@@ -1,0 +1,7 @@
+const float PI = 3.141592653589793;
+const float TAU = 6.283185307179586;
+const float HALF_PI = 1.57079632679;
+const float SQRT2 = 1.414213562373095;
+const float SQRT3 = 1.732050807568877;
+const float PHI = 1.618033988749894;
+const float EULER = 2.718281828459045;

@@ -1,0 +1,114 @@
+#version 460 core
+
+struct particle {
+    vec3 position;
+    vec3 velocity;
+    vec3 scale;
+    vec3 accel;
+    vec4 color;
+    float life;
+};
+
+struct emitterSettings {
+    vec4 MinColor;
+    vec4 MaxColor;
+    vec3 MinOffset;
+    vec3 MaxOffset;
+    vec3 MinVelocity;
+    vec3 MaxVelocity;
+    vec3 MinScale;
+    vec3 MaxScale;
+    vec3 MinAccel;
+    vec3 MaxAccel;
+    float MinLife;
+    float MaxLife;
+};
+
+layout (std430, binding = 0) writeonly restrict buffer SSBO_0 {
+    particle particles[];
+};
+
+layout (std430, binding = 1) coherent restrict buffer SSBO_1 {
+    int count;
+    int indices[];
+} freelist;
+
+uniform int ParticlesToSpawn;
+uniform emitterSettings EmitterSettings;
+uniform uint Random;
+
+uint pcg_hash(uint seed)
+{
+    uint state = seed * 747796405u + 2891336453u;
+    uint word = ((state >> ((state >> 28u) + 4u)) ^ state) * 277803737u;
+    return (word >> 22u) ^ word;
+}
+
+// Used to advance the PCG state.
+uint rand_pcg(inout uint rng_state)
+{
+    uint state = rng_state;
+    rng_state = rng_state * 747796405u + 2891336453u;
+    uint word = ((state >> ((state >> 28u) + 4u)) ^ state) * 277803737u;
+    return (word >> 22u) ^ word;
+}
+
+// Advances the prng state and returns the corresponding random float.
+float rand(inout uint state)
+{
+    uint x = rand_pcg(state);
+    state = x;
+    return float(x) * uintBitsToFloat(0x2f800004u);
+}
+
+float rng1(float min, float max, inout uint state)
+{
+    return rand(state) * (max - min) + min;
+}
+
+vec2 rng2(vec2 min, vec2 max, inout uint state)
+{
+    return vec2(rng1(min.x, max.x, state), rng1(min.y, max.y, state));
+}
+
+
+vec3 rng3(vec3 min, vec3 max, inout uint state)
+{
+    return vec3(rng1(min.x, max.x, state), rng1(min.y, max.y, state), rng1(min.z, max.z, state));
+}
+
+
+vec4 rng4(vec4 min, vec4 max, inout uint state)
+{
+    return vec4(rng1(min.x, max.x, state), rng1(min.y, max.y, state), rng1(min.z, max.z, state), rng1(min.w, max.w, state));
+}
+
+
+// make a particle with random attributes
+void MakeParticle(out particle Particle) {
+    uint seed = uint(gl_GlobalInvocationID.x) + Random;
+    seed = pcg_hash(seed);
+    Particle.life = rng1(EmitterSettings.MinLife, EmitterSettings.MaxLife, seed);
+    Particle.velocity.xyz = rng3(EmitterSettings.MinVelocity.xyz, EmitterSettings.MaxVelocity.xyz, seed);
+    Particle.scale.xyz = rng3(EmitterSettings.MinScale.xyz, EmitterSettings.MaxScale.xyz, seed);
+    Particle.accel.xyz = rng3(EmitterSettings.MinAccel.xyz, EmitterSettings.MaxAccel.xyz, seed);
+    Particle.color.rgba = rng4(EmitterSettings.MinColor.rgba, EmitterSettings.MaxColor.rgba, seed);
+    Particle.position = rng3(EmitterSettings.MinOffset.xyz, EmitterSettings.MaxOffset.xyz, seed);
+}
+
+layout (local_size_x = 128, local_size_y = 1, local_size_z = 1) in;
+void main() {
+    uint index = gl_GlobalInvocationID.x;
+
+    if (index >= ParticlesToSpawn)
+    return;
+
+    int freeListIndex = atomicAdd(freelist.count, -1) - 1;
+    if (freeListIndex < 0) {
+        atomicAdd(freelist.count, 1);
+        return;
+    }
+
+    int particleIndex = freelist.indices[freeListIndex];
+    MakeParticle(particles[particleIndex]);
+}
