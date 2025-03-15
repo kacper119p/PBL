@@ -1,25 +1,31 @@
 #pragma once
 #include <functional>
 
-namespace Events
+class Action
 {
-    template<typename T>
-    class Action
+    friend bool operator==(const Action& lhs, const Action& rhs);
+private:
+    std::function<void()> Callback;
+    void* OwnerPtr;
+    void* CallbackPtr;
+
+public:
+    template<typename U>
+    Action(U* Owner, void (U::* Method)())
     {
-    private:
-        std::function<void(T)> Callback;
+        Callback = std::bind(Method, Owner);
+        OwnerPtr = Owner;
+        CallbackPtr = Method;
+    }
 
-    public:
-        template<typename U>
-        Action(U Owner, void (* Method)(T))
-        {
-            Callback = std::bind(Method, Owner);
-        }
+public:
+    void Invoke()
+    {
+        Callback();
+    }
+};
 
-    public:
-        void Invoke()
-        {
-            Callback();
-        }
-    };
-} // Events
+inline bool operator==(const Action& lhs, const Action& rhs)
+{
+    return lhs.OwnerPtr == rhs.OwnerPtr && lhs.CallbackPtr == rhs.CallbackPtr;
+}
