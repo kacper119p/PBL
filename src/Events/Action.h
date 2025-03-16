@@ -1,31 +1,52 @@
 #pragma once
 #include <functional>
+#include <combaseapi.h>
 
-class Action
+namespace Events
 {
-    friend bool operator==(const Action& lhs, const Action& rhs);
-private:
-    std::function<void()> Callback;
-    void* OwnerPtr;
-    void* CallbackPtr;
-
-public:
-    template<typename U>
-    Action(U* Owner, void (U::* Method)())
+    /**
+     * @brief Class representing callback to an event.
+     */
+    class Action
     {
-        Callback = std::bind(Method, Owner);
-        OwnerPtr = Owner;
-        CallbackPtr = Method;
-    }
+    private:
+        GUID Id;
+        std::function<void()> Callback;
 
-public:
-    void Invoke()
-    {
-        Callback();
-    }
-};
+    public:
+        Action() = delete;
 
-inline bool operator==(const Action& lhs, const Action& rhs)
-{
-    return lhs.OwnerPtr == rhs.OwnerPtr && lhs.CallbackPtr == rhs.CallbackPtr;
-}
+        /**
+         * @brief Constructs new Action bound to an owner and its method.
+         * @tparam U A Type of owner.
+         * @param Owner An Object to call method on.
+         * @param Method A Method to call.
+         */
+        template<class U>
+        Action(U* Owner, void (U::* Method)()) : // NOLINT(*-pro-type-member-init)
+            Callback([Owner, Method]() { (Owner->*Method)(); })
+        {
+            (void) CoCreateGuid(&Id); // ID initialized here.
+        }
+
+    public:
+        /**
+         * @brief Calls method associated with this Action.
+         */
+        void Invoke()
+        {
+            Callback();
+        }
+
+    public:
+        /**
+         * @brief Compares two Actions and returns true if they're the same Action.
+         * @param Other An Action to compare this Action to.
+         * @return True if other is equal. False otherwise.
+         */
+        bool operator==(const Action& Other) const
+        {
+            return Id == Other.Id;
+        }
+    };
+} // Events
