@@ -11,4 +11,5 @@ CTestTestfile.cmake
 [Bb]uild/
 cmake-build-*/
 .idea/
+.vs/
 
