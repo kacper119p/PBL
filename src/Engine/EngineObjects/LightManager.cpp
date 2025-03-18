@@ -55,7 +55,7 @@ namespace Engine
 
     void LightManager::SetupPointLightsForRendering(const Shaders::Shader& Shader)
     {
-        Shader.SetUniform("PointLightsCount", PointLights.size());
+        Shader.SetUniform("PointLightsCount", static_cast<GLuint>(PointLights.size()));
 
         if (PointLights.empty())
         {
@@ -103,7 +103,7 @@ namespace Engine
 
     void LightManager::SetupSpotLightsForRendering(const Shaders::Shader& Shader)
     {
-        Shader.SetUniform("SpotLightsCount", SpotLights.size());
+        Shader.SetUniform("SpotLightsCount", static_cast<GLuint>(SpotLights.size()));
 
         if (SpotLights.empty())
         {
