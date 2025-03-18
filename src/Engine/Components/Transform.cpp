@@ -1,4 +1,6 @@
 #include "Transform.h"
+
+#include "Engine/EngineObjects/Entity.h"
 #include "glm/gtx/euler_angles.hpp"
 
 namespace Engine
@@ -8,6 +10,11 @@ namespace Engine
         if (Parent)
         {
             Parent->RemoveChild(this);
+        }
+        // foreach loop doesn't work properly.
+        for (int i = 0; i < Children.size(); ++i) // NOLINT(*-loop-convert)
+        {
+            delete Children[i]->GetOwner();
         }
     }
 

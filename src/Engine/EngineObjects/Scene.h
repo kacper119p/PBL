@@ -7,7 +7,7 @@ namespace Engine
     /**
      * @brief Class representing scene hierarchy.
      */
-    class Scene
+    class Scene final
     {
     private:
         Entity* Root;
@@ -24,6 +24,7 @@ namespace Engine
          */
         Scene();
 
+    public:
         virtual ~Scene();
 
     public:
