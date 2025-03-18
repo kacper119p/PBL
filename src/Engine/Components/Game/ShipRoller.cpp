@@ -1,28 +1,12 @@
-//
-// Created by Kacper on 28.01.2025.
-//
-
 #include "ShipRoller.h"
 #include "Engine/EngineObjects/Entity.h"
-#include "Engine/EngineObjects/UpdateManager.h"
 #include "GLFW/glfw3.h"
 
 namespace Engine
 {
-    ShipRoller::ShipRoller(const glm::vec3& Amplitude, glm::vec3 Velocity) :
+    ShipRoller::ShipRoller(const glm::vec3& Amplitude, const glm::vec3& Velocity) :
         Amplitude(Amplitude), Velocity(Velocity)
     {
-    }
-
-    ShipRoller::~ShipRoller()
-    {
-        UpdateManager::GetInstance()->UnregisterComponent(this);
-    }
-
-    void ShipRoller::OnAdd(Entity* NewOwner)
-    {
-        Component::OnAdd(NewOwner);
-        UpdateManager::GetInstance()->RegisterComponent(this);
     }
 
     void ShipRoller::Update(float DeltaTime)

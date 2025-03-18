@@ -1,19 +1,14 @@
-//
-// Created by Kacper on 28.01.2025.
-//
-
 #pragma once
 
 #include "glm/vec3.hpp"
-#include "Engine/Components/Component.h"
-#include "Engine/Components/Interfaces/IUpdateable.h"
+#include "Engine/Components/Updateable.h"
 
 namespace Engine
 {
     /**
      * @brief Simulates ship rolling by applying sine waves to the owner's rotation.
      */
-    class ShipRoller : public Component, IUpdateable
+    class ShipRoller final : public Updateable
     {
     private:
         glm::vec3 Amplitude;
@@ -26,10 +21,10 @@ namespace Engine
          * @param Amplitude Amplitude of the rotation in degrees.
          * @param Velocity Velocity of the rotation per axis  (Period is 2*Pi).
          */
-        ShipRoller(const glm::vec3& Amplitude, glm::vec3 Velocity);
+        ShipRoller(const glm::vec3& Amplitude, const glm::vec3& Velocity);
 
     public:
-        ~ShipRoller() override;
+        ~ShipRoller() override = default;
 
     public:
         /**
@@ -84,8 +79,6 @@ namespace Engine
         }
 
     public:
-        void OnAdd(Entity* NewOwner) override;
-
         void Update(float DeltaTime) override;
     };
 
