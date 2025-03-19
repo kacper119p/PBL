@@ -18,7 +18,7 @@ namespace Models
         std::vector<unsigned int> VertexIndices;
 
     private:
-        AABBox AABBox;
+        AABBox3 AABBox;
         unsigned int VertexArray;
         unsigned int VertexBuffer;
         unsigned int ElementBuffer;
