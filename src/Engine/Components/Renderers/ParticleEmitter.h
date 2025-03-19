@@ -69,42 +69,42 @@ namespace Engine
         ~ParticleEmitter() override;
 
     public:
-        [[nodiscard]] inline const EmitterSettings& GetSettings() const
+        [[nodiscard]] const EmitterSettings& GetSettings() const
         {
             return Settings;
         }
 
-        inline void SetSettings(const EmitterSettings& Settings)
+        void SetSettings(const EmitterSettings& Settings)
         {
             ParticleEmitter::Settings = Settings;
         }
 
-        [[nodiscard]] inline const Shaders::ComputeShader& GetUpdateShader() const
+        [[nodiscard]] const Shaders::ComputeShader& GetUpdateShader() const
         {
             return UpdateShader;
         }
 
-        inline void SetUpdateShader(const Shaders::ComputeShader& UpdateShader)
+        void SetUpdateShader(const Shaders::ComputeShader& UpdateShader)
         {
             ParticleEmitter::UpdateShader = UpdateShader;
         }
 
-        [[nodiscard]] inline const Shaders::ComputeShader& GetSpawnShader() const
+        [[nodiscard]] const Shaders::ComputeShader& GetSpawnShader() const
         {
             return SpawnShader;
         }
 
-        inline void SetSpawnShader(const Shaders::ComputeShader& SpawnShader)
+        void SetSpawnShader(const Shaders::ComputeShader& SpawnShader)
         {
             ParticleEmitter::SpawnShader = SpawnShader;
         }
 
-        [[nodiscard]] inline const Shaders::Shader& GetRenderShader() const
+        [[nodiscard]] const Shaders::Shader& GetRenderShader() const
         {
             return RenderShader;
         }
 
-        inline void SetRenderShader(const Shaders::Shader& RenderShader)
+        void SetRenderShader(const Shaders::Shader& RenderShader)
         {
             ParticleEmitter::RenderShader = RenderShader;
         }

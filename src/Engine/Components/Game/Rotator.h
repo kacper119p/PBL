@@ -1,19 +1,15 @@
-//
-// Created by Kacper on 28.01.2025.
-//
-
 #pragma once
 
+#include "Engine/Components/Updateable.h"
 #include "glm/vec3.hpp"
 #include "Engine/EngineObjects/Entity.h"
-#include "Engine/Components/Interfaces/IUpdateable.h"
 
 namespace Engine
 {
     /**
      * @brief Rotates owner.
      */
-    class Rotator : public Component, IUpdateable
+    class Rotator final : public Updateable
     {
     private:
         glm::vec3 Velocity;
@@ -26,7 +22,7 @@ namespace Engine
         explicit Rotator(const glm::vec3& Velocity);
 
     public:
-        ~Rotator() override;
+        ~Rotator() override = default;
 
     public:
         /**
@@ -47,8 +43,6 @@ namespace Engine
         }
 
     public:
-        void OnAdd(Entity* NewOwner) override;
-
         void Update(float DeltaTime) override;
     };
 

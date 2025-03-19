@@ -11,10 +11,14 @@ namespace Engine
         Root = new Entity();
     }
 
-    Scene::Scene(Entity* Root) :
+    Scene::Scene(Entity* Root)
+    :
         Root(Root)
     {
     }
 
-    Scene::~Scene() = default;
+    Scene::~Scene()
+    {
+        delete Root;
+    }
 } // Engine

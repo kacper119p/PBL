@@ -2,6 +2,8 @@
 
 #include <vector>
 #include <string>
+
+#include "AabBox.h"
 #include "Vertex.h"
 
 namespace Models
@@ -9,13 +11,14 @@ namespace Models
     /**
      * @brief Collection of vertices accessible to the GPU.
      */
-    class Mesh
+    class Mesh final
     {
     public:
         std::vector<Vertex> VerticesData;
         std::vector<unsigned int> VertexIndices;
 
     private:
+        AABBox3 AABBox;
         unsigned int VertexArray;
         unsigned int VertexBuffer;
         unsigned int ElementBuffer;
@@ -82,8 +85,19 @@ namespace Models
         }
 
         /**
+         * @brief Returns AABox for this mesh.
+         */
+        [[nodiscard]] AABBox3 GetAabBox() const
+        {
+            return AABBox;
+        }
+
+        /**
          * @brief Draws this mesh using currently bound shader.
          */
         void Draw() const;
+
+    private:
+        static AABBox3 CreateAABBox(const std::vector<Vertex>& Vertices);
     };
 } // Models

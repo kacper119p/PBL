@@ -5,8 +5,8 @@
 namespace Models
 {
     Mesh::Mesh(const std::vector<Vertex>& VerticesData, const std::vector<unsigned int>& VertexIndices,
-               const std::string& Name) : VerticesData(
-                                       VerticesData), VertexIndices(VertexIndices), Name(Name)
+               const std::string& Name) :
+        VerticesData(VerticesData), VertexIndices(VertexIndices), AABBox(CreateAABBox(VerticesData)), Name(Name)
     {
         glGenVertexArrays(1, &VertexArray);
         glGenBuffers(1, &ElementBuffer);
@@ -53,5 +53,21 @@ namespace Models
         glDeleteBuffers(1, &VertexBuffer);
         glDeleteBuffers(1, &ElementBuffer);
         glDeleteVertexArrays(1, &VertexArray);
+    }
+
+    AABBox3 Mesh::CreateAABBox(const std::vector<Vertex>& Vertices)
+    {
+        if (Vertices.empty())
+        {
+            return AABBox3();
+        }
+        glm::vec3 min = Vertices[0].Position;
+        glm::vec3 max = Vertices[0].Position;
+        for (int i = 1; i < Vertices.size(); ++i)
+        {
+            min = glm::min(min, Vertices[i].Position);
+            max = glm::max(max, Vertices[i].Position);
+        }
+        return AABBox3(min, max);
     }
 } // Models

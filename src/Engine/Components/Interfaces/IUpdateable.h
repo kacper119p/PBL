@@ -2,7 +2,9 @@
 
 namespace Engine
 {
-
+    /**
+     * @brief Interface for classes that get an Update() callback.
+     */
     class IUpdateable
     {
     public:
