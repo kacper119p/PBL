@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "imgui.h" //Have to import imgui before imguizmo
 #include <ImGuizmo.h>
 #include "Engine/Components/Transform.h"
 #include "CameraRenderData.h"
