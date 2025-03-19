@@ -20,7 +20,7 @@ target_include_directories(stb_image PRIVATE ${STB_IMAGE_DIR})
 CPMAddPackage("gh:assimp/assimp@5.2.5")
 CPMAddPackage("gh:glfw/glfw#3.3.8")
 CPMAddPackage("gh:g-truc/glm#0.9.9.8")
-CPMAddPackage("gh:ocornut/imgui@1.91.7")
+CPMAddPackage("gh:ocornut/imgui@1.91.8")
 CPMAddPackage("gh:gabime/spdlog@1.10.0")
 
 set(imgui_SOURCE_DIR ${imgui_SOURCE_DIR} CACHE INTERNAL "")
