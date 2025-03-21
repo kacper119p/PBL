@@ -16,6 +16,7 @@ namespace Engine
     rapidjson::Value Entity::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         rapidjson::Value object(rapidjson::kObjectType);
+        object.AddMember("type", Serialization::Serialize(typeid(this).name(), Allocator), Allocator);
         object.AddMember("id", Serialization::Serialize(GetID(), Allocator), Allocator);
         object.AddMember("transform", Transform.Serialize(Allocator), Allocator);
         return object;
