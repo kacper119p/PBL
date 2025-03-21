@@ -108,28 +108,28 @@ namespace Engine
 
     rapidjson::Value Transform::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
-        START_OBJECT_SERIALIZATION
+        START_COMPONENT_SERIALIZATION
         object.AddMember("position", Serialization::Serialize(Position, Allocator), Allocator);
         object.AddMember("eulerAngles", Serialization::Serialize(EulerAngles, Allocator), Allocator);
         object.AddMember("scale", Serialization::Serialize(Scale, Allocator), Allocator);
         //TODO Children Serialization
-        END_OBJECT_SERIALIZATION
+        END_COMPONENT_SERIALIZATION
     }
 
     void Transform::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
-        START_OBJECT_DESERIALIZATION_VALUE_PASS
+        START_COMPONENT_DESERIALIZATION_VALUE_PASS
         Serialization::Deserialize(Object["position"], Position);
         Serialization::Deserialize(Object["eulerAngles"], EulerAngles);
         Serialization::Deserialize(Object["scale"], Scale);
-        END_OBJECT_DESERIALIZATION_VALUE_PASS
+        END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 
     void Transform::DeserializeReferencesPass(const rapidjson::Value& Object,
                                               Serialization::ReferenceTable& ReferenceMap)
     {
-        START_OBJECT_DESERIALIZATION_REFERENCES_PASS
+        START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
         //TODO Children Deserialization
-        END_OBJECT_DESERIALIZATION_REFERENCES_PASS
+        END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 }

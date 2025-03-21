@@ -16,21 +16,21 @@ namespace Engine
 
     rapidjson::Value Rotator::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
-        START_OBJECT_SERIALIZATION
+        START_COMPONENT_SERIALIZATION
         object.AddMember("velocity", Serialization::Serialize(Velocity, Allocator), Allocator);
-        END_OBJECT_SERIALIZATION
+        END_COMPONENT_SERIALIZATION
     }
 
     void Rotator::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
-        START_OBJECT_DESERIALIZATION_VALUE_PASS
+        START_COMPONENT_DESERIALIZATION_VALUE_PASS
         Serialization::Deserialize(Object["velocity"], Velocity);
-        END_OBJECT_DESERIALIZATION_VALUE_PASS
+        END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 
     void Rotator::DeserializeReferencesPass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
-        START_OBJECT_DESERIALIZATION_REFERENCES_PASS
-        END_OBJECT_DESERIALIZATION_REFERENCES_PASS
+        START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
+        END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 } // Engine
