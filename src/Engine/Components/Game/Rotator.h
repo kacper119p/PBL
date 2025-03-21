@@ -44,6 +44,13 @@ namespace Engine
 
     public:
         void Update(float DeltaTime) override;
+
+        rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const override;
+
+        void DeserializeValuePass(const rapidjson::Value& Object) override;
+
+        void DeserializeReferencesPass(const rapidjson::Value& Object,
+                                       std::unordered_map<GUID, SerializedObject*> ReferenceMap) override;
     };
 
 } // Engine

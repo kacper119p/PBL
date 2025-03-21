@@ -43,5 +43,13 @@ namespace Engine
          * @param NewOwner New owner of this component.
          */
         virtual void OnAdd(Entity* NewOwner);
+
+    public:
+        rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const override;
+
+        void DeserializeValuePass(const rapidjson::Value& Object) override;
+
+        void DeserializeReferencesPass(const rapidjson::Value& Object,
+                                       std::unordered_map<GUID, SerializedObject*> ReferenceMap) override;
     };
 }
