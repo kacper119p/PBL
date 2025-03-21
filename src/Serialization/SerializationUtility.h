@@ -2,6 +2,7 @@
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 #include <rpc.h>
+#include <string>
 
 
 #include "GuidHasher.h"
@@ -17,15 +18,19 @@ namespace Serialization
 
     rapidjson::Value Serialize(const Engine::Texture& Value, const rapidjson::Document::AllocatorType& Allocator);
 
+    rapidjson::Value Serialize(const std::string& Value, rapidjson::Document::AllocatorType& Allocator);
+
     rapidjson::Value Serialize(const GUID& Guid, rapidjson::Document::AllocatorType& Allocator);
 
-    rapidjson::Value Serialize(const SerializedObject* const Value, rapidjson::Document::AllocatorType& Allocator);
+    rapidjson::Value Serialize(const SerializedObject* Value, rapidjson::Document::AllocatorType& Allocator);
 
     void Deserialize(const rapidjson::Value& Object, glm::vec3& Value);
 
     void Deserialize(const rapidjson::Value& Object, glm::vec2& Value);
 
     void Deserialize(const rapidjson::Value& Object, Engine::Texture& Value);
+
+    void Deserialize(const rapidjson::Value& Object, std::string& Value);
 
     void Deserialize(const rapidjson::Value& Object, GUID& Value);
 

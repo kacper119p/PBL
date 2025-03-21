@@ -28,7 +28,7 @@ namespace Engine
         END_OBJECT_DESERIALIZATION_VALUE_PASS
     }
 
-    void Rotator::DeserializeReferencesPass(const rapidjson::Value& Object,Serialization::ReferenceTable& ReferenceMap)
+    void Rotator::DeserializeReferencesPass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
         START_OBJECT_DESERIALIZATION_REFERENCES_PASS
         END_OBJECT_DESERIALIZATION_REFERENCES_PASS

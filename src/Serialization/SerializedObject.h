@@ -7,6 +7,7 @@
 #include "rapidjson/document.h"
 
 #define START_OBJECT_SERIALIZATION rapidjson::Value object(rapidjson::kObjectType);\
+                                   object.AddMember("type", Serialization::Serialize(typeid(this).name(), Allocator), Allocator);\
                                    object.AddMember("id", Serialization::Serialize(GetID(), Allocator), Allocator);\
                                    object.AddMember("owner", Serialization::Serialize(GetOwner(), Allocator), Allocator);
 

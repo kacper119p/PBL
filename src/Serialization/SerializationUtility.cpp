@@ -55,12 +55,19 @@ namespace Serialization
         return object;
     }
 
+    rapidjson::Value Serialize(const std::string& Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kStringType);
+        object.SetString(Value.c_str(), static_cast<rapidjson::SizeType>(Value.length()), Allocator);
+        return object;
+    }
+
     rapidjson::Value Serialize(const GUID& Guid, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kStringType);
         char guidStr[GUID_STRING_SIZE];
         GuidToStr(Guid, guidStr);
-        object.SetString(guidStr, sizeof(guidStr), Allocator);
+        object.SetString(guidStr, static_cast<rapidjson::SizeType>(GUID_STRING_SIZE), Allocator);
         return object;
     }
 
@@ -91,6 +98,11 @@ namespace Serialization
     void Deserialize(const rapidjson::Value& Object, Engine::Texture& Value)
     {
         Value = Engine::TextureManager::GetTexture(Object.GetString());
+    }
+
+    void Deserialize(const rapidjson::Value& Object, std::string& Value)
+    {
+        Value = Object.GetString();
     }
 
     void Deserialize(const rapidjson::Value& Object, GUID& Value)
