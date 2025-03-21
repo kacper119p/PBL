@@ -22,7 +22,7 @@ namespace Engine
     }
 
     void Rotator::DeserializeValuePass(const rapidjson::Value& Object,
-                                       std::unordered_map<GUID, SerializedObject*>& ReferenceMap)
+                                       std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap)
     {
         START_OBJECT_DESERIALIZATION_VALUE_PASS
         Serialization::Deserialize(Object["velocity"], Velocity);
@@ -30,7 +30,7 @@ namespace Engine
     }
 
     void Rotator::DeserializeReferencesPass(const rapidjson::Value& Object,
-                                            std::unordered_map<GUID, SerializedObject*>& ReferenceMap)
+                                            std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap)
     {
         START_OBJECT_DESERIALIZATION_REFERENCES_PASS
         END_OBJECT_DESERIALIZATION_REFERENCES_PASS

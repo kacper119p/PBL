@@ -3,6 +3,7 @@
 #include <combaseapi.h>
 #include <unordered_map>
 
+#include "GuidHasher.h"
 #include "rapidjson/document.h"
 
 #define START_OBJECT_SERIALIZATION rapidjson::Value object(rapidjson::kObjectType);\
@@ -27,6 +28,7 @@ namespace Serialization
 {
     class SerializedObject
     {
+    private:
         GUID Id;
 
     public:
@@ -53,10 +55,11 @@ namespace Serialization
         virtual rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const = 0;
 
         virtual void DeserializeValuePass(const rapidjson::Value& Object,
-                                          std::unordered_map<GUID, SerializedObject*>& ReferenceMap) = 0;
+                                          std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap) = 0;
 
         virtual void DeserializeReferencesPass(const rapidjson::Value& Object,
-                                               std::unordered_map<GUID, SerializedObject*>& ReferenceMap) = 0;
+                                               std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap) =
+        0;
     };
 
 } // Serialization

@@ -22,7 +22,7 @@ namespace Engine
     }
 
     void Entity::DeserializeValuePass(const rapidjson::Value& Object,
-                                      std::unordered_map<GUID, SerializedObject*>& ReferenceMap)
+                                      std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap)
     {
         GUID id;
         Serialization::Deserialize(Object["id"], id);
@@ -32,7 +32,7 @@ namespace Engine
     }
 
     void Entity::DeserializeReferencesPass(const rapidjson::Value& Object,
-                                           std::unordered_map<GUID, SerializedObject*>& ReferenceMap)
+                                           std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap)
     {
         Transform.DeserializeReferencesPass(Object["transform"], ReferenceMap);
     }
