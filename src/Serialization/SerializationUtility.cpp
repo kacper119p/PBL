@@ -74,11 +74,28 @@ namespace Serialization
     rapidjson::Value Serialize(const SerializedObject* const Value, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kStringType);
+        if (Value == nullptr)
+        {
+            object.SetNull();
+            return object;
+        }
         const GUID guid = Value->GetID();
         char guidStr[GUID_STRING_SIZE];
         GuidToStr(guid, guidStr);
         object.SetString(guidStr, sizeof(guidStr), Allocator);
         return object;
+    }
+
+    rapidjson::Value Serialize(const std::vector<SerializedObject*>& Value,
+                               rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value array(rapidjson::kArrayType);
+        array.Reserve(static_cast<rapidjson::SizeType>(Value.size()), Allocator);
+        for (const SerializedObject* const object : Value)
+        {
+            array.PushBack(Serialize(object, Allocator), Allocator);
+        }
+        return array;
     }
 
 
@@ -117,6 +134,12 @@ namespace Serialization
         const std::string str = Object.GetString();
         GUID guid;
         StrToGuid(str, &guid);
-        Value = ReferenceMap[guid];
+        const auto iterator = ReferenceMap.find(guid);
+        if (iterator == ReferenceMap.end())
+        {
+            Value = nullptr;
+            return;
+        }
+        Value = iterator->second;
     }
 } // Serialization

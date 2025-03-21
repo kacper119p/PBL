@@ -112,7 +112,8 @@ namespace Engine
         object.AddMember("position", Serialization::Serialize(Position, Allocator), Allocator);
         object.AddMember("eulerAngles", Serialization::Serialize(EulerAngles, Allocator), Allocator);
         object.AddMember("scale", Serialization::Serialize(Scale, Allocator), Allocator);
-        //TODO Children Serialization
+        object.AddMember("children", Serialization::Serialize(Children, Allocator), Allocator);
+        object.AddMember("parent", Serialization::Serialize(Parent, Allocator), Allocator);
         END_COMPONENT_SERIALIZATION
     }
 
@@ -129,7 +130,8 @@ namespace Engine
                                               Serialization::ReferenceTable& ReferenceMap)
     {
         START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
-        //TODO Children Deserialization
+        Serialization::Deserialize(Object["children"], Children, ReferenceMap);
+        Serialization::Deserialize(Object["parent"], Parent, ReferenceMap);
         END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 }
