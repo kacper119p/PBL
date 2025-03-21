@@ -1,5 +1,7 @@
 #include "SerializationUtility.h"
 
+#include "Engine/Textures/TextureManager.h"
+
 namespace Serialization
 {
     rapidjson::Value Serialize(const glm::vec3& Value, rapidjson::Document::AllocatorType& Allocator)
@@ -19,16 +21,29 @@ namespace Serialization
         return object;
     }
 
-    inline void Deserialize(const rapidjson::Value& Object, glm::vec3& Value)
+    rapidjson::Value Serialize(const Engine::Texture& Value)
+    {
+        rapidjson::Value object(rapidjson::kStringType);
+        const std::string path = Engine::TextureManager::GetTexturePath(Value);
+        object.SetString(path.c_str(), static_cast<rapidjson::SizeType>(path.length()));
+        return object;
+    }
+
+    void Deserialize(const rapidjson::Value& Object, glm::vec3& Value)
     {
         Value.x = Object["x"].GetFloat();
         Value.y = Object["y"].GetFloat();
         Value.z = Object["z"].GetFloat();
     }
 
-    inline void Deserialize(const rapidjson::Value& Object, glm::vec2& Value)
+    void Deserialize(const rapidjson::Value& Object, glm::vec2& Value)
     {
         Value.x = Object["x"].GetFloat();
         Value.y = Object["y"].GetFloat();
+    }
+
+    void Deserialize(const rapidjson::Value& Object, Engine::Texture& Value)
+    {
+        Value = Engine::TextureManager::GetTexture(Object.GetString());
     }
 } // Serialization

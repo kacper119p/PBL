@@ -8,13 +8,15 @@
 
 namespace Serialization
 {
-    const rapidjson::Value Serialize(const glm::vec3& Value, const rapidjson::Document::AllocatorType& Allocator);
+    rapidjson::Value Serialize(const glm::vec3& Value, const rapidjson::Document::AllocatorType& Allocator);
 
-    const rapidjson::Value Serialize(const glm::vec2& Value, const rapidjson::Document::AllocatorType& Allocator);
+    rapidjson::Value Serialize(const glm::vec2& Value, const rapidjson::Document::AllocatorType& Allocator);
 
-    const rapidjson::Value Serialize(const Engine::Texture& Value, const rapidjson::Document::AllocatorType& Allocator);
+    rapidjson::Value Serialize(const Engine::Texture& Value, const rapidjson::Document::AllocatorType& Allocator);
 
     void Deserialize(const rapidjson::Value& Object, glm::vec3& Value);
 
     void Deserialize(const rapidjson::Value& Object, glm::vec2& Value);
+
+    inline void Deserialize(const rapidjson::Value& Object, Engine::Texture& Value);
 } // Serialization
