@@ -18,6 +18,7 @@
 #include "Materials/WaterMaterial.h"
 #include "Engine/Components/Game/ShipRoller.h"
 #include "Engine/Components/Game/Rotator.h"
+#include "Engine/Textures/Texture.h"
 #include "Engine/Textures/TextureManager.h"
 #include "Materials/PbrMaterial.h"
 
@@ -26,10 +27,13 @@ namespace Scene
     SceneBuilder::~SceneBuilder() = default;
 
     void
-    SceneBuilder::Build(Engine::Scene*& Scene, std::vector<unsigned int>& Textures, std::vector<Models::Model*>& Models,
-                        std::vector<Shaders::Shader>& Shaders, std::vector<Materials::Material*>& Materials)
+    SceneBuilder::Build(Engine::Scene*& Scene)
     {
         Scene = new class Engine::Scene();
+        std::vector<Engine::Texture>& Textures = Scene->Textures;
+        std::vector<Models::Model*>& Models = Scene->Models;
+        std::vector<Shaders::Shader>& Shaders = Scene->Shaders;
+        std::vector<Materials::Material*>& Materials = Scene->Materials;
 
         Shaders::ShaderSourceFiles depthSource("./res/shaders/DefaultDepth/DefaultDepth.vert", nullptr,
                                                "./res/shaders/DefaultDepth/DefaultDepth.frag");
@@ -109,19 +113,21 @@ namespace Scene
 
         Engine::LightManager::GetInstance()->SetEnvironmentMap(environmentMap);
 
-        Textures.push_back(environmentMap);
+        Textures.push_back(Engine::Texture(environmentMap));
 
         /*
          * Assembling Submarine
          */
 
-        unsigned int submarineBaseMap = Engine::TextureManager::GetTexture("./res/textures/Submarine/Base.png");
+        unsigned int submarineBaseMap = Engine::TextureManager::GetTexture("./res/textures/Submarine/Base.png").GetId();
         unsigned int submarineRmaoMap = Engine::TextureManager::GetTexture(
-                "./res/textures/Submarine/RoughnessMetallicAmbientOcclusion.png");
+                "./res/textures/Submarine/RoughnessMetallicAmbientOcclusion.png").GetId();
 
-        unsigned int submarineNormalMap = Engine::TextureManager::GetTexture("./res/textures/Submarine/Normal.png");
+        unsigned int submarineNormalMap = Engine::TextureManager::GetTexture("./res/textures/Submarine/Normal.png").
+                GetId();
 
-        unsigned int submarineEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png");
+        unsigned int submarineEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png").
+                GetId();
 
         Models::Model* submarineModel = new Models::Model("./res/models/Submarine.fbx");
         Materials::PbrMaterial* submarineMaterial = new Materials::PbrMaterial(
@@ -139,10 +145,10 @@ namespace Scene
         submarineEntity->AddComponent(submarineRoller);
         submarineEntity->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
 
-        Textures.push_back(submarineBaseMap);
-        Textures.push_back(submarineRmaoMap);
-        Textures.push_back(submarineNormalMap);
-        Textures.push_back(submarineEmissiveMap);
+        Textures.push_back(Engine::Texture(submarineBaseMap));
+        Textures.push_back(Engine::Texture(submarineRmaoMap));
+        Textures.push_back(Engine::Texture(submarineNormalMap));
+        Textures.push_back(Engine::Texture(submarineEmissiveMap));
 
         Models.push_back(submarineModel);
         Materials.push_back(submarineMaterial);
@@ -151,9 +157,9 @@ namespace Scene
          * Assembling Water
          */
 
-        unsigned int waterNormal0 = Engine::TextureManager::GetTexture("./res/textures/Water/Normal0.png");
+        unsigned int waterNormal0 = Engine::TextureManager::GetTexture("./res/textures/Water/Normal0.png").GetId();
         unsigned int waterNormal1 = Engine::TextureManager::GetTexture(
-                "./res/textures/Water/Normal1.png");
+                "./res/textures/Water/Normal1.png").GetId();
 
 
         Models::Model* waterModel = new Models::Model("./res/models/Water.fbx");
@@ -170,8 +176,8 @@ namespace Scene
         waterEntity->AddComponent(waterRenderer);
         waterEntity->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
 
-        Textures.push_back(waterNormal0);
-        Textures.push_back(waterNormal1);
+        Textures.push_back(Engine::Texture(waterNormal0));
+        Textures.push_back(Engine::Texture(waterNormal1));
 
         Models.push_back(waterModel);
         Materials.push_back(waterMaterial);
@@ -180,13 +186,14 @@ namespace Scene
          * Assembling Floor
          */
 
-        unsigned int floorBaseMap = Engine::TextureManager::GetTexture("./res/textures/Floor/Base.png");
+        unsigned int floorBaseMap = Engine::TextureManager::GetTexture("./res/textures/Floor/Base.png").GetId();
         unsigned int floorRmaoMap = Engine::TextureManager::GetTexture(
-                "./res/textures/Floor/RoughnessMetallicAmbientOcclusion.png");
+                "./res/textures/Floor/RoughnessMetallicAmbientOcclusion.png").GetId();
 
-        unsigned int floorNormalMap = Engine::TextureManager::GetTexture("./res/textures/Floor/Normal.png");
+        unsigned int floorNormalMap = Engine::TextureManager::GetTexture("./res/textures/Floor/Normal.png").GetId();
 
-        unsigned int floorEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png");
+        unsigned int floorEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png").
+                GetId();
 
         Models::Model* floorModel = new Models::Model("./res/models/Floor.fbx");
         Materials::PbrMaterial* floorMaterial = new Materials::PbrMaterial(depth, shader, directionalPass, pointPass,
@@ -201,10 +208,10 @@ namespace Scene
         floorEntity->AddComponent(floorRenderer);
         floorEntity->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
 
-        Textures.push_back(floorBaseMap);
-        Textures.push_back(floorRmaoMap);
-        Textures.push_back(floorNormalMap);
-        Textures.push_back(floorEmissiveMap);
+        Textures.push_back(Engine::Texture(floorBaseMap));
+        Textures.push_back(Engine::Texture(floorRmaoMap));
+        Textures.push_back(Engine::Texture(floorNormalMap));
+        Textures.push_back(Engine::Texture(floorEmissiveMap));
 
         Models.push_back(floorModel);
         Materials.push_back(floorMaterial);
@@ -213,13 +220,14 @@ namespace Scene
          * Assembling Walls
          */
 
-        unsigned int wallsBaseMap = Engine::TextureManager::GetTexture("./res/textures/Walls/Base.png");
+        unsigned int wallsBaseMap = Engine::TextureManager::GetTexture("./res/textures/Walls/Base.png").GetId();
         unsigned int wallsRmaoMap = Engine::TextureManager::GetTexture(
-                "./res/textures/Walls/RoughnessMetallicAmbientOcclusion.png");
+                "./res/textures/Walls/RoughnessMetallicAmbientOcclusion.png").GetId();
 
-        unsigned int wallsNormalMap = Engine::TextureManager::GetTexture("./res/textures/Walls/Normal.png");
+        unsigned int wallsNormalMap = Engine::TextureManager::GetTexture("./res/textures/Walls/Normal.png").GetId();
 
-        unsigned int wallsEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png");
+        unsigned int wallsEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png").
+                GetId();
 
         Models::Model* wallsModel = new Models::Model("./res/models/Walls.fbx");
         Materials::PbrMaterial* wallsMaterial = new Materials::PbrMaterial(depth, shader, directionalPass, pointPass,
@@ -234,10 +242,10 @@ namespace Scene
         wallsEntity->AddComponent(wallsRenderer);
         wallsEntity->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
 
-        Textures.push_back(wallsBaseMap);
-        Textures.push_back(wallsRmaoMap);
-        Textures.push_back(wallsNormalMap);
-        Textures.push_back(wallsEmissiveMap);
+        Textures.push_back(Engine::Texture(wallsBaseMap));
+        Textures.push_back(Engine::Texture(wallsRmaoMap));
+        Textures.push_back(Engine::Texture(wallsNormalMap));
+        Textures.push_back(Engine::Texture(wallsEmissiveMap));
 
         Models.push_back(wallsModel);
         Materials.push_back(wallsMaterial);
@@ -246,13 +254,14 @@ namespace Scene
          * Assembling Boxes
          */
 
-        unsigned int boxBaseMap = Engine::TextureManager::GetTexture("./res/textures/Box/Base.png");
+        unsigned int boxBaseMap = Engine::TextureManager::GetTexture("./res/textures/Box/Base.png").GetId();
         unsigned int boxRmaoMap = Engine::TextureManager::GetTexture(
-                "./res/textures/Box/RoughnessMetallicAmbientOcclusion.png");
+                "./res/textures/Box/RoughnessMetallicAmbientOcclusion.png").GetId();
 
-        unsigned int boxNormalMap = Engine::TextureManager::GetTexture("./res/textures/Box/Normal.png");
+        unsigned int boxNormalMap = Engine::TextureManager::GetTexture("./res/textures/Box/Normal.png").GetId();
 
-        unsigned int boxEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png");
+        unsigned int boxEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png").
+                GetId();
 
         Models::Model* boxModel = new Models::Model("./res/models/Box.fbx");
         Materials::PbrMaterial* boxMaterial = new Materials::PbrMaterial(depth, shader, directionalPass, pointPass,
@@ -318,10 +327,10 @@ namespace Scene
         boxEntity->GetTransform()->SetEulerAngles(glm::vec3(0.0f, -77.4803f, 0.0f));
 
 
-        Textures.push_back(boxBaseMap);
-        Textures.push_back(boxRmaoMap);
-        Textures.push_back(boxNormalMap);
-        Textures.push_back(boxEmissiveMap);
+        Textures.push_back(Engine::Texture(boxBaseMap));
+        Textures.push_back(Engine::Texture(boxRmaoMap));
+        Textures.push_back(Engine::Texture(boxNormalMap));
+        Textures.push_back(Engine::Texture(boxEmissiveMap));
 
         Models.push_back(boxModel);
         Materials.push_back(boxMaterial);
@@ -330,13 +339,15 @@ namespace Scene
          * Assemble Fan
          */
 
-        unsigned int fanBaseBaseMap = Engine::TextureManager::GetTexture("./res/textures/Fan/Base/Base.png");
+        unsigned int fanBaseBaseMap = Engine::TextureManager::GetTexture("./res/textures/Fan/Base/Base.png").GetId();
         unsigned int fanBaseRmaoMap = Engine::TextureManager::GetTexture(
-                "./res/textures/Fan/Base/RoughnessMetallicAmbientOcclusion.png");
+                "./res/textures/Fan/Base/RoughnessMetallicAmbientOcclusion.png").GetId();
 
-        unsigned int fanBaseNormalMap = Engine::TextureManager::GetTexture("./res/textures/Fan/Base/Normal.png");
+        unsigned int fanBaseNormalMap = Engine::TextureManager::GetTexture("./res/textures/Fan/Base/Normal.png").
+                GetId();
 
-        unsigned int fanBaseEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png");
+        unsigned int fanBaseEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png").
+                GetId();
 
         Models::Model* fanBaseModel = new Models::Model("./res/models/Fan/Base.fbx");
         Materials::PbrMaterial* fanBaseMaterial = new Materials::PbrMaterial(depth, shader, directionalPass, pointPass,
@@ -353,21 +364,23 @@ namespace Scene
         fanBaseEntity->GetTransform()->SetPosition(glm::vec3(-5.39749f, 1.2595f, -18.3669));
         fanBaseEntity->GetTransform()->SetEulerAngles(glm::vec3(0.0f, 31.2321f, 0.0f));
 
-        Textures.push_back(fanBaseBaseMap);
-        Textures.push_back(fanBaseRmaoMap);
-        Textures.push_back(fanBaseNormalMap);
-        Textures.push_back(fanBaseEmissiveMap);
+        Textures.push_back(Engine::Texture(fanBaseBaseMap));
+        Textures.push_back(Engine::Texture(fanBaseRmaoMap));
+        Textures.push_back(Engine::Texture(fanBaseNormalMap));
+        Textures.push_back(Engine::Texture(fanBaseEmissiveMap));
 
         Models.push_back(fanBaseModel);
         Materials.push_back(fanBaseMaterial);
 
-        unsigned int fanMotorBaseMap = Engine::TextureManager::GetTexture("./res/textures/Fan/Motor/Base.png");
+        unsigned int fanMotorBaseMap = Engine::TextureManager::GetTexture("./res/textures/Fan/Motor/Base.png").GetId();
         unsigned int fanMotorRmaoMap = Engine::TextureManager::GetTexture(
-                "./res/textures/Fan/Motor/RoughnessMetallicAmbientOcclusion.png");
+                "./res/textures/Fan/Motor/RoughnessMetallicAmbientOcclusion.png").GetId();
 
-        unsigned int fanMotorNormalMap = Engine::TextureManager::GetTexture("./res/textures/Fan/Motor/Normal.png");
+        unsigned int fanMotorNormalMap = Engine::TextureManager::GetTexture("./res/textures/Fan/Motor/Normal.png").
+                GetId();
 
-        unsigned int fanMotorEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png");
+        unsigned int fanMotorEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png").
+                GetId();
 
         Models::Model* fanMotorModel = new Models::Model("./res/models/Fan/Motor.fbx");
         Materials::PbrMaterial* fanMotorMaterial = new Materials::PbrMaterial(depth, shader, directionalPass, pointPass,
@@ -388,21 +401,24 @@ namespace Scene
         fanMotorRoller->SetInitialRotation(fanMotorEntity->GetTransform()->GetEulerAngles());
         fanMotorEntity->AddComponent(fanMotorRoller);
 
-        Textures.push_back(fanMotorBaseMap);
-        Textures.push_back(fanMotorRmaoMap);
-        Textures.push_back(fanMotorNormalMap);
-        Textures.push_back(fanMotorEmissiveMap);
+        Textures.push_back(Engine::Texture(fanMotorBaseMap));
+        Textures.push_back(Engine::Texture(fanMotorRmaoMap));
+        Textures.push_back(Engine::Texture(fanMotorNormalMap));
+        Textures.push_back(Engine::Texture(fanMotorEmissiveMap));
 
         Models.push_back(fanMotorModel);
         Materials.push_back(fanMotorMaterial);
 
-        unsigned int fanBladesBaseMap = Engine::TextureManager::GetTexture("./res/textures/Fan/Blades/Base.png");
+        unsigned int fanBladesBaseMap = Engine::TextureManager::GetTexture("./res/textures/Fan/Blades/Base.png").
+                GetId();
         unsigned int fanBladesRmaoMap = Engine::TextureManager::GetTexture(
-                "./res/textures/Fan/Blades/RoughnessMetallicAmbientOcclusion.png");
+                "./res/textures/Fan/Blades/RoughnessMetallicAmbientOcclusion.png").GetId();
 
-        unsigned int fanBladesNormalMap = Engine::TextureManager::GetTexture("./res/textures/Fan/Blades/Normal.png");
+        unsigned int fanBladesNormalMap = Engine::TextureManager::GetTexture("./res/textures/Fan/Blades/Normal.png").
+                GetId();
 
-        unsigned int fanBladesEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png");
+        unsigned int fanBladesEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png").
+                GetId();
 
         Models::Model* fanBladesModel = new Models::Model("./res/models/Fan/Blades.fbx");
         Materials::PbrMaterial* fanBladesMaterial = new Materials::PbrMaterial(
@@ -421,10 +437,10 @@ namespace Scene
         Engine::Rotator* fanBladesRotator = new Engine::Rotator(glm::vec3(0.0f, 0.0f, 720.0f));
         fanBladesEntity->AddComponent(fanBladesRotator);
 
-        Textures.push_back(fanBladesBaseMap);
-        Textures.push_back(fanBladesRmaoMap);
-        Textures.push_back(fanBladesNormalMap);
-        Textures.push_back(fanBladesEmissiveMap);
+        Textures.push_back(Engine::Texture(fanBladesBaseMap));
+        Textures.push_back(Engine::Texture(fanBladesRmaoMap));
+        Textures.push_back(Engine::Texture(fanBladesNormalMap));
+        Textures.push_back(Engine::Texture(fanBladesEmissiveMap));
 
         Models.push_back(fanBladesModel);
         Materials.push_back(fanBladesMaterial);
@@ -433,13 +449,14 @@ namespace Scene
          * Assembling Table
          */
 
-        unsigned int tableBaseMap = Engine::TextureManager::GetTexture("./res/textures/Table/Base.png");
+        unsigned int tableBaseMap = Engine::TextureManager::GetTexture("./res/textures/Table/Base.png").GetId();
         unsigned int tableRmaoMap = Engine::TextureManager::GetTexture(
-                "./res/textures/Table/RoughnessMetallicAmbientOcclusion.png");
+                "./res/textures/Table/RoughnessMetallicAmbientOcclusion.png").GetId();
 
-        unsigned int tableNormalMap = Engine::TextureManager::GetTexture("./res/textures/Table/Normal.png");
+        unsigned int tableNormalMap = Engine::TextureManager::GetTexture("./res/textures/Table/Normal.png").GetId();
 
-        unsigned int tableEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png");
+        unsigned int tableEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png").
+                GetId();
 
         Models::Model* tableModel = new Models::Model("./res/models/Table.fbx");
         Materials::PbrMaterial* tableMaterial = new Materials::PbrMaterial(depth, shader, directionalPass, pointPass,
@@ -462,10 +479,10 @@ namespace Scene
         tableEntity->GetTransform()->SetPosition(glm::vec3(30.0707f, 1.65611f, 25.2889f));
         tableEntity->GetTransform()->SetEulerAngles(glm::vec3(0.0f, -90.0f, 0.0f));
 
-        Textures.push_back(tableBaseMap);
-        Textures.push_back(tableRmaoMap);
-        Textures.push_back(tableNormalMap);
-        Textures.push_back(tableEmissiveMap);
+        Textures.push_back(Engine::Texture(tableBaseMap));
+        Textures.push_back(Engine::Texture(tableRmaoMap));
+        Textures.push_back(Engine::Texture(tableNormalMap));
+        Textures.push_back(Engine::Texture(tableEmissiveMap));
 
         Models.push_back(tableModel);
         Materials.push_back(tableMaterial);
@@ -507,13 +524,14 @@ namespace Scene
          * Assembling Monitor
          */
 
-        unsigned int monitorBaseMap = Engine::TextureManager::GetTexture("./res/textures/Monitor/Base.png");
+        unsigned int monitorBaseMap = Engine::TextureManager::GetTexture("./res/textures/Monitor/Base.png").GetId();
         unsigned int monitorRmaoMap = Engine::TextureManager::GetTexture(
-                "./res/textures/Monitor/RoughnessMetallicAmbientOcclusion.png");
+                "./res/textures/Monitor/RoughnessMetallicAmbientOcclusion.png").GetId();
 
-        unsigned int monitorNormalMap = Engine::TextureManager::GetTexture("./res/textures/Monitor/Normal.png");
+        unsigned int monitorNormalMap = Engine::TextureManager::GetTexture("./res/textures/Monitor/Normal.png").GetId();
 
-        unsigned int monitorEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/Monitor/Emissive.png");
+        unsigned int monitorEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/Monitor/Emissive.png").
+                GetId();
 
         Models::Model* monitorModel = new Models::Model("./res/models/Monitor.fbx");
         Materials::PbrMaterial* monitorMaterial = new Materials::PbrMaterial(depth, shader, directionalPass, pointPass,
@@ -529,10 +547,10 @@ namespace Scene
         monitorEntity->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
         monitorEntity->GetTransform()->SetPosition(glm::vec3(-8.11747, 2.28526, -18.5948));
 
-        Textures.push_back(monitorBaseMap);
-        Textures.push_back(monitorRmaoMap);
-        Textures.push_back(monitorNormalMap);
-        Textures.push_back(monitorEmissiveMap);
+        Textures.push_back(Engine::Texture(monitorBaseMap));
+        Textures.push_back(Engine::Texture(monitorRmaoMap));
+        Textures.push_back(Engine::Texture(monitorNormalMap));
+        Textures.push_back(Engine::Texture(monitorEmissiveMap));
 
         Models.push_back(monitorModel);
         Materials.push_back(monitorMaterial);
@@ -541,14 +559,16 @@ namespace Scene
          * Wall Monitor
          */
 
-        unsigned int wallMonitorBaseMap = Engine::TextureManager::GetTexture("./res/textures/WallMonitor/Base.png");
+        unsigned int wallMonitorBaseMap = Engine::TextureManager::GetTexture("./res/textures/WallMonitor/Base.png").
+                GetId();
         unsigned int wallMonitorRmaoMap = Engine::TextureManager::GetTexture(
-                "./res/textures/WallMonitor/RoughnessMetallicAmbientOcclusion.png");
+                "./res/textures/WallMonitor/RoughnessMetallicAmbientOcclusion.png").GetId();
 
-        unsigned int wallMonitorNormalMap = Engine::TextureManager::GetTexture("./res/textures/WallMonitor/Normal.png");
+        unsigned int wallMonitorNormalMap = Engine::TextureManager::GetTexture("./res/textures/WallMonitor/Normal.png").
+                GetId();
 
         unsigned int wallMonitorEmissiveMap = Engine::TextureManager::GetTexture(
-                "./res/textures/WallMonitor/Emissive.png");
+                "./res/textures/WallMonitor/Emissive.png").GetId();
 
         Models::Model* wallMonitorModel = new Models::Model("./res/models/WallMonitor.fbx");
         Materials::PbrMaterial* wallMonitorMaterial = new Materials::PbrMaterial(
@@ -565,10 +585,10 @@ namespace Scene
         wallMonitorEntity->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
         wallMonitorEntity->GetTransform()->SetPosition(glm::vec3(-6.88389f, 5.599f, -19.0169f));
 
-        Textures.push_back(wallMonitorBaseMap);
-        Textures.push_back(wallMonitorRmaoMap);
-        Textures.push_back(wallMonitorNormalMap);
-        Textures.push_back(wallMonitorEmissiveMap);
+        Textures.push_back(Engine::Texture(wallMonitorBaseMap));
+        Textures.push_back(Engine::Texture(wallMonitorRmaoMap));
+        Textures.push_back(Engine::Texture(wallMonitorNormalMap));
+        Textures.push_back(Engine::Texture(wallMonitorEmissiveMap));
 
         Models.push_back(wallMonitorModel);
         Materials.push_back(wallMonitorMaterial);
@@ -577,14 +597,16 @@ namespace Scene
          * Ceiling Lamps
          */
 
-        unsigned int ceilingLampBaseMap = Engine::TextureManager::GetTexture("./res/textures/CeilingLamp/Base.png");
+        unsigned int ceilingLampBaseMap = Engine::TextureManager::GetTexture("./res/textures/CeilingLamp/Base.png").
+                GetId();
         unsigned int ceilingLampRmaoMap = Engine::TextureManager::GetTexture(
-                "./res/textures/CeilingLamp/RoughnessMetallicAmbientOcclusion.png");
+                "./res/textures/CeilingLamp/RoughnessMetallicAmbientOcclusion.png").GetId();
 
-        unsigned int ceilingLampNormalMap = Engine::TextureManager::GetTexture("./res/textures/CeilingLamp/Normal.png");
+        unsigned int ceilingLampNormalMap = Engine::TextureManager::GetTexture("./res/textures/CeilingLamp/Normal.png").
+                GetId();
 
         unsigned int ceilingLampEmissiveMap = Engine::TextureManager::GetTexture(
-                "./res/textures/CeilingLamp/Emissive.png");
+                "./res/textures/CeilingLamp/Emissive.png").GetId();
 
         Models::Model* ceilingLampModel = new Models::Model("./res/models/CeilingLamp.fbx");
         Materials::PbrMaterial* ceilingLampMaterial = new Materials::PbrMaterial(
@@ -607,10 +629,10 @@ namespace Scene
         ceilingLampEntity->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
         ceilingLampEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 10.8041f, 7.12522f));
 
-        Textures.push_back(ceilingLampBaseMap);
-        Textures.push_back(ceilingLampRmaoMap);
-        Textures.push_back(ceilingLampNormalMap);
-        Textures.push_back(ceilingLampEmissiveMap);
+        Textures.push_back(Engine::Texture(ceilingLampBaseMap));
+        Textures.push_back(Engine::Texture(ceilingLampRmaoMap));
+        Textures.push_back(Engine::Texture(ceilingLampNormalMap));
+        Textures.push_back(Engine::Texture(ceilingLampEmissiveMap));
 
         Models.push_back(ceilingLampModel);
         Materials.push_back(ceilingLampMaterial);

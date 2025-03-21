@@ -32,11 +32,6 @@ namespace Engine
         glm::vec2 LastMousePosition = glm::vec2(0, 0);
 
         Scene* Scene;
-        std::vector<unsigned int> Textures;
-        std::vector<Models::Model*> Models;
-        std::vector<Shaders::Shader> Shaders;
-        std::vector<Materials::Material*> Materials;
-
     public:
         Engine();
 

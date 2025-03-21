@@ -54,7 +54,7 @@ namespace Engine
 
         try
         {
-            SceneBuilding::SceneBuilder::Build(Scene, Textures, Models, Shaders, Materials);
+            SceneBuilding::SceneBuilder::Build(Scene);
         } catch (std::runtime_error& e)
         {
             spdlog::error(e.what());
@@ -290,17 +290,17 @@ namespace Engine
         delete Scene;
         TextureManager::DeleteAllTextures();
 
-        for (Models::Model* model : Models)
+        for (Models::Model* model : Scene->Models)
         {
             delete model;
         }
 
-        for (Shaders::Shader shader : Shaders)
+        for (Shaders::Shader shader : Scene->Shaders)
         {
             shader.Delete();
         }
 
-        for (Materials::Material* material : Materials)
+        for (Materials::Material* material : Scene->Materials)
         {
             delete material;
         }

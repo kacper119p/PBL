@@ -25,12 +25,12 @@ namespace Serialization
         }
 
     public:
-        virtual rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const = 0;
+       /* virtual rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const = 0;
 
         virtual void DeserializeValuePass(const rapidjson::Value& Object) = 0;
 
         virtual void DeserializeReferencesPass(const rapidjson::Value& Object,
-                                               std::unordered_map<GUID, SerializedObject*>) = 0;
+                                               std::unordered_map<GUID, SerializedObject*>) = 0;*/
     };
 
 } // Serialization

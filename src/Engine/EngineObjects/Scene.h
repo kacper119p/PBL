@@ -1,6 +1,18 @@
 #pragma once
 
 #include "Entity.h"
+#include "Engine/Textures/Texture.h"
+#include "Shaders/Shader.h"
+
+namespace Materials
+{
+    class Material;
+}
+
+namespace Models
+{
+    class Model;
+}
 
 namespace Engine
 {
@@ -11,6 +23,12 @@ namespace Engine
     {
     private:
         Entity* Root;
+
+    public:
+        std::vector<Texture> Textures;
+        std::vector<Models::Model*> Models;
+        std::vector<Shaders::Shader> Shaders;
+        std::vector<Materials::Material*> Materials;
 
     public:
         /**
