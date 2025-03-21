@@ -116,9 +116,7 @@ namespace Engine
         END_OBJECT_SERIALIZATION
     }
 
-    void Transform::DeserializeValuePass(const rapidjson::Value& Object,
-                                         std::unordered_map<GUID, Serialization::SerializedObject*, GuidHasher>&
-                                         ReferenceMap)
+    void Transform::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
         START_OBJECT_DESERIALIZATION_VALUE_PASS
         Serialization::Deserialize(Object["position"], Position);
@@ -128,8 +126,7 @@ namespace Engine
     }
 
     void Transform::DeserializeReferencesPass(const rapidjson::Value& Object,
-                                              std::unordered_map<GUID, Serialization::SerializedObject*, GuidHasher>&
-                                              ReferenceMap)
+                                              Serialization::ReferenceTable& ReferenceMap)
     {
         START_OBJECT_DESERIALIZATION_REFERENCES_PASS
         //TODO Children Deserialization

@@ -26,6 +26,9 @@
 
 namespace Serialization
 {
+    class SerializedObject;
+    typedef std::unordered_map<GUID, SerializedObject*, GuidHasher> ReferenceTable;
+
     class SerializedObject
     {
     private:
@@ -54,12 +57,9 @@ namespace Serialization
     public:
         virtual rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const = 0;
 
-        virtual void DeserializeValuePass(const rapidjson::Value& Object,
-                                          std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap) = 0;
+        virtual void DeserializeValuePass(const rapidjson::Value& Object, ReferenceTable& ReferenceMap) = 0;
 
-        virtual void DeserializeReferencesPass(const rapidjson::Value& Object,
-                                               std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap) =
-        0;
+        virtual void DeserializeReferencesPass(const rapidjson::Value& Object, ReferenceTable& ReferenceMap) =0;
     };
 
 } // Serialization

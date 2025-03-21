@@ -85,10 +85,9 @@ namespace Engine
 
         rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const override;
 
-        void DeserializeValuePass(const rapidjson::Value& Object,
-                                  std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap) override;
+        void DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap) override;
 
         void DeserializeReferencesPass(const rapidjson::Value& Object,
-                                       std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap) override;
+                                       Serialization::ReferenceTable& ReferenceMap) override;
     };
 }

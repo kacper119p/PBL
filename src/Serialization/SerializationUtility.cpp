@@ -100,7 +100,7 @@ namespace Serialization
     }
 
     void Deserialize(const rapidjson::Value& Object, SerializedObject*& Value,
-                     std::unordered_map<GUID, SerializedObject*>& ReferenceMap)
+                     std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap)
     {
         const std::string str = Object.GetString();
         GUID guid;

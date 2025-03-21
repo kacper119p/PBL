@@ -21,16 +21,14 @@ namespace Engine
         END_OBJECT_SERIALIZATION
     }
 
-    void Rotator::DeserializeValuePass(const rapidjson::Value& Object,
-                                       std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap)
+    void Rotator::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
         START_OBJECT_DESERIALIZATION_VALUE_PASS
         Serialization::Deserialize(Object["velocity"], Velocity);
         END_OBJECT_DESERIALIZATION_VALUE_PASS
     }
 
-    void Rotator::DeserializeReferencesPass(const rapidjson::Value& Object,
-                                            std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap)
+    void Rotator::DeserializeReferencesPass(const rapidjson::Value& Object,Serialization::ReferenceTable& ReferenceMap)
     {
         START_OBJECT_DESERIALIZATION_REFERENCES_PASS
         END_OBJECT_DESERIALIZATION_REFERENCES_PASS
