@@ -1,4 +1,5 @@
 #pragma once
+#include "Serialization/SerializedObject.h"
 
 namespace Engine
 {
@@ -7,7 +8,7 @@ namespace Engine
     /**
      * @brief Base class for all components attached to entities.
      */
-    class Component
+    class Component : public Serialization::SerializedObject
     {
     private:
         Entity* Owner = nullptr;

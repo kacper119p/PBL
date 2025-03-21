@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+
+#include "Serialization/SerializedObject.h"
 #include "glm/glm.hpp"
 
 namespace Engine
@@ -10,7 +12,7 @@ namespace Engine
     /**
      * @brief Position, rotation and scale of an entity.
      */
-    class Transform
+    class Transform final : Serialization::SerializedObject
     {
     private:
         glm::vec3 Position = glm::vec3(0.0f, 0.0f, 0.0f);
