@@ -1,6 +1,7 @@
 #include "Transform.h"
 
 #include "Engine/EngineObjects/Entity.h"
+#include "Serialization/SerializationUtility.h"
 #include "glm/gtx/euler_angles.hpp"
 
 namespace Engine
@@ -103,5 +104,33 @@ namespace Engine
         }
 
         IsDirty = false;
+    }
+
+    rapidjson::Value Transform::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+    {
+        START_OBJECT_SERIALIZATION
+        object.AddMember("position", Serialization::Serialize(Position, Allocator), Allocator);
+        object.AddMember("eulerAngles", Serialization::Serialize(EulerAngles, Allocator), Allocator);
+        object.AddMember("scale", Serialization::Serialize(Scale, Allocator), Allocator);
+        //TODO Children Serialization
+        END_OBJECT_SERIALIZATION
+    }
+
+    void Transform::DeserializeValuePass(const rapidjson::Value& Object,
+                                         std::unordered_map<GUID, Serialization::SerializedObject*>& ReferenceMap)
+    {
+        START_OBJECT_DESERIALIZATION_VALUE_PASS
+        Serialization::Deserialize(Object["position"], Position);
+        Serialization::Deserialize(Object["eulerAngles"], EulerAngles);
+        Serialization::Deserialize(Object["scale"], Scale);
+        END_OBJECT_DESERIALIZATION_VALUE_PASS
+    }
+
+    void Transform::DeserializeReferencesPass(const rapidjson::Value& Object,
+                                              std::unordered_map<GUID, Serialization::SerializedObject*>& ReferenceMap)
+    {
+        START_OBJECT_DESERIALIZATION_REFERENCES_PASS
+        //TODO Children Deserialization
+        END_OBJECT_DESERIALIZATION_REFERENCES_PASS
     }
 }

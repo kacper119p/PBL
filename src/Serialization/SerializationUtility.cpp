@@ -1,10 +1,32 @@
 #include "SerializationUtility.h"
 
 #include <atlbase.h>
-#include <codecvt>
 #include <locale>
 
 #include "Engine/Textures/TextureManager.h"
+
+namespace
+{
+    constexpr int GUID_STRING_SIZE = 39; // GUID is 36 chars + null terminator
+
+    void GuidToStr(const GUID& guid, char* buffer)
+    {
+        snprintf(buffer, sizeof(buffer),
+                 "{%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x}",
+                 guid.Data1, guid.Data2, guid.Data3,
+                 guid.Data4[0], guid.Data4[1], guid.Data4[2], guid.Data4[3],
+                 guid.Data4[4], guid.Data4[5], guid.Data4[6], guid.Data4[7]);
+    }
+
+    void StrToGuid(const std::string& str, GUID* guid)
+    {
+        sscanf_s(str.c_str(),
+                 "{%8x-%4hx-%4hx-%2hhx%2hhx-%2hhx%2hhx%2hhx%2hhx%2hhx%2hhx}",
+                 &guid->Data1, &guid->Data2, &guid->Data3,
+                 &guid->Data4[0], &guid->Data4[1], &guid->Data4[2], &guid->Data4[3],
+                 &guid->Data4[4], &guid->Data4[5], &guid->Data4[6], &guid->Data4[7]);
+    }
+}
 
 namespace Serialization
 {
@@ -33,18 +55,22 @@ namespace Serialization
         return object;
     }
 
-    rapidjson::Value Serialize(const SerializedObject* const Value, const rapidjson::Document::AllocatorType& Allocator)
+    rapidjson::Value Serialize(const GUID& Guid, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kStringType);
-        GUID guid = Value->GetID();
-        char guidStr[37]; // GUID is 36 chars + null terminator
-        snprintf(guidStr, sizeof(guidStr),
-                 "%08X-%04X-%04X-%04X-%02X%02X%02X%02X%02X%02X",
-                 guid.Data1, guid.Data2, guid.Data3,
-                 (guid.Data4[0] << 8) | guid.Data4[1],
-                 guid.Data4[2], guid.Data4[3], guid.Data4[4],
-                 guid.Data4[5], guid.Data4[6], guid.Data4[7]);
-        object.SetString(guidStr, sizeof(guidStr));
+        char guidStr[GUID_STRING_SIZE];
+        GuidToStr(Guid, guidStr);
+        object.SetString(guidStr, sizeof(guidStr), Allocator);
+        return object;
+    }
+
+    rapidjson::Value Serialize(const SerializedObject* const Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kStringType);
+        const GUID guid = Value->GetID();
+        char guidStr[GUID_STRING_SIZE];
+        GuidToStr(guid, guidStr);
+        object.SetString(guidStr, sizeof(guidStr), Allocator);
         return object;
     }
 
@@ -67,16 +93,18 @@ namespace Serialization
         Value = Engine::TextureManager::GetTexture(Object.GetString());
     }
 
+    void Deserialize(const rapidjson::Value& Object, GUID& Value)
+    {
+        const std::string str = Object.GetString();
+        StrToGuid(str, &Value);
+    }
+
     void Deserialize(const rapidjson::Value& Object, SerializedObject*& Value,
                      std::unordered_map<GUID, SerializedObject*>& ReferenceMap)
     {
-        std::string str = Object.GetString();
-        std::wstring wStr(str.begin(), str.end());
+        const std::string str = Object.GetString();
         GUID guid;
-        const HRESULT result = CLSIDFromString(wStr.c_str(), &guid);
-#ifdef DEBUG
-        assert(result == S_OK);
-#endif
+        StrToGuid(str, &guid);
         Value = ReferenceMap[guid];
     }
 } // Serialization

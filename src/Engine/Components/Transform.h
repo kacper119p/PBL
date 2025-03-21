@@ -12,7 +12,7 @@ namespace Engine
     /**
      * @brief Position, rotation and scale of an entity.
      */
-    class Transform final : Serialization::SerializedObject
+    class Transform final : public Serialization::SerializedObject
     {
     private:
         glm::vec3 Position = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -21,7 +21,7 @@ namespace Engine
 
         glm::mat4 LocalMatrix = glm::mat4(1.0f);
         glm::mat4 LocalToWorldMatrix = glm::mat4(1.0f);;
-        bool IsDirty = false;
+        bool IsDirty = true;
 
     private:
         Transform* Parent = nullptr;
@@ -160,8 +160,24 @@ namespace Engine
         [[nodiscard]] const std::vector<Transform*>& GetChildren();
 
     private:
+        void SetOwner(Entity* const InOwner)
+        {
+            Owner = InOwner;
+        }
+
+    private:
         void MarkDirty();
 
         void UpdateMatrices();
+
+    public:
+        rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const override;
+
+        void DeserializeValuePass(const rapidjson::Value& Object,
+                                  std::unordered_map<GUID, Serialization::SerializedObject*>& ReferenceMap) override;
+
+        void DeserializeReferencesPass(const rapidjson::Value& Object,
+                                       std::unordered_map<GUID, Serialization::SerializedObject*>&
+                                       ReferenceMap) override;
     };
 }

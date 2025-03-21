@@ -12,7 +12,7 @@ namespace Engine
     /**
      * @brief Base class for all objects that exist in a scene.
      */
-    class Entity
+    class Entity final : public Serialization::SerializedObject
     {
     private:
         Transform Transform;
@@ -82,5 +82,13 @@ namespace Engine
                 }
             }
         }
+
+        rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const override;
+
+        void DeserializeValuePass(const rapidjson::Value& Object,
+                                  std::unordered_map<GUID, SerializedObject*>& ReferenceMap) override;
+
+        void DeserializeReferencesPass(const rapidjson::Value& Object,
+                                       std::unordered_map<GUID, SerializedObject*>& ReferenceMap) override;
     };
 }

@@ -5,14 +5,33 @@
 
 #include "rapidjson/document.h"
 
+#define START_OBJECT_SERIALIZATION rapidjson::Value object(rapidjson::kObjectType);\
+                                   object.AddMember("id", Serialization::Serialize(GetID(), Allocator), Allocator);\
+                                   object.AddMember("owner", Serialization::Serialize(GetOwner(), Allocator), Allocator);
+
+#define END_OBJECT_SERIALIZATION  return object;
+
+#define START_OBJECT_DESERIALIZATION_VALUE_PASS GUID id;\
+                                                Serialization::Deserialize(Object["id"], id);\
+                                                SetId(id);
+
+#define END_OBJECT_DESERIALIZATION_VALUE_PASS   ReferenceMap.emplace(id, this);
+
+#define START_OBJECT_DESERIALIZATION_REFERENCES_PASS Entity* owner;\
+                                                     Serialization::Deserialize(Object["owner"], owner, ReferenceMap);\
+                                                     SetOwner(owner);
+
+#define END_OBJECT_DESERIALIZATION_REFERENCES_PASS
+
 namespace Serialization
 {
-
     class SerializedObject
     {
         GUID Id;
 
     public:
+        virtual ~SerializedObject() = default;
+
         SerializedObject() // NOLINT(*-pro-type-member-init)
         {
             (void) CoCreateGuid(&Id); //ID Initialized here.
@@ -24,13 +43,20 @@ namespace Serialization
             return Id;
         }
 
+    protected:
+        void SetId(const GUID& Id)
+        {
+            this->Id = Id;
+        }
+
     public:
         virtual rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const = 0;
 
-        virtual void DeserializeValuePass(const rapidjson::Value& Object) = 0;
+        virtual void DeserializeValuePass(const rapidjson::Value& Object,
+                                          std::unordered_map<GUID, SerializedObject*>& ReferenceMap) = 0;
 
         virtual void DeserializeReferencesPass(const rapidjson::Value& Object,
-                                               std::unordered_map<GUID, SerializedObject*> ReferenceMap) = 0;
+                                               std::unordered_map<GUID, SerializedObject*>& ReferenceMap) = 0;
     };
 
 } // Serialization
