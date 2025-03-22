@@ -1,9 +1,18 @@
 #include "DirectionalLight.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include "Engine/Gui/LightsGui.h"
+#include "Serialization/SerializationUtility.h"
 
 namespace Engine
 {
+    DirectionalLight::DirectionalLight() = default;
+
+    DirectionalLight::~DirectionalLight()
+    {
+        LightManager::GetInstance()->UnregisterLight(this);
+        LightsGui::UnregisterLight(this);
+    }
+
     void DirectionalLight::OnAdd(Entity* NewOwner)
     {
         Component::OnAdd(NewOwner);
@@ -11,11 +20,25 @@ namespace Engine
         LightsGui::RegisterLight(this);
     }
 
-    DirectionalLight::DirectionalLight() = default;
-
-    DirectionalLight::~DirectionalLight()
+    rapidjson::Value DirectionalLight::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
-        LightManager::GetInstance()->UnregisterLight(this);
-        LightsGui::UnregisterLight(this);
+        START_COMPONENT_SERIALIZATION
+        object.AddMember("color", Serialization::Serialize(Color, Allocator), Allocator);
+        END_COMPONENT_SERIALIZATION
+    }
+
+    void DirectionalLight::DeserializeValuePass(const rapidjson::Value& Object,
+                                                Serialization::ReferenceTable& ReferenceMap)
+    {
+        START_COMPONENT_DESERIALIZATION_VALUE_PASS
+        Serialization::Deserialize(Object, "color", Color);
+        END_COMPONENT_DESERIALIZATION_VALUE_PASS
+    }
+
+    void DirectionalLight::DeserializeReferencesPass(const rapidjson::Value& Object,
+                                                     Serialization::ReferenceTable& ReferenceMap)
+    {
+        START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
+        END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 } // Engine

@@ -30,6 +30,13 @@ namespace
 
 namespace Serialization
 {
+    rapidjson::Value Serialize(const float& Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kNumberType);
+        object.SetFloat(Value);
+        return object;
+    }
+
     rapidjson::Value Serialize(const glm::vec3& Value, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kObjectType);
@@ -98,6 +105,16 @@ namespace Serialization
         return array;
     }
 
+
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, float& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsFloat())
+        {
+            return;
+        }
+        Value = iterator->value.GetFloat();
+    }
 
     void Deserialize(const rapidjson::Value& Object, const char* const Name, glm::vec3& Value)
     {

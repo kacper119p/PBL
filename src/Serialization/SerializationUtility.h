@@ -12,6 +12,8 @@
 
 namespace Serialization
 {
+    rapidjson::Value Serialize(const float& Value, rapidjson::Document::AllocatorType& Allocator);
+
     rapidjson::Value Serialize(const glm::vec3& Value, rapidjson::Document::AllocatorType& Allocator);
 
     rapidjson::Value Serialize(const glm::vec2& Value, rapidjson::Document::AllocatorType& Allocator);
@@ -42,6 +44,8 @@ namespace Serialization
         return array;
     }
 
+
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, float& Value);
 
     void Deserialize(const rapidjson::Value& Object, const char* const Name, glm::vec3& Value);
 

@@ -54,6 +54,8 @@ namespace Engine
         }
 
         void OnAdd(Entity* NewOwner) override;
+
+        SERIALIZATION_METHODS_DECLARATIONS
     };
 
 } // Engine
