@@ -80,6 +80,8 @@ namespace Engine
 
     public:
         void Update(float DeltaTime) override;
+
+        SERIALIZATION_METHODS_DECLARATIONS
     };
 
 } // Engine

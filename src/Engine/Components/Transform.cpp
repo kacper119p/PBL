@@ -120,9 +120,9 @@ namespace Engine
     void Transform::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
-        Serialization::Deserialize(Object["position"], Position);
-        Serialization::Deserialize(Object["eulerAngles"], EulerAngles);
-        Serialization::Deserialize(Object["scale"], Scale);
+        Serialization::Deserialize(Object, "position", Position);
+        Serialization::Deserialize(Object, "eulerAngles", EulerAngles);
+        Serialization::Deserialize(Object, "scale", Scale);
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 
@@ -130,8 +130,8 @@ namespace Engine
                                               Serialization::ReferenceTable& ReferenceMap)
     {
         START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
-        Serialization::Deserialize(Object["children"], Children, ReferenceMap);
-        Serialization::Deserialize(Object["parent"], Parent, ReferenceMap);
+        Serialization::Deserialize(Object, "children", Children, ReferenceMap);
+        Serialization::Deserialize(Object, "parent", Parent, ReferenceMap);
         END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 }

@@ -43,32 +43,35 @@ namespace Serialization
     }
 
 
-    void Deserialize(const rapidjson::Value& Object, glm::vec3& Value);
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, glm::vec3& Value);
 
-    void Deserialize(const rapidjson::Value& Object, glm::vec2& Value);
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, glm::vec2& Value);
 
-    void Deserialize(const rapidjson::Value& Object, Engine::Texture& Value);
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, Engine::Texture& Value);
 
-    void Deserialize(const rapidjson::Value& Object, std::string& Value);
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, std::string& Value);
 
-    void Deserialize(const rapidjson::Value& Object, GUID& Value);
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, GUID& Value);
+
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, SerializedObject*& Value,
+                     std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap);
 
     void Deserialize(const rapidjson::Value& Object, SerializedObject*& Value,
                      std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap);
 
     template<class T>
-    void Deserialize(const rapidjson::Value& Object, T*& Value,
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, T*& Value,
                      std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap)
     {
         static_assert(std::is_base_of_v<SerializedObject, T>);
 
         SerializedObject* result;
-        Deserialize(Object, result, ReferenceMap);
+        Deserialize(Object, Name, result, ReferenceMap);
         Value = reinterpret_cast<T*>(result);
     }
 
     template<class T>
-    void Deserialize(const rapidjson::Value& Object, const std::vector<T*>& Values,
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, const std::vector<T*>& Values,
                      std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap)
     {
         static_assert(std::is_base_of_v<SerializedObject, T>);

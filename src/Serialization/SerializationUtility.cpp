@@ -11,7 +11,7 @@ namespace
 
     void GuidToStr(const GUID& guid, char* buffer)
     {
-        snprintf(buffer, sizeof(buffer),
+        snprintf(buffer, GUID_STRING_SIZE * sizeof(char),
                  "{%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x}",
                  guid.Data1, guid.Data2, guid.Data3,
                  guid.Data4[0], guid.Data4[1], guid.Data4[2], guid.Data4[3],
@@ -47,11 +47,11 @@ namespace Serialization
         return object;
     }
 
-    rapidjson::Value Serialize(const Engine::Texture& Value)
+    rapidjson::Value Serialize(const Engine::Texture& Value, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kStringType);
         const std::string path = Engine::TextureManager::GetTexturePath(Value);
-        object.SetString(path.c_str(), static_cast<rapidjson::SizeType>(path.length()));
+        object.SetString(path.c_str(), static_cast<rapidjson::SizeType>(path.length()), Allocator);
         return object;
     }
 
@@ -99,47 +99,128 @@ namespace Serialization
     }
 
 
-    void Deserialize(const rapidjson::Value& Object, glm::vec3& Value)
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, glm::vec3& Value)
     {
-        Value.x = Object["x"].GetFloat();
-        Value.y = Object["y"].GetFloat();
-        Value.z = Object["z"].GetFloat();
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsObject())
+        {
+            return;
+        }
+        const rapidjson::Value& vector = iterator->value;
+        const auto iteratorX = vector.FindMember("x");
+
+
+        if (iteratorX == vector.MemberEnd() || !iteratorX->value.IsFloat())
+        {
+            return;
+        }
+        const auto iteratorY = vector.FindMember("y");
+        if (iteratorY == vector.MemberEnd() || !iteratorY->value.IsFloat())
+        {
+            return;
+        }
+        const auto iteratorZ = vector.FindMember("z");
+        if (iteratorZ == vector.MemberEnd() || !iteratorZ->value.IsFloat())
+        {
+            return;
+        }
+        Value.x = iteratorX->value.GetFloat();
+        Value.y = iteratorY->value.GetFloat();
+        Value.z = iteratorZ->value.GetFloat();
     }
 
-    void Deserialize(const rapidjson::Value& Object, glm::vec2& Value)
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, glm::vec2& Value)
     {
-        Value.x = Object["x"].GetFloat();
-        Value.y = Object["y"].GetFloat();
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsObject())
+        {
+            return;
+        }
+        const rapidjson::Value& vector = iterator->value;
+        const auto iteratorX = vector.FindMember("x");
+
+
+        if (iteratorX == vector.MemberEnd() || !iteratorX->value.IsFloat())
+        {
+            return;
+        }
+        const auto iteratorY = vector.FindMember("y");
+        if (iteratorY == vector.MemberEnd() || !iteratorY->value.IsFloat())
+        {
+            return;
+        }
+        Value.x = iteratorX->value.GetFloat();
+        Value.y = iteratorY->value.GetFloat();
     }
 
-    void Deserialize(const rapidjson::Value& Object, Engine::Texture& Value)
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, Engine::Texture& Value)
     {
-        Value = Engine::TextureManager::GetTexture(Object.GetString());
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsString())
+        {
+            return;
+        }
+        Value = Engine::TextureManager::GetTexture(iterator->value.GetString());
     }
 
-    void Deserialize(const rapidjson::Value& Object, std::string& Value)
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, std::string& Value)
     {
-        Value = Object.GetString();
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsString())
+        {
+            return;
+        }
+        Value = iterator->value.GetString();
     }
 
-    void Deserialize(const rapidjson::Value& Object, GUID& Value)
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, GUID& Value)
     {
-        const std::string str = Object.GetString();
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsString())
+        {
+            return;
+        }
+        const std::string str = iterator->value.GetString();
         StrToGuid(str, &Value);
     }
 
-    void Deserialize(const rapidjson::Value& Object, SerializedObject*& Value,
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, SerializedObject*& Value,
                      std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap)
     {
-        const std::string str = Object.GetString();
-        GUID guid;
-        StrToGuid(str, &guid);
-        const auto iterator = ReferenceMap.find(guid);
-        if (iterator == ReferenceMap.end())
+        const auto guidIterator = Object.FindMember(Name);
+        if (guidIterator == Object.MemberEnd() || !guidIterator->value.IsString())
         {
             Value = nullptr;
             return;
         }
-        Value = iterator->second;
+        const std::string str = guidIterator->value.GetString();
+        GUID guid;
+        StrToGuid(str, &guid);
+        const auto referenceIterator = ReferenceMap.find(guid);
+        if (referenceIterator == ReferenceMap.end())
+        {
+            Value = nullptr;
+            return;
+        }
+        Value = referenceIterator->second;
+    }
+
+    inline void Deserialize(const rapidjson::Value& Object, SerializedObject*& Value,
+                            std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap)
+    {
+        if (!Object.IsString())
+        {
+            Value = nullptr;
+            return;
+        }
+        GUID guid;
+        StrToGuid(Object.GetString(), &guid);
+        const auto referenceIterator = ReferenceMap.find(guid);
+        if (referenceIterator == ReferenceMap.end())
+        {
+            Value = nullptr;
+            return;
+        }
+        Value = referenceIterator->second;
     }
 } // Serialization
