@@ -24,7 +24,7 @@ namespace Engine
     void Rotator::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
-        Serialization::Deserialize(Object["velocity"], Velocity);
+        Serialization::Deserialize(Object, "velocity", Velocity);
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 
