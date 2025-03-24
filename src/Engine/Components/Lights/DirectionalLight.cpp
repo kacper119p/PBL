@@ -23,7 +23,7 @@ namespace Engine
     rapidjson::Value DirectionalLight::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION
-        object.AddMember("color", Serialization::Serialize(Color, Allocator), Allocator);
+        SERIALIZE_FIELD(Color)
         END_COMPONENT_SERIALIZATION
     }
 
@@ -31,7 +31,7 @@ namespace Engine
                                                 Serialization::ReferenceTable& ReferenceMap)
     {
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
-        Serialization::Deserialize(Object, "color", Color);
+        DESERIALIZE_VALUE(Color)
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 

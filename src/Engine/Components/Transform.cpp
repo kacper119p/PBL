@@ -109,20 +109,20 @@ namespace Engine
     rapidjson::Value Transform::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION
-        object.AddMember("position", Serialization::Serialize(Position, Allocator), Allocator);
-        object.AddMember("eulerAngles", Serialization::Serialize(EulerAngles, Allocator), Allocator);
-        object.AddMember("scale", Serialization::Serialize(Scale, Allocator), Allocator);
-        object.AddMember("children", Serialization::Serialize(Children, Allocator), Allocator);
-        object.AddMember("parent", Serialization::Serialize(Parent, Allocator), Allocator);
+        SERIALIZE_FIELD(Position)
+        SERIALIZE_FIELD(EulerAngles)
+        SERIALIZE_FIELD(Scale)
+        SERIALIZE_FIELD(Children)
+        SERIALIZE_FIELD(Parent)
         END_COMPONENT_SERIALIZATION
     }
 
     void Transform::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
-        Serialization::Deserialize(Object, "position", Position);
-        Serialization::Deserialize(Object, "eulerAngles", EulerAngles);
-        Serialization::Deserialize(Object, "scale", Scale);
+        DESERIALIZE_VALUE(Position);
+        DESERIALIZE_VALUE(EulerAngles);
+        DESERIALIZE_VALUE(Scale);
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 
@@ -130,8 +130,8 @@ namespace Engine
                                               Serialization::ReferenceTable& ReferenceMap)
     {
         START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
-        Serialization::Deserialize(Object, "children", Children, ReferenceMap);
-        Serialization::Deserialize(Object, "parent", Parent, ReferenceMap);
+        DESERIALIZE_POINTER(Children)
+        DESERIALIZE_POINTER(Parent)
         END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 }

@@ -21,10 +21,10 @@ namespace Engine
     rapidjson::Value PointLight::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION
-        object.AddMember("color", Serialization::Serialize(Color, Allocator), Allocator);
-        object.AddMember("linearFalloff", Serialization::Serialize(LinearFalloff, Allocator), Allocator);
-        object.AddMember("quadraticFalloff", Serialization::Serialize(QuadraticFalloff, Allocator), Allocator);
-        object.AddMember("range", Serialization::Serialize(Range, Allocator), Allocator);
+        SERIALIZE_FIELD(Color)
+        SERIALIZE_FIELD(LinearFalloff)
+        SERIALIZE_FIELD(QuadraticFalloff)
+        SERIALIZE_FIELD(Range)
         END_COMPONENT_SERIALIZATION
     }
 
@@ -32,10 +32,10 @@ namespace Engine
                                           Serialization::ReferenceTable& ReferenceMap)
     {
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
-        Serialization::Deserialize(Object, "color", Color);
-        Serialization::Deserialize(Object, "linearFalloff", LinearFalloff);
-        Serialization::Deserialize(Object, "quadraticFalloff", QuadraticFalloff);
-        Serialization::Deserialize(Object, "range", Range);
+        DESERIALIZE_VALUE(Color)
+        DESERIALIZE_VALUE(LinearFalloff)
+        DESERIALIZE_VALUE(QuadraticFalloff)
+        DESERIALIZE_VALUE(Range)
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 

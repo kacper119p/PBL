@@ -29,6 +29,12 @@
 
 #define END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
 
+#define SERIALIZE_FIELD(__NAME__) object.AddMember(#__NAME__, Serialization::Serialize(__NAME__, Allocator), Allocator);
+
+#define DESERIALIZE_VALUE(__NAME__) Serialization::Deserialize(Object, #__NAME__, __NAME__);
+
+#define DESERIALIZE_POINTER(__NAME__) Serialization::Deserialize(Object, #__NAME__, (__NAME__), ReferenceMap);
+
 namespace Serialization
 {
     class SerializedObject;

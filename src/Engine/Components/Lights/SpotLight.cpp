@@ -21,12 +21,12 @@ namespace Engine
     rapidjson::Value SpotLight::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION
-        object.AddMember("color", Serialization::Serialize(Color, Allocator), Allocator);
-        object.AddMember("outerAngle", Serialization::Serialize(OuterAngle, Allocator), Allocator);
-        object.AddMember("innerAngle", Serialization::Serialize(InnerAngle, Allocator), Allocator);
-        object.AddMember("linearFalloff", Serialization::Serialize(LinearFalloff, Allocator), Allocator);
-        object.AddMember("quadraticFalloff", Serialization::Serialize(QuadraticFalloff, Allocator), Allocator);
-        object.AddMember("range", Serialization::Serialize(Range, Allocator), Allocator);
+        SERIALIZE_FIELD(Color)
+        SERIALIZE_FIELD(OuterAngle)
+        SERIALIZE_FIELD(InnerAngle)
+        SERIALIZE_FIELD(LinearFalloff)
+        SERIALIZE_FIELD(QuadraticFalloff)
+        SERIALIZE_FIELD(Range)
         END_COMPONENT_SERIALIZATION
     }
 
@@ -34,12 +34,12 @@ namespace Engine
                                          Serialization::ReferenceTable& ReferenceMap)
     {
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
-        Serialization::Deserialize(Object, "color", Color);
-        Serialization::Deserialize(Object, "outerAngle", OuterAngle);
-        Serialization::Deserialize(Object, "innerAngle", InnerAngle);
-        Serialization::Deserialize(Object, "linearFalloff", LinearFalloff);
-        Serialization::Deserialize(Object, "quadraticFalloff", QuadraticFalloff);
-        Serialization::Deserialize(Object, "range", Range);
+        DESERIALIZE_VALUE(Color)
+        DESERIALIZE_VALUE(OuterAngle)
+        DESERIALIZE_VALUE(InnerAngle)
+        DESERIALIZE_VALUE(LinearFalloff)
+        DESERIALIZE_VALUE(QuadraticFalloff)
+        DESERIALIZE_VALUE(Range)
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 

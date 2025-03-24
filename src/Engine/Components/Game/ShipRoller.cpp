@@ -22,16 +22,16 @@ namespace Engine
     rapidjson::Value ShipRoller::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION
-        object.AddMember("velocity", Serialization::Serialize(Velocity, Allocator), Allocator);
-        object.AddMember("amplitude", Serialization::Serialize(Amplitude, Allocator), Allocator);
+        SERIALIZE_FIELD(Velocity)
+        SERIALIZE_FIELD(Amplitude)
         END_COMPONENT_SERIALIZATION
     }
 
     void ShipRoller::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
-        Serialization::Deserialize(Object, "velocity", Velocity);
-        Serialization::Deserialize(Object, "amplitude", Amplitude);
+        DESERIALIZE_VALUE(Velocity)
+        DESERIALIZE_VALUE(Amplitude)
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 
