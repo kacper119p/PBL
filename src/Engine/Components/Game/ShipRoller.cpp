@@ -23,7 +23,7 @@ namespace Engine
     {
         START_COMPONENT_SERIALIZATION
         object.AddMember("velocity", Serialization::Serialize(Velocity, Allocator), Allocator);
-        object.AddMember('amplitude', Serialization::Serialize(Amplitude, Allocator), Allocator);
+        object.AddMember("amplitude", Serialization::Serialize(Amplitude, Allocator), Allocator);
         END_COMPONENT_SERIALIZATION
     }
 
