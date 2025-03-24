@@ -3,7 +3,10 @@
 #include <atlbase.h>
 #include <locale>
 
+#include "Engine/Textures/Texture.h"
 #include "Engine/Textures/TextureManager.h"
+#include "Models/ModelManager.h"
+#include "Models/Model.h"
 
 namespace
 {
@@ -58,6 +61,14 @@ namespace Serialization
     {
         rapidjson::Value object(rapidjson::kStringType);
         const std::string path = Engine::TextureManager::GetTexturePath(Value);
+        object.SetString(path.c_str(), static_cast<rapidjson::SizeType>(path.length()), Allocator);
+        return object;
+    }
+
+    inline rapidjson::Value Serialize(const Models::Model* Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kStringType);
+        const std::string path = Models::ModelManager::GetModelPath(Value);
         object.SetString(path.c_str(), static_cast<rapidjson::SizeType>(path.length()), Allocator);
         return object;
     }
@@ -178,6 +189,16 @@ namespace Serialization
             return;
         }
         Value = Engine::TextureManager::GetTexture(iterator->value.GetString());
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, Models::Model& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsString())
+        {
+            return;
+        }
+        Value = Models::ModelManager::GetModel(iterator->value.GetString());
     }
 
     void Deserialize(const rapidjson::Value& Object, const char* const Name, std::string& Value)

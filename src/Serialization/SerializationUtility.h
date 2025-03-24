@@ -6,9 +6,18 @@
 
 
 #include "GuidHasher.h"
-#include "Engine/Textures/Texture.h"
 #include "rapidjson/document.h"
 #include "SerializedObject.h"
+
+namespace Engine
+{
+    class Texture;
+}
+
+namespace Models
+{
+    class Model;
+}
 
 namespace Serialization
 {
@@ -19,6 +28,9 @@ namespace Serialization
     rapidjson::Value Serialize(const glm::vec2& Value, rapidjson::Document::AllocatorType& Allocator);
 
     rapidjson::Value Serialize(const Engine::Texture& Value, rapidjson::Document::AllocatorType& Allocator);
+
+    rapidjson::Value Serialize(const Models::Model* Value, rapidjson::Document::AllocatorType& Allocator);
+
 
     rapidjson::Value Serialize(const std::string& Value, rapidjson::Document::AllocatorType& Allocator);
 
@@ -52,6 +64,8 @@ namespace Serialization
     void Deserialize(const rapidjson::Value& Object, const char* const Name, glm::vec2& Value);
 
     void Deserialize(const rapidjson::Value& Object, const char* const Name, Engine::Texture& Value);
+
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, Models::Model& Value);
 
     void Deserialize(const rapidjson::Value& Object, const char* const Name, std::string& Value);
 
