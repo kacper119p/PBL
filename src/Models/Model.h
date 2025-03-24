@@ -10,12 +10,15 @@ namespace Models
     /**
      * @brief Collection of meshes.
      */
-    class Model
+    class Model final
     {
-    private:
-        std::vector<std::unique_ptr<Mesh> > Meshes = std::vector<std::unique_ptr<Mesh> >();
+        friend class ModelManager;
 
-    public:
+    private:
+        std::vector<std::unique_ptr<Mesh>> Meshes = std::vector<std::unique_ptr<Mesh>>();
+        std::string Path;
+
+    private:
         /**
          * @brief Constructs a new model from a given file.
          * @param FilePath Path to a model file.
@@ -59,6 +62,14 @@ namespace Models
                 }
             }
             return nullptr;
+        }
+
+        /**
+         * @brief Returns path to this model's file.
+         */
+        [[nodiscard]] std::string GetPath() const
+        {
+            return Path;
         }
 
     private:
