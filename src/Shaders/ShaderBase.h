@@ -22,9 +22,13 @@ namespace Shaders
         {
         }
 
-        ShaderBase() = default;
+        ShaderBase() = delete;
 
     public:
+        ShaderBase& operator=(const ShaderBase&) = delete;
+
+        ShaderBase(const ShaderBase&) = delete;
+
         [[nodiscard]] unsigned int GetId() const
         {
             return Id;
