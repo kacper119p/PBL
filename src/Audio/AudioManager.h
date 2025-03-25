@@ -1,30 +1,32 @@
 #ifndef TIDEENGINE_AUDIOMANAGER_H
 #define TIDEENGINE_AUDIOMANAGER_H
 
-#include <soloud.h>
-#include <soloud_wav.h>
+#include <memory>
+#include <miniaudio.h>
 #include <string>
+#include <unordered_map>
 
 /**
- * @brief Class for managing audio.
+ * @brief Class for managing audio using MiniAudio.
  *
- * This class implements the Singleton pattern for managing audio in the application,
- * using the SoLoud library (MiniAudio backend, .wav files).
+ * This class implements the Singleton pattern for handling audio in the application.
  */
 class AudioManager {
 private:
-    static AudioManager* instance;  ///< Singleton instance.
+    static AudioManager* instance; ///< Singleton instance.
 
-    SoLoud::Soloud soloud;  ///< Object for managing audio.
-    SoLoud::Wav currentSound;  ///< Object representing the loaded audio file.
+    ma_engine engine; ///< MiniAudio engine for sound playback.
+    std::unordered_map<std::string, std::shared_ptr<ma_sound>> sounds; ///< Map of sounds indexed by string ID.
 
     /**
      * @brief Private constructor.
+     * Initializes the MiniAudio engine.
      */
     AudioManager();
 
     /**
      * @brief Private destructor.
+     * Cleans up resources and shuts down MiniAudio.
      */
     ~AudioManager();
 
@@ -44,17 +46,20 @@ public:
     static void destroyInstance();
 
     /**
-     * @brief Loads an audio file.
+     * @brief Loads an audio file with a specific ID.
      *
-     * @param filename The name of the audio file.
+     * @param filename The path to the audio file.
+     * @param id The unique string ID for the sound.
      * @return true If the file was successfully loaded, false otherwise.
      */
-    bool loadSound(const std::string& filename);
+    bool loadSound(const std::string& filename, const std::string& id);
 
     /**
-     * @brief Plays the loaded audio.
+     * @brief Plays a sound based on its ID.
+     *
+     * @param id The string ID of the sound to play.
      */
-    void playSound();
+    void playSound(const std::string& id);
 
     /**
      * @brief Sets the global volume.
@@ -64,19 +69,11 @@ public:
     void setVolume(float volume);
 
     /**
-     * @brief Pauses all sounds.
+     * @brief Stops a sound based on its ID.
+     *
+     * @param id The string ID of the sound to stop.
      */
-    void pauseSound();
-
-    /**
-     * @brief Resumes all sounds.
-     */
-    void resumeSound();
-
-    /**
-     * @brief Stops all sounds.
-     */
-    void stopSound();
+    void stopSound(const std::string& id);
 };
 
 #endif

@@ -28,7 +28,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
 												  ${glad_SOURCE_DIR}
 												  ${stb_image_SOURCE_DIR}
 												  ${imgui_SOURCE_DIR}
-												  ${SOLOUD_INCLUDE_DIR})
+										  	  	  ${miniaudio_SOURCE_DIR})
 
 find_package(imguizmo CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
@@ -42,7 +42,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE imgui::imgui)
 target_link_libraries(${PROJECT_NAME} PRIVATE spdlog)
 target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)
 target_link_libraries(${PROJECT_NAME} PRIVATE imguizmo::imguizmo)
-target_link_libraries(${PROJECT_NAME} PRIVATE soloud)
+target_link_libraries(${PROJECT_NAME} PRIVATE miniaudio)
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
 				   COMMAND ${CMAKE_COMMAND} -E create_symlink
