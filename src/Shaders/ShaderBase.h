@@ -16,13 +16,14 @@ namespace Shaders
     private:
         unsigned int Id;
 
+    public:
+        ShaderBase() = delete;
+
     protected:
         explicit ShaderBase(const unsigned int Id) :
             Id(Id)
         {
         }
-
-        ShaderBase() = delete;
 
     public:
         ShaderBase& operator=(const ShaderBase&) = delete;
