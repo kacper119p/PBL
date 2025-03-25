@@ -1,6 +1,5 @@
 #pragma once
 
-#include "ShaderSourceFiles.h"
 #include "ShaderBase.h"
 
 namespace Shaders
@@ -8,12 +7,14 @@ namespace Shaders
     /**
      * @brief Render pass shader.
      */
-    class Shader : public ShaderBase
+    class Shader final : public ShaderBase
     {
-    public:
-        explicit Shader(const ShaderSourceFiles& MainPass);
+        friend class ShaderManager;
 
     private:
-        static unsigned int CompilePass(const ShaderSourceFiles& Pass);
+        explicit Shader(const unsigned int ProgramId) :
+            ShaderBase(ProgramId)
+        {
+        }
     };
 } //Shaders

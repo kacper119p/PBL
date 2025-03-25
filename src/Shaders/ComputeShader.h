@@ -7,16 +7,21 @@ namespace Shaders
     /**
      * @brief Compute shader.
      */
-    class ComputeShader : public ShaderBase
+    class ComputeShader final : public ShaderBase
     {
-    public:
-        explicit ComputeShader(const char* SourceFile);
+        friend class ShaderManager;
+
+    private:
+        explicit ComputeShader(const unsigned int ProgramID) :
+            ShaderBase(ProgramID)
+        {
+        }
 
     public:
         [[nodiscard]] glm::ivec3 GetWorkGroupSize() const
         {
             int localWorkGroupSize[3];
-            glGetProgramiv(Id, GL_COMPUTE_WORK_GROUP_SIZE, localWorkGroupSize);
+            glGetProgramiv(GetId(), GL_COMPUTE_WORK_GROUP_SIZE, localWorkGroupSize);
             return glm::ivec3(localWorkGroupSize[0], localWorkGroupSize[1], localWorkGroupSize[2]);
         }
 

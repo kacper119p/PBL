@@ -4,7 +4,6 @@
 
 namespace Serialization
 {
-
     struct GuidHasher
     {
         size_t operator()(const GUID& Guid) const

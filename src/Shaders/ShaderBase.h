@@ -11,8 +11,16 @@ namespace Shaders
      */
     class ShaderBase
     {
-    protected:
+        friend class ShaderManager;
+
+    private:
         unsigned int Id;
+
+    protected:
+        explicit ShaderBase(const unsigned int Id) :
+            Id(Id)
+        {
+        }
 
     public:
         virtual ~ShaderBase() = 0;
