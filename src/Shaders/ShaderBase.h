@@ -22,8 +22,7 @@ namespace Shaders
         {
         }
 
-    public:
-        virtual ~ShaderBase() = 0;
+        ShaderBase() = default;
 
     public:
         [[nodiscard]] unsigned int GetId() const
@@ -191,8 +190,5 @@ namespace Shaders
         {
             glDeleteProgram(Id);
         }
-
-    protected:
-        static unsigned int CompileShader(const char* FilePath, GLenum Type);
     };
 } // Shaders

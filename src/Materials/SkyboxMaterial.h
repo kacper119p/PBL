@@ -4,15 +4,19 @@
 
 namespace Materials
 {
-    class SkyboxMaterial : public Material
+    class SkyboxMaterial final : public Material
     {
+    private:
+        static const Shaders::Shader DepthPass;
+        static const Shaders::Shader MainPass;
+        static const Shaders::Shader DirectionalShadowPass;
+        static const Shaders::Shader PointSpotShadowPass;
+
     private:
         unsigned int Texture;
 
     public:
-        SkyboxMaterial(const Shaders::Shader& DepthPass, const Shaders::Shader& Shader,
-                       const Shaders::Shader& DirectionalShadowPass, const Shaders::Shader& PointSpotShadowPass,
-                       unsigned int Texture);
+        explicit SkyboxMaterial(unsigned int Texture);
 
     public:
         [[nodiscard]] unsigned int GetTexture() const

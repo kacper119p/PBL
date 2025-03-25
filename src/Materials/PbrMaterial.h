@@ -6,8 +6,14 @@
 
 namespace Materials
 {
-    class PbrMaterial : public Material
+    class PbrMaterial final : public Material
     {
+    private:
+        static const Shaders::Shader DepthPass;
+        static const Shaders::Shader MainPass;
+        static const Shaders::Shader DirectionalShadowPass;
+        static const Shaders::Shader PointSpotShadowPass;
+
     private:
         unsigned int BaseMap;
         unsigned int RoughnessMetallicMap;
@@ -19,9 +25,7 @@ namespace Materials
         Vector3MaterialProperty EmissiveColor;
 
     public:
-        PbrMaterial(const Shaders::Shader& DepthPass, const Shaders::Shader& Shader,
-                    const Shaders::Shader& DirectionalShadowPass, const Shaders::Shader& PointSpotShadowPass,
-                    unsigned int BaseMap, unsigned int RoughnessMetallicMap, unsigned int NormalMap,
+        PbrMaterial(unsigned int BaseMap, unsigned int RoughnessMetallicMap, unsigned int NormalMap,
                     unsigned int EmissiveMap, const glm::vec3& BaseColor, float Roughness, float Metallic,
                     const glm::vec3& EmissiveColor);
 

@@ -1,18 +1,31 @@
 #include "PbrMaterial.h"
 
+#include "Shaders/ShaderManager.h"
+
 namespace Materials
 {
-    PbrMaterial::PbrMaterial(const Shaders::Shader& DepthPass, const Shaders::Shader& Shader,
-                             const Shaders::Shader& DirectionalShadowPass, const Shaders::Shader& PointSpotShadowPass,
-                             const unsigned int BaseMap, const unsigned int RoughnessMetallicMap,
+    const Shaders::Shader PbrMaterial::DepthPass = Shaders::ShaderManager::GetShader(
+            Shaders::ShaderSourceFiles("./res/shaders/DefaultDepth/DefaultDepth.vert", nullptr,
+                                       "./res/shaders/DefaultDepth/DefaultDepth.frag"));
+    const Shaders::Shader PbrMaterial::MainPass = Shaders::ShaderManager::GetShader(
+            Shaders::ShaderSourceFiles("./res/shaders/PBR/PBR.vert", nullptr, "./res/shaders/PBR/PBR.frag"));
+    const Shaders::Shader PbrMaterial::DirectionalShadowPass = Shaders::ShaderManager::GetShader(
+            Shaders::ShaderSourceFiles("./res/shaders/Common/BasicShadowPass/DirectionalLight.vert", nullptr,
+                                       "./res/shaders/Common/BasicShadowPass/DirectionalLight.frag"));
+    const Shaders::Shader PbrMaterial::PointSpotShadowPass = Shaders::ShaderManager::GetShader(
+            Shaders::ShaderSourceFiles("./res/shaders/Common/BasicShadowPass/PointSpotLight.vert",
+                                       "./res/shaders/Common/BasicShadowPass/PointSpotLight.geom",
+                                       "./res/shaders/Common/BasicShadowPass/PointSpotLight.frag"));
+
+    PbrMaterial::PbrMaterial(const unsigned int BaseMap, const unsigned int RoughnessMetallicMap,
                              const unsigned int NormalMap, const unsigned int EmissiveMap, const glm::vec3& BaseColor,
                              const float Roughness, const float Metallic, const glm::vec3& EmissiveColor) :
-        Material(DepthPass, Shader, DirectionalShadowPass, PointSpotShadowPass), BaseMap(BaseMap),
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), BaseMap(BaseMap),
         RoughnessMetallicMap(RoughnessMetallicMap), NormalMap(NormalMap), EmissiveMap(EmissiveMap),
-        Roughness(FloatMaterialProperty("Roughness", Shader, Roughness)),
-        Metallic(FloatMaterialProperty("Metallic", Shader, Metallic)),
-        BaseColor(Vector3MaterialProperty("BaseColor", Shader, BaseColor)),
-        EmissiveColor(Vector3MaterialProperty("EmissiveColor", Shader, EmissiveColor))
+        Roughness(FloatMaterialProperty("Roughness", MainPass, Roughness)),
+        Metallic(FloatMaterialProperty("Metallic", MainPass, Metallic)),
+        BaseColor(Vector3MaterialProperty("BaseColor", MainPass, BaseColor)),
+        EmissiveColor(Vector3MaterialProperty("EmissiveColor", MainPass, EmissiveColor))
     {
     }
 

@@ -5,15 +5,19 @@
 namespace Materials
 {
 
-    class ReflectiveMaterial : public Material
+    class ReflectiveMaterial final : public Material
     {
+    private:
+        static const Shaders::Shader DepthPass;
+        static const Shaders::Shader MainPass;
+        static const Shaders::Shader DirectionalShadowPass;
+        static const Shaders::Shader PointSpotShadowPass;
+
     private:
         unsigned int EnvironmentMap;
 
     public:
-        ReflectiveMaterial(const Shaders::Shader& DepthPass, const Shaders::Shader& Shader,
-                           const Shaders::Shader& DirectionalShadowPass, const Shaders::Shader& PointSpotShadowPass,
-                           unsigned int EnvironmentMap);
+        explicit ReflectiveMaterial(unsigned int EnvironmentMap);
 
     public:
         [[nodiscard]] inline unsigned int GetEnvironmentMap() const

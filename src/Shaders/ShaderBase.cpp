@@ -2,5 +2,4 @@
 
 namespace Shaders
 {
-    ShaderBase::~ShaderBase() = default;
 }

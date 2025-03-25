@@ -1,23 +1,34 @@
 #include "WaterMaterial.h"
 #include "GLFW/glfw3.h"
+#include "Shaders/ShaderManager.h"
+#include "Shaders/ShaderSourceFiles.h"
 
 namespace Materials
 {
-    WaterMaterial::WaterMaterial(const Shaders::Shader& DepthPass, const Shaders::Shader& Shader,
-                                 const Shaders::Shader& DirectionalShadowPass,
-                                 const Shaders::Shader& PointSpotShadowPass, const unsigned int NormalMap0,
-                                 const unsigned int NormalMap1, const glm::vec3& Color, const glm::vec2& Tiling0,
-                                 const glm::vec2& Tiling1, const glm::vec2& Velocity0, const glm::vec2& Velocity1,
-                                 const float Roughness, const float Metallic) :
-        Material(DepthPass, Shader,
-                 DirectionalShadowPass, PointSpotShadowPass), NormalMap0(NormalMap0),
-        NormalMap1(NormalMap1), Color(Vector3MaterialProperty("Color", Shader, Color)),
-        Tiling0(Vector2MaterialProperty("Tiling0", Shader, Tiling0)),
-        Tiling1(Vector2MaterialProperty("Tiling1", Shader, Tiling1)),
-        Velocity0(Vector2MaterialProperty("Velocity0", Shader, Velocity0)), Velocity1("Velocity1", Shader, Velocity1),
-        Roughness(FloatMaterialProperty("Roughness", Shader, Roughness)),
-        Metallic(FloatMaterialProperty("Metallic", Shader, Metallic)),
-        TimeLocation(glGetUniformLocation(Shader.GetId(), "Time"))
+    const Shaders::Shader WaterMaterial::DepthPass = Shaders::ShaderManager::GetShader(
+            Shaders::ShaderSourceFiles("./res/shaders/DefaultDepth/DefaultDepth.vert", nullptr,
+                                       "./res/shaders/DefaultDepth/DefaultDepth.frag"));
+    const Shaders::Shader WaterMaterial::MainPass = Shaders::ShaderManager::GetShader(
+            Shaders::ShaderSourceFiles("./res/shaders/Water/Water.vert", nullptr, "./res/shaders/Water/Water.frag"));
+    const Shaders::Shader WaterMaterial::DirectionalShadowPass = Shaders::ShaderManager::GetShader(
+            Shaders::ShaderSourceFiles("./res/shaders/Common/BasicShadowPass/DirectionalLight.vert", nullptr,
+                                       "./res/shaders/Common/BasicShadowPass/DirectionalLight.frag"));
+    const Shaders::Shader WaterMaterial::PointSpotShadowPass = Shaders::ShaderManager::GetShader(
+            Shaders::ShaderSourceFiles("./res/shaders/Common/BasicShadowPass/PointSpotLight.vert",
+                                       "./res/shaders/Common/BasicShadowPass/PointSpotLight.geom",
+                                       "./res/shaders/Common/BasicShadowPass/PointSpotLight.frag"));
+
+    WaterMaterial::WaterMaterial(const unsigned int NormalMap0, const unsigned int NormalMap1, const glm::vec3& Color,
+                                 const glm::vec2& Tiling0, const glm::vec2& Tiling1, const glm::vec2& Velocity0,
+                                 const glm::vec2& Velocity1, const float Roughness, const float Metallic) :
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), NormalMap0(NormalMap0),
+        NormalMap1(NormalMap1), Color(Vector3MaterialProperty("Color", MainPass, Color)),
+        Tiling0(Vector2MaterialProperty("Tiling0", MainPass, Tiling0)),
+        Tiling1(Vector2MaterialProperty("Tiling1", MainPass, Tiling1)),
+        Velocity0(Vector2MaterialProperty("Velocity0", MainPass, Velocity0)),
+        Velocity1("Velocity1", MainPass, Velocity1), Roughness(FloatMaterialProperty("Roughness", MainPass, Roughness)),
+        Metallic(FloatMaterialProperty("Metallic", MainPass, Metallic)),
+        TimeLocation(glGetUniformLocation(MainPass.GetId(), "Time"))
     {
     }
 

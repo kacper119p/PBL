@@ -5,17 +5,20 @@
 
 namespace Materials
 {
-    class RefractiveMaterial : public Material
+    class RefractiveMaterial final : public Material
     {
+    private:
+        static const Shaders::Shader DepthPass;
+        static const Shaders::Shader MainPass;
+        static const Shaders::Shader DirectionalShadowPass;
+        static const Shaders::Shader PointSpotShadowPass;
+
     private:
         unsigned int EnvironmentMap;
         FloatMaterialProperty IndexOfRefraction;
 
     public:
-        RefractiveMaterial(const Shaders::Shader& DepthPass, const Shaders::Shader& Shader,
-                           const Shaders::Shader& DirectionalShadowPass,
-                           const Shaders::Shader& PointSpotShadowPass, unsigned int EnvironmentMap,
-                           float IndexOfRefraction);
+        RefractiveMaterial(unsigned int EnvironmentMap, float IndexOfRefraction);
 
     public:
         [[nodiscard]] unsigned int GetEnvironmentMap() const
@@ -23,7 +26,7 @@ namespace Materials
             return EnvironmentMap;
         }
 
-        void SetEnvironmentMap(unsigned int EnvironmentMap)
+        void SetEnvironmentMap(const unsigned int EnvironmentMap)
         {
             RefractiveMaterial::EnvironmentMap = EnvironmentMap;
         }

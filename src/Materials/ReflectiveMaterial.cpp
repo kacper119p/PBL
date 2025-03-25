@@ -1,12 +1,26 @@
 #include "ReflectiveMaterial.h"
 
+#include "Shaders/ShaderManager.h"
+#include "Shaders/ShaderSourceFiles.h"
+
 namespace Materials
 {
-    ReflectiveMaterial::ReflectiveMaterial(const Shaders::Shader& DepthPass, const Shaders::Shader& Shader,
-                                           const Shaders::Shader& DirectionalShadowPass,
-                                           const Shaders::Shader& PointSpotShadowPass,
-                                           const unsigned int EnvironmentMap) :
-        Material(DepthPass, Shader, DirectionalShadowPass, PointSpotShadowPass), EnvironmentMap(EnvironmentMap)
+    const Shaders::Shader ReflectiveMaterial::DepthPass = Shaders::ShaderManager::GetShader(
+            Shaders::ShaderSourceFiles("./res/shaders/DefaultDepth/DefaultDepth.vert", nullptr,
+                                       "./res/shaders/DefaultDepth/DefaultDepth.frag"));
+    const Shaders::Shader ReflectiveMaterial::MainPass = Shaders::ShaderManager::GetShader(
+            Shaders::ShaderSourceFiles("./res/shaders/Reflective/Reflective.vert", nullptr,
+                                       "./res/shaders/Reflective/Reflective.frag"));
+    const Shaders::Shader ReflectiveMaterial::DirectionalShadowPass = Shaders::ShaderManager::GetShader(
+            Shaders::ShaderSourceFiles("./res/shaders/Common/BasicShadowPass/DirectionalLight.vert", nullptr,
+                                       "./res/shaders/Common/BasicShadowPass/DirectionalLight.frag"));
+    const Shaders::Shader ReflectiveMaterial::PointSpotShadowPass = Shaders::ShaderManager::GetShader(
+            Shaders::ShaderSourceFiles("./res/shaders/Common/BasicShadowPass/PointSpotLight.vert",
+                                       "./res/shaders/Common/BasicShadowPass/PointSpotLight.geom",
+                                       "./res/shaders/Common/BasicShadowPass/PointSpotLight.frag"));
+
+    ReflectiveMaterial::ReflectiveMaterial(const unsigned int EnvironmentMap) :
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), EnvironmentMap(EnvironmentMap)
     {
     }
 

@@ -6,8 +6,14 @@
 
 namespace Materials
 {
-    class WaterMaterial : public Material
+    class WaterMaterial final : public Material
     {
+    private:
+        static const Shaders::Shader DepthPass;
+        static const Shaders::Shader MainPass;
+        static const Shaders::Shader DirectionalShadowPass;
+        static const Shaders::Shader PointSpotShadowPass;
+
     private:
         unsigned int NormalMap0;
         unsigned int NormalMap1;
@@ -22,9 +28,7 @@ namespace Materials
         GLint TimeLocation;
 
     public:
-        WaterMaterial(const Shaders::Shader& DepthPass, const Shaders::Shader& Shader,
-                      const Shaders::Shader& DirectionalShadowPass, const Shaders::Shader& PointSpotShadowPass,
-                      unsigned int NormalMap0, unsigned int NormalMap1, const glm::vec3& Color,
+        WaterMaterial(unsigned int NormalMap0, unsigned int NormalMap1, const glm::vec3& Color,
                       const glm::vec2& Tiling0, const glm::vec2& Tiling1, const glm::vec2& Velocity0,
                       const glm::vec2& Velocity1, float Roughness, float Metallic);
 
