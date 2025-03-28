@@ -8,6 +8,8 @@
 #include "GuidHasher.h"
 #include "rapidjson/document.h"
 #include "SerializedObject.h"
+#include "Materials/Properties/MaterialProperty.h"
+#include "Shaders/Shader.h"
 
 namespace Engine
 {
@@ -30,7 +32,6 @@ namespace Serialization
     rapidjson::Value Serialize(const Engine::Texture& Value, rapidjson::Document::AllocatorType& Allocator);
 
     rapidjson::Value Serialize(const Models::Model* Value, rapidjson::Document::AllocatorType& Allocator);
-
 
     rapidjson::Value Serialize(const std::string& Value, rapidjson::Document::AllocatorType& Allocator);
 
@@ -56,22 +57,29 @@ namespace Serialization
         return array;
     }
 
+    template<typename T>
+    rapidjson::Value Serialize(const Materials::MaterialProperty<T>& Value,
+                               rapidjson::Document::AllocatorType& Allocator)
+    {
+        T value = Value.GetValue();
+        return Serialize(value, Allocator);
+    }
 
-    void Deserialize(const rapidjson::Value& Object, const char* const Name, float& Value);
+    void Deserialize(const rapidjson::Value& Object, const char* Name, float& Value);
 
-    void Deserialize(const rapidjson::Value& Object, const char* const Name, glm::vec3& Value);
+    void Deserialize(const rapidjson::Value& Object, const char* Name, glm::vec3& Value);
 
-    void Deserialize(const rapidjson::Value& Object, const char* const Name, glm::vec2& Value);
+    void Deserialize(const rapidjson::Value& Object, const char* Name, glm::vec2& Value);
 
-    void Deserialize(const rapidjson::Value& Object, const char* const Name, Engine::Texture& Value);
+    void Deserialize(const rapidjson::Value& Object, const char* Name, Engine::Texture& Value);
 
-    void Deserialize(const rapidjson::Value& Object, const char* const Name, Models::Model& Value);
+    void Deserialize(const rapidjson::Value& Object, const char* Name, Models::Model*& Value);
 
-    void Deserialize(const rapidjson::Value& Object, const char* const Name, std::string& Value);
+    void Deserialize(const rapidjson::Value& Object, const char* Name, std::string& Value);
 
-    void Deserialize(const rapidjson::Value& Object, const char* const Name, GUID& Value);
+    void Deserialize(const rapidjson::Value& Object, const char* Name, GUID& Value);
 
-    void Deserialize(const rapidjson::Value& Object, const char* const Name, SerializedObject*& Value,
+    void Deserialize(const rapidjson::Value& Object, const char* Name, SerializedObject*& Value,
                      std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap);
 
     void Deserialize(const rapidjson::Value& Object, SerializedObject*& Value,
@@ -102,5 +110,11 @@ namespace Serialization
         }
     }
 
-
+    template<typename T>
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, Materials::MaterialProperty<T>& Value)
+    {
+        T value = Value.GetValue();
+        Deserialize(Object, Name, Value);
+        Value.SetValue(value);
+    }
 } // Serialization

@@ -191,7 +191,7 @@ namespace Serialization
         Value = Engine::TextureManager::GetTexture(iterator->value.GetString());
     }
 
-    void Deserialize(const rapidjson::Value& Object, const char* const Name, Models::Model& Value)
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, Models::Model*& Value)
     {
         const auto iterator = Object.FindMember(Name);
         if (iterator == Object.MemberEnd() || !iterator->value.IsString())

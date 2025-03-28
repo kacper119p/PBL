@@ -43,7 +43,7 @@ namespace Materials
         /**
          * @brief Returns value stored by this property.
          */
-        [[nodiscard]] T GetValue() const
+        [[nodiscard]] const T& GetValue() const
         {
             return Value;
         }
