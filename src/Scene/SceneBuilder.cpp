@@ -20,6 +20,7 @@
 #include "Engine/Components/Game/Rotator.h"
 #include "Engine/Textures/TextureManager.h"
 #include "Materials/PbrMaterial.h"
+#include "tracy/Tracy.hpp"
 
 namespace Scene
 {
@@ -29,6 +30,7 @@ namespace Scene
     SceneBuilder::Build(Engine::Scene*& Scene, std::vector<unsigned int>& Textures, std::vector<Models::Model*>& Models,
                         std::vector<Shaders::Shader>& Shaders, std::vector<Materials::Material*>& Materials)
     {
+        ZoneScoped;
         Scene = new class Engine::Scene();
 
         Shaders::ShaderSourceFiles depthSource("./res/shaders/DefaultDepth/DefaultDepth.vert", nullptr,
