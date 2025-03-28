@@ -26,10 +26,6 @@ namespace Shaders
         }
 
     public:
-        ShaderBase& operator=(const ShaderBase&) = delete;
-
-        ShaderBase(const ShaderBase&) = delete;
-
         [[nodiscard]] unsigned int GetId() const
         {
             return Id;
