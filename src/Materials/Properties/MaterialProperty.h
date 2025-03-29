@@ -2,7 +2,7 @@
 #include <string>
 
 #include <glm/glm.hpp>
-#include "Shaders/ShaderBase.h"
+#include "Shaders/Shader.h"
 
 namespace Materials
 {

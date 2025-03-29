@@ -2,6 +2,7 @@
 
 #include "Shaders/Shader.h"
 #include "Material.h"
+#include "Engine/Textures/Texture.h"
 #include "Properties/MaterialProperty.h"
 
 namespace Materials
@@ -15,10 +16,10 @@ namespace Materials
         static const Shaders::Shader PointSpotShadowPass;
 
     private:
-        unsigned int BaseMap;
-        unsigned int RoughnessMetallicMap;
-        unsigned int NormalMap;
-        unsigned int EmissiveMap;
+        Engine::Texture BaseMap;
+        Engine::Texture RoughnessMetallicMap;
+        Engine::Texture NormalMap;
+        Engine::Texture EmissiveMap;
         FloatMaterialProperty Roughness;
         FloatMaterialProperty Metallic;
         Vector3MaterialProperty BaseColor;
@@ -28,6 +29,8 @@ namespace Materials
         PbrMaterial(unsigned int BaseMap, unsigned int RoughnessMetallicMap, unsigned int NormalMap,
                     unsigned int EmissiveMap, const glm::vec3& BaseColor, float Roughness, float Metallic,
                     const glm::vec3& EmissiveColor);
+
+        PbrMaterial();
 
     public:
         void UseDepthPass() const override;
@@ -39,42 +42,42 @@ namespace Materials
         void UsePointSpotShadows() const override;
 
     public:
-        [[nodiscard]] unsigned int GetBaseMap() const
+        [[nodiscard]] Engine::Texture GetBaseMap() const
         {
             return BaseMap;
         }
 
-        void SetBaseMap(const unsigned int BaseMap)
+        void SetBaseMap(const Engine::Texture BaseMap)
         {
             PbrMaterial::BaseMap = BaseMap;
         }
 
-        [[nodiscard]] unsigned int GetRoughnessMetallicMap() const
+        [[nodiscard]] Engine::Texture GetRoughnessMetallicMap() const
         {
             return RoughnessMetallicMap;
         }
 
-        void SetRoughnessMetallicMap(const unsigned int RoughnessMetallicMap)
+        void SetRoughnessMetallicMap(const Engine::Texture RoughnessMetallicMap)
         {
             PbrMaterial::RoughnessMetallicMap = RoughnessMetallicMap;
         }
 
-        [[nodiscard]] unsigned int GetNormalMap() const
+        [[nodiscard]] Engine::Texture GetNormalMap() const
         {
             return NormalMap;
         }
 
-        void SetNormalMap(const unsigned int NormalMap)
+        void SetNormalMap(const Engine::Texture NormalMap)
         {
             PbrMaterial::NormalMap = NormalMap;
         }
 
-        [[nodiscard]] unsigned int GetEmissiveMap() const
+        [[nodiscard]] Engine::Texture GetEmissiveMap() const
         {
             return EmissiveMap;
         }
 
-        void SetEmissiveMap(const unsigned int EmissiveMap)
+        void SetEmissiveMap(const Engine::Texture EmissiveMap)
         {
             PbrMaterial::EmissiveMap = EmissiveMap;
         }
@@ -118,5 +121,7 @@ namespace Materials
         {
             PbrMaterial::EmissiveColor.SetValue(EmissiveColor);
         }
+
+        MATERIAL_SERIALIZATION_METHODS_DECLARATIONS
     };
 } // Models

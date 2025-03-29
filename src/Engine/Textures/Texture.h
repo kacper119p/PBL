@@ -6,22 +6,28 @@ namespace Engine
     class Texture
     {
     private:
-        uint32_t TextureID;
+        uint32_t TextureId;
 
     public:
-        explicit Texture(const uint32_t TextureId) :
-            TextureID(TextureId)
+        Texture() :
+            TextureId(0)
         {
         }
 
+        explicit Texture(const uint32_t TextureId) :
+            TextureId(TextureId)
+        {
+        }
+
+    public:
         [[nodiscard]] uint32_t GetId() const
         {
-            return TextureID;
+            return TextureId;
         }
 
-        bool operator==(const Texture& other) const
+        bool operator==(const Texture& Other) const
         {
-            return TextureID == other.TextureID;
+            return TextureId == Other.TextureId;
         }
     };
 

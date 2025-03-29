@@ -1,5 +1,6 @@
 #include "RefractiveMaterial.h"
 
+#include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
 #include "Shaders/ShaderSourceFiles.h"
 
@@ -20,8 +21,15 @@ namespace Materials
                                        "./res/shaders/Common/BasicShadowPass/PointSpotLight.frag"));
 
     RefractiveMaterial::RefractiveMaterial(const unsigned int EnvironmentMap, const float IndexOfRefraction) :
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), EnvironmentMap(EnvironmentMap),
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
+        EnvironmentMap(Engine::Texture(EnvironmentMap)),
         IndexOfRefraction(FloatMaterialProperty("IOR", MainPass, IndexOfRefraction))
+    {
+    }
+
+    RefractiveMaterial::RefractiveMaterial() :
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), EnvironmentMap(Engine::Texture()),
+        IndexOfRefraction(FloatMaterialProperty("IOR", MainPass))
     {
     }
 
@@ -38,7 +46,7 @@ namespace Materials
         IndexOfRefraction.Bind();
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, EnvironmentMap);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, EnvironmentMap.GetId());
     }
 
     void RefractiveMaterial::UseDirectionalShadows() const
@@ -49,5 +57,21 @@ namespace Materials
     void RefractiveMaterial::UsePointSpotShadows() const
     {
         GetPointSpotShadowPass().Use();
+    }
+
+    rapidjson::Value RefractiveMaterial::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+    {
+        START_MATERIAL_SERIALIZATION
+        SERIALIZE_PROPERTY(EnvironmentMap);
+        SERIALIZE_PROPERTY(IndexOfRefraction);
+        END_MATERIAL_SERIALIZATION
+    }
+
+    void RefractiveMaterial::Deserialize(const rapidjson::Value& Object)
+    {
+        START_MATERIAL_DESERIALIZATION
+        DESERIALIZE_PROPERTY(EnvironmentMap);
+        DESERIALIZE_PROPERTY(IndexOfRefraction);
+        END_MATERIAL_DESERIALIZATION
     }
 } // Models

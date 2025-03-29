@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Material.h"
+#include "Engine/Textures/Texture.h"
 #include "Properties/MaterialProperty.h"
 
 namespace Materials
@@ -14,19 +15,21 @@ namespace Materials
         static const Shaders::Shader PointSpotShadowPass;
 
     private:
-        unsigned int EnvironmentMap;
+        Engine::Texture EnvironmentMap;
         FloatMaterialProperty IndexOfRefraction;
 
     public:
         RefractiveMaterial(unsigned int EnvironmentMap, float IndexOfRefraction);
 
+        RefractiveMaterial();
+
     public:
-        [[nodiscard]] unsigned int GetEnvironmentMap() const
+        [[nodiscard]] Engine::Texture GetEnvironmentMap() const
         {
             return EnvironmentMap;
         }
 
-        void SetEnvironmentMap(const unsigned int EnvironmentMap)
+        void SetEnvironmentMap(const Engine::Texture EnvironmentMap)
         {
             RefractiveMaterial::EnvironmentMap = EnvironmentMap;
         }
@@ -49,5 +52,7 @@ namespace Materials
         void UseDirectionalShadows() const override;
 
         void UsePointSpotShadows() const override;
+
+        MATERIAL_SERIALIZATION_METHODS_DECLARATIONS
     };
 } // Models

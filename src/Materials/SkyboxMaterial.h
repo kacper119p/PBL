@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Material.h"
+#include "Engine/Textures/Texture.h"
 
 namespace Materials
 {
@@ -13,18 +14,20 @@ namespace Materials
         static const Shaders::Shader PointSpotShadowPass;
 
     private:
-        unsigned int Texture;
+        Engine::Texture Texture;
 
     public:
         explicit SkyboxMaterial(unsigned int Texture);
 
+        SkyboxMaterial();
+
     public:
-        [[nodiscard]] unsigned int GetTexture() const
+        [[nodiscard]] Engine::Texture GetTexture() const
         {
             return Texture;
         }
 
-        void SetTexture(const unsigned int Texture)
+        void SetTexture(const Engine::Texture Texture)
         {
             SkyboxMaterial::Texture = Texture;
         }
@@ -37,6 +40,8 @@ namespace Materials
         void UseDirectionalShadows() const override;
 
         void UsePointSpotShadows() const override;
+
+        MATERIAL_SERIALIZATION_METHODS_DECLARATIONS
     };
 
 } // Models

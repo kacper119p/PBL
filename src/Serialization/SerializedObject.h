@@ -1,5 +1,6 @@
 #pragma once
 
+#include <combaseapi.h>
 #include <unordered_map>
 
 #include "GuidHasher.h"

@@ -1,5 +1,6 @@
 #include "PbrMaterial.h"
 
+#include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
 
 namespace Materials
@@ -20,12 +21,21 @@ namespace Materials
     PbrMaterial::PbrMaterial(const unsigned int BaseMap, const unsigned int RoughnessMetallicMap,
                              const unsigned int NormalMap, const unsigned int EmissiveMap, const glm::vec3& BaseColor,
                              const float Roughness, const float Metallic, const glm::vec3& EmissiveColor) :
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), BaseMap(BaseMap),
-        RoughnessMetallicMap(RoughnessMetallicMap), NormalMap(NormalMap), EmissiveMap(EmissiveMap),
-        Roughness(FloatMaterialProperty("Roughness", MainPass, Roughness)),
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), BaseMap(Engine::Texture(BaseMap)),
+        RoughnessMetallicMap(Engine::Texture(RoughnessMetallicMap)), NormalMap(Engine::Texture(NormalMap)),
+        EmissiveMap(Engine::Texture(EmissiveMap)), Roughness(FloatMaterialProperty("Roughness", MainPass, Roughness)),
         Metallic(FloatMaterialProperty("Metallic", MainPass, Metallic)),
         BaseColor(Vector3MaterialProperty("BaseColor", MainPass, BaseColor)),
         EmissiveColor(Vector3MaterialProperty("EmissiveColor", MainPass, EmissiveColor))
+    {
+    }
+
+    PbrMaterial::PbrMaterial():
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), BaseMap(Engine::Texture()),
+        RoughnessMetallicMap(Engine::Texture()), NormalMap(Engine::Texture()), EmissiveMap(Engine::Texture()),
+        Roughness(FloatMaterialProperty("Roughness", MainPass)), Metallic(FloatMaterialProperty("Metallic", MainPass)),
+        BaseColor(Vector3MaterialProperty("BaseColor", MainPass)),
+        EmissiveColor(Vector3MaterialProperty("EmissiveColor", MainPass))
     {
     }
 
@@ -43,13 +53,13 @@ namespace Materials
         Metallic.Bind();
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, BaseMap);
+        glBindTexture(GL_TEXTURE_2D, BaseMap.GetId());
         glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, RoughnessMetallicMap);
+        glBindTexture(GL_TEXTURE_2D, RoughnessMetallicMap.GetId());
         glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D, NormalMap);
+        glBindTexture(GL_TEXTURE_2D, NormalMap.GetId());
         glActiveTexture(GL_TEXTURE3);
-        glBindTexture(GL_TEXTURE_2D, EmissiveMap);
+        glBindTexture(GL_TEXTURE_2D, EmissiveMap.GetId());
     }
 
     void PbrMaterial::UseDirectionalShadows() const
@@ -60,5 +70,33 @@ namespace Materials
     void PbrMaterial::UsePointSpotShadows() const
     {
         GetPointSpotShadowPass().Use();
+    }
+
+    rapidjson::Value PbrMaterial::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+    {
+        START_MATERIAL_SERIALIZATION
+        SERIALIZE_PROPERTY(BaseMap);
+        SERIALIZE_PROPERTY(RoughnessMetallicMap);
+        SERIALIZE_PROPERTY(NormalMap);
+        SERIALIZE_PROPERTY(EmissiveMap);
+        SERIALIZE_PROPERTY(Roughness);
+        SERIALIZE_PROPERTY(Metallic);
+        SERIALIZE_PROPERTY(BaseColor);
+        SERIALIZE_PROPERTY(EmissiveColor);
+        END_MATERIAL_SERIALIZATION
+    }
+
+    void PbrMaterial::Deserialize(const rapidjson::Value& Object)
+    {
+        START_MATERIAL_DESERIALIZATION
+        DESERIALIZE_PROPERTY(BaseMap);
+        DESERIALIZE_PROPERTY(RoughnessMetallicMap);
+        DESERIALIZE_PROPERTY(NormalMap);
+        DESERIALIZE_PROPERTY(EmissiveMap);
+        DESERIALIZE_PROPERTY(Roughness);
+        DESERIALIZE_PROPERTY(Metallic);
+        DESERIALIZE_PROPERTY(BaseColor);
+        DESERIALIZE_PROPERTY(EmissiveColor);
+        END_MATERIAL_DESERIALIZATION
     }
 }

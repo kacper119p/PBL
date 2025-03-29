@@ -187,6 +187,11 @@ namespace Shaders
             SetTexture(glGetUniformLocation(Id, Name), Value);
         }
 
+        GLint GetUniformLocation(const char* const Name) const
+        {
+            return glGetUniformLocation(Id, Name);
+        }
+
         void Delete()
         {
             glDeleteProgram(Id);

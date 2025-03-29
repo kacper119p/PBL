@@ -24,7 +24,7 @@ namespace Engine
         {
         }
 
-        virtual ~Entity();
+        ~Entity() override;
 
     public:
         /**

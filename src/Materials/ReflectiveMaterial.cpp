@@ -1,5 +1,6 @@
 #include "ReflectiveMaterial.h"
 
+#include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
 #include "Shaders/ShaderSourceFiles.h"
 
@@ -20,7 +21,13 @@ namespace Materials
                                        "./res/shaders/Common/BasicShadowPass/PointSpotLight.frag"));
 
     ReflectiveMaterial::ReflectiveMaterial(const unsigned int EnvironmentMap) :
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), EnvironmentMap(EnvironmentMap)
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
+        EnvironmentMap(Engine::Texture(EnvironmentMap))
+    {
+    }
+
+    ReflectiveMaterial::ReflectiveMaterial() :
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), EnvironmentMap(Engine::Texture())
     {
     }
 
@@ -35,7 +42,7 @@ namespace Materials
         GetMainPass().Use();
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, EnvironmentMap);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, EnvironmentMap.GetId());
     }
 
     void ReflectiveMaterial::UseDirectionalShadows() const
@@ -46,5 +53,19 @@ namespace Materials
     void ReflectiveMaterial::UsePointSpotShadows() const
     {
         GetPointSpotShadowPass().Use();
+    }
+
+    rapidjson::Value ReflectiveMaterial::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+    {
+        START_MATERIAL_SERIALIZATION
+        SERIALIZE_PROPERTY(EnvironmentMap);
+        END_MATERIAL_SERIALIZATION
+    }
+
+    void ReflectiveMaterial::Deserialize(const rapidjson::Value& Object)
+    {
+        START_MATERIAL_DESERIALIZATION
+        DESERIALIZE_PROPERTY(EnvironmentMap);
+        END_MATERIAL_DESERIALIZATION
     }
 } // Models

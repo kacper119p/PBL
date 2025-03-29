@@ -2,6 +2,7 @@
 
 #include "Shaders/Shader.h"
 #include "Material.h"
+#include "Engine/Textures/Texture.h"
 #include "Properties/MaterialProperty.h"
 
 namespace Materials
@@ -15,8 +16,8 @@ namespace Materials
         static const Shaders::Shader PointSpotShadowPass;
 
     private:
-        unsigned int NormalMap0;
-        unsigned int NormalMap1;
+        Engine::Texture NormalMap0;
+        Engine::Texture NormalMap1;
         Vector3MaterialProperty Color;
         Vector2MaterialProperty Tiling0;
         Vector2MaterialProperty Tiling1;
@@ -32,6 +33,8 @@ namespace Materials
                       const glm::vec2& Tiling0, const glm::vec2& Tiling1, const glm::vec2& Velocity0,
                       const glm::vec2& Velocity1, float Roughness, float Metallic);
 
+        WaterMaterial();
+
     public:
         void UseDepthPass() const override;
 
@@ -40,5 +43,7 @@ namespace Materials
         void UseDirectionalShadows() const override;
 
         void UsePointSpotShadows() const override;
+
+        MATERIAL_SERIALIZATION_METHODS_DECLARATIONS
     };
 } // Models

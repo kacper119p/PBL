@@ -97,16 +97,25 @@ namespace Serialization
     }
 
     template<class T>
-    void Deserialize(const rapidjson::Value& Object, const char* const Name, const std::vector<T*>& Values,
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, std::vector<T*>& Values,
                      std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap)
     {
         static_assert(std::is_base_of_v<SerializedObject, T>);
 
-        for (const rapidjson::Value& value : Object)
+        const auto guidIterator = Object.FindMember(Name);
+        if (guidIterator == Object.MemberEnd() || !guidIterator->value.IsArray())
+        {
+            return;
+        }
+
+        for (const rapidjson::Value& value : Object.GetArray())
         {
             SerializedObject* result;
             Deserialize(value, result, ReferenceMap);
-            Values.push_back(reinterpret_cast<T*>(result));
+            if (result != nullptr)
+            {
+                Values.push_back(reinterpret_cast<T*>(result));
+            }
         }
     }
 
@@ -114,7 +123,7 @@ namespace Serialization
     void Deserialize(const rapidjson::Value& Object, const char* const Name, Materials::MaterialProperty<T>& Value)
     {
         T value = Value.GetValue();
-        Deserialize(Object, Name, Value);
+        Deserialize(Object, Name, value);
         Value.SetValue(value);
     }
 } // Serialization
