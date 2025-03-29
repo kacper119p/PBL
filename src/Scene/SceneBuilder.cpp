@@ -21,6 +21,9 @@
 #include "Engine/Textures/Texture.h"
 #include "Engine/Textures/TextureManager.h"
 #include "Materials/PbrMaterial.h"
+#include "Models/ModelManager.h"
+#include "Shaders/ShaderManager.h"
+#include "Shaders/ShaderSourceFiles.h"
 
 namespace Scene
 {
@@ -81,19 +84,22 @@ namespace Scene
                 nullptr,
                 "./res/shaders/Particles/Particle.frag");
 
-        Shaders::Shader depth(depthSource);
-        Shaders::Shader shader(shaderSource);
-        Shaders::Shader directionalPass(directionalShadowPass);
-        Shaders::Shader pointPass(pointSpotShadowPass);
-        Shaders::Shader skyboxShader(skyboxShaderSource);
-        Shaders::Shader skyboxDirectionalLightShader(skyboxDirectionalLightShadowShaderSource);
-        Shaders::Shader reflectiveShader(reflectiveShaderSource);
-        Shaders::Shader refractiveShader(refractiveShaderSource);
-        Shaders::Shader waterShader(waterShaderSource);
+        Shaders::Shader depth = Shaders::ShaderManager::GetShader(depthSource);
+        Shaders::Shader shader = Shaders::ShaderManager::GetShader(shaderSource);
+        Shaders::Shader directionalPass = Shaders::ShaderManager::GetShader(directionalShadowPass);
+        Shaders::Shader pointPass = Shaders::ShaderManager::GetShader(pointSpotShadowPass);
+        Shaders::Shader skyboxShader = Shaders::ShaderManager::GetShader(skyboxShaderSource);
+        Shaders::Shader skyboxDirectionalLightShader = Shaders::ShaderManager::GetShader(
+                skyboxDirectionalLightShadowShaderSource);
+        Shaders::Shader reflectiveShader = Shaders::ShaderManager::GetShader(reflectiveShaderSource);
+        Shaders::Shader refractiveShader = Shaders::ShaderManager::GetShader(refractiveShaderSource);
+        Shaders::Shader waterShader = Shaders::ShaderManager::GetShader(waterShaderSource);
 
-        Shaders::Shader particleRenderShader(particleRenderSource);
-        Shaders::ComputeShader particleSpawnShader("./res/shaders/Particles/ParticlesSpawn.comp");
-        Shaders::ComputeShader particleUpdateShader("./res/shaders/Particles/ParticlesUpdate.comp");
+        Shaders::Shader particleRenderShader = Shaders::ShaderManager::GetShader(particleRenderSource);
+        Shaders::ComputeShader particleSpawnShader = Shaders::ShaderManager::GetComputeShader(
+                "./res/shaders/Particles/ParticlesSpawn.comp");
+        Shaders::ComputeShader particleUpdateShader = Shaders::ShaderManager::GetComputeShader(
+                "./res/shaders/Particles/ParticlesUpdate.comp");
 
         Shaders.push_back(depth);
         Shaders.push_back(shader);
@@ -129,9 +135,8 @@ namespace Scene
         unsigned int submarineEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png").
                 GetId();
 
-        Models::Model* submarineModel = new Models::Model("./res/models/Submarine.fbx");
+        Models::Model* submarineModel = Models::ModelManager::GetModel("./res/models/Submarine.fbx");
         Materials::PbrMaterial* submarineMaterial = new Materials::PbrMaterial(
-                depth, shader, directionalPass, pointPass,
                 submarineBaseMap,
                 submarineRmaoMap, submarineNormalMap,
                 submarineEmissiveMap,
@@ -162,9 +167,8 @@ namespace Scene
                 "./res/textures/Water/Normal1.png").GetId();
 
 
-        Models::Model* waterModel = new Models::Model("./res/models/Water.fbx");
-        Materials::WaterMaterial* waterMaterial = new Materials::WaterMaterial(depth, waterShader, directionalPass,
-                                                                               pointPass, waterNormal0,
+        Models::Model* waterModel = Models::ModelManager::GetModel("./res/models/Water.fbx");
+        Materials::WaterMaterial* waterMaterial = new Materials::WaterMaterial(waterNormal0,
                                                                                waterNormal1,
                                                                                glm::vec3(0.02745f, 0.2156f, 0.3843f),
                                                                                glm::vec2(0.32f), glm::vec2(0.112f),
@@ -195,9 +199,8 @@ namespace Scene
         unsigned int floorEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png").
                 GetId();
 
-        Models::Model* floorModel = new Models::Model("./res/models/Floor.fbx");
-        Materials::PbrMaterial* floorMaterial = new Materials::PbrMaterial(depth, shader, directionalPass, pointPass,
-                                                                           floorBaseMap,
+        Models::Model* floorModel = Models::ModelManager::GetModel("./res/models/Floor.fbx");
+        Materials::PbrMaterial* floorMaterial = new Materials::PbrMaterial(floorBaseMap,
                                                                            floorRmaoMap, floorNormalMap,
                                                                            floorEmissiveMap,
                                                                            glm::vec3(1.0f), 1.0f, 1.0f,
@@ -229,9 +232,8 @@ namespace Scene
         unsigned int wallsEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png").
                 GetId();
 
-        Models::Model* wallsModel = new Models::Model("./res/models/Walls.fbx");
-        Materials::PbrMaterial* wallsMaterial = new Materials::PbrMaterial(depth, shader, directionalPass, pointPass,
-                                                                           wallsBaseMap,
+        Models::Model* wallsModel = Models::ModelManager::GetModel("./res/models/Walls.fbx");
+        Materials::PbrMaterial* wallsMaterial = new Materials::PbrMaterial(wallsBaseMap,
                                                                            wallsRmaoMap, wallsNormalMap,
                                                                            wallsEmissiveMap,
                                                                            glm::vec3(1.0f), 1.0f, 1.0f,
@@ -263,9 +265,8 @@ namespace Scene
         unsigned int boxEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png").
                 GetId();
 
-        Models::Model* boxModel = new Models::Model("./res/models/Box.fbx");
-        Materials::PbrMaterial* boxMaterial = new Materials::PbrMaterial(depth, shader, directionalPass, pointPass,
-                                                                         boxBaseMap,
+        Models::Model* boxModel = Models::ModelManager::GetModel("./res/models/Box.fbx");
+        Materials::PbrMaterial* boxMaterial = new Materials::PbrMaterial(boxBaseMap,
                                                                          boxRmaoMap, boxNormalMap,
                                                                          boxEmissiveMap,
                                                                          glm::vec3(1.0f), 1.0f, 1.0f, glm::vec3(0.0f));
@@ -349,9 +350,8 @@ namespace Scene
         unsigned int fanBaseEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png").
                 GetId();
 
-        Models::Model* fanBaseModel = new Models::Model("./res/models/Fan/Base.fbx");
-        Materials::PbrMaterial* fanBaseMaterial = new Materials::PbrMaterial(depth, shader, directionalPass, pointPass,
-                                                                             fanBaseBaseMap,
+        Models::Model* fanBaseModel = Models::ModelManager::GetModel("./res/models/Fan/Base.fbx");
+        Materials::PbrMaterial* fanBaseMaterial = new Materials::PbrMaterial(fanBaseBaseMap,
                                                                              fanBaseRmaoMap, fanBaseNormalMap,
                                                                              fanBaseEmissiveMap,
                                                                              glm::vec3(1.0f), 1.0f, 1.0f,
@@ -382,9 +382,8 @@ namespace Scene
         unsigned int fanMotorEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png").
                 GetId();
 
-        Models::Model* fanMotorModel = new Models::Model("./res/models/Fan/Motor.fbx");
-        Materials::PbrMaterial* fanMotorMaterial = new Materials::PbrMaterial(depth, shader, directionalPass, pointPass,
-                                                                              fanMotorBaseMap,
+        Models::Model* fanMotorModel = Models::ModelManager::GetModel("./res/models/Fan/Motor.fbx");
+        Materials::PbrMaterial* fanMotorMaterial = new Materials::PbrMaterial(fanMotorBaseMap,
                                                                               fanMotorRmaoMap, fanMotorNormalMap,
                                                                               fanMotorEmissiveMap,
                                                                               glm::vec3(1.0f), 1.0f, 1.0f,
@@ -420,13 +419,12 @@ namespace Scene
         unsigned int fanBladesEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png").
                 GetId();
 
-        Models::Model* fanBladesModel = new Models::Model("./res/models/Fan/Blades.fbx");
-        Materials::PbrMaterial* fanBladesMaterial = new Materials::PbrMaterial(
-                depth, shader, directionalPass, pointPass,
-                fanBladesBaseMap,
-                fanBladesRmaoMap, fanBladesNormalMap,
-                fanBladesEmissiveMap,
-                glm::vec3(1.0f), 1.0f, 1.0f, glm::vec3(0.0f));
+        Models::Model* fanBladesModel = Models::ModelManager::GetModel("./res/models/Fan/Blades.fbx");
+        Materials::PbrMaterial* fanBladesMaterial = new Materials::PbrMaterial(fanBladesBaseMap,
+                                                                               fanBladesRmaoMap, fanBladesNormalMap,
+                                                                               fanBladesEmissiveMap,
+                                                                               glm::vec3(1.0f), 1.0f, 1.0f,
+                                                                               glm::vec3(0.0f));
 
         Engine::Entity* fanBladesEntity = new Engine::Entity();
         Engine::ModelRenderer* fanBladesRenderer = new Engine::ModelRenderer(fanBladesMaterial, fanBladesModel);
@@ -458,9 +456,8 @@ namespace Scene
         unsigned int tableEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png").
                 GetId();
 
-        Models::Model* tableModel = new Models::Model("./res/models/Table.fbx");
-        Materials::PbrMaterial* tableMaterial = new Materials::PbrMaterial(depth, shader, directionalPass, pointPass,
-                                                                           tableBaseMap,
+        Models::Model* tableModel = Models::ModelManager::GetModel("./res/models/Table.fbx");
+        Materials::PbrMaterial* tableMaterial = new Materials::PbrMaterial(tableBaseMap,
                                                                            tableRmaoMap, tableNormalMap,
                                                                            tableEmissiveMap,
                                                                            glm::vec3(1.0f), 1.0f, 1.0f,
@@ -491,12 +488,8 @@ namespace Scene
          * Assembling Bottles
          */
 
-        Models::Model* bottleModel = new Models::Model("./res/models/Bottle.fbx");
-        Materials::ReflectiveMaterial* bottleReflectiveMaterial = new Materials::ReflectiveMaterial(
-                depth, reflectiveShader,
-                directionalPass,
-                pointPass,
-                environmentMap);
+        Models::Model* bottleModel = Models::ModelManager::GetModel("./res/models/Bottle.fbx");
+        Materials::ReflectiveMaterial* bottleReflectiveMaterial = new Materials::ReflectiveMaterial(environmentMap);
 
         Engine::Entity* bottleEntity = new Engine::Entity();
         Engine::ModelRenderer* bottleRenderer = new Engine::ModelRenderer(bottleReflectiveMaterial, bottleModel);
@@ -505,9 +498,6 @@ namespace Scene
         bottleEntity->GetTransform()->SetPosition(glm::vec3(29.9154f, 2.20356f, 25.0271f));
 
         Materials::RefractiveMaterial* bottleRefractiveMaterial = new Materials::RefractiveMaterial(
-                depth, refractiveShader,
-                directionalPass,
-                pointPass,
                 environmentMap, 1.52f);
 
         bottleEntity = new Engine::Entity();
@@ -533,9 +523,8 @@ namespace Scene
         unsigned int monitorEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/Monitor/Emissive.png").
                 GetId();
 
-        Models::Model* monitorModel = new Models::Model("./res/models/Monitor.fbx");
-        Materials::PbrMaterial* monitorMaterial = new Materials::PbrMaterial(depth, shader, directionalPass, pointPass,
-                                                                             monitorBaseMap,
+        Models::Model* monitorModel = Models::ModelManager::GetModel("./res/models/Monitor.fbx");
+        Materials::PbrMaterial* monitorMaterial = new Materials::PbrMaterial(monitorBaseMap,
                                                                              monitorRmaoMap, monitorNormalMap,
                                                                              monitorEmissiveMap,
                                                                              glm::vec3(1.0f), 1.0f, 1.0f,
@@ -570,9 +559,8 @@ namespace Scene
         unsigned int wallMonitorEmissiveMap = Engine::TextureManager::GetTexture(
                 "./res/textures/WallMonitor/Emissive.png").GetId();
 
-        Models::Model* wallMonitorModel = new Models::Model("./res/models/WallMonitor.fbx");
+        Models::Model* wallMonitorModel = Models::ModelManager::GetModel("./res/models/WallMonitor.fbx");
         Materials::PbrMaterial* wallMonitorMaterial = new Materials::PbrMaterial(
-                depth, shader, directionalPass, pointPass,
                 wallMonitorBaseMap,
                 wallMonitorRmaoMap, wallMonitorNormalMap,
                 wallMonitorEmissiveMap,
@@ -608,9 +596,8 @@ namespace Scene
         unsigned int ceilingLampEmissiveMap = Engine::TextureManager::GetTexture(
                 "./res/textures/CeilingLamp/Emissive.png").GetId();
 
-        Models::Model* ceilingLampModel = new Models::Model("./res/models/CeilingLamp.fbx");
+        Models::Model* ceilingLampModel = Models::ModelManager::GetModel("./res/models/CeilingLamp.fbx");
         Materials::PbrMaterial* ceilingLampMaterial = new Materials::PbrMaterial(
-                depth, shader, directionalPass, pointPass,
                 ceilingLampBaseMap,
                 ceilingLampRmaoMap, ceilingLampNormalMap,
                 ceilingLampEmissiveMap,
@@ -700,12 +687,9 @@ namespace Scene
          * Skybox
          */
 
-        Models::Model* skyboxModel = new Models::Model("./res/models/SkySphere.fbx");
+        Models::Model* skyboxModel = Models::ModelManager::GetModel("./res/models/SkySphere.fbx");
 
-        Materials::SkyboxMaterial* skyboxMaterial = new Materials::SkyboxMaterial(skyboxShader, skyboxShader,
-            skyboxDirectionalLightShader,
-            skyboxDirectionalLightShader,
-            environmentMap);
+        Materials::SkyboxMaterial* skyboxMaterial = new Materials::SkyboxMaterial(environmentMap);
         Engine::Entity* skybox = new Engine::Entity();
         skybox->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
         Engine::ModelRenderer* skyboxRenderer = new Engine::ModelRenderer(skyboxMaterial, skyboxModel);
@@ -718,7 +702,7 @@ namespace Scene
          * Particles
          */
 
-        Models::Model* sphereModel = new Models::Model("./res/models/SphereLowPoly.fbx");
+        Models::Model* sphereModel = Models::ModelManager::GetModel("./res/models/SphereLowPoly.fbx");
 
         Engine::ParticleEmitter::EmitterSettings emitterSettings(1000.0f,
                                                                  sphereModel,
