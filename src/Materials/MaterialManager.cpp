@@ -6,6 +6,7 @@
 #include "SkyboxMaterial.h"
 #include "WaterMaterial.h"
 #include "Serialization/SerializationFilesUtility.h"
+#include "Utility/AssertionsUtility.h"
 
 namespace Materials
 {
@@ -69,11 +70,47 @@ namespace Materials
         return std::string();
     }
 
+    void MaterialManager::SaveMaterial(const std::string& Path)
+    {
+#if DEBUG || EDITOR
+        const auto iterator = Materials.find(Path);
+        CHECK_MESSAGE(iterator != Materials.end(), "Material was not loaded from a file")
+        SaveMaterial(Path, iterator->second);
+#else
+        SaveMaterial(Path, Materials[Path]);
+#endif
+    }
+
+    void MaterialManager::SaveMaterial(const Material* const Material)
+    {
+        for (const auto& pair : Materials)
+        {
+            if (pair.second == Material)
+            {
+                SaveMaterial(pair.first, pair.second);
+                return;
+            }
+        }
+#if DEBUG || EDITOR
+        CHECK_MESSAGE(false, "Material was not loaded from a file")
+#endif
+    }
+
+    void MaterialManager::SaveMaterial(const std::string& Path, const Material* const Material)
+    {
+        rapidjson::MemoryPoolAllocator<> allocator;
+        rapidjson::Value json = Material->Serialize(allocator);
+        Serialization::WriteJsonFile(Path.c_str(), json);
+    }
+
     Material* MaterialManager::LoadMaterialFromFile(const std::string& Path)
     {
         rapidjson::Value data = Serialization::ReadJsonFile(Path.c_str());
         Material* material = DetermineMaterialType(data);
-        assert(material != nullptr);
+        if (material == nullptr)
+        {
+            return nullptr;
+        }
         material->Deserialize(data);
         return material;
     }

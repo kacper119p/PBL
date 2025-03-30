@@ -26,6 +26,12 @@ namespace Materials
 
         static std::string GetMaterialPath(const Material* Material);
 
+        static void SaveMaterial(const std::string& Path);
+
+        static void SaveMaterial(const Material* Material);
+
+        static void SaveMaterial(const std::string& Path, const Material* Material);
+
         template<class T>
         static Material* GetMaterial(const std::string& Path)
         {
