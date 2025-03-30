@@ -32,6 +32,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
 find_package(imguizmo CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 find_package(rapidjson CONFIG REQUIRED)
+find_package(Tracy CONFIG REQUIRED)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ${OPENGL_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} PRIVATE glad)
@@ -43,6 +44,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE spdlog)
 target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)
 target_link_libraries(${PROJECT_NAME} PRIVATE imguizmo::imguizmo)
 target_link_libraries(${PROJECT_NAME} PRIVATE rapidjson)
+target_link_libraries(${PROJECT_NAME} PRIVATE Tracy::TracyClient)
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E create_symlink

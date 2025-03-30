@@ -24,6 +24,7 @@
 #include "Models/ModelManager.h"
 #include "Shaders/ShaderManager.h"
 #include "Shaders/ShaderSourceFiles.h"
+#include "tracy/Tracy.hpp"
 
 namespace Scene
 {
@@ -32,6 +33,7 @@ namespace Scene
     void
     SceneBuilder::Build(Engine::Scene*& Scene)
     {
+        ZoneScoped;
         Scene = new class Engine::Scene();
         std::vector<Engine::Texture>& Textures = Scene->Textures;
         std::vector<Models::Model*>& Models = Scene->Models;

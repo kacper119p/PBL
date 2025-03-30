@@ -22,6 +22,7 @@
 #include "Utility/SystemUtilities.h"
 #include "Scene/SceneBuilder.h"
 #include "Textures/TextureManager.h"
+#include "tracy/Tracy.hpp"
 
 namespace SceneBuilding = Scene;
 
@@ -67,6 +68,7 @@ namespace Engine
         // Main loop
         while (!glfwWindowShouldClose(Window))
         {
+            ZoneScopedN("GameLoop");
             ++Frame;
             glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
             float currentFrame = glfwGetTime();
@@ -95,6 +97,7 @@ namespace Engine
 
             // End frame and swap buffers (double buffering)
             EndFrame();
+            FrameMark;
         }
 
         spdlog::info("Closing project.");
