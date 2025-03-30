@@ -2,7 +2,7 @@
 // Created by Kacper on 27.01.2025.
 //
 
-#include "ImGuizmo.h"
+#include "imgui.h"
 #include "TransformGui.h"
 
 namespace Engine
