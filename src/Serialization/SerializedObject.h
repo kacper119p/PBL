@@ -1,9 +1,11 @@
 #pragma once
-
+#pragma comment(lib, "Ole32.lib")
+#include <windows.h>
 #include <combaseapi.h>
 #include <unordered_map>
 
 #include "GuidHasher.h"
+#include "Utility/AssertionsUtility.h"
 #include "rapidjson/document.h"
 
 #define SERIALIZATION_METHODS_DECLARATIONS public:\
@@ -51,7 +53,8 @@ namespace Serialization
 
         SerializedObject() // NOLINT(*-pro-type-member-init)
         {
-            (void) CoCreateGuid(&Id); //ID Initialized here.
+            const HRESULT result = CoCreateGuid(&Id); //ID Initialized here.
+            CHECK_MESSAGE(result == S_OK, "Failed to initialize GUID")
         }
 
     public:

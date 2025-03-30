@@ -72,7 +72,7 @@ namespace Materials
 
     void MaterialManager::SaveMaterial(const std::string& Path)
     {
-#if DEBUG || EDITOR
+#if DEBUG
         const auto iterator = Materials.find(Path);
         CHECK_MESSAGE(iterator != Materials.end(), "Material was not loaded from a file")
         SaveMaterial(Path, iterator->second);
@@ -91,9 +91,7 @@ namespace Materials
                 return;
             }
         }
-#if DEBUG || EDITOR
         CHECK_MESSAGE(false, "Material was not loaded from a file")
-#endif
     }
 
     void MaterialManager::SaveMaterial(const std::string& Path, const Material* const Material)

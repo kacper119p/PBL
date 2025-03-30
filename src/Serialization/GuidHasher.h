@@ -1,5 +1,6 @@
 #pragma once
-
+#pragma comment(lib, "Rpcrt4.lib")
+#include <windows.h>
 #include <rpc.h>
 
 namespace Serialization

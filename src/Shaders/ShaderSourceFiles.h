@@ -11,31 +11,31 @@ namespace Shaders
         friend std::hash<Shaders::ShaderSourceFiles>;
 
     public:
-        const char* VertexShader;
-        const char* GeometryShader;
-        const char* FragmentShader;
+        std::string VertexShader;
+        std::string GeometryShader;
+        std::string FragmentShader;
 
-        ShaderSourceFiles(const char* VertexShader, const char* GeometryShader, const char* FragmentShader) :
+        ShaderSourceFiles(const std::string& VertexShader, const std::string& GeometryShader,
+                          const std::string& FragmentShader) :
             VertexShader(VertexShader), GeometryShader(GeometryShader), FragmentShader(FragmentShader)
         {
         }
 
-        bool operator==(const ShaderSourceFiles&) const
+        ShaderSourceFiles(const char* VertexShader, const char* GeometryShader, const char* FragmentShader) :
+            VertexShader(std::string(VertexShader)), GeometryShader(std::string(GeometryShader)),
+            FragmentShader(std::string(FragmentShader))
         {
+        }
 
-            if (std::strcmp(VertexShader, VertexShader) != 0)
-            {
-                return false;
-            }
-            if (GeometryShader && std::strcmp(GeometryShader, GeometryShader) != 0)
-            {
-                return false;
-            }
-            if (std::strcmp(FragmentShader, FragmentShader) != 0)
-            {
-                return false;
-            }
-            return true;
+        bool operator==(const ShaderSourceFiles& Other) const
+        {
+            return VertexShader == Other.VertexShader && GeometryShader == Other.GeometryShader && FragmentShader ==
+                   Other.FragmentShader;
+        }
+
+        bool operator!=(const ShaderSourceFiles& Other) const
+        {
+            return !(*this == Other);
         }
     };
 
@@ -51,12 +51,9 @@ struct std::hash<Shaders::ShaderSourceFiles>
 
     size_t operator()(const Shaders::ShaderSourceFiles& ShaderSourceFiles) const noexcept
     {
-        constexpr std::hash<std::string_view> hasher;
+        constexpr std::hash<std::string> hasher;
         size_t hash = hasher(ShaderSourceFiles.VertexShader);
-        if (ShaderSourceFiles.GeometryShader)
-        {
-            hash = CombineHashes(hash, hasher(ShaderSourceFiles.GeometryShader));
-        }
+        hash = CombineHashes(hash, hasher(ShaderSourceFiles.GeometryShader));
         hash = CombineHashes(hash, hasher(ShaderSourceFiles.FragmentShader));
         return hash;
     }

@@ -127,5 +127,7 @@ namespace Engine
         void SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const;
 
         void SetEmitterSettingsUniforms(Shaders::ComputeShader Shader) const;
+
+        SERIALIZATION_METHODS_DECLARATIONS
     };
 }

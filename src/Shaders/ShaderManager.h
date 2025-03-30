@@ -27,6 +27,10 @@ namespace Shaders
 
         static ComputeShader GetComputeShader(const char* ShaderSourceFile);
 
+        static ShaderSourceFiles GetShaderSourceFiles(Shader Shader);
+
+        static std::string GetShaderSourceFile(ComputeShader Shader);
+
         static void FreeResources();
 
     private:

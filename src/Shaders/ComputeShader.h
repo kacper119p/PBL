@@ -34,6 +34,17 @@ namespace Shaders
         {
             glDispatchCompute(1, 1, 1);
         }
+
+    public:
+        bool operator==(const ComputeShader Other) const
+        {
+            return Other.GetId() == this->GetId();
+        }
+
+        bool operator!=(const ComputeShader Other) const
+        {
+            return !(*this == Other);
+        }
     };
 
 } // Shaders

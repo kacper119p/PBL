@@ -4,6 +4,7 @@
 
 #include "Material.h"
 #include "Serialization/SerializationFilesUtility.h"
+#include "Utility/AssertionsUtility.h"
 
 namespace Materials
 {
@@ -37,9 +38,9 @@ namespace Materials
         {
             static_assert(std::is_base_of_v<Material, T>, "T must derive from Material");
             Material* material = GetMaterial(Path);
-#if EDITOR || DEBUG
+#if DEBUG
             T* result = dynamic_cast<T*>(material);
-            assert(result != nullptr);
+            CHECK_MESSAGE(result != nullptr, "Wrong material type or material not found.");
             return result;
 #else
             return reinterpret_cast<T*>(material);

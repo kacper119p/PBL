@@ -4,6 +4,7 @@
 
 #include "GlslPreprocessor.h"
 #include "ShaderException.h"
+#include "Utility/AssertionsUtility.h"
 
 namespace
 {
@@ -39,6 +40,32 @@ namespace Shaders
         ComputeShader shader = CreateComputeShader(ShaderSourceFile);
         ComputeShaderPrograms.emplace(path, shader);
         return shader;
+    }
+
+    ShaderSourceFiles ShaderManager::GetShaderSourceFiles(const Shader Shader)
+    {
+        for (const auto& pair : ShaderPrograms)
+        {
+            if (pair.second == Shader)
+            {
+                return pair.first;
+            }
+        }
+        CHECK_MESSAGE(false, "Shader is not loaded")
+        return ShaderSourceFiles(nullptr, nullptr, nullptr);
+    }
+
+    std::string ShaderManager::GetShaderSourceFile(const ComputeShader Shader)
+    {
+        for (const auto& pair : ComputeShaderPrograms)
+        {
+            if (pair.second == Shader)
+            {
+                return pair.first;
+            }
+        }
+        CHECK_MESSAGE(false, "Shader is not loaded")
+        return std::string();
     }
 
     void ShaderManager::FreeResources()
@@ -99,18 +126,18 @@ namespace Shaders
         unsigned int vertexShader;
         try
         {
-            vertexShader = GetShaderStage(ShaderSource.VertexShader, GL_VERTEX_SHADER);
+            vertexShader = GetShaderStage(ShaderSource.VertexShader.c_str(), GL_VERTEX_SHADER);
         } catch (ShaderException&)
         {
             throw;
         }
 
         unsigned int geometryShader = 0;
-        if (ShaderSource.GeometryShader)
+        if (!ShaderSource.GeometryShader.empty())
         {
             try
             {
-                geometryShader = GetShaderStage(ShaderSource.GeometryShader, GL_GEOMETRY_SHADER);
+                geometryShader = GetShaderStage(ShaderSource.GeometryShader.c_str(), GL_GEOMETRY_SHADER);
             } catch (ShaderException&)
             {
                 throw;
@@ -120,7 +147,7 @@ namespace Shaders
         unsigned int fragmentShader;
         try
         {
-            fragmentShader = GetShaderStage(ShaderSource.FragmentShader, GL_FRAGMENT_SHADER);
+            fragmentShader = GetShaderStage(ShaderSource.FragmentShader.c_str(), GL_FRAGMENT_SHADER);
         } catch (ShaderException&)
         {
             throw;
@@ -129,7 +156,7 @@ namespace Shaders
         const unsigned int id = glCreateProgram();
 
         glAttachShader(id, vertexShader);
-        if (ShaderSource.GeometryShader)
+        if (ShaderSource.GeometryShader.c_str())
         {
             glAttachShader(id, geometryShader);
         }
@@ -147,7 +174,7 @@ namespace Shaders
         }
 
         glDetachShader(id, vertexShader);
-        if (ShaderSource.GeometryShader)
+        if (!ShaderSource.GeometryShader.empty())
         {
             glDetachShader(id, geometryShader);
         }

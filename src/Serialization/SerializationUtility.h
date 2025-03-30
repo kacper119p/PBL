@@ -1,14 +1,12 @@
 #pragma once
-#include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
-#include <rpc.h>
 #include <string>
-
 
 #include "GuidHasher.h"
 #include "rapidjson/document.h"
 #include "SerializedObject.h"
 #include "Materials/Properties/MaterialProperty.h"
+#include "Shaders/ComputeShader.h"
 #include "Shaders/Shader.h"
 
 namespace Engine
@@ -24,6 +22,8 @@ namespace Models
 namespace Serialization
 {
     rapidjson::Value Serialize(const float& Value, rapidjson::Document::AllocatorType& Allocator);
+
+    rapidjson::Value Serialize(const glm::vec4& Value, rapidjson::Document::AllocatorType& Allocator);
 
     rapidjson::Value Serialize(const glm::vec3& Value, rapidjson::Document::AllocatorType& Allocator);
 
@@ -41,6 +41,10 @@ namespace Serialization
 
     rapidjson::Value Serialize(const std::vector<SerializedObject*>& Value,
                                rapidjson::Document::AllocatorType& Allocator);
+
+    rapidjson::Value Serialize(Shaders::Shader Value, rapidjson::Document::AllocatorType& Allocator);
+
+    rapidjson::Value Serialize(Shaders::ComputeShader Value, rapidjson::Document::AllocatorType& Allocator);
 
     template<class T>
     rapidjson::Value Serialize(const std::vector<T*>& Value,
@@ -67,6 +71,8 @@ namespace Serialization
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, float& Value);
 
+    void Deserialize(const rapidjson::Value& Object, const char* Name, glm::vec4& Value);
+
     void Deserialize(const rapidjson::Value& Object, const char* Name, glm::vec3& Value);
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, glm::vec2& Value);
@@ -84,6 +90,10 @@ namespace Serialization
 
     void Deserialize(const rapidjson::Value& Object, SerializedObject*& Value,
                      std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap);
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, Shaders::Shader& Value);
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, Shaders::ComputeShader& Value);
 
     template<class T>
     void Deserialize(const rapidjson::Value& Object, const char* const Name, T*& Value,

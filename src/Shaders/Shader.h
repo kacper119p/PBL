@@ -16,5 +16,16 @@ namespace Shaders
             ShaderBase(ProgramId)
         {
         }
+
+    public:
+        bool operator==(const Shader Other) const
+        {
+            return Other.GetId() == this->GetId();
+        }
+
+        bool operator!=(const Shader Other) const
+        {
+            return !(*this == Other);
+        }
     };
 } //Shaders

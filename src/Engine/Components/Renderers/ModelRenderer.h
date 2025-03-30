@@ -73,5 +73,7 @@ namespace Engine
         void SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const;
 
         void Draw() const;
+
+        SERIALIZATION_METHODS_DECLARATIONS
     };
 } // Engine

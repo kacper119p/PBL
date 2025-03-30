@@ -7,6 +7,8 @@
 #include "Engine/Textures/TextureManager.h"
 #include "Models/ModelManager.h"
 #include "Models/Model.h"
+#include "Shaders/ShaderManager.h"
+#include "Shaders/ShaderSourceFiles.h"
 
 namespace
 {
@@ -40,6 +42,16 @@ namespace Serialization
         return object;
     }
 
+    rapidjson::Value Serialize(const glm::vec4& Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kObjectType);
+        object.AddMember("x", Value.x, Allocator);
+        object.AddMember("y", Value.y, Allocator);
+        object.AddMember("z", Value.z, Allocator);
+        object.AddMember("w", Value.w, Allocator);
+        return object;
+    }
+
     rapidjson::Value Serialize(const glm::vec3& Value, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kObjectType);
@@ -65,7 +77,7 @@ namespace Serialization
         return object;
     }
 
-    inline rapidjson::Value Serialize(const Models::Model* Value, rapidjson::Document::AllocatorType& Allocator)
+    rapidjson::Value Serialize(const Models::Model* Value, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kStringType);
         const std::string path = Models::ModelManager::GetModelPath(Value);
@@ -116,6 +128,24 @@ namespace Serialization
         return array;
     }
 
+    rapidjson::Value Serialize(const Shaders::Shader Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kObjectType);
+        const Shaders::ShaderSourceFiles source = Shaders::ShaderManager::GetShaderSourceFiles(Value);
+        object.AddMember("vertex", Serialize(source.VertexShader, Allocator), Allocator);
+        object.AddMember("geometry", Serialize(source.GeometryShader, Allocator), Allocator);
+        object.AddMember("fragment", Serialize(source.FragmentShader, Allocator), Allocator);
+        return object;
+    }
+
+    rapidjson::Value Serialize(const Shaders::ComputeShader Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kStringType);
+        const std::string path = Shaders::ShaderManager::GetShaderSourceFile(Value);
+        object.SetString(path.c_str(), path.length(), Allocator);
+        return object;
+    }
+
 
     void Deserialize(const rapidjson::Value& Object, const char* const Name, float& Value)
     {
@@ -125,6 +155,43 @@ namespace Serialization
             return;
         }
         Value = iterator->value.GetFloat();
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, glm::vec4& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsObject())
+        {
+            return;
+        }
+        const rapidjson::Value& vector = iterator->value;
+        const auto iteratorX = vector.FindMember("x");
+
+
+        if (iteratorX == vector.MemberEnd() || !iteratorX->value.IsFloat())
+        {
+            return;
+        }
+        const auto iteratorY = vector.FindMember("y");
+        if (iteratorY == vector.MemberEnd() || !iteratorY->value.IsFloat())
+        {
+            return;
+        }
+        const auto iteratorZ = vector.FindMember("z");
+        if (iteratorZ == vector.MemberEnd() || !iteratorZ->value.IsFloat())
+        {
+            return;
+        }
+
+        const auto iteratorW = vector.FindMember("w");
+        if (iteratorW == vector.MemberEnd() || !iteratorW->value.IsFloat())
+        {
+            return;
+        }
+        Value.x = iteratorX->value.GetFloat();
+        Value.y = iteratorY->value.GetFloat();
+        Value.z = iteratorZ->value.GetFloat();
+        Value.w = iteratorW->value.GetFloat();
     }
 
     void Deserialize(const rapidjson::Value& Object, const char* const Name, glm::vec3& Value)
@@ -243,8 +310,8 @@ namespace Serialization
         Value = referenceIterator->second;
     }
 
-    inline void Deserialize(const rapidjson::Value& Object, SerializedObject*& Value,
-                            std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap)
+    void Deserialize(const rapidjson::Value& Object, SerializedObject*& Value,
+                     std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap)
     {
         if (!Object.IsString())
         {
@@ -260,5 +327,49 @@ namespace Serialization
             return;
         }
         Value = referenceIterator->second;
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, Shaders::Shader& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsObject())
+        {
+            return;
+        }
+        const rapidjson::Value& files = iterator->value;
+        const auto iteratorVertex = files.FindMember("vertex");
+
+        if (iteratorVertex == files.MemberEnd() || !iteratorVertex->value.IsFloat())
+        {
+            return;
+        }
+        const auto iteratorGeometry = files.FindMember("geometry");
+        if (iteratorGeometry == files.MemberEnd() || !iteratorGeometry->value.IsFloat())
+        {
+            return;
+        }
+        const auto iteratorFragment = files.FindMember("fragment");
+        if (iteratorFragment == files.MemberEnd() || !iteratorFragment->value.IsFloat())
+        {
+            return;
+        }
+
+        const std::string vertexPath = iteratorVertex->value.GetString();
+        const std::string geometryPath = iteratorGeometry->value.GetString();
+        const std::string fragmentPath = iteratorFragment->value.GetString();
+
+        const Shaders::ShaderSourceFiles sourceFiles(vertexPath, geometryPath, fragmentPath);
+        Value = Shaders::ShaderManager::GetShader(sourceFiles);
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, Shaders::ComputeShader& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsString())
+        {
+            return;
+        }
+
+        Value = Shaders::ShaderManager::GetComputeShader(iterator->value.GetString());
     }
 } // Serialization

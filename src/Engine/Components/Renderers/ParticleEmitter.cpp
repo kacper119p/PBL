@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <GLFW/glfw3.h>
 
+#include "Serialization/SerializationUtility.h"
+
 Engine::ParticleEmitter::ParticleEmitter(const Shaders::Shader& RenderShader, const Shaders::ComputeShader& SpawnShader,
                                          const Shaders::ComputeShader& UpdateShader,
                                          const EmitterSettings& EmitterSettings,
@@ -140,6 +142,60 @@ void Engine::ParticleEmitter::SetEmitterSettingsUniforms(Shaders::ComputeShader 
     Shader.SetUniform("EmitterSettings.MaxAccel", Settings.MaxAccel);
     Shader.SetUniform("EmitterSettings.MinLife", Settings.MinLife);
     Shader.SetUniform("EmitterSettings.MaxLife", Settings.MaxLife);
+}
+
+rapidjson::Value Engine::ParticleEmitter::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+{
+    START_COMPONENT_SERIALIZATION
+    SERIALIZE_FIELD(Settings.SpawnRate)
+    SERIALIZE_FIELD(Settings.Model)
+    SERIALIZE_FIELD(Settings.MinColor)
+    SERIALIZE_FIELD(Settings.MaxColor)
+    SERIALIZE_FIELD(Settings.MinOffset)
+    SERIALIZE_FIELD(Settings.MaxOffset)
+    SERIALIZE_FIELD(Settings.MinVelocity)
+    SERIALIZE_FIELD(Settings.MaxVelocity)
+    SERIALIZE_FIELD(Settings.MinScale)
+    SERIALIZE_FIELD(Settings.MaxScale)
+    SERIALIZE_FIELD(Settings.MinAccel)
+    SERIALIZE_FIELD(Settings.MaxAccel)
+    SERIALIZE_FIELD(Settings.MinLife)
+    SERIALIZE_FIELD(Settings.MaxLife)
+    SERIALIZE_FIELD(RenderShader)
+    SERIALIZE_FIELD(SpawnShader)
+    SERIALIZE_FIELD(UpdateShader)
+    END_COMPONENT_SERIALIZATION
+}
+
+void Engine::ParticleEmitter::DeserializeValuePass(const rapidjson::Value& Object,
+                                                   Serialization::ReferenceTable& ReferenceMap)
+{
+    START_COMPONENT_DESERIALIZATION_VALUE_PASS
+    DESERIALIZE_VALUE(Settings.SpawnRate)
+    DESERIALIZE_VALUE(Settings.Model)
+    DESERIALIZE_VALUE(Settings.MinColor)
+    DESERIALIZE_VALUE(Settings.MaxColor)
+    DESERIALIZE_VALUE(Settings.MinOffset)
+    DESERIALIZE_VALUE(Settings.MaxOffset)
+    DESERIALIZE_VALUE(Settings.MinVelocity)
+    DESERIALIZE_VALUE(Settings.MaxVelocity)
+    DESERIALIZE_VALUE(Settings.MinScale)
+    DESERIALIZE_VALUE(Settings.MaxScale)
+    DESERIALIZE_VALUE(Settings.MinAccel)
+    DESERIALIZE_VALUE(Settings.MaxAccel)
+    DESERIALIZE_VALUE(Settings.MinLife)
+    DESERIALIZE_VALUE(Settings.MaxLife)
+    DESERIALIZE_VALUE(RenderShader)
+    DESERIALIZE_VALUE(SpawnShader)
+    DESERIALIZE_VALUE(UpdateShader)
+    END_COMPONENT_DESERIALIZATION_VALUE_PASS
+}
+
+void Engine::ParticleEmitter::DeserializeReferencesPass(const rapidjson::Value& Object,
+                                                        Serialization::ReferenceTable& ReferenceMap)
+{
+    START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
+    END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
 }
 
 Engine::ParticleEmitter::EmitterSettings::EmitterSettings(const float SpawnRate, Models::Model* Model,
