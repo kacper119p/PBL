@@ -11,6 +11,12 @@ namespace Shaders
     {
         friend class ShaderManager;
 
+    public:
+        ComputeShader() :
+            ShaderBase(0)
+        {
+        }
+
     private:
         explicit ComputeShader(const unsigned int ProgramID) :
             ShaderBase(ProgramID)
