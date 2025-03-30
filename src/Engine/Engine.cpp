@@ -18,6 +18,7 @@
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/EngineObjects/GizmoManager.h"
 #include "imgui_internal.h"
+#include "Materials/MaterialManager.h"
 #include "Utility/SystemUtilities.h"
 #include "Scene/SceneBuilder.h"
 #include "Textures/TextureManager.h"
@@ -171,6 +172,7 @@ namespace Engine
         LightManager::Initialize();
         UpdateManager::Initialize();
         GizmoManager::Initialize();
+        Materials::MaterialManager::Initialize();
 
         Camera = new class Camera(glm::perspective(glm::radians(70.0f),
                                                    float(WindowWidth) / float(WindowHeight),

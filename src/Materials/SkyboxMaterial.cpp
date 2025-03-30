@@ -6,18 +6,10 @@
 
 namespace Materials
 {
-    const Shaders::Shader SkyboxMaterial::DepthPass = Shaders::ShaderManager::GetShader(
-            Shaders::ShaderSourceFiles("./res/shaders/Skybox/Skybox.vert", nullptr,
-                                       "./res/shaders/Skybox/Skybox.frag"));
-    const Shaders::Shader SkyboxMaterial::MainPass = Shaders::ShaderManager::GetShader(
-            Shaders::ShaderSourceFiles("./res/shaders/Skybox/Skybox.vert", nullptr,
-                                       "./res/shaders/Skybox/Skybox.frag"));
-    const Shaders::Shader SkyboxMaterial::DirectionalShadowPass = Shaders::ShaderManager::GetShader(
-            Shaders::ShaderSourceFiles("./res/shaders/Skybox/SkyboxDirectionalLightShadow.vert", nullptr,
-                                       "./res/shaders/Skybox/SkyboxDirectionalLightShadow.frag"));
-    const Shaders::Shader SkyboxMaterial::PointSpotShadowPass = Shaders::ShaderManager::GetShader(
-            Shaders::ShaderSourceFiles("./res/shaders/Skybox/SkyboxDirectionalLightShadow.vert", nullptr,
-                                       "./res/shaders/Skybox/SkyboxDirectionalLightShadow.frag"));
+    Shaders::Shader SkyboxMaterial::DepthPass;
+    Shaders::Shader SkyboxMaterial::MainPass;
+    Shaders::Shader SkyboxMaterial::DirectionalShadowPass;
+    Shaders::Shader SkyboxMaterial::PointSpotShadowPass;
 
     SkyboxMaterial::SkyboxMaterial(const unsigned int Texture) :
         Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), Texture(Engine::Texture(Texture))
@@ -27,6 +19,22 @@ namespace Materials
     SkyboxMaterial::SkyboxMaterial():
         Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), Texture(Engine::Texture())
     {
+    }
+
+    void SkyboxMaterial::Initialize()
+    {
+        DepthPass = Shaders::ShaderManager::GetShader(
+                Shaders::ShaderSourceFiles("./res/shaders/Skybox/Skybox.vert", nullptr,
+                                           "./res/shaders/Skybox/Skybox.frag"));
+        MainPass = Shaders::ShaderManager::GetShader(
+                Shaders::ShaderSourceFiles("./res/shaders/Skybox/Skybox.vert", nullptr,
+                                           "./res/shaders/Skybox/Skybox.frag"));
+        DirectionalShadowPass = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
+                "./res/shaders/Skybox/SkyboxDirectionalLightShadow.vert", nullptr,
+                "./res/shaders/Skybox/SkyboxDirectionalLightShadow.frag"));
+        PointSpotShadowPass = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
+                "./res/shaders/Skybox/SkyboxDirectionalLightShadow.vert", nullptr,
+                "./res/shaders/Skybox/SkyboxDirectionalLightShadow.frag"));
     }
 
     void SkyboxMaterial::UseDepthPass() const

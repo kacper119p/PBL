@@ -6,19 +6,10 @@
 
 namespace Materials
 {
-    const Shaders::Shader ReflectiveMaterial::DepthPass = Shaders::ShaderManager::GetShader(
-            Shaders::ShaderSourceFiles("./res/shaders/DefaultDepth/DefaultDepth.vert", nullptr,
-                                       "./res/shaders/DefaultDepth/DefaultDepth.frag"));
-    const Shaders::Shader ReflectiveMaterial::MainPass = Shaders::ShaderManager::GetShader(
-            Shaders::ShaderSourceFiles("./res/shaders/Reflective/Reflective.vert", nullptr,
-                                       "./res/shaders/Reflective/Reflective.frag"));
-    const Shaders::Shader ReflectiveMaterial::DirectionalShadowPass = Shaders::ShaderManager::GetShader(
-            Shaders::ShaderSourceFiles("./res/shaders/Common/BasicShadowPass/DirectionalLight.vert", nullptr,
-                                       "./res/shaders/Common/BasicShadowPass/DirectionalLight.frag"));
-    const Shaders::Shader ReflectiveMaterial::PointSpotShadowPass = Shaders::ShaderManager::GetShader(
-            Shaders::ShaderSourceFiles("./res/shaders/Common/BasicShadowPass/PointSpotLight.vert",
-                                       "./res/shaders/Common/BasicShadowPass/PointSpotLight.geom",
-                                       "./res/shaders/Common/BasicShadowPass/PointSpotLight.frag"));
+    Shaders::Shader ReflectiveMaterial::DepthPass;
+    Shaders::Shader ReflectiveMaterial::MainPass;
+    Shaders::Shader ReflectiveMaterial::DirectionalShadowPass;
+    Shaders::Shader ReflectiveMaterial::PointSpotShadowPass;
 
     ReflectiveMaterial::ReflectiveMaterial(const unsigned int EnvironmentMap) :
         Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
@@ -29,6 +20,22 @@ namespace Materials
     ReflectiveMaterial::ReflectiveMaterial() :
         Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), EnvironmentMap(Engine::Texture())
     {
+    }
+
+    void ReflectiveMaterial::Initialize()
+    {
+        DepthPass = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
+                "./res/shaders/DefaultDepth/DefaultDepth.vert", nullptr,
+                "./res/shaders/DefaultDepth/DefaultDepth.frag"));
+        MainPass = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
+                "./res/shaders/Reflective/Reflective.vert", nullptr, "./res/shaders/Reflective/Reflective.frag"));
+        DirectionalShadowPass = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
+                "./res/shaders/Common/BasicShadowPass/DirectionalLight.vert", nullptr,
+                "./res/shaders/Common/BasicShadowPass/DirectionalLight.frag"));
+        PointSpotShadowPass = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
+                "./res/shaders/Common/BasicShadowPass/PointSpotLight.vert",
+                "./res/shaders/Common/BasicShadowPass/PointSpotLight.geom",
+                "./res/shaders/Common/BasicShadowPass/PointSpotLight.frag"));
     }
 
 

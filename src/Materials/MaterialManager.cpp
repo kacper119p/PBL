@@ -101,6 +101,15 @@ namespace Materials
         Serialization::WriteJsonFile(Path.c_str(), json);
     }
 
+    void MaterialManager::Initialize()
+    {
+        PbrMaterial::Initialize();;
+        ReflectiveMaterial::Initialize();
+        RefractiveMaterial::Initialize();
+        SkyboxMaterial::Initialize();
+        WaterMaterial::Initialize();
+    }
+
     Material* MaterialManager::LoadMaterialFromFile(const std::string& Path)
     {
         rapidjson::Value data = Serialization::ReadJsonFile(Path.c_str());

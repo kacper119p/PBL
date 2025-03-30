@@ -10,10 +10,10 @@ namespace Materials
     class WaterMaterial final : public Material
     {
     private:
-        static const Shaders::Shader DepthPass;
-        static const Shaders::Shader MainPass;
-        static const Shaders::Shader DirectionalShadowPass;
-        static const Shaders::Shader PointSpotShadowPass;
+        static Shaders::Shader DepthPass;
+        static Shaders::Shader MainPass;
+        static Shaders::Shader DirectionalShadowPass;
+        static Shaders::Shader PointSpotShadowPass;
 
     private:
         Engine::Texture NormalMap0;
@@ -34,6 +34,9 @@ namespace Materials
                       const glm::vec2& Velocity1, float Roughness, float Metallic);
 
         WaterMaterial();
+
+    public:
+        static void Initialize();
 
     public:
         void UseDepthPass() const override;

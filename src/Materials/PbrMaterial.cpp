@@ -5,18 +5,10 @@
 
 namespace Materials
 {
-    const Shaders::Shader PbrMaterial::DepthPass = Shaders::ShaderManager::GetShader(
-            Shaders::ShaderSourceFiles("./res/shaders/DefaultDepth/DefaultDepth.vert", nullptr,
-                                       "./res/shaders/DefaultDepth/DefaultDepth.frag"));
-    const Shaders::Shader PbrMaterial::MainPass = Shaders::ShaderManager::GetShader(
-            Shaders::ShaderSourceFiles("./res/shaders/PBR/PBR.vert", nullptr, "./res/shaders/PBR/PBR.frag"));
-    const Shaders::Shader PbrMaterial::DirectionalShadowPass = Shaders::ShaderManager::GetShader(
-            Shaders::ShaderSourceFiles("./res/shaders/Common/BasicShadowPass/DirectionalLight.vert", nullptr,
-                                       "./res/shaders/Common/BasicShadowPass/DirectionalLight.frag"));
-    const Shaders::Shader PbrMaterial::PointSpotShadowPass = Shaders::ShaderManager::GetShader(
-            Shaders::ShaderSourceFiles("./res/shaders/Common/BasicShadowPass/PointSpotLight.vert",
-                                       "./res/shaders/Common/BasicShadowPass/PointSpotLight.geom",
-                                       "./res/shaders/Common/BasicShadowPass/PointSpotLight.frag"));
+    Shaders::Shader PbrMaterial::DepthPass;
+    Shaders::Shader PbrMaterial::MainPass;
+    Shaders::Shader PbrMaterial::DirectionalShadowPass;
+    Shaders::Shader PbrMaterial::PointSpotShadowPass;
 
     PbrMaterial::PbrMaterial(const unsigned int BaseMap, const unsigned int RoughnessMetallicMap,
                              const unsigned int NormalMap, const unsigned int EmissiveMap, const glm::vec3& BaseColor,
@@ -37,6 +29,22 @@ namespace Materials
         BaseColor(Vector3MaterialProperty("BaseColor", MainPass)),
         EmissiveColor(Vector3MaterialProperty("EmissiveColor", MainPass))
     {
+    }
+
+    void PbrMaterial::Initialize()
+    {
+        DepthPass = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
+                "./res/shaders/DefaultDepth/DefaultDepth.vert", nullptr,
+                "./res/shaders/DefaultDepth/DefaultDepth.frag"));
+        MainPass = Shaders::ShaderManager::GetShader(
+                Shaders::ShaderSourceFiles("./res/shaders/PBR/PBR.vert", nullptr, "./res/shaders/PBR/PBR.frag"));
+        DirectionalShadowPass = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
+                "./res/shaders/Common/BasicShadowPass/DirectionalLight.vert", nullptr,
+                "./res/shaders/Common/BasicShadowPass/DirectionalLight.frag"));
+        PointSpotShadowPass = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
+                "./res/shaders/Common/BasicShadowPass/PointSpotLight.vert",
+                "./res/shaders/Common/BasicShadowPass/PointSpotLight.geom",
+                "./res/shaders/Common/BasicShadowPass/PointSpotLight.frag"));
     }
 
     void PbrMaterial::UseDepthPass() const

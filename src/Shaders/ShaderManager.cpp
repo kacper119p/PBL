@@ -198,7 +198,6 @@ namespace Shaders
         glLinkProgram(programId);
 
         glDetachShader(programId, ComputeShaderId);
-        glDeleteShader(ComputeShaderId);
 
         int success;
         glGetProgramiv(programId, GL_LINK_STATUS, &success);

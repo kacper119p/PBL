@@ -9,10 +9,10 @@ namespace Materials
     class RefractiveMaterial final : public Material
     {
     private:
-        static const Shaders::Shader DepthPass;
-        static const Shaders::Shader MainPass;
-        static const Shaders::Shader DirectionalShadowPass;
-        static const Shaders::Shader PointSpotShadowPass;
+        static Shaders::Shader DepthPass;
+        static Shaders::Shader MainPass;
+        static Shaders::Shader DirectionalShadowPass;
+        static Shaders::Shader PointSpotShadowPass;
 
     private:
         Engine::Texture EnvironmentMap;
@@ -22,6 +22,9 @@ namespace Materials
         RefractiveMaterial(unsigned int EnvironmentMap, float IndexOfRefraction);
 
         RefractiveMaterial();
+
+    public:
+        static void Initialize();
 
     public:
         [[nodiscard]] Engine::Texture GetEnvironmentMap() const

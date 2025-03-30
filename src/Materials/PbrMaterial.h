@@ -10,10 +10,10 @@ namespace Materials
     class PbrMaterial final : public Material
     {
     private:
-        static const Shaders::Shader DepthPass;
-        static const Shaders::Shader MainPass;
-        static const Shaders::Shader DirectionalShadowPass;
-        static const Shaders::Shader PointSpotShadowPass;
+        static Shaders::Shader DepthPass;
+        static Shaders::Shader MainPass;
+        static Shaders::Shader DirectionalShadowPass;
+        static Shaders::Shader PointSpotShadowPass;
 
     private:
         Engine::Texture BaseMap;
@@ -31,6 +31,9 @@ namespace Materials
                     const glm::vec3& EmissiveColor);
 
         PbrMaterial();
+
+    public:
+        static void Initialize();
 
     public:
         void UseDepthPass() const override;

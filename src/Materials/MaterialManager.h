@@ -33,6 +33,8 @@ namespace Materials
 
         static void SaveMaterial(const std::string& Path, const Material* Material);
 
+        static void Initialize();
+
         template<class T>
         static Material* GetMaterial(const std::string& Path)
         {
