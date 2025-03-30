@@ -45,7 +45,7 @@ namespace Materials
             CHECK_MESSAGE(result != nullptr, "Wrong material type or material not found.");
             return result;
 #else
-            return reinterpret_cast<T*>(material);
+            T* result = dynamic_cast<T*>(material);
 #endif
 
         }

@@ -34,9 +34,9 @@ namespace Shaders
         static void FreeResources();
 
     private:
-        static unsigned int CompileShaderStage(const char* FilePath, GLenum Type);
+        static unsigned int CompileShaderStage(const std::string& FilePath, GLenum Type);
 
-        static unsigned int GetShaderStage(const char* FilePath, GLenum Type);
+        static unsigned int GetShaderStage(const std::string& FilePath, GLenum Type);
 
         static Shader CreateShader(const ShaderSourceFiles& ShaderSource);\
 

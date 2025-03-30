@@ -87,7 +87,7 @@ namespace Shaders
         ComputeShaderPrograms.clear();
     }
 
-    unsigned int ShaderManager::CompileShaderStage(const char* const FilePath, const GLenum Type)
+    unsigned int ShaderManager::CompileShaderStage(const std::string& FilePath, const GLenum Type)
     {
         const std::string preprocessedSource = GLSLPreprocessor::PreprocessFile(FilePath);
         const GLchar* const source = preprocessedSource.c_str();
@@ -108,16 +108,15 @@ namespace Shaders
         return shaderId;
     }
 
-    unsigned int ShaderManager::GetShaderStage(const char* const FilePath, const GLenum Type)
+    unsigned int ShaderManager::GetShaderStage(const std::string& FilePath, const GLenum Type)
     {
-        const std::string filePath;
-        if (const auto iterator = ShaderStages.find(filePath); iterator != ShaderStages.end())
+        if (const auto iterator = ShaderStages.find(FilePath); iterator != ShaderStages.end())
         {
             return iterator->second;
         }
 
         unsigned int shaderId = CompileShaderStage(FilePath, Type);
-        ShaderStages.emplace(filePath, shaderId);
+        ShaderStages.emplace(FilePath, shaderId);
         return shaderId;
     }
 
