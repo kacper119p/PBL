@@ -22,7 +22,8 @@ namespace Shaders
         }
 
         ShaderSourceFiles(const char* VertexShader, const char* GeometryShader, const char* FragmentShader) :
-            VertexShader(std::string(VertexShader)), GeometryShader(std::string(GeometryShader)),
+            VertexShader(std::string(VertexShader)),
+            GeometryShader(GeometryShader == nullptr ? std::string() : std::string(GeometryShader)),
             FragmentShader(std::string(FragmentShader))
         {
         }
