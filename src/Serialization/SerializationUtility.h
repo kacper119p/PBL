@@ -5,6 +5,7 @@
 #include "GuidHasher.h"
 #include "rapidjson/document.h"
 #include "SerializedObject.h"
+#include "Materials/Material.h"
 #include "Materials/Properties/MaterialProperty.h"
 #include "Shaders/ComputeShader.h"
 #include "Shaders/Shader.h"
@@ -45,6 +46,8 @@ namespace Serialization
     rapidjson::Value Serialize(Shaders::Shader Value, rapidjson::Document::AllocatorType& Allocator);
 
     rapidjson::Value Serialize(Shaders::ComputeShader Value, rapidjson::Document::AllocatorType& Allocator);
+
+    rapidjson::Value Serialize(const Materials::Material* Value, rapidjson::Document::AllocatorType& Allocator);
 
     template<class T>
     rapidjson::Value Serialize(const std::vector<T*>& Value,
@@ -94,6 +97,8 @@ namespace Serialization
     void Deserialize(const rapidjson::Value& Object, const char* Name, Shaders::Shader& Value);
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, Shaders::ComputeShader& Value);
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, Materials::Material*& Value);
 
     template<class T>
     void Deserialize(const rapidjson::Value& Object, const char* const Name, T*& Value,

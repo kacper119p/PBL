@@ -5,6 +5,7 @@
 
 #include "Engine/Textures/Texture.h"
 #include "Engine/Textures/TextureManager.h"
+#include "Materials/MaterialManager.h"
 #include "Models/ModelManager.h"
 #include "Models/Model.h"
 #include "Shaders/ShaderManager.h"
@@ -142,6 +143,14 @@ namespace Serialization
     {
         rapidjson::Value object(rapidjson::kStringType);
         const std::string path = Shaders::ShaderManager::GetShaderSourceFile(Value);
+        object.SetString(path.c_str(), path.length(), Allocator);
+        return object;
+    }
+
+    rapidjson::Value Serialize(const Materials::Material* const Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kStringType);
+        const std::string path = Materials::MaterialManager::GetMaterialPath(Value);
         object.SetString(path.c_str(), path.length(), Allocator);
         return object;
     }
@@ -371,5 +380,16 @@ namespace Serialization
         }
 
         Value = Shaders::ShaderManager::GetComputeShader(iterator->value.GetString());
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, Materials::Material*& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsString())
+        {
+            return;
+        }
+
+        Value = Materials::MaterialManager::GetMaterial(iterator->value.GetString());
     }
 } // Serialization

@@ -79,7 +79,7 @@ namespace Engine
     rapidjson::Value ModelRenderer::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION
-        //SERIALIZE_FIELD(Material)
+        SERIALIZE_FIELD(Material)
         SERIALIZE_FIELD(Model)
         END_COMPONENT_SERIALIZATION
     }
