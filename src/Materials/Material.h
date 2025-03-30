@@ -3,8 +3,7 @@
 #include <string>
 #include <typeinfo>
 
-#include "../../cmake-build-debug-visual-studio/_deps/assimp-src/contrib/rapidjson/include/rapidjson/document.h"
-#include "../../cmake-build-release-visual-studio/_deps/assimp-src/contrib/rapidjson/include/rapidjson/rapidjson.h"
+#include "rapidjson/document.h"
 #include "Shaders/Shader.h"
 
 #define MATERIAL_SERIALIZATION_METHODS_DECLARATIONS public:\
