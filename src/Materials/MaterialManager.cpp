@@ -112,7 +112,8 @@ namespace Materials
 
     Material* MaterialManager::LoadMaterialFromFile(const std::string& Path)
     {
-        rapidjson::Value data = Serialization::ReadJsonFile(Path.c_str());
+        rapidjson::Document data;
+        Serialization::ReadJsonFile(Path.c_str(), data);
         Material* material = DetermineMaterialType(data);
         if (material == nullptr)
         {
@@ -122,9 +123,9 @@ namespace Materials
         return material;
     }
 
-    Material* MaterialManager::DetermineMaterialType(rapidjson::Value& Json)
+    Material* MaterialManager::DetermineMaterialType(const rapidjson::Value& Json)
     {
-        const std::string typeId = Json["type"].GetString();
+        const std::string typeId = Json.FindMember("type")->value.GetString();
 
         if (CheckTypeId<PbrMaterial>(typeId))
         {

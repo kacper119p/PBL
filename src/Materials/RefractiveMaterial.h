@@ -8,6 +8,9 @@ namespace Materials
 {
     class RefractiveMaterial final : public Material
     {
+    public:
+        static const std::string TypeName;
+
     private:
         static Shaders::Shader DepthPass;
         static Shaders::Shader MainPass;
@@ -19,7 +22,7 @@ namespace Materials
         FloatMaterialProperty IndexOfRefraction;
 
     public:
-        RefractiveMaterial(unsigned int EnvironmentMap, float IndexOfRefraction);
+        RefractiveMaterial(Engine::Texture EnvironmentMap, float IndexOfRefraction);
 
         RefractiveMaterial();
 
@@ -55,6 +58,11 @@ namespace Materials
         void UseDirectionalShadows() const override;
 
         void UsePointSpotShadows() const override;
+
+        std::string GetType() const override
+        {
+            return TypeName;
+        }
 
         MATERIAL_SERIALIZATION_METHODS_DECLARATIONS
     };

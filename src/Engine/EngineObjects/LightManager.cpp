@@ -4,6 +4,7 @@
 #include "glad/glad.h"
 #include "CameraRenderData.h"
 #include "RenderingManager.h"
+#include "Engine/Textures/Texture.h"
 #include "Utility/TextureUtilities.h"
 
 namespace Engine
@@ -325,15 +326,15 @@ namespace Engine
                                                      SpotLightSpaceTransforms + 6);
     }
 
-    void LightManager::SetEnvironmentMap(unsigned int EnvironmentMap)
+    void LightManager::SetEnvironmentMap(const Texture EnvironmentMap)
     {
         if (IrradianceMap != 0)
         {
             glDeleteTextures(1, &IrradianceMap);
             glDeleteTextures(1, &PrefilterMap);
         }
-        IrradianceMap = Utility::IrradianceMapFromEnvironmentMap(EnvironmentMap);
-        PrefilterMap = Utility::IblPrefilterMapFromEnvironmentMap(EnvironmentMap);
+        IrradianceMap = Utility::IrradianceMapFromEnvironmentMap(EnvironmentMap.GetId());
+        PrefilterMap = Utility::IblPrefilterMapFromEnvironmentMap(EnvironmentMap.GetId());
     }
 
     LightManager::~LightManager()

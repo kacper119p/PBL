@@ -59,7 +59,7 @@ namespace Engine
         } catch (std::runtime_error& e)
         {
             spdlog::error(e.what());
-            return EXIT_FAILURE;
+            throw;
         }
 
         spdlog::info("Successfully built scene.");

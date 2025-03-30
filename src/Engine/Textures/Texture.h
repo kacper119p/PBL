@@ -25,9 +25,14 @@ namespace Engine
             return TextureId;
         }
 
-        bool operator==(const Texture& Other) const
+        bool operator==(const Texture Other) const
         {
             return TextureId == Other.TextureId;
+        }
+
+        bool operator!=(const Texture Other) const
+        {
+            return !(*this == Other);
         }
     };
 

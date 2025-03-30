@@ -9,6 +9,9 @@ namespace Materials
 {
     class WaterMaterial final : public Material
     {
+    public:
+        static const std::string TypeName;
+
     private:
         static Shaders::Shader DepthPass;
         static Shaders::Shader MainPass;
@@ -29,7 +32,7 @@ namespace Materials
         GLint TimeLocation;
 
     public:
-        WaterMaterial(unsigned int NormalMap0, unsigned int NormalMap1, const glm::vec3& Color,
+        WaterMaterial(Engine::Texture NormalMap0, Engine::Texture NormalMap1, const glm::vec3& Color,
                       const glm::vec2& Tiling0, const glm::vec2& Tiling1, const glm::vec2& Velocity0,
                       const glm::vec2& Velocity1, float Roughness, float Metallic);
 
@@ -46,6 +49,11 @@ namespace Materials
         void UseDirectionalShadows() const override;
 
         void UsePointSpotShadows() const override;
+
+        std::string GetType() const override
+        {
+            return TypeName;
+        }
 
         MATERIAL_SERIALIZATION_METHODS_DECLARATIONS
     };

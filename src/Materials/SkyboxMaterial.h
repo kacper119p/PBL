@@ -7,6 +7,9 @@ namespace Materials
 {
     class SkyboxMaterial final : public Material
     {
+    public:
+        static const std::string TypeName;
+
     private:
         static Shaders::Shader DepthPass;
         static Shaders::Shader MainPass;
@@ -17,7 +20,7 @@ namespace Materials
         Engine::Texture Texture;
 
     public:
-        explicit SkyboxMaterial(unsigned int Texture);
+        explicit SkyboxMaterial(Engine::Texture Texture);
 
         SkyboxMaterial();
 
@@ -43,6 +46,11 @@ namespace Materials
         void UseDirectionalShadows() const override;
 
         void UsePointSpotShadows() const override;
+
+        std::string GetType() const override
+        {
+            return TypeName;
+        }
 
         MATERIAL_SERIALIZATION_METHODS_DECLARATIONS
     };

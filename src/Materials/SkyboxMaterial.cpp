@@ -6,13 +6,14 @@
 
 namespace Materials
 {
+    const std::string SkyboxMaterial::TypeName("SkyboxMaterial");
     Shaders::Shader SkyboxMaterial::DepthPass;
     Shaders::Shader SkyboxMaterial::MainPass;
     Shaders::Shader SkyboxMaterial::DirectionalShadowPass;
     Shaders::Shader SkyboxMaterial::PointSpotShadowPass;
 
-    SkyboxMaterial::SkyboxMaterial(const unsigned int Texture) :
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), Texture(Engine::Texture(Texture))
+    SkyboxMaterial::SkyboxMaterial(const Engine::Texture Texture) :
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), Texture(Texture)
     {
     }
 

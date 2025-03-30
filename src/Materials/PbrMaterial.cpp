@@ -5,14 +5,16 @@
 
 namespace Materials
 {
+    const std::string PbrMaterial::TypeName("PbrMaterial");
     Shaders::Shader PbrMaterial::DepthPass;
     Shaders::Shader PbrMaterial::MainPass;
     Shaders::Shader PbrMaterial::DirectionalShadowPass;
     Shaders::Shader PbrMaterial::PointSpotShadowPass;
 
-    PbrMaterial::PbrMaterial(const unsigned int BaseMap, const unsigned int RoughnessMetallicMap,
-                             const unsigned int NormalMap, const unsigned int EmissiveMap, const glm::vec3& BaseColor,
-                             const float Roughness, const float Metallic, const glm::vec3& EmissiveColor) :
+    PbrMaterial::PbrMaterial(const Engine::Texture BaseMap, const Engine::Texture RoughnessMetallicMap,
+                             const Engine::Texture NormalMap, const Engine::Texture EmissiveMap,
+                             const glm::vec3& BaseColor, const float Roughness, const float Metallic,
+                             const glm::vec3& EmissiveColor) :
         Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), BaseMap(Engine::Texture(BaseMap)),
         RoughnessMetallicMap(Engine::Texture(RoughnessMetallicMap)), NormalMap(Engine::Texture(NormalMap)),
         EmissiveMap(Engine::Texture(EmissiveMap)), Roughness(FloatMaterialProperty("Roughness", MainPass, Roughness)),

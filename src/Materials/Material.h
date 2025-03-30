@@ -11,7 +11,7 @@
                                                     virtual void Deserialize(const rapidjson::Value& Object) override;
 
 #define START_MATERIAL_SERIALIZATION rapidjson::Value object(rapidjson::kObjectType);\
-                                     object.AddMember("type", Serialization::Serialize(typeid(this).name(), Allocator), Allocator);
+                                     object.AddMember("type", Serialization::Serialize(GetType(), Allocator), Allocator);
 
 #define END_MATERIAL_SERIALIZATION  return object;
 
@@ -83,10 +83,7 @@ namespace Materials
         /**
          * @brief Returns class name of this material.
          */
-        std::string GetType()
-        {
-            return typeid(this).name();
-        }
+        virtual std::string GetType() const = 0;
 
         /**
          * @brief Binds depth pass and its uniforms used by this material to be used in the next draw call.

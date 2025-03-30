@@ -9,6 +9,9 @@ namespace Materials
 {
     class PbrMaterial final : public Material
     {
+    public:
+        static const std::string TypeName;
+
     private:
         static Shaders::Shader DepthPass;
         static Shaders::Shader MainPass;
@@ -26,8 +29,8 @@ namespace Materials
         Vector3MaterialProperty EmissiveColor;
 
     public:
-        PbrMaterial(unsigned int BaseMap, unsigned int RoughnessMetallicMap, unsigned int NormalMap,
-                    unsigned int EmissiveMap, const glm::vec3& BaseColor, float Roughness, float Metallic,
+        PbrMaterial(Engine::Texture BaseMap, Engine::Texture RoughnessMetallicMap, Engine::Texture NormalMap,
+                    Engine::Texture EmissiveMap, const glm::vec3& BaseColor, float Roughness, float Metallic,
                     const glm::vec3& EmissiveColor);
 
         PbrMaterial();
@@ -43,6 +46,11 @@ namespace Materials
         void UseDirectionalShadows() const override;
 
         void UsePointSpotShadows() const override;
+
+        std::string GetType() const override
+        {
+            return TypeName;
+        }
 
     public:
         [[nodiscard]] Engine::Texture GetBaseMap() const

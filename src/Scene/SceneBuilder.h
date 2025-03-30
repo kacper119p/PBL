@@ -1,9 +1,6 @@
 #pragma once
 
 #include "Engine/EngineObjects/Scene.h"
-#include "Materials/Material.h"
-#include "Models/Model.h"
-#include "Shaders/Shader.h"
 
 namespace Scene
 {

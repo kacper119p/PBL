@@ -6,17 +6,18 @@
 
 namespace Materials
 {
+    const std::string WaterMaterial::TypeName("WaterMaterial");
     Shaders::Shader WaterMaterial::DepthPass;
     Shaders::Shader WaterMaterial::MainPass;
     Shaders::Shader WaterMaterial::DirectionalShadowPass;
     Shaders::Shader WaterMaterial::PointSpotShadowPass;
 
-    WaterMaterial::WaterMaterial(const unsigned int NormalMap0, const unsigned int NormalMap1, const glm::vec3& Color,
-                                 const glm::vec2& Tiling0, const glm::vec2& Tiling1, const glm::vec2& Velocity0,
-                                 const glm::vec2& Velocity1, const float Roughness, const float Metallic) :
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
-        NormalMap0(Engine::Texture(NormalMap0)), NormalMap1(Engine::Texture(NormalMap1)),
-        Color(Vector3MaterialProperty("Color", MainPass, Color)),
+    WaterMaterial::WaterMaterial(const Engine::Texture NormalMap0, const Engine::Texture NormalMap1,
+                                 const glm::vec3& Color, const glm::vec2& Tiling0, const glm::vec2& Tiling1,
+                                 const glm::vec2& Velocity0, const glm::vec2& Velocity1, const float Roughness,
+                                 const float Metallic) :
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), NormalMap0(NormalMap0),
+        NormalMap1(NormalMap1), Color(Vector3MaterialProperty("Color", MainPass, Color)),
         Tiling0(Vector2MaterialProperty("Tiling0", MainPass, Tiling0)),
         Tiling1(Vector2MaterialProperty("Tiling1", MainPass, Tiling1)),
         Velocity0(Vector2MaterialProperty("Velocity0", MainPass, Velocity0)),

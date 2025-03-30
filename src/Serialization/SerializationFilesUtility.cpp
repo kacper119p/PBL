@@ -11,7 +11,7 @@ namespace
 
 namespace Serialization
 {
-    rapidjson::Value ReadJsonFile(const char* FilePath)
+    void ReadJsonFile(const char* FilePath, rapidjson::Document& Target)
     {
         FILE* file;
         const int errorNumber = fopen_s(&file, FilePath, "rb");
@@ -19,18 +19,16 @@ namespace Serialization
         char buffer[BufferSize];
         rapidjson::FileReadStream inputStream(file, buffer, sizeof(buffer));
 
-        rapidjson::Document document;
-        document.ParseStream(inputStream);
+        Target.ParseStream(inputStream);
         fclose(file);
 
 #if EDITOR || DEBUG
-        assert(!document.HasParseError());
-        assert(document.IsObject());
+        assert(!Target.HasParseError());
+        assert(Target.IsObject());
 #endif
-        return rapidjson::Value(document.GetObject());
     }
 
-    void WriteJsonFile(const char* FilePath, rapidjson::Value& Object)
+    void WriteJsonFile(const char* FilePath, const rapidjson::Value& Object)
     {
         FILE* file;
         const int errorNumber = fopen_s(&file, FilePath, "wb");

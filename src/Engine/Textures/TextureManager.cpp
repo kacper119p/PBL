@@ -1,6 +1,7 @@
 #include "TextureManager.h"
 
 #include <algorithm>
+#include <filesystem>
 
 #include "Texture.h"
 #include "Utility/TextureUtilities.h"
@@ -19,7 +20,16 @@ namespace Engine
             return Texture(iterator->second);
         }
 
-        const uint32_t textureId = Utility::LoadTexture2DFromFile(Path, GL_RGBA, 4,GL_RGBA);
+        uint32_t textureId;
+        if (std::filesystem::path(path).extension() == ".hdr")
+        {
+            textureId = Utility::LoadHdrCubeMapFromFile(Path);
+        }
+        else
+        {
+            textureId = Utility::LoadTexture2DFromFile(Path, GL_RGBA, 4,GL_RGBA);
+        }
+
 
         Textures.emplace(path, textureId);
         return Texture(textureId);

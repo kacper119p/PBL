@@ -6,14 +6,15 @@
 
 namespace Materials
 {
+    const std::string ReflectiveMaterial::TypeName("ReflectiveMaterial");
     Shaders::Shader ReflectiveMaterial::DepthPass;
     Shaders::Shader ReflectiveMaterial::MainPass;
     Shaders::Shader ReflectiveMaterial::DirectionalShadowPass;
     Shaders::Shader ReflectiveMaterial::PointSpotShadowPass;
 
-    ReflectiveMaterial::ReflectiveMaterial(const unsigned int EnvironmentMap) :
+    ReflectiveMaterial::ReflectiveMaterial(const Engine::Texture EnvironmentMap) :
         Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
-        EnvironmentMap(Engine::Texture(EnvironmentMap))
+        EnvironmentMap(EnvironmentMap)
     {
     }
 

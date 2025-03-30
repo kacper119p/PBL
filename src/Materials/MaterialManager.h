@@ -36,7 +36,7 @@ namespace Materials
         static void Initialize();
 
         template<class T>
-        static Material* GetMaterial(const std::string& Path)
+        static T* GetMaterial(const std::string& Path)
         {
             static_assert(std::is_base_of_v<Material, T>, "T must derive from Material");
             Material* material = GetMaterial(Path);
@@ -46,6 +46,7 @@ namespace Materials
             return result;
 #else
             T* result = dynamic_cast<T*>(material);
+            return result;
 #endif
 
         }
@@ -65,13 +66,13 @@ namespace Materials
     private:
         static Material* LoadMaterialFromFile(const std::string& Path);
 
-        static Material* DetermineMaterialType(rapidjson::Value& Json);
+        static Material* DetermineMaterialType(const rapidjson::Value& Json);
 
         template<class T>
         static bool CheckTypeId(const std::string TypeId)
         {
             static_assert(std::is_base_of_v<Material, T>, "T must derive from Material");
-            return std::strcmp(TypeId.c_str(), typeid(T).name()) == 0;
+            return T::TypeName == TypeId;
         }
     };
 } // Materials

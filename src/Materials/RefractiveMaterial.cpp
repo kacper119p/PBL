@@ -6,14 +6,15 @@
 
 namespace Materials
 {
+    const std::string RefractiveMaterial::TypeName("RefractiveMaterial");
     Shaders::Shader RefractiveMaterial::DepthPass;
     Shaders::Shader RefractiveMaterial::MainPass;
     Shaders::Shader RefractiveMaterial::DirectionalShadowPass;
     Shaders::Shader RefractiveMaterial::PointSpotShadowPass;
 
-    RefractiveMaterial::RefractiveMaterial(const unsigned int EnvironmentMap, const float IndexOfRefraction) :
+    RefractiveMaterial::RefractiveMaterial(const Engine::Texture EnvironmentMap, const float IndexOfRefraction) :
         Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
-        EnvironmentMap(Engine::Texture(EnvironmentMap)),
+        EnvironmentMap(EnvironmentMap),
         IndexOfRefraction(FloatMaterialProperty("IOR", MainPass, IndexOfRefraction))
     {
     }
@@ -30,7 +31,7 @@ namespace Materials
                 "./res/shaders/DefaultDepth/DefaultDepth.vert", nullptr,
                 "./res/shaders/DefaultDepth/DefaultDepth.frag"));
         MainPass = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
-                "./res/shaders/Reflective/Reflective.vert", nullptr, "./res/shaders/Reflective/Reflective.frag"));
+                "./res/shaders/Refractive/Refractive.vert", nullptr, "./res/shaders/Refractive/Refractive.frag"));
         DirectionalShadowPass = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
                 "./res/shaders/Common/BasicShadowPass/DirectionalLight.vert", nullptr,
                 "./res/shaders/Common/BasicShadowPass/DirectionalLight.frag"));

@@ -4,7 +4,7 @@
 namespace Serialization
 {
 
-    rapidjson::Value ReadJsonFile(const char* FilePath);
+    void ReadJsonFile(const char* FilePath, rapidjson::Document& Target);
 
-    void WriteJsonFile(const char* FilePath, rapidjson::Value& Object);
+    void WriteJsonFile(const char* FilePath, const rapidjson::Value& Object);
 } // Serialization
