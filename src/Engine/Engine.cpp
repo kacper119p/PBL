@@ -87,6 +87,11 @@ namespace Engine
 
             const CameraRenderData renderData(Camera->GetPosition(), Camera->GetTransform(),
                                               Camera->GetProjectionMatrix());
+
+
+            // TO REMOVE WHEN MODEL MANAGER IS IMPLEMENTED -----
+
+            
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
 
             // Draw ImGui

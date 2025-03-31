@@ -5,8 +5,10 @@
 #include <spdlog/spdlog.h>
 #include "Utility/TextureUtilities.h"
 #include "Models/Model.h"
+#include "Models/ModelAnimated.h"
 #include "Engine/EngineObjects/Scene.h"
 #include "Engine/Components/Renderers/ModelRenderer.h"
+#include "Engine/Components/Renderers/AnimatedModelRenderer.h"
 #include "Engine/Components/Lights/DirectionalLight.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include "Engine/Gui/LightsGui.h"
@@ -125,7 +127,7 @@ namespace Scene
 
         unsigned int submarineEmissiveMap = Engine::TextureManager::GetTexture("./res/textures/EmissiveMapDefault.png");
 
-        Models::Model* submarineModel = new Models::Model("./res/models/Submarine.fbx");
+        Models::ModelAnimated* submarineModel = new Models::ModelAnimated("./res/models/Submarine.fbx");
         Materials::PbrMaterial* submarineMaterial = new Materials::PbrMaterial(
                 depth, shader, directionalPass, pointPass,
                 submarineBaseMap,
@@ -134,11 +136,13 @@ namespace Scene
                 glm::vec3(1.0f), 1.0f, 1.0f, glm::vec3(0.0f));
 
         Engine::Entity* submarineEntity = new Engine::Entity();
-        Engine::ModelRenderer* submarineRenderer = new Engine::ModelRenderer(submarineMaterial, submarineModel);
+        Models::Animation* submarineAnimation = new Models::Animation();
+        Models::Animator* submarineAnimator = new Models::Animator(submarineAnimation);
+        Engine::AnimatedModelRenderer* submarineRenderer = new Engine::AnimatedModelRenderer(submarineMaterial, submarineModel, submarineAnimation, submarineAnimator);
         submarineEntity->AddComponent(submarineRenderer);
-        Engine::ShipRoller* submarineRoller = new Engine::ShipRoller(glm::vec3(1.0f, 1.0f, 5.0f),
-                                                                     glm::vec3(0.2f, 0.1f, 0.4f));
-        submarineEntity->AddComponent(submarineRoller);
+        //Engine::ShipRoller* submarineRoller = new Engine::ShipRoller(glm::vec3(1.0f, 1.0f, 5.0f),
+                                                                     //glm::vec3(0.2f, 0.1f, 0.4f));
+        //submarineEntity->AddComponent(submarineRoller);
         submarineEntity->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
 
         Textures.push_back(submarineBaseMap);
@@ -146,7 +150,7 @@ namespace Scene
         Textures.push_back(submarineNormalMap);
         Textures.push_back(submarineEmissiveMap);
 
-        Models.push_back(submarineModel);
+        //Models.push_back(submarineModel);
         Materials.push_back(submarineMaterial);
 
         /*

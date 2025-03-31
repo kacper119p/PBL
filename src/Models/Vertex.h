@@ -1,7 +1,7 @@
 #pragma once
 
 #include "glm/glm.hpp"
-
+#define MAX_BONE_INFLUENCE 4
 namespace Models
 {
     /**
@@ -16,5 +16,10 @@ namespace Models
 
         Vertex(const glm::vec3& position, const glm::vec2& texCoords, const glm::vec3& normal,
                const glm::vec3& tangent);
+        Vertex() {};
+
+        int m_BoneIDs[MAX_BONE_INFLUENCE];
+        // weights from each bone
+        float m_Weights[MAX_BONE_INFLUENCE];
     };
 } // Models
