@@ -15,5 +15,7 @@ namespace Engine
 
     public:
         static void SaveScene(const std::string& Path, const Scene* Scene);
+
+        static void LoadScene(const std::string& Path, Scene* Scene);
     };
 } // Engine

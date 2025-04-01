@@ -10,4 +10,12 @@ namespace Engine
         const rapidjson::Value json = Scene->Serialize(allocator);
         Serialization::WriteJsonFile(Path.c_str(), json);
     }
+
+    void SceneManager::LoadScene(const std::string& Path, Scene* Scene)
+    {
+        rapidjson::Document data;
+        Serialization::ReadJsonFile(Path.c_str(), data);
+
+
+    }
 } // Engine

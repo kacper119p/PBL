@@ -1,8 +1,15 @@
-//
-// Created by Kacper on 17.11.2024.
-//
-
 #include "Scene.h"
+
+#include "SerializedObjectFactory.h"
+
+namespace
+{
+    struct DeserializationPair
+    {
+        const rapidjson::Value& Json;
+        Serialization::SerializedObject* Object;
+    };
+}
 
 namespace Engine
 {
@@ -23,16 +30,48 @@ namespace Engine
 
     rapidjson::Value Scene::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
+        rapidjson::Value documentRoot = rapidjson::Value(rapidjson::kObjectType);
+        documentRoot.SetObject();
         rapidjson::Value root = rapidjson::Value(rapidjson::kObjectType);
-        root.SetObject();
-        rapidjson::Value value = rapidjson::Value(rapidjson::kArrayType);
-        SerializeEntity(Root, value, Allocator);
-        root.AddMember("Objects", value, Allocator);
-        return root;
+        rapidjson::Value objects = rapidjson::Value(rapidjson::kArrayType);
+        for (const Component* component : *Root)
+        {
+            objects.PushBack(component->Serialize(Allocator), Allocator);
+        }
+        for (const Transform* transform : *(Root->GetTransform()))
+        {
+            SerializeEntity(transform->GetOwner(), objects, Allocator);
+        }
+
+        documentRoot.AddMember("Objects", objects, Allocator);
+        return documentRoot;
     }
 
     void Scene::Deserialize(const rapidjson::Value& Value)
     {
+        Serialization::ReferenceTable referenceTable;
+        std::vector<DeserializationPair> objects;
+
+        delete Root;
+        Root = new Entity();
+
+        Root->DeserializeValuePass(Value["Root"], referenceTable);
+
+        const rapidjson::Value& serializedObjects = Value["Objects"].GetArray();
+
+        for (const rapidjson::Value& jsonObject : serializedObjects)
+        {
+            Serialization::SerializedObject* deserializedObject = SerializedObjectFactory::CreateObject(jsonObject);
+            deserializedObject->DeserializeValuePass(jsonObject, referenceTable);
+            DeserializationPair pair{jsonObject, deserializedObject};
+            objects.emplace_back(pair);
+        }
+
+        Root->DeserializeReferencesPass(Value["Root"], referenceTable);
+        for (DeserializationPair pair : objects)
+        {
+            pair.Object->DeserializeReferencesPass(pair.Json, referenceTable);
+        }
     }
 
     void Scene::SerializeEntity(const Entity* const Entity, rapidjson::Value& Object,
@@ -47,7 +86,5 @@ namespace Engine
         {
             SerializeEntity(transform->GetOwner(), Object, Allocator);
         }
-
-
     }
 } // Engine
