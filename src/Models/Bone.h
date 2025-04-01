@@ -1,5 +1,9 @@
+#pragma once
 #include <vector>
 #include <string>
+#include <glm/glm.hpp>
+#include <glm/gtx/quaternion.hpp>
+#include <assimp/scene.h>
 
 namespace Models
 {

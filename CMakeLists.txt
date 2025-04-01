@@ -10,6 +10,14 @@ IF (WIN32)
   message(NOTICE "\n")
 ENDIF()
 
+if (MSVC)
+    add_compile_options(/fsanitize=address)
+    add_link_options(/INCREMENTAL:NO /DEBUG)
+else()
+    add_compile_options(-fsanitize=address)
+    add_link_options(-fsanitize=address)
+endif()
+
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 include(global_settings)

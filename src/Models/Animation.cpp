@@ -1,9 +1,12 @@
 #include "Bone.h"
 #include "Animation.h"
+#include "Utility/AssimpGLMHelpers.h"
+#include <assimp/Importer.hpp>
+#include <assimp/postprocess.h>
 
 namespace Models
 {
-    Animation::Animation(const std::string& animationPath, Model* model)
+    Animation::Animation(const std::string& animationPath, ModelAnimated* model)
     {
         Assimp::Importer importer;
         const aiScene* scene = importer.ReadFile(animationPath, aiProcess_Triangulate);
@@ -11,7 +14,7 @@ namespace Models
         auto animation = scene->mAnimations[0];
         m_Duration = animation->mDuration;
         m_TicksPerSecond = animation->mTicksPerSecond;
-        ReadHeirarchyData(m_RootNode, scene->mRootNode);
+        ReadHierarchyData(m_RootNode, scene->mRootNode);
         ReadMissingBones(animation, *model);
     }
     Bone* Animation::FindBone(const std::string& name)
@@ -24,7 +27,7 @@ namespace Models
             return &(*iter);
     }
 
-    void Animation::ReadMissingBones(const aiAnimation* animation, Model& model)
+    void Animation::ReadMissingBones(const aiAnimation* animation, ModelAnimated& model)
     {
         int size = animation->mNumChannels;
 
@@ -59,7 +62,7 @@ namespace Models
         for (int i = 0; i < src->mNumChildren; i++)
         {
             AssimpNodeData newData;
-            ReadHeirarchyData(newData, src->mChildren[i]);
+            ReadHierarchyData(newData, src->mChildren[i]);
             dest.children.push_back(newData);
         }
     }

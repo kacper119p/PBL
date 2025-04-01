@@ -1,3 +1,10 @@
+#pragma once
+
+#include <vector>
+#include "glad/glad.h"
+#include <glm/glm.hpp>
+#include "Models/Animation.h"
+
 namespace Models
 {
 	class Animator

@@ -1,4 +1,5 @@
 #include "Bone.h"
+#include "Utility/AssimpGLMHelpers.h"
 
 namespace Models
 {
@@ -145,6 +146,5 @@ namespace Models
             glm::vec3 finalScale = glm::mix(m_Scales[p0Index].scale, m_Scales[p1Index].scale, scaleFactor);
             return glm::scale(glm::mat4(1.0f), finalScale);
         }
-
-
+    }
 } 

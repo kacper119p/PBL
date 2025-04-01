@@ -136,7 +136,7 @@ namespace Scene
                 glm::vec3(1.0f), 1.0f, 1.0f, glm::vec3(0.0f));
 
         Engine::Entity* submarineEntity = new Engine::Entity();
-        Models::Animation* submarineAnimation = new Models::Animation();
+        Models::Animation* submarineAnimation = new Models::Animation("./res/models/Submarine.fbx", submarineModel);
         Models::Animator* submarineAnimator = new Models::Animator(submarineAnimation);
         Engine::AnimatedModelRenderer* submarineRenderer = new Engine::AnimatedModelRenderer(submarineMaterial, submarineModel, submarineAnimation, submarineAnimator);
         submarineEntity->AddComponent(submarineRenderer);

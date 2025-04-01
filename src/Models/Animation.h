@@ -1,4 +1,10 @@
+#pragma once
+
+#include <glm/glm.hpp>
 #include "Bone.h"
+#include "ModelAnimated.h"
+#include <map>
+#include <assimp/scene.h>
 namespace Models
 {
     struct AssimpNodeData
@@ -20,7 +26,7 @@ namespace Models
 
     public:
         Animation() = default;
-        Animation(const std::string& animationPath, Model* model);
+        Animation(const std::string& animationPath, ModelAnimated* model);
 
         ~Animation() {}
 
@@ -35,7 +41,7 @@ namespace Models
         inline const std::map<std::string, BoneInfo>& GetBoneIDMap() { return m_BoneInfoMap; }
 
     private:
-        void ReadMissingBones(const aiAnimation* animation, Model& model);
+        void ReadMissingBones(const aiAnimation* animation, ModelAnimated& model);
         void ReadHierarchyData(AssimpNodeData& dest, const aiNode* src);
 
 

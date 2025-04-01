@@ -1,13 +1,16 @@
 #include "Engine/EngineObjects/CameraRenderData.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include "ModelRenderer.h"
+#include "Models/ModelAnimated.h"
+#include "Models/Animator.h"
 #include "AnimatedModelRenderer.h"
+#include <GLFW/glfw3.h>
 
 namespace Engine
 {
     AnimatedModelRenderer::AnimatedModelRenderer(Materials::Material* Material, Models::ModelAnimated* Model,
                                  Models::Animation* Animation, Models::Animator* Animator) :
-        Material(Material), ModelAnimated(Model), Animation(Animation), Animator(Animator)
+        Material(Material), Model(Model), Animation(Animation), Animator(Animator)
     {
     }
     void AnimatedModelRenderer::RenderDepth(const CameraRenderData& RenderData)
@@ -70,9 +73,12 @@ namespace Engine
         Shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
         Shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
         Shader.SetUniform("ObjectToWorldMatrix", GetOwner()->GetTransform()->GetLocalToWorldMatrix());
-        auto transforms = animator.GetFinalBoneMatrices();
+        std::vector<glm::mat4> transforms = Animator->GetFinalBoneMatrices();
         for (int i = 0; i < transforms.size(); ++i)
-            Shader.SetUniform("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
+        {
+            glm::mat4 transform = transforms[i];
+            Shader.SetUniform(("finalBonesMatrices[" + std::to_string(i) + "]").c_str(), transform);
+        }
     }
 
     void AnimatedModelRenderer::Draw() const

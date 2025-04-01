@@ -12,7 +12,7 @@ namespace Models
     {
         Assimp::Importer importer = Assimp::Importer();
 
-        const aiScene* scene =
+        scene =
                 importer.ReadFile(FilePath, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
 
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
@@ -48,10 +48,14 @@ namespace Models
 
         for (unsigned int i = 0; i < Mesh->mNumVertices; i++)
         {
-            Vertex vertex;
+            Models::Vertex vertex;
 
             // Initialize bone weights to default
-            SetVertexBoneDataToDefault(vertex);
+            for (int i = 0; i < 4; i++)
+            {
+                vertex.m_BoneIDs[i] = -1;
+                vertex.m_Weights[i] = 0.0f;
+            }
 
             vertex.Position = glm::vec3(Mesh->mVertices[i].x, Mesh->mVertices[i].y, Mesh->mVertices[i].z);
             vertex.Normal = glm::vec3(Mesh->mNormals[i].x, Mesh->mNormals[i].y, Mesh->mNormals[i].z);
@@ -84,7 +88,7 @@ namespace Models
 
     void ModelAnimated::SetVertexBoneDataToDefault(Vertex& vertex)
     {
-        for (int i = 0; i < MAX_BONE_WEIGHTS; i++)
+        for (int i = 0; i < 4; i++)
         {
             vertex.m_BoneIDs[i] = -1;
             vertex.m_Weights[i] = 0.0f;
@@ -93,7 +97,7 @@ namespace Models
 
     void ModelAnimated::SetVertexBoneData(Vertex& vertex, int boneID, float weight)
     {
-        for (int i = 0; i < MAX_BONE_WEIGHTS; ++i)
+        for (int i = 0; i < 4; ++i)
         {
             if (vertex.m_BoneIDs[i] < 0)
             {
@@ -103,6 +107,8 @@ namespace Models
             }
         }
     }
+
+
 
     void ModelAnimated::ExtractBoneWeightForVertices(std::vector<Vertex>& vertices, aiMesh* mesh, const aiScene* scene)
     {
@@ -114,7 +120,7 @@ namespace Models
             {
                 BoneInfo newBoneInfo;
                 newBoneInfo.id = m_BoneCounter;
-                newBoneInfo.offset = AssimpGLMHelpers::ConvertMatrixToGLMFormat(mesh->mBones[boneIndex]->mOffsetMatrix);
+                newBoneInfo.offset = ConvertMatrixToGLMFormat(mesh->mBones[boneIndex]->mOffsetMatrix);
                 m_BoneInfoMap[boneName] = newBoneInfo;
                 boneID = m_BoneCounter;
                 m_BoneCounter++;

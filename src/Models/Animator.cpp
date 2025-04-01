@@ -4,7 +4,7 @@ namespace Models
     Animator::Animator(Animation* Animation)
     {
         m_CurrentTime = 0.0;
-        m_CurrentAnimation = currentAnimation;
+        m_CurrentAnimation = Animation;
 
         m_FinalBoneMatrices.reserve(100);
 
