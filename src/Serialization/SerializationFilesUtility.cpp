@@ -1,7 +1,7 @@
 #include "SerializationFilesUtility.h"
 #include "rapidjson/filereadstream.h"
 #include "rapidjson/filewritestream.h"
-#include <rapidjson/writer.h>
+#include <rapidjson/prettywriter.h>
 #include <cstdio>
 
 namespace
@@ -35,7 +35,7 @@ namespace Serialization
         assert(errorNumber == 0); //failed to write to file
         char buffer[BufferSize];
         rapidjson::FileWriteStream outputStream(file, buffer, sizeof(buffer));
-        rapidjson::Writer<rapidjson::FileWriteStream> writer(outputStream);
+        rapidjson::PrettyWriter<rapidjson::FileWriteStream> writer(outputStream);
 
         Object.Accept(writer);
         fclose(file);

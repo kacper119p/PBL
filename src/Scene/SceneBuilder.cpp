@@ -18,6 +18,7 @@
 #include "Materials/WaterMaterial.h"
 #include "Engine/Components/Game/ShipRoller.h"
 #include "Engine/Components/Game/Rotator.h"
+#include "Engine/EngineObjects/SceneManager.h"
 #include "Engine/Textures/Texture.h"
 #include "Engine/Textures/TextureManager.h"
 #include "Materials/MaterialManager.h"
@@ -526,5 +527,7 @@ namespace Scene
         particleEntity->AddComponent(particleEmitter);
 
         Models.push_back(sphereModel);
+
+        Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
     }
 } // Scene

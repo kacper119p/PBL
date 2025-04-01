@@ -17,52 +17,6 @@ namespace Engine
      */
     class Entity final : public Serialization::SerializedObject
     {
-    public:
-        struct Iterator
-        {
-            using iterator_category = std::input_iterator_tag;
-            using difference_type = std::ptrdiff_t;
-            using value_type = Component*;
-            using pointer = Component**;
-            using reference = Component*&;
-
-        private:
-            pointer Ptr;
-
-        public:
-            explicit Iterator(pointer Ptr) :
-                Ptr(Ptr)
-            {
-            }
-
-        public:
-            reference operator*() const { return *Ptr; }
-            pointer operator->() const { return Ptr; }
-
-            Iterator& operator++()
-            {
-                Ptr++;
-                return *this;
-            }
-
-            Iterator operator++(int)
-            {
-                const Iterator tmp = *this;
-                ++(*this);
-                return tmp;
-            }
-
-            friend bool operator==(const Iterator& a, const Iterator& b)
-            {
-                return a.Ptr == b.Ptr;
-            }
-
-            friend bool operator!=(const Iterator& a, const Iterator& b)
-            {
-                return a.Ptr != b.Ptr;
-            }
-        };
-
     private:
         Transform Transform;
         std::vector<Component*> Components;
@@ -80,6 +34,14 @@ namespace Engine
          * @brief Returns transform of this entity.
          */
         class Transform* GetTransform()
+        {
+            return &Transform;
+        }
+
+        /**
+         * @brief Returns transform of this entity.
+         */
+        const class Transform* GetTransform() const
         {
             return &Transform;
         }
@@ -133,14 +95,24 @@ namespace Engine
         }
 
     public:
-        Iterator begin()
+        [[nodiscard]] std::vector<Component*>::iterator begin()
         {
-            return Iterator(Components.data());
+            return Components.begin();
         }
 
-        Iterator end()
+        [[nodiscard]] std::vector<Component*>::iterator end()
         {
-            return Iterator(Components.data() + Components.size());
+            return Components.end();
+        }
+
+        [[nodiscard]] std::vector<Component*>::const_iterator begin() const
+        {
+            return Components.begin();
+        }
+
+        [[nodiscard]] std::vector<Component*>::const_iterator end() const
+        {
+            return Components.end();
         }
 
         SERIALIZATION_METHODS_DECLARATIONS

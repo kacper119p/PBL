@@ -62,5 +62,13 @@ namespace Engine
         {
             this->Root = Root;
         }
+
+        rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const;
+
+        void Deserialize(const rapidjson::Value& Value);
+
+    private:
+        static void SerializeEntity(const Entity* Entity, rapidjson::Value& Object,
+                                    rapidjson::Document::AllocatorType& Allocator);
     };
 }

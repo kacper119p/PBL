@@ -219,14 +219,24 @@ namespace Engine
         void UpdateMatrices();
 
     public:
-        Iterator begin()
+        [[nodiscard]] std::vector<Transform*>::iterator begin()
         {
-            return Iterator(Children.data());
+            return Children.begin();
         }
 
-        Iterator end()
+        [[nodiscard]] std::vector<Transform*>::iterator end()
         {
-            return Iterator(Children.data() + Children.size());
+            return Children.end();
+        }
+
+        [[nodiscard]] std::vector<Transform*>::const_iterator begin() const
+        {
+            return Children.begin();
+        }
+
+        [[nodiscard]] std::vector<Transform*>::const_iterator end() const
+        {
+            return Children.end();
         }
 
         SERIALIZATION_METHODS_DECLARATIONS
