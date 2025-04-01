@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/EngineObjects/Entity.h"
+#include "Engine/EngineObjects/LightManager.h"
 #include "Engine/Textures/Texture.h"
 #include "Shaders/Shader.h"
 
@@ -23,6 +24,7 @@ namespace Engine
     {
     private:
         Entity* Root;
+        Texture Skybox;
 
     public:
         std::vector<Texture> Textures;
@@ -54,14 +56,21 @@ namespace Engine
             return Root;
         }
 
-        /**
-         * @brief Sets root of this scene.
-         * @param Root A new root.
-         */
-        void SetRoot(Entity* Root)
+        [[nodiscard]] Texture GetSkybox() const
         {
-            this->Root = Root;
+            return Skybox;
         }
+
+        void SetSkybox(const Texture& Skybox)
+        {
+            this->Skybox = Skybox;
+            LightManager::GetInstance()->SetEnvironmentMap(Skybox);
+        }
+
+        Entity* SpawnEntity(Entity* Parent);
+
+        Entity* SpawnEntity(Entity* Parent, const glm::vec3& Position, const glm::vec3& Rotation);
+
 
         rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const;
 

@@ -38,7 +38,11 @@ namespace Engine
 
     void Entity::DeserializeReferencesPass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
-        Transform.DeserializeReferencesPass(Object["transform"], ReferenceMap);
+        if (const auto transformIterator = Object.FindMember("transform");
+            transformIterator != Object.MemberEnd() && transformIterator->value.IsObject())
+        {
+            Transform.DeserializeReferencesPass(transformIterator->value, ReferenceMap);
+        }
         Serialization::Deserialize(Object, "components", Components, ReferenceMap);
     }
 }

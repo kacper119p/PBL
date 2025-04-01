@@ -1,6 +1,7 @@
 #include "Scene.h"
 
-#include "SerializedObjectFactory.h"
+#include "Serialization/SerializedObjectFactory.h"
+#include "Serialization/SerializationUtility.h"
 
 namespace
 {
@@ -28,11 +29,35 @@ namespace Engine
         delete Root;
     }
 
+    Entity* Scene::SpawnEntity(Entity* const Parent)
+    {
+#if DEBUG
+        CHECK_MESSAGE(Parent->GetScene() == this, "Parent doesn't belong to this scene.")
+#endif
+        Entity* result = new Entity();
+        result->GetTransform()->SetParent(Parent->GetTransform());
+        return result;
+    }
+
+    Entity* Scene::SpawnEntity(Entity* const Parent, const glm::vec3& Position, const glm::vec3& Rotation)
+    {
+#if DEBUG
+        CHECK_MESSAGE(Parent->GetScene() == this, "Parent doesn't belong to this scene.")
+#endif
+        Entity* result = new Entity();
+        result->GetTransform()->SetParent(Parent->GetTransform());
+        result->GetTransform()->SetPosition(Position);
+        result->GetTransform()->SetEulerAngles(Rotation);
+        return result;
+    }
+
     rapidjson::Value Scene::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         rapidjson::Value documentRoot = rapidjson::Value(rapidjson::kObjectType);
         documentRoot.SetObject();
-        rapidjson::Value root = rapidjson::Value(rapidjson::kObjectType);
+        rapidjson::Value root = Root->Serialize(Allocator);
+        documentRoot.AddMember("Skybox", Serialization::Serialize(Skybox, Allocator), Allocator);
+        documentRoot.AddMember("Root", root, Allocator);
         rapidjson::Value objects = rapidjson::Value(rapidjson::kArrayType);
         for (const Component* component : *Root)
         {
@@ -55,6 +80,9 @@ namespace Engine
         delete Root;
         Root = new Entity();
 
+        Serialization::Deserialize(Value, "Skybox", Skybox);
+        LightManager::GetInstance()->SetEnvironmentMap(Skybox);
+
         Root->DeserializeValuePass(Value["Root"], referenceTable);
 
         const rapidjson::Value& serializedObjects = Value["Objects"];
@@ -71,6 +99,14 @@ namespace Engine
         for (DeserializationPair pair : objects)
         {
             pair.Object->DeserializeReferencesPass(pair.Json, referenceTable);
+        }
+
+        for (const DeserializationPair pair : objects)
+        {
+            if (Component* component = dynamic_cast<Component*>(pair.Object))
+            {
+                component->Start();
+            }
         }
     }
 

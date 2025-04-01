@@ -105,9 +105,9 @@ void Engine::ParticleEmitter::Update(float DeltaTime)
     Shaders::ComputeShader::Dispatch(glm::ivec3(workGroupsCount, 1, 1));
 }
 
-void Engine::ParticleEmitter::OnAdd(Engine::Entity* NewOwner)
+void Engine::ParticleEmitter::Start()
 {
-    Renderer::OnAdd(NewOwner);
+    Renderer::Start();
     UpdateManager::GetInstance()->RegisterComponent(this);
 }
 

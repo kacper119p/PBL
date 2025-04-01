@@ -5,9 +5,9 @@
 
 namespace Engine
 {
-    void PointLight::OnAdd(Entity* NewOwner)
+    void PointLight::Start()
     {
-        Component::OnAdd(NewOwner);
+        Component::Start();
         LightManager::GetInstance()->RegisterLight(this);
         LightsGui::RegisterLight(this);
     }

@@ -3,9 +3,9 @@
 
 namespace Engine
 {
-    void Renderer::OnAdd(Engine::Entity* NewOwner)
+    void Renderer::Start()
     {
-        Component::OnAdd(NewOwner);
+        Component::Start();
         RenderingManager::GetInstance()->RegisterRenderer(this);
     }
 

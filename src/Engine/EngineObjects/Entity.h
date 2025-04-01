@@ -11,6 +11,7 @@
 namespace Engine
 {
     class Component;
+    class Scene;
 
     /**
      * @brief Base class for all objects that exist in a scene.
@@ -19,6 +20,7 @@ namespace Engine
     {
     private:
         Transform Transform;
+        Scene* Scene;
         std::vector<Component*> Components;
 
     public:
@@ -33,7 +35,7 @@ namespace Engine
         /**
          * @brief Returns transform of this entity.
          */
-        class Transform* GetTransform()
+        [[nodiscard]] class Transform* GetTransform()
         {
             return &Transform;
         }
@@ -41,19 +43,39 @@ namespace Engine
         /**
          * @brief Returns transform of this entity.
          */
-        const class Transform* GetTransform() const
+        [[nodiscard]] const class Transform* GetTransform() const
         {
             return &Transform;
         }
 
         /**
-         * @brief Adds a new component to this entity.
-         * @param Component Component to be added.
+         * @brief Returns scene this entity belongs to.
          */
+        [[nodiscard]] class Scene* GetScene() const
+        {
+            return Scene;
+        }
+
+        /**
+         * @brief Adds a new component to this entity.
+         * @tparam T Component's class.
+         */
+        template<class T>
+        T* AddComponent()
+        {
+            static_assert(std::is_base_of_v<class Component, T>, "T must derive from Component");
+            T* component = new T();
+            component->SetOwner(this);
+            Components.push_back(component);
+            component->Start();
+            return component;
+        }
+
         void AddComponent(Component* Component)
         {
+            Component->SetOwner(this);
             Components.push_back(Component);
-            Component->OnAdd(this);
+            Component->Start();
         }
 
         /**
@@ -89,6 +111,7 @@ namespace Engine
                 if (Component* component = GetComponent<T>())
                 {
                     std::erase(Components, component);
+                    component->OnDestroy();
                     delete component;
                 }
             }

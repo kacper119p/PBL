@@ -27,10 +27,12 @@ namespace Engine
 
     private:
         Transform* Parent = nullptr;
-        Entity* Owner;
+        Entity* Owner = nullptr;
         std::vector<Transform*> Children = std::vector<Transform*>();
 
     public:
+        Transform() = default;
+
         /**
          * @brief Creates a new transform representing an identity transformation.
          * @param Owner Owner of this transform.
@@ -41,7 +43,7 @@ namespace Engine
         }
 
     public:
-        virtual ~Transform();
+        ~Transform() override;
 
     public:
         /**

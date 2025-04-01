@@ -18,6 +18,7 @@
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/EngineObjects/GizmoManager.h"
 #include "imgui_internal.h"
+#include "Materials/Material.h"
 #include "Materials/MaterialManager.h"
 #include "Utility/SystemUtilities.h"
 #include "Scene/SceneBuilder.h"

@@ -71,8 +71,8 @@ namespace Materials
     void MaterialManager::SaveMaterial(const std::string& Path)
     {
 #if DEBUG
-        const auto iterator = Materials.find(Path);
-        CHECK_MESSAGE(iterator != Materials.end(), "Material was not loaded from a file")
+        const auto iterator = GetMaterials().find(Path);
+        CHECK_MESSAGE(iterator != GetMaterials().end(), "Material was not loaded from a file")
         SaveMaterial(Path, iterator->second);
 #else
         SaveMaterial(Path, GetMaterials()[Path]);

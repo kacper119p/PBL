@@ -1,6 +1,9 @@
 #include "Component.h"
 
-void Engine::Component::OnAdd(Engine::Entity* NewOwner)
+void Engine::Component::Start()
 {
-    Owner = NewOwner;
+}
+
+void Engine::Component::OnDestroy()
+{
 }

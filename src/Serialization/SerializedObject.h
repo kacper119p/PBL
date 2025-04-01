@@ -8,6 +8,7 @@
 #include "GuidHasher.h"
 #include "Utility/AssertionsUtility.h"
 #include "rapidjson/document.h"
+#include "Serialization/SerializedObjectRaii.h" // Used in macros.
 
 #define SERIALIZATION_EXPORT_CLASS(__CLASS__)\
 public:\
@@ -18,7 +19,8 @@ public:\
     [[nodiscard]] std::string GetType() const override\
     {\
         return TypeName;\
-    }
+    }\
+    static inline const SerializedObjectRaii<__CLASS__> RaiiHandle =  SerializedObjectRaii<__CLASS__>(#__CLASS__);
 
 #define START_COMPONENT_SERIALIZATION\
     rapidjson::Value object(rapidjson::kObjectType);\

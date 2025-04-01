@@ -117,13 +117,13 @@ namespace Serialization
     {
         static_assert(std::is_base_of_v<SerializedObject, T>);
 
-        const auto guidIterator = Object.FindMember(Name);
-        if (guidIterator == Object.MemberEnd() || !guidIterator->value.IsArray())
+        const auto memberIterator = Object.FindMember(Name);
+        if (memberIterator == Object.MemberEnd() || !memberIterator->value.IsArray())
         {
             return;
         }
 
-        for (const rapidjson::Value& value : Object.GetArray())
+        for (const rapidjson::Value& value : memberIterator->value.GetArray())
         {
             SerializedObject* result;
             Deserialize(value, result, ReferenceMap);

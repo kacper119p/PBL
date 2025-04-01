@@ -16,7 +16,7 @@ namespace Engine
         ~Updateable() override;
 
     public:
-        void OnAdd(Entity* NewOwner) override;
+        void Start() override;
     };
 
 } // Engine

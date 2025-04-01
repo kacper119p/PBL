@@ -9,7 +9,7 @@ namespace Engine
     /**
     * @brief Directional light component.
     */
-    class DirectionalLight : public Component
+    class DirectionalLight final : public Component
     {
     private:
         glm::vec3 Color = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -53,7 +53,7 @@ namespace Engine
                             ));
         }
 
-        void OnAdd(Entity* NewOwner) override;
+        void Start() override;
 
         SERIALIZATION_EXPORT_CLASS(DirectionalLight);
     };

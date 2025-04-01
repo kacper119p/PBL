@@ -13,9 +13,9 @@ namespace Engine
         LightsGui::UnregisterLight(this);
     }
 
-    void DirectionalLight::OnAdd(Entity* NewOwner)
+    void DirectionalLight::Start()
     {
-        Component::OnAdd(NewOwner);
+        Component::Start();
         LightManager::GetInstance()->RegisterLight(this);
         LightsGui::RegisterLight(this);
     }

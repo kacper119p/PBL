@@ -10,13 +10,15 @@ namespace Engine
     /**
      * @brief Renderer used for rendering meshes.
      */
-    class ModelRenderer : public Renderer
+    class ModelRenderer final : public Renderer
     {
     private:
-        Materials::Material* Material;
-        Models::Model* Model;
+        Materials::Material* Material = nullptr;
+        Models::Model* Model = nullptr;
 
     public:
+        ModelRenderer() = default;
+
         /**
          * @brief
          * @param Material Material to be used.

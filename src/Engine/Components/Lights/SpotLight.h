@@ -7,7 +7,7 @@
 namespace Engine
 {
 
-    class SpotLight : public Component
+    class SpotLight final : public Component
     {
     private:
         glm::vec3 Color = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -145,7 +145,7 @@ namespace Engine
             return GetOwner()->GetTransform()->GetPositionWorldSpace();
         }
 
-        void OnAdd(Entity* NewOwner) override;
+        void Start() override;
 
         SERIALIZATION_EXPORT_CLASS(SpotLight)
     };
