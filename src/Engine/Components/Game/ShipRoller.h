@@ -81,7 +81,7 @@ namespace Engine
     public:
         void Update(float DeltaTime) override;
 
-        SERIALIZATION_METHODS_DECLARATIONS
+        SERIALIZATION_EXPORT_CLASS(ShipRoller)
     };
 
 } // Engine

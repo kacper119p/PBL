@@ -128,6 +128,6 @@ namespace Engine
 
         void SetEmitterSettingsUniforms(Shaders::ComputeShader Shader) const;
 
-        SERIALIZATION_METHODS_DECLARATIONS
+        SERIALIZATION_EXPORT_CLASS(ParticleEmitter)
     };
 }

@@ -5,7 +5,6 @@
 
 namespace Materials
 {
-    const std::string PbrMaterial::TypeName("PbrMaterial");
     Shaders::Shader PbrMaterial::DepthPass;
     Shaders::Shader PbrMaterial::MainPass;
     Shaders::Shader PbrMaterial::DirectionalShadowPass;

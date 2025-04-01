@@ -55,7 +55,7 @@ namespace Engine
 
         void OnAdd(Entity* NewOwner) override;
 
-        SERIALIZATION_METHODS_DECLARATIONS
+        SERIALIZATION_EXPORT_CLASS(DirectionalLight);
     };
 
 } // Engine

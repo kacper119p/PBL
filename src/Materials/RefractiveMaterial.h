@@ -8,9 +8,6 @@ namespace Materials
 {
     class RefractiveMaterial final : public Material
     {
-    public:
-        static const std::string TypeName;
-
     private:
         static Shaders::Shader DepthPass;
         static Shaders::Shader MainPass;
@@ -59,11 +56,6 @@ namespace Materials
 
         void UsePointSpotShadows() const override;
 
-        std::string GetType() const override
-        {
-            return TypeName;
-        }
-
-        MATERIAL_SERIALIZATION_METHODS_DECLARATIONS
+        SERIALIZATION_EXPORT_MATERIAL(RefractiveMaterial)
     };
 } // Models

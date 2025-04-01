@@ -6,7 +6,6 @@
 
 namespace Materials
 {
-    const std::string ReflectiveMaterial::TypeName("ReflectiveMaterial");
     Shaders::Shader ReflectiveMaterial::DepthPass;
     Shaders::Shader ReflectiveMaterial::MainPass;
     Shaders::Shader ReflectiveMaterial::DirectionalShadowPass;

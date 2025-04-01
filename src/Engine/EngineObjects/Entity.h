@@ -115,6 +115,6 @@ namespace Engine
             return Components.end();
         }
 
-        SERIALIZATION_METHODS_DECLARATIONS
+        SERIALIZATION_EXPORT_CLASS(Entity);
     };
 }

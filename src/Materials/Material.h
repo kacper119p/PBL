@@ -1,15 +1,19 @@
 #pragma once
 
 #include <string>
-#include <typeinfo>
 
 #include "rapidjson/document.h"
 #include "Shaders/Shader.h"
 
-#define MATERIAL_SERIALIZATION_METHODS_DECLARATIONS public:\
-                                                    rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const override;\
-                                                    virtual void Deserialize(const rapidjson::Value& Object) override;
-
+#define SERIALIZATION_EXPORT_MATERIAL(__CLASS__)\
+public:\
+    static inline const std::string TypeName =std::string(#__CLASS__);\
+    rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const override;\
+    virtual void Deserialize(const rapidjson::Value& Object) override;\
+    [[nodiscard]] std::string GetType() const override\
+    {\
+        return TypeName;\
+    }
 #define START_MATERIAL_SERIALIZATION rapidjson::Value object(rapidjson::kObjectType);\
                                      object.AddMember("type", Serialization::Serialize(GetType(), Allocator), Allocator);
 
@@ -83,7 +87,7 @@ namespace Materials
         /**
          * @brief Returns class name of this material.
          */
-        virtual std::string GetType() const = 0;
+        [[nodiscard]] virtual std::string GetType() const = 0;
 
         /**
          * @brief Binds depth pass and its uniforms used by this material to be used in the next draw call.

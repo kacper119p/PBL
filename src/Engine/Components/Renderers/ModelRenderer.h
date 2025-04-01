@@ -74,6 +74,6 @@ namespace Engine
 
         void Draw() const;
 
-        SERIALIZATION_METHODS_DECLARATIONS
+        SERIALIZATION_EXPORT_CLASS(ModelRenderer)
     };
 } // Engine

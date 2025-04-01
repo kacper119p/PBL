@@ -6,7 +6,6 @@
 
 namespace Materials
 {
-    const std::string WaterMaterial::TypeName("WaterMaterial");
     Shaders::Shader WaterMaterial::DepthPass;
     Shaders::Shader WaterMaterial::MainPass;
     Shaders::Shader WaterMaterial::DirectionalShadowPass;
