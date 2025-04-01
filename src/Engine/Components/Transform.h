@@ -218,6 +218,17 @@ namespace Engine
 
         void UpdateMatrices();
 
+    public:
+        Iterator begin()
+        {
+            return Iterator(Children.data());
+        }
+
+        Iterator end()
+        {
+            return Iterator(Children.data() + Children.size());
+        }
+
         SERIALIZATION_METHODS_DECLARATIONS
     };
 }
