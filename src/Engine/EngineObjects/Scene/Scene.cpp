@@ -57,9 +57,9 @@ namespace Engine
 
         Root->DeserializeValuePass(Value["Root"], referenceTable);
 
-        const rapidjson::Value& serializedObjects = Value["Objects"].GetArray();
+        const rapidjson::Value& serializedObjects = Value["Objects"];
 
-        for (const rapidjson::Value& jsonObject : serializedObjects)
+        for (const rapidjson::Value& jsonObject : serializedObjects.GetArray())
         {
             Serialization::SerializedObject* deserializedObject = SerializedObjectFactory::CreateObject(jsonObject);
             deserializedObject->DeserializeValuePass(jsonObject, referenceTable);
