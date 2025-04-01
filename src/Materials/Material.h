@@ -2,18 +2,26 @@
 
 #include <string>
 
+#include "Materials/MaterialRaii.h" //Used in SERIALIZATION_EXPORT_MATERIAL
 #include "rapidjson/document.h"
 #include "Shaders/Shader.h"
 
 #define SERIALIZATION_EXPORT_MATERIAL(__CLASS__)\
 public:\
     static inline const std::string TypeName =std::string(#__CLASS__);\
+    \
     rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const override;\
+    \
     virtual void Deserialize(const rapidjson::Value& Object) override;\
+    \
     [[nodiscard]] std::string GetType() const override\
     {\
         return TypeName;\
-    }
+    }\
+    \
+private:\
+    static inline const MaterialRaii<__CLASS__> RaiiHandle =  MaterialRaii<__CLASS__>(#__CLASS__);
+
 #define START_MATERIAL_SERIALIZATION rapidjson::Value object(rapidjson::kObjectType);\
                                      object.AddMember("type", Serialization::Serialize(GetType(), Allocator), Allocator);
 

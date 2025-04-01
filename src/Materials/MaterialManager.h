@@ -2,21 +2,80 @@
 #include <string>
 #include <unordered_map>
 
-#include "Material.h"
 #include "Serialization/SerializationFilesUtility.h"
-#include "Utility/AssertionsUtility.h"
 
 namespace Materials
 {
+    class Material;
+
     class MaterialManager
     {
     private:
-        static std::unordered_map<std::string, Material*> Materials;
+        class IMaterialBuilder
+        {
+        public:
+            virtual ~IMaterialBuilder() = default;
+
+            [[nodiscard]] virtual Material* Build() const = 0;
+        };
+
+        template<class T>
+        class MaterialBuilder final : public IMaterialBuilder
+        {
+        public:
+            [[nodiscard]] Material* Build() const override
+            {
+                return new T();
+            }
+        };
+
+    private:
+        [[nodiscard]] static std::unordered_map<std::string, Material*>& GetMaterials()
+        {
+            static std::unordered_map<std::string, Material*> materials;
+            return materials;
+        }
+
+    public:
+        class MaterialFactory final
+        {
+            std::unordered_map<std::string, IMaterialBuilder*> MaterialBuilders;
+
+        public:
+            template<class T>
+            void Register(const std::string& Name)
+            {
+                MaterialBuilders.emplace(Name, new MaterialBuilder<T>());
+            }
+
+            void Unregister(const std::string& Name)
+            {
+                MaterialBuilders.erase(Name);
+            }
+
+            [[nodiscard]] const IMaterialBuilder* GetBuilder(const std::string& Name)
+            {
+                const auto iterator = MaterialBuilders.find(Name);
+                if (iterator == MaterialBuilders.end())
+                {
+                    return nullptr;
+                }
+                return iterator->second;
+            }
+        };
+
+    public:
+        [[nodiscard]] static MaterialFactory* GetMaterialFactory()
+        {
+            static MaterialFactory factory;
+            return &factory;
+        }
 
     private:
         MaterialManager() = default;
 
-    public:
+    public
+    :
         static Material* GetMaterial(const std::string& Path);
 
         static bool DeleteMaterial(const std::string& Path);
@@ -63,7 +122,8 @@ namespace Materials
             return material;
         }
 
-    private:
+    private
+    :
         static Material* LoadMaterialFromFile(const std::string& Path);
 
         static Material* DetermineMaterialType(const rapidjson::Value& Json);
@@ -75,4 +135,5 @@ namespace Materials
             return T::TypeName == TypeId;
         }
     };
+
 } // Materials

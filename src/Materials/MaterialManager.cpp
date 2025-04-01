@@ -10,26 +10,24 @@
 
 namespace Materials
 {
-    std::unordered_map<std::string, Material*> MaterialManager::Materials;
-
     Material* MaterialManager::GetMaterial(const std::string& Path)
     {
-        if (const auto iterator = Materials.find(Path); iterator != Materials.end())
+        if (const auto iterator = GetMaterials().find(Path); iterator != GetMaterials().end())
         {
             return iterator->second;
         }
 
         Material* material = LoadMaterialFromFile(Path);
-        Materials.emplace(Path, material);
+        GetMaterials().emplace(Path, material);
         return material;
     }
 
     bool MaterialManager::DeleteMaterial(const std::string& Path)
     {
-        if (const auto iterator = Materials.find(Path); iterator != Materials.end())
+        if (const auto iterator = GetMaterials().find(Path); iterator != GetMaterials().end())
         {
             delete iterator->second;
-            Materials.erase(Path);
+            GetMaterials().erase(Path);
             return true;
         }
         return false;
@@ -37,12 +35,12 @@ namespace Materials
 
     bool MaterialManager::DeleteMaterial(Material* const Material)
     {
-        for (const auto& pair : Materials)
+        for (const auto& pair : GetMaterials())
         {
             if (pair.second == Material)
             {
                 delete Material;
-                Materials.erase(pair.first);
+                GetMaterials().erase(pair.first);
                 return true;
             }
         }
@@ -51,16 +49,16 @@ namespace Materials
 
     void MaterialManager::DeleteAllMaterials()
     {
-        for (const auto& pair : Materials)
+        for (const auto& pair : GetMaterials())
         {
             delete pair.second;
         }
-        Materials.clear();
+        GetMaterials().clear();
     }
 
     std::string MaterialManager::GetMaterialPath(const Material* const Material)
     {
-        for (const auto& pair : Materials)
+        for (const auto& pair : GetMaterials())
         {
             if (pair.second == Material)
             {
@@ -77,13 +75,13 @@ namespace Materials
         CHECK_MESSAGE(iterator != Materials.end(), "Material was not loaded from a file")
         SaveMaterial(Path, iterator->second);
 #else
-        SaveMaterial(Path, Materials[Path]);
+        SaveMaterial(Path, GetMaterials()[Path]);
 #endif
     }
 
     void MaterialManager::SaveMaterial(const Material* const Material)
     {
-        for (const auto& pair : Materials)
+        for (const auto& pair : GetMaterials())
         {
             if (pair.second == Material)
             {
@@ -126,27 +124,12 @@ namespace Materials
     Material* MaterialManager::DetermineMaterialType(const rapidjson::Value& Json)
     {
         const std::string typeId = Json.FindMember("type")->value.GetString();
+        const IMaterialBuilder* const builder = GetMaterialFactory()->GetBuilder(typeId);
+        if (builder == nullptr)
+        {
+            return nullptr;
+        }
 
-        if (CheckTypeId<PbrMaterial>(typeId))
-        {
-            return new PbrMaterial();
-        }
-        if (CheckTypeId<ReflectiveMaterial>(typeId))
-        {
-            return new ReflectiveMaterial();
-        }
-        if (CheckTypeId<RefractiveMaterial>(typeId))
-        {
-            return new RefractiveMaterial();
-        }
-        if (CheckTypeId<SkyboxMaterial>(typeId))
-        {
-            return new SkyboxMaterial();
-        }
-        if (CheckTypeId<WaterMaterial>(typeId))
-        {
-            return new WaterMaterial();
-        }
-        return nullptr;
+        return builder->Build();
     }
 } // Materials
