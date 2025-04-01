@@ -16,6 +16,52 @@ namespace Engine
     {
         friend class Entity;
 
+    public:
+        struct Iterator
+        {
+            using iterator_category = std::input_iterator_tag;
+            using difference_type = std::ptrdiff_t;
+            using value_type = Transform*;
+            using pointer = Transform**;
+            using reference = Transform*&;
+
+        private:
+            pointer Ptr;
+
+        public:
+            explicit Iterator(pointer ptr) :
+                Ptr(ptr)
+            {
+            }
+
+        public:
+            reference operator*() const { return *Ptr; }
+            pointer operator->() const { return Ptr; }
+
+            Iterator& operator++()
+            {
+                Ptr++;
+                return *this;
+            }
+
+            Iterator operator++(int)
+            {
+                const Iterator tmp = *this;
+                ++(*this);
+                return tmp;
+            }
+
+            friend bool operator==(const Iterator& a, const Iterator& b)
+            {
+                return a.Ptr == b.Ptr;
+            }
+
+            friend bool operator!=(const Iterator& a, const Iterator& b)
+            {
+                return a.Ptr != b.Ptr;
+            }
+        };
+
     private:
         glm::vec3 Position = glm::vec3(0.0f, 0.0f, 0.0f);
         glm::vec3 EulerAngles = glm::vec3(0.0f, 0.0f, 0.0f);

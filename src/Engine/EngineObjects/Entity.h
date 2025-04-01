@@ -27,21 +27,21 @@ namespace Engine
             using reference = Component*&;
 
         private:
-            pointer ptr;
+            pointer Ptr;
 
         public:
-            explicit Iterator(pointer ptr) :
-                ptr(ptr)
+            explicit Iterator(pointer Ptr) :
+                Ptr(Ptr)
             {
             }
 
         public:
-            reference operator*() const { return *ptr; }
-            pointer operator->() const { return ptr; }
+            reference operator*() const { return *Ptr; }
+            pointer operator->() const { return Ptr; }
 
             Iterator& operator++()
             {
-                ptr++;
+                Ptr++;
                 return *this;
             }
 
@@ -54,12 +54,12 @@ namespace Engine
 
             friend bool operator==(const Iterator& a, const Iterator& b)
             {
-                return a.ptr == b.ptr;
+                return a.Ptr == b.Ptr;
             }
 
             friend bool operator!=(const Iterator& a, const Iterator& b)
             {
-                return a.ptr != b.ptr;
+                return a.Ptr != b.Ptr;
             }
         };
 
