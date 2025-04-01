@@ -1,6 +1,9 @@
 #pragma once
 
+#include <iterator>
+#include <cstddef>
 #include <vector>
+
 
 #include "Engine/Components/Component.h"
 #include "Engine/Components/Transform.h"
@@ -14,6 +17,52 @@ namespace Engine
      */
     class Entity final : public Serialization::SerializedObject
     {
+    public:
+        struct Iterator
+        {
+            using iterator_category = std::input_iterator_tag;
+            using difference_type = std::ptrdiff_t;
+            using value_type = Component*;
+            using pointer = Component**;
+            using reference = Component*&;
+
+        private:
+            pointer ptr;
+
+        public:
+            explicit Iterator(pointer ptr) :
+                ptr(ptr)
+            {
+            }
+
+        public:
+            reference operator*() const { return *ptr; }
+            pointer operator->() const { return ptr; }
+
+            Iterator& operator++()
+            {
+                ptr++;
+                return *this;
+            }
+
+            Iterator operator++(int)
+            {
+                const Iterator tmp = *this;
+                ++(*this);
+                return tmp;
+            }
+
+            friend bool operator==(const Iterator& a, const Iterator& b)
+            {
+                return a.ptr == b.ptr;
+            }
+
+            friend bool operator!=(const Iterator& a, const Iterator& b)
+            {
+                return a.ptr != b.ptr;
+            }
+        };
+
     private:
         Transform Transform;
         std::vector<Component*> Components;
@@ -81,6 +130,17 @@ namespace Engine
                     delete component;
                 }
             }
+        }
+
+    public:
+        Iterator begin()
+        {
+            return Iterator(Components.data());
+        }
+
+        Iterator end()
+        {
+            return Iterator(Components.data() + Components.size());
         }
 
         SERIALIZATION_METHODS_DECLARATIONS
