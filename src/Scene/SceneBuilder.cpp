@@ -5,7 +5,7 @@
 #include <spdlog/spdlog.h>
 #include "Utility/TextureUtilities.h"
 #include "Models/Model.h"
-#include "Engine/EngineObjects/Scene.h"
+#include "Engine/EngineObjects/Scene/Scene.h"
 #include "Engine/Components/Renderers/ModelRenderer.h"
 #include "Engine/Components/Lights/DirectionalLight.h"
 #include "Engine/EngineObjects/LightManager.h"
@@ -18,7 +18,7 @@
 #include "Materials/WaterMaterial.h"
 #include "Engine/Components/Game/ShipRoller.h"
 #include "Engine/Components/Game/Rotator.h"
-#include "Engine/EngineObjects/SceneManager.h"
+#include "Engine/EngineObjects/Scene/SceneManager.h"
 #include "Engine/Textures/Texture.h"
 #include "Engine/Textures/TextureManager.h"
 #include "Materials/MaterialManager.h"

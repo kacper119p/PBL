@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Entity.h"
+#include "Engine/EngineObjects/Entity.h"
 #include "Engine/Textures/Texture.h"
 #include "Shaders/Shader.h"
 

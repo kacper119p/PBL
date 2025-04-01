@@ -9,7 +9,9 @@ namespace Engine
     class SceneManager
     {
     private:
-        SceneManager();
+        SceneManager()
+        {
+        }
 
     public:
         static void SaveScene(const std::string& Path, const Scene* Scene);
