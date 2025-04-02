@@ -4,8 +4,8 @@ layout (location = 0) in vec3 inputPosition;
 layout (location = 1) in vec2 inputTexCoord;
 layout (location = 2) in vec3 inputNormal;
 layout (location = 3) in vec3 inputTangent;
-layout (location = 5) in ivec4 boneIds;
-layout (location = 6) in vec4 weights;
+layout (location = 4) in ivec4 boneIds;
+layout (location = 5) in vec4 weights;
 
 out vec2 TexCoord;
 out vec3 Position;
