@@ -41,6 +41,12 @@ namespace Scene
         Shaders::ShaderSourceFiles shaderSource("./res/shaders/PBR/PBR.vert", nullptr,
                                                 "./res/shaders/PBR/PBR.frag");
 
+        Shaders::ShaderSourceFiles shaderSourceAnimatedDepth("./res/shaders/PBR/PBRAnimated.vert", nullptr,
+                                                             "./res/shaders/PBR/PBR.frag");
+
+        Shaders::ShaderSourceFiles shaderSourceAnimated("./res/shaders/PBR/PBRAnimated.vert", nullptr,
+                                                        "./res/shaders/PBR/PBR.frag");
+
         Shaders::ShaderSourceFiles directionalShadowPass(
                 "./res/shaders/Common/BasicShadowPass/DirectionalLight.vert",
                 nullptr,
@@ -91,6 +97,9 @@ namespace Scene
         Shaders::Shader refractiveShader(refractiveShaderSource);
         Shaders::Shader waterShader(waterShaderSource);
 
+        Shaders::Shader animatedDepthShader(shaderSourceAnimatedDepth);
+        Shaders::Shader animatedShader(shaderSourceAnimated);
+
         Shaders::Shader particleRenderShader(particleRenderSource);
         Shaders::ComputeShader particleSpawnShader("./res/shaders/Particles/ParticlesSpawn.comp");
         Shaders::ComputeShader particleUpdateShader("./res/shaders/Particles/ParticlesUpdate.comp");
@@ -129,7 +138,7 @@ namespace Scene
 
         Models::ModelAnimated* submarineModel = new Models::ModelAnimated("./res/models/Submarine.fbx");
         Materials::PbrMaterial* submarineMaterial = new Materials::PbrMaterial(
-                depth, shader, directionalPass, pointPass,
+                animatedDepthShader, animatedShader, directionalPass, pointPass,
                 submarineBaseMap,
                 submarineRmaoMap, submarineNormalMap,
                 submarineEmissiveMap,
@@ -138,10 +147,11 @@ namespace Scene
         Engine::Entity* submarineEntity = new Engine::Entity();
         Models::Animation* submarineAnimation = new Models::Animation("./res/models/Submarine.fbx", submarineModel);
         Models::Animator* submarineAnimator = new Models::Animator(submarineAnimation);
-        Engine::AnimatedModelRenderer* submarineRenderer = new Engine::AnimatedModelRenderer(submarineMaterial, submarineModel, submarineAnimation, submarineAnimator);
+        Engine::AnimatedModelRenderer* submarineRenderer = new Engine::AnimatedModelRenderer(
+                submarineMaterial, submarineModel, submarineAnimation, submarineAnimator);
         submarineEntity->AddComponent(submarineRenderer);
         //Engine::ShipRoller* submarineRoller = new Engine::ShipRoller(glm::vec3(1.0f, 1.0f, 5.0f),
-                                                                     //glm::vec3(0.2f, 0.1f, 0.4f));
+        //glm::vec3(0.2f, 0.1f, 0.4f));
         //submarineEntity->AddComponent(submarineRoller);
         submarineEntity->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
 
