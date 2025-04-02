@@ -20,7 +20,7 @@ namespace Engine
     {
     private:
         Transform Transform;
-        Scene* Scene;
+        Scene* Scene = nullptr;
         std::vector<Component*> Components;
 
     public:
