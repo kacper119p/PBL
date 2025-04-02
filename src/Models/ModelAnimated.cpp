@@ -1,5 +1,6 @@
 #include "Model.h"
 
+
 #include "Assimp/Importer.hpp"
 #include "Assimp/postprocess.h"
 #include "Vertex.h"
@@ -13,9 +14,7 @@ namespace Models
     {
         Assimp::Importer importer = Assimp::Importer();
 
-        scene =
-                importer.ReadFile(FilePath, aiProcess_Triangulate | aiProcess_GenNormals);
-
+        scene = importer.ReadFile(FilePath, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
         {
             return;
@@ -110,7 +109,6 @@ namespace Models
     {
         auto& boneInfoMap = m_BoneInfoMap;
         int& boneCount = m_BoneCounter;
-
         for (int boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex)
         {
             int boneID = -1;

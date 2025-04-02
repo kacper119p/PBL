@@ -153,7 +153,7 @@ namespace Scene
         //Engine::ShipRoller* submarineRoller = new Engine::ShipRoller(glm::vec3(1.0f, 1.0f, 5.0f),
         //glm::vec3(0.2f, 0.1f, 0.4f));
         //submarineEntity->AddComponent(submarineRoller);
-        //submarineEntity->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
+        submarineEntity->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
 
         Textures.push_back(submarineBaseMap);
         Textures.push_back(submarineRmaoMap);

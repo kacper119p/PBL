@@ -1,4 +1,7 @@
 #include "Animator.h"
+#include <spdlog/spdlog.h>
+#include <glm/glm.hpp>
+#include <glm/gtx/string_cast.hpp> // Required for glm::to_string()
 namespace Models
 {
     Animator::Animator(Animation* Animation)
@@ -40,6 +43,7 @@ namespace Models
             Bone->Update(m_CurrentTime);
             nodeTransform = Bone->GetLocalTransform();
         }
+
 
         glm::mat4 globalTransformation = parentTransform * nodeTransform;
 

@@ -31,25 +31,45 @@ for (int i = 0; i < MAX_BONE_INFLUENCE; i++)
 }
 
 vec4 totalPosition = vec4(0.0f);
+vec3 localNormal = vec3(0.0f);
+vec3 localTangent = vec3(0.0f);
 if (weightSum == 0.0) {
     totalPosition = vec4(inputPosition, 1.0);  // Use original position if no bones influence
 }
 if (weightSum > 0.0)
 {
     for (int i = 0; i < MAX_BONE_INFLUENCE; i++)
-    {
-        if (boneIds[i] == -1) continue;
+   {
+      if (boneIds[i] == -1) continue;
         if (boneIds[i] >= MAX_BONES) break;
 
-        float normalizedWeight = weights[i] / weightSum; // Normalize each weight
+        //float normalizedWeight = weights[i] / weightSum; // Normalize each weight
         vec4 localPosition = finalBonesMatrices[boneIds[i]] * vec4(inputPosition, 1.0f);
-        totalPosition += localPosition * normalizedWeight;
+        totalPosition += localPosition * weights[i];
+
+
     }
 }
 else
 {
     totalPosition = vec4(inputPosition, 1.0f); // Fallback to original position
 }
+    for(int i = 0 ; i < MAX_BONE_INFLUENCE ; i++)
+    {
+        if(boneIds[i] == -1)
+            continue;
+
+        if(boneIds[i] >= MAX_BONES)  // too many bones in the model
+        {
+            totalPosition = vec4(inputPosition,1.0f);
+            break;
+        }
+        vec4 localPosition = finalBonesMatrices[boneIds[i]] * vec4(inputPosition,1.0f);
+        totalPosition += localPosition * weights[i];
+        localNormal += (mat3(finalBonesMatrices[boneIds[i]]) * inputNormal) * weights[i];
+        localTangent += (mat3(finalBonesMatrices[boneIds[i]]) * inputTangent) * weights[i];
+    }
+
 
 
     gl_Position = ProjectionMatrix * ViewMatrix * ObjectToWorldMatrix * totalPosition;
@@ -57,6 +77,6 @@ else
 
     Position = (ObjectToWorldMatrix * totalPosition).xyz;
     TexCoord = inputTexCoord;
-    Normal = (ObjectToWorldMatrix * vec4(inputNormal, 0.0)).xyz;
-    Tangent = (ObjectToWorldMatrix * vec4(inputTangent, 0.0)).xyz;
+    Normal = (ObjectToWorldMatrix * vec4(localNormal, 0.0)).xyz;
+    Tangent = (ObjectToWorldMatrix * vec4(localTangent, 0.0)).xyz;
 }
