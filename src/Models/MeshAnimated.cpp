@@ -5,7 +5,7 @@
 namespace Models
 {
     MeshAnimated::MeshAnimated(const std::vector<Vertex>& VerticesData, const std::vector<unsigned int>& VertexIndices,
-               const std::string& Name) :
+                               const std::string& Name) :
         VerticesData(VerticesData), VertexIndices(VertexIndices), AABBox(CreateAABBox(VerticesData)), Name(Name)
     {
         glGenVertexArrays(1, &VertexArray);
@@ -41,11 +41,11 @@ namespace Models
 
         // ids
         glEnableVertexAttribArray(5);
-        glVertexAttribIPointer(3, 4, GL_INT, sizeof(Vertex), (void*) offsetof(Vertex, m_BoneIDs));
+        glVertexAttribIPointer(5, 4, GL_INT, sizeof(Vertex), (void*) offsetof(Vertex, m_BoneIDs));
 
         // weights
         glEnableVertexAttribArray(6);
-        glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, m_Weights));   
+        glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, m_Weights));
     }
 
     void MeshAnimated::Draw() const
