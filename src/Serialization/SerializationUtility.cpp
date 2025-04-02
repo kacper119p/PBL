@@ -36,7 +36,14 @@ namespace
 
 namespace Serialization
 {
-    rapidjson::Value Serialize(const float& Value, rapidjson::Document::AllocatorType& Allocator)
+    rapidjson::Value Serialize(int Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kNumberType);
+        object.SetInt(Value);
+        return object;
+    }
+
+    rapidjson::Value Serialize(const float Value, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kNumberType);
         object.SetFloat(Value);
@@ -153,6 +160,16 @@ namespace Serialization
         const std::string path = Materials::MaterialManager::GetMaterialPath(Value);
         object.SetString(path.c_str(), path.length(), Allocator);
         return object;
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, int& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsInt())
+        {
+            return;
+        }
+        Value = iterator->value.GetInt();
     }
 
 
@@ -348,17 +365,17 @@ namespace Serialization
         const rapidjson::Value& files = iterator->value;
         const auto iteratorVertex = files.FindMember("vertex");
 
-        if (iteratorVertex == files.MemberEnd() || !iteratorVertex->value.IsFloat())
+        if (iteratorVertex == files.MemberEnd() || !iteratorVertex->value.IsString())
         {
             return;
         }
         const auto iteratorGeometry = files.FindMember("geometry");
-        if (iteratorGeometry == files.MemberEnd() || !iteratorGeometry->value.IsFloat())
+        if (iteratorGeometry == files.MemberEnd() || !iteratorGeometry->value.IsString())
         {
             return;
         }
         const auto iteratorFragment = files.FindMember("fragment");
-        if (iteratorFragment == files.MemberEnd() || !iteratorFragment->value.IsFloat())
+        if (iteratorFragment == files.MemberEnd() || !iteratorFragment->value.IsString())
         {
             return;
         }

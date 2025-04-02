@@ -52,7 +52,7 @@ namespace Engine
 
     private:
         EmitterSettings Settings;
-        int MaxParticleCount;
+        int MaxParticleCount = 0;
 
         float Timer = 0.0f;
 
@@ -60,6 +60,7 @@ namespace Engine
         unsigned int FreelistBuffer;
 
         Shaders::Shader RenderShader;
+
         Shaders::ComputeShader SpawnShader;
         Shaders::ComputeShader UpdateShader;
 

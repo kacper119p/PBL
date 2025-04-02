@@ -22,7 +22,9 @@ namespace Models
 
 namespace Serialization
 {
-    rapidjson::Value Serialize(const float& Value, rapidjson::Document::AllocatorType& Allocator);
+    rapidjson::Value Serialize(int Value, rapidjson::Document::AllocatorType& Allocator);
+
+    rapidjson::Value Serialize(float Value, rapidjson::Document::AllocatorType& Allocator);
 
     rapidjson::Value Serialize(const glm::vec4& Value, rapidjson::Document::AllocatorType& Allocator);
 
@@ -71,6 +73,8 @@ namespace Serialization
         T value = Value.GetValue();
         return Serialize(value, Allocator);
     }
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, int& Value);
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, float& Value);
 

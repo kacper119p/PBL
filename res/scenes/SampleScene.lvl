@@ -1212,6 +1212,7 @@
             "type": "ParticleEmitter",
             "id": "{4e5cfcaf-be56-443b-9cf9-b4024b80da48}\u0000",
             "owner": "{3957f4cf-9d1a-4637-86be-6aecd2d356ff}\u0000",
+            "MaxParticleCount": 10000,
             "Settings.SpawnRate": 1000.0,
             "Settings.Model": "./res/models/SphereLowPoly.fbx",
             "Settings.MinColor": {
