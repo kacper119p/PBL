@@ -1,5 +1,6 @@
 #pragma once
 
+#if EDITOR
 #include "Engine/Components/Lights/DirectionalLight.h"
 #include "Engine/Components/Lights/PointLight.h"
 #include "Engine/Components/Lights/SpotLight.h"
@@ -75,3 +76,4 @@ namespace Engine
         static bool ManageColor(glm::vec3& Color);
     };
 } // Engine
+#endif

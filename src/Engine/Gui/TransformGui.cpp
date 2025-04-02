@@ -1,3 +1,4 @@
+#if EDITOR
 #include "imgui.h"
 #include "TransformGui.h"
 
@@ -31,3 +32,4 @@ namespace Engine
         }
     }
 } // Engine
+#endif
