@@ -11,11 +11,19 @@ namespace Shaders
      */
     class ShaderBase
     {
-    protected:
+        friend class ShaderManager;
+
+    private:
         unsigned int Id;
 
     public:
-        virtual ~ShaderBase() = 0;
+        ShaderBase() = delete;
+
+    protected:
+        explicit ShaderBase(const unsigned int Id) :
+            Id(Id)
+        {
+        }
 
     public:
         [[nodiscard]] unsigned int GetId() const
@@ -179,12 +187,14 @@ namespace Shaders
             SetTexture(glGetUniformLocation(Id, Name), Value);
         }
 
+        GLint GetUniformLocation(const char* const Name) const
+        {
+            return glGetUniformLocation(Id, Name);
+        }
+
         void Delete()
         {
             glDeleteProgram(Id);
         }
-
-    protected:
-        static unsigned int CompileShader(const char* FilePath, GLenum Type);
     };
 } // Shaders

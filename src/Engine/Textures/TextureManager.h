@@ -15,18 +15,18 @@ namespace Engine
     class TextureManager final
     {
     private:
-        static std::unordered_map<std::string, uint32_t> Textures;
+        static std::unordered_map<std::string, Texture> Textures;
 
-    public:
-        virtual ~TextureManager() = 0;
+    private:
+        TextureManager() = default;
 
     public:
         /**
          * @brief Loads a texture from a file if not already loaded, otherwise retrieves an id of an already loaded texture.
          * @param Path Path to a texture file.
-         * @return
+         * @return A loaded texture.
          */
-        static uint32_t GetTexture(const char* Path);
+        static Texture GetTexture(const char* Path);
 
         /**
          * @brief Frees resources used by an existing texture.
@@ -37,10 +37,10 @@ namespace Engine
 
         /**
          * @brief Frees resources used by an existing texture.
-         * @param Id ID of a texture.
+         * @param Texture Texture to delete
          * @return True if a texture existed prior to a method call. False otherwise.
          */
-        static bool DeleteTexture(uint32_t Id);
+        static bool DeleteTexture(Texture Texture);
 
         /**
          * @brief Frees resources used by all textures.
@@ -56,16 +56,16 @@ namespace Engine
 
         /**
          * @brief Checks if a texture is loaded and ready to use.
-         * @param Id ID of a texture.
+         * @param Texture Texture to be checked.
          * @return True if a texture is loaded. False otherwise.
          */
-        static bool IsValid(uint32_t Id);
+        static bool IsValid(Texture Texture);
 
         /**
          * @brief Checks if a texture is loaded and ready to use.
-         * @param Id ID of a texture.
+         * @param Texture Texture to be found.
          * @return
          */
-        static std::string GetTexturePath(uint32_t Id);
+        static std::string GetTexturePath(Texture Texture);
     };
 } // Engine

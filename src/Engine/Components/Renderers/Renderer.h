@@ -13,7 +13,7 @@ namespace Engine
     public:
         ~Renderer() override;
 
-        void OnAdd(Entity* NewOwner) override;
+        void Start() override;
 
         /**
          * @brief Renders geometry's depth to a depth buffer. Used for a depth prepass.

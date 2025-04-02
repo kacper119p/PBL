@@ -1,7 +1,3 @@
-//
-// Created by Kacper on 26.01.2025.
-//
-
 #include "GizmoManager.h"
 #include "glm/gtc/type_ptr.hpp"
 

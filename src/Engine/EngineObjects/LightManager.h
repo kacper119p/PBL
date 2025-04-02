@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include "CameraRenderData.h"
 #include "Engine/Components/Lights/SpotLight.h"
+#include "Engine/Textures/Texture.h"
 
 
 namespace Engine
@@ -127,7 +128,7 @@ namespace Engine
             std::erase(SpotLights, LightToUnregister);
         }
 
-        void SetEnvironmentMap(unsigned int EnvironmentMap);
+        void SetEnvironmentMap(Texture EnvironmentMap);
 
         void RenderShadowMaps(const CameraRenderData& RenderData);
 

@@ -1,6 +1,9 @@
 #pragma once
 
+#include <iterator>
+#include <cstddef>
 #include <vector>
+
 
 #include "Engine/Components/Component.h"
 #include "Engine/Components/Transform.h"
@@ -8,41 +11,67 @@
 namespace Engine
 {
     class Component;
+    class Scene;
 
     /**
      * @brief Base class for all objects that exist in a scene.
      */
-    class Entity
+    class Entity final : public Serialization::SerializedObject
     {
     private:
         Transform Transform;
+        Scene* Scene = nullptr;
         std::vector<Component*> Components;
 
     public:
+        /**
+         * @brief Initializes a new Entity with default values.
+         */
         Entity() :
             Transform(Engine::Transform(this)), Components(std::vector<Component*>())
         {
         }
 
-        virtual ~Entity();
+        ~Entity() override;
 
     public:
         /**
          * @brief Returns transform of this entity.
          */
-        class Transform* GetTransform()
+        [[nodiscard]] class Transform* GetTransform()
         {
             return &Transform;
         }
 
         /**
-         * @brief Adds a new component to this entity.
-         * @param Component Component to be added.
+         * @brief Returns transform of this entity.
          */
-        void AddComponent(Component* Component)
+        [[nodiscard]] const class Transform* GetTransform() const
         {
-            Components.push_back(Component);
-            Component->OnAdd(this);
+            return &Transform;
+        }
+
+        /**
+         * @brief Returns scene this entity belongs to.
+         */
+        [[nodiscard]] class Scene* GetScene() const
+        {
+            return Scene;
+        }
+
+        /**
+         * @brief Adds a new component to this entity.
+         * @tparam T Component's class.
+         */
+        template<class T>
+        T* AddComponent()
+        {
+            static_assert(std::is_base_of_v<Component, T>, "T must derive from Component");
+            T* component = new T();
+            component->SetOwner(this);
+            Components.push_back(component);
+            component->Start();
+            return component;
         }
 
         /**
@@ -78,9 +107,33 @@ namespace Engine
                 if (Component* component = GetComponent<T>())
                 {
                     std::erase(Components, component);
+                    component->OnDestroy();
                     delete component;
                 }
             }
         }
+
+    public:
+        [[nodiscard]] std::vector<Component*>::iterator begin()
+        {
+            return Components.begin();
+        }
+
+        [[nodiscard]] std::vector<Component*>::iterator end()
+        {
+            return Components.end();
+        }
+
+        [[nodiscard]] std::vector<Component*>::const_iterator begin() const
+        {
+            return Components.begin();
+        }
+
+        [[nodiscard]] std::vector<Component*>::const_iterator end() const
+        {
+            return Components.end();
+        }
+
+        SERIALIZATION_EXPORT_CLASS(Entity);
     };
 }

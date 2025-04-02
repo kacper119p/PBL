@@ -1,29 +1,38 @@
 #pragma once
 
 #include "Material.h"
+#include "Engine/Textures/Texture.h"
 #include "Properties/MaterialProperty.h"
 
 namespace Materials
 {
-    class RefractiveMaterial : public Material
+    class RefractiveMaterial final : public Material
     {
     private:
-        unsigned int EnvironmentMap;
+        static Shaders::Shader DepthPass;
+        static Shaders::Shader MainPass;
+        static Shaders::Shader DirectionalShadowPass;
+        static Shaders::Shader PointSpotShadowPass;
+
+    private:
+        Engine::Texture EnvironmentMap;
         FloatMaterialProperty IndexOfRefraction;
 
     public:
-        RefractiveMaterial(const Shaders::Shader& DepthPass, const Shaders::Shader& Shader,
-                           const Shaders::Shader& DirectionalShadowPass,
-                           const Shaders::Shader& PointSpotShadowPass, unsigned int EnvironmentMap,
-                           float IndexOfRefraction);
+        RefractiveMaterial(Engine::Texture EnvironmentMap, float IndexOfRefraction);
+
+        RefractiveMaterial();
 
     public:
-        [[nodiscard]] unsigned int GetEnvironmentMap() const
+        static void Initialize();
+
+    public:
+        [[nodiscard]] Engine::Texture GetEnvironmentMap() const
         {
             return EnvironmentMap;
         }
 
-        void SetEnvironmentMap(unsigned int EnvironmentMap)
+        void SetEnvironmentMap(const Engine::Texture EnvironmentMap)
         {
             RefractiveMaterial::EnvironmentMap = EnvironmentMap;
         }
@@ -46,5 +55,7 @@ namespace Materials
         void UseDirectionalShadows() const override;
 
         void UsePointSpotShadows() const override;
+
+        SERIALIZATION_EXPORT_MATERIAL(RefractiveMaterial)
     };
 } // Models

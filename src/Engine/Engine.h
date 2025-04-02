@@ -1,10 +1,8 @@
 #pragma once
 
-#include "stdint.h"
 #include "imgui_impl/imgui_impl_glfw.h"
 #include "Engine/EngineObjects/Camera.h"
-#include "Engine/EngineObjects/Scene.h"
-#include "Materials/Material.h"
+#include "Engine/EngineObjects/Scene/Scene.h"
 #include "Models/Model.h"
 #include "Shaders/Shader.h"
 
@@ -12,7 +10,7 @@
 
 namespace Engine
 {
-    class Engine
+    class Engine final
     {
     public:
         constexpr static const char* const GlslVersion = "#version 460";
@@ -32,10 +30,6 @@ namespace Engine
         glm::vec2 LastMousePosition = glm::vec2(0, 0);
 
         Scene* Scene;
-        std::vector<unsigned int> Textures;
-        std::vector<Models::Model*> Models;
-        std::vector<Shaders::Shader> Shaders;
-        std::vector<Materials::Material*> Materials;
 
     public:
         Engine();

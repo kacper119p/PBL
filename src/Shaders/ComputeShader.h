@@ -7,16 +7,27 @@ namespace Shaders
     /**
      * @brief Compute shader.
      */
-    class ComputeShader : public ShaderBase
+    class ComputeShader final : public ShaderBase
     {
+        friend class ShaderManager;
+
     public:
-        explicit ComputeShader(const char* SourceFile);
+        ComputeShader() :
+            ShaderBase(0)
+        {
+        }
+
+    private:
+        explicit ComputeShader(const unsigned int ProgramID) :
+            ShaderBase(ProgramID)
+        {
+        }
 
     public:
         [[nodiscard]] glm::ivec3 GetWorkGroupSize() const
         {
             int localWorkGroupSize[3];
-            glGetProgramiv(Id, GL_COMPUTE_WORK_GROUP_SIZE, localWorkGroupSize);
+            glGetProgramiv(GetId(), GL_COMPUTE_WORK_GROUP_SIZE, localWorkGroupSize);
             return glm::ivec3(localWorkGroupSize[0], localWorkGroupSize[1], localWorkGroupSize[2]);
         }
 
@@ -28,6 +39,17 @@ namespace Shaders
         static void Dispatch()
         {
             glDispatchCompute(1, 1, 1);
+        }
+
+    public:
+        bool operator==(const ComputeShader Other) const
+        {
+            return Other.GetId() == this->GetId();
+        }
+
+        bool operator!=(const ComputeShader Other) const
+        {
+            return !(*this == Other);
         }
     };
 

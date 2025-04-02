@@ -1,12 +1,7 @@
-//
-// Created by Kacper on 10.10.2024.
-//
-
 #include "Engine/EngineObjects/Camera.h"
 #include "imgui.h"
 #include "imgui_impl/imgui_impl_glfw.h"
 #include "imgui_impl/imgui_impl_opengl3.h"
-#include "Shaders/ShaderException.h"
 #include <stdio.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h> // Include glfw3.h after our OpenGL definitions
@@ -19,9 +14,14 @@
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/EngineObjects/GizmoManager.h"
 #include "imgui_internal.h"
+#include "Materials/Material.h"
+#include "Materials/MaterialManager.h"
+#include "Models/ModelManager.h"
 #include "Utility/SystemUtilities.h"
 #include "Scene/SceneBuilder.h"
+#include "Shaders/ShaderManager.h"
 #include "Textures/TextureManager.h"
+#include "tracy/Tracy.hpp"
 
 namespace SceneBuilding = Scene;
 
@@ -54,11 +54,11 @@ namespace Engine
 
         try
         {
-            SceneBuilding::SceneBuilder::Build(Scene, Textures, Models, Shaders, Materials);
+            SceneBuilding::SceneBuilder::Build(Scene);
         } catch (std::runtime_error& e)
         {
             spdlog::error(e.what());
-            return EXIT_FAILURE;
+            throw;
         }
 
         spdlog::info("Successfully built scene.");
@@ -67,6 +67,7 @@ namespace Engine
         // Main loop
         while (!glfwWindowShouldClose(Window))
         {
+            ZoneScopedN("GameLoop");
             ++Frame;
             glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
             float currentFrame = glfwGetTime();
@@ -95,6 +96,7 @@ namespace Engine
 
             // End frame and swap buffers (double buffering)
             EndFrame();
+            FrameMark;
         }
 
         spdlog::info("Closing project.");
@@ -172,6 +174,7 @@ namespace Engine
         LightManager::Initialize();
         UpdateManager::Initialize();
         GizmoManager::Initialize();
+        Materials::MaterialManager::Initialize();
 
         Camera = new class Camera(glm::perspective(glm::radians(70.0f),
                                                    float(WindowWidth) / float(WindowHeight),
@@ -289,21 +292,9 @@ namespace Engine
     {
         delete Scene;
         TextureManager::DeleteAllTextures();
-
-        for (Models::Model* model : Models)
-        {
-            delete model;
-        }
-
-        for (Shaders::Shader shader : Shaders)
-        {
-            shader.Delete();
-        }
-
-        for (Materials::Material* material : Materials)
-        {
-            delete material;
-        }
+        Shaders::ShaderManager::FreeResources();
+        Models::ModelManager::DeleteAllModels();
+        Materials::MaterialManager::DeleteAllMaterials();
     }
 
     void Engine::GlfwErrorCallback(int Error, const char* Description)

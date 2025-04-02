@@ -1,14 +1,10 @@
 #include "ModelRenderer.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include "Engine/EngineObjects/CameraRenderData.h"
+#include "Serialization/SerializationUtility.h"
 
 namespace Engine
 {
-    ModelRenderer::ModelRenderer(Materials::Material* Material, Models::Model* Model) :
-        Material(Material), Model(Model)
-    {
-    }
-
     void ModelRenderer::RenderDepth(const CameraRenderData& RenderData)
     {
         Material->UseDepthPass();
@@ -73,5 +69,29 @@ namespace Engine
         {
             Model->GetMesh(i)->Draw();
         }
+    }
+
+    rapidjson::Value ModelRenderer::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+    {
+        START_COMPONENT_SERIALIZATION
+        SERIALIZE_FIELD(Material)
+        SERIALIZE_FIELD(Model)
+        END_COMPONENT_SERIALIZATION
+    }
+
+    void ModelRenderer::DeserializeValuePass(const rapidjson::Value& Object,
+                                             Serialization::ReferenceTable& ReferenceMap)
+    {
+        START_COMPONENT_DESERIALIZATION_VALUE_PASS
+        DESERIALIZE_VALUE(Material)
+        DESERIALIZE_VALUE(Model)
+        END_COMPONENT_DESERIALIZATION_VALUE_PASS
+    }
+
+    void ModelRenderer::DeserializeReferencesPass(const rapidjson::Value& Object,
+                                                  Serialization::ReferenceTable& ReferenceMap)
+    {
+        START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
+        END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 } // Engine

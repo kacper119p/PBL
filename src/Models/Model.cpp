@@ -9,6 +9,7 @@ namespace Models
 {
     Model::Model(const char* FilePath)
     {
+        Path = std::string(FilePath);
         Assimp::Importer importer = Assimp::Importer();
 
         const aiScene* scene = importer.ReadFile(FilePath,

@@ -12,14 +12,13 @@ namespace Engine
     class Rotator final : public Updateable
     {
     private:
-        glm::vec3 Velocity;
+        glm::vec3 Velocity = glm::vec3(0.0f);
 
     public:
         /**
-         * @brief Creates a new rotator.
-         * @param Velocity Rotation velocity around major axes in degrees per second.
+         * @brief Initializes Rotator with default values.
          */
-        explicit Rotator(const glm::vec3& Velocity);
+        Rotator() = default;
 
     public:
         ~Rotator() override = default;
@@ -44,6 +43,8 @@ namespace Engine
 
     public:
         void Update(float DeltaTime) override;
+
+        SERIALIZATION_EXPORT_CLASS(Rotator)
     };
 
 } // Engine

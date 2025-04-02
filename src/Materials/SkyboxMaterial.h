@@ -1,26 +1,36 @@
 #pragma once
 
 #include "Material.h"
+#include "Engine/Textures/Texture.h"
 
 namespace Materials
 {
-    class SkyboxMaterial : public Material
+    class SkyboxMaterial final : public Material
     {
     private:
-        unsigned int Texture;
+        static Shaders::Shader DepthPass;
+        static Shaders::Shader MainPass;
+        static Shaders::Shader DirectionalShadowPass;
+        static Shaders::Shader PointSpotShadowPass;
+
+    private:
+        Engine::Texture Texture;
 
     public:
-        SkyboxMaterial(const Shaders::Shader& DepthPass, const Shaders::Shader& Shader,
-                       const Shaders::Shader& DirectionalShadowPass, const Shaders::Shader& PointSpotShadowPass,
-                       unsigned int Texture);
+        explicit SkyboxMaterial(Engine::Texture Texture);
+
+        SkyboxMaterial();
 
     public:
-        [[nodiscard]] unsigned int GetTexture() const
+        static void Initialize();
+
+    public:
+        [[nodiscard]] Engine::Texture GetTexture() const
         {
             return Texture;
         }
 
-        void SetTexture(const unsigned int Texture)
+        void SetTexture(const Engine::Texture Texture)
         {
             SkyboxMaterial::Texture = Texture;
         }
@@ -33,6 +43,8 @@ namespace Materials
         void UseDirectionalShadows() const override;
 
         void UsePointSpotShadows() const override;
+
+        SERIALIZATION_EXPORT_MATERIAL(SkyboxMaterial);
     };
 
 } // Models

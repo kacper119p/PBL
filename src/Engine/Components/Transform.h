@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+
+#include "Serialization/SerializedObject.h"
 #include "glm/glm.hpp"
 
 namespace Engine
@@ -10,8 +12,10 @@ namespace Engine
     /**
      * @brief Position, rotation and scale of an entity.
      */
-    class Transform
+    class Transform final : public Serialization::SerializedObject
     {
+        friend class Entity;
+
     private:
         glm::vec3 Position = glm::vec3(0.0f, 0.0f, 0.0f);
         glm::vec3 EulerAngles = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -19,14 +23,19 @@ namespace Engine
 
         glm::mat4 LocalMatrix = glm::mat4(1.0f);
         glm::mat4 LocalToWorldMatrix = glm::mat4(1.0f);;
-        bool IsDirty = false;
+        bool IsDirty = true;
 
     private:
         Transform* Parent = nullptr;
-        Entity* Owner;
+        Entity* Owner = nullptr;
         std::vector<Transform*> Children = std::vector<Transform*>();
 
     public:
+        /**
+         * @brief Initializes Transform with default values.
+         */
+        Transform() = default;
+
         /**
          * @brief Creates a new transform representing an identity transformation.
          * @param Owner Owner of this transform.
@@ -37,7 +46,7 @@ namespace Engine
         }
 
     public:
-        virtual ~Transform();
+        ~Transform() override;
 
     public:
         /**
@@ -158,8 +167,37 @@ namespace Engine
         [[nodiscard]] const std::vector<Transform*>& GetChildren();
 
     private:
+        void SetOwner(Entity* const InOwner)
+        {
+            Owner = InOwner;
+        }
+
+    private:
         void MarkDirty();
 
         void UpdateMatrices();
+
+    public:
+        [[nodiscard]] std::vector<Transform*>::iterator begin()
+        {
+            return Children.begin();
+        }
+
+        [[nodiscard]] std::vector<Transform*>::iterator end()
+        {
+            return Children.end();
+        }
+
+        [[nodiscard]] std::vector<Transform*>::const_iterator begin() const
+        {
+            return Children.begin();
+        }
+
+        [[nodiscard]] std::vector<Transform*>::const_iterator end() const
+        {
+            return Children.end();
+        }
+
+        SERIALIZATION_EXPORT_CLASS(Transform)
     };
 }
