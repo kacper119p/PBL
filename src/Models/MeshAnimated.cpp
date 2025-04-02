@@ -37,8 +37,6 @@ namespace Models
         glEnableVertexAttribArray(3);
         glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, Tangent));
 
-        glBindVertexArray(0);
-
         // ids
         glEnableVertexAttribArray(5);
         glVertexAttribIPointer(5, 4, GL_INT, sizeof(Vertex), (void*) offsetof(Vertex, m_BoneIDs));
@@ -46,6 +44,8 @@ namespace Models
         // weights
         glEnableVertexAttribArray(6);
         glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, m_Weights));
+
+        glBindVertexArray(0);
     }
 
     void MeshAnimated::Draw() const
