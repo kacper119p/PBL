@@ -7,7 +7,7 @@
 #include "MeshAnimated.h"
 #include "assimp/scene.h"
 
-#define MAX_BONE_WEIGHTS = 4
+#define MAX_BONE_INFLUENCE = 4
 
 namespace Models
 {

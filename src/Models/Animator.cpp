@@ -6,10 +6,12 @@ namespace Models
         m_CurrentTime = 0.0;
         m_CurrentAnimation = Animation;
 
-        m_FinalBoneMatrices.reserve(100);
+        size_t boneCount = Animation->GetBoneIDMap().size();
+        m_FinalBoneMatrices.resize(boneCount, glm::mat4(1.0f));
 
-        for (int i = 0; i < 100; i++)
-            m_FinalBoneMatrices.push_back(glm::mat4(1.0f));
+
+        m_FinalBoneMatrices.assign(boneCount, glm::mat4(1.0f));
+
     }
     void Animator::UpdateAnimation(float dt)
     {
@@ -46,7 +48,7 @@ namespace Models
         {
             int index = boneInfoMap[nodeName].id;
             glm::mat4 offset = boneInfoMap[nodeName].offset;
-            m_FinalBoneMatrices[index] = globalTransformation * offset;
+            m_FinalBoneMatrices[index] = offset * globalTransformation;
         }
 
         for (int i = 0; i < node->childrenCount; i++)

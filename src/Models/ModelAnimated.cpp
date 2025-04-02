@@ -5,6 +5,7 @@
 #include "Vertex.h"
 #include "assimp/scene.h"
 #include "ModelAnimated.h"
+#include "Utility/AssimpGLMHelpers.h"
 
 namespace Models
 {
@@ -13,7 +14,7 @@ namespace Models
         Assimp::Importer importer = Assimp::Importer();
 
         scene =
-                importer.ReadFile(FilePath, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
+                importer.ReadFile(FilePath, aiProcess_Triangulate | aiProcess_GenNormals);
 
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
         {
@@ -49,13 +50,8 @@ namespace Models
         for (unsigned int i = 0; i < Mesh->mNumVertices; i++)
         {
             Models::Vertex vertex;
-
-            // Initialize bone weights to default
-            for (int i = 0; i < 4; i++)
-            {
-                vertex.m_BoneIDs[i] = -1;
-                vertex.m_Weights[i] = 0.0f;
-            }
+            SetVertexBoneDataToDefault(vertex);
+            
 
             vertex.Position = glm::vec3(Mesh->mVertices[i].x, Mesh->mVertices[i].y, Mesh->mVertices[i].z);
             vertex.Normal = glm::vec3(Mesh->mNormals[i].x, Mesh->mNormals[i].y, Mesh->mNormals[i].z);
@@ -112,22 +108,25 @@ namespace Models
 
     void ModelAnimated::ExtractBoneWeightForVertices(std::vector<Vertex>& vertices, aiMesh* mesh, const aiScene* scene)
     {
+        auto& boneInfoMap = m_BoneInfoMap;
+        int& boneCount = m_BoneCounter;
+
         for (int boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex)
         {
             int boneID = -1;
             std::string boneName = mesh->mBones[boneIndex]->mName.C_Str();
-            if (m_BoneInfoMap.find(boneName) == m_BoneInfoMap.end())
+            if (boneInfoMap.find(boneName) == boneInfoMap.end())
             {
                 BoneInfo newBoneInfo;
-                newBoneInfo.id = m_BoneCounter;
-                newBoneInfo.offset = ConvertMatrixToGLMFormat(mesh->mBones[boneIndex]->mOffsetMatrix);
-                m_BoneInfoMap[boneName] = newBoneInfo;
-                boneID = m_BoneCounter;
-                m_BoneCounter++;
+                newBoneInfo.id = boneCount;
+                newBoneInfo.offset = AssimpGLMHelpers::ConvertMatrixToGLMFormat(mesh->mBones[boneIndex]->mOffsetMatrix);
+                boneInfoMap[boneName] = newBoneInfo;
+                boneID = boneCount;
+                boneCount++;
             }
             else
             {
-                boneID = m_BoneInfoMap[boneName].id;
+                boneID = boneInfoMap[boneName].id;
             }
             assert(boneID != -1);
             auto weights = mesh->mBones[boneIndex]->mWeights;

@@ -22,22 +22,38 @@ uniform mat4 finalBonesMatrices[MAX_BONES];
 
 void main()
 {
-    //calculating position after applying bone's weight
-    vec4 totalPosition = vec4(0.0f);
+
+    float weightSum = 0.0;
+for (int i = 0; i < MAX_BONE_INFLUENCE; i++)
+{
+    if (boneIds[i] >= 0)
+        weightSum += weights[i];
+}
+
+vec4 totalPosition = vec4(0.0f);
+if (weightSum == 0.0) {
+    totalPosition = vec4(inputPosition, 1.0);  // Use original position if no bones influence
+}
+if (weightSum > 0.0)
+{
     for (int i = 0; i < MAX_BONE_INFLUENCE; i++)
     {
-        if (boneIds[i] == -1)
-        continue;
-        if (boneIds[i] >= MAX_BONES)
-        {
-            totalPosition = vec4(inputPosition, 1.0f);
-            break;
-        }
+        if (boneIds[i] == -1) continue;
+        if (boneIds[i] >= MAX_BONES) break;
+
+        float normalizedWeight = weights[i] / weightSum; // Normalize each weight
         vec4 localPosition = finalBonesMatrices[boneIds[i]] * vec4(inputPosition, 1.0f);
-        totalPosition += localPosition * weights[i];
+        totalPosition += localPosition * normalizedWeight;
     }
+}
+else
+{
+    totalPosition = vec4(inputPosition, 1.0f); // Fallback to original position
+}
+
 
     gl_Position = ProjectionMatrix * ViewMatrix * ObjectToWorldMatrix * totalPosition;
+
 
     Position = (ObjectToWorldMatrix * totalPosition).xyz;
     TexCoord = inputTexCoord;
