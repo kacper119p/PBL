@@ -1,3 +1,4 @@
+#if EDITOR
 #include "GizmoManager.h"
 #include "glm/gtc/type_ptr.hpp"
 
@@ -52,3 +53,4 @@ namespace Engine
         Managed->SetScale(glm::vec3(scale[0], scale[1], scale[2]));
     }
 } // Engine
+#endif

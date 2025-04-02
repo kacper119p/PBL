@@ -1,4 +1,5 @@
 #pragma once
+#if Editor
 
 #include "Engine/Components/Transform.h"
 
@@ -17,3 +18,4 @@ namespace Engine
     };
 
 } // Engine
+#endif
