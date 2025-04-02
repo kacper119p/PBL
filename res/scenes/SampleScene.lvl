@@ -2,11 +2,11 @@
     "Skybox": "./res/textures/Skyboxes/Skybox.hdr",
     "Root": {
         "type": "Entity",
-        "id": "{90946f60-934c-48a9-b7d6-9295ca5e5453}\u0000",
+        "id": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
         "transform": {
             "type": "Transform",
-            "id": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000",
-            "owner": "{90946f60-934c-48a9-b7d6-9295ca5e5453}\u0000",
+            "id": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000",
+            "owner": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
             "Position": {
                 "x": 0.0,
                 "y": 0.0,
@@ -23,34 +23,34 @@
                 "z": 1.0
             },
             "Children": [
-                "{6de32e46-3dff-4e71-a8f1-4462c81f638f}\u0000",
-                "{9aaaa867-baf0-4976-ad9c-cd6aa7e7e4fb}\u0000",
-                "{100995d7-1d9d-46d6-8982-85a6a50a8431}\u0000",
-                "{02d20da0-1faa-493f-b988-c2cd64941bb2}\u0000",
-                "{9a884c8a-145d-4249-b246-71c900f12e9b}\u0000",
-                "{a3bcfd6f-8282-48b0-9972-1d219ed6a2c8}\u0000",
-                "{612ced81-f3e3-427b-b833-053fb86f4c02}\u0000",
-                "{807f4ac9-5a75-47d8-a169-c03d29710d1b}\u0000",
-                "{8f4a259a-75ca-4ad8-925e-35791f716ef0}\u0000",
-                "{892344a9-cc1f-4a9c-87c6-417e537fe912}\u0000",
-                "{eeb16ceb-f3fe-4dc5-a105-244004356770}\u0000",
-                "{5b433dd1-b8a2-4115-a8a0-0c310b941fd0}\u0000",
-                "{9ada7d8e-48e0-4e60-b282-31bc4c2acf2f}\u0000",
-                "{134ece22-1fa4-4707-bf46-5d0abf9f19ff}\u0000",
-                "{45baeaf5-d70c-4f82-8c59-ee4139806f16}\u0000",
-                "{51b18057-f3d9-4a03-b7bc-f562971a1552}\u0000",
-                "{fc213baa-a348-418a-9aad-04ce76f8001b}\u0000",
-                "{f2578146-0b97-428c-8136-f7e4cf280df1}\u0000",
-                "{005f1b9e-74ed-47ad-8424-2e4bec727542}\u0000",
-                "{33ba1e51-6b67-42c4-9369-2049e40eddf7}\u0000",
-                "{d68e2c11-14a8-4697-88cc-b2e9fa664462}\u0000",
-                "{54891b8e-d987-41b8-9266-fe326cd8ac2d}\u0000",
-                "{da2177f7-676e-4397-98ec-1bce8fef399f}\u0000",
-                "{bc728122-fa6a-45ee-944d-7e7e0f1c194a}\u0000",
-                "{a3b35ed8-f97f-431f-9efb-56bfe577203a}\u0000",
-                "{2b168af2-3741-4628-b054-0c65ae55ed80}\u0000",
-                "{98c779ef-26b2-4dc1-99f9-30f2ef3fd8b7}\u0000",
-                "{fa71b1f8-ce77-4365-b62c-efebbfed1d0f}\u0000"
+                "{ea7592d3-07eb-4a85-b4f0-794ae9c87da2}\u0000",
+                "{3fdfbd7f-54c9-4ba1-9043-54dcb04a61ca}\u0000",
+                "{fd65822d-f06d-4fec-afd1-88f26d358c85}\u0000",
+                "{b501bc21-ea81-45a9-86ba-a2e0ac862263}\u0000",
+                "{7ad2e286-11e9-4ff6-8184-0f2567255215}\u0000",
+                "{a8c4a254-44a1-46fd-aa79-eb6df07e73f5}\u0000",
+                "{78534d6e-564c-422b-87b5-377ec7392739}\u0000",
+                "{28912038-0572-4d45-8ad8-7d57113f405f}\u0000",
+                "{4e7c93b5-f5d3-4186-a04e-42208e0ad501}\u0000",
+                "{8fec0507-3ddd-4711-95ea-092022b03073}\u0000",
+                "{643f1a09-469d-474b-9c4e-2c7a29f9fb7e}\u0000",
+                "{53371b2b-bbe9-402a-a7cc-6dcf1f89522a}\u0000",
+                "{68e2367d-b35c-46e5-8a8d-98484bfbb0ef}\u0000",
+                "{18556b41-4074-4396-a7ce-602b58570837}\u0000",
+                "{e38e4a57-3eb9-4959-9cf3-c600f39125e0}\u0000",
+                "{0d80d703-aa0e-47a9-987a-c9eb1ab9cef9}\u0000",
+                "{a5810354-3ed2-4191-971e-e6bff62c9096}\u0000",
+                "{43d13416-fec4-4b78-927a-dde73ac9cd87}\u0000",
+                "{5a9e1c2f-19f8-44bf-9347-e2002f25175b}\u0000",
+                "{0e6b9f63-08ff-4679-92a1-9ee6ff3dbcfd}\u0000",
+                "{0bf14636-5cbf-4761-baf9-8f1a582bb8e8}\u0000",
+                "{d7485720-1a60-4bf5-87ee-859a1eb44a5d}\u0000",
+                "{46fa191b-835a-458d-b38a-d8f5b609113c}\u0000",
+                "{96f8c2cd-7c4c-4ee8-860d-2554d5e99fc3}\u0000",
+                "{511aa219-f2a0-45c9-b394-af6e04a75258}\u0000",
+                "{a9c8d8b0-9f69-4c3e-bf05-8daf3cbff3d0}\u0000",
+                "{731f4770-5ff9-4ab1-b4a2-ca9b8be74712}\u0000",
+                "{7dbe5512-7971-484b-990d-7efc28d5fd1f}\u0000"
             ],
             "Parent": null
         },
@@ -59,11 +59,11 @@
     "Objects": [
         {
             "type": "Entity",
-            "id": "{08614d63-ad5e-4add-8aa1-824a6ef5ac02}\u0000",
+            "id": "{fb206b5b-6c7f-40b0-859f-402cc2d3acdd}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{6de32e46-3dff-4e71-a8f1-4462c81f638f}\u0000",
-                "owner": "{08614d63-ad5e-4add-8aa1-824a6ef5ac02}\u0000",
+                "id": "{ea7592d3-07eb-4a85-b4f0-794ae9c87da2}\u0000",
+                "owner": "{fb206b5b-6c7f-40b0-859f-402cc2d3acdd}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -80,24 +80,24 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{cefa8b4b-bafc-4539-8287-a4a0d733a700}\u0000",
-                "{211756e2-cc79-4b2f-90e7-d2d1164328a6}\u0000"
+                "{7653609a-eeef-4977-a010-2fe934d8dc67}\u0000",
+                "{3c521437-4e9a-4750-80f7-22b58b09938b}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{cefa8b4b-bafc-4539-8287-a4a0d733a700}\u0000",
-            "owner": "{08614d63-ad5e-4add-8aa1-824a6ef5ac02}\u0000",
+            "id": "{7653609a-eeef-4977-a010-2fe934d8dc67}\u0000",
+            "owner": "{fb206b5b-6c7f-40b0-859f-402cc2d3acdd}\u0000",
             "Material": "./res/materials/SampleScene/Submarine.mat",
             "Model": "./res/models/Submarine.fbx"
         },
         {
             "type": "ShipRoller",
-            "id": "{211756e2-cc79-4b2f-90e7-d2d1164328a6}\u0000",
-            "owner": "{08614d63-ad5e-4add-8aa1-824a6ef5ac02}\u0000",
+            "id": "{3c521437-4e9a-4750-80f7-22b58b09938b}\u0000",
+            "owner": "{fb206b5b-6c7f-40b0-859f-402cc2d3acdd}\u0000",
             "Velocity": {
                 "x": 0.20000000298023224,
                 "y": 0.10000000149011612,
@@ -111,11 +111,11 @@
         },
         {
             "type": "Entity",
-            "id": "{29003296-b7de-4088-8b5e-1b5b69cf955e}\u0000",
+            "id": "{20b41bd5-c360-4d6d-b819-8188f1f5ca69}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{9aaaa867-baf0-4976-ad9c-cd6aa7e7e4fb}\u0000",
-                "owner": "{29003296-b7de-4088-8b5e-1b5b69cf955e}\u0000",
+                "id": "{3fdfbd7f-54c9-4ba1-9043-54dcb04a61ca}\u0000",
+                "owner": "{20b41bd5-c360-4d6d-b819-8188f1f5ca69}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -132,26 +132,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{95da4df0-f77a-4ba2-a646-fab8a9d87278}\u0000"
+                "{9f6d7611-428a-4e31-8910-ec50d1a48ae3}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{95da4df0-f77a-4ba2-a646-fab8a9d87278}\u0000",
-            "owner": "{29003296-b7de-4088-8b5e-1b5b69cf955e}\u0000",
+            "id": "{9f6d7611-428a-4e31-8910-ec50d1a48ae3}\u0000",
+            "owner": "{20b41bd5-c360-4d6d-b819-8188f1f5ca69}\u0000",
             "Material": "./res/materials/SampleScene/Water.mat",
             "Model": "./res/models/Water.fbx"
         },
         {
             "type": "Entity",
-            "id": "{60239836-8150-4422-9a09-ceea630f3799}\u0000",
+            "id": "{1cf6c987-d0c7-4e3e-8b1f-224002414adb}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{100995d7-1d9d-46d6-8982-85a6a50a8431}\u0000",
-                "owner": "{60239836-8150-4422-9a09-ceea630f3799}\u0000",
+                "id": "{fd65822d-f06d-4fec-afd1-88f26d358c85}\u0000",
+                "owner": "{1cf6c987-d0c7-4e3e-8b1f-224002414adb}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -168,26 +168,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{82dee177-6b60-4d37-94c1-ec521ba1bbe6}\u0000"
+                "{24708c81-a073-4038-9bbe-d67ee049acf4}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{82dee177-6b60-4d37-94c1-ec521ba1bbe6}\u0000",
-            "owner": "{60239836-8150-4422-9a09-ceea630f3799}\u0000",
+            "id": "{24708c81-a073-4038-9bbe-d67ee049acf4}\u0000",
+            "owner": "{1cf6c987-d0c7-4e3e-8b1f-224002414adb}\u0000",
             "Material": "./res/materials/SampleScene/Floor.mat",
             "Model": "./res/models/Floor.fbx"
         },
         {
             "type": "Entity",
-            "id": "{34d1e6c8-83b0-4c73-852d-1c60bb80f687}\u0000",
+            "id": "{4975259a-f1c2-43e2-853e-dd44294184ee}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{02d20da0-1faa-493f-b988-c2cd64941bb2}\u0000",
-                "owner": "{34d1e6c8-83b0-4c73-852d-1c60bb80f687}\u0000",
+                "id": "{b501bc21-ea81-45a9-86ba-a2e0ac862263}\u0000",
+                "owner": "{4975259a-f1c2-43e2-853e-dd44294184ee}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -204,26 +204,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{f40b4fe6-c620-4601-8a3d-ca7beb349b83}\u0000"
+                "{7f29b3fe-c2ed-4339-8238-150fd75f9307}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{f40b4fe6-c620-4601-8a3d-ca7beb349b83}\u0000",
-            "owner": "{34d1e6c8-83b0-4c73-852d-1c60bb80f687}\u0000",
+            "id": "{7f29b3fe-c2ed-4339-8238-150fd75f9307}\u0000",
+            "owner": "{4975259a-f1c2-43e2-853e-dd44294184ee}\u0000",
             "Material": "./res/materials/SampleScene/Walls.mat",
             "Model": "./res/models/Walls.fbx"
         },
         {
             "type": "Entity",
-            "id": "{ab5b9553-3f8f-43f8-aea9-8928453d229b}\u0000",
+            "id": "{3a618be7-16df-4a25-8923-2747b239c0ed}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{9a884c8a-145d-4249-b246-71c900f12e9b}\u0000",
-                "owner": "{ab5b9553-3f8f-43f8-aea9-8928453d229b}\u0000",
+                "id": "{7ad2e286-11e9-4ff6-8184-0f2567255215}\u0000",
+                "owner": "{3a618be7-16df-4a25-8923-2747b239c0ed}\u0000",
                 "Position": {
                     "x": -13.569999694824219,
                     "y": 2.2007999420166016,
@@ -240,26 +240,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{ab0220e6-2f20-4e23-a7bc-52739cef60a3}\u0000"
+                "{5124a1a6-95da-416f-8551-744d2fd065a4}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{ab0220e6-2f20-4e23-a7bc-52739cef60a3}\u0000",
-            "owner": "{ab5b9553-3f8f-43f8-aea9-8928453d229b}\u0000",
+            "id": "{5124a1a6-95da-416f-8551-744d2fd065a4}\u0000",
+            "owner": "{3a618be7-16df-4a25-8923-2747b239c0ed}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
             "Model": "./res/models/Box.fbx"
         },
         {
             "type": "Entity",
-            "id": "{8a32606f-fd70-4dee-b51e-b7107c3f7734}\u0000",
+            "id": "{5f877847-f0c8-4c47-91c5-2fa383b38763}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{a3bcfd6f-8282-48b0-9972-1d219ed6a2c8}\u0000",
-                "owner": "{8a32606f-fd70-4dee-b51e-b7107c3f7734}\u0000",
+                "id": "{a8c4a254-44a1-46fd-aa79-eb6df07e73f5}\u0000",
+                "owner": "{5f877847-f0c8-4c47-91c5-2fa383b38763}\u0000",
                 "Position": {
                     "x": -13.626399993896484,
                     "y": 2.1866800785064697,
@@ -276,26 +276,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{1c468e6b-89ef-4826-a1d2-283a0b7f70b8}\u0000"
+                "{a9836800-98cf-4ea8-9dec-d5aff029be2c}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{1c468e6b-89ef-4826-a1d2-283a0b7f70b8}\u0000",
-            "owner": "{8a32606f-fd70-4dee-b51e-b7107c3f7734}\u0000",
+            "id": "{a9836800-98cf-4ea8-9dec-d5aff029be2c}\u0000",
+            "owner": "{5f877847-f0c8-4c47-91c5-2fa383b38763}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
             "Model": "./res/models/Box.fbx"
         },
         {
             "type": "Entity",
-            "id": "{cdd6d24c-0da2-4618-8f70-cdf9e2ab8a6e}\u0000",
+            "id": "{eba34860-7551-48cb-9d7d-87ffcddff42b}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{612ced81-f3e3-427b-b833-053fb86f4c02}\u0000",
-                "owner": "{cdd6d24c-0da2-4618-8f70-cdf9e2ab8a6e}\u0000",
+                "id": "{78534d6e-564c-422b-87b5-377ec7392739}\u0000",
+                "owner": "{eba34860-7551-48cb-9d7d-87ffcddff42b}\u0000",
                 "Position": {
                     "x": 13.218700408935547,
                     "y": 2.2010200023651123,
@@ -312,26 +312,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{3809611a-dcdf-4d37-98b2-30ed9cc97b35}\u0000"
+                "{a2e699ca-4518-43a3-b60f-f7c35ee8bdb0}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{3809611a-dcdf-4d37-98b2-30ed9cc97b35}\u0000",
-            "owner": "{cdd6d24c-0da2-4618-8f70-cdf9e2ab8a6e}\u0000",
+            "id": "{a2e699ca-4518-43a3-b60f-f7c35ee8bdb0}\u0000",
+            "owner": "{eba34860-7551-48cb-9d7d-87ffcddff42b}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
             "Model": "./res/models/Box.fbx"
         },
         {
             "type": "Entity",
-            "id": "{ed965101-132f-4941-b8c6-b2b8a787c054}\u0000",
+            "id": "{0084b5eb-5e59-46d1-8b5e-ed501b661c62}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{807f4ac9-5a75-47d8-a169-c03d29710d1b}\u0000",
-                "owner": "{ed965101-132f-4941-b8c6-b2b8a787c054}\u0000",
+                "id": "{28912038-0572-4d45-8ad8-7d57113f405f}\u0000",
+                "owner": "{0084b5eb-5e59-46d1-8b5e-ed501b661c62}\u0000",
                 "Position": {
                     "x": 13.642499923706055,
                     "y": 2.180459976196289,
@@ -348,26 +348,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{c42fbdd2-baa3-4140-ba48-5bea73a16005}\u0000"
+                "{4d11e599-b071-44e1-a6ef-b64e9a26c70f}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{c42fbdd2-baa3-4140-ba48-5bea73a16005}\u0000",
-            "owner": "{ed965101-132f-4941-b8c6-b2b8a787c054}\u0000",
+            "id": "{4d11e599-b071-44e1-a6ef-b64e9a26c70f}\u0000",
+            "owner": "{0084b5eb-5e59-46d1-8b5e-ed501b661c62}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
             "Model": "./res/models/Box.fbx"
         },
         {
             "type": "Entity",
-            "id": "{e8430bf3-5d7b-4943-99df-58a731d43a3a}\u0000",
+            "id": "{96e0bdf5-7b11-4b64-b632-bd9966ca2473}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{8f4a259a-75ca-4ad8-925e-35791f716ef0}\u0000",
-                "owner": "{e8430bf3-5d7b-4943-99df-58a731d43a3a}\u0000",
+                "id": "{4e7c93b5-f5d3-4186-a04e-42208e0ad501}\u0000",
+                "owner": "{96e0bdf5-7b11-4b64-b632-bd9966ca2473}\u0000",
                 "Position": {
                     "x": 11.315799713134766,
                     "y": 2.2010200023651123,
@@ -384,26 +384,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{999ee9bd-6cd2-491a-9081-1179ae8fbd8d}\u0000"
+                "{01325c46-bfd4-48c2-9aa5-5163147f46c9}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{999ee9bd-6cd2-491a-9081-1179ae8fbd8d}\u0000",
-            "owner": "{e8430bf3-5d7b-4943-99df-58a731d43a3a}\u0000",
+            "id": "{01325c46-bfd4-48c2-9aa5-5163147f46c9}\u0000",
+            "owner": "{96e0bdf5-7b11-4b64-b632-bd9966ca2473}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
             "Model": "./res/models/Box.fbx"
         },
         {
             "type": "Entity",
-            "id": "{97c9ecf6-b5df-481a-9d85-84e57518fe2a}\u0000",
+            "id": "{e0d0df36-9fd4-4421-bfbb-a377ca582523}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{892344a9-cc1f-4a9c-87c6-417e537fe912}\u0000",
-                "owner": "{97c9ecf6-b5df-481a-9d85-84e57518fe2a}\u0000",
+                "id": "{8fec0507-3ddd-4711-95ea-092022b03073}\u0000",
+                "owner": "{e0d0df36-9fd4-4421-bfbb-a377ca582523}\u0000",
                 "Position": {
                     "x": 12.62600040435791,
                     "y": 4.2010297775268555,
@@ -420,26 +420,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{b6b7932c-bbee-413d-aad6-80eb6d7a5785}\u0000"
+                "{9b46435e-5927-40fe-af91-fec15850f71b}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{b6b7932c-bbee-413d-aad6-80eb6d7a5785}\u0000",
-            "owner": "{97c9ecf6-b5df-481a-9d85-84e57518fe2a}\u0000",
+            "id": "{9b46435e-5927-40fe-af91-fec15850f71b}\u0000",
+            "owner": "{e0d0df36-9fd4-4421-bfbb-a377ca582523}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
             "Model": "./res/models/Box.fbx"
         },
         {
             "type": "Entity",
-            "id": "{41b62c4a-fbdf-46d0-8f50-c5d883f031af}\u0000",
+            "id": "{2aa4c905-3672-4bbf-ae63-928418e916c0}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{eeb16ceb-f3fe-4dc5-a105-244004356770}\u0000",
-                "owner": "{41b62c4a-fbdf-46d0-8f50-c5d883f031af}\u0000",
+                "id": "{643f1a09-469d-474b-9c4e-2c7a29f9fb7e}\u0000",
+                "owner": "{2aa4c905-3672-4bbf-ae63-928418e916c0}\u0000",
                 "Position": {
                     "x": 18.697200775146484,
                     "y": 2.180389881134033,
@@ -456,26 +456,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{0ef9e7a1-570d-4e22-93e3-4d58f8043d10}\u0000"
+                "{f3fc6a8e-d80d-4b3f-b72e-a900feeba85e}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{0ef9e7a1-570d-4e22-93e3-4d58f8043d10}\u0000",
-            "owner": "{41b62c4a-fbdf-46d0-8f50-c5d883f031af}\u0000",
+            "id": "{f3fc6a8e-d80d-4b3f-b72e-a900feeba85e}\u0000",
+            "owner": "{2aa4c905-3672-4bbf-ae63-928418e916c0}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
             "Model": "./res/models/Box.fbx"
         },
         {
             "type": "Entity",
-            "id": "{c2e2988f-4cd1-4481-97bd-3feffcabe304}\u0000",
+            "id": "{f8bc2f2f-ddde-4de2-8ab6-aa387da31236}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{5b433dd1-b8a2-4115-a8a0-0c310b941fd0}\u0000",
-                "owner": "{c2e2988f-4cd1-4481-97bd-3feffcabe304}\u0000",
+                "id": "{53371b2b-bbe9-402a-a7cc-6dcf1f89522a}\u0000",
+                "owner": "{f8bc2f2f-ddde-4de2-8ab6-aa387da31236}\u0000",
                 "Position": {
                     "x": 16.684900283813477,
                     "y": 2.180389881134033,
@@ -492,26 +492,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{6f99474d-9022-43de-b353-048a32c4338b}\u0000"
+                "{8c51f0b9-7aea-4bc1-af48-fe0cee857d2e}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{6f99474d-9022-43de-b353-048a32c4338b}\u0000",
-            "owner": "{c2e2988f-4cd1-4481-97bd-3feffcabe304}\u0000",
+            "id": "{8c51f0b9-7aea-4bc1-af48-fe0cee857d2e}\u0000",
+            "owner": "{f8bc2f2f-ddde-4de2-8ab6-aa387da31236}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
             "Model": "./res/models/Box.fbx"
         },
         {
             "type": "Entity",
-            "id": "{d786e4b7-2021-4dc6-920c-5319cbf4d260}\u0000",
+            "id": "{12d3eb4e-1d6e-4d90-95dc-cbc17f0307fd}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{9ada7d8e-48e0-4e60-b282-31bc4c2acf2f}\u0000",
-                "owner": "{d786e4b7-2021-4dc6-920c-5319cbf4d260}\u0000",
+                "id": "{68e2367d-b35c-46e5-8a8d-98484bfbb0ef}\u0000",
+                "owner": "{12d3eb4e-1d6e-4d90-95dc-cbc17f0307fd}\u0000",
                 "Position": {
                     "x": -5.39749002456665,
                     "y": 1.2595000267028809,
@@ -528,28 +528,28 @@
                     "z": 1.0
                 },
                 "Children": [
-                    "{6d663187-c159-4841-ba85-9341fa0056b2}\u0000"
+                    "{88c779e6-d611-4b38-b58b-53cdbea02cfa}\u0000"
                 ],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{5cb6c535-486b-4c5b-8f79-ac65189424ee}\u0000"
+                "{cfaa8dee-3f57-4eb2-bf98-5935db739c5e}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{5cb6c535-486b-4c5b-8f79-ac65189424ee}\u0000",
-            "owner": "{d786e4b7-2021-4dc6-920c-5319cbf4d260}\u0000",
+            "id": "{cfaa8dee-3f57-4eb2-bf98-5935db739c5e}\u0000",
+            "owner": "{12d3eb4e-1d6e-4d90-95dc-cbc17f0307fd}\u0000",
             "Material": "./res/materials/SampleScene/FanBase.mat",
             "Model": "./res/models/Fan/Base.fbx"
         },
         {
             "type": "Entity",
-            "id": "{2106b7e9-7538-45e5-bd14-12ef6187f5bf}\u0000",
+            "id": "{0d7bfa19-9b97-4eb3-8be7-de7195bf27da}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{6d663187-c159-4841-ba85-9341fa0056b2}\u0000",
-                "owner": "{2106b7e9-7538-45e5-bd14-12ef6187f5bf}\u0000",
+                "id": "{88c779e6-d611-4b38-b58b-53cdbea02cfa}\u0000",
+                "owner": "{0d7bfa19-9b97-4eb3-8be7-de7195bf27da}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 1.5863200426101685,
@@ -566,26 +566,26 @@
                     "z": 1.0
                 },
                 "Children": [
-                    "{c2e61571-a7d8-4461-834c-a027564ec056}\u0000"
+                    "{d10aec6d-d407-4f3c-82aa-a29c106e820c}\u0000"
                 ],
-                "Parent": "{9ada7d8e-48e0-4e60-b282-31bc4c2acf2f}\u0000"
+                "Parent": "{68e2367d-b35c-46e5-8a8d-98484bfbb0ef}\u0000"
             },
             "components": [
-                "{a0acbc5d-1b4d-45f1-98db-ec8902ee8351}\u0000",
-                "{bf0bc7ad-7ebb-4f17-aa7b-944601953c1c}\u0000"
+                "{b655f4be-c539-450b-9b56-53d9f50b6581}\u0000",
+                "{1bee7c7d-7006-4d51-b80c-a4fb96b09915}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{a0acbc5d-1b4d-45f1-98db-ec8902ee8351}\u0000",
-            "owner": "{2106b7e9-7538-45e5-bd14-12ef6187f5bf}\u0000",
+            "id": "{b655f4be-c539-450b-9b56-53d9f50b6581}\u0000",
+            "owner": "{0d7bfa19-9b97-4eb3-8be7-de7195bf27da}\u0000",
             "Material": "./res/materials/SampleScene/FanMotor.mat",
             "Model": "./res/models/Fan/Motor.fbx"
         },
         {
             "type": "ShipRoller",
-            "id": "{bf0bc7ad-7ebb-4f17-aa7b-944601953c1c}\u0000",
-            "owner": "{2106b7e9-7538-45e5-bd14-12ef6187f5bf}\u0000",
+            "id": "{1bee7c7d-7006-4d51-b80c-a4fb96b09915}\u0000",
+            "owner": "{0d7bfa19-9b97-4eb3-8be7-de7195bf27da}\u0000",
             "Velocity": {
                 "x": 0.0,
                 "y": 0.625,
@@ -599,11 +599,11 @@
         },
         {
             "type": "Entity",
-            "id": "{88534c9b-b8c9-4648-88db-fc34c9228fd5}\u0000",
+            "id": "{ff4c8058-8406-4f55-aa85-19f8ee337a91}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{c2e61571-a7d8-4461-834c-a027564ec056}\u0000",
-                "owner": "{88534c9b-b8c9-4648-88db-fc34c9228fd5}\u0000",
+                "id": "{d10aec6d-d407-4f3c-82aa-a29c106e820c}\u0000",
+                "owner": "{ff4c8058-8406-4f55-aa85-19f8ee337a91}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -620,24 +620,24 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{6d663187-c159-4841-ba85-9341fa0056b2}\u0000"
+                "Parent": "{88c779e6-d611-4b38-b58b-53cdbea02cfa}\u0000"
             },
             "components": [
-                "{abede0cb-e60d-4a45-a30a-c1f47ba1c41d}\u0000",
-                "{aea7ff51-4797-4ce1-9be2-7f0d9a8c94c5}\u0000"
+                "{dfb13da4-b024-4d16-8abd-25c22e3e23a7}\u0000",
+                "{eda95d65-7f7a-4f18-92f1-7eb7256462cc}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{abede0cb-e60d-4a45-a30a-c1f47ba1c41d}\u0000",
-            "owner": "{88534c9b-b8c9-4648-88db-fc34c9228fd5}\u0000",
+            "id": "{dfb13da4-b024-4d16-8abd-25c22e3e23a7}\u0000",
+            "owner": "{ff4c8058-8406-4f55-aa85-19f8ee337a91}\u0000",
             "Material": "./res/materials/SampleScene/FanBlades.mat",
             "Model": "./res/models/Fan/Blades.fbx"
         },
         {
             "type": "Rotator",
-            "id": "{aea7ff51-4797-4ce1-9be2-7f0d9a8c94c5}\u0000",
-            "owner": "{88534c9b-b8c9-4648-88db-fc34c9228fd5}\u0000",
+            "id": "{eda95d65-7f7a-4f18-92f1-7eb7256462cc}\u0000",
+            "owner": "{ff4c8058-8406-4f55-aa85-19f8ee337a91}\u0000",
             "Velocity": {
                 "x": 0.0,
                 "y": 0.0,
@@ -646,11 +646,11 @@
         },
         {
             "type": "Entity",
-            "id": "{2457c122-cb06-4eb0-b73b-12a08acd346e}\u0000",
+            "id": "{80495222-64d3-4bb2-b725-f17e2afefc20}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{134ece22-1fa4-4707-bf46-5d0abf9f19ff}\u0000",
-                "owner": "{2457c122-cb06-4eb0-b73b-12a08acd346e}\u0000",
+                "id": "{18556b41-4074-4396-a7ce-602b58570837}\u0000",
+                "owner": "{80495222-64d3-4bb2-b725-f17e2afefc20}\u0000",
                 "Position": {
                     "x": -8.197990417480469,
                     "y": 1.6561100482940674,
@@ -667,26 +667,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{2f53500a-1459-4621-9f8c-23769dfc1f19}\u0000"
+                "{4dddf18d-fcd1-469d-aca6-df9f06d21fdb}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{2f53500a-1459-4621-9f8c-23769dfc1f19}\u0000",
-            "owner": "{2457c122-cb06-4eb0-b73b-12a08acd346e}\u0000",
+            "id": "{4dddf18d-fcd1-469d-aca6-df9f06d21fdb}\u0000",
+            "owner": "{80495222-64d3-4bb2-b725-f17e2afefc20}\u0000",
             "Material": "./res/materials/SampleScene/Table.mat",
             "Model": "./res/models/Table.fbx"
         },
         {
             "type": "Entity",
-            "id": "{fedb29cd-598f-4382-8544-2b35605e0b69}\u0000",
+            "id": "{70553072-fbc7-4404-a539-42ea4ca9d050}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{45baeaf5-d70c-4f82-8c59-ee4139806f16}\u0000",
-                "owner": "{fedb29cd-598f-4382-8544-2b35605e0b69}\u0000",
+                "id": "{e38e4a57-3eb9-4959-9cf3-c600f39125e0}\u0000",
+                "owner": "{70553072-fbc7-4404-a539-42ea4ca9d050}\u0000",
                 "Position": {
                     "x": 30.07069969177246,
                     "y": 1.6561100482940674,
@@ -703,26 +703,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{9b255861-0c56-40d8-a9a1-fa6fc2aea75a}\u0000"
+                "{47e98238-00cc-489f-9102-e0adb34f3fb3}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{9b255861-0c56-40d8-a9a1-fa6fc2aea75a}\u0000",
-            "owner": "{fedb29cd-598f-4382-8544-2b35605e0b69}\u0000",
+            "id": "{47e98238-00cc-489f-9102-e0adb34f3fb3}\u0000",
+            "owner": "{70553072-fbc7-4404-a539-42ea4ca9d050}\u0000",
             "Material": "./res/materials/SampleScene/Table.mat",
             "Model": "./res/models/Table.fbx"
         },
         {
             "type": "Entity",
-            "id": "{bfe9d1d6-a8b9-4cae-965d-465e3f76a50b}\u0000",
+            "id": "{734bd41f-5a34-43c2-b46e-c9a9bdcb6560}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{51b18057-f3d9-4a03-b7bc-f562971a1552}\u0000",
-                "owner": "{bfe9d1d6-a8b9-4cae-965d-465e3f76a50b}\u0000",
+                "id": "{0d80d703-aa0e-47a9-987a-c9eb1ab9cef9}\u0000",
+                "owner": "{734bd41f-5a34-43c2-b46e-c9a9bdcb6560}\u0000",
                 "Position": {
                     "x": 29.9153995513916,
                     "y": 2.2035601139068604,
@@ -739,26 +739,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{914eabdd-ff1f-40d8-b4d6-9a321de442ad}\u0000"
+                "{550ad88a-3b4b-461f-ad35-f14954e6f369}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{914eabdd-ff1f-40d8-b4d6-9a321de442ad}\u0000",
-            "owner": "{bfe9d1d6-a8b9-4cae-965d-465e3f76a50b}\u0000",
+            "id": "{550ad88a-3b4b-461f-ad35-f14954e6f369}\u0000",
+            "owner": "{734bd41f-5a34-43c2-b46e-c9a9bdcb6560}\u0000",
             "Material": "./res/materials/SampleScene/ReflectiveBottle.mat",
             "Model": "./res/models/Bottle.fbx"
         },
         {
             "type": "Entity",
-            "id": "{e85f59d9-c7ac-41eb-bf9f-83f693851540}\u0000",
+            "id": "{108f15bc-e4ef-468e-ba0a-d9db9c761b77}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{fc213baa-a348-418a-9aad-04ce76f8001b}\u0000",
-                "owner": "{e85f59d9-c7ac-41eb-bf9f-83f693851540}\u0000",
+                "id": "{a5810354-3ed2-4191-971e-e6bff62c9096}\u0000",
+                "owner": "{108f15bc-e4ef-468e-ba0a-d9db9c761b77}\u0000",
                 "Position": {
                     "x": 30.123699188232422,
                     "y": 2.2035601139068604,
@@ -775,26 +775,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{44a6b9d4-163a-4263-a716-2d10e9a11056}\u0000"
+                "{584bc66f-6efd-42c0-a232-6491a6025ede}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{44a6b9d4-163a-4263-a716-2d10e9a11056}\u0000",
-            "owner": "{e85f59d9-c7ac-41eb-bf9f-83f693851540}\u0000",
+            "id": "{584bc66f-6efd-42c0-a232-6491a6025ede}\u0000",
+            "owner": "{108f15bc-e4ef-468e-ba0a-d9db9c761b77}\u0000",
             "Material": "./res/materials/SampleScene/RefractiveBottle.mat",
             "Model": "./res/models/Bottle.fbx"
         },
         {
             "type": "Entity",
-            "id": "{787f8741-5bbf-457b-aef2-56262ad42b2a}\u0000",
+            "id": "{1828cffc-cbb9-4c9c-9151-40c9b55d752a}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{f2578146-0b97-428c-8136-f7e4cf280df1}\u0000",
-                "owner": "{787f8741-5bbf-457b-aef2-56262ad42b2a}\u0000",
+                "id": "{43d13416-fec4-4b78-927a-dde73ac9cd87}\u0000",
+                "owner": "{1828cffc-cbb9-4c9c-9151-40c9b55d752a}\u0000",
                 "Position": {
                     "x": -8.117469787597656,
                     "y": 2.285259962081909,
@@ -811,26 +811,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{c64daf6e-3160-4cfa-aa9e-6333b40a88e0}\u0000"
+                "{63d955c7-0b3d-4f60-85f4-ed7c154d8891}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{c64daf6e-3160-4cfa-aa9e-6333b40a88e0}\u0000",
-            "owner": "{787f8741-5bbf-457b-aef2-56262ad42b2a}\u0000",
+            "id": "{63d955c7-0b3d-4f60-85f4-ed7c154d8891}\u0000",
+            "owner": "{1828cffc-cbb9-4c9c-9151-40c9b55d752a}\u0000",
             "Material": "./res/materials/SampleScene/Monitor.mat",
             "Model": "./res/models/Monitor.fbx"
         },
         {
             "type": "Entity",
-            "id": "{10615843-c339-40dd-abcf-4462900246b4}\u0000",
+            "id": "{6ea9a571-f617-4f87-ba6e-18211952d313}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{005f1b9e-74ed-47ad-8424-2e4bec727542}\u0000",
-                "owner": "{10615843-c339-40dd-abcf-4462900246b4}\u0000",
+                "id": "{5a9e1c2f-19f8-44bf-9347-e2002f25175b}\u0000",
+                "owner": "{6ea9a571-f617-4f87-ba6e-18211952d313}\u0000",
                 "Position": {
                     "x": -6.883890151977539,
                     "y": 5.598999977111816,
@@ -847,26 +847,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{63d157f2-f3dc-464c-9715-da2d5b509ef8}\u0000"
+                "{348d9977-4fa0-40aa-9694-a6caba893563}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{63d157f2-f3dc-464c-9715-da2d5b509ef8}\u0000",
-            "owner": "{10615843-c339-40dd-abcf-4462900246b4}\u0000",
+            "id": "{348d9977-4fa0-40aa-9694-a6caba893563}\u0000",
+            "owner": "{6ea9a571-f617-4f87-ba6e-18211952d313}\u0000",
             "Material": "./res/materials/SampleScene/WallMonitor.mat",
             "Model": "./res/models/WallMonitor.fbx"
         },
         {
             "type": "Entity",
-            "id": "{9eecee49-3c5e-415a-b671-7c9873bca066}\u0000",
+            "id": "{ae3c82b8-f574-43e7-973b-12aaf2d7a6f0}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{33ba1e51-6b67-42c4-9369-2049e40eddf7}\u0000",
-                "owner": "{9eecee49-3c5e-415a-b671-7c9873bca066}\u0000",
+                "id": "{0e6b9f63-08ff-4679-92a1-9ee6ff3dbcfd}\u0000",
+                "owner": "{ae3c82b8-f574-43e7-973b-12aaf2d7a6f0}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 10.804100036621094,
@@ -883,26 +883,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{8a0ee32d-5fc7-4301-8da2-a8a75cfd84b5}\u0000"
+                "{3114248e-baf3-4f4d-9b85-7ff43a4109d5}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{8a0ee32d-5fc7-4301-8da2-a8a75cfd84b5}\u0000",
-            "owner": "{9eecee49-3c5e-415a-b671-7c9873bca066}\u0000",
+            "id": "{3114248e-baf3-4f4d-9b85-7ff43a4109d5}\u0000",
+            "owner": "{ae3c82b8-f574-43e7-973b-12aaf2d7a6f0}\u0000",
             "Material": "./res/materials/SampleScene/CeilingLamp.mat",
             "Model": "./res/models/CeilingLamp.fbx"
         },
         {
             "type": "Entity",
-            "id": "{11577f2f-a1ac-433d-9455-a45e924609ad}\u0000",
+            "id": "{f0da05ea-f7cb-4e27-b952-f4f1124dc39b}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{d68e2c11-14a8-4697-88cc-b2e9fa664462}\u0000",
-                "owner": "{11577f2f-a1ac-433d-9455-a45e924609ad}\u0000",
+                "id": "{0bf14636-5cbf-4761-baf9-8f1a582bb8e8}\u0000",
+                "owner": "{f0da05ea-f7cb-4e27-b952-f4f1124dc39b}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 10.804100036621094,
@@ -919,26 +919,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{c4ccf502-54f2-49f3-b5c1-16686682f362}\u0000"
+                "{9a364b2e-06bd-4919-a204-b6be4563f602}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{c4ccf502-54f2-49f3-b5c1-16686682f362}\u0000",
-            "owner": "{11577f2f-a1ac-433d-9455-a45e924609ad}\u0000",
+            "id": "{9a364b2e-06bd-4919-a204-b6be4563f602}\u0000",
+            "owner": "{f0da05ea-f7cb-4e27-b952-f4f1124dc39b}\u0000",
             "Material": "./res/materials/SampleScene/CeilingLamp.mat",
             "Model": "./res/models/CeilingLamp.fbx"
         },
         {
             "type": "Entity",
-            "id": "{12efbbe0-1fae-4714-aea2-76fbf4196ae9}\u0000",
+            "id": "{31ebb64f-5b11-4466-9223-9f65f44e4b78}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{54891b8e-d987-41b8-9266-fe326cd8ac2d}\u0000",
-                "owner": "{12efbbe0-1fae-4714-aea2-76fbf4196ae9}\u0000",
+                "id": "{d7485720-1a60-4bf5-87ee-859a1eb44a5d}\u0000",
+                "owner": "{31ebb64f-5b11-4466-9223-9f65f44e4b78}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -955,16 +955,16 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{4fa495df-3e67-4db2-94db-d9653367fe4b}\u0000"
+                "{ca9250af-c75a-4344-aa53-fbb92938da1a}\u0000"
             ]
         },
         {
             "type": "DirectionalLight",
-            "id": "{4fa495df-3e67-4db2-94db-d9653367fe4b}\u0000",
-            "owner": "{12efbbe0-1fae-4714-aea2-76fbf4196ae9}\u0000",
+            "id": "{ca9250af-c75a-4344-aa53-fbb92938da1a}\u0000",
+            "owner": "{31ebb64f-5b11-4466-9223-9f65f44e4b78}\u0000",
             "Color": {
                 "x": 15.0,
                 "y": 10.649999618530273,
@@ -973,11 +973,11 @@
         },
         {
             "type": "Entity",
-            "id": "{2704ccd9-a0f3-491f-a0f3-9e973c089825}\u0000",
+            "id": "{a96ae852-3ecb-4d5e-98c4-fb95d1bafd34}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{da2177f7-676e-4397-98ec-1bce8fef399f}\u0000",
-                "owner": "{2704ccd9-a0f3-491f-a0f3-9e973c089825}\u0000",
+                "id": "{46fa191b-835a-458d-b38a-d8f5b609113c}\u0000",
+                "owner": "{a96ae852-3ecb-4d5e-98c4-fb95d1bafd34}\u0000",
                 "Position": {
                     "x": -8.092000007629395,
                     "y": 2.2950000762939453,
@@ -994,16 +994,16 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{e7b95ac9-9a8c-4249-ac03-3134f73f6535}\u0000"
+                "{5efc4d5d-b838-4807-b160-be1d7f466a58}\u0000"
             ]
         },
         {
             "type": "PointLight",
-            "id": "{e7b95ac9-9a8c-4249-ac03-3134f73f6535}\u0000",
-            "owner": "{2704ccd9-a0f3-491f-a0f3-9e973c089825}\u0000",
+            "id": "{5efc4d5d-b838-4807-b160-be1d7f466a58}\u0000",
+            "owner": "{a96ae852-3ecb-4d5e-98c4-fb95d1bafd34}\u0000",
             "Color": {
                 "x": 0.0,
                 "y": 6.309999942779541,
@@ -1015,11 +1015,11 @@
         },
         {
             "type": "Entity",
-            "id": "{74c5f34b-8aa6-413e-ae3a-8ee78e61cb7b}\u0000",
+            "id": "{149e2c52-05e5-4565-9770-704910e1d408}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{bc728122-fa6a-45ee-944d-7e7e0f1c194a}\u0000",
-                "owner": "{74c5f34b-8aa6-413e-ae3a-8ee78e61cb7b}\u0000",
+                "id": "{96f8c2cd-7c4c-4ee8-860d-2554d5e99fc3}\u0000",
+                "owner": "{149e2c52-05e5-4565-9770-704910e1d408}\u0000",
                 "Position": {
                     "x": -6.883890151977539,
                     "y": 5.598999977111816,
@@ -1036,16 +1036,16 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{68447c4e-6d13-4546-8d64-a19e5198de97}\u0000"
+                "{90b868bc-a26c-49dc-bfb6-23ac0bc3195a}\u0000"
             ]
         },
         {
             "type": "PointLight",
-            "id": "{68447c4e-6d13-4546-8d64-a19e5198de97}\u0000",
-            "owner": "{74c5f34b-8aa6-413e-ae3a-8ee78e61cb7b}\u0000",
+            "id": "{90b868bc-a26c-49dc-bfb6-23ac0bc3195a}\u0000",
+            "owner": "{149e2c52-05e5-4565-9770-704910e1d408}\u0000",
             "Color": {
                 "x": 0.0,
                 "y": 6.309999942779541,
@@ -1057,11 +1057,11 @@
         },
         {
             "type": "Entity",
-            "id": "{ace3dee9-8ac8-4c7e-80c0-fa4848ff4e66}\u0000",
+            "id": "{52481cec-a2b6-430a-a08c-5141e5240def}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{a3b35ed8-f97f-431f-9efb-56bfe577203a}\u0000",
-                "owner": "{ace3dee9-8ac8-4c7e-80c0-fa4848ff4e66}\u0000",
+                "id": "{511aa219-f2a0-45c9-b394-af6e04a75258}\u0000",
+                "owner": "{52481cec-a2b6-430a-a08c-5141e5240def}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 10.729999542236328,
@@ -1078,16 +1078,16 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{a853bef7-9eb0-4b09-b2fe-b26ec3bde510}\u0000"
+                "{3bdd2ab2-ae74-493d-89b2-d428f1b19cdd}\u0000"
             ]
         },
         {
             "type": "SpotLight",
-            "id": "{a853bef7-9eb0-4b09-b2fe-b26ec3bde510}\u0000",
-            "owner": "{ace3dee9-8ac8-4c7e-80c0-fa4848ff4e66}\u0000",
+            "id": "{3bdd2ab2-ae74-493d-89b2-d428f1b19cdd}\u0000",
+            "owner": "{52481cec-a2b6-430a-a08c-5141e5240def}\u0000",
             "Color": {
                 "x": 100.0,
                 "y": 100.0,
@@ -1101,11 +1101,11 @@
         },
         {
             "type": "Entity",
-            "id": "{a2443a9a-f338-4c55-9995-46943031837e}\u0000",
+            "id": "{e6e4e1a9-6d4b-4a52-8b6e-82272757fe23}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{2b168af2-3741-4628-b054-0c65ae55ed80}\u0000",
-                "owner": "{a2443a9a-f338-4c55-9995-46943031837e}\u0000",
+                "id": "{a9c8d8b0-9f69-4c3e-bf05-8daf3cbff3d0}\u0000",
+                "owner": "{e6e4e1a9-6d4b-4a52-8b6e-82272757fe23}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 10.739999771118164,
@@ -1122,16 +1122,16 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{92d5c362-b2d6-4ebd-9ac7-ff30d07c1363}\u0000"
+                "{db2fc880-bd1f-4a5e-80f5-bffb433ee33f}\u0000"
             ]
         },
         {
             "type": "SpotLight",
-            "id": "{92d5c362-b2d6-4ebd-9ac7-ff30d07c1363}\u0000",
-            "owner": "{a2443a9a-f338-4c55-9995-46943031837e}\u0000",
+            "id": "{db2fc880-bd1f-4a5e-80f5-bffb433ee33f}\u0000",
+            "owner": "{e6e4e1a9-6d4b-4a52-8b6e-82272757fe23}\u0000",
             "Color": {
                 "x": 100.0,
                 "y": 100.0,
@@ -1145,11 +1145,11 @@
         },
         {
             "type": "Entity",
-            "id": "{bc1af5f7-9007-4943-bb7f-5f95d139868a}\u0000",
+            "id": "{481edaf4-f8d4-498d-b8a6-4f2f1edcb731}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{98c779ef-26b2-4dc1-99f9-30f2ef3fd8b7}\u0000",
-                "owner": "{bc1af5f7-9007-4943-bb7f-5f95d139868a}\u0000",
+                "id": "{731f4770-5ff9-4ab1-b4a2-ca9b8be74712}\u0000",
+                "owner": "{481edaf4-f8d4-498d-b8a6-4f2f1edcb731}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -1166,26 +1166,26 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{78af21d9-b4d0-4a37-a851-1f7e2d579be4}\u0000"
+                "{add043cf-85b1-49f5-b11c-af0c6e07e65b}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{78af21d9-b4d0-4a37-a851-1f7e2d579be4}\u0000",
-            "owner": "{bc1af5f7-9007-4943-bb7f-5f95d139868a}\u0000",
+            "id": "{add043cf-85b1-49f5-b11c-af0c6e07e65b}\u0000",
+            "owner": "{481edaf4-f8d4-498d-b8a6-4f2f1edcb731}\u0000",
             "Material": "./res/materials/SampleScene/Skybox.mat",
             "Model": "./res/models/SkySphere.fbx"
         },
         {
             "type": "Entity",
-            "id": "{99c6284b-7a52-4ca3-851a-b3618ae5229a}\u0000",
+            "id": "{3957f4cf-9d1a-4637-86be-6aecd2d356ff}\u0000",
             "transform": {
                 "type": "Transform",
-                "id": "{fa71b1f8-ce77-4365-b62c-efebbfed1d0f}\u0000",
-                "owner": "{99c6284b-7a52-4ca3-851a-b3618ae5229a}\u0000",
+                "id": "{7dbe5512-7971-484b-990d-7efc28d5fd1f}\u0000",
+                "owner": "{3957f4cf-9d1a-4637-86be-6aecd2d356ff}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -1202,16 +1202,16 @@
                     "z": 1.0
                 },
                 "Children": [],
-                "Parent": "{b6975ea4-ccae-4a6c-869a-3d6c4637cd9f}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{659dc8ef-ac8f-4b9f-b0cc-8bf9af93bf32}\u0000"
+                "{4e5cfcaf-be56-443b-9cf9-b4024b80da48}\u0000"
             ]
         },
         {
             "type": "ParticleEmitter",
-            "id": "{659dc8ef-ac8f-4b9f-b0cc-8bf9af93bf32}\u0000",
-            "owner": "{99c6284b-7a52-4ca3-851a-b3618ae5229a}\u0000",
+            "id": "{4e5cfcaf-be56-443b-9cf9-b4024b80da48}\u0000",
+            "owner": "{3957f4cf-9d1a-4637-86be-6aecd2d356ff}\u0000",
             "Settings.SpawnRate": 1000.0,
             "Settings.Model": "./res/models/SphereLowPoly.fbx",
             "Settings.MinColor": {

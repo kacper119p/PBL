@@ -12,10 +12,10 @@ namespace Engine
         {
             Parent->RemoveChild(this);
         }
-        // foreach loop doesn't work properly.
-        for (int i = 0; i < Children.size(); ++i) // NOLINT(*-loop-convert)
+        for (int i = Children.size() - 1; i >= 0; --i)
         {
-            delete Children[i]->GetOwner();
+            const Entity* owner = Children[i]->GetOwner();
+            delete owner;
         }
     }
 
