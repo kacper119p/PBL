@@ -17,14 +17,10 @@ namespace Engine
         Models::Model* Model = nullptr;
 
     public:
-        ModelRenderer() = default;
-
         /**
-         * @brief
-         * @param Material Material to be used.
-         * @param Model Model to be used.
+         * @brief Initializes ModelRenderer with default values.
          */
-        ModelRenderer(Materials::Material* Material, Models::Model* Model);
+        ModelRenderer() = default;
 
     public:
         /**

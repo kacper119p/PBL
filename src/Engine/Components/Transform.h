@@ -31,6 +31,9 @@ namespace Engine
         std::vector<Transform*> Children = std::vector<Transform*>();
 
     public:
+        /**
+         * @brief Initializes Transform with default values.
+         */
         Transform() = default;
 
         /**

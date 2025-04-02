@@ -24,6 +24,9 @@ namespace Engine
         std::vector<Component*> Components;
 
     public:
+        /**
+         * @brief Initializes a new Entity with default values.
+         */
         Entity() :
             Transform(Engine::Transform(this)), Components(std::vector<Component*>())
         {

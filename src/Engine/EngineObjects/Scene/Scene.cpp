@@ -31,11 +31,18 @@ namespace Engine
 
     Entity* Scene::SpawnEntity(Entity* const Parent)
     {
-#if DEBUG
-        CHECK_MESSAGE(Parent->GetScene() == this, "Parent doesn't belong to this scene.")
-#endif
         Entity* result = new Entity();
-        result->GetTransform()->SetParent(Parent->GetTransform());
+        if (Parent != nullptr)
+        {
+#if DEBUG
+            CHECK_MESSAGE(Parent->GetScene() == this, "Parent doesn't belong to this scene.")
+#endif
+            result->GetTransform()->SetParent(Parent->GetTransform());
+        }
+        else
+        {
+            result->GetTransform()->SetParent(Root->GetTransform());
+        }
         return result;
     }
 

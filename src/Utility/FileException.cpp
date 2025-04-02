@@ -1,7 +1,3 @@
-//
-// Created by Kacper on 08.10.2024.
-//
-
 #include "FileException.h"
 
 

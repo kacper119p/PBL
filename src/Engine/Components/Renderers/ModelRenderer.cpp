@@ -5,11 +5,6 @@
 
 namespace Engine
 {
-    ModelRenderer::ModelRenderer(Materials::Material* Material, Models::Model* Model) :
-        Material(Material), Model(Model)
-    {
-    }
-
     void ModelRenderer::RenderDepth(const CameraRenderData& RenderData)
     {
         Material->UseDepthPass();

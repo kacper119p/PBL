@@ -1,7 +1,3 @@
-//
-// Created by Kacper on 10.10.2024.
-//
-
 #include "Engine/EngineObjects/Camera.h"
 #include "imgui.h"
 #include "imgui_impl/imgui_impl_glfw.h"
@@ -20,8 +16,10 @@
 #include "imgui_internal.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialManager.h"
+#include "Models/ModelManager.h"
 #include "Utility/SystemUtilities.h"
 #include "Scene/SceneBuilder.h"
+#include "Shaders/ShaderManager.h"
 #include "Textures/TextureManager.h"
 #include "tracy/Tracy.hpp"
 
@@ -294,21 +292,9 @@ namespace Engine
     {
         delete Scene;
         TextureManager::DeleteAllTextures();
-
-        for (Models::Model* model : Scene->Models)
-        {
-            delete model;
-        }
-
-        for (Shaders::Shader shader : Scene->Shaders)
-        {
-            shader.Delete();
-        }
-
-        for (Materials::Material* material : Scene->Materials)
-        {
-            delete material;
-        }
+        Shaders::ShaderManager::FreeResources();
+        Models::ModelManager::DeleteAllModels();
+        Materials::MaterialManager::DeleteAllMaterials();
     }
 
     void Engine::GlfwErrorCallback(int Error, const char* Description)

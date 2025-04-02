@@ -15,13 +15,10 @@ namespace Engine
         glm::vec3 Velocity = glm::vec3(0.0f);
 
     public:
-        Rotator() = default;
-
         /**
-         * @brief Creates a new rotator.
-         * @param Velocity Rotation velocity around major axes in degrees per second.
+         * @brief Initializes Rotator with default values.
          */
-        explicit Rotator(const glm::vec3& Velocity);
+        Rotator() = default;
 
     public:
         ~Rotator() override = default;

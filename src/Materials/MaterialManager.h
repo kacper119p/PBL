@@ -55,23 +55,40 @@ namespace Materials
         }
 
     public:
+        /**
+         * @brief Factory used in deserialization of materials.
+         */
         class MaterialFactory final
         {
         private:
             std::unordered_map<std::string, IMaterialBuilder*> MaterialBuilders;
 
         public:
+            /**
+             * @brief Registers a new material class in the factory.
+             * @tparam T Material class to be registered.
+             * @param Name TypeName of a material class.
+             */
             template<class T>
             void Register(const std::string& Name)
             {
                 MaterialBuilders.emplace(Name, new MaterialBuilder<T>());
             }
 
+            /**
+             * @brief
+             * @param Name TypeName of a material class.
+             */
             void Unregister(const std::string& Name)
             {
                 MaterialBuilders.erase(Name);
             }
 
+            /**
+             * @brief Returns a Material builder for a given material class based on TypeName.
+             * @param Name Material's TypeName.
+             * @return A Material builder.
+             */
             [[nodiscard]] const IMaterialBuilder* GetBuilder(const std::string& Name)
             {
                 const auto iterator = MaterialBuilders.find(Name);
@@ -83,12 +100,18 @@ namespace Materials
             }
         };
 
+        /**
+         * @brief Used to initialize material's shaders.
+         */
         class MaterialInitializerManager final
         {
         private:
             std::vector<IMaterialInitializer*> MaterialInitializers;
 
         public:
+            /**
+             * @brief Initialize materials.
+             */
             void Initialize() const
             {
                 for (const IMaterialInitializer* initializer : MaterialInitializers)
@@ -97,15 +120,25 @@ namespace Materials
                 }
             }
 
+            /**
+             * @brief Register a new material to a initializer.
+             * @tparam T Material's class.
+             */
             template<class T>
             void Register()
             {
+                static_assert(std::is_base_of_v<Material, T>, "T must derive from Material");
                 MaterialInitializers.emplace_back(new MaterialInitializer<T>());
             }
 
+            /**
+             * @brief Unregisters material class from a initializer.
+             * @tparam T Material's class.
+             */
             template<class T>
             void Unregister()
             {
+                static_assert(std::is_base_of_v<Material, T>, "T must derive from Material");
                 for (IMaterialInitializer* initializer : MaterialInitializers)
                 {
                     if (dynamic_cast<MaterialInitializer<T>*>(initializer))
@@ -118,12 +151,18 @@ namespace Materials
         };
 
     public:
+        /**
+         * @brief Returns the MaterialFactory singleton.
+         */
         [[nodiscard]] static MaterialFactory* GetMaterialFactory()
         {
             static MaterialFactory factory;
             return &factory;
         }
 
+        /**
+         * @brief Returns the MaterialInitializer singleton.
+         */
         [[nodiscard]] static MaterialInitializerManager& GetMaterialInitializer()
         {
             static MaterialInitializerManager materialInitializer;
@@ -133,26 +172,70 @@ namespace Materials
     private:
         MaterialManager() = default;
 
-    public
-    :
+    public:
+        /**
+         * @brief Gets cached material or loads it from file.
+         * @param Path Filepath of a material file.
+         * @return Material provided by a given file.
+         */
         static Material* GetMaterial(const std::string& Path);
 
+        /**
+         * @brief Deletes material object.
+         * @param Path Filepath of a material file.
+         * @return True if material existed, false otherwise.
+         */
         static bool DeleteMaterial(const std::string& Path);
 
+        /**
+         * @brief Deletes material object.
+         * @param Material Material to be deleted.
+         * @return
+         */
         static bool DeleteMaterial(Material* Material);
 
+        /**
+         * @brief Deletes all materials.
+         */
         static void DeleteAllMaterials();
 
+        /**
+         * @brief Finds material's filepath.
+         * @param Material Material.
+         * @return Material's filepath, empty string if material is not loaded.
+         */
         static std::string GetMaterialPath(const Material* Material);
 
+        /**
+         * @brief
+         * @param Path
+         */
         static void SaveMaterial(const std::string& Path);
 
+        /**
+         * @brief Saves material to its file.
+         * @param Material Material to be saved.
+         */
         static void SaveMaterial(const Material* Material);
 
+        /**
+         * @brief Saves material to a file.
+         * @param Path Path of a material file.
+         * @param Material Material to be saved.
+         */
         static void SaveMaterial(const std::string& Path, const Material* Material);
 
+        /**
+         * @brief Loads materials' shaders.
+         */
         static void Initialize();
 
+        /**
+         * @brief Gets cached material or loads it from file.
+         * @tparam T Material's class
+         * @param Path Material's filepath.
+         * @return Material, nullptr if type doesn't match.
+         */
         template<class T>
         static T* GetMaterial(const std::string& Path)
         {
@@ -169,6 +252,12 @@ namespace Materials
 
         }
 
+        /**
+         * @brief Creates a new material with default values.
+         * @tparam T Material's class.
+         * @param Path File to save material to.
+         * @return Created material object.
+         */
         template<class T>
         static Material* CreateMaterialAsset(const std::string& Path)
         {

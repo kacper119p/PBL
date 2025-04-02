@@ -16,6 +16,9 @@ namespace Engine
         glm::vec3 InitialRotation = glm::vec3(0.0f);
 
     public:
+        /**
+         * @brief Initializes ShipRoller with default values.
+         */
         ShipRoller() = default;
 
         /**

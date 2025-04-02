@@ -1,7 +1,3 @@
-//
-// Created by Kacper on 26.01.2025.
-//
-
 #pragma once
 
 #include "imgui.h" //Have to import imgui before imguizmo

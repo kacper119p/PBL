@@ -15,6 +15,9 @@ namespace Engine
         Entity* Owner = nullptr;
 
     public:
+        /**
+         * @brief Initializes Component with default values.
+         */
         Component() = default;
 
     public:

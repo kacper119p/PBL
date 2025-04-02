@@ -53,8 +53,13 @@ public:\
 namespace Serialization
 {
     class SerializedObject;
+    /**
+     * @brief Used in serializing references.
+     */
     typedef std::unordered_map<GUID, SerializedObject*, GuidHasher> ReferenceTable;
-
+    /**
+    * @brief Class providing interface for object serialization.
+    */
     class SerializedObject
     {
     private:
@@ -63,6 +68,9 @@ namespace Serialization
     public:
         virtual ~SerializedObject() = default;
 
+        /**
+         * @brief Initializes object with guid.
+         */
         SerializedObject() // NOLINT(*-pro-type-member-init)
         {
             const HRESULT result = CoCreateGuid(&Id); //ID Initialized here.
@@ -70,22 +78,44 @@ namespace Serialization
         }
 
     public:
+        /**
+         * @brief Returns guid of this object.
+         */
         [[nodiscard]] GUID GetID() const
         {
             return Id;
         }
 
     protected:
+        /**
+         * @brief Sets id of this object.
+         * @param Id A New id.
+         */
         void SetId(const GUID& Id)
         {
             this->Id = Id;
         }
 
     public:
+        /**
+         * @brief Saves this object's state to a json object.
+         * @param Allocator Allocator to be used.
+         * @return Serialized object.
+         */
         virtual rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const = 0;
 
+        /**
+         * @brief Used to load values members of this object.
+         * @param Object Object to read values from.
+         * @param ReferenceMap Reference table used in serialization.
+         */
         virtual void DeserializeValuePass(const rapidjson::Value& Object, ReferenceTable& ReferenceMap) = 0;
 
+        /**
+         * @brief Used to load references to other objects.
+         * @param Object Object to read values from.
+         * @param ReferenceMap Reference table used in serialization.
+         */
         virtual void DeserializeReferencesPass(const rapidjson::Value& Object, ReferenceTable& ReferenceMap) =0;
 
         /**

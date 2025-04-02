@@ -5,6 +5,9 @@
 
 namespace Serialization
 {
+    /**
+     * @brief Used to generate hashes from Guid.
+     */
     struct GuidHasher
     {
         size_t operator()(const GUID& Guid) const

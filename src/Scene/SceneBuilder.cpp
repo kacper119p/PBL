@@ -38,6 +38,7 @@ namespace Scene
         ZoneScoped;
         Scene = new class Engine::Scene();
         Engine::SceneManager::LoadScene("./res/scenes/SampleScene.lvl", Scene);
-        Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
+        //Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
     }
+
 } // Scene

@@ -23,14 +23,37 @@ namespace Shaders
         ~ShaderManager() = default;
 
     public:
+        /**
+         * @brief Gets cached shader or loads it from a file.
+         * @param ShaderSourceFiles Shader's sourcefile.
+         * @return Loaded shader.
+         */
         static Shader GetShader(const ShaderSourceFiles& ShaderSourceFiles);
 
+        /**
+         * @brief Gets cached shader or loads it from a file.
+         * @param ShaderSourceFile Shader's sourcefile.
+         * @return Loaded shader.
+         */
         static ComputeShader GetComputeShader(const char* ShaderSourceFile);
 
+        /**
+         * @brief Returns source files associated with a provided shader.
+         * @param Shader Shader which source files should be found.
+         * @return Shader's source files.
+         */
         static ShaderSourceFiles GetShaderSourceFiles(Shader Shader);
 
+        /**
+         * @brief Returns source file associated with a provided shader.
+         * @param Shader Shader which source file should be found.
+         * @return Shader's source file.
+         */
         static std::string GetShaderSourceFile(ComputeShader Shader);
 
+        /**
+         * @brief Deletes all shaders.
+         */
         static void FreeResources();
 
     private:
