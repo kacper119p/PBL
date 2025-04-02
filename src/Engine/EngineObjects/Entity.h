@@ -63,19 +63,12 @@ namespace Engine
         template<class T>
         T* AddComponent()
         {
-            static_assert(std::is_base_of_v<class Component, T>, "T must derive from Component");
+            static_assert(std::is_base_of_v<Component, T>, "T must derive from Component");
             T* component = new T();
             component->SetOwner(this);
             Components.push_back(component);
             component->Start();
             return component;
-        }
-
-        void AddComponent(Component* Component)
-        {
-            Component->SetOwner(this);
-            Components.push_back(Component);
-            Component->Start();
         }
 
         /**
