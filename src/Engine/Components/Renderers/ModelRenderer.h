@@ -10,19 +10,17 @@ namespace Engine
     /**
      * @brief Renderer used for rendering meshes.
      */
-    class ModelRenderer : public Renderer
+    class ModelRenderer final : public Renderer
     {
     private:
-        Materials::Material* Material;
-        Models::Model* Model;
+        Materials::Material* Material = nullptr;
+        Models::Model* Model = nullptr;
 
     public:
         /**
-         * @brief
-         * @param Material Material to be used.
-         * @param Model Model to be used.
+         * @brief Initializes ModelRenderer with default values.
          */
-        ModelRenderer(Materials::Material* Material, Models::Model* Model);
+        ModelRenderer() = default;
 
     public:
         /**
@@ -73,5 +71,7 @@ namespace Engine
         void SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const;
 
         void Draw() const;
+
+        SERIALIZATION_EXPORT_CLASS(ModelRenderer)
     };
 } // Engine

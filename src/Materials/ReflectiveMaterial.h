@@ -1,27 +1,37 @@
 #pragma once
 
 #include "Material.h"
+#include "Engine/Textures/Texture.h"
 
 namespace Materials
 {
 
-    class ReflectiveMaterial : public Material
+    class ReflectiveMaterial final : public Material
     {
     private:
-        unsigned int EnvironmentMap;
+        static Shaders::Shader DepthPass;
+        static Shaders::Shader MainPass;
+        static Shaders::Shader DirectionalShadowPass;
+        static Shaders::Shader PointSpotShadowPass;
+
+    private:
+        Engine::Texture EnvironmentMap;
 
     public:
-        ReflectiveMaterial(const Shaders::Shader& DepthPass, const Shaders::Shader& Shader,
-                           const Shaders::Shader& DirectionalShadowPass, const Shaders::Shader& PointSpotShadowPass,
-                           unsigned int EnvironmentMap);
+        explicit ReflectiveMaterial(Engine::Texture EnvironmentMap);
+
+        ReflectiveMaterial();
 
     public:
-        [[nodiscard]] inline unsigned int GetEnvironmentMap() const
+        static void Initialize();
+
+    public:
+        [[nodiscard]] Engine::Texture GetEnvironmentMap() const
         {
             return EnvironmentMap;
         }
 
-        inline void SetEnvironmentMap(unsigned int EnvironmentMap)
+        inline void SetEnvironmentMap(Engine::Texture EnvironmentMap)
         {
             ReflectiveMaterial::EnvironmentMap = EnvironmentMap;
         }
@@ -34,6 +44,8 @@ namespace Materials
         void UseDirectionalShadows() const override;
 
         void UsePointSpotShadows() const override;
+
+        SERIALIZATION_EXPORT_MATERIAL(ReflectiveMaterial);
     };
 
 } // Models

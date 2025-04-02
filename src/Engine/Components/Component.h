@@ -1,4 +1,5 @@
 #pragma once
+#include "Serialization/SerializedObject.h"
 
 namespace Engine
 {
@@ -7,16 +8,20 @@ namespace Engine
     /**
      * @brief Base class for all components attached to entities.
      */
-    class Component
+    class Component : public Serialization::SerializedObject
     {
+
     private:
         Entity* Owner = nullptr;
 
     public:
+        /**
+         * @brief Initializes Component with default values.
+         */
         Component() = default;
 
     public:
-        virtual ~Component() = default;
+        ~Component() override = default;
 
     public:
         /**
@@ -38,9 +43,13 @@ namespace Engine
         }
 
         /**
-         * @brief Invoked when this component is attached to a new Entity.
-         * @param NewOwner New owner of this component.
+         * @brief Invoked after this component is created.
          */
-        virtual void OnAdd(Entity* NewOwner);
+        virtual void Start();
+
+        /**
+         * @brief Invoked just before deleting this component.
+         */
+        virtual void OnDestroy();
     };
 }

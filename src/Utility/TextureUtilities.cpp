@@ -8,6 +8,7 @@
 #include "Shaders/Shader.h"
 #include "Engine/Rendering/CubeGeometry.h"
 #include "Engine/Rendering/ScreenQuad.h"
+#include "Shaders/ShaderManager.h"
 
 namespace
 {
@@ -73,8 +74,8 @@ namespace
 
 namespace Utility
 {
-    [[nodiscard]]unsigned int LoadTexture2DFromFile(const char* const FilePath, const GLenum Format,
-                                                    const uint8_t SourceChannels, const GLenum SourceFormat)
+    [[nodiscard]] unsigned int LoadTexture2DFromFile(const char* const FilePath, const GLenum Format,
+                                                     const uint8_t SourceChannels, const GLenum SourceFormat)
     {
         int width, height, channelCount;
         GLubyte* data = stbi_load(FilePath, &width, &height,
@@ -139,7 +140,7 @@ namespace Utility
         glm::mat4 captureViews[6];
         GetCaptureViews(captureViews);
 
-        Shaders::Shader shader(Shaders::ShaderSourceFiles(
+        Shaders::Shader shader = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
                 "./res/shaders/Utility/CubeMapGenerator/CubeMapGenerator.vert",
                 nullptr,
                 "./res/shaders/Utility/CubeMapGenerator/CubeMapGenerator.frag"));
@@ -196,7 +197,7 @@ namespace Utility
         glm::mat4 captureViews[6];
         GetCaptureViews(captureViews);
 
-        Shaders::Shader shader(Shaders::ShaderSourceFiles(
+        Shaders::Shader shader = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
                 "./res/shaders/Utility/Convolution/Convolution.vert",
                 nullptr,
                 "./res/shaders/Utility/Convolution/Convolution.frag"));
@@ -253,9 +254,10 @@ namespace Utility
 
         Engine::CubeGeometry cube;
 
-        Shaders::Shader shader(Shaders::ShaderSourceFiles("./res/shaders/Utility/SpecularIBLSetup/Prefilter.vert",
-                                                          nullptr,
-                                                          "./res/shaders/Utility/SpecularIBLSetup/Prefilter.frag"));
+        Shaders::Shader shader = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
+                "./res/shaders/Utility/SpecularIBLSetup/Prefilter.vert",
+                nullptr,
+                "./res/shaders/Utility/SpecularIBLSetup/Prefilter.frag"));
         shader.Use();
         shader.SetTexture("EnvironmentMap", 0);
         glActiveTexture(GL_TEXTURE0);
@@ -322,9 +324,10 @@ namespace Utility
 
         Engine::Rendering::ScreenQuad quad;
 
-        const Shaders::Shader shader(Shaders::ShaderSourceFiles("./res/shaders/Utility/SpecularIBLSetup/BRDF.vert",
-                                                          nullptr,
-                                                          "./res/shaders/Utility/SpecularIBLSetup/BRDF.frag"));
+        const Shaders::Shader shader = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
+                "./res/shaders/Utility/SpecularIBLSetup/BRDF.vert",
+                nullptr,
+                "./res/shaders/Utility/SpecularIBLSetup/BRDF.frag"));
 
         InitializeViewPort(resolution);
 

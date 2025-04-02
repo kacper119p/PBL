@@ -9,9 +9,9 @@ namespace Engine
         UpdateManager::GetInstance()->UnregisterComponent(this);
     }
 
-    void Updateable::OnAdd(Entity* NewOwner)
+    void Updateable::Start()
     {
-        Component::OnAdd(NewOwner);
+        Component::Start();
         UpdateManager::GetInstance()->RegisterComponent(this);
     }
 } // Engine

@@ -1,24 +1,27 @@
 #include "BloomPostprocessingEffect.h"
+
+#include "Shaders/ShaderManager.h"
+#include "Shaders/ShaderSourceFiles.h"
 #include "glad/glad.h"
 
 namespace Engine
 {
     BloomPostprocessingEffect::BloomPostprocessingEffect() :
-        FilterShader(Shaders::Shader(Shaders::ShaderSourceFiles(
+        FilterShader(Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
                 "./res/shaders/Bloom/Bloom.vert",
                 nullptr,
                 "./res/shaders/Bloom/BloomFilter.frag"))),
         BlurShaders{
-                Shaders::Shader(Shaders::ShaderSourceFiles(
+                Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
                         "./res/shaders/Bloom/Bloom.vert",
                         nullptr,
                         "./res/shaders/Bloom/BloomHorizontal.frag")),
-                Shaders::Shader(Shaders::ShaderSourceFiles(
+                Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
                         "./res/shaders/Bloom/Bloom.vert",
                         nullptr,
                         "./res/shaders/Bloom/BloomVertical.frag"))
         },
-        OutputShader(Shaders::Shader(Shaders::ShaderSourceFiles(
+        OutputShader(Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
                 "./res/shaders/Bloom/Bloom.vert",
                 nullptr,
                 "./res/shaders/Bloom/BloomOutput.frag")))

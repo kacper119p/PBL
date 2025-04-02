@@ -1,9 +1,4 @@
-//
-// Created by Kacper on 07.10.2024.
-//
-
-#ifndef OPENGLGP_TEXTUREUTILITIES_H
-#define OPENGLGP_TEXTUREUTILITIES_H
+#pragma once
 
 #include <cstdint>
 #include "glad/glad.h"
@@ -21,5 +16,3 @@ namespace Utility
 
     [[nodiscard]] unsigned int GenerateIblBrdfLut();
 } // Utility
-
-#endif //OPENGLGP_TEXTUREUTILITIES_H
