@@ -101,11 +101,7 @@ namespace Materials
 
     void MaterialManager::Initialize()
     {
-        PbrMaterial::Initialize();;
-        ReflectiveMaterial::Initialize();
-        RefractiveMaterial::Initialize();
-        SkyboxMaterial::Initialize();
-        WaterMaterial::Initialize();
+        GetMaterialInitializer().Initialize();
     }
 
     Material* MaterialManager::LoadMaterialFromFile(const std::string& Path)

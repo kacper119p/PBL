@@ -29,6 +29,24 @@ namespace Materials
             }
         };
 
+        class IMaterialInitializer
+        {
+        public:
+            virtual ~IMaterialInitializer() = default;
+
+            virtual void Initialize() const = 0;
+        };
+
+        template<class T>
+        class MaterialInitializer final : public IMaterialInitializer
+        {
+        public:
+            void Initialize() const override
+            {
+                T::Initialize();
+            }
+        };
+
     private:
         [[nodiscard]] static std::unordered_map<std::string, Material*>& GetMaterials()
         {
@@ -39,6 +57,7 @@ namespace Materials
     public:
         class MaterialFactory final
         {
+        private:
             std::unordered_map<std::string, IMaterialBuilder*> MaterialBuilders;
 
         public:
@@ -64,11 +83,51 @@ namespace Materials
             }
         };
 
+        class MaterialInitializerManager final
+        {
+        private:
+            std::vector<IMaterialInitializer*> MaterialInitializers;
+
+        public:
+            void Initialize() const
+            {
+                for (const IMaterialInitializer* initializer : MaterialInitializers)
+                {
+                    initializer->Initialize();
+                }
+            }
+
+            template<class T>
+            void Register()
+            {
+                MaterialInitializers.emplace_back(new MaterialInitializer<T>());
+            }
+
+            template<class T>
+            void Unregister()
+            {
+                for (IMaterialInitializer* initializer : MaterialInitializers)
+                {
+                    if (dynamic_cast<MaterialInitializer<T>*>(initializer))
+                    {
+                        std::erase(MaterialInitializers, initializer);
+                        return;
+                    }
+                }
+            }
+        };
+
     public:
         [[nodiscard]] static MaterialFactory* GetMaterialFactory()
         {
             static MaterialFactory factory;
             return &factory;
+        }
+
+        [[nodiscard]] static MaterialInitializerManager& GetMaterialInitializer()
+        {
+            static MaterialInitializerManager materialInitializer;
+            return materialInitializer;
         }
 
     private:

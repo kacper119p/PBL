@@ -15,12 +15,14 @@ namespace Materials
             Name(Name)
         {
             MaterialManager::GetMaterialFactory()->Register<T>(Name);
+            MaterialManager::GetMaterialInitializer().Register<T>();
         }
 
     public:
         ~MaterialRaii()
         {
             MaterialManager::GetMaterialFactory()->Unregister(Name);
+            MaterialManager::GetMaterialInitializer().Unregister<T>();
         }
     };
 } // Materials
