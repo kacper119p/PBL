@@ -6,13 +6,14 @@
 #include "Models/ModelAnimated.h"
 #include "models/Animation.h"
 #include "models/Animator.h"
+#include "Engine/EngineObjects/UpdateManager.h"
 
 namespace Engine
 {
     /**
      * @brief Renderer used for rendering meshes.
      */
-    class AnimatedModelRenderer : public Renderer
+    class AnimatedModelRenderer : public Renderer, IUpdateable
     {
     private:
         Materials::Material* Material;
@@ -64,6 +65,10 @@ namespace Engine
 
         void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                     const glm::mat4* SpaceTransformMatrices) override;
+        void OnAdd(Entity* NewOwner) override;
+
+        void Update(float DeltaTime) override;
+
 
     private:
         void SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const;

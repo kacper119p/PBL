@@ -25,12 +25,6 @@ namespace Engine
     {
         Material->Use();
 
-        float currentFrame = glfwGetTime();
-        deltaTime = currentFrame - lastFrame;
-        lastFrame = currentFrame;
-
-        Animator->UpdateAnimation(deltaTime);
-
         LightManager::GetInstance()->SetupLightsForRendering(Material->GetMainPass());
 
         SetupMatrices(RenderData, Material->GetMainPass());
@@ -88,4 +82,11 @@ namespace Engine
             Model->GetMesh(i)->Draw();
         }
     }
+    void AnimatedModelRenderer::OnAdd(Entity* NewOwner)
+    {
+        Renderer::OnAdd(NewOwner);
+        UpdateManager::GetInstance()->RegisterComponent(this);
+    }
+
+    void AnimatedModelRenderer::Update(float DeltaTime) { Animator->UpdateAnimation(DeltaTime); }
 } 

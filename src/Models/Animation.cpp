@@ -57,6 +57,8 @@ namespace Models
 
         dest.name = src->mName.data;
         dest.transformation = AssimpGLMHelpers::ConvertMatrixToGLMFormat(src->mTransformation);
+        dest.transformation = glm::scale(dest.transformation, glm::vec3(1.0f)); // Normalize scale
+
         dest.childrenCount = src->mNumChildren;
 
         for (int i = 0; i < src->mNumChildren; i++)
