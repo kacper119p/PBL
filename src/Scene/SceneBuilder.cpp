@@ -57,6 +57,16 @@ namespace Scene
                 "./res/shaders/Common/BasicShadowPass/PointSpotLight.geom",
                 "./res/shaders/Common/BasicShadowPass/PointSpotLight.frag");
 
+        Shaders::ShaderSourceFiles directionalShadowPassAnimated(
+                "./res/shaders/PBR/PBRAnimated.vert",
+                nullptr,
+                "./res/shaders/Common/BasicShadowPass/DirectionalLight.frag");
+
+        Shaders::ShaderSourceFiles pointSpotShadowPassAnimated(
+                "./res/shaders/PBR/PBRAnimated.vert",
+                "./res/shaders/Common/BasicShadowPass/PointSpotLight.geom",
+                "./res/shaders/Common/BasicShadowPass/PointSpotLight.frag");
+
         Shaders::ShaderSourceFiles skyboxShaderSource(
                 "./res/shaders/Skybox/Skybox.vert",
                 nullptr,
@@ -99,6 +109,8 @@ namespace Scene
 
         Shaders::Shader animatedDepthShader(shaderSourceAnimatedDepth);
         Shaders::Shader animatedShader(shaderSourceAnimated);
+        Shaders::Shader animatedDirectional(directionalShadowPassAnimated);
+        Shaders::Shader animatedPoint(pointSpotShadowPassAnimated);
 
         Shaders::Shader particleRenderShader(particleRenderSource);
         Shaders::ComputeShader particleSpawnShader("./res/shaders/Particles/ParticlesSpawn.comp");
@@ -138,7 +150,7 @@ namespace Scene
 
         Models::ModelAnimated* submarineModel = new Models::ModelAnimated("./res/models/Submarine.fbx");
         Materials::PbrMaterial* submarineMaterial = new Materials::PbrMaterial(
-                animatedDepthShader, animatedShader, directionalPass, pointPass,
+                animatedDepthShader, animatedShader, animatedDirectional, animatedPoint,
                 submarineBaseMap,
                 submarineRmaoMap, submarineNormalMap,
                 submarineEmissiveMap,
