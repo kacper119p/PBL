@@ -22,7 +22,7 @@ namespace Engine::Rendering
         glBindFramebuffer(GL_READ_FRAMEBUFFER, Id);
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, Target);
         glBlitFramebuffer(0, 0, Resolution.x, Resolution.y, 0, 0, Resolution.x, Resolution.y,
-                          GL_COLOR_BUFFER_BIT, GL_NEAREST);
+                          GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT, GL_NEAREST);
     }
 
     void GBuffer::UpdateBuffers()
