@@ -3,21 +3,26 @@
 #include <vector>
 #include "Engine/Components/Renderers/Renderer.h"
 #include "CameraRenderData.h"
+#include "Engine/Rendering/GBuffer.h"
 #include "Engine/Rendering/Postprocessing/BloomPostprocessingEffect.h"
 
 namespace Engine
 {
 
-    class RenderingManager
+    class RenderingManager final
     {
     private:
+        static uint8_t MultisampleLevel;
+
         std::vector<Renderer*> Renderers;
 
         static RenderingManager* Instance;
 
-        unsigned int SceneColorFrameBuffer;
-        unsigned int SceneColorRBO;
-        unsigned int SceneColorBuffer;
+        Rendering::GBuffer GBuffer;
+
+        uint32_t SceneColorFrameBuffer = 0;
+        uint32_t SceneColorRbo = 0;
+        uint32_t SceneColorBuffer = 0;
 
         BloomPostprocessingEffect Bloom;
 

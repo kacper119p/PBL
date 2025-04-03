@@ -8,45 +8,55 @@ namespace Engine::Rendering
     /**
      * @brief Not used.
      */
-    class GBuffer
+    class GBuffer final
     {
     private:
-        unsigned int id;
-        glm::vec2 resolution;
+        static constexpr uint8_t Samples = 8;
 
-        unsigned int baseColorBuffer;
-        unsigned int positionAndSpecularBuffer;
-        unsigned int normalAndMetallicBuffer;
-        unsigned int depthStencilBuffer;
+        uint32_t Id = 0;
+        glm::ivec2 Resolution;
 
-    public:
-        explicit GBuffer(glm::vec2 resolution);
-
-        virtual ~GBuffer();
+        uint32_t ColorBuffer = 0;
+        uint32_t DepthStencilBuffer = 0;
 
     public:
-        [[nodiscard]] inline unsigned int GetId() const
+        explicit GBuffer(glm::ivec2 Resolution);
+
+        ~GBuffer();
+
+    public:
+        [[nodiscard]] unsigned int GetId() const
         {
-            return id;
+            return Id;
         }
 
-        [[nodiscard]] inline const glm::vec2& GetResolution() const
+        [[nodiscard]] const glm::ivec2& GetResolution() const
         {
-            return resolution;
+            return Resolution;
         }
 
-        inline void SetResolution(const glm::vec2& value)
+        void SetResolution(const glm::ivec2& Value)
         {
-            GBuffer::resolution = value;
+            Resolution = Value;
             UpdateBuffers();
         }
 
-        inline void Bind() const
+        void Bind() const
         {
-            glBindFramebuffer(GL_FRAMEBUFFER, id);
+            glBindFramebuffer(GL_FRAMEBUFFER, Id);
         }
 
-        void BindOutput();
+        [[nodiscard]] uint32_t GetColorBuffer() const
+        {
+            return ColorBuffer;
+        }
+
+        [[nodiscard]] uint32_t GetDepthStencilBuffer() const
+        {
+            return DepthStencilBuffer;
+        }
+
+        void ResolveMultisampling(uint32_t Target) const;
 
     private:
         void UpdateBuffers();

@@ -6,10 +6,11 @@ namespace Engine
 {
     RenderingManager* RenderingManager::Instance = nullptr;
 
-    RenderingManager::RenderingManager()
+    RenderingManager::RenderingManager() :
+        GBuffer(glm::ivec2(1920, 1080))
     {
         glGenFramebuffers(1, &SceneColorFrameBuffer);
-        glGenRenderbuffers(1, &SceneColorRBO);
+        glGenRenderbuffers(1, &SceneColorRbo);
         glGenTextures(1, &SceneColorBuffer);
 
         glBindFramebuffer(GL_FRAMEBUFFER, SceneColorFrameBuffer);
@@ -22,9 +23,9 @@ namespace Engine
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, SceneColorBuffer, 0);
 
-        glBindRenderbuffer(GL_RENDERBUFFER, SceneColorRBO);
+        glBindRenderbuffer(GL_RENDERBUFFER, SceneColorRbo);
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 1920, 1080);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, SceneColorRBO);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, SceneColorRbo);
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
@@ -42,7 +43,7 @@ namespace Engine
     {
         LightManager::GetInstance()->RenderShadowMaps(RenderData);
 
-        glBindFramebuffer(GL_FRAMEBUFFER, SceneColorFrameBuffer);
+        GBuffer.Bind();
 
         glDepthMask(GL_TRUE);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
@@ -73,6 +74,7 @@ namespace Engine
             renderer->Render(RenderData);
         }
 
+        GBuffer.ResolveMultisampling(SceneColorFrameBuffer);
         Bloom.Render(SceneColorBuffer);
     }
 
@@ -116,7 +118,7 @@ namespace Engine
     RenderingManager::~RenderingManager()
     {
         glDeleteFramebuffers(1, &SceneColorFrameBuffer);
-        glDeleteRenderbuffers(1, &SceneColorRBO);
+        glDeleteRenderbuffers(1, &SceneColorRbo);
         glDeleteTextures(1, &SceneColorBuffer);
     }
 } // Engine
