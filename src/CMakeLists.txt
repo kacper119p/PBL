@@ -32,7 +32,8 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE LIBRARY_SUFFIX="")
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
         ${glad_SOURCE_DIR}
-        ${stb_image_SOURCE_DIR})
+        ${stb_image_SOURCE_DIR}
+        ${miniaudio_SOURCE_DIR})
 
 # include imgui only in editor.
 if (DEFINED ENV{Editor})

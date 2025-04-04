@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Serialization/SerializedObject.h"
+#include "Engine/Components/Component.h"
 #include "audio/AudioManager.h"
 
 namespace Engine
@@ -21,7 +21,6 @@ namespace Engine
         bool Looping = false; ///< Flag indicating whether the selected sound should loop.
         float SoundPos[3] = {0.0f, 0.0f, 0.0f}; ///< Position of the selected sound in 3D space.
 
-        //SERIALIZATION_EXPORT_CLASS(AudioUi);
 
     public:
         /**

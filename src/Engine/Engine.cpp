@@ -69,8 +69,10 @@ namespace Engine
         spdlog::info("Successfully built scene.");
 
         float lastFrame = 0.0f;
+#if EDITOR
         AudioUi audioUi;
         audioUi.LoadSounds();
+#endif
         // Main loop
         while (!glfwWindowShouldClose(Window))
         {

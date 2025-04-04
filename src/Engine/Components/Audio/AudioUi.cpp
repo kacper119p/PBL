@@ -1,3 +1,4 @@
+//#if EDITOR
 #include "AudioUi.h"
 #include <filesystem>
 #include "imgui.h"
@@ -87,3 +88,6 @@ void Engine::AudioUi::RenderUi()
 
     ImGui::End();
 }
+
+
+//#endif
