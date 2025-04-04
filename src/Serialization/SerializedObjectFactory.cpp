@@ -1,8 +1,8 @@
 #include "SerializedObjectFactory.h"
 
-namespace Engine
+namespace Serialization
 {
-    Serialization::SerializedObject* SerializedObjectFactory::CreateObject(const rapidjson::Value& Object)
+    SerializedObject* SerializedObjectFactory::CreateObject(const rapidjson::Value& Object)
     {
         const std::string typeName = Object["type"].GetString();
         const auto iterator = GetInstance()->Builders.find(typeName);
