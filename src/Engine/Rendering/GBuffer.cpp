@@ -7,7 +7,6 @@ namespace Engine::Rendering
         Resolution(Resolution)
     {
         glGenFramebuffers(1, &Id);
-        glBindFramebuffer(GL_FRAMEBUFFER, Id);
         UpdateBuffers();
     }
 
@@ -15,6 +14,7 @@ namespace Engine::Rendering
     {
         glDeleteFramebuffers(1, &Id);
         glDeleteTextures(1, &ColorBuffer);
+        glDeleteRenderbuffers(1, &DepthStencilBuffer);
     }
 
     void GBuffer::ResolveMultisampling(const uint32_t Target) const
