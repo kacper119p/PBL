@@ -34,7 +34,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
         ${glad_SOURCE_DIR}
         ${stb_image_SOURCE_DIR}
         ${miniaudio_SOURCE_DIR})
-
+        
 # include imgui only in editor.
 if (DEFINED ENV{Editor})
     target_include_directories(${PROJECT_NAME} AFTER PUBLIC ${imgui_SOURCE_DIR})
@@ -55,6 +55,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE stb_image)
 target_link_libraries(${PROJECT_NAME} PRIVATE assimp)
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)
+target_link_libraries(${PROJECT_NAME} PRIVATE imguizmo::imguizmo)
+target_link_libraries(${PROJECT_NAME} PRIVATE miniaudio)
 target_link_libraries(${PROJECT_NAME} PRIVATE rapidjson)
 target_link_libraries(${PROJECT_NAME} PRIVATE miniaudio)
 target_link_libraries(${PROJECT_NAME} PRIVATE Tracy::TracyClient)
