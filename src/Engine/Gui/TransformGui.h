@@ -1,5 +1,5 @@
 #pragma once
-#if EDITOR
+#if Editor
 
 #include "Engine/Components/Transform.h"
 
