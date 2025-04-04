@@ -3,32 +3,35 @@
 #include <vector>
 #include "Engine/Components/Renderers/Renderer.h"
 #include "CameraRenderData.h"
+#include "Engine/Rendering/MultiSampledSceneFrameBuffer.h"
+#include "Engine/Rendering/SceneFrameBuffer.h"
 #include "Engine/Rendering/Postprocessing/BloomPostprocessingEffect.h"
 
 namespace Engine
 {
 
-    class RenderingManager
+    class RenderingManager final
     {
     private:
+        static uint8_t MultisampleLevel;
+
         std::vector<Renderer*> Renderers;
 
         static RenderingManager* Instance;
 
-        unsigned int SceneColorFrameBuffer;
-        unsigned int SceneColorRBO;
-        unsigned int SceneColorBuffer;
+        MultiSampledSceneFrameBuffer MultiSampledBuffer;
+        SceneFrameBuffer ResolvedBuffer;
 
         BloomPostprocessingEffect Bloom;
 
     private:
-        RenderingManager();
+        explicit RenderingManager(glm::ivec2 Resolution);
 
     public:
         virtual ~RenderingManager();
 
     public:
-        static void Initialize();
+        static void Initialize(glm::ivec2 Resolution);
 
     public:
         RenderingManager(RenderingManager const&) = delete;
