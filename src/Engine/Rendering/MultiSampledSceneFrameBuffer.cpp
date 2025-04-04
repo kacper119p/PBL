@@ -1,7 +1,7 @@
 #include <iostream>
 #include "MultiSampledSceneFrameBuffer.h"
 
-namespace Engine::Rendering
+namespace Engine
 {
     MultiSampledSceneFrameBuffer::MultiSampledSceneFrameBuffer(glm::ivec2 Resolution) :
         Resolution(Resolution)
@@ -17,10 +17,10 @@ namespace Engine::Rendering
         glDeleteRenderbuffers(1, &DepthStencilBuffer);
     }
 
-    void MultiSampledSceneFrameBuffer::ResolveMultisampling(const uint32_t Target) const
+    void MultiSampledSceneFrameBuffer::ResolveMultisampling(const SceneFrameBuffer& Target) const
     {
         glBindFramebuffer(GL_READ_FRAMEBUFFER, Id);
-        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, Target);
+        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, Target.GetId());
         glBlitFramebuffer(0, 0, Resolution.x, Resolution.y, 0, 0, Resolution.x, Resolution.y,
                           GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT, GL_NEAREST);
     }

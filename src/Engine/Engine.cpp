@@ -178,7 +178,7 @@ namespace Engine
 
         glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
-        RenderingManager::Initialize();
+        RenderingManager::Initialize(glm::ivec2(WindowWidth, WindowHeight));
         LightManager::Initialize();
         UpdateManager::Initialize();
         Materials::MaterialManager::Initialize();

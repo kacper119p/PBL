@@ -1,15 +1,17 @@
 #pragma once
 
-#include "SceneFrameBuffer.h"
+#include <cstdint>
+
 #include "glad/glad.h"
 #include "glm/glm.hpp"
+
 
 namespace Engine
 {
     /**
-     * @brief Multi-sampled FrameBuffer used for scene rendering.
+     * @brief Framebuffer used for scene rendering.
      */
-    class MultiSampledSceneFrameBuffer final
+    class SceneFrameBuffer
     {
     private:
         static constexpr uint8_t Samples = 8;
@@ -21,9 +23,9 @@ namespace Engine
         uint32_t DepthStencilBuffer = 0;
 
     public:
-        explicit MultiSampledSceneFrameBuffer(glm::ivec2 Resolution);
+        explicit SceneFrameBuffer(glm::ivec2 Resolution);
 
-        ~MultiSampledSceneFrameBuffer();
+        ~SceneFrameBuffer();
 
     public:
         /**
@@ -76,13 +78,8 @@ namespace Engine
             return DepthStencilBuffer;
         }
 
-        /**
-         * @brief Resolves multisampling and writes result to the Target.
-         * @param Target FrameBuffer to receive resolved image.
-         */
-        void ResolveMultisampling(const SceneFrameBuffer& Target) const;
-
     private:
         void UpdateBuffers();
     };
-} // Rendering
+
+} // Engine
