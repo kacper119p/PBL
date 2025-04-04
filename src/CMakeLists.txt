@@ -9,7 +9,7 @@ file(GLOB_RECURSE HEADER_FILES
         *.hpp)
 
 # Do not include imgui in non editor builds.
-if (NOT DEFINED $ENV{Editor})
+if (NOT DEFINED ENV{Editor})
     list(FILTER SOURCE_FILES EXCLUDE REGEX "${CMAKE_SOURCE_DIR}/src/imgui_impl/*")
     list(FILTER HEADER_FILES EXCLUDE REGEX "${CMAKE_SOURCE_DIR}/src/imgui_impl/*")
 endif ()
@@ -35,11 +35,11 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
         ${stb_image_SOURCE_DIR})
 
 # include imgui only in editor.
-if (DEFINED $ENV{Editor})
+if (DEFINED ENV{Editor})
     target_include_directories(${PROJECT_NAME} AFTER PUBLIC ${imgui_SOURCE_DIR})
 endif ()
 
-if (DEFINED $ENV{Editor})
+if (DEFINED ENV{Editor})
     find_package(imgui CONFIG REQUIRED)
     find_package(imguizmo CONFIG REQUIRED)
 endif ()
@@ -59,7 +59,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE rapidjson)
 target_link_libraries(${PROJECT_NAME} PRIVATE Tracy::TracyClient)
 target_link_libraries(${PROJECT_NAME} PRIVATE spdlog)
 
-if (DEFINED $ENV{Editor})
+if (DEFINED ENV{Editor})
     target_link_libraries(${PROJECT_NAME} PRIVATE imgui::imgui)
     target_link_libraries(${PROJECT_NAME} PRIVATE imguizmo::imguizmo)
 endif ()
@@ -70,7 +70,7 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
         ${CMAKE_SOURCE_DIR}/res
         ${CMAKE_CURRENT_BINARY_DIR}/res)
 
-if (DEFINED $ENV{Editor})
+if (DEFINED ENV{Editor})
     target_compile_definitions(${PROJECT_NAME} PRIVATE EDITOR=1)
 else ()
     target_compile_definitions(${PROJECT_NAME} PRIVATE EDITOR=0)
