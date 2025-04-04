@@ -3,7 +3,7 @@
 #include <vector>
 #include "Engine/Components/Renderers/Renderer.h"
 #include "CameraRenderData.h"
-#include "Engine/Rendering/GBuffer.h"
+#include "Engine/Rendering/MultiSampledSceneFrameBuffer.h"
 #include "Engine/Rendering/Postprocessing/BloomPostprocessingEffect.h"
 
 namespace Engine
@@ -18,7 +18,7 @@ namespace Engine
 
         static RenderingManager* Instance;
 
-        Rendering::GBuffer GBuffer;
+        Rendering::MultiSampledSceneFrameBuffer GBuffer;
 
         uint32_t SceneColorFrameBuffer = 0;
         uint32_t SceneColorRbo = 0;

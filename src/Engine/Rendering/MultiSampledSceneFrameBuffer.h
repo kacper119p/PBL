@@ -6,9 +6,9 @@
 namespace Engine::Rendering
 {
     /**
-     * @brief Not used.
+     * @brief Multi-sampled FrameBuffer used for scene rendering.
      */
-    class GBuffer final
+    class MultiSampledSceneFrameBuffer final
     {
     private:
         static constexpr uint8_t Samples = 8;
@@ -20,42 +20,65 @@ namespace Engine::Rendering
         uint32_t DepthStencilBuffer = 0;
 
     public:
-        explicit GBuffer(glm::ivec2 Resolution);
+        explicit MultiSampledSceneFrameBuffer(glm::ivec2 Resolution);
 
-        ~GBuffer();
+        ~MultiSampledSceneFrameBuffer();
 
     public:
+        /**
+         * @brief Returns id of the underlying FrameBuffer.
+         */
         [[nodiscard]] unsigned int GetId() const
         {
             return Id;
         }
 
+        /**
+         * @brief Returns resolution of this buffer.
+         */
         [[nodiscard]] const glm::ivec2& GetResolution() const
         {
             return Resolution;
         }
 
+        /**
+         * @brief Updates resolution of this FrameBuffer.
+         * @param Value A new resolution.
+         */
         void SetResolution(const glm::ivec2& Value)
         {
             Resolution = Value;
             UpdateBuffers();
         }
 
+        /**
+         * @brief Binds underlying FrameBuffer for rendering.
+         */
         void Bind() const
         {
             glBindFramebuffer(GL_FRAMEBUFFER, Id);
         }
 
+        /**
+         * @brief Returns color texture attached to this buffer.
+         */
         [[nodiscard]] uint32_t GetColorBuffer() const
         {
             return ColorBuffer;
         }
 
+        /**
+         * @brief Returns depth and stencil buffer attached to this buffer.
+         */
         [[nodiscard]] uint32_t GetDepthStencilBuffer() const
         {
             return DepthStencilBuffer;
         }
 
+        /**
+         * @brief Resolves multisampling and writes result to the Target.
+         * @param Target FrameBuffer to receive resolved image.
+         */
         void ResolveMultisampling(uint32_t Target) const;
 
     private:

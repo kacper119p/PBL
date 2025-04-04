@@ -1,23 +1,23 @@
 #include <iostream>
-#include "GBuffer.h"
+#include "MultiSampledSceneFrameBuffer.h"
 
 namespace Engine::Rendering
 {
-    GBuffer::GBuffer(glm::ivec2 Resolution) :
+    MultiSampledSceneFrameBuffer::MultiSampledSceneFrameBuffer(glm::ivec2 Resolution) :
         Resolution(Resolution)
     {
         glGenFramebuffers(1, &Id);
         UpdateBuffers();
     }
 
-    GBuffer::~GBuffer()
+    MultiSampledSceneFrameBuffer::~MultiSampledSceneFrameBuffer()
     {
         glDeleteFramebuffers(1, &Id);
         glDeleteTextures(1, &ColorBuffer);
         glDeleteRenderbuffers(1, &DepthStencilBuffer);
     }
 
-    void GBuffer::ResolveMultisampling(const uint32_t Target) const
+    void MultiSampledSceneFrameBuffer::ResolveMultisampling(const uint32_t Target) const
     {
         glBindFramebuffer(GL_READ_FRAMEBUFFER, Id);
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, Target);
@@ -25,7 +25,7 @@ namespace Engine::Rendering
                           GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT, GL_NEAREST);
     }
 
-    void GBuffer::UpdateBuffers()
+    void MultiSampledSceneFrameBuffer::UpdateBuffers()
     {
         glBindFramebuffer(GL_FRAMEBUFFER, Id);
 
