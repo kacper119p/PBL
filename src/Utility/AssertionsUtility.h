@@ -6,7 +6,7 @@
  * @param __MESSAGE__ Message to be printed on fail
  */
 #define CHECK_MESSAGE(__EXPRESSION__,__MESSAGE__)\
-if(!!(!(__EXPRESSION__)))\
+if(!(!!(__EXPRESSION__)))\
 {\
     fprintf(stderr, "%s %d: Assertion failed on expression: %s: %s", __FILE__, __LINE__, #__EXPRESSION__,  __MESSAGE__);\
     abort();\
@@ -26,7 +26,7 @@ if(!!(!(__EXPRESSION__)))\
  * @param __EXPRESSION__ expression to be evaluated.
  */
 #define CHECK(__EXPRESSION__)\
-if(!!(!(__EXPRESSION__)))\
+if(!(!!(__EXPRESSION__)))\
 {\
     fprintf(stderr, "%s %d: Assertion failed on expression: %s", __FILE__, __LINE__, #__EXPRESSION__);\
     abort();\
