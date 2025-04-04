@@ -20,7 +20,7 @@ public:\
     {\
         return TypeName;\
     }\
-    static inline const SerializedObjectRaii<__CLASS__> RaiiHandle =  SerializedObjectRaii<__CLASS__>(#__CLASS__);
+    static inline const Serialization::SerializedObjectRaii<__CLASS__> RaiiHandle = Serialization::SerializedObjectRaii<__CLASS__>(#__CLASS__);
 
 #define START_COMPONENT_SERIALIZATION\
     rapidjson::Value object(rapidjson::kObjectType);\

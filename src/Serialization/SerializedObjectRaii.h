@@ -3,7 +3,7 @@
 
 #include "SerializedObjectFactory.h"
 
-namespace Engine
+namespace Serialization
 {
     template<class T>
     class SerializedObjectRaii
