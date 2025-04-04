@@ -1,12 +1,15 @@
 #pragma once
 
-#include "imgui_impl/imgui_impl_glfw.h"
+#include "glfw/glfw3.h"
 #include "Engine/EngineObjects/Camera.h"
 #include "Engine/EngineObjects/Scene/Scene.h"
 #include "Models/Model.h"
 #include "Shaders/Shader.h"
 
+#if EDITOR
+#include "imgui_impl/imgui_impl_glfw.h"
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
+#endif
 
 namespace Engine
 {
@@ -44,7 +47,7 @@ namespace Engine
         bool Initialize();
 
         void HandleInput(float deltaTime);
-
+#if EDITOR
         void ImGuiInit();
 
         void ImGuiBegin();
@@ -52,7 +55,7 @@ namespace Engine
         void ImGuiRender();
 
         void ImGuiEnd();
-
+#endif
         void EndFrame();
 
         void FreeResources();

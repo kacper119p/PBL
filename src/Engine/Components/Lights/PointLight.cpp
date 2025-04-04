@@ -9,13 +9,17 @@ namespace Engine
     {
         Component::Start();
         LightManager::GetInstance()->RegisterLight(this);
+#if EDITOR
         LightsGui::RegisterLight(this);
+#endif
     }
 
     PointLight::~PointLight()
     {
         LightManager::GetInstance()->UnregisterLight(this);
+#if EDITOR
         LightsGui::UnregisterLight(this);
+#endif
     }
 
     rapidjson::Value PointLight::Serialize(rapidjson::Document::AllocatorType& Allocator) const

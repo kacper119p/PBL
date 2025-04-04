@@ -1,8 +1,5 @@
 #include "Engine/EngineObjects/Camera.h"
-#include "imgui.h"
-#include "imgui_impl/imgui_impl_glfw.h"
-#include "imgui_impl/imgui_impl_opengl3.h"
-#include <stdio.h>
+#include <cstdio>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h> // Include glfw3.h after our OpenGL definitions
 #include <spdlog/spdlog.h>
@@ -12,8 +9,6 @@
 #include "Engine/EngineObjects/LightManager.h"
 #include "Engine/Gui/LightsGui.h"
 #include "Engine/EngineObjects/UpdateManager.h"
-#include "Engine/EngineObjects/GizmoManager.h"
-#include "imgui_internal.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialManager.h"
 #include "Models/ModelManager.h"
@@ -23,6 +18,14 @@
 #include "Textures/TextureManager.h"
 #include "Engine/Components/Audio/AudioUi.h"
 #include "tracy/Tracy.hpp"
+
+#if EDITOR
+#include "imgui.h"
+#include "imgui_impl/imgui_impl_glfw.h"
+#include "imgui_impl/imgui_impl_opengl3.h"
+#include "imgui_internal.h"
+#include "Engine/EngineObjects/GizmoManager.h"
+#endif
 
 namespace SceneBuilding = Scene;
 
@@ -46,9 +49,10 @@ namespace Engine
         }
 
         spdlog::info("Initialized project.");
-
+#if EDITOR
         ImGuiInit();
         spdlog::info("Initialized ImGui.");
+#endif
 
         Camera->SetProjectionMatrix(glm::perspective(glm::radians(70.0f), float(WindowWidth) /
                                                                           float(WindowHeight), 0.1f, 1000.0f));
@@ -97,12 +101,14 @@ namespace Engine
                                                                Camera->GetForward().z, Camera->GetUp().x,
                                                                Camera->GetUp().y, Camera->GetUp().z);
 
+#if EDITOR
             // Draw ImGui
             ImGuiBegin();
             audioUi.RenderUi();
             ImGuiRender();
             GizmoManager::GetInstance()->Manipulate(renderData);
             ImGuiEnd(); // this call effectively renders ImGui
+#endif
 
             // End frame and swap buffers (double buffering)
             EndFrame();
@@ -117,10 +123,12 @@ namespace Engine
         //AudioManager::DestroyInstance();
 
         spdlog::info("Freed scene resources.");
-
+#if EDITOR
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
+
         ImGui::DestroyContext();
+#endif
 
         glfwDestroyWindow(Window);
         glfwTerminate();
@@ -185,8 +193,10 @@ namespace Engine
         RenderingManager::Initialize();
         LightManager::Initialize();
         UpdateManager::Initialize();
-        GizmoManager::Initialize();
         Materials::MaterialManager::Initialize();
+#if EDITOR
+        GizmoManager::Initialize();
+#endif
 
         Camera = new class Camera(glm::perspective(glm::radians(70.0f),
                                                    float(WindowWidth) / float(WindowHeight),
@@ -225,6 +235,7 @@ namespace Engine
             Camera->SetPosition(Camera->GetPosition() +
                                 cameraSpeed * glm::normalize(glm::cross(Camera->GetForward(), Camera->GetUp())));
         }
+#if EDITOR
         if (glfwGetKey(Window, GLFW_KEY_E) == GLFW_PRESS && GizmoManager::GetInstance()->GetManaged() != nullptr)
         {
             GizmoManager::GetInstance()->SetCurrentOperation(ImGuizmo::OPERATION::TRANSLATE);
@@ -237,8 +248,10 @@ namespace Engine
         {
             GizmoManager::GetInstance()->SetCurrentOperation(ImGuizmo::OPERATION::SCALE);
         }
+#endif
     }
 
+#if EDITOR
     void Engine::ImGuiInit()
     {
         // Setup Dear ImGui binding
@@ -292,6 +305,7 @@ namespace Engine
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     }
+#endif
 
     void Engine::EndFrame()
     {

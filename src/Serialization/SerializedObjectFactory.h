@@ -6,10 +6,7 @@
 namespace Serialization
 {
     class SerializedObject;
-}
 
-namespace Engine
-{
     class SerializedObjectFactory
     {
     private:
@@ -19,14 +16,14 @@ namespace Engine
             virtual ~ISerializedObjectBuilder() = default;
 
         public:
-            [[nodiscard]] virtual Serialization::SerializedObject* Build() const = 0;
+            [[nodiscard]] virtual SerializedObject* Build() const = 0;
         };
 
         template<class T>
         class SerializedObjectBuilder final : public ISerializedObjectBuilder
         {
         public:
-            [[nodiscard]] Serialization::SerializedObject* Build() const override
+            [[nodiscard]] SerializedObject* Build() const override
             {
                 return new T();
             }
@@ -69,7 +66,7 @@ namespace Engine
          * @param Object Json object to read TypeName from.
          * @return Created object.
          */
-        static Serialization::SerializedObject* CreateObject(const rapidjson::Value& Object);
+        static SerializedObject* CreateObject(const rapidjson::Value& Object);
     };
 
 } // Engine

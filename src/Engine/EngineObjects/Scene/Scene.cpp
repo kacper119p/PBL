@@ -96,7 +96,8 @@ namespace Engine
 
         for (const rapidjson::Value& jsonObject : serializedObjects.GetArray())
         {
-            Serialization::SerializedObject* deserializedObject = SerializedObjectFactory::CreateObject(jsonObject);
+            Serialization::SerializedObject* deserializedObject
+                    = Serialization::SerializedObjectFactory::CreateObject(jsonObject);
             deserializedObject->DeserializeValuePass(jsonObject, referenceTable);
             DeserializationPair pair{jsonObject, deserializedObject};
             objects.emplace_back(pair);

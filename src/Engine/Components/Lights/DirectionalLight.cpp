@@ -10,14 +10,18 @@ namespace Engine
     DirectionalLight::~DirectionalLight()
     {
         LightManager::GetInstance()->UnregisterLight(this);
+#if EDITOR
         LightsGui::UnregisterLight(this);
+#endif
     }
 
     void DirectionalLight::Start()
     {
         Component::Start();
         LightManager::GetInstance()->RegisterLight(this);
+#if EDITOR
         LightsGui::RegisterLight(this);
+#endif
     }
 
     rapidjson::Value DirectionalLight::Serialize(rapidjson::Document::AllocatorType& Allocator) const

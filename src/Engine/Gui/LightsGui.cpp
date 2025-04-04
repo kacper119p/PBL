@@ -1,3 +1,4 @@
+#if EDITOR
 #include <format>
 #include "LightsGui.h"
 #include "imgui.h"
@@ -178,3 +179,4 @@ namespace Engine
         return false;
     }
 } // Engine
+#endif
