@@ -16,6 +16,7 @@
 #include "Scene/SceneBuilder.h"
 #include "Shaders/ShaderManager.h"
 #include "Textures/TextureManager.h"
+#include "Engine/Components/Audio/AudioUi.h"
 #include "tracy/Tracy.hpp"
 
 #if EDITOR
@@ -68,6 +69,8 @@ namespace Engine
         spdlog::info("Successfully built scene.");
 
         float lastFrame = 0.0f;
+        AudioUi audioUi;
+        audioUi.LoadSounds();
         // Main loop
         while (!glfwWindowShouldClose(Window))
         {
@@ -92,9 +95,16 @@ namespace Engine
                                               Camera->GetProjectionMatrix());
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
 
+            AudioManager::GetInstance().SetListenerPosition(Camera->GetPosition().x, Camera->GetPosition().y,
+                                                            Camera->GetPosition().z);
+            AudioManager::GetInstance().SetListenerOrientation(Camera->GetForward().x, Camera->GetForward().y,
+                                                               Camera->GetForward().z, Camera->GetUp().x,
+                                                               Camera->GetUp().y, Camera->GetUp().z);
+
 #if EDITOR
             // Draw ImGui
             ImGuiBegin();
+            audioUi.RenderUi();
             ImGuiRender();
             GizmoManager::GetInstance()->Manipulate(renderData);
             ImGuiEnd(); // this call effectively renders ImGui
@@ -109,6 +119,8 @@ namespace Engine
 
         // Cleanup
         FreeResources();
+
+        //AudioManager::DestroyInstance();
 
         spdlog::info("Freed scene resources.");
 #if EDITOR
