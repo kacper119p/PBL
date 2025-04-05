@@ -26,12 +26,6 @@ namespace Engine
          */
         AudioManager();
 
-        /**
-         * @brief Private destructor.
-         * Cleans up resources and shuts down MiniAudio.
-         */
-        ~AudioManager();
-
     public:
         /**
          * @brief Returns the Singleton instance.

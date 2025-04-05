@@ -5,21 +5,10 @@ Engine::AudioManager* Engine::AudioManager::Instance = nullptr;
 
 Engine::AudioManager::AudioManager()
 {
-    ma_engine_config engineConfig = ma_engine_config_init();
-    if (ma_engine_init(&engineConfig, &Engine) != MA_SUCCESS)
+    if (ma_engine_init(nullptr, &Engine) != MA_SUCCESS)
     {
         spdlog::error("Failed to initialize MiniAudio engine!");
     }
-
-    if (ma_engine_start(&Engine) != MA_SUCCESS)
-    {
-        spdlog::error("Failed to start MiniAudio engine!");
-    }
-}
-
-Engine::AudioManager::~AudioManager()
-{
-    ma_engine_uninit(&Engine);
 }
 
 Engine::AudioManager& Engine::AudioManager::GetInstance()
