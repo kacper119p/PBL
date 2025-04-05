@@ -47,6 +47,7 @@ endif ()
 # Link libraries
 find_package(rapidjson CONFIG REQUIRED)
 find_package(Tracy CONFIG REQUIRED)
+find_package(Freetype REQUIRED)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ${OPENGL_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} PRIVATE glad)
@@ -55,6 +56,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE assimp)
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)
 target_link_libraries(${PROJECT_NAME} PRIVATE rapidjson)
+target_link_libraries(${PROJECT_NAME} PRIVATE Freetype::Freetype)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Tracy::TracyClient)
 target_link_libraries(${PROJECT_NAME} PRIVATE spdlog)
