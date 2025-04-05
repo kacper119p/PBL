@@ -253,6 +253,8 @@ namespace Engine
 
         // Setup style
         ImGui::StyleColorsDark();
+
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     }
 
     void Engine::ImGuiBegin()
