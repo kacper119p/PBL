@@ -1,6 +1,6 @@
 #include "AudioManager.h"
-#include <iostream>
-#include <spdlog/spdlog.h>
+#include "spdlog/spdlog.h"
+
 Engine::AudioManager* Engine::AudioManager::Instance = nullptr;
 
 Engine::AudioManager::AudioManager()
@@ -8,18 +8,17 @@ Engine::AudioManager::AudioManager()
     ma_engine_config engineConfig = ma_engine_config_init();
     if (ma_engine_init(&engineConfig, &Engine) != MA_SUCCESS)
     {
-        std::cerr << "Failed to initialize MiniAudio engine!" << std::endl;
+        spdlog::error("Failed to initialize MiniAudio engine!");
+    }
+
+    if (ma_engine_start(&Engine) != MA_SUCCESS)
+    {
+        spdlog::error("Failed to start MiniAudio engine!");
     }
 }
 
 Engine::AudioManager::~AudioManager()
 {
-    for (auto& [id, sound] : Sounds)
-    {
-        ma_sound_uninit(sound.get());
-    }
-    Sounds.clear();
-
     ma_engine_uninit(&Engine);
 }
 
@@ -52,7 +51,7 @@ bool Engine::AudioManager::LoadSound(const std::string& Filename, const std::str
 
     if (ma_sound_init_from_file(&Engine, Filename.c_str(), 0, nullptr, nullptr, newSound) != MA_SUCCESS)
     {
-        std::cerr << "Failed to load audio file: " << Filename << std::endl;
+        spdlog::error("Failed to load audio file: {}", Filename);
         delete newSound;
         return false;
     }
@@ -78,7 +77,7 @@ void Engine::AudioManager::PlayAudio(const std::string& Id)
     }
     else
     {
-        std::cerr << "Sound with ID '" << Id << "' not found!" << std::endl;
+        spdlog::error("Sound with ID '{}' not found!", Id);
     }
 }
 
@@ -96,7 +95,7 @@ void Engine::AudioManager::SetVolume(const std::string& Id, float Volume)
     }
     else
     {
-        std::cerr << "Sound with ID '" << Id << "' not found!" << std::endl;
+        spdlog::error("Sound with ID '{}' not found!", Id);
     }
 }
 
@@ -109,7 +108,7 @@ void Engine::AudioManager::PauseSound(const std::string& Id)
     }
     else
     {
-        std::cerr << "Sound with ID '" << Id << "' not found!" << std::endl;
+        spdlog::error("Sound with ID '{}' not found!", Id);
     }
 }
 
@@ -123,7 +122,7 @@ void Engine::AudioManager::StopSound(const std::string& Id)
     }
     else
     {
-        std::cerr << "Sound with ID '" << Id << "' not found!" << std::endl;
+        spdlog::error("Sound with ID '{}' not found!", Id);
     }
 }
 
@@ -136,7 +135,7 @@ void Engine::AudioManager::SetLooping(const std::string& Id, bool Loop)
     }
     else
     {
-        std::cerr << "Sound with ID '" << Id << "' not found!" << std::endl;
+        spdlog::error("Sound with ID '{}' not found!", Id);
     }
 }
 
@@ -161,7 +160,7 @@ void Engine::AudioManager::SetSoundPosition(const std::string& Id, float X, floa
     }
     else
     {
-        std::cerr << "Sound with ID '" << Id << "' not found!" << std::endl;
+        spdlog::error("Sound with ID '{}' not found!", Id);
     }
 }
 
@@ -177,6 +176,6 @@ void Engine::AudioManager::ConfigureSoundAttenuation(const std::string& Id, floa
     }
     else
     {
-        std::cerr << "Sound with ID '" << Id << "' not found!" << std::endl;
+        spdlog::error("Sound with ID '{}' not found!", Id);
     }
 }

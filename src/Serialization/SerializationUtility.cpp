@@ -183,6 +183,16 @@ namespace Serialization
         Value = iterator->value.GetFloat();
     }
 
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, bool& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsBool())
+        {
+            return;
+        }
+        Value = iterator->value.GetBool();
+    }
+
     void Deserialize(const rapidjson::Value& Object, const char* Name, glm::vec4& Value)
     {
         const auto iterator = Object.FindMember(Name);

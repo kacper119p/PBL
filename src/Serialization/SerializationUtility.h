@@ -78,6 +78,8 @@ namespace Serialization
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, float& Value);
 
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, bool& Value);
+
     void Deserialize(const rapidjson::Value& Object, const char* Name, glm::vec4& Value);
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, glm::vec3& Value);

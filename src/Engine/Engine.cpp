@@ -52,6 +52,10 @@ namespace Engine
 #if EDITOR
         ImGuiInit();
         spdlog::info("Initialized ImGui.");
+
+        AudioUi audioUi;
+        audioUi.LoadSounds();
+        spdlog::info("Sounds loaded.");
 #endif
 
         Camera->SetProjectionMatrix(glm::perspective(glm::radians(70.0f), float(WindowWidth) /
@@ -69,10 +73,7 @@ namespace Engine
         spdlog::info("Successfully built scene.");
 
         float lastFrame = 0.0f;
-#if EDITOR
-        AudioUi audioUi;
-        audioUi.LoadSounds();
-#endif
+
         // Main loop
         while (!glfwWindowShouldClose(Window))
         {
@@ -121,8 +122,7 @@ namespace Engine
 
         // Cleanup
         FreeResources();
-
-        //AudioManager::DestroyInstance();
+        AudioManager::DestroyInstance();
 
         spdlog::info("Freed scene resources.");
 #if EDITOR
