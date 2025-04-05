@@ -2,13 +2,25 @@
 #define COLLIDER_H
 
 #include <functional>
+#include "BoxCollider.h"
+#include "CapsuleCollider.h"
 #include "Component.h"
+#include "MeshCollider.h"
+#include "SphereCollider.h"
 #include "Transform.h"
+#include "src/events/Event.h" // Zak³adam, ¿e Event.h zawiera definicjê systemu eventów
 
 using namespace Engine;
 
 class Collider : public Component
 {
+private:
+    bool isTrigger;
+    Transform* transform;
+
+    Event<Collider*> onCollisionEnter;
+    Event<Collider*> onCollisionExit;
+
 public:
     Collider();
     Collider(Transform* transform, bool isTrigger = false);
@@ -23,25 +35,19 @@ public:
     void SetTransform(Transform* transform);
     Transform* GetTransform() const;
 
-    void SetOnCollisionEnter(const std::function<void(Collider*)>& callback);
-    std::function<void(Collider*)> GetOnCollisionEnter() const;
+    void AddOnCollisionEnterListener(const std::function<void(Collider*)>& listener);
+    void RemoveOnCollisionEnterListener(const std::function<void(Collider*)>& listener);
 
-    void SetOnCollisionExit(const std::function<void(Collider*)>& callback);
-    std::function<void(Collider*)> GetOnCollisionExit() const;
+    void AddOnCollisionExitListener(const std::function<void(Collider*)>& listener);
+    void RemoveOnCollisionExitListener(const std::function<void(Collider*)>& listener);
 
-    static MeshCollider* CreateMeshCollider(Transform* transform, bool isTrigger = false, float scale = 1.0f);
+    static MeshCollider* CreateMeshCollider(Transform* transform, bool isTrigger = false, float xScale = 1.0f,
+                                            float yScale = 1.0f, float zScale = 1.0f, Engine::Mesh* mesh_p = nullptr);
     static BoxCollider* CreateBoxCollider(Transform* transform, bool isTrigger = false, float width = 1.0f,
                                           float height = 1.0f, float depth = 1.0f);
     static SphereCollider* CreateSphereCollider(Transform* transform, bool isTrigger = false, float radius = 1.0f);
     static CapsuleCollider* CreateCapsuleCollider(Transform* transform, bool isTrigger = false, float radius = 1.0f,
                                                   float height = 2.0f);
-
-private:
-    bool isTrigger;
-    Transform* transform;
-
-    std::function<void(Collider*)> onCollisionEnter;
-    std::function<void(Collider*)> onCollisionExit;
 };
 
 inline Collider::Collider() : isTrigger(false), transform(nullptr) {}
@@ -56,20 +62,30 @@ inline void Collider::SetTransform(Transform* transform) { this->transform = tra
 
 inline Transform* Collider::GetTransform() const { return transform; }
 
-inline void Collider::SetOnCollisionEnter(const std::function<void(Collider*)>& callback)
+inline void Collider::AddOnCollisionEnterListener(const std::function<void(Collider*)>& listener)
 {
-    onCollisionEnter = callback;
+    onCollisionEnter.AddListener(listener);
 }
 
-inline std::function<void(Collider*)> Collider::GetOnCollisionEnter() const { return onCollisionEnter; }
-
-inline void Collider::SetOnCollisionExit(const std::function<void(Collider*)>& callback) { onCollisionExit = callback; }
-
-inline std::function<void(Collider*)> Collider::GetOnCollisionExit() const { return onCollisionExit; }
-
-inline MeshCollider* Collider::CreateMeshCollider(Transform* transform, bool isTrigger, float scale)
+inline void Collider::RemoveOnCollisionEnterListener(const std::function<void(Collider*)>& listener)
 {
-    return new MeshCollider(transform, isTrigger, scale);
+    onCollisionEnter.RemoveListener(listener);
+}
+
+inline void Collider::AddOnCollisionExitListener(const std::function<void(Collider*)>& listener)
+{
+    onCollisionExit.AddListener(listener);
+}
+
+inline void Collider::RemoveOnCollisionExitListener(const std::function<void(Collider*)>& listener)
+{
+    onCollisionExit.RemoveListener(listener);
+}
+
+inline MeshCollider* Collider::CreateMeshCollider(Transform* transform, bool isTrigger, float xScale, float yScale,
+                                                  float zScale, Engine::Mesh* mesh_p)
+{
+    return new MeshCollider(transform, isTrigger, xScale, yScale, zScale, mesh_p);
 }
 
 inline BoxCollider* Collider::CreateBoxCollider(Transform* transform, bool isTrigger, float width, float height,

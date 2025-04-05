@@ -5,11 +5,15 @@
 
 class SphereCollider : public Collider
 {
+
 public:
-    SphereCollider(Transform* transform, bool isTrigger = false, float radius = 1.0f);
-    virtual bool CheckCollision(const Collider& other) override;
 
     float radius;
+
+    SphereCollider(Transform* transform, bool isTrigger = false, float radius = 1.0f);
+
+    virtual bool CheckCollision(const Collider& other) override;
+
 };
 
 #endif // SPHERE_COLLIDER_H
