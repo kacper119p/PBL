@@ -1,9 +1,12 @@
 #include "CapsuleCollider.h"
 
-CapsuleCollider::CapsuleCollider(Transform* transform, bool isTrigger) : Collider(transform, isTrigger) {}
+CapsuleCollider::CapsuleCollider(Transform* transform, bool isTrigger, float radius, float height) :
+    Collider(transform, isTrigger), _radius(radius), _height(height)
+{
+}
 
 bool CapsuleCollider::CheckCollision(const Collider& other)
 {
-    // Implementacja sprawdzania kolizji dla CapsuleCollider
+    // TODO: implement collision detection for CapsuleCollider
     return false;
 }

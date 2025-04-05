@@ -16,30 +16,43 @@ void Collider::SetTransform(Transform* transform) { this->transform = transform;
 
 Transform* Collider::GetTransform() const { return transform; }
 
-void Collider::SetOnCollisionEnter(const std::function<void(Collider*)>& callback) { onCollisionEnter = callback; }
-
-std::function<void(Collider*)> Collider::GetOnCollisionEnter() const { return onCollisionEnter; }
-
-void Collider::SetOnCollisionExit(const std::function<void(Collider*)>& callback) { onCollisionExit = callback; }
-
-std::function<void(Collider*)> Collider::GetOnCollisionExit() const { return onCollisionExit; }
-
-MeshCollider* Collider::CreateMeshCollider(Transform* transform, bool isTrigger)
+void Collider::AddOnCollisionEnterListener(const std::function<void(Collider*)>& listener)
 {
-    return new MeshCollider(transform, isTrigger);
+    onCollisionEnter.AddListener(listener);
 }
 
-BoxCollider* Collider::CreateBoxCollider(Transform* transform, bool isTrigger)
+void Collider::RemoveOnCollisionEnterListener(const std::function<void(Collider*)>& listener)
 {
-    return new BoxCollider(transform, isTrigger);
+    onCollisionEnter.RemoveListener(listener);
 }
 
-SphereCollider* Collider::CreateSphereCollider(Transform* transform, bool isTrigger)
+void Collider::AddOnCollisionExitListener(const std::function<void(Collider*)>& listener)
 {
-    return new SphereCollider(transform, isTrigger);
+    onCollisionExit.AddListener(listener);
 }
 
-CapsuleCollider* Collider::CreateCapsuleCollider(Transform* transform, bool isTrigger)
+void Collider::RemoveOnCollisionExitListener(const std::function<void(Collider*)>& listener)
 {
-    return new CapsuleCollider(transform, isTrigger);
+    onCollisionExit.RemoveListener(listener);
+}
+
+MeshCollider* Collider::CreateMeshCollider(Transform* transform, bool isTrigger, float xScale, float yScale,
+                                           float zScale, Engine::Mesh* mesh_p)
+{
+    return new MeshCollider(transform, isTrigger, xScale, yScale, zScale, mesh_p);
+}
+
+BoxCollider* Collider::CreateBoxCollider(Transform* transform, bool isTrigger, float width, float height, float depth)
+{
+    return new BoxCollider(transform, isTrigger, width, height, depth);
+}
+
+SphereCollider* Collider::CreateSphereCollider(Transform* transform, bool isTrigger, float radius)
+{
+    return new SphereCollider(transform, isTrigger, radius);
+}
+
+CapsuleCollider* Collider::CreateCapsuleCollider(Transform* transform, bool isTrigger, float radius, float height)
+{
+    return new CapsuleCollider(transform, isTrigger, radius, height);
 }
