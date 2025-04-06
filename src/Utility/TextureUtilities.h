@@ -8,6 +8,9 @@ namespace Utility
     [[nodiscard]] unsigned int LoadTexture2DFromFile(const char* FilePath, GLenum Format,
                                                      uint8_t SourceChannels, GLenum SourceFormat);
 
+    [[nodiscard]] unsigned int LoadTexture2DFromFile(const char* FilePath, GLenum Format, uint8_t SourceChannels,
+                                                     GLenum SourceFormat, int& OutWidth, int& OutHeight);
+
     [[nodiscard]] unsigned int LoadHdrCubeMapFromFile(const char* FilePath);
 
     [[nodiscard]] unsigned int IrradianceMapFromEnvironmentMap(unsigned int EnvironmentMap);
