@@ -1,18 +1,31 @@
-#ifndef CAPSULE_COLLIDER_H
-#define CAPSULE_COLLIDER_H
-
+#pragma once
 #include "Collider.h"
 
-class CapsuleCollider : public Collider
+namespace Engine
 {
-private:
-    float _radius;
-    float _height;
+    /**
+     * @brief Capsule collider class.
+     * @details Represents a capsule-shaped collider.
+     */
+    class CapsuleCollider : public Collider
+    {
+    private:
+        float _radius;
+        float _height;
 
-public:
-    CapsuleCollider(Transform* transform, bool isTrigger = false, float radius = 1.0f, float height = 2.0f);
-    virtual bool CheckCollision(const Collider& other) override;
-    
-};
+    public:
+        CapsuleCollider() = default;
+        CapsuleCollider(Transform* transform, bool isTrigger = false, float radius = 1.0f, float height = 2.0f);
+        virtual bool CheckCollision(const Collider& other) override;
+        inline virtual Collider* GetInstance() override { return this; }
 
-#endif // CAPSULE_COLLIDER_H
+        float GetRadius() const;
+        void SetRadius(float radius);
+
+        float GetHeight() const;
+        void SetHeight(float height);
+
+        CapsuleCollider& operator=(const CapsuleCollider& other);
+    };
+
+} // namespace Engine
