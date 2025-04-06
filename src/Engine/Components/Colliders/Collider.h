@@ -5,7 +5,7 @@
 
 #include "Events/TAction.h"
 #include "Events/TEvent.h"
-
+#include "ColliderVisitor.h"
 namespace Engine
 {
     /*
@@ -28,6 +28,7 @@ namespace Engine
         Collider(Transform* transform, bool isTrigger = false);
         virtual ~Collider() = default;
 
+        virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
         virtual bool CheckCollision(const Collider& other) = 0;
 
         void SetTrigger(bool isTrigger);

@@ -7,6 +7,12 @@ namespace Engine
     {
     }
 
+    bool BoxCollider::AcceptCollision(ColliderVisitor& visitor)
+    {
+        visitor.VisitBox(*this);
+        return true;
+    }
+
     bool BoxCollider::CheckCollision(const Collider& other)
     {
         if (isStatic || other.IsStatic()) 

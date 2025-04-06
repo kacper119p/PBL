@@ -7,6 +7,12 @@ namespace Engine
     {
     }
 
+    bool SphereCollider::AcceptCollision(ColliderVisitor& visitor)
+    {
+        visitor.VisitSphere(*this);
+        return true;
+    }
+
     bool SphereCollider::CheckCollision(const Collider& other)
     {
         if (isStatic || other.IsStatic())
