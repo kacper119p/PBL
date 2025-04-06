@@ -18,8 +18,7 @@ Engine::AudioManager::~AudioManager()
 {
     for (auto& sound : Sounds)
     {
-
-        ma_sound_uninit(sound.get());
+        ma_sound_uninit(sound.second.get());
     }
     Sounds.clear();
 
@@ -55,7 +54,7 @@ bool Engine::AudioManager::LoadSound(const std::string& Filename, ma_sound& Soun
     return true;
 }
 
-std::vector<std::shared_ptr<ma_sound>> Engine::AudioManager::GetLoadedSounds() const
+std::map<std::string, std::shared_ptr<ma_sound>> Engine::AudioManager::GetLoadedSounds() const
 {
     return Sounds;
 }
@@ -64,17 +63,17 @@ void Engine::AudioManager::LoadSounds()
 {
     std::string soundDir = "./res/sounds";
 
-
     for (const auto& entry : std::filesystem::directory_iterator(soundDir))
     {
         if (entry.is_regular_file())
         {
             std::string filePath = entry.path().string();
+            std::string fileId = entry.path().stem().string();
 
-            auto sound = std::make_unique<ma_sound>();
+            auto sound = std::make_shared<ma_sound>();
             if (LoadSound(filePath, *sound))
             {
-                Sounds.push_back(std::move(sound));
+                Sounds[fileId] = sound;
             }
         }
     }

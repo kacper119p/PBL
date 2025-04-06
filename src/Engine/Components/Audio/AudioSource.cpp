@@ -20,16 +20,39 @@ void Engine::AudioSource::RenderAudioSourceImGui()
 
     if (ImGui::BeginListBox("Loaded Sounds"))
     {
-        for (size_t i = 0; i < AudioManager.GetLoadedSounds().size(); ++i)
+        bool isNoneSelected = (SelectedSound == nullptr);
+        if (ImGui::Selectable("None", isNoneSelected))
         {
-            ma_sound* sound = AudioManager.GetLoadedSounds()[i].get();
-            bool isSelected = (SelectedSound == sound);
-            if (ImGui::Selectable(std::to_string(i).c_str(), isSelected))
+            if (SelectedSound)
             {
+                AudioManager.StopSound(*SelectedSound);
+                ResetAudioSettings();
+            }
+            SelectedSound = nullptr;
+        }
+
+        for (const auto& soundPair : AudioManager.GetLoadedSounds())
+        {
+            std::string soundId = soundPair.first;
+            ma_sound* sound = soundPair.second.get();
+            bool isSelected = (SelectedSound == sound);
+
+            if (ImGui::Selectable(soundId.c_str(), isSelected))
+            {
+                if (SelectedSound)
+                {
+                    AudioManager.StopSound(*SelectedSound);
+                    ResetAudioSettings();
+                }
+
                 SelectedSound = sound;
-                AudioManager.SetSoundPosition(*SelectedSound, GetOwner()->GetTransform()->GetPosition());
+
+                ResetAudioSettings();
+
+                AudioManager.SetSoundPosition(*SelectedSound, this->GetOwner()->GetTransform()->GetPosition());
             }
         }
+
         ImGui::EndListBox();
     }
 
@@ -77,6 +100,10 @@ void Engine::AudioSource::RenderAudioSourceImGui()
             AudioManager.ConfigureSoundAttenuation(*SelectedSound, MinDist, MaxDist, RollOff);
         }
     }
+    else
+    {
+        ImGui::Text("No sound selected.");
+    }
 
     ImGui::End();
 }
@@ -86,12 +113,20 @@ void Engine::AudioSource::SelectEntityForAudioControl(Entity* Entity)
     if (Entity != nullptr)
     {
         IsEntitySelected = true;
-        AudioManager.SetSoundPosition(*SelectedSound, Entity->GetTransform()->GetPosition());
     }
     else
     {
         IsEntitySelected = false;
     }
+}
+
+void Engine::AudioSource::ResetAudioSettings()
+{
+    SoundVolume = 1.0f;
+    Looping = false;
+    MinDist = 1.0f;
+    MaxDist = 100.0f;
+    RollOff = 1.0f;
 }
 
 rapidjson::Value Engine::AudioSource::Serialize(rapidjson::Document::AllocatorType& Allocator) const

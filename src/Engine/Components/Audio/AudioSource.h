@@ -33,6 +33,7 @@ namespace Engine
     public:
         /**
          * @brief Constructs the AudioSource component.
+         *
          * Acquires a reference to the global AudioManager instance.
          */
         AudioSource();
@@ -44,8 +45,14 @@ namespace Engine
 
         /**
          * @brief Marks this audio source's entity as selected or not.
+         *
          * @param Entity Pointer to the currently selected entity, or nullptr to deselect.
          */
         void SelectEntityForAudioControl(Entity* Entity);
+
+        /**
+         * @brief Resets settings of sounds in the ImGui interface to default.
+         */
+        void ResetAudioSettings();
     };
 }

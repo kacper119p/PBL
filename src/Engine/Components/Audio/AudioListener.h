@@ -17,6 +17,7 @@ namespace Engine
     public:
         /**
          * @brief Constructs the AudioListener using a reference to a Camera.
+         *
          * @param Camera The camera to synchronize the audio listener with.
          */
         AudioListener(Camera& Camera);

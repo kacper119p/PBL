@@ -3,6 +3,7 @@
 #include <miniaudio.h>
 #include <filesystem>
 #include <glm/glm.hpp>
+#include <map>
 
 namespace Engine
 {
@@ -18,12 +19,12 @@ namespace Engine
 
         ma_engine Engine; ///< MiniAudio engine instance used for handling audio playback.
 
-        std::vector<std::shared_ptr<ma_sound>> Sounds; ///< Container holding all loaded sounds.
+        std::map<std::string, std::shared_ptr<ma_sound>> Sounds;
+        ///< Container holding all loaded sounds, mapped by filename.
 
         /**
          * @brief Constructs the AudioManager and initializes the MiniAudio engine.
          *
-         * This constructor is private to enforce the Singleton pattern.
          */
         AudioManager();
 
@@ -63,7 +64,7 @@ namespace Engine
          *
          * @return Vector of shared pointers to ma_sound objects.
          */
-        std::vector<std::shared_ptr<ma_sound>> GetLoadedSounds() const;
+        std::map<std::string, std::shared_ptr<ma_sound>> GetLoadedSounds() const;
 
         /**
          * @brief Loads predefined or batch sounds into the manager.
