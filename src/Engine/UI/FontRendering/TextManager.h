@@ -1,17 +1,21 @@
 #pragma once
 
 #include <cstdint>
+#include <string>
+
+#include "Font.h"
+#include "FontId.h"
 
 namespace Engine::Ui
 {
     class TextManager
     {
     private:
-        static constexpr uint8_t MaxSupportedFaces = 32;
-
+        static constexpr uint8_t MaxSupportedFonts = 8;
         static TextManager* Instance;
 
-        uint8_t FacesTopPointer = 0;
+        Font Fonts[MaxSupportedFonts]{};
+        uint8_t FontTopPointer = 0;
 
     private:
         TextManager();
@@ -21,7 +25,9 @@ namespace Engine::Ui
 
         static void Shutdown();
 
+        static FontId GetFontId(const std::string& Name);
 
+        static Font* GetFont(FontId Id);
     };
 
 }

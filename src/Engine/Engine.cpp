@@ -16,6 +16,7 @@
 #include "Scene/SceneBuilder.h"
 #include "Shaders/ShaderManager.h"
 #include "Textures/TextureManager.h"
+#include "UI/FontRendering/TextManager.h"
 #include "tracy/Tracy.hpp"
 
 #if EDITOR
@@ -182,6 +183,7 @@ namespace Engine
         LightManager::Initialize();
         UpdateManager::Initialize();
         Materials::MaterialManager::Initialize();
+        Ui::TextManager::Initialize();
 #if EDITOR
         GizmoManager::Initialize();
 #endif
