@@ -16,7 +16,8 @@
 #include "Scene/SceneBuilder.h"
 #include "Shaders/ShaderManager.h"
 #include "Textures/TextureManager.h"
-#include "Engine/Components/Audio/AudioUi.h"
+#include "Engine/Components/Audio/AudioSource.h"
+#include "Engine/Components/Audio/AudioListener.h"
 #include "tracy/Tracy.hpp"
 
 #if EDITOR
@@ -52,14 +53,14 @@ namespace Engine
 #if EDITOR
         ImGuiInit();
         spdlog::info("Initialized ImGui.");
-
-        AudioUi audioUi;
-        audioUi.LoadSounds();
-        spdlog::info("Sounds loaded.");
 #endif
 
         Camera->SetProjectionMatrix(glm::perspective(glm::radians(70.0f), float(WindowWidth) /
                                                                           float(WindowHeight), 0.1f, 1000.0f));
+
+        AudioListener audioListener(*Camera);
+        AudioSource audioSource;
+        spdlog::info("Sounds loaded.");
 
         try
         {
@@ -97,17 +98,13 @@ namespace Engine
             const CameraRenderData renderData(Camera->GetPosition(), Camera->GetTransform(),
                                               Camera->GetProjectionMatrix());
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
-
-            AudioManager::GetInstance().SetListenerPosition(Camera->GetPosition().x, Camera->GetPosition().y,
-                                                            Camera->GetPosition().z);
-            AudioManager::GetInstance().SetListenerOrientation(Camera->GetForward().x, Camera->GetForward().y,
-                                                               Camera->GetForward().z, Camera->GetUp().x,
-                                                               Camera->GetUp().y, Camera->GetUp().z);
+            audioListener.UpdateListener();
 
 #if EDITOR
             // Draw ImGui
             ImGuiBegin();
-            audioUi.RenderUi();
+            audioSource.RenderAudioSourceImGui();
+            AudioManager::GetInstance().RenderGlobalVolumeImGui();
             ImGuiRender();
             GizmoManager::GetInstance()->Manipulate(renderData);
             ImGuiEnd(); // this call effectively renders ImGui
@@ -122,7 +119,6 @@ namespace Engine
 
         // Cleanup
         FreeResources();
-        AudioManager::DestroyInstance();
 
         spdlog::info("Freed scene resources.");
 #if EDITOR
@@ -323,6 +319,7 @@ namespace Engine
         Shaders::ShaderManager::FreeResources();
         Models::ModelManager::DeleteAllModels();
         Materials::MaterialManager::DeleteAllMaterials();
+        AudioManager::DestroyInstance();
     }
 
     void Engine::GlfwErrorCallback(int Error, const char* Description)

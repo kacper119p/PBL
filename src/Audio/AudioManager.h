@@ -1,145 +1,164 @@
 #pragma once
 
-#include <memory>
 #include <miniaudio.h>
-#include <string>
-#include <unordered_map>
+#include <filesystem>
+#include <glm/glm.hpp>
 
 namespace Engine
 {
     /**
-     * @brief Class for managing audio using MiniAudio.
+     * @brief Manages all audio operations using MiniAudio.
      *
-     * This class implements the Singleton pattern for handling audio in the application.
+     * AudioManager is a Singleton class responsible for managing all sound-related functionality.
      */
     class AudioManager
     {
     private:
-        static AudioManager* Instance; ///< Singleton instance.
+        static AudioManager* Instance; ///< Singleton instance of the AudioManager.
 
-        ma_engine Engine; ///< MiniAudio engine for sound playback.
-        std::unordered_map<std::string, std::shared_ptr<ma_sound>> Sounds; ///< Map of sounds indexed by string ID.
+        ma_engine Engine; ///< MiniAudio engine instance used for handling audio playback.
+
+        std::vector<std::shared_ptr<ma_sound>> Sounds; ///< Container holding all loaded sounds.
 
         /**
-         * @brief Private constructor.
-         * Initializes the MiniAudio engine.
+         * @brief Constructs the AudioManager and initializes the MiniAudio engine.
+         *
+         * This constructor is private to enforce the Singleton pattern.
          */
         AudioManager();
 
+        /**
+         * @brief Destructor.
+         *
+         * Cleans up the MiniAudio engine and deallocates any loaded sounds.
+         */
+        ~AudioManager();
+
     public:
         /**
-         * @brief Returns the Singleton instance.
+         * @brief Retrieves the singleton instance of the AudioManager.
          *
-         * @return AudioManager& The instance of AudioManager.
+         * @return Reference to the AudioManager instance.
          */
         static AudioManager& GetInstance();
 
         /**
-         * @brief Destroys the Singleton instance.
+         * @brief Destroys the singleton instance of the AudioManager.
          *
-         * Deletes the instance and frees any resources.
+         * Frees all associated resources and deinitializes the audio engine.
          */
         static void DestroyInstance();
 
         /**
-         * @brief Retrieves the map of loaded sounds.
+         * @brief Loads a single sound file into memory.
          *
-         * @return Sounds
+         * @param Filename Path to the audio file to be loaded.
+         * @param Sound Output reference to the created sound object.
+         * @return true if the sound was successfully loaded, false otherwise.
          */
-        std::unordered_map<std::string, std::shared_ptr<ma_sound>> GetSounds();
+        bool LoadSound(const std::string& Filename, ma_sound& Sound);
 
         /**
-         * @brief Loads an audio file with a specific ID.
+         * @brief Returns the collection of all currently loaded sounds.
          *
-         * @param Filename The path to the audio file.
-         * @param Id The unique string ID for the sound.
-         * @return true If the file was successfully loaded, false otherwise.
+         * @return Vector of shared pointers to ma_sound objects.
          */
-        bool LoadSound(const std::string& Filename, const std::string& Id);
+        std::vector<std::shared_ptr<ma_sound>> GetLoadedSounds() const;
 
         /**
-         * @brief Plays or resumes a sound based on its ID.
+         * @brief Loads predefined or batch sounds into the manager.
          *
-         * @param Id The string ID of the sound to play.
+         * This function can be used to initialize a group of audio assets at once.
          */
-        void PlayAudio(const std::string& Id);
+        void LoadSounds();
 
         /**
-         * @brief Sets the global volume.
+         * @brief Plays or resumes playback of the specified sound.
          *
-         * @param Volume The volume level (0.0 to 1.0).
+         * @param Sound The sound object to play.
          */
-        void SetVolumeGlobal(float Volume);
+        void PlayAudio(ma_sound& Sound);
 
         /**
-         * @brief Sets the volume for a specific sound.
+         * @brief Pauses playback of the specified sound.
          *
-         * @param Id The string ID of the sound.
-         * @param Volume The volume level (0.0 to 1.0).
+         * @param Sound The sound object to pause.
          */
-        void SetVolume(const std::string& Id, float Volume);
+        void PauseSound(ma_sound& Sound);
 
         /**
-         * @brief Pauses a sound based on its ID.
+         * @brief Stops playback of the specified sound.
          *
-         * @param Id The string ID of the sound to pause.
+         * @param Sound The sound object to stop.
          */
-        void PauseSound(const std::string& Id);
+        void StopSound(ma_sound& Sound);
 
         /**
-         * @brief Stops a sound based on its ID.
+         * @brief Sets whether a sound should loop when it reaches the end.
          *
-         * @param Id The string ID of the sound to stop.
+         * @param Sound The sound to configure.
+         * @param Looping True to enable looping; false to disable.
          */
-        void StopSound(const std::string& Id);
+        void SetLooping(ma_sound& Sound, bool Looping);
 
         /**
-         * @brief Sets whether a sound should loop.
+         * @brief Sets the volume level of the specified sound.
          *
-         * @param Id The string ID of the sound.
-         * @param Loop True to enable looping, false to disable.
+         * @param Sound The sound to modify.
+         * @param Volume The volume value in range [0.0, 1.0].
          */
-        void SetLooping(const std::string& Id, bool Loop);
+        void SetVolume(ma_sound& Sound, float Volume);
+
+        /**
+         * @brief Retrieves the global output volume.
+         *
+         * @return Global volume in range [0.0, 1.0].
+         */
+        float GetGlobalVolume();
+
+        /**
+         * @brief Sets the global output volume.
+         *
+         * @param Volume Volume level in range [0.0, 1.0].
+         */
+        void SetGlobalVolume(float Volume);
 
         /**
          * @brief Sets the listener's position in 3D space.
          *
-         * @param X X coordinate.
-         * @param Y Y coordinate.
-         * @param Z Z coordinate.
+         * @param Position 3D coordinates representing the listener's position.
          */
-        void SetListenerPosition(float X, float Y, float Z);
+        void SetListenerPosition(const glm::vec3& Position);
 
         /**
-         * @brief Sets the listener's orientation in 3D space.
+         * @brief Sets the listener's orientation based on forward and up vectors.
          *
-         * @param ForwardX X component of the forward vector.
-         * @param ForwardY Y component of the forward vector.
-         * @param ForwardZ Z component of the forward vector.
-         * @param UpX X component of the up vector.
-         * @param UpY Y component of the up vector.
-         * @param UpZ Z component of the up vector.
+         * @param Forward Vector representing the listener's facing direction.
+         * @param Up Vector representing the listener's upward direction.
          */
-        void SetListenerOrientation(float ForwardX, float ForwardY, float ForwardZ, float UpX, float UpY, float UpZ);
+        void SetListenerOrientation(glm::vec3 Forward, glm::vec3 Up);
 
         /**
-         * @brief Sets the position of a specific sound in 3D space.
+         * @brief Sets the position of a sound in 3D space.
          *
-         * @param Id The string ID of the sound.
-         * @param X X coordinate.
-         * @param Y Y coordinate.
-         * @param Z Z coordinate.
+         * @param Sound The sound to position.
+         * @param Position World-space position of the sound.
          */
-        void SetSoundPosition(const std::string& Id, float X, float Y, float Z);
+        void SetSoundPosition(ma_sound& Sound, const glm::vec3& Position);
 
         /**
-         * @brief Configures the attenuation of a 3D sound.
+         * @brief Configures distance attenuation parameters for 3D audio.
          *
-         * @param Id The identifier of the sound.
-         * @param MinDist The minimum distance at which the sound is at full volume.
-         * @param MaxDist The maximum distance beyond which the sound becomes inaudible.
+         * @param Sound The sound to apply attenuation to.
+         * @param MinDist Minimum distance for full volume.
+         * @param MaxDist Maximum distance beyond which the sound is inaudible.
+         * @param RollOff Attenuation roll-off factor.
          */
-        void ConfigureSoundAttenuation(const std::string& Id, float MinDist, float MaxDist);
+        void ConfigureSoundAttenuation(ma_sound& Sound, float MinDist, float MaxDist, float RollOff);
 
+        /**
+         * @brief Renders a separate ImGui window to control the global volume.
+         */
+        static void RenderGlobalVolumeImGui();
     };
 }

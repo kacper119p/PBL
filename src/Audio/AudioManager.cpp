@@ -1,5 +1,6 @@
 #include "AudioManager.h"
 #include "spdlog/spdlog.h"
+#include "imgui.h"
 
 Engine::AudioManager* Engine::AudioManager::Instance = nullptr;
 
@@ -9,6 +10,20 @@ Engine::AudioManager::AudioManager()
     {
         spdlog::error("Failed to initialize MiniAudio engine!");
     }
+
+    LoadSounds();
+}
+
+Engine::AudioManager::~AudioManager()
+{
+    for (auto& sound : Sounds)
+    {
+
+        ma_sound_uninit(sound.get());
+    }
+    Sounds.clear();
+
+    ma_engine_uninit(&Engine);
 }
 
 Engine::AudioManager& Engine::AudioManager::GetInstance()
@@ -29,142 +44,114 @@ void Engine::AudioManager::DestroyInstance()
     }
 }
 
-std::unordered_map<std::string, std::shared_ptr<ma_sound>> Engine::AudioManager::GetSounds()
+bool Engine::AudioManager::LoadSound(const std::string& Filename, ma_sound& Sound)
+{
+    ma_result result = ma_sound_init_from_file(&Engine, Filename.c_str(), 0, nullptr, nullptr, &Sound);
+    if (result != MA_SUCCESS)
+    {
+        spdlog::error("Failed to load audio file: {}", Filename);
+        return false;
+    }
+    return true;
+}
+
+std::vector<std::shared_ptr<ma_sound>> Engine::AudioManager::GetLoadedSounds() const
 {
     return Sounds;
 }
 
-bool Engine::AudioManager::LoadSound(const std::string& Filename, const std::string& Id)
+void Engine::AudioManager::LoadSounds()
 {
-    ma_sound* newSound = new ma_sound;
+    std::string soundDir = "./res/sounds";
 
-    if (ma_sound_init_from_file(&Engine, Filename.c_str(), 0, nullptr, nullptr, newSound) != MA_SUCCESS)
+
+    for (const auto& entry : std::filesystem::directory_iterator(soundDir))
     {
-        spdlog::error("Failed to load audio file: {}", Filename);
-        delete newSound;
-        return false;
-    }
-
-    Sounds[Id] = std::shared_ptr<ma_sound>(newSound,
-                                           [](ma_sound* Sound)
-                                           {
-                                               ma_sound_uninit(Sound);
-                                               delete Sound;
-                                           });
-    return true;
-}
-
-void Engine::AudioManager::PlayAudio(const std::string& Id)
-{
-    auto it = Sounds.find(Id);
-    if (it != Sounds.end())
-    {
-        if (!ma_sound_is_playing(it->second.get()))
+        if (entry.is_regular_file())
         {
-            ma_sound_start(it->second.get());
+            std::string filePath = entry.path().string();
+
+            auto sound = std::make_unique<ma_sound>();
+            if (LoadSound(filePath, *sound))
+            {
+                Sounds.push_back(std::move(sound));
+            }
         }
     }
-    else
+}
+
+void Engine::AudioManager::PlayAudio(ma_sound& Sound)
+{
+    if (!ma_sound_is_playing(&Sound))
     {
-        spdlog::error("Sound with ID '{}' not found!", Id);
+        ma_sound_start(&Sound);
     }
 }
 
-void Engine::AudioManager::SetVolumeGlobal(float Volume)
+void Engine::AudioManager::SetGlobalVolume(float Volume)
 {
     ma_engine_set_volume(&Engine, Volume);
 }
 
-void Engine::AudioManager::SetVolume(const std::string& Id, float Volume)
+float Engine::AudioManager::GetGlobalVolume()
 {
-    auto it = Sounds.find(Id);
-    if (it != Sounds.end())
-    {
-        ma_sound_set_volume(it->second.get(), Volume);
-    }
-    else
-    {
-        spdlog::error("Sound with ID '{}' not found!", Id);
-    }
+    return ma_engine_get_volume(&Engine);
 }
 
-void Engine::AudioManager::PauseSound(const std::string& Id)
+void Engine::AudioManager::SetVolume(ma_sound& Sound, float Volume)
 {
-    auto it = Sounds.find(Id);
-    if (it != Sounds.end())
-    {
-        ma_sound_stop(it->second.get());
-    }
-    else
-    {
-        spdlog::error("Sound with ID '{}' not found!", Id);
-    }
+    ma_sound_set_volume(&Sound, Volume);
 }
 
-void Engine::AudioManager::StopSound(const std::string& Id)
+void Engine::AudioManager::PauseSound(ma_sound& Sound)
 {
-    auto it = Sounds.find(Id);
-    if (it != Sounds.end())
-    {
-        ma_sound_stop(it->second.get());
-        ma_sound_seek_to_pcm_frame(it->second.get(), 0);
-    }
-    else
-    {
-        spdlog::error("Sound with ID '{}' not found!", Id);
-    }
+    ma_sound_stop(&Sound);
 }
 
-void Engine::AudioManager::SetLooping(const std::string& Id, bool Loop)
+void Engine::AudioManager::StopSound(ma_sound& Sound)
 {
-    auto it = Sounds.find(Id);
-    if (it != Sounds.end())
-    {
-        ma_sound_set_looping(it->second.get(), Loop);
-    }
-    else
-    {
-        spdlog::error("Sound with ID '{}' not found!", Id);
-    }
+    ma_sound_stop(&Sound);
+    ma_sound_seek_to_pcm_frame(&Sound, 0);
 }
 
-void Engine::AudioManager::SetListenerPosition(float X, float Y, float Z)
+void Engine::AudioManager::SetLooping(ma_sound& Sound, bool Loop)
 {
-    ma_engine_listener_set_position(&Engine, 0, X, Y, Z);
+    ma_sound_set_looping(&Sound, Loop);
 }
 
-void Engine::AudioManager::SetListenerOrientation(float ForwardX, float ForwardY, float ForwardZ, float UpX, float UpY,
-                                                  float UpZ)
+void Engine::AudioManager::SetListenerPosition(const glm::vec3& Position)
 {
-    ma_engine_listener_set_direction(&Engine, 0, ForwardX, ForwardY, ForwardZ);
-    ma_engine_listener_set_world_up(&Engine, 0, UpX, UpY, UpZ);
+    ma_engine_listener_set_position(&Engine, 0, Position.x, Position.y, Position.z);
 }
 
-void Engine::AudioManager::SetSoundPosition(const std::string& Id, float X, float Y, float Z)
+void Engine::AudioManager::SetListenerOrientation(glm::vec3 Forward, glm::vec3 Up)
 {
-    auto it = Sounds.find(Id);
-    if (it != Sounds.end())
-    {
-        ma_sound_set_position(it->second.get(), X, Y, Z);
-    }
-    else
-    {
-        spdlog::error("Sound with ID '{}' not found!", Id);
-    }
+    ma_engine_listener_set_direction(&Engine, 0, Forward.x, Forward.y, Forward.z);
+    ma_engine_listener_set_world_up(&Engine, 0, Up.x, Up.y, Up.z);
 }
 
-void Engine::AudioManager::ConfigureSoundAttenuation(const std::string& Id, float MinDist, float MaxDist)
+void Engine::AudioManager::SetSoundPosition(ma_sound& Sound, const glm::vec3& Position)
 {
-    auto it = Sounds.find(Id);
-    if (it != Sounds.end())
+    ma_sound_set_position(&Sound, Position.x, Position.y, Position.z);
+}
+
+void Engine::AudioManager::ConfigureSoundAttenuation(ma_sound& Sound, float MinDist, float MaxDist, float RollOff)
+{
+    ma_sound_set_attenuation_model(&Sound, ma_attenuation_model_exponential);
+    ma_sound_set_min_distance(&Sound, MinDist);
+    ma_sound_set_max_distance(&Sound, MaxDist);
+    ma_sound_set_rolloff(&Sound, RollOff);
+}
+
+void Engine::AudioManager::RenderGlobalVolumeImGui()
+{
+    ImGui::Begin("Global Audio Volume");
+
+    float globalVolume = GetInstance().GetGlobalVolume();
+    if (ImGui::SliderFloat("Global Volume", &globalVolume, 0.0f, 1.0f))
     {
-        ma_sound_set_attenuation_model(it->second.get(), ma_attenuation_model_exponential);
-        ma_sound_set_min_distance(it->second.get(), MinDist);
-        ma_sound_set_max_distance(it->second.get(), MaxDist);
-        ma_sound_set_rolloff(it->second.get(), 2.0f);
+        GetInstance().SetGlobalVolume(globalVolume);
     }
-    else
-    {
-        spdlog::error("Sound with ID '{}' not found!", Id);
-    }
+
+    ImGui::End();
 }
