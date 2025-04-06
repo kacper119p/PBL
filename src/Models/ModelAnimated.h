@@ -108,10 +108,10 @@ namespace Models
 
         std::unique_ptr<MeshAnimated> ProcessMesh(aiMesh* Mesh);
 
-        void SetVertexBoneDataToDefault(Vertex& vertex);
+        void SetVertexBoneDataToDefault(VertexAnimated& vertex);
 
-        void SetVertexBoneData(Vertex& vertex, int boneID, float weight);
+        void SetVertexBoneData(VertexAnimated& vertex, int boneID, float weight);
 
-        void ExtractBoneWeightForVertices(std::vector<Vertex>& vertices, aiMesh* mesh, const aiScene* scene);
+        void ExtractBoneWeightForVertices(std::vector<VertexAnimated>& vertices, aiMesh* mesh, const aiScene* scene);
     };
 } // namespace Models

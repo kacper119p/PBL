@@ -3,7 +3,7 @@
 
 #include "Assimp/Importer.hpp"
 #include "Assimp/postprocess.h"
-#include "Vertex.h"
+#include "VertexAnimated.h"
 #include "assimp/scene.h"
 #include "ModelAnimated.h"
 #include "Utility/AssimpGLMHelpers.h"
@@ -41,14 +41,14 @@ namespace Models
 
     std::unique_ptr<MeshAnimated> ModelAnimated::ProcessMesh(aiMesh* Mesh)
     {
-        std::vector<Vertex> vertices;
+        std::vector<VertexAnimated> vertices;
         vertices.reserve(Mesh->mNumVertices);
         std::vector<unsigned int> indices;
         indices.reserve(Mesh->mNumFaces);
 
         for (unsigned int i = 0; i < Mesh->mNumVertices; i++)
         {
-            Models::Vertex vertex;
+            Models::VertexAnimated vertex;
             SetVertexBoneDataToDefault(vertex);
             
 
@@ -81,7 +81,7 @@ namespace Models
         return std::make_unique<class MeshAnimated>(vertices, indices, std::string(Mesh->mName.C_Str()));
     }
 
-    void ModelAnimated::SetVertexBoneDataToDefault(Vertex& vertex)
+    void ModelAnimated::SetVertexBoneDataToDefault(VertexAnimated& vertex)
     {
         for (int i = 0; i < 4; i++)
         {
@@ -90,7 +90,7 @@ namespace Models
         }
     }
 
-    void ModelAnimated::SetVertexBoneData(Vertex& vertex, int boneID, float weight)
+    void ModelAnimated::SetVertexBoneData(VertexAnimated& vertex, int boneID, float weight)
     {
         for (int i = 0; i < 4; ++i)
         {
@@ -105,7 +105,8 @@ namespace Models
 
 
 
-    void ModelAnimated::ExtractBoneWeightForVertices(std::vector<Vertex>& vertices, aiMesh* mesh, const aiScene* scene)
+    void ModelAnimated::ExtractBoneWeightForVertices(std::vector<VertexAnimated>& vertices, aiMesh* mesh,
+                                                     const aiScene* scene)
     {
         auto& boneInfoMap = m_BoneInfoMap;
         int& boneCount = m_BoneCounter;

@@ -4,7 +4,8 @@
 
 namespace Models
 {
-    MeshAnimated::MeshAnimated(const std::vector<Vertex>& VerticesData, const std::vector<unsigned int>& VertexIndices,
+    MeshAnimated::MeshAnimated(const std::vector<VertexAnimated>& VerticesData,
+                               const std::vector<unsigned int>& VertexIndices,
                                const std::string& Name) :
         VerticesData(VerticesData), VertexIndices(VertexIndices), AABBox(CreateAABBox(VerticesData)), Name(Name)
     {
@@ -19,31 +20,36 @@ namespace Models
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, VertexIndices.size() * sizeof(unsigned int), &VertexIndices[0],
                      GL_STATIC_DRAW);
 
-        glBufferData(GL_ARRAY_BUFFER, VerticesData.size() * sizeof(Vertex), &VerticesData[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, VerticesData.size() * sizeof(VertexAnimated), &VerticesData[0], GL_STATIC_DRAW);
 
         // Vertex::Position
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, Position));
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexAnimated),
+                              (void*) offsetof(VertexAnimated, Position));
 
         // Vertex::TexCoords
         glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, TexCoords));
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(VertexAnimated),
+                              (void*) offsetof(VertexAnimated, TexCoords));
 
         // Vertex::Normal
         glEnableVertexAttribArray(2);
-        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, Normal));
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(VertexAnimated),
+                              (void*) offsetof(VertexAnimated, Normal));
 
         // Vertex::Tangent
         glEnableVertexAttribArray(3);
-        glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, Tangent));
+        glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(VertexAnimated),
+                              (void*) offsetof(VertexAnimated, Tangent));
 
         // ids
         glEnableVertexAttribArray(4);
-        glVertexAttribIPointer(4, 4, GL_INT, sizeof(Vertex), (void*) offsetof(Vertex, m_BoneIDs));
+        glVertexAttribIPointer(4, 4, GL_INT, sizeof(VertexAnimated), (void*) offsetof(VertexAnimated, m_BoneIDs));
 
         // weights
         glEnableVertexAttribArray(5);
-        glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, m_Weights));
+        glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(VertexAnimated),
+                              (void*) offsetof(VertexAnimated, m_Weights));
 
         glBindVertexArray(0);
     }
@@ -62,7 +68,7 @@ namespace Models
         glDeleteVertexArrays(1, &VertexArray);
     }
 
-    AABBox3 MeshAnimated::CreateAABBox(const std::vector<Vertex>& Vertices)
+    AABBox3 MeshAnimated::CreateAABBox(const std::vector<VertexAnimated>& Vertices)
     {
         if (Vertices.empty())
         {

@@ -1,16 +1,10 @@
-//
-// Created by Kacper on 27.01.2025.
-//
-
-#include "imgui.h"
+#if EDITOR
 #include "TransformGui.h"
+#include "imgui.h"
 
 namespace Engine
 {
-    TransformGui::~TransformGui()
-    {
-
-    }
+    TransformGui::~TransformGui() {}
 
     void TransformGui::Draw(Transform* Transform)
     {
@@ -34,4 +28,5 @@ namespace Engine
             Transform->SetScale(glm::vec3(scale[0], scale[1], scale[2]));
         }
     }
-} // Engine
+} // namespace Engine
+#endif

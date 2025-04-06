@@ -82,11 +82,7 @@ namespace Engine
             Model->GetMesh(i)->Draw();
         }
     }
-    void AnimatedModelRenderer::OnAdd(Entity* NewOwner)
-    {
-        Renderer::OnAdd(NewOwner);
-        UpdateManager::GetInstance()->RegisterComponent(this);
-    }
+    
 
     void AnimatedModelRenderer::Update(float DeltaTime) { Animator->UpdateAnimation(DeltaTime); }
 } 

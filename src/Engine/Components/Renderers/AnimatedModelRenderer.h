@@ -65,7 +65,6 @@ namespace Engine
 
         void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                     const glm::mat4* SpaceTransformMatrices) override;
-        void OnAdd(Entity* NewOwner) override;
 
         void Update(float DeltaTime) override;
 

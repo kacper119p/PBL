@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "AabBox.h"
-#include "Vertex.h"
+#include "VertexAnimated.h"
 
 namespace Models
 {
@@ -14,7 +14,7 @@ namespace Models
     class MeshAnimated final
     {
     public:
-        std::vector<Vertex> VerticesData;
+        std::vector<VertexAnimated> VerticesData;
         std::vector<unsigned int> VertexIndices;
 
     private:
@@ -31,7 +31,7 @@ namespace Models
          * @param VertexIndices Faces.
          * @param Name Name of the mesh.
          */
-        MeshAnimated(const std::vector<Vertex>& VerticesData, const std::vector<unsigned int>& VertexIndices,
+        MeshAnimated(const std::vector<VertexAnimated>& VerticesData, const std::vector<unsigned int>& VertexIndices,
              const std::string& Name);
 
         virtual ~MeshAnimated();
@@ -77,6 +77,6 @@ namespace Models
         void Draw() const;
 
     private:
-        static AABBox3 CreateAABBox(const std::vector<Vertex>& Vertices);
+        static AABBox3 CreateAABBox(const std::vector<VertexAnimated>& Vertices);
     };
 } // namespace Models
