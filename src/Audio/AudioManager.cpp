@@ -142,6 +142,7 @@ void Engine::AudioManager::ConfigureSoundAttenuation(ma_sound& Sound, float MinD
     ma_sound_set_rolloff(&Sound, RollOff);
 }
 
+#if EDITOR
 void Engine::AudioManager::RenderGlobalVolumeImGui()
 {
     ImGui::Begin("Global Audio Volume");
@@ -154,3 +155,4 @@ void Engine::AudioManager::RenderGlobalVolumeImGui()
 
     ImGui::End();
 }
+#endif

@@ -8,6 +8,7 @@ Engine::AudioSource::AudioSource() :
 {
 }
 
+#if EDITOR
 void Engine::AudioSource::RenderAudioSourceImGui()
 {
     if (!IsEntitySelected)
@@ -107,6 +108,7 @@ void Engine::AudioSource::RenderAudioSourceImGui()
 
     ImGui::End();
 }
+#endif
 
 void Engine::AudioSource::SelectEntityForAudioControl(Entity* Entity)
 {
@@ -134,9 +136,7 @@ rapidjson::Value Engine::AudioSource::Serialize(rapidjson::Document::AllocatorTy
     START_COMPONENT_SERIALIZATION
     SERIALIZE_FIELD(SoundVolume)
     SERIALIZE_FIELD(Looping)
-    SERIALIZE_FIELD(Position.x)
-    SERIALIZE_FIELD(Position.y)
-    SERIALIZE_FIELD(Position.z)
+    SERIALIZE_FIELD(Position)
     SERIALIZE_FIELD(MinDist)
     SERIALIZE_FIELD(MaxDist)
     SERIALIZE_FIELD(RollOff)
@@ -149,9 +149,7 @@ void Engine::AudioSource::DeserializeValuePass(const rapidjson::Value& Object,
     START_COMPONENT_DESERIALIZATION_VALUE_PASS
     DESERIALIZE_VALUE(SoundVolume)
     DESERIALIZE_VALUE(Looping)
-    DESERIALIZE_VALUE(Position.x)
-    DESERIALIZE_VALUE(Position.y)
-    DESERIALIZE_VALUE(Position.z)
+    DESERIALIZE_VALUE(Position)
     DESERIALIZE_VALUE(MinDist)
     DESERIALIZE_VALUE(MaxDist)
     DESERIALIZE_VALUE(RollOff)

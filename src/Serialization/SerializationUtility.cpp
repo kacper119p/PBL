@@ -50,6 +50,13 @@ namespace Serialization
         return object;
     }
 
+    rapidjson::Value Serialize(const bool Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kNumberType);
+        object.SetBool(Value);
+        return object;
+    }
+
     rapidjson::Value Serialize(const glm::vec4& Value, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kObjectType);

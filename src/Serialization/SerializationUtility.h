@@ -26,6 +26,8 @@ namespace Serialization
 
     rapidjson::Value Serialize(float Value, rapidjson::Document::AllocatorType& Allocator);
 
+    rapidjson::Value Serialize(bool Value, rapidjson::Document::AllocatorType& Allocator);
+
     rapidjson::Value Serialize(const glm::vec4& Value, rapidjson::Document::AllocatorType& Allocator);
 
     rapidjson::Value Serialize(const glm::vec3& Value, rapidjson::Document::AllocatorType& Allocator);
