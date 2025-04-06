@@ -1,12 +1,29 @@
 #include "SphereCollider.h"
 
-SphereCollider::SphereCollider(Transform* transform, bool isTrigger, float radius) :
-    Collider(transform, isTrigger), radius(radius)
+namespace Engine
 {
-}
+    SphereCollider::SphereCollider(Transform* transform, bool isTrigger, float radius) :
+        Collider(transform, isTrigger), radius(radius)
+    {
+    }
 
-bool SphereCollider::CheckCollision(const Collider& other)
-{
-    // TODO: implement collision detection for SphereCollider
-    return false;
-}
+    bool SphereCollider::CheckCollision(const Collider& other)
+    {
+        // Implementacja sprawdzania kolizji dla SphereCollider
+        return false;
+    }
+
+    SphereCollider& SphereCollider::operator=(const SphereCollider& other)
+    {
+        if (this == &other)
+            return *this;
+
+        Collider::operator=(other);
+        radius = other.radius;
+
+        return *this;
+    }
+
+    float SphereCollider::GetRadius() const { return radius; }
+    void SphereCollider::SetRadius(float radius) { this->radius = radius; }
+} // namespace Engine

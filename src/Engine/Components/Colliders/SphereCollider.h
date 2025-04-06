@@ -1,19 +1,33 @@
-#ifndef SPHERE_COLLIDER_H
-#define SPHERE_COLLIDER_H
+#pragma once
 
 #include "Collider.h"
 
-class SphereCollider : public Collider
+namespace Engine
 {
+    /**
+     * @brief Sphere collider class.
+     * @details Represents a sphere-shaped collider.
+     */
+    class SphereCollider : public Collider
+    {
 
-public:
+    public:
+        float radius;
 
-    float radius;
+        SphereCollider() = default;
 
-    SphereCollider(Transform* transform, bool isTrigger = false, float radius = 1.0f);
+        SphereCollider(Transform* transform, bool isTrigger = false, float radius = 1.0f);
 
-    virtual bool CheckCollision(const Collider& other) override;
+        virtual bool CheckCollision(const Collider& other) override;
 
-};
+        inline virtual Collider* GetInstance() override { return this; }
 
-#endif // SPHERE_COLLIDER_H
+        // Getters and setters
+        float GetRadius() const;
+        void SetRadius(float radius);
+
+        // Assignment operator
+        SphereCollider& operator=(const SphereCollider& other);
+    };
+
+} // namespace Engine
