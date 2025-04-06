@@ -9,7 +9,11 @@ namespace Engine
 
     bool SphereCollider::CheckCollision(const Collider& other)
     {
-        // Implementacja sprawdzania kolizji dla SphereCollider
+        if (isStatic || other.IsStatic())
+            return false;
+
+        // TODO: implement collision detection for SphereCollider
+
         return false;
     }
 
@@ -26,4 +30,5 @@ namespace Engine
 
     float SphereCollider::GetRadius() const { return radius; }
     void SphereCollider::SetRadius(float radius) { this->radius = radius; }
+
 } // namespace Engine

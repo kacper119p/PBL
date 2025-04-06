@@ -23,7 +23,6 @@ namespace Engine
 
         inline virtual Collider* GetInstance() override { return this; }
 
-        // Getters and setters
         float GetWidth() const;
         void SetWidth(float width);
 
@@ -33,7 +32,6 @@ namespace Engine
         float GetDepth() const;
         void SetDepth(float depth);
 
-        // Assignment operator
         BoxCollider& operator=(const BoxCollider& other);
     };
 

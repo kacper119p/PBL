@@ -10,6 +10,10 @@ namespace Engine
 
     bool Collider::IsTrigger() const { return isTrigger; }
 
+    void Collider::SetStatic(bool isStatic) { this->isStatic = isStatic; }
+
+    bool Collider::IsStatic() const { return isStatic; }
+
     void Collider::SetTransform(Transform* transform) { this->transform = transform; }
 
     Transform* Collider::GetTransform() const { return transform; }

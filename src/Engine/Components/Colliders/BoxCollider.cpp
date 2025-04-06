@@ -9,7 +9,11 @@ namespace Engine
 
     bool BoxCollider::CheckCollision(const Collider& other)
     {
+        if (isStatic || other.IsStatic()) 
+            return false;
+
         // TODO: implement collision detection for BoxCollider
+
         return false;
     }
 
@@ -34,4 +38,5 @@ namespace Engine
 
     float BoxCollider::GetDepth() const { return _depth; }
     void BoxCollider::SetDepth(float depth) { _depth = depth; }
+
 } // namespace Engine
