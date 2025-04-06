@@ -1,13 +1,5 @@
-//
-// Created by Kacper on 10.10.2024.
-//
-
 #include "Engine/EngineObjects/Camera.h"
-#include "imgui.h"
-#include "imgui_impl/imgui_impl_glfw.h"
-#include "imgui_impl/imgui_impl_opengl3.h"
-#include "Shaders/ShaderException.h"
-#include <stdio.h>
+#include <cstdio>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h> // Include glfw3.h after our OpenGL definitions
 #include <spdlog/spdlog.h>
@@ -17,12 +9,22 @@
 #include "Engine/EngineObjects/LightManager.h"
 #include "Engine/Gui/LightsGui.h"
 #include "Engine/EngineObjects/UpdateManager.h"
-#include "Engine/EngineObjects/GizmoManager.h"
-#include "imgui_internal.h"
+#include "Materials/Material.h"
+#include "Materials/MaterialManager.h"
+#include "Models/ModelManager.h"
 #include "Utility/SystemUtilities.h"
 #include "Scene/SceneBuilder.h"
+#include "Shaders/ShaderManager.h"
 #include "Textures/TextureManager.h"
 #include "tracy/Tracy.hpp"
+
+#if EDITOR
+#include "imgui.h"
+#include "imgui_impl/imgui_impl_glfw.h"
+#include "imgui_impl/imgui_impl_opengl3.h"
+#include "imgui_internal.h"
+#include "Engine/EngineObjects/GizmoManager.h"
+#endif
 
 namespace SceneBuilding = Scene;
 
@@ -46,20 +48,21 @@ namespace Engine
         }
 
         spdlog::info("Initialized project.");
-
+#if EDITOR
         ImGuiInit();
         spdlog::info("Initialized ImGui.");
+#endif
 
         Camera->SetProjectionMatrix(glm::perspective(glm::radians(70.0f), float(WindowWidth) /
                                                                           float(WindowHeight), 0.1f, 1000.0f));
 
         try
         {
-            SceneBuilding::SceneBuilder::Build(Scene, Textures, Models, Shaders, Materials);
+            SceneBuilding::SceneBuilder::Build(Scene);
         } catch (std::runtime_error& e)
         {
             spdlog::error(e.what());
-            return EXIT_FAILURE;
+            throw;
         }
 
         spdlog::info("Successfully built scene.");
@@ -94,11 +97,13 @@ namespace Engine
             
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
 
+#if EDITOR
             // Draw ImGui
             ImGuiBegin();
             ImGuiRender();
             GizmoManager::GetInstance()->Manipulate(renderData);
             ImGuiEnd(); // this call effectively renders ImGui
+#endif
 
             // End frame and swap buffers (double buffering)
             EndFrame();
@@ -111,10 +116,12 @@ namespace Engine
         FreeResources();
 
         spdlog::info("Freed scene resources.");
-
+#if EDITOR
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
+
         ImGui::DestroyContext();
+#endif
 
         glfwDestroyWindow(Window);
         glfwTerminate();
@@ -176,10 +183,13 @@ namespace Engine
 
         glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
-        RenderingManager::Initialize();
+        RenderingManager::Initialize(glm::ivec2(WindowWidth, WindowHeight));
         LightManager::Initialize();
         UpdateManager::Initialize();
+        Materials::MaterialManager::Initialize();
+#if EDITOR
         GizmoManager::Initialize();
+#endif
 
         Camera = new class Camera(glm::perspective(glm::radians(70.0f),
                                                    float(WindowWidth) / float(WindowHeight),
@@ -218,6 +228,7 @@ namespace Engine
             Camera->SetPosition(Camera->GetPosition() +
                                 cameraSpeed * glm::normalize(glm::cross(Camera->GetForward(), Camera->GetUp())));
         }
+#if EDITOR
         if (glfwGetKey(Window, GLFW_KEY_E) == GLFW_PRESS && GizmoManager::GetInstance()->GetManaged() != nullptr)
         {
             GizmoManager::GetInstance()->SetCurrentOperation(ImGuizmo::OPERATION::TRANSLATE);
@@ -230,8 +241,10 @@ namespace Engine
         {
             GizmoManager::GetInstance()->SetCurrentOperation(ImGuizmo::OPERATION::SCALE);
         }
+#endif
     }
 
+#if EDITOR
     void Engine::ImGuiInit()
     {
         // Setup Dear ImGui binding
@@ -245,6 +258,8 @@ namespace Engine
 
         // Setup style
         ImGui::StyleColorsDark();
+
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     }
 
     void Engine::ImGuiBegin()
@@ -285,6 +300,7 @@ namespace Engine
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
     }
+#endif
 
     void Engine::EndFrame()
     {
@@ -297,21 +313,9 @@ namespace Engine
     {
         delete Scene;
         TextureManager::DeleteAllTextures();
-
-        for (Models::Model* model : Models)
-        {
-            delete model;
-        }
-
-        for (Shaders::Shader shader : Shaders)
-        {
-            shader.Delete();
-        }
-
-        for (Materials::Material* material : Materials)
-        {
-            delete material;
-        }
+        Shaders::ShaderManager::FreeResources();
+        Models::ModelManager::DeleteAllModels();
+        Materials::MaterialManager::DeleteAllMaterials();
     }
 
     void Engine::GlfwErrorCallback(int Error, const char* Description)

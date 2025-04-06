@@ -1,7 +1,4 @@
-//
-// Created by Kacper on 27.01.2025.
-//
-
+#if EDITOR
 #include <format>
 #include "LightsGui.h"
 #include "imgui.h"
@@ -182,3 +179,4 @@ namespace Engine
         return false;
     }
 } // Engine
+#endif

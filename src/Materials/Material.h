@@ -1,6 +1,39 @@
 #pragma once
 
+#include <string>
+
+#include "Materials/MaterialRaii.h" //Used in SERIALIZATION_EXPORT_MATERIAL
+#include "rapidjson/document.h"
 #include "Shaders/Shader.h"
+
+#define SERIALIZATION_EXPORT_MATERIAL(__CLASS__)\
+public:\
+    static inline const std::string TypeName =std::string(#__CLASS__);\
+    \
+    rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const override;\
+    \
+    virtual void Deserialize(const rapidjson::Value& Object) override;\
+    \
+    [[nodiscard]] std::string GetType() const override\
+    {\
+        return TypeName;\
+    }\
+    \
+private:\
+    static inline const MaterialRaii<__CLASS__> RaiiHandle =  MaterialRaii<__CLASS__>(#__CLASS__);
+
+#define START_MATERIAL_SERIALIZATION rapidjson::Value object(rapidjson::kObjectType);\
+                                     object.AddMember("type", Serialization::Serialize(GetType(), Allocator), Allocator);
+
+#define END_MATERIAL_SERIALIZATION  return object;
+
+#define START_MATERIAL_DESERIALIZATION
+
+#define END_MATERIAL_DESERIALIZATION
+
+#define SERIALIZE_PROPERTY(__NAME__) object.AddMember(#__NAME__, Serialization::Serialize(__NAME__, Allocator), Allocator);
+
+#define DESERIALIZE_PROPERTY(__NAME__) Serialization::Deserialize(Object, #__NAME__, __NAME__);
 
 namespace Materials
 {
@@ -60,6 +93,11 @@ namespace Materials
         }
 
         /**
+         * @brief Returns class name of this material.
+         */
+        [[nodiscard]] virtual std::string GetType() const = 0;
+
+        /**
          * @brief Binds depth pass and its uniforms used by this material to be used in the next draw call.
          */
         virtual void UseDepthPass() const = 0;
@@ -78,5 +116,18 @@ namespace Materials
          * @brief Binds directional light shadow pass and its uniforms used by this material to be used in the next draw call.
          */
         virtual void UsePointSpotShadows() const = 0;
+
+        /**
+         * @brief Saves this material's properties to a JSON.
+         * @param Allocator An allocator to be used.
+         * @return Serialized data.
+         */
+        virtual rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const = 0;
+
+        /**
+         * @brief Sets this material's properties from JSON.
+         * @param Value Data to load properties from.
+         */
+        virtual void Deserialize(const rapidjson::Value& Value) = 0;
     };
 }

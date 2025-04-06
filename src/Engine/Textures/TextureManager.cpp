@@ -1,28 +1,38 @@
 #include "TextureManager.h"
 
 #include <algorithm>
+#include <filesystem>
 
+#include "Texture.h"
 #include "Utility/TextureUtilities.h"
+
 
 namespace Engine
 {
-    std::unordered_map<std::string, uint32_t> TextureManager::Textures;
+    std::unordered_map<std::string, Texture> TextureManager::Textures;
 
-    TextureManager::~TextureManager() = default;
-
-    uint32_t TextureManager::GetTexture(const char* Path)
+    Texture TextureManager::GetTexture(const char* Path)
     {
         const std::string path = Path;
 
         if (const auto iterator = Textures.find(path); iterator != Textures.end())
         {
-            return iterator->second;
+            return Texture(iterator->second);
         }
 
-        const uint32_t textureId = Utility::LoadTexture2DFromFile(Path, GL_RGBA, 4,GL_RGBA);
+        uint32_t textureId;
+        if (std::filesystem::path(path).extension() == ".hdr")
+        {
+            textureId = Utility::LoadHdrCubeMapFromFile(Path);
+        }
+        else
+        {
+            textureId = Utility::LoadTexture2DFromFile(Path, GL_RGBA, 4,GL_RGBA);
+        }
+
 
         Textures.emplace(path, textureId);
-        return textureId;
+        return Texture(textureId);
     }
 
     bool TextureManager::DeleteTexture(const char* Path)
@@ -31,7 +41,7 @@ namespace Engine
         if (const auto iterator = Textures.find(path);
             iterator != Textures.end())
         {
-            const uint32_t id = iterator->second;
+            const uint32_t id = iterator->second.GetId();
             glDeleteTextures(1, &id);
             Textures.erase(iterator);
             return true;
@@ -39,13 +49,13 @@ namespace Engine
         return false;
     }
 
-    bool TextureManager::DeleteTexture(const uint32_t Id)
+    bool TextureManager::DeleteTexture(const Texture Texture)
     {
         for (const auto& pair : Textures)
         {
-            if (pair.second == Id)
+            if (pair.second == Texture)
             {
-                const uint32_t id = pair.second;
+                const uint32_t id = pair.second.GetId();
                 glDeleteTextures(1, &id);
                 Textures.erase(pair.first);
                 return true;
@@ -58,7 +68,7 @@ namespace Engine
     {
         for (const auto& pair : Textures)
         {
-            const uint32_t id = pair.second;
+            const uint32_t id = pair.second.GetId();
             glDeleteTextures(1, &id);
         }
         Textures.clear();
@@ -69,11 +79,11 @@ namespace Engine
         return Textures.contains(Path);
     }
 
-    bool TextureManager::IsValid(const uint32_t Id)
+    bool TextureManager::IsValid(const Texture Texture)
     {
         for (const auto& pair : Textures)
         {
-            if (pair.second == Id)
+            if (pair.second == Texture)
             {
                 return true;
             }
@@ -81,11 +91,11 @@ namespace Engine
         return false;
     }
 
-    std::string TextureManager::GetTexturePath(const uint32_t Id)
+    std::string TextureManager::GetTexturePath(const Texture Texture)
     {
         for (const auto& pair : Textures)
         {
-            if (pair.second == Id)
+            if (pair.second == Texture)
             {
                 return pair.first;
             }

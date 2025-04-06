@@ -11,11 +11,16 @@ namespace Engine
     class ShipRoller final : public Updateable
     {
     private:
-        glm::vec3 Amplitude;
-        glm::vec3 Velocity;
+        glm::vec3 Amplitude = glm::vec3(0.0f);
+        glm::vec3 Velocity = glm::vec3(0.0f);
         glm::vec3 InitialRotation = glm::vec3(0.0f);
 
     public:
+        /**
+         * @brief Initializes ShipRoller with default values.
+         */
+        ShipRoller() = default;
+
         /**
          * @brief Creates a new ShipRoller instance.
          * @param Amplitude Amplitude of the rotation in degrees.
@@ -80,6 +85,8 @@ namespace Engine
 
     public:
         void Update(float DeltaTime) override;
+
+        SERIALIZATION_EXPORT_CLASS(ShipRoller)
     };
 
 } // Engine

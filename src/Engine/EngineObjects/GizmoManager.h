@@ -1,9 +1,6 @@
-//
-// Created by Kacper on 26.01.2025.
-//
-
 #pragma once
 
+#if EDITOR
 #include "imgui.h" //Have to import imgui before imguizmo
 #include <ImGuizmo.h>
 #include "Engine/Components/Transform.h"
@@ -58,3 +55,4 @@ namespace Engine
     };
 
 } // Engine
+#endif

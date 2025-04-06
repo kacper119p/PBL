@@ -1,18 +1,19 @@
 #pragma once
 
-#include "stdint.h"
-#include "imgui_impl/imgui_impl_glfw.h"
+#include "glfw/glfw3.h"
 #include "Engine/EngineObjects/Camera.h"
-#include "Engine/EngineObjects/Scene.h"
-#include "Materials/Material.h"
+#include "Engine/EngineObjects/Scene/Scene.h"
 #include "Models/Model.h"
 #include "Shaders/Shader.h"
 
+#if EDITOR
+#include "imgui_impl/imgui_impl_glfw.h"
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
+#endif
 
 namespace Engine
 {
-    class Engine
+    class Engine final
     {
     public:
         constexpr static const char* const GlslVersion = "#version 460";
@@ -32,10 +33,6 @@ namespace Engine
         glm::vec2 LastMousePosition = glm::vec2(0, 0);
 
         Scene* Scene;
-        std::vector<unsigned int> Textures;
-        std::vector<Models::Model*> Models;
-        std::vector<Shaders::Shader> Shaders;
-        std::vector<Materials::Material*> Materials;
 
     public:
         Engine();
@@ -50,7 +47,7 @@ namespace Engine
         bool Initialize();
 
         void HandleInput(float deltaTime);
-
+#if EDITOR
         void ImGuiInit();
 
         void ImGuiBegin();
@@ -58,7 +55,7 @@ namespace Engine
         void ImGuiRender();
 
         void ImGuiEnd();
-
+#endif
         void EndFrame();
 
         void FreeResources();

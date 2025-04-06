@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <GLFW/glfw3.h>
 
+#include "Serialization/SerializationUtility.h"
+
 Engine::ParticleEmitter::ParticleEmitter(const Shaders::Shader& RenderShader, const Shaders::ComputeShader& SpawnShader,
                                          const Shaders::ComputeShader& UpdateShader,
                                          const EmitterSettings& EmitterSettings,
@@ -13,25 +15,6 @@ Engine::ParticleEmitter::ParticleEmitter(const Shaders::Shader& RenderShader, co
     SpawnShader(SpawnShader),
     UpdateShader(UpdateShader)
 {
-    glGenBuffers(1, &ParticlesBuffer);
-    glGenBuffers(1, &FreelistBuffer);
-    glBindBuffer(GL_SHADER_STORAGE_BUFFER, ParticlesBuffer);
-
-    const Particle* particles = new Particle[MaxParticleCount]{};
-    glBufferData(GL_SHADER_STORAGE_BUFFER, MaxParticleCount * sizeof(Particle), particles, GL_DYNAMIC_DRAW);
-    delete[] particles;
-
-    glBindBuffer(GL_SHADER_STORAGE_BUFFER, FreelistBuffer);
-    int* freeList = new int[MaxParticleCount + 1]{0};
-    freeList[0] = MaxParticleCount;
-    for (int i = 1; i <= MaxParticleCount; ++i)
-    {
-        freeList[i] = i - 1;
-    }
-    glBufferData(GL_SHADER_STORAGE_BUFFER, (MaxParticleCount + 1) * sizeof(int), freeList, GL_DYNAMIC_DRAW);
-    delete[] freeList;
-
-    glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 }
 
 void Engine::ParticleEmitter::Render(const Engine::CameraRenderData& RenderData)
@@ -103,10 +86,30 @@ void Engine::ParticleEmitter::Update(float DeltaTime)
     Shaders::ComputeShader::Dispatch(glm::ivec3(workGroupsCount, 1, 1));
 }
 
-void Engine::ParticleEmitter::OnAdd(Engine::Entity* NewOwner)
+void Engine::ParticleEmitter::Start()
 {
-    Renderer::OnAdd(NewOwner);
+    Renderer::Start();
     UpdateManager::GetInstance()->RegisterComponent(this);
+
+    glGenBuffers(1, &ParticlesBuffer);
+    glGenBuffers(1, &FreelistBuffer);
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, ParticlesBuffer);
+
+    const Particle* particles = new Particle[MaxParticleCount]{};
+    glBufferData(GL_SHADER_STORAGE_BUFFER, MaxParticleCount * sizeof(Particle), particles, GL_DYNAMIC_DRAW);
+    delete[] particles;
+
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, FreelistBuffer);
+    int* freeList = new int[MaxParticleCount + 1]{0};
+    freeList[0] = MaxParticleCount;
+    for (int i = 1; i <= MaxParticleCount; ++i)
+    {
+        freeList[i] = i - 1;
+    }
+    glBufferData(GL_SHADER_STORAGE_BUFFER, (MaxParticleCount + 1) * sizeof(int), freeList, GL_DYNAMIC_DRAW);
+    delete[] freeList;
+
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 }
 
 Engine::ParticleEmitter::~ParticleEmitter()
@@ -140,6 +143,62 @@ void Engine::ParticleEmitter::SetEmitterSettingsUniforms(Shaders::ComputeShader 
     Shader.SetUniform("EmitterSettings.MaxAccel", Settings.MaxAccel);
     Shader.SetUniform("EmitterSettings.MinLife", Settings.MinLife);
     Shader.SetUniform("EmitterSettings.MaxLife", Settings.MaxLife);
+}
+
+rapidjson::Value Engine::ParticleEmitter::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+{
+    START_COMPONENT_SERIALIZATION
+    SERIALIZE_FIELD(MaxParticleCount)
+    SERIALIZE_FIELD(Settings.SpawnRate)
+    SERIALIZE_FIELD(Settings.Model)
+    SERIALIZE_FIELD(Settings.MinColor)
+    SERIALIZE_FIELD(Settings.MaxColor)
+    SERIALIZE_FIELD(Settings.MinOffset)
+    SERIALIZE_FIELD(Settings.MaxOffset)
+    SERIALIZE_FIELD(Settings.MinVelocity)
+    SERIALIZE_FIELD(Settings.MaxVelocity)
+    SERIALIZE_FIELD(Settings.MinScale)
+    SERIALIZE_FIELD(Settings.MaxScale)
+    SERIALIZE_FIELD(Settings.MinAccel)
+    SERIALIZE_FIELD(Settings.MaxAccel)
+    SERIALIZE_FIELD(Settings.MinLife)
+    SERIALIZE_FIELD(Settings.MaxLife)
+    SERIALIZE_FIELD(RenderShader)
+    SERIALIZE_FIELD(SpawnShader)
+    SERIALIZE_FIELD(UpdateShader)
+    END_COMPONENT_SERIALIZATION
+}
+
+void Engine::ParticleEmitter::DeserializeValuePass(const rapidjson::Value& Object,
+                                                   Serialization::ReferenceTable& ReferenceMap)
+{
+    START_COMPONENT_DESERIALIZATION_VALUE_PASS
+    DESERIALIZE_VALUE(MaxParticleCount)
+    DESERIALIZE_VALUE(Settings.SpawnRate)
+    DESERIALIZE_VALUE(Settings.Model)
+    DESERIALIZE_VALUE(Settings.MinColor)
+    DESERIALIZE_VALUE(Settings.MaxColor)
+    DESERIALIZE_VALUE(Settings.MinOffset)
+    DESERIALIZE_VALUE(Settings.MaxOffset)
+    DESERIALIZE_VALUE(Settings.MinVelocity)
+    DESERIALIZE_VALUE(Settings.MaxVelocity)
+    DESERIALIZE_VALUE(Settings.MinScale)
+    DESERIALIZE_VALUE(Settings.MaxScale)
+    DESERIALIZE_VALUE(Settings.MinAccel)
+    DESERIALIZE_VALUE(Settings.MaxAccel)
+    DESERIALIZE_VALUE(Settings.MinLife)
+    DESERIALIZE_VALUE(Settings.MaxLife)
+    DESERIALIZE_VALUE(RenderShader)
+    DESERIALIZE_VALUE(SpawnShader)
+    DESERIALIZE_VALUE(UpdateShader)
+    END_COMPONENT_DESERIALIZATION_VALUE_PASS
+}
+
+void Engine::ParticleEmitter::DeserializeReferencesPass(const rapidjson::Value& Object,
+                                                        Serialization::ReferenceTable& ReferenceMap)
+{
+    START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
+    END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
 }
 
 Engine::ParticleEmitter::EmitterSettings::EmitterSettings(const float SpawnRate, Models::Model* Model,

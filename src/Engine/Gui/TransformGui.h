@@ -1,8 +1,5 @@
-//
-// Created by Kacper on 27.01.2025.
-//
-
 #pragma once
+#if EDITOR
 
 #include "Engine/Components/Transform.h"
 
@@ -21,3 +18,4 @@ namespace Engine
     };
 
 } // Engine
+#endif

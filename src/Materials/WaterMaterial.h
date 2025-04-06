@@ -2,15 +2,22 @@
 
 #include "Shaders/Shader.h"
 #include "Material.h"
+#include "Engine/Textures/Texture.h"
 #include "Properties/MaterialProperty.h"
 
 namespace Materials
 {
-    class WaterMaterial : public Material
+    class WaterMaterial final : public Material
     {
     private:
-        unsigned int NormalMap0;
-        unsigned int NormalMap1;
+        static Shaders::Shader DepthPass;
+        static Shaders::Shader MainPass;
+        static Shaders::Shader DirectionalShadowPass;
+        static Shaders::Shader PointSpotShadowPass;
+
+    private:
+        Engine::Texture NormalMap0;
+        Engine::Texture NormalMap1;
         Vector3MaterialProperty Color;
         Vector2MaterialProperty Tiling0;
         Vector2MaterialProperty Tiling1;
@@ -22,11 +29,14 @@ namespace Materials
         GLint TimeLocation;
 
     public:
-        WaterMaterial(const Shaders::Shader& DepthPass, const Shaders::Shader& Shader,
-                      const Shaders::Shader& DirectionalShadowPass, const Shaders::Shader& PointSpotShadowPass,
-                      unsigned int NormalMap0, unsigned int NormalMap1, const glm::vec3& Color,
+        WaterMaterial(Engine::Texture NormalMap0, Engine::Texture NormalMap1, const glm::vec3& Color,
                       const glm::vec2& Tiling0, const glm::vec2& Tiling1, const glm::vec2& Velocity0,
                       const glm::vec2& Velocity1, float Roughness, float Metallic);
+
+        WaterMaterial();
+
+    public:
+        static void Initialize();
 
     public:
         void UseDepthPass() const override;
@@ -36,5 +46,7 @@ namespace Materials
         void UseDirectionalShadows() const override;
 
         void UsePointSpotShadows() const override;
+
+        SERIALIZATION_EXPORT_MATERIAL(WaterMaterial)
     };
 } // Models

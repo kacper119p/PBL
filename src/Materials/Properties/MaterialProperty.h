@@ -2,7 +2,7 @@
 #include <string>
 
 #include <glm/glm.hpp>
-#include "Shaders/ShaderBase.h"
+#include "Shaders/Shader.h"
 
 namespace Materials
 {
@@ -43,7 +43,7 @@ namespace Materials
         /**
          * @brief Returns value stored by this property.
          */
-        [[nodiscard]] T GetValue() const
+        [[nodiscard]] const T& GetValue() const
         {
             return Value;
         }

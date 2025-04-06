@@ -7,6 +7,7 @@
 #include "Models/Model.h"
 #include "Models/ModelAnimated.h"
 #include "Engine/EngineObjects/Scene.h"
+#include "Engine/EngineObjects/Scene/Scene.h"
 #include "Engine/Components/Renderers/ModelRenderer.h"
 #include "Engine/Components/Renderers/AnimatedModelRenderer.h"
 #include "Engine/Components/Lights/DirectionalLight.h"
@@ -20,8 +21,14 @@
 #include "Materials/WaterMaterial.h"
 #include "Engine/Components/Game/ShipRoller.h"
 #include "Engine/Components/Game/Rotator.h"
+#include "Engine/EngineObjects/Scene/SceneManager.h"
+#include "Engine/Textures/Texture.h"
 #include "Engine/Textures/TextureManager.h"
+#include "Materials/MaterialManager.h"
 #include "Materials/PbrMaterial.h"
+#include "Models/ModelManager.h"
+#include "Shaders/ShaderManager.h"
+#include "Shaders/ShaderSourceFiles.h"
 #include "tracy/Tracy.hpp"
 
 namespace Scene
@@ -29,8 +36,7 @@ namespace Scene
     SceneBuilder::~SceneBuilder() = default;
 
     void
-    SceneBuilder::Build(Engine::Scene*& Scene, std::vector<unsigned int>& Textures, std::vector<Models::Model*>& Models,
-                        std::vector<Shaders::Shader>& Shaders, std::vector<Materials::Material*>& Materials)
+    SceneBuilder::Build(Engine::Scene*& Scene)
     {
         ZoneScoped;
         Scene = new class Engine::Scene();
@@ -751,5 +757,8 @@ namespace Scene
         particleEntity->AddComponent(particleEmitter);
 
         Models.push_back(sphereModel);
+        Engine::SceneManager::LoadScene("./res/scenes/SampleScene.lvl", Scene);
+        //Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
     }
+
 } // Scene
