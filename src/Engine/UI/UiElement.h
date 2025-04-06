@@ -10,6 +10,8 @@ namespace Engine::Ui
 
     public:
         virtual ~UiElement() = default;
+
+        virtual void Render() const = 0;
     };
 
 }
