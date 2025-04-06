@@ -62,9 +62,9 @@ namespace
                                       glm::vec3(0.0f, -1.0f, 0.0f));
     }
 
-    void InitializeViewPort(unsigned int Resolution)
+    void InitializeViewPort(const unsigned int Resolution)
     {
-        glViewport(0, 0, Resolution, Resolution);
+        glViewport(0, 0, static_cast<GLsizei>(Resolution), static_cast<GLsizei>(Resolution));
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
         glEnable(GL_DEPTH_TEST);
@@ -76,6 +76,14 @@ namespace Utility
 {
     [[nodiscard]] unsigned int LoadTexture2DFromFile(const char* const FilePath, const GLenum Format,
                                                      const uint8_t SourceChannels, const GLenum SourceFormat)
+    {
+        int width;
+        int height;
+        return LoadTexture2DFromFile(FilePath, Format, SourceChannels, SourceFormat, width, height);
+    }
+
+    unsigned int LoadTexture2DFromFile(const char* FilePath, GLenum Format, uint8_t SourceChannels, GLenum SourceFormat,
+                                       int& OutWidth, int& OutHeight)
     {
         int width, height, channelCount;
         GLubyte* data = stbi_load(FilePath, &width, &height,
@@ -99,6 +107,9 @@ namespace Utility
         glGenerateMipmap(GL_TEXTURE_2D);
 
         stbi_image_free(data);
+
+        OutWidth = width;
+        OutHeight = height;
 
         return textureId;
     }
