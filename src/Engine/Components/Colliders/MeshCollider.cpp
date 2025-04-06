@@ -9,7 +9,11 @@ namespace Engine
 
     bool MeshCollider::CheckCollision(const Collider& other)
     {
-        // Implementacja sprawdzania kolizji dla MeshCollider
+        if (isStatic || other.IsStatic())
+            return false;
+
+        // TODO: implement collision detection for MeshCollider
+
         return false;
     }
 
@@ -30,4 +34,5 @@ namespace Engine
 
     Models::Mesh* MeshCollider::GetMesh() const { return _mesh_p; }
     void MeshCollider::SetMesh(Models::Mesh* mesh_p) { _mesh_p = mesh_p; }
+
 } // namespace Engine

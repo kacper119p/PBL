@@ -9,7 +9,11 @@ namespace Engine
 
     bool CapsuleCollider::CheckCollision(const Collider& other)
     {
+        if (isStatic || other.IsStatic())
+            return false;
+
         // TODO: implement collision detection for CapsuleCollider
+
         return false;
     }
 

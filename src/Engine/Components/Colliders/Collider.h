@@ -8,14 +8,6 @@
 
 namespace Engine
 {
-    enum ColliderType
-    {
-        Box,
-        Sphere,
-        Capsule,
-        Mesh
-    };
-
     /*
      * @brief Base class for all colliders. Subtypes: boxCollider, sphereCollider, capsuleCollider, meshCollider.
      */
@@ -24,6 +16,9 @@ namespace Engine
     private:
         bool isTrigger;
         Transform* transform;
+
+    protected:
+        bool isStatic;
 
     public:
         Events::TEvent<Collider*> onCollisionEnter;
@@ -37,6 +32,9 @@ namespace Engine
 
         void SetTrigger(bool isTrigger);
         bool IsTrigger() const;
+
+        void SetStatic(bool isStatic);
+        bool IsStatic() const;
 
         void SetTransform(Transform* transform);
         Transform* GetTransform() const;

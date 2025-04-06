@@ -23,14 +23,12 @@ namespace Engine
 
         inline virtual Collider* GetInstance() override { return this; }
 
-        // Getters and setters
         float GetScale() const;
         void SetScale(float scale);
 
         Models::Mesh* GetMesh() const;
         void SetMesh(Models::Mesh* mesh_p);
 
-        // Assignment operator
         MeshCollider& operator=(const MeshCollider& other);
     };
 

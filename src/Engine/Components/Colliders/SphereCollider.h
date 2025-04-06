@@ -22,11 +22,9 @@ namespace Engine
 
         inline virtual Collider* GetInstance() override { return this; }
 
-        // Getters and setters
         float GetRadius() const;
         void SetRadius(float radius);
 
-        // Assignment operator
         SphereCollider& operator=(const SphereCollider& other);
     };
 
