@@ -7,7 +7,7 @@ namespace Engine
      * @brief Capsule collider class.
      * @details Represents a capsule-shaped collider.
      */
-    class CapsuleCollider : public Collider
+    class CapsuleCollider : public Collider, ColliderVisitor
     {
     private:
         float _radius;
@@ -17,6 +17,7 @@ namespace Engine
         CapsuleCollider() = default;
         CapsuleCollider(Transform* transform, bool isTrigger = false, float radius = 1.0f, float height = 2.0f);
         
+        virtual bool AcceptCollision(ColliderVisitor& visitor) override;
         virtual bool CheckCollision(const Collider& other) override;
         inline virtual Collider* GetInstance() override { return this; }
 

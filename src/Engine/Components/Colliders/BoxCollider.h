@@ -8,7 +8,7 @@ namespace Engine
      * @brief Box collider class.
      * @details Represents a box-shaped collider.
      */
-    class BoxCollider : public Collider
+    class BoxCollider : public Collider, ColliderVisitor
     {
     private:
         float _width;
@@ -19,9 +19,12 @@ namespace Engine
         BoxCollider() = default;
         BoxCollider(Transform* transform, bool isTrigger = false, float width = 1.0f, float height = 1.0f,
                     float depth = 1.0f);
+
+        virtual bool AcceptCollision(ColliderVisitor& visitor) override;
         virtual bool CheckCollision(const Collider& other) override;
 
         inline virtual Collider* GetInstance() override { return this; }
+        
 
         float GetWidth() const;
         void SetWidth(float width);
