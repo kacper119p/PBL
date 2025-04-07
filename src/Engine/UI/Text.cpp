@@ -78,13 +78,15 @@ namespace Engine::Ui
 
     void Text::Render() const
     {
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         Shader.Use();
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, Font->GetGlyphAtlas());
-        glDisable(GL_CULL_FACE);
+        glEnable(GL_BLEND);
         glBindVertexArray(VertexArray);
         glDrawArrays(GL_TRIANGLES, 0, VertexCount);
         glBindVertexArray(0);
+        glDisable(GL_BLEND);
     }
 
 }
