@@ -1,9 +1,8 @@
 #include "SampleUi.h"
-
-#include "Image.h"
-#include "Text.h"
 #include "GLFW/glfw3.h"
 #include "Engine/Textures/TextureManager.h"
+#include "Engine/UI/Image.h"
+#include "Engine/UI/Text.h"
 #include "Materials/MaterialManager.h"
 #include "Materials/Ui/BasicImageMaterial.h"
 

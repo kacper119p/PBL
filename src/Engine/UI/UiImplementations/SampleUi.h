@@ -1,5 +1,7 @@
 #pragma once
-#include "Ui.h"
+
+#include <cstdint>
+#include "Engine/UI/Ui.h"
 
 namespace Engine::Ui
 {
