@@ -36,7 +36,7 @@ namespace Engine::Ui
         ChangingText2->SetText("Changing");
     }
 
-    void SampleUi::Update(float DeltaTime)
+    void SampleUi::Update(const float DeltaTime)
     {
         MovingImage->Rect.SetPositionPixels(glm::vec3(720 * std::cos(glfwGetTime()), -200, 0));
         MovingImage->Rect.SetRotation(glfwGetTime() * 180);

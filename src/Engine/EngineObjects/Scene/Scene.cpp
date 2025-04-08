@@ -1,5 +1,6 @@
 #include "Scene.h"
 
+#include "Engine/UI/Ui.h"
 #include "Serialization/SerializedObjectFactory.h"
 #include "Serialization/SerializationUtility.h"
 
@@ -27,6 +28,7 @@ namespace Engine
     Scene::~Scene()
     {
         delete Root;
+        delete Ui;
     }
 
     Entity* Scene::SpawnEntity(Entity* const Parent)
@@ -64,6 +66,7 @@ namespace Engine
         documentRoot.SetObject();
         rapidjson::Value root = Root->Serialize(Allocator);
         documentRoot.AddMember("Skybox", Serialization::Serialize(Skybox, Allocator), Allocator);
+        documentRoot.AddMember("UI", Serialization::Serialize(Ui->GetType(), Allocator), Allocator);
         documentRoot.AddMember("Root", root, Allocator);
         rapidjson::Value objects = rapidjson::Value(rapidjson::kArrayType);
         for (const Component* component : *Root)
@@ -89,6 +92,8 @@ namespace Engine
 
         Serialization::Deserialize(Value, "Skybox", Skybox);
         LightManager::GetInstance()->SetEnvironmentMap(Skybox);
+
+        Ui = Ui::UiSerializationFactory::CreateObject(Value["UI"].GetString());
 
         Root->DeserializeValuePass(Value["Root"], referenceTable);
 

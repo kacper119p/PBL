@@ -3,7 +3,6 @@
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include "Engine/Textures/Texture.h"
-#include "Shaders/Shader.h"
 
 namespace Materials
 {
@@ -17,6 +16,11 @@ namespace Models
 
 namespace Engine
 {
+    namespace Ui
+    {
+        class Ui;
+    }
+
     /**
      * @brief Class representing scene hierarchy.
      */
@@ -24,6 +28,7 @@ namespace Engine
     {
     private:
         Entity* Root;
+        Ui::Ui* Ui = nullptr;
         Texture Skybox;
 
     public:
@@ -67,6 +72,23 @@ namespace Engine
         {
             this->Skybox = Skybox;
             LightManager::GetInstance()->SetEnvironmentMap(Skybox);
+        }
+
+        /**
+         * @brief Returns UI used in this scene.
+         */
+        [[nodiscard]] Ui::Ui* GetUi() const
+        {
+            return Ui;
+        }
+
+        /**
+         * @brief Sets UI used in this scene.
+         * @param Ui A new UI.
+         */
+        void SetUi(Ui::Ui* const Ui)
+        {
+            this->Ui = Ui;
         }
 
         /**

@@ -1,5 +1,6 @@
 {
     "Skybox": "./res/textures/Skyboxes/Skybox.hdr",
+    "UI": "SampleUi",
     "Root": {
         "type": "Entity",
         "id": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
