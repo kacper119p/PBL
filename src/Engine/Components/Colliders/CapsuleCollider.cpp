@@ -5,22 +5,13 @@ namespace Engine
     CapsuleCollider::CapsuleCollider(Transform* transform, bool isTrigger, float radius, float height) :
         Collider(transform, isTrigger), _radius(radius), _height(height)
     {
+        this->colliderType = CAPSULE;
     }
 
     bool CapsuleCollider::AcceptCollision(ColliderVisitor& visitor)
     {
-        visitor.VisitCapsule(*this);
+        visitor.ResolveCollisionCapsule(*this);
         return true;
-    }
-
-    bool CapsuleCollider::CheckCollision(const Collider& other)
-    {
-        if (isStatic || other.IsStatic())
-            return false;
-
-        // TODO: implement collision detection for CapsuleCollider
-
-        return false;
     }
 
     CapsuleCollider& CapsuleCollider::operator=(const CapsuleCollider& other)

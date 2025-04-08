@@ -5,11 +5,12 @@ namespace Engine
     SphereCollider::SphereCollider(Transform* transform, bool isTrigger, float radius) :
         Collider(transform, isTrigger), radius(radius)
     {
+        this->colliderType = SPHERE;
     }
 
     bool SphereCollider::AcceptCollision(ColliderVisitor& visitor)
     {
-        visitor.VisitSphere(*this);
+        visitor.ResolveCollisionSphere(*this);
         return true;
     }
 
@@ -18,7 +19,7 @@ namespace Engine
         if (isStatic || other.IsStatic())
             return false;
 
-        // TODO: implement collision detection for SphereCollider
+        // TODO: implement collision detection for SphereCollider / remove func
 
         return false;
     }

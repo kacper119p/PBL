@@ -1,7 +1,5 @@
 #pragma once
 
-
-
 namespace Engine
 {
     class BoxCollider;
@@ -12,10 +10,11 @@ namespace Engine
     class ColliderVisitor
     {
     public:
-        virtual void VisitBox(BoxCollider& box) = 0;
-        virtual void VisitSphere(SphereCollider& sphere) = 0;
-        virtual void VisitCapsule(CapsuleCollider& capsule) = 0;
-        virtual void VisitMesh(MeshCollider& mesh) = 0;
+        // according to visitor scheme this would be named VisitBox, VisitSphere etc.
+        virtual void ResolveCollisionBox(BoxCollider& box) = 0;
+        virtual void ResolveCollisionSphere(SphereCollider& sphere) = 0;
+        virtual void ResolveCollisionCapsule(CapsuleCollider& capsule) = 0;
+        virtual void ResolveCollisionMesh(MeshCollider& mesh) = 0;
     };
 
 } // namespace Engine
