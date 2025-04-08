@@ -15,7 +15,7 @@ if(!(!!(__EXPRESSION__)))\
 /**
  * @brief Check is disabled in non debug builds.
  * @param __EXPRESSION__ Not used.
- * @param __MESSAGE__ not used.
+ * @param __MESSAGE__ Not used.
  */
 #define CHECK_MESSAGE(__EXPRESSION__, __MESSAGE__)
 #endif

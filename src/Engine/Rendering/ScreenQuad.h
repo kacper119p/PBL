@@ -29,7 +29,7 @@ namespace Engine::Rendering
         /**
          * @brief Draws quad covering whole screen
          */
-        void Draw();
+        void Draw() const;
 
     private:
         static void Initialize();
