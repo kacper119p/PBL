@@ -19,21 +19,27 @@ namespace Engine::Ui
         image->SetTexture(TextureManager::GetTexture("./res/textures/Logos/WIR_logo_2.png"));
 
         MovingImage = AddElement<Image>(nullptr);
-        MovingImage->GetRect().SetPositionPixels(glm::vec3(720, 0, 0.5));
+        MovingImage->GetRect().SetPositionPixels(glm::vec3(720, -200, 0.5));
         MovingImage->GetRect().SetSizePixels(glm::vec2(480, 270));
         MovingImage->SetMaterial(imageMaterial);
         MovingImage->SetTexture(TextureManager::GetTexture("./res/textures/Logos/WIR_logo_2.png"));
 
         ChangingText = AddElement<Text>(nullptr);
-        ChangingText->GetRect().SetPositionPixels(glm::vec3(-720, 0, 0.5));
-        ChangingText->GetRect().SetSizePixels(glm::vec2(480, 270));
+        ChangingText->GetRect().SetPositionPixels(glm::vec3(-960, -480, 0.5));
+        ChangingText->GetRect().SetSizePixels(glm::vec2(480, 180));
         ChangingText->SetFont("Lato");
         ChangingText->SetText("Changing");
+
+        ChangingText2 = AddElement<Text>(nullptr);
+        ChangingText2->GetRect().SetPositionPixels(glm::vec3(-960, -380, 0.5));
+        ChangingText2->GetRect().SetSizePixels(glm::vec2(480, 72));
+        ChangingText2->SetFont("Lato");
+        ChangingText2->SetText("Changing");
     }
 
     void SampleUi::Update(float DeltaTime)
     {
-        MovingImage->Rect.SetPositionPixels(glm::vec3(720 * std::cos(glfwGetTime()), 0, 0));
+        MovingImage->Rect.SetPositionPixels(glm::vec3(720 * std::cos(glfwGetTime()), -200, 0));
         MovingImage->Rect.SetRotation(glfwGetTime() * 180);
         MovingImage->GetRect().SetSizePixels(
                 glm::vec2(480, 270) * static_cast<float>(std::cos(glfwGetTime()) * 0.25f + 0.75));
@@ -45,11 +51,13 @@ namespace Engine::Ui
             {
                 Change = 1;
                 ChangingText->SetText("Text");
+                ChangingText2->SetText("Text");
             }
             else
             {
                 Change = 0;
                 ChangingText->SetText("Changing");
+                ChangingText2->SetText("Changing");
             }
         }
     }

@@ -14,6 +14,7 @@ namespace Engine::Ui
     private:
         Image* MovingImage;
         Text* ChangingText;
+        Text* ChangingText2;
         float Timer = 0;
         uint8_t Change = 0;
 
