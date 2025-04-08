@@ -23,7 +23,8 @@ namespace Engine::Ui
         }
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         Shader.Use();
-        Shader.SetUniform("Transform", Rect.GetLocalToWorldMatrix());
+        Shader.SetUniform("Size", Rect.GetSize().y);
+        Shader.SetUniform("Transform", Rect.GetLocalToWorldMatrixNoScale());
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, Font->GetGlyphAtlas());
         glEnable(GL_BLEND);
