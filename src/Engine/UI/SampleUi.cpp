@@ -11,7 +11,7 @@ namespace Engine::Ui
     {
         Image* image = AddElement<Image>(nullptr);
         image->GetRect().SetPositionPixels(glm::vec3(-960, 540, 0));
-        image->GetRect().SetSizePixels(glm::vec2(960 / 2, 540 / 2));
+        image->GetRect().SetSizePixels(glm::vec2(960, 540));
         Materials::UiMaterial* imageMaterial = new Materials::BasicImageMaterial();
         image->SetMaterial(imageMaterial);
         image->SetTexture(TextureManager::GetTexture("./res/textures/Box/Base.png"));
