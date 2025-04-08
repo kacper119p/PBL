@@ -79,20 +79,31 @@ namespace Engine::Ui
          */
         void SetPositionPixels(const glm::vec3& InPosition)
         {
-            Position.x = InPosition.x / 1920.0f;
-            Position.y = InPosition.y / 1080.0f;
+            Position.x = InPosition.x / 1920.0f * 2.0f;
+            Position.y = InPosition.y / 1080.0f * 2.0f;
             Position.z = InPosition.z;
             MarkDirty();
         }
 
         /**
+         * @brief Returns position in local space in pixels. Assumes 1920x1080 screen.
+         * @return
+         */
+        [[nodiscard]] glm::vec3 GetPositionPixels() const
+        {
+            return glm::vec3(Position.x * 1920.0f / 2.0f,
+                             Position.y * 1080.0f / 2.0f,
+                             Position.z);
+        }
+
+        /**
          * @brief Sets size of this rect in pixels. Assumes 1920x1080 screen.
-         * @param Value A new position.
+         * @param Value A new size.
          */
         void SetSizePixels(const glm::vec2& Value)
         {
-            Position.x = Value.x / 1920.0f;
-            Position.y = Value.y / 1080.0f;
+            Size.x = Value.x / 1920.0f;
+            Size.y = Value.y / 1080.0f;
             MarkDirty();
         }
 
