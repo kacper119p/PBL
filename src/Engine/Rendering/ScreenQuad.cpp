@@ -20,7 +20,7 @@ Engine::Rendering::ScreenQuad::ScreenQuad()
 
 Engine::Rendering::ScreenQuad::~ScreenQuad() = default;
 
-void Engine::Rendering::ScreenQuad::Draw() // NOLINT(*-convert-member-functions-to-static)
+void Engine::Rendering::ScreenQuad::Draw() const // NOLINT(*-convert-member-functions-to-static)
 {
     glBindVertexArray(CachedData.VertexArray);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

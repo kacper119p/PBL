@@ -12,7 +12,8 @@ const float GAMMA = 2.2;
 
 out vec3 FragColor;
 
-void main() {
+void main()
+{
     vec3 hdrColor = texture(SceneColor, TexCoords).rgb;
     vec3 bloomColor = max(vec3(0.0), texture(BloomColor, TexCoords).rgb) * Intensity;
 

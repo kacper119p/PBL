@@ -56,7 +56,7 @@ namespace Engine::Ui
             this->Shader = Shader;
         }
 
-        void Render() const override;
+        void Render() override;
 
     private:
         void UpdateMesh();
