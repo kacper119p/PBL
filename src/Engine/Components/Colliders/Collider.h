@@ -8,6 +8,13 @@
 #include "ColliderVisitor.h"
 namespace Engine
 {
+    enum ColliderTypeE
+    {
+        BOX,
+        SPHERE,
+        CAPSULE,
+        MESH
+    };
     /*
      * @brief Base class for all colliders. Subtypes: boxCollider, sphereCollider, capsuleCollider, meshCollider.
      */
@@ -21,6 +28,8 @@ namespace Engine
         bool isStatic;
 
     public:
+        ColliderTypeE colliderType;
+
         Events::TEvent<Collider*> onCollisionEnter;
         Events::TEvent<Collider*> onCollisionExit;
 

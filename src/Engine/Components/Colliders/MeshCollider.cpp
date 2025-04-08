@@ -5,11 +5,12 @@ namespace Engine
     MeshCollider::MeshCollider(Transform* transform, bool isTrigger, float scale, Models::Mesh* mesh_p) :
         Collider(transform, isTrigger), _scale(scale), _mesh_p(mesh_p)
     {
+        this->colliderType = MESH;
     }
 
     bool MeshCollider::AcceptCollision(ColliderVisitor& visitor)
     {
-        visitor.VisitMesh(*this);
+        visitor.ResolveCollisionMesh(*this);
         return true;
     }
 
@@ -18,7 +19,7 @@ namespace Engine
         if (isStatic || other.IsStatic())
             return false;
 
-        // TODO: implement collision detection for MeshCollider
+        // TODO: implement collision detection for MeshCollider / remove func
 
         return false;
     }

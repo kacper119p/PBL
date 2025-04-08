@@ -5,11 +5,12 @@ namespace Engine
     BoxCollider::BoxCollider(Transform* transform, bool isTrigger, float width, float height, float depth) :
         Collider(transform, isTrigger), _width(width), _height(height), _depth(depth)
     {
+        this->colliderType = BOX;
     }
 
     bool BoxCollider::AcceptCollision(ColliderVisitor& visitor)
     {
-        visitor.VisitBox(*this);
+        visitor.ResolveCollisionBox(*this);
         return true;
     }
 
@@ -18,7 +19,7 @@ namespace Engine
         if (isStatic || other.IsStatic()) 
             return false;
 
-        // TODO: implement collision detection for BoxCollider
+        // TODO: implement collision detection for BoxCollider / remove func
 
         return false;
     }
