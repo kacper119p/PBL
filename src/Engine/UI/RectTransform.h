@@ -110,11 +110,10 @@ namespace Engine::Ui
         /**
          * @brief Returns size of this rect in pixels. Assumes 1920x1080 screen.
          */
-        [[nodiscard]] glm::vec2 GetSizePixels()
+        [[nodiscard]] glm::vec2 GetSizePixels() const
         {
             return glm::vec2(Position.x * 1920.0f,
                              Position.y * 1080.0f);
-            MarkDirty();
         }
 
         /**
