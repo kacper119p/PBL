@@ -40,42 +40,52 @@ namespace Engine::Ui
 
         float x = 0.0f;
         float y = 0.0f;
+        size_t j = 0;
         for (size_t i = 0; i < String.length(); i++)
         {
             const Glyph& glyph = font->GetGlyph(String[i]);
             if (glyph.GetCharacter() == ' ') // Optimize space out.
             {
-                x += glyph.GetAdvance();
                 VertexCount -= 6;
+                if (x * GetRect().GetSize().y >= GetRect().GetSize().x)
+                {
+                    y -= 1.0f;
+                    x = 0.0f;
+                }
+                else
+                {
+                    x += glyph.GetAdvance();
+                }
                 continue;
             }
-            vertices[i * 6 + 0].Position = glm::vec2(x + glyph.GetPlaneHorizontalBounds().x,
+            vertices[j * 6 + 0].Position = glm::vec2(x + glyph.GetPlaneHorizontalBounds().x,
                                                      y + glyph.GetPlaneVerticalBounds().y);
-            vertices[i * 6 + 0].TexCoords = glm::vec2(glyph.GetAtlasHorizontalBounds().x,
+            vertices[j * 6 + 0].TexCoords = glm::vec2(glyph.GetAtlasHorizontalBounds().x,
                                                       glyph.GetAtlasVerticalBounds().y);
-            vertices[i * 6 + 1].Position = glm::vec2(x + glyph.GetPlaneHorizontalBounds().x,
+            vertices[j * 6 + 1].Position = glm::vec2(x + glyph.GetPlaneHorizontalBounds().x,
                                                      y + glyph.GetPlaneVerticalBounds().x);
-            vertices[i * 6 + 1].TexCoords = glm::vec2(glyph.GetAtlasHorizontalBounds().x,
+            vertices[j * 6 + 1].TexCoords = glm::vec2(glyph.GetAtlasHorizontalBounds().x,
                                                       glyph.GetAtlasVerticalBounds().x);
-            vertices[i * 6 + 2].Position = glm::vec2(x + glyph.GetPlaneHorizontalBounds().y,
-                                                     glyph.GetPlaneVerticalBounds().y);
-            vertices[i * 6 + 2].TexCoords = glm::vec2(glyph.GetAtlasHorizontalBounds().y,
+            vertices[j * 6 + 2].Position = glm::vec2(x + glyph.GetPlaneHorizontalBounds().y,
+                                                     y + glyph.GetPlaneVerticalBounds().y);
+            vertices[j * 6 + 2].TexCoords = glm::vec2(glyph.GetAtlasHorizontalBounds().y,
                                                       glyph.GetAtlasVerticalBounds().y);
 
-            vertices[i * 6 + 3].Position = glm::vec2(x + glyph.GetPlaneHorizontalBounds().y,
+            vertices[j * 6 + 3].Position = glm::vec2(x + glyph.GetPlaneHorizontalBounds().y,
                                                      y + glyph.GetPlaneVerticalBounds().y);
-            vertices[i * 6 + 3].TexCoords = glm::vec2(glyph.GetAtlasHorizontalBounds().y,
+            vertices[j * 6 + 3].TexCoords = glm::vec2(glyph.GetAtlasHorizontalBounds().y,
                                                       glyph.GetAtlasVerticalBounds().y);
-            vertices[i * 6 + 4].Position = glm::vec2(x + glyph.GetPlaneHorizontalBounds().x,
+            vertices[j * 6 + 4].Position = glm::vec2(x + glyph.GetPlaneHorizontalBounds().x,
                                                      y + glyph.GetPlaneVerticalBounds().x);
-            vertices[i * 6 + 4].TexCoords = glm::vec2(glyph.GetAtlasHorizontalBounds().x,
+            vertices[j * 6 + 4].TexCoords = glm::vec2(glyph.GetAtlasHorizontalBounds().x,
                                                       glyph.GetAtlasVerticalBounds().x);
-            vertices[i * 6 + 5].Position = glm::vec2(x + glyph.GetPlaneHorizontalBounds().y,
+            vertices[j * 6 + 5].Position = glm::vec2(x + glyph.GetPlaneHorizontalBounds().y,
                                                      y + glyph.GetPlaneVerticalBounds().x);
-            vertices[i * 6 + 5].TexCoords = glm::vec2(glyph.GetAtlasHorizontalBounds().y,
+            vertices[j * 6 + 5].TexCoords = glm::vec2(glyph.GetAtlasHorizontalBounds().y,
                                                       glyph.GetAtlasVerticalBounds().x);
 
             x += glyph.GetAdvance();
+            ++j;
         }
 
 

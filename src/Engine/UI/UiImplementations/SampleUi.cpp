@@ -34,6 +34,13 @@ namespace Engine::Ui
         ChangingText2->GetRect().SetSizePixels(glm::vec2(480, 72));
         ChangingText2->SetFont("Lato");
         ChangingText2->SetText("Changing");
+
+        Text* text = AddElement<Text>(nullptr);
+        text->GetRect().SetPositionPixels(glm::vec3(-960, 468, 0));
+        text->GetRect().SetSizePixels(glm::vec2(960, 72));
+        text->SetFont("Lato");
+        text->SetText(
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
     }
 
     void SampleUi::Update(const float DeltaTime)
