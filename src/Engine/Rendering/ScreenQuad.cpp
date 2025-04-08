@@ -1,7 +1,33 @@
 #include "ScreenQuad.h"
 #include "glad/glad.h"
 
+struct Engine::Rendering::ScreenQuad::CachedData Engine::Rendering::ScreenQuad::CachedData;
+
+Engine::Rendering::ScreenQuad::CachedData::~CachedData()
+{
+    glDeleteBuffers(1, &VertexBuffer);
+    glDeleteBuffers(1, &ElementBuffer);
+    glDeleteVertexArrays(1, &VertexArray);
+}
+
 Engine::Rendering::ScreenQuad::ScreenQuad()
+{
+    if (CachedData.VertexArray == 0)
+    {
+        Initialize();
+    }
+}
+
+Engine::Rendering::ScreenQuad::~ScreenQuad() = default;
+
+void Engine::Rendering::ScreenQuad::Draw() // NOLINT(*-convert-member-functions-to-static)
+{
+    glBindVertexArray(CachedData.VertexArray);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
+}
+
+void Engine::Rendering::ScreenQuad::Initialize()
 {
     constexpr float vertices[] = {
             -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, // bottom left
@@ -15,14 +41,14 @@ Engine::Rendering::ScreenQuad::ScreenQuad()
             0, 3, 1
     };
 
-    glGenVertexArrays(1, &VertexArray);
-    glGenBuffers(1, &ElementBuffer);
-    glGenBuffers(1, &VertexBuffer);
+    glGenVertexArrays(1, &CachedData.VertexArray);
+    glGenBuffers(1, &CachedData.ElementBuffer);
+    glGenBuffers(1, &CachedData.VertexBuffer);
 
-    glBindVertexArray(VertexArray);
-    glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
+    glBindVertexArray(CachedData.VertexArray);
+    glBindBuffer(GL_ARRAY_BUFFER, CachedData.VertexBuffer);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ElementBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, CachedData.ElementBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(faceIndices), faceIndices,
                  GL_STATIC_DRAW);
 
@@ -37,19 +63,5 @@ Engine::Rendering::ScreenQuad::ScreenQuad()
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*) (3 * sizeof(float)));
 
-    glBindVertexArray(0);
-}
-
-Engine::Rendering::ScreenQuad::~ScreenQuad()
-{
-    glDeleteBuffers(1, &VertexBuffer);
-    glDeleteBuffers(1, &ElementBuffer);
-    glDeleteVertexArrays(1, &VertexArray);
-}
-
-void Engine::Rendering::ScreenQuad::Draw()
-{
-    glBindVertexArray(VertexArray);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }

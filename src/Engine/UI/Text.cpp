@@ -9,21 +9,47 @@
 namespace Engine::Ui
 {
 
-    Text::Text(const std::string& Text, const std::string& FontName)
+    Text::Text()
     {
         Shader = Shaders::ShaderManager::GetShader(
                 Shaders::ShaderSourceFiles("./res/shaders/Font/Font.vert", "", "./res/shaders/Font/Font.frag"));
-        Font = TextManager::GetFontId(FontName);
+    }
+
+    void Text::Render() const
+    {
+        if (VertexBuffer == 0)
+        {
+            return;
+        }
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        Shader.Use();
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, Font->GetGlyphAtlas());
+        glEnable(GL_BLEND);
+        glBindVertexArray(VertexArray);
+        glDrawArrays(GL_TRIANGLES, 0, VertexCount);
+        glBindVertexArray(0);
+        glDisable(GL_BLEND);
+    }
+
+    void Text::UpdateMesh()
+    {
         const class Font* font = *Font;
-        VertexCount = static_cast<int32_t>(Text.length() * 6);
+        VertexCount = static_cast<int32_t>(String.length() * 6);
 
         FontVertex* const vertices = new FontVertex[VertexCount];
 
         float x = 0.0f;
         float y = 0.0f;
-        for (size_t i = 0; i < Text.length(); i++)
+        for (size_t i = 0; i < String.length(); i++)
         {
-            const Glyph& glyph = font->GetGlyph(Text[i]);
+            const Glyph& glyph = font->GetGlyph(String[i]);
+            if (glyph.GetCharacter() == ' ') // Optimize space out.
+            {
+                x += glyph.GetAdvance();
+                VertexCount -= 6;
+                continue;
+            }
             vertices[i * 6 + 0].Position = glm::vec2(x + glyph.GetPlaneHorizontalBounds().x,
                                                      y + glyph.GetPlaneVerticalBounds().y);
             vertices[i * 6 + 0].TexCoords = glm::vec2(glyph.GetAtlasHorizontalBounds().x,
@@ -59,7 +85,7 @@ namespace Engine::Ui
         glBindVertexArray(VertexArray);
         glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
 
-        glBufferData(GL_ARRAY_BUFFER, VertexCount * sizeof(FontVertex), vertices,
+        glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(VertexCount * sizeof(FontVertex)), vertices,
                      GL_STATIC_DRAW);
 
         //Position
@@ -74,19 +100,6 @@ namespace Engine::Ui
 
         glBindVertexArray(0);
         delete [] vertices;
-    }
-
-    void Text::Render() const
-    {
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        Shader.Use();
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, Font->GetGlyphAtlas());
-        glEnable(GL_BLEND);
-        glBindVertexArray(VertexArray);
-        glDrawArrays(GL_TRIANGLES, 0, VertexCount);
-        glBindVertexArray(0);
-        glDisable(GL_BLEND);
     }
 
 }

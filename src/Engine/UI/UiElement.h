@@ -9,10 +9,8 @@ namespace Engine::Ui
     public:
         RectTransform Rect;
 
-        UiElement() = default;
-
     public:
-        UiElement(const UiElement&) :
+        UiElement():
             Rect(this)
         {
         }
@@ -21,6 +19,16 @@ namespace Engine::Ui
         virtual ~UiElement() = default;
 
     public:
+        [[nodiscard]] RectTransform& GetRect()
+        {
+            return Rect;
+        }
+
+        [[nodiscard]] const RectTransform& GetRect() const
+        {
+            return Rect;
+        }
+
         virtual void Render() const = 0;
     };
 
