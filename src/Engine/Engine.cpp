@@ -18,6 +18,7 @@
 #include "Textures/TextureManager.h"
 #include "Engine/Components/Audio/AudioSource.h"
 #include "Engine/Components/Audio/AudioListener.h"
+#include "UI/SampleUi.h"
 #include "UI/FontRendering/TextManager.h"
 #include "tracy/Tracy.hpp"
 
@@ -70,6 +71,8 @@ namespace Engine
 
         spdlog::info("Successfully built scene.");
 
+        Ui::SampleUi ui;
+
         float lastFrame = 0.0f;
 
         // Main loop
@@ -96,6 +99,9 @@ namespace Engine
                                               Camera->GetProjectionMatrix());
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
             AudioListener->UpdateListener();
+
+            ui.Update(deltaTime);
+            ui.Render();
 
 #if EDITOR
             // Draw ImGui

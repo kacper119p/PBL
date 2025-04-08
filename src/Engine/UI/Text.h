@@ -9,7 +9,7 @@
 
 namespace Engine::Ui
 {
-    class Text final : UiElement
+    class Text final : public UiElement
     {
     private:
         uint32_t VertexBuffer = 0;
