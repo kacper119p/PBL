@@ -58,10 +58,6 @@ namespace Engine
         Camera->SetProjectionMatrix(glm::perspective(glm::radians(70.0f), float(WindowWidth) /
                                                                           float(WindowHeight), 0.1f, 1000.0f));
 
-        AudioListener audioListener(*Camera);
-        AudioSource audioSource;
-        spdlog::info("Sounds loaded.");
-
         try
         {
             SceneBuilding::SceneBuilder::Build(Scene);
@@ -98,12 +94,11 @@ namespace Engine
             const CameraRenderData renderData(Camera->GetPosition(), Camera->GetTransform(),
                                               Camera->GetProjectionMatrix());
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
-            audioListener.UpdateListener();
+            AudioListener->UpdateListener();
 
 #if EDITOR
             // Draw ImGui
             ImGuiBegin();
-            audioSource.RenderAudioSourceImGui();
             AudioManager::GetInstance().RenderGlobalVolumeImGui();
             ImGuiRender();
             GizmoManager::GetInstance()->Manipulate(renderData);
@@ -202,6 +197,9 @@ namespace Engine
                                                    100.0f),
                                   0.0018f);
         Camera->SetPosition(glm::vec3(0.0f, 5.0f, 20.0f));
+
+        AudioListener = new class AudioListener(*Camera);
+        spdlog::info("Sounds loaded.");
 
         return true;
     }
@@ -320,6 +318,7 @@ namespace Engine
         Models::ModelManager::DeleteAllModels();
         Materials::MaterialManager::DeleteAllMaterials();
         AudioManager::DestroyInstance();
+        delete AudioListener;
     }
 
     void Engine::GlfwErrorCallback(int Error, const char* Description)
