@@ -17,7 +17,17 @@ namespace Engine::Ui
 
     public:
         template<class T>
-        T AddElement(UiElement* Parent);
+        T* AddElement(UiElement* Parent)
+        {
+            static_assert(std::is_base_of_v<UiElement, T>, "T must be derived from UiElement.");
+            T* newElement = new T();
+            if (Parent != nullptr)
+            {
+                newElement->GetRect().SetParent(&Parent->GetRect());
+            }
+            UiElements.emplace_back(newElement);
+            return newElement;
+        }
 
     public:
         void Render() const;
