@@ -79,7 +79,9 @@ namespace Engine::Ui
          */
         void SetPositionPixels(const glm::vec3& InPosition)
         {
-            Position = InPosition;
+            Position.x = InPosition.x / 1920.0f;
+            Position.y = InPosition.y / 1080.0f;
+            Position.z = InPosition.z;
             MarkDirty();
         }
 
@@ -91,15 +93,17 @@ namespace Engine::Ui
         {
             Position.x = Value.x / 1920.0f;
             Position.y = Value.y / 1080.0f;
+            MarkDirty();
         }
 
         /**
          * @brief Returns size of this rect in pixels. Assumes 1920x1080 screen.
          */
-        [[nodiscard]] glm::vec2 GetSizePixels() const
+        [[nodiscard]] glm::vec2 GetSizePixels()
         {
             return glm::vec2(Position.x * 1920.0f,
                              Position.y * 1080.0f);
+            MarkDirty();
         }
 
         /**
@@ -109,6 +113,7 @@ namespace Engine::Ui
         void SetPositionWorldSpace(const glm::vec3& InPosition)
         {
             Position = glm::vec3(glm::inverse(GetLocalToWorldMatrix()) * glm::vec4(InPosition, 1.0f));
+            MarkDirty();
         }
 
         /**
@@ -148,16 +153,6 @@ namespace Engine::Ui
         }
 
         /**
-         * @brief Sets size of this rect in pixels. Assumes 1920x1080 screen.
-         * @param Value A new size.
-         */
-        void SetSize(const glm::uvec2& Value)
-        {
-            Size.x = static_cast<float>(Value.x) / 1920.0f;
-            Size.y = static_cast<float>(Value.y) / 1080.0f;
-        }
-
-        /**
          * @brief Returns Entity owning this transform
          */
         [[nodiscard]] UiElement* GetOwner() const
@@ -180,6 +175,11 @@ namespace Engine::Ui
          * @brief Returns local to world space transformation matrix.
          */
         const glm::mat4& GetLocalToWorldMatrix();
+
+        /**
+         * @brief Returns local to world space transformation matrix without scale component.
+         */
+        const glm::mat4& GetLocalToWorldMatrixNoScale();
 
         /**
          * @brief Returns parent of this transform.

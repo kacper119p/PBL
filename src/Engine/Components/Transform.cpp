@@ -21,7 +21,7 @@ namespace Engine
 
     void Transform::SetParent(Transform* InParent)
     {
-        if (Parent)
+        if (Parent != nullptr)
         {
             Parent->RemoveChild(this);
         }
@@ -37,7 +37,10 @@ namespace Engine
 
     void Transform::AddChild(Transform* Child)
     {
-        Child->Parent->RemoveChild(Child);
+        if (Child->Parent != nullptr)
+        {
+            Child->Parent->RemoveChild(Child);
+        }
         Child->Parent = this;
         Child->MarkDirty();
         Children.push_back(Child);

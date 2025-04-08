@@ -10,7 +10,7 @@ namespace Materials
         static Shaders::Shader Shader;
 
     public:
-        explicit BasicImageMaterial(const Shaders::Shader& Shader) :
+        explicit BasicImageMaterial() :
             UiMaterial(Shader)
         {
         }

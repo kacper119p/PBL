@@ -34,7 +34,10 @@ namespace Engine::Ui
 
     void RectTransform::AddChild(RectTransform* Child)
     {
-        Child->Parent->RemoveChild(Child);
+        if (Child->Parent != nullptr)
+        {
+            Child->Parent->RemoveChild(Child);
+        }
         Child->Parent = this;
         Child->MarkDirty();
         Children.push_back(Child);
@@ -66,6 +69,12 @@ namespace Engine::Ui
         return LocalToWorldMatrix;
     }
 
+    const glm::mat4& RectTransform::GetLocalToWorldMatrixNoScale()
+    {
+        UpdateMatrices();
+        return LocalToWorldMatrixNoScale;
+    }
+
     void RectTransform::MarkDirty()
     {
         IsDirty = true;
@@ -83,21 +92,22 @@ namespace Engine::Ui
         }
         LocalToWorldMatrixNoScale = glm::mat4(1.0f);
 
-        LocalToWorldMatrixNoScale = glm::translate(LocalMatrix, Position);
+        LocalToWorldMatrixNoScale = glm::translate(LocalToWorldMatrixNoScale, Position);
 
-        LocalToWorldMatrixNoScale = glm::rotate(LocalMatrix, glm::radians(Rotation), glm::vec3(0.0f, 0.0f, 1.0f));
+        LocalToWorldMatrixNoScale = glm::rotate(LocalToWorldMatrixNoScale, glm::radians(Rotation),
+                                                glm::vec3(0.0f, 0.0f, 1.0f));
 
+        LocalMatrix = glm::scale(LocalToWorldMatrixNoScale, glm::vec3(Size, 1.0f));
 
-        if (Parent)
+        if (Parent != nullptr)
         {
-            LocalToWorldMatrixNoScale = Parent->GetLocalToWorldMatrix() * LocalToWorldMatrixNoScale;
+            LocalToWorldMatrixNoScale = Parent->GetLocalToWorldMatrixNoScale() * LocalToWorldMatrixNoScale;
+            LocalToWorldMatrix = Parent->GetLocalToWorldMatrixNoScale() * LocalMatrix;
         }
         else
         {
-            LocalToWorldMatrixNoScale = LocalMatrix;
+            LocalToWorldMatrix = LocalMatrix;
         }
-
-        LocalMatrix = glm::scale(LocalToWorldMatrixNoScale, glm::vec3(Size, 1.0f));
 
         IsDirty = false;
     }
