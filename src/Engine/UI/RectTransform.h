@@ -16,7 +16,7 @@ namespace Engine::Ui
     private:
         glm::vec3 Position = glm::vec3(0.0f, 0.0f, 0.0f);
         float Rotation = 0.0f;
-        glm::vec2 Size = glm::vec3(1.0f, 1.0f, 1.0f);
+        glm::vec2 Size = glm::vec2(1.0f, 1.0f);
 
         glm::mat4 LocalMatrix = glm::mat4(1.0f);
         glm::mat4 LocalToWorldMatrix = glm::mat4(1.0f);
@@ -74,13 +74,32 @@ namespace Engine::Ui
         }
 
         /**
-         * @brief Sets position of this rect in pixels. Assumes 1920x1080 screen.
+         * @brief Sets position in local space in pixels. Assumes 1920x1080 screen.
+         * @param InPosition New position.
+         */
+        void SetPositionPixels(const glm::vec3& InPosition)
+        {
+            Position = InPosition;
+            MarkDirty();
+        }
+
+        /**
+         * @brief Sets size of this rect in pixels. Assumes 1920x1080 screen.
          * @param Value A new position.
          */
-        void SetSizePixels(const glm::uvec2& Value)
+        void SetSizePixels(const glm::vec2& Value)
         {
-            Position.x = static_cast<float>(Value.x) / 1920.0f;
-            Position.y = static_cast<float>(Value.y) / 1080.0f;
+            Position.x = Value.x / 1920.0f;
+            Position.y = Value.y / 1080.0f;
+        }
+
+        /**
+         * @brief Returns size of this rect in pixels. Assumes 1920x1080 screen.
+         */
+        [[nodiscard]] glm::vec2 GetSizePixels() const
+        {
+            return glm::vec2(Position.x * 1920.0f,
+                             Position.y * 1080.0f);
         }
 
         /**
