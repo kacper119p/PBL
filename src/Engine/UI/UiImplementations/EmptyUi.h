@@ -10,5 +10,7 @@ namespace Engine::Ui
 
     public:
         void Update(float DeltaTime) override;
+
+        SERIALIZATION_EXPORT_UI(EmptyUi)
     };
 }

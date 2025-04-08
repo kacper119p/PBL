@@ -6,6 +6,7 @@
 #include "Engine/Rendering/MultiSampledSceneFrameBuffer.h"
 #include "Engine/Rendering/SceneFrameBuffer.h"
 #include "Engine/Rendering/Postprocessing/BloomPostprocessingEffect.h"
+#include "Engine/UI/Ui.h"
 
 namespace Engine
 {
@@ -16,6 +17,7 @@ namespace Engine
         static uint8_t MultisampleLevel;
 
         std::vector<Renderer*> Renderers;
+        Ui::Ui* Ui = nullptr;
 
         static RenderingManager* Instance;
 
@@ -52,6 +54,19 @@ namespace Engine
         void UnregisterRenderer(Renderer* Renderer)
         {
             std::erase(Renderers, Renderer);
+        }
+
+        void RegisterUi(Ui::Ui* const Ui)
+        {
+            this->Ui = Ui;
+        }
+
+        void UnregisterUi(Ui::Ui* const Ui)
+        {
+            if (this->Ui == Ui)
+            {
+                this->Ui = nullptr;
+            }
         }
 
         void RenderAll(const CameraRenderData& RenderData, int ScreenWidth, int ScreenHeight);

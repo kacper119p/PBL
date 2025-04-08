@@ -1,10 +1,25 @@
 #pragma once
+#include <string>
+
 #include "UiElement.h"
+#include "UiSerializationRaii.h"
+#include "Engine/Components/Interfaces/IUpdateable.h"
+
+#define SERIALIZATION_EXPORT_UI(__CLASS__)\
+public:\
+inline static const std::string TypeName = std::string(#__CLASS__);\
+\
+[[nodiscard]] std::string GetType() const override\
+{\
+return TypeName;\
+}\
+\
+private:\
+static inline const UiSerializationRaii<__CLASS__> RaiiHandle = UiSerializationRaii<__CLASS__>(#__CLASS__);
 
 namespace Engine::Ui
 {
-
-    class Ui
+    class Ui : IUpdateable
     {
     private:
         std::vector<UiElement*> UiElements;
@@ -13,7 +28,7 @@ namespace Engine::Ui
         Ui();
 
     public:
-        virtual ~Ui() = default;
+        ~Ui() override;
 
     public:
         template<class T>
@@ -31,6 +46,8 @@ namespace Engine::Ui
 
     public:
         void Render() const;
+
+        [[nodiscard]] virtual std::string GetType() const = 0;
 
         virtual void Update(float DeltaTime) = 0;
     };

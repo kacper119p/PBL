@@ -2,7 +2,7 @@
 
 namespace Engine::Ui
 {
-    void EmptyUi::Update(float DeltaTime)
+    void EmptyUi::Update(const float DeltaTime)
     {
     }
 }

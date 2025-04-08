@@ -55,6 +55,14 @@ namespace Engine
             renderer->Render(RenderData);
         }
 
+        if (Ui != nullptr)
+        {
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_BLEND);
+            Ui->Render();
+            glDisable(GL_BLEND);
+        }
+
         MultiSampledBuffer.ResolveMultisampling(ResolvedBuffer);
         Bloom.Render(ResolvedBuffer.GetColorBuffer());
     }

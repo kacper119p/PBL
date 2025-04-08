@@ -21,17 +21,14 @@ namespace Engine::Ui
         {
             return;
         }
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         Shader.Use();
         Shader.SetUniform("Size", Rect.GetSize().y);
         Shader.SetUniform("Transform", Rect.GetLocalToWorldMatrixNoScale());
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, Font->GetGlyphAtlas());
-        glEnable(GL_BLEND);
         glBindVertexArray(VertexArray);
         glDrawArrays(GL_TRIANGLES, 0, VertexCount);
         glBindVertexArray(0);
-        glDisable(GL_BLEND);
     }
 
     void Text::UpdateMesh()
