@@ -15,7 +15,7 @@ namespace Engine::Ui
                 Shaders::ShaderSourceFiles("./res/shaders/Font/Font.vert", "", "./res/shaders/Font/Font.frag"));
     }
 
-    void Text::Render() const
+    void Text::Render()
     {
         if (VertexBuffer == 0)
         {
@@ -23,6 +23,7 @@ namespace Engine::Ui
         }
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         Shader.Use();
+        Shader.SetUniform("Transform", Rect.GetLocalToWorldMatrix());
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, Font->GetGlyphAtlas());
         glEnable(GL_BLEND);

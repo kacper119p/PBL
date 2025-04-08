@@ -24,9 +24,6 @@ namespace Materials
         RefractiveMaterial();
 
     public:
-        static void Initialize();
-
-    public:
         [[nodiscard]] Engine::Texture GetEnvironmentMap() const
         {
             return EnvironmentMap;

@@ -22,9 +22,6 @@ namespace Materials
         SkyboxMaterial();
 
     public:
-        static void Initialize();
-
-    public:
         [[nodiscard]] Engine::Texture GetTexture() const
         {
             return Texture;

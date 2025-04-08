@@ -12,12 +12,14 @@ public:\
     \
     rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const override;\
     \
-    virtual void Deserialize(const rapidjson::Value& Object) override;\
+    void Deserialize(const rapidjson::Value& Object) override;\
     \
     [[nodiscard]] std::string GetType() const override\
     {\
         return TypeName;\
     }\
+    \
+    static void Initialize();\
     \
 private:\
     static inline const MaterialRaii<__CLASS__> RaiiHandle =  MaterialRaii<__CLASS__>(#__CLASS__);
