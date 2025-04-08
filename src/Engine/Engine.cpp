@@ -16,6 +16,8 @@
 #include "Scene/SceneBuilder.h"
 #include "Shaders/ShaderManager.h"
 #include "Textures/TextureManager.h"
+#include "Engine/Components/Audio/AudioSource.h"
+#include "Engine/Components/Audio/AudioListener.h"
 #include "tracy/Tracy.hpp"
 
 #if EDITOR
@@ -68,6 +70,7 @@ namespace Engine
         spdlog::info("Successfully built scene.");
 
         float lastFrame = 0.0f;
+
         // Main loop
         while (!glfwWindowShouldClose(Window))
         {
@@ -91,10 +94,12 @@ namespace Engine
             const CameraRenderData renderData(Camera->GetPosition(), Camera->GetTransform(),
                                               Camera->GetProjectionMatrix());
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
+            AudioListener->UpdateListener();
 
 #if EDITOR
             // Draw ImGui
             ImGuiBegin();
+            AudioManager::GetInstance().RenderGlobalVolumeImGui();
             ImGuiRender();
             GizmoManager::GetInstance()->Manipulate(renderData);
             ImGuiEnd(); // this call effectively renders ImGui
@@ -192,6 +197,9 @@ namespace Engine
                                                    100.0f),
                                   0.0018f);
         Camera->SetPosition(glm::vec3(0.0f, 5.0f, 20.0f));
+
+        AudioListener = new class AudioListener(*Camera);
+        spdlog::info("Sounds loaded.");
 
         return true;
     }
@@ -311,6 +319,8 @@ namespace Engine
         Shaders::ShaderManager::FreeResources();
         Models::ModelManager::DeleteAllModels();
         Materials::MaterialManager::DeleteAllMaterials();
+        AudioManager::DestroyInstance();
+        delete AudioListener;
     }
 
     void Engine::GlfwErrorCallback(int Error, const char* Description)
