@@ -87,6 +87,7 @@ namespace Engine
         START_COMPONENT_SERIALIZATION
         SERIALIZE_FIELD(Material)
         SERIALIZE_FIELD(Model)
+        SERIALIZE_FIELD(Animation)
         END_COMPONENT_SERIALIZATION
     }
 
@@ -96,6 +97,8 @@ namespace Engine
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
         DESERIALIZE_VALUE(Material)
         DESERIALIZE_VALUE(Model)
+        DESERIALIZE_VALUE(Animation)
+        Animator = Models::Animator(Animation);
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 
