@@ -39,6 +39,12 @@ namespace Scene
         ZoneScoped;
         Scene = new class Engine::Scene();
         Engine::SceneManager::LoadScene("./res/scenes/SampleScene.lvl", Scene);
+        Engine::Entity* entity = Scene->SpawnEntity(nullptr);
+        Engine::AnimatedModelRenderer* renderer = entity->AddComponent<Engine::AnimatedModelRenderer>();
+        Models::ModelAnimated* Model = &Models::ModelAnimated("./res/models/Submarine.fbx");
+        Models::Animation* Animation = &Models::Animation("./res/models/Submarine.fbx", Model);
+        renderer->SetModel(Model);
+        renderer->SetAnimation(Animation);
         // Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
     }
 

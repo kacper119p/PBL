@@ -50,6 +50,7 @@ namespace Engine
          * @brief Returns model used by this renderer.
          */
         [[nodiscard]] Models::ModelAnimated* GetModel() const { return Model; }
+        [[nodiscard]] Models::Animation* GetAnimation() const { return Animation; }
         [[nodiscard]] Models::Animator GetAnimator() const { return Animator; }
 
         /**
@@ -57,6 +58,8 @@ namespace Engine
          * @param Model A new model.
          */
         void SetModel(Models::ModelAnimated* const Model) { this->Model = Model; }
+        void SetAnimation(Models::Animation* const Animation) { this->Animation = Animation; }
+        void SetAnimator() { this->Animator = Models::Animator(Animation); }
 
     public:
         void RenderDepth(const CameraRenderData& RenderData) override;
