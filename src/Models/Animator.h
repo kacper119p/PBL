@@ -15,7 +15,7 @@ namespace Models
         float m_CurrentTime;
         float m_DeltaTime;	
     public:
-
+        Animator() = default;
         Animator(Animation* Animation);
         void UpdateAnimation(float dt);
         void PlayAnimation(Animation* pAnimation);

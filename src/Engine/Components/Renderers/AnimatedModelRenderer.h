@@ -8,6 +8,8 @@
 #include "models/Animator.h"
 #include "Engine/EngineObjects/UpdateManager.h"
 
+#include "Serialization/SerializationUtility.h"
+
 namespace Engine
 {
     /**

@@ -82,7 +82,29 @@ namespace Engine
         }
     }
 
-   
+   rapidjson::Value AnimatedModelRenderer::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+    {
+        START_COMPONENT_SERIALIZATION
+        SERIALIZE_FIELD(Material)
+        SERIALIZE_FIELD(Model)
+        END_COMPONENT_SERIALIZATION
+    }
+
+    void AnimatedModelRenderer::DeserializeValuePass(const rapidjson::Value& Object,
+                                             Serialization::ReferenceTable& ReferenceMap)
+    {
+        START_COMPONENT_DESERIALIZATION_VALUE_PASS
+        DESERIALIZE_VALUE(Material)
+        DESERIALIZE_VALUE(Model)
+        END_COMPONENT_DESERIALIZATION_VALUE_PASS
+    }
+
+    void AnimatedModelRenderer::DeserializeReferencesPass(const rapidjson::Value& Object,
+                                                  Serialization::ReferenceTable& ReferenceMap)
+    {
+        START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
+        END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
+    }
 
     void AnimatedModelRenderer::Update(float DeltaTime) { Animator.UpdateAnimation(DeltaTime); }
 } 
