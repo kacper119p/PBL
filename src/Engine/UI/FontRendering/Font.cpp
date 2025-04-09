@@ -32,6 +32,8 @@ namespace Engine::Ui
 
         CHECK_MESSAGE(document.IsObject() && document.HasMember("glyphs"), "Invalid format.");
 
+        LineHeight = document["metrics"]["lineHeight"].GetFloat();
+
         rapidjson::GenericArray glyphsJson = document["glyphs"].GetArray();
 
 

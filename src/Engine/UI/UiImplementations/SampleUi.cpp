@@ -24,7 +24,7 @@ namespace Engine::Ui
         MovingImage->SetTexture(TextureManager::GetTexture("./res/textures/Logos/WIR_logo_2.png"));
 
         ChangingText = AddElement<Text>(nullptr);
-        ChangingText->GetRect().SetPositionPixels(glm::vec3(-960, -480, 0.5));
+        ChangingText->GetRect().SetPositionPixels(glm::vec3(-960, -400, 0.5));
         ChangingText->GetRect().SetSizePixels(glm::vec2(480, 180));
         ChangingText->SetFont("Lato");
         ChangingText->SetText("Changing");
@@ -36,8 +36,8 @@ namespace Engine::Ui
         ChangingText2->SetText("Changing");
 
         Text* text = AddElement<Text>(nullptr);
-        text->GetRect().SetPositionPixels(glm::vec3(-960, 468, 0));
-        text->GetRect().SetSizePixels(glm::vec2(960, 72));
+        text->GetRect().SetPositionPixels(glm::vec3(-960, 540, 0));
+        text->GetRect().SetSizePixels(glm::vec2(960, 64));
         text->SetFont("Lato");
         text->SetText(
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");

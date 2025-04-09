@@ -15,7 +15,8 @@ namespace Engine::Ui
     private:
         std::string Name;
         std::unordered_map<char, Glyph> Glyphs;
-        uint32_t GlyphAtlas;
+        float LineHeight = 0.0f;
+        uint32_t GlyphAtlas = 0;
 
     public:
         Font() = default;
@@ -36,6 +37,11 @@ namespace Engine::Ui
         [[nodiscard]] const Glyph& operator[](const char C) const
         {
             return Glyphs.at(C);
+        }
+
+        [[nodiscard]] float GetLineHeight() const
+        {
+            return LineHeight;
         }
 
         [[nodiscard]] uint32_t GetGlyphAtlas() const

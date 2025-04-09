@@ -17,7 +17,11 @@ namespace Engine::Ui
 
     void Text::Render()
     {
-        if (VertexBuffer == 0)
+        if (IsDirty)
+        {
+            UpdateMesh();
+        }
+        else if (VertexBuffer == 0)
         {
             return;
         }
@@ -39,7 +43,7 @@ namespace Engine::Ui
         FontVertex* const vertices = new FontVertex[VertexCount];
 
         float x = 0.0f;
-        float y = 0.0f;
+        float y = -Font->GetLineHeight();
         size_t j = 0;
         for (size_t i = 0; i < String.length(); i++)
         {
@@ -49,7 +53,7 @@ namespace Engine::Ui
                 VertexCount -= 6;
                 if (x * GetRect().GetSize().y >= GetRect().GetSize().x)
                 {
-                    y -= 1.0f;
+                    y -= Font->GetLineHeight();
                     x = 0.0f;
                 }
                 else
