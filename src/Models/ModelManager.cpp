@@ -3,7 +3,6 @@
 #include "Model.h"
 #include "ModelAnimated.h"
 #include "Animation.h"
-#include "Animator.h"
 
 
 namespace Models
@@ -11,7 +10,6 @@ namespace Models
     std::unordered_map<std::string, Model*> ModelManager::Models;
     std::unordered_map<std::string, ModelAnimated*> ModelManager::ModelsAnimated;
     std::unordered_map<std::string, Animation*> ModelManager::Animations;
-    std::unordered_map<std::string, Animator*> ModelManager::Animators;
 
     Model* ModelManager::GetModel(const char* const Path)
     {
@@ -42,6 +40,24 @@ namespace Models
         ModelsAnimated.emplace(path, newModel);
         return newModel;
     }
+
+    //mozliwe do zmiany ze 2x path
+    Animation* ModelManager::GetAnimation(const char* Path)
+    {
+        const std::string path = Path;
+
+        if (const auto iterator = Animations.find(path); iterator != Animations.end())
+        {
+            return iterator->second;
+        }
+
+        Animation* newModel = new Animation(Path, GetAnimatedModel(Path));
+
+        Animations.emplace(path, newModel);
+        return newModel;
+    }
+
+   
 
     bool ModelManager::DeleteModel(const char* const Path)
     {
@@ -81,6 +97,19 @@ namespace Models
         return false;
     }
 
+    bool ModelManager::DeleteAnimation(Animation* Animation)
+    {
+        const std::string path = Animation->GetPath();
+        if (const auto iterator = Animations.find(path); iterator != Animations.end())
+        {
+            delete iterator->second;
+            Animations.erase(iterator);
+            return true;
+        }
+        return false;
+    }
+
+
     void ModelManager::DeleteAllModels()
     {
         for (const auto& pair : Models)
@@ -98,6 +127,15 @@ namespace Models
         Models.clear();
     }
 
+    void ModelManager::DeleteAllAnimations() {
+        for (const auto& pair : Animations)
+        {
+            delete pair.second;
+        }
+        Animations.clear();
+    }
+
+
     bool ModelManager::IsValid(const char* const Path)
     {
         return Models.contains(Path);
@@ -109,8 +147,11 @@ namespace Models
 
     bool ModelManager::IsValid(const ModelAnimated* Model) { return ModelsAnimated.contains(Model->GetPath()); }
 
+    bool ModelManager::IsValid(const Animation* Animation) { return Animations.contains(Animation->GetPath()); }
+
     std::string ModelManager::GetModelPath(const Model* const Model)
     {
         return Model->GetPath(); }
     std::string ModelManager::GetAnimatedModelPath(const ModelAnimated* Model) { return Model->GetPath(); }
+    std::string ModelManager::GetAnimationPath(const Animation* Animation) { return Animation->GetPath(); }
 } // Models

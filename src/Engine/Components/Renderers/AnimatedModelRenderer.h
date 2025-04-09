@@ -16,10 +16,10 @@ namespace Engine
     class AnimatedModelRenderer : public Renderer, IUpdateable
     {
     private:
-        Materials::Material* Material;
-        Models::ModelAnimated* Model;
-        Models::Animation* Animation;
-        Models::Animator* Animator;
+        Materials::Material* Material = nullptr;
+        Models::ModelAnimated* Model=nullptr;
+        Models::Animation* Animation=nullptr;
+        Models::Animator Animator;
 
         float deltaTime = 0.0f;
         float lastFrame = 0.0f;
@@ -30,8 +30,7 @@ namespace Engine
          * @param Material Material to be used.
          * @param Model Model to be used.
          */
-        AnimatedModelRenderer(Materials::Material* Material, Models::ModelAnimated* Model, Models::Animation* Animation,
-                              Models::Animator* Animator);
+        AnimatedModelRenderer() = default;
 
     public:
         /**
@@ -49,6 +48,7 @@ namespace Engine
          * @brief Returns model used by this renderer.
          */
         [[nodiscard]] Models::ModelAnimated* GetModel() const { return Model; }
+        [[nodiscard]] Models::Animator GetAnimator() const { return Animator; }
 
         /**
          * @brief Sets model used by this renderer.
@@ -73,5 +73,7 @@ namespace Engine
         void SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const;
 
         void Draw() const;
+
+        SERIALIZATION_EXPORT_CLASS(AnimatedModelRenderer)
     };
 } // namespace Engine

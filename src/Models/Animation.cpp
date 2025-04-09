@@ -18,6 +18,7 @@ namespace Models
         globalTransformation = globalTransformation.Inverse();
         ReadHierarchyData(m_RootNode, scene->mRootNode);
         ReadMissingBones(animation, *model);
+        Path = animationPath;
     }
     Bone* Animation::FindBone(const std::string& name)
     {

@@ -20,6 +20,6 @@ namespace Models
         void UpdateAnimation(float dt);
         void PlayAnimation(Animation* pAnimation);
         void CalculateBoneTransform(const AssimpNodeData* node, glm::mat4 parentTransform);
-        std::vector<glm::mat4> GetFinalBoneMatrices() { return m_FinalBoneMatrices; }
+        std::vector<glm::mat4> GetFinalBoneMatrices() const { return m_FinalBoneMatrices; }
 	};
 }

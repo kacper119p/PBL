@@ -23,6 +23,7 @@ namespace Models
         std::vector<Bone> m_Bones;
         AssimpNodeData m_RootNode;
         std::map<std::string, BoneInfo> m_BoneInfoMap;
+        std::string Path;
 
     public:
         Animation() = default;
@@ -39,6 +40,8 @@ namespace Models
         inline const AssimpNodeData& GetRootNode() { return m_RootNode; }
 
         inline const std::map<std::string, BoneInfo>& GetBoneIDMap() { return m_BoneInfoMap; }
+
+        [[nodiscard]] std::string GetPath() const { return Path; }
 
     private:
         void ReadMissingBones(const aiAnimation* animation, ModelAnimated& model);

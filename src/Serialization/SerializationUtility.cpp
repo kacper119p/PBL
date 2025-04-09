@@ -101,6 +101,14 @@ namespace Serialization
         return object;
     }
 
+    rapidjson::Value Serialize(const Models::Animation* Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kStringType);
+        const std::string path = Models::ModelManager::GetAnimationPath(Value);
+        object.SetString(path.c_str(), static_cast<rapidjson::SizeType>(path.length()), Allocator);
+        return object;
+    }
+
     rapidjson::Value Serialize(const std::string& Value, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kStringType);
@@ -309,6 +317,15 @@ namespace Serialization
             return;
         }
         Value = Models::ModelManager::GetAnimatedModel(iterator->value.GetString());
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, Models::Animation*& Value) {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsString())
+        {
+            return;
+        }
+        Value = Models::ModelManager::GetAnimation(iterator->value.GetString());
     }
 
     void Deserialize(const rapidjson::Value& Object, const char* const Name, std::string& Value)

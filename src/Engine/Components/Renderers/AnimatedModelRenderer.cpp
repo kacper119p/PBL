@@ -1,3 +1,6 @@
+#include "AnimatedModelRenderer.h"
+#include "AnimatedModelRenderer.h"
+#include "AnimatedModelRenderer.h"
 #include "Engine/EngineObjects/CameraRenderData.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include "ModelRenderer.h"
@@ -8,11 +11,7 @@
 
 namespace Engine
 {
-    AnimatedModelRenderer::AnimatedModelRenderer(Materials::Material* Material, Models::ModelAnimated* Model,
-                                 Models::Animation* Animation, Models::Animator* Animator) :
-        Material(Material), Model(Model), Animation(Animation), Animator(Animator)
-    {
-    }
+    
     void AnimatedModelRenderer::RenderDepth(const CameraRenderData& RenderData)
     {
         Material->UseDepthPass();
@@ -67,7 +66,7 @@ namespace Engine
         Shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
         Shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
         Shader.SetUniform("ObjectToWorldMatrix", GetOwner()->GetTransform()->GetLocalToWorldMatrix());
-        std::vector<glm::mat4> transforms = Animator->GetFinalBoneMatrices();
+        std::vector<glm::mat4> transforms = Animator.GetFinalBoneMatrices();
         for (int i = 0; i < transforms.size(); ++i)
         {
             glm::mat4 transform = transforms[i];
@@ -82,7 +81,8 @@ namespace Engine
             Model->GetMesh(i)->Draw();
         }
     }
-    
 
-    void AnimatedModelRenderer::Update(float DeltaTime) { Animator->UpdateAnimation(DeltaTime); }
+   
+
+    void AnimatedModelRenderer::Update(float DeltaTime) { Animator.UpdateAnimation(DeltaTime); }
 } 
