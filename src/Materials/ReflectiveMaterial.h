@@ -23,9 +23,6 @@ namespace Materials
         ReflectiveMaterial();
 
     public:
-        static void Initialize();
-
-    public:
         [[nodiscard]] Engine::Texture GetEnvironmentMap() const
         {
             return EnvironmentMap;

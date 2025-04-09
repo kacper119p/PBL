@@ -82,6 +82,7 @@ namespace Engine
         void SetPositionWorldSpace(const glm::vec3& InPosition)
         {
             Position = glm::vec3(glm::inverse(GetLocalToWorldMatrix()) * glm::vec4(InPosition, 1.0f));
+            MarkDirty();
         }
 
         /**
