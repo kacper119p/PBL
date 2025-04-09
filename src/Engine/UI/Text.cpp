@@ -47,21 +47,32 @@ namespace Engine::Ui
         size_t j = 0;
         for (size_t i = 0; i < String.length(); i++)
         {
-            const Glyph& glyph = font->GetGlyph(String[i]);
-            if (glyph.GetCharacter() == ' ') // Optimize space out.
+            const char character = String[i];
+            if (character == ' ') // Optimize space out.
             {
                 VertexCount -= 6;
-                if (x * GetRect().GetSize().y >= GetRect().GetSize().x)
+                if (x * GetRect().GetSize().y >= GetRect().GetSize().x) //Wrap line on space if it's too long.
                 {
                     y -= Font->GetLineHeight();
                     x = 0.0f;
                 }
                 else
                 {
+                    const Glyph& glyph = font->GetGlyph(character);
                     x += glyph.GetAdvance();
                 }
                 continue;
             }
+            if (character == '\n') // Handle line breaks.
+            {
+                VertexCount -= 6;
+                y -= Font->GetLineHeight();
+                x = 0.0f;
+                continue;
+            }
+
+            const Glyph& glyph = font->GetGlyph(character);
+
             vertices[j * 6 + 0].Position = glm::vec2(x + glyph.GetPlaneHorizontalBounds().x,
                                                      y + glyph.GetPlaneVerticalBounds().y);
             vertices[j * 6 + 0].TexCoords = glm::vec2(glyph.GetAtlasHorizontalBounds().x,
