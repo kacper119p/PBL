@@ -5,11 +5,17 @@
 namespace Models
 {
     class Model;
+    class ModelAnimated;
+    class Animation;
+    class Animator;
 
     class ModelManager final
     {
     private:
         static std::unordered_map<std::string, Model*> Models;
+        static std::unordered_map<std::string, ModelAnimated*> ModelsAnimated;
+        static std::unordered_map<std::string, Animation*> Animations;
+        static std::unordered_map<std::string, Animator*> Animators;
 
     private:
         ModelManager() = default;
@@ -21,6 +27,8 @@ namespace Models
          * @return Loaded model.
          */
         static Model* GetModel(const char* Path);
+
+        static ModelAnimated* GetAnimatedModel(const char* Path);
 
         /**
          * @brief Deletes model's object.
@@ -35,11 +43,13 @@ namespace Models
          * @return True if model was loaded, false otherwise.
          */
         static bool DeleteModel(Model* Model);
+        static bool DeleteAnimatedModel(ModelAnimated* Model);
 
         /**
          * @brief Removes all loaded models from memory.
          */
         static void DeleteAllModels();
+        static void DeleteAllAnimatedModels();
 
         /**
          * @brief Checks if model is valid.
@@ -54,6 +64,7 @@ namespace Models
          * @return True if model is loaded, false otherwise.
          */
         static bool IsValid(const Model* Model);
+        static bool IsValid(const ModelAnimated* Model);
 
         /**
          * @brief Finds filepath of this model.
@@ -61,6 +72,7 @@ namespace Models
          * @return Model's file path.
          */
         static std::string GetModelPath(const Model* Model);
+        static std::string GetAnimatedModelPath(const ModelAnimated* Model);
     };
 
 } // Models

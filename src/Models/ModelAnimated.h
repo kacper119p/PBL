@@ -29,6 +29,7 @@ namespace Models
     {
     private:
         std::vector<std::unique_ptr<MeshAnimated>> Meshes = std::vector<std::unique_ptr<MeshAnimated>>();
+        std::string Path;
 
         //for animating
         std::map<std::string, BoneInfo> m_BoneInfoMap; //
@@ -38,7 +39,7 @@ namespace Models
     public:
         auto& GetBoneInfoMap() { return m_BoneInfoMap; }
         int& GetBoneCount() { return m_BoneCounter; }  
-
+        [[nodiscard]] std::string GetPath() const { return Path; }
         
 	static inline glm::mat4 ConvertMatrixToGLMFormat(const aiMatrix4x4& from)
         {
