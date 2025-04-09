@@ -45,6 +45,7 @@ namespace Scene
         Engine::AnimatedModelRenderer* renderer = entity->AddComponent<Engine::AnimatedModelRenderer>();
         Models::ModelAnimated* submarineModel = Models::ModelManager::GetAnimatedModel("./res/models/Submarine.fbx");
         Models::Animation* animation = new Models::Animation("./res/models/Submarine.fbx", submarineModel);
+        renderer->SetModel(submarineModel);
         renderer->SetAnimation(animation);
 
         Engine::Texture submarineBaseMap = Engine::TextureManager::GetTexture("./res/textures/Submarine/Base.png");
@@ -59,6 +60,7 @@ namespace Scene
                 submarineEmissiveMap,
                 glm::vec3(1.0f), 1.0f, 1.0f, glm::vec3(0.0f));
         renderer->SetMaterial(submarineMaterial);
+        renderer->SetAnimator();
 
 
         // Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
