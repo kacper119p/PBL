@@ -17,6 +17,7 @@ namespace Engine::Ui
         int32_t VertexCount = 0;
         std::string String;
         Shaders::Shader Shader;
+        bool IsDirty = false;
         FontId Font;
 
     public:
@@ -31,19 +32,19 @@ namespace Engine::Ui
         void SetText(const std::string& String)
         {
             this->String = String;
-            UpdateMesh();
+            IsDirty = true;
         }
 
         void SetFont(const FontId FontId)
         {
             this->Font = FontId;
-            UpdateMesh();
+            IsDirty = true;
         }
 
         void SetFont(const std::string& FontName)
         {
             Font = TextManager::GetFontId(FontName);
-            UpdateMesh();
+            IsDirty = true;
         }
 
         [[nodiscard]] Shaders::Shader GetShader() const
