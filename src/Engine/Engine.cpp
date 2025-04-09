@@ -182,6 +182,7 @@ namespace Engine
         }
 
         glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+        glEnable(GL_MULTISAMPLE);
 
         RenderingManager::Initialize(glm::ivec2(WindowWidth, WindowHeight));
         LightManager::Initialize();
