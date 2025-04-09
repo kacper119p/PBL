@@ -12,7 +12,7 @@ namespace Engine
     class MultiSampledSceneFrameBuffer final
     {
     private:
-        static constexpr uint8_t Samples = 8;
+        static constexpr uint8_t Samples = 32;
 
         uint32_t Id = 0;
         glm::ivec2 Resolution;

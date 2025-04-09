@@ -23,7 +23,7 @@ namespace Engine
         glDeleteTextures(1, &ColorBuffer);
         glGenTextures(1, &ColorBuffer);
 
-        glBindFramebuffer(GL_FRAMEBUFFER, ColorBuffer);
+        glBindFramebuffer(GL_FRAMEBUFFER, Id);
 
         glBindTexture(GL_TEXTURE_2D, ColorBuffer);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, Resolution.x, Resolution.y, 0, GL_RGBA, GL_FLOAT, NULL);
@@ -35,7 +35,7 @@ namespace Engine
 
         glBindRenderbuffer(GL_RENDERBUFFER, DepthStencilBuffer);
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, Resolution.x, Resolution.y);
-        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, ColorBuffer);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, DepthStencilBuffer);
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
