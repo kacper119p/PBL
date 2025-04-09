@@ -36,16 +36,16 @@ namespace Materials
     void AnimatedPbrMaterial::Initialize()
     {
         DepthPass = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
-                "./res/shaders/DefaultDepth/PBRAnimated.vert", nullptr,
+                "./res/shaders/PBR/PBRAnimated.vert", nullptr,
                 "./res/shaders/DefaultDepth/DefaultDepth.frag"));
         MainPass = Shaders::ShaderManager::GetShader(
                 Shaders::ShaderSourceFiles("./res/shaders/PBR/PBRAnimated.vert", nullptr,
                                            "./res/shaders/PBR/PBR.frag"));
         DirectionalShadowPass = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
-                "./res/shaders/Common/BasicShadowPass/PBRAnimated.vert", nullptr,
+                "./res/shaders/PBR/PBRAnimated.vert", nullptr,
                 "./res/shaders/Common/BasicShadowPass/DirectionalLight.frag"));
         PointSpotShadowPass = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
-                "./res/shaders/Common/BasicShadowPass/PBRAnimated.vert",
+                "./res/shaders/PBR/PBRAnimated.vert",
                 "./res/shaders/Common/BasicShadowPass/PointSpotLight.geom",
                 "./res/shaders/Common/BasicShadowPass/PointSpotLight.frag"));
     }
