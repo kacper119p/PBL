@@ -22,32 +22,65 @@ namespace Engine
 
         bool CheckBoxBoxCollision(const BoxCollider& box1, const BoxCollider& box2)
         {
-            return !(box1.GetTransform()->GetPosition().x + box1.GetWidth() < box2.GetTransform()->GetPosition().x ||
-                     box1.GetTransform()->GetPosition().x > box2.GetTransform()->GetPosition().x + box2.GetWidth() ||
-                     box1.GetTransform()->GetPosition().y + box1.GetHeight() < box2.GetTransform()->GetPosition().y ||
-                     box1.GetTransform()->GetPosition().y > box2.GetTransform()->GetPosition().y + box2.GetHeight() ||
-                     box1.GetTransform()->GetPosition().z + box1.GetDepth() < box2.GetTransform()->GetPosition().z ||
-                     box1.GetTransform()->GetPosition().z > box2.GetTransform()->GetPosition().z + box2.GetDepth());
+            const glm::mat4& transform1 = box1.GetTransform()->GetLocalToWorldMatrix();
+            const glm::mat4& transform2 = box2.GetTransform()->GetLocalToWorldMatrix();
+
+            glm::vec3 box1Min = transform1 * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+            glm::vec3 box1Max = transform1 * glm::vec4(box1.GetWidth(), box1.GetHeight(), box1.GetDepth(), 1.0f);
+
+            glm::vec3 box2Min = transform2 * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+            glm::vec3 box2Max = transform2 * glm::vec4(box2.GetWidth(), box2.GetHeight(), box2.GetDepth(), 1.0f);
+
+            return !(box1Max.x < box2Min.x || box1Min.x > box2Max.x || box1Max.y < box2Min.y || box1Min.y > box2Max.y ||
+                     box1Max.z < box2Min.z || box1Min.z > box2Max.z);
         }
 
         bool CheckBoxSphereCollision(const BoxCollider& box, const SphereCollider& sphere)
         {
-            glm::vec3 closestPoint = glm::clamp(sphere.GetTransform()->GetPosition(), box.GetTransform()->GetPosition(),
-                                                box.GetTransform()->GetPosition() +
-                                                        glm::vec3(box.GetWidth(), box.GetHeight(), box.GetDepth()));
+            const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
+            const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
 
-            float distanceSquared = glm::distance2(closestPoint, sphere.GetTransform()->GetPosition());
+            glm::vec3 sphereCenter = sphereTransform * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+
+            glm::vec3 boxCenter = boxTransform *
+                                  glm::vec4(box.GetWidth() / 2.0f, box.GetHeight() / 2.0f, box.GetDepth() / 2.0f, 1.0f);
+            glm::vec3 boxHalfExtents = glm::vec3(box.GetWidth() / 2.0f, box.GetHeight() / 2.0f, box.GetDepth() / 2.0f);
+
+            glm::vec3 xAxis = glm::normalize(glm::vec3(boxTransform[0])); 
+            glm::vec3 yAxis = glm::normalize(glm::vec3(boxTransform[1])); 
+            glm::vec3 zAxis = glm::normalize(glm::vec3(boxTransform[2])); 
+
+            glm::vec3 delta = sphereCenter - boxCenter;
+
+            glm::vec3 closestPoint = boxCenter;
+
+            float distanceX = glm::dot(delta, xAxis);
+            float distanceY = glm::dot(delta, yAxis);
+            float distanceZ = glm::dot(delta, zAxis);
+
+            distanceX = glm::clamp(distanceX, -boxHalfExtents.x, boxHalfExtents.x);
+            distanceY = glm::clamp(distanceY, -boxHalfExtents.y, boxHalfExtents.y);
+            distanceZ = glm::clamp(distanceZ, -boxHalfExtents.z, boxHalfExtents.z);
+
+            closestPoint += distanceX * xAxis;
+            closestPoint += distanceY * yAxis;
+            closestPoint += distanceZ * zAxis;
+
+            float distanceSquared = glm::distance2(closestPoint, sphereCenter);
+
             return distanceSquared <= (sphere.GetRadius() * sphere.GetRadius());
         }
 
         bool CheckBoxCapsuleCollision(const BoxCollider& box, const CapsuleCollider& capsule)
         {
-            glm::vec3 boxMin = box.GetTransform()->GetPosition();
-            glm::vec3 boxMax = boxMin + glm::vec3(box.GetWidth(), box.GetHeight(), box.GetDepth());
+            const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
+            const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
 
-            glm::vec3 capsuleStart = capsule.GetTransform()->GetPosition(); 
-            glm::vec3 capsuleEnd =
-                    capsuleStart + glm::vec3(0.0f, capsule.GetHeight(), 0.0f); 
+            glm::vec3 boxMin = boxTransform * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+            glm::vec3 boxMax = boxTransform * glm::vec4(box.GetWidth(), box.GetHeight(), box.GetDepth(), 1.0f);
+
+            glm::vec3 capsuleStart = capsuleTransform * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+            glm::vec3 capsuleEnd = capsuleTransform * glm::vec4(0.0f, capsule.GetHeight(), 0.0f, 1.0f);
             float capsuleRadius = capsule.GetRadius();
 
             glm::vec3 closestPointOnAABB = glm::clamp(capsuleStart, boxMin, boxMax);
@@ -71,7 +104,24 @@ namespace Engine
 
         bool CheckBoxMeshCollision(const BoxCollider& box, const MeshCollider& mesh)
         {
-            // TODO: Implementacja kolizji między AABB a siatką
+            const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
+            const glm::mat4& meshTransform = mesh.GetTransform()->GetLocalToWorldMatrix();
+
+            glm::vec3 boxMin = boxTransform * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+            glm::vec3 boxMax = boxTransform * glm::vec4(box.GetWidth(), box.GetHeight(), box.GetDepth(), 1.0f);
+
+            const auto& vertices = mesh.GetMesh()->GetVertices();
+
+            for (const auto& vertex : vertices)
+            {
+                glm::vec3 worldVertex = meshTransform * glm::vec4(vertex, 1.0f);
+                if (worldVertex.x >= boxMin.x && worldVertex.x <= boxMax.x && worldVertex.y >= boxMin.y &&
+                    worldVertex.y <= boxMax.y && worldVertex.z >= boxMin.z && worldVertex.z <= boxMax.z)
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
 
@@ -84,31 +134,49 @@ namespace Engine
 
         bool CheckSphereMeshCollision(const SphereCollider& sphere, const MeshCollider& mesh)
         {
-            // TODO: Implement collision checking between sphere and mesh
+            const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
+            const glm::mat4& meshTransform = mesh.GetTransform()->GetLocalToWorldMatrix();
+
+            glm::vec3 sphereCenter = sphereTransform * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+            float sphereRadius = sphere.GetRadius();
+
+            const auto& vertices = mesh.GetMesh()->GetVertices();
+
+            for (const auto& vertex : vertices)
+            {
+                glm::vec3 worldVertex = meshTransform * glm::vec4(vertex, 1.0f);
+                float distanceSquared = glm::distance2(sphereCenter, worldVertex);
+                if (distanceSquared <= (sphereRadius * sphereRadius))
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
 
         bool CheckCapsuleCapsuleCollision(const CapsuleCollider& capsule1, const CapsuleCollider& capsule2)
         {
-            glm::vec3 capsule1Start = capsule1.GetTransform()->GetPosition(); 
-            glm::vec3 capsule1End =
-                    capsule1Start + glm::vec3(0.0f, capsule1.GetHeight(), 0.0f);
+            const glm::mat4& transform1 = capsule1.GetTransform()->GetLocalToWorldMatrix();
+            const glm::mat4& transform2 = capsule2.GetTransform()->GetLocalToWorldMatrix();
+
+            glm::vec3 capsule1Start = transform1 * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+            glm::vec3 capsule1End = transform1 * glm::vec4(0.0f, capsule1.GetHeight(), 0.0f, 1.0f);
             float capsule1Radius = capsule1.GetRadius();
 
-            glm::vec3 capsule2Start = capsule2.GetTransform()->GetPosition();
-            glm::vec3 capsule2End =
-                    capsule2Start + glm::vec3(0.0f, capsule2.GetHeight(), 0.0f);
+            glm::vec3 capsule2Start = transform2 * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+            glm::vec3 capsule2End = transform2 * glm::vec4(0.0f, capsule2.GetHeight(), 0.0f, 1.0f);
             float capsule2Radius = capsule2.GetRadius();
 
             glm::vec3 u = capsule1End - capsule1Start;
-            glm::vec3 v = capsule2End - capsule2Start; 
+            glm::vec3 v = capsule2End - capsule2Start;
             glm::vec3 w = capsule1Start - capsule2Start;
 
             float a = glm::dot(u, u);
             float b = glm::dot(u, v);
             float c = glm::dot(v, v);
-            float d = glm::dot(u, w); 
-            float e = glm::dot(v, w); 
+            float d = glm::dot(u, w);
+            float e = glm::dot(v, w);
 
             float denominator = a * c - b * b;
 
@@ -138,13 +206,59 @@ namespace Engine
 
         bool CheckCapsuleMeshCollision(const CapsuleCollider& capsule, const MeshCollider& mesh)
         {
-            // TODO: Implement collision checking between capsule and mesh
+            const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
+            const glm::mat4& meshTransform = mesh.GetTransform()->GetLocalToWorldMatrix();
+
+            glm::vec3 capsuleStart = capsuleTransform * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+            glm::vec3 capsuleEnd = capsuleTransform * glm::vec4(0.0f, capsule.GetHeight(), 0.0f, 1.0f);
+            float capsuleRadius = capsule.GetRadius();
+
+            const auto& vertices = mesh.GetMesh()->GetVertices();
+
+            for (const auto& vertex : vertices)
+            {
+                glm::vec3 worldVertex = meshTransform * glm::vec4(vertex, 1.0f);
+
+                glm::vec3 capsuleAxis = capsuleEnd - capsuleStart;
+                float capsuleAxisLengthSquared = glm::dot(capsuleAxis, capsuleAxis);
+
+                float t = glm::dot(worldVertex - capsuleStart, capsuleAxis) / capsuleAxisLengthSquared;
+                t = glm::clamp(t, 0.0f, 1.0f);
+                glm::vec3 closestPointOnCapsule = capsuleStart + t * capsuleAxis;
+
+                float distanceSquared = glm::distance2(closestPointOnCapsule, worldVertex);
+                if (distanceSquared <= (capsuleRadius * capsuleRadius))
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
 
         bool CheckMeshMeshCollision(const MeshCollider& mesh1, const MeshCollider& mesh2)
         {
-            // TODO: Implement collision checking between two meshes
+            const glm::mat4& transform1 = mesh1.GetTransform()->GetLocalToWorldMatrix();
+            const glm::mat4& transform2 = mesh2.GetTransform()->GetLocalToWorldMatrix();
+
+            const auto& vertices1 = mesh1.GetMesh()->GetVertices();
+            const auto& vertices2 = mesh2.GetMesh()->GetVertices();
+
+            for (const auto& vertex1 : vertices1)
+            {
+                glm::vec3 worldVertex1 = transform1 * glm::vec4(vertex1, 1.0f);
+
+                for (const auto& vertex2 : vertices2)
+                {
+                    glm::vec3 worldVertex2 = transform2 * glm::vec4(vertex2, 1.0f);
+
+                    if (glm::distance2(worldVertex1, worldVertex2) < 1e-6f)
+                    {
+                        return true;
+                    }
+                }
+            }
+
             return false;
         }
 
