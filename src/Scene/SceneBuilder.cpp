@@ -61,7 +61,7 @@ namespace Scene
                 glm::vec3(1.0f), 1.0f, 1.0f, glm::vec3(0.0f));
         renderer->SetMaterial(submarineMaterial);
         renderer->SetAnimator();
-
+        renderer->Start();
 
         // Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
     }
