@@ -22,6 +22,9 @@
 #include "UI/FontRendering/TextManager.h"
 #include "UI/UiImplementations/SampleUi.h"
 #include "tracy/Tracy.hpp"
+#if DEBUG
+#include "Utility/OpenGlDebugger.h"
+#endif
 
 #if EDITOR
 #include "imgui.h"
@@ -157,6 +160,9 @@ namespace Engine
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 3.2+ only
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // 3.0+ only
 
+#if DEBUG
+        glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
+#endif
 
         // Create window with graphics context
         Window = glfwCreateWindow(mode->width, mode->height, "Tide Engine", monitor, nullptr);
@@ -194,6 +200,9 @@ namespace Engine
         Ui::TextManager::Initialize();
 #if EDITOR
         GizmoManager::Initialize();
+#endif
+#if DEBUG
+        Utility::OpenGlDebugger::Enable();
 #endif
 
         Camera = new class Camera(glm::perspective(glm::radians(70.0f),
