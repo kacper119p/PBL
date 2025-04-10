@@ -11,6 +11,10 @@ namespace Utility
     class OpenGlDebugger
     {
     public:
+        /**
+         * @brief Enables OpenGL Debugger. <br>
+         * GLFW_OPENGL_DEBUG_CONTEXT window hint must be set to true before creating glfw window, to work correctly.
+         */
         static void Enable();
 
     private:

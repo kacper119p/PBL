@@ -32,7 +32,7 @@ namespace Utility
                                                 const char* Message,
                                                 const void* UserParam)
     {
-        // ignore non-significant error/warning codes
+        // Ignore non-significant error/warning codes
         if (Id == 131169 || Id == 131185 || Id == 131218 || Id == 131204)
             return;
 
