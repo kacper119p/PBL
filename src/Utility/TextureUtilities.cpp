@@ -101,7 +101,7 @@ namespace Utility
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, 16.0f);
 
         glTexImage2D(GL_TEXTURE_2D, 0, Format, width, height, 0, SourceFormat, GL_UNSIGNED_BYTE, data);
@@ -277,7 +277,7 @@ namespace Utility
         glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER,
                         GL_LINEAR_MIPMAP_LINEAR);
         shader.SetUniform("ProjectionMatrix", captureProjection);
-        shader.SetUniform("Resolution", environmentMapResolution);
+        shader.SetUniform("Resolution", static_cast<float>(environmentMapResolution));
 
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 

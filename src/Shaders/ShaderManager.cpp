@@ -155,7 +155,7 @@ namespace Shaders
         const unsigned int id = glCreateProgram();
 
         glAttachShader(id, vertexShader);
-        if (ShaderSource.GeometryShader.c_str())
+        if (!ShaderSource.GeometryShader.empty())
         {
             glAttachShader(id, geometryShader);
         }
