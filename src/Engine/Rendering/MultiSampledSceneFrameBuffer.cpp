@@ -24,7 +24,7 @@ namespace Engine
         glBlitFramebuffer(0, 0, Resolution.x, Resolution.y, 0, 0, Resolution.x, Resolution.y,
                           GL_COLOR_BUFFER_BIT, GL_LINEAR);
         glBlitFramebuffer(0, 0, Resolution.x, Resolution.y, 0, 0, Resolution.x, Resolution.y,
-                          GL_DEPTH_BUFFER_BIT, GL_LINEAR);
+                          GL_DEPTH_BUFFER_BIT, GL_NEAREST);
     }
 
     void MultiSampledSceneFrameBuffer::UpdateBuffers()
