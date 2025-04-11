@@ -1,13 +1,12 @@
-#include <sstream>
-
-#include "../../cmake-build-debug-visual-studio-editor/_deps/spdlog-src/include/spdlog/spdlog.h"
 #if DEBUG
-#include "OpenGlDebugger.h"
 
-#include <iostream>
+#include <sstream>
 #include <ostream>
 
 #include "AssertionsUtility.h"
+#include "spdlog/spdlog.h"
+
+#include "OpenGlDebugger.h"
 
 namespace Utility
 {
