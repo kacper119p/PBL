@@ -18,6 +18,7 @@ namespace Engine
     Scene::Scene()
     {
         Root = new Entity();
+        Root->SetName("Root");
     }
 
     Scene::Scene(Entity* Root) :
@@ -89,6 +90,7 @@ namespace Engine
 
         delete Root;
         Root = new Entity();
+        Root->SetName("Root");
 
         Serialization::Deserialize(Value, "Skybox", Skybox);
         LightManager::GetInstance()->SetEnvironmentMap(Skybox);
