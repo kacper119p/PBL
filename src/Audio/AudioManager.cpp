@@ -145,7 +145,7 @@ void Engine::AudioManager::ConfigureSoundAttenuation(ma_sound& Sound, float MinD
 #if EDITOR
 void Engine::AudioManager::RenderGlobalVolumeImGui()
 {
-    ImGui::Begin("Global Audio Volume");
+    ImGui::Begin("Audio Manager");
 
     float globalVolume = GetInstance().GetGlobalVolume();
     if (ImGui::SliderFloat("Global Volume", &globalVolume, 0.0f, 1.0f))

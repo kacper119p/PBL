@@ -6,6 +6,7 @@
 #include "Engine/EngineObjects/Scene/Scene.h"
 #include "Models/Model.h"
 #include "Shaders/Shader.h"
+#include "Engine/GUI/EditorGUI.h"
 
 #if EDITOR
 #include "imgui_impl/imgui_impl_glfw.h"
@@ -21,6 +22,9 @@ namespace Engine
         static constexpr int32_t GlVersionMajor = 4;
         static constexpr int32_t GlVersionMinor = 6;
 
+        GLuint EditorFramebuffer;
+        GLuint EditorColorTexture;
+        GLuint EditorDepthRBO = 0;
     private:
         GLFWwindow* Window = nullptr;
 
@@ -35,6 +39,9 @@ namespace Engine
         glm::vec2 LastMousePosition = glm::vec2(0, 0);
 
         Scene* Scene;
+        EditorGUI EditorGUI;
+
+
 
     public:
         Engine();
@@ -69,5 +76,7 @@ namespace Engine
         static void MouseCallback(GLFWwindow* Window, double MouseX, double MouseY);
 
         static void MouseButtonCallback(GLFWwindow* Window, int Button, int Action, int Mods);
+
+        void InitEditorFramebuffer();
     };
 } // Engine
