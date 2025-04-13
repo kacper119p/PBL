@@ -8,21 +8,21 @@ namespace Engine
         this->colliderType = MESH;
     }
 
-    bool MeshCollider::AcceptCollision(ColliderVisitor& visitor)
+    /*bool MeshCollider::AcceptCollision(ColliderVisitor& visitor)
     {
         visitor.ResolveCollisionMesh(*this);
         return true;
-    }
+    }*/
 
-    bool MeshCollider::CheckCollision(const Collider& other)
-    {
-        if (isStatic || other.IsStatic())
-            return false;
+    //bool MeshCollider::CheckCollision(const Collider& other)
+    //{
+    //    if (isStatic || other.IsStatic())
+    //        return false;
 
-        // TODO: implement collision detection for MeshCollider / remove func
+    //    // TODO: implement collision detection for MeshCollider / remove func
 
-        return false;
-    }
+    //    return false;
+    //}
 
     MeshCollider& MeshCollider::operator=(const MeshCollider& other)
     {
@@ -41,5 +41,11 @@ namespace Engine
 
     Models::Mesh* MeshCollider::GetMesh() const { return _mesh_p; }
     void MeshCollider::SetMesh(Models::Mesh* mesh_p) { _mesh_p = mesh_p; }
+
+    bool MeshCollider::AcceptCollision(ColliderVisitor& visitor)
+    {
+        visitor.ResolveCollisionMesh(*this); // Wywo³anie odpowiedniej metody w visitorze
+        return true; // Mo¿esz dostosowaæ zwracan¹ wartoœæ w zale¿noœci od logiki
+    }
 
 } // namespace Engine

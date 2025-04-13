@@ -14,15 +14,15 @@ namespace Engine
         return true;
     }
 
-    bool BoxCollider::CheckCollision(const Collider& other)
-    {
-        if (isStatic || other.IsStatic()) 
-            return false;
+    //bool BoxCollider::CheckCollision(const Collider& other)
+    //{
+    //    if (isStatic || other.IsStatic()) 
+    //        return false;
 
-        // TODO: implement collision detection for BoxCollider / remove func
+    //    // TODO: implement collision detection for BoxCollider / remove func
 
-        return false;
-    }
+    //    return false;
+    //}
 
     BoxCollider& BoxCollider::operator=(const BoxCollider& other)
     {

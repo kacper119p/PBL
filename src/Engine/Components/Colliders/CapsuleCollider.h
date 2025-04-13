@@ -7,7 +7,7 @@ namespace Engine
      * @brief Capsule collider class.
      * @details Represents a capsule-shaped collider.
      */
-    class CapsuleCollider : public Collider, ColliderVisitor
+    class CapsuleCollider : public Collider
     {
     private:
         float _radius;

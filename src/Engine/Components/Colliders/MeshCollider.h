@@ -9,7 +9,7 @@ namespace Engine
      * @brief Mesh collider class.
      * @details Represents a mesh-shaped collider.
      */
-    class MeshCollider : public Collider, ColliderVisitor
+    class MeshCollider : public Collider
     {
     public:
         float _scale;
@@ -20,7 +20,7 @@ namespace Engine
         MeshCollider(Transform* transform, bool isTrigger = false, float scale = 1.0f, Models::Mesh* mesh_p = nullptr);
 
         virtual bool AcceptCollision(ColliderVisitor& visitor) override;
-        virtual bool CheckCollision(const Collider& other) override;
+        //virtual bool CheckCollision(const Collider& other) override;
 
         inline virtual Collider* GetInstance() override { return this; }
 

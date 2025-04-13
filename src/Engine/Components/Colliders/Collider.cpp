@@ -1,10 +1,15 @@
 #include "Collider.h"
-
+#include "SpatialPartitioning.h"
 namespace Engine
 {
-    Collider::Collider() : isTrigger(false), transform(nullptr) {}
+    Collider::Collider() : isTrigger(false), transform(nullptr) {
+        this->colliderVisitor = ConcreteColliderVisitor();
+    }
 
-    Collider::Collider(Transform* transform, bool isTrigger) : isTrigger(isTrigger), transform(transform) {}
+    Collider::Collider(Transform* transform, bool isTrigger, SpatialPartitioning* spatialParam) 
+        : isTrigger(isTrigger), transform(transform), spatial(spatialParam) {
+        this->colliderVisitor = ConcreteColliderVisitor(spatialParam, this);
+    }
 
     void Collider::SetTrigger(bool isTrigger) { this->isTrigger = isTrigger; }
 
@@ -33,6 +38,10 @@ namespace Engine
         onCollisionExit = other.onCollisionExit;
 
         return *this;
+    }
+
+    void Collider::Update() {  
+       colliderVisitor.ManageCollisions();  
     }
 
 } // namespace Engine
