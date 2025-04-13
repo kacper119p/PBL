@@ -14,15 +14,15 @@ namespace Engine
         return true;
     }
 
-    bool SphereCollider::CheckCollision(const Collider& other)
-    {
-        if (isStatic || other.IsStatic())
-            return false;
+    //bool SphereCollider::CheckCollision(const Collider& other)
+    //{
+    //    if (isStatic || other.IsStatic())
+    //        return false;
 
-        // TODO: implement collision detection for SphereCollider / remove func
+    //    // TODO: implement collision detection for SphereCollider / remove func
 
-        return false;
-    }
+    //    return false;
+    //}
 
     SphereCollider& SphereCollider::operator=(const SphereCollider& other)
     {

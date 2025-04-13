@@ -7,8 +7,11 @@ namespace Engine
     /**
      * @brief Box collider class.
      * @details Represents a box-shaped collider.
-     */
-    class BoxCollider : public Collider, ColliderVisitor
+    */
+
+    class CocreteColliderVisitor;
+
+    class BoxCollider : public Collider
     {
     private:
         float _width;
@@ -21,7 +24,7 @@ namespace Engine
                     float depth = 1.0f);
 
         virtual bool AcceptCollision(ColliderVisitor& visitor) override;
-        virtual bool CheckCollision(const Collider& other) override;
+        //virtual bool CheckCollision(const Collider& other) override;
 
         inline virtual Collider* GetInstance() override { return this; }
         

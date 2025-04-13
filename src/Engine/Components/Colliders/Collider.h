@@ -6,8 +6,11 @@
 #include "Events/TAction.h"
 #include "Events/TEvent.h"
 #include "ColliderVisitor.h"
+
 namespace Engine
 {
+    class SpatialPartitioning;
+
     enum ColliderTypeE
     {
         BOX,
@@ -23,6 +26,8 @@ namespace Engine
     private:
         bool isTrigger;
         Transform* transform;
+        ConcreteColliderVisitor colliderVisitor;
+        SpatialPartitioning* spatial;
 
     protected:
         bool isStatic;
@@ -34,11 +39,11 @@ namespace Engine
         Events::TEvent<Collider*> onCollisionExit;
 
         Collider();
-        Collider(Transform* transform, bool isTrigger = false);
+        Collider(Transform* transform, bool isTrigger = false, SpatialPartitioning* spatial = nullptr);
         virtual ~Collider() = default;
 
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
-        virtual bool CheckCollision(const Collider& other) = 0;
+        //virtual bool CheckCollision(const Collider& other) = 0;
 
         void SetTrigger(bool isTrigger);
         bool IsTrigger() const;
@@ -55,6 +60,8 @@ namespace Engine
         virtual Collider* GetInstance() = 0;
 
         Collider& operator=(const Collider& other);
+
+        void Update();
     };
 
 } // namespace Engine
