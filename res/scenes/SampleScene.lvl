@@ -50,7 +50,8 @@
                 "{511aa219-f2a0-45c9-b394-af6e04a75258}\u0000",
                 "{a9c8d8b0-9f69-4c3e-bf05-8daf3cbff3d0}\u0000",
                 "{731f4770-5ff9-4ab1-b4a2-ca9b8be74712}\u0000",
-                "{7dbe5512-7971-484b-990d-7efc28d5fd1f}\u0000"
+                "{7dbe5512-7971-484b-990d-7efc28d5fd1f}\u0000",
+                "{ba71ac81-3772-4fa7-b0fb-ac3d3834df05}\u0000"
             ],
             "Parent": null
         },
@@ -1276,6 +1277,43 @@
             },
             "SpawnShader": "./res/shaders/Particles/ParticlesSpawn.comp",
             "UpdateShader": "./res/shaders/Particles/ParticlesUpdate.comp"
+        },
+        {
+            "type": "Entity",
+            "id": "{c3810952-ba4d-435b-bd12-a1d8dc11dc0d}\u0000",
+            "transform": {
+                "type": "Transform",
+                "id": "{ba71ac81-3772-4fa7-b0fb-ac3d3834df05}\u0000",
+                "owner": "{c3810952-ba4d-435b-bd12-a1d8dc11dc0d}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{1089c7a4-6893-436b-a972-a092b8997368}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{1089c7a4-6893-436b-a972-a092b8997368}\u0000",
+            "owner": "{c3810952-ba4d-435b-bd12-a1d8dc11dc0d}\u0000",
+            "Material": "",
+            "Model": "",
+            "Animation": "./res/models/Submarine.fbx"
         }
     ]
 }

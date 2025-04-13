@@ -63,7 +63,7 @@ namespace Scene
         renderer->SetAnimator();
         renderer->Start();
 
-        // Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
+         Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
     }
 
 } // Scene

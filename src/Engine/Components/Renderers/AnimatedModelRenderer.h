@@ -32,7 +32,8 @@ namespace Engine
          * @param Material Material to be used.
          * @param Model Model to be used.
          */
-        AnimatedModelRenderer() = default;
+        AnimatedModelRenderer() { UpdateManager::GetInstance()->RegisterComponent(this); }
+        ~AnimatedModelRenderer() { UpdateManager::GetInstance()->UnregisterComponent(this); }
 
     public:
         /**
