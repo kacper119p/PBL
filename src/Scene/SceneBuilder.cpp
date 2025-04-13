@@ -59,11 +59,12 @@ namespace Scene
                 submarineRmaoMap, submarineNormalMap,
                 submarineEmissiveMap,
                 glm::vec3(1.0f), 1.0f, 1.0f, glm::vec3(0.0f));
+        Materials::MaterialManager::SaveMaterial(".res/materials/SubmarineAnimated", submarineMaterial);
         renderer->SetMaterial(submarineMaterial);
         renderer->SetAnimator();
         renderer->Start();
 
-        // Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
+        Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
     }
 
 } // Scene
