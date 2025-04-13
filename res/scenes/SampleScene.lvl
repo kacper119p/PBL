@@ -50,7 +50,9 @@
                 "{511aa219-f2a0-45c9-b394-af6e04a75258}\u0000",
                 "{a9c8d8b0-9f69-4c3e-bf05-8daf3cbff3d0}\u0000",
                 "{731f4770-5ff9-4ab1-b4a2-ca9b8be74712}\u0000",
-                "{7dbe5512-7971-484b-990d-7efc28d5fd1f}\u0000"
+                "{7dbe5512-7971-484b-990d-7efc28d5fd1f}\u0000",
+                "{e6d34ed2-d56d-42bc-b6e5-f5e5e98f1f49}\u0000",
+                "{175de58d-3a88-41c4-9e0f-13d72632b5cb}\u0000"
             ],
             "Parent": null
         },
@@ -1276,6 +1278,80 @@
             },
             "SpawnShader": "./res/shaders/Particles/ParticlesSpawn.comp",
             "UpdateShader": "./res/shaders/Particles/ParticlesUpdate.comp"
+        },
+        {
+            "type": "Entity",
+            "id": "{058881c0-9606-4851-a063-3c93bd468acd}\u0000",
+            "transform": {
+                "type": "Transform",
+                "id": "{e6d34ed2-d56d-42bc-b6e5-f5e5e98f1f49}\u0000",
+                "owner": "{058881c0-9606-4851-a063-3c93bd468acd}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{0e9df840-c3f1-44b5-88a4-a3e6b9b5ce22}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{0e9df840-c3f1-44b5-88a4-a3e6b9b5ce22}\u0000",
+            "owner": "{058881c0-9606-4851-a063-3c93bd468acd}\u0000",
+            "Material": "./res/materials/SampleScene/SubmarineAnimated.mat",
+            "Model": "./res/models/Submarine.fbx",
+            "Animation": "./res/models/Submarine.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{6a970693-00f1-4bd9-9d53-02c7d9303aa3}\u0000",
+            "transform": {
+                "type": "Transform",
+                "id": "{175de58d-3a88-41c4-9e0f-13d72632b5cb}\u0000",
+                "owner": "{6a970693-00f1-4bd9-9d53-02c7d9303aa3}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{2fc48f11-9e23-4d8d-9520-17e720e02ca6}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{2fc48f11-9e23-4d8d-9520-17e720e02ca6}\u0000",
+            "owner": "{6a970693-00f1-4bd9-9d53-02c7d9303aa3}\u0000",
+            "Material": "./res/materials/SampleScene/SubmarineAnimated.mat",
+            "Model": "./res/models/Submarine.fbx",
+            "Animation": "./res/models/Submarine.fbx"
         }
     ]
 }

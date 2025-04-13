@@ -21,6 +21,7 @@ namespace Models
         }
 
         ProcessNode(scene->mRootNode, scene);
+        Path = FilePath;
     }
 
     ModelAnimated::~ModelAnimated() = default;
