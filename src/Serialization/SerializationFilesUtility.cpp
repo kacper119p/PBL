@@ -3,7 +3,6 @@
 #include "rapidjson/filewritestream.h"
 #include <rapidjson/prettywriter.h>
 #include <cstdio>
-#include <iostream>
 
 namespace
 {
@@ -16,12 +15,7 @@ namespace Serialization
     {
         FILE* file;
         const int errorNumber = fopen_s(&file, FilePath, "rb");
-        if (errorNumber != 0)
-        {
-            std::cerr << "Failed to open file: " << FilePath << std::endl;
-            return;
-        }
-        assert(errorNumber == 0); // failed to read file
+        assert(errorNumber == 0); //failed to read file
         char buffer[BufferSize];
         rapidjson::FileReadStream inputStream(file, buffer, sizeof(buffer));
 
