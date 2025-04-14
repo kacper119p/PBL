@@ -1,13 +1,21 @@
 #include <algorithm>
-#include <filesystem>
-#include "imgui.h"
+
 #include "AssetsWindowGUI.h"
+#include "imgui.h"
 
 namespace fs = std::filesystem;
 
 void Engine::AssetsWindow::Draw()
 {
     ImGui::Begin("Assets");
+
+    // Search bar
+    char searchBuffer[256] = {};
+    std::strncpy(searchBuffer, m_SearchQuery.c_str(), sizeof(searchBuffer));
+    if (ImGui::InputText("Search", searchBuffer, sizeof(searchBuffer)))
+    {
+        m_SearchQuery = searchBuffer;
+    }
 
     if (ImGui::Button("Up") && m_CurrentPath != "./assets")
     {
@@ -18,6 +26,18 @@ void Engine::AssetsWindow::Draw()
 
     for (const auto& entry : m_DirectoryEntries)
     {
+        // Filter based on search query (case-insensitive)
+        if (!m_SearchQuery.empty())
+        {
+            std::string lowerEntry = entry;
+            std::string lowerQuery = m_SearchQuery;
+            std::transform(lowerEntry.begin(), lowerEntry.end(), lowerEntry.begin(), ::tolower);
+            std::transform(lowerQuery.begin(), lowerQuery.end(), lowerQuery.begin(), ::tolower);
+
+            if (lowerEntry.find(lowerQuery) == std::string::npos)
+                continue;
+        }
+
         std::string fullPath = m_CurrentPath + "/" + entry;
         if (fs::is_directory(fullPath))
         {
