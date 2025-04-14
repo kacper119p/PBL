@@ -11,7 +11,13 @@
 
 namespace Engine
 {
-    
+
+    void AnimatedModelRenderer::Start()
+    {
+        Renderer::Start();
+        UpdateManager::GetInstance()->RegisterComponent(this);
+    }
+
     void AnimatedModelRenderer::RenderDepth(const CameraRenderData& RenderData)
     {
         Material->UseDepthPass();
@@ -39,7 +45,7 @@ namespace Engine
     }
 
     void AnimatedModelRenderer::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
-                                               const glm::mat4* const SpaceTransformMatrices)
+                                                       const glm::mat4* const SpaceTransformMatrices)
     {
         Material->UsePointSpotShadows();
 
@@ -82,7 +88,7 @@ namespace Engine
         }
     }
 
-   rapidjson::Value AnimatedModelRenderer::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+    rapidjson::Value AnimatedModelRenderer::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION
         SERIALIZE_FIELD(Material)
@@ -92,7 +98,7 @@ namespace Engine
     }
 
     void AnimatedModelRenderer::DeserializeValuePass(const rapidjson::Value& Object,
-                                             Serialization::ReferenceTable& ReferenceMap)
+                                                     Serialization::ReferenceTable& ReferenceMap)
     {
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
         DESERIALIZE_VALUE(Material)
@@ -103,7 +109,7 @@ namespace Engine
     }
 
     void AnimatedModelRenderer::DeserializeReferencesPass(const rapidjson::Value& Object,
-                                                  Serialization::ReferenceTable& ReferenceMap)
+                                                          Serialization::ReferenceTable& ReferenceMap)
     {
         START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
         END_COMPONENT_DESERIALIZATION_REFERENCES_PASS

@@ -41,31 +41,7 @@ namespace Scene
 
         Scene = new class Engine::Scene();
         Engine::SceneManager::LoadScene("./res/scenes/SampleScene.lvl", Scene);
-        /*Engine::Entity* entity = Scene->SpawnEntity(nullptr);
-        Engine::AnimatedModelRenderer* renderer = entity->AddComponent<Engine::AnimatedModelRenderer>();
-        Models::ModelAnimated* submarineModel = Models::ModelManager::GetAnimatedModel("./res/models/Submarine.fbx");
-        Models::Animation* animation = new Models::Animation("./res/models/Submarine.fbx", submarineModel);
-        renderer->SetModel(submarineModel);
-        renderer->SetAnimation(animation);
-
-        Engine::Texture submarineBaseMap = Engine::TextureManager::GetTexture("./res/textures/Submarine/Base.png");
-        Engine::Texture submarineRmaoMap = Engine::TextureManager::GetTexture(
-                "./res/textures/Submarine/RoughnessMetallicAmbientOcclusion.png");
-        Engine::Texture submarineNormalMap = Engine::TextureManager::GetTexture("./res/textures/Submarine/Normal.png");
-        Engine::Texture submarineEmissiveMap = Engine::TextureManager::GetTexture(
-                "./res/textures/EmissiveMapDefault.png");
-        Materials::Material* submarineMaterial = new Materials::AnimatedPbrMaterial(
-                submarineBaseMap,
-                submarineRmaoMap, submarineNormalMap,
-                submarineEmissiveMap,
-                glm::vec3(1.0f), 1.0f, 1.0f, glm::vec3(0.0f));
-        Materials::Material* newSubmarineMaterial =
-                Materials::MaterialManager::GetMaterial("./res/materials/SampleScene/SubmarineAnimated.mat");
-        renderer->SetMaterial(newSubmarineMaterial);
-        renderer->SetAnimator();
-        renderer->Start();
-
-        Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);*/
+        Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
     }
 
 } // Scene

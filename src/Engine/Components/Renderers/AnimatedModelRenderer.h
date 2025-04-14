@@ -15,12 +15,12 @@ namespace Engine
     /**
      * @brief Renderer used for rendering meshes.
      */
-    class AnimatedModelRenderer : public Renderer, IUpdateable
+    class AnimatedModelRenderer : public Renderer, public IUpdateable
     {
     private:
         Materials::Material* Material = nullptr;
-        Models::ModelAnimated* Model=nullptr;
-        Models::Animation* Animation=nullptr;
+        Models::ModelAnimated* Model = nullptr;
+        Models::Animation* Animation = nullptr;
         Models::Animator Animator;
 
         float deltaTime = 0.0f;
@@ -62,6 +62,8 @@ namespace Engine
         void SetAnimator() { this->Animator = Models::Animator(Animation); }
 
     public:
+        void Start() override;
+
         void RenderDepth(const CameraRenderData& RenderData) override;
 
         void Render(const CameraRenderData& RenderData) override;
@@ -72,7 +74,6 @@ namespace Engine
                                     const glm::mat4* SpaceTransformMatrices) override;
 
         void Update(float DeltaTime) override;
-
 
     private:
         void SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const;
