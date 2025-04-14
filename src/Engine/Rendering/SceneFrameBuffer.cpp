@@ -34,6 +34,8 @@ namespace Engine
 
         glDeleteTextures(1, &ColorBuffer);
         glGenTextures(1, &ColorBuffer);
+        glDeleteTextures(1, &NormalsBuffer);
+        glGenTextures(1, &NormalsBuffer);
         glDeleteTextures(1, &ResolvedColorBuffer);
         glGenTextures(1, &ResolvedColorBuffer);
         glDeleteRenderbuffers(1, &DepthStencilBuffer);
@@ -47,8 +49,16 @@ namespace Engine
         glTexParameteri(GL_TEXTURE_2D_MULTISAMPLE, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, ColorBuffer, 0);
 
-        constexpr uint32_t attachments[1] = {GL_COLOR_ATTACHMENT0};
-        glDrawBuffers(1, attachments);
+        glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, NormalsBuffer);
+        glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, Samples, GL_RGBA32F, Resolution.x, Resolution.y, GL_TRUE);;
+        glTexParameteri(GL_TEXTURE_2D_MULTISAMPLE, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D_MULTISAMPLE, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D_MULTISAMPLE, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D_MULTISAMPLE, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D_MULTISAMPLE, NormalsBuffer, 0);
+
+        constexpr uint32_t attachments[2] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
+        glDrawBuffers(2, attachments);
 
         glBindRenderbuffer(GL_RENDERBUFFER, DepthStencilBuffer);
         glRenderbufferStorageMultisample(GL_RENDERBUFFER, Samples, GL_DEPTH24_STENCIL8, Resolution.x, Resolution.y);

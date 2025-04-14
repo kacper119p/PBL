@@ -32,7 +32,7 @@ namespace Engine
         glClear(GL_DEPTH_BUFFER_BIT);
 
         glViewport(0, 0, ScreenWidth, ScreenHeight);
-        glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+        //glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
         glEnable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);

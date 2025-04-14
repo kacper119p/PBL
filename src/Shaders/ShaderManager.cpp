@@ -100,10 +100,10 @@ namespace Shaders
         glGetShaderiv(shaderId, GL_COMPILE_STATUS, &success);
         if (!success)
         {
-            glDeleteShader(shaderId);
             char errorInfo[ErrorLogSize];
             glGetShaderInfoLog(shaderId, ErrorLogSize, nullptr, errorInfo);
-            throw ShaderException(std::format("Failed to compile shader: {}\n", errorInfo));
+            glDeleteShader(shaderId);
+            CHECK_MESSAGE(success, errorInfo);
         }
         return shaderId;
     }
@@ -169,7 +169,7 @@ namespace Shaders
             char errorInfo[ErrorLogSize];
             glGetProgramInfoLog(id, ErrorLogSize, nullptr, errorInfo);
             glDeleteProgram(id);
-            throw ShaderException(std::format("Failed to link shader: {}\n", errorInfo));
+            CHECK_MESSAGE(success, errorInfo);
         }
 
         glDetachShader(id, vertexShader);
@@ -205,7 +205,7 @@ namespace Shaders
             char errorInfo[ErrorLogSize];
             glGetProgramInfoLog(programId, ErrorLogSize, nullptr, errorInfo);
             glDeleteProgram(programId);
-            throw ShaderException(std::format("Failed to link shader: {}\n", errorInfo));
+            CHECK_MESSAGE(success, errorInfo);
         }
 
         return ComputeShader(programId);

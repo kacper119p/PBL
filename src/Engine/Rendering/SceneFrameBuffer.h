@@ -17,6 +17,7 @@ namespace Engine
         uint32_t MultiSampledId = 0;
         glm::ivec2 Resolution;
         uint32_t ColorBuffer = 0;
+        uint32_t NormalsBuffer = 0;
         uint32_t DepthStencilBuffer = 0;
 
         uint32_t ResolvedId = 0;
