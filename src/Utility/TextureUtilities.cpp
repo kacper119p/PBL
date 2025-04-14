@@ -62,9 +62,9 @@ namespace
                                       glm::vec3(0.0f, -1.0f, 0.0f));
     }
 
-    void InitializeViewPort(unsigned int Resolution)
+    void InitializeViewPort(const unsigned int Resolution)
     {
-        glViewport(0, 0, Resolution, Resolution);
+        glViewport(0, 0, static_cast<GLsizei>(Resolution), static_cast<GLsizei>(Resolution));
         glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
         glEnable(GL_DEPTH_TEST);
@@ -76,6 +76,14 @@ namespace Utility
 {
     [[nodiscard]] unsigned int LoadTexture2DFromFile(const char* const FilePath, const GLenum Format,
                                                      const uint8_t SourceChannels, const GLenum SourceFormat)
+    {
+        int width;
+        int height;
+        return LoadTexture2DFromFile(FilePath, Format, SourceChannels, SourceFormat, width, height);
+    }
+
+    unsigned int LoadTexture2DFromFile(const char* FilePath, GLenum Format, uint8_t SourceChannels, GLenum SourceFormat,
+                                       int& OutWidth, int& OutHeight)
     {
         int width, height, channelCount;
         GLubyte* data = stbi_load(FilePath, &width, &height,
@@ -92,13 +100,17 @@ namespace Utility
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, 16.0f);
 
         glTexImage2D(GL_TEXTURE_2D, 0, Format, width, height, 0, SourceFormat, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
 
         stbi_image_free(data);
+
+        OutWidth = width;
+        OutHeight = height;
 
         return textureId;
     }
@@ -265,7 +277,7 @@ namespace Utility
         glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER,
                         GL_LINEAR_MIPMAP_LINEAR);
         shader.SetUniform("ProjectionMatrix", captureProjection);
-        shader.SetUniform("Resolution", environmentMapResolution);
+        shader.SetUniform("Resolution", static_cast<float>(environmentMapResolution));
 
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 

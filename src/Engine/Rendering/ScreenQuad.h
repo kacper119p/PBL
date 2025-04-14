@@ -8,19 +8,30 @@ namespace Engine::Rendering
     class ScreenQuad
     {
     private:
-        unsigned int VertexArray;
-        unsigned int VertexBuffer;
-        unsigned int ElementBuffer;
+        struct CachedData
+        {
+            unsigned int VertexArray = 0;
+            unsigned int VertexBuffer = 0;
+            unsigned int ElementBuffer = 0;
+
+            ~CachedData();
+        };
+
+    private:
+        static CachedData CachedData;
 
     public:
         ScreenQuad();
 
-        virtual ~ScreenQuad();
+        ~ScreenQuad();
 
     public:
         /**
          * @brief Draws quad covering whole screen
          */
-        void Draw();
+        void Draw() const;
+
+    private:
+        static void Initialize();
     };
 } // Engine

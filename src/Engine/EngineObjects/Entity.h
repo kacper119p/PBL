@@ -22,6 +22,7 @@ namespace Engine
         Transform Transform;
         Scene* Scene = nullptr;
         std::vector<Component*> Components;
+        std::string Name = "New Entity";
 
     public:
         /**
@@ -113,7 +114,23 @@ namespace Engine
             }
         }
 
-    public:
+        /**
+         * @brief Returns name of this entity.
+         */
+        [[nodiscard]] std::string GetName() const
+        {
+            return Name;
+        }
+
+        /**
+        * @brief Sets a name of this entity.
+        * @return A new name.
+        */
+        void SetName(const std::string& Name)
+        {
+            this->Name = Name;
+        }
+
         [[nodiscard]] std::vector<Component*>::iterator begin()
         {
             return Components.begin();

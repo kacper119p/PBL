@@ -32,7 +32,8 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE LIBRARY_SUFFIX="")
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
         ${glad_SOURCE_DIR}
-        ${stb_image_SOURCE_DIR})
+        ${stb_image_SOURCE_DIR}
+        ${miniaudio_SOURCE_DIR})
 
 # include imgui only in editor.
 if (DEFINED ENV{Editor})
@@ -47,6 +48,7 @@ endif ()
 # Link libraries
 find_package(rapidjson CONFIG REQUIRED)
 find_package(Tracy CONFIG REQUIRED)
+find_package(Freetype REQUIRED)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ${OPENGL_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} PRIVATE glad)
@@ -55,7 +57,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE assimp)
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)
 target_link_libraries(${PROJECT_NAME} PRIVATE rapidjson)
-
+target_link_libraries(${PROJECT_NAME} PRIVATE miniaudio)
 target_link_libraries(${PROJECT_NAME} PRIVATE Tracy::TracyClient)
 target_link_libraries(${PROJECT_NAME} PRIVATE spdlog)
 

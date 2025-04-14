@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Components/Audio/AudioListener.h"
 #include "glfw/glfw3.h"
 #include "Engine/EngineObjects/Camera.h"
 #include "Engine/EngineObjects/Scene/Scene.h"
@@ -29,6 +30,7 @@ namespace Engine
         uint64_t Frame = 0;
 
         Camera* Camera = nullptr;
+        AudioListener* AudioListener = nullptr;
         bool CameraMoved = false;
         glm::vec2 LastMousePosition = glm::vec2(0, 0);
 

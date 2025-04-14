@@ -1,8 +1,10 @@
 {
     "Skybox": "./res/textures/Skyboxes/Skybox.hdr",
+    "UI": "EmptyUi",
     "Root": {
         "type": "Entity",
         "id": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
+        "name": "Root",
         "transform": {
             "type": "Transform",
             "id": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000",
@@ -62,6 +64,7 @@
         {
             "type": "Entity",
             "id": "{fb206b5b-6c7f-40b0-859f-402cc2d3acdd}\u0000",
+            "name": "Submarine",
             "transform": {
                 "type": "Transform",
                 "id": "{ea7592d3-07eb-4a85-b4f0-794ae9c87da2}\u0000",
@@ -114,6 +117,7 @@
         {
             "type": "Entity",
             "id": "{20b41bd5-c360-4d6d-b819-8188f1f5ca69}\u0000",
+            "name": "Water",
             "transform": {
                 "type": "Transform",
                 "id": "{3fdfbd7f-54c9-4ba1-9043-54dcb04a61ca}\u0000",
@@ -150,6 +154,7 @@
         {
             "type": "Entity",
             "id": "{1cf6c987-d0c7-4e3e-8b1f-224002414adb}\u0000",
+            "name": "Floor",
             "transform": {
                 "type": "Transform",
                 "id": "{fd65822d-f06d-4fec-afd1-88f26d358c85}\u0000",
@@ -186,6 +191,7 @@
         {
             "type": "Entity",
             "id": "{4975259a-f1c2-43e2-853e-dd44294184ee}\u0000",
+            "name": "Walls",
             "transform": {
                 "type": "Transform",
                 "id": "{b501bc21-ea81-45a9-86ba-a2e0ac862263}\u0000",
@@ -222,6 +228,7 @@
         {
             "type": "Entity",
             "id": "{3a618be7-16df-4a25-8923-2747b239c0ed}\u0000",
+            "name": "Box 1",
             "transform": {
                 "type": "Transform",
                 "id": "{7ad2e286-11e9-4ff6-8184-0f2567255215}\u0000",
@@ -258,6 +265,7 @@
         {
             "type": "Entity",
             "id": "{5f877847-f0c8-4c47-91c5-2fa383b38763}\u0000",
+            "name": "Box 2",
             "transform": {
                 "type": "Transform",
                 "id": "{a8c4a254-44a1-46fd-aa79-eb6df07e73f5}\u0000",
@@ -294,6 +302,7 @@
         {
             "type": "Entity",
             "id": "{eba34860-7551-48cb-9d7d-87ffcddff42b}\u0000",
+            "name": "Box 3",
             "transform": {
                 "type": "Transform",
                 "id": "{78534d6e-564c-422b-87b5-377ec7392739}\u0000",
@@ -330,6 +339,7 @@
         {
             "type": "Entity",
             "id": "{0084b5eb-5e59-46d1-8b5e-ed501b661c62}\u0000",
+            "name": "Box 4",
             "transform": {
                 "type": "Transform",
                 "id": "{28912038-0572-4d45-8ad8-7d57113f405f}\u0000",
@@ -366,6 +376,7 @@
         {
             "type": "Entity",
             "id": "{96e0bdf5-7b11-4b64-b632-bd9966ca2473}\u0000",
+            "name": "Box 5",
             "transform": {
                 "type": "Transform",
                 "id": "{4e7c93b5-f5d3-4186-a04e-42208e0ad501}\u0000",
@@ -402,6 +413,7 @@
         {
             "type": "Entity",
             "id": "{e0d0df36-9fd4-4421-bfbb-a377ca582523}\u0000",
+            "name": "Box 6",
             "transform": {
                 "type": "Transform",
                 "id": "{8fec0507-3ddd-4711-95ea-092022b03073}\u0000",
@@ -438,6 +450,7 @@
         {
             "type": "Entity",
             "id": "{2aa4c905-3672-4bbf-ae63-928418e916c0}\u0000",
+            "name": "Box 7",
             "transform": {
                 "type": "Transform",
                 "id": "{643f1a09-469d-474b-9c4e-2c7a29f9fb7e}\u0000",
@@ -474,6 +487,7 @@
         {
             "type": "Entity",
             "id": "{f8bc2f2f-ddde-4de2-8ab6-aa387da31236}\u0000",
+            "name": "Box 8",
             "transform": {
                 "type": "Transform",
                 "id": "{53371b2b-bbe9-402a-a7cc-6dcf1f89522a}\u0000",
@@ -510,6 +524,7 @@
         {
             "type": "Entity",
             "id": "{12d3eb4e-1d6e-4d90-95dc-cbc17f0307fd}\u0000",
+            "name": "Fan Base",
             "transform": {
                 "type": "Transform",
                 "id": "{68e2367d-b35c-46e5-8a8d-98484bfbb0ef}\u0000",
@@ -548,6 +563,7 @@
         {
             "type": "Entity",
             "id": "{0d7bfa19-9b97-4eb3-8be7-de7195bf27da}\u0000",
+            "name": "Fan Motor",
             "transform": {
                 "type": "Transform",
                 "id": "{88c779e6-d611-4b38-b58b-53cdbea02cfa}\u0000",
@@ -602,6 +618,7 @@
         {
             "type": "Entity",
             "id": "{ff4c8058-8406-4f55-aa85-19f8ee337a91}\u0000",
+            "name": "Fan Blades",
             "transform": {
                 "type": "Transform",
                 "id": "{d10aec6d-d407-4f3c-82aa-a29c106e820c}\u0000",
@@ -649,6 +666,7 @@
         {
             "type": "Entity",
             "id": "{80495222-64d3-4bb2-b725-f17e2afefc20}\u0000",
+            "name": "Table 1",
             "transform": {
                 "type": "Transform",
                 "id": "{18556b41-4074-4396-a7ce-602b58570837}\u0000",
@@ -685,6 +703,7 @@
         {
             "type": "Entity",
             "id": "{70553072-fbc7-4404-a539-42ea4ca9d050}\u0000",
+            "name": "Table 2",
             "transform": {
                 "type": "Transform",
                 "id": "{e38e4a57-3eb9-4959-9cf3-c600f39125e0}\u0000",
@@ -721,6 +740,7 @@
         {
             "type": "Entity",
             "id": "{734bd41f-5a34-43c2-b46e-c9a9bdcb6560}\u0000",
+            "name": "Reflective Bottle",
             "transform": {
                 "type": "Transform",
                 "id": "{0d80d703-aa0e-47a9-987a-c9eb1ab9cef9}\u0000",
@@ -757,6 +777,7 @@
         {
             "type": "Entity",
             "id": "{108f15bc-e4ef-468e-ba0a-d9db9c761b77}\u0000",
+            "name": "Refractive Bottle",
             "transform": {
                 "type": "Transform",
                 "id": "{a5810354-3ed2-4191-971e-e6bff62c9096}\u0000",
@@ -793,6 +814,7 @@
         {
             "type": "Entity",
             "id": "{1828cffc-cbb9-4c9c-9151-40c9b55d752a}\u0000",
+            "name": "Monitor",
             "transform": {
                 "type": "Transform",
                 "id": "{43d13416-fec4-4b78-927a-dde73ac9cd87}\u0000",
@@ -829,6 +851,7 @@
         {
             "type": "Entity",
             "id": "{6ea9a571-f617-4f87-ba6e-18211952d313}\u0000",
+            "name": "Wall Monitor",
             "transform": {
                 "type": "Transform",
                 "id": "{5a9e1c2f-19f8-44bf-9347-e2002f25175b}\u0000",
@@ -865,6 +888,7 @@
         {
             "type": "Entity",
             "id": "{ae3c82b8-f574-43e7-973b-12aaf2d7a6f0}\u0000",
+            "name": "Ceiling Lamp 1",
             "transform": {
                 "type": "Transform",
                 "id": "{0e6b9f63-08ff-4679-92a1-9ee6ff3dbcfd}\u0000",
@@ -901,6 +925,7 @@
         {
             "type": "Entity",
             "id": "{f0da05ea-f7cb-4e27-b952-f4f1124dc39b}\u0000",
+            "name": "Ceiling Lamp 2",
             "transform": {
                 "type": "Transform",
                 "id": "{0bf14636-5cbf-4761-baf9-8f1a582bb8e8}\u0000",
@@ -937,6 +962,7 @@
         {
             "type": "Entity",
             "id": "{31ebb64f-5b11-4466-9223-9f65f44e4b78}\u0000",
+            "name": "Directional Light",
             "transform": {
                 "type": "Transform",
                 "id": "{d7485720-1a60-4bf5-87ee-859a1eb44a5d}\u0000",
@@ -976,6 +1002,7 @@
         {
             "type": "Entity",
             "id": "{a96ae852-3ecb-4d5e-98c4-fb95d1bafd34}\u0000",
+            "name": "Point Light 1",
             "transform": {
                 "type": "Transform",
                 "id": "{46fa191b-835a-458d-b38a-d8f5b609113c}\u0000",
@@ -1018,6 +1045,7 @@
         {
             "type": "Entity",
             "id": "{149e2c52-05e5-4565-9770-704910e1d408}\u0000",
+            "name": "Point Light 2",
             "transform": {
                 "type": "Transform",
                 "id": "{96f8c2cd-7c4c-4ee8-860d-2554d5e99fc3}\u0000",
@@ -1060,6 +1088,7 @@
         {
             "type": "Entity",
             "id": "{52481cec-a2b6-430a-a08c-5141e5240def}\u0000",
+            "name": "Spotlight 1",
             "transform": {
                 "type": "Transform",
                 "id": "{511aa219-f2a0-45c9-b394-af6e04a75258}\u0000",
@@ -1104,6 +1133,7 @@
         {
             "type": "Entity",
             "id": "{e6e4e1a9-6d4b-4a52-8b6e-82272757fe23}\u0000",
+            "name": "Spotlight 2",
             "transform": {
                 "type": "Transform",
                 "id": "{a9c8d8b0-9f69-4c3e-bf05-8daf3cbff3d0}\u0000",
@@ -1148,6 +1178,7 @@
         {
             "type": "Entity",
             "id": "{481edaf4-f8d4-498d-b8a6-4f2f1edcb731}\u0000",
+            "name": "Sky Sphere",
             "transform": {
                 "type": "Transform",
                 "id": "{731f4770-5ff9-4ab1-b4a2-ca9b8be74712}\u0000",
@@ -1184,6 +1215,7 @@
         {
             "type": "Entity",
             "id": "{3957f4cf-9d1a-4637-86be-6aecd2d356ff}\u0000",
+            "name": "Particle Emitter",
             "transform": {
                 "type": "Transform",
                 "id": "{7dbe5512-7971-484b-990d-7efc28d5fd1f}\u0000",

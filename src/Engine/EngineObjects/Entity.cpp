@@ -18,6 +18,7 @@ namespace Engine
         rapidjson::Value object(rapidjson::kObjectType);
         object.AddMember("type", Serialization::Serialize(TypeName, Allocator), Allocator);
         object.AddMember("id", Serialization::Serialize(GetID(), Allocator), Allocator);
+        object.AddMember("name", Serialization::Serialize(GetName(), Allocator), Allocator);
         object.AddMember("transform", Transform.Serialize(Allocator), Allocator);
         object.AddMember("components", Serialization::Serialize(Components, Allocator), Allocator);
         return object;
@@ -28,6 +29,7 @@ namespace Engine
         GUID id;
         Serialization::Deserialize(Object, "id", id);
         SetId(id);
+        Serialization::Deserialize(Object, "name", Name);
         if (const auto transformIterator = Object.FindMember("transform");
             transformIterator != Object.MemberEnd() && transformIterator->value.IsObject())
         {

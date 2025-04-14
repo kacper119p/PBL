@@ -16,7 +16,15 @@
 #include "Scene/SceneBuilder.h"
 #include "Shaders/ShaderManager.h"
 #include "Textures/TextureManager.h"
+#include "UI/FontRendering/TextManager.h"
+#include "Engine/Components/Audio/AudioSource.h"
+#include "Engine/Components/Audio/AudioListener.h"
+#include "UI/FontRendering/TextManager.h"
+#include "UI/UiImplementations/SampleUi.h"
 #include "tracy/Tracy.hpp"
+#if DEBUG
+#include "Utility/OpenGlDebugger.h"
+#endif
 
 #if EDITOR
 #include "imgui.h"
@@ -68,6 +76,7 @@ namespace Engine
         spdlog::info("Successfully built scene.");
 
         float lastFrame = 0.0f;
+
         // Main loop
         while (!glfwWindowShouldClose(Window))
         {
@@ -96,10 +105,12 @@ namespace Engine
 
             
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
+            AudioListener->UpdateListener();
 
 #if EDITOR
             // Draw ImGui
             ImGuiBegin();
+            AudioManager::GetInstance().RenderGlobalVolumeImGui();
             ImGuiRender();
             GizmoManager::GetInstance()->Manipulate(renderData);
             ImGuiEnd(); // this call effectively renders ImGui
@@ -154,6 +165,9 @@ namespace Engine
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 3.2+ only
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // 3.0+ only
 
+#if DEBUG
+        glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
+#endif
 
         // Create window with graphics context
         Window = glfwCreateWindow(mode->width, mode->height, "Tide Engine", monitor, nullptr);
@@ -182,13 +196,18 @@ namespace Engine
         }
 
         glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+        glEnable(GL_MULTISAMPLE);
 
         RenderingManager::Initialize(glm::ivec2(WindowWidth, WindowHeight));
         LightManager::Initialize();
         UpdateManager::Initialize();
         Materials::MaterialManager::Initialize();
+        Ui::TextManager::Initialize();
 #if EDITOR
         GizmoManager::Initialize();
+#endif
+#if DEBUG
+        Utility::OpenGlDebugger::Enable();
 #endif
 
         Camera = new class Camera(glm::perspective(glm::radians(70.0f),
@@ -197,6 +216,9 @@ namespace Engine
                                                    100.0f),
                                   0.0018f);
         Camera->SetPosition(glm::vec3(0.0f, 5.0f, 20.0f));
+
+        AudioListener = new class AudioListener(*Camera);
+        spdlog::info("Sounds loaded.");
 
         return true;
     }
@@ -316,6 +338,8 @@ namespace Engine
         Shaders::ShaderManager::FreeResources();
         Models::ModelManager::DeleteAllModels();
         Materials::MaterialManager::DeleteAllMaterials();
+        AudioManager::DestroyInstance();
+        delete AudioListener;
     }
 
     void Engine::GlfwErrorCallback(int Error, const char* Description)
