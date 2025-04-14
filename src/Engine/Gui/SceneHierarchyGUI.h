@@ -20,5 +20,6 @@ namespace Engine
         }
         void DrawHierarchy(Transform* entity);
         void Draw();
+        Transform* GetSelectedEntity() const { return SelectedEntity; }
     };
 } // namespace Engine

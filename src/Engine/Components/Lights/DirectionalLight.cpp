@@ -24,6 +24,18 @@ namespace Engine
 #endif
     }
 
+    void DirectionalLight::DrawImGui() 
+    {
+        if (ImGui::CollapsingHeader("Directional Light", ImGuiTreeNodeFlags_DefaultOpen))
+        {
+            float color[3] = {Color.r, Color.g, Color.b};
+            if (ImGui::ColorEdit3("Color", color))
+            {
+                SetColor(glm::vec3(color[0], color[1], color[2]));
+            }
+        }
+    }
+
     rapidjson::Value DirectionalLight::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION

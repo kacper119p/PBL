@@ -9,11 +9,12 @@ void Engine::EditorGUI::Render(uint64_t Frame)
     m_Hierarchy.Draw();
     m_AssetsWindow.Draw();
     RenderInspector(Frame);
+    DrawSelectedEntitysComponents();
     AudioManager::GetInstance().RenderGlobalVolumeImGui();
 }
 void Engine::EditorGUI::RenderInspector(uint64_t Frame)
 {
-    ImGui::Begin("Properties");
+    ImGui::Begin("Engine Properties");
 
     const GLubyte* renderer = glGetString(GL_RENDERER);
     std::string cpuInfo = Utility::GetCpuInfo();
@@ -31,6 +32,12 @@ void Engine::EditorGUI::RenderInspector(uint64_t Frame)
                 ImGui::GetIO().Framerate);
 
 
+    ImGui::End();
+}
+void Engine::EditorGUI::DrawSelectedEntitysComponents() 
+{ 
+    ImGui::Begin("Components");
+    m_Hierarchy.GetSelectedEntity()->GetOwner()->DrawImGui();
     ImGui::End();
 }
 void Engine::EditorGUI::SetupDockspace()
@@ -74,9 +81,9 @@ void Engine::EditorGUI::SetupDockspace()
 
         // Dock the windows into the same dock
         ImGui::DockBuilderDockWindow("Hierarchy", dock_left);
-        ImGui::DockBuilderDockWindow("Properties", dock_right_top);
+        ImGui::DockBuilderDockWindow("Engine Properties", dock_right_top);
         ImGui::DockBuilderDockWindow("Audio Manager", dock_right_top);
-        ImGui::DockBuilderDockWindow("Inspector", dock_right_top);
+        ImGui::DockBuilderDockWindow("Components", dock_right_top);
         ImGui::DockBuilderDockWindow("Assets", dock_bottom);
 
         ImGui::DockBuilderFinish(dockspace_id);

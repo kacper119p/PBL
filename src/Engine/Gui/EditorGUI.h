@@ -20,6 +20,8 @@ namespace Engine {
             m_Scene.SetFramebufferTexture(Texture);
         }
         void RenderInspector(uint64_t Frame);
+        void DrawSelectedEntitysComponents();
+
     private:
         void SetupDockspace();
 

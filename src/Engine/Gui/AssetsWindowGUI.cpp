@@ -9,7 +9,7 @@ void Engine::AssetsWindow::Draw()
 {
     ImGui::Begin("Assets");
 
-    // Search bar
+    // Search bar - works only in current directory
     char searchBuffer[256] = {};
     std::strncpy(searchBuffer, m_SearchQuery.c_str(), sizeof(searchBuffer));
     if (ImGui::InputText("Search", searchBuffer, sizeof(searchBuffer)))

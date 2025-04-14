@@ -14,6 +14,47 @@ namespace Engine
 #endif
     }
 
+    void SpotLight::DrawImGui() {
+        if (ImGui::CollapsingHeader("SpotLight", ImGuiTreeNodeFlags_DefaultOpen))
+        {
+            // Editable Color (with color picker)
+            if (ImGui::ColorEdit3("Color", glm::value_ptr(Color)))
+            {
+                SetColor(Color);
+            }
+
+            // Editable Inner Angle
+            if (ImGui::DragFloat("Inner Angle", &InnerAngle, 1.0f, 0.0f, OuterAngle))
+            {
+                SetInnerAngle(InnerAngle);
+            }
+
+            // Editable Outer Angle
+            if (ImGui::DragFloat("Outer Angle", &OuterAngle, 1.0f, InnerAngle, 180.0f))
+            {
+                SetOuterAngle(OuterAngle);
+            }
+
+            // Editable Linear Falloff
+            if (ImGui::DragFloat("Linear Falloff", &LinearFalloff, 0.01f, 0.0f, 10.0f))
+            {
+                SetLinearFalloff(LinearFalloff);
+            }
+
+            // Editable Quadratic Falloff
+            if (ImGui::DragFloat("Quadratic Falloff", &QuadraticFalloff, 0.01f, 0.0f, 10.0f))
+            {
+                SetQuadraticFalloff(QuadraticFalloff);
+            }
+
+            // Editable Range
+            if (ImGui::DragFloat("Range", &Range, 1.0f, 0.0f, 1000.0f))
+            {
+                SetRange(Range);
+            }
+        }
+    }
+
     SpotLight::~SpotLight()
     {
         LightManager::GetInstance()->UnregisterLight(this);

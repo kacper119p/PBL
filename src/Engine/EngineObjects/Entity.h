@@ -150,6 +150,7 @@ namespace Engine
         {
             return Components.end();
         }
+        void DrawImGui();
 
         SERIALIZATION_EXPORT_CLASS(Entity);
     };

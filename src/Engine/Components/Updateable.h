@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Interfaces/IUpdateable.h"
+#include "imgui.h"
 
 namespace Engine
 {
@@ -17,6 +18,8 @@ namespace Engine
 
     public:
         void Start() override;
+
+        void DrawImGui() override { ImGui::CollapsingHeader("Updateable"); }
     };
 
 } // Engine

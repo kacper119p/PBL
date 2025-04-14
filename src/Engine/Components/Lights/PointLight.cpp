@@ -14,6 +14,40 @@ namespace Engine
 #endif
     }
 
+    void PointLight::DrawImGui()
+    {
+        if (ImGui::CollapsingHeader("PointLight", ImGuiTreeNodeFlags_DefaultOpen))
+        {
+            // Display and edit the Color (glm::vec3)
+            float color[3] = {Color.r, Color.g, Color.b};
+            if (ImGui::ColorEdit3("Color", color))
+            {
+                SetColor(glm::vec3(color[0], color[1], color[2]));
+            }
+
+            // Display and edit the Linear Falloff
+            float linearFalloff = GetLinearFalloff();
+            if (ImGui::DragFloat("Linear Falloff", &linearFalloff, 0.01f, 0.0f, 10.0f))
+            {
+                SetLinearFalloff(linearFalloff);
+            }
+
+            // Display and edit the Quadratic Falloff
+            float quadraticFalloff = GetQuadraticFalloff();
+            if (ImGui::DragFloat("Quadratic Falloff", &quadraticFalloff, 0.01f, 0.0f, 10.0f))
+            {
+                SetQuadraticFalloff(quadraticFalloff);
+            }
+
+            // Display and edit the Range
+            float range = GetRange();
+            if (ImGui::DragFloat("Range", &range, 1.0f, 0.0f, 1000.0f))
+            {
+                SetRange(range);
+            }
+        }
+    }
+
     PointLight::~PointLight()
     {
         LightManager::GetInstance()->UnregisterLight(this);
