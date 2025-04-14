@@ -48,7 +48,16 @@ void Engine::AssetsWindow::Draw()
         }
         else
         {
-            ImGui::Text("%s", entry.c_str());
+            if (ImGui::Selectable(entry.c_str(), false))
+            {
+            } 
+
+            if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID))
+            {
+                ImGui::SetDragDropPayload("ASSET_PATH", fullPath.c_str(), fullPath.size() + 1);
+                ImGui::Text("Dragging: %s", entry.c_str());
+                ImGui::EndDragDropSource();
+            }
         }
     }
 
