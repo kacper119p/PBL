@@ -10,7 +10,6 @@
 #include "Models/Model.h"
 #include "Shaders/ShaderManager.h"
 #include "Shaders/ShaderSourceFiles.h"
-#include <iostream>
 
 namespace
 {
@@ -101,22 +100,6 @@ namespace Serialization
         return object;
     }
 
-    rapidjson::Value Serialize(const Models::ModelAnimated* Value, rapidjson::Document::AllocatorType& Allocator)
-    {
-        rapidjson::Value object(rapidjson::kStringType);
-        const std::string path = Models::ModelManager::GetAnimatedModelPath(Value);
-        object.SetString(path.c_str(), static_cast<rapidjson::SizeType>(path.length()), Allocator);
-        return object;
-    }
-
-    rapidjson::Value Serialize(const Models::Animation* Value, rapidjson::Document::AllocatorType& Allocator)
-    {
-        rapidjson::Value object(rapidjson::kStringType);
-        const std::string path = Models::ModelManager::GetAnimationPath(Value);
-        object.SetString(path.c_str(), static_cast<rapidjson::SizeType>(path.length()), Allocator);
-        return object;
-    }
-
     rapidjson::Value Serialize(const std::string& Value, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kStringType);
@@ -182,7 +165,6 @@ namespace Serialization
     {
         rapidjson::Value object(rapidjson::kStringType);
         const std::string path = Materials::MaterialManager::GetMaterialPath(Value);
-        std::cout << "Material: "<< path << std::endl;
         object.SetString(path.c_str(), path.length(), Allocator);
         return object;
     }
@@ -327,24 +309,6 @@ namespace Serialization
             return;
         }
         Value = Models::ModelManager::GetModel(iterator->value.GetString());
-    }
-
-    void Deserialize(const rapidjson::Value& Object, const char* Name, Models::ModelAnimated*& Value) {
-        const auto iterator = Object.FindMember(Name);
-        if (iterator == Object.MemberEnd() || !iterator->value.IsString())
-        {
-            return;
-        }
-        Value = Models::ModelManager::GetAnimatedModel(iterator->value.GetString());
-    }
-
-    void Deserialize(const rapidjson::Value& Object, const char* Name, Models::Animation*& Value) {
-        const auto iterator = Object.FindMember(Name);
-        if (iterator == Object.MemberEnd() || !iterator->value.IsString())
-        {
-            return;
-        }
-        Value = Models::ModelManager::GetAnimation(iterator->value.GetString());
     }
 
     void Deserialize(const rapidjson::Value& Object, const char* const Name, std::string& Value)

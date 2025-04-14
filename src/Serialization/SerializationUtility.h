@@ -18,9 +18,6 @@ namespace Engine
 namespace Models
 {
     class Model;
-    class ModelAnimated;
-    class Animation;
-    class Animator;
 }
 
 namespace Serialization
@@ -40,8 +37,6 @@ namespace Serialization
     rapidjson::Value Serialize(const Engine::Texture& Value, rapidjson::Document::AllocatorType& Allocator);
 
     rapidjson::Value Serialize(const Models::Model* Value, rapidjson::Document::AllocatorType& Allocator);
-    rapidjson::Value Serialize(const Models::ModelAnimated* Value, rapidjson::Document::AllocatorType& Allocator);
-    rapidjson::Value Serialize(const Models::Animation* Value, rapidjson::Document::AllocatorType& Allocator);
 
     rapidjson::Value Serialize(const std::string& Value, rapidjson::Document::AllocatorType& Allocator);
 
@@ -96,8 +91,6 @@ namespace Serialization
     void Deserialize(const rapidjson::Value& Object, const char* Name, Engine::Texture& Value);
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, Models::Model*& Value);
-    void Deserialize(const rapidjson::Value& Object, const char* Name, Models::ModelAnimated*& Value);
-    void Deserialize(const rapidjson::Value& Object, const char* Name, Models::Animation*& Value);
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, std::string& Value);
 
