@@ -21,7 +21,7 @@ void Engine::SceneHierarchyGUI::DrawHierarchy(Transform* entity) {
         flags |= ImGuiTreeNodeFlags_DefaultOpen;
 
     // Tree node with pointer ID (avoids duplicates)
-    bool open = ImGui::TreeNodeEx((void*) (intptr_t) entity, flags, "%s", entity->GetOwner());
+    bool open = ImGui::TreeNodeEx((void*) (intptr_t) entity, flags, "%s", entity->GetOwner()->GetName().c_str());
 
     // Handle click selection
     if (ImGui::IsItemClicked())

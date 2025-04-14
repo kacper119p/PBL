@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Engine/Components/Transform.h"
+#include "Engine/EngineObjects/Entity.h"
+
 namespace Engine
 {
     class SceneHierarchyGUI
