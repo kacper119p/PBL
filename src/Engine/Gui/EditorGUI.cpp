@@ -7,6 +7,7 @@ void Engine::EditorGUI::Render(uint64_t Frame)
 { 
     SetupDockspace();
     m_Hierarchy.Draw();
+    m_AssetsWindow.Draw();
     RenderInspector(Frame);
     AudioManager::GetInstance().RenderGlobalVolumeImGui();
 }
@@ -76,7 +77,7 @@ void Engine::EditorGUI::SetupDockspace()
         ImGui::DockBuilderDockWindow("Properties", dock_right_top);
         ImGui::DockBuilderDockWindow("Audio Manager", dock_right_top);
         ImGui::DockBuilderDockWindow("Inspector", dock_right_top);
-        // Optionally: ImGui::DockBuilderDockWindow("Assets", dock_bottom);
+        ImGui::DockBuilderDockWindow("Assets", dock_bottom);
 
         ImGui::DockBuilderFinish(dockspace_id);
         m_Initialized = true;
