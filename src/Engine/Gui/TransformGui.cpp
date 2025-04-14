@@ -1,10 +1,13 @@
 #if EDITOR
-#include "TransformGui.h"
 #include "imgui.h"
+#include "TransformGui.h"
 
 namespace Engine
 {
-    TransformGui::~TransformGui() {}
+    TransformGui::~TransformGui()
+    {
+
+    }
 
     void TransformGui::Draw(Transform* Transform)
     {
@@ -28,5 +31,5 @@ namespace Engine
             Transform->SetScale(glm::vec3(scale[0], scale[1], scale[2]));
         }
     }
-} // namespace Engine
+} // Engine
 #endif
