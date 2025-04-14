@@ -1,26 +1,26 @@
 #pragma once
 
-#include <cstdint>
-
+#include "SceneFrameBuffer.h"
 #include "glad/glad.h"
 #include "glm/glm.hpp"
-
 
 namespace Engine
 {
     /**
-     * @brief Framebuffer used for scene rendering.
+     * @brief Multi-sampled FrameBuffer used for scene rendering.
      */
-    class SceneFrameBuffer
+    class SceneFrameBuffer final
     {
     private:
-        static constexpr uint8_t Samples = 8;
+        static constexpr uint8_t Samples = 32;
 
-        uint32_t Id = 0;
+        uint32_t MultiSampledId = 0;
         glm::ivec2 Resolution;
-
         uint32_t ColorBuffer = 0;
         uint32_t DepthStencilBuffer = 0;
+
+        uint32_t ResolvedId = 0;
+        uint32_t ResolvedColorBuffer = 0;
 
     public:
         explicit SceneFrameBuffer(glm::ivec2 Resolution);
@@ -31,9 +31,9 @@ namespace Engine
         /**
          * @brief Returns id of the underlying FrameBuffer.
          */
-        [[nodiscard]] unsigned int GetId() const
+        [[nodiscard]] unsigned int GetMultiSampledId() const
         {
-            return Id;
+            return MultiSampledId;
         }
 
         /**
@@ -57,17 +57,27 @@ namespace Engine
         /**
          * @brief Binds underlying FrameBuffer for rendering.
          */
-        void Bind() const
+        void BindMultiSampled() const
         {
-            glBindFramebuffer(GL_FRAMEBUFFER, Id);
+            glBindFramebuffer(GL_FRAMEBUFFER, MultiSampledId);
+        }
+
+        void BindResolved() const
+        {
+            glBindFramebuffer(GL_FRAMEBUFFER, ResolvedId);
         }
 
         /**
          * @brief Returns color texture attached to this buffer.
          */
-        [[nodiscard]] uint32_t GetColorBuffer() const
+        [[nodiscard]] uint32_t GetMultiSampledColorBuffer() const
         {
             return ColorBuffer;
+        }
+
+        [[nodiscard]] uint32_t GetResolvedColorBuffer() const
+        {
+            return ResolvedColorBuffer;
         }
 
         /**
@@ -78,8 +88,12 @@ namespace Engine
             return DepthStencilBuffer;
         }
 
+        /**
+         * @brief Resolves multisampling and writes result to Resolved color buffer.
+         */
+        void ResolveMultisampling() const;
+
     private:
         void UpdateBuffers();
     };
-
-} // Engine
+} // Rendering

@@ -7,7 +7,7 @@ namespace Engine
     RenderingManager* RenderingManager::Instance = nullptr;
 
     RenderingManager::RenderingManager(const glm::ivec2 Resolution) :
-        MultiSampledBuffer(Resolution), ResolvedBuffer(Resolution)
+        MultiSampledBuffer(Resolution)
     {
     }
 
@@ -24,7 +24,7 @@ namespace Engine
     {
         LightManager::GetInstance()->RenderShadowMaps(RenderData);
 
-        MultiSampledBuffer.Bind();
+        MultiSampledBuffer.BindMultiSampled();
 
         glDepthMask(GL_TRUE);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
@@ -63,8 +63,8 @@ namespace Engine
             glDisable(GL_BLEND);
         }
 
-        MultiSampledBuffer.ResolveMultisampling(ResolvedBuffer);
-        Bloom.Render(ResolvedBuffer.GetColorBuffer());
+        MultiSampledBuffer.ResolveMultisampling();
+        Bloom.Render(MultiSampledBuffer.GetResolvedColorBuffer());
     }
 
     void RenderingManager::RenderAllDirectionalShadowMap(const CameraRenderData& RenderData, unsigned int Target,

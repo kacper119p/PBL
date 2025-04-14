@@ -3,7 +3,6 @@
 #include <vector>
 #include "Engine/Components/Renderers/Renderer.h"
 #include "CameraRenderData.h"
-#include "Engine/Rendering/MultiSampledSceneFrameBuffer.h"
 #include "Engine/Rendering/SceneFrameBuffer.h"
 #include "Engine/Rendering/Postprocessing/BloomPostprocessingEffect.h"
 #include "Engine/UI/Ui.h"
@@ -21,8 +20,7 @@ namespace Engine
 
         static RenderingManager* Instance;
 
-        MultiSampledSceneFrameBuffer MultiSampledBuffer;
-        SceneFrameBuffer ResolvedBuffer;
+        SceneFrameBuffer MultiSampledBuffer;
 
         BloomPostprocessingEffect Bloom;
 
