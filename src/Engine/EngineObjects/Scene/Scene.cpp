@@ -38,7 +38,7 @@ namespace Engine
         if (Parent != nullptr)
         {
 #if DEBUG
-            CHECK_MESSAGE(Parent->GetScene() == this, "Parent doesn't belong to this scene.")
+            //CHECK_MESSAGE(Parent->GetScene() == this, "Parent doesn't belong to this scene.")
 #endif
             result->GetTransform()->SetParent(Parent->GetTransform());
         }

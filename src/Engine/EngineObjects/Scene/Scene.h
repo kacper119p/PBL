@@ -3,6 +3,7 @@
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include "Engine/Textures/Texture.h"
+#include <string>
 
 namespace Materials
 {
@@ -30,7 +31,7 @@ namespace Engine
         Entity* Root;
         Ui::Ui* Ui = nullptr;
         Texture Skybox;
-
+        std::string Path;
     public:
         /**
          * @brief Constructs a new scene.
@@ -119,7 +120,8 @@ namespace Engine
          * @param Value Serialized scene.
          */
         void Deserialize(const rapidjson::Value& Value);
-
+        std::string GetPath() const { return Path; }
+        void SetPath(const std::string& Path) { this->Path = Path; }
     private:
         static void SerializeEntity(const Entity* Entity, rapidjson::Value& Object,
                                     rapidjson::Document::AllocatorType& Allocator);

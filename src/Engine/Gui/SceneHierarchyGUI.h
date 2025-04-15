@@ -18,8 +18,11 @@ namespace Engine
             Root = root;
             SelectedEntity = root;
         }
-        void DrawHierarchy(Transform* entity);
-        void Draw();
+        void DrawHierarchy(Transform* entity, Scene* scene);
+        void Draw(Scene* scene);
         Transform* GetSelectedEntity() const { return SelectedEntity; }
+        void AddEntityToScene(Scene* scene, Entity* parent);
+        void AddModelToScene(Scene* scene, Entity* parent);
+        void AddAnimatedModelToScene(Scene* scene, Entity* parent);
     };
 } // namespace Engine

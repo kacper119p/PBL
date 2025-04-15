@@ -66,8 +66,8 @@ namespace Engine
 
         try
         {
-            SceneBuilding::SceneBuilder::Build(Scene);
-            EditorGUI.SetHierarchyRoot(Scene->GetRoot()->GetTransform());
+            SceneBuilding::SceneBuilder::Build(CurrentScene);
+            EditorGUI.SetHierarchyRoot(CurrentScene->GetRoot()->GetTransform());
         } catch (std::runtime_error& e)
         {
             spdlog::error(e.what());
@@ -296,7 +296,7 @@ namespace Engine
     {
         
         //LightsGui::Draw();
-        EditorGUI.Render(Frame);
+        EditorGUI.Render(Frame, CurrentScene);
 
     }
 
@@ -316,7 +316,7 @@ namespace Engine
 
     void Engine::FreeResources()
     {
-        delete Scene;
+        delete CurrentScene;
         TextureManager::DeleteAllTextures();
         Shaders::ShaderManager::FreeResources();
         Models::ModelManager::DeleteAllModels();

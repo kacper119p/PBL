@@ -38,7 +38,7 @@ namespace Engine
         bool CameraMoved = false;
         glm::vec2 LastMousePosition = glm::vec2(0, 0);
 
-        Scene* Scene;
+        Scene* CurrentScene;
         EditorGUI EditorGUI;
 
 
@@ -78,5 +78,8 @@ namespace Engine
         static void MouseButtonCallback(GLFWwindow* Window, int Button, int Action, int Mods);
 
         void InitEditorFramebuffer();
+
+    public:
+        Scene* GetCurrentScene() const { return CurrentScene; };
     };
 } // Engine

@@ -2,11 +2,18 @@
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "Utility/SystemUtilities.h"
+#include "Engine/Engine.h"
+#include "Engine/EngineObjects/Scene/SceneManager.h"
+#include "Scene/SceneBuilder.h"
+#include "Engine/EngineObjects/Entity.h"
+#include <filesystem>
+namespace fs = std::filesystem;
+
 void Engine::EditorGUI::Init() { }
 void Engine::EditorGUI::Render(uint64_t Frame, Scene* scene)
 { 
     SetupDockspace();
-    m_Hierarchy.Draw();
+    m_Hierarchy.Draw(scene);
     m_AssetsWindow.Draw();
     RenderInspector(Frame, scene);
     AudioManager::GetInstance().RenderGlobalVolumeImGui();
@@ -34,6 +41,45 @@ void Engine::EditorGUI::RenderInspector(uint64_t Frame, Scene* scene)
             scanned = true;
         }
         ImGui::Text("Current scene:");
+        if (scene->GetPath() == "")
+        {
+            scenePath = "None";
+        }
+        else
+        {
+            scenePath = scene->GetPath();
+        }
+        ImGui::Selectable(scenePath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
+        if (ImGui::IsItemClicked())
+            showScenePopup = true;
+
+        if (showScenePopup)
+        {
+            ImGui::OpenPopup("Scene Picker");
+            showScenePopup = false;
+        }
+
+        if (ImGui::BeginPopup("Scene Picker"))
+        {
+            for (const auto& path : availableScenes)
+            {
+                std::filesystem::path fsPath(path);
+                std::string displayName = fsPath.filename().string();
+
+                if (ImGui::Selectable(displayName.c_str()))
+                {
+                    LightManager::GetInstance()->ClearAllLights();
+                    SceneManager::LoadScene(path, scene);
+                    SetHierarchyRoot(scene->GetRoot()->GetTransform());
+                }
+
+                ImGui::SameLine();
+                ImGui::TextDisabled("(%s)", path.c_str());
+            }
+            ImGui::EndPopup();
+        }
+
+        ImGui::Separator();
 
         //for inspector
         const GLubyte* renderer = glGetString(GL_RENDERER);
@@ -55,12 +101,30 @@ void Engine::EditorGUI::RenderInspector(uint64_t Frame, Scene* scene)
 
     ImGui::End();
 }
-void Engine::EditorGUI::DrawSelectedEntitysComponents() 
-{ 
+void Engine::EditorGUI::DrawSelectedEntitysComponents()
+{
     ImGui::Begin("Components");
-    m_Hierarchy.GetSelectedEntity()->GetOwner()->DrawImGui();
+
+    auto selectedEntity = m_Hierarchy.GetSelectedEntity();
+    if (selectedEntity)
+    {
+        auto owner = selectedEntity->GetOwner();
+        std::string currentName = owner->GetName();
+        char buffer[256];
+        memset(buffer, 0, sizeof(buffer));
+        strncpy(buffer, currentName.c_str(), sizeof(buffer) - 1);
+
+        if (ImGui::InputText("Name", buffer, sizeof(buffer)))
+        {
+            owner->SetName(std::string(buffer));
+        }
+
+        owner->DrawImGui();
+    }
+
     ImGui::End();
 }
+
 void Engine::EditorGUI::SetupDockspace()
 {
     ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_PassthruCentralNode;
