@@ -3,6 +3,7 @@
 #include "SceneHierarchyGUI.h"
 #include "SceneViewGUI.h"
 #include "AssetsWindowGUI.h"
+#include "Topbar.h"
 #include "Audio/AudioManager.h"
 
 namespace Engine {
@@ -33,6 +34,7 @@ namespace Engine {
         SceneViewGUI m_Scene;
         AudioManager* m_AudioManager;
         AssetsWindow m_AssetsWindow;
+        TopBar m_TopBar;
 
     };
 

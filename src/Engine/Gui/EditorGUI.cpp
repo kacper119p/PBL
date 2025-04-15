@@ -18,6 +18,7 @@ void Engine::EditorGUI::Render(uint64_t Frame, Scene* scene)
     RenderInspector(Frame, scene);
     AudioManager::GetInstance().RenderGlobalVolumeImGui();
     DrawSelectedEntitysComponents();
+    m_TopBar.Draw();
     
 }
 void Engine::EditorGUI::RenderInspector(uint64_t Frame, Scene* scene)
