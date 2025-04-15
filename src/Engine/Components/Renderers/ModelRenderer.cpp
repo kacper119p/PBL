@@ -11,51 +11,63 @@ namespace Engine
 {
     void ModelRenderer::RenderDepth(const CameraRenderData& RenderData)
     {
-        Material->UseDepthPass();
+        if (Material!=nullptr)
+        {
+            Material->UseDepthPass();
 
-        SetupMatrices(RenderData, Material->GetDepthPass());
-        Draw();
+            SetupMatrices(RenderData, Material->GetDepthPass());
+            Draw();
+        }
     }
 
     void ModelRenderer::Render(const CameraRenderData& RenderData)
     {
-        Material->Use();
+        if (Material != nullptr)
+        {
+            Material->Use();
 
-        LightManager::GetInstance()->SetupLightsForRendering(Material->GetMainPass());
+            LightManager::GetInstance()->SetupLightsForRendering(Material->GetMainPass());
 
-        SetupMatrices(RenderData, Material->GetMainPass());
-        Draw();
+            SetupMatrices(RenderData, Material->GetMainPass());
+            Draw();
+        }
     }
 
     void ModelRenderer::RenderDirectionalShadows(const CameraRenderData& RenderData)
     {
-        Material->UseDirectionalShadows();
+        if (Material!=nullptr)
+        {
+            Material->UseDirectionalShadows();
 
-        SetupMatrices(RenderData, Material->GetDirectionalShadowPass());
-        Draw();
+            SetupMatrices(RenderData, Material->GetDirectionalShadowPass());
+            Draw();
+        }
     }
 
     void
     ModelRenderer::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                           const glm::mat4* const SpaceTransformMatrices)
     {
-        Material->UsePointSpotShadows();
+        if (Material != nullptr)
+        {
+            Material->UsePointSpotShadows();
 
 
-        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[0]", SpaceTransformMatrices[0]);
-        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[1]", SpaceTransformMatrices[1]);
-        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[2]", SpaceTransformMatrices[2]);
-        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[3]", SpaceTransformMatrices[3]);
-        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[4]", SpaceTransformMatrices[4]);
-        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[5]", SpaceTransformMatrices[5]);
+            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[0]", SpaceTransformMatrices[0]);
+            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[1]", SpaceTransformMatrices[1]);
+            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[2]", SpaceTransformMatrices[2]);
+            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[3]", SpaceTransformMatrices[3]);
+            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[4]", SpaceTransformMatrices[4]);
+            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[5]", SpaceTransformMatrices[5]);
 
-        Material->GetPointSpotShadowPass().SetUniform("LightPosition", LightPosition);
-        Material->GetPointSpotShadowPass().SetUniform("Range", LightRange);
+            Material->GetPointSpotShadowPass().SetUniform("LightPosition", LightPosition);
+            Material->GetPointSpotShadowPass().SetUniform("Range", LightRange);
 
-        Material->GetPointSpotShadowPass().SetUniform("ObjectToWorldMatrix",
-                                                      GetOwner()->GetTransform()->GetLocalToWorldMatrix());
+            Material->GetPointSpotShadowPass().SetUniform("ObjectToWorldMatrix",
+                                                          GetOwner()->GetTransform()->GetLocalToWorldMatrix());
 
-        Draw();
+            Draw();
+        }
     }
 
     void ModelRenderer::SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const
@@ -69,9 +81,12 @@ namespace Engine
 
     void ModelRenderer::Draw() const
     {
-        for (int i = 0; i < Model->GetMeshCount(); ++i)
+        if (Model != nullptr)
         {
-            Model->GetMesh(i)->Draw();
+            for (int i = 0; i < Model->GetMeshCount(); ++i)
+            {
+                Model->GetMesh(i)->Draw();
+            }
         }
     }
 

@@ -6,6 +6,12 @@
 #include "Engine/EngineObjects/Scene/SceneManager.h"
 #include "Scene/SceneBuilder.h"
 #include "Engine/EngineObjects/Entity.h"
+#include "Engine/Components/Updateable.h"
+#include "Engine/Components/Renderers/ParticleEmitter.h"
+#include "Engine/Components/Renderers/ModelRenderer.h"
+#include "Engine/Components/Audio/AudioSource.h"
+#include "Engine/Components/Game/Rotator.h"
+#include "Engine/Components/Game/ShipRoller.h"
 #include <filesystem>
 namespace fs = std::filesystem;
 
@@ -104,6 +110,17 @@ void Engine::EditorGUI::RenderInspector(uint64_t Frame, Scene* scene)
 }
 void Engine::EditorGUI::DrawSelectedEntitysComponents()
 {
+    static std::vector<std::string> availableComponents = { 
+                                                           "Particle emmiter",
+                                                           "Model renderer",
+                                                           "Spot light",
+                                                           "Point light",
+                                                           "Directional light",
+                                                           "Rotator",
+                                                           "Ship roller",
+                                                           "Audio source"};
+    static int selectedComponent = -1;
+
     ImGui::Begin("Components");
 
     auto selectedEntity = m_Hierarchy.GetSelectedEntity();
@@ -123,6 +140,56 @@ void Engine::EditorGUI::DrawSelectedEntitysComponents()
         owner->DrawImGui();
     }
 
+    ImGui::Separator();
+    ImGui::Text("Add New Component");
+    if (ImGui::BeginCombo("##component_combo", selectedComponent >= 0 ? availableComponents[selectedComponent].c_str()
+                                                                      : "Select component..."))
+    {
+        for (int i = 0; i < availableComponents.size(); ++i)
+        {
+            bool isSelected = (selectedComponent == i);
+            if (ImGui::Selectable(availableComponents[i].c_str(), isSelected))
+                selectedComponent = i;
+
+            if (isSelected)
+                ImGui::SetItemDefaultFocus();
+        }
+        ImGui::EndCombo();
+    }
+    if (ImGui::Button("Add Component") && selectedComponent >= 0)
+    {
+        switch (selectedComponent)
+        {
+            case 0:
+                selectedEntity->GetOwner()->AddComponent<ParticleEmitter>();
+                break;
+            case 1:
+                selectedEntity->GetOwner()->AddComponent<ModelRenderer>();
+                break;
+            case 2:
+                selectedEntity->GetOwner()->AddComponent<SpotLight>();
+                break;
+            case 3:
+                selectedEntity->GetOwner()->AddComponent<PointLight>();
+                break;
+            case 4:
+                selectedEntity->GetOwner()->AddComponent<DirectionalLight>();
+                break;
+            case 5:
+                selectedEntity->GetOwner()->AddComponent<Rotator>();
+                break;
+            case 6:
+                selectedEntity->GetOwner()->AddComponent<ShipRoller>();
+                break;
+            case 7:
+                selectedEntity->GetOwner()->AddComponent<AudioSource>();
+                break;
+            default:
+                break;
+        }
+
+        selectedComponent = -1; // Reset selection
+    }
     ImGui::End();
 }
 
