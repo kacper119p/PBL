@@ -1,5 +1,6 @@
 #include "Collider.h"
 #include "SpatialPartitioning.h"
+
 namespace Engine
 {
     Collider::Collider() : isTrigger(false), transform(nullptr) {
@@ -10,6 +11,26 @@ namespace Engine
         : isTrigger(isTrigger), transform(transform), spatial(spatialParam) {
         this->colliderVisitor = ConcreteColliderVisitor(spatialParam, this);
     }
+
+     rapidjson::Value Collider::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+    {
+
+        return rapidjson::Value(rapidjson::kObjectType);
+    }
+
+    void Collider::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
+    {
+        
+    }
+
+    void Collider::DeserializeReferencesPass(const rapidjson::Value& Object,
+                                             Serialization::ReferenceTable& ReferenceMap){}
+
+    std::string Collider::GetType() const
+    {
+        return "Collider";
+    }
+
 
     void Collider::SetTrigger(bool isTrigger) { this->isTrigger = isTrigger; }
 
@@ -42,6 +63,16 @@ namespace Engine
 
     void Collider::Update() {  
        colliderVisitor.ManageCollisions();  
+    }
+
+     void Collider::Start()
+    {
+        // TODO: implementation
+    }
+
+    void Collider::OnDestroy()
+    {
+        // TODO: implementation
     }
 
 } // namespace Engine

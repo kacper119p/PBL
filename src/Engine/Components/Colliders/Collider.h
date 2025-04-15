@@ -21,7 +21,7 @@ namespace Engine
     /*
      * @brief Base class for all colliders. Subtypes: boxCollider, sphereCollider, capsuleCollider, meshCollider.
      */
-    class Collider : public Component
+    class Collider : public Component, public Serialization::SerializedObject
     {
     private:
         bool isTrigger;
@@ -42,8 +42,17 @@ namespace Engine
         Collider(Transform* transform, bool isTrigger = false, SpatialPartitioning* spatial = nullptr);
         virtual ~Collider() = default;
 
+        rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const override;
+        void DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap) override;
+        void DeserializeReferencesPass(const rapidjson::Value& Object,
+                                       Serialization::ReferenceTable& ReferenceMap) override;
+        [[nodiscard]] std::string GetType() const override;
+
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
         //virtual bool CheckCollision(const Collider& other) = 0;
+
+        void Start() override;
+        void OnDestroy() override;
 
         void SetTrigger(bool isTrigger);
         bool IsTrigger() const;

@@ -22,15 +22,19 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
-
-
-
-
 namespace Engine
 {
-        bool ConcreteColliderVisitor::CheckBoxBoxCollision(const BoxCollider& box1, const BoxCollider& box2)
+
+    ConcreteColliderVisitor::ConcreteColliderVisitor() :
+        currentCollider(nullptr), collisionDetected(false), spatialPartitioning(nullptr)
+    {
+    }
+
+    ConcreteColliderVisitor::ConcreteColliderVisitor(SpatialPartitioning* partitioning, Collider* collider) :
+        currentCollider(collider), collisionDetected(false), spatialPartitioning(partitioning)
+    {
+    }
+    bool ConcreteColliderVisitor::CheckBoxBoxCollision(const BoxCollider& box1, const BoxCollider& box2)
         {
             const glm::mat4& transform1 = box1.GetTransform()->GetLocalToWorldMatrix();
             const glm::mat4& transform2 = box2.GetTransform()->GetLocalToWorldMatrix();
@@ -45,7 +49,7 @@ namespace Engine
                      box1Max.z < box2Min.z || box1Min.z > box2Max.z);
         }
 
-        bool ConcreteColliderVisitor::CheckBoxSphereCollision(const BoxCollider& box, const SphereCollider& sphere)
+    bool ConcreteColliderVisitor::CheckBoxSphereCollision(const BoxCollider& box, const SphereCollider& sphere)
         {
             const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
             const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
@@ -82,7 +86,7 @@ namespace Engine
             return distanceSquared <= (sphere.GetRadius() * sphere.GetRadius());
         }
 
-        bool ConcreteColliderVisitor::CheckBoxCapsuleCollision(const BoxCollider& box, const CapsuleCollider& capsule)
+    bool ConcreteColliderVisitor::CheckBoxCapsuleCollision(const BoxCollider& box, const CapsuleCollider& capsule)
         {
             const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
             const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
@@ -116,7 +120,7 @@ namespace Engine
             return distanceSquared <= (capsuleRadius * capsuleRadius);
         }
 
-        bool ConcreteColliderVisitor::CheckBoxMeshCollision(const BoxCollider& box, const MeshCollider& mesh)
+    bool ConcreteColliderVisitor::CheckBoxMeshCollision(const BoxCollider& box, const MeshCollider& mesh)
         {
             const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
             const glm::mat4& meshTransform = mesh.GetTransform()->GetLocalToWorldMatrix();
@@ -152,7 +156,7 @@ namespace Engine
             return false; // Brak kolizji
         }
 
-        bool ConcreteColliderVisitor::CheckSphereSphereCollision(const SphereCollider& sphere1,
+    bool ConcreteColliderVisitor::CheckSphereSphereCollision(const SphereCollider& sphere1,
                                                                  const SphereCollider& sphere2)
         {
             float distance =
@@ -160,7 +164,7 @@ namespace Engine
             return distance <= (sphere1.GetRadius() + sphere2.GetRadius());
         }
 
-        bool ConcreteColliderVisitor::CheckSphereMeshCollision(const SphereCollider& sphere, const MeshCollider& mesh)
+    bool ConcreteColliderVisitor::CheckSphereMeshCollision(const SphereCollider& sphere, const MeshCollider& mesh)
         {
             const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
             const glm::mat4& meshTransform = mesh.GetTransform()->GetLocalToWorldMatrix();
@@ -198,7 +202,7 @@ namespace Engine
             return false; // Brak kolizji
         }
 
-        bool ConcreteColliderVisitor::CheckCapsuleSphereCollision(const CapsuleCollider& capsule,
+    bool ConcreteColliderVisitor::CheckCapsuleSphereCollision(const CapsuleCollider& capsule,
                                                                   const SphereCollider& sphere)
         {
             const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
@@ -225,7 +229,7 @@ namespace Engine
             return distanceSquared <= (combinedRadius * combinedRadius);
         }
 
-        bool ConcreteColliderVisitor::CheckCapsuleCapsuleCollision(const CapsuleCollider& capsule1,
+    bool ConcreteColliderVisitor::CheckCapsuleCapsuleCollision(const CapsuleCollider& capsule1,
                                                                    const CapsuleCollider& capsule2)
         {
             const glm::mat4& transform1 = capsule1.GetTransform()->GetLocalToWorldMatrix();
@@ -277,7 +281,7 @@ namespace Engine
             return distanceSquared <= (combinedRadius * combinedRadius);
         }
 
-        bool ConcreteColliderVisitor::CheckCapsuleMeshCollision(const CapsuleCollider& capsule,
+    bool ConcreteColliderVisitor::CheckCapsuleMeshCollision(const CapsuleCollider& capsule,
                                                                 const MeshCollider& mesh)
         {
             const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
@@ -311,7 +315,7 @@ namespace Engine
             return false; // Brak kolizji
         }
 
-        bool ConcreteColliderVisitor::CheckMeshMeshCollision(const MeshCollider& mesh1, const MeshCollider& mesh2)
+    bool ConcreteColliderVisitor::CheckMeshMeshCollision(const MeshCollider& mesh1, const MeshCollider& mesh2)
         {
             const glm::mat4& transform1 = mesh1.GetTransform()->GetLocalToWorldMatrix();
             const glm::mat4& transform2 = mesh2.GetTransform()->GetLocalToWorldMatrix();
@@ -355,15 +359,158 @@ namespace Engine
             return false; // Brak kolizji
         }
 
-        ConcreteColliderVisitor::ConcreteColliderVisitor() :
-            currentCollider(nullptr), collisionDetected(false), spatialPartitioning(nullptr){}
+    glm::vec3 ConcreteColliderVisitor::GetSeparationBoxBox(const BoxCollider& box1, const BoxCollider& box2)
+    {
+        const glm::mat4& transform1 = box1.GetTransform()->GetLocalToWorldMatrix();
+        const glm::mat4& transform2 = box2.GetTransform()->GetLocalToWorldMatrix();
 
-        ConcreteColliderVisitor::ConcreteColliderVisitor(SpatialPartitioning* partitioning, Collider* collider) :
-            currentCollider(collider), collisionDetected(false), spatialPartitioning(partitioning)
+        glm::vec3 box1Min = transform1 * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+        glm::vec3 box1Max = transform1 * glm::vec4(box1.GetWidth(), box1.GetHeight(), box1.GetDepth(), 1.0f);
+
+        glm::vec3 box2Min = transform2 * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+        glm::vec3 box2Max = transform2 * glm::vec4(box2.GetWidth(), box2.GetHeight(), box2.GetDepth(), 1.0f);
+
+        glm::vec3 overlapMin = glm::max(box1Min, box2Min);
+        glm::vec3 overlapMax = glm::min(box1Max, box2Max);
+
+        if (overlapMin.x > overlapMax.x || overlapMin.y > overlapMax.y || overlapMin.z > overlapMax.z)
         {
+            return glm::vec3(0.0f);
         }
-        
-        void ConcreteColliderVisitor::ResolveCollisionBox(BoxCollider& box)
+
+        glm::vec3 overlap = overlapMax - overlapMin;
+
+        if (overlap.x < overlap.y && overlap.x < overlap.z)
+        {
+            return glm::vec3(overlap.x * (box1Min.x < box2Min.x ? -1.0f : 1.0f), 0.0f, 0.0f);
+        }
+        else if (overlap.y < overlap.z)
+        {
+            return glm::vec3(0.0f, overlap.y * (box1Min.y < box2Min.y ? -1.0f : 1.0f), 0.0f);
+        }
+        else
+        {
+            return glm::vec3(0.0f, 0.0f, overlap.z * (box1Min.z < box2Min.z ? -1.0f : 1.0f));
+        }
+
+        return glm::vec3(0.0f);
+    }
+
+    glm::vec3 ConcreteColliderVisitor::GetSeparationBoxSphere(const BoxCollider& box, const SphereCollider& sphere)
+    {
+        const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
+        const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
+
+        glm::vec3 sphereCenter = sphereTransform * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+
+        glm::vec3 boxCenter =
+                boxTransform * glm::vec4(box.GetWidth() / 2.0f, box.GetHeight() / 2.0f, box.GetDepth() / 2.0f, 1.0f);
+        glm::vec3 boxHalfExtents = glm::vec3(box.GetWidth() / 2.0f, box.GetHeight() / 2.0f, box.GetDepth() / 2.0f);
+
+        glm::vec3 delta = sphereCenter - boxCenter;
+
+        glm::vec3 closestPoint = glm::clamp(delta, -boxHalfExtents, boxHalfExtents) + boxCenter;
+
+        glm::vec3 separation = sphereCenter - closestPoint;
+        float distance = glm::length(separation);
+
+        if (distance < sphere.GetRadius())
+        {
+            return glm::normalize(separation) * (sphere.GetRadius() - distance);
+        }
+
+        return glm::vec3(0.0f); // Brak kolizji
+    }
+
+    glm::vec3 ConcreteColliderVisitor::GetSeparationSphereSphere(const SphereCollider& sphere1,
+                                                                 const SphereCollider& sphere2)
+    {
+        glm::vec3 center1 = sphere1.GetTransform()->GetPosition();
+        glm::vec3 center2 = sphere2.GetTransform()->GetPosition();
+
+        glm::vec3 delta = center2 - center1;
+        float distance = glm::length(delta);
+        float radiusSum = sphere1.GetRadius() + sphere2.GetRadius();
+
+        if (distance < radiusSum)
+        {
+            return glm::normalize(delta) * (radiusSum - distance);
+        }
+
+        return glm::vec3(0.0f); // Brak kolizji
+    }
+
+    glm::vec3 ConcreteColliderVisitor::GetSeparationBoxCapsule(const BoxCollider& box, const CapsuleCollider& capsule)
+    {
+        glm::vec3 boxCenter = box.GetTransform()->GetPositionWorldSpace();
+        glm::vec3 capsuleCenter = capsule.GetTransform()->GetPositionWorldSpace();
+
+        glm::vec3 separation = capsuleCenter - boxCenter;
+
+        // Uwzględnij rozmiary pudełka i kapsuły
+        float boxHalfWidth = box.GetWidth() / 2.0f;
+        float boxHalfHeight = box.GetHeight() / 2.0f;
+        float boxHalfDepth = box.GetDepth() / 2.0f;
+
+        float capsuleRadius = capsule.GetRadius();
+        float capsuleHeight = capsule.GetHeight();
+
+        // Korekta separacji, jeśli obiekty się nakładają
+        separation.x = glm::max(separation.x - (boxHalfWidth + capsuleRadius), 0.0f);
+        separation.y = glm::max(separation.y - (boxHalfHeight + capsuleHeight / 2.0f), 0.0f);
+        separation.z = glm::max(separation.z - (boxHalfDepth + capsuleRadius), 0.0f);
+
+        return separation;
+    }
+
+    glm::vec3 ConcreteColliderVisitor::GetSeparationSphereCapsule(const SphereCollider& sphere,
+                                                                  const MeshCollider& mesh)
+    {
+        glm::vec3 sphereCenter = sphere.GetTransform()->GetPositionWorldSpace();
+        glm::vec3 meshCenter = mesh.GetTransform()->GetPositionWorldSpace();
+
+        glm::vec3 separation = meshCenter - sphereCenter;
+
+        // Uwzględnij promień sfery i skalę siatki
+        float sphereRadius = sphere.GetRadius();
+        float meshScale = mesh.GetScale();
+
+        // Korekta separacji, jeśli obiekty się nakładają
+        separation = glm::normalize(separation) * glm::max(glm::length(separation) - (sphereRadius + meshScale), 0.0f);
+
+        return separation;
+    }
+
+    glm::vec3 ConcreteColliderVisitor::GetSeparationCapsuleBox(const CapsuleCollider& capsule, const BoxCollider& box)
+    {
+        // Odwróć kolejność i użyj istniejącej metody
+        return -GetSeparationBoxCapsule(box, capsule);
+    }
+
+    glm::vec3 ConcreteColliderVisitor::GetSeparationCapsuleCapsule(const CapsuleCollider& capsule1,
+                                                                   const CapsuleCollider& capsule2)
+    {
+        glm::vec3 capsule1Center = capsule1.GetTransform()->GetPositionWorldSpace();
+        glm::vec3 capsule2Center = capsule2.GetTransform()->GetPositionWorldSpace();
+
+        glm::vec3 separation = capsule2Center - capsule1Center;
+
+        // Uwzględnij promienie i wysokości kapsuł
+        float capsule1Radius = capsule1.GetRadius();
+        float capsule1Height = capsule1.GetHeight();
+        float capsule2Radius = capsule2.GetRadius();
+        float capsule2Height = capsule2.GetHeight();
+
+        // Korekta separacji, jeśli obiekty się nakładają
+        separation = glm::normalize(separation) *
+                     glm::max(glm::length(separation) -
+                                      (capsule1Radius + capsule2Radius + (capsule1Height + capsule2Height) / 2.0f),
+                              0.0f);
+
+        return separation;
+    }
+
+    void ConcreteColliderVisitor::ResolveCollisionBox(BoxCollider& box)
         {
             if (this->currentCollider == nullptr || this->currentCollider->IsStatic())
                 return;
@@ -404,7 +551,7 @@ namespace Engine
             }
         }
 
-        void ConcreteColliderVisitor::ResolveCollisionSphere(SphereCollider& sphere)
+    void ConcreteColliderVisitor::ResolveCollisionSphere(SphereCollider& sphere)
         {
             if (this->currentCollider == nullptr || this->currentCollider->IsStatic())
                 return;
@@ -447,7 +594,7 @@ namespace Engine
             }
         }
 
-        void ConcreteColliderVisitor::ResolveCollisionCapsule(CapsuleCollider& capsule)
+    void ConcreteColliderVisitor::ResolveCollisionCapsule(CapsuleCollider& capsule)
         {
             if (this->currentCollider == nullptr || this->currentCollider->IsStatic())
                 return;
@@ -491,7 +638,7 @@ namespace Engine
             }
         }
 
-        void ConcreteColliderVisitor::ResolveCollisionMesh(MeshCollider& mesh)
+    void ConcreteColliderVisitor::ResolveCollisionMesh(MeshCollider& mesh)
         {
             if (!currentCollider)
                 return;
@@ -529,7 +676,7 @@ namespace Engine
             }
         }
 
-        void ConcreteColliderVisitor::ManageCollisions() 
+    void ConcreteColliderVisitor::ManageCollisions() 
         { 
             if (currentCollider == nullptr || currentCollider->IsStatic())
                 return;

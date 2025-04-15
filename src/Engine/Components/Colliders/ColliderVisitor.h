@@ -1,4 +1,5 @@
 #pragma once
+#include <glm/vec3.hpp>
 
 namespace Engine
 {
@@ -37,6 +38,20 @@ namespace Engine
         bool CheckCapsuleCapsuleCollision(const CapsuleCollider& capsule1, const CapsuleCollider& capsule2);
         bool CheckCapsuleMeshCollision(const CapsuleCollider& capsule, const MeshCollider& mesh);
         bool CheckMeshMeshCollision(const MeshCollider& mesh1, const MeshCollider& mesh2);
+
+        glm::vec3 GetSeparationBoxBox(const BoxCollider& box1, const BoxCollider& box2);
+
+        glm::vec3 GetSeparationBoxSphere(const BoxCollider& box, const SphereCollider& sphere);
+
+        glm::vec3 GetSeparationBoxCapsule(const BoxCollider& box, const CapsuleCollider& capsule);
+
+        glm::vec3 GetSeparationSphereSphere(const SphereCollider& sphere1, const SphereCollider& sphere2);
+
+        glm::vec3 GetSeparationSphereCapsule(const SphereCollider& sphere, const MeshCollider& mesh);
+
+        glm::vec3 GetSeparationCapsuleBox(const CapsuleCollider& capsule, const BoxCollider& box);
+
+        glm::vec3 GetSeparationCapsuleCapsule(const CapsuleCollider& capsule1, const CapsuleCollider& capsule2);
 
     protected:
         Collider* currentCollider;
