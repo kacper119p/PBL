@@ -9,27 +9,30 @@ void Engine::EditorGUI::Render(uint64_t Frame)
     m_Hierarchy.Draw();
     m_AssetsWindow.Draw();
     RenderInspector(Frame);
-    DrawSelectedEntitysComponents();
     AudioManager::GetInstance().RenderGlobalVolumeImGui();
+    DrawSelectedEntitysComponents();
+    
 }
 void Engine::EditorGUI::RenderInspector(uint64_t Frame)
 {
     ImGui::Begin("Engine Properties");
+    if (ImGui::CollapsingHeader("Inspector", ImGuiTreeNodeFlags_DefaultOpen))
+    {
+        const GLubyte* renderer = glGetString(GL_RENDERER);
+        std::string cpuInfo = Utility::GetCpuInfo();
+        int ram = Utility::GetTotalRamGB();
+        const GLubyte* version = glGetString(GL_VERSION);
+        const GLubyte* shadingLanguageVersion = glGetString(GL_SHADING_LANGUAGE_VERSION);
 
-    const GLubyte* renderer = glGetString(GL_RENDERER);
-    std::string cpuInfo = Utility::GetCpuInfo();
-    int ram = Utility::GetTotalRamGB();
-    const GLubyte* version = glGetString(GL_VERSION);
-    const GLubyte* shadingLanguageVersion = glGetString(GL_SHADING_LANGUAGE_VERSION);
+        ImGui::Text("GPU: %s", (char*) renderer);
+        ImGui::Text("CPU: %s", cpuInfo.c_str());
+        ImGui::Text("RAM: %dGB", ram);
+        ImGui::Text("OpenGL version: %s", (char*) version);
+        ImGui::Text("Shading Language version: %s", (char*) shadingLanguageVersion);
 
-    ImGui::Text("GPU: %s", (char*) renderer);
-    ImGui::Text("CPU: %s", cpuInfo.c_str());
-    ImGui::Text("RAM: %dGB", ram);
-    ImGui::Text("OpenGL version: %s", (char*) version);
-    ImGui::Text("Shading Language version: %s", (char*) shadingLanguageVersion);
-
-    ImGui::Text("Frame: %llu\nApplication average %.3f ms/frame\n(%.1f FPS)", Frame, 1000.0f / ImGui::GetIO().Framerate,
-                ImGui::GetIO().Framerate);
+        ImGui::Text("Frame: %llu\nApplication average %.3f ms/frame\n(%.1f FPS)", Frame,
+                    1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+    }
 
 
     ImGui::End();
@@ -82,7 +85,6 @@ void Engine::EditorGUI::SetupDockspace()
         // Dock the windows into the same dock
         ImGui::DockBuilderDockWindow("Hierarchy", dock_left);
         ImGui::DockBuilderDockWindow("Engine Properties", dock_right_top);
-        ImGui::DockBuilderDockWindow("Audio Manager", dock_right_top);
         ImGui::DockBuilderDockWindow("Components", dock_right_top);
         ImGui::DockBuilderDockWindow("Assets", dock_bottom);
 
