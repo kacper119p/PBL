@@ -4,14 +4,14 @@
 #include "imgui.h"
 
 Engine::AudioSource::AudioSource() :
-    AudioManager(AudioManager::GetInstance()), SelectedSound(nullptr), IsEntitySelected(false)
+    AudioManager(AudioManager::GetInstance()), SelectedSound(nullptr), SelectedEntity(nullptr)
 {
 }
 
 #if EDITOR
 void Engine::AudioSource::RenderAudioSourceImGui()
 {
-    if (!IsEntitySelected)
+    if (!SelectedEntity)
     {
         ImGui::Text("Please select an entity to configure audio.");
         return;
@@ -50,7 +50,7 @@ void Engine::AudioSource::RenderAudioSourceImGui()
 
                 ResetAudioSettings();
 
-                AudioManager.SetSoundPosition(*SelectedSound, this->GetOwner()->GetTransform()->GetPosition());
+                AudioManager.SetSoundPosition(*SelectedSound, SelectedEntity->GetTransform()->GetPosition());
             }
         }
 
@@ -112,13 +112,9 @@ void Engine::AudioSource::RenderAudioSourceImGui()
 
 void Engine::AudioSource::SelectEntityForAudioControl(Entity* Entity)
 {
-    if (Entity != nullptr)
+    if (Entity)
     {
-        IsEntitySelected = true;
-    }
-    else
-    {
-        IsEntitySelected = false;
+        SelectedEntity = Entity;
     }
 }
 
