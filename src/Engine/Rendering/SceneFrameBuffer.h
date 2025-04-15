@@ -12,7 +12,7 @@ namespace Engine
     class SceneFrameBuffer final
     {
     private:
-        static constexpr uint8_t Samples = 32;
+        static constexpr uint8_t Samples = 16;
 
         uint32_t MultiSampledId = 0;
         glm::ivec2 Resolution;
@@ -93,6 +93,18 @@ namespace Engine
          * @brief Resolves multisampling and writes result to Resolved color buffer.
          */
         void ResolveMultisampling() const;
+
+        void EnableNormalWrite() const
+        {
+            constexpr GLenum drawBuffers[2] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
+            glDrawBuffers(2, drawBuffers);
+        }
+
+        void DisableNormalWrite() const
+        {
+            constexpr GLenum drawBuffers[1] = {GL_COLOR_ATTACHMENT0};
+            glDrawBuffers(1, drawBuffers);
+        }
 
     private:
         void UpdateBuffers();

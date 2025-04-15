@@ -25,6 +25,7 @@ namespace Engine
         LightManager::GetInstance()->RenderShadowMaps(RenderData);
 
         MultiSampledBuffer.BindMultiSampled();
+        MultiSampledBuffer.EnableNormalWrite();
 
         glDepthMask(GL_TRUE);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
@@ -32,7 +33,6 @@ namespace Engine
         glClear(GL_DEPTH_BUFFER_BIT);
 
         glViewport(0, 0, ScreenWidth, ScreenHeight);
-        //glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
         glEnable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);
@@ -43,6 +43,7 @@ namespace Engine
             renderer->RenderDepth(RenderData);
         }
 
+        MultiSampledBuffer.DisableNormalWrite();
         glViewport(0, 0, ScreenWidth, ScreenHeight);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
         glDepthMask(GL_FALSE);

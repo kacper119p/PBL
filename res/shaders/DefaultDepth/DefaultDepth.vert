@@ -9,10 +9,11 @@ uniform mat4 ObjectToWorldMatrix;
 uniform mat4 ViewMatrix;
 uniform mat4 ProjectionMatrix;
 
-out vec3 Normal;
+out vec4 NormalDepth;
 
 void main()
 {
     gl_Position = ProjectionMatrix * ViewMatrix * ObjectToWorldMatrix * vec4(inputPosition, 1.0);
-    Normal = (ProjectionMatrix * ViewMatrix * ObjectToWorldMatrix * vec4(inputNormal, 0.0)).xyz;
+    NormalDepth.xyz = (ObjectToWorldMatrix * vec4(inputNormal, 0.0)).xyz;
+    NormalDepth.w = -(ViewMatrix * ObjectToWorldMatrix * vec4(inputPosition, 1.0)).z;
 }
