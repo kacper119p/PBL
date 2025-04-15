@@ -3,21 +3,39 @@
 #include "imgui_internal.h"
 #include "Utility/SystemUtilities.h"
 void Engine::EditorGUI::Init() { }
-void Engine::EditorGUI::Render(uint64_t Frame)
+void Engine::EditorGUI::Render(uint64_t Frame, Scene* scene)
 { 
     SetupDockspace();
     m_Hierarchy.Draw();
     m_AssetsWindow.Draw();
-    RenderInspector(Frame);
+    RenderInspector(Frame, scene);
     AudioManager::GetInstance().RenderGlobalVolumeImGui();
     DrawSelectedEntitysComponents();
     
 }
-void Engine::EditorGUI::RenderInspector(uint64_t Frame)
+void Engine::EditorGUI::RenderInspector(uint64_t Frame, Scene* scene)
 {
     ImGui::Begin("Engine Properties");
     if (ImGui::CollapsingHeader("Inspector", ImGuiTreeNodeFlags_DefaultOpen))
     {
+        //for scene selection
+        static bool showScenePopup = false;
+        static std::vector<std::string> availableScenes;
+        static bool scanned = false;
+        std::string scenePath = fs::absolute("./res/scenes").string();
+
+        if (!scanned)
+        {
+            for (const auto& entry : fs::directory_iterator(scenePath))
+            {
+                if (entry.is_regular_file() && entry.path().extension() == ".lvl")
+                    availableScenes.emplace_back(entry.path().string());
+            }
+            scanned = true;
+        }
+        ImGui::Text("Current scene:");
+
+        //for inspector
         const GLubyte* renderer = glGetString(GL_RENDERER);
         std::string cpuInfo = Utility::GetCpuInfo();
         int ram = Utility::GetTotalRamGB();

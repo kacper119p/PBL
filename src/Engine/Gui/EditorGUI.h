@@ -13,13 +13,13 @@ namespace Engine {
         ~EditorGUI()=default;
 
         void Init(); // Call once on startup
-        void Render(uint64_t Frame); // Call every frame
+        void Render(uint64_t Frame, Scene* scene); // Call every frame
         void SetHierarchyRoot(Transform* root) { m_Hierarchy.SetRoot(root); }
         void SetSceneViewFramebuffer(GLuint Texture)
         {
             m_Scene.SetFramebufferTexture(Texture);
         }
-        void RenderInspector(uint64_t Frame);
+        void RenderInspector(uint64_t Frame, Scene* scene);
         void DrawSelectedEntitysComponents();
 
     private:
