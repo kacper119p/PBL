@@ -7,6 +7,7 @@
 #include "Engine/Rendering/Ssao.h"
 #include "Engine/Rendering/Postprocessing/BloomPostprocessingEffect.h"
 #include "Engine/UI/Ui.h"
+#include "Engine/Rendering/Frustum.h"
 
 namespace Engine
 {
@@ -25,6 +26,8 @@ namespace Engine
 
         Ssao Ssao;
         BloomPostprocessingEffect Bloom;
+
+        Frustum CurrentFrustum;
 
     private:
         explicit RenderingManager(glm::ivec2 Resolution);
@@ -82,6 +85,16 @@ namespace Engine
         void RenderAllPointSpotShadowMap(const glm::vec3& LightPosition, float LightRange,
                                          glm::mat4* SpaceTransformMatrices, unsigned int Target, unsigned int Width,
                                          unsigned int Height);
+
+        void SetFrustum(const Frustum& Frustum)
+        {
+            CurrentFrustum = Frustum;
+        }
+
+        [[nodiscard]] const Frustum& GetFrustum() const
+        {
+            return CurrentFrustum;
+        }
     };
 
 } // Engine

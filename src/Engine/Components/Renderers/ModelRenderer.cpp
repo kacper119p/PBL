@@ -1,6 +1,7 @@
 #include "ModelRenderer.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include "Engine/EngineObjects/CameraRenderData.h"
+#include "Engine/EngineObjects/RenderingManager.h"
 #include "Serialization/SerializationUtility.h"
 
 namespace Engine
@@ -65,9 +66,19 @@ namespace Engine
 
     void ModelRenderer::Draw() const
     {
+        const auto& frustum = RenderingManager::GetInstance()->GetFrustum();
+        glm::mat4 objectToWorldMatrix = GetOwner()->GetTransform()->GetLocalToWorldMatrix();
         for (int i = 0; i < Model->GetMeshCount(); ++i)
         {
-            Model->GetMesh(i)->Draw();
+            if (Model->GetPath() == "./res/models/SkySphere.fbx")
+            {
+                Model->GetMesh(i)->Draw();
+                return;
+            }
+            if (frustum.IsBoxVisible(Model->GetMesh(i)->GetAabBox(), objectToWorldMatrix))
+            {
+                Model->GetMesh(i)->Draw();
+            }
         }
     }
 

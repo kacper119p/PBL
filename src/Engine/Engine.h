@@ -6,6 +6,7 @@
 #include "Engine/EngineObjects/Scene/Scene.h"
 #include "Models/Model.h"
 #include "Shaders/Shader.h"
+#include "Rendering/Frustum.h"
 
 #if EDITOR
 #include "imgui_impl/imgui_impl_glfw.h"
@@ -33,6 +34,8 @@ namespace Engine
         AudioListener* AudioListener = nullptr;
         bool CameraMoved = false;
         glm::vec2 LastMousePosition = glm::vec2(0, 0);
+
+        Frustum Frustum;
 
         Scene* Scene;
 
