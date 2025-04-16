@@ -419,7 +419,28 @@ namespace Engine
             return glm::normalize(separation) * (sphere.GetRadius() - distance);
         }
 
-        return glm::vec3(0.0f); // Brak kolizji
+        return glm::vec3(0.0f);
+    }
+
+    glm::vec3 ConcreteColliderVisitor::GetSeparationBoxCapsule(const BoxCollider& box, const CapsuleCollider& capsule)
+    {
+        glm::vec3 boxCenter = box.GetTransform()->GetPositionWorldSpace();
+        glm::vec3 capsuleCenter = capsule.GetTransform()->GetPositionWorldSpace();
+
+        glm::vec3 separation = capsuleCenter - boxCenter;
+
+        float boxHalfWidth = box.GetWidth() / 2.0f;
+        float boxHalfHeight = box.GetHeight() / 2.0f;
+        float boxHalfDepth = box.GetDepth() / 2.0f;
+
+        float capsuleRadius = capsule.GetRadius();
+        float capsuleHeight = capsule.GetHeight();
+
+        separation.x = glm::max(separation.x - (boxHalfWidth + capsuleRadius), 0.0f);
+        separation.y = glm::max(separation.y - (boxHalfHeight + capsuleHeight / 2.0f), 0.0f);
+        separation.z = glm::max(separation.z - (boxHalfDepth + capsuleRadius), 0.0f);
+
+        return separation;
     }
 
     glm::vec3 ConcreteColliderVisitor::GetSeparationSphereSphere(const SphereCollider& sphere1,
@@ -437,77 +458,100 @@ namespace Engine
             return glm::normalize(delta) * (radiusSum - distance);
         }
 
-        return glm::vec3(0.0f); // Brak kolizji
-    }
-
-    glm::vec3 ConcreteColliderVisitor::GetSeparationBoxCapsule(const BoxCollider& box, const CapsuleCollider& capsule)
-    {
-        glm::vec3 boxCenter = box.GetTransform()->GetPositionWorldSpace();
-        glm::vec3 capsuleCenter = capsule.GetTransform()->GetPositionWorldSpace();
-
-        glm::vec3 separation = capsuleCenter - boxCenter;
-
-        // Uwzględnij rozmiary pudełka i kapsuły
-        float boxHalfWidth = box.GetWidth() / 2.0f;
-        float boxHalfHeight = box.GetHeight() / 2.0f;
-        float boxHalfDepth = box.GetDepth() / 2.0f;
-
-        float capsuleRadius = capsule.GetRadius();
-        float capsuleHeight = capsule.GetHeight();
-
-        // Korekta separacji, jeśli obiekty się nakładają
-        separation.x = glm::max(separation.x - (boxHalfWidth + capsuleRadius), 0.0f);
-        separation.y = glm::max(separation.y - (boxHalfHeight + capsuleHeight / 2.0f), 0.0f);
-        separation.z = glm::max(separation.z - (boxHalfDepth + capsuleRadius), 0.0f);
-
-        return separation;
+        return glm::vec3(0.0f);
     }
 
     glm::vec3 ConcreteColliderVisitor::GetSeparationSphereCapsule(const SphereCollider& sphere,
-                                                                  const MeshCollider& mesh)
+                                                                  const CapsuleCollider& capsule)
     {
-        glm::vec3 sphereCenter = sphere.GetTransform()->GetPositionWorldSpace();
-        glm::vec3 meshCenter = mesh.GetTransform()->GetPositionWorldSpace();
+        const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
+        const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
 
-        glm::vec3 separation = meshCenter - sphereCenter;
-
-        // Uwzględnij promień sfery i skalę siatki
+        glm::vec3 sphereCenter = sphereTransform * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
         float sphereRadius = sphere.GetRadius();
-        float meshScale = mesh.GetScale();
 
-        // Korekta separacji, jeśli obiekty się nakładają
-        separation = glm::normalize(separation) * glm::max(glm::length(separation) - (sphereRadius + meshScale), 0.0f);
+        glm::vec3 capsuleStartLocal(0.0f, -capsule.GetHeight() / 2.0f, 0.0f);
+        glm::vec3 capsuleEndLocal(0.0f, capsule.GetHeight() / 2.0f, 0.0f);
 
-        return separation;
-    }
+        glm::vec3 capsuleStart = glm::vec3(capsuleTransform * glm::vec4(capsuleStartLocal, 1.0f));
+        glm::vec3 capsuleEnd = glm::vec3(capsuleTransform * glm::vec4(capsuleEndLocal, 1.0f));
+        float capsuleRadius = capsule.GetRadius();
 
-    glm::vec3 ConcreteColliderVisitor::GetSeparationCapsuleBox(const CapsuleCollider& capsule, const BoxCollider& box)
-    {
-        // Odwróć kolejność i użyj istniejącej metody
-        return -GetSeparationBoxCapsule(box, capsule);
+        glm::vec3 capsuleAxis = capsuleEnd - capsuleStart;
+        float capsuleAxisLengthSquared = glm::dot(capsuleAxis, capsuleAxis);
+
+        float t = glm::dot(sphereCenter - capsuleStart, capsuleAxis) / capsuleAxisLengthSquared;
+        t = glm::clamp(t, 0.0f, 1.0f);
+        glm::vec3 closestPointOnCapsule = capsuleStart + t * capsuleAxis;
+
+        glm::vec3 separation = sphereCenter - closestPointOnCapsule;
+        float distance = glm::length(separation);
+        float combinedRadius = sphereRadius + capsuleRadius;
+
+        if (distance < combinedRadius)
+        {
+            return glm::normalize(separation) * (combinedRadius - distance);
+        }
+
+        return glm::vec3(0.0f);
     }
 
     glm::vec3 ConcreteColliderVisitor::GetSeparationCapsuleCapsule(const CapsuleCollider& capsule1,
                                                                    const CapsuleCollider& capsule2)
     {
-        glm::vec3 capsule1Center = capsule1.GetTransform()->GetPositionWorldSpace();
-        glm::vec3 capsule2Center = capsule2.GetTransform()->GetPositionWorldSpace();
+        const glm::mat4& transform1 = capsule1.GetTransform()->GetLocalToWorldMatrix();
+        const glm::mat4& transform2 = capsule2.GetTransform()->GetLocalToWorldMatrix();
 
-        glm::vec3 separation = capsule2Center - capsule1Center;
+        glm::vec3 capsule1Start = transform1 * glm::vec4(0.0f, -capsule1.GetHeight() / 2.0f, 0.0f, 1.0f);
+        glm::vec3 capsule1End = transform1 * glm::vec4(0.0f, capsule1.GetHeight() / 2.0f, 0.0f, 1.0f);
 
-        // Uwzględnij promienie i wysokości kapsuł
-        float capsule1Radius = capsule1.GetRadius();
-        float capsule1Height = capsule1.GetHeight();
-        float capsule2Radius = capsule2.GetRadius();
-        float capsule2Height = capsule2.GetHeight();
+        glm::vec3 capsule2Start = transform2 * glm::vec4(0.0f, -capsule2.GetHeight() / 2.0f, 0.0f, 1.0f);
+        glm::vec3 capsule2End = transform2 * glm::vec4(0.0f, capsule2.GetHeight() / 2.0f, 0.0f, 1.0f);
 
-        // Korekta separacji, jeśli obiekty się nakładają
-        separation = glm::normalize(separation) *
-                     glm::max(glm::length(separation) -
-                                      (capsule1Radius + capsule2Radius + (capsule1Height + capsule2Height) / 2.0f),
-                              0.0f);
+        glm::vec3 capsule1Axis = capsule1End - capsule1Start;
+        glm::vec3 capsule2Axis = capsule2End - capsule2Start;
 
-        return separation;
+        float capsule1AxisLengthSquared = glm::dot(capsule1Axis, capsule1Axis);
+        float capsule2AxisLengthSquared = glm::dot(capsule2Axis, capsule2Axis);
+
+        glm::vec3 w = capsule1Start - capsule2Start;
+
+        float a = capsule1AxisLengthSquared;
+        float b = glm::dot(capsule1Axis, capsule2Axis);
+        float c = capsule2AxisLengthSquared;
+        float d = glm::dot(capsule1Axis, w);
+        float e = glm::dot(capsule2Axis, w);
+
+        float denominator = a * c - b * b;
+
+        float s, t;
+        if (denominator > 1e-6f)
+        {
+            s = (b * e - c * d) / denominator;
+            t = (a * e - b * d) / denominator;
+        }
+        else 
+        {
+            s = 0.0f;
+            t = glm::clamp(e / c, 0.0f, 1.0f);
+        }
+
+        s = glm::clamp(s, 0.0f, 1.0f);
+        t = glm::clamp(t, 0.0f, 1.0f);
+
+        glm::vec3 closestPointOnCapsule1 = capsule1Start + s * capsule1Axis;
+        glm::vec3 closestPointOnCapsule2 = capsule2Start + t * capsule2Axis;
+
+        glm::vec3 separation = closestPointOnCapsule2 - closestPointOnCapsule1;
+        float distance = glm::length(separation);
+        float combinedRadius = capsule1.GetRadius() + capsule2.GetRadius();
+
+        if (distance < combinedRadius)
+        {
+            return glm::normalize(separation) * (combinedRadius - distance);
+        }
+
+        return glm::vec3(0.0f);
     }
 
     void ConcreteColliderVisitor::ResolveCollisionBox(BoxCollider& box)
@@ -522,6 +566,12 @@ namespace Engine
                     BoxCollider thisBox = BoxCollider();
                     thisBox = static_cast<BoxCollider&>(*this->currentCollider);
                     collisionDetected = CheckBoxBoxCollision(box, thisBox);
+                    if (collisionDetected)
+                    {
+                        glm::vec3 separation = GetSeparationBoxBox(box, thisBox);
+                        box.GetTransform()->SetPosition(box.GetTransform()->GetPosition() + separation);
+                        thisBox.GetTransform()->SetPosition(thisBox.GetTransform()->GetPosition() - separation);
+                    }
                     // TODO: emit collision event
                     break;
                 }
@@ -530,6 +580,12 @@ namespace Engine
                     SphereCollider sphere = SphereCollider();
                     sphere = static_cast<SphereCollider&>(*this->currentCollider);
                     collisionDetected = CheckBoxSphereCollision(box, sphere);
+                    if (collisionDetected)
+                    {
+                        glm::vec3 separation = GetSeparationBoxSphere(box, sphere);
+                        box.GetTransform()->SetPosition(box.GetTransform()->GetPosition() + separation);
+                        sphere.GetTransform()->SetPosition(sphere.GetTransform()->GetPosition() - separation);
+                    }
                     // TODO: emit collision event
                     break;
                 }
@@ -538,6 +594,12 @@ namespace Engine
                     CapsuleCollider capsule = CapsuleCollider();
                     capsule = static_cast<CapsuleCollider&>(*this->currentCollider);
                     collisionDetected = CheckBoxCapsuleCollision(box, capsule);
+                    if (collisionDetected)
+                    {
+                        glm::vec3 separation = GetSeparationBoxCapsule(box, capsule);
+                        box.GetTransform()->SetPosition(box.GetTransform()->GetPosition() + separation);
+                        capsule.GetTransform()->SetPosition(capsule.GetTransform()->GetPosition() - separation);
+                    }
                     // TODO: emit collision event
                     break;
                 }
@@ -563,6 +625,12 @@ namespace Engine
                     BoxCollider box = BoxCollider();
                     box = static_cast<BoxCollider&>(*this->currentCollider);
                     collisionDetected = CheckBoxSphereCollision(box, sphere);
+                    if (collisionDetected)
+                    {
+                        glm::vec3 separation = GetSeparationBoxSphere(box, sphere);
+                        box.GetTransform()->SetPosition(box.GetTransform()->GetPosition() + separation);
+                        sphere.GetTransform()->SetPosition(sphere.GetTransform()->GetPosition() - separation);
+                    }
                     // TODO: emit collision event
                     break;
                 }
@@ -572,6 +640,12 @@ namespace Engine
                     otherSphere = SphereCollider();
                     otherSphere = static_cast<SphereCollider&>(*this->currentCollider);
                     collisionDetected = CheckSphereSphereCollision(sphere, otherSphere);
+                    if (collisionDetected)
+                    {
+                        glm::vec3 separation = GetSeparationSphereSphere(sphere, otherSphere);
+                        sphere.GetTransform()->SetPosition(sphere.GetTransform()->GetPosition() + separation);
+                        otherSphere.GetTransform()->SetPosition(otherSphere.GetTransform()->GetPosition() - separation);
+                    }
                     // TODO: emit collision event
                     break;
                 }
@@ -581,6 +655,12 @@ namespace Engine
                     capsule = static_cast<CapsuleCollider&>(*this->currentCollider);
                     collisionDetected =
                             CheckCapsuleSphereCollision(capsule, sphere);
+                    if (collisionDetected)
+                    {
+                        glm::vec3 separation = GetSeparationSphereCapsule(sphere, capsule);
+                        sphere.GetTransform()->SetPosition(sphere.GetTransform()->GetPosition() + separation);
+                        capsule.GetTransform()->SetPosition(capsule.GetTransform()->GetPosition() - separation);
+                    }
                     // TODO: emit collision event
                     break;
                 }
@@ -606,6 +686,12 @@ namespace Engine
                     BoxCollider box = BoxCollider();
                     box = static_cast<BoxCollider&>(*this->currentCollider);
                     collisionDetected = CheckBoxCapsuleCollision(box, capsule);
+                    if (collisionDetected)
+                    {
+                        glm::vec3 separation = GetSeparationBoxCapsule(box, capsule);
+                        box.GetTransform()->SetPosition(box.GetTransform()->GetPosition() + separation);
+                        capsule.GetTransform()->SetPosition(capsule.GetTransform()->GetPosition() - separation);
+                    }
                     // TODO: emit collision event
                     break;
                 }
@@ -615,6 +701,12 @@ namespace Engine
                     sphere = static_cast<SphereCollider&>(*this->currentCollider);
                     collisionDetected =
                             CheckCapsuleSphereCollision(capsule, sphere);
+                    if (collisionDetected)
+                    {
+                        glm::vec3 separation = GetSeparationSphereCapsule(sphere, capsule);
+                        sphere.GetTransform()->SetPosition(sphere.GetTransform()->GetPosition() + separation);
+                        capsule.GetTransform()->SetPosition(capsule.GetTransform()->GetPosition() - separation);
+                    }
                     // TODO: emit collision event
                     break;
                 }
@@ -625,6 +717,13 @@ namespace Engine
 
                     collisionDetected =
                             CheckCapsuleCapsuleCollision(capsule, otherCapsule);
+                    if (collisionDetected)
+                    {
+                        glm::vec3 separation = GetSeparationCapsuleCapsule(capsule, otherCapsule);
+                        capsule.GetTransform()->SetPosition(capsule.GetTransform()->GetPosition() + separation);
+                        otherCapsule.GetTransform()->SetPosition(otherCapsule.GetTransform()->GetPosition() -
+                                                                 separation);
+                    }
                     // TODO: emit collision event
                     break;
                 }

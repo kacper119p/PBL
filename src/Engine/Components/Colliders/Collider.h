@@ -1,8 +1,7 @@
 #pragma once
 
 #include "../Component.h" // TODO: Fix later. I'm using this way because of indexing problem.
-#include "../Transform.h" // TODO: Fix later. I'm using this way because of indexing problem.
-
+#include "../Transform.h" // Add this include to ensure the Transform class is fully defined
 #include "Events/TAction.h"
 #include "Events/TEvent.h"
 #include "ColliderVisitor.h"
@@ -10,6 +9,7 @@
 namespace Engine
 {
     class SpatialPartitioning;
+    class Transform;
 
     enum ColliderTypeE
     {
@@ -25,12 +25,13 @@ namespace Engine
     {
     private:
         bool isTrigger;
-        Transform* transform;
+        
         ConcreteColliderVisitor colliderVisitor;
         SpatialPartitioning* spatial;
 
     protected:
         bool isStatic;
+        Transform* transform;
 
     public:
         ColliderTypeE colliderType;
@@ -39,7 +40,7 @@ namespace Engine
         Events::TEvent<Collider*> onCollisionExit;
 
         Collider();
-        Collider(Transform* transform, bool isTrigger = false, SpatialPartitioning* spatial = nullptr);
+        Collider(Transform* transform, bool isTrigger = false, bool isStatic = false, SpatialPartitioning* spatial = nullptr);
         virtual ~Collider() = default;
 
         rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const override;
@@ -49,6 +50,7 @@ namespace Engine
         [[nodiscard]] std::string GetType() const override;
 
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
+        
         //virtual bool CheckCollision(const Collider& other) = 0;
 
         void Start() override;

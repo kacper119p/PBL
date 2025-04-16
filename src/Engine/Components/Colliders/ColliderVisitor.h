@@ -47,9 +47,7 @@ namespace Engine
 
         glm::vec3 GetSeparationSphereSphere(const SphereCollider& sphere1, const SphereCollider& sphere2);
 
-        glm::vec3 GetSeparationSphereCapsule(const SphereCollider& sphere, const MeshCollider& mesh);
-
-        glm::vec3 GetSeparationCapsuleBox(const CapsuleCollider& capsule, const BoxCollider& box);
+        glm::vec3 GetSeparationSphereCapsule(const SphereCollider& sphere, const CapsuleCollider& capsule);
 
         glm::vec3 GetSeparationCapsuleCapsule(const CapsuleCollider& capsule1, const CapsuleCollider& capsule2);
 
