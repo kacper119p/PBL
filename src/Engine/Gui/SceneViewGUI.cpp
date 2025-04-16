@@ -2,7 +2,6 @@
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "ImGuizmo.h"
-#include "Engine/EngineObjects/GizmoManager.h"
 void Engine::SceneViewGUI::Draw()
 {
     ImGui::Begin("Scene");
@@ -27,11 +26,7 @@ void Engine::SceneViewGUI::Draw()
             ImVec2(cursorPos.x + (avail.x - imageSize.x) * 0.5f, cursorPos.y + (avail.y - imageSize.y) * 0.5f);
 
     // Set ImGuizmo rect (must be in screen space)
-    auto* gizmoManager = Engine::GizmoManager::GetInstance();
-    if (gizmoManager)
-    {
-        gizmoManager->SetRects(imagePos.x, imagePos.y, imageSize.x, imageSize.y);
-    }
+    ImGuizmo::SetRect(imagePos.x, imagePos.y, imageSize.x, imageSize.y);
 
     // Draw the image (framebuffer)
     if (m_FramebufferTexture != 0)
