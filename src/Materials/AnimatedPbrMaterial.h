@@ -33,9 +33,6 @@ namespace Materials
         AnimatedPbrMaterial();
 
     public:
-        static void Initialize();
-
-    public:
         void UseDepthPass() const override;
 
         void Use() const override;
