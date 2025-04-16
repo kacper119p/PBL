@@ -100,13 +100,15 @@ namespace Engine
 
             const CameraRenderData renderData(Camera->GetPosition(), Camera->GetTransform(),
                                               Camera->GetProjectionMatrix());
- 
+
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
             AudioListener->UpdateListener();
 
-                       glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
+            glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, EditorFramebuffer);
             glBlitFramebuffer(0, 0, displayW, displayH, 0, 0, displayW, displayH, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+            glClear(GL_COLOR_BUFFER_BIT);
 
 #if EDITOR
             // Draw ImGui
@@ -166,7 +168,6 @@ namespace Engine
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // 3.0+ only
 
 
-
 #if DEBUG
         glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 #endif
@@ -206,6 +207,9 @@ namespace Engine
         Materials::MaterialManager::Initialize();
         Ui::TextManager::Initialize();
 #if EDITOR
+        //for editor game screen
+        InitEditorFramebuffer();
+        EditorGUI.SetSceneViewFramebuffer(EditorColorTexture);
         GizmoManager::Initialize();
 #endif
 #if DEBUG
@@ -218,9 +222,6 @@ namespace Engine
                                                    100.0f),
                                   0.0018f);
         Camera->SetPosition(glm::vec3(0.0f, 5.0f, 20.0f));
-
-        //for editor game screen
-        InitEditorFramebuffer();
 
         AudioListener = new class AudioListener(*Camera);
         spdlog::info("Sounds loaded.");
@@ -299,9 +300,8 @@ namespace Engine
 
     void Engine::ImGuiRender()
     {
-        
+
         //LightsGui::Draw();
-        EditorGUI.SetSceneViewFramebuffer(EditorColorTexture);
         EditorGUI.Render(Frame, CurrentScene);
 
     }
@@ -385,7 +385,9 @@ namespace Engine
             }
         }
     }
-    void Engine::InitEditorFramebuffer() {
+
+    void Engine::InitEditorFramebuffer()
+    {
         glGenFramebuffers(1, &EditorFramebuffer);
         glBindFramebuffer(GL_FRAMEBUFFER, EditorFramebuffer);
 
