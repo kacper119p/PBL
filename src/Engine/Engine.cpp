@@ -113,7 +113,7 @@ namespace Engine
 #if EDITOR
             // Draw ImGui
             ImGuiBegin();
-            ImGuiRender();
+            EditorGUI.Render(Frame, CurrentScene);
             GizmoManager::GetInstance()->Manipulate(renderData);
             ImGuiEnd(); // this call effectively renders ImGui
 #endif

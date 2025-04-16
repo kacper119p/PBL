@@ -27,10 +27,15 @@ namespace Engine
                                                 glm::value_ptr(Managed->GetScale()),
                                                 transformMatrix);
 
+        //ImGuizmo::SetRect(rectX, rectY, rectWidth, rectHeight);
+        ImGuizmo::SetOrthographic(true);
         const float* viewMatrixPtr = glm::value_ptr(CameraRenderData.ViewMatrix);
         const float* projectionMatrixPtr = glm::value_ptr(CameraRenderData.ProjectionMatrix);
         const ImGuiIO& io = ImGui::GetIO();
-        ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
+
+        ImGui::Text("Mouse: (%.1f, %.1f), Down: %d", io.MousePos.x, io.MousePos.y, io.MouseDown[0]);
+        
+        
 
         const ImGuizmo::MODE mode = (CurrentOperation == ImGuizmo::OPERATION::ROTATE)
                                         ? ImGuizmo::MODE::LOCAL
@@ -39,6 +44,11 @@ namespace Engine
         ImGuizmo::Manipulate(viewMatrixPtr,
                              projectionMatrixPtr, CurrentOperation,
                              mode, transformMatrix);
+
+        ImGui::Text("Gizmo IsOver: %s", ImGuizmo::IsOver() ? "true" : "false");
+        ImGui::Text("Gizmo IsUsing: %s", ImGuizmo::IsUsing() ? "true" : "false");
+
+
         if (!ImGuizmo::IsUsing())
         {
             return;
