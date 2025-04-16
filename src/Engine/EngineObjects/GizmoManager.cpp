@@ -33,8 +33,6 @@ namespace Engine
         const float* projectionMatrixPtr = glm::value_ptr(CameraRenderData.ProjectionMatrix);
         const ImGuiIO& io = ImGui::GetIO();
 
-        ImGui::Text("Mouse: (%.1f, %.1f), Down: %d", io.MousePos.x, io.MousePos.y, io.MouseDown[0]);
-        
         
 
         const ImGuizmo::MODE mode = (CurrentOperation == ImGuizmo::OPERATION::ROTATE)
@@ -45,8 +43,6 @@ namespace Engine
                              projectionMatrixPtr, CurrentOperation,
                              mode, transformMatrix);
 
-        ImGui::Text("Gizmo IsOver: %s", ImGuizmo::IsOver() ? "true" : "false");
-        ImGui::Text("Gizmo IsUsing: %s", ImGuizmo::IsUsing() ? "true" : "false");
 
 
         if (!ImGuizmo::IsUsing())
