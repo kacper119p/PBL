@@ -21,6 +21,7 @@ void Engine::EditorGUI::Render(uint64_t Frame, Scene* scene)
     SetupDockspace();
     m_Hierarchy.Draw(scene);
     m_AssetsWindow.Draw();
+    m_Scene.Draw();
     RenderInspector(Frame, scene);
     AudioManager::GetInstance().RenderGlobalVolumeImGui();
     DrawSelectedEntitysComponents();
@@ -237,6 +238,8 @@ void Engine::EditorGUI::SetupDockspace()
         ImGui::DockBuilderDockWindow("Engine Properties", dock_right_top);
         ImGui::DockBuilderDockWindow("Components", dock_right_top);
         ImGui::DockBuilderDockWindow("Assets", dock_bottom);
+        ImGui::DockBuilderDockWindow("Scene", dock_main);
+
 
         ImGui::DockBuilderFinish(dockspace_id);
         m_Initialized = true;

@@ -100,8 +100,13 @@ namespace Engine
 
             const CameraRenderData renderData(Camera->GetPosition(), Camera->GetTransform(),
                                               Camera->GetProjectionMatrix());
+ 
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
             AudioListener->UpdateListener();
+
+                       glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, EditorFramebuffer);
+            glBlitFramebuffer(0, 0, displayW, displayH, 0, 0, displayW, displayH, GL_COLOR_BUFFER_BIT, GL_NEAREST);
 
 #if EDITOR
             // Draw ImGui
@@ -296,6 +301,7 @@ namespace Engine
     {
         
         //LightsGui::Draw();
+        EditorGUI.SetSceneViewFramebuffer(EditorColorTexture);
         EditorGUI.Render(Frame, CurrentScene);
 
     }
