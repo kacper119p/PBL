@@ -229,15 +229,40 @@ namespace Engine
         return true;
     }
 
-    void Engine::HandleInput(float deltaTime)
+   void Engine::HandleInput(float deltaTime)
     {
+#if EDITOR
+        ImGuiIO& io = ImGui::GetIO();
+
+        // Only capture input when mouse is inside the scene view rectangle
+        float mouseX = io.MousePos.x;
+        float mouseY = io.MousePos.y;
+
+        float sceneX = GizmoManager::GetInstance()->rectX;
+        float sceneY = GizmoManager::GetInstance()->rectY;
+        float sceneW = GizmoManager::GetInstance()->rectWidth;
+        float sceneH = GizmoManager::GetInstance()->rectHeight;
+
+        // Check if mouse is inside the scene rect
+        bool insideSceneView =
+                mouseX >= sceneX && mouseX <= sceneX + sceneW && mouseY >= sceneY && mouseY <= sceneY + sceneH;
+
+        // Cancel input if ImGui wants mouse or we're outside the scene view or manipulating gizmo
+        if (!insideSceneView || io.WantCaptureMouse || ImGuizmo::IsUsing())
+        {
+            return;
+        }
+#endif
+
         if (glfwGetKey(Window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         {
             glfwSetWindowShouldClose(Window, true);
             return;
         }
 
-        const float cameraSpeed = 10.0f * deltaTime; // adjust accordingly
+        const float cameraSpeed = 10.0f * deltaTime;
+
+        // WASD movement
         if (glfwGetKey(Window, GLFW_KEY_W) == GLFW_PRESS || glfwGetKey(Window, GLFW_KEY_UP) == GLFW_PRESS)
         {
             Camera->SetPosition(Camera->GetPosition() + cameraSpeed * Camera->GetForward());
@@ -246,17 +271,19 @@ namespace Engine
         {
             Camera->SetPosition(Camera->GetPosition() - cameraSpeed * Camera->GetForward());
         }
-        if (glfwGetKey(Window, GLFW_KEY_A) == GLFW_PRESS || glfwGetKey(Window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+        if (glfwGetKey(Window, GLFW_KEY_A) == GLFW_PRESS || glfwGetKey(Window, GLFW_KEY_LEFT) == GLFW_PRESS)
         {
             Camera->SetPosition(Camera->GetPosition() -
                                 cameraSpeed * glm::normalize(glm::cross(Camera->GetForward(), Camera->GetUp())));
         }
-        if (glfwGetKey(Window, GLFW_KEY_D) == GLFW_PRESS || glfwGetKey(Window, GLFW_KEY_LEFT) == GLFW_PRESS)
+        if (glfwGetKey(Window, GLFW_KEY_D) == GLFW_PRESS || glfwGetKey(Window, GLFW_KEY_RIGHT) == GLFW_PRESS)
         {
             Camera->SetPosition(Camera->GetPosition() +
                                 cameraSpeed * glm::normalize(glm::cross(Camera->GetForward(), Camera->GetUp())));
         }
+
 #if EDITOR
+        // Gizmo switching keys
         if (glfwGetKey(Window, GLFW_KEY_E) == GLFW_PRESS && GizmoManager::GetInstance()->GetManaged() != nullptr)
         {
             GizmoManager::GetInstance()->SetCurrentOperation(ImGuizmo::OPERATION::TRANSLATE);
@@ -271,6 +298,7 @@ namespace Engine
         }
 #endif
     }
+
 
 #if EDITOR
     void Engine::ImGuiInit()

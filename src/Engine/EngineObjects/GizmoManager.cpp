@@ -52,5 +52,13 @@ namespace Engine
         Managed->SetEulerAngles(glm::vec3(rotation[0], rotation[1], rotation[2]));
         Managed->SetScale(glm::vec3(scale[0], scale[1], scale[2]));
     }
+    void GizmoManager::SetRects(float rectX, float rectY, float rectWidth, float rectHeight)
+    {
+        rectX = rectX;
+        rectY = rectY;
+        rectWidth = rectWidth;
+        rectHeight = rectHeight;
+        ImGuizmo::SetRect(rectX, rectY, rectWidth, rectHeight);
+    }
 } // Engine
 #endif
