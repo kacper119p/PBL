@@ -80,7 +80,8 @@ namespace Serialization
         return Serialize(value, Allocator);
     }
 
-    template<enum E>
+    template<typename E>
+    requires std::is_enum_v<E>
     rapidjson::Value Serialize(const E Value, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kNumberType);
@@ -164,8 +165,10 @@ namespace Serialization
         Value.SetValue(value);
     }
 
-    template<enum E>
-    void Deserialize(const rapidjson::Value& Object, const char* Name, E& Value)
+    template<typename E>
+    requires std::is_enum_v<E>
+    void Deserialize(
+            const rapidjson::Value& Object, const char* Name, E& Value)
     {
         const auto iterator = Object.FindMember(Name);
         if (iterator == Object.MemberEnd() || !iterator->value.IsString())
