@@ -44,12 +44,6 @@ namespace Engine
         Collider(Transform* transform, bool isTrigger = false, bool isStatic = false, SpatialPartitioning* spatial = nullptr);
         virtual ~Collider() = default;
 
-        virtual rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const = 0;
-        virtual void DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap) = 0;
-        virtual void DeserializeReferencesPass(const rapidjson::Value& Object,
-                                       Serialization::ReferenceTable& ReferenceMap) = 0;
-        [[nodiscard]] std::string GetType() const override;
-
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
         
         //virtual bool CheckCollision(const Collider& other) = 0;

@@ -35,6 +35,21 @@ namespace Engine
         return *this;
     }
 
+    rapidjson::Value SphereCollider::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+    {
+
+        START_COMPONENT_SERIALIZATION
+        SERIALIZE_FIELD(isTrigger);
+        SERIALIZE_FIELD(isStatic);
+        SERIALIZE_FIELD(colliderType);
+        SERIALIZE_FIELD(radius);
+        END_COMPONENT_SERIALIZATION
+    }
+
+    void SphereCollider::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
+    {
+    }
+
     float SphereCollider::GetRadius() const { return radius; }
     void SphereCollider::SetRadius(float radius) { this->radius = radius; }
 

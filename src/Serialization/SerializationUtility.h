@@ -3,12 +3,12 @@
 #include <string>
 
 #include "GuidHasher.h"
-#include "rapidjson/document.h"
-#include "SerializedObject.h"
 #include "Materials/Material.h"
 #include "Materials/Properties/MaterialProperty.h"
+#include "SerializedObject.h"
 #include "Shaders/ComputeShader.h"
 #include "Shaders/Shader.h"
+#include "rapidjson/document.h"
 
 namespace Engine
 {
@@ -21,7 +21,7 @@ namespace Models
     class ModelAnimated;
     class Animation;
     class Animator;
-}
+} // namespace Models
 
 namespace Serialization
 {
@@ -59,8 +59,7 @@ namespace Serialization
     rapidjson::Value Serialize(const Materials::Material* Value, rapidjson::Document::AllocatorType& Allocator);
 
     template<class T>
-    rapidjson::Value Serialize(const std::vector<T*>& Value,
-                               rapidjson::Document::AllocatorType& Allocator)
+    rapidjson::Value Serialize(const std::vector<T*>& Value, rapidjson::Document::AllocatorType& Allocator)
     {
         static_assert(std::is_base_of_v<SerializedObject, T>);
 
@@ -79,6 +78,14 @@ namespace Serialization
     {
         T value = Value.GetValue();
         return Serialize(value, Allocator);
+    }
+
+    template<enum E>
+    rapidjson::Value Serialize(const E Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kNumberType);
+        object.SetInt(Value);
+        return object;
     }
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, int& Value);
@@ -156,4 +163,15 @@ namespace Serialization
         Deserialize(Object, Name, value);
         Value.SetValue(value);
     }
-} // Serialization
+
+    template<enum E>
+    void Deserialize(const rapidjson::Value& Object, const char* Name, E& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsString())
+        {
+            return;
+        }
+        Value = static_cast<E>(iterator->value.GetInt());
+    }
+} // namespace Serialization

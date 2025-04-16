@@ -27,11 +27,6 @@ namespace Engine
         //virtual bool CheckCollision(const Collider& other) override;
 
         inline virtual Collider* GetInstance() override { return this; }
-        
-        rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const override;
-        void DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap) override;
-        void DeserializeReferencesPass(const rapidjson::Value& Object,
-                                       Serialization::ReferenceTable& ReferenceMap) override;
 
         float GetWidth() const;
         void SetWidth(float width);

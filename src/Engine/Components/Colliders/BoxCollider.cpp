@@ -38,7 +38,7 @@ namespace Engine
         return *this;
     }
 
-    rapidjson::Value Collider::Serialize(rapidjson::Document::AllocatorType& Allocator) const {
+    rapidjson::Value BoxCollider::Serialize(rapidjson::Document::AllocatorType& Allocator) const {
     
         START_COMPONENT_SERIALIZATION
         SERIALIZE_FIELD(isTrigger);
@@ -51,12 +51,18 @@ namespace Engine
 
     }
 
-    void Collider::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap) {}
-
-    void Collider::DeserializeReferencesPass(const rapidjson::Value& Object,
-                                             Serialization::ReferenceTable& ReferenceMap)
+    void BoxCollider::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap) 
     {
+        START_COMPONENT_DESERIALIZATION_VALUE_PASS
+        DESERIALIZE_VALUE(isTrigger);
+        DESERIALIZE_VALUE(isStatic);
+        DESERIALIZE_VALUE(colliderType);
+        DESERIALIZE_VALUE(_width);
+        DESERIALIZE_VALUE(_height);
+        DESERIALIZE_VALUE(_depth);
+        END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
+
 
     float BoxCollider::GetWidth() const { return _width; }
     void BoxCollider::SetWidth(float width) { _width = width; }

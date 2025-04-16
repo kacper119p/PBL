@@ -36,6 +36,21 @@ namespace Engine
         return *this;
     }
 
+    rapidjson::Value MeshCollider::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+    {
+
+        START_COMPONENT_SERIALIZATION
+        SERIALIZE_FIELD(isTrigger);
+        SERIALIZE_FIELD(isStatic);
+        SERIALIZE_FIELD(colliderType);
+        SERIALIZE_FIELD(_scale);
+        END_COMPONENT_SERIALIZATION
+    }
+
+    void MeshCollider::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
+    {
+    }
+
     float MeshCollider::GetScale() const { return _scale; }
     void MeshCollider::SetScale(float scale) { _scale = scale; }
 
