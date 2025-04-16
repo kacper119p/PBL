@@ -25,7 +25,6 @@
                 "z": 1.0
             },
             "Children": [
-                "{ea7592d3-07eb-4a85-b4f0-794ae9c87da2}\u0000",
                 "{3fdfbd7f-54c9-4ba1-9043-54dcb04a61ca}\u0000",
                 "{fd65822d-f06d-4fec-afd1-88f26d358c85}\u0000",
                 "{b501bc21-ea81-45a9-86ba-a2e0ac862263}\u0000",
@@ -52,66 +51,14 @@
                 "{511aa219-f2a0-45c9-b394-af6e04a75258}\u0000",
                 "{a9c8d8b0-9f69-4c3e-bf05-8daf3cbff3d0}\u0000",
                 "{731f4770-5ff9-4ab1-b4a2-ca9b8be74712}\u0000",
-                "{7dbe5512-7971-484b-990d-7efc28d5fd1f}\u0000"
+                "{7dbe5512-7971-484b-990d-7efc28d5fd1f}\u0000",
+                "{175de58d-3a88-41c4-9e0f-13d72632b5cb}\u0000"
             ],
             "Parent": null
         },
         "components": []
     },
     "Objects": [
-        {
-            "type": "Entity",
-            "id": "{fb206b5b-6c7f-40b0-859f-402cc2d3acdd}\u0000",
-            "name": "Submarine",
-            "transform": {
-                "type": "Transform",
-                "id": "{ea7592d3-07eb-4a85-b4f0-794ae9c87da2}\u0000",
-                "owner": "{fb206b5b-6c7f-40b0-859f-402cc2d3acdd}\u0000",
-                "Position": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{7653609a-eeef-4977-a010-2fe934d8dc67}\u0000",
-                "{3c521437-4e9a-4750-80f7-22b58b09938b}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{7653609a-eeef-4977-a010-2fe934d8dc67}\u0000",
-            "owner": "{fb206b5b-6c7f-40b0-859f-402cc2d3acdd}\u0000",
-            "Material": "./res/materials/SampleScene/Submarine.mat",
-            "Model": "./res/models/Submarine.fbx"
-        },
-        {
-            "type": "ShipRoller",
-            "id": "{3c521437-4e9a-4750-80f7-22b58b09938b}\u0000",
-            "owner": "{fb206b5b-6c7f-40b0-859f-402cc2d3acdd}\u0000",
-            "Velocity": {
-                "x": 0.20000000298023224,
-                "y": 0.10000000149011612,
-                "z": 0.4000000059604645
-            },
-            "Amplitude": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 5.0
-            }
-        },
         {
             "type": "Entity",
             "id": "{20b41bd5-c360-4d6d-b819-8188f1f5ca69}\u0000",
@@ -1308,6 +1255,44 @@
             },
             "SpawnShader": "./res/shaders/Particles/ParticlesSpawn.comp",
             "UpdateShader": "./res/shaders/Particles/ParticlesUpdate.comp"
+        },
+        {
+            "type": "Entity",
+            "id": "{6a970693-00f1-4bd9-9d53-02c7d9303aa3}\u0000",
+            "name": "Submarine",
+            "transform": {
+                "type": "Transform",
+                "id": "{175de58d-3a88-41c4-9e0f-13d72632b5cb}\u0000",
+                "owner": "{6a970693-00f1-4bd9-9d53-02c7d9303aa3}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{2fc48f11-9e23-4d8d-9520-17e720e02ca6}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{2fc48f11-9e23-4d8d-9520-17e720e02ca6}\u0000",
+            "owner": "{6a970693-00f1-4bd9-9d53-02c7d9303aa3}\u0000",
+            "Material": "./res/materials/SampleScene/SubmarineAnimated.mat",
+            "Model": "./res/models/Submarine.fbx",
+            "Animation": "./res/models/Submarine.fbx"
         }
     ]
 }
