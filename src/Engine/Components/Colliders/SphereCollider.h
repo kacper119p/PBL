@@ -27,6 +27,8 @@ namespace Engine
         void SetRadius(float radius);
 
         SphereCollider& operator=(const SphereCollider& other);
+
+        SERIALIZATION_EXPORT_CLASS(SphereCollider)
     };
 
 } // namespace Engine

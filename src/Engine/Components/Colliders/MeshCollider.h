@@ -31,6 +31,8 @@ namespace Engine
         void SetMesh(Models::Mesh* mesh_p);
 
         MeshCollider& operator=(const MeshCollider& other);
+
+        SERIALIZATION_EXPORT_CLASS(MeshCollider)
     };
 
 } // namespace Engine

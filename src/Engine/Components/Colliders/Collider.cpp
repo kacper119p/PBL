@@ -1,6 +1,7 @@
 #include "Collider.h"
 #include "SpatialPartitioning.h"
 #include "../Transform.h" // TODO: Fix later. I'm using this way because of indexing problems
+#include "Serialization/SerializationUtility.h"
 
 namespace Engine
 {
@@ -12,24 +13,10 @@ namespace Engine
     Collider::Collider(Transform* transform, bool isTrigger, bool isStatic, SpatialPartitioning* spatialParam) 
         : isTrigger(isTrigger), isStatic(isStatic), transform(transform), spatial(spatialParam) {
         this->colliderVisitor = ConcreteColliderVisitor(spatialParam, this);
+        colliderType = BOX; // Default type, can be changed in derived classes
     }
 
-    rapidjson::Value Collider::Serialize(rapidjson::Document::AllocatorType& Allocator) const
-    {
-
-        return rapidjson::Value(rapidjson::kObjectType);
-    }
-
-    void Collider::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
-    {
-        
-    }
-
-    void Collider::DeserializeReferencesPass(const rapidjson::Value& Object,
-                                             Serialization::ReferenceTable& ReferenceMap)
-    {
     
-    }
 
     std::string Collider::GetType() const
     {

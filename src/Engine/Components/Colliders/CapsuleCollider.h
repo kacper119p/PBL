@@ -27,6 +27,8 @@ namespace Engine
         void SetHeight(float height);
 
         CapsuleCollider& operator=(const CapsuleCollider& other);
+
+        SERIALIZATION_EXPORT_CLASS(CapsuleCollider)
     };
 
 } // namespace Engine

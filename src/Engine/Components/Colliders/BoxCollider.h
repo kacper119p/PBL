@@ -28,6 +28,10 @@ namespace Engine
 
         inline virtual Collider* GetInstance() override { return this; }
         
+        rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const override;
+        void DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap) override;
+        void DeserializeReferencesPass(const rapidjson::Value& Object,
+                                       Serialization::ReferenceTable& ReferenceMap) override;
 
         float GetWidth() const;
         void SetWidth(float width);
@@ -39,6 +43,9 @@ namespace Engine
         void SetDepth(float depth);
 
         BoxCollider& operator=(const BoxCollider& other);
+
+        SERIALIZATION_EXPORT_CLASS(BoxCollider)
+        
     };
 
 } // namespace Engine

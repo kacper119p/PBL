@@ -5,6 +5,7 @@
 #include "Events/TAction.h"
 #include "Events/TEvent.h"
 #include "ColliderVisitor.h"
+#include "Serialization/SerializationUtility.h"
 
 namespace Engine
 {
@@ -21,17 +22,17 @@ namespace Engine
     /*
      * @brief Base class for all colliders. Subtypes: boxCollider, sphereCollider, capsuleCollider, meshCollider.
      */
-    class Collider : public Component, public Serialization::SerializedObject
+    class Collider : public Component
     {
-    private:
-        bool isTrigger;
-        
-        ConcreteColliderVisitor colliderVisitor;
-        SpatialPartitioning* spatial;
 
     protected:
         bool isStatic;
+        bool isTrigger;
+
         Transform* transform;
+
+        ConcreteColliderVisitor colliderVisitor;
+        SpatialPartitioning* spatial;
 
     public:
         ColliderTypeE colliderType;
@@ -43,10 +44,10 @@ namespace Engine
         Collider(Transform* transform, bool isTrigger = false, bool isStatic = false, SpatialPartitioning* spatial = nullptr);
         virtual ~Collider() = default;
 
-        rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const override;
-        void DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap) override;
-        void DeserializeReferencesPass(const rapidjson::Value& Object,
-                                       Serialization::ReferenceTable& ReferenceMap) override;
+        virtual rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const = 0;
+        virtual void DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap) = 0;
+        virtual void DeserializeReferencesPass(const rapidjson::Value& Object,
+                                       Serialization::ReferenceTable& ReferenceMap) = 0;
         [[nodiscard]] std::string GetType() const override;
 
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
@@ -73,6 +74,7 @@ namespace Engine
         Collider& operator=(const Collider& other);
 
         void Update();
+        
     };
 
 } // namespace Engine

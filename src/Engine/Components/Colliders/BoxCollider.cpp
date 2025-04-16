@@ -1,4 +1,5 @@
 #include "BoxCollider.h"
+#include "Serialization/SerializationUtility.h"
 
 namespace Engine
 {
@@ -35,6 +36,26 @@ namespace Engine
         _depth = other._depth;
 
         return *this;
+    }
+
+    rapidjson::Value Collider::Serialize(rapidjson::Document::AllocatorType& Allocator) const {
+    
+        START_COMPONENT_SERIALIZATION
+        SERIALIZE_FIELD(isTrigger);
+        SERIALIZE_FIELD(isStatic);
+        SERIALIZE_FIELD(colliderType);
+        SERIALIZE_FIELD(_width)
+        SERIALIZE_FIELD(_height);
+        SERIALIZE_FIELD(_depth);
+        END_COMPONENT_SERIALIZATION
+
+    }
+
+    void Collider::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap) {}
+
+    void Collider::DeserializeReferencesPass(const rapidjson::Value& Object,
+                                             Serialization::ReferenceTable& ReferenceMap)
+    {
     }
 
     float BoxCollider::GetWidth() const { return _width; }
