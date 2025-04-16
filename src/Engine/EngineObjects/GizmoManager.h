@@ -18,6 +18,10 @@ namespace Engine
         Transform* Managed = nullptr;
 
         static GizmoManager* Instance;
+        float rectX, rectY = 0.0f;
+
+        float rectWidth = 1920.0f;
+        float rectHeight = 1080.0f;
 
     private:
         GizmoManager();
@@ -52,6 +56,7 @@ namespace Engine
         static void Initialize();
 
         void Manipulate(const CameraRenderData& CameraRenderData);
+        void SetRects(float rectX, float rectY, float rectWidth, float rectHeight);
     };
 
 } // Engine

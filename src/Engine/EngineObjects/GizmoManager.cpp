@@ -24,21 +24,19 @@ namespace Engine
 
         ImGuizmo::RecomposeMatrixFromComponents(glm::value_ptr(Managed->GetPosition()),
                                                 glm::value_ptr(Managed->GetEulerAngles()),
-                                                glm::value_ptr(Managed->GetScale()),
-                                                transformMatrix);
+                                                glm::value_ptr(Managed->GetScale()), transformMatrix);
 
         const float* viewMatrixPtr = glm::value_ptr(CameraRenderData.ViewMatrix);
         const float* projectionMatrixPtr = glm::value_ptr(CameraRenderData.ProjectionMatrix);
-        const ImGuiIO& io = ImGui::GetIO();
-        ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
 
-        const ImGuizmo::MODE mode = (CurrentOperation == ImGuizmo::OPERATION::ROTATE)
-                                        ? ImGuizmo::MODE::LOCAL
-                                        : ImGuizmo::MODE::WORLD;
+        // Use custom rect for the gizmo
+        ImGuizmo::SetRect(rectX, rectY, rectWidth, rectHeight);
 
-        ImGuizmo::Manipulate(viewMatrixPtr,
-                             projectionMatrixPtr, CurrentOperation,
-                             mode, transformMatrix);
+        const ImGuizmo::MODE mode =
+                (CurrentOperation == ImGuizmo::OPERATION::ROTATE) ? ImGuizmo::MODE::LOCAL : ImGuizmo::MODE::WORLD;
+
+        ImGuizmo::Manipulate(viewMatrixPtr, projectionMatrixPtr, CurrentOperation, mode, transformMatrix);
+
         if (!ImGuizmo::IsUsing())
         {
             return;
@@ -48,9 +46,19 @@ namespace Engine
         float rotation[3];
         float scale[3];
         ImGuizmo::DecomposeMatrixToComponents(transformMatrix, translation, rotation, scale);
+
         Managed->SetPosition(glm::vec3(translation[0], translation[1], translation[2]));
         Managed->SetEulerAngles(glm::vec3(rotation[0], rotation[1], rotation[2]));
         Managed->SetScale(glm::vec3(scale[0], scale[1], scale[2]));
     }
+
+    void GizmoManager::SetRects(float rectX, float rectY, float rectWidth, float rectHeight) 
+    { rectX = rectX;
+        rectY = rectY;
+        rectWidth = rectWidth;
+        rectHeight = rectHeight;
+        ImGuizmo::SetRect(rectX, rectY, rectWidth, rectHeight);
+    }
+
 } // Engine
 #endif
