@@ -36,7 +36,7 @@ namespace Materials
     void AnimatedPbrMaterial::Initialize()
     {
         DepthPass = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
-                "./res/shaders/PBR/PBRAnimated.vert", nullptr,
+                "./res/shaders/DefaultDepth/DefaultDepthAnimated.vert", nullptr,
                 "./res/shaders/DefaultDepth/DefaultDepth.frag"));
         MainPass = Shaders::ShaderManager::GetShader(
                 Shaders::ShaderSourceFiles("./res/shaders/PBR/PBRAnimated.vert", nullptr,
