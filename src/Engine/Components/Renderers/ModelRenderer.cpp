@@ -3,6 +3,7 @@
 #include "Engine/EngineObjects/CameraRenderData.h"
 #include "Serialization/SerializationUtility.h"
 #include "Materials/MaterialManager.h"
+#include "Materials/Material.h"
 #include "Models/ModelManager.h"
 #include "imgui.h"
 #include <filesystem>
@@ -97,6 +98,7 @@ namespace Engine
             static bool showMaterialPopup = false;
             static bool showModelPopup = false;
             
+            
             static std::vector<std::string> availableMaterials;
             static std::vector<std::string> availableModels;
 
@@ -116,55 +118,65 @@ namespace Engine
                     if (entry.is_regular_file() && entry.path().extension() == ".fbx")
                         availableModels.emplace_back(entry.path().string());
                 }
+                
                 scanned = true;
             }
             
 
-            ImGui::Text("Material:");
-            materialPath = Material ? Materials::MaterialManager::GetMaterialPath(Material) : "None";
-            ImGui::Selectable(materialPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
-
-            if (ImGui::BeginDragDropTarget())
+            
+            if (Material)
             {
-                if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
+                ImGui::Text("Material Properties:");
+                ImGui::Separator();
+                Material->DrawImGui();
+                ImGui::Separator();
+            }
+                ImGui::Text("Material file:");
+                materialPath = Material ? Materials::MaterialManager::GetMaterialPath(Material) : "None";
+                ImGui::Selectable(materialPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
+
+                if (ImGui::BeginDragDropTarget())
                 {
-                    const char* droppedPath = static_cast<const char*>(payload->Data);
-                    if (fs::path(droppedPath).extension() == ".mat")
+                    if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
                     {
-                        Material = Materials::MaterialManager::GetMaterial(droppedPath);
+                        const char* droppedPath = static_cast<const char*>(payload->Data);
+                        if (fs::path(droppedPath).extension() == ".mat")
+                        {
+                            Material = Materials::MaterialManager::GetMaterial(droppedPath);
+                        }
                     }
+                    ImGui::EndDragDropTarget();
                 }
-                ImGui::EndDragDropTarget();
-            }
 
-            if (ImGui::IsItemClicked())
-                showMaterialPopup = true;
+                if (ImGui::IsItemClicked())
+                    showMaterialPopup = true;
 
-            if (showMaterialPopup)
-            {
-                ImGui::OpenPopup("Material Picker");
-                showMaterialPopup = false;
-            }
-
-            if (ImGui::BeginPopup("Material Picker"))
-            {
-                for (const auto& path : availableMaterials)
+                if (showMaterialPopup)
                 {
-                    std::filesystem::path fsPath(path);
-                    std::string displayName = fsPath.filename().string();
-
-                    if (ImGui::Selectable(displayName.c_str()))
-                    {
-                        Material = Materials::MaterialManager::GetMaterial(path);
-                        ImGui::CloseCurrentPopup();
-                    }
-
-                    ImGui::SameLine();
-                    ImGui::TextDisabled("(%s)", path.c_str());
+                    ImGui::OpenPopup("Material Picker");
+                    showMaterialPopup = false;
                 }
-                ImGui::EndPopup();
-            }
 
+                if (ImGui::BeginPopup("Material Picker"))
+                {
+                    for (const auto& path : availableMaterials)
+                    {
+                        std::filesystem::path fsPath(path);
+                        std::string displayName = fsPath.filename().string();
+
+                        if (ImGui::Selectable(displayName.c_str()))
+                        {
+                            Material = Materials::MaterialManager::GetMaterial(path);
+                            ImGui::CloseCurrentPopup();
+                        }
+
+                        ImGui::SameLine();
+                        ImGui::TextDisabled("(%s)", path.c_str());
+                    }
+                    ImGui::EndPopup();
+                }
+            
+            
             ImGui::Separator();
             
             ImGui::Text("Model:");

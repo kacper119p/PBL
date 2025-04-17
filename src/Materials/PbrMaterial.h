@@ -41,6 +41,8 @@ namespace Materials
 
         void UsePointSpotShadows() const override;
 
+        void DrawImGui() override;
+
     public:
         [[nodiscard]] Engine::Texture GetBaseMap() const
         {

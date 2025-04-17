@@ -53,6 +53,8 @@ namespace Materials
 
         void UsePointSpotShadows() const override;
 
+        void DrawImGui() override;
+
         SERIALIZATION_EXPORT_MATERIAL(RefractiveMaterial)
     };
 } // Models
