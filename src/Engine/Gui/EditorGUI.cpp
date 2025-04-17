@@ -4,20 +4,19 @@
 #include "Utility/SystemUtilities.h"
 #include "Engine/Engine.h"
 #include "Engine/EngineObjects/Scene/SceneManager.h"
-#include "Scene/SceneBuilder.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/Components/Updateable.h"
 #include "Engine/Components/Renderers/ParticleEmitter.h"
-#include "Engine/Components/Renderers/ModelRenderer.h"
 #include "Engine/Components/Audio/AudioSource.h"
-#include "Engine/Components/Game/Rotator.h"
-#include "Engine/Components/Game/ShipRoller.h"
 #include <filesystem>
 namespace fs = std::filesystem;
 
-void Engine::EditorGUI::Init() { }
+void Engine::EditorGUI::Init()
+{
+}
+
 void Engine::EditorGUI::Render(uint64_t Frame, Scene* scene)
-{ 
+{
     SetupDockspace();
     m_Hierarchy.Draw(scene);
     m_AssetsWindow.Draw();
@@ -26,8 +25,9 @@ void Engine::EditorGUI::Render(uint64_t Frame, Scene* scene)
     AudioManager::GetInstance().RenderGlobalVolumeImGui();
     DrawSelectedEntitysComponents();
     m_TopBar.Draw();
-    
+
 }
+
 void Engine::EditorGUI::RenderInspector(uint64_t Frame, Scene* scene)
 {
     ImGui::Begin("Engine Properties");
@@ -109,17 +109,9 @@ void Engine::EditorGUI::RenderInspector(uint64_t Frame, Scene* scene)
 
     ImGui::End();
 }
+
 void Engine::EditorGUI::DrawSelectedEntitysComponents()
 {
-    static std::vector<std::string> availableComponents = { 
-                                                           "Particle emmiter",
-                                                           "Model renderer",
-                                                           "Spot light",
-                                                           "Point light",
-                                                           "Directional light",
-                                                           "Rotator",
-                                                           "Ship roller",
-                                                           "Audio source"};
     static int selectedComponent = -1;
 
     ImGui::Begin("Components");
@@ -127,11 +119,10 @@ void Engine::EditorGUI::DrawSelectedEntitysComponents()
     auto selectedEntity = m_Hierarchy.GetSelectedEntity();
     if (selectedEntity)
     {
-        auto owner = selectedEntity->GetOwner();
+        Entity* owner = selectedEntity->GetOwner();
         std::string currentName = owner->GetName();
-        char buffer[256];
-        memset(buffer, 0, sizeof(buffer));
-        strncpy(buffer, currentName.c_str(), sizeof(buffer) - 1);
+        char buffer[256] = {};
+        strncpy_s(buffer, currentName.c_str(), sizeof(buffer) - 1);
 
         if (ImGui::InputText("Name", buffer, sizeof(buffer)))
         {
@@ -143,13 +134,16 @@ void Engine::EditorGUI::DrawSelectedEntitysComponents()
 
     ImGui::Separator();
     ImGui::Text("Add New Component");
-    if (ImGui::BeginCombo("##component_combo", selectedComponent >= 0 ? availableComponents[selectedComponent].c_str()
-                                                                      : "Select component..."))
+    if (ImGui::BeginCombo("##component_combo", selectedComponent >= 0
+                                                   ? Serialization::SerializedObjectFactory::GetAvailableComponents()->
+                                                   at(selectedComponent).c_str()
+                                                   : "Select component..."))
     {
-        for (int i = 0; i < availableComponents.size(); ++i)
+        for (int i = 0; i < Serialization::SerializedObjectFactory::GetAvailableComponents()->size(); ++i)
         {
             bool isSelected = (selectedComponent == i);
-            if (ImGui::Selectable(availableComponents[i].c_str(), isSelected))
+            if (ImGui::Selectable(Serialization::SerializedObjectFactory::GetAvailableComponents()->at(i).c_str(),
+                                  isSelected))
                 selectedComponent = i;
 
             if (isSelected)
@@ -159,35 +153,10 @@ void Engine::EditorGUI::DrawSelectedEntitysComponents()
     }
     if (ImGui::Button("Add Component") && selectedComponent >= 0)
     {
-        switch (selectedComponent)
-        {
-            case 0:
-                selectedEntity->GetOwner()->AddComponent<ParticleEmitter>();
-                break;
-            case 1:
-                selectedEntity->GetOwner()->AddComponent<ModelRenderer>();
-                break;
-            case 2:
-                selectedEntity->GetOwner()->AddComponent<SpotLight>();
-                break;
-            case 3:
-                selectedEntity->GetOwner()->AddComponent<PointLight>();
-                break;
-            case 4:
-                selectedEntity->GetOwner()->AddComponent<DirectionalLight>();
-                break;
-            case 5:
-                selectedEntity->GetOwner()->AddComponent<Rotator>();
-                break;
-            case 6:
-                selectedEntity->GetOwner()->AddComponent<ShipRoller>();
-                break;
-            case 7:
-                selectedEntity->GetOwner()->AddComponent<AudioSource>();
-                break;
-            default:
-                break;
-        }
+        const std::string& typeName = Serialization::SerializedObjectFactory::GetAvailableComponents()->at(
+                selectedComponent);
+        Component* component = static_cast<Component*>(Serialization::SerializedObjectFactory::CreateObject(typeName));
+        selectedEntity->GetOwner()->AddComponent(component);
 
         selectedComponent = -1; // Reset selection
     }
@@ -200,13 +169,13 @@ void Engine::EditorGUI::SetupDockspace()
 
     ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
 
-     ImGuiViewport* viewport = ImGui::GetMainViewport();
+    ImGuiViewport* viewport = ImGui::GetMainViewport();
     ImGui::SetNextWindowPos(viewport->WorkPos);
     ImGui::SetNextWindowSize(viewport->WorkSize);
     ImGui::SetNextWindowViewport(viewport->ID);
 
     window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize |
-                    ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+            ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
 
     ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
     ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);

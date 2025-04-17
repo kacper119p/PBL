@@ -75,6 +75,19 @@ namespace Engine
             return component;
         }
 
+#if EDITOR
+        /**
+         * @brief Adds a new component to this Entity. To be used with Editor GUI.
+         * @param Component A new component.
+         */
+        void AddComponent(Component* Component)
+        {
+            Component->SetOwner(this);
+            Components.push_back(Component);
+            Component->Start();
+        }
+#endif
+
         /**
          * @brief Finds component of given class in this entity.
          * @tparam T Class of sought component.
@@ -150,6 +163,7 @@ namespace Engine
         {
             return Components.end();
         }
+
         void DrawImGui();
 
         SERIALIZATION_EXPORT_CLASS(Entity);

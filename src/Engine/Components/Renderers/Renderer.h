@@ -42,7 +42,5 @@ namespace Engine
         virtual void
         RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                const glm::mat4* SpaceTransformMatrices) = 0;
-
-        virtual void DrawImGui() {};
     };
 } // Engine

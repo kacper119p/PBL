@@ -18,8 +18,6 @@ namespace Engine
 
     public:
         void Start() override;
-
-        void DrawImGui() override { ImGui::CollapsingHeader("Updateable"); }
     };
 
 } // Engine

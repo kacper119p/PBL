@@ -52,6 +52,6 @@ namespace Engine
          */
         virtual void OnDestroy();
 
-        virtual void DrawImGui() {};
+        virtual void DrawImGui() = 0;
     };
 }
