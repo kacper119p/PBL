@@ -840,7 +840,7 @@
                 "owner": "{ae3c82b8-f574-43e7-973b-12aaf2d7a6f0}\u0000",
                 "Position": {
                     "x": 0.0,
-                    "y": 10.804100036621094,
+                    "y": 20.804100036621094,
                     "z": -5.172080039978027
                 },
                 "EulerAngles": {
@@ -849,9 +849,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
+                    "x": 5.0,
+                    "y": 5.0,
+                    "z": 5.0
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
@@ -864,8 +864,8 @@
             "type": "ModelRenderer",
             "id": "{3114248e-baf3-4f4d-9b85-7ff43a4109d5}\u0000",
             "owner": "{ae3c82b8-f574-43e7-973b-12aaf2d7a6f0}\u0000",
-            "Material": "./res/materials/SampleScene/CeilingLamp.mat",
-            "Model": "./res/models/CeilingLamp.fbx"
+            "Material": "./res/materials/SampleScene/Test.mat",
+            "Model": "./res/models/SphereLowPoly.fbx"
         },
         {
             "type": "Entity",
