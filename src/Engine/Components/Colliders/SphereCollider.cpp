@@ -48,9 +48,24 @@ namespace Engine
 
     void SphereCollider::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
+        START_COMPONENT_DESERIALIZATION_VALUE_PASS
+        DESERIALIZE_VALUE(isTrigger);
+        DESERIALIZE_VALUE(isStatic);
+        DESERIALIZE_VALUE(colliderType);
+        DESERIALIZE_VALUE(radius);
+        END_COMPONENT_DESERIALIZATION_VALUE_PASS
+    }
+
+    void SphereCollider::DeserializeReferencesPass(const rapidjson::Value& Object,
+                                                Serialization::ReferenceTable& ReferenceMap)
+    {
     }
 
     float SphereCollider::GetRadius() const { return radius; }
     void SphereCollider::SetRadius(float radius) { this->radius = radius; }
+
+    void SphereCollider::Start() {}
+
+    void SphereCollider::OnDestroy() {}
 
 } // namespace Engine

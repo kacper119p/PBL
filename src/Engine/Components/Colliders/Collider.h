@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Component.h" // TODO: Fix later. I'm using this way because of indexing problem.
-#include "../Transform.h" // Add this include to ensure the Transform class is fully defined
+#include "../Transform.h" // TODO: Fix later. I'm using this way because of indexing problem.
 #include "Events/TAction.h"
 #include "Events/TEvent.h"
 #include "ColliderVisitor.h"
@@ -47,9 +47,6 @@ namespace Engine
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
         
         //virtual bool CheckCollision(const Collider& other) = 0;
-
-        void Start() override;
-        void OnDestroy() override;
 
         void SetTrigger(bool isTrigger);
         bool IsTrigger() const;

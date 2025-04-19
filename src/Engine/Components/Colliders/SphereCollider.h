@@ -28,6 +28,9 @@ namespace Engine
 
         SphereCollider& operator=(const SphereCollider& other);
 
+        void Start() override;
+        void OnDestroy() override;
+
         SERIALIZATION_EXPORT_CLASS(SphereCollider)
     };
 

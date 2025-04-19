@@ -16,14 +16,6 @@ namespace Engine
         colliderType = BOX; // Default type, can be changed in derived classes
     }
 
-    
-
-    std::string Collider::GetType() const
-    {
-        return "Collider";
-    }
-
-
     void Collider::SetTrigger(bool isTrigger) { this->isTrigger = isTrigger; }
 
     bool Collider::IsTrigger() const { return isTrigger; }
@@ -55,16 +47,6 @@ namespace Engine
 
     void Collider::Update() {  
        colliderVisitor.ManageCollisions();  
-    }
-
-     void Collider::Start()
-    {
-        // TODO: implementation
-    }
-
-    void Collider::OnDestroy()
-    {
-        // TODO: implementation
     }
 
 } // namespace Engine

@@ -63,6 +63,8 @@ namespace Engine
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 
+    void BoxCollider::DeserializeReferencesPass(const rapidjson::Value& Object,
+                                                        Serialization::ReferenceTable& ReferenceMap) {}
 
     float BoxCollider::GetWidth() const { return _width; }
     void BoxCollider::SetWidth(float width) { _width = width; }
@@ -72,5 +74,15 @@ namespace Engine
 
     float BoxCollider::GetDepth() const { return _depth; }
     void BoxCollider::SetDepth(float depth) { _depth = depth; }
+
+    void BoxCollider::Start()
+    {
+
+    }
+
+    void BoxCollider::OnDestroy() 
+    {
+
+    }
 
 } // namespace Engine

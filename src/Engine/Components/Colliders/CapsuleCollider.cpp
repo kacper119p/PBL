@@ -40,6 +40,18 @@ namespace Engine
 
     void CapsuleCollider::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
+        START_COMPONENT_DESERIALIZATION_VALUE_PASS
+        DESERIALIZE_VALUE(isTrigger);
+        DESERIALIZE_VALUE(isStatic);
+        DESERIALIZE_VALUE(colliderType);
+        DESERIALIZE_VALUE(_height);
+        DESERIALIZE_VALUE(_radius);
+        END_COMPONENT_DESERIALIZATION_VALUE_PASS
+    }
+
+    void CapsuleCollider::DeserializeReferencesPass(const rapidjson::Value& Object,
+                                                Serialization::ReferenceTable& ReferenceMap)
+    {
     }
 
     float CapsuleCollider::GetRadius() const { return _radius; }
@@ -47,5 +59,15 @@ namespace Engine
 
     float CapsuleCollider::GetHeight() const { return _height; }
     void CapsuleCollider::SetHeight(float height) { _height = height; }
+
+    void CapsuleCollider::Start() 
+    {
+    
+    }
+
+    void CapsuleCollider::OnDestroy() 
+    {
+    
+    }
 
 } // namespace Engine

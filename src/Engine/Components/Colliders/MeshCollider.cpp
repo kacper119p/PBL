@@ -49,6 +49,17 @@ namespace Engine
 
     void MeshCollider::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
+        START_COMPONENT_DESERIALIZATION_VALUE_PASS
+        DESERIALIZE_VALUE(isTrigger);
+        DESERIALIZE_VALUE(isStatic);
+        DESERIALIZE_VALUE(colliderType);
+        DESERIALIZE_VALUE(_scale);
+        END_COMPONENT_DESERIALIZATION_VALUE_PASS
+    }
+
+    void MeshCollider::DeserializeReferencesPass(const rapidjson::Value& Object,
+                                                Serialization::ReferenceTable& ReferenceMap)
+    {
     }
 
     float MeshCollider::GetScale() const { return _scale; }
@@ -59,8 +70,12 @@ namespace Engine
 
     bool MeshCollider::AcceptCollision(ColliderVisitor& visitor)
     {
-        visitor.ResolveCollisionMesh(*this); // Wywo³anie odpowiedniej metody w visitorze
-        return true; // Mo¿esz dostosowaæ zwracan¹ wartoœæ w zale¿noœci od logiki
+        visitor.ResolveCollisionMesh(*this); 
+        return true;
     }
+
+    void MeshCollider::Start() {}
+
+    void MeshCollider::OnDestroy() {}
 
 } // namespace Engine

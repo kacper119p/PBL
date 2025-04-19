@@ -32,6 +32,9 @@ namespace Engine
 
         MeshCollider& operator=(const MeshCollider& other);
 
+        void Start() override;
+        void OnDestroy() override;
+
         SERIALIZATION_EXPORT_CLASS(MeshCollider)
     };
 

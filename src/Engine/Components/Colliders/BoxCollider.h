@@ -28,6 +28,9 @@ namespace Engine
 
         inline virtual Collider* GetInstance() override { return this; }
 
+        void Start() override;
+        void OnDestroy() override;
+
         float GetWidth() const;
         void SetWidth(float width);
 

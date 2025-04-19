@@ -28,6 +28,9 @@ namespace Engine
 
         CapsuleCollider& operator=(const CapsuleCollider& other);
 
+        void Start() override;
+        void OnDestroy() override;
+
         SERIALIZATION_EXPORT_CLASS(CapsuleCollider)
     };
 
