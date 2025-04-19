@@ -22,7 +22,7 @@ vec3 GetViewPosition(vec2 uv, float viewZ) {
     vec4 ray_eye = InverseProjectionMatrix * ray_clip;
     vec3 viewDir = normalize(ray_eye.xyz);
 
-    return 1;
+    return viewDir * viewZ;
 }
 
 void main() {
