@@ -29,7 +29,6 @@ void main()
 
     vec4 totalPosition = vec4(0.0f);
     vec3 localNormal = vec3(0.0f);
-    vec3 localTangent = vec3(0.0f);
     if (weightSum == 0.0) {
         totalPosition = vec4(inputPosition, 1.0);  // Use original position if no bones influence
     }
@@ -63,14 +62,13 @@ void main()
         vec4 localPosition = finalBonesMatrices[boneIds[i]] * vec4(inputPosition, 1.0f);
         totalPosition += localPosition * weights[i];
         localNormal += (mat3(finalBonesMatrices[boneIds[i]]) * inputNormal) * weights[i];
-        localTangent += (mat3(finalBonesMatrices[boneIds[i]]) * inputTangent) * weights[i];
     }
 
 
 
     gl_Position = ProjectionMatrix * ViewMatrix * ObjectToWorldMatrix * totalPosition;
 
-
+    totalPosition.w = 1.0;
     NormalDepth.xyz = (ViewMatrix * ObjectToWorldMatrix * vec4(localNormal, 0.0)).xyz;
     NormalDepth.w = -(ViewMatrix * ObjectToWorldMatrix * totalPosition).z;
 }

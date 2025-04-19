@@ -69,6 +69,11 @@ namespace Engine
             }
         }
 
+        [[nodiscard]] unsigned int GetSsaoTextureId() const
+        {
+            return Ssao.GetColorTexture();
+        }
+
         void RenderAll(const CameraRenderData& RenderData, int ScreenWidth, int ScreenHeight);
 
         void RenderAllDirectionalShadowMap(const CameraRenderData& RenderData, unsigned int Target, unsigned int Width,

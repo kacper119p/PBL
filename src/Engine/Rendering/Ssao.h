@@ -19,6 +19,7 @@ namespace Engine
         uint32_t NoiseTexture = 0;
         Shaders::Shader Shader;
         int32_t ProjectionMatrixLocation;
+        int32_t InverseProjectionMatrixLocation;
         int32_t KernelLocation;
         Rendering::ScreenQuad ScreenQuad;
 

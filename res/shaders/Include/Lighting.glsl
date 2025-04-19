@@ -42,6 +42,7 @@ layout (binding = 15) uniform samplerCubeShadow SpotLightShadowMap1;
 layout (binding = 16) uniform samplerCube IrradianceMap;
 layout (binding = 17) uniform samplerCube PrefilterMap;
 layout (binding = 18) uniform sampler2D BrdfLUT;
+layout (binding = 19) uniform sampler2D SSAOMap;
 
 uniform directionalLight DirectionalLight;
 uniform mat4 DirectionalLightSpaceTransform;
@@ -221,5 +222,5 @@ vec3 CalculateEnvironmentInfluence(vec3 BaseColor, vec3 Normal, vec3 ViewDirecti
     vec2 brdf = texture(BrdfLUT, vec2(max(dot(Normal, ViewDirection), 0.0), Roughness)).rg;
     vec3 specular = prefilteredColor * (kS * brdf.x + brdf.y);
 
-    return (kD * diffuse + specular) * AmbientOcclusion;
+    return (kD * diffuse + specular) * vec3(texture(SSAOMap, gl_FragCoord.xy / vec2(1920, 1080)).r) * AmbientOcclusion;
 }

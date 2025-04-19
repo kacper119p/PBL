@@ -36,8 +36,8 @@ namespace Engine
         glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, NormalsTexture);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, NoiseTexture);
-        Shaders::Shader::SetUniformArray(KernelLocation, Kernel, KernelSize);
         Shaders::Shader::SetUniform(ProjectionMatrixLocation, CameraData.ProjectionMatrix);
+        Shaders::Shader::SetUniform(InverseProjectionMatrixLocation, glm::inverse(CameraData.ProjectionMatrix));
         ScreenQuad.Draw();
     }
 
@@ -73,6 +73,7 @@ namespace Engine
         Shader = Shaders::ShaderManager::GetShader(
                 Shaders::ShaderSourceFiles("./res/shaders/SSAO/SSAO.vert", nullptr, "./res/shaders/SSAO/SSAO.frag"));
         ProjectionMatrixLocation = Shader.GetUniformLocation("ProjectionMatrix");
+        InverseProjectionMatrixLocation = Shader.GetUniformLocation("InverseProjectionMatrix");
         KernelLocation = Shader.GetUniformLocation("Kernel");
     }
 
@@ -86,6 +87,8 @@ namespace Engine
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, 1920, 1080, 0, GL_RED, GL_FLOAT, nullptr);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, ColorTexture, 0);
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
