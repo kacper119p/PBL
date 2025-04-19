@@ -71,6 +71,6 @@ void main()
     gl_Position = ProjectionMatrix * ViewMatrix * ObjectToWorldMatrix * totalPosition;
 
 
-    NormalDepth.xyz = (ObjectToWorldMatrix * vec4(localNormal, 0.0)).xyz;
+    NormalDepth.xyz = (ViewMatrix * ObjectToWorldMatrix * vec4(localNormal, 0.0)).xyz;
     NormalDepth.w = -(ViewMatrix * ObjectToWorldMatrix * totalPosition).z;
 }

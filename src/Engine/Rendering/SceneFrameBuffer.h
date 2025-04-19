@@ -89,6 +89,11 @@ namespace Engine
             return DepthStencilBuffer;
         }
 
+        [[nodiscard]] uint32_t GetNormalsBuffer() const
+        {
+            return NormalsBuffer;
+        }
+
         /**
          * @brief Resolves multisampling and writes result to Resolved color buffer.
          */

@@ -4,6 +4,7 @@
 #include "Engine/Components/Renderers/Renderer.h"
 #include "CameraRenderData.h"
 #include "Engine/Rendering/SceneFrameBuffer.h"
+#include "Engine/Rendering/Ssao.h"
 #include "Engine/Rendering/Postprocessing/BloomPostprocessingEffect.h"
 #include "Engine/UI/Ui.h"
 
@@ -22,6 +23,7 @@ namespace Engine
 
         SceneFrameBuffer MultiSampledBuffer;
 
+        Ssao Ssao;
         BloomPostprocessingEffect Bloom;
 
     private:

@@ -14,6 +14,6 @@ out vec4 NormalDepth;
 void main()
 {
     gl_Position = ProjectionMatrix * ViewMatrix * ObjectToWorldMatrix * vec4(inputPosition, 1.0);
-    NormalDepth.xyz = (ObjectToWorldMatrix * vec4(inputNormal, 0.0)).xyz;
+    NormalDepth.xyz = (ViewMatrix * ObjectToWorldMatrix * vec4(inputNormal, 0.0)).xyz;
     NormalDepth.w = -(ViewMatrix * ObjectToWorldMatrix * vec4(inputPosition, 1.0)).z;
 }

@@ -43,6 +43,9 @@ namespace Engine
             renderer->RenderDepth(RenderData);
         }
 
+        Ssao.Render(RenderData, MultiSampledBuffer.GetNormalsBuffer());
+
+        MultiSampledBuffer.BindMultiSampled();
         MultiSampledBuffer.DisableNormalWrite();
         glViewport(0, 0, ScreenWidth, ScreenHeight);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);

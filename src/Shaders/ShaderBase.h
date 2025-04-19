@@ -187,6 +187,16 @@ namespace Shaders
             SetTexture(glGetUniformLocation(Id, Name), Value);
         }
 
+        static void SetUniformArray(const GLint UniformId, const glm::vec3* Array, const GLsizei Count)
+        {
+            glUniform3fv(UniformId, Count, glm::value_ptr(*Array));
+        }
+
+        void SetUniformArray(const char* const Name, const glm::vec3* Array, const GLsizei Count) const
+        {
+            glUniform3fv(glGetUniformLocation(Id, Name), Count, glm::value_ptr(*Array));
+        }
+
         GLint GetUniformLocation(const char* const Name) const
         {
             return glGetUniformLocation(Id, Name);
