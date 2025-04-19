@@ -5,6 +5,7 @@
 #include "Materials/MaterialRaii.h" //Used in SERIALIZATION_EXPORT_MATERIAL
 #include "rapidjson/document.h"
 #include "Shaders/Shader.h"
+#include "imgui.h"
 
 #define SERIALIZATION_EXPORT_MATERIAL(__CLASS__)\
 public:\
@@ -131,5 +132,7 @@ namespace Materials
          * @param Value Data to load properties from.
          */
         virtual void Deserialize(const rapidjson::Value& Value) = 0;
+
+        virtual void DrawImGui() {};
     };
 }

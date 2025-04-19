@@ -1,9 +1,10 @@
 #pragma once
-
 #include <vector>
 
 #include "Serialization/SerializedObject.h"
 #include "glm/glm.hpp"
+#include "imgui.h"
+#include "glm/gtc/type_ptr.hpp"
 
 namespace Engine
 {
@@ -199,6 +200,7 @@ namespace Engine
             return Children.end();
         }
 
+        void DrawImGui();
         SERIALIZATION_EXPORT_CLASS(Transform)
     };
 }

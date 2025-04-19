@@ -48,7 +48,6 @@ endif ()
 # Link libraries
 find_package(rapidjson CONFIG REQUIRED)
 find_package(Tracy CONFIG REQUIRED)
-find_package(Freetype REQUIRED)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE ${OPENGL_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} PRIVATE glad)

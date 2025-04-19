@@ -287,6 +287,13 @@ namespace Engine
         Instance = new LightManager();
     }
 
+    void LightManager::ClearAllLights() 
+    { 
+        DirectionalLight = nullptr;
+        PointLights.clear();
+        SpotLights.clear();
+    }
+
     void LightManager::RenderPointLightsShadowMaps()
     {
         if (PointLights.empty())

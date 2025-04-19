@@ -44,6 +44,8 @@ namespace Engine
     public:
         void Update(float DeltaTime) override;
 
+        void DrawImGui() override;
+
         SERIALIZATION_EXPORT_CLASS(Rotator)
     };
 

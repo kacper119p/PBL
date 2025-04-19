@@ -3,6 +3,8 @@
 #include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
 #include "Shaders/ShaderSourceFiles.h"
+#include "Engine/Textures/TextureManager.h"
+#include <filesystem>
 
 namespace Materials
 {
@@ -58,7 +60,63 @@ namespace Materials
 
     void SkyboxMaterial::UsePointSpotShadows() const
     {
-        GetPointSpotShadowPass().Use();
+        GetPointSpotShadowPass().Use(); }
+
+    void SkyboxMaterial::DrawImGui() 
+    {
+        static bool showBaseTexPopup = false;
+        static std::vector<std::string> availableTextures;
+        std::string texturePath = std::filesystem::absolute("./res/textures").string();
+        static bool scanned = false;
+        if (!scanned)
+        {
+            for (const auto& entry : std::filesystem::recursive_directory_iterator(texturePath))
+            {
+                if (entry.is_regular_file() && entry.path().extension() == ".hdr")
+                    availableTextures.emplace_back(entry.path().string());
+            }
+            scanned = true;
+        }
+        std::string baseMapPath = Texture.GetId() != 0 ? Engine::TextureManager::GetTexturePath(Texture) : "None";
+        ImGui::Separator();
+        ImGui::Text("Base Map:");
+        ImGui::Selectable(baseMapPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
+        if (ImGui::BeginDragDropTarget())
+        {
+            if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
+            {
+                const char* droppedPath = static_cast<const char*>(payload->Data);
+                if (std::filesystem::path(droppedPath).extension() == ".hdr")
+                {
+                    Texture = Engine::TextureManager::GetTexture(droppedPath);
+                }
+            }
+            ImGui::EndDragDropTarget();
+        }
+        if (ImGui::IsItemClicked())
+            showBaseTexPopup = true;
+        if (showBaseTexPopup)
+        {
+            ImGui::OpenPopup("Base Map Picker");
+            showBaseTexPopup = false;
+        }
+        if (ImGui::BeginPopup("Base Map Picker"))
+        {
+            for (const auto& path : availableTextures)
+            {
+                std::filesystem::path fsPath(path);
+                std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
+                if (ImGui::Selectable(displayName.c_str()))
+                {
+                    Texture = Engine::TextureManager::GetTexture(path.c_str());
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::SameLine();
+                ImGui::TextDisabled("(%s)", path.c_str());
+            }
+            ImGui::EndPopup();
+        }
+    
     }
 
     rapidjson::Value SkyboxMaterial::Serialize(rapidjson::Document::AllocatorType& Allocator) const

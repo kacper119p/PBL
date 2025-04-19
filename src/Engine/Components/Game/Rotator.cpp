@@ -9,6 +9,14 @@ namespace Engine
         GetOwner()->GetTransform()->SetEulerAngles(GetOwner()->GetTransform()->GetEulerAngles() + Velocity * DeltaTime);
     }
 
+    void Rotator::DrawImGui()
+    {
+        if (ImGui::CollapsingHeader("Ship Rotator"))
+        {
+            ImGui::InputFloat3("Velocity##Rotator", glm::value_ptr(Velocity));
+        }
+    }
+
     rapidjson::Value Rotator::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION

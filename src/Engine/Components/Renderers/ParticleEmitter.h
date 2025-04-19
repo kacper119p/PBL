@@ -134,6 +134,8 @@ namespace Engine
 
         void SetEmitterSettingsUniforms(Shaders::ComputeShader Shader) const;
 
+        void DrawImGui() override;
+
         SERIALIZATION_EXPORT_CLASS(ParticleEmitter)
     };
 }

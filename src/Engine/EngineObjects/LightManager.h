@@ -92,6 +92,8 @@ namespace Engine
             }
         }
 
+        void ClearAllLights();
+
         void RegisterLight(class PointLight* NewLight)
         {
             if (PointLights.size() >= MaxPointLights)

@@ -51,5 +51,7 @@ namespace Engine
          * @brief Invoked just before deleting this component.
          */
         virtual void OnDestroy();
+
+        virtual void DrawImGui() = 0;
     };
 }

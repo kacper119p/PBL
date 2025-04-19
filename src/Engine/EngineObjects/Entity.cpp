@@ -13,6 +13,15 @@ namespace Engine
         }
     }
 
+    void Entity::DrawImGui()
+    { Transform.DrawImGui();
+        for (Component* component : Components)
+        {
+            component->DrawImGui();
+        }
+    }
+    
+
     rapidjson::Value Entity::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         rapidjson::Value object(rapidjson::kObjectType);

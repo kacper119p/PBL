@@ -127,6 +127,10 @@ void Engine::AudioSource::ResetAudioSettings()
     RollOff = 1.0f;
 }
 
+void Engine::AudioSource::DrawImGui()
+{
+}
+
 rapidjson::Value Engine::AudioSource::Serialize(rapidjson::Document::AllocatorType& Allocator) const
 {
     START_COMPONENT_SERIALIZATION

@@ -4,7 +4,6 @@
 #include "Materials/Material.h"
 #include "Models/Model.h"
 #include "Engine/EngineObjects/Camera.h"
-
 namespace Engine
 {
     /**
@@ -71,6 +70,8 @@ namespace Engine
         void SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const;
 
         void Draw() const;
+
+        void DrawImGui() override;
 
         SERIALIZATION_EXPORT_CLASS(ModelRenderer)
     };

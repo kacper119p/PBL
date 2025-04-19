@@ -105,6 +105,8 @@ namespace Engine
 
         void Start() override;
 
+        void DrawImGui() override;
+
         SERIALIZATION_EXPORT_CLASS(PointLight)
     };
 

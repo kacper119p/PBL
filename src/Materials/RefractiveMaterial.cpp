@@ -3,6 +3,8 @@
 #include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
 #include "Shaders/ShaderSourceFiles.h"
+#include "Engine/Textures/TextureManager.h"
+#include <filesystem>
 
 namespace Materials
 {
@@ -63,7 +65,72 @@ namespace Materials
 
     void RefractiveMaterial::UsePointSpotShadows() const
     {
-        GetPointSpotShadowPass().Use();
+        GetPointSpotShadowPass().Use(); }
+
+    void RefractiveMaterial::DrawImGui() 
+    {
+        float ior = IndexOfRefraction.GetValue();
+        if (ImGui::SliderFloat("Index of Refraction", &ior, 1.0f, 2.5f))
+        {
+            IndexOfRefraction.SetValue(ior);
+        }
+
+        static bool showEnvironmentMapPopup = false;
+        static std::vector<std::string> availableTextures;
+        std::string texturePath = std::filesystem::absolute("./res/textures").string();
+        static bool scanned = false;
+
+        if (!scanned)
+        {
+            for (const auto& entry : std::filesystem::recursive_directory_iterator(texturePath))
+            {
+                if (entry.is_regular_file() && entry.path().extension() == ".png")
+                    availableTextures.emplace_back(entry.path().string());
+            }
+            scanned = true;
+        }
+
+        std::string environmentMapPath =
+                EnvironmentMap.GetId() != 0 ? Engine::TextureManager::GetTexturePath(EnvironmentMap) : "None";
+        ImGui::Separator();
+
+        ImGui::Text("Environment Map:");
+        ImGui::Selectable(environmentMapPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
+        if (ImGui::BeginDragDropTarget())
+        {
+            if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
+            {
+                const char* droppedPath = static_cast<const char*>(payload->Data);
+                if (std::filesystem::path(droppedPath).extension() == ".png")
+                {
+                    EnvironmentMap = Engine::TextureManager::GetTexture(droppedPath);
+                }
+            }
+            ImGui::EndDragDropTarget();
+        }
+        if (ImGui::IsItemClicked())
+            showEnvironmentMapPopup = true;
+        if (showEnvironmentMapPopup)
+        {
+            ImGui::OpenPopup("Environment Map Picker");
+            showEnvironmentMapPopup = false;
+        }
+        if (ImGui::BeginPopup("Environment Map Picker"))
+        {
+            for (const auto& path : availableTextures)
+            {
+                std::filesystem::path fsPath(path);
+                std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
+                if (ImGui::Selectable(displayName.c_str()))
+                {
+                    EnvironmentMap = Engine::TextureManager::GetTexture(path.c_str());
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::SameLine();
+                ImGui::TextDisabled("(%s)", path.c_str());
+            }
+            ImGui::EndPopup();
+        }
     }
 
     rapidjson::Value RefractiveMaterial::Serialize(rapidjson::Document::AllocatorType& Allocator) const
