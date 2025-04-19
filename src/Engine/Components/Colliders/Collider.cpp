@@ -45,7 +45,8 @@ namespace Engine
         return *this;
     }
 
-    void Collider::Update() {  
+    void Collider::Update(float deltaTime) {  
+       DrawDebugMesh();
        colliderVisitor.ManageCollisions();  
     }
 

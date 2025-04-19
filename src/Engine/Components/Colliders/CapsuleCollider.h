@@ -28,6 +28,8 @@ namespace Engine
 
         CapsuleCollider& operator=(const CapsuleCollider& other);
 
+        void DrawDebugMesh() override;
+
         void Start() override;
         void OnDestroy() override;
 

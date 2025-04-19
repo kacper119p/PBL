@@ -28,6 +28,8 @@ namespace Engine
 
         SphereCollider& operator=(const SphereCollider& other);
 
+        void DrawDebugMesh() override;
+
         void Start() override;
         void OnDestroy() override;
 

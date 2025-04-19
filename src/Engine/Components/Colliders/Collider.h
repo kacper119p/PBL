@@ -6,6 +6,11 @@
 #include "Events/TEvent.h"
 #include "ColliderVisitor.h"
 #include "Serialization/SerializationUtility.h"
+#include "../../EngineObjects/Entity.h" // TODO: Fix later. I'm using this way because of indexing problem.
+#include "../Interfaces/IUpdateable.h"
+#include <glad/glad.h> 
+#include <glm/glm.hpp>
+#include <cmath>
 
 namespace Engine
 {
@@ -22,7 +27,7 @@ namespace Engine
     /*
      * @brief Base class for all colliders. Subtypes: boxCollider, sphereCollider, capsuleCollider, meshCollider.
      */
-    class Collider : public Component
+    class Collider : public Component, public IUpdateable
     {
 
     protected:
@@ -61,10 +66,11 @@ namespace Engine
         void EmitCollisionExit(Collider* other);
 
         virtual Collider* GetInstance() = 0;
+        virtual void DrawDebugMesh() = 0;
 
         Collider& operator=(const Collider& other);
 
-        void Update();
+        void Update(float DeltaTime) override;
         
     };
 

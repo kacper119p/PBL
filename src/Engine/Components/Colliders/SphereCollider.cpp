@@ -1,5 +1,6 @@
 #include "SphereCollider.h"
 
+
 namespace Engine
 {
     SphereCollider::SphereCollider(Transform* transform, bool isTrigger, float radius) :
@@ -64,7 +65,67 @@ namespace Engine
     float SphereCollider::GetRadius() const { return radius; }
     void SphereCollider::SetRadius(float radius) { this->radius = radius; }
 
-    void SphereCollider::Start() {}
+    void SphereCollider::DrawDebugMesh()
+    {
+        const int segments = 16;
+        const int rings = 16;
+        const float radius = this->radius;
+
+        glColor3f(0.0f, 1.0f, 0.0f);
+
+        glBegin(GL_LINES);
+        for (int i = 0; i <= rings; ++i)
+        {
+            float phi = glm::pi<float>() * i / rings;
+            float y = radius * cos(phi);
+            float ringRadius = radius * sin(phi);
+
+            for (int j = 0; j < segments; ++j)
+            {
+                float theta1 = 2.0f * glm::pi<float>() * j / segments;
+                float theta2 = 2.0f * glm::pi<float>() * (j + 1) / segments;
+
+                float x1 = ringRadius * cos(theta1);
+                float z1 = ringRadius * sin(theta1);
+
+                float x2 = ringRadius * cos(theta2);
+                float z2 = ringRadius * sin(theta2);
+
+                glVertex3f(x1, y, z1);
+                glVertex3f(x2, y, z2);
+            }
+        }
+        glEnd();
+
+        glBegin(GL_LINES);
+        for (int j = 0; j < segments; ++j)
+        {
+            float theta = 2.0f * glm::pi<float>() * j / segments;
+
+            for (int i = 0; i < rings; ++i)
+            {
+                float phi1 = glm::pi<float>() * i / rings;
+                float phi2 = glm::pi<float>() * (i + 1) / rings;
+
+                float x1 = radius * sin(phi1) * cos(theta);
+                float y1 = radius * cos(phi1);
+                float z1 = radius * sin(phi1) * sin(theta);
+
+                float x2 = radius * sin(phi2) * cos(theta);
+                float y2 = radius * cos(phi2);
+                float z2 = radius * sin(phi2) * sin(theta);
+
+                glVertex3f(x1, y1, z1);
+                glVertex3f(x2, y2, z2);
+            }
+        }
+        glEnd();
+    }
+
+    void SphereCollider::Start() 
+    {
+        transform = GetOwner()->GetTransform();
+    }
 
     void SphereCollider::OnDestroy() {}
 

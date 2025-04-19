@@ -74,7 +74,15 @@ namespace Engine
         return true;
     }
 
-    void MeshCollider::Start() {}
+    void MeshCollider::DrawDebugMesh()
+    {
+        
+    }
+
+    void MeshCollider::Start() 
+    { 
+        transform = GetOwner()->GetTransform();
+    }
 
     void MeshCollider::OnDestroy() {}
 

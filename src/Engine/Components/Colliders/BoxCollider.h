@@ -40,6 +40,8 @@ namespace Engine
         float GetDepth() const;
         void SetDepth(float depth);
 
+        void DrawDebugMesh() override;
+
         BoxCollider& operator=(const BoxCollider& other);
 
         SERIALIZATION_EXPORT_CLASS(BoxCollider)

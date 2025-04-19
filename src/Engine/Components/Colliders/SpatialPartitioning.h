@@ -5,6 +5,7 @@
 #include "Collider.h"
 #include <functional>
 #include "glm/glm.hpp"
+#include "../Interfaces/IUpdateable.h"
 
 namespace std
 {
@@ -20,7 +21,7 @@ namespace std
 
 namespace Engine
 {
-    class SpatialPartitioning
+    class SpatialPartitioning : public IUpdateable
     {
     private:
         float cellSize;
@@ -34,5 +35,8 @@ namespace Engine
         void AddCollider(Collider* collider);
         void RemoveCollider(Collider* collider);
         std::vector<Collider*> GetPotentialCollisions(Collider* collider);
+
+        void Update(float deltaTime) override;
+
     };
 } // namespace Engine

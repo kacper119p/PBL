@@ -32,6 +32,8 @@ namespace Engine
 
         MeshCollider& operator=(const MeshCollider& other);
 
+        void DrawDebugMesh() override;
+
         void Start() override;
         void OnDestroy() override;
 

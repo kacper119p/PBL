@@ -75,9 +75,48 @@ namespace Engine
     float BoxCollider::GetDepth() const { return _depth; }
     void BoxCollider::SetDepth(float depth) { _depth = depth; }
 
-    void BoxCollider::Start()
+    void BoxCollider::DrawDebugMesh()
     {
+        glm::vec3 halfExtents = glm::vec3(_width, _height, _depth) * 0.5f;
 
+        glm::vec3 vertices[8] = {
+                {-halfExtents.x, -halfExtents.y, -halfExtents.z},
+                {halfExtents.x, -halfExtents.y, -halfExtents.z},
+                {halfExtents.x, halfExtents.y, -halfExtents.z},
+                {-halfExtents.x, halfExtents.y, -halfExtents.z},
+                {-halfExtents.x, -halfExtents.y, halfExtents.z},
+                {halfExtents.x, -halfExtents.y, halfExtents.z},
+                {halfExtents.x, halfExtents.y, halfExtents.z},
+                {-halfExtents.x, halfExtents.y, halfExtents.z}
+        };
+
+        unsigned int indices[] = {
+                0, 1, 1, 2, 2, 3, 3, 0,
+                4, 5, 5, 6, 6, 7, 7, 4,
+                0, 4, 1, 5, 2, 6, 3, 7 
+        };
+
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+        glColor3f(0.0f, 1.0f, 0.0f);
+
+        glBegin(GL_LINES);
+        for (unsigned int i = 0; i < sizeof(indices) / sizeof(indices[0]); i += 2)
+        {
+            glm::vec3 start = vertices[indices[i]];
+            glm::vec3 end = vertices[indices[i + 1]];
+
+            glVertex3f(start.x, start.y, start.z);
+            glVertex3f(end.x, end.y, end.z);
+        }
+        glEnd();
+
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
+
+    void BoxCollider::Start()
+    { 
+       transform = GetOwner()->GetTransform();
     }
 
     void BoxCollider::OnDestroy() 
