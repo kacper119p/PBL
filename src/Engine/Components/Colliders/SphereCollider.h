@@ -1,0 +1,39 @@
+#pragma once
+
+#include "Collider.h"
+
+namespace Engine
+{
+    /**
+     * @brief Sphere collider class.
+     * @details Represents a sphere-shaped collider.
+     */
+    class SphereCollider : public Collider
+    {
+
+    public:
+        float radius;
+
+        SphereCollider() = default;
+
+        SphereCollider(Transform* transform, bool isTrigger = false, float radius = 1.0f);
+
+        virtual bool AcceptCollision(ColliderVisitor& visitor) override;
+        //virtual bool CheckCollision(const Collider& other) override;
+
+        inline virtual Collider* GetInstance() override { return this; }
+
+        float GetRadius() const;
+        void SetRadius(float radius);
+
+        SphereCollider& operator=(const SphereCollider& other);
+
+        void DrawDebugMesh() override;
+
+        void Start() override;
+        void OnDestroy() override;
+
+        SERIALIZATION_EXPORT_CLASS(SphereCollider)
+    };
+
+} // namespace Engine
