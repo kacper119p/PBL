@@ -60,4 +60,8 @@ namespace Engine
 
         return potentialCollisions;
     }
+
+    void SpatialPartitioning::Update(float deltaTime)
+    {
+    }
 } // namespace Engine
