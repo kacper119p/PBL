@@ -222,5 +222,5 @@ vec3 CalculateEnvironmentInfluence(vec3 BaseColor, vec3 Normal, vec3 ViewDirecti
     vec2 brdf = texture(BrdfLUT, vec2(max(dot(Normal, ViewDirection), 0.0), Roughness)).rg;
     vec3 specular = prefilteredColor * (kS * brdf.x + brdf.y);
 
-    return (kD * diffuse + specular) * vec3(texture(SSAOMap, gl_FragCoord.xy / vec2(1920, 1080)).r) * AmbientOcclusion;
+    return (kD * diffuse + specular) * min(vec3(texture(SSAOMap, gl_FragCoord.xy / vec2(1920, 1080)).r), AmbientOcclusion);
 }
