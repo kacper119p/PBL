@@ -38,14 +38,13 @@ namespace Engine
         glBindTexture(GL_TEXTURE_2D, NoiseTexture);
         Shaders::Shader::SetUniform(ProjectionMatrixLocation, CameraData.ProjectionMatrix);
         Shaders::Shader::SetUniform(InverseProjectionMatrixLocation, glm::inverse(CameraData.ProjectionMatrix));
+        Shaders::Shader::SetUniformArray(KernelLocation, Kernel, KernelSize);
         ScreenQuad.Draw();
     }
 
     void Ssao::GenerateKernel(std::default_random_engine& Generator,
                               std::uniform_real_distribution<float>& Distribution)
     {
-
-
         for (int i = 0; i < KernelSize; ++i)
         {
             glm::vec3 sample(
@@ -62,10 +61,6 @@ namespace Engine
 
             Kernel[i] = sample;
         }
-
-        // Can be set once as long as SSAO shader is not used anywhere else.
-        Shader.Use();
-        Shader.SetUniformArray("Kernel", Kernel, KernelSize);
     }
 
     void Ssao::LoadShader()
