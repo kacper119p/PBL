@@ -84,9 +84,10 @@ namespace Materials
 
     void WaterMaterial::UsePointSpotShadows() const
     {
-        GetPointSpotShadowPass().Use();
-    }
-
+        GetPointSpotShadowPass().Use(); }
+#if EDITOR
+    void WaterMaterial::DrawImGui() {}
+    #endif
     rapidjson::Value WaterMaterial::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_MATERIAL_SERIALIZATION

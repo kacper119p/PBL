@@ -17,7 +17,9 @@ namespace Materials
 
     public:
         void Use() const override;
-
+#if EDITOR
+        void DrawImGui() override;
+#endif
         SERIALIZATION_EXPORT_MATERIAL(BasicImageMaterial);
     };
 

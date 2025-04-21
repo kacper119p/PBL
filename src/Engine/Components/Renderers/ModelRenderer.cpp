@@ -90,7 +90,7 @@ namespace Engine
             }
         }
     }
-
+#if EDITOR
     void ModelRenderer::DrawImGui() 
     { 
         if (ImGui::CollapsingHeader("Model Renderer", ImGuiTreeNodeFlags_DefaultOpen))
@@ -252,7 +252,7 @@ namespace Engine
 
         }
     }
-
+    #endif
     rapidjson::Value ModelRenderer::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION
