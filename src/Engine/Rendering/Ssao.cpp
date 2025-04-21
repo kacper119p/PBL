@@ -33,7 +33,7 @@ namespace Engine
         glBindFramebuffer(GL_FRAMEBUFFER, FrameBuffer);
         Shader.Use();
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, NormalsTexture);
+        glBindTexture(GL_TEXTURE_2D, NormalsTexture);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, NoiseTexture);
         Shaders::Shader::SetUniform(ProjectionMatrixLocation, CameraData.ProjectionMatrix);

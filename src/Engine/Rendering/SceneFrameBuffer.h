@@ -20,6 +20,9 @@ namespace Engine
         uint32_t NormalsBuffer = 0;
         uint32_t DepthStencilBuffer = 0;
 
+        uint32_t ResolvedNormalsFramebuffer = 0;
+        uint32_t ResolvedNormalsTexture = 0;
+
         uint32_t ResolvedId = 0;
         uint32_t ResolvedColorBuffer = 0;
 
@@ -94,10 +97,17 @@ namespace Engine
             return NormalsBuffer;
         }
 
+        [[nodiscard]] uint32_t GetResolvedNormals() const
+        {
+            return ResolvedNormalsTexture;
+        }
+
         /**
          * @brief Resolves multisampling and writes result to Resolved color buffer.
          */
         void ResolveMultisampling() const;
+
+        void ResolveNormals() const;
 
         void EnableNormalWrite() const
         {

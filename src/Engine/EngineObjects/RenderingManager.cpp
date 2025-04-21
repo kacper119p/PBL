@@ -43,7 +43,8 @@ namespace Engine
             renderer->RenderDepth(RenderData);
         }
 
-        Ssao.Render(RenderData, MultiSampledBuffer.GetNormalsBuffer());
+        MultiSampledBuffer.ResolveNormals();
+        Ssao.Render(RenderData, MultiSampledBuffer.GetResolvedNormals());
 
         MultiSampledBuffer.BindMultiSampled();
         MultiSampledBuffer.DisableNormalWrite();
