@@ -44,6 +44,8 @@ namespace Engine
     void Ssao::GenerateKernel(std::default_random_engine& Generator,
                               std::uniform_real_distribution<float>& Distribution)
     {
+        glm::vec3 kernel[KernelSize];
+
         for (int i = 0; i < KernelSize; ++i)
         {
             glm::vec3 sample(
@@ -58,12 +60,12 @@ namespace Engine
             scale = glm::mix(0.1f, 1.0f, scale * scale);
             sample *= scale;
 
-            Kernel[i] = sample;
+            kernel[i] = sample;
         }
 
         // Can be only set once as long as SSAO shader is not used anywhere else.
         Shader.Use();
-        Shader.SetUniformArray("Kernel", Kernel, KernelSize);
+        Shader.SetUniformArray("Kernel", kernel, KernelSize);
     }
 
     void Ssao::LoadShader()
@@ -72,7 +74,6 @@ namespace Engine
                 Shaders::ShaderSourceFiles("./res/shaders/SSAO/SSAO.vert", nullptr, "./res/shaders/SSAO/SSAO.frag"));
         ProjectionMatrixLocation = Shader.GetUniformLocation("ProjectionMatrix");
         InverseProjectionMatrixLocation = Shader.GetUniformLocation("InverseProjectionMatrix");
-        KernelLocation = Shader.GetUniformLocation("Kernel");
     }
 
     void Ssao::GenerateBuffers()

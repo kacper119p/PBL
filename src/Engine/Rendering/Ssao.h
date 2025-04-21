@@ -13,14 +13,12 @@ namespace Engine
     {
     private:
         static constexpr uint8_t KernelSize = 64;
-        glm::vec3 Kernel[KernelSize];
         uint32_t FrameBuffer = 0;
         uint32_t ColorTexture = 0;
         uint32_t NoiseTexture = 0;
         Shaders::Shader Shader;
         int32_t ProjectionMatrixLocation;
         int32_t InverseProjectionMatrixLocation;
-        int32_t KernelLocation;
         Rendering::ScreenQuad ScreenQuad;
 
     public:
