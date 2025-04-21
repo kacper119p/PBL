@@ -1,3 +1,4 @@
+#if EDITOR
 #include "SceneHierarchyGUI.h"
 
 #include "TransformGui.h"
@@ -67,14 +68,28 @@ void Engine::SceneHierarchyGUI::Draw(Scene* scene)
 {
     ImGui::Begin("Hierarchy");
     ImGui::Text("Scene Hierarchy");
+
     if (Root)
     {
-        // Draw root node (scene)
         DrawHierarchy(Root, scene);
         GizmoManager::GetInstance()->SetManaged(SelectedEntity);
     }
+
+    
+        // Replace the problematic line with the following code to fix the error:
+        if (SelectedEntity && ImGui::IsWindowFocused() && ImGui::IsKeyPressed(ImGuiKey_Delete))
+        {
+           if (SelectedEntity != Root)
+           {
+               // Remove the selected entity from the scene
+               scene->DeleteEntity(SelectedEntity->GetOwner());
+               SelectedEntity = Root; // Reset to root after deletion
+           }
+        }
+
     ImGui::End();
 }
+
 
 void Engine::SceneHierarchyGUI::AddEntityToScene(Scene* scene, Entity* parent)
 {
@@ -90,4 +105,4 @@ void Engine::SceneHierarchyGUI::AddAnimatedModelToScene(Scene* scene, Entity* pa
 {
     Entity* entity = scene->SpawnEntity(parent);
 }
-
+#endif

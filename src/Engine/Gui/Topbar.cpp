@@ -1,3 +1,4 @@
+#if EDITOR
 #include "TopBar.h"
 #include "imgui.h"
 
@@ -31,3 +32,4 @@ void TopBar::Draw()
         ImGui::EndMainMenuBar();
     }
 }
+#endif

@@ -1,3 +1,4 @@
+#if EDITOR
 #include "EditorGUI.h"
 #include "imgui.h"
 #include "imgui_internal.h"
@@ -8,7 +9,9 @@
 #include "Engine/Components/Updateable.h"
 #include "Engine/Components/Renderers/ParticleEmitter.h"
 #include "Engine/Components/Audio/AudioSource.h"
+#include "Engine/EngineObjects/Scene/SceneManager.h"
 #include <filesystem>
+#include <iostream>
 namespace fs = std::filesystem;
 
 void Engine::EditorGUI::Init()
@@ -24,7 +27,7 @@ void Engine::EditorGUI::Render(uint64_t Frame, Scene* scene)
     RenderInspector(Frame, scene);
     AudioManager::GetInstance().RenderGlobalVolumeImGui();
     DrawSelectedEntitysComponents();
-    m_TopBar.Draw();
+    //m_TopBar.Draw();
 
 }
 
@@ -86,6 +89,29 @@ void Engine::EditorGUI::RenderInspector(uint64_t Frame, Scene* scene)
             }
             ImGui::EndPopup();
         }
+
+        static char editableSceneName[256] = {};
+        static std::string lastScenePath;
+
+        std::string currentScenePath = scene->GetPath();
+        if (currentScenePath != lastScenePath)
+        {
+            strncpy_s(editableSceneName, fs::path(currentScenePath).filename().string().c_str(),
+                      sizeof(editableSceneName) - 1);
+            lastScenePath = currentScenePath;
+        }
+
+        ImGui::InputText("Scene File Name", editableSceneName, sizeof(editableSceneName));
+
+        if (ImGui::Button("Save Scene"))
+        {
+            if (!std::string(editableSceneName).empty())
+            {
+                fs::path newScenePath = fs::path("./res/scenes");
+                SceneManager::SaveScene(newScenePath.string() + "/"+ editableSceneName, scene);
+            }
+        }
+
 
         ImGui::Separator();
 
@@ -216,3 +242,4 @@ void Engine::EditorGUI::SetupDockspace()
 
     ImGui::End();
 }
+#endif

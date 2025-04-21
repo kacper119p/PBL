@@ -67,7 +67,9 @@ namespace Engine
         try
         {
             SceneBuilding::SceneBuilder::Build(CurrentScene);
+        #if EDITOR
             EditorGUI.SetHierarchyRoot(CurrentScene->GetRoot()->GetTransform());
+        #endif
         } catch (std::runtime_error& e)
         {
             spdlog::error(e.what());
@@ -104,11 +106,13 @@ namespace Engine
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
             AudioListener->UpdateListener();
 
+            #if EDITOR
             glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, EditorFramebuffer);
             glBlitFramebuffer(0, 0, displayW, displayH, 0, 0, displayW, displayH, GL_COLOR_BUFFER_BIT, GL_NEAREST);
             glBindFramebuffer(GL_FRAMEBUFFER, 0);
             glClear(GL_COLOR_BUFFER_BIT);
+            #endif
 
 #if EDITOR
             // Draw ImGui
@@ -300,10 +304,10 @@ namespace Engine
 
     void Engine::ImGuiRender()
     {
-
+    #if EDITOR
         //LightsGui::Draw();
         EditorGUI.Render(Frame, CurrentScene);
-
+    #endif
     }
 
     void Engine::ImGuiEnd()

@@ -1,4 +1,5 @@
 #pragma once
+#if EDITOR
 #include <glad/glad.h>
 namespace Engine
 {
@@ -10,4 +11,5 @@ namespace Engine
         void SetFramebufferTexture(GLuint texture) { m_FramebufferTexture = texture; }
         void Draw();
     };
-}
+} // namespace Engine
+#endif

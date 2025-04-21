@@ -1,3 +1,4 @@
+#if EDITOR
 #include <algorithm>
 
 #include "AssetsWindowGUI.h"
@@ -81,3 +82,4 @@ void Engine::AssetsWindow::ListDirectory(const std::string& path)
         m_DirectoryEntries.push_back("[Error reading directory]");
     }
 }
+#endif

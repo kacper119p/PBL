@@ -1,5 +1,5 @@
 #pragma once
-
+#if EDITOR
 #include "Engine/Components/Transform.h"
 #include "Engine/EngineObjects/Entity.h"
 
@@ -26,3 +26,4 @@ namespace Engine
         void AddAnimatedModelToScene(Scene* scene, Entity* parent);
     };
 } // namespace Engine
+#endif

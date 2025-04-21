@@ -1,3 +1,4 @@
+#if EDITOR
 #include "SceneViewGUI.h"
 #include "imgui.h"
 #include "imgui_internal.h"
@@ -44,3 +45,4 @@ void Engine::SceneViewGUI::Draw()
 
     ImGui::End();
 }
+#endif

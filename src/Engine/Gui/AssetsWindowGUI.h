@@ -1,5 +1,5 @@
 #pragma once
-
+#if EDITOR
 #include <string>
 #include <vector>
 #include <filesystem>
@@ -18,3 +18,4 @@ namespace Engine
         std::string m_SearchQuery;
     };
 } // namespace Engine
+#endif

@@ -1,4 +1,6 @@
 #pragma once
+
+#if EDITOR
 #include <memory>
 #include "SceneHierarchyGUI.h"
 #include "SceneViewGUI.h"
@@ -38,4 +40,5 @@ namespace Engine {
 
     };
 
-}
+} // namespace Engine
+#endif

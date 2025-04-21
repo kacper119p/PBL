@@ -122,6 +122,7 @@ namespace Engine
         void Deserialize(const rapidjson::Value& Value);
         std::string GetPath() const { return Path; }
         void SetPath(const std::string& Path) { this->Path = Path; }
+        void DeleteEntity(Entity* Entity);
     private:
         static void SerializeEntity(const Entity* Entity, rapidjson::Value& Object,
                                     rapidjson::Document::AllocatorType& Allocator);

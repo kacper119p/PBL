@@ -125,6 +125,30 @@ namespace Engine
         }
     }
 
+    void Scene::DeleteEntity(Entity* entity) 
+    {
+        if (!entity || entity == Root)
+            return;
+
+        // Recursively delete children
+        std::vector<Transform*> children = entity->GetTransform()->GetChildren();
+        for (Transform* child : children)
+        {
+            Entity* childEntity = child->GetOwner();
+            DeleteEntity(childEntity); // Recursive call
+        }
+
+        // Remove from parent
+        Transform* parentTransform = entity->GetTransform()->GetParent();
+        if (parentTransform)
+        {
+            parentTransform->RemoveChild(entity->GetTransform());
+        }
+
+        // Now delete the entity itself
+        delete entity;
+    }
+
     void Scene::SerializeEntity(const Entity* const Entity, rapidjson::Value& Object,
                                 rapidjson::Document::AllocatorType& Allocator)
     {

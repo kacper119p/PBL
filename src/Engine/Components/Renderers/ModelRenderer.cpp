@@ -133,6 +133,9 @@ namespace Engine
             }
                 ImGui::Text("Material file:");
                 materialPath = Material ? Materials::MaterialManager::GetMaterialPath(Material) : "None";
+
+                
+
                 ImGui::Selectable(materialPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
 
                 if (ImGui::BeginDragDropTarget())
@@ -176,7 +179,30 @@ namespace Engine
                     ImGui::EndPopup();
                 }
             
+            static char editableMaterialName[256] = {};
+                static std::string lastMaterialPath;
+
+                std::string currentMaterialPath = materialPath;
+                if (currentMaterialPath != lastMaterialPath)
+                {
+                    strncpy_s(editableMaterialName, fs::path(currentMaterialPath).filename().string().c_str(),
+                              sizeof(editableMaterialName) - 1);
+                    lastMaterialPath = currentMaterialPath;
+                }
             
+            ImGui::InputText("Material File Name", editableMaterialName, sizeof(editableMaterialName));
+
+            if (ImGui::Button("Save"))
+            {
+                if (!std::string(editableMaterialName).empty())
+                {
+                    fs::path newMaterialPath = fs::path("./res/materials/SampleScene");
+                    Materials::MaterialManager::SaveMaterial(newMaterialPath.string() + "/" + editableMaterialName, Material);
+                    //Material = Materials::MaterialManager::GetMaterial(newMaterialPath.string() + "/" + editableMaterialName);
+                }
+            }
+
+
             ImGui::Separator();
             
             ImGui::Text("Model:");
