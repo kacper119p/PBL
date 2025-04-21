@@ -6,6 +6,10 @@
 #include "Engine/Textures/TextureManager.h"
 #include <filesystem>
 
+#if EDITOR
+#include "imgui.h"
+#endif
+
 namespace Materials
 {
     Shaders::Shader ReflectiveMaterial::DepthPass;
@@ -61,10 +65,12 @@ namespace Materials
 
     void ReflectiveMaterial::UsePointSpotShadows() const
     {
-        GetPointSpotShadowPass().Use(); }
+        GetPointSpotShadowPass().Use();
+    }
 
-    void ReflectiveMaterial::DrawImGui() 
-    { 
+#if EDITOR
+    void ReflectiveMaterial::DrawImGui()
+    {
         static bool showEnvironmentMapPopup = false;
         static std::vector<std::string> availableTextures;
         std::string texturePath = std::filesystem::absolute("./res/textures").string();
@@ -122,6 +128,7 @@ namespace Materials
             ImGui::EndPopup();
         }
     }
+#endif
 
     rapidjson::Value ReflectiveMaterial::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {

@@ -40,8 +40,9 @@ namespace Materials
         void UseDirectionalShadows() const override;
 
         void UsePointSpotShadows() const override;
-
+#if EDITOR
         void DrawImGui() override;
+#endif
 
     public:
         [[nodiscard]] Engine::Texture GetBaseMap() const

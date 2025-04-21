@@ -6,6 +6,10 @@
 #include "Engine/Textures/TextureManager.h"
 #include <filesystem>
 
+#if EDITOR
+#include "imgui.h"
+#endif
+
 namespace Materials
 {
     Shaders::Shader SkyboxMaterial::DepthPass;
@@ -60,8 +64,9 @@ namespace Materials
 
     void SkyboxMaterial::UsePointSpotShadows() const
     {
-        GetPointSpotShadowPass().Use(); }
-
+        GetPointSpotShadowPass().Use();
+    }
+#if EDITOR
     void SkyboxMaterial::DrawImGui() 
     {
         static bool showBaseTexPopup = false;
@@ -118,7 +123,7 @@ namespace Materials
         }
     
     }
-
+#endif
     rapidjson::Value SkyboxMaterial::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_MATERIAL_SERIALIZATION

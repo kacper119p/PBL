@@ -6,6 +6,9 @@
 #include "Engine/Textures/TextureManager.h"
 #include <filesystem>
 
+#if EDITOR
+#include "imgui.h"
+#endif
 namespace Materials
 {
     Shaders::Shader RefractiveMaterial::DepthPass;
@@ -65,9 +68,10 @@ namespace Materials
 
     void RefractiveMaterial::UsePointSpotShadows() const
     {
-        GetPointSpotShadowPass().Use(); }
-
-    void RefractiveMaterial::DrawImGui() 
+        GetPointSpotShadowPass().Use();
+    }
+#if EDITOR
+    void RefractiveMaterial::DrawImGui()
     {
         float ior = IndexOfRefraction.GetValue();
         if (ImGui::SliderFloat("Index of Refraction", &ior, 1.0f, 2.5f))
@@ -132,7 +136,7 @@ namespace Materials
             ImGui::EndPopup();
         }
     }
-
+#endif
     rapidjson::Value RefractiveMaterial::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_MATERIAL_SERIALIZATION

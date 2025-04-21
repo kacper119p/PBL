@@ -6,11 +6,11 @@
 #include "Engine/EngineObjects/Scene/Scene.h"
 #include "Models/Model.h"
 #include "Shaders/Shader.h"
-#include "Engine/GUI/EditorGUI.h"
 
 #if EDITOR
 #include "imgui_impl/imgui_impl_glfw.h"
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
+#include "Engine/GUI/EditorGUI.h"
 #endif
 
 namespace Engine
@@ -25,6 +25,7 @@ namespace Engine
         GLuint EditorFramebuffer;
         GLuint EditorColorTexture;
         GLuint EditorDepthRBO = 0;
+
     private:
         GLFWwindow* Window = nullptr;
 
@@ -39,9 +40,9 @@ namespace Engine
         glm::vec2 LastMousePosition = glm::vec2(0, 0);
 
         Scene* CurrentScene;
+#if EDITOR
         EditorGUI EditorGUI;
-
-
+#endif
 
     public:
         Engine();
