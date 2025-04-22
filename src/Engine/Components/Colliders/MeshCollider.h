@@ -2,7 +2,7 @@
 
 #include "Collider.h"
 #include "Models/Mesh.h" // TODO: Fix later. Double inclusion. I'm using this way because of indexing problem.
-
+#include "Engine/Components/Renderers/Renderer.h"
 namespace Engine
 {
     /**
@@ -33,6 +33,15 @@ namespace Engine
         MeshCollider& operator=(const MeshCollider& other);
 
         void DrawDebugMesh() override;
+
+        void RenderDepth(const CameraRenderData& RenderData) override;
+
+        void Render(const CameraRenderData& RenderData) override;
+
+        void RenderDirectionalShadows(const CameraRenderData& RenderData) override;
+
+        void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
+                                    const glm::mat4* SpaceTransformMatrices) override;
 
         void Start() override;
         void OnDestroy() override;

@@ -142,6 +142,17 @@ namespace Engine
         }
     }
 
+    void CapsuleCollider::Render(const CameraRenderData& RenderData) { CapsuleCollider::DrawDebugMesh(); }
+
+    void CapsuleCollider::RenderDepth(const CameraRenderData& RenderData) {}
+
+    void CapsuleCollider::RenderDirectionalShadows(const CameraRenderData& RenderData) {}
+
+    void CapsuleCollider::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
+                                             const glm::mat4* SpaceTransformMatrices)
+    {
+    }
+
     void CapsuleCollider::Start() 
     { 
         transform = GetOwner()->GetTransform();

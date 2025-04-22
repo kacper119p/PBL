@@ -20,6 +20,10 @@
 #include "Materials/WaterMaterial.h"
 #include "Engine/Components/Game/ShipRoller.h"
 #include "Engine/Components/Game/Rotator.h"
+#include "Engine/Components/Colliders/Collider.h"
+#include "Engine/Components/Colliders/BoxCollider.h"
+#include "Engine/Components/Colliders/SphereCollider.h"
+#include "Engine/Components/Colliders/CapsuleCollider.h"
 #include "Engine/EngineObjects/Scene/SceneManager.h"
 #include "Engine/Textures/Texture.h"
 #include "Engine/Textures/TextureManager.h"
@@ -41,7 +45,12 @@ namespace Scene
 
         Scene = new class Engine::Scene();
         Engine::SceneManager::LoadScene("./res/scenes/SampleScene.lvl", Scene);
-        Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
+        Engine::Entity* entity = Scene->SpawnEntity(nullptr);
+        Engine::BoxCollider* collider = entity->AddComponent<Engine::BoxCollider>();
+        collider->Start();
+        collider->DrawDebugMesh();
+
+        // Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene); 
     }
 
 } // Scene

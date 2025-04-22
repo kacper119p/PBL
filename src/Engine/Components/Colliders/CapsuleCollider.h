@@ -1,6 +1,6 @@
 #pragma once
 #include "Collider.h"
-
+#include "Engine/Components/Renderers/Renderer.h"
 namespace Engine
 {
     /**
@@ -29,6 +29,15 @@ namespace Engine
         CapsuleCollider& operator=(const CapsuleCollider& other);
 
         void DrawDebugMesh() override;
+
+        void RenderDepth(const CameraRenderData& RenderData) override;
+
+        void Render(const CameraRenderData& RenderData) override;
+
+        void RenderDirectionalShadows(const CameraRenderData& RenderData) override;
+
+        void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
+                                    const glm::mat4* SpaceTransformMatrices) override;
 
         void Start() override;
         void OnDestroy() override;

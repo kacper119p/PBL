@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Collider.h"
+#include "Engine/Components/Renderers/Renderer.h"
 
 namespace Engine
 {
@@ -18,8 +19,12 @@ namespace Engine
         float _height;
         float _depth;
 
+        unsigned int VAO = 0;
+        unsigned int VBO = 0;
+        unsigned int EBO = 0;
+
     public:
-        BoxCollider() = default;
+        BoxCollider();
         BoxCollider(Transform* transform, bool isTrigger = false, float width = 1.0f, float height = 1.0f,
                     float depth = 1.0f);
 
@@ -39,6 +44,15 @@ namespace Engine
 
         float GetDepth() const;
         void SetDepth(float depth);
+
+        void RenderDepth(const CameraRenderData& RenderData) override;
+
+        void Render(const CameraRenderData& RenderData) override;
+
+        void RenderDirectionalShadows(const CameraRenderData& RenderData) override;
+
+        void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
+                                    const glm::mat4* SpaceTransformMatrices) override;
 
         void DrawDebugMesh() override;
 

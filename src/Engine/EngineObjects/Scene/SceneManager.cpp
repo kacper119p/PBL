@@ -16,5 +16,6 @@ namespace Engine
         rapidjson::Document data;
         Serialization::ReadJsonFile(Path.c_str(), data);
         Scene->Deserialize(data);
+
     }
 } // Engine

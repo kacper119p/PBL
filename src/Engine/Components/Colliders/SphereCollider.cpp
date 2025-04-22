@@ -122,6 +122,18 @@ namespace Engine
         glEnd();
     }
 
+    void SphereCollider::Render(const CameraRenderData& RenderData) { SphereCollider::DrawDebugMesh(); }
+
+    void SphereCollider::RenderDepth(const CameraRenderData& RenderData) {}
+
+    void SphereCollider::RenderDirectionalShadows(const CameraRenderData& RenderData) {}
+
+    void SphereCollider::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
+                                             const glm::mat4* SpaceTransformMatrices)
+    {
+    }
+
+
     void SphereCollider::Start() 
     {
         transform = GetOwner()->GetTransform();

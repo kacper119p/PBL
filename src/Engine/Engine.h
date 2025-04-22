@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Components/Audio/AudioListener.h"
+#include "Components/Colliders/BoxCollider.h"
 #include "glfw/glfw3.h"
 #include "Engine/EngineObjects/Camera.h"
 #include "Engine/EngineObjects/Scene/Scene.h"
@@ -20,6 +21,7 @@ namespace Engine
         constexpr static const char* const GlslVersion = "#version 460";
         static constexpr int32_t GlVersionMajor = 4;
         static constexpr int32_t GlVersionMinor = 6;
+        Collider* Collider = nullptr;
 
     private:
         GLFWwindow* Window = nullptr;
@@ -35,7 +37,7 @@ namespace Engine
         glm::vec2 LastMousePosition = glm::vec2(0, 0);
 
         Scene* Scene;
-
+        
     public:
         Engine();
 

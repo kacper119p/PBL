@@ -1,8 +1,9 @@
 #include "BoxCollider.h"
-#include "Serialization/SerializationUtility.h"
 
 namespace Engine
 {
+    BoxCollider::BoxCollider() : _width(1.0f), _height(1.0f), _depth(1.0f) { this->colliderType = BOX; }
+
     BoxCollider::BoxCollider(Transform* transform, bool isTrigger, float width, float height, float depth) :
         Collider(transform, isTrigger), _width(width), _height(height), _depth(depth)
     {
@@ -76,47 +77,78 @@ namespace Engine
     void BoxCollider::SetDepth(float depth) { _depth = depth; }
 
     void BoxCollider::DrawDebugMesh()
+{
+    glm::vec3 halfExtents = glm::vec3(_width, _height, _depth) * 0.5f;
+
+    // Wspó³rzêdne wierzcho³ków
+    float vertices[] = {
+        -halfExtents.x, -halfExtents.y, -halfExtents.z,
+         halfExtents.x, -halfExtents.y, -halfExtents.z,
+         halfExtents.x,  halfExtents.y, -halfExtents.z,
+        -halfExtents.x,  halfExtents.y, -halfExtents.z,
+        -halfExtents.x, -halfExtents.y,  halfExtents.z,
+         halfExtents.x, -halfExtents.y,  halfExtents.z,
+         halfExtents.x,  halfExtents.y,  halfExtents.z,
+        -halfExtents.x,  halfExtents.y,  halfExtents.z
+    };
+
+    // Indeksy linii
+    unsigned int indices[] = {
+        0, 1, 1, 2, 2, 3, 3, 0,
+        4, 5, 5, 6, 6, 7, 7, 4,
+        0, 4, 1, 5, 2, 6, 3, 7
+    };
+
+    // Tworzenie VAO i VBO
+    unsigned int VAO, VBO, EBO;
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    glGenBuffers(1, &EBO);
+
+    glBindVertexArray(VAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    // Ustawienie trybu rysowania na linie
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    // Rysowanie
+    glBindVertexArray(VAO);
+    glDrawElements(GL_LINES, sizeof(indices) / sizeof(indices[0]), GL_UNSIGNED_INT, 0);
+
+    // Przywrócenie trybu wype³nienia
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    // Czyszczenie
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &EBO);
+}
+
+    void BoxCollider::Render(const CameraRenderData& RenderData) { 
+        BoxCollider::DrawDebugMesh();
+    }
+
+    void BoxCollider::RenderDepth(const CameraRenderData& RenderData) {}
+
+    void BoxCollider::RenderDirectionalShadows(const CameraRenderData& RenderData) {}
+
+    void BoxCollider::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
+                                             const glm::mat4* SpaceTransformMatrices)
     {
-        glm::vec3 halfExtents = glm::vec3(_width, _height, _depth) * 0.5f;
-
-        glm::vec3 vertices[8] = {
-                {-halfExtents.x, -halfExtents.y, -halfExtents.z},
-                {halfExtents.x, -halfExtents.y, -halfExtents.z},
-                {halfExtents.x, halfExtents.y, -halfExtents.z},
-                {-halfExtents.x, halfExtents.y, -halfExtents.z},
-                {-halfExtents.x, -halfExtents.y, halfExtents.z},
-                {halfExtents.x, -halfExtents.y, halfExtents.z},
-                {halfExtents.x, halfExtents.y, halfExtents.z},
-                {-halfExtents.x, halfExtents.y, halfExtents.z}
-        };
-
-        unsigned int indices[] = {
-                0, 1, 1, 2, 2, 3, 3, 0,
-                4, 5, 5, 6, 6, 7, 7, 4,
-                0, 4, 1, 5, 2, 6, 3, 7 
-        };
-
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-        glColor3f(0.0f, 1.0f, 0.0f);
-
-        glBegin(GL_LINES);
-        for (unsigned int i = 0; i < sizeof(indices) / sizeof(indices[0]); i += 2)
-        {
-            glm::vec3 start = vertices[indices[i]];
-            glm::vec3 end = vertices[indices[i + 1]];
-
-            glVertex3f(start.x, start.y, start.z);
-            glVertex3f(end.x, end.y, end.z);
-        }
-        glEnd();
-
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
 
     void BoxCollider::Start()
     { 
-       transform = GetOwner()->GetTransform();
+       transform = Component::GetOwner()->GetTransform();
+
     }
 
     void BoxCollider::OnDestroy() 

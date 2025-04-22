@@ -14,6 +14,12 @@ namespace Engine
         : isTrigger(isTrigger), isStatic(isStatic), transform(transform), spatial(spatialParam) {
         this->colliderVisitor = ConcreteColliderVisitor(spatialParam, this);
         colliderType = BOX; // Default type, can be changed in derived classes
+        UpdateManager::GetInstance()->RegisterComponent(this);
+    }
+
+    Collider::~Collider() 
+    { 
+        UpdateManager::GetInstance()->UnregisterComponent(this);
     }
 
     void Collider::SetTrigger(bool isTrigger) { this->isTrigger = isTrigger; }
@@ -49,5 +55,14 @@ namespace Engine
        DrawDebugMesh();
        colliderVisitor.ManageCollisions();  
     }
+
+    void RenderDepth(const CameraRenderData& RenderData) {}
+
+    void Render(const CameraRenderData& RenderData) {}
+
+    void RenderDirectionalShadows(const CameraRenderData& RenderData) {}
+
+    void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
+                                const glm::mat4* SpaceTransformMatrices) {}
 
 } // namespace Engine

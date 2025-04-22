@@ -8,9 +8,11 @@
 #include "Serialization/SerializationUtility.h"
 #include "../../EngineObjects/Entity.h" // TODO: Fix later. I'm using this way because of indexing problem.
 #include "../Interfaces/IUpdateable.h"
+#include "../../EngineObjects/UpdateManager.h"
 #include <glad/glad.h> 
 #include <glm/glm.hpp>
 #include <cmath>
+#include "Engine/Components/Renderers/Renderer.h"
 
 namespace Engine
 {
@@ -27,7 +29,7 @@ namespace Engine
     /*
      * @brief Base class for all colliders. Subtypes: boxCollider, sphereCollider, capsuleCollider, meshCollider.
      */
-    class Collider : public Component, public IUpdateable
+    class Collider : public Component, public IUpdateable, public Renderer
     {
 
     protected:
@@ -47,7 +49,7 @@ namespace Engine
 
         Collider();
         Collider(Transform* transform, bool isTrigger = false, bool isStatic = false, SpatialPartitioning* spatial = nullptr);
-        virtual ~Collider() = default;
+        virtual ~Collider();
 
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
         
@@ -71,7 +73,17 @@ namespace Engine
         Collider& operator=(const Collider& other);
 
         void Update(float DeltaTime) override;
+
+        void RenderDepth(const CameraRenderData& RenderData) override;
+
+        void Render(const CameraRenderData& RenderData) override;
+
+        void RenderDirectionalShadows(const CameraRenderData& RenderData) override;
+
+        void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
+                                    const glm::mat4* SpaceTransformMatrices) override;
         
+
     };
 
 } // namespace Engine

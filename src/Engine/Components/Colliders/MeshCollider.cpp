@@ -79,6 +79,18 @@ namespace Engine
         
     }
 
+    void MeshCollider::Render(const CameraRenderData& RenderData) { MeshCollider::DrawDebugMesh(); }
+
+    void MeshCollider::RenderDepth(const CameraRenderData& RenderData) {}
+
+    void MeshCollider::RenderDirectionalShadows(const CameraRenderData& RenderData) {}
+
+    void MeshCollider::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
+                                             const glm::mat4* SpaceTransformMatrices)
+    {
+    }
+
+
     void MeshCollider::Start() 
     { 
         transform = GetOwner()->GetTransform();
