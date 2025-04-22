@@ -56,13 +56,13 @@ namespace Engine
        colliderVisitor.ManageCollisions();  
     }
 
-    void RenderDepth(const CameraRenderData& RenderData) {}
+    void Collider::RenderDepth(const CameraRenderData& RenderData) {}
 
-    void Render(const CameraRenderData& RenderData) {}
+    void Collider::Render(const CameraRenderData& RenderData) {}
 
-    void RenderDirectionalShadows(const CameraRenderData& RenderData) {}
+    void Collider::RenderDirectionalShadows(const CameraRenderData& RenderData) {}
 
-    void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
+    void Collider::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                 const glm::mat4* SpaceTransformMatrices) {}
 
 } // namespace Engine

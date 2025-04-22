@@ -29,7 +29,7 @@ namespace Engine
     /*
      * @brief Base class for all colliders. Subtypes: boxCollider, sphereCollider, capsuleCollider, meshCollider.
      */
-    class Collider : public Component, public IUpdateable, public Renderer
+    class Collider : public IUpdateable, public Renderer
     {
 
     protected:
