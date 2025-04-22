@@ -32,7 +32,7 @@ namespace Engine
 
         MeshCollider& operator=(const MeshCollider& other);
 
-        void DrawDebugMesh() override;
+        void DrawDebugMesh(const CameraRenderData& RenderData) override;
 
         void RenderDepth(const CameraRenderData& RenderData) override;
 

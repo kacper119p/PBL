@@ -28,7 +28,7 @@ namespace Engine
 
         SphereCollider& operator=(const SphereCollider& other);
 
-        void DrawDebugMesh() override;
+        void DrawDebugMesh(const CameraRenderData& RenderData) override;
 
         void RenderDepth(const CameraRenderData& RenderData) override;
 

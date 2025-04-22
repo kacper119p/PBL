@@ -54,12 +54,14 @@ namespace Engine
         void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                     const glm::mat4* SpaceTransformMatrices) override;
 
-        void DrawDebugMesh() override;
+        void DrawDebugMesh(const CameraRenderData& RenderData) override;
 
         BoxCollider& operator=(const BoxCollider& other);
 
         SERIALIZATION_EXPORT_CLASS(BoxCollider)
-        
+
+        private:
+        std::string loadShaderSource(const char* filePath);
     };
 
 } // namespace Engine

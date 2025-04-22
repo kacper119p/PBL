@@ -48,7 +48,6 @@ namespace Scene
         Engine::Entity* entity = Scene->SpawnEntity(nullptr);
         Engine::BoxCollider* collider = entity->AddComponent<Engine::BoxCollider>();
         collider->Start();
-        collider->DrawDebugMesh();
 
         // Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene); 
     }

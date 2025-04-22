@@ -74,12 +74,12 @@ namespace Engine
         return true;
     }
 
-    void MeshCollider::DrawDebugMesh()
+    void MeshCollider::DrawDebugMesh(const CameraRenderData& RenderData)
     {
         
     }
 
-    void MeshCollider::Render(const CameraRenderData& RenderData) { MeshCollider::DrawDebugMesh(); }
+    void MeshCollider::Render(const CameraRenderData& RenderData) { MeshCollider::DrawDebugMesh(RenderData); }
 
     void MeshCollider::RenderDepth(const CameraRenderData& RenderData) {}
 

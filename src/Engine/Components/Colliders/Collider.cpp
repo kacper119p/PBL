@@ -52,7 +52,6 @@ namespace Engine
     }
 
     void Collider::Update(float deltaTime) {  
-       DrawDebugMesh();
        colliderVisitor.ManageCollisions();  
     }
 

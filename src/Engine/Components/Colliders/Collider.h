@@ -68,7 +68,7 @@ namespace Engine
         void EmitCollisionExit(Collider* other);
 
         virtual Collider* GetInstance() = 0;
-        virtual void DrawDebugMesh() = 0;
+        virtual void DrawDebugMesh(const CameraRenderData& RenderData) = 0;
 
         Collider& operator=(const Collider& other);
 

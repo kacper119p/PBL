@@ -60,7 +60,7 @@ namespace Engine
     float CapsuleCollider::GetHeight() const { return _height; }
     void CapsuleCollider::SetHeight(float height) { _height = height; }
 
-    void CapsuleCollider::DrawDebugMesh()
+    void CapsuleCollider::DrawDebugMesh(const CameraRenderData& RenderData)
     {
         const int segments = 16;
         const int rings = 8;
@@ -142,7 +142,7 @@ namespace Engine
         }
     }
 
-    void CapsuleCollider::Render(const CameraRenderData& RenderData) { CapsuleCollider::DrawDebugMesh(); }
+    void CapsuleCollider::Render(const CameraRenderData& RenderData) { CapsuleCollider::DrawDebugMesh(RenderData); }
 
     void CapsuleCollider::RenderDepth(const CameraRenderData& RenderData) {}
 

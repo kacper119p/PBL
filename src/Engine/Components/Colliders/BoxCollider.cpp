@@ -1,13 +1,24 @@
 #include "BoxCollider.h"
+#include "Shaders/ShaderManager.h"
+#include "Engine/EngineObjects/RenderingManager.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 
 namespace Engine
 {
-    BoxCollider::BoxCollider() : _width(1.0f), _height(1.0f), _depth(1.0f) { this->colliderType = BOX; }
+    BoxCollider::BoxCollider() : _width(1.0f), _height(1.0f), _depth(1.0f) 
+    { 
+        this->colliderType = BOX; 
+        RenderingManager::GetInstance()->RegisterRenderer(this);
+    }
 
     BoxCollider::BoxCollider(Transform* transform, bool isTrigger, float width, float height, float depth) :
         Collider(transform, isTrigger), _width(width), _height(height), _depth(depth)
     {
         this->colliderType = BOX;
+        RenderingManager::GetInstance()->RegisterRenderer(this);
     }
 
     bool BoxCollider::AcceptCollision(ColliderVisitor& visitor)
@@ -37,6 +48,20 @@ namespace Engine
         _depth = other._depth;
 
         return *this;
+    }
+
+    std::string BoxCollider::loadShaderSource(const char* filePath)
+    {
+        std::ifstream shaderFile(filePath);
+        std::stringstream shaderStream;
+
+        if (!shaderFile)
+        {
+            throw std::runtime_error("Failed to open shader file");
+        }
+
+        shaderStream << shaderFile.rdbuf();
+        return shaderStream.str();
     }
 
     rapidjson::Value BoxCollider::Serialize(rapidjson::Document::AllocatorType& Allocator) const {
@@ -76,8 +101,8 @@ namespace Engine
     float BoxCollider::GetDepth() const { return _depth; }
     void BoxCollider::SetDepth(float depth) { _depth = depth; }
 
-    void BoxCollider::DrawDebugMesh()
-{
+    void BoxCollider::DrawDebugMesh(const CameraRenderData& RenderData)
+    {
     glm::vec3 halfExtents = glm::vec3(_width, _height, _depth) * 0.5f;
 
     // Wspó³rzêdne wierzcho³ków
@@ -116,10 +141,23 @@ namespace Engine
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
+    Shaders::Shader shader = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles("res/shaders/basic/basic.vert", nullptr,
+                                      "res/shaders/basic/basic.frag"));
+
+    shader.Use();
+
+    shader.SetUniform("CameraPosition", RenderData.CameraPosition);
+    shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
+    shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
+    shader.SetUniform("ObjectToWorldMatrix", GetOwner()->GetTransform()->GetLocalToWorldMatrix());
+
     // Ustawienie trybu rysowania na linie
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
+    
     // Rysowanie
+    glDebugMessageInsert(GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_TYPE_MARKER, 0, GL_DEBUG_SEVERITY_NOTIFICATION, 0,
+                         "Drawing BoxCollider");
     glBindVertexArray(VAO);
     glDrawElements(GL_LINES, sizeof(indices) / sizeof(indices[0]), GL_UNSIGNED_INT, 0);
 
@@ -133,7 +171,7 @@ namespace Engine
 }
 
     void BoxCollider::Render(const CameraRenderData& RenderData) { 
-        BoxCollider::DrawDebugMesh();
+        BoxCollider::DrawDebugMesh(RenderData);
     }
 
     void BoxCollider::RenderDepth(const CameraRenderData& RenderData) {}

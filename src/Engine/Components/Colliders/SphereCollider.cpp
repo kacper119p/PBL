@@ -65,7 +65,7 @@ namespace Engine
     float SphereCollider::GetRadius() const { return radius; }
     void SphereCollider::SetRadius(float radius) { this->radius = radius; }
 
-    void SphereCollider::DrawDebugMesh()
+    void SphereCollider::DrawDebugMesh(const CameraRenderData& RenderData)
     {
         const int segments = 16;
         const int rings = 16;
@@ -122,7 +122,7 @@ namespace Engine
         glEnd();
     }
 
-    void SphereCollider::Render(const CameraRenderData& RenderData) { SphereCollider::DrawDebugMesh(); }
+    void SphereCollider::Render(const CameraRenderData& RenderData) { SphereCollider::DrawDebugMesh(RenderData); }
 
     void SphereCollider::RenderDepth(const CameraRenderData& RenderData) {}
 
