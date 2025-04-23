@@ -7,7 +7,7 @@
 #include "Engine/Components/Renderers/ModelRenderer.h"
 
 #include "imgui.h"
-Engine::SceneHierarchyGUI::SceneHierarchyGUI(Transform* Root) : Root(Root), SelectedEntity(Root){}
+Engine::SceneHierarchyGUI::SceneHierarchyGUI(Transform* Root) : Root(Root), SelectedEntity(nullptr){}
 
 void Engine::SceneHierarchyGUI::DrawHierarchy(Transform* entity, Scene* scene)
 {
@@ -106,7 +106,6 @@ void Engine::SceneHierarchyGUI::Draw(Scene* scene)
         if (SelectedEntity != Root)
         {
             scene->DeleteEntity(SelectedEntity->GetOwner());
-            SelectedEntity = Root; // Reset to root after deletion
         }
     }
 

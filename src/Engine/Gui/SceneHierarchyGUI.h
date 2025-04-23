@@ -16,7 +16,7 @@ namespace Engine
         void SetRoot(Transform* root)
         {
             Root = root;
-            SelectedEntity = root;
+            SelectedEntity = nullptr;
         }
         void DrawHierarchy(Transform* entity, Scene* scene);
         void Draw(Scene* scene);
