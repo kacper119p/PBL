@@ -47,16 +47,16 @@ namespace Scene
         Scene = new class Engine::Scene();
         Engine::SceneManager::LoadScene("./res/scenes/SampleScene.lvl", Scene);
 
-        Engine::Entity* boxEntity = Scene->SpawnEntity(nullptr);
-        Engine::BoxCollider* boxCollider = boxEntity->AddComponent<Engine::BoxCollider>();
-        boxEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+        //Engine::Entity* boxEntity = Scene->SpawnEntity(nullptr);
+        //Engine::BoxCollider* boxCollider = boxEntity->AddComponent<Engine::BoxCollider>();
+        //boxEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 
-        Engine::Entity* secondBoxEntity = Scene->SpawnEntity(nullptr);
-        Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
-        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(5.0f, 0.0f, 0.0f));
+        //Engine::Entity* secondBoxEntity = Scene->SpawnEntity(nullptr);
+        //Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
+        //secondBoxEntity->GetTransform()->SetPosition(glm::vec3(5.0f, 0.0f, 0.0f));
 
-        boxCollider->AddColliderToSpatial(secondBoxCollider);
-        secondBoxCollider->AddColliderToSpatial(boxCollider);
+        //boxCollider->AddColliderToSpatial(secondBoxCollider);
+        //secondBoxCollider->AddColliderToSpatial(boxCollider);
 
         /*glm::vec3 boxVelocity = glm::vec3(-0.1f, 0.0f, 0.0f);
         for (int i = 0; i < 1000; ++i)
