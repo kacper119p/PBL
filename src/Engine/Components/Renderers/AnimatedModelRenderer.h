@@ -79,7 +79,9 @@ namespace Engine
         void SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const;
 
         void Draw() const;
-
+        #if EDITOR
+        void DrawImGui() override;
+        #endif
         SERIALIZATION_EXPORT_CLASS(AnimatedModelRenderer)
     };
 } // namespace Engine

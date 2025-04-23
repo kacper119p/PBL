@@ -2,11 +2,11 @@
 
 #include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
-#include "Engine/Textures/TextureManager.h"
-#include <filesystem>
 
 #if EDITOR
 #include "imgui.h"
+#include "Engine/Textures/TextureManager.h"
+#include <filesystem>
 #endif
 
 namespace Materials
