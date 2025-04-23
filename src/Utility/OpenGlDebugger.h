@@ -1,8 +1,10 @@
 #pragma once
+
+#if DEBUG
+
 #include <glad/glad.h>
 #include "GLFW/glfw3.h"
 
-#if DEBUG
 namespace Utility
 {
     /**

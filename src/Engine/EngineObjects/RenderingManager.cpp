@@ -7,7 +7,7 @@ namespace Engine
     RenderingManager* RenderingManager::Instance = nullptr;
 
     RenderingManager::RenderingManager(const glm::ivec2 Resolution) :
-        MultiSampledBuffer(Resolution), ResolvedBuffer(Resolution)
+        MultiSampledBuffer(Resolution)
     {
     }
 
@@ -24,7 +24,8 @@ namespace Engine
     {
         LightManager::GetInstance()->RenderShadowMaps(RenderData);
 
-        MultiSampledBuffer.Bind();
+        MultiSampledBuffer.BindMultiSampled();
+        MultiSampledBuffer.EnableNormalWrite();
 
         glDepthMask(GL_TRUE);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
@@ -32,7 +33,6 @@ namespace Engine
         glClear(GL_DEPTH_BUFFER_BIT);
 
         glViewport(0, 0, ScreenWidth, ScreenHeight);
-        glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
         glEnable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);
@@ -43,6 +43,11 @@ namespace Engine
             renderer->RenderDepth(RenderData);
         }
 
+        MultiSampledBuffer.ResolveNormals();
+        Ssao.Render(RenderData, MultiSampledBuffer.GetResolvedNormals());
+
+        MultiSampledBuffer.BindMultiSampled();
+        MultiSampledBuffer.DisableNormalWrite();
         glViewport(0, 0, ScreenWidth, ScreenHeight);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
         glDepthMask(GL_FALSE);
@@ -63,8 +68,8 @@ namespace Engine
             glDisable(GL_BLEND);
         }
 
-        MultiSampledBuffer.ResolveMultisampling(ResolvedBuffer);
-        Bloom.Render(ResolvedBuffer.GetColorBuffer());
+        MultiSampledBuffer.ResolveMultisampling();
+        Bloom.Render(MultiSampledBuffer.GetResolvedColorBuffer());
     }
 
     void RenderingManager::RenderAllDirectionalShadowMap(const CameraRenderData& RenderData, unsigned int Target,

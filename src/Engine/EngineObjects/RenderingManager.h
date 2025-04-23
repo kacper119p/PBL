@@ -3,8 +3,8 @@
 #include <vector>
 #include "Engine/Components/Renderers/Renderer.h"
 #include "CameraRenderData.h"
-#include "Engine/Rendering/MultiSampledSceneFrameBuffer.h"
 #include "Engine/Rendering/SceneFrameBuffer.h"
+#include "Engine/Rendering/Ssao.h"
 #include "Engine/Rendering/Postprocessing/BloomPostprocessingEffect.h"
 #include "Engine/UI/Ui.h"
 
@@ -21,9 +21,9 @@ namespace Engine
 
         static RenderingManager* Instance;
 
-        MultiSampledSceneFrameBuffer MultiSampledBuffer;
-        SceneFrameBuffer ResolvedBuffer;
+        SceneFrameBuffer MultiSampledBuffer;
 
+        Ssao Ssao;
         BloomPostprocessingEffect Bloom;
 
     private:
@@ -67,6 +67,11 @@ namespace Engine
             {
                 this->Ui = nullptr;
             }
+        }
+
+        [[nodiscard]] unsigned int GetSsaoTextureId() const
+        {
+            return Ssao.GetColorTexture();
         }
 
         void RenderAll(const CameraRenderData& RenderData, int ScreenWidth, int ScreenHeight);
