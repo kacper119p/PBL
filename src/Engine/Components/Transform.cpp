@@ -109,6 +109,7 @@ namespace Engine
         IsDirty = false;
     }
 
+#if EDITOR
     void Transform::DrawImGui()
     {
         if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen))
@@ -161,6 +162,7 @@ namespace Engine
             }
         }
     }
+#endif
 
     rapidjson::Value Transform::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
