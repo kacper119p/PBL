@@ -48,6 +48,9 @@ namespace Engine
 
         MultiSampledBuffer.BindMultiSampled();
         MultiSampledBuffer.DisableNormalWrite();
+
+        Frustum.UpdateFrustum(RenderData);
+
         glViewport(0, 0, ScreenWidth, ScreenHeight);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
         glDepthMask(GL_FALSE);

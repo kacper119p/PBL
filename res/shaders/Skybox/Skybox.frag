@@ -2,7 +2,7 @@
 
 in vec3 Direction;
 
-uniform samplerCube Texture;
+layout (location = 0) uniform samplerCube Texture;
 
 out vec4 FragColor;
 
