@@ -1,6 +1,8 @@
 #pragma once
 #include <cstdint>
 
+#include "Utility/AssertionsUtility.h"
+
 namespace Engine
 {
     class Texture
@@ -23,6 +25,14 @@ namespace Engine
         [[nodiscard]] uint32_t GetId() const
         {
             return TextureId;
+        }
+
+        [[nodiscard]] uint64_t GetHandleReadonly() const
+        {
+            CHECK_MESSAGE(TextureId != 0, "Texture not initialized");
+            const uint64_t handle = glGetTextureHandleARB(TextureId);
+            glMakeImageHandleResidentARB(handle, GL_READ_ONLY);
+            return handle;
         }
 
         bool operator==(const Texture Other) const
