@@ -70,11 +70,6 @@ namespace Engine
         glm::mat4 objectToWorldMatrix = GetOwner()->GetTransform()->GetLocalToWorldMatrix();
         for (int i = 0; i < Model->GetMeshCount(); ++i)
         {
-            if (Model->GetPath() == "./res/models/SkySphere.fbx")
-            {
-                Model->GetMesh(i)->Draw();
-                return;
-            }
             if (frustum.IsBoxVisible(Model->GetMesh(i)->GetAabBox(), objectToWorldMatrix))
             {
                 Model->GetMesh(i)->Draw();

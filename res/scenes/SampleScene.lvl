@@ -1151,11 +1151,10 @@
             ]
         },
         {
-            "type": "ModelRenderer",
+            "type": "SkyboxRenderer",
             "id": "{add043cf-85b1-49f5-b11c-af0c6e07e65b}\u0000",
             "owner": "{481edaf4-f8d4-498d-b8a6-4f2f1edcb731}\u0000",
-            "Material": "./res/materials/SampleScene/Skybox.mat",
-            "Model": "./res/models/SkySphere.fbx"
+            "Material": "./res/materials/SampleScene/Skybox.mat"
         },
         {
             "type": "Entity",
