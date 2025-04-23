@@ -77,15 +77,7 @@ namespace Engine
             return Ssao.GetColorTexture();
         }
 
-        void RenderAll(const CameraRenderData& RenderData, int ScreenWidth, int ScreenHeight);
-
-        void RenderAllDirectionalShadowMap(const CameraRenderData& RenderData, unsigned int Target, unsigned int Width,
-                                           unsigned int Height);
-
-        void RenderAllPointSpotShadowMap(const glm::vec3& LightPosition, float LightRange,
-                                         glm::mat4* SpaceTransformMatrices, unsigned int Target, unsigned int Width,
-                                         unsigned int Height);
-
+    public:
         void SetFrustum(const Frustum& Frustum)
         {
             CurrentFrustum = Frustum;
@@ -95,6 +87,15 @@ namespace Engine
         {
             return CurrentFrustum;
         }
+
+        void RenderAll(const CameraRenderData& RenderData, int ScreenWidth, int ScreenHeight);
+
+        void RenderAllDirectionalShadowMap(const CameraRenderData& RenderData, unsigned int Target, unsigned int Width,
+                                           unsigned int Height);
+
+        void RenderAllPointSpotShadowMap(const glm::vec3& LightPosition, float LightRange,
+                                         glm::mat4* SpaceTransformMatrices, unsigned int Target, unsigned int Width,
+                                         unsigned int Height);
     };
 
 } // Engine
