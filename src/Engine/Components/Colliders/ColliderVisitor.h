@@ -65,7 +65,7 @@ namespace Engine
         void ResolveCollisionCapsule(CapsuleCollider& capsule) override;
         void ResolveCollisionMesh(MeshCollider& mesh) override;
 
-        void ManageCollisions();
+        void ManageCollisions(Scene scene);
     };
 
 } // namespace Engine

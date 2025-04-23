@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include "spdlog/spdlog.h"
 
 namespace Engine
 {
@@ -12,6 +13,7 @@ namespace Engine
     { 
         this->colliderType = BOX; 
         RenderingManager::GetInstance()->RegisterRenderer(this);
+        UpdateManager::GetInstance()->RegisterComponent(this);
     }
 
     BoxCollider::BoxCollider(Transform* transform, bool isTrigger, float width, float height, float depth) :
@@ -19,6 +21,7 @@ namespace Engine
     {
         this->colliderType = BOX;
         RenderingManager::GetInstance()->RegisterRenderer(this);
+        UpdateManager::GetInstance()->RegisterComponent(this);
     }
 
     bool BoxCollider::AcceptCollision(ColliderVisitor& visitor)
@@ -26,16 +29,6 @@ namespace Engine
         visitor.ResolveCollisionBox(*this);
         return true;
     }
-
-    //bool BoxCollider::CheckCollision(const Collider& other)
-    //{
-    //    if (isStatic || other.IsStatic()) 
-    //        return false;
-
-    //    // TODO: implement collision detection for BoxCollider / remove func
-
-    //    return false;
-    //}
 
     BoxCollider& BoxCollider::operator=(const BoxCollider& other)
     {
@@ -105,7 +98,6 @@ namespace Engine
     {
     glm::vec3 halfExtents = glm::vec3(_width, _height, _depth) * 0.5f;
 
-    // Wspó³rzêdne wierzcho³ków
     float vertices[] = {
         -halfExtents.x, -halfExtents.y, -halfExtents.z,
          halfExtents.x, -halfExtents.y, -halfExtents.z,
@@ -117,14 +109,12 @@ namespace Engine
         -halfExtents.x,  halfExtents.y,  halfExtents.z
     };
 
-    // Indeksy linii
     unsigned int indices[] = {
         0, 1, 1, 2, 2, 3, 3, 0,
         4, 5, 5, 6, 6, 7, 7, 4,
         0, 4, 1, 5, 2, 6, 3, 7
     };
 
-    // Tworzenie VAO i VBO
     unsigned int VAO, VBO, EBO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -151,20 +141,13 @@ namespace Engine
     shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
     shader.SetUniform("ObjectToWorldMatrix", GetOwner()->GetTransform()->GetLocalToWorldMatrix());
 
-    // Ustawienie trybu rysowania na linie
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    
-    // Rysowanie
-    //glDebugMessageInsert(GL_DEBUG_SOURCE_APPLICATION, GL_DEBUG_TYPE_MARKER, 0, GL_DEBUG_SEVERITY_NOTIFICATION, 0,
-                         "Drawing BoxCollider");
     glBindVertexArray(VAO);
     glDrawElements(GL_LINES, sizeof(indices) / sizeof(indices[0]), GL_UNSIGNED_INT, 0);
 
-    // Przywrócenie trybu wype³nienia
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-    // Czyszczenie
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
@@ -185,13 +168,20 @@ namespace Engine
 
     void BoxCollider::Start()
     { 
+       isColliding = false;
        transform = Component::GetOwner()->GetTransform();
+       spdlog::info("BoxCollider start");
 
     }
 
-    void BoxCollider::OnDestroy() 
+    void BoxCollider::Update(float deltaTime)
     {
+        colliderVisitor.ManageCollisions(scene);
+    }
 
+    void BoxCollider::OnDestroy() 
+    { 
+        UpdateManager::GetInstance()->UnregisterComponent(this);
     }
 
 } // namespace Engine

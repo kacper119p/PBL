@@ -6,7 +6,10 @@
 #include "MeshCollider.h"
 #include "SphereCollider.h"
 #include "SpatialPartitioning.h"
+#include "spdlog/spdlog.h"
 
+// TODO: remove when spatial fully implemented
+#include "Engine/EngineObjects/Scene/Scene.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -566,6 +569,7 @@ namespace Engine
                     BoxCollider thisBox = BoxCollider();
                     thisBox = static_cast<BoxCollider&>(*this->currentCollider);
                     collisionDetected = CheckBoxBoxCollision(box, thisBox);
+                    thisBox.isColliding = box.isColliding = collisionDetected;
                     if (collisionDetected)
                     {
                         glm::vec3 separation = GetSeparationBoxBox(box, thisBox);
@@ -580,6 +584,7 @@ namespace Engine
                     SphereCollider sphere = SphereCollider();
                     sphere = static_cast<SphereCollider&>(*this->currentCollider);
                     collisionDetected = CheckBoxSphereCollision(box, sphere);
+                    box.isColliding = sphere.isColliding = collisionDetected;
                     if (collisionDetected)
                     {
                         glm::vec3 separation = GetSeparationBoxSphere(box, sphere);
@@ -775,13 +780,23 @@ namespace Engine
             }
         }
 
-    void ConcreteColliderVisitor::ManageCollisions() 
+    void ConcreteColliderVisitor::ManageCollisions(Scene scene) 
         { 
-            if (currentCollider == nullptr || currentCollider->IsStatic())
+        spdlog::info("Managing collisions");
+
+            if (!currentCollider || currentCollider->IsStatic())
                 return;
-            std::vector<Collider*> potentialCollisions = this->spatialPartitioning->GetPotentialCollisions(this->currentCollider);
-            for (auto collider : potentialCollisions)
+
+            // Pobierz wszystkie collidery w scenie
+            std::vector<Collider*> colliders = scene.GetColliders();
+
+            for (auto* collider : colliders)
             {
+                // Pomijamy samego siebie
+                if (collider == currentCollider)
+                    continue;
+
+                // Wywołujemy AcceptCollision dla każdego collidera
                 collider->AcceptCollision(*this);
             }
             

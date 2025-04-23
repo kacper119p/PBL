@@ -35,6 +35,17 @@ namespace Engine
         }
     }
 
+    SpatialPartitioning& SpatialPartitioning::operator=(const SpatialPartitioning& other)
+    {
+        if (this == &other)
+            return *this;
+
+        this->cellSize = other.cellSize;
+        this->grid = other.grid;
+
+        return *this;
+    }
+
     std::vector<Collider*> SpatialPartitioning::GetPotentialCollisions(Collider* collider)
     {
         glm::vec3 position = collider->GetTransform()->GetPositionWorldSpace();

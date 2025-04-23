@@ -34,22 +34,49 @@
 #include "Shaders/ShaderManager.h"
 #include "Shaders/ShaderSourceFiles.h"
 #include "tracy/Tracy.hpp"
+#include "Engine/Components/Colliders/SpatialPartitioning.h"
+
 
 namespace Scene
 {
-    SceneBuilder::~SceneBuilder() = default;
-
+    bool shouldContinue = true;
     void SceneBuilder::Build(Engine::Scene*& Scene)
     {
         ZoneScoped;
 
         Scene = new class Engine::Scene();
         Engine::SceneManager::LoadScene("./res/scenes/SampleScene.lvl", Scene);
-        Engine::Entity* entity = Scene->SpawnEntity(nullptr);
-        Engine::BoxCollider* collider = entity->AddComponent<Engine::BoxCollider>();
-        collider->Start();
 
-        // Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene); 
+        Engine::Entity* boxEntity = Scene->SpawnEntity(nullptr);
+        Engine::BoxCollider* boxCollider = boxEntity->AddComponent<Engine::BoxCollider>();
+        boxEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+
+        Engine::Entity* secondBoxEntity = Scene->SpawnEntity(nullptr);
+        Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
+        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(5.0f, 0.0f, 0.0f));
+
+        Scene->AddCollider(boxCollider);
+        Scene->AddCollider(secondBoxCollider);
+
+        boxCollider->scene = Scene;
+        secondBoxCollider->scene = Scene;
+        /*glm::vec3 boxVelocity = glm::vec3(-0.1f, 0.0f, 0.0f);
+        for (int i = 0; i < 1000; ++i)
+        {
+            if (!shouldContinue)
+            {
+                break;
+            }
+            glm::vec3 currentPosition = secondBoxEntity->GetTransform()->GetPosition();
+            secondBoxEntity->GetTransform()->SetPosition(currentPosition + boxVelocity);
+            
+            if (boxCollider->isColliding)
+            {
+                spdlog::info("Kolizja wykryta w kroku symulacji: {}", i);
+                break;
+            }
+        }*/
+
+        // Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
     }
-
-} // Scene
+} // namespace Scene

@@ -38,5 +38,6 @@ namespace Engine
 
         void Update(float deltaTime) override;
 
+        SpatialPartitioning& operator=(const SpatialPartitioning& other);
     };
 } // namespace Engine

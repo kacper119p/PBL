@@ -2,24 +2,27 @@
 #include "SpatialPartitioning.h"
 #include "../Transform.h" // TODO: Fix later. I'm using this way because of indexing problems
 #include "Serialization/SerializationUtility.h"
+#include "spdlog/spdlog.h"
 
 namespace Engine
 {
     
     Collider::Collider() : isTrigger(false), transform(nullptr) {
         this->colliderVisitor = ConcreteColliderVisitor();
+        this->spatial = nullptr;
+        isColliding = false; // TODO: to be removed, just for debug purposes
     }
 
     Collider::Collider(Transform* transform, bool isTrigger, bool isStatic, SpatialPartitioning* spatialParam) 
         : isTrigger(isTrigger), isStatic(isStatic), transform(transform), spatial(spatialParam) {
         this->colliderVisitor = ConcreteColliderVisitor(spatialParam, this);
         colliderType = BOX; // Default type, can be changed in derived classes
-        UpdateManager::GetInstance()->RegisterComponent(this);
+        
+        isColliding = false; // TODO: to be removed, just for debug purposes
     }
 
     Collider::~Collider() 
     { 
-        UpdateManager::GetInstance()->UnregisterComponent(this);
     }
 
     void Collider::SetTrigger(bool isTrigger) { this->isTrigger = isTrigger; }
@@ -38,6 +41,8 @@ namespace Engine
 
     void Collider::EmitCollisionExit(Collider* other) { onCollisionExit.Invoke(other); }
 
+    bool Collider::GetCollisionStatus() { return isColliding;}
+
     Collider& Collider::operator=(const Collider& other)
     {
         if (this == &other)
@@ -51,8 +56,7 @@ namespace Engine
         return *this;
     }
 
-    void Collider::Update(float deltaTime) {  
-       colliderVisitor.ManageCollisions();  
+    bool Collider::operator==(const Collider& other) const { return this->GetID() == other.GetID();
     }
 
     void Collider::RenderDepth(const CameraRenderData& RenderData) {}

@@ -3,7 +3,7 @@
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include "Engine/Textures/Texture.h"
-
+#include <vector>
 namespace Materials
 {
     class Material;
@@ -30,6 +30,7 @@ namespace Engine
         Entity* Root;
         Ui::Ui* Ui = nullptr;
         Texture Skybox;
+        std::vector<Collider*> colliders;
 
     public:
         /**
@@ -119,6 +120,21 @@ namespace Engine
          * @param Value Serialized scene.
          */
         void Deserialize(const rapidjson::Value& Value);
+
+
+
+        // TODO: remove those once spatial partitioning is fully implemented
+        const std::vector<Collider*>& GetColliders() const { return colliders; }
+
+        void AddCollider(Collider* collider) { colliders.push_back(collider); }
+
+        void RemoveCollider(Collider* collider)
+        {
+            colliders.erase(std::remove(colliders.begin(), colliders.end(), collider), colliders.end());
+        }
+        // END TODO
+
+
 
     private:
         static void SerializeEntity(const Entity* Entity, rapidjson::Value& Object,

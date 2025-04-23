@@ -29,31 +29,32 @@ namespace Engine
     /*
      * @brief Base class for all colliders. Subtypes: boxCollider, sphereCollider, capsuleCollider, meshCollider.
      */
-    class Collider : public IUpdateable, public Renderer
+    class Collider : public Renderer
     {
 
     protected:
         bool isStatic;
         bool isTrigger;
 
-        Transform* transform;
+    public:
+        ColliderTypeE colliderType;
+        bool isColliding; // TODO: to be removed, just for debug purposes
+        Events::TEvent<Collider*> onCollisionEnter;
+        Events::TEvent<Collider*> onCollisionExit;
 
+        /// TODO: move those to protected and add getters + setters
+        Transform* transform;
         ConcreteColliderVisitor colliderVisitor;
         SpatialPartitioning* spatial;
 
-    public:
-        ColliderTypeE colliderType;
-
-        Events::TEvent<Collider*> onCollisionEnter;
-        Events::TEvent<Collider*> onCollisionExit;
+        // TODO: remove this when spatial fully implemented
+        Scene* scene;
 
         Collider();
         Collider(Transform* transform, bool isTrigger = false, bool isStatic = false, SpatialPartitioning* spatial = nullptr);
         virtual ~Collider();
 
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
-        
-        //virtual bool CheckCollision(const Collider& other) = 0;
 
         void SetTrigger(bool isTrigger);
         bool IsTrigger() const;
@@ -70,9 +71,10 @@ namespace Engine
         virtual Collider* GetInstance() = 0;
         virtual void DrawDebugMesh(const CameraRenderData& RenderData) = 0;
 
-        Collider& operator=(const Collider& other);
+        bool GetCollisionStatus();
 
-        void Update(float DeltaTime) override;
+        Collider& operator=(const Collider& other);
+        bool operator==(const Collider& other) const;
 
         void RenderDepth(const CameraRenderData& RenderData) override;
 

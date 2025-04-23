@@ -12,7 +12,7 @@ namespace Engine
 
     class CocreteColliderVisitor;
 
-    class BoxCollider : public Collider
+    class BoxCollider : public Collider, public IUpdateable
     {
     private:
         float _width;
@@ -34,6 +34,7 @@ namespace Engine
         inline virtual Collider* GetInstance() override { return this; }
 
         void Start() override;
+        void Update(float deltaTime) override;
         void OnDestroy() override;
 
         float GetWidth() const;
