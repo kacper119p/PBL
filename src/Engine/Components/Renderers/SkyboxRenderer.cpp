@@ -12,6 +12,9 @@ namespace Engine
     void SkyboxRenderer::Render(const CameraRenderData& RenderData)
     {
         Material->Use();
+        const Shaders::Shader shader = GetMaterial()->GetMainPass();
+        shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
+        shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
         Cube.Draw();
     }
 
