@@ -780,23 +780,18 @@ namespace Engine
             }
         }
 
-    void ConcreteColliderVisitor::ManageCollisions(Scene scene) 
+    void ConcreteColliderVisitor::ManageCollisions(std::vector<Collider*> colliders) 
         { 
         spdlog::info("Managing collisions");
 
             if (!currentCollider || currentCollider->IsStatic())
                 return;
 
-            // Pobierz wszystkie collidery w scenie
-            std::vector<Collider*> colliders = scene.GetColliders();
-
             for (auto* collider : colliders)
             {
-                // Pomijamy samego siebie
-                if (collider == currentCollider)
+                if (collider == this->currentCollider)
                     continue;
 
-                // Wywołujemy AcceptCollision dla każdego collidera
                 collider->AcceptCollision(*this);
             }
             

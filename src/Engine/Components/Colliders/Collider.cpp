@@ -68,4 +68,9 @@ namespace Engine
     void Collider::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                 const glm::mat4* SpaceTransformMatrices) {}
 
+    void Collider::AddColliderToSpatial(Collider* collider)
+    { 
+        colliders.push_back(collider);
+    }
+
 } // namespace Engine

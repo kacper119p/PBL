@@ -175,8 +175,8 @@ namespace Engine
     }
 
     void BoxCollider::Update(float deltaTime)
-    {
-        colliderVisitor.ManageCollisions(scene);
+    { 
+        colliderVisitor.ManageCollisions(colliders);
     }
 
     void BoxCollider::OnDestroy() 

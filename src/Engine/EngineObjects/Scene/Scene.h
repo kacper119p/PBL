@@ -30,7 +30,6 @@ namespace Engine
         Entity* Root;
         Ui::Ui* Ui = nullptr;
         Texture Skybox;
-        std::vector<Collider*> colliders;
 
     public:
         /**
@@ -121,18 +120,6 @@ namespace Engine
          */
         void Deserialize(const rapidjson::Value& Value);
 
-
-
-        // TODO: remove those once spatial partitioning is fully implemented
-        const std::vector<Collider*>& GetColliders() const { return colliders; }
-
-        void AddCollider(Collider* collider) { colliders.push_back(collider); }
-
-        void RemoveCollider(Collider* collider)
-        {
-            colliders.erase(std::remove(colliders.begin(), colliders.end(), collider), colliders.end());
-        }
-        // END TODO
 
 
 

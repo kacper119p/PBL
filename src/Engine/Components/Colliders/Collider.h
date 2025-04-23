@@ -38,7 +38,6 @@ namespace Engine
 
     public:
         ColliderTypeE colliderType;
-        bool isColliding; // TODO: to be removed, just for debug purposes
         Events::TEvent<Collider*> onCollisionEnter;
         Events::TEvent<Collider*> onCollisionExit;
 
@@ -47,8 +46,9 @@ namespace Engine
         ConcreteColliderVisitor colliderVisitor;
         SpatialPartitioning* spatial;
 
-        // TODO: remove this when spatial fully implemented
-        Scene* scene;
+        // TODO: remove when spatial fully implemented
+        std::vector<Collider*> colliders;
+        bool isColliding;
 
         Collider();
         Collider(Transform* transform, bool isTrigger = false, bool isStatic = false, SpatialPartitioning* spatial = nullptr);
@@ -75,6 +75,10 @@ namespace Engine
 
         Collider& operator=(const Collider& other);
         bool operator==(const Collider& other) const;
+        bool operator==(const Collider* other) const
+        {
+            return this == other;
+        }
 
         void RenderDepth(const CameraRenderData& RenderData) override;
 
@@ -84,6 +88,9 @@ namespace Engine
 
         void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                     const glm::mat4* SpaceTransformMatrices) override;
+
+        // TODO: remove when spatial fully implemented
+        void AddColliderToSpatial(Collider* collider);
         
 
     };

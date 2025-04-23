@@ -55,11 +55,9 @@ namespace Scene
         Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
         secondBoxEntity->GetTransform()->SetPosition(glm::vec3(5.0f, 0.0f, 0.0f));
 
-        Scene->AddCollider(boxCollider);
-        Scene->AddCollider(secondBoxCollider);
+        boxCollider->AddColliderToSpatial(secondBoxCollider);
+        secondBoxCollider->AddColliderToSpatial(boxCollider);
 
-        boxCollider->scene = Scene;
-        secondBoxCollider->scene = Scene;
         /*glm::vec3 boxVelocity = glm::vec3(-0.1f, 0.0f, 0.0f);
         for (int i = 0; i < 1000; ++i)
         {

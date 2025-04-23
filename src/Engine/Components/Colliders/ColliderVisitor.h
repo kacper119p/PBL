@@ -1,5 +1,6 @@
 #pragma once
 #include <glm/vec3.hpp>
+#include <vector>
 
 namespace Engine
 {
@@ -65,7 +66,7 @@ namespace Engine
         void ResolveCollisionCapsule(CapsuleCollider& capsule) override;
         void ResolveCollisionMesh(MeshCollider& mesh) override;
 
-        void ManageCollisions(Scene scene);
+        void ManageCollisions(std::vector<Collider*> colliders);
     };
 
 } // namespace Engine
