@@ -27,7 +27,7 @@ namespace Engine
         Ssao Ssao;
         BloomPostprocessingEffect Bloom;
 
-        Frustum CurrentFrustum;
+        Frustum Frustum;
 
     private:
         explicit RenderingManager(glm::ivec2 Resolution);
@@ -78,14 +78,9 @@ namespace Engine
         }
 
     public:
-        void SetFrustum(const Frustum& Frustum)
+        [[nodiscard]] const class Frustum& GetFrustum() const
         {
-            CurrentFrustum = Frustum;
-        }
-
-        [[nodiscard]] const Frustum& GetFrustum() const
-        {
-            return CurrentFrustum;
+            return Frustum;
         }
 
         void RenderAll(const CameraRenderData& RenderData, int ScreenWidth, int ScreenHeight);

@@ -99,8 +99,6 @@ namespace Engine
 
             const CameraRenderData renderData(Camera->GetPosition(), Camera->GetTransform(),
                                               Camera->GetProjectionMatrix());
-            Frustum.UpdateFrustum(renderData);
-            RenderingManager::GetInstance()->SetFrustum(Frustum);
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
             AudioListener->UpdateListener();
 
