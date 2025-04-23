@@ -133,9 +133,9 @@ namespace Engine
         void SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const;
 
         void SetEmitterSettingsUniforms(Shaders::ComputeShader Shader) const;
-
+#if EDITOR
         void DrawImGui() override;
-
+        #endif
         SERIALIZATION_EXPORT_CLASS(ParticleEmitter)
     };
 }

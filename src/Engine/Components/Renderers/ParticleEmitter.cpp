@@ -146,7 +146,7 @@ void Engine::ParticleEmitter::SetEmitterSettingsUniforms(Shaders::ComputeShader 
     Shader.SetUniform("EmitterSettings.MinLife", Settings.MinLife);
     Shader.SetUniform("EmitterSettings.MaxLife", Settings.MaxLife);
 }
-
+#if EDITOR
 void Engine::ParticleEmitter::DrawImGui() 
 {
     if (ImGui::CollapsingHeader("Emitter Settings"))
@@ -178,7 +178,7 @@ void Engine::ParticleEmitter::DrawImGui()
         ImGui::Text("Current Timer: %.2f", Timer);
     }
 }
-
+#endif
 rapidjson::Value Engine::ParticleEmitter::Serialize(rapidjson::Document::AllocatorType& Allocator) const
 {
     START_COMPONENT_SERIALIZATION

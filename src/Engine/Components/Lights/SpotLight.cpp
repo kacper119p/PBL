@@ -13,7 +13,7 @@ namespace Engine
         LightsGui::RegisterLight(this);
 #endif
     }
-
+#if EDITOR
     void SpotLight::DrawImGui() {
         if (ImGui::CollapsingHeader("SpotLight", ImGuiTreeNodeFlags_DefaultOpen))
         {
@@ -54,7 +54,7 @@ namespace Engine
             }
         }
     }
-
+    #endif
     SpotLight::~SpotLight()
     {
         LightManager::GetInstance()->UnregisterLight(this);

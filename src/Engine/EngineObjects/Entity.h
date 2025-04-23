@@ -163,9 +163,9 @@ namespace Engine
         {
             return Components.end();
         }
-
+        #if EDITOR
         void DrawImGui();
-
+        #endif
         SERIALIZATION_EXPORT_CLASS(Entity);
     };
 }

@@ -13,7 +13,7 @@ namespace Engine
         LightsGui::RegisterLight(this);
 #endif
     }
-
+#if EDITOR
     void PointLight::DrawImGui()
     {
         if (ImGui::CollapsingHeader("PointLight", ImGuiTreeNodeFlags_DefaultOpen))
@@ -47,7 +47,7 @@ namespace Engine
             }
         }
     }
-
+    #endif
     PointLight::~PointLight()
     {
         LightManager::GetInstance()->UnregisterLight(this);

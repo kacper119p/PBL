@@ -130,10 +130,11 @@ void Engine::AudioSource::ResetAudioSettings()
     MaxDist = 100.0f;
     RollOff = 1.0f;
 }
-
+#if EDITOR
 void Engine::AudioSource::DrawImGui()
 {
 }
+#endif
 
 rapidjson::Value Engine::AudioSource::Serialize(rapidjson::Document::AllocatorType& Allocator) const
 {

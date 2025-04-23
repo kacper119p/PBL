@@ -23,7 +23,7 @@ namespace Engine
         LightsGui::RegisterLight(this);
 #endif
     }
-
+#if EDITOR
     void DirectionalLight::DrawImGui() 
     {
         if (ImGui::CollapsingHeader("Directional Light", ImGuiTreeNodeFlags_DefaultOpen))
@@ -35,7 +35,7 @@ namespace Engine
             }
         }
     }
-
+    #endif
     rapidjson::Value DirectionalLight::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION

@@ -85,9 +85,9 @@ namespace Engine
 
     public:
         void Update(float DeltaTime) override;
-
+        #if EDITOR
         void DrawImGui() override;
-
+        #endif
         SERIALIZATION_EXPORT_CLASS(ShipRoller)
     };
 
