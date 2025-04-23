@@ -47,6 +47,8 @@ namespace Engine
         unsigned int PrefilterMap = 0;
         unsigned int BrdfLUT;
 
+        unsigned int SsaoTexture = 0;
+
         static LightManager* Instance;
 
         static constexpr unsigned int DirectionalShadowWidth = 4096;

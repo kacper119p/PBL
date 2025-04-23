@@ -108,6 +108,10 @@ namespace Engine
             deserializedObject->DeserializeValuePass(jsonObject, referenceTable);
             DeserializationPair pair{jsonObject, deserializedObject};
             objects.emplace_back(pair);
+            if (Entity* entity = dynamic_cast<Entity*>(deserializedObject))
+            {
+                entity->Scene = this;
+            }
         }
 
         Root->DeserializeReferencesPass(Value["Root"], referenceTable);

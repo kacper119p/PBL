@@ -5,8 +5,10 @@
 #include <spdlog/spdlog.h>
 #include "Utility/TextureUtilities.h"
 #include "Models/Model.h"
+#include "Models/ModelAnimated.h"
 #include "Engine/EngineObjects/Scene/Scene.h"
 #include "Engine/Components/Renderers/ModelRenderer.h"
+#include "Engine/Components/Renderers/AnimatedModelRenderer.h"
 #include "Engine/Components/Lights/DirectionalLight.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include "Engine/Gui/LightsGui.h"
@@ -21,6 +23,7 @@
 #include "Engine/EngineObjects/Scene/SceneManager.h"
 #include "Engine/Textures/Texture.h"
 #include "Engine/Textures/TextureManager.h"
+#include "Materials/AnimatedPbrMaterial.h"
 #include "Materials/MaterialManager.h"
 #include "Materials/PbrMaterial.h"
 #include "Models/ModelManager.h"
@@ -32,13 +35,13 @@ namespace Scene
 {
     SceneBuilder::~SceneBuilder() = default;
 
-    void
-    SceneBuilder::Build(Engine::Scene*& Scene)
+    void SceneBuilder::Build(Engine::Scene*& Scene)
     {
         ZoneScoped;
+
         Scene = new class Engine::Scene();
         Engine::SceneManager::LoadScene("./res/scenes/SampleScene.lvl", Scene);
-        //Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
+        Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
     }
 
 } // Scene

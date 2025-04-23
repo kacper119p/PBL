@@ -1,18 +1,24 @@
 #include "ModelRenderer.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include "Engine/EngineObjects/CameraRenderData.h"
+#include "Engine/EngineObjects/RenderingManager.h"
 #include "Serialization/SerializationUtility.h"
 #include "Materials/MaterialManager.h"
 #include "Materials/Material.h"
 #include "Models/ModelManager.h"
-#include "imgui.h"
+
+#if EDITOR
 #include <filesystem>
+#include "imgui.h"
 namespace fs = std::filesystem;
+#endif
+
+
 namespace Engine
 {
     void ModelRenderer::RenderDepth(const CameraRenderData& RenderData)
     {
-        if (Material!=nullptr)
+        if (Material != nullptr)
         {
             Material->UseDepthPass();
 
@@ -36,7 +42,7 @@ namespace Engine
 
     void ModelRenderer::RenderDirectionalShadows(const CameraRenderData& RenderData)
     {
-        if (Material!=nullptr)
+        if (Material != nullptr)
         {
             Material->UseDirectionalShadows();
 
@@ -82,9 +88,16 @@ namespace Engine
 
     void ModelRenderer::Draw() const
     {
-        if (Model != nullptr)
+
+        if (Model == nullptr)
         {
-            for (int i = 0; i < Model->GetMeshCount(); ++i)
+            return;
+        }
+        const auto& frustum = RenderingManager::GetInstance()->GetFrustum();
+        glm::mat4 objectToWorldMatrix = GetOwner()->GetTransform()->GetLocalToWorldMatrix();
+        for (int i = 0; i < Model->GetMeshCount(); ++i)
+        {
+            if (frustum.IsBoxVisible(Model->GetMesh(i)->GetAabBox(), objectToWorldMatrix))
             {
                 Model->GetMesh(i)->Draw();
             }
@@ -252,7 +265,7 @@ namespace Engine
 
         }
     }
-    #endif
+#endif
     rapidjson::Value ModelRenderer::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION

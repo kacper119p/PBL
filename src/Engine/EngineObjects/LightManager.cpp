@@ -52,6 +52,8 @@ namespace Engine
         glBindTexture(GL_TEXTURE_CUBE_MAP, PrefilterMap);
         glActiveTexture(GL_TEXTURE18);
         glBindTexture(GL_TEXTURE_2D, BrdfLUT);
+        glActiveTexture(GL_TEXTURE19);
+        glBindTexture(GL_TEXTURE_2D, RenderingManager::GetInstance()->GetSsaoTextureId());
     }
 
     void LightManager::SetupPointLightsForRendering(const Shaders::Shader& Shader)
@@ -143,27 +145,28 @@ namespace Engine
         for (int i = 2; i < SpotLights.size(); ++i)
         {
 
-            Shader.SetUniform(std::format("PointLights[{}].Position", i).c_str(),
+            Shader.SetUniform(std::format("SpotLights[{}].Position", i).c_str(),
                               SpotLights[i]->GetPosition());
 
-            Shader.SetUniform(std::format("PointLights[{}].Direction", i).c_str(),
+            Shader.SetUniform(std::format("SpotLights[{}].Direction", i).c_str(),
                               SpotLights[i]->GetDirection());
 
-            Shader.SetUniform(std::format("PointLights[{}].Color", i).c_str(),
+            Shader.SetUniform(std::format("SpotLights[{}].Color", i).c_str(),
                               SpotLights[i]->GetColor());
 
-            Shader.SetUniform(std::format("PointLights[{}].OuterAngle", i).c_str(),
+            Shader.SetUniform(std::format("SpotLights[{}].OuterAngle", i).c_str(),
                               glm::cos(SpotLights[i]->GetOuterAngle()));
 
-            Shader.SetUniform(std::format("PointLights[{}].InnerAngle", i).c_str(),
+            Shader.SetUniform(std::format("SpotLights[{}].InnerAngle", i).c_str(),
                               glm::cos(glm::radians(SpotLights[i]->GetInnerAngle())));
 
-            Shader.SetUniform(std::format("PointLights[{}].LinearFalloff", i).c_str(),
-                              glm::radians(PointLights[i]->GetLinearFalloff()));
+            Shader.SetUniform(std::format("SpotLights[{}].LinearFalloff", i).c_str(),
+                              glm::radians(SpotLights[i]->GetLinearFalloff()));
 
-            Shader.SetUniform(std::format("PointLights[{}].QuadraticFalloff", i).c_str(),
+            Shader.SetUniform(std::format("SpotLights[{}].QuadraticFalloff", i).c_str(),
                               SpotLights[i]->GetQuadraticFalloff());
-            Shader.SetUniform(std::format("PointLights[{}].Range", i).c_str(),
+
+            Shader.SetUniform(std::format("SpotLights[{}].Range", i).c_str(),
                               SpotLights[i]->GetRange());
         }
     }

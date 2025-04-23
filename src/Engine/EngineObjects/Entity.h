@@ -18,6 +18,8 @@ namespace Engine
      */
     class Entity final : public Serialization::SerializedObject
     {
+        friend class Scene;
+
     private:
         Transform Transform;
         Scene* Scene = nullptr;

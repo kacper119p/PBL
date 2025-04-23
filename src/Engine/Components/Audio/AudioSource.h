@@ -19,7 +19,7 @@ namespace Engine
     private:
         AudioManager& AudioManager; ///< Reference to the global AudioManager instance.
         ma_sound* SelectedSound; ///< Currently selected sound to control for this source.
-        bool IsEntitySelected; ///< Indicates if this component's entity is currently selected in the editor.
+        Entity* SelectedEntity; ///< Entity that keeps the AudioSource
 
         float SoundVolume = 1.0f; ///< Volume level of the selected sound (0.0 to 1.0).
         bool Looping = false; ///< Whether the selected sound should loop.

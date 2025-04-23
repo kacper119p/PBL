@@ -11,7 +11,7 @@ namespace Engine
     /**
      * @brief Renders single particle system.
      */
-    class ParticleEmitter final : public Renderer, IUpdateable
+    class ParticleEmitter final : public Renderer, public IUpdateable
     {
     private:
         struct Particle
