@@ -31,7 +31,6 @@ namespace Engine
         {
             CHECK_MESSAGE(TextureId != 0, "Texture not initialized");
             const uint64_t handle = glGetTextureHandleARB(TextureId);
-            glMakeImageHandleResidentARB(handle, GL_READ_ONLY);
             return handle;
         }
 

@@ -107,6 +107,9 @@ namespace Utility
         glTexImage2D(GL_TEXTURE_2D, 0, Format, width, height, 0, SourceFormat, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
 
+        const uint64_t handle = glGetTextureHandleARB(textureId);
+        glMakeTextureHandleResidentARB(handle);
+
         stbi_image_free(data);
 
         OutWidth = width;

@@ -22,9 +22,13 @@ namespace Materials
                                              const Engine::Texture NormalMap, const Engine::Texture EmissiveMap,
                                              const glm::vec3& BaseColor, const float Roughness, const float Metallic,
                                              const glm::vec3& EmissiveColor) :
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), BaseMap(Engine::Texture(BaseMap)),
-        RoughnessMetallicMap(Engine::Texture(RoughnessMetallicMap)), NormalMap(Engine::Texture(NormalMap)),
-        EmissiveMap(Engine::Texture(EmissiveMap)), Roughness(FloatMaterialProperty("Roughness", MainPass, Roughness)),
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
+        BaseMap(TextureMaterialProperty("BaseMap", MainPass, BaseMap)),
+        RoughnessMetallicMap(TextureMaterialProperty("RoughnessMetallicAmbientOcclusionMap", MainPass,
+                                                     RoughnessMetallicMap)),
+        NormalMap(TextureMaterialProperty("NormalMap", MainPass, NormalMap)),
+        EmissiveMap(TextureMaterialProperty("EmissiveMap", MainPass, EmissiveMap)),
+        Roughness(FloatMaterialProperty("Roughness", MainPass, Roughness)),
         Metallic(FloatMaterialProperty("Metallic", MainPass, Metallic)),
         BaseColor(Vector3MaterialProperty("BaseColor", MainPass, BaseColor)),
         EmissiveColor(Vector3MaterialProperty("EmissiveColor", MainPass, EmissiveColor))
@@ -32,13 +36,17 @@ namespace Materials
     }
 
     AnimatedPbrMaterial::AnimatedPbrMaterial():
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), BaseMap(Engine::Texture()),
-        RoughnessMetallicMap(Engine::Texture()), NormalMap(Engine::Texture()), EmissiveMap(Engine::Texture()),
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
+        BaseMap(TextureMaterialProperty("BaseMap", MainPass)),
+        RoughnessMetallicMap(TextureMaterialProperty("RoughnessMetallicAmbientOcclusionMap", MainPass)),
+        NormalMap(TextureMaterialProperty("NormalMap", MainPass)),
+        EmissiveMap(TextureMaterialProperty("EmissiveMap", MainPass)),
         Roughness(FloatMaterialProperty("Roughness", MainPass)), Metallic(FloatMaterialProperty("Metallic", MainPass)),
         BaseColor(Vector3MaterialProperty("BaseColor", MainPass)),
         EmissiveColor(Vector3MaterialProperty("EmissiveColor", MainPass))
     {
     }
+
 
     void AnimatedPbrMaterial::Initialize()
     {
@@ -70,14 +78,10 @@ namespace Materials
         Roughness.Bind();
         Metallic.Bind();
 
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, BaseMap.GetId());
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, RoughnessMetallicMap.GetId());
-        glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D, NormalMap.GetId());
-        glActiveTexture(GL_TEXTURE3);
-        glBindTexture(GL_TEXTURE_2D, EmissiveMap.GetId());
+        BaseMap.Bind();
+        RoughnessMetallicMap.Bind();
+        NormalMap.Bind();
+        EmissiveMap.Bind();
     }
 
     void AnimatedPbrMaterial::UseDirectionalShadows() const
@@ -87,9 +91,10 @@ namespace Materials
 
     void AnimatedPbrMaterial::UsePointSpotShadows() const
     {
-        GetPointSpotShadowPass().Use(); }
+        GetPointSpotShadowPass().Use();
+    }
 
-    #if EDITOR
+#if EDITOR
     void AnimatedPbrMaterial::DrawImGui()
     {
         glm::vec3 baseColor = BaseColor.GetValue();

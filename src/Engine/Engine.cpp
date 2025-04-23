@@ -157,12 +157,6 @@ namespace Engine
             return false;
         }
 
-        if (!GLAD_GL_ARB_bindless_texture)
-        {
-            spdlog::error("Platform unsupported: GLAD_GL_ARB_bindless_texture.");
-            return false;
-        }
-
         // For windowless fullscreen
         GLFWmonitor* monitor = glfwGetPrimaryMonitor();
         const GLFWvidmode* mode = glfwGetVideoMode(monitor);
@@ -205,6 +199,12 @@ namespace Engine
         if (err)
         {
             spdlog::error("Failed to initialize OpenGL loader!");
+            return false;
+        }
+
+        if (!GLAD_GL_ARB_bindless_texture)
+        {
+            spdlog::error("Platform unsupported: GLAD_GL_ARB_bindless_texture.");
             return false;
         }
 
