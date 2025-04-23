@@ -14,10 +14,10 @@ uniform vec3 EmissiveColor;
 
 uniform vec3 CameraPosition;
 
-layout (binding = 0) uniform sampler2D BaseMap;
-layout (binding = 1) uniform sampler2D RoughnessMetallicAmbientOcclusionMap;
-layout (binding = 2) uniform sampler2D NormalMap;
-layout (binding = 3) uniform sampler2D EmissiveMap;
+layout (bindless_sampler) uniform sampler2D BaseMap;
+layout (bindless_sampler) uniform sampler2D RoughnessMetallicAmbientOcclusionMap;
+layout (bindless_sampler) uniform sampler2D NormalMap;
+layout (bindless_sampler) uniform sampler2D EmissiveMap;
 
 out vec3 FragColor;
 

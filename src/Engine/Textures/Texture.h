@@ -1,6 +1,6 @@
 #pragma once
 #include <cstdint>
-
+#include "glad/glad.h"
 #include "Utility/AssertionsUtility.h"
 
 namespace Engine

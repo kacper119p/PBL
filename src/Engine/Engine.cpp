@@ -160,6 +160,7 @@ namespace Engine
         if (!GLAD_GL_ARB_bindless_texture)
         {
             spdlog::error("Platform unsupported: GLAD_GL_ARB_bindless_texture.");
+            return false;
         }
 
         // For windowless fullscreen

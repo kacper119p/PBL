@@ -4,6 +4,7 @@
 #include "Material.h"
 #include "Engine/Textures/Texture.h"
 #include "Properties/MaterialProperty.h"
+#include "Properties/TextureMaterialProperty.h"
 
 namespace Materials
 {
@@ -16,10 +17,10 @@ namespace Materials
         static Shaders::Shader PointSpotShadowPass;
 
     private:
-        Engine::Texture BaseMap;
-        Engine::Texture RoughnessMetallicMap;
-        Engine::Texture NormalMap;
-        Engine::Texture EmissiveMap;
+        TextureMaterialProperty BaseMap;
+        TextureMaterialProperty RoughnessMetallicMap;
+        TextureMaterialProperty NormalMap;
+        TextureMaterialProperty EmissiveMap;
         FloatMaterialProperty Roughness;
         FloatMaterialProperty Metallic;
         Vector3MaterialProperty BaseColor;
@@ -47,42 +48,42 @@ namespace Materials
     public:
         [[nodiscard]] Engine::Texture GetBaseMap() const
         {
-            return BaseMap;
+            return BaseMap.GetValue();
         }
 
         void SetBaseMap(const Engine::Texture BaseMap)
         {
-            PbrMaterial::BaseMap = BaseMap;
+            PbrMaterial::BaseMap.SetValue(BaseMap);
         }
 
         [[nodiscard]] Engine::Texture GetRoughnessMetallicMap() const
         {
-            return RoughnessMetallicMap;
+            return RoughnessMetallicMap.GetValue();
         }
 
         void SetRoughnessMetallicMap(const Engine::Texture RoughnessMetallicMap)
         {
-            PbrMaterial::RoughnessMetallicMap = RoughnessMetallicMap;
+            PbrMaterial::RoughnessMetallicMap.SetValue(RoughnessMetallicMap);
         }
 
         [[nodiscard]] Engine::Texture GetNormalMap() const
         {
-            return NormalMap;
+            return NormalMap.GetValue();
         }
 
         void SetNormalMap(const Engine::Texture NormalMap)
         {
-            PbrMaterial::NormalMap = NormalMap;
+            PbrMaterial::NormalMap.SetValue(NormalMap);
         }
 
         [[nodiscard]] Engine::Texture GetEmissiveMap() const
         {
-            return EmissiveMap;
+            return EmissiveMap.GetValue();
         }
 
         void SetEmissiveMap(const Engine::Texture EmissiveMap)
         {
-            PbrMaterial::EmissiveMap = EmissiveMap;
+            PbrMaterial::EmissiveMap.SetValue(EmissiveMap);
         }
 
         [[nodiscard]] glm::vec3 GetBaseColor() const
