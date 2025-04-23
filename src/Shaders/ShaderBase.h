@@ -123,6 +123,16 @@ namespace Shaders
             SetUniform(glGetUniformLocation(Id, Name), Value);
         }
 
+        static void SetUniform(const GLint UniformId, const bool Value)
+        {
+            glUniform1i(UniformId, static_cast<int>(Value));
+        }
+
+        void SetUniform(const char* const Name, const bool Value) const
+        {
+            SetUniform(glGetUniformLocation(Id, Name), Value);
+        }
+
         static void SetUniform(const GLint UniformId, const GLuint Value)
         {
             glUniform1ui(UniformId, Value);

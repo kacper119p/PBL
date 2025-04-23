@@ -11,10 +11,10 @@ in vec2 TexCoords;
 
 out float FragColor;
 
-const vec2 SCREEN_SIZE = vec2(1920.0, 1080.0);
+const vec2 SCREEN_SIZE = vec2(1920.0 / 2.0, 1080.0 / 2.0);
 const vec2 NOISE_SCALE = SCREEN_SIZE / 4.0;
-const float RADIUS = 3;
-const float BIAS = 0.2;
+const float RADIUS = 1.0;
+const float BIAS = 0.015;
 
 vec3 GetViewPosition(vec2 uv, float viewZ) {
     float x = uv.x * 2.0 - 1.0;

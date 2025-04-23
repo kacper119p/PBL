@@ -30,6 +30,7 @@ namespace Engine
 
     void Ssao::Render(const CameraRenderData& CameraData, const uint32_t NormalsTexture) const
     {
+        glViewport(0, 0, Resolution.x, Resolution.y);
         glBindFramebuffer(GL_FRAMEBUFFER, FrameBuffer);
         Shader.Use();
         glActiveTexture(GL_TEXTURE0);
@@ -38,6 +39,17 @@ namespace Engine
         glBindTexture(GL_TEXTURE_2D, NoiseTexture);
         Shaders::Shader::SetUniform(ProjectionMatrixLocation, CameraData.ProjectionMatrix);
         Shaders::Shader::SetUniform(InverseProjectionMatrixLocation, glm::inverse(CameraData.ProjectionMatrix));
+        ScreenQuad.Draw();
+
+        BlurShader.Use();
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, ColorTexture);
+        glBindFramebuffer(GL_FRAMEBUFFER, SecondaryFramebuffer);
+        Shaders::Shader::SetUniform(BlurHorizontalBoolLocation, false);
+        ScreenQuad.Draw();
+        glBindFramebuffer(GL_FRAMEBUFFER, FrameBuffer);
+        glBindTexture(GL_TEXTURE_2D, SecondaryColorTexture);
+        Shaders::Shader::SetUniform(BlurHorizontalBoolLocation, true);
         ScreenQuad.Draw();
     }
 
@@ -74,6 +86,9 @@ namespace Engine
                 Shaders::ShaderSourceFiles("./res/shaders/SSAO/SSAO.vert", nullptr, "./res/shaders/SSAO/SSAO.frag"));
         ProjectionMatrixLocation = Shader.GetUniformLocation("ProjectionMatrix");
         InverseProjectionMatrixLocation = Shader.GetUniformLocation("InverseProjectionMatrix");
+        BlurShader = Shaders::ShaderManager::GetShader(
+                Shaders::ShaderSourceFiles("./res/shaders/SSAO/SSAO.vert", nullptr, "./res/shaders/SSAO/Blur.frag"));
+        BlurHorizontalBoolLocation = BlurShader.GetUniformLocation("Horizontal");
     }
 
     void Ssao::GenerateBuffers()
@@ -83,12 +98,24 @@ namespace Engine
 
         glGenTextures(1, &ColorTexture);
         glBindTexture(GL_TEXTURE_2D, ColorTexture);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, 1920, 1080, 0, GL_RED, GL_FLOAT, nullptr);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, Resolution.x, Resolution.y, 0, GL_RED, GL_FLOAT, nullptr);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, ColorTexture, 0);
+
+        glGenFramebuffers(1, &SecondaryFramebuffer);
+        glBindFramebuffer(GL_FRAMEBUFFER, SecondaryFramebuffer);
+
+        glGenTextures(1, &SecondaryColorTexture);
+        glBindTexture(GL_TEXTURE_2D, SecondaryColorTexture);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, Resolution.x, Resolution.y, 0, GL_RED, GL_FLOAT, nullptr);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, SecondaryColorTexture, 0);
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
