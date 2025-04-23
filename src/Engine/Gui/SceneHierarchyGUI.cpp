@@ -4,6 +4,8 @@
 #include "TransformGui.h"
 #include "Engine/EngineObjects/GizmoManager.h"
 #include "Engine/EngineObjects/Scene/Scene.h"
+#include "Engine/Components/Renderers/ModelRenderer.h"
+
 #include "imgui.h"
 Engine::SceneHierarchyGUI::SceneHierarchyGUI(Transform* Root) : Root(Root), SelectedEntity(Root){}
 
@@ -67,28 +69,50 @@ void Engine::SceneHierarchyGUI::DrawHierarchy(Transform* entity, Scene* scene)
 void Engine::SceneHierarchyGUI::Draw(Scene* scene)
 {
     ImGui::Begin("Hierarchy");
-    ImGui::Text("Scene Hierarchy");
 
     if (Root)
     {
-        DrawHierarchy(Root, scene);
+        // Instead of drawing the root, draw its children directly
+        for (Transform* child : Root->GetChildren())
+        {
+            DrawHierarchy(child, scene);
+        }
+
+        if (ImGui::BeginPopupContextWindow("HierarchyContext",
+                                           ImGuiPopupFlags_MouseButtonRight | ImGuiPopupFlags_NoOpenOverItems))
+        {
+            if (ImGui::MenuItem("Add Entity"))
+            {
+                AddEntityToScene(scene, Root->GetOwner());
+            }
+            if (ImGui::MenuItem("Add Model"))
+            {
+                AddModelToScene(scene, Root->GetOwner());
+            }
+            if (ImGui::MenuItem("Add Animated Model"))
+            {
+                AddAnimatedModelToScene(scene, Root->GetOwner());
+            }
+
+            ImGui::EndPopup();
+        }
+
+
         GizmoManager::GetInstance()->SetManaged(SelectedEntity);
     }
 
-    
-        // Replace the problematic line with the following code to fix the error:
-        if (SelectedEntity && ImGui::IsWindowFocused() && ImGui::IsKeyPressed(ImGuiKey_Delete))
+    if (SelectedEntity && ImGui::IsWindowFocused() && ImGui::IsKeyPressed(ImGuiKey_Delete))
+    {
+        if (SelectedEntity != Root)
         {
-           if (SelectedEntity != Root)
-           {
-               // Remove the selected entity from the scene
-               scene->DeleteEntity(SelectedEntity->GetOwner());
-               SelectedEntity = Root; // Reset to root after deletion
-           }
+            scene->DeleteEntity(SelectedEntity->GetOwner());
+            SelectedEntity = Root; // Reset to root after deletion
         }
+    }
 
     ImGui::End();
 }
+
 
 
 void Engine::SceneHierarchyGUI::AddEntityToScene(Scene* scene, Entity* parent)
@@ -99,6 +123,7 @@ void Engine::SceneHierarchyGUI::AddEntityToScene(Scene* scene, Entity* parent)
 void Engine::SceneHierarchyGUI::AddModelToScene(Scene* scene, Entity* parent)
 {
     Entity* entity = scene->SpawnEntity(parent);
+    entity->AddComponent<ModelRenderer>();
 }
 
 void Engine::SceneHierarchyGUI::AddAnimatedModelToScene(Scene* scene, Entity* parent)
