@@ -13,5 +13,5 @@ uniform sampler2D BaseMap;
 void main()
 {
     //FragColor = customColor * Tint * texture(BaseMap, TexCoord).rgb;
-    FragColor = texture(BaseMap, TexCoord).rgb * max(dot(Normal, normalize(vec3(1.0f, 1.0f, 1.0f))), 0.0f);
+    FragColor = texture(BaseMap, TexCoord).rgb * Tint * max(dot(Normal, normalize(vec3(1.0f, 1.0f, 1.0f))), 0.0f);
 }

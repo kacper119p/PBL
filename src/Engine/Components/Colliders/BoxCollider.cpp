@@ -96,62 +96,63 @@ namespace Engine
 
     void BoxCollider::DrawDebugMesh(const CameraRenderData& RenderData)
     {
-    glm::vec3 halfExtents = glm::vec3(_width, _height, _depth) * 0.5f;
+        glm::vec3 halfExtents = glm::vec3(_width, _height, _depth) * 0.5f;
 
-    float vertices[] = {
-        -halfExtents.x, -halfExtents.y, -halfExtents.z,
-         halfExtents.x, -halfExtents.y, -halfExtents.z,
-         halfExtents.x,  halfExtents.y, -halfExtents.z,
-        -halfExtents.x,  halfExtents.y, -halfExtents.z,
-        -halfExtents.x, -halfExtents.y,  halfExtents.z,
-         halfExtents.x, -halfExtents.y,  halfExtents.z,
-         halfExtents.x,  halfExtents.y,  halfExtents.z,
-        -halfExtents.x,  halfExtents.y,  halfExtents.z
-    };
+        float vertices[] = {
+            -halfExtents.x, -halfExtents.y, -halfExtents.z,
+             halfExtents.x, -halfExtents.y, -halfExtents.z,
+             halfExtents.x,  halfExtents.y, -halfExtents.z,
+            -halfExtents.x,  halfExtents.y, -halfExtents.z,
+            -halfExtents.x, -halfExtents.y,  halfExtents.z,
+             halfExtents.x, -halfExtents.y,  halfExtents.z,
+             halfExtents.x,  halfExtents.y,  halfExtents.z,
+            -halfExtents.x,  halfExtents.y,  halfExtents.z
+        };
 
-    unsigned int indices[] = {
-        0, 1, 1, 2, 2, 3, 3, 0,
-        4, 5, 5, 6, 6, 7, 7, 4,
-        0, 4, 1, 5, 2, 6, 3, 7
-    };
+        unsigned int indices[] = {
+            0, 1, 1, 2, 2, 3, 3, 0,
+            4, 5, 5, 6, 6, 7, 7, 4,
+            0, 4, 1, 5, 2, 6, 3, 7
+        };
 
-    unsigned int VAO, VBO, EBO;
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glGenBuffers(1, &EBO);
+        unsigned int VAO, VBO, EBO;
+        glGenVertexArrays(1, &VAO);
+        glGenBuffers(1, &VBO);
+        glGenBuffers(1, &EBO);
 
-    glBindVertexArray(VAO);
+        glBindVertexArray(VAO);
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+        glEnableVertexAttribArray(0);
 
-    Shaders::Shader shader = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles("res/shaders/basic/basic.vert", nullptr,
+        Shaders::Shader shader = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles("res/shaders/basic/basic.vert", nullptr,
                                       "res/shaders/basic/basic.frag"));
 
-    shader.Use();
+        shader.Use();
 
-    shader.SetUniform("CameraPosition", RenderData.CameraPosition);
-    shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
-    shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
-    shader.SetUniform("ObjectToWorldMatrix", GetOwner()->GetTransform()->GetLocalToWorldMatrix());
+        shader.SetUniform("CameraPosition", RenderData.CameraPosition);
+        shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
+        shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
+        shader.SetUniform("ObjectToWorldMatrix", GetOwner()->GetTransform()->GetLocalToWorldMatrix());
+        shader.SetUniform("Tint", glm::vec3(0.0f, 255.0f, 0.0f));
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    glBindVertexArray(VAO);
-    glDrawElements(GL_LINES, sizeof(indices) / sizeof(indices[0]), GL_UNSIGNED_INT, 0);
+        glBindVertexArray(VAO);
+        glDrawElements(GL_LINES, sizeof(indices) / sizeof(indices[0]), GL_UNSIGNED_INT, 0);
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    glDeleteBuffers(1, &EBO);
-}
+        glDeleteVertexArrays(1, &VAO);
+        glDeleteBuffers(1, &VBO);
+        glDeleteBuffers(1, &EBO);
+    }
 
     void BoxCollider::Render(const CameraRenderData& RenderData) { 
         BoxCollider::DrawDebugMesh(RenderData);
@@ -163,19 +164,30 @@ namespace Engine
 
     void BoxCollider::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                              const glm::mat4* SpaceTransformMatrices)
-    {
-    }
+    {}
 
     void BoxCollider::Start()
     { 
        isColliding = false;
        transform = Component::GetOwner()->GetTransform();
        spdlog::info("BoxCollider start");
-
+       colliderVisitor.SetCurrentCollider(this);
     }
 
     void BoxCollider::Update(float deltaTime)
     { 
+
+        // TODO: remove when scriptable fully implemented
+        if (shouldMove)
+        {
+            glm::vec3 newPosition = transform->GetPosition() - glm::vec3(.1f, 0.0f, 0.0f) * deltaTime;
+            transform->SetPosition(newPosition);
+            if (transform->GetPosition().x < -10.0f)
+            {
+                shouldMove = false;
+            }
+        }
+        // TODO END
         colliderVisitor.ManageCollisions(colliders);
     }
 

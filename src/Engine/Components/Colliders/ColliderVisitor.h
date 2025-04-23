@@ -59,7 +59,7 @@ namespace Engine
         ConcreteColliderVisitor();
         ConcreteColliderVisitor(SpatialPartitioning* partitioning, Collider* collider);
 
-        static void SetCurrentCollider(Collider* collider);
+        void SetCurrentCollider(Collider* collider);
 
         void ResolveCollisionBox(BoxCollider& box) override;
         void ResolveCollisionSphere(SphereCollider& sphere) override;

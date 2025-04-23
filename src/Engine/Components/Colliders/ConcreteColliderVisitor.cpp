@@ -558,65 +558,75 @@ namespace Engine
     }
 
     void ConcreteColliderVisitor::ResolveCollisionBox(BoxCollider& box)
-        {
-            if (this->currentCollider == nullptr || this->currentCollider->IsStatic())
-                return;
+    {
+       if (this->currentCollider == nullptr || this->currentCollider->IsStatic())
+           return;
 
-            switch (this->currentCollider->colliderType)
-            {
-                case BOX:
-                {
-                    BoxCollider thisBox = BoxCollider();
-                    thisBox = static_cast<BoxCollider&>(*this->currentCollider);
-                    collisionDetected = CheckBoxBoxCollision(box, thisBox);
-                    thisBox.isColliding = box.isColliding = collisionDetected;
-                    if (collisionDetected)
-                    {
-                        glm::vec3 separation = GetSeparationBoxBox(box, thisBox);
-                        box.GetTransform()->SetPosition(box.GetTransform()->GetPosition() + separation);
-                        thisBox.GetTransform()->SetPosition(thisBox.GetTransform()->GetPosition() - separation);
-                    }
-                    // TODO: emit collision event
-                    break;
-                }
-                case SPHERE:
-                {
-                    SphereCollider sphere = SphereCollider();
-                    sphere = static_cast<SphereCollider&>(*this->currentCollider);
-                    collisionDetected = CheckBoxSphereCollision(box, sphere);
-                    box.isColliding = sphere.isColliding = collisionDetected;
-                    if (collisionDetected)
-                    {
-                        glm::vec3 separation = GetSeparationBoxSphere(box, sphere);
-                        box.GetTransform()->SetPosition(box.GetTransform()->GetPosition() + separation);
-                        sphere.GetTransform()->SetPosition(sphere.GetTransform()->GetPosition() - separation);
-                    }
-                    // TODO: emit collision event
-                    break;
-                }
-                case CAPSULE:
-                {
-                    CapsuleCollider capsule = CapsuleCollider();
-                    capsule = static_cast<CapsuleCollider&>(*this->currentCollider);
-                    collisionDetected = CheckBoxCapsuleCollision(box, capsule);
-                    if (collisionDetected)
-                    {
-                        glm::vec3 separation = GetSeparationBoxCapsule(box, capsule);
-                        box.GetTransform()->SetPosition(box.GetTransform()->GetPosition() + separation);
-                        capsule.GetTransform()->SetPosition(capsule.GetTransform()->GetPosition() - separation);
-                    }
-                    // TODO: emit collision event
-                    break;
-                }
-                case MESH:
-                {
-                    /*auto& mesh = static_cast<MeshCollider&>(*currentCollider);
-                    collisionDetected = CheckBoxMeshCollision(box, mesh);*/
-                    // TODO: emit collision event
-                    break;
-                }
-            }
-        }
+       switch (this->currentCollider->colliderType)
+       {
+           case BOX:
+           {
+               auto* boxCollider = dynamic_cast<BoxCollider*>(this->currentCollider);
+               if (boxCollider)
+               {
+                   collisionDetected = CheckBoxBoxCollision(box, *boxCollider);
+                   box.isColliding = boxCollider->isColliding = collisionDetected;
+                   if (collisionDetected)
+                   {
+                       glm::vec3 separation = GetSeparationBoxBox(box, *boxCollider);
+                       box.GetTransform()->SetPosition(box.GetTransform()->GetPosition() + separation);
+                       boxCollider->GetTransform()->SetPosition(boxCollider->GetTransform()->GetPosition() - separation);
+
+                       // TODO: remove or research usefulness of this
+                       box.shouldMove = false;
+                       boxCollider->shouldMove = false;
+                       // TODO END
+
+                       spdlog::info("Box-Box collision detected");
+                   }
+                   // TODO: emit collision event
+                   // TODO: fix other cases and resolvers to work like this case
+               }
+               break;
+           }
+           case SPHERE:
+           {
+               SphereCollider sphere = SphereCollider();
+               sphere = static_cast<SphereCollider&>(*this->currentCollider);
+               collisionDetected = CheckBoxSphereCollision(box, sphere);
+               box.isColliding = sphere.isColliding = collisionDetected;
+               if (collisionDetected)
+               {
+                   glm::vec3 separation = GetSeparationBoxSphere(box, sphere);
+                   box.GetTransform()->SetPosition(box.GetTransform()->GetPosition() + separation);
+                   sphere.GetTransform()->SetPosition(sphere.GetTransform()->GetPosition() - separation);
+               }
+               // TODO: emit collision event
+               break;
+           }
+           case CAPSULE:
+           {
+               CapsuleCollider capsule = CapsuleCollider();
+               capsule = static_cast<CapsuleCollider&>(*this->currentCollider);
+               collisionDetected = CheckBoxCapsuleCollision(box, capsule);
+               if (collisionDetected)
+               {
+                   glm::vec3 separation = GetSeparationBoxCapsule(box, capsule);
+                   box.GetTransform()->SetPosition(box.GetTransform()->GetPosition() + separation);
+                   capsule.GetTransform()->SetPosition(capsule.GetTransform()->GetPosition() - separation);
+               }
+               // TODO: emit collision event
+               break;
+           }
+           case MESH:
+           {
+               /*auto& mesh = static_cast<MeshCollider&>(*currentCollider);
+               collisionDetected = CheckBoxMeshCollision(box, mesh);*/
+               // TODO: emit collision event
+               break;
+           }
+       }
+    }
 
     void ConcreteColliderVisitor::ResolveCollisionSphere(SphereCollider& sphere)
         {
@@ -780,10 +790,10 @@ namespace Engine
             }
         }
 
+    void ConcreteColliderVisitor::SetCurrentCollider(Collider* collider) { this->currentCollider = collider; }
+
     void ConcreteColliderVisitor::ManageCollisions(std::vector<Collider*> colliders) 
         { 
-        spdlog::info("Managing collisions");
-
             if (!currentCollider || currentCollider->IsStatic())
                 return;
 

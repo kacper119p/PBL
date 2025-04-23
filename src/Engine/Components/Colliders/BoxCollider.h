@@ -24,6 +24,10 @@ namespace Engine
         unsigned int EBO = 0;
 
     public:
+
+        // TODO: remove when scriptable fully implemented
+        bool shouldMove = false;
+
         BoxCollider();
         BoxCollider(Transform* transform, bool isTrigger = false, float width = 1.0f, float height = 1.0f,
                     float depth = 1.0f);

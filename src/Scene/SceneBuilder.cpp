@@ -47,33 +47,24 @@ namespace Scene
         Scene = new class Engine::Scene();
         Engine::SceneManager::LoadScene("./res/scenes/SampleScene.lvl", Scene);
 
-        //Engine::Entity* boxEntity = Scene->SpawnEntity(nullptr);
-        //Engine::BoxCollider* boxCollider = boxEntity->AddComponent<Engine::BoxCollider>();
-        //boxEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 
-        //Engine::Entity* secondBoxEntity = Scene->SpawnEntity(nullptr);
-        //Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
-        //secondBoxEntity->GetTransform()->SetPosition(glm::vec3(5.0f, 0.0f, 0.0f));
+        // TODO: remove when no longer needed
+        Engine::Entity* boxEntity = Scene->SpawnEntity(nullptr);
+        Engine::BoxCollider* boxCollider = boxEntity->AddComponent<Engine::BoxCollider>();
+        boxEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 0.0f, 20.0f));
 
-        //boxCollider->AddColliderToSpatial(secondBoxCollider);
-        //secondBoxCollider->AddColliderToSpatial(boxCollider);
+        Engine::Entity* secondBoxEntity = Scene->SpawnEntity(nullptr);
+        Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
+        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(5.0f, 0.0f, 20.0f));
 
-        /*glm::vec3 boxVelocity = glm::vec3(-0.1f, 0.0f, 0.0f);
-        for (int i = 0; i < 1000; ++i)
-        {
-            if (!shouldContinue)
-            {
-                break;
-            }
-            glm::vec3 currentPosition = secondBoxEntity->GetTransform()->GetPosition();
-            secondBoxEntity->GetTransform()->SetPosition(currentPosition + boxVelocity);
-            
-            if (boxCollider->isColliding)
-            {
-                spdlog::info("Kolizja wykryta w kroku symulacji: {}", i);
-                break;
-            }
-        }*/
+        boxCollider->AddColliderToSpatial(secondBoxCollider);
+        secondBoxCollider->AddColliderToSpatial(boxCollider);
+
+        boxCollider->SetStatic(false);
+        secondBoxCollider->SetStatic(false);
+
+        secondBoxCollider->shouldMove = true;
+        // TODO END
 
         // Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
     }
