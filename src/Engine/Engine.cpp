@@ -66,7 +66,10 @@ namespace Engine
 
         try
         {
-            SceneBuilding::SceneBuilder::Build(Scene);
+            SceneBuilding::SceneBuilder::Build(CurrentScene);
+        #if EDITOR
+            EditorGUI.SetHierarchyRoot(CurrentScene->GetRoot()->GetTransform());
+        #endif
         } catch (std::runtime_error& e)
         {
             spdlog::error(e.what());
@@ -99,14 +102,22 @@ namespace Engine
 
             const CameraRenderData renderData(Camera->GetPosition(), Camera->GetTransform(),
                                               Camera->GetProjectionMatrix());
+
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
             AudioListener->UpdateListener();
+
+            #if EDITOR
+            glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, EditorFramebuffer);
+            glBlitFramebuffer(0, 0, displayW, displayH, 0, 0, displayW, displayH, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+            glClear(GL_COLOR_BUFFER_BIT);
+            #endif
 
 #if EDITOR
             // Draw ImGui
             ImGuiBegin();
-            AudioManager::GetInstance().RenderGlobalVolumeImGui();
-            ImGuiRender();
+            EditorGUI.Render(Frame, CurrentScene);
             GizmoManager::GetInstance()->Manipulate(renderData);
             ImGuiEnd(); // this call effectively renders ImGui
 #endif
@@ -160,6 +171,7 @@ namespace Engine
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 3.2+ only
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // 3.0+ only
 
+
 #if DEBUG
         glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 #endif
@@ -199,6 +211,9 @@ namespace Engine
         Materials::MaterialManager::Initialize();
         Ui::TextManager::Initialize();
 #if EDITOR
+        //for editor game screen
+        InitEditorFramebuffer();
+        EditorGUI.SetSceneViewFramebuffer(EditorColorTexture);
         GizmoManager::Initialize();
 #endif
 #if DEBUG
@@ -289,27 +304,10 @@ namespace Engine
 
     void Engine::ImGuiRender()
     {
-        ImGui::Begin("Inspector");
-
-        const GLubyte* renderer = glGetString(GL_RENDERER);
-        std::string cpuInfo = Utility::GetCpuInfo();
-        int ram = Utility::GetTotalRamGB();
-        const GLubyte* version = glGetString(GL_VERSION);
-        const GLubyte* shadingLanguageVersion = glGetString(GL_SHADING_LANGUAGE_VERSION);
-
-        ImGui::Text("GPU: %s", (char*) renderer);
-        ImGui::Text("CPU: %s", cpuInfo.c_str());
-        ImGui::Text("RAM: %dGB", ram);
-        ImGui::Text("OpenGL version: %s", (char*) version);
-        ImGui::Text("Shading Language version: %s", (char*) shadingLanguageVersion);
-
-        ImGui::Text("Frame: %llu\nApplication average %.3f ms/frame\n(%.1f FPS)", Frame,
-                    1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-
-        LightsGui::Draw();
-
-
-        ImGui::End();
+    #if EDITOR
+        //LightsGui::Draw();
+        EditorGUI.Render(Frame, CurrentScene);
+    #endif
     }
 
     void Engine::ImGuiEnd()
@@ -328,7 +326,7 @@ namespace Engine
 
     void Engine::FreeResources()
     {
-        delete Scene;
+        delete CurrentScene;
         TextureManager::DeleteAllTextures();
         Shaders::ShaderManager::FreeResources();
         Models::ModelManager::DeleteAllModels();
@@ -390,5 +388,33 @@ namespace Engine
                 camera->SetIsDragged(false);
             }
         }
+    }
+
+    void Engine::InitEditorFramebuffer()
+    {
+        glGenFramebuffers(1, &EditorFramebuffer);
+        glBindFramebuffer(GL_FRAMEBUFFER, EditorFramebuffer);
+
+        // Create color texture
+        glGenTextures(1, &EditorColorTexture);
+        glBindTexture(GL_TEXTURE_2D, EditorColorTexture);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, WindowWidth, WindowHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, EditorColorTexture, 0);
+
+        // Create depth renderbuffer
+        glGenRenderbuffers(1, &EditorDepthRBO);
+        glBindRenderbuffer(GL_RENDERBUFFER, EditorDepthRBO);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, WindowWidth, WindowHeight);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, EditorDepthRBO);
+
+        // Check framebuffer completeness
+        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+        {
+            spdlog::error("Editor framebuffer is not complete!");
+        }
+
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 } // Engine

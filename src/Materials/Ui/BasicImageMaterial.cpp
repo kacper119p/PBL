@@ -10,9 +10,10 @@ namespace Materials
 
     void BasicImageMaterial::Use() const
     {
-        Shader.Use();
-    }
-
+        Shader.Use(); }
+#if EDITOR
+    void BasicImageMaterial::DrawImGui() {}
+    #endif
     rapidjson::Value BasicImageMaterial::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_MATERIAL_SERIALIZATION

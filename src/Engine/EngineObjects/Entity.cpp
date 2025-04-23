@@ -12,6 +12,15 @@ namespace Engine
             delete component;
         }
     }
+#if EDITOR
+    void Entity::DrawImGui()
+    { Transform.DrawImGui();
+        for (Component* component : Components)
+        {
+            component->DrawImGui();
+        }
+    }
+    #endif
 
     rapidjson::Value Entity::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {

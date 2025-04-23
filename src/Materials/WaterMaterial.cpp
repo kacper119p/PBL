@@ -3,6 +3,9 @@
 #include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
 #include "Shaders/ShaderSourceFiles.h"
+#include "Engine/Textures/TextureManager.h"
+#include "imgui.h"
+#include <filesystem>
 
 namespace Materials
 {
@@ -84,9 +87,154 @@ namespace Materials
 
     void WaterMaterial::UsePointSpotShadows() const
     {
-        GetPointSpotShadowPass().Use();
-    }
+        GetPointSpotShadowPass().Use(); }
+#if EDITOR
+    void WaterMaterial::DrawImGui() 
+    {
+        {
+            static bool showNormal0Popup = false;
+            static bool showNormal1Popup = false;
+            static std::vector<std::string> availableTextures;
+            std::string texturePath = std::filesystem::absolute("./res/textures").string();
+            static bool scanned = false;
 
+             if (!scanned)
+            {
+                for (const auto& entry : std::filesystem::recursive_directory_iterator(texturePath))
+                {
+                    if (entry.is_regular_file() && entry.path().extension() == ".png")
+                        availableTextures.emplace_back(entry.path().string());
+                }
+                scanned = true;
+            }
+
+            std::string normalMap0Path =
+                    NormalMap0.GetId() != 0 ? Engine::TextureManager::GetTexturePath(NormalMap0) : "None";
+            std::string normalMap1Path =
+                    NormalMap1.GetId() != 0 ? Engine::TextureManager::GetTexturePath(NormalMap1) : "None";
+
+
+            ImGui::Text("Normal Map 0:");
+            ImGui::Selectable(normalMap0Path.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
+            if (ImGui::BeginDragDropTarget())
+            {
+                if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
+                {
+                    const char* droppedPath = static_cast<const char*>(payload->Data);
+                    if (std::filesystem::path(droppedPath).extension() == ".png")
+                    {
+                        NormalMap0 = Engine::TextureManager::GetTexture(droppedPath);
+                    }
+                }
+                ImGui::EndDragDropTarget();
+            }
+            if (ImGui::IsItemClicked())
+                showNormal0Popup = true;
+            if (showNormal0Popup)
+            {
+                ImGui::OpenPopup("Normal Map 0 Picker");
+                showNormal0Popup = false;
+            }
+            if (ImGui::BeginPopup("Normal Map 0 Picker"))
+            {
+                for (const auto& path : availableTextures)
+                {
+                    std::filesystem::path fsPath(path);
+                    std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
+                    if (ImGui::Selectable(displayName.c_str()))
+                    {
+                        NormalMap0 = Engine::TextureManager::GetTexture(path.c_str());
+                        ImGui::CloseCurrentPopup();
+                    }
+                    ImGui::SameLine();
+                    ImGui::TextDisabled("(%s)", path.c_str());
+                }
+                ImGui::EndPopup();
+            }
+            ImGui::Text("Normal Map 1:");
+            ImGui::Selectable(normalMap1Path.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
+            if (ImGui::BeginDragDropTarget())
+            {
+                if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
+                {
+                    const char* droppedPath = static_cast<const char*>(payload->Data);
+                    if (std::filesystem::path(droppedPath).extension() == ".png")
+                    {
+                        NormalMap1 = Engine::TextureManager::GetTexture(droppedPath);
+                    }
+                }
+                ImGui::EndDragDropTarget();
+            }
+            if (ImGui::IsItemClicked())
+                showNormal1Popup = true;
+            if (showNormal1Popup)
+            {
+                ImGui::OpenPopup("Normal Map 1 Picker");
+                showNormal1Popup = false;
+            }
+            if (ImGui::BeginPopup("Normal Map 1 Picker"))
+            {
+                for (const auto& path : availableTextures)
+                {
+                    std::filesystem::path fsPath(path);
+                    std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
+                    if (ImGui::Selectable(displayName.c_str()))
+                    {
+                        NormalMap1 = Engine::TextureManager::GetTexture(path.c_str());
+                        ImGui::CloseCurrentPopup();
+                    }
+                    ImGui::SameLine();
+                    ImGui::TextDisabled("(%s)", path.c_str());
+                }
+                ImGui::EndPopup();
+            }
+
+            ImGui::Separator();
+
+            glm::vec3 color = Color.GetValue();
+            if (ImGui::ColorEdit3("Color", &color.x))
+            {
+                Color.SetValue(color);
+            }
+
+            glm::vec2 tiling0 = Tiling0.GetValue();
+            if (ImGui::DragFloat2("Tiling 0", &tiling0.x, 0.01f))
+            {
+                Tiling0.SetValue(tiling0);
+            }
+
+            glm::vec2 tiling1 = Tiling1.GetValue();
+            if (ImGui::DragFloat2("Tiling 1", &tiling1.x, 0.01f))
+            {
+                Tiling1.SetValue(tiling1);
+            }
+
+            glm::vec2 velocity0 = Velocity0.GetValue();
+            if (ImGui::DragFloat2("Velocity 0", &velocity0.x, 0.01f))
+            {
+                Velocity0.SetValue(velocity0);
+            }
+
+            glm::vec2 velocity1 = Velocity1.GetValue();
+            if (ImGui::DragFloat2("Velocity 1", &velocity1.x, 0.01f))
+            {
+                Velocity1.SetValue(velocity1);
+            }
+
+            float roughness = Roughness.GetValue();
+            if (ImGui::SliderFloat("Roughness", &roughness, 0.0f, 1.0f))
+            {
+                Roughness.SetValue(roughness);
+            }
+
+            float metallic = Metallic.GetValue();
+            if (ImGui::SliderFloat("Metallic", &metallic, 0.0f, 1.0f))
+            {
+                Metallic.SetValue(metallic);
+            }
+        }
+    }
+    #endif
     rapidjson::Value WaterMaterial::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_MATERIAL_SERIALIZATION

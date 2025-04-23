@@ -1,7 +1,13 @@
 #pragma once
 #include <string>
 #include <unordered_map>
+
 #include "rapidjson/document.h"
+
+namespace Engine
+{
+    class Component;
+}
 
 namespace Serialization
 {
@@ -31,6 +37,9 @@ namespace Serialization
 
     private:
         std::unordered_map<std::string, ISerializedObjectBuilder*> Builders;
+#if EDITOR
+        std::vector<std::string> AvailableComponents;
+#endif
 
     private:
         [[nodiscard]] static SerializedObjectFactory* GetInstance()
@@ -49,6 +58,12 @@ namespace Serialization
         static void Register(const std::string& Name)
         {
             GetInstance()->Builders.emplace(Name, new SerializedObjectBuilder<T>());
+#if EDITOR
+            if constexpr (std::is_base_of_v<Engine::Component, T> && !std::is_abstract_v<T>)
+            {
+                GetInstance()->AvailableComponents.emplace_back(Name);
+            }
+#endif
         }
 
 
@@ -59,6 +74,9 @@ namespace Serialization
         static void Unregister(const std::string& Name)
         {
             GetInstance()->Builders.erase(Name);
+#if EDITOR
+            std::erase(GetInstance()->AvailableComponents, Name);
+#endif
         }
 
         /**
@@ -66,7 +84,17 @@ namespace Serialization
          * @param Object Json object to read TypeName from.
          * @return Created object.
          */
-        static SerializedObject* CreateObject(const rapidjson::Value& Object);
+        static SerializedObject* CreateObject(const std::string& TypeName);
+
+#if EDITOR
+        /**
+         * @brief Returns TypeNames of all available components.
+         */
+        static const std::vector<std::string>* GetAvailableComponents()
+        {
+            return &GetInstance()->AvailableComponents;
+        }
+#endif
     };
 
 } // Engine

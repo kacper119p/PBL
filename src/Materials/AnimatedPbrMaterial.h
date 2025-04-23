@@ -122,6 +122,10 @@ namespace Materials
             AnimatedPbrMaterial::EmissiveColor.SetValue(EmissiveColor);
         }
 
+        #if EDITOR
+        void DrawImGui() override;
+#endif
+
         SERIALIZATION_EXPORT_MATERIAL(AnimatedPbrMaterial)
     };
 

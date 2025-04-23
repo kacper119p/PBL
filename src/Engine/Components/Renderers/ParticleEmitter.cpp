@@ -3,6 +3,8 @@
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include <algorithm>
+#include <imgui.h>
+#include <glm/gtc/type_ptr.hpp>
 #include <GLFW/glfw3.h>
 
 #include "Serialization/SerializationUtility.h"
@@ -144,7 +146,39 @@ void Engine::ParticleEmitter::SetEmitterSettingsUniforms(Shaders::ComputeShader 
     Shader.SetUniform("EmitterSettings.MinLife", Settings.MinLife);
     Shader.SetUniform("EmitterSettings.MaxLife", Settings.MaxLife);
 }
+#if EDITOR
+void Engine::ParticleEmitter::DrawImGui() 
+{
+    if (ImGui::CollapsingHeader("Emitter Settings"))
+    {
+        ImGui::SliderFloat("Spawn Rate", &Settings.SpawnRate, 0.0f, 1000.0f);
 
+        ImGui::ColorEdit4("Min Color", glm::value_ptr(Settings.MinColor));
+        ImGui::ColorEdit4("Max Color", glm::value_ptr(Settings.MaxColor));
+
+        ImGui::DragFloat3("Min Offset", glm::value_ptr(Settings.MinOffset), 0.1f);
+        ImGui::DragFloat3("Max Offset", glm::value_ptr(Settings.MaxOffset), 0.1f);
+
+        ImGui::DragFloat3("Min Velocity", glm::value_ptr(Settings.MinVelocity), 0.1f);
+        ImGui::DragFloat3("Max Velocity", glm::value_ptr(Settings.MaxVelocity), 0.1f);
+
+        ImGui::DragFloat3("Min Scale", glm::value_ptr(Settings.MinScale), 0.1f);
+        ImGui::DragFloat3("Max Scale", glm::value_ptr(Settings.MaxScale), 0.1f);
+
+        ImGui::DragFloat3("Min Accel", glm::value_ptr(Settings.MinAccel), 0.1f);
+        ImGui::DragFloat3("Max Accel", glm::value_ptr(Settings.MaxAccel), 0.1f);
+
+        ImGui::SliderFloat("Min Life", &Settings.MinLife, 0.0f, 30.0f);
+        ImGui::SliderFloat("Max Life", &Settings.MaxLife, 0.0f, 30.0f);
+    }
+
+    if (ImGui::CollapsingHeader("Particle System Control"))
+    {
+        ImGui::InputInt("Max Particles", &MaxParticleCount);
+        ImGui::Text("Current Timer: %.2f", Timer);
+    }
+}
+#endif
 rapidjson::Value Engine::ParticleEmitter::Serialize(rapidjson::Document::AllocatorType& Allocator) const
 {
     START_COMPONENT_SERIALIZATION
