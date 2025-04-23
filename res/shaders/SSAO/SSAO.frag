@@ -13,7 +13,7 @@ out float FragColor;
 
 const vec2 SCREEN_SIZE = vec2(1920.0 / 2.0, 1080.0 / 2.0);
 const vec2 NOISE_SCALE = SCREEN_SIZE / 4.0;
-const float RADIUS = 1.0;
+const float RADIUS = 1.5;
 const float BIAS = 0.015;
 
 vec3 GetViewPosition(vec2 uv, float viewZ) {
@@ -57,7 +57,7 @@ void main() {
         float sampleDepth = GetViewPosition(sampleUV, offsetDepth).z;
 
         float rangeCheck = smoothstep(0.0, 1.0, RADIUS / abs(fragPos.z - sampleDepth));
-        occlusion += (sampleDepth > samplePos.z - BIAS ? 1.0 : 0.0) * rangeCheck;
+        occlusion += step(samplePos.z - BIAS, sampleDepth) * rangeCheck;
     }
 
     occlusion = 1.0 - (occlusion / 64.0);
