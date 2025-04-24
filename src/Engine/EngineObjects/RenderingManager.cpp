@@ -22,6 +22,7 @@ namespace Engine
 
     void RenderingManager::RenderAll(const CameraRenderData& RenderData, int ScreenWidth, int ScreenHeight)
     {
+        Frustum.UpdateFrustum(RenderData);
         LightManager::GetInstance()->RenderShadowMaps(RenderData);
 
         MultiSampledBuffer.BindMultiSampled();
@@ -48,8 +49,6 @@ namespace Engine
 
         MultiSampledBuffer.BindMultiSampled();
         MultiSampledBuffer.DisableNormalWrite();
-
-        Frustum.UpdateFrustum(RenderData);
 
         glViewport(0, 0, ScreenWidth, ScreenHeight);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);

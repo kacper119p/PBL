@@ -4,6 +4,7 @@
 #include "Materials/Material.h"
 #include "Models/Model.h"
 #include "Engine/EngineObjects/Camera.h"
+
 namespace Engine
 {
     /**
@@ -14,6 +15,8 @@ namespace Engine
     private:
         Materials::Material* Material = nullptr;
         Models::Model* Model = nullptr;
+
+        bool Culled = false;
 
     public:
         /**
