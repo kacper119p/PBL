@@ -36,9 +36,9 @@ namespace Engine
         void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                     const glm::mat4* SpaceTransformMatrices) override;
 
-        #if EDITOR
-        void DrawImGui() override {};
-        #endif
+#if EDITOR
+        void DrawImGui() override;
+#endif
 
         SERIALIZATION_EXPORT_CLASS(SkyboxRenderer);
     };
