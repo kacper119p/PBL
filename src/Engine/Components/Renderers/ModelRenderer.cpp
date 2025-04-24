@@ -18,26 +18,48 @@ namespace Engine
 {
     void ModelRenderer::RenderDepth(const CameraRenderData& RenderData)
     {
-        if (Material != nullptr)
+        if (Model == nullptr)
         {
-            Material->UseDepthPass();
+            return;
+        }
+        if (Material == nullptr)
+        {
+            return;
+        }
 
-            SetupMatrices(RenderData, Material->GetDepthPass());
-            Draw();
+        Culled = true;
+
+        const auto& frustum = RenderingManager::GetInstance()->GetFrustum();
+        const glm::mat4 objectToWorldMatrix = GetOwner()->GetTransform()->GetLocalToWorldMatrix();
+        for (int i = 0; i < Model->GetMeshCount(); ++i)
+        {
+            if (frustum.IsBoxVisible(Model->GetMesh(i)->GetAabBox(), objectToWorldMatrix))
+            {
+                Culled &= false;
+
+                Material->UseDepthPass();
+                SetupMatrices(RenderData, Material->GetDepthPass());
+                Model->GetMesh(i)->Draw();
+            }
         }
     }
 
     void ModelRenderer::Render(const CameraRenderData& RenderData)
     {
-        if (Material != nullptr)
+        if (Culled)
         {
-            Material->Use();
-
-            LightManager::GetInstance()->SetupLightsForRendering(Material->GetMainPass());
-
-            SetupMatrices(RenderData, Material->GetMainPass());
-            Draw();
+            return;
         }
+        if (Material == nullptr)
+        {
+            return;
+        }
+        Material->Use();
+
+        LightManager::GetInstance()->SetupLightsForRendering(Material->GetMainPass());
+
+        SetupMatrices(RenderData, Material->GetMainPass());
+        Draw();
     }
 
     void ModelRenderer::RenderDirectionalShadows(const CameraRenderData& RenderData)
@@ -88,30 +110,21 @@ namespace Engine
 
     void ModelRenderer::Draw() const
     {
-
-        if (Model == nullptr)
-        {
-            return;
-        }
-        const auto& frustum = RenderingManager::GetInstance()->GetFrustum();
-        glm::mat4 objectToWorldMatrix = GetOwner()->GetTransform()->GetLocalToWorldMatrix();
         for (int i = 0; i < Model->GetMeshCount(); ++i)
         {
-            if (frustum.IsBoxVisible(Model->GetMesh(i)->GetAabBox(), objectToWorldMatrix))
-            {
-                Model->GetMesh(i)->Draw();
-            }
+            Model->GetMesh(i)->Draw();
         }
     }
+
 #if EDITOR
-    void ModelRenderer::DrawImGui() 
-    { 
+    void ModelRenderer::DrawImGui()
+    {
         if (ImGui::CollapsingHeader("Model Renderer", ImGuiTreeNodeFlags_DefaultOpen))
         {
             static bool showMaterialPopup = false;
             static bool showModelPopup = false;
-            
-            
+
+
             static std::vector<std::string> availableMaterials;
             static std::vector<std::string> availableModels;
 
@@ -131,12 +144,11 @@ namespace Engine
                     if (entry.is_regular_file() && entry.path().extension() == ".fbx")
                         availableModels.emplace_back(entry.path().string());
                 }
-                
+
                 scanned = true;
             }
-            
 
-            
+
             if (Material)
             {
                 ImGui::Text("Material Properties:");
@@ -144,65 +156,64 @@ namespace Engine
                 Material->DrawImGui();
                 ImGui::Separator();
             }
-                ImGui::Text("Material file:");
-                materialPath = Material ? Materials::MaterialManager::GetMaterialPath(Material) : "None";
+            ImGui::Text("Material file:");
+            materialPath = Material ? Materials::MaterialManager::GetMaterialPath(Material) : "None";
 
-                
 
-                ImGui::Selectable(materialPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
+            ImGui::Selectable(materialPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
 
-                if (ImGui::BeginDragDropTarget())
+            if (ImGui::BeginDragDropTarget())
+            {
+                if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
                 {
-                    if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
+                    const char* droppedPath = static_cast<const char*>(payload->Data);
+                    if (fs::path(droppedPath).extension() == ".mat")
                     {
-                        const char* droppedPath = static_cast<const char*>(payload->Data);
-                        if (fs::path(droppedPath).extension() == ".mat")
-                        {
-                            Material = Materials::MaterialManager::GetMaterial(droppedPath);
-                        }
+                        Material = Materials::MaterialManager::GetMaterial(droppedPath);
                     }
-                    ImGui::EndDragDropTarget();
                 }
+                ImGui::EndDragDropTarget();
+            }
 
-                if (ImGui::IsItemClicked())
-                    showMaterialPopup = true;
+            if (ImGui::IsItemClicked())
+                showMaterialPopup = true;
 
-                if (showMaterialPopup)
+            if (showMaterialPopup)
+            {
+                ImGui::OpenPopup("Material Picker");
+                showMaterialPopup = false;
+            }
+
+            if (ImGui::BeginPopup("Material Picker"))
+            {
+                for (const auto& path : availableMaterials)
                 {
-                    ImGui::OpenPopup("Material Picker");
-                    showMaterialPopup = false;
-                }
+                    std::filesystem::path fsPath(path);
+                    std::string displayName = fsPath.filename().string();
 
-                if (ImGui::BeginPopup("Material Picker"))
-                {
-                    for (const auto& path : availableMaterials)
+                    if (ImGui::Selectable(displayName.c_str()))
                     {
-                        std::filesystem::path fsPath(path);
-                        std::string displayName = fsPath.filename().string();
-
-                        if (ImGui::Selectable(displayName.c_str()))
-                        {
-                            Material = Materials::MaterialManager::GetMaterial(path);
-                            ImGui::CloseCurrentPopup();
-                        }
-
-                        ImGui::SameLine();
-                        ImGui::TextDisabled("(%s)", path.c_str());
+                        Material = Materials::MaterialManager::GetMaterial(path);
+                        ImGui::CloseCurrentPopup();
                     }
-                    ImGui::EndPopup();
+
+                    ImGui::SameLine();
+                    ImGui::TextDisabled("(%s)", path.c_str());
                 }
-            
+                ImGui::EndPopup();
+            }
+
             static char editableMaterialName[256] = {};
-                static std::string lastMaterialPath;
+            static std::string lastMaterialPath;
 
-                std::string currentMaterialPath = materialPath;
-                if (currentMaterialPath != lastMaterialPath)
-                {
-                    strncpy_s(editableMaterialName, fs::path(currentMaterialPath).filename().string().c_str(),
-                              sizeof(editableMaterialName) - 1);
-                    lastMaterialPath = currentMaterialPath;
-                }
-            
+            std::string currentMaterialPath = materialPath;
+            if (currentMaterialPath != lastMaterialPath)
+            {
+                strncpy_s(editableMaterialName, fs::path(currentMaterialPath).filename().string().c_str(),
+                          sizeof(editableMaterialName) - 1);
+                lastMaterialPath = currentMaterialPath;
+            }
+
             ImGui::InputText("Material File Name", editableMaterialName, sizeof(editableMaterialName));
 
             if (ImGui::Button("Save"))
@@ -210,14 +221,15 @@ namespace Engine
                 if (!std::string(editableMaterialName).empty())
                 {
                     fs::path newMaterialPath = fs::path("./res/materials/SampleScene");
-                    Materials::MaterialManager::SaveMaterial(newMaterialPath.string() + "/" + editableMaterialName, Material);
+                    Materials::MaterialManager::SaveMaterial(newMaterialPath.string() + "/" + editableMaterialName,
+                                                             Material);
                     //Material = Materials::MaterialManager::GetMaterial(newMaterialPath.string() + "/" + editableMaterialName);
                 }
             }
 
 
             ImGui::Separator();
-            
+
             ImGui::Text("Model:");
             modelPath = Model ? Models::ModelManager::GetModelPath(Model) : "None";
             ImGui::Selectable(modelPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
@@ -266,6 +278,7 @@ namespace Engine
         }
     }
 #endif
+
     rapidjson::Value ModelRenderer::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION
