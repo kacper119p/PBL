@@ -1,4 +1,5 @@
 #version 460 core
+#extension GL_ARB_bindless_texture: enable
 
 in vec2 TexCoord;
 in vec3 Position;
@@ -7,7 +8,7 @@ in vec3 Tangent;
 
 uniform vec3 CameraPosition;
 uniform float IOR;
-layout (binding = 0) uniform samplerCube EnvironmentMap;
+layout (bindless_sampler) uniform samplerCube EnvironmentMap;
 
 out vec4 FragColor;
 

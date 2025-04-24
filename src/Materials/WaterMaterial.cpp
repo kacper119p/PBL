@@ -18,8 +18,10 @@ namespace Materials
                                  const glm::vec3& Color, const glm::vec2& Tiling0, const glm::vec2& Tiling1,
                                  const glm::vec2& Velocity0, const glm::vec2& Velocity1, const float Roughness,
                                  const float Metallic) :
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), NormalMap0(NormalMap0),
-        NormalMap1(NormalMap1), Color(Vector3MaterialProperty("Color", MainPass, Color)),
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
+        NormalMap0(TextureMaterialProperty("NormalMap0", MainPass, NormalMap0)),
+        NormalMap1(TextureMaterialProperty("NormalMap1", MainPass, NormalMap1)),
+        Color(Vector3MaterialProperty("Color", MainPass, Color)),
         Tiling0(Vector2MaterialProperty("Tiling0", MainPass, Tiling0)),
         Tiling1(Vector2MaterialProperty("Tiling1", MainPass, Tiling1)),
         Velocity0(Vector2MaterialProperty("Velocity0", MainPass, Velocity0)),
@@ -30,8 +32,9 @@ namespace Materials
     }
 
     WaterMaterial::WaterMaterial() :
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), NormalMap0(Engine::Texture()),
-        NormalMap1(Engine::Texture()), Color(Vector3MaterialProperty("Color", MainPass)),
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
+        NormalMap0(TextureMaterialProperty("NormalMap0", MainPass)),
+        NormalMap1(TextureMaterialProperty("NormalMap1", MainPass)), Color(Vector3MaterialProperty("Color", MainPass)),
         Tiling0(Vector2MaterialProperty("Tiling0", MainPass)), Tiling1(Vector2MaterialProperty("Tiling1", MainPass)),
         Velocity0(Vector2MaterialProperty("Velocity0", MainPass)), Velocity1("Velocity1", MainPass),
         Roughness(FloatMaterialProperty("Roughness", MainPass)), Metallic(FloatMaterialProperty("Metallic", MainPass)),
@@ -72,12 +75,10 @@ namespace Materials
         Velocity0.Bind();
         Velocity1.Bind();
 
-        Shaders::Shader::SetUniform(TimeLocation, static_cast<float>(glfwGetTime()));
+        NormalMap0.Bind();
+        NormalMap1.Bind();
 
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, NormalMap0.GetId());
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, NormalMap1.GetId());
+        Shaders::Shader::SetUniform(TimeLocation, static_cast<float>(glfwGetTime()));
     }
 
     void WaterMaterial::UseDirectionalShadows() const
@@ -87,9 +88,10 @@ namespace Materials
 
     void WaterMaterial::UsePointSpotShadows() const
     {
-        GetPointSpotShadowPass().Use(); }
+        GetPointSpotShadowPass().Use();
+    }
 #if EDITOR
-    void WaterMaterial::DrawImGui() 
+    void WaterMaterial::DrawImGui()
     {
         {
             static bool showNormal0Popup = false;
@@ -98,7 +100,7 @@ namespace Materials
             std::string texturePath = std::filesystem::absolute("./res/textures").string();
             static bool scanned = false;
 
-             if (!scanned)
+            if (!scanned)
             {
                 for (const auto& entry : std::filesystem::recursive_directory_iterator(texturePath))
                 {
@@ -109,9 +111,13 @@ namespace Materials
             }
 
             std::string normalMap0Path =
-                    NormalMap0.GetId() != 0 ? Engine::TextureManager::GetTexturePath(NormalMap0) : "None";
+                    NormalMap0.GetValue().GetId() != 0
+                        ? Engine::TextureManager::GetTexturePath(NormalMap0.GetValue())
+                        : "None";
             std::string normalMap1Path =
-                    NormalMap1.GetId() != 0 ? Engine::TextureManager::GetTexturePath(NormalMap1) : "None";
+                    NormalMap1.GetValue().GetId() != 0
+                        ? Engine::TextureManager::GetTexturePath(NormalMap1.GetValue())
+                        : "None";
 
 
             ImGui::Text("Normal Map 0:");
@@ -123,7 +129,7 @@ namespace Materials
                     const char* droppedPath = static_cast<const char*>(payload->Data);
                     if (std::filesystem::path(droppedPath).extension() == ".png")
                     {
-                        NormalMap0 = Engine::TextureManager::GetTexture(droppedPath);
+                        NormalMap0.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                     }
                 }
                 ImGui::EndDragDropTarget();
@@ -143,7 +149,7 @@ namespace Materials
                     std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
                     if (ImGui::Selectable(displayName.c_str()))
                     {
-                        NormalMap0 = Engine::TextureManager::GetTexture(path.c_str());
+                        NormalMap0.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
                         ImGui::CloseCurrentPopup();
                     }
                     ImGui::SameLine();
@@ -160,7 +166,7 @@ namespace Materials
                     const char* droppedPath = static_cast<const char*>(payload->Data);
                     if (std::filesystem::path(droppedPath).extension() == ".png")
                     {
-                        NormalMap1 = Engine::TextureManager::GetTexture(droppedPath);
+                        NormalMap1.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                     }
                 }
                 ImGui::EndDragDropTarget();
@@ -180,7 +186,7 @@ namespace Materials
                     std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
                     if (ImGui::Selectable(displayName.c_str()))
                     {
-                        NormalMap1 = Engine::TextureManager::GetTexture(path.c_str());
+                        NormalMap1.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
                         ImGui::CloseCurrentPopup();
                     }
                     ImGui::SameLine();
@@ -234,7 +240,7 @@ namespace Materials
             }
         }
     }
-    #endif
+#endif
     rapidjson::Value WaterMaterial::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_MATERIAL_SERIALIZATION

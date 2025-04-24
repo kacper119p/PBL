@@ -135,13 +135,20 @@ namespace Materials
             scanned = true;
         }
 
-        std::string baseMapPath = BaseMap.GetId() != 0 ? Engine::TextureManager::GetTexturePath(BaseMap) : "None";
-        std::string roughnessMetallicMapPath = RoughnessMetallicMap.GetId() != 0
-                                                       ? Engine::TextureManager::GetTexturePath(RoughnessMetallicMap)
-                                                       : "None";
-        std::string normalMapPath = NormalMap.GetId() != 0 ? Engine::TextureManager::GetTexturePath(NormalMap) : "None";
+        std::string baseMapPath = BaseMap.GetValue().GetId() != 0
+                                      ? Engine::TextureManager::GetTexturePath(BaseMap.GetValue())
+                                      : "None";
+        std::string roughnessMetallicMapPath = RoughnessMetallicMap.GetValue().GetId() != 0
+                                                   ? Engine::TextureManager::GetTexturePath(
+                                                           RoughnessMetallicMap.GetValue())
+                                                   : "None";
+        std::string normalMapPath = NormalMap.GetValue().GetId() != 0
+                                        ? Engine::TextureManager::GetTexturePath(NormalMap.GetValue())
+                                        : "None";
         std::string emissiveMapPath =
-                EmissiveMap.GetId() != 0 ? Engine::TextureManager::GetTexturePath(EmissiveMap) : "None";
+                EmissiveMap.GetValue().GetId() != 0
+                    ? Engine::TextureManager::GetTexturePath(EmissiveMap.GetValue())
+                    : "None";
         ImGui::Separator();
         ImGui::Text("Base Map:");
         ImGui::Selectable(baseMapPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
@@ -152,7 +159,7 @@ namespace Materials
                 const char* droppedPath = static_cast<const char*>(payload->Data);
                 if (std::filesystem::path(droppedPath).extension() == ".png")
                 {
-                    BaseMap = Engine::TextureManager::GetTexture(droppedPath);
+                    BaseMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                 }
             }
             ImGui::EndDragDropTarget();
@@ -173,7 +180,7 @@ namespace Materials
                 std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
                 if (ImGui::Selectable(displayName.c_str()))
                 {
-                    BaseMap = Engine::TextureManager::GetTexture(path.c_str());
+                    BaseMap.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
                     ImGui::CloseCurrentPopup();
                 }
                 ImGui::SameLine();
@@ -191,7 +198,7 @@ namespace Materials
                 const char* droppedPath = static_cast<const char*>(payload->Data);
                 if (std::filesystem::path(droppedPath).extension() == ".png")
                 {
-                    RoughnessMetallicMap = Engine::TextureManager::GetTexture(droppedPath);
+                    RoughnessMetallicMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                 }
             }
             ImGui::EndDragDropTarget();
@@ -213,7 +220,7 @@ namespace Materials
                 std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
                 if (ImGui::Selectable(displayName.c_str()))
                 {
-                    RoughnessMetallicMap = Engine::TextureManager::GetTexture(path.c_str());
+                    RoughnessMetallicMap.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
                     ImGui::CloseCurrentPopup();
                 }
                 ImGui::SameLine();
@@ -231,7 +238,7 @@ namespace Materials
                 const char* droppedPath = static_cast<const char*>(payload->Data);
                 if (std::filesystem::path(droppedPath).extension() == ".png")
                 {
-                    NormalMap = Engine::TextureManager::GetTexture(droppedPath);
+                    NormalMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                 }
             }
             ImGui::EndDragDropTarget();
@@ -251,7 +258,7 @@ namespace Materials
                 std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
                 if (ImGui::Selectable(displayName.c_str()))
                 {
-                    NormalMap = Engine::TextureManager::GetTexture(path.c_str());
+                    NormalMap.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
                     ImGui::CloseCurrentPopup();
                 }
                 ImGui::SameLine();
@@ -268,7 +275,7 @@ namespace Materials
                 const char* droppedPath = static_cast<const char*>(payload->Data);
                 if (std::filesystem::path(droppedPath).extension() == ".png")
                 {
-                    EmissiveMap = Engine::TextureManager::GetTexture(droppedPath);
+                    EmissiveMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                 }
             }
             ImGui::EndDragDropTarget();
@@ -288,7 +295,7 @@ namespace Materials
                 std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
                 if (ImGui::Selectable(displayName.c_str()))
                 {
-                    EmissiveMap = Engine::TextureManager::GetTexture(path.c_str());
+                    EmissiveMap.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
                     ImGui::CloseCurrentPopup();
                 }
                 ImGui::SameLine();

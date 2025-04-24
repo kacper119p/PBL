@@ -18,13 +18,14 @@ namespace Materials
 
     RefractiveMaterial::RefractiveMaterial(const Engine::Texture EnvironmentMap, const float IndexOfRefraction) :
         Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
-        EnvironmentMap(EnvironmentMap),
+        EnvironmentMap(TextureMaterialProperty("EnvironmentMap", MainPass, EnvironmentMap)),
         IndexOfRefraction(FloatMaterialProperty("IOR", MainPass, IndexOfRefraction))
     {
     }
 
     RefractiveMaterial::RefractiveMaterial() :
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), EnvironmentMap(Engine::Texture()),
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
+        EnvironmentMap(TextureMaterialProperty("EnvironmentMap", MainPass)),
         IndexOfRefraction(FloatMaterialProperty("IOR", MainPass))
     {
     }
@@ -58,7 +59,7 @@ namespace Materials
         IndexOfRefraction.Bind();
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, EnvironmentMap.GetId());
+        glBindTexture(GL_TEXTURE_CUBE_MAP, EnvironmentMap.GetValue().GetId());
     }
 
     void RefractiveMaterial::UseDirectionalShadows() const
@@ -95,7 +96,9 @@ namespace Materials
         }
 
         std::string environmentMapPath =
-                EnvironmentMap.GetId() != 0 ? Engine::TextureManager::GetTexturePath(EnvironmentMap) : "None";
+                EnvironmentMap.GetValue().GetId() != 0
+                    ? Engine::TextureManager::GetTexturePath(EnvironmentMap.GetValue())
+                    : "None";
         ImGui::Separator();
 
         ImGui::Text("Environment Map:");
@@ -107,7 +110,7 @@ namespace Materials
                 const char* droppedPath = static_cast<const char*>(payload->Data);
                 if (std::filesystem::path(droppedPath).extension() == ".png")
                 {
-                    EnvironmentMap = Engine::TextureManager::GetTexture(droppedPath);
+                    EnvironmentMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                 }
             }
             ImGui::EndDragDropTarget();
@@ -127,7 +130,7 @@ namespace Materials
                 std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
                 if (ImGui::Selectable(displayName.c_str()))
                 {
-                    EnvironmentMap = Engine::TextureManager::GetTexture(path.c_str());
+                    EnvironmentMap.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
                     ImGui::CloseCurrentPopup();
                 }
                 ImGui::SameLine();
