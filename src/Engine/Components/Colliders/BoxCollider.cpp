@@ -182,7 +182,7 @@ namespace Engine
         {
             glm::vec3 newPosition = transform->GetPosition() - glm::vec3(.1f, 0.0f, 0.0f) * deltaTime;
             transform->SetPosition(newPosition);
-            if (transform->GetPosition().x < -10.0f)
+            if (isColliding)
             {
                 shouldMove = false;
             }

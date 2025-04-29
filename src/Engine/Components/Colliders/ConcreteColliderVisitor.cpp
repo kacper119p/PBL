@@ -42,41 +42,31 @@ namespace Engine
     }
 
     bool OverlapOnAxis(const glm::vec3& axis, const glm::vec3& toCenter, const glm::vec3& aX, const glm::vec3& aY,
-                       const glm::vec3& aZ, const glm::vec3& aHalfSize, const glm::vec3& bX, const glm::vec3& bY,
-                       const glm::vec3& bZ, const glm::vec3& bHalfSize)
+                       const glm::vec3& aZ, const glm::vec3& aHalf, const glm::vec3& bX, const glm::vec3& bY,
+                       const glm::vec3& bZ, const glm::vec3& bHalf)
     {
-        float aProj = std::abs(glm::dot(axis, aX)) * aHalfSize.x + std::abs(glm::dot(axis, aY)) * aHalfSize.y +
-                      std::abs(glm::dot(axis, aZ)) * aHalfSize.z;
+        float projectionA = std::abs(glm::dot(axis, aX)) * aHalf.x + std::abs(glm::dot(axis, aY)) * aHalf.y +
+                            std::abs(glm::dot(axis, aZ)) * aHalf.z;
 
-        float bProj = std::abs(glm::dot(axis, bX)) * bHalfSize.x + std::abs(glm::dot(axis, bY)) * bHalfSize.y +
-                      std::abs(glm::dot(axis, bZ)) * bHalfSize.z;
+        float projectionB = std::abs(glm::dot(axis, bX)) * bHalf.x + std::abs(glm::dot(axis, bY)) * bHalf.y +
+                            std::abs(glm::dot(axis, bZ)) * bHalf.z;
 
-        float dist = std::abs(glm::dot(axis, toCenter));
+        float distance = std::abs(glm::dot(toCenter, axis));
 
-        return dist <= (aProj + bProj);
+        return distance <= (projectionA + projectionB);
     }
+
 
     bool ConcreteColliderVisitor::CheckBoxBoxCollision(const BoxCollider& box1, const BoxCollider& box2)
     {
-        /*if (GetSeparationBoxBox(box1, box2) == glm::vec3(0.0f))
-        {
-            return false;
-        }
-        else
-        {
-            spdlog::info("Box-Box separation detected");
-            box1.transform->SetPosition(box1.transform->GetPosition() + GetSeparationBoxBox(box1, box2));
-            box2.transform->SetPosition(box2.transform->GetPosition() + GetSeparationBoxBox(box2, box1));
-            return true; 
-        }*/
         const glm::mat4& t1 = box1.GetTransform()->GetLocalToWorldMatrix();
         const glm::mat4& t2 = box2.GetTransform()->GetLocalToWorldMatrix();
 
         glm::vec3 half1 = glm::vec3(box1.GetWidth(), box1.GetHeight(), box1.GetDepth()) * 0.5f;
         glm::vec3 half2 = glm::vec3(box2.GetWidth(), box2.GetHeight(), box2.GetDepth()) * 0.5f;
 
-        glm::vec3 center1 = glm::vec3(t1 * glm::vec4(half1, 1.0f));
-        glm::vec3 center2 = glm::vec3(t2 * glm::vec4(half2, 1.0f));
+        glm::vec3 center1 = glm::vec3(t1 * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+        glm::vec3 center2 = glm::vec3(t2 * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
 
         glm::vec3 aX = glm::normalize(glm::vec3(t1[0]));
         glm::vec3 aY = glm::normalize(glm::vec3(t1[1]));
@@ -107,18 +97,17 @@ namespace Engine
         for (const glm::vec3& axis : axes)
         {
             if (glm::length2(axis) < 1e-6f)
-                continue; 
+                continue;
 
-            if (!OverlapOnAxis(glm::normalize(axis), toCenter, aX, aY, aZ, half1, bX, bY, bZ, half2))
-            {
-                return false; 
-            }
+            glm::vec3 normAxis = glm::normalize(axis);
+            if (!OverlapOnAxis(normAxis, toCenter, aX, aY, aZ, half1, bX, bY, bZ, half2))
+                return false;
         }
 
-        box1.transform->SetPosition(box1.transform->GetPosition() + GetSeparationBoxBox(box1, box2));
-        box2.transform->SetPosition(box2.transform->GetPosition() + GetSeparationBoxBox(box2, box1));
-        return true; 
+        return true;
     }
+
+
 
     bool ConcreteColliderVisitor::CheckBoxSphereCollision(const BoxCollider& box, const SphereCollider& sphere)
     {
@@ -318,26 +307,32 @@ namespace Engine
             const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
             const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
 
-            glm::vec3 capsuleStart = capsuleTransform * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-            glm::vec3 capsuleEnd = capsuleTransform * glm::vec4(0.0f, capsule.GetHeight(), 0.0f, 1.0f);
-            float capsuleRadius = capsule.GetRadius();
+            glm::vec3 capsuleOrigin = glm::vec3(capsuleTransform * glm::vec4(0, 0, 0, 1));
 
-            glm::vec3 sphereCenter = sphereTransform * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-            float sphereRadius = sphere.GetRadius();
+            glm::vec3 upDirection = glm::normalize(glm::vec3(capsuleTransform * glm::vec4(0, 1, 0, 0)));
+
+            float cylinderHeight = capsule.GetHeight() - 2.0f * capsule.GetRadius();
+            glm::vec3 capsuleStart = capsuleOrigin - 0.5f * cylinderHeight * upDirection;
+            glm::vec3 capsuleEnd = capsuleOrigin + 0.5f * cylinderHeight * upDirection;
 
             glm::vec3 capsuleAxis = capsuleEnd - capsuleStart;
-            float capsuleAxisLengthSquared = glm::dot(capsuleAxis, capsuleAxis);
 
-            float t = glm::dot(sphereCenter - capsuleStart, capsuleAxis) / capsuleAxisLengthSquared;
+            glm::vec3 sphereCenter = glm::vec3(sphereTransform * glm::vec4(0, 0, 0, 1));
+
+            float t = glm::dot(sphereCenter - capsuleStart, capsuleAxis) / glm::dot(capsuleAxis, capsuleAxis);
             t = glm::clamp(t, 0.0f, 1.0f);
-            glm::vec3 closestPointOnCapsule = capsuleStart + t * capsuleAxis;
+            glm::vec3 closestPoint = capsuleStart + t * capsuleAxis;
 
-            float distanceSquared =
-                    glm::dot(closestPointOnCapsule - sphereCenter, closestPointOnCapsule - sphereCenter);
+            float distanceSquared = glm::length2(sphereCenter - closestPoint);
 
-            float combinedRadius = capsuleRadius + sphereRadius;
-            return distanceSquared <= (combinedRadius * combinedRadius);
+            float capsuleScale = glm::length(glm::vec3(capsuleTransform[0]));
+            float sphereScale = glm::length(glm::vec3(sphereTransform[0]));
+
+            float radiusSum = capsule.GetRadius() * capsuleScale + sphere.GetRadius() * sphereScale;
+
+            return distanceSquared <= (radiusSum * radiusSum);
         }
+
 
     bool ConcreteColliderVisitor::CheckCapsuleCapsuleCollision(const CapsuleCollider& capsule1,
                                                                    const CapsuleCollider& capsule2)
@@ -712,7 +707,7 @@ namespace Engine
                auto* boxCollider = dynamic_cast<BoxCollider*>(this->currentCollider);
                if (boxCollider)
                {
-                   collisionDetected = CheckBoxBoxCollision(*boxCollider, box) || GetSeparationBoxBox(*boxCollider, box) != glm::vec3(0.0f);
+                   collisionDetected = CheckBoxBoxCollision(*boxCollider, box);
                    box.isColliding = boxCollider->isColliding = collisionDetected;
                    //if (collisionDetected)
                    //{
