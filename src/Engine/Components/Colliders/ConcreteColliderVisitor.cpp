@@ -9,7 +9,7 @@
 #include "spdlog/spdlog.h"
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
-#include <glm/gtx/norm.hpp>  // dla glm::length2
+#include <glm/gtx/norm.hpp> 
 #include <cmath>
 // TODO: remove when spatial fully implemented
 #include "Engine/EngineObjects/Scene/Scene.h"
@@ -121,42 +121,45 @@ namespace Engine
     }
 
     bool ConcreteColliderVisitor::CheckBoxSphereCollision(const BoxCollider& box, const SphereCollider& sphere)
-        {
-        
-            const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
-            const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
+    {
+        const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
+        const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
 
-            glm::vec3 sphereCenter = sphereTransform * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+        glm::vec3 sphereCenter = glm::vec3(sphereTransform * glm::vec4(0, 0, 0, 1));
 
-            glm::vec3 boxCenter = boxTransform *
-                                  glm::vec4(box.GetWidth() / 2.0f, box.GetHeight() / 2.0f, box.GetDepth() / 2.0f, 1.0f);
-            glm::vec3 boxHalfExtents = glm::vec3(box.GetWidth() / 2.0f, box.GetHeight() / 2.0f, box.GetDepth() / 2.0f);
+        glm::vec3 xAxis = glm::normalize(glm::vec3(boxTransform[0]));
+        glm::vec3 yAxis = glm::normalize(glm::vec3(boxTransform[1]));
+        glm::vec3 zAxis = glm::normalize(glm::vec3(boxTransform[2]));
 
-            glm::vec3 xAxis = glm::normalize(glm::vec3(boxTransform[0])); 
-            glm::vec3 yAxis = glm::normalize(glm::vec3(boxTransform[1])); 
-            glm::vec3 zAxis = glm::normalize(glm::vec3(boxTransform[2])); 
+        float scaleX = glm::length(glm::vec3(boxTransform[0]));
+        float scaleY = glm::length(glm::vec3(boxTransform[1]));
+        float scaleZ = glm::length(glm::vec3(boxTransform[2]));
 
-            glm::vec3 delta = sphereCenter - boxCenter;
+        glm::vec3 halfExtents = glm::vec3(box.GetWidth() * 0.5f * scaleX, box.GetHeight() * 0.5f * scaleY,
+                                          box.GetDepth() * 0.5f * scaleZ);
 
-            glm::vec3 closestPoint = boxCenter;
+        glm::vec3 boxCenter = glm::vec3(boxTransform * glm::vec4(0, 0, 0, 1));
 
-            float distanceX = glm::dot(delta, xAxis);
-            float distanceY = glm::dot(delta, yAxis);
-            float distanceZ = glm::dot(delta, zAxis);
+        glm::vec3 delta = sphereCenter - boxCenter;
 
-            distanceX = glm::clamp(distanceX, -boxHalfExtents.x, boxHalfExtents.x);
-            distanceY = glm::clamp(distanceY, -boxHalfExtents.y, boxHalfExtents.y);
-            distanceZ = glm::clamp(distanceZ, -boxHalfExtents.z, boxHalfExtents.z);
+        float distanceX = glm::dot(delta, xAxis);
+        float distanceY = glm::dot(delta, yAxis);
+        float distanceZ = glm::dot(delta, zAxis);
 
-            closestPoint += distanceX * xAxis;
-            closestPoint += distanceY * yAxis;
-            closestPoint += distanceZ * zAxis;
+        distanceX = glm::clamp(distanceX, -halfExtents.x, halfExtents.x);
+        distanceY = glm::clamp(distanceY, -halfExtents.y, halfExtents.y);
+        distanceZ = glm::clamp(distanceZ, -halfExtents.z, halfExtents.z);
 
-            float distanceSquared = glm::dot(closestPoint - sphereCenter, closestPoint - sphereCenter);
+        glm::vec3 closestPoint = boxCenter + distanceX * xAxis + distanceY * yAxis + distanceZ * zAxis;
 
+        float distanceSquared = glm::length2(closestPoint - sphereCenter);
 
-            return distanceSquared <= (sphere.GetRadius() * sphere.GetRadius());
-        }
+        float scaleSphere = glm::length(glm::vec3(sphereTransform[0]));
+        float worldRadius = sphere.GetRadius() * scaleSphere;
+
+        return distanceSquared <= (worldRadius * worldRadius);
+    }
+
 
     bool ConcreteColliderVisitor::CheckBoxCapsuleCollision(const BoxCollider& box, const CapsuleCollider& capsule)
     {

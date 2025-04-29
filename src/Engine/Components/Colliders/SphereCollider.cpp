@@ -1,8 +1,22 @@
 #include "SphereCollider.h"
-
+#include "Shaders/ShaderManager.h"
+#include "Engine/EngineObjects/RenderingManager.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include "spdlog/spdlog.h"
 
 namespace Engine
 {
+    SphereCollider::SphereCollider() : radius(1.0f)
+    {
+        this->colliderType = SPHERE;
+        this->shouldMove = false;
+        RenderingManager::GetInstance()->RegisterRenderer(this);
+        UpdateManager::GetInstance()->RegisterComponent(this);
+    }
+
     SphereCollider::SphereCollider(Transform* transform, bool isTrigger, float radius) :
         Collider(transform, isTrigger), radius(radius)
     {
@@ -65,62 +79,104 @@ namespace Engine
     float SphereCollider::GetRadius() const { return radius; }
     void SphereCollider::SetRadius(float radius) { this->radius = radius; }
 
+    std::string SphereCollider::loadShaderSource(const char* filePath)
+    {
+        std::ifstream shaderFile(filePath);
+        std::stringstream shaderStream;
+
+        if (!shaderFile)
+        {
+            throw std::runtime_error("Failed to open shader file");
+        }
+
+        shaderStream << shaderFile.rdbuf();
+        return shaderStream.str();
+    }
+
     void SphereCollider::DrawDebugMesh(const CameraRenderData& RenderData)
     {
-        const int segments = 16;
-        const int rings = 16;
-        const float radius = this->radius;
+        const int latitudeSegments = 16;
+        const int longitudeSegments = 16;
 
-        glColor3f(0.0f, 1.0f, 0.0f);
+        std::vector<glm::vec3> vertices;
+        std::vector<unsigned int> indices;
 
-        glBegin(GL_LINES);
-        for (int i = 0; i <= rings; ++i)
+        for (int lat = 0; lat <= latitudeSegments; ++lat)
         {
-            float phi = glm::pi<float>() * i / rings;
-            float y = radius * cos(phi);
-            float ringRadius = radius * sin(phi);
+            float theta = glm::pi<float>() * float(lat) / latitudeSegments;
+            float sinTheta = sin(theta);
+            float cosTheta = cos(theta);
 
-            for (int j = 0; j < segments; ++j)
+            for (int lon = 0; lon <= longitudeSegments; ++lon)
             {
-                float theta1 = 2.0f * glm::pi<float>() * j / segments;
-                float theta2 = 2.0f * glm::pi<float>() * (j + 1) / segments;
+                float phi = glm::two_pi<float>() * float(lon) / longitudeSegments;
+                float sinPhi = sin(phi);
+                float cosPhi = cos(phi);
 
-                float x1 = ringRadius * cos(theta1);
-                float z1 = ringRadius * sin(theta1);
+                float x = radius * sinTheta * cosPhi;
+                float y = radius * cosTheta;
+                float z = radius * sinTheta * sinPhi;
 
-                float x2 = ringRadius * cos(theta2);
-                float z2 = ringRadius * sin(theta2);
-
-                glVertex3f(x1, y, z1);
-                glVertex3f(x2, y, z2);
+                vertices.emplace_back(x, y, z);
             }
         }
-        glEnd();
 
-        glBegin(GL_LINES);
-        for (int j = 0; j < segments; ++j)
+        for (int lat = 0; lat < latitudeSegments; ++lat)
         {
-            float theta = 2.0f * glm::pi<float>() * j / segments;
-
-            for (int i = 0; i < rings; ++i)
+            for (int lon = 0; lon < longitudeSegments; ++lon)
             {
-                float phi1 = glm::pi<float>() * i / rings;
-                float phi2 = glm::pi<float>() * (i + 1) / rings;
+                int current = lat * (longitudeSegments + 1) + lon;
+                int next = current + longitudeSegments + 1;
 
-                float x1 = radius * sin(phi1) * cos(theta);
-                float y1 = radius * cos(phi1);
-                float z1 = radius * sin(phi1) * sin(theta);
+                // lines for latitudinal circle
+                indices.push_back(current);
+                indices.push_back(current + 1);
 
-                float x2 = radius * sin(phi2) * cos(theta);
-                float y2 = radius * cos(phi2);
-                float z2 = radius * sin(phi2) * sin(theta);
-
-                glVertex3f(x1, y1, z1);
-                glVertex3f(x2, y2, z2);
+                // lines for longitudinal circle
+                indices.push_back(current);
+                indices.push_back(next);
             }
         }
-        glEnd();
+
+        unsigned int VAO, VBO, EBO;
+        glGenVertexArrays(1, &VAO);
+        glGenBuffers(1, &VBO);
+        glGenBuffers(1, &EBO);
+
+        glBindVertexArray(VAO);
+
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), vertices.data(), GL_STATIC_DRAW);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
+
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void*) 0);
+        glEnableVertexAttribArray(0);
+
+        Shaders::Shader shader = Shaders::ShaderManager::GetShader(
+                Shaders::ShaderSourceFiles("res/shaders/basic/basic.vert", nullptr, "res/shaders/basic/basic.frag"));
+
+        shader.Use();
+
+        shader.SetUniform("CameraPosition", RenderData.CameraPosition);
+        shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
+        shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
+        shader.SetUniform("ObjectToWorldMatrix", GetOwner()->GetTransform()->GetLocalToWorldMatrix());
+        shader.SetUniform("Tint", glm::vec3(0.0f, 0.0f, 255.0f));
+
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+        glBindVertexArray(VAO);
+        glDrawElements(GL_LINES, (GLsizei) indices.size(), GL_UNSIGNED_INT, 0);
+
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+        glDeleteVertexArrays(1, &VAO);
+        glDeleteBuffers(1, &VBO);
+        glDeleteBuffers(1, &EBO);
     }
+
 
     void SphereCollider::Render(const CameraRenderData& RenderData) { SphereCollider::DrawDebugMesh(RenderData); }
 
@@ -139,6 +195,26 @@ namespace Engine
         transform = GetOwner()->GetTransform();
     }
 
-    void SphereCollider::OnDestroy() {}
+    void SphereCollider::Update(float deltaTime)
+    {
+
+        // TODO: remove when scriptable fully implemented
+        if (shouldMove)
+        {
+            glm::vec3 newPosition = transform->GetPosition() - glm::vec3(.1f, 0.0f, 0.0f) * deltaTime;
+            transform->SetPosition(newPosition);
+            if (isColliding)
+            {
+                shouldMove = false;
+            }
+        }
+        // TODO END
+        colliderVisitor.ManageCollisions(colliders);
+    }
+
+    void SphereCollider::OnDestroy() {
+        RenderingManager::GetInstance()->UnregisterRenderer(this);
+        UpdateManager::GetInstance()->UnregisterComponent(this);
+    }
 
 } // namespace Engine

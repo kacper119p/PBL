@@ -8,7 +8,7 @@ namespace Engine
      * @brief Sphere collider class.
      * @details Represents a sphere-shaped collider.
      */
-    class SphereCollider : public Collider
+    class SphereCollider : public Collider, public IUpdateable
     {
     private:
         unsigned int VAO = 0;
@@ -16,9 +16,11 @@ namespace Engine
         unsigned int EBO = 0;
 
     public:
+
+        bool shouldMove = false; // TODO: remove when scriptable fully implemented
         float radius;
 
-        SphereCollider() = default;
+        SphereCollider();
 
         SphereCollider(Transform* transform, bool isTrigger = false, float radius = 1.0f);
 
@@ -32,6 +34,8 @@ namespace Engine
 
         SphereCollider& operator=(const SphereCollider& other);
 
+        std::string loadShaderSource(const char* filePath);
+
         void DrawDebugMesh(const CameraRenderData& RenderData) override;
 
         void RenderDepth(const CameraRenderData& RenderData) override;
@@ -44,6 +48,7 @@ namespace Engine
                                     const glm::mat4* SpaceTransformMatrices) override;
 
         void Start() override;
+        void Update(float deltaTime) override;
         void OnDestroy() override;
 
         SERIALIZATION_EXPORT_CLASS(SphereCollider)
