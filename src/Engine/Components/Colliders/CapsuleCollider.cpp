@@ -172,7 +172,7 @@ namespace Engine
         shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
         shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
         shader.SetUniform("ObjectToWorldMatrix", GetOwner()->GetTransform()->GetLocalToWorldMatrix());
-        shader.SetUniform("Tint", glm::vec3(0.0f, 255.0f, 0.0f));
+        shader.SetUniform("Tint", glm::vec3(0.0f, 5.0f, 0.0f));
 
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -213,7 +213,7 @@ namespace Engine
         {
             glm::vec3 newPosition = transform->GetPosition() - glm::vec3(.1f, 0.0f, 0.0f) * deltaTime;
             transform->SetPosition(newPosition);
-            if (transform->GetPosition().x < -10.0f)
+            if (isColliding)
             {
                 shouldMove = false;
             }

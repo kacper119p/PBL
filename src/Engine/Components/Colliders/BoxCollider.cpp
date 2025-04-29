@@ -140,7 +140,7 @@ namespace Engine
         shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
         shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
         shader.SetUniform("ObjectToWorldMatrix", GetOwner()->GetTransform()->GetLocalToWorldMatrix());
-        shader.SetUniform("Tint", glm::vec3(0.0f, 255.0f, 0.0f));
+        shader.SetUniform("Tint", glm::vec3(0.0f, 5.0f, 0.0f));
 
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
