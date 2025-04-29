@@ -1,11 +1,28 @@
 #include "CapsuleCollider.h"
+#include "Shaders/ShaderManager.h"
+#include "Engine/EngineObjects/RenderingManager.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include "spdlog/spdlog.h"
 
 namespace Engine
 {
+
+    CapsuleCollider::CapsuleCollider() : _height(2.0f), _radius(2.0f) {
+        this->colliderType = CAPSULE;
+        this->shouldMove = false;
+        RenderingManager::GetInstance()->RegisterRenderer(this);
+        UpdateManager::GetInstance()->RegisterComponent(this);
+    }
+
     CapsuleCollider::CapsuleCollider(Transform* transform, bool isTrigger, float radius, float height) :
         Collider(transform, isTrigger), _radius(radius), _height(height)
     {
         this->colliderType = CAPSULE;
+        RenderingManager::GetInstance()->RegisterRenderer(this);
+        UpdateManager::GetInstance()->RegisterComponent(this);
     }
 
     bool CapsuleCollider::AcceptCollision(ColliderVisitor& visitor)
@@ -24,6 +41,20 @@ namespace Engine
         _height = other._height;
 
         return *this;
+    }
+
+    std::string CapsuleCollider::loadShaderSource(const char* filePath)
+    {
+        std::ifstream shaderFile(filePath);
+        std::stringstream shaderStream;
+
+        if (!shaderFile)
+        {
+            throw std::runtime_error("Failed to open shader file");
+        }
+
+        shaderStream << shaderFile.rdbuf();
+        return shaderStream.str();
     }
 
     rapidjson::Value CapsuleCollider::Serialize(rapidjson::Document::AllocatorType& Allocator) const
@@ -64,83 +95,97 @@ namespace Engine
     {
         const int segments = 16;
         const int rings = 8;
-        const float radius = _radius;
-        const float halfHeight = _height * 0.5f - radius;
+        std::vector<glm::vec3> vertices;
+        std::vector<unsigned int> indices;
 
-        glColor3f(0.0f, 1.0f, 0.0f);
-
-        glBegin(GL_LINES);
-        for (int i = 0; i < segments; ++i)
-        {
-            float theta1 = (2.0f * glm::pi<float>() * i) / segments;
-            float theta2 = (2.0f * glm::pi<float>() * (i + 1)) / segments;
-
-            float x1 = radius * cos(theta1);
-            float z1 = radius * sin(theta1);
-            float x2 = radius * cos(theta2);
-            float z2 = radius * sin(theta2);
-
-            glVertex3f(x1, -halfHeight, z1);
-            glVertex3f(x2, -halfHeight, z2);
-
-            glVertex3f(x1, halfHeight, z1);
-            glVertex3f(x2, halfHeight, z2);
-
-            glVertex3f(x1, -halfHeight, z1);
-            glVertex3f(x1, halfHeight, z1);
-        }
-        glEnd();
+        float halfHeight = (_height - 2.0f * _radius) * 0.5f;
+        float stepTheta = glm::pi<float>() / rings;
+        float stepPhi = glm::two_pi<float>() / segments;
 
         for (int i = 0; i <= rings; ++i)
         {
-            float phi1 = (glm::pi<float>() * i) / rings;
-            float phi2 = (glm::pi<float>() * (i + 1)) / rings;
-
-            glBegin(GL_LINES);
-            for (int j = 0; j < segments; ++j)
+            for (int j = 0; j <= segments; ++j)
             {
-                float theta1 = (2.0f * glm::pi<float>() * j) / segments;
-                float theta2 = (2.0f * glm::pi<float>() * (j + 1)) / segments;
+                float theta = i * stepTheta;
+                float phi = j * stepPhi;
 
-                float x1 = radius * sin(phi1) * cos(theta1);
-                float y1 = -halfHeight - radius * cos(phi1);
-                float z1 = radius * sin(phi1) * sin(theta1);
+                float x = _radius * sin(theta) * cos(phi);
+                float y = -halfHeight - _radius * cos(theta);
+                float z = _radius * sin(theta) * sin(phi);
 
-                float x2 = radius * sin(phi2) * cos(theta1);
-                float y2 = -halfHeight - radius * cos(phi2);
-                float z2 = radius * sin(phi2) * sin(theta1);
-
-                float x3 = radius * sin(phi1) * cos(theta2);
-                float y3 = -halfHeight - radius * cos(phi1);
-                float z3 = radius * sin(phi1) * sin(theta2);
-
-                glVertex3f(x1, y1, z1);
-                glVertex3f(x2, y2, z2);
-
-                glVertex3f(x1, y1, z1);
-                glVertex3f(x3, y3, z3);
-
-                x1 = radius * sin(phi1) * cos(theta1);
-                y1 = halfHeight + radius * cos(phi1);
-                z1 = radius * sin(phi1) * sin(theta1);
-
-                x2 = radius * sin(phi2) * cos(theta1);
-                y2 = halfHeight + radius * cos(phi2);
-                z2 = radius * sin(phi2) * sin(theta1);
-
-                x3 = radius * sin(phi1) * cos(theta2);
-                y3 = halfHeight + radius * cos(phi1);
-                z3 = radius * sin(phi1) * sin(theta2);
-
-                glVertex3f(x1, y1, z1);
-                glVertex3f(x2, y2, z2);
-
-                glVertex3f(x1, y1, z1);
-                glVertex3f(x3, y3, z3);
+                vertices.push_back(glm::vec3(x, y, z));
             }
-            glEnd();
         }
+
+        for (int j = 0; j <= segments; ++j)
+        {
+            float phi = j * stepPhi;
+            float x = _radius * cos(phi);
+            float z = _radius * sin(phi);
+            vertices.push_back(glm::vec3(x, -halfHeight, z));
+            vertices.push_back(glm::vec3(x, halfHeight, z));
+        }
+
+        for (int i = 0; i <= rings; ++i)
+        {
+            for (int j = 0; j <= segments; ++j)
+            {
+                float theta = i * stepTheta;
+                float phi = j * stepPhi;
+
+                float x = _radius * sin(theta) * cos(phi);
+                float y = halfHeight + _radius * cos(theta);
+                float z = _radius * sin(theta) * sin(phi);
+
+                vertices.push_back(glm::vec3(x, y, z));
+            }
+        }
+
+        for (size_t i = 0; i + 1 < vertices.size(); ++i)
+        {
+            indices.push_back((unsigned int) i);
+            indices.push_back((unsigned int) (i + 1));
+        }
+
+        unsigned int VAO, VBO, EBO;
+        glGenVertexArrays(1, &VAO);
+        glGenBuffers(1, &VBO);
+        glGenBuffers(1, &EBO);
+
+        glBindVertexArray(VAO);
+
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), vertices.data(), GL_STATIC_DRAW);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
+
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (void*) 0);
+        glEnableVertexAttribArray(0);
+
+        Shaders::Shader shader = Shaders::ShaderManager::GetShader(
+                Shaders::ShaderSourceFiles("res/shaders/basic/basic.vert", nullptr, "res/shaders/basic/basic.frag"));
+
+        shader.Use();
+
+        shader.SetUniform("CameraPosition", RenderData.CameraPosition);
+        shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
+        shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
+        shader.SetUniform("ObjectToWorldMatrix", GetOwner()->GetTransform()->GetLocalToWorldMatrix());
+        shader.SetUniform("Tint", glm::vec3(0.0f, 255.0f, 0.0f));
+
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+        glBindVertexArray(VAO);
+        glDrawElements(GL_LINES, (GLsizei) indices.size(), GL_UNSIGNED_INT, 0);
+
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+        glDeleteVertexArrays(1, &VAO);
+        glDeleteBuffers(1, &VBO);
+        glDeleteBuffers(1, &EBO);
     }
+
 
     void CapsuleCollider::Render(const CameraRenderData& RenderData) { CapsuleCollider::DrawDebugMesh(RenderData); }
 
@@ -155,12 +200,31 @@ namespace Engine
 
     void CapsuleCollider::Start() 
     { 
+        isColliding = false;
         transform = GetOwner()->GetTransform();
+        colliderVisitor.SetCurrentCollider(this);
+    }
+
+    void CapsuleCollider::Update(float deltaTime)
+    {
+
+        // TODO: remove when scriptable fully implemented
+        if (shouldMove)
+        {
+            glm::vec3 newPosition = transform->GetPosition() - glm::vec3(.1f, 0.0f, 0.0f) * deltaTime;
+            transform->SetPosition(newPosition);
+            if (transform->GetPosition().x < -10.0f)
+            {
+                shouldMove = false;
+            }
+        }
+        // TODO END
+        colliderVisitor.ManageCollisions(colliders);
     }
 
     void CapsuleCollider::OnDestroy() 
-    {
-    
+    { 
+        UpdateManager::GetInstance()->UnregisterComponent(this);
     }
 
 } // namespace Engine

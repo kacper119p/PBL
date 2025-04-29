@@ -10,6 +10,10 @@ namespace Engine
      */
     class SphereCollider : public Collider
     {
+    private:
+        unsigned int VAO = 0;
+        unsigned int VBO = 0;
+        unsigned int EBO = 0;
 
     public:
         float radius;

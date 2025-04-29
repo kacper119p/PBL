@@ -53,17 +53,22 @@ namespace Scene
         Engine::BoxCollider* boxCollider = boxEntity->AddComponent<Engine::BoxCollider>();
         boxEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 0.0f, 20.0f));
 
-        Engine::Entity* secondBoxEntity = Scene->SpawnEntity(nullptr);
+        /*Engine::Entity* secondBoxEntity = Scene->SpawnEntity(nullptr);
         Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
-        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(5.0f, 0.0f, 20.0f));
+        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(5.0f, 0.0f, 20.0f));*/
 
-        boxCollider->AddColliderToSpatial(secondBoxCollider);
-        secondBoxCollider->AddColliderToSpatial(boxCollider);
+        Engine::Entity* capsuleEntity = Scene->SpawnEntity(nullptr);
+        Engine::CapsuleCollider* capsuleCollider = capsuleEntity->AddComponent<Engine::CapsuleCollider>();
+        capsuleEntity->GetTransform()->SetPosition(glm::vec3(5.0f, 0.0f, 20.0f));
+
+        boxCollider->AddColliderToSpatial(capsuleCollider);
+        capsuleCollider->AddColliderToSpatial(boxCollider);
 
         boxCollider->SetStatic(false);
-        secondBoxCollider->SetStatic(false);
+        capsuleCollider->SetStatic(false);
 
-        secondBoxCollider->shouldMove = true;
+        //boxCollider->transform->SetEulerAngles(glm::vec3(0.0f, 30.0f, 0.0f));
+        capsuleCollider->shouldMove = true;
         // TODO END
 
         // Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);

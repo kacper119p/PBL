@@ -7,7 +7,10 @@
 #include "SphereCollider.h"
 #include "SpatialPartitioning.h"
 #include "spdlog/spdlog.h"
-
+#include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
+#include <glm/gtx/norm.hpp>  // dla glm::length2
+#include <cmath>
 // TODO: remove when spatial fully implemented
 #include "Engine/EngineObjects/Scene/Scene.h"
 
@@ -37,23 +40,89 @@ namespace Engine
         currentCollider(collider), collisionDetected(false), spatialPartitioning(partitioning)
     {
     }
+
+    bool OverlapOnAxis(const glm::vec3& axis, const glm::vec3& toCenter, const glm::vec3& aX, const glm::vec3& aY,
+                       const glm::vec3& aZ, const glm::vec3& aHalfSize, const glm::vec3& bX, const glm::vec3& bY,
+                       const glm::vec3& bZ, const glm::vec3& bHalfSize)
+    {
+        float aProj = std::abs(glm::dot(axis, aX)) * aHalfSize.x + std::abs(glm::dot(axis, aY)) * aHalfSize.y +
+                      std::abs(glm::dot(axis, aZ)) * aHalfSize.z;
+
+        float bProj = std::abs(glm::dot(axis, bX)) * bHalfSize.x + std::abs(glm::dot(axis, bY)) * bHalfSize.y +
+                      std::abs(glm::dot(axis, bZ)) * bHalfSize.z;
+
+        float dist = std::abs(glm::dot(axis, toCenter));
+
+        return dist <= (aProj + bProj);
+    }
+
     bool ConcreteColliderVisitor::CheckBoxBoxCollision(const BoxCollider& box1, const BoxCollider& box2)
+    {
+        /*if (GetSeparationBoxBox(box1, box2) == glm::vec3(0.0f))
         {
-            const glm::mat4& transform1 = box1.GetTransform()->GetLocalToWorldMatrix();
-            const glm::mat4& transform2 = box2.GetTransform()->GetLocalToWorldMatrix();
-
-            glm::vec3 box1Min = transform1 * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-            glm::vec3 box1Max = transform1 * glm::vec4(box1.GetWidth(), box1.GetHeight(), box1.GetDepth(), 1.0f);
-
-            glm::vec3 box2Min = transform2 * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-            glm::vec3 box2Max = transform2 * glm::vec4(box2.GetWidth(), box2.GetHeight(), box2.GetDepth(), 1.0f);
-
-            return !(box1Max.x < box2Min.x || box1Min.x > box2Max.x || box1Max.y < box2Min.y || box1Min.y > box2Max.y ||
-                     box1Max.z < box2Min.z || box1Min.z > box2Max.z);
+            return false;
         }
+        else
+        {
+            spdlog::info("Box-Box separation detected");
+            box1.transform->SetPosition(box1.transform->GetPosition() + GetSeparationBoxBox(box1, box2));
+            box2.transform->SetPosition(box2.transform->GetPosition() + GetSeparationBoxBox(box2, box1));
+            return true; 
+        }*/
+        const glm::mat4& t1 = box1.GetTransform()->GetLocalToWorldMatrix();
+        const glm::mat4& t2 = box2.GetTransform()->GetLocalToWorldMatrix();
+
+        glm::vec3 half1 = glm::vec3(box1.GetWidth(), box1.GetHeight(), box1.GetDepth()) * 0.5f;
+        glm::vec3 half2 = glm::vec3(box2.GetWidth(), box2.GetHeight(), box2.GetDepth()) * 0.5f;
+
+        glm::vec3 center1 = glm::vec3(t1 * glm::vec4(half1, 1.0f));
+        glm::vec3 center2 = glm::vec3(t2 * glm::vec4(half2, 1.0f));
+
+        glm::vec3 aX = glm::normalize(glm::vec3(t1[0]));
+        glm::vec3 aY = glm::normalize(glm::vec3(t1[1]));
+        glm::vec3 aZ = glm::normalize(glm::vec3(t1[2]));
+
+        glm::vec3 bX = glm::normalize(glm::vec3(t2[0]));
+        glm::vec3 bY = glm::normalize(glm::vec3(t2[1]));
+        glm::vec3 bZ = glm::normalize(glm::vec3(t2[2]));
+
+        glm::vec3 toCenter = center2 - center1;
+
+        glm::vec3 axes[] = {aX,
+                            aY,
+                            aZ,
+                            bX,
+                            bY,
+                            bZ,
+                            glm::cross(aX, bX),
+                            glm::cross(aX, bY),
+                            glm::cross(aX, bZ),
+                            glm::cross(aY, bX),
+                            glm::cross(aY, bY),
+                            glm::cross(aY, bZ),
+                            glm::cross(aZ, bX),
+                            glm::cross(aZ, bY),
+                            glm::cross(aZ, bZ)};
+
+        for (const glm::vec3& axis : axes)
+        {
+            if (glm::length2(axis) < 1e-6f)
+                continue; 
+
+            if (!OverlapOnAxis(glm::normalize(axis), toCenter, aX, aY, aZ, half1, bX, bY, bZ, half2))
+            {
+                return false; 
+            }
+        }
+
+        box1.transform->SetPosition(box1.transform->GetPosition() + GetSeparationBoxBox(box1, box2));
+        box2.transform->SetPosition(box2.transform->GetPosition() + GetSeparationBoxBox(box2, box1));
+        return true; 
+    }
 
     bool ConcreteColliderVisitor::CheckBoxSphereCollision(const BoxCollider& box, const SphereCollider& sphere)
         {
+        
             const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
             const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
 
@@ -363,41 +432,77 @@ namespace Engine
         }
 
     glm::vec3 ConcreteColliderVisitor::GetSeparationBoxBox(const BoxCollider& box1, const BoxCollider& box2)
-    {
-        const glm::mat4& transform1 = box1.GetTransform()->GetLocalToWorldMatrix();
-        const glm::mat4& transform2 = box2.GetTransform()->GetLocalToWorldMatrix();
-
-        glm::vec3 box1Min = transform1 * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-        glm::vec3 box1Max = transform1 * glm::vec4(box1.GetWidth(), box1.GetHeight(), box1.GetDepth(), 1.0f);
-
-        glm::vec3 box2Min = transform2 * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-        glm::vec3 box2Max = transform2 * glm::vec4(box2.GetWidth(), box2.GetHeight(), box2.GetDepth(), 1.0f);
-
-        glm::vec3 overlapMin = glm::max(box1Min, box2Min);
-        glm::vec3 overlapMax = glm::min(box1Max, box2Max);
-
-        if (overlapMin.x > overlapMax.x || overlapMin.y > overlapMax.y || overlapMin.z > overlapMax.z)
         {
-            return glm::vec3(0.0f);
-        }
+            const glm::mat4& transform1 = box1.GetTransform()->GetLocalToWorldMatrix();
+            const glm::mat4& transform2 = box2.GetTransform()->GetLocalToWorldMatrix();
 
-        glm::vec3 overlap = overlapMax - overlapMin;
+            glm::vec3 halfExtents1 = glm::vec3(box1.GetWidth(), box1.GetHeight(), box1.GetDepth()) * 0.5f;
+            glm::vec3 halfExtents2 = glm::vec3(box2.GetWidth(), box2.GetHeight(), box2.GetDepth()) * 0.5f;
 
-        if (overlap.x < overlap.y && overlap.x < overlap.z)
-        {
-            return glm::vec3(overlap.x * (box1Min.x < box2Min.x ? -1.0f : 1.0f), 0.0f, 0.0f);
-        }
-        else if (overlap.y < overlap.z)
-        {
-            return glm::vec3(0.0f, overlap.y * (box1Min.y < box2Min.y ? -1.0f : 1.0f), 0.0f);
-        }
-        else
-        {
-            return glm::vec3(0.0f, 0.0f, overlap.z * (box1Min.z < box2Min.z ? -1.0f : 1.0f));
-        }
+            glm::vec3 center1 = glm::vec3(transform1 * glm::vec4(halfExtents1, 1.0f));
+            glm::vec3 center2 = glm::vec3(transform2 * glm::vec4(halfExtents2, 1.0f));
 
-        return glm::vec3(0.0f);
-    }
+            glm::mat3 rot1 = glm::mat3(transform1);
+            glm::mat3 rot2 = glm::mat3(transform2);
+
+            glm::vec3 axes1[3] = {rot1[0], rot1[1], rot1[2]};
+            glm::vec3 axes2[3] = {rot2[0], rot2[1], rot2[2]};
+
+            glm::vec3 delta = center2 - center1;
+
+            float minPenetration = std::numeric_limits<float>::max();
+            glm::vec3 smallestAxis = glm::vec3(0.0f);
+
+            for (int i = 0; i < 3; ++i)
+            {
+                glm::vec3 axis = glm::normalize(axes1[i]);
+                float proj1 = halfExtents1.x * glm::abs(glm::dot(axis, axes1[0])) +
+                              halfExtents1.y * glm::abs(glm::dot(axis, axes1[1])) +
+                              halfExtents1.z * glm::abs(glm::dot(axis, axes1[2]));
+
+                float proj2 = halfExtents2.x * glm::abs(glm::dot(axis, axes2[0])) +
+                              halfExtents2.y * glm::abs(glm::dot(axis, axes2[1])) +
+                              halfExtents2.z * glm::abs(glm::dot(axis, axes2[2]));
+
+                float distance = glm::abs(glm::dot(delta, axis));
+                float overlap = proj1 + proj2 - distance;
+
+                if (overlap < 0.0f)
+                    return glm::vec3(0.0f); // no collision
+
+                if (overlap < minPenetration)
+                {
+                    minPenetration = overlap;
+                    smallestAxis = axis * (glm::dot(delta, axis) < 0.0f ? -1.0f : 1.0f);
+                }
+            }
+
+            for (int i = 0; i < 3; ++i)
+            {
+                glm::vec3 axis = glm::normalize(axes2[i]);
+                float proj1 = halfExtents1.x * glm::abs(glm::dot(axis, axes1[0])) +
+                              halfExtents1.y * glm::abs(glm::dot(axis, axes1[1])) +
+                              halfExtents1.z * glm::abs(glm::dot(axis, axes1[2]));
+
+                float proj2 = halfExtents2.x * glm::abs(glm::dot(axis, axes2[0])) +
+                              halfExtents2.y * glm::abs(glm::dot(axis, axes2[1])) +
+                              halfExtents2.z * glm::abs(glm::dot(axis, axes2[2]));
+
+                float distance = glm::abs(glm::dot(delta, axis));
+                float overlap = proj1 + proj2 - distance;
+
+                if (overlap < 0.0f)
+                    return glm::vec3(0.0f); // no collision
+
+                if (overlap < minPenetration)
+                {
+                    minPenetration = overlap;
+                    smallestAxis = axis * (glm::dot(delta, axis) < 0.0f ? -1.0f : 1.0f);
+                }
+            }
+
+            return smallestAxis * minPenetration;
+        }
 
     glm::vec3 ConcreteColliderVisitor::GetSeparationBoxSphere(const BoxCollider& box, const SphereCollider& sphere)
     {
@@ -569,7 +674,7 @@ namespace Engine
                auto* boxCollider = dynamic_cast<BoxCollider*>(this->currentCollider);
                if (boxCollider)
                {
-                   collisionDetected = CheckBoxBoxCollision(box, *boxCollider);
+                   collisionDetected = CheckBoxBoxCollision(*boxCollider, box) || GetSeparationBoxBox(*boxCollider, box) != glm::vec3(0.0f);
                    box.isColliding = boxCollider->isColliding = collisionDetected;
                    if (collisionDetected)
                    {
