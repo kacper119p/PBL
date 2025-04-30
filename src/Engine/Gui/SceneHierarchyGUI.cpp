@@ -106,8 +106,10 @@ void Engine::SceneHierarchyGUI::Draw(Scene* scene)
         if (SelectedEntity != Root)
         {
             scene->DeleteEntity(SelectedEntity->GetOwner());
+            SelectedEntity = nullptr;
         }
     }
+
 
     ImGui::End();
 }

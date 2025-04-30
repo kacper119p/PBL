@@ -19,6 +19,15 @@ namespace fs = std::filesystem;
 namespace Engine
 {
 
+    AnimatedModelRenderer::~AnimatedModelRenderer()
+    {
+        {
+            // Remove this instance from the UpdateManager
+            UpdateManager::GetInstance()->UnregisterComponent(this);
+        }
+
+    }
+
     void AnimatedModelRenderer::Start()
     {
         Renderer::Start();
@@ -94,7 +103,7 @@ namespace Engine
             Model->GetMesh(i)->Draw();
         }
     }
-    #if EDITOR
+#if EDITOR
     void AnimatedModelRenderer::DrawImGui() 
     {
         if (ImGui::CollapsingHeader("Animated Model Renderer", ImGuiTreeNodeFlags_DefaultOpen))
@@ -301,7 +310,7 @@ namespace Engine
             }
         }
     }
-    #endif
+#endif
     rapidjson::Value AnimatedModelRenderer::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION
