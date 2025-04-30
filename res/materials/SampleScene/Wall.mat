@@ -1,0 +1,19 @@
+{
+    "type": "PbrMaterial",
+    "BaseMap": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\textures\\Default.png",
+    "RoughnessMetallicMap": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\textures\\Default.png",
+    "NormalMap": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\textures\\Default.png",
+    "EmissiveMap": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\textures\\Default.png",
+    "Roughness": 1.0,
+    "Metallic": 1.0,
+    "BaseColor": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+    },
+    "EmissiveColor": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+    }
+}

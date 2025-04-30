@@ -33,6 +33,30 @@ namespace Engine
          * @param Model Model to be used.
          */
         AnimatedModelRenderer() = default;
+        ~AnimatedModelRenderer() override
+        {
+            // Remove this instance from the UpdateManager
+            UpdateManager::GetInstance()->UnregisterComponent(this);
+
+            // Clean up dynamically allocated resources
+            if (Material)
+            {
+                delete Material;
+                Material = nullptr;
+            }
+
+            if (Model)
+            {
+                delete Model;
+                Model = nullptr;
+            }
+
+            if (Animation)
+            {
+                delete Animation;
+                Animation = nullptr;
+            }
+        }
 
     public:
         /**

@@ -29,7 +29,7 @@ namespace Models
         Animation() = default;
         Animation(const std::string& animationPath, ModelAnimated* model);
 
-        ~Animation() {}
+        ~Animation() = default;
 
         Bone* FindBone(const std::string& name);
 
