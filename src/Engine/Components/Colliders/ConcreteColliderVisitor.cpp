@@ -14,20 +14,6 @@
 // TODO: remove when spatial fully implemented
 #include "Engine/EngineObjects/Scene/Scene.h"
 
-/////////////////////////////////////////////////////////////////////////////////////////
-//
-//
-//          POMYSL MIALAM TAKI ZEBY ZROBIC CONCRETECOLLIDERVISITOR DLA KAZDEGO COLLIDERA
-//          KAZDY COLLIDER MUSIALBY MIEC PRZYPISANA REFKE DO ZEWNETRZNEGO SPATIALA
-//          CZYLI SPATIAL BEDZIE TAKIM SINGLETONOWYM MANAGEREM SIATKOWANIA POZYCJI
-//          I NA TEJ PODSTAWIE BEDZIE WYKONYWANY W COLLIDER->UPDATE() MANAGECOLLISIONS()
-//          A W MANAGECOLLISIONS() BEDZIE POBIERANIE POTENCJALNYCH KOLIZJI ZE SPATIALA
-//          I PODWOJNYM FOREM PRZELECENIE WSZYSTKICH I WYKRYCIE KOLIZJI
-//
-//
-///////////////////////////////////////////////////////////////////////////////////////
-
-
 namespace Engine
 {
 
