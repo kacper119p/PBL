@@ -33,30 +33,9 @@ namespace Engine
          * @param Model Model to be used.
          */
         AnimatedModelRenderer() = default;
-        ~AnimatedModelRenderer() override
-        {
-            // Remove this instance from the UpdateManager
-            UpdateManager::GetInstance()->UnregisterComponent(this);
 
-            // Clean up dynamically allocated resources
-            if (Material)
-            {
-                delete Material;
-                Material = nullptr;
-            }
-
-            if (Model)
-            {
-                delete Model;
-                Model = nullptr;
-            }
-
-            if (Animation)
-            {
-                delete Animation;
-                Animation = nullptr;
-            }
-        }
+    public:
+        ~AnimatedModelRenderer() override;
 
     public:
         /**
@@ -103,9 +82,9 @@ namespace Engine
         void SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const;
 
         void Draw() const;
-        #if EDITOR
+#if EDITOR
         void DrawImGui() override;
-        #endif
+#endif
         SERIALIZATION_EXPORT_CLASS(AnimatedModelRenderer)
     };
 } // namespace Engine
