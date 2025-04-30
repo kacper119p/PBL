@@ -182,9 +182,16 @@ namespace Serialization
     {
         rapidjson::Value object(rapidjson::kStringType);
         const std::string path = Materials::MaterialManager::GetMaterialPath(Value);
-        std::cout << "Material: "<< path << std::endl;
+        std::cout << "Material: " << path << std::endl;
         object.SetString(path.c_str(), path.length(), Allocator);
         return object;
+    }
+
+    rapidjson::Value Serialize(const Materials::TextureMaterialProperty& Value,
+                               rapidjson::Document::AllocatorType& Allocator)
+    {
+        const Engine::Texture value = Value.GetValue();
+        return Serialize(value, Allocator);
     }
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, int& Value)
@@ -329,7 +336,8 @@ namespace Serialization
         Value = Models::ModelManager::GetModel(iterator->value.GetString());
     }
 
-    void Deserialize(const rapidjson::Value& Object, const char* Name, Models::ModelAnimated*& Value) {
+    void Deserialize(const rapidjson::Value& Object, const char* Name, Models::ModelAnimated*& Value)
+    {
         const auto iterator = Object.FindMember(Name);
         if (iterator == Object.MemberEnd() || !iterator->value.IsString())
         {
@@ -338,7 +346,8 @@ namespace Serialization
         Value = Models::ModelManager::GetAnimatedModel(iterator->value.GetString());
     }
 
-    void Deserialize(const rapidjson::Value& Object, const char* Name, Models::Animation*& Value) {
+    void Deserialize(const rapidjson::Value& Object, const char* Name, Models::Animation*& Value)
+    {
         const auto iterator = Object.FindMember(Name);
         if (iterator == Object.MemberEnd() || !iterator->value.IsString())
         {
@@ -461,5 +470,12 @@ namespace Serialization
         }
 
         Value = Materials::MaterialManager::GetMaterial(iterator->value.GetString());
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, Materials::TextureMaterialProperty& Value)
+    {
+        Engine::Texture value = Value.GetValue();
+        Deserialize(Object, Name, value);
+        Value.SetValue(value);
     }
 } // Serialization

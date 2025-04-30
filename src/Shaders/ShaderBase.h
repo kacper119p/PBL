@@ -1,6 +1,7 @@
 #pragma once
 
 #include "glad/glad.h"
+#include <GLFW/glfw3.h>
 #include "glm/glm.hpp"
 #include <glm/gtc/type_ptr.hpp>
 
@@ -195,6 +196,16 @@ namespace Shaders
         void SetTexture(const char* const Name, const GLint Value) const
         {
             SetTexture(glGetUniformLocation(Id, Name), Value);
+        }
+
+        static void SetTextureHandle(const GLint UniformId, const GLuint64 Value)
+        {
+            glUniformHandleui64ARB(UniformId, Value);
+        }
+
+        void SetTextureHandle(const char* const Name, const GLuint64 Value) const
+        {
+            SetTextureHandle(glGetUniformLocation(Id, Name), Value);
         }
 
         static void SetUniformArray(const GLint UniformId, const glm::vec3* Array, const GLsizei Count)

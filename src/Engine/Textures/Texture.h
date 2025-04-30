@@ -1,5 +1,7 @@
 #pragma once
 #include <cstdint>
+#include "glad/glad.h"
+#include "Utility/AssertionsUtility.h"
 
 namespace Engine
 {
@@ -23,6 +25,13 @@ namespace Engine
         [[nodiscard]] uint32_t GetId() const
         {
             return TextureId;
+        }
+
+        [[nodiscard]] uint64_t GetHandleReadonly() const
+        {
+            CHECK_MESSAGE(TextureId != 0, "Texture not initialized");
+            const uint64_t handle = glGetTextureHandleARB(TextureId);
+            return handle;
         }
 
         bool operator==(const Texture Other) const

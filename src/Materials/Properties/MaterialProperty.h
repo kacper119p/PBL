@@ -87,5 +87,4 @@ namespace Materials
     typedef MaterialProperty<glm::uvec3> UIntVector3MaterialProperty;
     typedef MaterialProperty<glm::uvec4> UIntVector4MaterialProperty;
     typedef MaterialProperty<glm::mat4> Matrix4MaterialProperty;
-    typedef MaterialProperty<int> TextureMaterialProperty;
 } // Models

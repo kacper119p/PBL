@@ -1,4 +1,5 @@
 #version 460 core
+#extension GL_ARB_bindless_texture: enable
 
 #include "Lighting.glsl"
 
@@ -17,8 +18,8 @@ uniform float Time;
 
 uniform vec3 CameraPosition;
 
-layout (binding = 0) uniform sampler2D NormalMap0;
-layout (binding = 1) uniform sampler2D NormalMap1;
+layout (bindless_sampler) uniform sampler2D NormalMap0;
+layout (bindless_sampler) uniform sampler2D NormalMap1;
 
 out vec3 FragColor;
 

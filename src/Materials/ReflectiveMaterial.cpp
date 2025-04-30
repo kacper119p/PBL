@@ -19,12 +19,13 @@ namespace Materials
 
     ReflectiveMaterial::ReflectiveMaterial(const Engine::Texture EnvironmentMap) :
         Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
-        EnvironmentMap(EnvironmentMap)
+        EnvironmentMap(TextureMaterialProperty("EnvironmentMap", MainPass, EnvironmentMap))
     {
     }
 
     ReflectiveMaterial::ReflectiveMaterial() :
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), EnvironmentMap(Engine::Texture())
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
+        EnvironmentMap("EnvironmentMap", MainPass)
     {
     }
 
@@ -55,7 +56,7 @@ namespace Materials
         GetMainPass().Use();
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, EnvironmentMap.GetId());
+        glBindTexture(GL_TEXTURE_CUBE_MAP, EnvironmentMap.GetValue().GetId());
     }
 
     void ReflectiveMaterial::UseDirectionalShadows() const
@@ -87,7 +88,9 @@ namespace Materials
         }
 
         std::string environmentMapPath =
-                EnvironmentMap.GetId() != 0 ? Engine::TextureManager::GetTexturePath(EnvironmentMap) : "None";
+                EnvironmentMap.GetValue().GetId() != 0
+                    ? Engine::TextureManager::GetTexturePath(EnvironmentMap.GetValue())
+                    : "None";
         ImGui::Separator();
 
         ImGui::Text("Environment Map:");
@@ -99,7 +102,7 @@ namespace Materials
                 const char* droppedPath = static_cast<const char*>(payload->Data);
                 if (std::filesystem::path(droppedPath).extension() == ".png")
                 {
-                    EnvironmentMap = Engine::TextureManager::GetTexture(droppedPath);
+                    EnvironmentMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                 }
             }
             ImGui::EndDragDropTarget();
@@ -119,7 +122,7 @@ namespace Materials
                 std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
                 if (ImGui::Selectable(displayName.c_str()))
                 {
-                    EnvironmentMap = Engine::TextureManager::GetTexture(path.c_str());
+                    EnvironmentMap.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
                     ImGui::CloseCurrentPopup();
                 }
                 ImGui::SameLine();

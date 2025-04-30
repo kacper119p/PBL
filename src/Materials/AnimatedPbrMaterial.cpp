@@ -22,9 +22,13 @@ namespace Materials
                                              const Engine::Texture NormalMap, const Engine::Texture EmissiveMap,
                                              const glm::vec3& BaseColor, const float Roughness, const float Metallic,
                                              const glm::vec3& EmissiveColor) :
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), BaseMap(Engine::Texture(BaseMap)),
-        RoughnessMetallicMap(Engine::Texture(RoughnessMetallicMap)), NormalMap(Engine::Texture(NormalMap)),
-        EmissiveMap(Engine::Texture(EmissiveMap)), Roughness(FloatMaterialProperty("Roughness", MainPass, Roughness)),
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
+        BaseMap(TextureMaterialProperty("BaseMap", MainPass, BaseMap)),
+        RoughnessMetallicMap(TextureMaterialProperty("RoughnessMetallicAmbientOcclusionMap", MainPass,
+                                                     RoughnessMetallicMap)),
+        NormalMap(TextureMaterialProperty("NormalMap", MainPass, NormalMap)),
+        EmissiveMap(TextureMaterialProperty("EmissiveMap", MainPass, EmissiveMap)),
+        Roughness(FloatMaterialProperty("Roughness", MainPass, Roughness)),
         Metallic(FloatMaterialProperty("Metallic", MainPass, Metallic)),
         BaseColor(Vector3MaterialProperty("BaseColor", MainPass, BaseColor)),
         EmissiveColor(Vector3MaterialProperty("EmissiveColor", MainPass, EmissiveColor))
@@ -32,13 +36,17 @@ namespace Materials
     }
 
     AnimatedPbrMaterial::AnimatedPbrMaterial():
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), BaseMap(Engine::Texture()),
-        RoughnessMetallicMap(Engine::Texture()), NormalMap(Engine::Texture()), EmissiveMap(Engine::Texture()),
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
+        BaseMap(TextureMaterialProperty("BaseMap", MainPass)),
+        RoughnessMetallicMap(TextureMaterialProperty("RoughnessMetallicAmbientOcclusionMap", MainPass)),
+        NormalMap(TextureMaterialProperty("NormalMap", MainPass)),
+        EmissiveMap(TextureMaterialProperty("EmissiveMap", MainPass)),
         Roughness(FloatMaterialProperty("Roughness", MainPass)), Metallic(FloatMaterialProperty("Metallic", MainPass)),
         BaseColor(Vector3MaterialProperty("BaseColor", MainPass)),
         EmissiveColor(Vector3MaterialProperty("EmissiveColor", MainPass))
     {
     }
+
 
     void AnimatedPbrMaterial::Initialize()
     {
@@ -70,14 +78,10 @@ namespace Materials
         Roughness.Bind();
         Metallic.Bind();
 
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, BaseMap.GetId());
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, RoughnessMetallicMap.GetId());
-        glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D, NormalMap.GetId());
-        glActiveTexture(GL_TEXTURE3);
-        glBindTexture(GL_TEXTURE_2D, EmissiveMap.GetId());
+        BaseMap.Bind();
+        RoughnessMetallicMap.Bind();
+        NormalMap.Bind();
+        EmissiveMap.Bind();
     }
 
     void AnimatedPbrMaterial::UseDirectionalShadows() const
@@ -87,9 +91,10 @@ namespace Materials
 
     void AnimatedPbrMaterial::UsePointSpotShadows() const
     {
-        GetPointSpotShadowPass().Use(); }
+        GetPointSpotShadowPass().Use();
+    }
 
-    #if EDITOR
+#if EDITOR
     void AnimatedPbrMaterial::DrawImGui()
     {
         glm::vec3 baseColor = BaseColor.GetValue();
@@ -130,13 +135,20 @@ namespace Materials
             scanned = true;
         }
 
-        std::string baseMapPath = BaseMap.GetId() != 0 ? Engine::TextureManager::GetTexturePath(BaseMap) : "None";
-        std::string roughnessMetallicMapPath = RoughnessMetallicMap.GetId() != 0
-                                                       ? Engine::TextureManager::GetTexturePath(RoughnessMetallicMap)
-                                                       : "None";
-        std::string normalMapPath = NormalMap.GetId() != 0 ? Engine::TextureManager::GetTexturePath(NormalMap) : "None";
+        std::string baseMapPath = BaseMap.GetValue().GetId() != 0
+                                      ? Engine::TextureManager::GetTexturePath(BaseMap.GetValue())
+                                      : "None";
+        std::string roughnessMetallicMapPath = RoughnessMetallicMap.GetValue().GetId() != 0
+                                                   ? Engine::TextureManager::GetTexturePath(
+                                                           RoughnessMetallicMap.GetValue())
+                                                   : "None";
+        std::string normalMapPath = NormalMap.GetValue().GetId() != 0
+                                        ? Engine::TextureManager::GetTexturePath(NormalMap.GetValue())
+                                        : "None";
         std::string emissiveMapPath =
-                EmissiveMap.GetId() != 0 ? Engine::TextureManager::GetTexturePath(EmissiveMap) : "None";
+                EmissiveMap.GetValue().GetId() != 0
+                    ? Engine::TextureManager::GetTexturePath(EmissiveMap.GetValue())
+                    : "None";
         ImGui::Separator();
         ImGui::Text("Base Map:");
         ImGui::Selectable(baseMapPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
@@ -147,7 +159,7 @@ namespace Materials
                 const char* droppedPath = static_cast<const char*>(payload->Data);
                 if (std::filesystem::path(droppedPath).extension() == ".png")
                 {
-                    BaseMap = Engine::TextureManager::GetTexture(droppedPath);
+                    BaseMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                 }
             }
             ImGui::EndDragDropTarget();
@@ -168,7 +180,7 @@ namespace Materials
                 std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
                 if (ImGui::Selectable(displayName.c_str()))
                 {
-                    BaseMap = Engine::TextureManager::GetTexture(path.c_str());
+                    BaseMap.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
                     ImGui::CloseCurrentPopup();
                 }
                 ImGui::SameLine();
@@ -186,7 +198,7 @@ namespace Materials
                 const char* droppedPath = static_cast<const char*>(payload->Data);
                 if (std::filesystem::path(droppedPath).extension() == ".png")
                 {
-                    RoughnessMetallicMap = Engine::TextureManager::GetTexture(droppedPath);
+                    RoughnessMetallicMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                 }
             }
             ImGui::EndDragDropTarget();
@@ -208,7 +220,7 @@ namespace Materials
                 std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
                 if (ImGui::Selectable(displayName.c_str()))
                 {
-                    RoughnessMetallicMap = Engine::TextureManager::GetTexture(path.c_str());
+                    RoughnessMetallicMap.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
                     ImGui::CloseCurrentPopup();
                 }
                 ImGui::SameLine();
@@ -226,7 +238,7 @@ namespace Materials
                 const char* droppedPath = static_cast<const char*>(payload->Data);
                 if (std::filesystem::path(droppedPath).extension() == ".png")
                 {
-                    NormalMap = Engine::TextureManager::GetTexture(droppedPath);
+                    NormalMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                 }
             }
             ImGui::EndDragDropTarget();
@@ -246,7 +258,7 @@ namespace Materials
                 std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
                 if (ImGui::Selectable(displayName.c_str()))
                 {
-                    NormalMap = Engine::TextureManager::GetTexture(path.c_str());
+                    NormalMap.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
                     ImGui::CloseCurrentPopup();
                 }
                 ImGui::SameLine();
@@ -263,7 +275,7 @@ namespace Materials
                 const char* droppedPath = static_cast<const char*>(payload->Data);
                 if (std::filesystem::path(droppedPath).extension() == ".png")
                 {
-                    EmissiveMap = Engine::TextureManager::GetTexture(droppedPath);
+                    EmissiveMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                 }
             }
             ImGui::EndDragDropTarget();
@@ -283,7 +295,7 @@ namespace Materials
                 std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
                 if (ImGui::Selectable(displayName.c_str()))
                 {
-                    EmissiveMap = Engine::TextureManager::GetTexture(path.c_str());
+                    EmissiveMap.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
                     ImGui::CloseCurrentPopup();
                 }
                 ImGui::SameLine();
