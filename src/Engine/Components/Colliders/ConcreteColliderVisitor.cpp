@@ -336,55 +336,93 @@ namespace Engine
 
     bool ConcreteColliderVisitor::CheckCapsuleCapsuleCollision(const CapsuleCollider& capsule1,
                                                                    const CapsuleCollider& capsule2)
-        {
+    {
             const glm::mat4& transform1 = capsule1.GetTransform()->GetLocalToWorldMatrix();
             const glm::mat4& transform2 = capsule2.GetTransform()->GetLocalToWorldMatrix();
 
-            glm::vec3 capsule1Start = transform1 * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-            glm::vec3 capsule1End = transform1 * glm::vec4(0.0f, capsule1.GetHeight(), 0.0f, 1.0f);
-            float capsule1Radius = capsule1.GetRadius();
+            float halfHeight1 = capsule1.GetHeight() * 0.5f;
+            float halfHeight2 = capsule2.GetHeight() * 0.5f;
 
-            glm::vec3 capsule2Start = transform2 * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-            glm::vec3 capsule2End = transform2 * glm::vec4(0.0f, capsule2.GetHeight(), 0.0f, 1.0f);
-            float capsule2Radius = capsule2.GetRadius();
+            float radius1 = capsule1.GetRadius();
+            float radius2 = capsule2.GetRadius();
 
-            glm::vec3 u = capsule1End - capsule1Start;
-            glm::vec3 v = capsule2End - capsule2Start;
-            glm::vec3 w = capsule1Start - capsule2Start;
+            glm::vec3 localA1 = glm::vec3(0.0f, -halfHeight1, 0.0f);
+            glm::vec3 localB1 = glm::vec3(0.0f, +halfHeight1, 0.0f);
 
-            float a = glm::dot(u, u);
-            float b = glm::dot(u, v);
-            float c = glm::dot(v, v);
-            float d = glm::dot(u, w);
-            float e = glm::dot(v, w);
+            glm::vec3 localA2 = glm::vec3(0.0f, -halfHeight2, 0.0f);
+            glm::vec3 localB2 = glm::vec3(0.0f, +halfHeight2, 0.0f);
 
-            float denominator = a * c - b * b;
+            glm::vec3 A1 = glm::vec3(transform1 * glm::vec4(localA1, 1.0f));
+            glm::vec3 B1 = glm::vec3(transform1 * glm::vec4(localB1, 1.0f));
+
+            glm::vec3 A2 = glm::vec3(transform2 * glm::vec4(localA2, 1.0f));
+            glm::vec3 B2 = glm::vec3(transform2 * glm::vec4(localB2, 1.0f));
+
+            glm::vec3 d1 = B1 - A1;
+            glm::vec3 d2 = B2 - A2;
+            glm::vec3 r = A1 - A2;
+
+            float a = glm::dot(d1, d1);
+            float e = glm::dot(d2, d2);
+            float f = glm::dot(d2, r);
 
             float s, t;
-            if (denominator > 1e-6f)
+            if (a <= 1e-6f && e <= 1e-6f)
             {
-                s = (b * e - c * d) / denominator;
-                t = (a * e - b * d) / denominator;
+                s = t = 0.0f;
+            }
+            else if (a <= 1e-6f)
+            {
+                s = 0.0f;
+                t = glm::clamp(f / e, 0.0f, 1.0f);
             }
             else
             {
-                s = 0.0f;
-                t = (e > 0.0f ? 1.0f : 0.0f);
+                float c = glm::dot(d1, r);
+                if (e <= 1e-6f)
+                {
+                    t = 0.0f;
+                    s = glm::clamp(-c / a, 0.0f, 1.0f);
+                }
+                else
+                {
+                    float b = glm::dot(d1, d2);
+                    float denom = a * e - b * b;
+
+                    if (denom != 0.0f)
+                    {
+                        s = glm::clamp((b * f - c * e) / denom, 0.0f, 1.0f);
+                    }
+                    else
+                    {
+                        s = 0.0f;
+                    }
+
+                    t = (b * s + f) / e;
+
+                    if (t < 0.0f)
+                    {
+                        t = 0.0f;
+                        s = glm::clamp(-c / a, 0.0f, 1.0f);
+                    }
+                    else if (t > 1.0f)
+                    {
+                        t = 1.0f;
+                        s = glm::clamp((b - c) / a, 0.0f, 1.0f);
+                    }
+                }
             }
 
-            s = glm::clamp(s, 0.0f, 1.0f);
-            t = glm::clamp(t, 0.0f, 1.0f);
+            glm::vec3 closestPoint1 = A1 + d1 * s;
+            glm::vec3 closestPoint2 = A2 + d2 * t;
 
-            glm::vec3 closestPointOnCapsule1 = capsule1Start + s * u;
-            glm::vec3 closestPointOnCapsule2 = capsule2Start + t * v;
+            float distanceSquared = glm::length2(closestPoint1 - closestPoint2);
+            float combinedRadius = radius1 + radius2;
 
-            float distanceSquared = glm::dot(closestPointOnCapsule1 - closestPointOnCapsule2,
-                                             closestPointOnCapsule1 - closestPointOnCapsule2);
-
-
-            float combinedRadius = capsule1Radius + capsule2Radius;
             return distanceSquared <= (combinedRadius * combinedRadius);
-        }
+    }
+
+
 
     bool ConcreteColliderVisitor::CheckCapsuleMeshCollision(const CapsuleCollider& capsule,
                                                                 const MeshCollider& mesh)
