@@ -96,13 +96,13 @@ namespace Engine
          * @return Component if found, nullptr otherwise.
          */
         template<class T>
-        [[nodiscard]] Component* GetComponent() const
+        [[nodiscard]] T* GetComponent() const
         {
             {
                 static_assert(std::is_base_of_v<Component, T>, "Class not derived from IComponent");
                 for (Component* component : Components)
                 {
-                    if (T* result = dynamic_cast<T>(component))
+                    if (T* result = dynamic_cast<T*>(component))
                     {
                         return result;
                     }
@@ -165,9 +165,9 @@ namespace Engine
         {
             return Components.end();
         }
-        #if EDITOR
+#if EDITOR
         void DrawImGui();
-        #endif
+#endif
         SERIALIZATION_EXPORT_CLASS(Entity);
     };
 }
