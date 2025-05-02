@@ -7,6 +7,8 @@
 #include "imgui.h"
 #include <filesystem>
 
+#include "Engine/EngineObjects/LightManager.h"
+
 namespace Materials
 {
     Shaders::Shader WaterMaterial::DepthPass;
@@ -67,6 +69,8 @@ namespace Materials
     void WaterMaterial::Use() const
     {
         GetMainPass().Use();
+        Engine::LightManager::GetInstance()->SetupLightsForRendering(MainPass);
+
         Color.Bind();
         Roughness.Bind();
         Metallic.Bind();

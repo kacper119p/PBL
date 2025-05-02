@@ -1,5 +1,6 @@
 #include "ParticleMaterial.h"
 
+#include "Engine/EngineObjects/LightManager.h"
 #include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
 
@@ -26,6 +27,7 @@ namespace Materials
     void ParticleMaterial::Use() const
     {
         Shader.Use();
+        Engine::LightManager::GetInstance()->SetupLightsForRendering(Shader);
     }
 
     void ParticleMaterial::UseDirectionalShadows() const

@@ -23,7 +23,6 @@ void Engine::ParticleEmitter::Render(const Engine::CameraRenderData& RenderData)
     glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     glEnable(GL_BLEND);
-    Material->GetMainPass().Use();
     LightManager::GetInstance()->SetupLightsForRendering(Material->GetMainPass());
     SetupMatrices(RenderData, Material->GetMainPass());
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ParticlesBuffer);

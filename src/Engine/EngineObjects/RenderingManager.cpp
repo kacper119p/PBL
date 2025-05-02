@@ -1,6 +1,7 @@
 #include "RenderingManager.h"
 #include "Engine/Exceptions/SingletonAlreadyExistsException.h"
 #include "LightManager.h"
+#include "Materials/Material.h"
 
 namespace Engine
 {
@@ -39,9 +40,13 @@ namespace Engine
         glDepthFunc(GL_LEQUAL);
         glCullFace(GL_BACK);
 
-        for (Renderer* renderer : Renderers)
+        for (const auto& renderersGroup : Renderers)
         {
-            renderer->RenderDepth(RenderData);
+            renderersGroup.first->UseDepthPass();
+            for (Renderer* const renderer : renderersGroup.second)
+            {
+                renderer->RenderDepth(RenderData);
+            }
         }
 
         MultiSampledBuffer.ResolveNormals();
@@ -57,9 +62,13 @@ namespace Engine
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);
         glCullFace(GL_BACK);
-        for (Renderer* renderer : Renderers)
+        for (const auto& renderersGroup : Renderers)
         {
-            renderer->Render(RenderData);
+            renderersGroup.first->Use();
+            for (Renderer* const renderer : renderersGroup.second)
+            {
+                renderer->Render(RenderData);
+            }
         }
 
         if (Ui != nullptr)
@@ -85,9 +94,13 @@ namespace Engine
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LESS);
         glClear(GL_DEPTH_BUFFER_BIT);
-        for (Renderer* renderer : Renderers)
+        for (const auto& renderersGroup : Renderers)
         {
-            renderer->RenderDirectionalShadows(RenderData);
+            renderersGroup.first->UseDirectionalShadows();
+            for (Renderer* const renderer : renderersGroup.second)
+            {
+                renderer->RenderDirectionalShadows(RenderData);
+            }
         }
     }
 
@@ -105,9 +118,13 @@ namespace Engine
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LESS);
         glClear(GL_DEPTH_BUFFER_BIT);
-        for (Renderer* renderer : Renderers)
+        for (const auto& renderersGroup : Renderers)
         {
-            renderer->RenderPointSpotShadows(LightPosition, LightRange, SpaceTransformMatrices);
+            renderersGroup.first->UsePointSpotShadows();
+            for (Renderer* const renderer : renderersGroup.second)
+            {
+                renderer->RenderPointSpotShadows(LightPosition, LightRange, SpaceTransformMatrices);
+            }
         }
     }
 

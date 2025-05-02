@@ -1,5 +1,6 @@
 #include "PbrMaterial.h"
 
+#include "Engine/EngineObjects/LightManager.h"
 #include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
 
@@ -69,6 +70,8 @@ namespace Materials
     void PbrMaterial::Use() const
     {
         GetMainPass().Use();
+        Engine::LightManager::GetInstance()->SetupLightsForRendering(MainPass);
+
         BaseColor.Bind();
         EmissiveColor.Bind();
         Roughness.Bind();
