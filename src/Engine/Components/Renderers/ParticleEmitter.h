@@ -59,15 +59,13 @@ namespace Engine
         unsigned int ParticlesBuffer;
         unsigned int FreelistBuffer;
 
-        Shaders::Shader RenderShader;
-
         Shaders::ComputeShader SpawnShader;
         Shaders::ComputeShader UpdateShader;
 
     public:
         ParticleEmitter() = default;
 
-        ParticleEmitter(const Shaders::Shader& RenderShader, const Shaders::ComputeShader& SpawnShader,
+        ParticleEmitter(Materials::Material* Material, const Shaders::ComputeShader& SpawnShader,
                         const Shaders::ComputeShader& UpdateShader, const EmitterSettings& EmitterSettings,
                         int MaxParticleCount);
 
@@ -105,16 +103,6 @@ namespace Engine
             ParticleEmitter::SpawnShader = SpawnShader;
         }
 
-        [[nodiscard]] const Shaders::Shader& GetRenderShader() const
-        {
-            return RenderShader;
-        }
-
-        void SetRenderShader(const Shaders::Shader& RenderShader)
-        {
-            ParticleEmitter::RenderShader = RenderShader;
-        }
-
     public:
         void Start() override;
 
@@ -135,7 +123,7 @@ namespace Engine
         void SetEmitterSettingsUniforms(Shaders::ComputeShader Shader) const;
 #if EDITOR
         void DrawImGui() override;
-        #endif
+#endif
         SERIALIZATION_EXPORT_CLASS(ParticleEmitter)
     };
 }

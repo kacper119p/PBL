@@ -1247,11 +1247,7 @@
             },
             "Settings.MinLife": 10.0,
             "Settings.MaxLife": 15.0,
-            "RenderShader": {
-                "vertex": "./res/shaders/Particles/Particles.vert",
-                "geometry": "",
-                "fragment": "./res/shaders/Particles/Particle.frag"
-            },
+            "Material": "./res/materials/SampleScene/Particles.mat",
             "SpawnShader": "./res/shaders/Particles/ParticlesSpawn.comp",
             "UpdateShader": "./res/shaders/Particles/ParticlesUpdate.comp"
         },

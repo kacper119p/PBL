@@ -18,7 +18,6 @@ namespace Engine
     class AnimatedModelRenderer : public Renderer, public IUpdateable
     {
     private:
-        Materials::Material* Material = nullptr;
         Models::ModelAnimated* Model = nullptr;
         Models::Animation* Animation = nullptr;
         Models::Animator Animator;
@@ -38,17 +37,6 @@ namespace Engine
         ~AnimatedModelRenderer() override;
 
     public:
-        /**
-         * @brief Returns Material used by this Renderer.
-         */
-        [[nodiscard]] Materials::Material* GetMaterial() const { return Material; }
-
-        /**
-         * @brief Sets material used by this renderer.
-         * @param Material A new material.
-         */
-        void SetMaterial(Materials::Material* const Material) { this->Material = Material; }
-
         /**
          * @brief Returns model used by this renderer.
          */
