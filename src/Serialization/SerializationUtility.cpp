@@ -182,7 +182,6 @@ namespace Serialization
     {
         rapidjson::Value object(rapidjson::kStringType);
         const std::string path = Materials::MaterialManager::GetMaterialPath(Value);
-        std::cout << "Material: "<< path << std::endl;
         object.SetString(path.c_str(), path.length(), Allocator);
         return object;
     }
@@ -329,7 +328,8 @@ namespace Serialization
         Value = Models::ModelManager::GetModel(iterator->value.GetString());
     }
 
-    void Deserialize(const rapidjson::Value& Object, const char* Name, Models::ModelAnimated*& Value) {
+    void Deserialize(const rapidjson::Value& Object, const char* Name, Models::ModelAnimated*& Value)
+    {
         const auto iterator = Object.FindMember(Name);
         if (iterator == Object.MemberEnd() || !iterator->value.IsString())
         {
@@ -338,7 +338,8 @@ namespace Serialization
         Value = Models::ModelManager::GetAnimatedModel(iterator->value.GetString());
     }
 
-    void Deserialize(const rapidjson::Value& Object, const char* Name, Models::Animation*& Value) {
+    void Deserialize(const rapidjson::Value& Object, const char* Name, Models::Animation*& Value)
+    {
         const auto iterator = Object.FindMember(Name);
         if (iterator == Object.MemberEnd() || !iterator->value.IsString())
         {

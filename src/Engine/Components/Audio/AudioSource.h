@@ -19,7 +19,6 @@ namespace Engine
     private:
         AudioManager& AudioManager; ///< Reference to the global AudioManager instance.
         ma_sound* SelectedSound; ///< Currently selected sound to control for this source.
-        Entity* SelectedEntity; ///< Entity that keeps the AudioSource
 
         float SoundVolume = 1.0f; ///< Volume level of the selected sound (0.0 to 1.0).
         bool Looping = false; ///< Whether the selected sound should loop.
@@ -42,13 +41,6 @@ namespace Engine
          * @brief Renders the ImGui interface for editing this audio source.
          */
         void RenderAudioSourceImGui();
-
-        /**
-         * @brief Marks this audio source's entity as selected or not.
-         *
-         * @param Entity Pointer to the currently selected entity, or nullptr to deselect.
-         */
-        void SelectEntityForAudioControl(Entity* Entity);
 
         /**
          * @brief Resets settings of sounds in the ImGui interface to default.

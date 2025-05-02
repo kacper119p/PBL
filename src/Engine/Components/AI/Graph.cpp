@@ -1,0 +1,47 @@
+#include "Graph.h"
+
+namespace Engine
+{
+    void Graph::AddNode(int Id, const glm::vec2 Position)
+    {
+        Nodes.emplace(Id, Node(Id, Position));
+    }
+
+    void Graph::AddConnection(const int FromId, const int ToId)
+    {
+        auto fromNode = Nodes.find(FromId);
+        auto toNode = Nodes.find(ToId);
+
+        if (fromNode == Nodes.end() || toNode == Nodes.end())
+        {
+            return;
+        }
+
+        fromNode->second.AddNeighbor(ToId);
+        toNode->second.AddNeighbor(FromId);
+    }
+
+    void Graph::RemoveNode(int Id)
+    {
+        for (auto& [otherId, node] : Nodes)
+        {
+            auto& neighbors = const_cast<std::vector<int>&>(node.GetNeighbors());
+            neighbors.erase(
+                    std::remove(neighbors.begin(), neighbors.end(), Id),
+                    neighbors.end()
+                    );
+        }
+
+        Nodes.erase(Id);
+    }
+
+    const Node& Graph::GetNode(const int Id) const
+    {
+        return Nodes.at(Id);
+    }
+
+    const std::unordered_map<int, Node>& Graph::GetAllNodes() const
+    {
+        return Nodes;
+    }
+}

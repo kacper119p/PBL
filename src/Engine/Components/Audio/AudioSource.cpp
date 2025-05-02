@@ -4,14 +4,14 @@
 #include "imgui.h"
 
 Engine::AudioSource::AudioSource() :
-    AudioManager(AudioManager::GetInstance()), SelectedSound(nullptr), SelectedEntity(nullptr)
+    AudioManager(AudioManager::GetInstance()), SelectedSound(nullptr)
 {
 }
 
 #if EDITOR
 void Engine::AudioSource::RenderAudioSourceImGui()
 {
-    if (!SelectedEntity)
+    if (!this->GetOwner())
     {
         ImGui::Text("Please select an entity to configure audio.");
         return;
@@ -49,8 +49,6 @@ void Engine::AudioSource::RenderAudioSourceImGui()
                 SelectedSound = sound;
 
                 ResetAudioSettings();
-
-                AudioManager.SetSoundPosition(*SelectedSound, SelectedEntity->GetTransform()->GetPosition());
             }
         }
 
@@ -100,6 +98,8 @@ void Engine::AudioSource::RenderAudioSourceImGui()
         {
             AudioManager.ConfigureSoundAttenuation(*SelectedSound, MinDist, MaxDist, RollOff);
         }
+
+        AudioManager.SetSoundPosition(*SelectedSound, this->GetOwner()->GetTransform()->GetPosition());
     }
     else
     {
@@ -109,14 +109,6 @@ void Engine::AudioSource::RenderAudioSourceImGui()
     ImGui::End();
 }
 #endif
-
-void Engine::AudioSource::SelectEntityForAudioControl(Entity* Entity)
-{
-    if (Entity)
-    {
-        SelectedEntity = Entity;
-    }
-}
 
 void Engine::AudioSource::ResetAudioSettings()
 {
