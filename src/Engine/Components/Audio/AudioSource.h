@@ -46,5 +46,8 @@ namespace Engine
          * @brief Resets settings of sounds in the ImGui interface to default.
          */
         void ResetAudioSettings();
+#if EDITOR
+        void DrawImGui() override;
+#endif
     };
 }

@@ -3,6 +3,12 @@
 #include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
 #include "Shaders/ShaderSourceFiles.h"
+#include "Engine/Textures/TextureManager.h"
+
+#if EDITOR
+#include <filesystem>
+#include "imgui.h"
+#endif
 
 namespace Materials
 {
@@ -12,12 +18,14 @@ namespace Materials
     Shaders::Shader SkyboxMaterial::PointSpotShadowPass;
 
     SkyboxMaterial::SkyboxMaterial(const Engine::Texture Texture) :
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), Texture(Texture)
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
+        Texture(TextureMaterialProperty("Texture", MainPass, Texture))
     {
     }
 
     SkyboxMaterial::SkyboxMaterial():
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), Texture(Engine::Texture())
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
+        Texture(TextureMaterialProperty("Texture", MainPass))
     {
     }
 
@@ -45,10 +53,9 @@ namespace Materials
     void SkyboxMaterial::Use() const
     {
         GetMainPass().Use();
-        GetMainPass().SetTexture("Texture", 0);
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, Texture.GetId());
+        glBindTexture(GL_TEXTURE_CUBE_MAP, Texture.GetValue().GetId());
     }
 
     void SkyboxMaterial::UseDirectionalShadows() const
@@ -60,7 +67,66 @@ namespace Materials
     {
         GetPointSpotShadowPass().Use();
     }
+#if EDITOR
+    void SkyboxMaterial::DrawImGui()
+    {
+        static bool showBaseTexPopup = false;
+        static std::vector<std::string> availableTextures;
+        std::string texturePath = std::filesystem::absolute("./res/textures").string();
+        static bool scanned = false;
+        if (!scanned)
+        {
+            for (const auto& entry : std::filesystem::recursive_directory_iterator(texturePath))
+            {
+                if (entry.is_regular_file() && entry.path().extension() == ".hdr")
+                    availableTextures.emplace_back(entry.path().string());
+            }
+            scanned = true;
+        }
+        std::string baseMapPath = Texture.GetValue().GetId() != 0
+                                      ? Engine::TextureManager::GetTexturePath(Texture.GetValue())
+                                      : "None";
+        ImGui::Separator();
+        ImGui::Text("Base Map:");
+        ImGui::Selectable(baseMapPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
+        if (ImGui::BeginDragDropTarget())
+        {
+            if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
+            {
+                const char* droppedPath = static_cast<const char*>(payload->Data);
+                if (std::filesystem::path(droppedPath).extension() == ".hdr")
+                {
+                    Texture.SetValue(Engine::TextureManager::GetTexture(droppedPath));
+                }
+            }
+            ImGui::EndDragDropTarget();
+        }
+        if (ImGui::IsItemClicked())
+            showBaseTexPopup = true;
+        if (showBaseTexPopup)
+        {
+            ImGui::OpenPopup("Base Map Picker");
+            showBaseTexPopup = false;
+        }
+        if (ImGui::BeginPopup("Base Map Picker"))
+        {
+            for (const auto& path : availableTextures)
+            {
+                std::filesystem::path fsPath(path);
+                std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
+                if (ImGui::Selectable(displayName.c_str()))
+                {
+                    Texture.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
+                    ImGui::CloseCurrentPopup();
+                }
+                ImGui::SameLine();
+                ImGui::TextDisabled("(%s)", path.c_str());
+            }
+            ImGui::EndPopup();
+        }
 
+    }
+#endif
     rapidjson::Value SkyboxMaterial::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_MATERIAL_SERIALIZATION

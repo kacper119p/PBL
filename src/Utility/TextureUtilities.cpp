@@ -107,6 +107,9 @@ namespace Utility
         glTexImage2D(GL_TEXTURE_2D, 0, Format, width, height, 0, SourceFormat, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
 
+        const uint64_t handle = glGetTextureHandleARB(textureId);
+        glMakeTextureHandleResidentARB(handle);
+
         stbi_image_free(data);
 
         OutWidth = width;
@@ -224,6 +227,8 @@ namespace Utility
 
         InitializeViewPort(resolution);
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glDisable(GL_DEPTH_TEST);
 
         for (unsigned int i = 0; i < 6; ++i)
         {
@@ -233,6 +238,8 @@ namespace Utility
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             cube.Draw();
         }
+
+        glEnable(GL_DEPTH_TEST);
 
         glDeleteFramebuffers(1, &fbo);
         glDeleteRenderbuffers(1, &rbo);
@@ -283,6 +290,9 @@ namespace Utility
 
         InitializeViewPort(resolution);
 
+        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glDisable(GL_DEPTH_TEST);
+
         for (unsigned int mipLevel = 0; mipLevel < maxMipLevels; ++mipLevel)
         {
             unsigned int mipWidth = resolution * std::pow(0.5, mipLevel);
@@ -302,6 +312,8 @@ namespace Utility
                 cube.Draw();
             }
         }
+
+        glEnable(GL_DEPTH_TEST);
 
         glDeleteFramebuffers(1, &fbo);
         glDeleteRenderbuffers(1, &rbo);

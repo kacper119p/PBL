@@ -186,6 +186,13 @@ namespace Serialization
         return object;
     }
 
+    rapidjson::Value Serialize(const Materials::TextureMaterialProperty& Value,
+                               rapidjson::Document::AllocatorType& Allocator)
+    {
+        const Engine::Texture value = Value.GetValue();
+        return Serialize(value, Allocator);
+    }
+
     void Deserialize(const rapidjson::Value& Object, const char* Name, int& Value)
     {
         const auto iterator = Object.FindMember(Name);
@@ -462,5 +469,12 @@ namespace Serialization
         }
 
         Value = Materials::MaterialManager::GetMaterial(iterator->value.GetString());
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, Materials::TextureMaterialProperty& Value)
+    {
+        Engine::Texture value = Value.GetValue();
+        Deserialize(Object, Name, value);
+        Value.SetValue(value);
     }
 } // Serialization

@@ -2,10 +2,10 @@
 
 namespace Serialization
 {
-    SerializedObject* SerializedObjectFactory::CreateObject(const rapidjson::Value& Object)
+    SerializedObject* SerializedObjectFactory::CreateObject(const std::string& TypeName)
     {
-        const std::string typeName = Object["type"].GetString();
-        const auto iterator = GetInstance()->Builders.find(typeName);
+
+        const auto iterator = GetInstance()->Builders.find(TypeName);
         if (iterator == GetInstance()->Builders.end())
         {
             return nullptr;

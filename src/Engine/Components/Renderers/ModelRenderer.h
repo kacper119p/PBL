@@ -16,6 +16,8 @@ namespace Engine
         Materials::Material* Material = nullptr;
         Models::Model* Model = nullptr;
 
+        bool Culled = false;
+
     public:
         /**
          * @brief Initializes ModelRenderer with default values.
@@ -71,7 +73,9 @@ namespace Engine
         void SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const;
 
         void Draw() const;
-
+#if EDITOR
+        void DrawImGui() override;
+#endif
         SERIALIZATION_EXPORT_CLASS(ModelRenderer)
     };
 } // Engine

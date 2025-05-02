@@ -131,5 +131,8 @@ namespace Materials
          * @param Value Data to load properties from.
          */
         virtual void Deserialize(const rapidjson::Value& Value) = 0;
+#if EDITOR
+        virtual void DrawImGui() = 0;
+#endif
     };
 }

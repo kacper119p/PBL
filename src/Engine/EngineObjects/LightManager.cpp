@@ -52,6 +52,8 @@ namespace Engine
         glBindTexture(GL_TEXTURE_CUBE_MAP, PrefilterMap);
         glActiveTexture(GL_TEXTURE18);
         glBindTexture(GL_TEXTURE_2D, BrdfLUT);
+        glActiveTexture(GL_TEXTURE19);
+        glBindTexture(GL_TEXTURE_2D, RenderingManager::GetInstance()->GetSsaoTextureId());
     }
 
     void LightManager::SetupPointLightsForRendering(const Shaders::Shader& Shader)
@@ -285,6 +287,13 @@ namespace Engine
             throw SingletonAlreadyExistsException("Instance of LightManager already exists.");
         }
         Instance = new LightManager();
+    }
+
+    void LightManager::ClearAllLights() 
+    { 
+        DirectionalLight = nullptr;
+        PointLights.clear();
+        SpotLights.clear();
     }
 
     void LightManager::RenderPointLightsShadowMaps()

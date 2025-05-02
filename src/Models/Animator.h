@@ -17,6 +17,7 @@ namespace Models
     public:
         Animator() = default;
         Animator(Animation* Animation);
+        ~Animator() = default;
         void UpdateAnimation(float dt);
         void PlayAnimation(Animation* pAnimation);
         void CalculateBoneTransform(const AssimpNodeData* node, glm::mat4 parentTransform);

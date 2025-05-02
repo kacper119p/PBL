@@ -7,6 +7,7 @@
 #include "SerializedObject.h"
 #include "Materials/Material.h"
 #include "Materials/Properties/MaterialProperty.h"
+#include "Materials/Properties/TextureMaterialProperty.h"
 #include "Shaders/ComputeShader.h"
 #include "Shaders/Shader.h"
 
@@ -40,7 +41,9 @@ namespace Serialization
     rapidjson::Value Serialize(const Engine::Texture& Value, rapidjson::Document::AllocatorType& Allocator);
 
     rapidjson::Value Serialize(const Models::Model* Value, rapidjson::Document::AllocatorType& Allocator);
+
     rapidjson::Value Serialize(const Models::ModelAnimated* Value, rapidjson::Document::AllocatorType& Allocator);
+
     rapidjson::Value Serialize(const Models::Animation* Value, rapidjson::Document::AllocatorType& Allocator);
 
     rapidjson::Value Serialize(const std::string& Value, rapidjson::Document::AllocatorType& Allocator);
@@ -57,6 +60,9 @@ namespace Serialization
     rapidjson::Value Serialize(Shaders::ComputeShader Value, rapidjson::Document::AllocatorType& Allocator);
 
     rapidjson::Value Serialize(const Materials::Material* Value, rapidjson::Document::AllocatorType& Allocator);
+
+    rapidjson::Value Serialize(const Materials::TextureMaterialProperty& Value,
+                               rapidjson::Document::AllocatorType& Allocator);
 
     template<class T>
     rapidjson::Value Serialize(const std::vector<T*>& Value,
@@ -96,7 +102,9 @@ namespace Serialization
     void Deserialize(const rapidjson::Value& Object, const char* Name, Engine::Texture& Value);
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, Models::Model*& Value);
+
     void Deserialize(const rapidjson::Value& Object, const char* Name, Models::ModelAnimated*& Value);
+
     void Deserialize(const rapidjson::Value& Object, const char* Name, Models::Animation*& Value);
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, std::string& Value);
@@ -114,6 +122,8 @@ namespace Serialization
     void Deserialize(const rapidjson::Value& Object, const char* Name, Shaders::ComputeShader& Value);
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, Materials::Material*& Value);
+
+    void Deserialize(const rapidjson::Value& Object, const char* const Name, Materials::TextureMaterialProperty& Value);
 
     template<class T>
     void Deserialize(const rapidjson::Value& Object, const char* const Name, T*& Value,
