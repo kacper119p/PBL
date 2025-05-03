@@ -44,6 +44,14 @@ namespace Engine
         static AudioManager& GetInstance();
 
         /**
+         * @brief Creates a new sound instance from a loaded sound based on the given SoundId.
+         *
+         * @param SoundId The ID of the sound to create an instance of.
+         * @return A shared pointer to the new sound instance, or nullptr if an error occurs.
+         */
+        std::shared_ptr<ma_sound> CreateSoundInstance(const std::string& SoundId);
+
+        /**
          * @brief Destroys the singleton instance of the AudioManager.
          *
          * Frees all associated resources and deinitializes the audio engine.
@@ -78,21 +86,21 @@ namespace Engine
          *
          * @param Sound The sound object to play.
          */
-        void PlayAudio(ma_sound& Sound);
+        void PlayAudio(std::shared_ptr<ma_sound> Sound);
 
         /**
          * @brief Pauses playback of the specified sound.
          *
          * @param Sound The sound object to pause.
          */
-        void PauseSound(ma_sound& Sound);
+        void PauseSound(std::shared_ptr<ma_sound> Sound);
 
         /**
          * @brief Stops playback of the specified sound.
          *
          * @param Sound The sound object to stop.
          */
-        void StopSound(ma_sound& Sound);
+        void StopSound(std::shared_ptr<ma_sound> Sound);
 
         /**
          * @brief Sets whether a sound should loop when it reaches the end.
@@ -100,7 +108,7 @@ namespace Engine
          * @param Sound The sound to configure.
          * @param Looping True to enable looping; false to disable.
          */
-        void SetLooping(ma_sound& Sound, bool Looping);
+        void SetLooping(std::shared_ptr<ma_sound> Sound, bool Looping);
 
         /**
          * @brief Sets the volume level of the specified sound.
@@ -108,7 +116,7 @@ namespace Engine
          * @param Sound The sound to modify.
          * @param Volume The volume value in range [0.0, 1.0].
          */
-        void SetVolume(ma_sound& Sound, float Volume);
+        void SetVolume(std::shared_ptr<ma_sound> Sound, float Volume);
 
         /**
          * @brief Retrieves the global output volume.
@@ -145,7 +153,7 @@ namespace Engine
          * @param Sound The sound to position.
          * @param Position World-space position of the sound.
          */
-        void SetSoundPosition(ma_sound& Sound, const glm::vec3& Position);
+        void SetSoundPosition(std::shared_ptr<ma_sound> Sound, const glm::vec3& Position);
 
         /**
          * @brief Configures distance attenuation parameters for 3D audio.
@@ -155,7 +163,7 @@ namespace Engine
          * @param MaxDist Maximum distance beyond which the sound is inaudible.
          * @param RollOff Attenuation roll-off factor.
          */
-        void ConfigureSoundAttenuation(ma_sound& Sound, float MinDist, float MaxDist, float RollOff);
+        void ConfigureSoundAttenuation(std::shared_ptr<ma_sound> Sound, float MinDist, float MaxDist, float RollOff);
 
         /**
          * @brief Renders a separate ImGui window to control the global volume.

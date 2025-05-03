@@ -32,6 +32,11 @@ namespace Engine
         void BuildNavMesh(Entity* Root, float Spacing = 1.0f);
 
         /**
+         * @brief Sets NavGraph to nullptr.
+         */
+        void ClearGraph();
+
+        /**
          * @brief Removes all nodes that have NavArea component and IsWalkable is false from the existing NavMesh.
          * @param Root Scene root entity.
          */

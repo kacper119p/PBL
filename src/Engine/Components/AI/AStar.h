@@ -4,6 +4,7 @@
 #include "Engine/EngineObjects/Entity.h"
 #include "glm/glm.hpp"
 #include "Graph.h"
+#include "Engine/EngineObjects/Scene/SceneManager.h"
 
 namespace Engine
 {
@@ -22,6 +23,10 @@ namespace Engine
          * @brief Destructs the AStar component.
          */
         ~AStar();
+
+#if EDITOR
+        void DrawImGui() override;
+#endif
 
         /**
          * @brief Sets the navigation graph used for pathfinding.
@@ -93,6 +98,8 @@ namespace Engine
         int CurrentPathIndex = 0; ///< Index of the next node in the path.
         int StartId = -1; ///< ID of the start node.
         int GoalId = -1; ///< ID of the goal node.
+
+        glm::vec3 GoalPosition{}; ///< The end position of the A* path.
 
         /**
          * @brief Internal record used during A* pathfinding.

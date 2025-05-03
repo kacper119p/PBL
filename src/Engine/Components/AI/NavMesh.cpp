@@ -79,6 +79,11 @@ namespace Engine
         }
     }
 
+    void NavMesh::ClearGraph()
+    {
+        NavGraph = nullptr;
+    }
+
     void NavMesh::BuildNavMesh(Entity* Root, float Spacing)
     {
         std::vector<Transform*> entities = Root->GetTransform()->GetChildren();

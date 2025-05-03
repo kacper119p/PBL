@@ -29,9 +29,13 @@ namespace Engine
          */
         [[nodiscard]] bool GetWalkable() const;
 
-        SERIALIZATION_EXPORT_CLASS(NavArea)
+#if EDITOR
+        void DrawImGui() override;
+#endif
 
     private:
+        SERIALIZATION_EXPORT_CLASS(NavArea)
+
         bool IsWalkable = false; ///< Indicates whether the navigation area is walkable.
     };
 }

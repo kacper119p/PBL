@@ -14,6 +14,16 @@ namespace Engine
         return IsWalkable;
     }
 
+#if EDITOR
+    void NavArea::DrawImGui()
+    {
+        if (ImGui::CollapsingHeader("Navigation Area", ImGuiTreeNodeFlags_DefaultOpen))
+        {
+            ImGui::Checkbox("IsWalkable", &IsWalkable);
+        }
+    }
+#endif
+
     rapidjson::Value NavArea::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION

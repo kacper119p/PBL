@@ -18,12 +18,62 @@ namespace Engine
         UpdateManager::GetInstance()->UnregisterComponent(this);
     }
 
+#if EDITOR
+    void AStar::DrawImGui()
+    {
+        if (ImGui::CollapsingHeader("A* Pathfinding", ImGuiTreeNodeFlags_DefaultOpen))
+        {
+            ImGui::InputFloat("Move Speed", &MoveSpeed);
+            ImGui::InputFloat("Spacing", &Spacing);
+            ImGui::InputFloat3("Goal", &GoalPosition.x);
+
+            if (ImGui::Button("Bake NavMesh"))
+            {
+                BakeNavMesh(GetOwner()->GetScene()->GetRoot());
+            }
+
+            if (ImGui::Button("Compute Path"))
+            {
+                ComputePath(GoalPosition);
+            }
+
+            if (!Path.empty())
+            {
+                ImGui::Text("Path Nodes: %zu", Path.size());
+                ImGui::Text("Current Node Index: %d", CurrentPathIndex);
+
+                if (ImGui::TreeNode("Path List"))
+                {
+                    for (size_t i = 0; i < Path.size(); ++i)
+                    {
+                        ImGui::BulletText("Node ID: %d", Path[i]);
+                    }
+                    ImGui::TreePop();
+                }
+            }
+            else
+            {
+                ImGui::Text("No active path.");
+            }
+        }
+    }
+#endif
+
     void AStar::BakeNavMesh(Entity* Root)
     {
         auto& navMesh = NavMesh::Get();
+        if (!navMesh.GetGraph())
+        {
+            navMesh.ClearGraph();
+        }
         navMesh.BuildNavMesh(Root, Spacing);
         navMesh.RemoveNotWalkableNodes(Root);
         SetGraph(navMesh.GetGraph());
+
+        if (navMesh.GetGraph()->GetAllNodes().size() == 0)
+        {
+            spdlog::warn("NavGraph has 0 nodes!");
+        }
     }
 
     void AStar::FindPath(int StartId, int GoalId)
@@ -106,7 +156,7 @@ namespace Engine
         int startNodeId = GetNodeIdFromPosition(Position);
         if (startNodeId == -1)
         {
-            spdlog::error("Can't find node for the starting position!");
+            spdlog::warn("Can't find node for the starting position!");
             return;
         }
         StartId = startNodeId;
@@ -117,7 +167,7 @@ namespace Engine
         int goalNodeId = GetNodeIdFromPosition(Position);
         if (goalNodeId == -1)
         {
-            spdlog::error("Can't find node for the goal position!");
+            spdlog::warn("Can't find node for the goal position!");
             return;
         }
         GoalId = goalNodeId;
@@ -127,18 +177,21 @@ namespace Engine
     {
         if (!NavGraph)
         {
-            spdlog::error("NavGraph is null!");
+            spdlog::warn("NavGraph is null!");
             return;
         }
 
-        SetStartPosition(this->GetOwner()->GetTransform()->GetPosition());
+        SetStartPosition(GetOwner()->GetTransform()->GetPosition());
         SetGoalPosition(GoalPosition);
 
         if (StartId < 0 || GoalId < 0)
         {
-            spdlog::error("Incorrect node IDs!");
+            spdlog::warn("Incorrect node IDs!");
             return;
         }
+
+        ObjectPosition = glm::vec2(GetOwner()->GetTransform()->GetPosition().x,
+                                   GetOwner()->GetTransform()->GetPosition().z);
 
         Path.clear();
         CurrentPathIndex = 0;
@@ -153,26 +206,42 @@ namespace Engine
 
     void AStar::Update(const float DeltaTime)
     {
-        if (!this->GetOwner() || Path.empty() || !NavGraph || CurrentPathIndex >= Path.size())
+        if (CurrentPathIndex >= Path.size())
+        {
+            StartId = -1;
+            GoalId = -1;
+            Path.clear();
+            CurrentPathIndex = 0;
+        }
+
+        if (!GetOwner() || Path.empty() || !NavGraph)
             return;
+
 
         const glm::vec2& targetPos = NavGraph->GetNode(Path[CurrentPathIndex]).GetPosition();
         glm::vec2 direction = targetPos - ObjectPosition;
 
         float distance = glm::length(direction);
 
+        if (distance < 0.001f)
+        {
+            ObjectPosition = targetPos;
+            CurrentPathIndex++;
+            return;
+        }
+
         direction = glm::normalize(direction);
 
         float targetAngle = glm::degrees(glm::atan(direction.x, direction.y));
-        float currentAngle = this->GetOwner()->GetTransform()->GetEulerAngles().y;
+        float currentAngle = GetOwner()->GetTransform()->GetEulerAngles().y;
         float angleDiff = glm::mod(targetAngle - currentAngle + 540.0f, 360.0f) - 180.0f;
 
         float rotationSpeed = 180.0f * DeltaTime;
         float newAngle = currentAngle + glm::clamp(angleDiff, -rotationSpeed, rotationSpeed);
 
-        glm::vec3 rotation = this->GetOwner()->GetTransform()->GetEulerAngles();
+        glm::vec3 rotation = GetOwner()->GetTransform()->GetEulerAngles();
         rotation.y = newAngle;
-        this->GetOwner()->GetTransform()->SetEulerAngles(rotation);
+        GetOwner()->GetTransform()->SetEulerAngles(rotation);
 
         glm::vec2 forward = glm::normalize(
                 glm::vec2(glm::sin(glm::radians(newAngle)), glm::cos(glm::radians(newAngle))));
@@ -195,9 +264,9 @@ namespace Engine
             }
         }
 
-        glm::vec3 currentPos3D = this->GetOwner()->GetTransform()->GetPosition();
+        glm::vec3 currentPos3D = GetOwner()->GetTransform()->GetPosition();
         glm::vec3 newPos = glm::vec3(ObjectPosition.x, currentPos3D.y, ObjectPosition.y);
-        this->GetOwner()->GetTransform()->SetPosition(newPos);
+        GetOwner()->GetTransform()->SetPosition(newPos);
     }
 
     int AStar::GetNodeIdFromPosition(const glm::vec3& Position) const
@@ -220,6 +289,11 @@ namespace Engine
                 closestDistance = distance;
                 closestNodeId = nodePair.first;
             }
+        }
+
+        if (closestDistance > 2 * Spacing)
+        {
+            return -1;
         }
 
         return closestNodeId;
