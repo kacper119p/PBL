@@ -88,9 +88,10 @@ namespace Utility
                                                      GLenum SourceFormat,
                                                      int& OutWidth, int& OutHeight)
     {
-        int width, height, channelCount;
+        int width;
+        int height;
 
-        GLuint textureId = LoadDds(FilePath, width, height, channelCount, SourceChannels);
+        const GLuint textureId = LoadDds(FilePath, width, height);
 
         const uint64_t handle = glGetTextureHandleARB(textureId);
         glMakeTextureHandleResidentARB(handle);
