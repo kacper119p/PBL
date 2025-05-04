@@ -1,121 +1,17 @@
 #include "AudioSource.h"
+
+#include "../../../../cmake-build-debug-visual-studio-editor/_deps/spdlog-src/include/spdlog/spdlog.h"
 #include "Serialization/SerializationUtility.h"
 #include "Engine/EngineObjects/Entity.h"
-#include "imgui.h"
 
 Engine::AudioSource::AudioSource() :
-    AudioManager(AudioManager::GetInstance()), SelectedSound(nullptr), SelectedEntity(nullptr)
+    AudioManager(AudioManager::GetInstance())
 {
 }
 
-#if EDITOR
-void Engine::AudioSource::RenderAudioSourceImGui()
+Engine::AudioSource::~AudioSource()
 {
-    if (!SelectedEntity)
-    {
-        ImGui::Text("Please select an entity to configure audio.");
-        return;
-    }
-
-    ImGui::Begin("Audio Settings");
-
-    if (ImGui::BeginListBox("Loaded Sounds"))
-    {
-        bool isNoneSelected = (SelectedSound == nullptr);
-        if (ImGui::Selectable("None", isNoneSelected))
-        {
-            if (SelectedSound)
-            {
-                AudioManager.StopSound(*SelectedSound);
-                ResetAudioSettings();
-            }
-            SelectedSound = nullptr;
-        }
-
-        for (const auto& soundPair : AudioManager.GetLoadedSounds())
-        {
-            std::string soundId = soundPair.first;
-            ma_sound* sound = soundPair.second.get();
-            bool isSelected = (SelectedSound == sound);
-
-            if (ImGui::Selectable(soundId.c_str(), isSelected))
-            {
-                if (SelectedSound)
-                {
-                    AudioManager.StopSound(*SelectedSound);
-                    ResetAudioSettings();
-                }
-
-                SelectedSound = sound;
-
-                ResetAudioSettings();
-
-                AudioManager.SetSoundPosition(*SelectedSound, SelectedEntity->GetTransform()->GetPosition());
-            }
-        }
-
-        ImGui::EndListBox();
-    }
-
-    if (SelectedSound)
-    {
-        if (ImGui::Button("Play"))
-        {
-            AudioManager.PlayAudio(*SelectedSound);
-        }
-
-        ImGui::SameLine();
-        if (ImGui::Button("Pause"))
-        {
-            AudioManager.PauseSound(*SelectedSound);
-        }
-
-        ImGui::SameLine();
-        if (ImGui::Button("Stop"))
-        {
-            AudioManager.StopSound(*SelectedSound);
-        }
-
-        if (ImGui::SliderFloat("Sound Volume", &SoundVolume, 0.0f, 1.0f))
-        {
-            AudioManager.SetVolume(*SelectedSound, SoundVolume);
-        }
-
-        if (ImGui::Checkbox("Looping", &Looping))
-        {
-            AudioManager.SetLooping(*SelectedSound, Looping);
-        }
-
-        if (ImGui::SliderFloat("Attenuation Min Distance", &MinDist, 0.1f, 100.0f))
-        {
-            AudioManager.ConfigureSoundAttenuation(*SelectedSound, MinDist, MaxDist, RollOff);
-        }
-
-        if (ImGui::SliderFloat("Attenuation Max Distance", &MaxDist, 1.0f, 500.0f))
-        {
-            AudioManager.ConfigureSoundAttenuation(*SelectedSound, MinDist, MaxDist, RollOff);
-        }
-
-        if (ImGui::SliderFloat("Attenuation Roll Off", &RollOff, 0.0f, 10.0f))
-        {
-            AudioManager.ConfigureSoundAttenuation(*SelectedSound, MinDist, MaxDist, RollOff);
-        }
-    }
-    else
-    {
-        ImGui::Text("No sound selected.");
-    }
-
-    ImGui::End();
-}
-#endif
-
-void Engine::AudioSource::SelectEntityForAudioControl(Entity* Entity)
-{
-    if (Entity)
-    {
-        SelectedEntity = Entity;
-    }
+    SoundInstance.reset();
 }
 
 void Engine::AudioSource::ResetAudioSettings()
@@ -126,9 +22,108 @@ void Engine::AudioSource::ResetAudioSettings()
     MaxDist = 100.0f;
     RollOff = 1.0f;
 }
+
 #if EDITOR
 void Engine::AudioSource::DrawImGui()
 {
+    if (ImGui::CollapsingHeader("Audio Source", ImGuiTreeNodeFlags_DefaultOpen))
+    {
+        if (ImGui::BeginCombo("##sound_combo", SelectedSoundId.empty() ? "Select sound..." : SelectedSoundId.c_str()))
+        {
+            if (ImGui::Selectable("None", SelectedSoundId.empty()))
+            {
+                if (SoundInstance)
+                {
+                    AudioManager.StopSound(SoundInstance);
+                    SoundInstance.reset();
+                    ResetAudioSettings();
+                }
+                SelectedSoundId.clear();
+            }
+
+            for (const auto& soundPair : AudioManager.GetLoadedSounds())
+            {
+                std::string soundId = soundPair.first;
+                bool isSelected = (SelectedSoundId == soundId);
+
+                if (ImGui::Selectable(soundId.c_str(), isSelected))
+                {
+                    if (SoundInstance)
+                    {
+                        AudioManager.StopSound(SoundInstance);
+                        SoundInstance.reset();
+                    }
+
+                    SoundInstance = AudioManager.CreateSoundInstance(soundId);
+                    if (SoundInstance)
+                    {
+                        SelectedSoundId = soundId;
+                        ResetAudioSettings();
+                    }
+                    else
+                    {
+                        SelectedSoundId.clear();
+                    }
+                }
+
+                if (isSelected)
+                    ImGui::SetItemDefaultFocus();
+            }
+
+            ImGui::EndCombo();
+        }
+
+        if (SoundInstance)
+        {
+            if (ImGui::Button("Play"))
+            {
+                AudioManager.PlayAudio(SoundInstance);
+            }
+
+            ImGui::SameLine();
+            if (ImGui::Button("Pause"))
+            {
+                AudioManager.PauseSound(SoundInstance);
+            }
+
+            ImGui::SameLine();
+            if (ImGui::Button("Stop"))
+            {
+                AudioManager.StopSound(SoundInstance);
+            }
+
+            if (ImGui::SliderFloat("Sound Volume", &SoundVolume, 0.0f, 1.0f))
+            {
+                AudioManager.SetVolume(SoundInstance, SoundVolume);
+            }
+
+            if (ImGui::Checkbox("Looping", &Looping))
+            {
+                AudioManager.SetLooping(SoundInstance, Looping);
+            }
+
+            if (ImGui::SliderFloat("Attenuation Min Distance", &MinDist, 0.1f, 100.0f))
+            {
+                AudioManager.ConfigureSoundAttenuation(SoundInstance, MinDist, MaxDist, RollOff);
+            }
+
+            if (ImGui::SliderFloat("Attenuation Max Distance", &MaxDist, 1.0f, 500.0f))
+            {
+                AudioManager.ConfigureSoundAttenuation(SoundInstance, MinDist, MaxDist, RollOff);
+            }
+
+            if (ImGui::SliderFloat("Attenuation Roll Off", &RollOff, 0.0f, 10.0f))
+            {
+                AudioManager.ConfigureSoundAttenuation(SoundInstance, MinDist, MaxDist, RollOff);
+            }
+
+            AudioManager.SetSoundPosition(SoundInstance, this->GetOwner()->GetTransform()->GetPosition());
+        }
+        else
+        {
+            ImGui::Text("No sound selected.");
+        }
+    }
 }
 #endif
 

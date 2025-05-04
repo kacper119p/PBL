@@ -182,7 +182,6 @@ namespace Serialization
     {
         rapidjson::Value object(rapidjson::kStringType);
         const std::string path = Materials::MaterialManager::GetMaterialPath(Value);
-        std::cout << "Material: " << path << std::endl;
         object.SetString(path.c_str(), path.length(), Allocator);
         return object;
     }
