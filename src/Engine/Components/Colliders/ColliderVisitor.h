@@ -11,6 +11,15 @@ namespace Engine
     class MeshCollider;
     class SpatialPartitioning;
 
+    struct CollisionResult
+    {
+        bool hasCollision;
+        glm::vec3 collisionPoint;
+        glm::vec3 collisionNormal; // will be edited by physics
+
+        CollisionResult() : hasCollision(false), collisionPoint(0.0f), collisionNormal(0.0f) {}
+    };
+
     class ColliderVisitor
     {
     public:
@@ -28,17 +37,17 @@ namespace Engine
         
         bool collisionDetected;
         SpatialPartitioning* spatialPartitioning;
-
-        bool CheckBoxBoxCollision(const BoxCollider& box1, const BoxCollider& box2);
-        bool CheckBoxSphereCollision(const BoxCollider& box, const SphereCollider& sphere);
-        bool CheckBoxCapsuleCollision(const BoxCollider& box, const CapsuleCollider& capsule);
-        bool CheckBoxMeshCollision(const BoxCollider& box, const MeshCollider& mesh);
-        bool CheckSphereSphereCollision(const SphereCollider& sphere1, const SphereCollider& sphere2);
-        bool CheckSphereMeshCollision(const SphereCollider& sphere, const MeshCollider& mesh);
-        bool CheckCapsuleSphereCollision(const CapsuleCollider& capsule, const SphereCollider& sphere);
-        bool CheckCapsuleCapsuleCollision(const CapsuleCollider& capsule1, const CapsuleCollider& capsule2);
-        bool CheckCapsuleMeshCollision(const CapsuleCollider& capsule, const MeshCollider& mesh);
-        bool CheckMeshMeshCollision(const MeshCollider& mesh1, const MeshCollider& mesh2);
+        
+        CollisionResult CheckBoxBoxCollision(const BoxCollider& box1, const BoxCollider& box2);
+        CollisionResult CheckBoxSphereCollision(const BoxCollider& box, const SphereCollider& sphere);
+        CollisionResult CheckBoxCapsuleCollision(const BoxCollider& box, const CapsuleCollider& capsule);
+        CollisionResult CheckBoxMeshCollision(const BoxCollider& box, const MeshCollider& mesh);
+        CollisionResult CheckSphereSphereCollision(const SphereCollider& sphere1, const SphereCollider& sphere2);
+        CollisionResult CheckSphereMeshCollision(const SphereCollider& sphere, const MeshCollider& mesh);
+        CollisionResult CheckCapsuleSphereCollision(const CapsuleCollider& capsule, const SphereCollider& sphere);
+        CollisionResult CheckCapsuleCapsuleCollision(const CapsuleCollider& capsule1, const CapsuleCollider& capsule2);
+        CollisionResult CheckCapsuleMeshCollision(const CapsuleCollider& capsule, const MeshCollider& mesh);
+        CollisionResult CheckMeshMeshCollision(const MeshCollider& mesh1, const MeshCollider& mesh2);
 
         glm::vec3 GetSeparationBoxBox(const BoxCollider& box1, const BoxCollider& box2);
 
@@ -56,6 +65,8 @@ namespace Engine
         Collider* currentCollider;
 
     public:
+        CollisionResult result;
+
         ConcreteColliderVisitor();
         ConcreteColliderVisitor(SpatialPartitioning* partitioning, Collider* collider);
 
