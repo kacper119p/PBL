@@ -27,6 +27,12 @@ namespace Shaders
         }
 
     public:
+        [[nodiscard]] bool IsNull() const
+        {
+            return Id == 0;
+        }
+
+
         [[nodiscard]] unsigned int GetId() const
         {
             return Id;

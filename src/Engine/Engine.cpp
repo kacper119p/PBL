@@ -207,6 +207,16 @@ namespace Engine
             spdlog::error("Platform unsupported: GLAD_GL_ARB_bindless_texture.");
             return false;
         }
+        if (!GLAD_GL_EXT_texture_compression_s3tc)
+        {
+            spdlog::error("Platform unsupported: GLAD_GL_EXT_texture_compression_s3tc.");
+            return false;
+        }
+        if (!GLAD_GL_ARB_texture_compression_bptc)
+        {
+            spdlog::error("Platform unsupported: GLAD_GL_ARB_texture_compression_bptc.");
+            return false;
+        }
 
         glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
         glEnable(GL_MULTISAMPLE);

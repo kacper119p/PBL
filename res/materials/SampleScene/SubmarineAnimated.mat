@@ -1,9 +1,9 @@
 {
     "type": "AnimatedPbrMaterial",
-    "BaseMap": "./res/textures/Submarine/Base.png",
-    "RoughnessMetallicMap": "./res/textures/Submarine/RoughnessMetallicAmbientOcclusion.png",
-    "NormalMap": "./res/textures/Submarine/Normal.png",
-    "EmissiveMap": "./res/textures/EmissiveMapDefault.png",
+    "BaseMap": "./res/textures/Submarine/Base.dds",
+    "RoughnessMetallicMap": "./res/textures/Submarine/RoughnessMetallicAmbientOcclusion.dds",
+    "NormalMap": "./res/textures/Submarine/Normal.dds",
+    "EmissiveMap": "./res/textures/EmissiveMapDefault.dds",
     "Roughness": 1.0,
     "Metallic": 1.0,
     "BaseColor": {

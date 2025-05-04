@@ -14,19 +14,8 @@ namespace Engine
     {
     private:
         Engine::CubeGeometry Cube;
-        Materials::Material* Material = nullptr;
 
     public:
-        [[nodiscard]] Materials::Material* GetMaterial() const
-        {
-            return Material;
-        }
-
-        void SetMaterial(Materials::Material* const Material)
-        {
-            this->Material = Material;
-        }
-
         void RenderDepth(const CameraRenderData& RenderData) override;
 
         void Render(const CameraRenderData& RenderData) override;

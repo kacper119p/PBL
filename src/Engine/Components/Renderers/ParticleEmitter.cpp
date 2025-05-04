@@ -9,14 +9,13 @@
 
 #include "Serialization/SerializationUtility.h"
 
-Engine::ParticleEmitter::ParticleEmitter(const Shaders::Shader& RenderShader, const Shaders::ComputeShader& SpawnShader,
+Engine::ParticleEmitter::ParticleEmitter(Materials::Material* const Material, const Shaders::ComputeShader& SpawnShader,
                                          const Shaders::ComputeShader& UpdateShader,
-                                         const EmitterSettings& EmitterSettings,
-                                         const int MaxParticleCount) :
-    Settings(EmitterSettings), MaxParticleCount(MaxParticleCount), RenderShader(RenderShader),
-    SpawnShader(SpawnShader),
+                                         const EmitterSettings& EmitterSettings, const int MaxParticleCount) :
+    Settings(EmitterSettings), MaxParticleCount(MaxParticleCount), SpawnShader(SpawnShader),
     UpdateShader(UpdateShader)
 {
+    this->Material = Material;
 }
 
 void Engine::ParticleEmitter::Render(const Engine::CameraRenderData& RenderData)
@@ -24,9 +23,8 @@ void Engine::ParticleEmitter::Render(const Engine::CameraRenderData& RenderData)
     glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     glEnable(GL_BLEND);
-    RenderShader.Use();
-    LightManager::GetInstance()->SetupLightsForRendering(RenderShader);
-    SetupMatrices(RenderData, RenderShader);
+    LightManager::GetInstance()->SetupLightsForRendering(Material->GetMainPass());
+    SetupMatrices(RenderData, Material->GetMainPass());
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ParticlesBuffer);
     for (int i = 0; i < Settings.Model->GetMeshCount(); ++i)
     {
@@ -147,7 +145,7 @@ void Engine::ParticleEmitter::SetEmitterSettingsUniforms(Shaders::ComputeShader 
     Shader.SetUniform("EmitterSettings.MaxLife", Settings.MaxLife);
 }
 #if EDITOR
-void Engine::ParticleEmitter::DrawImGui() 
+void Engine::ParticleEmitter::DrawImGui()
 {
     if (ImGui::CollapsingHeader("Emitter Settings"))
     {
@@ -197,7 +195,7 @@ rapidjson::Value Engine::ParticleEmitter::Serialize(rapidjson::Document::Allocat
     SERIALIZE_FIELD(Settings.MaxAccel)
     SERIALIZE_FIELD(Settings.MinLife)
     SERIALIZE_FIELD(Settings.MaxLife)
-    SERIALIZE_FIELD(RenderShader)
+    SERIALIZE_FIELD(Material)
     SERIALIZE_FIELD(SpawnShader)
     SERIALIZE_FIELD(UpdateShader)
     END_COMPONENT_SERIALIZATION
@@ -222,7 +220,7 @@ void Engine::ParticleEmitter::DeserializeValuePass(const rapidjson::Value& Objec
     DESERIALIZE_VALUE(Settings.MaxAccel)
     DESERIALIZE_VALUE(Settings.MinLife)
     DESERIALIZE_VALUE(Settings.MaxLife)
-    DESERIALIZE_VALUE(RenderShader)
+    DESERIALIZE_VALUE(Material)
     DESERIALIZE_VALUE(SpawnShader)
     DESERIALIZE_VALUE(UpdateShader)
     END_COMPONENT_DESERIALIZATION_VALUE_PASS

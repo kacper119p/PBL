@@ -1,13 +1,9 @@
 #include "AnimatedModelRenderer.h"
-#include "AnimatedModelRenderer.h"
-#include "AnimatedModelRenderer.h"
 #include "Engine/EngineObjects/CameraRenderData.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include "ModelRenderer.h"
 #include "Models/ModelAnimated.h"
 #include "Models/Animator.h"
-#include "AnimatedModelRenderer.h"
-#include <GLFW/glfw3.h>
 #if EDITOR
 #include "Materials/MaterialManager.h"
 #include "Materials/Material.h"
@@ -36,16 +32,12 @@ namespace Engine
 
     void AnimatedModelRenderer::RenderDepth(const CameraRenderData& RenderData)
     {
-        Material->UseDepthPass();
-
         SetupMatrices(RenderData, Material->GetDepthPass());
         Draw();
     }
 
     void AnimatedModelRenderer::Render(const CameraRenderData& RenderData)
     {
-        Material->Use();
-
         LightManager::GetInstance()->SetupLightsForRendering(Material->GetMainPass());
 
         SetupMatrices(RenderData, Material->GetMainPass());
@@ -54,8 +46,6 @@ namespace Engine
 
     void AnimatedModelRenderer::RenderDirectionalShadows(const CameraRenderData& RenderData)
     {
-        Material->UseDirectionalShadows();
-
         SetupMatrices(RenderData, Material->GetDirectionalShadowPass());
         Draw();
     }
@@ -63,9 +53,6 @@ namespace Engine
     void AnimatedModelRenderer::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                                        const glm::mat4* const SpaceTransformMatrices)
     {
-        Material->UsePointSpotShadows();
-
-
         Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[0]", SpaceTransformMatrices[0]);
         Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[1]", SpaceTransformMatrices[1]);
         Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[2]", SpaceTransformMatrices[2]);
@@ -104,7 +91,7 @@ namespace Engine
         }
     }
 #if EDITOR
-    void AnimatedModelRenderer::DrawImGui() 
+    void AnimatedModelRenderer::DrawImGui()
     {
         if (ImGui::CollapsingHeader("Animated Model Renderer", ImGuiTreeNodeFlags_DefaultOpen))
         {
@@ -261,7 +248,7 @@ namespace Engine
                 }
                 ImGui::EndPopup();
             }
-            
+
             ImGui::Separator();
 
             ImGui::Text("Animation:");

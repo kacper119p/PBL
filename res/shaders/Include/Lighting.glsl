@@ -56,6 +56,11 @@ uniform uint SpotLightsCount;
 const float SHADOW_BIAS = 0.00005;
 const float MAX_REFLECTION_LOD = 4.0;
 
+float FastPow5(float x)
+{
+    return x * x * x * x * x;
+}
+
 light CalculateDirectionalLight(directionalLight Light, vec3 Position)
 {
     light result;
@@ -149,12 +154,12 @@ light CalculateSpotLightShadowed(spotLight Light, samplerCubeShadow ShadowMap, v
 vec3 FresnelSchlickRoughness(float CosTheta, vec3 F0, float Roughness)
 {
     return F0 + (max(vec3(1.0 - Roughness), F0) - F0) *
-    pow(1.0 - CosTheta, 5.0);
+    FastPow5(1.0 - CosTheta);
 }
 
 vec3 FresnelSchlick(float CosTheta, vec3 F0)
 {
-    return F0 + (1.0 - F0) * pow(1.0 - CosTheta, 5.0);
+    return F0 + (1.0 - F0) * FastPow5(1.0 - CosTheta);
 }
 
 float DistributionGGX(vec3 N, vec3 H, float roughness)
