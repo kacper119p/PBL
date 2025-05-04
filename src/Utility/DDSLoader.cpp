@@ -53,8 +53,8 @@ namespace Utility
         fread(&header, sizeof(DDS_HEADER), 1, f);
         fread(&headerDxt, sizeof(DDS_HEADER_DXT10), 1, f);
 
-        Height = header.dwHeight;
-        Width = header.dwWidth;
+        Height = static_cast<int>(header.dwHeight);
+        Width = static_cast<int>(header.dwWidth);
 
         int32_t format;
         int32_t blockSize;
@@ -112,17 +112,14 @@ namespace Utility
             EXIT
         }
 
-        // bind the texture
-        // make it complete by specifying all needed parameters and ensuring all mipmaps are filled
         glBindTexture(GL_TEXTURE_2D, textureId);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, header.dwMipMapCount - 1);
-        // opengl likes array length of mipmaps
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, static_cast<GLint>(header.dwMipMapCount - 1));
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        // don't forget to enable mipmaping
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, 16.0f);
 
         // prepare some variables
         unsigned int offset = 0;
@@ -130,8 +127,8 @@ namespace Utility
 
         uint32_t mipMapCount = header.dwMipMapCount;
 
-        int32_t h = header.dwHeight;
-        int32_t w = header.dwWidth;
+        int32_t h = static_cast<int32_t>(header.dwHeight);
+        int32_t w = static_cast<int32_t>(header.dwWidth);
 
         // loop through sending block at a time with the magic formula
         // upload to opengl properly, note the offset transverses the pointer
