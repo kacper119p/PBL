@@ -12,7 +12,7 @@ namespace Engine::Ui
     Font::Font(const std::string& Name) :
         Name(Name)
     {
-        const std::string atlasPath = FontsFolder + Name + ".png";
+        const std::string atlasPath = FontsFolder + Name + ".dds";
         const std::string descriptorPath = FontsFolder + Name + ".json";
 
         rapidjson::Document document;

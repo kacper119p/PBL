@@ -14,7 +14,7 @@ namespace Models
     {
         Assimp::Importer importer = Assimp::Importer();
 
-        scene = importer.ReadFile(FilePath, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
+        scene = importer.ReadFile(FilePath, aiProcess_Triangulate | aiProcess_GenNormals);
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
         {
             return;
@@ -51,7 +51,7 @@ namespace Models
         {
             Models::VertexAnimated vertex;
             SetVertexBoneDataToDefault(vertex);
-            
+
 
             vertex.Position = glm::vec3(Mesh->mVertices[i].x, Mesh->mVertices[i].y, Mesh->mVertices[i].z);
             vertex.Normal = glm::vec3(Mesh->mNormals[i].x, Mesh->mNormals[i].y, Mesh->mNormals[i].z);
@@ -62,8 +62,8 @@ namespace Models
                 vertex.TexCoords = glm::vec2(0.0f, 0.0f);
 
             vertex.Tangent = Mesh->mTangents
-                                     ? glm::vec3(Mesh->mTangents[i].x, Mesh->mTangents[i].y, Mesh->mTangents[i].z)
-                                     : glm::vec3(0.0f, 0.0f, 0.0f);
+                                 ? glm::vec3(Mesh->mTangents[i].x, Mesh->mTangents[i].y, Mesh->mTangents[i].z)
+                                 : glm::vec3(0.0f, 0.0f, 0.0f);
 
             vertices.push_back(vertex);
         }
@@ -105,7 +105,6 @@ namespace Models
     }
 
 
-
     void ModelAnimated::ExtractBoneWeightForVertices(std::vector<VertexAnimated>& vertices, aiMesh* mesh,
                                                      const aiScene* scene)
     {
@@ -141,8 +140,6 @@ namespace Models
             }
         }
     }
-
-
 
 
 }

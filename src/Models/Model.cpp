@@ -13,7 +13,7 @@ namespace Models
         Assimp::Importer importer = Assimp::Importer();
 
         const aiScene* scene = importer.ReadFile(FilePath,
-                                                 aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
+                                                 aiProcess_Triangulate | aiProcess_GenNormals);
 
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE ||
             !scene->mRootNode)

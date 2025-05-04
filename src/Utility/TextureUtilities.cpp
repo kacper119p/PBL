@@ -2,6 +2,8 @@
 #include <format>
 #include "FileException.h"
 #include "TextureUtilities.h"
+
+#include "DDSLoader.h"
 #include "glm/glm.hpp"
 #include "glm/ext/matrix_transform.hpp"
 #include "glm/ext/matrix_clip_space.hpp"
@@ -82,35 +84,16 @@ namespace Utility
         return LoadTexture2DFromFile(FilePath, Format, SourceChannels, SourceFormat, width, height);
     }
 
-    unsigned int LoadTexture2DFromFile(const char* FilePath, GLenum Format, uint8_t SourceChannels, GLenum SourceFormat,
-                                       int& OutWidth, int& OutHeight)
+    [[nodiscard]] unsigned int LoadTexture2DFromFile(const char* FilePath, GLenum Format, uint8_t SourceChannels,
+                                                     GLenum SourceFormat,
+                                                     int& OutWidth, int& OutHeight)
     {
         int width, height, channelCount;
-        GLubyte* data = stbi_load(FilePath, &width, &height,
-                                  &channelCount, SourceChannels);
 
-        if (data == nullptr)
-        {
-            throw Utility::FileException(std::format("Failed to read texture from {}.", FilePath));
-        }
-
-        unsigned int textureId;
-        glGenTextures(1, &textureId);
-        glBindTexture(GL_TEXTURE_2D, textureId);
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, 16.0f);
-
-        glTexImage2D(GL_TEXTURE_2D, 0, Format, width, height, 0, SourceFormat, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
+        GLuint textureId = LoadDds(FilePath, width, height, channelCount, SourceChannels);
 
         const uint64_t handle = glGetTextureHandleARB(textureId);
         glMakeTextureHandleResidentARB(handle);
-
-        stbi_image_free(data);
 
         OutWidth = width;
         OutHeight = height;
