@@ -44,10 +44,18 @@ DDS_CUBEMAP_POSITIVEZ | DDS_CUBEMAP_NEGATIVEZ)
 
 namespace Utility
 {
+    /**
+     * @brief https://learn.microsoft.com/en-us/windows/win32/winprog/windows-data-types
+     */
     typedef uint32_t DWORD;
+    /**
+     * @brief https://learn.microsoft.com/en-us/windows/win32/winprog/windows-data-types
+     */
     typedef uint32_t UINT;
 
-
+    /**
+     * @brief https://learn.microsoft.com/en-us/windows/win32/api/d3d10/ne-d3d10-d3d10_resource_dimension
+     */
     enum D3D10_RESOURCE_DIMENSION : DWORD
     {
         D3D10_RESOURCE_DIMENSION_UNKNOWN = 0,
@@ -57,6 +65,9 @@ namespace Utility
         D3D10_RESOURCE_DIMENSION_TEXTURE3D = 4
     };
 
+    /**
+     * @brief https://learn.microsoft.com/en-us/windows/win32/api/dxgiformat/ne-dxgiformat-dxgi_format
+     */
     enum DXGI_FORMAT : DWORD
     {
         DXGI_FORMAT_UNKNOWN = 0,
@@ -183,6 +194,9 @@ namespace Utility
         DXGI_FORMAT_FORCE_UINT = 0xffffffff
     };
 
+    /**
+     * @brief https://learn.microsoft.com/en-us/windows/win32/direct3ddds/dds-header-dxt10
+     */
     struct DDS_HEADER_DXT10
     {
         DXGI_FORMAT dxgiFormat;
@@ -192,6 +206,9 @@ namespace Utility
         UINT miscFlags2;
     };
 
+    /**
+     * @brief https://learn.microsoft.com/en-us/windows/win32/direct3ddds/dds-pixelformat
+     */
     struct DDS_PIXELFORMAT
     {
         DWORD dwSize;
@@ -204,6 +221,9 @@ namespace Utility
         DWORD dwABitMask;
     };
 
+    /**
+     * @brief https://learn.microsoft.com/en-us/windows/win32/direct3ddds/dds-header
+     */
     struct DDS_HEADER
     {
         DWORD dwSize;
@@ -222,10 +242,14 @@ namespace Utility
         DWORD dwReserved2;
     };
 
-    static_assert(sizeof(DDS_HEADER) == 124);
-
 #pragma pack(pop)
-    GLuint LoadDds(const char* FilePath, int& Width, int& Height, int& ChannelCount, uint8_t SourceChannels);
 
-    void DecodeFormat(DXGI_FORMAT& DxgiFormat, uint32_t& BlockSize, uint32_t& Format);
+    /**
+     * @brief Loads OpenGL texture from dds file
+     * @param FilePath Path to a texture file.
+     * @param Width Outputs texture width.
+     * @param Height Outputs texture height.
+     * @return Texture ID.
+     */
+    GLuint LoadDds(const char* FilePath, int& Width, int& Height);
 }

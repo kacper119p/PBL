@@ -19,7 +19,7 @@
 
 namespace Utility
 {
-    GLuint LoadDds(const char* FilePath, int& Width, int& Height, int& ChannelCount, uint8_t SourceChannels)
+    GLuint LoadDds(const char* FilePath, int& Width, int& Height)
     {
         GLuint textureId = 0;
 
@@ -30,7 +30,7 @@ namespace Utility
 #if DEBUG
             NOTIFY_FAILED
 #endif
-            return 0;
+            return textureId;
         }
 
         fseek(f, 0, SEEK_END);
@@ -85,15 +85,13 @@ namespace Utility
                 format = GL_COMPRESSED_RGBA_BPTC_UNORM;
                 blockSize = 16;
                 break;
-            default:
+            default: // Unsupported format
 #if DEBUG
                 NOTIFY_FAILED
 #endif
                 EXIT
         }
 
-        // allocate new unsigned char space with file_size - (file_code + header_size) magnitude
-        // read rest of file
         buffer = reinterpret_cast<uint8_t*>(malloc(file_size - sizeof(DDS_HEADER) - sizeof(DDS_HEADER_DXT10)));
 #if DEBUG
         if (buffer == nullptr)
@@ -104,7 +102,6 @@ namespace Utility
 #endif
         fread(buffer, 1, file_size, f);
 
-        // prepare new incomplete texture
         glGenTextures(1, &textureId);
         if (textureId == 0)
         {
@@ -121,8 +118,7 @@ namespace Utility
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, 16.0f);
 
-        // prepare some variables
-        unsigned int offset = 0;
+        uint32_t offset = 0;
         int32_t size = 0;
 
         uint32_t mipMapCount = header.dwMipMapCount;
@@ -148,21 +144,10 @@ namespace Utility
             w /= 2;
             h /= 2;
         }
+
         //discard any odd mipmaps, ensure a complete texture
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, mipMapCount - 1);
-        // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16, Width, Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
-        //glGenerateMipmap(GL_TEXTURE_2D);
 
         EXIT
     }
-
-    void DecodeFormat(DXGI_FORMAT& DxgiFormat, uint32_t& BlockSize, uint32_t& Format)
-    {
-    }
-
-    void FreeDds(uint8_t* Data)
-    {
-        free(Data);
-    }
-
-} // Utility
+}
