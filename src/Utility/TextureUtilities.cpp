@@ -265,8 +265,6 @@ namespace Utility
         shader.SetTexture("EnvironmentMap", 0);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_CUBE_MAP, EnvironmentMap);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER,
-                        GL_LINEAR_MIPMAP_LINEAR);
         shader.SetUniform("ProjectionMatrix", captureProjection);
         shader.SetUniform("Resolution", static_cast<float>(environmentMapResolution));
 
@@ -301,11 +299,6 @@ namespace Utility
 
         glDeleteFramebuffers(1, &fbo);
         glDeleteRenderbuffers(1, &rbo);
-
-        glBindTexture(GL_TEXTURE_CUBE_MAP, EnvironmentMap);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         return cubemap;
