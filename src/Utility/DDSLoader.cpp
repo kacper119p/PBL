@@ -85,6 +85,10 @@ namespace Utility
                 format = GL_COMPRESSED_RGBA_BPTC_UNORM;
                 blockSize = 16;
                 break;
+            case DXGI_FORMAT_R16G16B16A16_UNORM: // uncompressed
+                format = GL_RGBA16;
+                blockSize = 8;
+                break;
             default: // Unsupported format
 #if DEBUG
                 NOTIFY_FAILED
@@ -93,13 +97,14 @@ namespace Utility
         }
 
         buffer = reinterpret_cast<uint8_t*>(malloc(file_size - sizeof(DDS_HEADER) - sizeof(DDS_HEADER_DXT10)));
-#if DEBUG
         if (buffer == nullptr)
         {
+#if DEBUG
             NOTIFY_FAILED
+#endif
             EXIT
         }
-#endif
+
         fread(buffer, 1, file_size, f);
 
         glGenTextures(1, &textureId);
@@ -129,20 +134,41 @@ namespace Utility
         // loop through sending block at a time with the magic formula
         // upload to opengl properly, note the offset transverses the pointer
         // assumes each mipmap is 1/2 the size of the previous mipmap
-        for (unsigned int i = 0; i < mipMapCount; i++)
+        if (headerDxt.dxgiFormat == DXGI_FORMAT_R16G16B16A16_UNORM)
         {
-            if (w == 0 || h == 0)
+            for (unsigned int i = 0; i < mipMapCount; i++)
             {
-                // discard any odd mipmaps 0x1 0x2 resolutions
-                mipMapCount--;
-                continue;
+                if (w == 0 || h == 0)
+                {
+                    // discard any odd mipmaps 0x1 0x2 resolutions
+                    mipMapCount--;
+                    continue;
+                }
+                size = w * h * blockSize;
+                glTexImage2D(GL_TEXTURE_2D, static_cast<GLint>(i), format, w, h, 0, GL_RGBA, GL_UNSIGNED_SHORT,
+                             buffer + offset);
+                offset += size;
+                w /= 2;
+                h /= 2;
             }
-            size = ((w + 3) / 4) * ((h + 3) / 4) * blockSize;
-            glCompressedTexImage2D(GL_TEXTURE_2D, static_cast<int32_t>(i), format, w, h, 0,
-                                   size, buffer + offset);
-            offset += size;
-            w /= 2;
-            h /= 2;
+        }
+        else
+        {
+            for (unsigned int i = 0; i < mipMapCount; i++)
+            {
+                if (w == 0 || h == 0)
+                {
+                    // discard any odd mipmaps 0x1 0x2 resolutions
+                    mipMapCount--;
+                    continue;
+                }
+                size = ((w + 3) / 4) * ((h + 3) / 4) * blockSize;
+                glCompressedTexImage2D(GL_TEXTURE_2D, static_cast<int32_t>(i), format, w, h, 0,
+                                       size, buffer + offset);
+                offset += size;
+                w /= 2;
+                h /= 2;
+            }
         }
 
         //discard any odd mipmaps, ensure a complete texture
