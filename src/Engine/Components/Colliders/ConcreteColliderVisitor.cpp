@@ -33,10 +33,14 @@ namespace Engine
         result.hasCollision = false;
     }
 
+
+
     bool OverlapOnAxis(const glm::vec3& axis, const glm::vec3& toCenter, const glm::vec3& aX, const glm::vec3& aY,
                        const glm::vec3& aZ, const glm::vec3& aHalf, const glm::vec3& bX, const glm::vec3& bY,
                        const glm::vec3& bZ, const glm::vec3& bHalf)
     {
+        if (glm::length2(axis) < 1e-6f)
+            return true;
         float projectionA = std::abs(glm::dot(axis, aX)) * aHalf.x + std::abs(glm::dot(axis, aY)) * aHalf.y +
                             std::abs(glm::dot(axis, aZ)) * aHalf.z;
 
@@ -386,21 +390,18 @@ namespace Engine
             float radius1 = capsule1.GetRadius();
             float radius2 = capsule2.GetRadius();
 
-            // Lokalne punkty kapsuł
             glm::vec3 localA1(0.0f, -halfHeight1, 0.0f);
             glm::vec3 localB1(0.0f, +halfHeight1, 0.0f);
 
             glm::vec3 localA2(0.0f, -halfHeight2, 0.0f);
             glm::vec3 localB2(0.0f, +halfHeight2, 0.0f);
 
-            // Transformacja do przestrzeni świata
             glm::vec3 A1 = glm::vec3(transform1 * glm::vec4(localA1, 1.0f));
             glm::vec3 B1 = glm::vec3(transform1 * glm::vec4(localB1, 1.0f));
 
             glm::vec3 A2 = glm::vec3(transform2 * glm::vec4(localA2, 1.0f));
             glm::vec3 B2 = glm::vec3(transform2 * glm::vec4(localB2, 1.0f));
 
-            // Kierunki osi kapsuł
             glm::vec3 d1 = B1 - A1;
             glm::vec3 d2 = B2 - A2;
             glm::vec3 r = A1 - A2;
@@ -411,15 +412,12 @@ namespace Engine
 
             float s, t;
 
-            // Obliczenie najbliższych punktów na segmentach
             if (a <= 1e-6f && e <= 1e-6f)
             {
-                // Obie kapsuły są zredukowane do punktów
                 s = t = 0.0f;
             }
             else if (a <= 1e-6f)
             {
-                // Pierwsza kapsuła jest punktem
                 s = 0.0f;
                 t = glm::clamp(f / e, 0.0f, 1.0f);
             }
@@ -428,7 +426,6 @@ namespace Engine
                 float c = glm::dot(d1, r);
                 if (e <= 1e-6f)
                 {
-                    // Druga kapsuła jest punktem
                     t = 0.0f;
                     s = glm::clamp(-c / a, 0.0f, 1.0f);
                 }
@@ -520,7 +517,6 @@ namespace Engine
             const glm::mat4& transform1 = mesh1.GetTransform()->GetLocalToWorldMatrix();
             const glm::mat4& transform2 = mesh2.GetTransform()->GetLocalToWorldMatrix();
 
-            // Pobierz AABB dla obu siatek
             Models::AABBox3 aabb1 = mesh1.GetMesh()->GetAabBox();
             Models::AABBox3 aabb2 = mesh2.GetMesh()->GetAabBox();
 
@@ -529,14 +525,11 @@ namespace Engine
             glm::vec3 min2 = transform2 * glm::vec4(aabb2.min, 1.0f);
             glm::vec3 max2 = transform2 * glm::vec4(aabb2.max, 1.0f);
 
-            // Sprawdź kolizję AABB
             if (max1.x < min2.x || min1.x > max2.x || max1.y < min2.y || min1.y > max2.y || max1.z < min2.z ||
                 min1.z > max2.z)
             {
                 return result;
             }
-
-            // Sprawdź kolizję wierzchołków
             const auto& vertices1 = mesh1.GetMesh()->VerticesData;
             const auto& vertices2 = mesh2.GetMesh()->VerticesData;
 
@@ -629,7 +622,7 @@ namespace Engine
                 }
             }
 
-            return smallestAxis * minPenetration;
+           return smallestAxis * glm::max(0.0f, minPenetration);
         }
 
     glm::vec3 ConcreteColliderVisitor::GetSeparationBoxSphere(const BoxCollider& box, const SphereCollider& sphere)
@@ -803,13 +796,13 @@ namespace Engine
                if (boxCollider)
                {
                    result = CheckBoxBoxCollision(box, *boxCollider);
-                   box.isColliding = boxCollider->isColliding = result.hasCollision;
                    
-                   //if (collisionDetected)
-                   //{
-                   //    glm::vec3 separation = GetSeparationBoxBox(box, *boxCollider);
-                   //    box.GetTransform()->SetPosition(box.GetTransform()->GetPosition() + separation);
-                   //    boxCollider->GetTransform()->SetPosition(boxCollider->GetTransform()->GetPosition() - separation);
+                   
+                   if (result.hasCollision && !currentCollider->isColliding)
+                   {
+                       box.isColliding = boxCollider->isColliding = result.hasCollision;
+                       glm::vec3 separation = GetSeparationBoxBox(box, *boxCollider);
+                       boxCollider->GetTransform()->SetPosition(boxCollider->GetTransform()->GetPosition() + separation);
 
                    //    // TODO: remove or research usefulness of this
                    //    box.shouldMove = false;
@@ -817,7 +810,7 @@ namespace Engine
                    //    // TODO END
 
                    //    spdlog::info("Box-Box collision detected");
-                   //}
+                   }
                    // TODO: emit collision event
                    // TODO: fix other cases and resolvers to work like this case
                }

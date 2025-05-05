@@ -61,7 +61,7 @@ namespace Scene
 
         Engine::Entity* secondBoxEntity = Scene->SpawnEntity(nullptr);
         Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
-        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(5.0f, 0.0f, 20.0f));
+        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(200.0f, 0.0f, 20.0f));
 
         boxCollider->SetStatic(false);
         secondBoxCollider->SetStatic(false);
