@@ -33,6 +33,9 @@
 #include "imgui_internal.h"
 #include "Engine/EngineObjects/GizmoManager.h"
 #endif
+#include "Input/InputManager.h"
+
+#include <iostream>
 
 namespace SceneBuilding = Scene;
 
@@ -105,6 +108,13 @@ namespace Engine
 
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
             AudioListener->UpdateListener();
+
+            //debug 
+            if (InputManager::GetInstance().IsGamepadButtonPressed(GLFW_GAMEPAD_BUTTON_A))
+                std::cout << "Gamepad A button pressed\n";
+
+        
+
 
 #if EDITOR
             glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
@@ -245,6 +255,9 @@ namespace Engine
 
         AudioListener = new class AudioListener(*Camera);
         spdlog::info("Sounds loaded.");
+
+        //input manager init
+        InputManager::GetInstance().Init(Window);
 
         return true;
     }
