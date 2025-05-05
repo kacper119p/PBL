@@ -38,8 +38,6 @@ namespace Engine
 
     void AnimatedModelRenderer::Render(const CameraRenderData& RenderData)
     {
-        LightManager::GetInstance()->SetupLightsForRendering(Material->GetMainPass());
-
         SetupMatrices(RenderData, Material->GetMainPass());
         Draw();
     }

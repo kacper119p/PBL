@@ -19,6 +19,7 @@ namespace Engine
         BrdfLUT(Utility::GenerateIblBrdfLut())
     {
         InitializeDirectionalLightShadowMap();
+        InitializeLightBuffer();
         InitializeShadowCubeMap(PointLightShadowMaps[0], PointLightFrameBuffers[0]);
         InitializeShadowCubeMap(PointLightShadowMaps[1], PointLightFrameBuffers[1]);
         InitializeShadowCubeMap(SpotLightShadowMaps[0], SpotLightFrameBuffers[0]);
@@ -32,19 +33,27 @@ namespace Engine
         RenderSpotLightsShadowMaps();
     }
 
-    void LightManager::SetupLightsForRendering(const Shaders::Shader& Shader)
+    void LightManager::SetupLightsForRendering() const
     {
-        if (DirectionalLight)
-        {
-            Shader.SetUniform("DirectionalLight.Direction", DirectionalLight->GetDirection());
-            Shader.SetUniform("DirectionalLight.Color", DirectionalLight->GetColor());
-            Shader.Shader::SetUniform("DirectionalLightSpaceTransform", DirectionalLightSpaceTransform);
-            glActiveTexture(GL_TEXTURE11);
-            glBindTexture(GL_TEXTURE_2D, DirectionalLightShadowMap);
-        }
+        glActiveTexture(GL_TEXTURE11);
+        glBindTexture(GL_TEXTURE_2D, DirectionalLightShadowMap);
 
-        SetupPointLightsForRendering(Shader);
-        SetupSpotLightsForRendering(Shader);
+        const LightData lightData{DirectionalLight->GetShaderData(DirectionalLightSpaceTransform),
+                                  {PointLights[0]->GetShaderData(), PointLights[1]->GetShaderData()},
+                                  {SpotLights[0]->GetShaderData(), SpotLights[1]->GetShaderData()},};
+
+        glBindBuffer(GL_SHADER_STORAGE_BUFFER, LightBuffer);
+        glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(LightData), &lightData, GL_DYNAMIC_DRAW);
+        glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, LightBuffer);
+
+        glActiveTexture(GL_TEXTURE12);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, PointLightShadowMaps[0]);
+        glActiveTexture(GL_TEXTURE13);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, PointLightShadowMaps[1]);
+        glActiveTexture(GL_TEXTURE14);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, SpotLightShadowMaps[0]);
+        glActiveTexture(GL_TEXTURE15);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, SpotLightShadowMaps[1]);
 
         glActiveTexture(GL_TEXTURE16);
         glBindTexture(GL_TEXTURE_CUBE_MAP, IrradianceMap);
@@ -289,8 +298,8 @@ namespace Engine
         Instance = new LightManager();
     }
 
-    void LightManager::ClearAllLights() 
-    { 
+    void LightManager::ClearAllLights()
+    {
         DirectionalLight = nullptr;
         PointLights.clear();
         SpotLights.clear();
@@ -334,6 +343,11 @@ namespace Engine
                                                      SpotLights[1]->GetPosition(),
                                                      SpotLights[1]->GetRange(),
                                                      SpotLightSpaceTransforms + 6);
+    }
+
+    void LightManager::InitializeLightBuffer()
+    {
+        glGenBuffers(1, &LightBuffer);
     }
 
     void LightManager::SetEnvironmentMap(const Texture EnvironmentMap)

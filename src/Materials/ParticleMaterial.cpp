@@ -27,7 +27,6 @@ namespace Materials
     void ParticleMaterial::Use() const
     {
         Shader.Use();
-        Engine::LightManager::GetInstance()->SetupLightsForRendering(Shader);
     }
 
     void ParticleMaterial::UseDirectionalShadows() const

@@ -9,6 +9,34 @@ namespace Engine
 
     class SpotLight final : public Component
     {
+    public:
+        struct alignas(4 * sizeof(float)) ShaderData
+        {
+            glm::vec3 Direction;
+            float OuterAngle;
+            glm::vec3 Color;
+            float InnerAngle;
+            glm::vec3 Position;
+            float LinearFalloff;
+            float QuadraticFalloff;
+            float Range;
+
+            ShaderData(const glm::vec3& Direction, const glm::vec3& Color, const glm::vec3& Position,
+                       const float OuterAngle,
+                       const float InnerAngle, const float LinearFalloff, const float QuadraticFalloff,
+                       const float Range) :
+                Direction(Direction),
+                OuterAngle(OuterAngle),
+                Color(Color),
+                InnerAngle(InnerAngle),
+                Position(Position),
+                LinearFalloff(LinearFalloff),
+                QuadraticFalloff(QuadraticFalloff),
+                Range(Range)
+            {
+            }
+        };
+
     private:
         glm::vec3 Color = glm::vec3(1.0f, 1.0f, 1.0f);
 
@@ -145,10 +173,16 @@ namespace Engine
             return GetOwner()->GetTransform()->GetPositionWorldSpace();
         }
 
+        [[nodiscard]] ShaderData GetShaderData() const
+        {
+            return ShaderData(GetDirection(), Color, GetPosition(), glm::cos(glm::radians(OuterAngle)),
+                              glm::cos(glm::radians(InnerAngle)), LinearFalloff, QuadraticFalloff, Range);
+        }
+
         void Start() override;
 #if EDITOR
         void DrawImGui() override;
-        #endif
+#endif
         SERIALIZATION_EXPORT_CLASS(SpotLight)
     };
 

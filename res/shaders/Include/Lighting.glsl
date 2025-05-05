@@ -2,26 +2,30 @@
 
 struct directionalLight
 {
+    mat4 DirectionalLightSpaceTransform;
     vec3 Direction;
+    float _padding0;
     vec3 Color;
+    float padding1;
 };
 
 struct pointLight
 {
-    vec3 Position;
     vec3 Color;
     float LinearFalloff;
+    vec3 Position;
     float QuadraticFalloff;
     float Range;
+    float _padding[3];
 };
 
 struct spotLight
 {
-    vec3 Position;
     vec3 Direction;
-    vec3 Color;
     float OuterAngle;
+    vec3 Color;
     float InnerAngle;
+    vec3 Position;
     float LinearFalloff;
     float QuadraticFalloff;
     float Range;
@@ -44,14 +48,11 @@ layout (binding = 17) uniform samplerCube PrefilterMap;
 layout (binding = 18) uniform sampler2D BrdfLUT;
 layout (binding = 19) uniform sampler2D SSAOMap;
 
-uniform directionalLight DirectionalLight;
-uniform mat4 DirectionalLightSpaceTransform;
-
-uniform pointLight[8] PointLights;
-uniform uint PointLightsCount;
-
-uniform spotLight[8] SpotLights;
-uniform uint SpotLightsCount;
+layout (std430, binding = 0) buffer Lights {
+    directionalLight DirectionalLight;
+    pointLight PointLights[2];
+    spotLight SpotLights[2];
+};
 
 const float SHADOW_BIAS = 0.00005;
 const float MAX_REFLECTION_LOD = 4.0;
@@ -67,7 +68,7 @@ light CalculateDirectionalLight(directionalLight Light, vec3 Position)
     result.Direction = Light.Direction;
     result.Color = Light.Color;
 
-    vec4 fragPosLightSpace = DirectionalLightSpaceTransform * vec4(Position, 1.0);
+    vec4 fragPosLightSpace = DirectionalLight.DirectionalLightSpaceTransform * vec4(Position, 1.0);
     vec3 shadowCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
     shadowCoords.xyz = shadowCoords.xyz * 0.5 + 0.5;
     result.Attenuation = texture(DirectionalLightShadowMap, shadowCoords, SHADOW_BIAS);
@@ -228,4 +229,64 @@ vec3 CalculateEnvironmentInfluence(vec3 BaseColor, vec3 Normal, vec3 ViewDirecti
     vec3 specular = prefilteredColor * (kS * brdf.x + brdf.y);
 
     return (kD * diffuse + specular) * min(vec3(texture(SSAOMap, gl_FragCoord.xy / vec2(1920, 1080)).r), AmbientOcclusion);
+}
+
+vec3 CalculateLight(vec3 BaseColor, float Metallic, float Roughness, vec3 Normal, vec3 Position, vec3 ViewDirection, float AmbientOcclusion)
+{
+    vec3 Light = vec3(0.0, 0.0, 0.0);
+
+    vec3 F0 = vec3(0.04);
+    F0 = mix(F0, BaseColor, Metallic);
+
+    Light += CalculateLightInfluence(CalculateDirectionalLight(DirectionalLight, Position),
+                                     BaseColor,
+                                     Normal,
+                                     ViewDirection,
+                                     Roughness,
+                                     Metallic,
+                                     F0);
+
+
+
+    Light += CalculateLightInfluence(CalculatePointLightShadowed(PointLights[0], PointLightShadowMap0, Position),
+                                     BaseColor,
+                                     Normal,
+                                     ViewDirection,
+                                     Roughness,
+                                     Metallic,
+                                     F0);
+
+    Light += CalculateLightInfluence(CalculatePointLightShadowed(PointLights[1], PointLightShadowMap1, Position),
+                                     BaseColor,
+                                     Normal,
+                                     ViewDirection,
+                                     Roughness,
+                                     Metallic,
+                                     F0);
+
+    Light += CalculateLightInfluence(CalculateSpotLightShadowed(SpotLights[0], SpotLightShadowMap0, Position),
+                                     BaseColor,
+                                     Normal,
+                                     ViewDirection,
+                                     Roughness,
+                                     Metallic,
+                                     F0);
+
+    Light += CalculateLightInfluence(CalculateSpotLightShadowed(SpotLights[1], SpotLightShadowMap1, Position),
+                                     BaseColor,
+                                     Normal,
+                                     ViewDirection,
+                                     Roughness,
+                                     Metallic,
+                                     F0);
+
+
+    vec3 Color = Light + CalculateEnvironmentInfluence(BaseColor,
+                                                       Normal,
+                                                       ViewDirection,
+                                                       Roughness,
+                                                       Metallic,
+                                                       F0,
+                                                       AmbientOcclusion);
+    return Color;
 }
