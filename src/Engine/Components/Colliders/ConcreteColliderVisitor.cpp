@@ -18,15 +18,15 @@ namespace Engine
 {
 
     ConcreteColliderVisitor::ConcreteColliderVisitor() :
-        currentCollider(nullptr), collisionDetected(false), spatialPartitioning(nullptr)
+        currentCollider(nullptr), collisionDetected(false), spatialPartitioning(&SpatialPartitioning::GetInstance())
     {
         result.collisionNormal = glm::vec3(0.0f);
         result.collisionPoint = glm::vec3(0.0f);
         result.hasCollision = false;
     }
 
-    ConcreteColliderVisitor::ConcreteColliderVisitor(SpatialPartitioning* partitioning, Collider* collider) :
-        currentCollider(collider), collisionDetected(false), spatialPartitioning(partitioning)
+    ConcreteColliderVisitor::ConcreteColliderVisitor(Collider* collider) :
+        currentCollider(collider), collisionDetected(false), spatialPartitioning(&SpatialPartitioning::GetInstance())
     {
         result.collisionNormal = glm::vec3(0.0f);
         result.collisionPoint = glm::vec3(0.0f);
@@ -1036,12 +1036,12 @@ namespace Engine
 
     void ConcreteColliderVisitor::SetCurrentCollider(Collider* collider) { this->currentCollider = collider; }
 
-    void ConcreteColliderVisitor::ManageCollisions(std::vector<Collider*> colliders) 
+    void ConcreteColliderVisitor::ManageCollisions() 
         { 
             if (!currentCollider || currentCollider->IsStatic())
                 return;
 
-            for (auto* collider : colliders)
+            for (auto* collider : spatialPartitioning->GetPotentialCollisions(currentCollider))
             {
                 if (collider == this->currentCollider)
                     continue;

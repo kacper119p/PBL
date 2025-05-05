@@ -35,6 +35,8 @@ namespace Engine
     protected:
         bool isStatic;
         bool isTrigger;
+        glm::ivec3 currentCellIndex = glm::ivec3(0, 0, 0); // non-definable by user
+        SpatialPartitioning* spatial;
 
     public:
         ColliderTypeE colliderType;
@@ -44,14 +46,14 @@ namespace Engine
         /// TODO: move those to protected and add getters + setters
         Transform* transform;
         ConcreteColliderVisitor colliderVisitor;
-        SpatialPartitioning* spatial;
+        
 
         // TODO: remove when spatial fully implemented
         std::vector<Collider*> colliders;
         bool isColliding;
 
         Collider();
-        Collider(Transform* transform, bool isTrigger = false, bool isStatic = false, SpatialPartitioning* spatial = nullptr);
+        Collider(Transform* transform, bool isTrigger = false, bool isStatic = false);
         virtual ~Collider();
 
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;

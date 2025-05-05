@@ -219,7 +219,7 @@ namespace Engine
             }
         }
         // TODO END
-        colliderVisitor.ManageCollisions(colliders);
+        colliderVisitor.ManageCollisions();
     }
 
     void CapsuleCollider::OnDestroy() 

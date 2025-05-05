@@ -47,7 +47,6 @@ namespace Scene
 
         Scene = new class Engine::Scene();
         Engine::SceneManager::LoadScene("./res/scenes/SampleScene.lvl", Scene);
-
         // TODO: remove when no longer needed
 
 
@@ -55,7 +54,7 @@ namespace Scene
        
 
         // BOX BOX SCENARIO /////////////////////////////////////////////////////////////////////////////////////////////////////////
-       /* Engine::Entity* boxEntity = Scene->SpawnEntity(nullptr);
+        Engine::Entity* boxEntity = Scene->SpawnEntity(nullptr);
         Engine::BoxCollider* boxCollider = boxEntity->AddComponent<Engine::BoxCollider>();
         boxEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 0.0f, 20.0f));
         boxEntity->GetTransform()->SetEulerAngles(glm::vec3(.0f, 30.0f, 0.0f));
@@ -67,10 +66,7 @@ namespace Scene
         boxCollider->SetStatic(false);
         secondBoxCollider->SetStatic(false);
 
-        boxCollider->AddColliderToSpatial(secondBoxCollider);
-        secondBoxCollider->AddColliderToSpatial(boxCollider);
-
-        secondBoxCollider->shouldMove = true;*/
+        secondBoxCollider->shouldMove = true;
 
 
 

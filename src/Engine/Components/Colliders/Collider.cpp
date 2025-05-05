@@ -7,15 +7,18 @@
 namespace Engine
 {
     
-    Collider::Collider() : isTrigger(false), transform(nullptr) {
+    Collider::Collider() : isTrigger(false), transform(nullptr), spatial(&SpatialPartitioning::GetInstance())
+    {
         this->colliderVisitor = ConcreteColliderVisitor();
         this->spatial = nullptr;
         isColliding = false; // TODO: to be removed, just for debug purposes
     }
 
-    Collider::Collider(Transform* transform, bool isTrigger, bool isStatic, SpatialPartitioning* spatialParam) 
-        : isTrigger(isTrigger), isStatic(isStatic), transform(transform), spatial(spatialParam) {
-        this->colliderVisitor = ConcreteColliderVisitor(spatialParam, this);
+    Collider::Collider(Transform* transform, bool isTrigger, bool isStatic) 
+        :
+        isTrigger(isTrigger), isStatic(isStatic), transform(transform), spatial(&SpatialPartitioning::GetInstance())
+    {
+        this->colliderVisitor = ConcreteColliderVisitor(this);
         colliderType = BOX; // Default type, can be changed in derived classes
         
         isColliding = false; // TODO: to be removed, just for debug purposes

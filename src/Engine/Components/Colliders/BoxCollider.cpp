@@ -1,6 +1,7 @@
 #include "BoxCollider.h"
 #include "Shaders/ShaderManager.h"
 #include "Engine/EngineObjects/RenderingManager.h"
+#include "SpatialPartitioning.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -172,12 +173,20 @@ namespace Engine
        transform = Component::GetOwner()->GetTransform();
        spdlog::info("BoxCollider start");
        colliderVisitor.SetCurrentCollider(this);
+       spatial = &SpatialPartitioning::GetInstance();
+       spatial->AddCollider(this);
+       currentCellIndex = spatial->GetCellIndex(transform->GetPositionWorldSpace());
+       spdlog::info("BoxCollider start, current cell index: {}", currentCellIndex.x);
     }
 
     void BoxCollider::Update(float deltaTime)
     { 
-
         // TODO: remove when scriptable fully implemented
+        if (currentCellIndex != spatial->GetCellIndex(transform->GetPosition()))
+        {
+            spatial->RemoveCollider(this);
+            spatial->AddCollider(this);
+        }
         if (shouldMove)
         {
             glm::vec3 newPosition = transform->GetPosition() - glm::vec3(.1f, 0.0f, 0.0f) * deltaTime;
@@ -188,7 +197,7 @@ namespace Engine
             }
         }
         // TODO END
-        colliderVisitor.ManageCollisions(colliders);
+        colliderVisitor.ManageCollisions();
     }
 
     void BoxCollider::OnDestroy() 
