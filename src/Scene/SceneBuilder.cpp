@@ -25,6 +25,7 @@
 #include "Engine/Components/Colliders/SphereCollider.h"
 #include "Engine/Components/Colliders/CapsuleCollider.h"
 #include "Engine/Components/Colliders/SpatialPartitioning.h"
+#include "Engine/Components//Physics/RigidBody.h"
 #include "Engine/EngineObjects/Scene/SceneManager.h"
 #include "Engine/Textures/Texture.h"
 #include "Engine/Textures/TextureManager.h"
@@ -56,18 +57,19 @@ namespace Scene
         // BOX BOX SCENARIO /////////////////////////////////////////////////////////////////////////////////////////////////////////
         Engine::Entity* boxEntity = Scene->SpawnEntity(nullptr);
         Engine::BoxCollider* boxCollider = boxEntity->AddComponent<Engine::BoxCollider>();
-        boxEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 0.0f, 20.0f));
+        boxEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 7.0f, 10.0f));
         boxEntity->GetTransform()->SetEulerAngles(glm::vec3(.0f, 30.0f, 0.0f));
 
         Engine::Entity* secondBoxEntity = Scene->SpawnEntity(nullptr);
         Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
-        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(200.0f, 0.0f, 20.0f));
+        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(5.0f, 7.0f, 10.0f));
 
         boxCollider->SetStatic(false);
         secondBoxCollider->SetStatic(false);
 
-        secondBoxCollider->shouldMove = true;
-
+        //secondBoxCollider->shouldMove = true;
+        
+        Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();
 
 
 

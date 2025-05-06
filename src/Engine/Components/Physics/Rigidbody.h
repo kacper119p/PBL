@@ -3,6 +3,11 @@
 #include "../Component.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/quaternion.hpp"
+#include "Serialization/SerializationUtility.h"
+#include "../../EngineObjects/Entity.h" // TODO: Fix later. I'm using this way because of indexing problem.
+#include "../Interfaces/IUpdateable.h"
+#include "../../EngineObjects/UpdateManager.h"
+
 
 namespace Engine
 {
@@ -20,9 +25,19 @@ namespace Engine
             LockRotationX = 1 << 3,
             LockRotationY = 1 << 4,
             LockRotationZ = 1 << 5
+
+        };
+
+        enum class ForceType
+        {
+            Force,
+            Impulse 
         };
 
     private:
+
+        float timeSinceLastForce = 0.0f;
+
         float mass;
         float inverseMass;
         glm::vec3 linearVelocity;
@@ -42,8 +57,11 @@ namespace Engine
 
     public:
         RigidBody();
+        ~RigidBody();
 
-        void AddForce(const glm::vec3& force);
+        RigidBody& operator=(const RigidBody& other);
+        
+        void AddForce(const glm::vec3& force, ForceType type = ForceType::Force);
         void AddTorque(const glm::vec3& torque);
 
         void SetMass(float m);
@@ -65,9 +83,11 @@ namespace Engine
         const glm::vec3& GetLinearVelocity() const;
         const glm::vec3& GetAngularVelocity() const;
         const glm::quat& GetOrientation() const;
+
+        SERIALIZATION_EXPORT_CLASS(RigidBody)
     };
 
-    inline RigidBody::Constraints operator|(RigidBody::Constraints a, RigidBody::Constraints b)
+   inline RigidBody::Constraints operator|(RigidBody::Constraints a, RigidBody::Constraints b)
     {
         return static_cast<RigidBody::Constraints>(static_cast<uint8_t>(a) | static_cast<uint8_t>(b));
     }
@@ -81,6 +101,12 @@ namespace Engine
     inline RigidBody::Constraints operator&(RigidBody::Constraints a, RigidBody::Constraints b)
     {
         return static_cast<RigidBody::Constraints>(static_cast<uint8_t>(a) & static_cast<uint8_t>(b));
+    }
+
+    inline RigidBody::Constraints& operator&=(RigidBody::Constraints& a, RigidBody::Constraints b)
+    {
+        a = a & b;
+        return a;
     }
 
     inline RigidBody::Constraints operator~(RigidBody::Constraints a)

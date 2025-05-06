@@ -6,9 +6,40 @@ namespace Engine
     RigidBody::RigidBody() :
         mass(1.0f), inverseMass(1.0f), linearVelocity(0.0f), angularVelocity(0.0f),
         orientation(glm::quat(1.0f, 0.0f, 0.0f, 0.0f)), accumulatedForce(0.0f), accumulatedTorque(0.0f),
-        staticFriction(0.5f), dynamicFriction(0.3f), restitution(0.5f), linearDamping(0.01f), angularDamping(0.01f),
+        staticFriction(0.0f), dynamicFriction(0.0f), restitution(0.0f), linearDamping(0.001f), angularDamping(0.001f),
         constraints(Constraints::None)
     {
+        UpdateManager::GetInstance()->RegisterComponent(this);
+    }
+
+    RigidBody::~RigidBody() 
+    { 
+        UpdateManager::GetInstance()->UnregisterComponent(this); 
+    }
+
+    RigidBody& RigidBody::operator=(const RigidBody& other)
+    {
+        if (this == &other)
+            return *this;
+
+        mass = other.mass;
+        inverseMass = other.inverseMass;
+        linearVelocity = other.linearVelocity;
+        angularVelocity = other.angularVelocity;
+        orientation = other.orientation;
+
+        accumulatedForce = other.accumulatedForce;
+        accumulatedTorque = other.accumulatedTorque;
+
+        staticFriction = other.staticFriction;
+        dynamicFriction = other.dynamicFriction;
+        restitution = other.restitution;
+        linearDamping = other.linearDamping;
+        angularDamping = other.angularDamping;
+
+        constraints = other.constraints;
+
+        return *this;
     }
 
     void RigidBody::SetConstraints(Constraints newConstraints) { constraints = newConstraints; }
@@ -22,8 +53,15 @@ namespace Engine
         return (constraints & constraint) != Constraints::None;
     }
 
+
     void RigidBody::Update(float deltaTime)
     {
+        if (timeSinceLastForce >= 10.0f)
+        {
+            AddForce(glm::vec3(-.2f, 0.0f, 0.0f), ForceType::Impulse);
+            timeSinceLastForce = 0.0f;
+        }
+        timeSinceLastForce += deltaTime;
         if (inverseMass == 0.0f)
             return;
 
@@ -45,21 +83,31 @@ namespace Engine
 
         angularVelocity *= (1.0f - angularDamping);
 
-        auto transform = GetOwner()->GetTransform();
+        Transform* transform = GetOwner()->GetTransform();
         glm::vec3 position = transform->GetPosition();
         position += linearVelocity * deltaTime;
-        transform->SetPosition(position);
+        GetOwner()->GetTransform()->SetPosition(position);
 
         glm::quat angularDelta = glm::quat(0.0f, angularVelocity * deltaTime);
         orientation = glm::normalize(orientation + angularDelta * orientation);
-        transform->SetEulerAngles(glm::eulerAngles(orientation));
+        GetOwner()->GetTransform()->SetEulerAngles(glm::eulerAngles(orientation));
 
         accumulatedForce = glm::vec3(0.0f);
         accumulatedTorque = glm::vec3(0.0f);
     }
 
     
-    void RigidBody::AddForce(const glm::vec3& force) { accumulatedForce += force; }
+    void RigidBody::AddForce(const glm::vec3& force, ForceType type)
+    {
+        if (type == ForceType::Impulse)
+        {
+            linearVelocity += force * inverseMass;
+        }
+        else
+        {
+            accumulatedForce += force;
+        }
+    }
 
     void RigidBody::AddTorque(const glm::vec3& torque) { accumulatedTorque += torque; }
 
@@ -92,5 +140,22 @@ namespace Engine
     const glm::vec3& RigidBody::GetAngularVelocity() const { return angularVelocity; }
 
     const glm::quat& RigidBody::GetOrientation() const { return orientation; }
+
+    rapidjson::Value RigidBody::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+    {
+        START_COMPONENT_SERIALIZATION
+        END_COMPONENT_SERIALIZATION
+    }
+
+    void RigidBody::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
+    {
+       
+    }
+
+    void RigidBody::DeserializeReferencesPass(const rapidjson::Value& Object,
+                                                Serialization::ReferenceTable& ReferenceMap)
+    {
+    }
+
 
 } // namespace Engine
