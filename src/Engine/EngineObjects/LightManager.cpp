@@ -33,18 +33,12 @@ namespace Engine
         RenderSpotLightsShadowMaps();
     }
 
-    void LightManager::SetupLightsForRendering() const
+    void LightManager::SetupLightsForRendering()
     {
         glActiveTexture(GL_TEXTURE11);
         glBindTexture(GL_TEXTURE_2D, DirectionalLightShadowMap);
 
-        const LightData lightData{DirectionalLight->GetShaderData(DirectionalLightSpaceTransform),
-                                  {PointLights[0]->GetShaderData(), PointLights[1]->GetShaderData()},
-                                  {SpotLights[0]->GetShaderData(), SpotLights[1]->GetShaderData()},};
-
-        glBindBuffer(GL_SHADER_STORAGE_BUFFER, LightBuffer);
-        glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(LightData), &lightData, GL_DYNAMIC_DRAW);
-        glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, LightBuffer);
+        UpdateLightBuffer();
 
         glActiveTexture(GL_TEXTURE12);
         glBindTexture(GL_TEXTURE_CUBE_MAP, PointLightShadowMaps[0]);
@@ -348,6 +342,47 @@ namespace Engine
     void LightManager::InitializeLightBuffer()
     {
         glGenBuffers(1, &LightBuffer);
+    }
+
+    void LightManager::UpdateLightBuffer()
+    {
+        LightBufferData.DirectionalLightCount = DirectionalLight == nullptr ? 0 : 1;
+        LightBufferData.PointLightCount = PointLights.size();
+        LightBufferData.SpotlightCount = SpotLights.size();
+
+        if (LightBufferData.DirectionalLightCount != 0)
+        {
+            LightBufferData.DirectionalLight = DirectionalLight->GetShaderData(DirectionalLightSpaceTransform);
+        }
+
+        if (LightBufferData.PointLightCount > 0)
+        {
+            LightBufferData.PointLights[0] = PointLights[0]->GetShaderData();
+        }
+
+        if (LightBufferData.PointLightCount > 1)
+        {
+            LightBufferData.PointLights[1] = PointLights[1]->GetShaderData();
+        }
+
+        if (LightBufferData.SpotlightCount > 0)
+        {
+            LightBufferData.SpotLights[0] = SpotLights[0]->GetShaderData();
+        }
+
+        if (LightBufferData.SpotlightCount > 1)
+        {
+            LightBufferData.SpotLights[1] = SpotLights[1]->GetShaderData();
+        }
+
+        for (uint32_t i = 2; i < LightBufferData.PointLightCount; ++i)
+        {
+            LightBufferData.PointLightsDynamic[i - 2] = PointLights[i]->GetShaderData();
+        }
+
+        glBindBuffer(GL_SHADER_STORAGE_BUFFER, LightBuffer);
+        glBufferData(GL_SHADER_STORAGE_BUFFER, LightBufferData.GetCurrentSize(), &LightBufferData, GL_DYNAMIC_DRAW);
+        glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, LightBuffer);
     }
 
     void LightManager::SetEnvironmentMap(const Texture EnvironmentMap)

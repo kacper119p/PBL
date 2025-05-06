@@ -16,9 +16,13 @@ namespace Engine
         {
             glm::mat4 LightSpaceTransform;
             glm::vec3 Direction;
-            float __padding0{};
+            float _padding0;
             glm::vec3 Color;
-            float __padding1{};
+            float _padding1;
+
+            ShaderData()
+            {
+            }
 
             ShaderData(const glm::mat4& LightSpaceTransform, const glm::vec3& Direction, const glm::vec3& Color) :
                 LightSpaceTransform(LightSpaceTransform),

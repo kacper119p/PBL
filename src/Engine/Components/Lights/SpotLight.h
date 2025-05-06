@@ -21,6 +21,10 @@ namespace Engine
             float QuadraticFalloff;
             float Range;
 
+            ShaderData()
+            {
+            }
+
             ShaderData(const glm::vec3& Direction, const glm::vec3& Color, const glm::vec3& Position,
                        const float OuterAngle,
                        const float InnerAngle, const float LinearFalloff, const float QuadraticFalloff,

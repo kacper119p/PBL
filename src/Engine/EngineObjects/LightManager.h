@@ -16,21 +16,36 @@ namespace Engine
 {
     class LightManager
     {
-    private:
-        struct LightData
-        {
-            DirectionalLight::ShaderData DirectionalLight;
-            PointLight::ShaderData PointLights[2];
-            SpotLight::ShaderData SpotLights[2];
-        };
-
     public:
         static constexpr uint8_t MaxDirectionalLights = 1;
         static constexpr uint8_t MaxPointLights = 8;
-        static constexpr uint8_t MaxSpotLights = 8;
+        static constexpr uint8_t MaxSpotLights = 2;
         static constexpr uint8_t MaxDirectionalLightsShadowsSupported = 1;
         static constexpr uint8_t MaxPointLightsShadowsSupported = 2;
         static constexpr uint8_t MaxSpotLightsShadowsSupported = 2;
+
+    private:
+        struct alignas(16) LightDataBuffer
+        {
+            uint32_t DirectionalLightCount = 0;
+            uint32_t PointLightCount = 0;
+            uint32_t SpotlightCount = 0;
+            float _padding0{};
+            DirectionalLight::ShaderData DirectionalLight{};
+            PointLight::ShaderData PointLights[2]{};
+            SpotLight::ShaderData SpotLights[2]{};
+            PointLight::ShaderData PointLightsDynamic[MaxPointLights - 2]{};
+
+            LightDataBuffer()
+            {
+            }
+
+            [[nodiscard]] int64_t GetCurrentSize() const
+            {
+                return sizeof(LightDataBuffer)
+                       - (MaxPointLights - PointLightCount - 2) * sizeof(PointLight::ShaderData);
+            }
+        };
 
     private:
         class DirectionalLight* DirectionalLight = nullptr;
@@ -58,6 +73,7 @@ namespace Engine
         uint32_t SsaoTexture = 0;
 
         uint32_t LightBuffer;
+        LightDataBuffer LightBufferData;
 
         static LightManager* Instance;
 
@@ -146,7 +162,7 @@ namespace Engine
 
         void RenderShadowMaps(const CameraRenderData& RenderData);
 
-        void SetupLightsForRendering() const;
+        void SetupLightsForRendering();
 
     private:
         void InitializeDirectionalLightShadowMap();
@@ -160,6 +176,8 @@ namespace Engine
         void RenderSpotLightsShadowMaps();
 
         void InitializeLightBuffer();
+
+        void UpdateLightBuffer();
 
         void
         RenderOmniDirectionalShadowMap(const unsigned int& Framebuffer, const glm::vec3& LightPosition,

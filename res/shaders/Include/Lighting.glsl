@@ -49,6 +49,9 @@ layout (binding = 18) uniform sampler2D BrdfLUT;
 layout (binding = 19) uniform sampler2D SSAOMap;
 
 layout (std430, binding = 0) buffer Lights {
+    uint DirectionalLightCount;
+    uint PointLightCount;
+    uint SpotlightCount;
     directionalLight DirectionalLight;
     pointLight PointLights[2];
     spotLight SpotLights[2];
@@ -238,48 +241,60 @@ vec3 CalculateLight(vec3 BaseColor, float Metallic, float Roughness, vec3 Normal
     vec3 F0 = vec3(0.04);
     F0 = mix(F0, BaseColor, Metallic);
 
-    Light += CalculateLightInfluence(CalculateDirectionalLight(DirectionalLight, Position),
-                                     BaseColor,
-                                     Normal,
-                                     ViewDirection,
-                                     Roughness,
-                                     Metallic,
-                                     F0);
+    if (DirectionalLightCount > 0)
+    {
+        Light += CalculateLightInfluence(CalculateDirectionalLight(DirectionalLight, Position),
+                                         BaseColor,
+                                         Normal,
+                                         ViewDirection,
+                                         Roughness,
+                                         Metallic,
+                                         F0);
+    }
 
+    if (PointLightCount > 0)
+    {
+        Light += CalculateLightInfluence(CalculatePointLightShadowed(PointLights[0], PointLightShadowMap0, Position),
+                                         BaseColor,
+                                         Normal,
+                                         ViewDirection,
+                                         Roughness,
+                                         Metallic,
+                                         F0);
+    }
 
+    if (PointLightCount > 1)
+    {
+        Light += CalculateLightInfluence(CalculatePointLightShadowed(PointLights[1], PointLightShadowMap1, Position),
+                                         BaseColor,
+                                         Normal,
+                                         ViewDirection,
+                                         Roughness,
+                                         Metallic,
+                                         F0);
+    }
 
-    Light += CalculateLightInfluence(CalculatePointLightShadowed(PointLights[0], PointLightShadowMap0, Position),
-                                     BaseColor,
-                                     Normal,
-                                     ViewDirection,
-                                     Roughness,
-                                     Metallic,
-                                     F0);
+    if (SpotlightCount > 0)
+    {
+        Light += CalculateLightInfluence(CalculateSpotLightShadowed(SpotLights[0], SpotLightShadowMap0, Position),
+                                         BaseColor,
+                                         Normal,
+                                         ViewDirection,
+                                         Roughness,
+                                         Metallic,
+                                         F0);
+    }
 
-    Light += CalculateLightInfluence(CalculatePointLightShadowed(PointLights[1], PointLightShadowMap1, Position),
-                                     BaseColor,
-                                     Normal,
-                                     ViewDirection,
-                                     Roughness,
-                                     Metallic,
-                                     F0);
-
-    Light += CalculateLightInfluence(CalculateSpotLightShadowed(SpotLights[0], SpotLightShadowMap0, Position),
-                                     BaseColor,
-                                     Normal,
-                                     ViewDirection,
-                                     Roughness,
-                                     Metallic,
-                                     F0);
-
-    Light += CalculateLightInfluence(CalculateSpotLightShadowed(SpotLights[1], SpotLightShadowMap1, Position),
-                                     BaseColor,
-                                     Normal,
-                                     ViewDirection,
-                                     Roughness,
-                                     Metallic,
-                                     F0);
-
+    if (SpotlightCount > 1)
+    {
+        Light += CalculateLightInfluence(CalculateSpotLightShadowed(SpotLights[1], SpotLightShadowMap1, Position),
+                                         BaseColor,
+                                         Normal,
+                                         ViewDirection,
+                                         Roughness,
+                                         Metallic,
+                                         F0);
+    }
 
     vec3 Color = Light + CalculateEnvironmentInfluence(BaseColor,
                                                        Normal,

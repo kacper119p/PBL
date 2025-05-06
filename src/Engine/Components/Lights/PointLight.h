@@ -18,7 +18,12 @@ namespace Engine
             glm::vec3 Position;
             float QuadraticFalloff;
             float Range;
-            float __padding[3];
+            float _padding[3];
+
+            ShaderData()
+            {
+            }
+
 
             ShaderData(const glm::vec3& Color, const glm::vec3& Position, const float LinearFalloff,
                        const float QuadraticFalloff,
