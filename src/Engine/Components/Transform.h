@@ -54,14 +54,6 @@ namespace Engine
 
     public:
         /**
-         * @brief Returns position in local space.
-         */
-        [[nodiscard]] const glm::vec3& GetPosition() const
-        {
-            return Position;
-        }
-
-        /**
          * @brief Returns position in world space.
          */
         [[nodiscard]] glm::vec3 GetPositionWorldSpace()
@@ -70,12 +62,28 @@ namespace Engine
         }
 
         /**
-         * @brief Sets position in local space.
+        * @brief Returns position in world space.
+        */
+        [[nodiscard]] glm::vec3 GetPosition()
+        {
+            return GetPositionWorldSpace();
+        }
+
+        /**
+        * @brief Returns position in parent's space.
+        */
+        [[nodiscard]] const glm::vec3& GetPositionLocalSpace()
+        {
+            return Position;
+        }
+
+        /**
+         * @brief Sets position in world space.
          * @param InPosition New position.
          */
         void SetPosition(const glm::vec3& InPosition)
         {
-            Position = InPosition;
+            Position = glm::vec3(glm::inverse(Parent->GetLocalToWorldMatrix()) * glm::vec4(InPosition, 1.0f));
             MarkDirty();
         }
 
@@ -85,7 +93,17 @@ namespace Engine
          */
         void SetPositionWorldSpace(const glm::vec3& InPosition)
         {
-            Position = glm::vec3(glm::inverse(GetLocalToWorldMatrix()) * glm::vec4(InPosition, 1.0f));
+            Position = glm::vec3(glm::inverse(Parent->GetLocalToWorldMatrix()) * glm::vec4(InPosition, 1.0f));
+            MarkDirty();
+        }
+
+        /**
+         * @brief Sets position in parent's space.
+         * @param InPosition New position.
+         */
+        void SetPositionLocalSpace(const glm::vec3& InPosition)
+        {
+            Position = InPosition;
             MarkDirty();
         }
 
