@@ -29,6 +29,12 @@ void main() {
     Light = CalculateSpotLightShadowed(SpotLights[1], SpotLightShadowMap1, Position);
     LightColor += Light.Color * Light.Attenuation;
 
+    for (uint i = 0; i < PointLightsDynamic.length(); ++i)
+    {
+        Light = CalculatePointLight(PointLightsDynamic[i], Position);
+        LightColor += Light.Color * Light.Attenuation;
+    }
+
     LightColor *= Color.rgb;
 
     vec3 ViewDirection = normalize(CameraPosition - Position);

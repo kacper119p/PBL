@@ -55,6 +55,7 @@ layout (std430, binding = 0) buffer Lights {
     directionalLight DirectionalLight;
     pointLight PointLights[2];
     spotLight SpotLights[2];
+    pointLight PointLightsDynamic[];
 };
 
 const float SHADOW_BIAS = 0.00005;
@@ -288,6 +289,17 @@ vec3 CalculateLight(vec3 BaseColor, float Metallic, float Roughness, vec3 Normal
     if (SpotlightCount > 1)
     {
         Light += CalculateLightInfluence(CalculateSpotLightShadowed(SpotLights[1], SpotLightShadowMap1, Position),
+                                         BaseColor,
+                                         Normal,
+                                         ViewDirection,
+                                         Roughness,
+                                         Metallic,
+                                         F0);
+    }
+
+    for (uint i = 0; i < PointLightsDynamic.length(); ++i)
+    {
+        Light += CalculateLightInfluence(CalculatePointLight(PointLightsDynamic[i], Position),
                                          BaseColor,
                                          Normal,
                                          ViewDirection,
