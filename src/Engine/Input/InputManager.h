@@ -3,7 +3,7 @@
 #include <glm/glm.hpp>  
 #include <array> 
 
-class InputManager :  
+class InputManager  
 {  
 public:  
    static InputManager& GetInstance();  

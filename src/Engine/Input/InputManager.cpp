@@ -12,7 +12,6 @@ InputManager::InputManager() :
     m_Window(nullptr), m_Keys{}, m_MouseButtons{}, m_MousePosition(0.0f), m_LastMousePosition(0.0f), m_MouseDelta(0.0f),
     m_ScrollOffset(0.0f), m_GamepadButtons{}, m_GamepadAxes{}
 {
-    Engine::UpdateManager::GetInstance()->RegisterComponent(this);
 }
 
 void InputManager::Init(GLFWwindow* window) {
