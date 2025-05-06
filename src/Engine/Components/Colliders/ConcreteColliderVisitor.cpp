@@ -793,6 +793,8 @@ namespace Engine
            case BOX:
            {
                auto* boxCollider = dynamic_cast<BoxCollider*>(this->currentCollider);
+               if (box.GetOwner() == boxCollider->GetOwner())
+                   return; // Ignore self-collision
                if (boxCollider)
                {
                    result = CheckBoxBoxCollision(box, *boxCollider);
@@ -823,7 +825,8 @@ namespace Engine
                    //    spdlog::info("Box-Box collision detected");
                    }
                    // TODO: emit collision event
-                   // TODO: fix other cases and resolvers to work like this case
+                   // TODO: fix other cases and resolvers to work like this case 
+                   // !!! e importanto ignoranto self colisianto crocodillo bombardillo !!!
                }
                break;
            }
