@@ -144,6 +144,46 @@ namespace Engine
         }
 
         /**
+         * @brief Transforms position from world space to local space.
+         * @param Position Position in world space.
+         * @return Position in local space.
+         */
+        [[nodiscard]] glm::vec3 TransformPositionWorldToLocal(const glm::vec3& Position)
+        {
+            return glm::vec3(glm::inverse(GetLocalToWorldMatrix()) * glm::vec4(Position, 1.0f));
+        }
+
+        /**
+         * @brief Transforms position from local space to world space.
+         * @param Position Position in local space.
+         * @return Position in world space.
+         */
+        [[nodiscard]] glm::vec3 TransformPositionLocalToWorld(const glm::vec3& Position)
+        {
+            return glm::vec3(GetLocalToWorldMatrix() * glm::vec4(Position, 1.0f));
+        }
+
+        /**
+         * @brief Transforms direction from world space to local space.
+         * @param Direction Direction in world space.
+         * @return Direction in local space.
+         */
+        [[nodiscard]] glm::vec3 TransformDirectionWorldToLocal(const glm::vec3& Direction)
+        {
+            return glm::normalize(glm::vec3(glm::inverse(GetLocalToWorldMatrix()) * glm::vec4(Direction, 0.0f)));
+        }
+
+        /**
+         * @brief Transforms direction from local space to world space.
+         * @param Direction Direction in local space.
+         * @return Direction in world space.
+         */
+        [[nodiscard]] glm::vec3 TransformDirectionLocalToWorld(const glm::vec3& Direction)
+        {
+            return glm::normalize(glm::vec3(GetLocalToWorldMatrix() * glm::vec4(Direction, 0.0f)));
+        }
+
+        /**
          * @brief Returns Entity owning this transform
          */
         [[nodiscard]] Entity* GetOwner() const
