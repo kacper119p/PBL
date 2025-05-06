@@ -26,7 +26,7 @@ namespace Engine
         glm::vec3 Scale = glm::vec3(1.0f, 1.0f, 1.0f);
 
         glm::mat4 LocalMatrix = glm::mat4(1.0f);
-        glm::mat4 LocalToWorldMatrix = glm::mat4(1.0f);;
+        glm::mat4 LocalToWorldMatrix = glm::mat4(1.0f);
         bool IsDirty = true;
 
     private:
@@ -72,7 +72,7 @@ namespace Engine
         /**
         * @brief Returns position in parent's space.
         */
-        [[nodiscard]] const glm::vec3& GetPositionLocalSpace()
+        [[nodiscard]] const glm::vec3& GetPositionLocalSpace() const
         {
             return Position;
         }
