@@ -33,6 +33,9 @@
 #include "imgui_internal.h"
 #include "Engine/EngineObjects/GizmoManager.h"
 #endif
+#include "Input/InputManager.h"
+
+#include <iostream>
 
 namespace SceneBuilding = Scene;
 
@@ -91,8 +94,11 @@ namespace Engine
             lastFrame = currentFrame;
 
             // Process I/O operations here
+            #if EDITOR
             HandleInput(deltaTime);
-
+            #else
+            InputManager::GetInstance().Update();
+            #endif
             // Update game objects' state here
             UpdateManager::GetInstance()->Update(deltaTime);
 
@@ -105,6 +111,9 @@ namespace Engine
 
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
             AudioListener->UpdateListener();
+
+        
+
 
 #if EDITOR
             glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
@@ -207,6 +216,16 @@ namespace Engine
             spdlog::error("Platform unsupported: GLAD_GL_ARB_bindless_texture.");
             return false;
         }
+        if (!GLAD_GL_EXT_texture_compression_s3tc)
+        {
+            spdlog::error("Platform unsupported: GLAD_GL_EXT_texture_compression_s3tc.");
+            return false;
+        }
+        if (!GLAD_GL_ARB_texture_compression_bptc)
+        {
+            spdlog::error("Platform unsupported: GLAD_GL_ARB_texture_compression_bptc.");
+            return false;
+        }
 
         glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
         glEnable(GL_MULTISAMPLE);
@@ -235,6 +254,11 @@ namespace Engine
 
         AudioListener = new class AudioListener(*Camera);
         spdlog::info("Sounds loaded.");
+
+        //input manager init
+        #if !EDITOR
+        InputManager::GetInstance().Init(Window);
+        #endif
 
         return true;
     }

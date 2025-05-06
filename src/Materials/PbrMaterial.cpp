@@ -1,5 +1,6 @@
 #include "PbrMaterial.h"
 
+#include "Engine/EngineObjects/LightManager.h"
 #include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
 
@@ -69,6 +70,8 @@ namespace Materials
     void PbrMaterial::Use() const
     {
         GetMainPass().Use();
+        Engine::LightManager::GetInstance()->SetupLightsForRendering(MainPass);
+
         BaseColor.Bind();
         EmissiveColor.Bind();
         Roughness.Bind();
@@ -125,7 +128,7 @@ namespace Materials
         {
             for (const auto& entry : std::filesystem::recursive_directory_iterator(texturePath))
             {
-                if (entry.is_regular_file() && entry.path().extension() == ".png")
+                if (entry.is_regular_file() && entry.path().extension() == ".dds")
                     availableTextures.emplace_back(entry.path().string());
             }
             scanned = true;
@@ -153,7 +156,7 @@ namespace Materials
             if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
             {
                 const char* droppedPath = static_cast<const char*>(payload->Data);
-                if (std::filesystem::path(droppedPath).extension() == ".png")
+                if (std::filesystem::path(droppedPath).extension() == ".dds")
                 {
                     BaseMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                 }
@@ -192,7 +195,7 @@ namespace Materials
             if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
             {
                 const char* droppedPath = static_cast<const char*>(payload->Data);
-                if (std::filesystem::path(droppedPath).extension() == ".png")
+                if (std::filesystem::path(droppedPath).extension() == ".dds")
                 {
                     RoughnessMetallicMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                 }
@@ -232,7 +235,7 @@ namespace Materials
             if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
             {
                 const char* droppedPath = static_cast<const char*>(payload->Data);
-                if (std::filesystem::path(droppedPath).extension() == ".png")
+                if (std::filesystem::path(droppedPath).extension() == ".dds")
                 {
                     NormalMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                 }
@@ -269,7 +272,7 @@ namespace Materials
             if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
             {
                 const char* droppedPath = static_cast<const char*>(payload->Data);
-                if (std::filesystem::path(droppedPath).extension() == ".png")
+                if (std::filesystem::path(droppedPath).extension() == ".dds")
                 {
                     EmissiveMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                 }

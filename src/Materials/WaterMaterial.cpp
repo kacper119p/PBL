@@ -7,6 +7,8 @@
 #include "imgui.h"
 #include <filesystem>
 
+#include "Engine/EngineObjects/LightManager.h"
+
 namespace Materials
 {
     Shaders::Shader WaterMaterial::DepthPass;
@@ -67,6 +69,8 @@ namespace Materials
     void WaterMaterial::Use() const
     {
         GetMainPass().Use();
+        Engine::LightManager::GetInstance()->SetupLightsForRendering(MainPass);
+
         Color.Bind();
         Roughness.Bind();
         Metallic.Bind();
@@ -104,7 +108,7 @@ namespace Materials
             {
                 for (const auto& entry : std::filesystem::recursive_directory_iterator(texturePath))
                 {
-                    if (entry.is_regular_file() && entry.path().extension() == ".png")
+                    if (entry.is_regular_file() && entry.path().extension() == ".dds")
                         availableTextures.emplace_back(entry.path().string());
                 }
                 scanned = true;
@@ -127,7 +131,7 @@ namespace Materials
                 if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
                 {
                     const char* droppedPath = static_cast<const char*>(payload->Data);
-                    if (std::filesystem::path(droppedPath).extension() == ".png")
+                    if (std::filesystem::path(droppedPath).extension() == ".dds")
                     {
                         NormalMap0.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                     }
@@ -164,7 +168,7 @@ namespace Materials
                 if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
                 {
                     const char* droppedPath = static_cast<const char*>(payload->Data);
-                    if (std::filesystem::path(droppedPath).extension() == ".png")
+                    if (std::filesystem::path(droppedPath).extension() == ".dds")
                     {
                         NormalMap1.SetValue(Engine::TextureManager::GetTexture(droppedPath));
                     }

@@ -36,8 +36,6 @@ namespace Engine
             if (frustum.IsBoxVisible(Model->GetMesh(i)->GetAabBox(), objectToWorldMatrix))
             {
                 Culled &= false;
-
-                Material->UseDepthPass();
                 SetupMatrices(RenderData, Material->GetDepthPass());
                 Model->GetMesh(i)->Draw();
             }
@@ -54,9 +52,6 @@ namespace Engine
         {
             return;
         }
-        Material->Use();
-
-        LightManager::GetInstance()->SetupLightsForRendering(Material->GetMainPass());
 
         SetupMatrices(RenderData, Material->GetMainPass());
         Draw();
@@ -66,8 +61,6 @@ namespace Engine
     {
         if (Material != nullptr)
         {
-            Material->UseDirectionalShadows();
-
             SetupMatrices(RenderData, Material->GetDirectionalShadowPass());
             Draw();
         }
@@ -79,9 +72,6 @@ namespace Engine
     {
         if (Material != nullptr)
         {
-            Material->UsePointSpotShadows();
-
-
             Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[0]", SpaceTransformMatrices[0]);
             Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[1]", SpaceTransformMatrices[1]);
             Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[2]", SpaceTransformMatrices[2]);
