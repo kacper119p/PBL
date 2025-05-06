@@ -1,3 +1,4 @@
+#include "Serialization/SerializationUtility.h"
 #if EDITOR
 #include "EditorGUI.h"
 #include "imgui.h"
@@ -12,6 +13,8 @@
 #include "Engine/EngineObjects/Scene/SceneManager.h"
 #include <filesystem>
 #include <iostream>
+#include <random>
+#include "spdlog/spdlog.h"
 namespace fs = std::filesystem;
 
 void Engine::EditorGUI::Init()
@@ -27,6 +30,7 @@ void Engine::EditorGUI::Render(uint64_t Frame, Scene* scene)
     RenderInspector(Frame, scene);
     AudioManager::GetInstance().RenderGlobalVolumeImGui();
     DrawSelectedEntitysComponents();
+    DrawGenerativeSystem(scene);
     //m_TopBar.Draw();
 
 }
@@ -108,7 +112,7 @@ void Engine::EditorGUI::RenderInspector(uint64_t Frame, Scene* scene)
             if (!std::string(editableSceneName).empty())
             {
                 fs::path newScenePath = fs::path("./res/scenes");
-                SceneManager::SaveScene(newScenePath.string() + "/"+ editableSceneName, scene);
+                SceneManager::SaveScene(newScenePath.string() + "/" + editableSceneName, scene);
             }
         }
 
@@ -189,6 +193,184 @@ void Engine::EditorGUI::DrawSelectedEntitysComponents()
     ImGui::End();
 }
 
+void Engine::EditorGUI::DrawGenerativeSystem(Scene* scene)
+{
+    ImGui::Begin("Generative System");
+
+    static int trashCount = 10;
+    static float trashSpacing = 1.0f;
+    static std::vector<float> trashPercentages;
+
+    static int bloodCount = 5;
+    static float bloodSpacing = 2.0f;
+    static float bloodSize = 1.0f;
+
+    static std::vector<std::pair<Models::Model*, Materials::Material*>> trash;
+    static std::vector<std::pair<Models::Model*, Materials::Material*>> stains;
+
+    float totalPercentage = 0.0f;
+
+    DrawModelDropZoneAndList(trash, modelManager.get(), materialManager.get(), "Trash");
+
+    ImGui::SeparatorText("Trash Settings");
+    ImGui::SliderInt("Trash Count", &trashCount, 0, 100);
+    ImGui::SliderFloat("Trash Spacingy", &trashSpacing, 0.1f, 20.0f);
+    if (trash.size() > 0)
+    {
+        if (trashPercentages.size() != trash.size())
+            trashPercentages = std::vector<float>(trash.size(), 100.0f / trash.size());
+
+        for (int i = 0; i < trash.size(); ++i)
+        {
+            std::string fullPath = trash.at(i).first->GetPath();
+            std::filesystem::path fsPath(fullPath);
+            std::string filename = fsPath.filename().string() + " Percentage";
+            ImGui::InputFloat(filename.c_str(), &trashPercentages[i], 0.0f, 100.0f);
+            totalPercentage += trashPercentages[i];
+        }
+
+        if (std::ceil(totalPercentage) != 100.0f)
+            ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 0, 0, 255));
+
+        ImGui::Text("Total: %.1f%%", totalPercentage);
+
+        if (std::ceil(totalPercentage) != 100.0f)
+            ImGui::PopStyleColor();
+    }
+
+    DrawModelDropZoneAndList(stains, modelManager.get(), materialManager.get(), "Stains");
+
+    ImGui::SeparatorText("Blood Settings");
+    ImGui::SliderInt("Blood Count", &bloodCount, 0, 50);
+    ImGui::SliderFloat("Blood Spacing", &bloodSpacing, 0.1f, 20.0f);
+    ImGui::SliderFloat("Blood Size", &bloodSize, 0.1f, 5.0f);
+
+    if (ImGui::Button("Generate Trash"))
+    {
+        LastGeneratedEntity = nullptr;
+
+        if (!trash.empty() && std::ceil(totalPercentage) == 100.0f)
+        {
+            m_GenerativeSystem.GenerateTrash(scene, trash, trashCount, trashSpacing, trashPercentages,
+                                             LastGeneratedEntity);
+        }
+    }
+    if (ImGui::Button("Generate Stains"))
+    {
+        LastGeneratedEntity = nullptr;
+
+        if (!stains.empty())
+        {
+            m_GenerativeSystem.GenerateBlood(scene, stains, bloodCount, bloodSize, bloodSpacing, LastGeneratedEntity);
+        }
+    }
+
+    if (ImGui::Button("Clear Last Generated"))
+    {
+        m_GenerativeSystem.ClearGeneratedEntities(LastGeneratedEntity);
+    }
+
+    ImGui::End();
+}
+
+void Engine::EditorGUI::DrawModelDropZoneAndList(
+        std::vector<std::pair<Models::Model*, Materials::Material*>>& modelsAndMaterials,
+        Models::ModelManager* modelManager,
+        Materials::MaterialManager* materialManager,
+        const char* uniqueId)
+{
+    static Models::Model* draggedModel = nullptr;
+    static Materials::Material* draggedMaterial = nullptr;
+
+    ImGui::SeparatorText("Drag & Drop Model and Material Here");
+
+    std::string modelButtonLabel = "Drop Model Here##" + std::string(uniqueId);
+    ImGui::Button(modelButtonLabel.c_str(), ImVec2(ImGui::GetContentRegionAvail().x, 50));
+
+    if (ImGui::BeginDragDropTarget())
+    {
+        if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
+        {
+            std::string fullPath(static_cast<const char*>(payload->Data));
+            std::filesystem::path fsPath(fullPath);
+            std::string filename = fsPath.filename().string();
+
+            if (filename.ends_with(".fbx") || filename.ends_with(".obj") || filename.ends_with(".gltf"))
+            {
+                draggedModel = modelManager->GetModel(fullPath.c_str());
+                if (draggedModel)
+                {
+                    spdlog::info("Model added: {}", filename);
+                }
+            }
+        }
+        ImGui::EndDragDropTarget();
+    }
+
+    std::string materialButtonLabel = "Drop Material Here##" + std::string(uniqueId);
+    ImGui::Button(materialButtonLabel.c_str(), ImVec2(ImGui::GetContentRegionAvail().x, 50));
+
+    if (ImGui::BeginDragDropTarget())
+    {
+        if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
+        {
+            std::string fullPath(static_cast<const char*>(payload->Data));
+            std::filesystem::path fsPath(fullPath);
+            std::string filename = fsPath.filename().string();
+
+            if (filename.ends_with(".mat"))
+            {
+                draggedMaterial = materialManager->GetMaterial(fullPath.c_str());
+                if (draggedMaterial)
+                {
+                    spdlog::info("Material added: {}", filename);
+                }
+            }
+        }
+        ImGui::EndDragDropTarget();
+    }
+
+    if (draggedModel && draggedMaterial)
+    {
+        modelsAndMaterials.push_back(std::make_pair(draggedModel, draggedMaterial));
+        spdlog::info("Model and Material successfully added to the list.");
+
+        draggedModel = nullptr;
+        draggedMaterial = nullptr;
+    }
+
+    ImGui::SeparatorText("Prefab List");
+    for (int i = 0; i < modelsAndMaterials.size(); ++i)
+    {
+        ImGui::PushID(i);
+
+        std::string modelPath = modelsAndMaterials[i].first->GetPath();
+        std::filesystem::path fsPath(modelPath);
+        std::string modelFilename = fsPath.filename().string();
+
+        char itemBuffer[256];
+        strncpy(itemBuffer, modelFilename.c_str(), sizeof(itemBuffer));
+        itemBuffer[sizeof(itemBuffer) - 1] = '\0';
+
+        ImGui::InputText("##ModelPath", itemBuffer, sizeof(itemBuffer), ImGuiInputTextFlags_ReadOnly);
+
+        std::string materialName = modelsAndMaterials[i].second
+                                       ? modelsAndMaterials[i].second->GetType()
+                                       : "No Material";
+        ImGui::Text("Material: %s", materialName.c_str());
+
+        ImGui::SameLine();
+        if (ImGui::Button("Remove"))
+        {
+            modelsAndMaterials.erase(modelsAndMaterials.begin() + i);
+            ImGui::PopID();
+            break;
+        }
+
+        ImGui::PopID();
+    }
+}
+
 void Engine::EditorGUI::SetupDockspace()
 {
     ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_PassthruCentralNode;
@@ -232,6 +414,7 @@ void Engine::EditorGUI::SetupDockspace()
         ImGui::DockBuilderDockWindow("Hierarchy", dock_left);
         ImGui::DockBuilderDockWindow("Engine Properties", dock_right_top);
         ImGui::DockBuilderDockWindow("Components", dock_right_top);
+        ImGui::DockBuilderDockWindow("Generative System", dock_right_top);
         ImGui::DockBuilderDockWindow("Assets", dock_bottom);
         ImGui::DockBuilderDockWindow("Scene", dock_main);
 

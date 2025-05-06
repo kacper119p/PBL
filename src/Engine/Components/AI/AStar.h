@@ -78,17 +78,10 @@ namespace Engine
          */
         [[nodiscard]] int GetNodeIdFromPosition(const glm::vec3& Position) const;
 
-        /**
-         * @brief Builds and assigns the navigation mesh from the given root entity.
-         * @param Root Scene root entity.
-         */
-        void BakeNavMesh(Entity* Root);
-
     private:
         SERIALIZATION_EXPORT_CLASS(AStar)
 
         const Graph* NavGraph = nullptr; ///< Pointer to the navigation graph.
-        float Spacing = 1.0f; ///< Spacing used when generating the navmesh.
 
         glm::vec2 ObjectPosition{}; ///< Current 2D position of the controlled object.
         glm::vec2 CurrentDirection = {1.0f, 0.0f}; ///< Current direction of movement.

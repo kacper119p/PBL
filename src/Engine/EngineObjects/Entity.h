@@ -63,6 +63,14 @@ namespace Engine
         }
 
         /**
+         * @brief Sets scene for this entity.
+         */
+        void SetScene(class Scene* Scene)
+        {
+            this->Scene = Scene;
+        }
+
+        /**
          * @brief Adds a new component to this entity.
          * @tparam T Component's class.
          */
