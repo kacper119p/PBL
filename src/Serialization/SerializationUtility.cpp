@@ -10,7 +10,7 @@
 #include "Models/Model.h"
 #include "Shaders/ShaderManager.h"
 #include "Shaders/ShaderSourceFiles.h"
-#include <iostream>
+#include "Serialization/SerializedObject.h"
 
 namespace
 {
