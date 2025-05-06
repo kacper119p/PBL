@@ -13,7 +13,7 @@
 #include <cmath>
 // TODO: remove when spatial fully implemented
 #include "Engine/EngineObjects/Scene/Scene.h"
-
+#include "Engine/Components/Physics/RigidBody.h"
 namespace Engine
 {
 
@@ -798,11 +798,18 @@ namespace Engine
                    result = CheckBoxBoxCollision(box, *boxCollider);
                    
                    
-                   if (result.hasCollision && !currentCollider->isColliding)
+                   if (result.hasCollision)
                    {
                        box.isColliding = boxCollider->isColliding = result.hasCollision;
                        glm::vec3 separation = GetSeparationBoxBox(box, *boxCollider);
-                       boxCollider->GetTransform()->SetPosition(boxCollider->GetTransform()->GetPosition() + separation);
+                       
+                       if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
+                       {
+                           currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
+                                   result.collisionNormal, result.collisionPoint, 0.001f);
+                       }
+                       
+
 
                    //    // TODO: remove or research usefulness of this
                    //    box.shouldMove = false;

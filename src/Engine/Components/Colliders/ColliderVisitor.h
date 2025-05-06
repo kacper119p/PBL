@@ -10,6 +10,7 @@ namespace Engine
     class CapsuleCollider;
     class MeshCollider;
     class SpatialPartitioning;
+    class RigidBody;
 
     struct CollisionResult
     {

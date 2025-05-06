@@ -1,4 +1,5 @@
 #include "Rigidbody.h"
+#include "../Colliders/Collider.h"
 
 namespace Engine
 {
@@ -6,7 +7,7 @@ namespace Engine
     RigidBody::RigidBody() :
         mass(1.0f), inverseMass(1.0f), linearVelocity(0.0f), angularVelocity(0.0f),
         orientation(glm::quat(1.0f, 0.0f, 0.0f, 0.0f)), accumulatedForce(0.0f), accumulatedTorque(0.0f),
-        staticFriction(0.0f), dynamicFriction(0.0f), restitution(0.0f), linearDamping(0.001f), angularDamping(0.001f),
+        staticFriction(0.0f), dynamicFriction(0.0f), restitution(0.5f), linearDamping(0.001f), angularDamping(0.001f),
         constraints(Constraints::None)
     {
         UpdateManager::GetInstance()->RegisterComponent(this);
@@ -42,6 +43,29 @@ namespace Engine
         return *this;
     }
 
+    void RigidBody::OnCollision(const glm::vec3& collisionNormal, const glm::vec3& collisionPoint,
+                                float penetrationDepth)
+    {
+        float velocityAlongNormal = glm::dot(linearVelocity, collisionNormal);
+
+        if (velocityAlongNormal > 0.0f)
+            return;
+
+        float restitutionFactor = restitution;
+
+        float impulseMagnitude = -(1.0f + restitutionFactor) * velocityAlongNormal;
+        impulseMagnitude /= inverseMass;
+
+        glm::vec3 impulse = impulseMagnitude * collisionNormal;
+
+        linearVelocity += impulse * inverseMass;
+
+        const float correctionFactor = 0.8f;
+        glm::vec3 correction = correctionFactor * penetrationDepth * collisionNormal;
+        GetOwner()->GetTransform()->SetPosition(GetOwner()->GetTransform()->GetPosition() + correction);
+    }
+
+
     void RigidBody::SetConstraints(Constraints newConstraints) { constraints = newConstraints; }
 
     void RigidBody::AddConstraint(Constraints constraint) { constraints |= constraint; }
@@ -53,15 +77,20 @@ namespace Engine
         return (constraints & constraint) != Constraints::None;
     }
 
+    void RigidBody::Start()
+    {
+    }
 
     void RigidBody::Update(float deltaTime)
     {
+        // TODO: remove when scriptable fully implemented
         if (timeSinceLastForce >= 10.0f)
         {
-            AddForce(glm::vec3(-.2f, 0.0f, 0.0f), ForceType::Impulse);
+            AddForce(glm::vec3(-.5f, 0.0f, 0.0f), ForceType::Impulse);
             timeSinceLastForce = 0.0f;
         }
         timeSinceLastForce += deltaTime;
+        // TODO END
         if (inverseMass == 0.0f)
             return;
 

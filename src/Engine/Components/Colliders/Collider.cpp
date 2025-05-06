@@ -10,7 +10,6 @@ namespace Engine
     Collider::Collider() : isTrigger(false), transform(nullptr), spatial(&SpatialPartitioning::GetInstance())
     {
         this->colliderVisitor = ConcreteColliderVisitor();
-        this->spatial = nullptr;
         isColliding = false; // TODO: to be removed, just for debug purposes
     }
 
@@ -20,7 +19,6 @@ namespace Engine
     {
         this->colliderVisitor = ConcreteColliderVisitor(this);
         colliderType = BOX; // Default type, can be changed in derived classes
-        
         isColliding = false; // TODO: to be removed, just for debug purposes
     }
 

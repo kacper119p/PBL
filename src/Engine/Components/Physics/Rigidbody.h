@@ -11,7 +11,7 @@
 
 namespace Engine
 {
-
+    class Collider;
     class RigidBody : public Component, public IUpdateable
     {
     public:
@@ -36,6 +36,7 @@ namespace Engine
 
     private:
 
+        // TODO: remove when scriptable fully implemented
         float timeSinceLastForce = 0.0f;
 
         float mass;
@@ -61,6 +62,8 @@ namespace Engine
 
         RigidBody& operator=(const RigidBody& other);
         
+        void OnCollision(const glm::vec3& collisionNormal, const glm::vec3& collisionPoint, float penetrationDepth);
+
         void AddForce(const glm::vec3& force, ForceType type = ForceType::Force);
         void AddTorque(const glm::vec3& torque);
 
@@ -78,6 +81,7 @@ namespace Engine
         void RemoveConstraint(Constraints constraint);
         bool HasConstraint(Constraints constraint) const;
 
+        void Start() override;
         void Update(float deltaTime) override;
 
         const glm::vec3& GetLinearVelocity() const;
