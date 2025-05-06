@@ -25,7 +25,8 @@
 #include "Engine/Components/Colliders/SphereCollider.h"
 #include "Engine/Components/Colliders/CapsuleCollider.h"
 #include "Engine/Components/Colliders/SpatialPartitioning.h"
-#include "Engine/Components//Physics/RigidBody.h"
+#include "Engine/Components/Physics/RigidBody.h"
+#include "Engine/Components/BaseMovement/MovementComponent.h"
 #include "Engine/EngineObjects/Scene/SceneManager.h"
 #include "Engine/Textures/Texture.h"
 #include "Engine/Textures/TextureManager.h"
@@ -62,12 +63,13 @@ namespace Scene
 
         Engine::Entity* secondBoxEntity = Scene->SpawnEntity(nullptr);
         Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
-        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(155.0f, 7.0f, 10.0f));
+        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(5.0f, 7.0f, 10.0f));
 
-        boxCollider->SetStatic(true);
+        boxCollider->SetStatic(false);
         secondBoxCollider->SetStatic(false);
 
-        secondBoxCollider->shouldMove = true;
+        secondBoxEntity->AddComponent<Engine::MovementComponent>();
+        //secondBoxCollider->shouldMove = true;
         
         //Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();
 

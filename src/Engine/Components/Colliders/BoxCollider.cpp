@@ -13,14 +13,17 @@ namespace Engine
     BoxCollider::BoxCollider() : _width(1.0f), _height(1.0f), _depth(1.0f) 
     { 
         this->colliderType = BOX; 
+        SetMaterial(Materials::MaterialManager::GetMaterial("res/materials/SampleScene/Default.mat"));
         RenderingManager::GetInstance()->RegisterRenderer(this);
         UpdateManager::GetInstance()->RegisterComponent(this);
+
     }
 
     BoxCollider::BoxCollider(Transform* transform, bool isTrigger, float width, float height, float depth) :
         Collider(transform, isTrigger), _width(width), _height(height), _depth(depth)
     {
         this->colliderType = BOX;
+        SetMaterial(Materials::MaterialManager::GetMaterial("res/materials/SampleScene/Default.mat"));
         RenderingManager::GetInstance()->RegisterRenderer(this);
         UpdateManager::GetInstance()->RegisterComponent(this);
     }
@@ -169,6 +172,7 @@ namespace Engine
 
     void BoxCollider::Start()
     { 
+        
        isColliding = false;
        transform = Component::GetOwner()->GetTransform();
        spdlog::info("BoxCollider start");
