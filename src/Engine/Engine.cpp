@@ -94,8 +94,11 @@ namespace Engine
             lastFrame = currentFrame;
 
             // Process I/O operations here
+            #if EDITOR
             HandleInput(deltaTime);
+            #else
             InputManager::GetInstance().Update();
+            #endif
             // Update game objects' state here
             UpdateManager::GetInstance()->Update(deltaTime);
 
@@ -108,8 +111,6 @@ namespace Engine
 
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
             AudioListener->UpdateListener();
-
-           
 
         
 
@@ -255,7 +256,9 @@ namespace Engine
         spdlog::info("Sounds loaded.");
 
         //input manager init
+        #if !EDITOR
         InputManager::GetInstance().Init(Window);
+        #endif
 
         return true;
     }
