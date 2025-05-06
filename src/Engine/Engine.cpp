@@ -95,7 +95,7 @@ namespace Engine
 
             // Process I/O operations here
             HandleInput(deltaTime);
-
+            InputManager::GetInstance().Update();
             // Update game objects' state here
             UpdateManager::GetInstance()->Update(deltaTime);
 
@@ -109,9 +109,7 @@ namespace Engine
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
             AudioListener->UpdateListener();
 
-            //debug 
-            if (InputManager::GetInstance().IsGamepadButtonPressed(GLFW_GAMEPAD_BUTTON_A))
-                std::cout << "Gamepad A button pressed\n";
+           
 
         
 

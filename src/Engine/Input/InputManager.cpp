@@ -23,7 +23,7 @@ void InputManager::Init(GLFWwindow* window) {
     glfwSetScrollCallback(window, ScrollCallback);
 }
 
-void InputManager::Update(float DeltaTime) 
+void InputManager::Update() 
 {
     m_MouseDelta = m_MousePosition - m_LastMousePosition;
     m_LastMousePosition = m_MousePosition;

@@ -1,17 +1,15 @@
 #pragma once  
 #include <GLFW/glfw3.h>  
 #include <glm/glm.hpp>  
-#include <array>  
-#include "Engine/Components/Interfaces/IUpdateable.h"  
-#include "Engine/EngineObjects/UpdateManager.h"
+#include <array> 
 
-class InputManager : public Engine::IUpdateable  
+class InputManager :  
 {  
 public:  
    static InputManager& GetInstance();  
 
    void Init(GLFWwindow* window);  
-   void Update(float DeltaTime) override;  
+   void Update();  
 
    bool IsKeyPressed(int key) const;  
    bool IsMouseButtonPressed(int button) const;  
