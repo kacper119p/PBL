@@ -18,8 +18,8 @@ namespace Engine
     {
     private:
         AudioManager& AudioManager; ///< Reference to the global AudioManager instance.
-        ma_sound* SelectedSound; ///< Currently selected sound to control for this source.
-        Entity* SelectedEntity; ///< Entity that keeps the AudioSource
+        std::string SelectedSoundId; ///< ID of the currently selected sound.
+        std::shared_ptr<ma_sound> SoundInstance; ///< Instance of the sound currently playing on this entity.
 
         float SoundVolume = 1.0f; ///< Volume level of the selected sound (0.0 to 1.0).
         bool Looping = false; ///< Whether the selected sound should loop.
@@ -39,20 +39,17 @@ namespace Engine
         AudioSource();
 
         /**
-         * @brief Renders the ImGui interface for editing this audio source.
+         * @brief Destructor for cleaning up any resources used by the AudioSource component.
          */
-        void RenderAudioSourceImGui();
-
-        /**
-         * @brief Marks this audio source's entity as selected or not.
-         *
-         * @param Entity Pointer to the currently selected entity, or nullptr to deselect.
-         */
-        void SelectEntityForAudioControl(Entity* Entity);
+        ~AudioSource();
 
         /**
          * @brief Resets settings of sounds in the ImGui interface to default.
          */
         void ResetAudioSettings();
+
+#if EDITOR
+        void DrawImGui() override;
+#endif
     };
 }

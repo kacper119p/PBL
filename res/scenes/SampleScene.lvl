@@ -1151,11 +1151,10 @@
             ]
         },
         {
-            "type": "ModelRenderer",
+            "type": "SkyboxRenderer",
             "id": "{add043cf-85b1-49f5-b11c-af0c6e07e65b}\u0000",
             "owner": "{481edaf4-f8d4-498d-b8a6-4f2f1edcb731}\u0000",
-            "Material": "./res/materials/SampleScene/Skybox.mat",
-            "Model": "./res/models/SkySphere.fbx"
+            "Material": "./res/materials/SampleScene/Skybox.mat"
         },
         {
             "type": "Entity",
@@ -1248,11 +1247,7 @@
             },
             "Settings.MinLife": 10.0,
             "Settings.MaxLife": 15.0,
-            "RenderShader": {
-                "vertex": "./res/shaders/Particles/Particles.vert",
-                "geometry": "",
-                "fragment": "./res/shaders/Particles/Particle.frag"
-            },
+            "Material": "./res/materials/SampleScene/Particles.mat",
             "SpawnShader": "./res/shaders/Particles/ParticlesSpawn.comp",
             "UpdateShader": "./res/shaders/Particles/ParticlesUpdate.comp"
         },

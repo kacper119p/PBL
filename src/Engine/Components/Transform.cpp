@@ -109,6 +109,61 @@ namespace Engine
         IsDirty = false;
     }
 
+#if EDITOR
+    void Transform::DrawImGui()
+    {
+        if (ImGui::CollapsingHeader("Transform", ImGuiTreeNodeFlags_DefaultOpen))
+        {
+            // Editable Position
+            if (ImGui::DragFloat3("Position", glm::value_ptr(Position), 0.1f))
+            {
+                MarkDirty();
+            }
+
+            // Editable Euler Angles
+            if (ImGui::DragFloat3("Rotation (Euler)", glm::value_ptr(EulerAngles), 0.5f))
+            {
+                MarkDirty();
+            }
+
+            // Editable Scale
+            if (ImGui::DragFloat3("Scale", glm::value_ptr(Scale), 0.1f))
+            {
+                MarkDirty();
+            }
+
+            // Update matrices if dirty
+            if (IsDirty)
+            {
+                UpdateMatrices();
+            }
+
+            // Display Local Matrix
+            if (ImGui::TreeNode("Local Matrix"))
+            {
+                const glm::mat4& local = GetLocalMatrix();
+                for (int row = 0; row < 4; ++row)
+                {
+                    ImGui::Text("%.3f %.3f %.3f %.3f", local[row][0], local[row][1], local[row][2], local[row][3]);
+                }
+                ImGui::TreePop();
+            }
+
+            // Display LocalToWorld Matrix
+            if (ImGui::TreeNode("Local to World Matrix"))
+            {
+                const glm::mat4& localToWorld = GetLocalToWorldMatrix();
+                for (int row = 0; row < 4; ++row)
+                {
+                    ImGui::Text("%.3f %.3f %.3f %.3f", localToWorld[row][0], localToWorld[row][1], localToWorld[row][2],
+                                localToWorld[row][3]);
+                }
+                ImGui::TreePop();
+            }
+        }
+    }
+#endif
+
     rapidjson::Value Transform::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION

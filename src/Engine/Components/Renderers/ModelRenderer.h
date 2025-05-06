@@ -13,8 +13,9 @@ namespace Engine
     class ModelRenderer final : public Renderer
     {
     private:
-        Materials::Material* Material = nullptr;
         Models::Model* Model = nullptr;
+
+        bool Culled = false;
 
     public:
         /**
@@ -23,23 +24,6 @@ namespace Engine
         ModelRenderer() = default;
 
     public:
-        /**
-         * @brief Returns Material used by this Renderer.
-         */
-        [[nodiscard]] Materials::Material* GetMaterial() const
-        {
-            return Material;
-        }
-
-        /**
-         * @brief Sets material used by this renderer.
-         * @param Material A new material.
-         */
-        void SetMaterial(Materials::Material* const Material)
-        {
-            this->Material = Material;
-        }
-
         /**
          * @brief Returns model used by this renderer.
          */
@@ -71,7 +55,9 @@ namespace Engine
         void SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const;
 
         void Draw() const;
-
+#if EDITOR
+        void DrawImGui() override;
+#endif
         SERIALIZATION_EXPORT_CLASS(ModelRenderer)
     };
 } // Engine

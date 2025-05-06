@@ -1,8 +1,9 @@
 #version 460 core
+#extension GL_ARB_bindless_texture: enable
 
 in vec3 Direction;
 
-uniform samplerCube Texture;
+layout (bindless_sampler) uniform samplerCube Texture;
 
 out vec4 FragColor;
 

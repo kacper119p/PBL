@@ -3,6 +3,11 @@
 #include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
 #include "Shaders/ShaderSourceFiles.h"
+#include "Engine/Textures/TextureManager.h"
+#include "imgui.h"
+#include <filesystem>
+
+#include "Engine/EngineObjects/LightManager.h"
 
 namespace Materials
 {
@@ -15,8 +20,10 @@ namespace Materials
                                  const glm::vec3& Color, const glm::vec2& Tiling0, const glm::vec2& Tiling1,
                                  const glm::vec2& Velocity0, const glm::vec2& Velocity1, const float Roughness,
                                  const float Metallic) :
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), NormalMap0(NormalMap0),
-        NormalMap1(NormalMap1), Color(Vector3MaterialProperty("Color", MainPass, Color)),
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
+        NormalMap0(TextureMaterialProperty("NormalMap0", MainPass, NormalMap0)),
+        NormalMap1(TextureMaterialProperty("NormalMap1", MainPass, NormalMap1)),
+        Color(Vector3MaterialProperty("Color", MainPass, Color)),
         Tiling0(Vector2MaterialProperty("Tiling0", MainPass, Tiling0)),
         Tiling1(Vector2MaterialProperty("Tiling1", MainPass, Tiling1)),
         Velocity0(Vector2MaterialProperty("Velocity0", MainPass, Velocity0)),
@@ -27,8 +34,9 @@ namespace Materials
     }
 
     WaterMaterial::WaterMaterial() :
-        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass), NormalMap0(Engine::Texture()),
-        NormalMap1(Engine::Texture()), Color(Vector3MaterialProperty("Color", MainPass)),
+        Material(DepthPass, MainPass, DirectionalShadowPass, PointSpotShadowPass),
+        NormalMap0(TextureMaterialProperty("NormalMap0", MainPass)),
+        NormalMap1(TextureMaterialProperty("NormalMap1", MainPass)), Color(Vector3MaterialProperty("Color", MainPass)),
         Tiling0(Vector2MaterialProperty("Tiling0", MainPass)), Tiling1(Vector2MaterialProperty("Tiling1", MainPass)),
         Velocity0(Vector2MaterialProperty("Velocity0", MainPass)), Velocity1("Velocity1", MainPass),
         Roughness(FloatMaterialProperty("Roughness", MainPass)), Metallic(FloatMaterialProperty("Metallic", MainPass)),
@@ -61,6 +69,8 @@ namespace Materials
     void WaterMaterial::Use() const
     {
         GetMainPass().Use();
+        Engine::LightManager::GetInstance()->SetupLightsForRendering(MainPass);
+
         Color.Bind();
         Roughness.Bind();
         Metallic.Bind();
@@ -69,12 +79,10 @@ namespace Materials
         Velocity0.Bind();
         Velocity1.Bind();
 
-        Shaders::Shader::SetUniform(TimeLocation, static_cast<float>(glfwGetTime()));
+        NormalMap0.Bind();
+        NormalMap1.Bind();
 
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, NormalMap0.GetId());
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, NormalMap1.GetId());
+        Shaders::Shader::SetUniform(TimeLocation, static_cast<float>(glfwGetTime()));
     }
 
     void WaterMaterial::UseDirectionalShadows() const
@@ -86,7 +94,157 @@ namespace Materials
     {
         GetPointSpotShadowPass().Use();
     }
+#if EDITOR
+    void WaterMaterial::DrawImGui()
+    {
+        {
+            static bool showNormal0Popup = false;
+            static bool showNormal1Popup = false;
+            static std::vector<std::string> availableTextures;
+            std::string texturePath = std::filesystem::absolute("./res/textures").string();
+            static bool scanned = false;
 
+            if (!scanned)
+            {
+                for (const auto& entry : std::filesystem::recursive_directory_iterator(texturePath))
+                {
+                    if (entry.is_regular_file() && entry.path().extension() == ".dds")
+                        availableTextures.emplace_back(entry.path().string());
+                }
+                scanned = true;
+            }
+
+            std::string normalMap0Path =
+                    NormalMap0.GetValue().GetId() != 0
+                        ? Engine::TextureManager::GetTexturePath(NormalMap0.GetValue())
+                        : "None";
+            std::string normalMap1Path =
+                    NormalMap1.GetValue().GetId() != 0
+                        ? Engine::TextureManager::GetTexturePath(NormalMap1.GetValue())
+                        : "None";
+
+
+            ImGui::Text("Normal Map 0:");
+            ImGui::Selectable(normalMap0Path.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
+            if (ImGui::BeginDragDropTarget())
+            {
+                if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
+                {
+                    const char* droppedPath = static_cast<const char*>(payload->Data);
+                    if (std::filesystem::path(droppedPath).extension() == ".dds")
+                    {
+                        NormalMap0.SetValue(Engine::TextureManager::GetTexture(droppedPath));
+                    }
+                }
+                ImGui::EndDragDropTarget();
+            }
+            if (ImGui::IsItemClicked())
+                showNormal0Popup = true;
+            if (showNormal0Popup)
+            {
+                ImGui::OpenPopup("Normal Map 0 Picker");
+                showNormal0Popup = false;
+            }
+            if (ImGui::BeginPopup("Normal Map 0 Picker"))
+            {
+                for (const auto& path : availableTextures)
+                {
+                    std::filesystem::path fsPath(path);
+                    std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
+                    if (ImGui::Selectable(displayName.c_str()))
+                    {
+                        NormalMap0.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
+                        ImGui::CloseCurrentPopup();
+                    }
+                    ImGui::SameLine();
+                    ImGui::TextDisabled("(%s)", path.c_str());
+                }
+                ImGui::EndPopup();
+            }
+            ImGui::Text("Normal Map 1:");
+            ImGui::Selectable(normalMap1Path.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
+            if (ImGui::BeginDragDropTarget())
+            {
+                if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
+                {
+                    const char* droppedPath = static_cast<const char*>(payload->Data);
+                    if (std::filesystem::path(droppedPath).extension() == ".dds")
+                    {
+                        NormalMap1.SetValue(Engine::TextureManager::GetTexture(droppedPath));
+                    }
+                }
+                ImGui::EndDragDropTarget();
+            }
+            if (ImGui::IsItemClicked())
+                showNormal1Popup = true;
+            if (showNormal1Popup)
+            {
+                ImGui::OpenPopup("Normal Map 1 Picker");
+                showNormal1Popup = false;
+            }
+            if (ImGui::BeginPopup("Normal Map 1 Picker"))
+            {
+                for (const auto& path : availableTextures)
+                {
+                    std::filesystem::path fsPath(path);
+                    std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
+                    if (ImGui::Selectable(displayName.c_str()))
+                    {
+                        NormalMap1.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
+                        ImGui::CloseCurrentPopup();
+                    }
+                    ImGui::SameLine();
+                    ImGui::TextDisabled("(%s)", path.c_str());
+                }
+                ImGui::EndPopup();
+            }
+
+            ImGui::Separator();
+
+            glm::vec3 color = Color.GetValue();
+            if (ImGui::ColorEdit3("Color", &color.x))
+            {
+                Color.SetValue(color);
+            }
+
+            glm::vec2 tiling0 = Tiling0.GetValue();
+            if (ImGui::DragFloat2("Tiling 0", &tiling0.x, 0.01f))
+            {
+                Tiling0.SetValue(tiling0);
+            }
+
+            glm::vec2 tiling1 = Tiling1.GetValue();
+            if (ImGui::DragFloat2("Tiling 1", &tiling1.x, 0.01f))
+            {
+                Tiling1.SetValue(tiling1);
+            }
+
+            glm::vec2 velocity0 = Velocity0.GetValue();
+            if (ImGui::DragFloat2("Velocity 0", &velocity0.x, 0.01f))
+            {
+                Velocity0.SetValue(velocity0);
+            }
+
+            glm::vec2 velocity1 = Velocity1.GetValue();
+            if (ImGui::DragFloat2("Velocity 1", &velocity1.x, 0.01f))
+            {
+                Velocity1.SetValue(velocity1);
+            }
+
+            float roughness = Roughness.GetValue();
+            if (ImGui::SliderFloat("Roughness", &roughness, 0.0f, 1.0f))
+            {
+                Roughness.SetValue(roughness);
+            }
+
+            float metallic = Metallic.GetValue();
+            if (ImGui::SliderFloat("Metallic", &metallic, 0.0f, 1.0f))
+            {
+                Metallic.SetValue(metallic);
+            }
+        }
+    }
+#endif
     rapidjson::Value WaterMaterial::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_MATERIAL_SERIALIZATION

@@ -1,6 +1,7 @@
 #include "SceneManager.h"
 
 #include "Serialization/SerializationFilesUtility.h"
+#include "Engine/EngineObjects/LightManager.h"
 
 namespace Engine
 {
@@ -16,6 +17,6 @@ namespace Engine
         rapidjson::Document data;
         Serialization::ReadJsonFile(Path.c_str(), data);
         Scene->Deserialize(data);
-
+        Scene->SetPath(Path);
     }
 } // Engine

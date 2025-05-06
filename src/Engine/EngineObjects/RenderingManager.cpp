@@ -1,13 +1,14 @@
 #include "RenderingManager.h"
 #include "Engine/Exceptions/SingletonAlreadyExistsException.h"
 #include "LightManager.h"
+#include "Materials/Material.h"
 
 namespace Engine
 {
     RenderingManager* RenderingManager::Instance = nullptr;
 
     RenderingManager::RenderingManager(const glm::ivec2 Resolution) :
-        MultiSampledBuffer(Resolution), ResolvedBuffer(Resolution)
+        MultiSampledBuffer(Resolution)
     {
     }
 
@@ -22,9 +23,11 @@ namespace Engine
 
     void RenderingManager::RenderAll(const CameraRenderData& RenderData, int ScreenWidth, int ScreenHeight)
     {
+        Frustum.UpdateFrustum(RenderData);
         LightManager::GetInstance()->RenderShadowMaps(RenderData);
 
-        MultiSampledBuffer.Bind();
+        MultiSampledBuffer.BindMultiSampled();
+        MultiSampledBuffer.EnableNormalWrite();
 
         glDepthMask(GL_TRUE);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
@@ -32,16 +35,25 @@ namespace Engine
         glClear(GL_DEPTH_BUFFER_BIT);
 
         glViewport(0, 0, ScreenWidth, ScreenHeight);
-        glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
         glEnable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);
         glCullFace(GL_BACK);
 
-        for (Renderer* renderer : Renderers)
+        for (const auto& renderersGroup : Renderers)
         {
-            renderer->RenderDepth(RenderData);
+            renderersGroup.first->UseDepthPass();
+            for (Renderer* const renderer : renderersGroup.second)
+            {
+                renderer->RenderDepth(RenderData);
+            }
         }
+
+        MultiSampledBuffer.ResolveNormals();
+        Ssao.Render(RenderData, MultiSampledBuffer.GetResolvedNormals());
+
+        MultiSampledBuffer.BindMultiSampled();
+        MultiSampledBuffer.DisableNormalWrite();
 
         glViewport(0, 0, ScreenWidth, ScreenHeight);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
@@ -50,9 +62,13 @@ namespace Engine
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);
         glCullFace(GL_BACK);
-        for (Renderer* renderer : Renderers)
+        for (const auto& renderersGroup : Renderers)
         {
-            renderer->Render(RenderData);
+            renderersGroup.first->Use();
+            for (Renderer* const renderer : renderersGroup.second)
+            {
+                renderer->Render(RenderData);
+            }
         }
 
         if (Ui != nullptr)
@@ -63,8 +79,8 @@ namespace Engine
             glDisable(GL_BLEND);
         }
 
-        MultiSampledBuffer.ResolveMultisampling(ResolvedBuffer);
-        Bloom.Render(ResolvedBuffer.GetColorBuffer());
+        MultiSampledBuffer.ResolveMultisampling();
+        Bloom.Render(MultiSampledBuffer.GetResolvedColorBuffer());
     }
 
     void RenderingManager::RenderAllDirectionalShadowMap(const CameraRenderData& RenderData, unsigned int Target,
@@ -78,9 +94,13 @@ namespace Engine
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LESS);
         glClear(GL_DEPTH_BUFFER_BIT);
-        for (Renderer* renderer : Renderers)
+        for (const auto& renderersGroup : Renderers)
         {
-            renderer->RenderDirectionalShadows(RenderData);
+            renderersGroup.first->UseDirectionalShadows();
+            for (Renderer* const renderer : renderersGroup.second)
+            {
+                renderer->RenderDirectionalShadows(RenderData);
+            }
         }
     }
 
@@ -98,9 +118,13 @@ namespace Engine
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LESS);
         glClear(GL_DEPTH_BUFFER_BIT);
-        for (Renderer* renderer : Renderers)
+        for (const auto& renderersGroup : Renderers)
         {
-            renderer->RenderPointSpotShadows(LightPosition, LightRange, SpaceTransformMatrices);
+            renderersGroup.first->UsePointSpotShadows();
+            for (Renderer* const renderer : renderersGroup.second)
+            {
+                renderer->RenderPointSpotShadows(LightPosition, LightRange, SpaceTransformMatrices);
+            }
         }
     }
 

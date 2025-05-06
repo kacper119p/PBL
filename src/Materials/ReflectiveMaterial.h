@@ -2,6 +2,7 @@
 
 #include "Material.h"
 #include "Engine/Textures/Texture.h"
+#include "Properties/TextureMaterialProperty.h"
 
 namespace Materials
 {
@@ -15,7 +16,7 @@ namespace Materials
         static Shaders::Shader PointSpotShadowPass;
 
     private:
-        Engine::Texture EnvironmentMap;
+        TextureMaterialProperty EnvironmentMap;
 
     public:
         explicit ReflectiveMaterial(Engine::Texture EnvironmentMap);
@@ -25,12 +26,12 @@ namespace Materials
     public:
         [[nodiscard]] Engine::Texture GetEnvironmentMap() const
         {
-            return EnvironmentMap;
+            return EnvironmentMap.GetValue();
         }
 
-        inline void SetEnvironmentMap(Engine::Texture EnvironmentMap)
+        inline void SetEnvironmentMap(const Engine::Texture EnvironmentMap)
         {
-            ReflectiveMaterial::EnvironmentMap = EnvironmentMap;
+            ReflectiveMaterial::EnvironmentMap.SetValue(EnvironmentMap);
         }
 
     public:
@@ -41,6 +42,9 @@ namespace Materials
         void UseDirectionalShadows() const override;
 
         void UsePointSpotShadows() const override;
+#if EDITOR
+        void DrawImGui() override;
+#endif
 
         SERIALIZATION_EXPORT_MATERIAL(ReflectiveMaterial);
     };

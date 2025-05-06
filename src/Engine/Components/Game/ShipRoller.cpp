@@ -18,6 +18,17 @@ namespace Engine
                 InitialRotation.y + cos(time * Velocity.y) * Amplitude.y,
                 InitialRotation.z + sin(time * Velocity.z + 1.57f) * Amplitude.z));
     }
+#if EDITOR
+    void ShipRoller::DrawImGui()
+
+    {
+        if (ImGui::CollapsingHeader("Ship Roller"))
+        {
+            ImGui::InputFloat3("Amplitude##ShipRoller", glm::value_ptr(Amplitude));
+            ImGui::InputFloat3("Velocity##ShipRoller", glm::value_ptr(Velocity));
+        }
+    }
+#endif
 
     rapidjson::Value ShipRoller::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {

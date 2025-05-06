@@ -42,6 +42,7 @@ layout (binding = 15) uniform samplerCubeShadow SpotLightShadowMap1;
 layout (binding = 16) uniform samplerCube IrradianceMap;
 layout (binding = 17) uniform samplerCube PrefilterMap;
 layout (binding = 18) uniform sampler2D BrdfLUT;
+layout (binding = 19) uniform sampler2D SSAOMap;
 
 uniform directionalLight DirectionalLight;
 uniform mat4 DirectionalLightSpaceTransform;
@@ -54,6 +55,11 @@ uniform uint SpotLightsCount;
 
 const float SHADOW_BIAS = 0.00005;
 const float MAX_REFLECTION_LOD = 4.0;
+
+float FastPow5(float x)
+{
+    return x * x * x * x * x;
+}
 
 light CalculateDirectionalLight(directionalLight Light, vec3 Position)
 {
@@ -148,12 +154,12 @@ light CalculateSpotLightShadowed(spotLight Light, samplerCubeShadow ShadowMap, v
 vec3 FresnelSchlickRoughness(float CosTheta, vec3 F0, float Roughness)
 {
     return F0 + (max(vec3(1.0 - Roughness), F0) - F0) *
-    pow(1.0 - CosTheta, 5.0);
+    FastPow5(1.0 - CosTheta);
 }
 
 vec3 FresnelSchlick(float CosTheta, vec3 F0)
 {
-    return F0 + (1.0 - F0) * pow(1.0 - CosTheta, 5.0);
+    return F0 + (1.0 - F0) * FastPow5(1.0 - CosTheta);
 }
 
 float DistributionGGX(vec3 N, vec3 H, float roughness)
@@ -221,5 +227,5 @@ vec3 CalculateEnvironmentInfluence(vec3 BaseColor, vec3 Normal, vec3 ViewDirecti
     vec2 brdf = texture(BrdfLUT, vec2(max(dot(Normal, ViewDirection), 0.0), Roughness)).rg;
     vec3 specular = prefilteredColor * (kS * brdf.x + brdf.y);
 
-    return (kD * diffuse + specular) * AmbientOcclusion;
+    return (kD * diffuse + specular) * min(vec3(texture(SSAOMap, gl_FragCoord.xy / vec2(1920, 1080)).r), AmbientOcclusion);
 }

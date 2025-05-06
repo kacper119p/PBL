@@ -2,6 +2,7 @@
 
 #include "Material.h"
 #include "Engine/Textures/Texture.h"
+#include "Properties/TextureMaterialProperty.h"
 
 namespace Materials
 {
@@ -14,7 +15,7 @@ namespace Materials
         static Shaders::Shader PointSpotShadowPass;
 
     private:
-        Engine::Texture Texture;
+        TextureMaterialProperty Texture;
 
     public:
         explicit SkyboxMaterial(Engine::Texture Texture);
@@ -24,12 +25,12 @@ namespace Materials
     public:
         [[nodiscard]] Engine::Texture GetTexture() const
         {
-            return Texture;
+            return Texture.GetValue();
         }
 
         void SetTexture(const Engine::Texture Texture)
         {
-            SkyboxMaterial::Texture = Texture;
+            SkyboxMaterial::Texture.SetValue(Texture);
         }
 
     public:
@@ -40,6 +41,9 @@ namespace Materials
         void UseDirectionalShadows() const override;
 
         void UsePointSpotShadows() const override;
+#if EDITOR
+        void DrawImGui() override;
+#endif
 
         SERIALIZATION_EXPORT_MATERIAL(SkyboxMaterial);
     };

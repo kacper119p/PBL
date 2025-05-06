@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Interfaces/IUpdateable.h"
+#include "imgui.h"
 
 namespace Engine
 {

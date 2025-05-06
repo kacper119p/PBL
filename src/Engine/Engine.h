@@ -11,6 +11,7 @@
 #if EDITOR
 #include "imgui_impl/imgui_impl_glfw.h"
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
+#include "Engine/GUI/EditorGUI.h"
 #endif
 
 namespace Engine
@@ -22,6 +23,10 @@ namespace Engine
         static constexpr int32_t GlVersionMajor = 4;
         static constexpr int32_t GlVersionMinor = 6;
         Collider* Collider = nullptr;
+
+        GLuint EditorFramebuffer;
+        GLuint EditorColorTexture;
+        GLuint EditorDepthRBO = 0;
 
     private:
         GLFWwindow* Window = nullptr;
@@ -36,8 +41,11 @@ namespace Engine
         bool CameraMoved = false;
         glm::vec2 LastMousePosition = glm::vec2(0, 0);
 
-        Scene* Scene;
-        
+        Scene* CurrentScene;
+#if EDITOR
+        EditorGUI EditorGUI;
+#endif
+
     public:
         Engine();
 
@@ -71,5 +79,10 @@ namespace Engine
         static void MouseCallback(GLFWwindow* Window, double MouseX, double MouseY);
 
         static void MouseButtonCallback(GLFWwindow* Window, int Button, int Action, int Mods);
+
+        void InitEditorFramebuffer();
+
+    public:
+        Scene* GetCurrentScene() const { return CurrentScene; };
     };
 } // Engine

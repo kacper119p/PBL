@@ -38,7 +38,7 @@ namespace Engine
         if (Parent != nullptr)
         {
 #if DEBUG
-            CHECK_MESSAGE(Parent->GetScene() == this, "Parent doesn't belong to this scene.")
+            //CHECK_MESSAGE(Parent->GetScene() == this, "Parent doesn't belong to this scene.")
 #endif
             result->GetTransform()->SetParent(Parent->GetTransform());
         }
@@ -104,7 +104,7 @@ namespace Engine
         for (const rapidjson::Value& jsonObject : serializedObjects.GetArray())
         {
             Serialization::SerializedObject* deserializedObject
-                    = Serialization::SerializedObjectFactory::CreateObject(jsonObject);
+                    = Serialization::SerializedObjectFactory::CreateObject(jsonObject["type"].GetString());
             deserializedObject->DeserializeValuePass(jsonObject, referenceTable);
             DeserializationPair pair{jsonObject, deserializedObject};
             objects.emplace_back(pair);
@@ -127,6 +127,30 @@ namespace Engine
                 component->Start();
             }
         }
+    }
+
+    void Scene::DeleteEntity(Entity* entity) 
+    {
+        if (!entity || entity == Root)
+            return;
+
+        // Recursively delete children
+        std::vector<Transform*> children = entity->GetTransform()->GetChildren();
+        for (Transform* child : children)
+        {
+            Entity* childEntity = child->GetOwner();
+            DeleteEntity(childEntity); // Recursive call
+        }
+
+        // Remove from parent
+        Transform* parentTransform = entity->GetTransform()->GetParent();
+        if (parentTransform)
+        {
+            parentTransform->RemoveChild(entity->GetTransform());
+        }
+
+        // Now delete the entity itself
+        delete entity;
     }
 
     void Scene::SerializeEntity(const Entity* const Entity, rapidjson::Value& Object,

@@ -3,6 +3,7 @@
 #include "Material.h"
 #include "Engine/Textures/Texture.h"
 #include "Properties/MaterialProperty.h"
+#include "Properties/TextureMaterialProperty.h"
 
 namespace Materials
 {
@@ -15,7 +16,7 @@ namespace Materials
         static Shaders::Shader PointSpotShadowPass;
 
     private:
-        Engine::Texture EnvironmentMap;
+        TextureMaterialProperty EnvironmentMap;
         FloatMaterialProperty IndexOfRefraction;
 
     public:
@@ -26,12 +27,12 @@ namespace Materials
     public:
         [[nodiscard]] Engine::Texture GetEnvironmentMap() const
         {
-            return EnvironmentMap;
+            return EnvironmentMap.GetValue();
         }
 
         void SetEnvironmentMap(const Engine::Texture EnvironmentMap)
         {
-            RefractiveMaterial::EnvironmentMap = EnvironmentMap;
+            RefractiveMaterial::EnvironmentMap.SetValue(EnvironmentMap);
         }
 
         [[nodiscard]] float GetIndexOfRefraction() const
@@ -52,6 +53,10 @@ namespace Materials
         void UseDirectionalShadows() const override;
 
         void UsePointSpotShadows() const override;
+
+#if EDITOR
+        void DrawImGui() override;
+#endif
 
         SERIALIZATION_EXPORT_MATERIAL(RefractiveMaterial)
     };

@@ -3,6 +3,11 @@
 #include "Engine/Components/Component.h"
 #include "Engine/EngineObjects/CameraRenderData.h"
 
+namespace Materials
+{
+    class Material;
+}
+
 namespace Engine
 {
     /**
@@ -10,10 +15,30 @@ namespace Engine
      */
     class Renderer : public Component
     {
+    protected:
+        Materials::Material* Material = nullptr;
+
     public:
         ~Renderer() override;
 
         void Start() override;
+
+        /**
+         * @brief Returns Material used by this Renderer.
+         */
+        [[nodiscard]] Materials::Material* GetMaterial() const
+        {
+            return Material;
+        }
+
+        /**
+         * @brief Sets material used by this renderer.
+         * @param Material A new material.
+         */
+        void SetMaterial(Materials::Material* const Material)
+        {
+            this->Material = Material;
+        }
 
         /**
          * @brief Renders geometry's depth to a depth buffer. Used for a depth prepass.

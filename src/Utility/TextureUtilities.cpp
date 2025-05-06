@@ -2,6 +2,8 @@
 #include <format>
 #include "FileException.h"
 #include "TextureUtilities.h"
+
+#include "DDSLoader.h"
 #include "glm/glm.hpp"
 #include "glm/ext/matrix_transform.hpp"
 #include "glm/ext/matrix_clip_space.hpp"
@@ -82,32 +84,17 @@ namespace Utility
         return LoadTexture2DFromFile(FilePath, Format, SourceChannels, SourceFormat, width, height);
     }
 
-    unsigned int LoadTexture2DFromFile(const char* FilePath, GLenum Format, uint8_t SourceChannels, GLenum SourceFormat,
-                                       int& OutWidth, int& OutHeight)
+    [[nodiscard]] unsigned int LoadTexture2DFromFile(const char* FilePath, GLenum Format, uint8_t SourceChannels,
+                                                     GLenum SourceFormat,
+                                                     int& OutWidth, int& OutHeight)
     {
-        int width, height, channelCount;
-        GLubyte* data = stbi_load(FilePath, &width, &height,
-                                  &channelCount, SourceChannels);
+        int width;
+        int height;
 
-        if (data == nullptr)
-        {
-            throw Utility::FileException(std::format("Failed to read texture from {}.", FilePath));
-        }
+        const GLuint textureId = LoadDds(FilePath, width, height);
 
-        unsigned int textureId;
-        glGenTextures(1, &textureId);
-        glBindTexture(GL_TEXTURE_2D, textureId);
-
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY, 16.0f);
-
-        glTexImage2D(GL_TEXTURE_2D, 0, Format, width, height, 0, SourceFormat, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-
-        stbi_image_free(data);
+        const uint64_t handle = glGetTextureHandleARB(textureId);
+        glMakeTextureHandleResidentARB(handle);
 
         OutWidth = width;
         OutHeight = height;
@@ -224,6 +211,8 @@ namespace Utility
 
         InitializeViewPort(resolution);
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glDisable(GL_DEPTH_TEST);
 
         for (unsigned int i = 0; i < 6; ++i)
         {
@@ -233,6 +222,8 @@ namespace Utility
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             cube.Draw();
         }
+
+        glEnable(GL_DEPTH_TEST);
 
         glDeleteFramebuffers(1, &fbo);
         glDeleteRenderbuffers(1, &rbo);
@@ -274,14 +265,15 @@ namespace Utility
         shader.SetTexture("EnvironmentMap", 0);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_CUBE_MAP, EnvironmentMap);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER,
-                        GL_LINEAR_MIPMAP_LINEAR);
         shader.SetUniform("ProjectionMatrix", captureProjection);
         shader.SetUniform("Resolution", static_cast<float>(environmentMapResolution));
 
         glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 
         InitializeViewPort(resolution);
+
+        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glDisable(GL_DEPTH_TEST);
 
         for (unsigned int mipLevel = 0; mipLevel < maxMipLevels; ++mipLevel)
         {
@@ -303,13 +295,10 @@ namespace Utility
             }
         }
 
+        glEnable(GL_DEPTH_TEST);
+
         glDeleteFramebuffers(1, &fbo);
         glDeleteRenderbuffers(1, &rbo);
-
-        glBindTexture(GL_TEXTURE_CUBE_MAP, EnvironmentMap);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         return cubemap;

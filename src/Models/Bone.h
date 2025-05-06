@@ -39,6 +39,7 @@ namespace Models
 
     public:
         Bone(const std::string& name, int ID, const aiNodeAnim* channel);
+        ~Bone() = default;
         void Update(float animationTime);
 
         glm::mat4 GetLocalTransform() const { return m_LocalTransform; }

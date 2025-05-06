@@ -19,6 +19,9 @@ namespace Engine
 
         static GizmoManager* Instance;
 
+        float rectX, rectY = 0.0f;
+        float rectWidth = 1920.0f;
+        float rectHeight = 1080.0f;
     private:
         GizmoManager();
 
@@ -52,6 +55,13 @@ namespace Engine
         static void Initialize();
 
         void Manipulate(const CameraRenderData& CameraRenderData);
+        void SetRect(float x, float y, float width, float height)
+        {
+            rectX = x;
+            rectY = y;
+            rectWidth = width;
+            rectHeight = height;
+        }
     };
 
 } // Engine

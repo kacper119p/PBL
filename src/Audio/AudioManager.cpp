@@ -34,6 +34,42 @@ Engine::AudioManager& Engine::AudioManager::GetInstance()
     return *Instance;
 }
 
+std::shared_ptr<ma_sound> Engine::AudioManager::CreateSoundInstance(const std::string& SoundId)
+{
+    auto it = Sounds.find(SoundId);
+    if (it == Sounds.end())
+    {
+        spdlog::warn("SoundId '{}' not found in loaded sounds.", SoundId);
+        return nullptr;
+    }
+
+    ma_sound* baseSound = it->second.get();
+    if (!baseSound)
+    {
+        spdlog::error("Base sound for '{}' is null.", SoundId);
+        return nullptr;
+    }
+
+    auto deleter = [](ma_sound* s)
+    {
+        if (s)
+        {
+            ma_sound_uninit(s);
+            delete s;
+        }
+    };
+    std::shared_ptr<ma_sound> newSound(new ma_sound, deleter);
+
+    ma_result result = ma_sound_init_copy(&Engine, baseSound, 0, nullptr, newSound.get());
+    if (result != MA_SUCCESS)
+    {
+        spdlog::error("Failed to create sound instance for '{}'. Error code: {}", SoundId, result);
+        return nullptr;
+    }
+
+    return newSound;
+}
+
 void Engine::AudioManager::DestroyInstance()
 {
     if (Instance)
@@ -79,11 +115,11 @@ void Engine::AudioManager::LoadSounds()
     }
 }
 
-void Engine::AudioManager::PlayAudio(ma_sound& Sound)
+void Engine::AudioManager::PlayAudio(std::shared_ptr<ma_sound> Sound)
 {
-    if (!ma_sound_is_playing(&Sound))
+    if (Sound && !ma_sound_is_playing(Sound.get()))
     {
-        ma_sound_start(&Sound);
+        ma_sound_start(Sound.get());
     }
 }
 
@@ -97,25 +133,37 @@ float Engine::AudioManager::GetGlobalVolume()
     return ma_engine_get_volume(&Engine);
 }
 
-void Engine::AudioManager::SetVolume(ma_sound& Sound, float Volume)
+void Engine::AudioManager::SetVolume(std::shared_ptr<ma_sound> Sound, float Volume)
 {
-    ma_sound_set_volume(&Sound, Volume);
+    if (Sound)
+    {
+        ma_sound_set_volume(Sound.get(), Volume);
+    }
 }
 
-void Engine::AudioManager::PauseSound(ma_sound& Sound)
+void Engine::AudioManager::PauseSound(std::shared_ptr<ma_sound> Sound)
 {
-    ma_sound_stop(&Sound);
+    if (Sound)
+    {
+        ma_sound_stop(Sound.get());
+    }
 }
 
-void Engine::AudioManager::StopSound(ma_sound& Sound)
+void Engine::AudioManager::StopSound(std::shared_ptr<ma_sound> Sound)
 {
-    ma_sound_stop(&Sound);
-    ma_sound_seek_to_pcm_frame(&Sound, 0);
+    if (Sound)
+    {
+        ma_sound_stop(Sound.get());
+        ma_sound_seek_to_pcm_frame(Sound.get(), 0);
+    }
 }
 
-void Engine::AudioManager::SetLooping(ma_sound& Sound, bool Loop)
+void Engine::AudioManager::SetLooping(std::shared_ptr<ma_sound> Sound, bool Loop)
 {
-    ma_sound_set_looping(&Sound, Loop);
+    if (Sound)
+    {
+        ma_sound_set_looping(Sound.get(), Loop);
+    }
 }
 
 void Engine::AudioManager::SetListenerPosition(const glm::vec3& Position)
@@ -129,28 +177,38 @@ void Engine::AudioManager::SetListenerOrientation(glm::vec3 Forward, glm::vec3 U
     ma_engine_listener_set_world_up(&Engine, 0, Up.x, Up.y, Up.z);
 }
 
-void Engine::AudioManager::SetSoundPosition(ma_sound& Sound, const glm::vec3& Position)
+void Engine::AudioManager::SetSoundPosition(std::shared_ptr<ma_sound> Sound, const glm::vec3& Position)
 {
-    ma_sound_set_position(&Sound, Position.x, Position.y, Position.z);
+    if (Sound)
+    {
+        ma_sound_set_position(Sound.get(), Position.x, Position.y, Position.z);
+    }
 }
 
-void Engine::AudioManager::ConfigureSoundAttenuation(ma_sound& Sound, float MinDist, float MaxDist, float RollOff)
+void Engine::AudioManager::ConfigureSoundAttenuation(std::shared_ptr<ma_sound> Sound, float MinDist, float MaxDist,
+                                                     float RollOff)
 {
-    ma_sound_set_attenuation_model(&Sound, ma_attenuation_model_exponential);
-    ma_sound_set_min_distance(&Sound, MinDist);
-    ma_sound_set_max_distance(&Sound, MaxDist);
-    ma_sound_set_rolloff(&Sound, RollOff);
+    if (Sound)
+    {
+        ma_sound_set_attenuation_model(Sound.get(), ma_attenuation_model_exponential);
+        ma_sound_set_min_distance(Sound.get(), MinDist);
+        ma_sound_set_max_distance(Sound.get(), MaxDist);
+        ma_sound_set_rolloff(Sound.get(), RollOff);
+    }
 }
+
 
 #if EDITOR
 void Engine::AudioManager::RenderGlobalVolumeImGui()
 {
-    ImGui::Begin("Global Audio Volume");
-
-    float globalVolume = GetInstance().GetGlobalVolume();
-    if (ImGui::SliderFloat("Global Volume", &globalVolume, 0.0f, 1.0f))
+    ImGui::Begin("Engine Properties");
+    if (ImGui::CollapsingHeader("Audio Settings", ImGuiTreeNodeFlags_DefaultOpen))
     {
-        GetInstance().SetGlobalVolume(globalVolume);
+        float globalVolume = GetInstance().GetGlobalVolume();
+        if (ImGui::SliderFloat("Global Volume", &globalVolume, 0.0f, 1.0f))
+        {
+            GetInstance().SetGlobalVolume(globalVolume);
+        }
     }
 
     ImGui::End();

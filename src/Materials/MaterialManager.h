@@ -62,6 +62,9 @@ namespace Materials
         {
         private:
             std::unordered_map<std::string, IMaterialBuilder*> MaterialBuilders;
+#if EDITOR
+            std::vector<std::string> MaterialTypes;
+#endif
 
         public:
             /**
@@ -73,6 +76,12 @@ namespace Materials
             void Register(const std::string& Name)
             {
                 MaterialBuilders.emplace(Name, new MaterialBuilder<T>());
+#if EDITOR
+                if constexpr (std::is_base_of_v<Material, T> && !std::is_abstract_v<T>)
+                {
+                    MaterialTypes.emplace_back(Name);
+                }
+#endif
             }
 
             /**
@@ -82,6 +91,9 @@ namespace Materials
             void Unregister(const std::string& Name)
             {
                 MaterialBuilders.erase(Name);
+#if EDITOR
+                std::erase(MaterialTypes, Name);
+#endif
             }
 
             /**
@@ -98,6 +110,15 @@ namespace Materials
                 }
                 return iterator->second;
             }
+#if EDITOR
+            /**
+             * @brief Returns TypeNames of all available components.
+             */
+            const std::vector<std::string>* GetAvailableMaterialTypes() const
+            {
+                return &MaterialTypes;
+            }
+#endif
         };
 
         /**
