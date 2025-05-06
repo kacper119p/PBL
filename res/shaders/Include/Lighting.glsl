@@ -63,7 +63,8 @@ const float MAX_REFLECTION_LOD = 4.0;
 
 float FastPow5(float x)
 {
-    return x * x * x * x * x;
+    float x2 = x * x;
+    return x * x2 * x2;
 }
 
 light CalculateDirectionalLight(directionalLight Light, vec3 Position)
