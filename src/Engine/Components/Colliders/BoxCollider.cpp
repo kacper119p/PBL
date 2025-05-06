@@ -181,23 +181,24 @@ namespace Engine
 
     void BoxCollider::Update(float deltaTime)
     { 
-        // TODO: remove when scriptable fully implemented
         if (currentCellIndex != spatial->GetCellIndex(transform->GetPosition()))
         {
             spatial->RemoveCollider(this);
             spatial->AddCollider(this);
         }
+        colliderVisitor.ManageCollisions();
+        // TODO: remove when scriptable fully implemented
         if (shouldMove)
         {
             glm::vec3 newPosition = transform->GetPosition() - glm::vec3(10.0f, 0.0f, 0.0f) * deltaTime;
             transform->SetPosition(newPosition);
             if (isColliding)
             {
-                shouldMove = false;
+               // shouldMove = false;
             }
         }
         // TODO END
-        colliderVisitor.ManageCollisions();
+        
     }
 
     void BoxCollider::OnDestroy() 

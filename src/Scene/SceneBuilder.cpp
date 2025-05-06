@@ -62,14 +62,14 @@ namespace Scene
 
         Engine::Entity* secondBoxEntity = Scene->SpawnEntity(nullptr);
         Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
-        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(5.0f, 7.0f, 10.0f));
+        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(155.0f, 7.0f, 10.0f));
 
-        boxCollider->SetStatic(false);
+        boxCollider->SetStatic(true);
         secondBoxCollider->SetStatic(false);
 
-        //secondBoxCollider->shouldMove = true;
+        secondBoxCollider->shouldMove = true;
         
-        Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();
+        //Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();
 
 
 

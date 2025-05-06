@@ -797,7 +797,6 @@ namespace Engine
                {
                    result = CheckBoxBoxCollision(box, *boxCollider);
                    
-                   
                    if (result.hasCollision)
                    {
                        box.isColliding = boxCollider->isColliding = result.hasCollision;
@@ -807,6 +806,11 @@ namespace Engine
                        {
                            currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
                                    result.collisionNormal, result.collisionPoint, 0.001f);
+                       }
+                       else if (!currentCollider->IsStatic())
+                       {
+                           currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                                                                        separation);
                        }
                        
 
