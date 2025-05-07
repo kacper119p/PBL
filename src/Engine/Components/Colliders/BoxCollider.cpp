@@ -156,6 +156,7 @@ namespace Engine
         glDeleteVertexArrays(1, &VAO);
         glDeleteBuffers(1, &VBO);
         glDeleteBuffers(1, &EBO);
+        Material->GetMainPass().SetUniform("Tint", glm::vec3(.0f, 5.0f, .0f));
     }
 
     void BoxCollider::Render(const CameraRenderData& RenderData) { 
@@ -190,19 +191,13 @@ namespace Engine
             spatial->RemoveCollider(this);
             spatial->AddCollider(this);
         }
-        colliderVisitor.ManageCollisions();
-        // TODO: remove when scriptable fully implemented
-        if (shouldMove)
+        if (!isStatic)
         {
-            glm::vec3 newPosition = transform->GetPosition() - glm::vec3(10.0f, 0.0f, 0.0f) * deltaTime;
+            // TODO: remove when rigidbody fully implemented
+            glm::vec3 newPosition = transform->GetPosition() + gravity * deltaTime;
             transform->SetPosition(newPosition);
-            if (isColliding)
-            {
-               // shouldMove = false;
-            }
         }
-        // TODO END
-        
+        colliderVisitor.ManageCollisions();
     }
 
     void BoxCollider::OnDestroy() 

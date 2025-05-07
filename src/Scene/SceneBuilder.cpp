@@ -69,6 +69,13 @@ namespace Scene
         secondBoxCollider->SetStatic(false);
 
         secondBoxEntity->AddComponent<Engine::MovementComponent>();
+
+        Engine::Entity* floorEntity = Scene->SpawnEntity(nullptr);
+        Engine::BoxCollider* floorCollider = floorEntity->AddComponent<Engine::BoxCollider>();
+        floorCollider->SetStatic(true);
+        floorCollider->SetDepth(100.0f);
+        floorCollider->SetHeight(10.0f);
+        floorCollider->SetWidth(100.0f);
         //secondBoxCollider->shouldMove = true;
         
         //Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();

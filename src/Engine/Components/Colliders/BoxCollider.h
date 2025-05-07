@@ -23,6 +23,8 @@ namespace Engine
         unsigned int VBO = 0;
         unsigned int EBO = 0;
 
+        // TODO: remove when rigidbody fully implemented
+        const glm::vec3 gravity = glm::vec3(0.0f, -9.81f, 0.0f);
     public:
 
         // TODO: remove when scriptable fully implemented
