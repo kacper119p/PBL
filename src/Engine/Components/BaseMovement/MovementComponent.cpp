@@ -5,6 +5,7 @@ namespace Engine
 
     void MovementComponent::Update(float deltaTime)
     {
+#if !EDITOR
         glm::vec3 position = GetOwner()->GetTransform()->GetPosition();
 
         InputManager& input = InputManager::GetInstance();
@@ -27,6 +28,7 @@ namespace Engine
             position.x += Speed * deltaTime;
 
         GetOwner()->GetTransform()->SetPosition(position);
+        #endif
     }
 
     rapidjson::Value MovementComponent::Serialize(rapidjson::Document::AllocatorType & Allocator) const

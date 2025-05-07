@@ -94,7 +94,9 @@ namespace Engine
         // TODO: remove when spatial fully implemented
         void AddColliderToSpatial(Collider* collider);
         
-
+        #if EDITOR
+        void DrawImGui() override {};
+        #endif
     };
 
 } // namespace Engine

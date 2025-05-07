@@ -46,6 +46,10 @@ namespace Engine
         void Start() override;
         void OnDestroy() override;
 
+        #if EDITOR
+        void DrawImGui() override {};
+        #endif
+
         SERIALIZATION_EXPORT_CLASS(MeshCollider)
     };
 

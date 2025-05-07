@@ -32,7 +32,9 @@
                 "{473d53eb-2308-416a-b3ec-6890fc7ba617}\u0000",
                 "{a8eb14d7-ea4c-43a8-bf41-d398c792e344}\u0000",
                 "{5e181501-ae61-4af9-bb1f-40904c0439b7}\u0000",
-                "{ea2dc42e-0052-4bcd-9e28-25633c5cbb53}\u0000"
+                "{ea2dc42e-0052-4bcd-9e28-25633c5cbb53}\u0000",
+                "{d627c39b-eb7a-420d-9975-c72077ecf8a4}\u0000",
+                "{dcbad2e1-4641-4cca-9643-91d246c80d5b}\u0000"
             ],
             "Parent": null
         },
@@ -335,6 +337,80 @@
             "type": "ModelRenderer",
             "id": "{39690d01-b5e2-43d2-8d02-6e4637cd62ce}\u0000",
             "owner": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
+            "Material": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\materials\\SampleScene\\Wall.mat",
+            "Model": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\Models\\Box.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
+            "name": "Wall6",
+            "transform": {
+                "type": "Transform",
+                "id": "{d627c39b-eb7a-420d-9975-c72077ecf8a4}\u0000",
+                "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
+                "Position": {
+                    "x": -3.7337238788604736,
+                    "y": 2.5,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 2.5,
+                    "z": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{3f52de67-c547-4ac2-b56e-a5c902ef60b5}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{3f52de67-c547-4ac2-b56e-a5c902ef60b5}\u0000",
+            "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
+            "Material": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\materials\\SampleScene\\Wall.mat",
+            "Model": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\Models\\Box.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
+            "name": "Wall7",
+            "transform": {
+                "type": "Transform",
+                "id": "{dcbad2e1-4641-4cca-9643-91d246c80d5b}\u0000",
+                "owner": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
+                "Position": {
+                    "x": 4.465912342071533,
+                    "y": 2.5,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 2.5,
+                    "z": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{a83b86bd-7242-4337-aa26-210bd3372848}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{a83b86bd-7242-4337-aa26-210bd3372848}\u0000",
+            "owner": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
             "Material": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\materials\\SampleScene\\Wall.mat",
             "Model": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\Models\\Box.fbx"
         }

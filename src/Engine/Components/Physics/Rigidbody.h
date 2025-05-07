@@ -89,6 +89,10 @@ namespace Engine
         const glm::quat& GetOrientation() const;
 
         SERIALIZATION_EXPORT_CLASS(RigidBody)
+
+        #if EDITOR
+        void DrawImGui() override {};
+        #endif
     };
 
    inline RigidBody::Constraints operator|(RigidBody::Constraints a, RigidBody::Constraints b)

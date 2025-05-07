@@ -56,6 +56,10 @@ namespace Engine
         void OnDestroy() override;
 
         SERIALIZATION_EXPORT_CLASS(CapsuleCollider)
+
+        #if EDITOR
+        void DrawImGui() override {};
+        #endif
     };
 
 } // namespace Engine

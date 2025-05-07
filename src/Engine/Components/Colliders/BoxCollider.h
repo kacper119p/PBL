@@ -63,6 +63,10 @@ namespace Engine
 
         BoxCollider& operator=(const BoxCollider& other);
 
+        #if EDITOR
+        void DrawImGui() override {};
+        #endif
+
         SERIALIZATION_EXPORT_CLASS(BoxCollider)
 
         private:
