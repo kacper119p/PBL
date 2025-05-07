@@ -24,12 +24,17 @@ namespace Engine
         if (ImGui::CollapsingHeader("A* Pathfinding", ImGuiTreeNodeFlags_DefaultOpen))
         {
             ImGui::InputFloat("Move Speed", &MoveSpeed);
-            ImGui::InputFloat("Spacing", &Spacing);
+            float spacing = NavMesh::Get().GetSpacing();
+            if (ImGui::InputFloat("Spacing", &spacing))
+            {
+                NavMesh::Get().SetSpacing(spacing);
+            }
             ImGui::InputFloat3("Goal", &GoalPosition.x);
 
             if (ImGui::Button("Bake NavMesh"))
             {
-                BakeNavMesh(GetOwner()->GetScene()->GetRoot());
+                NavMesh::Get().BakeNavMesh(GetOwner()->GetScene()->GetRoot());
+                SetGraph(NavMesh::Get().GetGraph());
             }
 
             if (ImGui::Button("Compute Path"))
@@ -58,23 +63,6 @@ namespace Engine
         }
     }
 #endif
-
-    void AStar::BakeNavMesh(Entity* Root)
-    {
-        auto& navMesh = NavMesh::Get();
-        if (!navMesh.GetGraph())
-        {
-            navMesh.ClearGraph();
-        }
-        navMesh.BuildNavMesh(Root, Spacing);
-        navMesh.RemoveNotWalkableNodes(Root);
-        SetGraph(navMesh.GetGraph());
-
-        if (navMesh.GetGraph()->GetAllNodes().size() == 0)
-        {
-            spdlog::warn("NavGraph has 0 nodes!");
-        }
-    }
 
     void AStar::FindPath(int StartId, int GoalId)
     {
@@ -291,7 +279,7 @@ namespace Engine
             }
         }
 
-        if (closestDistance > 2 * Spacing)
+        if (closestDistance > 2 * NavMesh::Get().GetSpacing())
         {
             return -1;
         }
@@ -303,7 +291,7 @@ namespace Engine
     {
         START_COMPONENT_SERIALIZATION
         SERIALIZE_FIELD(MoveSpeed)
-        SERIALIZE_FIELD(Spacing)
+        SERIALIZE_FIELD(NavMesh::Get().GetSpacing())
         END_COMPONENT_SERIALIZATION
     }
 
@@ -311,7 +299,8 @@ namespace Engine
     {
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
         DESERIALIZE_VALUE(MoveSpeed)
-        DESERIALIZE_VALUE(Spacing)
+        float spacing = NavMesh::Get().GetSpacing();
+        DESERIALIZE_VALUE(spacing)
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 

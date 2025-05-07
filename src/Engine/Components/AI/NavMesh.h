@@ -37,6 +37,12 @@ namespace Engine
         void ClearGraph();
 
         /**
+         * @brief Builds and assigns the navigation mesh from the given root entity.
+         * @param Root Scene root entity.
+         */
+        void BakeNavMesh(Entity* Root);
+
+        /**
          * @brief Removes all nodes that have NavArea component and IsWalkable is false from the existing NavMesh.
          * @param Root Scene root entity.
          */
@@ -54,7 +60,18 @@ namespace Engine
                                    const glm::vec3& Vertex0, const glm::vec3& Vertex1, const glm::vec3& Vertex2,
                                    glm::vec3* HitPoint = nullptr);
 
+        [[nodiscard]] float GetSpacing() const
+        {
+            return Spacing;
+        }
+
+        void SetSpacing(float Spacing)
+        {
+            this->Spacing = Spacing;
+        }
+
     private:
         std::unique_ptr<Graph> NavGraph = std::make_unique<Graph>(); ///< The navigation graph.
+        float Spacing = 1.0f; ///< Spacing between NavMesh nodes.
     };
 }

@@ -1,6 +1,7 @@
 
 #include "NavMesh.h"
 #include "Engine/Components/Renderers/ModelRenderer.h"
+#include "spdlog/spdlog.h"
 
 namespace Engine
 {
@@ -82,6 +83,21 @@ namespace Engine
     void NavMesh::ClearGraph()
     {
         NavGraph = nullptr;
+    }
+
+    void NavMesh::BakeNavMesh(Entity* Root)
+    {
+        if (!GetGraph())
+        {
+            ClearGraph();
+        }
+        BuildNavMesh(Root, Spacing);
+        RemoveNotWalkableNodes(Root);
+
+        if (GetGraph()->GetAllNodes().size() == 0)
+        {
+            spdlog::warn("NavGraph has 0 nodes!");
+        }
     }
 
     void NavMesh::BuildNavMesh(Entity* Root, float Spacing)
