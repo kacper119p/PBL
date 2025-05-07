@@ -28,6 +28,9 @@ namespace Engine
             position.x += Speed * deltaTime;
 
         GetOwner()->GetTransform()->SetPosition(position);
+        std::cout << position.x << " ";
+        std::cout << position.y << " ";
+        std::cout << position.z << '\n';
         #endif
     }
 

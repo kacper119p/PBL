@@ -66,7 +66,9 @@ namespace Engine
 
         Camera->SetProjectionMatrix(glm::perspective(glm::radians(70.0f), float(WindowWidth) /
                                                                           float(WindowHeight), 0.1f, 1000.0f));
-
+        #if !EDITOR
+        CameraFollow::GetInstance().SetCamera(Camera);
+        #endif
         try
         {
             SceneBuilding::SceneBuilder::Build(CurrentScene);
@@ -98,6 +100,7 @@ namespace Engine
             HandleInput(deltaTime);
             #else
             InputManager::GetInstance().Update();
+            CameraFollow::GetInstance().Update(deltaTime);
             #endif
             // Update game objects' state here
             UpdateManager::GetInstance()->Update(deltaTime);

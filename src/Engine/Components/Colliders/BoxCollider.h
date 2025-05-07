@@ -24,7 +24,7 @@ namespace Engine
         unsigned int EBO = 0;
 
         // TODO: remove when rigidbody fully implemented
-        const glm::vec3 gravity = glm::vec3(0.0f, -9.81f, 0.0f);
+        const glm::vec3 gravity = glm::vec3(0.0f, -4.81f, 0.0f);
     public:
 
         // TODO: remove when scriptable fully implemented
@@ -66,7 +66,7 @@ namespace Engine
         BoxCollider& operator=(const BoxCollider& other);
 
         #if EDITOR
-        void DrawImGui() override {};
+        void DrawImGui() override;
         #endif
 
         SERIALIZATION_EXPORT_CLASS(BoxCollider)

@@ -560,8 +560,8 @@ namespace Engine
             glm::vec3 halfExtents1 = glm::vec3(box1.GetWidth(), box1.GetHeight(), box1.GetDepth()) * 0.5f;
             glm::vec3 halfExtents2 = glm::vec3(box2.GetWidth(), box2.GetHeight(), box2.GetDepth()) * 0.5f;
 
-            glm::vec3 center1 = glm::vec3(transform1 * glm::vec4(halfExtents1, 1.0f));
-            glm::vec3 center2 = glm::vec3(transform2 * glm::vec4(halfExtents2, 1.0f));
+            glm::vec3 center1 = glm::vec3(transform1[3]);
+            glm::vec3 center2 = glm::vec3(transform2[3]);
 
             glm::mat3 rot1 = glm::mat3(transform1);
             glm::mat3 rot2 = glm::mat3(transform2);

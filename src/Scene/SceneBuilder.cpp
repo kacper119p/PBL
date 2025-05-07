@@ -38,6 +38,7 @@
 #include "Shaders/ShaderSourceFiles.h"
 #include "tracy/Tracy.hpp"
 #include "Engine/Components/Colliders/SpatialPartitioning.h"
+#include "Engine/Components/Camera/CameraFollow.h"
 
 
 namespace Scene
@@ -48,7 +49,7 @@ namespace Scene
         ZoneScoped;
 
         Scene = new class Engine::Scene();
-        Engine::SceneManager::LoadScene("./res/scenes/SampleScene.lvl", Scene);
+        Engine::SceneManager::LoadScene("./res/scenes/BlockLayout.lvl", Scene);
         // TODO: remove when no longer needed
 
 
@@ -56,26 +57,24 @@ namespace Scene
        
 
         // BOX BOX SCENARIO /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        #if !EDITOR
         Engine::Entity* boxEntity = Scene->SpawnEntity(nullptr);
         Engine::BoxCollider* boxCollider = boxEntity->AddComponent<Engine::BoxCollider>();
-        boxEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 7.0f, 10.0f));
+        boxEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 7.0f, 0.0f));
         boxEntity->GetTransform()->SetEulerAngles(glm::vec3(.0f, 30.0f, 0.0f));
 
         Engine::Entity* secondBoxEntity = Scene->SpawnEntity(nullptr);
         Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
-        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(5.0f, 7.0f, 10.0f));
+        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(2.0f, 7.0f, 0.0f));
 
         boxCollider->SetStatic(false);
         secondBoxCollider->SetStatic(false);
 
         secondBoxEntity->AddComponent<Engine::MovementComponent>();
 
-        Engine::Entity* floorEntity = Scene->SpawnEntity(nullptr);
-        Engine::BoxCollider* floorCollider = floorEntity->AddComponent<Engine::BoxCollider>();
-        floorCollider->SetStatic(true);
-        floorCollider->SetDepth(100.0f);
-        floorCollider->SetHeight(1.0f);
-        floorCollider->SetWidth(100.0f);
+        CameraFollow::GetInstance().SetTarget(secondBoxEntity);
+        #endif
+
         //secondBoxCollider->shouldMove = true;
         
         //Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();

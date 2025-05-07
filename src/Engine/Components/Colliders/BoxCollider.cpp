@@ -14,8 +14,7 @@ namespace Engine
     { 
         this->colliderType = BOX; 
         SetMaterial(Materials::MaterialManager::GetMaterial("res/materials/SampleScene/Default.mat"));
-        RenderingManager::GetInstance()->RegisterRenderer(this);
-        UpdateManager::GetInstance()->RegisterComponent(this);
+        
 
     }
 
@@ -87,7 +86,12 @@ namespace Engine
     }
 
     void BoxCollider::DeserializeReferencesPass(const rapidjson::Value& Object,
-                                                        Serialization::ReferenceTable& ReferenceMap) {}
+                                                        Serialization::ReferenceTable& ReferenceMap) {
+    
+    START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
+    DESERIALIZE_POINTER(transform)
+    END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
+    }
 
     float BoxCollider::GetWidth() const { return _width; }
     void BoxCollider::SetWidth(float width) { _width = width; }
@@ -176,25 +180,32 @@ namespace Engine
         ImGui::Text("Box Collider");
         ImGui::Separator();
         ImGui::Checkbox("Is Static", &isStatic);
-        ImGui::Text("Width: %.2f", _width);
-        ImGui::Text("Height: %.2f", _height);
-        ImGui::Text("Depth: %.2f", _depth);
+        
         ImGui::Separator();
-    
+        ImGui::DragFloat("Width", &_width, 0.1f, 0.0f, FLT_MAX, "%.2f");
+        ImGui::DragFloat("Height", &_height, 0.1f, 0.0f, FLT_MAX, "%.2f");
+        ImGui::DragFloat("Depth", &_depth, 0.1f, 0.0f, FLT_MAX, "%.2f");
+        
+        ImGui::Separator();
     };
 #endif
 
     void BoxCollider::Start()
     { 
-        
+       RenderingManager::GetInstance()->RegisterRenderer(this);
+       UpdateManager::GetInstance()->RegisterComponent(this);
        isColliding = false;
-       transform = Component::GetOwner()->GetTransform();
+       transform = GetOwner()->GetTransform();
        spdlog::info("BoxCollider start");
        colliderVisitor.SetCurrentCollider(this);
        spatial = &SpatialPartitioning::GetInstance();
        spatial->AddCollider(this);
        currentCellIndex = spatial->GetCellIndex(transform->GetPositionWorldSpace());
        spdlog::info("BoxCollider start, current cell index: {}", currentCellIndex.x);
+       /*_width = transform->GetScale().x;
+       _height = transform->GetScale().y;
+       _depth = transform->GetScale().z;
+       this->GetTransform()->SetPosition(transform->GetPosition());*/
     }
 
     void BoxCollider::Update(float deltaTime)
@@ -216,6 +227,7 @@ namespace Engine
     void BoxCollider::OnDestroy() 
     { 
         UpdateManager::GetInstance()->UnregisterComponent(this);
+        RenderingManager::GetInstance()->UnregisterRenderer(this);
     }
 
 } // namespace Engine
