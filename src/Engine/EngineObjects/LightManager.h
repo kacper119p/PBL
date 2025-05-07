@@ -17,12 +17,35 @@ namespace Engine
     class LightManager
     {
     public:
-        static constexpr unsigned int MaxDirectionalLights = 1;
-        static constexpr unsigned int MaxPointLights = 8;
-        static constexpr unsigned int MaxSpotLights = 8;
-        static constexpr unsigned int MaxDirectionalLightsShadowsSupported = 1;
-        static constexpr unsigned int MaxPointLightsShadowsSupported = 2;
-        static constexpr unsigned int MaxSpotLightsShadowsSupported = 2;
+        static constexpr uint8_t MaxDirectionalLights = 1;
+        static constexpr uint8_t MaxPointLights = 8;
+        static constexpr uint8_t MaxSpotLights = 2;
+        static constexpr uint8_t MaxDirectionalLightsShadowsSupported = 1;
+        static constexpr uint8_t MaxPointLightsShadowsSupported = 2;
+        static constexpr uint8_t MaxSpotLightsShadowsSupported = 2;
+
+    private:
+        struct alignas(16) LightDataBuffer
+        {
+            uint32_t DirectionalLightCount = 0;
+            uint32_t PointLightCount = 0;
+            uint32_t SpotlightCount = 0;
+            float _padding0{};
+            DirectionalLight::ShaderData DirectionalLight{};
+            PointLight::ShaderData PointLights[2]{};
+            SpotLight::ShaderData SpotLights[2]{};
+            PointLight::ShaderData PointLightsDynamic[MaxPointLights - 2]{};
+
+            LightDataBuffer()
+            {
+            }
+
+            [[nodiscard]] int64_t GetCurrentSize() const
+            {
+                return sizeof(LightDataBuffer)
+                       - (MaxPointLights - PointLightCount - 2) * sizeof(PointLight::ShaderData);
+            }
+        };
 
     private:
         class DirectionalLight* DirectionalLight = nullptr;
@@ -30,31 +53,34 @@ namespace Engine
         static glm::mat4 DirectionalLightProjectionMatrix;
 
         glm::mat4 DirectionalLightSpaceTransform;
-        unsigned int DirectionalLightShadowMap;
-        unsigned int DirectionalLightFrameBuffer;
+        uint32_t DirectionalLightShadowMap;
+        uint32_t DirectionalLightFrameBuffer;
 
         std::vector<PointLight*> PointLights;
         glm::mat4 PointLightSpaceTransforms[MaxPointLightsShadowsSupported * 6];
-        unsigned int PointLightShadowMaps[MaxPointLightsShadowsSupported];
-        unsigned int PointLightFrameBuffers[MaxPointLightsShadowsSupported];
+        uint32_t PointLightShadowMaps[MaxPointLightsShadowsSupported];
+        uint32_t PointLightFrameBuffers[MaxPointLightsShadowsSupported];
 
         std::vector<SpotLight*> SpotLights;
         glm::mat4 SpotLightSpaceTransforms[MaxSpotLightsShadowsSupported * 6];
-        unsigned int SpotLightShadowMaps[MaxSpotLightsShadowsSupported];
-        unsigned int SpotLightFrameBuffers[MaxSpotLightsShadowsSupported];
+        uint32_t SpotLightShadowMaps[MaxSpotLightsShadowsSupported];
+        uint32_t SpotLightFrameBuffers[MaxSpotLightsShadowsSupported];
 
-        unsigned int IrradianceMap = 0;
-        unsigned int PrefilterMap = 0;
-        unsigned int BrdfLUT;
+        uint32_t IrradianceMap = 0;
+        uint32_t PrefilterMap = 0;
+        uint32_t BrdfLUT;
 
-        unsigned int SsaoTexture = 0;
+        uint32_t SsaoTexture = 0;
+
+        uint32_t LightBuffer;
+        LightDataBuffer LightBufferData;
 
         static LightManager* Instance;
 
-        static constexpr unsigned int DirectionalShadowWidth = 4096;
-        static constexpr unsigned int DirectionalShadowHeight = 4096;
-        static constexpr unsigned int OmnidirectionalShadowWidth = 1024;
-        static constexpr unsigned int OmnidirectionalShadowHeight = 1024;
+        static constexpr uint32_t DirectionalShadowWidth = 4096;
+        static constexpr uint32_t DirectionalShadowHeight = 4096;
+        static constexpr uint32_t OmnidirectionalShadowWidth = 1024;
+        static constexpr uint32_t OmnidirectionalShadowHeight = 1024;
 
     private:
         LightManager();
@@ -136,7 +162,7 @@ namespace Engine
 
         void RenderShadowMaps(const CameraRenderData& RenderData);
 
-        void SetupLightsForRendering(const Shaders::Shader& Shader);
+        void SetupLightsForRendering();
 
     private:
         void InitializeDirectionalLightShadowMap();
@@ -148,6 +174,10 @@ namespace Engine
         void RenderPointLightsShadowMaps();
 
         void RenderSpotLightsShadowMaps();
+
+        void InitializeLightBuffer();
+
+        void UpdateLightBuffer();
 
         void
         RenderOmniDirectionalShadowMap(const unsigned int& Framebuffer, const glm::vec3& LightPosition,

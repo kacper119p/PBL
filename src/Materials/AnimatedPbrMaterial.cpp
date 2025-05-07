@@ -74,7 +74,6 @@ namespace Materials
     void AnimatedPbrMaterial::Use() const
     {
         GetMainPass().Use();
-        Engine::LightManager::GetInstance()->SetupLightsForRendering(MainPass);
 
         BaseColor.Bind();
         EmissiveColor.Bind();

@@ -62,6 +62,7 @@ namespace Engine
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);
         glCullFace(GL_BACK);
+        LightManager::GetInstance()->SetupLightsForRendering();
         for (const auto& renderersGroup : Renderers)
         {
             renderersGroup.first->Use();

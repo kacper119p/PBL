@@ -7,6 +7,7 @@ layout (bindless_sampler) uniform samplerCube Texture;
 
 out vec4 FragColor;
 
+layout (early_fragment_tests) in;
 void main()
 {
     vec3 color = texture(Texture, normalize(Direction)).rgb;

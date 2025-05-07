@@ -70,7 +70,6 @@ namespace Materials
     void PbrMaterial::Use() const
     {
         GetMainPass().Use();
-        Engine::LightManager::GetInstance()->SetupLightsForRendering(MainPass);
 
         BaseColor.Bind();
         EmissiveColor.Bind();
