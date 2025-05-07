@@ -11,6 +11,7 @@ uniform vec3 CameraPosition;
 
 out vec4 FragColor;
 
+layout (early_fragment_tests) in;
 void main() {
     vec3 LightColor = vec3(0.0, 0.0, 0.0);
 

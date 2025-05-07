@@ -16,6 +16,9 @@ namespace Shaders
         static std::unordered_map<ShaderSourceFiles, Shader> ShaderPrograms;
         static std::unordered_map<std::string, ComputeShader> ComputeShaderPrograms;
 
+    public:
+        static uint32_t BoundShaderId;
+
     private:
         ShaderManager() = default;
 

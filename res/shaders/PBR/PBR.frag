@@ -22,6 +22,7 @@ layout (bindless_sampler) uniform sampler2D EmissiveMap;
 
 out vec3 FragColor;
 
+layout (early_fragment_tests) in;
 void main() {
     vec3 BaseColor = texture(BaseMap, TexCoord).rgb * BaseColor;
     vec3 RoughnessMetallicAmbientOcclusion = texture(RoughnessMetallicAmbientOcclusionMap, TexCoord).rgb;

@@ -11,6 +11,7 @@ layout (bindless_sampler) uniform samplerCube EnvironmentMap;
 
 out vec4 FragColor;
 
+layout (early_fragment_tests) in;
 void main()
 {
     vec3 I = normalize(Position - CameraPosition);

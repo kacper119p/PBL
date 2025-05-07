@@ -16,6 +16,8 @@ namespace Shaders
     std::unordered_map<std::string, unsigned int> ShaderManager::ShaderStages;
     std::unordered_map<ShaderSourceFiles, Shader> ShaderManager::ShaderPrograms;
     std::unordered_map<std::string, ComputeShader> ShaderManager::ComputeShaderPrograms;
+    uint32_t ShaderManager::BoundShaderId = -1;
+
 
     Shader ShaderManager::GetShader(const ShaderSourceFiles& ShaderSourceFiles)
     {

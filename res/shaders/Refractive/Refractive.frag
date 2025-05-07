@@ -12,6 +12,7 @@ layout (bindless_sampler) uniform samplerCube EnvironmentMap;
 
 out vec4 FragColor;
 
+layout (early_fragment_tests) in;
 void main()
 {
     float ratio = 1.0 / IOR;
