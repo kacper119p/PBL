@@ -81,7 +81,7 @@ namespace Engine
 
         spdlog::info("Successfully built scene.");
 
-        float lastFrame = 0.0f;
+        float lastFrame = glfwGetTime();
 
         // Main loop
         while (!glfwWindowShouldClose(Window))
