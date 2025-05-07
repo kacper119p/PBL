@@ -127,7 +127,7 @@ namespace Engine
          */
         [[nodiscard]] glm::vec3 GetPosition() const
         {
-            return GetOwner()->GetTransform()->GetPositionWorldSpace();
+            return GetOwner()->GetTransform()->GetPosition();
         }
 
         [[nodiscard]] ShaderData GetShaderData() const

@@ -35,10 +35,7 @@ namespace Engine
          * @brief Sets material used by this renderer.
          * @param Material A new material.
          */
-        void SetMaterial(Materials::Material* const Material)
-        {
-            this->Material = Material;
-        }
+        void SetMaterial(Materials::Material* const Material);
 
         /**
          * @brief Renders geometry's depth to a depth buffer. Used for a depth prepass.

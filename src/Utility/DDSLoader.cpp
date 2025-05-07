@@ -5,7 +5,7 @@
 #include <glad/glad.h>
 #include <glm/ext/scalar_int_sized.hpp>
 
-#include "../../cmake-build-debug-visual-studio-editor/_deps/spdlog-src/include/spdlog/spdlog.h"
+#include "spdlog/spdlog.h"
 #include "Events/Action.h"
 
 #define EXIT\

@@ -1,6 +1,6 @@
 #include "AudioSource.h"
 
-#include "../../../../cmake-build-debug-visual-studio-editor/_deps/spdlog-src/include/spdlog/spdlog.h"
+#include "spdlog/spdlog.h"
 #include "Serialization/SerializationUtility.h"
 #include "Engine/EngineObjects/Entity.h"
 
