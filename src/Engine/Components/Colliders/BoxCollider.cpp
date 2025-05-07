@@ -171,6 +171,19 @@ namespace Engine
                                              const glm::mat4* SpaceTransformMatrices)
     {}
 
+    #if EDITOR
+    void BoxCollider::DrawImGui() {
+        ImGui::Text("Box Collider");
+        ImGui::Separator();
+        ImGui::Checkbox("Is Static", &isStatic);
+        ImGui::Text("Width: %.2f", _width);
+        ImGui::Text("Height: %.2f", _height);
+        ImGui::Text("Depth: %.2f", _depth);
+        ImGui::Separator();
+    
+    };
+#endif
+
     void BoxCollider::Start()
     { 
         
