@@ -96,151 +96,70 @@ namespace Materials
 #if EDITOR
     void WaterMaterial::DrawImGui()
     {
+        static bool showNormal0Popup = false;
+        static bool showNormal1Popup = false;
+        static std::vector<std::string> availableTextures;
+        std::string texturePath = std::filesystem::relative("./res/textures").string();
+        static bool scanned = false;
+
+        // Use the EditorReadMaterial method to scan and populate available textures if not already scanned
+        if (!scanned)
         {
-            static bool showNormal0Popup = false;
-            static bool showNormal1Popup = false;
-            static std::vector<std::string> availableTextures;
-            std::string texturePath = std::filesystem::absolute("./res/textures").string();
-            static bool scanned = false;
+            EditorReadMaterial(availableTextures, scanned, texturePath);
+        }
 
-            if (!scanned)
-            {
-                for (const auto& entry : std::filesystem::recursive_directory_iterator(texturePath))
-                {
-                    if (entry.is_regular_file() && entry.path().extension() == ".dds")
-                        availableTextures.emplace_back(entry.path().string());
-                }
-                scanned = true;
-            }
+        // Use the helper method from Material to display and update NormalMap0
+        EditorSetMaterial("Normal Map 0", NormalMap0, showNormal0Popup, availableTextures, texturePath,
+                          "Normal Map 0 Picker");
 
-            std::string normalMap0Path =
-                    NormalMap0.GetValue().GetId() != 0
-                        ? Engine::TextureManager::GetTexturePath(NormalMap0.GetValue())
-                        : "None";
-            std::string normalMap1Path =
-                    NormalMap1.GetValue().GetId() != 0
-                        ? Engine::TextureManager::GetTexturePath(NormalMap1.GetValue())
-                        : "None";
+        // Use the helper method from Material to display and update NormalMap1
+        EditorSetMaterial("Normal Map 1", NormalMap1, showNormal1Popup, availableTextures, texturePath,
+                          "Normal Map 1 Picker");
 
+        ImGui::Separator();
 
-            ImGui::Text("Normal Map 0:");
-            ImGui::Selectable(normalMap0Path.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
-            if (ImGui::BeginDragDropTarget())
-            {
-                if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
-                {
-                    const char* droppedPath = static_cast<const char*>(payload->Data);
-                    if (std::filesystem::path(droppedPath).extension() == ".dds")
-                    {
-                        NormalMap0.SetValue(Engine::TextureManager::GetTexture(droppedPath));
-                    }
-                }
-                ImGui::EndDragDropTarget();
-            }
-            if (ImGui::IsItemClicked())
-                showNormal0Popup = true;
-            if (showNormal0Popup)
-            {
-                ImGui::OpenPopup("Normal Map 0 Picker");
-                showNormal0Popup = false;
-            }
-            if (ImGui::BeginPopup("Normal Map 0 Picker"))
-            {
-                for (const auto& path : availableTextures)
-                {
-                    std::filesystem::path fsPath(path);
-                    std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
-                    if (ImGui::Selectable(displayName.c_str()))
-                    {
-                        NormalMap0.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
-                        ImGui::CloseCurrentPopup();
-                    }
-                    ImGui::SameLine();
-                    ImGui::TextDisabled("(%s)", path.c_str());
-                }
-                ImGui::EndPopup();
-            }
-            ImGui::Text("Normal Map 1:");
-            ImGui::Selectable(normalMap1Path.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
-            if (ImGui::BeginDragDropTarget())
-            {
-                if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
-                {
-                    const char* droppedPath = static_cast<const char*>(payload->Data);
-                    if (std::filesystem::path(droppedPath).extension() == ".dds")
-                    {
-                        NormalMap1.SetValue(Engine::TextureManager::GetTexture(droppedPath));
-                    }
-                }
-                ImGui::EndDragDropTarget();
-            }
-            if (ImGui::IsItemClicked())
-                showNormal1Popup = true;
-            if (showNormal1Popup)
-            {
-                ImGui::OpenPopup("Normal Map 1 Picker");
-                showNormal1Popup = false;
-            }
-            if (ImGui::BeginPopup("Normal Map 1 Picker"))
-            {
-                for (const auto& path : availableTextures)
-                {
-                    std::filesystem::path fsPath(path);
-                    std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
-                    if (ImGui::Selectable(displayName.c_str()))
-                    {
-                        NormalMap1.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
-                        ImGui::CloseCurrentPopup();
-                    }
-                    ImGui::SameLine();
-                    ImGui::TextDisabled("(%s)", path.c_str());
-                }
-                ImGui::EndPopup();
-            }
+        // Color property binding using the existing helper method
 
-            ImGui::Separator();
+        glm::vec3 color = Color.GetValue();
+        if (ImGui::ColorEdit3("Color", &color.x))
+        {
+            Color.SetValue(color);
+        }
 
-            glm::vec3 color = Color.GetValue();
-            if (ImGui::ColorEdit3("Color", &color.x))
-            {
-                Color.SetValue(color);
-            }
+        glm::vec2 tiling0 = Tiling0.GetValue();
+        if (ImGui::DragFloat2("Tiling 0", &tiling0.x, 0.01f))
+        {
+            Tiling0.SetValue(tiling0);
+        }
 
-            glm::vec2 tiling0 = Tiling0.GetValue();
-            if (ImGui::DragFloat2("Tiling 0", &tiling0.x, 0.01f))
-            {
-                Tiling0.SetValue(tiling0);
-            }
+        glm::vec2 tiling1 = Tiling1.GetValue();
+        if (ImGui::DragFloat2("Tiling 1", &tiling1.x, 0.01f))
+        {
+            Tiling1.SetValue(tiling1);
+        }
 
-            glm::vec2 tiling1 = Tiling1.GetValue();
-            if (ImGui::DragFloat2("Tiling 1", &tiling1.x, 0.01f))
-            {
-                Tiling1.SetValue(tiling1);
-            }
+        glm::vec2 velocity0 = Velocity0.GetValue();
+        if (ImGui::DragFloat2("Velocity 0", &velocity0.x, 0.01f))
+        {
+            Velocity0.SetValue(velocity0);
+        }
 
-            glm::vec2 velocity0 = Velocity0.GetValue();
-            if (ImGui::DragFloat2("Velocity 0", &velocity0.x, 0.01f))
-            {
-                Velocity0.SetValue(velocity0);
-            }
+        glm::vec2 velocity1 = Velocity1.GetValue();
+        if (ImGui::DragFloat2("Velocity 1", &velocity1.x, 0.01f))
+        {
+            Velocity1.SetValue(velocity1);
+        }
 
-            glm::vec2 velocity1 = Velocity1.GetValue();
-            if (ImGui::DragFloat2("Velocity 1", &velocity1.x, 0.01f))
-            {
-                Velocity1.SetValue(velocity1);
-            }
+        float roughness = Roughness.GetValue();
+        if (ImGui::SliderFloat("Roughness", &roughness, 0.0f, 1.0f))
+        {
+            Roughness.SetValue(roughness);
+        }
 
-            float roughness = Roughness.GetValue();
-            if (ImGui::SliderFloat("Roughness", &roughness, 0.0f, 1.0f))
-            {
-                Roughness.SetValue(roughness);
-            }
-
-            float metallic = Metallic.GetValue();
-            if (ImGui::SliderFloat("Metallic", &metallic, 0.0f, 1.0f))
-            {
-                Metallic.SetValue(metallic);
-            }
+        float metallic = Metallic.GetValue();
+        if (ImGui::SliderFloat("Metallic", &metallic, 0.0f, 1.0f))
+        {
+            Metallic.SetValue(metallic);
         }
     }
 #endif
