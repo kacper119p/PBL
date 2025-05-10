@@ -8,7 +8,6 @@
 #include "Serialization/SerializationUtility.h"
 #include "../../EngineObjects/Entity.h" // TODO: Fix later. I'm using this way because of indexing problem.
 #include "../Interfaces/IUpdateable.h"
-#include "../../EngineObjects/UpdateManager.h"
 #include <glad/glad.h> 
 #include <glm/glm.hpp>
 #include <cmath>
@@ -38,6 +37,11 @@ namespace Engine
         glm::ivec3 currentCellIndex = glm::ivec3(0, 0, 0); // non-definable by user
         SpatialPartitioning* spatial;
 
+        // TODO: remove when rigidbody fully implemented
+        const glm::vec3 gravity = glm::vec3(0.0f, -9.81f, 0.0f);
+        // TODO END
+
+        std::string loadShaderSource(const char* filePath);
     public:
         ColliderTypeE colliderType;
         Events::TEvent<Collider*> onCollisionEnter;
@@ -82,6 +86,8 @@ namespace Engine
             return this == other;
         }
 
+        
+
         void RenderDepth(const CameraRenderData& RenderData) override;
 
         void Render(const CameraRenderData& RenderData) override;
@@ -91,8 +97,9 @@ namespace Engine
         void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                     const glm::mat4* SpaceTransformMatrices) override;
 
-        // TODO: remove when spatial fully implemented
-        void AddColliderToSpatial(Collider* collider);
+        void Start() override;
+        void OnDestroy() override;
+        void Update(float deltaTime);
         
         #if EDITOR
         void DrawImGui() override {};

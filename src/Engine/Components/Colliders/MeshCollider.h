@@ -43,11 +43,9 @@ namespace Engine
         void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                     const glm::mat4* SpaceTransformMatrices) override;
 
-        void Start() override;
-        void OnDestroy() override;
 
         #if EDITOR
-        void DrawImGui() override {};
+        void DrawImGui() override;
         #endif
 
         SERIALIZATION_EXPORT_CLASS(MeshCollider)

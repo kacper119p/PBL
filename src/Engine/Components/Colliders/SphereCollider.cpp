@@ -1,24 +1,10 @@
 #include "SphereCollider.h"
 #include "Shaders/ShaderManager.h"
-#include "Engine/EngineObjects/RenderingManager.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
 #include "spdlog/spdlog.h"
 
 namespace Engine
 {
     SphereCollider::SphereCollider() : radius(1.0f)
-    {
-        this->colliderType = SPHERE;
-        this->shouldMove = false;
-        RenderingManager::GetInstance()->RegisterRenderer(this);
-        UpdateManager::GetInstance()->RegisterComponent(this);
-    }
-
-    SphereCollider::SphereCollider(Transform* transform, bool isTrigger, float radius) :
-        Collider(transform, isTrigger), radius(radius)
     {
         this->colliderType = SPHERE;
     }
@@ -29,15 +15,6 @@ namespace Engine
         return true;
     }
 
-    //bool SphereCollider::CheckCollision(const Collider& other)
-    //{
-    //    if (isStatic || other.IsStatic())
-    //        return false;
-
-    //    // TODO: implement collision detection for SphereCollider / remove func
-
-    //    return false;
-    //}
 
     SphereCollider& SphereCollider::operator=(const SphereCollider& other)
     {
@@ -79,20 +56,6 @@ namespace Engine
     float SphereCollider::GetRadius() const { return radius; }
     void SphereCollider::SetRadius(float radius) { this->radius = radius; }
 
-    std::string SphereCollider::loadShaderSource(const char* filePath)
-    {
-        std::ifstream shaderFile(filePath);
-        std::stringstream shaderStream;
-
-        if (!shaderFile)
-        {
-            throw std::runtime_error("Failed to open shader file");
-        }
-
-        shaderStream << shaderFile.rdbuf();
-        return shaderStream.str();
-    }
-
     void SphereCollider::DrawDebugMesh(const CameraRenderData& RenderData)
     {
         const int latitudeSegments = 16;
@@ -128,11 +91,9 @@ namespace Engine
                 int current = lat * (longitudeSegments + 1) + lon;
                 int next = current + longitudeSegments + 1;
 
-                // lines for latitudinal circle
                 indices.push_back(current);
                 indices.push_back(current + 1);
 
-                // lines for longitudinal circle
                 indices.push_back(current);
                 indices.push_back(next);
             }
@@ -189,32 +150,15 @@ namespace Engine
     {
     }
 
-
-    void SphereCollider::Start() 
+    #if EDITOR
+    void SphereCollider::DrawImGui()
     {
-        transform = GetOwner()->GetTransform();
+        ImGui::Text("Sphere Collider");
+        ImGui::Separator();
+        ImGui::Checkbox("Is Trigger", &isTrigger);
+        ImGui::Checkbox("Is Static", &isStatic);
+        ImGui::DragFloat("Radius", &radius, 0.1f, 0.0f, 100.0f);
     }
-
-    void SphereCollider::Update(float deltaTime)
-    {
-
-        // TODO: remove when scriptable fully implemented
-        if (shouldMove)
-        {
-            glm::vec3 newPosition = transform->GetPosition() - glm::vec3(.1f, 0.0f, 0.0f) * deltaTime;
-            transform->SetPosition(newPosition);
-            if (isColliding)
-            {
-                shouldMove = false;
-            }
-        }
-        // TODO END
-        colliderVisitor.ManageCollisions();
-    }
-
-    void SphereCollider::OnDestroy() {
-        RenderingManager::GetInstance()->UnregisterRenderer(this);
-        UpdateManager::GetInstance()->UnregisterComponent(this);
-    }
+    #endif
 
 } // namespace Engine

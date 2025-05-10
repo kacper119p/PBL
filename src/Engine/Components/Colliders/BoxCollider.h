@@ -12,7 +12,7 @@ namespace Engine
 
     class CocreteColliderVisitor;
 
-    class BoxCollider : public Collider, public IUpdateable
+    class BoxCollider : public Collider
     {
     private:
         float _width;
@@ -23,25 +23,16 @@ namespace Engine
         unsigned int VBO = 0;
         unsigned int EBO = 0;
 
-        // TODO: remove when rigidbody fully implemented
-        const glm::vec3 gravity = glm::vec3(0.0f, -4.81f, 0.0f);
+        
     public:
 
-        // TODO: remove when scriptable fully implemented
-        bool shouldMove = false;
 
         BoxCollider();
-        BoxCollider(Transform* transform, bool isTrigger = false, float width = 1.0f, float height = 1.0f,
-                    float depth = 1.0f);
 
         virtual bool AcceptCollision(ColliderVisitor& visitor) override;
         //virtual bool CheckCollision(const Collider& other) override;
 
         inline virtual Collider* GetInstance() override { return this; }
-
-        void Start() override;
-        void Update(float deltaTime) override;
-        void OnDestroy() override;
 
         float GetWidth() const;
         void SetWidth(float width);
@@ -71,8 +62,6 @@ namespace Engine
 
         SERIALIZATION_EXPORT_CLASS(BoxCollider)
 
-        private:
-        std::string loadShaderSource(const char* filePath);
     };
 
 } // namespace Engine

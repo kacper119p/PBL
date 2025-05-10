@@ -1,29 +1,16 @@
 #include "CapsuleCollider.h"
 #include "Shaders/ShaderManager.h"
-#include "Engine/EngineObjects/RenderingManager.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
+
 #include "spdlog/spdlog.h"
+
 
 namespace Engine
 {
 
     CapsuleCollider::CapsuleCollider() : _height(2.0f), _radius(2.0f) {
         this->colliderType = CAPSULE;
-        this->shouldMove = false;
-        RenderingManager::GetInstance()->RegisterRenderer(this);
-        UpdateManager::GetInstance()->RegisterComponent(this);
     }
 
-    CapsuleCollider::CapsuleCollider(Transform* transform, bool isTrigger, float radius, float height) :
-        Collider(transform, isTrigger), _radius(radius), _height(height)
-    {
-        this->colliderType = CAPSULE;
-        RenderingManager::GetInstance()->RegisterRenderer(this);
-        UpdateManager::GetInstance()->RegisterComponent(this);
-    }
 
     bool CapsuleCollider::AcceptCollision(ColliderVisitor& visitor)
     {
@@ -41,20 +28,6 @@ namespace Engine
         _height = other._height;
 
         return *this;
-    }
-
-    std::string CapsuleCollider::loadShaderSource(const char* filePath)
-    {
-        std::ifstream shaderFile(filePath);
-        std::stringstream shaderStream;
-
-        if (!shaderFile)
-        {
-            throw std::runtime_error("Failed to open shader file");
-        }
-
-        shaderStream << shaderFile.rdbuf();
-        return shaderStream.str();
     }
 
     rapidjson::Value CapsuleCollider::Serialize(rapidjson::Document::AllocatorType& Allocator) const
@@ -198,33 +171,15 @@ namespace Engine
     {
     }
 
-    void CapsuleCollider::Start() 
-    { 
-        isColliding = false;
-        transform = GetOwner()->GetTransform();
-        colliderVisitor.SetCurrentCollider(this);
-    }
-
-    void CapsuleCollider::Update(float deltaTime)
+    #if EDITOR
+    void CapsuleCollider::DrawImGui()
     {
-
-        // TODO: remove when scriptable fully implemented
-        if (shouldMove)
-        {
-            glm::vec3 newPosition = transform->GetPosition() - glm::vec3(.1f, 0.0f, 0.0f) * deltaTime;
-            transform->SetPosition(newPosition);
-            if (isColliding)
-            {
-                shouldMove = false;
-            }
-        }
-        // TODO END
-        colliderVisitor.ManageCollisions();
+        ImGui::Text("Capsule Collider");
+        ImGui::Separator();
+        ImGui::Text("Radius: %.2f", _radius);
+        ImGui::Text("Height: %.2f", _height);
+        ImGui::Separator();
     }
-
-    void CapsuleCollider::OnDestroy() 
-    { 
-        UpdateManager::GetInstance()->UnregisterComponent(this);
-    }
+    #endif
 
 } // namespace Engine

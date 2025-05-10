@@ -1,11 +1,5 @@
 #include "BoxCollider.h"
 #include "Shaders/ShaderManager.h"
-#include "Engine/EngineObjects/RenderingManager.h"
-#include "SpatialPartitioning.h"
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
 #include "spdlog/spdlog.h"
 
 namespace Engine
@@ -14,17 +8,6 @@ namespace Engine
     { 
         this->colliderType = BOX; 
         SetMaterial(Materials::MaterialManager::GetMaterial("res/materials/SampleScene/Default.mat"));
-        
-
-    }
-
-    BoxCollider::BoxCollider(Transform* transform, bool isTrigger, float width, float height, float depth) :
-        Collider(transform, isTrigger), _width(width), _height(height), _depth(depth)
-    {
-        this->colliderType = BOX;
-        SetMaterial(Materials::MaterialManager::GetMaterial("res/materials/SampleScene/Default.mat"));
-        RenderingManager::GetInstance()->RegisterRenderer(this);
-        UpdateManager::GetInstance()->RegisterComponent(this);
     }
 
     bool BoxCollider::AcceptCollision(ColliderVisitor& visitor)
@@ -44,20 +27,6 @@ namespace Engine
         _depth = other._depth;
 
         return *this;
-    }
-
-    std::string BoxCollider::loadShaderSource(const char* filePath)
-    {
-        std::ifstream shaderFile(filePath);
-        std::stringstream shaderStream;
-
-        if (!shaderFile)
-        {
-            throw std::runtime_error("Failed to open shader file");
-        }
-
-        shaderStream << shaderFile.rdbuf();
-        return shaderStream.str();
     }
 
     rapidjson::Value BoxCollider::Serialize(rapidjson::Document::AllocatorType& Allocator) const {
@@ -188,46 +157,6 @@ namespace Engine
         
         ImGui::Separator();
     };
-#endif
-
-    void BoxCollider::Start()
-    { 
-       RenderingManager::GetInstance()->RegisterRenderer(this);
-       UpdateManager::GetInstance()->RegisterComponent(this);
-       isColliding = false;
-       transform = GetOwner()->GetTransform();
-       spdlog::info("BoxCollider start");
-       colliderVisitor.SetCurrentCollider(this);
-       spatial = &SpatialPartitioning::GetInstance();
-       spatial->AddCollider(this);
-       currentCellIndex = spatial->GetCellIndex(transform->GetPositionWorldSpace());
-       spdlog::info("BoxCollider start, current cell index: {}", currentCellIndex.x);
-       /*_width = transform->GetScale().x;
-       _height = transform->GetScale().y;
-       _depth = transform->GetScale().z;
-       this->GetTransform()->SetPosition(transform->GetPosition());*/
-    }
-
-    void BoxCollider::Update(float deltaTime)
-    { 
-        if (currentCellIndex != spatial->GetCellIndex(transform->GetPosition()))
-        {
-            spatial->RemoveCollider(this);
-            spatial->AddCollider(this);
-        }
-        if (!isStatic)
-        {
-            // TODO: remove when rigidbody fully implemented
-            glm::vec3 newPosition = transform->GetPosition() + gravity * deltaTime;
-            transform->SetPosition(newPosition);
-        }
-        colliderVisitor.ManageCollisions();
-    }
-
-    void BoxCollider::OnDestroy() 
-    { 
-        UpdateManager::GetInstance()->UnregisterComponent(this);
-        RenderingManager::GetInstance()->UnregisterRenderer(this);
-    }
+    #endif
 
 } // namespace Engine

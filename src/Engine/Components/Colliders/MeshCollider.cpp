@@ -89,13 +89,15 @@ namespace Engine
                                              const glm::mat4* SpaceTransformMatrices)
     {
     }
-
-
-    void MeshCollider::Start() 
-    { 
-        transform = GetOwner()->GetTransform();
+    
+    #if EDITOR
+    void MeshCollider::DrawImGui()
+    {
+        ImGui::Text("Mesh Collider");
+        ImGui::Separator();
+        ImGui::Checkbox("Is Trigger", &isTrigger);
+        ImGui::Checkbox("Is Static", &isStatic);
+        ImGui::InputFloat("Scale", &_scale);
     }
-
-    void MeshCollider::OnDestroy() {}
-
+    #endif
 } // namespace Engine

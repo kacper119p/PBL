@@ -3,6 +3,13 @@
 #include "../Transform.h" // TODO: Fix later. I'm using this way because of indexing problems
 #include "Serialization/SerializationUtility.h"
 #include "spdlog/spdlog.h"
+#include "Engine/EngineObjects/CollisionUpdateManager.h"
+#include "Shaders/ShaderManager.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include "Engine/EngineObjects/RenderingManager.h"
 
 namespace Engine
 {
@@ -10,6 +17,7 @@ namespace Engine
     Collider::Collider() : isTrigger(false), transform(nullptr), spatial(&SpatialPartitioning::GetInstance())
     {
         this->colliderVisitor = ConcreteColliderVisitor();
+        spatial = &SpatialPartitioning::GetInstance();
         isColliding = false; // TODO: to be removed, just for debug purposes
     }
 
@@ -69,9 +77,52 @@ namespace Engine
     void Collider::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                 const glm::mat4* SpaceTransformMatrices) {}
 
-    void Collider::AddColliderToSpatial(Collider* collider)
+    std::string Collider::loadShaderSource(const char* filePath)
+    {
+        std::ifstream shaderFile(filePath);
+        std::stringstream shaderStream;
+
+        if (!shaderFile)
+        {
+            throw std::runtime_error("Failed to open shader file");
+        }
+
+        shaderStream << shaderFile.rdbuf();
+        return shaderStream.str();
+    }
+
+    void Collider::Start()
+    {
+        isColliding = false;
+        transform = Component::GetOwner()->GetTransform();
+        colliderVisitor.SetCurrentCollider(this);
+        spatial = &SpatialPartitioning::GetInstance();
+        spatial->AddCollider(this);
+        currentCellIndex = spatial->GetCellIndex(transform->GetPositionWorldSpace());
+        CollisionUpdateManager::GetInstance()->RegisterCollider(this);
+    }
+
+    void Collider::Update(float deltaTime)
+    {
+        if (currentCellIndex != spatial->GetCellIndex(transform->GetPosition()))
+        {
+            spatial->RemoveCollider(this);
+            spatial->AddCollider(this);
+        }
+        if (!isStatic)
+        {
+            // TODO: remove when rigidbody fully implemented
+            glm::vec3 newPosition = transform->GetPosition() + gravity * deltaTime;
+            transform->SetPosition(newPosition);
+        }
+        colliderVisitor.ManageCollisions();
+    }
+
+    void Collider::OnDestroy() 
     { 
-        colliders.push_back(collider);
+        CollisionUpdateManager::GetInstance()->UnregisterCollider(this);  
+        RenderingManager::GetInstance()->UnregisterRenderer(this);
+        spatial->RemoveCollider(this);
     }
 
 } // namespace Engine
