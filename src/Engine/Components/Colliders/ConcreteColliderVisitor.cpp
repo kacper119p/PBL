@@ -983,7 +983,7 @@ namespace Engine
                         else if (!currentCollider->IsStatic())
                         {
                             currentCollider->GetTransform()->SetPosition(
-                                    currentCollider->GetTransform()->GetPosition() + separation);
+                                    currentCollider->GetTransform()->GetPosition() - separation);
                         }
                     }
                     // TODO: emit collision event
@@ -1032,7 +1032,7 @@ namespace Engine
                         else if (!currentCollider->IsStatic())
                         {
                             currentCollider->GetTransform()->SetPosition(
-                                    currentCollider->GetTransform()->GetPosition() + separation);
+                                    currentCollider->GetTransform()->GetPosition() - separation);
                         }
                     }
                     // TODO: emit collision event
@@ -1073,7 +1073,7 @@ namespace Engine
                         else if (!currentCollider->IsStatic())
                         {
                             currentCollider->GetTransform()->SetPosition(
-                                    currentCollider->GetTransform()->GetPosition() + separation);
+                                    currentCollider->GetTransform()->GetPosition() - separation);
                         }
                     }
                     // TODO: emit collision event
