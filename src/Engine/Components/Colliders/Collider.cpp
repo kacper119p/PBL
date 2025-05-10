@@ -10,7 +10,7 @@
 #include <sstream>
 #include <string>
 #include "Engine/EngineObjects/RenderingManager.h"
-
+#include <random>
 namespace Engine
 {
     
@@ -108,7 +108,12 @@ namespace Engine
             // TODO: remove when rigidbody fully implemented
             glm::vec3 newPosition = transform->GetPosition() + gravity * deltaTime;
             transform->SetPosition(newPosition);
-            transform->SetEulerAngles(transform->GetEulerAngles() + glm::vec3(15.0f, 0.0f, 0.0f) * deltaTime);
+            glm::vec3 randomRotation(GetRandomFloat(40.0f, 60.0f),
+                                     GetRandomFloat(40.0f, 60.0f),
+                                     GetRandomFloat(40.0f, 60.0f)
+            );
+
+            transform->SetEulerAngles(transform->GetEulerAngles() + randomRotation * deltaTime);
             // TODO END
         }
         
@@ -121,5 +126,15 @@ namespace Engine
         RenderingManager::GetInstance()->UnregisterRenderer(this);
         spatial->RemoveCollider(this);
     }
+
+    // TODO: remove when rigidbody implemented
+    float Collider::GetRandomFloat(float min, float max)
+    {
+        static std::random_device rd; 
+        static std::mt19937 gen(rd());
+        std::uniform_real_distribution<float> dis(min, max);
+        return dis(gen);
+    }
+
 
 } // namespace Engine

@@ -184,66 +184,77 @@ namespace Engine
                                                                       const CapsuleCollider& capsule)
     {
         CollisionResult result;
+        result.hasCollision = false;
 
         const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
         const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
 
-        glm::vec3 halfExtents = glm::vec3(box.GetWidth(), box.GetHeight(), box.GetDepth()) * 0.5f;
+        glm::vec3 boxCenter = glm::vec3(boxTransform[3]);
+        glm::vec3 xAxis = glm::normalize(glm::vec3(boxTransform[0]));
+        glm::vec3 yAxis = glm::normalize(glm::vec3(boxTransform[1]));
+        glm::vec3 zAxis = glm::normalize(glm::vec3(boxTransform[2]));
 
-        float capsuleHalfHeight = (capsule.GetHeight() * 0.5f) - capsule.GetRadius();
+        float scaleX = glm::length(glm::vec3(boxTransform[0]));
+        float scaleY = glm::length(glm::vec3(boxTransform[1]));
+        float scaleZ = glm::length(glm::vec3(boxTransform[2]));
+
+        glm::vec3 halfExtents = glm::vec3(box.GetWidth() * 0.5f * scaleX, box.GetHeight() * 0.5f * scaleY,
+                                          box.GetDepth() * 0.5f * scaleZ);
+
         glm::vec3 capsuleCenter = glm::vec3(capsuleTransform[3]);
-        glm::vec3 up = glm::normalize(glm::vec3(capsuleTransform * glm::vec4(0, 1, 0, 0)));
+        glm::vec3 capsuleUp = glm::normalize(glm::vec3(capsuleTransform * glm::vec4(0, 1, 0, 0)));
 
-        glm::vec3 capsuleStart = capsuleCenter - up * capsuleHalfHeight;
-        glm::vec3 capsuleEnd = capsuleCenter + up * capsuleHalfHeight;
+        float capsuleHalfHeight = (capsule.GetHeight() * 0.5f);
+        glm::vec3 capsuleStart = capsuleCenter - capsuleUp * capsuleHalfHeight;
+        glm::vec3 capsuleEnd = capsuleCenter + capsuleUp * capsuleHalfHeight;
         float capsuleRadius = capsule.GetRadius();
 
-        auto ClosestPointOnSegmentToAABB = [](const glm::vec3& segStart, const glm::vec3& segEnd,
-                                              const glm::vec3& aabbMin, const glm::vec3& aabbMax) -> glm::vec3
+        auto ClosestPointSegmentToOBB = [&](const glm::vec3& segStart,
+                                            const glm::vec3& segEnd) -> std::pair<glm::vec3, glm::vec3>
         {
-            glm::vec3 segDir = segEnd - segStart;
-            float segLen = glm::length(segDir);
-
-            if (segLen < 1e-6f)
-            {
-                return glm::clamp(segStart, aabbMin, aabbMax);
-            }
-
-            const int samples = 8;
-            glm::vec3 bestPoint;
             float bestDistSq = std::numeric_limits<float>::max();
+            glm::vec3 bestPointSeg, bestPointBox;
 
+            const int samples = 16;
             for (int i = 0; i <= samples; ++i)
             {
                 float t = static_cast<float>(i) / samples;
                 glm::vec3 p = glm::mix(segStart, segEnd, t);
-                glm::vec3 q = glm::clamp(p, aabbMin, aabbMax);
+                glm::vec3 d = p - boxCenter;
+
+                float dx = glm::clamp(glm::dot(d, xAxis), -halfExtents.x, halfExtents.x);
+                float dy = glm::clamp(glm::dot(d, yAxis), -halfExtents.y, halfExtents.y);
+                float dz = glm::clamp(glm::dot(d, zAxis), -halfExtents.z, halfExtents.z);
+
+                glm::vec3 q = boxCenter + dx * xAxis + dy * yAxis + dz * zAxis;
                 float distSq = glm::length2(p - q);
+
                 if (distSq < bestDistSq)
                 {
                     bestDistSq = distSq;
-                    bestPoint = q;
+                    bestPointSeg = p;
+                    bestPointBox = q;
                 }
             }
 
-            return bestPoint;
+            return {bestPointSeg, bestPointBox};
         };
 
-        glm::vec3 worldMin = glm::vec3(boxTransform * glm::vec4(-halfExtents, 1.0f));
-        glm::vec3 worldMax = glm::vec3(boxTransform * glm::vec4(halfExtents, 1.0f));
+        auto [capsuleP, boxP] = ClosestPointSegmentToOBB(capsuleStart, capsuleEnd);
+        glm::vec3 delta = capsuleP - boxP;
+        float distSq = glm::length2(delta);
 
-        glm::vec3 closestPoint = ClosestPointOnSegmentToAABB(capsuleStart, capsuleEnd, worldMin, worldMax);
-        float distanceSquared = glm::length2(closestPoint - capsuleStart);
-
-        if (distanceSquared <= (capsuleRadius * capsuleRadius))
+        if (distSq <= capsuleRadius * capsuleRadius)
         {
             result.hasCollision = true;
-            result.collisionPoint = closestPoint;
-            result.collisionNormal = glm::normalize(closestPoint - capsuleStart);
+            result.collisionPoint = boxP;
+            result.collisionNormal =
+                    glm::length(delta) > 1e-6f ? glm::normalize(delta) : glm::vec3(0, 1, 0);
         }
 
         return result;
     }
+
 
 
     CollisionResult ConcreteColliderVisitor::CheckBoxMeshCollision(const BoxCollider& box, const MeshCollider& mesh)
@@ -375,7 +386,6 @@ namespace Engine
             return result;
         }
 
-
     CollisionResult ConcreteColliderVisitor::CheckCapsuleCapsuleCollision(const CapsuleCollider& capsule1,
                                                                               const CapsuleCollider& capsule2)
         {
@@ -473,8 +483,6 @@ namespace Engine
 
             return result;
         }
-
-
 
     CollisionResult ConcreteColliderVisitor::CheckCapsuleMeshCollision(const CapsuleCollider& capsule,
                                                                 const MeshCollider& mesh)
@@ -682,7 +690,7 @@ namespace Engine
             const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
             const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
 
-            glm::vec3 boxCenter = glm::vec3(boxTransform * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+            glm::vec3 boxCenter = glm::vec3(boxTransform[3]);
             glm::vec3 xAxis = glm::normalize(glm::vec3(boxTransform[0]));
             glm::vec3 yAxis = glm::normalize(glm::vec3(boxTransform[1]));
             glm::vec3 zAxis = glm::normalize(glm::vec3(boxTransform[2]));
@@ -694,49 +702,48 @@ namespace Engine
             glm::vec3 halfExtents = glm::vec3(box.GetWidth() * 0.5f * scaleX, box.GetHeight() * 0.5f * scaleY,
                                               box.GetDepth() * 0.5f * scaleZ);
 
-            glm::vec3 capsuleCenter = glm::vec3(capsuleTransform * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-            glm::vec3 upDirection = glm::normalize(glm::vec3(capsuleTransform[1]));
+            glm::vec3 capsuleCenter = glm::vec3(capsuleTransform[3]);
+            glm::vec3 capsuleUp = glm::normalize(glm::vec3(capsuleTransform * glm::vec4(0, 1, 0, 0)));
 
             float capsuleHalfHeight = (capsule.GetHeight() * 0.5f) - capsule.GetRadius();
-            glm::vec3 capsuleStart = capsuleCenter - upDirection * capsuleHalfHeight;
-            glm::vec3 capsuleEnd = capsuleCenter + upDirection * capsuleHalfHeight;
+            glm::vec3 capsuleStart = capsuleCenter - capsuleUp * capsuleHalfHeight;
+            glm::vec3 capsuleEnd = capsuleCenter + capsuleUp * capsuleHalfHeight;
 
-            glm::vec3 delta = capsuleCenter - boxCenter;
+            glm::vec3 capsuleSegment = capsuleEnd - capsuleStart;
+            float segmentLenSq = glm::length2(capsuleSegment);
+            float t = 0.0f;
 
-            glm::vec3 axes[] = {xAxis, yAxis, zAxis};
-
-            float minPenetration = std::numeric_limits<float>::max();
-            glm::vec3 smallestAxis(0.0f);
-
-            for (const glm::vec3& axis : axes)
+            if (segmentLenSq > 1e-6f)
             {
-                float boxProjection = glm::abs(glm::dot(axis, xAxis)) * halfExtents.x +
-                                      glm::abs(glm::dot(axis, yAxis)) * halfExtents.y +
-                                      glm::abs(glm::dot(axis, zAxis)) * halfExtents.z;
-
-                float capsuleProjection =
-                        capsule.GetRadius() + 0.5f * glm::abs(glm::dot(axis, capsuleEnd - capsuleStart));
-
-                float distance = glm::abs(glm::dot(delta, axis));
-                float overlap = boxProjection + capsuleProjection - distance;
-
-                if (overlap < 0.0f)
-                {
-                    return glm::vec3(0.0f);
-                }
-
-                if (overlap < minPenetration)
-                {
-                    minPenetration = overlap;
-                    smallestAxis = axis * (glm::dot(delta, axis) < 0.0f ? -1.0f : 1.0f);
-                }
+                t = glm::dot(boxCenter - capsuleStart, capsuleSegment) / segmentLenSq;
+                t = glm::clamp(t, 0.0f, 1.0f);
             }
 
-            const float MaxPenetrationLimit = 0.1f;
-            minPenetration = glm::min(minPenetration, MaxPenetrationLimit);
+            glm::vec3 closestPointOnCapsule = capsuleStart + t * capsuleSegment;
 
-            return smallestAxis * minPenetration;
+            glm::vec3 d = closestPointOnCapsule - boxCenter;
+            glm::vec3 closestPointOnBox = boxCenter;
+
+            float distX = glm::clamp(glm::dot(d, xAxis), -halfExtents.x, halfExtents.x);
+            float distY = glm::clamp(glm::dot(d, yAxis), -halfExtents.y, halfExtents.y);
+            float distZ = glm::clamp(glm::dot(d, zAxis), -halfExtents.z, halfExtents.z);
+
+            closestPointOnBox += distX * xAxis + distY * yAxis + distZ * zAxis;
+
+            glm::vec3 separationVector = closestPointOnCapsule - closestPointOnBox;
+            float distance = glm::length(separationVector);
+            float radius = capsule.GetRadius();
+
+            if (distance < radius && distance > 1e-6f)
+            {
+                float penetration = radius - distance;
+                return glm::normalize(separationVector) * penetration;
+            }
+
+            return glm::vec3(0.0f);
         }
+
+
 
     glm::vec3 ConcreteColliderVisitor::GetSeparationSphereSphere(const SphereCollider& sphere1,
                                                                  const SphereCollider& sphere2)
@@ -868,37 +875,35 @@ namespace Engine
        {
            case BOX:
            {
-               auto* boxCollider = dynamic_cast<BoxCollider*>(this->currentCollider);
-               if (box.GetOwner() == boxCollider->GetOwner())
-                   return; // Ignore self-collision
-               if (boxCollider)
-               {
-                   result = CheckBoxBoxCollision(box, *boxCollider);
+           auto* boxCollider = dynamic_cast<BoxCollider*>(this->currentCollider);
+           if (box.GetOwner() == boxCollider->GetOwner())
+               return; // Ignore self-collision
+
+               result = CheckBoxBoxCollision(box, *boxCollider);
                    
-                   if (result.hasCollision)
-                   {
-                       box.isColliding = boxCollider->isColliding = result.hasCollision;
-                       glm::vec3 separation = GetSeparationBoxBox(box, *boxCollider);
+               if (result.hasCollision)
+               {
+                   box.isColliding = boxCollider->isColliding = result.hasCollision;
+                   glm::vec3 separation = GetSeparationBoxBox(box, *boxCollider);
                        
-                       if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
-                       {
-                           currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                   result.collisionNormal, result.collisionPoint, 0.001f);
-                       }
-                       else if (!currentCollider->IsStatic())
-                       {
-                           currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
-                                                                        separation);
-                       }
+                   if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
+                   {
+                       currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
+                               result.collisionNormal, result.collisionPoint, 0.001f);
                    }
-                   // TODO: emit collision event
+                   else if (!currentCollider->IsStatic())
+                   {
+                       currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                                                                        separation);
+                   }
                }
+                   // TODO: emit collision event
                break;
            }
            case SPHERE:
            {
                auto* sphere = dynamic_cast<SphereCollider*>(this->currentCollider);
-               if (!sphere || sphere->GetOwner() == box.GetOwner())
+               if (sphere->GetOwner() == box.GetOwner())
                    return;
                result = CheckBoxSphereCollision(box, *sphere);
                box.isColliding = sphere->isColliding = result.hasCollision;
@@ -922,7 +927,7 @@ namespace Engine
            case CAPSULE:
            {
                auto* capsule = dynamic_cast<CapsuleCollider*>(this->currentCollider);
-               if (!capsule || capsule->GetOwner() == box.GetOwner())
+               if (capsule->GetOwner() == box.GetOwner())
                    return;
                result = CheckBoxCapsuleCollision(box, *capsule);
                box.isColliding = capsule->isColliding = result.hasCollision;
@@ -963,7 +968,7 @@ namespace Engine
                 case BOX:
                 {
                     auto* box = dynamic_cast<BoxCollider*>(this->currentCollider);
-                    if (!box || box->GetOwner() == sphere.GetOwner())
+                    if (box->GetOwner() == sphere.GetOwner())
                         return;
                     result = CheckBoxSphereCollision(*box, sphere);
                     box->isColliding = sphere.isColliding = result.hasCollision;
@@ -987,7 +992,7 @@ namespace Engine
                 case SPHERE:
                 {
                     auto* otherSphere = dynamic_cast<SphereCollider*>(this->currentCollider);
-                    if (!otherSphere || otherSphere->GetOwner() == sphere.GetOwner())
+                    if (otherSphere->GetOwner() == sphere.GetOwner())
                         return;
                     result = CheckSphereSphereCollision(sphere, *otherSphere);
                     otherSphere->isColliding = sphere.isColliding = result.hasCollision;
@@ -1011,7 +1016,7 @@ namespace Engine
                 case CAPSULE:
                 {
                     auto* capsule = dynamic_cast<CapsuleCollider*>(this->currentCollider);
-                    if (!capsule || capsule->GetOwner() == sphere.GetOwner())
+                    if (capsule->GetOwner() == sphere.GetOwner())
                         return;
                     result =
                             CheckCapsuleSphereCollision(*capsule, sphere);
@@ -1053,7 +1058,7 @@ namespace Engine
                 case BOX:
                 {
                     auto* box = dynamic_cast<BoxCollider*>(this->currentCollider);
-                    if (!box || box->GetOwner() == capsule.GetOwner())
+                    if (box->GetOwner() == capsule.GetOwner())
                         return;
                     result = CheckBoxCapsuleCollision(*box, capsule);
                     box->isColliding = capsule.isColliding = result.hasCollision;
@@ -1077,7 +1082,7 @@ namespace Engine
                 case SPHERE:
                 {
                     auto* sphere = dynamic_cast<SphereCollider*>(this->currentCollider);
-                    if (!sphere || sphere->GetOwner() == capsule.GetOwner())
+                    if (sphere->GetOwner() == capsule.GetOwner())
                         return;
                     result =
                             CheckCapsuleSphereCollision(capsule, *sphere);
@@ -1102,7 +1107,7 @@ namespace Engine
                 case CAPSULE:
                 {
                     auto* otherCapsule = dynamic_cast<CapsuleCollider*>(this->currentCollider);
-                    if (!otherCapsule || otherCapsule->GetOwner() == capsule.GetOwner())
+                    if (otherCapsule->GetOwner() == capsule.GetOwner())
                         return;
 
                     result =
@@ -1187,6 +1192,5 @@ namespace Engine
 
                 collider->AcceptCollision(*this);
             }
-            
         }
 } // namespace Engine

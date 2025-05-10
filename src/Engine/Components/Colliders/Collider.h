@@ -99,6 +99,8 @@ namespace Engine
         void Start() override;
         void OnDestroy() override;
         void Update(float deltaTime);
+
+        float GetRandomFloat(float min, float max);
         
         #if EDITOR
         void DrawImGui() override {};
