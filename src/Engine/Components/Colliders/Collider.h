@@ -57,7 +57,6 @@ namespace Engine
         bool isColliding;
 
         Collider();
-        Collider(Transform* transform, bool isTrigger = false, bool isStatic = false);
         virtual ~Collider();
 
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;

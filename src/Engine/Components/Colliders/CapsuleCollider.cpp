@@ -7,7 +7,7 @@
 namespace Engine
 {
 
-    CapsuleCollider::CapsuleCollider() : _height(2.0f), _radius(2.0f) {
+    CapsuleCollider::CapsuleCollider() : _height(2.0f), _radius(.5f) {
         this->colliderType = CAPSULE;
     }
 

@@ -3,7 +3,7 @@
 namespace Engine
 {
     MeshCollider::MeshCollider(Transform* transform, bool isTrigger, float scale, Models::Mesh* mesh_p) :
-        Collider(transform, isTrigger), _scale(scale), _mesh_p(mesh_p)
+        Collider(), _scale(scale), _mesh_p(mesh_p)
     {
         this->colliderType = MESH;
     }

@@ -59,7 +59,9 @@ namespace Scene
         // BOX BOX SCENARIO /////////////////////////////////////////////////////////////////////////////////////////////////////////
         #if !EDITOR
         Engine::Entity* boxEntity = Scene->SpawnEntity(nullptr);
-        Engine::BoxCollider* boxCollider = boxEntity->AddComponent<Engine::BoxCollider>();
+        Engine::CapsuleCollider* boxCollider = boxEntity->AddComponent<Engine::CapsuleCollider>();
+        boxCollider->SetHeight(2.0f);
+        boxCollider->SetRadius(.5f);
         boxEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 7.0f, 0.0f));
         boxEntity->GetTransform()->SetEulerAngles(glm::vec3(.0f, 30.0f, 0.0f));
 
@@ -67,8 +69,9 @@ namespace Scene
         Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
         secondBoxEntity->GetTransform()->SetPosition(glm::vec3(2.0f, 7.0f, 0.0f));
 
-        boxCollider->SetStatic(false);
-        secondBoxCollider->SetStatic(false);
+        Engine::Entity* sphereEntity = Scene->SpawnEntity(nullptr);
+        Engine::SphereCollider* sphereCollider = sphereEntity->AddComponent<Engine::SphereCollider>();
+        sphereEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 14.0f, 0.0f));
 
         secondBoxEntity->AddComponent<Engine::MovementComponent>();
 

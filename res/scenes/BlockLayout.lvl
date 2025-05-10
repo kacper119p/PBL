@@ -76,8 +76,8 @@
             "type": "ModelRenderer",
             "id": "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
             "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
-            "Material": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\materials\\SampleScene\\Default.mat",
-            "Model": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\Models\\Box.fbx"
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Box.fbx"
         },
         {
             "type": "BoxCollider",
@@ -165,8 +165,8 @@
             "type": "ModelRenderer",
             "id": "{76d1136b-13b3-493b-88af-816fb45b5ba3}\u0000",
             "owner": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
-            "Material": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\materials\\SampleScene\\Wall.mat",
-            "Model": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\Models\\Box.fbx"
+            "Material": "./res/materials/SampleScene/Wall.mat",
+            "Model": "./res/Models/Box.fbx"
         },
         {
             "type": "BoxCollider",
@@ -214,8 +214,8 @@
             "type": "ModelRenderer",
             "id": "{de16add4-a432-4be8-80c7-5b6b05d2e875}\u0000",
             "owner": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
-            "Material": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\materials\\SampleScene\\Wall.mat",
-            "Model": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\Models\\Box.fbx"
+            "Material": "./res/materials/SampleScene/Wall.mat",
+            "Model": "./res/Models/Box.fbx"
         },
         {
             "type": "BoxCollider",
@@ -263,8 +263,8 @@
             "type": "ModelRenderer",
             "id": "{a9e349aa-d1f5-4d03-80bf-a22a13d058a8}\u0000",
             "owner": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
-            "Material": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\materials\\SampleScene\\Default.mat",
-            "Model": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\Models\\Box.fbx"
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Box.fbx"
         },
         {
             "type": "BoxCollider",
@@ -312,8 +312,8 @@
             "type": "ModelRenderer",
             "id": "{efd99244-36a8-49af-babd-431ee2c033fe}\u0000",
             "owner": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
-            "Material": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\materials\\SampleScene\\Wall.mat",
-            "Model": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\Models\\Box.fbx"
+            "Material": "./res/materials/SampleScene/Wall.mat",
+            "Model": "./res/Models/Box.fbx"
         },
         {
             "type": "BoxCollider",
@@ -361,8 +361,8 @@
             "type": "ModelRenderer",
             "id": "{93f6f002-b9fe-4798-95b9-cfe8dd65b099}\u0000",
             "owner": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
-            "Material": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\materials\\SampleScene\\Wall.mat",
-            "Model": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\Models\\Box.fbx"
+            "Material": "./res/materials/SampleScene/Wall.mat",
+            "Model": "./res/Models/Box.fbx"
         },
         {
             "type": "BoxCollider",
@@ -410,8 +410,8 @@
             "type": "ModelRenderer",
             "id": "{39690d01-b5e2-43d2-8d02-6e4637cd62ce}\u0000",
             "owner": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
-            "Material": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\materials\\SampleScene\\Wall.mat",
-            "Model": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\Models\\Box.fbx"
+            "Material": "./res/materials/SampleScene/Wall.mat",
+            "Model": "./res/Models/Box.fbx"
         },
         {
             "type": "BoxCollider",
@@ -459,8 +459,8 @@
             "type": "ModelRenderer",
             "id": "{3f52de67-c547-4ac2-b56e-a5c902ef60b5}\u0000",
             "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
-            "Material": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\materials\\SampleScene\\Wall.mat",
-            "Model": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\Models\\Box.fbx"
+            "Material": "./res/materials/SampleScene/Wall.mat",
+            "Model": "./res/Models/Box.fbx"
         },
         {
             "type": "BoxCollider",
@@ -508,8 +508,8 @@
             "type": "ModelRenderer",
             "id": "{a83b86bd-7242-4337-aa26-210bd3372848}\u0000",
             "owner": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
-            "Material": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\materials\\SampleScene\\Wall.mat",
-            "Model": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\Models\\Box.fbx"
+            "Material": "./res/materials/SampleScene/Wall.mat",
+            "Model": "./res/Models/Box.fbx"
         },
         {
             "type": "BoxCollider",

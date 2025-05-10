@@ -14,20 +14,12 @@
 namespace Engine
 {
     
-    Collider::Collider() : isTrigger(false), transform(nullptr), spatial(&SpatialPartitioning::GetInstance())
+    Collider::Collider() : isTrigger(false), isStatic(false), transform(nullptr), spatial(&SpatialPartitioning::GetInstance())
     {
         this->colliderVisitor = ConcreteColliderVisitor();
         spatial = &SpatialPartitioning::GetInstance();
-        isColliding = false; // TODO: to be removed, just for debug purposes
-    }
-
-    Collider::Collider(Transform* transform, bool isTrigger, bool isStatic) 
-        :
-        isTrigger(isTrigger), isStatic(isStatic), transform(transform), spatial(&SpatialPartitioning::GetInstance())
-    {
-        this->colliderVisitor = ConcreteColliderVisitor(this);
-        colliderType = BOX; // Default type, can be changed in derived classes
-        isColliding = false; // TODO: to be removed, just for debug purposes
+        SetMaterial(Materials::MaterialManager::GetMaterial("res/materials/SampleScene/Default.mat"));
+        transform = GetOwner()->GetTransform();
     }
 
     Collider::~Collider() 
@@ -99,6 +91,8 @@ namespace Engine
         spatial = &SpatialPartitioning::GetInstance();
         spatial->AddCollider(this);
         currentCellIndex = spatial->GetCellIndex(transform->GetPositionWorldSpace());
+        Material->GetMainPass().SetUniform("Tint", glm::vec3(.0f, 5.0f, .0f));
+        RenderingManager::GetInstance()->RegisterRenderer(this);
         CollisionUpdateManager::GetInstance()->RegisterCollider(this);
     }
 
@@ -114,7 +108,10 @@ namespace Engine
             // TODO: remove when rigidbody fully implemented
             glm::vec3 newPosition = transform->GetPosition() + gravity * deltaTime;
             transform->SetPosition(newPosition);
+            transform->SetEulerAngles(transform->GetEulerAngles() + glm::vec3(15.0f, 0.0f, 0.0f) * deltaTime);
+            // TODO END
         }
+        
         colliderVisitor.ManageCollisions();
     }
 

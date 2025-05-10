@@ -7,6 +7,7 @@ namespace Engine
     SphereCollider::SphereCollider() : radius(1.0f)
     {
         this->colliderType = SPHERE;
+        SetMaterial(Materials::MaterialManager::GetMaterial("res/materials/SampleScene/Default.mat"));
     }
 
     bool SphereCollider::AcceptCollision(ColliderVisitor& visitor)
@@ -51,6 +52,9 @@ namespace Engine
     void SphereCollider::DeserializeReferencesPass(const rapidjson::Value& Object,
                                                 Serialization::ReferenceTable& ReferenceMap)
     {
+        START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
+        DESERIALIZE_POINTER(transform)
+        END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 
     float SphereCollider::GetRadius() const { return radius; }

@@ -129,7 +129,6 @@ namespace Engine
         glDeleteVertexArrays(1, &VAO);
         glDeleteBuffers(1, &VBO);
         glDeleteBuffers(1, &EBO);
-        Material->GetMainPass().SetUniform("Tint", glm::vec3(.0f, 5.0f, .0f));
     }
 
     void BoxCollider::Render(const CameraRenderData& RenderData) { 
