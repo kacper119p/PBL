@@ -16,7 +16,7 @@ namespace Engine
     
     Collider::Collider() : isTrigger(false), isStatic(false), transform(nullptr), isColliding(false), spatial(&SpatialPartitioning::GetInstance())
     {
-        this->colliderVisitor = ConcreteColliderVisitor();
+        this->colliderVisitor = ColliderVisitor();
         spatial = &SpatialPartitioning::GetInstance();
         SetMaterial(Materials::MaterialManager::GetMaterial("res/materials/SampleScene/Default.mat"));
         transform = GetOwner()->GetTransform();

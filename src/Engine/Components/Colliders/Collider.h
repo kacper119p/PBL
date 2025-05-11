@@ -49,7 +49,7 @@ namespace Engine
 
         /// TODO: move those to protected and add getters + setters
         Transform* transform;
-        ConcreteColliderVisitor colliderVisitor;
+        ColliderVisitor colliderVisitor;
         
 
         // TODO: remove when spatial fully implemented

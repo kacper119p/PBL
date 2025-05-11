@@ -15,7 +15,7 @@
 namespace Engine
 {
 
-    ConcreteColliderVisitor::ConcreteColliderVisitor() :
+    ColliderVisitor::ColliderVisitor() :
         currentCollider(nullptr), collisionDetected(false), spatialPartitioning(&SpatialPartitioning::GetInstance())
     {
         result.collisionNormal = glm::vec3(0.0f);
@@ -42,7 +42,7 @@ namespace Engine
     }
 
 
-    CollisionResult ConcreteColliderVisitor::CheckBoxBoxCollision(const BoxCollider& box1, const BoxCollider& box2)
+    CollisionResult ColliderVisitor::CheckBoxBoxCollision(const BoxCollider& box1, const BoxCollider& box2)
     {
         CollisionResult result;
 
@@ -116,7 +116,7 @@ namespace Engine
     }
 
 
-    CollisionResult ConcreteColliderVisitor::CheckBoxSphereCollision(const BoxCollider& box,
+    CollisionResult ColliderVisitor::CheckBoxSphereCollision(const BoxCollider& box,
                                                                      const SphereCollider& sphere)
     {
         CollisionResult result;
@@ -167,7 +167,7 @@ namespace Engine
     }
 
 
-    CollisionResult ConcreteColliderVisitor::CheckBoxCapsuleCollision(const BoxCollider& box,
+    CollisionResult ColliderVisitor::CheckBoxCapsuleCollision(const BoxCollider& box,
                                                                       const CapsuleCollider& capsule)
     {
         CollisionResult result;
@@ -242,7 +242,7 @@ namespace Engine
     }
 
 
-    CollisionResult ConcreteColliderVisitor::CheckSphereSphereCollision(const SphereCollider& sphere1,
+    CollisionResult ColliderVisitor::CheckSphereSphereCollision(const SphereCollider& sphere1,
                                                                         const SphereCollider& sphere2)
     {
         CollisionResult result;
@@ -268,7 +268,7 @@ namespace Engine
     }
 
 
-    CollisionResult ConcreteColliderVisitor::CheckCapsuleSphereCollision(const CapsuleCollider& capsule,
+    CollisionResult ColliderVisitor::CheckCapsuleSphereCollision(const CapsuleCollider& capsule,
                                                                          const SphereCollider& sphere)
     {
         CollisionResult result;
@@ -304,7 +304,7 @@ namespace Engine
     }
 
 
-    CollisionResult ConcreteColliderVisitor::CheckCapsuleCapsuleCollision(const CapsuleCollider& capsule1,
+    CollisionResult ColliderVisitor::CheckCapsuleCapsuleCollision(const CapsuleCollider& capsule1,
                                                                           const CapsuleCollider& capsule2)
     {
         CollisionResult result;
@@ -403,7 +403,7 @@ namespace Engine
     }
 
 
-    glm::vec3 ConcreteColliderVisitor::GetSeparationBoxBox(const BoxCollider& box1, const BoxCollider& box2)
+    glm::vec3 ColliderVisitor::GetSeparationBoxBox(const BoxCollider& box1, const BoxCollider& box2)
     {
         const glm::mat4& transform1 = box1.GetTransform()->GetLocalToWorldMatrix();
         const glm::mat4& transform2 = box2.GetTransform()->GetLocalToWorldMatrix();
@@ -477,7 +477,7 @@ namespace Engine
     }
 
 
-    glm::vec3 ConcreteColliderVisitor::GetSeparationBoxSphere(const BoxCollider& box, const SphereCollider& sphere)
+    glm::vec3 ColliderVisitor::GetSeparationBoxSphere(const BoxCollider& box, const SphereCollider& sphere)
     {
         const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
         const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
@@ -528,7 +528,7 @@ namespace Engine
     }
 
 
-    glm::vec3 ConcreteColliderVisitor::GetSeparationBoxCapsule(const BoxCollider& box, const CapsuleCollider& capsule)
+    glm::vec3 ColliderVisitor::GetSeparationBoxCapsule(const BoxCollider& box, const CapsuleCollider& capsule)
     {
         const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
         const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
@@ -587,7 +587,7 @@ namespace Engine
     }
 
 
-    glm::vec3 ConcreteColliderVisitor::GetSeparationSphereSphere(const SphereCollider& sphere1,
+    glm::vec3 ColliderVisitor::GetSeparationSphereSphere(const SphereCollider& sphere1,
                                                                  const SphereCollider& sphere2)
     {
         glm::vec3 center1 = sphere1.GetTransform()->GetPosition();
@@ -606,7 +606,7 @@ namespace Engine
     }
 
 
-    glm::vec3 ConcreteColliderVisitor::GetSeparationSphereCapsule(const SphereCollider& sphere,
+    glm::vec3 ColliderVisitor::GetSeparationSphereCapsule(const SphereCollider& sphere,
                                                                   const CapsuleCollider& capsule)
     {
         const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
@@ -644,7 +644,7 @@ namespace Engine
     }
 
 
-    glm::vec3 ConcreteColliderVisitor::GetSeparationCapsuleCapsule(const CapsuleCollider& capsule1,
+    glm::vec3 ColliderVisitor::GetSeparationCapsuleCapsule(const CapsuleCollider& capsule1,
                                                                    const CapsuleCollider& capsule2)
     {
         const glm::mat4& transform1 = capsule1.GetTransform()->GetLocalToWorldMatrix();
@@ -708,7 +708,7 @@ namespace Engine
     }
 
 
-    void ConcreteColliderVisitor::ResolveCollisionBox(BoxCollider& box)
+    void ColliderVisitor::ResolveCollisionBox(BoxCollider& box)
     {
         if (this->currentCollider == nullptr || this->currentCollider->IsStatic())
             return;
@@ -794,7 +794,7 @@ namespace Engine
     }
 
 
-    void ConcreteColliderVisitor::ResolveCollisionSphere(SphereCollider& sphere)
+    void ColliderVisitor::ResolveCollisionSphere(SphereCollider& sphere)
     {
         if (this->currentCollider == nullptr || this->currentCollider->IsStatic())
             return;
@@ -877,7 +877,7 @@ namespace Engine
     }
 
 
-    void ConcreteColliderVisitor::ResolveCollisionCapsule(CapsuleCollider& capsule)
+    void ColliderVisitor::ResolveCollisionCapsule(CapsuleCollider& capsule)
     {
         if (this->currentCollider == nullptr || this->currentCollider->IsStatic())
             return;
@@ -961,10 +961,10 @@ namespace Engine
     }
 
 
-    void ConcreteColliderVisitor::SetCurrentCollider(Collider* collider) { this->currentCollider = collider; }
+    void ColliderVisitor::SetCurrentCollider(Collider* collider) { this->currentCollider = collider; }
 
 
-    void ConcreteColliderVisitor::ManageCollisions()
+    void ColliderVisitor::ManageCollisions()
     {
         if (!currentCollider || currentCollider->IsStatic())
             return;
