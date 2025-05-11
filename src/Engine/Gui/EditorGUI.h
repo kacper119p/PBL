@@ -6,6 +6,7 @@
 #include "SceneViewGUI.h"
 #include "AssetsWindowGUI.h"
 #include "Topbar.h"
+#include "MaterialsMenu.h"
 #include "Audio/AudioManager.h"
 #include "Generation/GenerativeSystem.h"
 #include "Models/ModelManager.h"
@@ -50,6 +51,7 @@ namespace Engine
         SceneViewGUI m_Scene;
         AudioManager* m_AudioManager;
         AssetsWindow m_AssetsWindow;
+        MaterialsMenu m_MaterialMenu;
         TopBar m_TopBar;
         Generation::GenerativeSystem m_GenerativeSystem;
         std::unique_ptr<Models::ModelManager> modelManager;

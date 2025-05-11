@@ -114,9 +114,10 @@ namespace Materials
             /**
              * @brief Returns TypeNames of all available components.
              */
-            const std::vector<std::string>* GetAvailableMaterialTypes() const
+        public:
+            std::vector<std::string> GetAvailableMaterialTypes() const
             {
-                return &MaterialTypes;
+                return MaterialTypes;
             }
 #endif
         };

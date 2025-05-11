@@ -11,6 +11,7 @@
 #include "Engine/Components/Renderers/ParticleEmitter.h"
 #include "Engine/Components/Audio/AudioSource.h"
 #include "Engine/EngineObjects/Scene/SceneManager.h"
+
 #include <filesystem>
 #include <iostream>
 #include <random>
@@ -31,6 +32,8 @@ void Engine::EditorGUI::Render(uint64_t Frame, Scene* scene)
     AudioManager::GetInstance().RenderGlobalVolumeImGui();
     DrawSelectedEntitysComponents();
     DrawGenerativeSystem(scene);
+    m_MaterialMenu.DrawMaterialEditor();
+
     //m_TopBar.Draw();
 
 }
@@ -415,6 +418,7 @@ void Engine::EditorGUI::SetupDockspace()
         ImGui::DockBuilderDockWindow("Engine Properties", dock_right_top);
         ImGui::DockBuilderDockWindow("Components", dock_right_top);
         ImGui::DockBuilderDockWindow("Generative System", dock_right_top);
+        ImGui::DockBuilderDockWindow("Material Creator", dock_right_top);
         ImGui::DockBuilderDockWindow("Assets", dock_bottom);
         ImGui::DockBuilderDockWindow("Scene", dock_main);
 
