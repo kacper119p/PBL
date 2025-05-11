@@ -14,7 +14,7 @@
 namespace Engine
 {
     
-    Collider::Collider() : isTrigger(false), isStatic(false), transform(nullptr), spatial(&SpatialPartitioning::GetInstance())
+    Collider::Collider() : isTrigger(false), isStatic(false), transform(nullptr), isColliding(false), spatial(&SpatialPartitioning::GetInstance())
     {
         this->colliderVisitor = ConcreteColliderVisitor();
         spatial = &SpatialPartitioning::GetInstance();
