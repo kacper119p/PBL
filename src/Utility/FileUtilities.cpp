@@ -19,7 +19,6 @@ namespace Utility
             content = stringStream.str();
         } catch (std::ifstream::failure& e)
         {
-            fileStream.close();
             return false;
         }
         destination = content;

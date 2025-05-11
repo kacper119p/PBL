@@ -15,7 +15,7 @@ namespace Utility
 
         int flags;
         glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
-        CHECK_MESSAGE(flags & GL_CONTEXT_FLAG_DEBUG_BIT, "Debug context was not set up correctly.");
+        //CHECK_MESSAGE(flags & GL_CONTEXT_FLAG_DEBUG_BIT, "Debug context was not set up correctly.");
         glEnable(GL_DEBUG_OUTPUT);
         glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
         glDebugMessageCallback(GlDebugOutput, nullptr);

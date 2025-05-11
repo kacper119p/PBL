@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Engine/EngineObjects/Scene/Scene.h"
+#include <Engine/Components/Transform.h>
+#include <Engine/EngineObjects/Entity.h>
 
 namespace Scene
 {

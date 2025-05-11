@@ -9,6 +9,7 @@
 #include "Engine/EngineObjects/LightManager.h"
 #include "Engine/Gui/LightsGui.h"
 #include "Engine/EngineObjects/UpdateManager.h"
+#include "Engine/EngineObjects/CollisionUpdateManager.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialManager.h"
 #include "Models/ModelManager.h"
@@ -66,7 +67,9 @@ namespace Engine
 
         Camera->SetProjectionMatrix(glm::perspective(glm::radians(70.0f), float(WindowWidth) /
                                                                           float(WindowHeight), 0.1f, 1000.0f));
-
+        #if !EDITOR
+        CameraFollow::GetInstance().SetCamera(Camera);
+        #endif
         try
         {
             SceneBuilding::SceneBuilder::Build(CurrentScene);
@@ -81,7 +84,7 @@ namespace Engine
 
         spdlog::info("Successfully built scene.");
 
-        float lastFrame = 0.0f;
+        float lastFrame = glfwGetTime();
 
         // Main loop
         while (!glfwWindowShouldClose(Window))
@@ -98,10 +101,11 @@ namespace Engine
             HandleInput(deltaTime);
             #else
             InputManager::GetInstance().Update();
+            CameraFollow::GetInstance().Update(deltaTime);
             #endif
             // Update game objects' state here
             UpdateManager::GetInstance()->Update(deltaTime);
-
+            CollisionUpdateManager::GetInstance()->Update(deltaTime);
             int displayW, displayH;
             glfwMakeContextCurrent(Window);
             glfwGetFramebufferSize(Window, &displayW, &displayH);
@@ -235,6 +239,7 @@ namespace Engine
         UpdateManager::Initialize();
         Materials::MaterialManager::Initialize();
         Ui::TextManager::Initialize();
+        CollisionUpdateManager::Initialize();
 #if EDITOR
         //for editor game screen
         InitEditorFramebuffer();

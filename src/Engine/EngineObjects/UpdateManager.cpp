@@ -24,7 +24,7 @@ namespace Engine
 
         for (IUpdateable* component : Updateables)
         {
-            component->Update(DeltaTime);
+               component->Update(DeltaTime);
         }
     }
 } // Engine
