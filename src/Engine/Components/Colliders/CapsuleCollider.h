@@ -1,6 +1,7 @@
 #pragma once
 #include "Collider.h"
 #include "Engine/Components/Renderers/Renderer.h"
+
 namespace Engine
 {
     /**
@@ -10,32 +11,61 @@ namespace Engine
 
     class CocreteColliderVisitor;
 
-    class CapsuleCollider : public Collider
+    class CapsuleCollider final : public Collider
     {
     private:
-        float _radius;
-        float _height;
+        float Radius;
+        float Height;
 
-        unsigned int VAO = 0;
-        unsigned int VBO = 0;
-        unsigned int EBO = 0;
+#if EDITOR
+        uint32_t Vao = 0;
+        uint32_t Vbo = 0;
+        uint32_t Ebo = 0;
+
+        static constexpr uint8_t Segments = 16;
+        static constexpr uint8_t Rings = 8;
+#endif
 
     public:
-
         CapsuleCollider();
-        
-        virtual bool AcceptCollision(ColliderVisitor& visitor) override;
+
+    public:
+        ~CapsuleCollider() override;
+
+        virtual bool AcceptCollision(ColliderVisitor& Visitor) override;
+
         inline virtual Collider* GetInstance() override { return this; }
 
-        float GetRadius() const;
-        void SetRadius(float radius);
+        float GetRadius() const
+        {
+            return Radius;
+        }
 
-        float GetHeight() const;
-        void SetHeight(float height);
+        void SetRadius(float Radius)
+        {
+            this->Radius = Radius;
+#if EDITOR
+            UpdateBuffers();
+#endif
+        }
+
+        float GetHeight() const
+        {
+            return Height;
+        }
+
+        void SetHeight(float Height)
+        {
+            this->Height -= Height;
+#if EDITOR
+            UpdateBuffers();
+#endif
+        }
 
         CapsuleCollider& operator=(const CapsuleCollider& other);
 
-        void DrawDebugMesh(const CameraRenderData& RenderData) override;
+#if EDITOR
+        void DrawDebugMesh(const CameraRenderData& RenderData);
 
         void RenderDepth(const CameraRenderData& RenderData) override;
 
@@ -45,12 +75,18 @@ namespace Engine
 
         void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                     const glm::mat4* SpaceTransformMatrices) override;
+#endif
+
+    private:
+#if EDITOR
+        void UpdateBuffers();
+#endif
 
         SERIALIZATION_EXPORT_CLASS(CapsuleCollider)
 
-        #if EDITOR
+#if EDITOR
         void DrawImGui() override;
-        #endif
+#endif
     };
 
 } // namespace Engine

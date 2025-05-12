@@ -10,39 +10,74 @@ namespace Engine
      * @details Represents a box-shaped collider.
     */
 
-    class CocreteColliderVisitor;
+    class ColliderVisitor;
 
-    class BoxCollider : public Collider
+    class BoxCollider final : public Collider
     {
     private:
         float _width;
         float _height;
         float _depth;
 
-        unsigned int VAO = 0;
-        unsigned int VBO = 0;
-        unsigned int EBO = 0;
+#if EDITOR
+        uint32_t Vao = 0;
+        uint32_t Vbo = 0;
+        uint32_t Ebo = 0;
+#endif
 
-        
     public:
-
-
         BoxCollider();
 
+    public:
+        ~BoxCollider() override;
+
+    public:
         virtual bool AcceptCollision(ColliderVisitor& visitor) override;
+
         //virtual bool CheckCollision(const Collider& other) override;
 
         inline virtual Collider* GetInstance() override { return this; }
 
-        float GetWidth() const;
-        void SetWidth(float width);
+        float GetWidth() const
+        {
+            return _width;
+        }
 
-        float GetHeight() const;
-        void SetHeight(float height);
+        void SetWidth(float width)
+        {
+            _width = width;
+#if EDITOR
+            UpdateBuffers();
+#endif
+        }
 
-        float GetDepth() const;
-        void SetDepth(float depth);
+        float GetHeight() const
+        {
+            return _height;
+        }
 
+        void SetHeight(float height)
+        {
+            _height = height;
+#if EDITOR
+            UpdateBuffers();
+#endif
+        }
+
+        float GetDepth() const
+        {
+            return _depth;
+        }
+
+        void SetDepth(float depth)
+        {
+            _depth = depth;
+#if EDITOR
+            UpdateBuffers();
+#endif
+        }
+
+#if EDITOR
         void RenderDepth(const CameraRenderData& RenderData) override;
 
         void Render(const CameraRenderData& RenderData) override;
@@ -52,13 +87,18 @@ namespace Engine
         void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                     const glm::mat4* SpaceTransformMatrices) override;
 
-        void DrawDebugMesh(const CameraRenderData& RenderData) override;
-
+        void DrawDebugMesh(const CameraRenderData& RenderData) const;
+#endif
         BoxCollider& operator=(const BoxCollider& other);
 
-        #if EDITOR
+#if EDITOR
         void DrawImGui() override;
-        #endif
+#endif
+
+    private:
+#if EDITOR
+        void UpdateBuffers();
+#endif
 
         SERIALIZATION_EXPORT_CLASS(BoxCollider)
 

@@ -1,16 +1,10 @@
 #pragma once
 
-#include "../Component.h" // TODO: Fix later. I'm using this way because of indexing problem.
 #include "../Transform.h" // TODO: Fix later. I'm using this way because of indexing problem.
-#include "Events/TAction.h"
 #include "Events/TEvent.h"
 #include "ColliderVisitor.h"
 #include "Serialization/SerializationUtility.h"
-#include "../../EngineObjects/Entity.h" // TODO: Fix later. I'm using this way because of indexing problem.
-#include "../Interfaces/IUpdateable.h"
-#include <glad/glad.h> 
 #include <glm/glm.hpp>
-#include <cmath>
 #include "Engine/Components/Renderers/Renderer.h"
 
 namespace Engine
@@ -25,23 +19,28 @@ namespace Engine
         CAPSULE,
         MESH
     };
+
     /*
      * @brief Base class for all colliders. Subtypes: boxCollider, sphereCollider, capsuleCollider, meshCollider.
      */
-    class Collider : public Renderer
+    class Collider
+#if EDITOR
+            : public Renderer
+#else
+            : public Component
+#endif
     {
 
     protected:
         bool isStatic;
         bool isTrigger;
-        glm::ivec3 currentCellIndex = glm::ivec3(0, 0, 0); // non-definable by user
-        SpatialPartitioning* spatial;
+        glm::ivec3 CurrentCellIndex = glm::ivec3(0, 0, 0); // non-definable by user
+        SpatialPartitioning* Spatial;
 
         // TODO: remove when rigidbody fully implemented
-        const glm::vec3 gravity = glm::vec3(0.0f, -9.81f, 0.0f);
+        const glm::vec3 Gravity = glm::vec3(0.0f, -9.81f, 0.0f);
         // TODO END
 
-        std::string loadShaderSource(const char* filePath);
     public:
         ColliderTypeE colliderType;
         Events::TEvent<Collider*> onCollisionEnter;
@@ -50,61 +49,92 @@ namespace Engine
         /// TODO: move those to protected and add getters + setters
         Transform* transform;
         ColliderVisitor colliderVisitor;
-        
+
 
         // TODO: remove when spatial fully implemented
         std::vector<Collider*> colliders;
         bool isColliding;
 
         Collider();
+
+#if EDITOR
+        ~Collider() override;
+#else
         virtual ~Collider();
+#endif
+
 
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
 
-        void SetTrigger(bool isTrigger);
-        bool IsTrigger() const;
+        void SetTrigger(bool isTrigger)
+        {
+            this->isTrigger = isTrigger;
+        }
 
-        void SetStatic(bool isStatic);
-        bool IsStatic() const;
+        bool IsTrigger() const
+        {
+            return isTrigger;
+        }
 
-        void SetTransform(Transform* transform);
-        Transform* GetTransform() const;
+        void SetStatic(bool isStatic)
+        {
+            this->isStatic = isStatic;
+        }
 
-        void EmitCollisionEnter(Collider* other);
-        void EmitCollisionExit(Collider* other);
+        bool IsStatic() const
+        {
+            return isStatic;
+        }
+
+        void SetTransform(Transform* transform)
+        {
+            this->transform = transform;
+        }
+
+        Transform* GetTransform() const
+        {
+            return transform;
+        }
+
+        void EmitCollisionEnter(Collider* other)
+        {
+            onCollisionEnter.Invoke(other);
+        }
+
+        void EmitCollisionExit(Collider* other)
+        {
+            onCollisionExit.Invoke(other);
+        }
 
         virtual Collider* GetInstance() = 0;
-        virtual void DrawDebugMesh(const CameraRenderData& RenderData) = 0;
 
-        bool GetCollisionStatus();
+        bool GetCollisionStatus() const
+        {
+            return isColliding;
+        }
 
-        Collider& operator=(const Collider& other);
+        Collider& operator=(const Collider& Other);
+
         bool operator==(const Collider& other) const;
+
         bool operator==(const Collider* other) const
         {
             return this == other;
         }
 
-        
-
-        void RenderDepth(const CameraRenderData& RenderData) override;
-
-        void Render(const CameraRenderData& RenderData) override;
-
-        void RenderDirectionalShadows(const CameraRenderData& RenderData) override;
-
-        void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
-                                    const glm::mat4* SpaceTransformMatrices) override;
-
         void Start() override;
-        void OnDestroy() override;
-        void Update(float deltaTime);
 
-        float GetRandomFloat(float min, float max);
-        
-        #if EDITOR
-        void DrawImGui() override {};
-        #endif
+        void OnDestroy() override;
+
+        void Update(float DeltaTime);
+
+        float GetRandomFloat(float Min, float Max);
+
+#if EDITOR
+        void DrawImGui() override
+        {
+        };
+#endif
     };
 
 } // namespace Engine

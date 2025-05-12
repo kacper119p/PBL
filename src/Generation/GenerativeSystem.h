@@ -2,15 +2,9 @@
 
 #include "Engine/EngineObjects/Scene/SceneManager.h"
 #include "Engine/EngineObjects/Entity.h"
-#include "Engine/Components/Updateable.h"
 #include "Engine/Components/Renderers/ParticleEmitter.h"
 #include "Engine/Components/Audio/AudioSource.h"
-#include "Engine/EngineObjects/Scene/SceneManager.h"
-#include <filesystem>
-#include <iostream>
 #include <random>
-#include "Engine/Components/AI/NavMesh.h"
-#include "Engine/Gui/SceneViewGUI.h"
 
 namespace Generation
 {
@@ -47,6 +41,5 @@ namespace Generation
         void SpawnBloodEntities(Engine::Scene* scene, Engine::Entity* parent,
                                 const std::vector<std::pair<Models::Model*, Materials::Material*>>& stains,
                                 int count, const glm::vec3& basePosition, float spacing, float size);
-
     };
 }
