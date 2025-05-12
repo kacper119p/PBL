@@ -2,42 +2,48 @@
 #include <string>
 #include <unordered_map>
 
-namespace Engine::Ui
+namespace Engine
 {
-    class UiSerializationFactory
+    class Player;
+}
+
+namespace Engine
+{
+
+    class PlayerFactory
     {
     private:
-        class IUiBuilder
+        class IPlayerBuilder
         {
         public:
-            virtual ~IUiBuilder() = default;
+            virtual ~IPlayerBuilder() = default;
 
         public:
-            [[nodiscard]] virtual class Ui* Build() const = 0;
+            virtual Player* Build() = 0;
         };
 
         template<class T>
-        class UiBuilder final : public IUiBuilder
+        class PlayerBuilder final : public IPlayerBuilder
         {
         public:
-            [[nodiscard]] Ui* Build() const override
+            Player* Build() override
             {
                 return new T();
             }
         };
 
     private:
-        std::unordered_map<std::string, IUiBuilder*> Builders;
-#if EDITOR
-        std::vector<std::string> AvailableUis;
-#endif
-
-    private:
-        [[nodiscard]] static UiSerializationFactory* GetInstance()
+        [[nodiscard]] static PlayerFactory* GetInstance()
         {
-            static UiSerializationFactory factory;
+            static PlayerFactory factory;
             return &factory;
         }
+
+    private:
+        std::unordered_map<std::string, IPlayerBuilder*> Builders;
+#if EDITOR
+        std::vector<std::string> AvailablePlayers;
+#endif
 
     public:
         /**
@@ -48,12 +54,12 @@ namespace Engine::Ui
         template<class T>
         static void Register(const std::string& Name)
         {
-            static_assert(std::is_base_of_v<Ui, T>, "T must be derived from Ui.");
-            GetInstance()->Builders.emplace(Name, new UiBuilder<T>());
+            static_assert(std::is_base_of_v<Player, T>, "T must be derived from Player.");
+            GetInstance()->Builders.emplace(Name, new PlayerBuilder<T>());
 #if EDITOR
             if constexpr (!std::is_abstract_v<T>)
             {
-                GetInstance()->AvailableUis.emplace_back(Name);
+                GetInstance()->AvailablePlayers.emplace_back(Name);
             }
 #endif
         }
@@ -69,7 +75,7 @@ namespace Engine::Ui
             delete iterator->second;
             GetInstance()->Builders.erase(iterator);
 #if EDITOR
-            std::erase(GetInstance()->AvailableUis, Name);
+            std::erase(GetInstance()->AvailablePlayers, Name);
 #endif
         }
 
@@ -78,17 +84,17 @@ namespace Engine::Ui
          * @param TypeName TypeName of a UI.
          * @return Deserialized UI.
          */
-        static Ui* CreateObject(const std::string& TypeName);
-
+        static Player* CreateObject(const std::string& TypeName);
 #if EDITOR
         /**
-         * @brief Returns TypeNames of all available Uis.
+         * @brief Returns TypeNames of all available Players.
          */
         static const std::vector<std::string>* GetAvailableComponents()
         {
-            return &GetInstance()->AvailableUis;
+            return &GetInstance()->AvailablePlayers;
         }
 #endif
-
     };
-}
+
+
+} // Engine

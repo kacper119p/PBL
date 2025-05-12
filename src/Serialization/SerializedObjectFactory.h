@@ -73,7 +73,9 @@ namespace Serialization
          */
         static void Unregister(const std::string& Name)
         {
-            GetInstance()->Builders.erase(Name);
+            const auto iterator = GetInstance()->Builders.find(Name);
+            delete iterator->second;
+            GetInstance()->Builders.erase(iterator);
 #if EDITOR
             std::erase(GetInstance()->AvailableComponents, Name);
 #endif
