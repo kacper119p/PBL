@@ -2,37 +2,56 @@
 
 #include "Collider.h"
 #include "Engine/Components/Renderers/Renderer.h"
+
 namespace Engine
 {
     /**
      * @brief Sphere collider class.
      * @details Represents a sphere-shaped collider.
      */
-    class SphereCollider : public Collider
+    class SphereCollider final : public Collider
     {
     private:
-        unsigned int VAO = 0;
-        unsigned int VBO = 0;
-        unsigned int EBO = 0;
+#if EDITOR
+        uint32_t Vao = 0;
+        uint32_t Vbo = 0;
+        uint32_t Ebo = 0;
 
-    public:
+        static constexpr uint8_t LatitudeSegments = 16;
+        static constexpr uint8_t LongitudeSegments = 16;
+#endif
 
+    private:
         float radius;
 
+    public:
         SphereCollider();
 
+    public:
+        ~SphereCollider() override;
 
+    public:
         virtual bool AcceptCollision(ColliderVisitor& visitor) override;
 
         inline virtual Collider* GetInstance() override { return this; }
 
-        float GetRadius() const;
-        void SetRadius(float radius);
+        float GetRadius() const
+        {
+            return radius;
+        }
+
+        void SetRadius(float radius)
+        {
+            this->radius = radius;
+#if EDITOR
+            UpdateBuffers();
+#endif
+        }
 
         SphereCollider& operator=(const SphereCollider& other);
 
-
-        void DrawDebugMesh(const CameraRenderData& RenderData) override;
+#if EDITOR
+        void DrawDebugMesh(const CameraRenderData& RenderData);
 
         void RenderDepth(const CameraRenderData& RenderData) override;
 
@@ -42,12 +61,18 @@ namespace Engine
 
         void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                     const glm::mat4* SpaceTransformMatrices) override;
-
+#endif
         SERIALIZATION_EXPORT_CLASS(SphereCollider)
 
-        #if EDITOR
+#if EDITOR
         void DrawImGui() override;
-        #endif
+#endif
+
+    private:
+#if EDITOR
+        void UpdateBuffers();
+#endif
+
     };
 
 } // namespace Engine

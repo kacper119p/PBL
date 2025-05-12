@@ -4,6 +4,7 @@
 #include "Engine/Gui/EditorGUI.h"
 #include "Serialization/SerializationUtility.h"
 #include "spdlog/spdlog.h"
+#include "Engine/Components/AI/NavMesh.h"
 
 namespace Generation
 {

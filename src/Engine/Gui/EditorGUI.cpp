@@ -7,12 +7,7 @@
 #include "Engine/Engine.h"
 #include "Engine/EngineObjects/Scene/SceneManager.h"
 #include "Engine/EngineObjects/Entity.h"
-#include "Engine/Components/Updateable.h"
-#include "Engine/Components/Renderers/ParticleEmitter.h"
-#include "Engine/Components/Audio/AudioSource.h"
-#include "Engine/EngineObjects/Scene/SceneManager.h"
 #include <filesystem>
-#include <iostream>
 #include <random>
 #include "spdlog/spdlog.h"
 namespace fs = std::filesystem;
