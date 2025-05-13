@@ -4,7 +4,6 @@
 
 #include "GuidHasher.h"
 #include "rapidjson/document.h"
-#include "SerializedObject.h"
 #include "Materials/Material.h"
 #include "Materials/Properties/MaterialProperty.h"
 #include "Materials/Properties/TextureMaterialProperty.h"
@@ -23,6 +22,12 @@ namespace Models
     class Animation;
     class Animator;
 }
+
+namespace Serialization
+{
+    class SerializedObject;
+}
+
 
 namespace Serialization
 {
@@ -85,6 +90,15 @@ namespace Serialization
     {
         T value = Value.GetValue();
         return Serialize(value, Allocator);
+    }
+
+    template<typename E>
+    requires std::is_enum_v<E>
+    rapidjson::Value Serialize(const E Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kNumberType);
+        object.SetInt(Value);
+        return object;
     }
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, int& Value);
@@ -166,4 +180,17 @@ namespace Serialization
         Deserialize(Object, Name, value);
         Value.SetValue(value);
     }
-} // Serialization
+
+    template<typename E>
+    requires std::is_enum_v<E>
+    void Deserialize(
+            const rapidjson::Value& Object, const char* Name, E& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsString())
+        {
+            return;
+        }
+        Value = static_cast<E>(iterator->value.GetInt());
+    }
+}

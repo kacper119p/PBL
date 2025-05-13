@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Engine/Components/AI/AStar.h"
-#include "Engine/EngineObjects/Entity.h"
 #include "NavArea.h"
 
 namespace Engine

@@ -3,6 +3,7 @@
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include "Engine/Textures/Texture.h"
+#include <vector>
 #include <string>
 
 namespace Materials

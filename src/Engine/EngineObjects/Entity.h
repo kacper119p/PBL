@@ -106,7 +106,6 @@ namespace Engine
         template<class T>
         [[nodiscard]] T* GetComponent() const
         {
-            {
                 static_assert(std::is_base_of_v<Component, T>, "Class not derived from IComponent");
                 for (Component* component : Components)
                 {
@@ -116,7 +115,6 @@ namespace Engine
                     }
                 }
                 return nullptr;
-            }
         }
 
         /**

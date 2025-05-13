@@ -11,6 +11,27 @@ namespace Engine
     */
     class DirectionalLight final : public Component
     {
+    public:
+        struct alignas(16) ShaderData
+        {
+            glm::mat4 LightSpaceTransform;
+            glm::vec3 Direction;
+            float _padding0;
+            glm::vec3 Color;
+            float _padding1;
+
+            ShaderData()
+            {
+            }
+
+            ShaderData(const glm::mat4& LightSpaceTransform, const glm::vec3& Direction, const glm::vec3& Color) :
+                LightSpaceTransform(LightSpaceTransform),
+                Direction(Direction),
+                Color(Color)
+            {
+            }
+        };
+
     private:
         glm::vec3 Color = glm::vec3(1.0f, 1.0f, 1.0f);
 
@@ -53,10 +74,16 @@ namespace Engine
                             ));
         }
 
+        [[nodiscard]] ShaderData GetShaderData(const glm::mat4& DirectionalLightSpaceTransform) const
+        {
+            return ShaderData(DirectionalLightSpaceTransform, GetDirection(), Color);
+        }
+
+
         void Start() override;
 #if EDITOR
         void DrawImGui() override;
-        #endif
+#endif
         SERIALIZATION_EXPORT_CLASS(DirectionalLight);
     };
 

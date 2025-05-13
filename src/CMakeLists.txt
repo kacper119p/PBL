@@ -12,8 +12,7 @@ file(GLOB_RECURSE HEADER_FILES
 if (NOT DEFINED ENV{Editor})
     list(FILTER SOURCE_FILES EXCLUDE REGEX "${CMAKE_SOURCE_DIR}/src/imgui_impl/*")
     list(FILTER HEADER_FILES EXCLUDE REGEX "${CMAKE_SOURCE_DIR}/src/imgui_impl/*")
-endif ()
-
+endif () 
 # Search for the assets files
 file(GLOB_RECURSE ASSETS_FILES
         ${CMAKE_SOURCE_DIR}/res/*.*)

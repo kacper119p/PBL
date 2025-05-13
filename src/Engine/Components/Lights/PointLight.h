@@ -10,6 +10,33 @@ namespace Engine
      */
     class PointLight final : public Component
     {
+    public:
+        struct alignas(16) ShaderData
+        {
+            glm::vec3 Color;
+            float LinearFalloff;
+            glm::vec3 Position;
+            float QuadraticFalloff;
+            float Range;
+            float _padding[3];
+
+            ShaderData()
+            {
+            }
+
+
+            ShaderData(const glm::vec3& Color, const glm::vec3& Position, const float LinearFalloff,
+                       const float QuadraticFalloff,
+                       const float Range) :
+                Color(Color),
+                LinearFalloff(LinearFalloff),
+                Position(Position),
+                QuadraticFalloff(QuadraticFalloff),
+                Range(Range)
+            {
+            }
+        };
+
     private:
         glm::vec3 Color = glm::vec3(1.0f, 1.0f, 1.0f);
 
@@ -101,6 +128,11 @@ namespace Engine
         [[nodiscard]] glm::vec3 GetPosition() const
         {
             return GetOwner()->GetTransform()->GetPosition();
+        }
+
+        [[nodiscard]] ShaderData GetShaderData() const
+        {
+            return ShaderData(Color, GetPosition(), LinearFalloff, QuadraticFalloff, Range);
         }
 
         void Start() override;

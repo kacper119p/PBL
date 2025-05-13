@@ -9,7 +9,7 @@ struct particle {
     float life;
 };
 
-layout (std430, binding = 0) readonly restrict buffer Particles {
+layout (std430, binding = 1) readonly restrict buffer Particles {
     particle particles[];
 };
 

@@ -1,0 +1,140 @@
+#pragma once
+
+#include "../Transform.h" // TODO: Fix later. I'm using this way because of indexing problem.
+#include "Events/TEvent.h"
+#include "ColliderVisitor.h"
+#include "Serialization/SerializationUtility.h"
+#include <glm/glm.hpp>
+#include "Engine/Components/Renderers/Renderer.h"
+
+namespace Engine
+{
+    class SpatialPartitioning;
+    class Transform;
+
+    enum ColliderTypeE
+    {
+        BOX,
+        SPHERE,
+        CAPSULE,
+        MESH
+    };
+
+    /*
+     * @brief Base class for all colliders. Subtypes: boxCollider, sphereCollider, capsuleCollider, meshCollider.
+     */
+    class Collider
+#if EDITOR
+            : public Renderer
+#else
+            : public Component
+#endif
+    {
+
+    protected:
+        bool isStatic;
+        bool isTrigger;
+        glm::ivec3 CurrentCellIndex = glm::ivec3(0, 0, 0); // non-definable by user
+        SpatialPartitioning* Spatial;
+
+        // TODO: remove when rigidbody fully implemented
+        const glm::vec3 Gravity = glm::vec3(0.0f, -9.81f, 0.0f);
+        // TODO END
+
+    public:
+        ColliderTypeE colliderType;
+        Events::TEvent<Collider*> onCollisionEnter;
+        Events::TEvent<Collider*> onCollisionExit;
+
+        /// TODO: move those to protected and add getters + setters
+        Transform* transform;
+        ColliderVisitor colliderVisitor;
+
+
+        // TODO: remove when spatial fully implemented
+        std::vector<Collider*> colliders;
+        bool isColliding;
+
+        Collider();
+
+#if EDITOR
+        ~Collider() override;
+#else
+        virtual ~Collider();
+#endif
+
+
+        virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
+
+        void SetTrigger(bool isTrigger)
+        {
+            this->isTrigger = isTrigger;
+        }
+
+        bool IsTrigger() const
+        {
+            return isTrigger;
+        }
+
+        void SetStatic(bool isStatic)
+        {
+            this->isStatic = isStatic;
+        }
+
+        bool IsStatic() const
+        {
+            return isStatic;
+        }
+
+        void SetTransform(Transform* transform)
+        {
+            this->transform = transform;
+        }
+
+        Transform* GetTransform() const
+        {
+            return transform;
+        }
+
+        void EmitCollisionEnter(Collider* other)
+        {
+            onCollisionEnter.Invoke(other);
+        }
+
+        void EmitCollisionExit(Collider* other)
+        {
+            onCollisionExit.Invoke(other);
+        }
+
+        virtual Collider* GetInstance() = 0;
+
+        bool GetCollisionStatus() const
+        {
+            return isColliding;
+        }
+
+        Collider& operator=(const Collider& Other);
+
+        bool operator==(const Collider& other) const;
+
+        bool operator==(const Collider* other) const
+        {
+            return this == other;
+        }
+
+        void Start() override;
+
+        void OnDestroy() override;
+
+        void Update(float DeltaTime);
+
+        float GetRandomFloat(float Min, float Max);
+
+#if EDITOR
+        void DrawImGui() override
+        {
+        };
+#endif
+    };
+
+} // namespace Engine

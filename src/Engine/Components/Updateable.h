@@ -8,7 +8,7 @@ namespace Engine
     /**
      * @brief Provides base implementation for IUpdateable.
      */
-    class Updateable : public Component, IUpdateable
+    class Updateable : public Component, public IUpdateable
     {
     public:
         Updateable() = default;

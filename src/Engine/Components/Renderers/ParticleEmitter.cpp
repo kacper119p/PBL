@@ -23,9 +23,8 @@ void Engine::ParticleEmitter::Render(const Engine::CameraRenderData& RenderData)
     glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
     glEnable(GL_BLEND);
-    LightManager::GetInstance()->SetupLightsForRendering(Material->GetMainPass());
     SetupMatrices(RenderData, Material->GetMainPass());
-    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ParticlesBuffer);
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, ParticlesBuffer);
     for (int i = 0; i < Settings.Model->GetMeshCount(); ++i)
     {
         Models::Mesh* mesh = Settings.Model->GetMesh(i);

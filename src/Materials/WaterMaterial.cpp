@@ -69,7 +69,6 @@ namespace Materials
     void WaterMaterial::Use() const
     {
         GetMainPass().Use();
-        Engine::LightManager::GetInstance()->SetupLightsForRendering(MainPass);
 
         Color.Bind();
         Roughness.Bind();

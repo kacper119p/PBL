@@ -23,6 +23,7 @@ layout (bindless_sampler) uniform sampler2D NormalMap1;
 
 out vec3 FragColor;
 
+layout (early_fragment_tests) in;
 void main() {
 
     vec3 Normal = normalize(Normal);
@@ -39,93 +40,5 @@ void main() {
 
     vec3 ViewDirection = normalize(CameraPosition - Position);
 
-    vec3 Light = vec3(0.0, 0.0, 0.0);
-
-    vec3 F0 = vec3(0.04);
-    F0 = mix(F0, Color, Metallic);
-
-    Light += CalculateLightInfluence(CalculateDirectionalLight(DirectionalLight, Position),
-                                     Color,
-                                     Normal,
-                                     ViewDirection,
-                                     Roughness,
-                                     Metallic,
-                                     F0);
-
-
-    if (PointLightsCount > 0)
-    {
-        Light += CalculateLightInfluence(CalculatePointLightShadowed(PointLights[0], PointLightShadowMap0, Position),
-                                         Color,
-                                         Normal,
-                                         ViewDirection,
-                                         Roughness,
-                                         Metallic,
-                                         F0);
-    }
-    if (PointLightsCount > 1)
-    {
-        Light += CalculateLightInfluence(CalculatePointLightShadowed(PointLights[1], PointLightShadowMap1, Position),
-                                         Color,
-                                         Normal,
-                                         ViewDirection,
-                                         Roughness,
-                                         Metallic,
-                                         F0);
-    }
-    for (uint i = 2; i < PointLightsCount; ++i)
-    {
-        Light += CalculateLightInfluence(CalculatePointLight(PointLights[i], Position),
-                                         Color,
-                                         Normal,
-                                         ViewDirection,
-                                         Roughness,
-                                         Metallic,
-                                         F0);
-    }
-
-    if (SpotLightsCount > 0)
-    {
-        Light += CalculateLightInfluence(CalculateSpotLightShadowed(SpotLights[0], SpotLightShadowMap0, Position),
-                                         Color,
-                                         Normal,
-                                         ViewDirection,
-                                         Roughness,
-                                         Metallic,
-                                         F0);
-
-    }
-
-    if (SpotLightsCount > 1)
-    {
-        Light += CalculateLightInfluence(CalculateSpotLightShadowed(SpotLights[1], SpotLightShadowMap1, Position),
-                                         Color,
-                                         Normal,
-                                         ViewDirection,
-                                         Roughness,
-                                         Metallic,
-                                         F0);
-
-    }
-
-    for (uint i = 2; i < SpotLightsCount; ++i)
-    {
-        Light += CalculateLightInfluence(CalculateSpotLight(SpotLights[i], Position),
-                                         Color,
-                                         Normal,
-                                         ViewDirection,
-                                         Roughness,
-                                         Metallic,
-                                         F0);
-    }
-
-    vec3 Color = Light + CalculateEnvironmentInfluence(Color,
-                                                       Normal,
-                                                       ViewDirection,
-                                                       Roughness,
-                                                       Metallic,
-                                                       F0,
-                                                       1.0);
-
-    FragColor = Color;
+    FragColor = CalculateLight(Color, Metallic, Roughness, Normal, Position, ViewDirection, 1.0f);
 }
