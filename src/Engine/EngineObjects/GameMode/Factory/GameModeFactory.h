@@ -1,48 +1,48 @@
 #pragma once
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 namespace Engine
 {
-    class Player;
+    class GameMode;
 }
 
 namespace Engine
 {
-
-    class PlayerFactory
+    class GameModeFactory
     {
     private:
-        class IPlayerBuilder
+        class IGameModeBuilder
         {
         public:
-            virtual ~IPlayerBuilder() = default;
+            virtual ~IGameModeBuilder() = default;
 
         public:
-            virtual Player* Build() = 0;
+            virtual GameMode* Build() = 0;
         };
 
         template<class T>
-        class PlayerBuilder final : public IPlayerBuilder
+        class GameModeBuilder final : public IGameModeBuilder
         {
         public:
-            Player* Build() override
+            GameMode* Build() override
             {
                 return new T();
             }
         };
 
     private:
-        [[nodiscard]] static PlayerFactory* GetInstance()
+        [[nodiscard]] static GameModeFactory* GetInstance()
         {
-            static PlayerFactory factory;
+            static GameModeFactory factory;
             return &factory;
         }
 
     private:
-        std::unordered_map<std::string, IPlayerBuilder*> Builders;
+        std::unordered_map<std::string, IGameModeBuilder*> Builders;
 #if EDITOR
-        std::vector<std::string> AvailablePlayers;
+        std::vector<std::string> AvailableGameModes;
 #endif
 
     public:
@@ -54,12 +54,12 @@ namespace Engine
         template<class T>
         static void Register(const std::string& Name)
         {
-            static_assert(std::is_base_of_v<Player, T>, "T must be derived from Player.");
-            GetInstance()->Builders.emplace(Name, new PlayerBuilder<T>());
+            static_assert(std::is_base_of_v<GameMode, T>, "T must be derived from GameMode.");
+            GetInstance()->Builders.emplace(Name, new GameModeBuilder<T>());
 #if EDITOR
             if constexpr (!std::is_abstract_v<T>)
             {
-                GetInstance()->AvailablePlayers.emplace_back(Name);
+                GetInstance()->AvailableGameModes.emplace_back(Name);
             }
 #endif
         }
@@ -75,26 +75,24 @@ namespace Engine
             delete iterator->second;
             GetInstance()->Builders.erase(iterator);
 #if EDITOR
-            std::erase(GetInstance()->AvailablePlayers, Name);
+            std::erase(GetInstance()->AvailableGameModes, Name);
 #endif
         }
 
         /**
-         * @brief Creates a new Player which class is determined by TypeName.
-         * @param TypeName TypeName of a Player.
-         * @return Deserialized Player.
+         * @brief Creates a new GameMode which class is determined by TypeName.
+         * @param TypeName TypeName of a GameMode.
+         * @return Deserialized GameMode.
          */
-        static Player* CreateObject(const std::string& TypeName);
+        static GameMode* CreateObject(const std::string& TypeName);
 #if EDITOR
         /**
-         * @brief Returns TypeNames of all available Players.
+         * @brief Returns TypeNames of all available GameModes.
          */
         static const std::vector<std::string>* GetAvailableComponents()
         {
-            return &GetInstance()->AvailablePlayers;
+            return &GetInstance()->AvailableGameModes;
         }
 #endif
     };
-
-
-} // Engine
+}
