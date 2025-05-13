@@ -71,13 +71,6 @@ namespace Engine
          */
         void SetGoalPosition(const glm::vec3& Position);
 
-        /**
-         * @brief Maps a 3D world position to a corresponding node ID in the graph.
-         * @param Position 3D world position.
-         * @return Node ID closest to the given position.
-         */
-        [[nodiscard]] int GetNodeIdFromPosition(const glm::vec3& Position) const;
-
     private:
         SERIALIZATION_EXPORT_CLASS(AStar)
 

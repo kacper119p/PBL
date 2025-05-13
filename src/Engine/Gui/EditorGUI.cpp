@@ -193,99 +193,79 @@ void Engine::EditorGUI::DrawSelectedEntitysComponents()
     ImGui::End();
 }
 
-void Engine::EditorGUI::DrawGenerativeSystem(Scene* scene)
+void Engine::EditorGUI::DrawGenerativeSystem(Scene* Scene)
 {
     ImGui::Begin("Generative System");
 
-    static int trashCount = 10;
-    static float trashSpacing = 1.0f;
-    static std::vector<float> trashPercentages;
+    static int itemsCount = 10;
+    static float itemsSpacing = 1.0f;
+    static std::vector<float> itemsPercentages;
+    static float itemsSizeMin = 1.0;
+    static float itemsSizeMax = 2.0;
 
-    static int bloodCount = 5;
-    static float bloodSpacing = 2.0f;
-    static float bloodSize = 1.0f;
-
-    static std::vector<std::pair<Models::Model*, Materials::Material*>> trash;
-    static std::vector<std::pair<Models::Model*, Materials::Material*>> stains;
+    static std::vector<std::pair<Models::Model*, Materials::Material*>> items;
 
     float totalPercentage = 0.0f;
 
-    DrawModelDropZoneAndList(trash, modelManager.get(), materialManager.get(), "Trash");
+    static std::vector<Models::Model*> modelList;
+    static std::vector<Materials::Material*> materialList;
 
-    ImGui::SeparatorText("Trash Settings");
-    ImGui::SliderInt("Trash Count", &trashCount, 0, 100);
-    ImGui::SliderFloat("Trash Spacingy", &trashSpacing, 0.1f, 20.0f);
-    if (trash.size() > 0)
+    DrawModelDropZoneAndList(modelList, materialList, ModelManager.get(), MaterialManager.get(),
+                             "itemsList");
+
+    DrawModelDropZoneAndList(items, ModelManager.get(), MaterialManager.get(), "Items");
+
+    ImGui::SeparatorText("Items Settings");
+    ImGui::SliderInt("Item Count", &itemsCount, 0, 100);
+    ImGui::SliderFloat("Item Spacing", &itemsSpacing, 0.1f, 20.0f);
+    if (!items.empty())
     {
-        if (trashPercentages.size() != trash.size())
-            trashPercentages = std::vector<float>(trash.size(), 100.0f / trash.size());
+        if (itemsPercentages.size() != items.size())
+            itemsPercentages = std::vector<float>(items.size(), 100.0f / items.size());
 
-        for (int i = 0; i < trash.size(); ++i)
+        for (int i = 0; i < items.size(); ++i)
         {
-            std::string fullPath = trash.at(i).first->GetPath();
-            std::filesystem::path fsPath(fullPath);
-            std::string filename = fsPath.filename().string() + " Percentage";
-            ImGui::InputFloat(filename.c_str(), &trashPercentages[i], 0.0f, 100.0f);
-            totalPercentage += trashPercentages[i];
+            std::string label = "Item " + std::to_string(i) + " Percentage";
+
+            ImGui::InputFloat(label.c_str(), &itemsPercentages[i], 0.0f, 100.0f);
+            totalPercentage += itemsPercentages[i];
         }
 
-        if (std::ceil(totalPercentage) != 100.0f)
+        if (std::round(totalPercentage) != 100.0f)
             ImGui::PushStyleColor(ImGuiCol_Text, IM_COL32(255, 0, 0, 255));
 
         ImGui::Text("Total: %.1f%%", totalPercentage);
 
-        if (std::ceil(totalPercentage) != 100.0f)
+        if (std::round(totalPercentage) != 100.0f)
             ImGui::PopStyleColor();
     }
+    ImGui::SliderFloat("Item Size Min", &itemsSizeMin, 0.1f, 5.0f);
+    ImGui::SliderFloat("Item Size Max", &itemsSizeMax, 0.1f, 5.0f);
 
-    DrawModelDropZoneAndList(stains, modelManager.get(), materialManager.get(), "Stains");
-
-    ImGui::SeparatorText("Blood Settings");
-    ImGui::SliderInt("Blood Count", &bloodCount, 0, 50);
-    ImGui::SliderFloat("Blood Spacing", &bloodSpacing, 0.1f, 20.0f);
-    ImGui::SliderFloat("Blood Size", &bloodSize, 0.1f, 5.0f);
-
-    if (ImGui::Button("Generate Trash"))
+    if (ImGui::Button("Generate Items"))
     {
-        LastGeneratedEntity = nullptr;
-
-        if (!trash.empty() && std::ceil(totalPercentage) == 100.0f)
+        if (!items.empty() && std::round(totalPercentage) == 100.0f)
         {
-            m_GenerativeSystem.GenerateTrash(scene, trash, trashCount, trashSpacing, trashPercentages,
-                                             LastGeneratedEntity);
+            GenerativeSystem.GenerateItems(Scene, items, itemsCount, itemsSpacing, itemsPercentages, itemsSizeMin,
+                                           itemsSizeMax);
         }
-    }
-    if (ImGui::Button("Generate Stains"))
-    {
-        LastGeneratedEntity = nullptr;
-
-        if (!stains.empty())
-        {
-            m_GenerativeSystem.GenerateBlood(scene, stains, bloodCount, bloodSize, bloodSpacing, LastGeneratedEntity);
-        }
-    }
-
-    if (ImGui::Button("Clear Last Generated"))
-    {
-        m_GenerativeSystem.ClearGeneratedEntities(LastGeneratedEntity);
     }
 
     ImGui::End();
 }
 
 void Engine::EditorGUI::DrawModelDropZoneAndList(
-        std::vector<std::pair<Models::Model*, Materials::Material*>>& modelsAndMaterials,
-        Models::ModelManager* modelManager,
-        Materials::MaterialManager* materialManager,
-        const char* uniqueId)
+        std::vector<std::pair<Models::Model*, Materials::Material*>>& ModelsAndMaterials,
+        Models::ModelManager* ModelManager, Materials::MaterialManager* MaterialManager, const char* UniqueId)
 {
     static Models::Model* draggedModel = nullptr;
     static Materials::Material* draggedMaterial = nullptr;
 
-    ImGui::SeparatorText("Drag & Drop Model and Material Here");
+    ImGui::SeparatorText("Generated Items");
 
-    std::string modelButtonLabel = "Drop Model Here##" + std::string(uniqueId);
-    ImGui::Button(modelButtonLabel.c_str(), ImVec2(ImGui::GetContentRegionAvail().x, 50));
+    ImGui::BeginChild(("ModelMaterialList##" + std::string(UniqueId)).c_str(), ImVec2(0, 150), true);
+
+    ImGui::Text("Drop Model and Material Here");
 
     if (ImGui::BeginDragDropTarget())
     {
@@ -297,18 +277,138 @@ void Engine::EditorGUI::DrawModelDropZoneAndList(
 
             if (filename.ends_with(".fbx") || filename.ends_with(".obj") || filename.ends_with(".gltf"))
             {
-                draggedModel = modelManager->GetModel(fullPath.c_str());
-                if (draggedModel)
+                draggedModel = ModelManager->GetModel(fullPath.c_str());
+            }
+            else if (filename.ends_with(".mat"))
+            {
+                draggedMaterial = MaterialManager->GetMaterial(fullPath);
+            }
+        }
+        else if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("DRAGGED_MODEL"))
+        {
+            draggedModel = *static_cast<Models::Model* const*>(payload->Data);
+        }
+        else if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("DRAGGED_MATERIAL"))
+        {
+            draggedMaterial = *static_cast<Materials::Material* const*>(payload->Data);
+        }
+
+        ImGui::EndDragDropTarget();
+    }
+
+    if (draggedModel && draggedMaterial)
+    {
+        ModelsAndMaterials.push_back(std::make_pair(draggedModel, draggedMaterial));
+
+        draggedModel = nullptr;
+        draggedMaterial = nullptr;
+    }
+
+    for (int i = 0; i < ModelsAndMaterials.size(); ++i)
+    {
+        ImGui::PushID(i);
+
+        std::string modelPath = ModelsAndMaterials[i].first->GetPath();
+        std::filesystem::path fsPath(modelPath);
+        std::string modelFilename = fsPath.filename().string();
+
+        char itemBuffer[256];
+        strncpy(itemBuffer, modelFilename.c_str(), sizeof(itemBuffer));
+        itemBuffer[sizeof(itemBuffer) - 1] = '\0';
+
+        std::string iter = std::to_string(i) + ". ";
+        ImGui::Text(iter.c_str());
+
+        ImGui::SameLine();
+
+        std::string fullPath = MaterialManager->GetMaterialPath(ModelsAndMaterials[i].second);
+        std::filesystem::path fPath(fullPath);
+        std::string filename = fPath.filename().string();
+
+        ImGui::Text(modelFilename.c_str(), itemBuffer, sizeof(itemBuffer), ImGuiInputTextFlags_ReadOnly);
+
+        ImGui::SameLine();
+
+        std::string materialName = ModelsAndMaterials[i].second
+                                       ? filename
+                                       : "No Material";
+        ImGui::Text(materialName.c_str());
+
+        ImGui::SameLine();
+        if (ImGui::Button("Remove"))
+        {
+            ModelsAndMaterials.erase(ModelsAndMaterials.begin() + i);
+            ImGui::PopID();
+            break;
+        }
+
+        ImGui::PopID();
+    }
+    ImGui::EndChild();
+}
+
+void Engine::EditorGUI::DrawModelDropZoneAndList(std::vector<Models::Model*>& Models,
+                                                 std::vector<Materials::Material*>& Materials,
+                                                 Models::ModelManager* ModelManager,
+                                                 Materials::MaterialManager* MaterialManager, const char* UniqueId)
+{
+    ImGui::SeparatorText("Selected Models List");
+
+    ImGui::BeginChild(("ModelList##" + std::string(UniqueId)).c_str(), ImVec2(0, 150), true);
+
+    ImGui::Text("Drop models here");
+
+    if (ImGui::BeginDragDropTarget())
+    {
+        if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
+        {
+            std::string fullPath(static_cast<const char*>(payload->Data));
+            std::filesystem::path fsPath(fullPath);
+            std::string filename = fsPath.filename().string();
+
+            if (filename.ends_with(".fbx") || filename.ends_with(".obj") || filename.ends_with(".gltf"))
+            {
+                auto* model = ModelManager->GetModel(fullPath.c_str());
+                if (model)
                 {
-                    spdlog::info("Model added: {}", filename);
+                    Models.push_back(model);
                 }
             }
         }
         ImGui::EndDragDropTarget();
     }
 
-    std::string materialButtonLabel = "Drop Material Here##" + std::string(uniqueId);
-    ImGui::Button(materialButtonLabel.c_str(), ImVec2(ImGui::GetContentRegionAvail().x, 50));
+    for (int i = 0; i < Models.size(); ++i)
+    {
+        ImGui::PushID(i);
+        std::filesystem::path path(Models[i]->GetPath());
+        ImGui::Selectable(path.filename().string().c_str());
+
+        if (ImGui::BeginDragDropSource())
+        {
+            ImGui::SetDragDropPayload("DRAGGED_MODEL", &Models[i], sizeof(Models::Model*));
+            ImGui::Text("Dragging Model: %s", path.filename().string().c_str());
+            ImGui::EndDragDropSource();
+        }
+
+        ImGui::SameLine();
+        if (ImGui::Button("Remove"))
+        {
+            Models.erase(Models.begin() + i);
+            ImGui::PopID();
+            break;
+        }
+        ImGui::PopID();
+    }
+
+    ImGui::EndChild();
+
+    ImGui::Spacing();
+    ImGui::SeparatorText("Selected Materials List");
+
+    ImGui::BeginChild(("MaterialList##" + std::string(UniqueId)).c_str(), ImVec2(0, 150), true);
+
+    ImGui::Text("Drop materials here");
 
     if (ImGui::BeginDragDropTarget())
     {
@@ -320,55 +420,42 @@ void Engine::EditorGUI::DrawModelDropZoneAndList(
 
             if (filename.ends_with(".mat"))
             {
-                draggedMaterial = materialManager->GetMaterial(fullPath.c_str());
-                if (draggedMaterial)
+                auto* material = MaterialManager->GetMaterial(fullPath.c_str());
+                if (material)
                 {
-                    spdlog::info("Material added: {}", filename);
+                    Materials.push_back(material);
                 }
             }
         }
         ImGui::EndDragDropTarget();
     }
 
-    if (draggedModel && draggedMaterial)
+    for (int i = 0; i < Materials.size(); ++i)
     {
-        modelsAndMaterials.push_back(std::make_pair(draggedModel, draggedMaterial));
-        spdlog::info("Model and Material successfully added to the list.");
+        ImGui::PushID(1000 + i);
+        std::string fullPath = MaterialManager->GetMaterialPath(Materials[i]);
+        std::filesystem::path fsPath(fullPath);
+        std::string filename = fsPath.filename().string();
+        ImGui::Selectable(filename.c_str());
 
-        draggedModel = nullptr;
-        draggedMaterial = nullptr;
-    }
-
-    ImGui::SeparatorText("Prefab List");
-    for (int i = 0; i < modelsAndMaterials.size(); ++i)
-    {
-        ImGui::PushID(i);
-
-        std::string modelPath = modelsAndMaterials[i].first->GetPath();
-        std::filesystem::path fsPath(modelPath);
-        std::string modelFilename = fsPath.filename().string();
-
-        char itemBuffer[256];
-        strncpy(itemBuffer, modelFilename.c_str(), sizeof(itemBuffer));
-        itemBuffer[sizeof(itemBuffer) - 1] = '\0';
-
-        ImGui::InputText("##ModelPath", itemBuffer, sizeof(itemBuffer), ImGuiInputTextFlags_ReadOnly);
-
-        std::string materialName = modelsAndMaterials[i].second
-                                       ? modelsAndMaterials[i].second->GetType()
-                                       : "No Material";
-        ImGui::Text("Material: %s", materialName.c_str());
+        if (ImGui::BeginDragDropSource())
+        {
+            ImGui::SetDragDropPayload("DRAGGED_MATERIAL", &Materials[i], sizeof(Materials::Material*));
+            ImGui::Text("Dragging Material: %s", filename.c_str());
+            ImGui::EndDragDropSource();
+        }
 
         ImGui::SameLine();
         if (ImGui::Button("Remove"))
         {
-            modelsAndMaterials.erase(modelsAndMaterials.begin() + i);
+            Materials.erase(Materials.begin() + i);
             ImGui::PopID();
             break;
         }
-
         ImGui::PopID();
     }
+
+    ImGui::EndChild();
 }
 
 void Engine::EditorGUI::SetupDockspace()

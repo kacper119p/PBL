@@ -1,4 +1,3 @@
-
 #include "NavMesh.h"
 #include "Engine/Components/Renderers/ModelRenderer.h"
 #include "spdlog/spdlog.h"
@@ -63,7 +62,7 @@ namespace Engine
                 {
                     int id = pair.first;
                     const Node& node = pair.second;
-                    glm::vec2 pos = node.GetPosition();
+                    glm::vec2 pos = glm::vec2(node.GetPosition().x, node.GetPosition().z);
 
                     if (pos.x >= worldMin.x && pos.x <= worldMax.x &&
                         pos.y >= worldMin.z && pos.y <= worldMax.z)
@@ -87,9 +86,10 @@ namespace Engine
 
     void NavMesh::BakeNavMesh(Entity* Root)
     {
-        if (!GetGraph())
+        if (GetGraph())
         {
             ClearGraph();
+            NavGraph = std::make_unique<Graph>();
         }
         BuildNavMesh(Root, Spacing);
         RemoveNotWalkableNodes(Root);
@@ -106,7 +106,7 @@ namespace Engine
         if (entities.empty())
             return;
 
-        std::vector<Models::Model*> models;
+        std::vector<std::pair<Models::Model*, glm::mat4>> modelTransforms;
 
         glm::vec2 sceneMin(FLT_MAX, FLT_MAX);
         glm::vec2 sceneMax(-FLT_MAX, -FLT_MAX);
@@ -120,11 +120,12 @@ namespace Engine
                 continue;
 
             Models::Model* model = entity->GetOwner()->GetComponent<ModelRenderer>()->GetModel();
-            models.push_back(model);
+            glm::mat4 localToWorld = entity->GetLocalToWorldMatrix();
+            modelTransforms.emplace_back(model, localToWorld);
+
             for (int i = 0; i < model->GetMeshCount(); ++i)
             {
                 const Models::AABBox3& bounds = model->GetMesh(i)->GetAabBox();
-                glm::mat4 localToWorld = entity->GetLocalToWorldMatrix();
 
                 glm::vec3 corners[8] = {
                         bounds.min,
@@ -157,6 +158,7 @@ namespace Engine
         int depth = static_cast<int>((sceneMax.y - sceneMin.y) / Spacing) + 1;
 
         auto nodeId = [width](int X, int Y) { return Y * width + X; };
+        glm::vec3 finalHitPoint;
 
         for (int z = 0; z < depth; ++z)
         {
@@ -171,8 +173,11 @@ namespace Engine
                 bool foundSurface = false;
                 glm::vec3 rayDir = glm::vec3(0.0f, -1.0f, 0.0f);
 
-                for (const auto& model : models)
+                for (const auto& modelPair : modelTransforms)
                 {
+                    Models::Model* model = modelPair.first;
+                    const glm::mat4& localToWorld = modelPair.second;
+
                     for (int i = 0; i < model->GetMeshCount(); i++)
                     {
                         const auto& mesh = *model->GetMesh(i);
@@ -181,14 +186,15 @@ namespace Engine
 
                         for (size_t j = 0; j + 2 < indices.size(); j += 3)
                         {
-                            glm::vec3 v0 = vertices[indices[j + 0]].Position;
-                            glm::vec3 v1 = vertices[indices[j + 1]].Position;
-                            glm::vec3 v2 = vertices[indices[j + 2]].Position;
+                            glm::vec3 v0 = glm::vec3(localToWorld * glm::vec4(vertices[indices[j + 0]].Position, 1.0f));
+                            glm::vec3 v1 = glm::vec3(localToWorld * glm::vec4(vertices[indices[j + 1]].Position, 1.0f));
+                            glm::vec3 v2 = glm::vec3(localToWorld * glm::vec4(vertices[indices[j + 2]].Position, 1.0f));
 
                             glm::vec3 hitPoint;
                             if (RayIntersectsTriangle(position, rayDir, v0, v1, v2, &hitPoint))
                             {
                                 foundSurface = true;
+                                finalHitPoint = hitPoint;
                                 break;
                             }
                         }
@@ -204,7 +210,7 @@ namespace Engine
                 if (foundSurface)
                 {
                     int id = nodeId(x, z);
-                    GetGraph()->AddNode(id, glm::vec2(position.x, position.z));
+                    GetGraph()->AddNode(id, finalHitPoint);
 
                     if (x > 0)
                         GetGraph()->AddConnection(id, nodeId(x - 1, z));
@@ -217,6 +223,36 @@ namespace Engine
                 }
             }
         }
+    }
+
+    int NavMesh::GetNodeIdFromPosition(const glm::vec3& Position) const
+    {
+        if (!NavGraph)
+            return -1;
+
+        const auto& nodes = NavGraph->GetAllNodes();
+        float closestDistance = FLT_MAX;
+        int closestNodeId = -1;
+
+        for (const auto& nodePair : nodes)
+        {
+            const glm::vec3& nodePosition = nodePair.second.GetPosition();
+
+            float distance = glm::length(glm::vec2(Position.x, Position.z) - glm::vec2(nodePosition.x, nodePosition.z));
+
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestNodeId = nodePair.first;
+            }
+        }
+
+        if (closestDistance > 2 * NavMesh::Get().GetSpacing())
+        {
+            return -1;
+        }
+
+        return closestNodeId;
     }
 
     bool NavMesh::RayIntersectsTriangle(const glm::vec3& RayOrigin, const glm::vec3& RayDirection,

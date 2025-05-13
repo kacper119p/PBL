@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-    void Graph::AddNode(int Id, const glm::vec2 Position)
+    void Graph::AddNode(int Id, const glm::vec3 Position)
     {
         Nodes.emplace(Id, Node(Id, Position));
     }

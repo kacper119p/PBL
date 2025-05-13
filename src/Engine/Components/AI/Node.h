@@ -19,27 +19,27 @@ namespace Engine
         /**
          * @brief Constructs a node with specified ID and position.
          * @param Id Unique identifier.
-         * @param Position 2D position in world space.
+         * @param Position 3D position in world space.
          */
-        Node(int Id, const glm::vec2& Position);
+        Node(int Id, const glm::vec3& Position);
 
         /**
          * @brief Gets the unique identifier of the node.
          * @return The node's ID.
          */
-        int GetId() const;
+        [[nodiscard]] int GetId() const;
 
         /**
-         * @brief Gets the 2D position of the node in world space.
+         * @brief Gets the 3D position of the node in world space.
          * @return Reference to the position vector.
          */
-        const glm::vec2& GetPosition() const;
+        [[nodiscard]] const glm::vec3& GetPosition() const;
 
         /**
          * @brief Gets the list of connected neighbor node IDs.
          * @return Constant reference to the neighbors vector.
          */
-        const std::vector<int>& GetNeighbors() const;
+        [[nodiscard]] const std::vector<int>& GetNeighbors() const;
 
         /**
          * @brief Sets the unique identifier of the node.
@@ -48,10 +48,10 @@ namespace Engine
         void SetId(int NewId);
 
         /**
-         * @brief Sets the 2D position of the node in world space.
+         * @brief Sets the 3D position of the node in world space.
          * @param NewPosition New position to assign.
          */
-        void SetPosition(const glm::vec2& NewPosition);
+        void SetPosition(const glm::vec3& NewPosition);
 
         /**
          * @brief Adds a neighbor node ID to the list of neighbors.
@@ -66,7 +66,7 @@ namespace Engine
 
     private:
         int Id{}; ///< Unique identifier of the node.
-        glm::vec2 Position{}; ///< 2D position of the node in world space.
+        glm::vec3 Position{}; ///< 3D position of the node in world space.
         std::vector<int> Neighbors; ///< List of connected neighbor node IDs.
     };
 }

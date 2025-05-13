@@ -76,8 +76,10 @@ namespace Engine
         std::unordered_map<int, NodeRecord> allNodes;
         std::unordered_map<int, bool> closedList;
 
-        const glm::vec2& goalPos = NavGraph->GetNode(GoalId).GetPosition();
-        const glm::vec2& startPos = NavGraph->GetNode(StartId).GetPosition();
+        const glm::vec2& goalPos = glm::vec2(NavGraph->GetNode(GoalId).GetPosition().x,
+                                             NavGraph->GetNode(GoalId).GetPosition().z);
+        const glm::vec2& startPos = glm::vec2(NavGraph->GetNode(StartId).GetPosition().x,
+                                              NavGraph->GetNode(StartId).GetPosition().z);
 
         const NodeRecord startRecord{StartId, 0.0f, glm::distance(startPos, goalPos), -1};
         openList.push(startRecord);
@@ -110,11 +112,14 @@ namespace Engine
                     continue;
 
                 const float g = current.CostSoFar + glm::distance(
-                                        NavGraph->GetNode(current.NodeId).GetPosition(),
-                                        NavGraph->GetNode(neighborId).GetPosition()
+                                        glm::vec2(NavGraph->GetNode(current.NodeId).GetPosition().x,
+                                                  NavGraph->GetNode(current.NodeId).GetPosition().z),
+                                        glm::vec2(NavGraph->GetNode(neighborId).GetPosition().x,
+                                                  NavGraph->GetNode(neighborId).GetPosition().z)
                                         );
 
-                const float h = glm::distance(NavGraph->GetNode(neighborId).GetPosition(), goalPos);
+                const float h = glm::distance(glm::vec2(NavGraph->GetNode(neighborId).GetPosition().x,
+                                                        NavGraph->GetNode(neighborId).GetPosition().z), goalPos);
                 const float f = g + h;
 
                 if (!allNodes.count(neighborId) || g < allNodes[neighborId].CostSoFar)
@@ -141,7 +146,7 @@ namespace Engine
 
     void AStar::SetStartPosition(const glm::vec3& Position)
     {
-        int startNodeId = GetNodeIdFromPosition(Position);
+        int startNodeId = NavMesh::Get().GetNodeIdFromPosition(Position);
         if (startNodeId == -1)
         {
             spdlog::warn("Can't find node for the starting position!");
@@ -152,7 +157,7 @@ namespace Engine
 
     void AStar::SetGoalPosition(const glm::vec3& Position)
     {
-        int goalNodeId = GetNodeIdFromPosition(Position);
+        int goalNodeId = NavMesh::Get().GetNodeIdFromPosition(Position);
         if (goalNodeId == -1)
         {
             spdlog::warn("Can't find node for the goal position!");
@@ -205,8 +210,8 @@ namespace Engine
         if (!GetOwner() || Path.empty() || !NavGraph)
             return;
 
-
-        const glm::vec2& targetPos = NavGraph->GetNode(Path[CurrentPathIndex]).GetPosition();
+        const glm::vec2& targetPos = glm::vec2(NavGraph->GetNode(Path[CurrentPathIndex]).GetPosition().x,
+                                               NavGraph->GetNode(Path[CurrentPathIndex]).GetPosition().z);
         glm::vec2 direction = targetPos - ObjectPosition;
 
         float distance = glm::length(direction);
@@ -255,36 +260,6 @@ namespace Engine
         glm::vec3 currentPos3D = GetOwner()->GetTransform()->GetPosition();
         glm::vec3 newPos = glm::vec3(ObjectPosition.x, currentPos3D.y, ObjectPosition.y);
         GetOwner()->GetTransform()->SetPosition(newPos);
-    }
-
-    int AStar::GetNodeIdFromPosition(const glm::vec3& Position) const
-    {
-        if (!NavGraph)
-            return -1;
-
-        const auto& nodes = NavGraph->GetAllNodes();
-        float closestDistance = FLT_MAX;
-        int closestNodeId = -1;
-
-        for (const auto& nodePair : nodes)
-        {
-            const glm::vec2& nodePosition = nodePair.second.GetPosition();
-
-            float distance = glm::length(glm::vec2(Position.x, Position.z) - nodePosition);
-
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closestNodeId = nodePair.first;
-            }
-        }
-
-        if (closestDistance > 2 * NavMesh::Get().GetSpacing())
-        {
-            return -1;
-        }
-
-        return closestNodeId;
     }
 
     rapidjson::Value AStar::Serialize(rapidjson::Document::AllocatorType& Allocator) const

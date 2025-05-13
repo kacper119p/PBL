@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-    Node::Node(int Id, const glm::vec2& Position) :
+    Node::Node(int Id, const glm::vec3& Position) :
         Id(Id), Position(Position)
     {
     }
@@ -12,7 +12,7 @@ namespace Engine
         return Id;
     }
 
-    const glm::vec2& Node::GetPosition() const
+    const glm::vec3& Node::GetPosition() const
     {
         return Position;
     }
@@ -27,7 +27,7 @@ namespace Engine
         Id = NewId;
     }
 
-    void Node::SetPosition(const glm::vec2& NewPosition)
+    void Node::SetPosition(const glm::vec3& NewPosition)
     {
         Position = NewPosition;
     }
