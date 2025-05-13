@@ -6,6 +6,9 @@
 #include <vector>
 #include <string>
 
+#include "Engine/EngineObjects/GameMode/GameMode.h"
+#include "Engine/EngineObjects/Player/Player.h"
+
 namespace Materials
 {
     class Material;
@@ -29,10 +32,13 @@ namespace Engine
     class Scene final
     {
     private:
-        Entity* Root;
+        Entity* Root = nullptr;
+        GameMode* GameMode = nullptr;
+        Player* Player = nullptr;
         Ui::Ui* Ui = nullptr;
-        Texture Skybox;
-        std::string Path;
+        Texture Skybox = Texture();
+        std::string Path = "";
+
     public:
         /**
          * @brief Constructs a new scene.
@@ -74,6 +80,22 @@ namespace Engine
         {
             this->Skybox = Skybox;
             LightManager::GetInstance()->SetEnvironmentMap(Skybox);
+        }
+
+        /**
+         * @brief Returns GameMode used in this scene.
+         */
+        [[nodiscard]] Engine::GameMode* GetGameMode() const
+        {
+            return GameMode;
+        }
+
+        /**
+         * @brief Returns Player used in this scene.
+         */
+        [[nodiscard]] Engine::Player* GetPlayer() const
+        {
+            return Player;
         }
 
         /**
@@ -121,9 +143,12 @@ namespace Engine
          * @param Value Serialized scene.
          */
         void Deserialize(const rapidjson::Value& Value);
+
         std::string GetPath() const { return Path; }
         void SetPath(const std::string& Path) { this->Path = Path; }
+
         void DeleteEntity(Entity* Entity);
+
     private:
         static void SerializeEntity(const Entity* Entity, rapidjson::Value& Object,
                                     rapidjson::Document::AllocatorType& Allocator);
