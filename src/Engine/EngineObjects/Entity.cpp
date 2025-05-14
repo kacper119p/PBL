@@ -1,5 +1,6 @@
 #include "Entity.h"
 
+#include "GizmoManager.h"
 #include "Serialization/SerializationUtility.h"
 
 
@@ -11,10 +12,17 @@ namespace Engine
         {
             delete component;
         }
+#if EDITOR
+        if (GizmoManager::GetInstance()->GetManaged() == this->GetTransform())
+        {
+            GizmoManager::GetInstance()->SetManaged(nullptr);
+        }
+#endif
     }
 #if EDITOR
     void Entity::DrawImGui()
-    { Transform.DrawImGui();
+    {
+        Transform.DrawImGui();
         for (Component* component : Components)
         {
             component->DrawImGui();

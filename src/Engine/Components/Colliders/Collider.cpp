@@ -23,7 +23,11 @@ namespace Engine
 #endif
     }
 
-    Collider::~Collider() = default;
+    Collider::~Collider()
+    {
+        Spatial->RemoveCollider(this);
+        CollisionUpdateManager::GetInstance()->UnregisterCollider(this);
+    }
 
     Collider& Collider::operator=(const Collider& Other)
     {
