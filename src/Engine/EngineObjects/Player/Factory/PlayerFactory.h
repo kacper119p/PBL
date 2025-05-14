@@ -89,9 +89,9 @@ namespace Engine
         /**
          * @brief Returns TypeNames of all available Players.
          */
-        static const std::vector<std::string>* GetAvailableComponents()
+        static const std::vector<std::string> GetAvailableComponents()
         {
-            return &GetInstance()->AvailablePlayers;
+            return GetInstance()->AvailablePlayers;
         }
 #endif
     };

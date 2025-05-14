@@ -89,9 +89,9 @@ namespace Engine
         /**
          * @brief Returns TypeNames of all available GameModes.
          */
-        static const std::vector<std::string>* GetAvailableComponents()
+        static const std::vector<std::string> GetAvailableComponents()
         {
-            return &GetInstance()->AvailableGameModes;
+            return GetInstance()->AvailableGameModes;
         }
 #endif
     };

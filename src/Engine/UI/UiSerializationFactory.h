@@ -84,9 +84,9 @@ namespace Engine::Ui
         /**
          * @brief Returns TypeNames of all available Uis.
          */
-        static const std::vector<std::string>* GetAvailableUis()
+        static const std::vector<std::string> GetAvailableUis()
         {
-            return &GetInstance()->AvailableUis;
+            return GetInstance()->AvailableUis;
         }
 #endif
 
