@@ -6,7 +6,7 @@
 namespace Engine
 {
     /**
-     * @brief Represents a simple 2D graph consisting of nodes and their connections.
+     * @brief Represents a simple 3D graph consisting of nodes and their connections.
      */
     class Graph
     {
@@ -14,9 +14,9 @@ namespace Engine
         /**
          * @brief Adds a new node to the graph.
          * @param Id Unique identifier for the node.
-         * @param Position 2D position of the node.
+         * @param Position 3D position of the node.
          */
-        void AddNode(int Id, glm::vec2 Position);
+        void AddNode(int Id, glm::vec3 Position);
 
         /**
          * @brief Creates a directed connection between two existing nodes.

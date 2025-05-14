@@ -26,7 +26,7 @@ namespace Engine
         glm::vec3 Scale = glm::vec3(1.0f, 1.0f, 1.0f);
 
         glm::mat4 LocalMatrix = glm::mat4(1.0f);
-        glm::mat4 LocalToWorldMatrix = glm::mat4(1.0f);;
+        glm::mat4 LocalToWorldMatrix = glm::mat4(1.0f);
         bool IsDirty = true;
 
     private:
@@ -72,7 +72,7 @@ namespace Engine
         /**
         * @brief Returns position in parent's space.
         */
-        [[nodiscard]] const glm::vec3& GetPositionLocalSpace()
+        [[nodiscard]] const glm::vec3& GetPositionLocalSpace() const
         {
             return Position;
         }
@@ -141,6 +141,46 @@ namespace Engine
         {
             Scale = InScale;
             MarkDirty();
+        }
+
+        /**
+         * @brief Transforms position from world space to local space.
+         * @param Position Position in world space.
+         * @return Position in local space.
+         */
+        [[nodiscard]] glm::vec3 TransformPositionWorldToLocal(const glm::vec3& Position)
+        {
+            return glm::vec3(glm::inverse(GetLocalToWorldMatrix()) * glm::vec4(Position, 1.0f));
+        }
+
+        /**
+         * @brief Transforms position from local space to world space.
+         * @param Position Position in local space.
+         * @return Position in world space.
+         */
+        [[nodiscard]] glm::vec3 TransformPositionLocalToWorld(const glm::vec3& Position)
+        {
+            return glm::vec3(GetLocalToWorldMatrix() * glm::vec4(Position, 1.0f));
+        }
+
+        /**
+         * @brief Transforms direction from world space to local space.
+         * @param Direction Direction in world space.
+         * @return Direction in local space.
+         */
+        [[nodiscard]] glm::vec3 TransformDirectionWorldToLocal(const glm::vec3& Direction)
+        {
+            return glm::normalize(glm::vec3(glm::inverse(GetLocalToWorldMatrix()) * glm::vec4(Direction, 0.0f)));
+        }
+
+        /**
+         * @brief Transforms direction from local space to world space.
+         * @param Direction Direction in local space.
+         * @return Direction in world space.
+         */
+        [[nodiscard]] glm::vec3 TransformDirectionLocalToWorld(const glm::vec3& Direction)
+        {
+            return glm::normalize(glm::vec3(GetLocalToWorldMatrix() * glm::vec4(Direction, 0.0f)));
         }
 
         /**

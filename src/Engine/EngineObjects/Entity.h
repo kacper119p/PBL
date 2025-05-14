@@ -16,7 +16,7 @@ namespace Engine
     /**
      * @brief Base class for all objects that exist in a scene.
      */
-    class Entity final : public Serialization::SerializedObject
+    class Entity : public Serialization::SerializedObject
     {
         friend class Scene;
 
@@ -106,7 +106,6 @@ namespace Engine
         template<class T>
         [[nodiscard]] T* GetComponent() const
         {
-            {
                 static_assert(std::is_base_of_v<Component, T>, "Class not derived from IComponent");
                 for (Component* component : Components)
                 {
@@ -116,7 +115,6 @@ namespace Engine
                     }
                 }
                 return nullptr;
-            }
         }
 
         /**

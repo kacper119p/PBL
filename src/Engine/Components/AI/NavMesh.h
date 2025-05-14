@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Engine/Components/AI/AStar.h"
-#include "Engine/EngineObjects/Entity.h"
 #include "NavArea.h"
 
 namespace Engine
@@ -69,6 +68,13 @@ namespace Engine
         {
             this->Spacing = Spacing;
         }
+
+        /**
+         * @brief Maps a 3D world position to a corresponding node ID in the graph.
+         * @param Position 3D world position.
+         * @return Node ID closest to the given position.
+         */
+        [[nodiscard]] int GetNodeIdFromPosition(const glm::vec3& Position) const;
 
     private:
         std::unique_ptr<Graph> NavGraph = std::make_unique<Graph>(); ///< The navigation graph.

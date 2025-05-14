@@ -1,44 +1,42 @@
 #include "GenerativeSystem.h"
-
 #include "Engine/Components/Renderers/ModelRenderer.h"
 #include "Engine/Gui/EditorGUI.h"
 #include "Serialization/SerializationUtility.h"
 #include "spdlog/spdlog.h"
+#include "Engine/Components/AI/NavMesh.h"
 
 namespace Generation
 {
-    void GenerativeSystem::GenerateTrash(Engine::Scene* scene,
-                                         const std::vector<std::pair<Models::Model*, Materials::Material*>>& trash,
-                                         int TrashCount, float TrashDensity, std::vector<float> trashPercentages,
-                                         Engine::Entity*& LastGeneratedEntity)
+    void GenerativeSystem::GenerateItems(Engine::Scene* Scene,
+                                         const std::vector<std::pair<Models::Model*, Materials::Material*>>& Items,
+                                         int ItemsCount, float ItemsDensity, std::vector<float> ItemsPercentages,
+                                         float ItemsSizeMin, float ItemsSizeMax)
     {
-        if (!PrepareNavMesh(scene))
+        if (!PrepareNavMesh(Scene))
             return;
 
-        if (trash.empty())
+        if (Items.empty())
             return;
 
-        NormalizePercentages(trashPercentages);
+        NormalizePercentages(ItemsPercentages);
 
-        std::vector<int> counts = CalculateModelCounts(trashPercentages, TrashCount);
+        std::vector<int> counts = CalculateModelCounts(ItemsPercentages, ItemsCount);
 
-        glm::vec3 basePosition = GetRandomNavMeshPosition(TrashDensity);
+        glm::vec3 basePosition = GetRandomNavMeshPosition();
 
-        Engine::Entity* parent = CreateParentEntity(scene, basePosition, "Generated Trash");
+        Engine::Entity* parent = CreateParentEntity(Scene, basePosition, "Generated Items");
 
-        SpawnTrashEntities(scene, parent, trash, counts, basePosition, TrashDensity);
-
-        LastGeneratedEntity = parent;
+        SpawnItemsEntities(Scene, parent, Items, counts, basePosition, ItemsDensity, ItemsSizeMin, ItemsSizeMax);
     }
 
-    bool GenerativeSystem::PrepareNavMesh(Engine::Scene* scene)
+    bool GenerativeSystem::PrepareNavMesh(Engine::Scene* Scene)
     {
-        Engine::NavMesh::Get().BakeNavMesh(scene->GetRoot());
+        Engine::NavMesh::Get().BakeNavMesh(Scene->GetRoot());
         const auto* graph = Engine::NavMesh::Get().GetGraph();
         return graph && !graph->GetAllNodes().empty();
     }
 
-    glm::vec3 GenerativeSystem::GetRandomNavMeshPosition(float density)
+    glm::vec3 GenerativeSystem::GetRandomNavMeshPosition()
     {
         const auto* graph = Engine::NavMesh::Get().GetGraph();
         const auto& nodes = graph->GetAllNodes();
@@ -51,37 +49,37 @@ namespace Generation
         std::uniform_int_distribution<int> nodeDist(0, nodeIds.size() - 1);
 
         int randomNodeId = nodeIds[nodeDist(rng)];
-        const glm::vec2& pos2D = graph->GetNode(randomNodeId).GetPosition();
-        return glm::vec3(pos2D.x, 3.0f, pos2D.y);
+        const glm::vec3& pos = graph->GetNode(randomNodeId).GetPosition();
+        return pos;
     }
 
-    void GenerativeSystem::NormalizePercentages(std::vector<float>& percentages)
+    void GenerativeSystem::NormalizePercentages(std::vector<float>& Percentages)
     {
         float sum = 0.0f;
-        for (float p : percentages)
+        for (float p : Percentages)
             sum += p;
 
         if (sum == 0.0f)
             return;
 
-        for (float& p : percentages)
+        for (float& p : Percentages)
             p /= sum;
     }
 
-    std::vector<int> GenerativeSystem::CalculateModelCounts(const std::vector<float>& percentages, int totalCount)
+    std::vector<int> GenerativeSystem::CalculateModelCounts(const std::vector<float>& Percentages, int TotalCount)
     {
-        std::vector<int> counts(percentages.size(), 0);
+        std::vector<int> counts(Percentages.size(), 0);
         int accumulated = 0;
 
-        for (size_t i = 0; i < percentages.size(); ++i)
+        for (size_t i = 0; i < Percentages.size(); ++i)
         {
-            counts[i] = static_cast<int>(totalCount * percentages[i]);
+            counts[i] = static_cast<int>(TotalCount * Percentages[i]);
             accumulated += counts[i];
         }
 
-        while (accumulated < totalCount)
+        while (accumulated < TotalCount)
         {
-            for (size_t i = 0; i < counts.size() && accumulated < totalCount; ++i)
+            for (size_t i = 0; i < counts.size() && accumulated < TotalCount; ++i)
             {
                 counts[i]++;
                 accumulated++;
@@ -91,36 +89,135 @@ namespace Generation
         return counts;
     }
 
-    Engine::Entity* GenerativeSystem::CreateParentEntity(Engine::Scene* scene, const glm::vec3& position,
-                                                         const std::string name)
+    Engine::Entity* GenerativeSystem::CreateParentEntity(Engine::Scene* Scene, const glm::vec3& Position,
+                                                         const std::string Name)
     {
-        Engine::Entity* parent = scene->SpawnEntity(scene->GetRoot());
-        parent->SetName(name);
-        parent->SetScene(scene);
-        parent->GetTransform()->SetPosition(position);
+        Engine::Entity* parent = Scene->SpawnEntity(Scene->GetRoot());
+        parent->SetName(Name);
+        parent->SetScene(Scene);
+        parent->GetTransform()->SetPosition(Position);
         return parent;
     }
 
-    void GenerativeSystem::SpawnTrashEntities(Engine::Scene* scene, Engine::Entity* parent,
-                                              const std::vector<std::pair<Models::Model*, Materials::Material*>>& trash,
-                                              const std::vector<int>& counts, const glm::vec3& basePosition,
-                                              float density)
+    bool AabBsIntersect(const glm::vec3& MinA, const glm::vec3& MaxA,
+                        const glm::vec3& MinB, const glm::vec3& MaxB)
     {
-        std::default_random_engine rng(std::random_device{}());
-        std::uniform_real_distribution<float> offsetDist(-density, density);
+        return (MinA.x <= MaxB.x && MaxA.x >= MinB.x) &&
+               (MinA.y <= MaxB.y && MaxA.y >= MinB.y) &&
+               (MinA.z <= MaxB.z && MaxA.z >= MinB.z);
+    }
 
-        for (size_t i = 0; i < trash.size(); ++i)
+    std::optional<glm::vec3> GenerativeSystem::GetNonOverlappingNavMeshPosition(
+            const glm::vec3& Center, float BaseSpacing, const std::vector<std::pair<glm::vec3, glm::vec3>>& UsedAabbs,
+            Perlin& Perlin, float PerlinScale, float PerlinMagnitude, const glm::vec3& AabbMin,
+            const glm::vec3& AabbMax)
+    {
+        const auto* graph = Engine::NavMesh::Get().GetGraph();
+        const auto& nodes = graph->GetAllNodes();
+
+        std::vector<int> nodeIds;
+        for (const auto& pair : nodes)
+            nodeIds.push_back(pair.first);
+
+        std::default_random_engine rng(std::random_device{}());
+        std::shuffle(nodeIds.begin(), nodeIds.end(), rng);
+
+        float spacing = BaseSpacing;
+        const float spacingStep = 0.5f;
+        const int maxAttempts = 10;
+
+        for (int attempt = 0; attempt < maxAttempts; ++attempt)
         {
-            const auto& modelMaterialPair = trash[i];
+            for (int id : nodeIds)
+            {
+                glm::vec3 pos = nodes.at(id).GetPosition();
+
+                if (glm::distance(pos, Center) > spacing)
+                    continue;
+
+                float noiseX = Perlin.Noise(pos.x * PerlinScale, pos.z * PerlinScale);
+                float noiseZ = Perlin.Noise(pos.z * PerlinScale, pos.x * PerlinScale);
+                glm::vec3 noisyPos = pos;
+                noisyPos.x += (noiseX - 0.5f) * 2.0f * PerlinMagnitude;
+                noisyPos.z += (noiseZ - 0.5f) * 2.0f * PerlinMagnitude;
+
+                glm::vec3 testMin = noisyPos + AabbMin;
+                glm::vec3 testMax = noisyPos + AabbMax;
+
+                bool valid = true;
+                for (const auto& [otherMin, otherMax] : UsedAabbs)
+                {
+                    if (AabBsIntersect(testMin, testMax, otherMin, otherMax))
+                    {
+                        valid = false;
+                        break;
+                    }
+                }
+
+                if (valid)
+                    return noisyPos;
+            }
+
+            spacing += spacingStep;
+        }
+
+        return std::nullopt;
+    }
+
+    void GenerativeSystem::SpawnItemsEntities(Engine::Scene* Scene, Engine::Entity* Parent,
+                                              const std::vector<std::pair<Models::Model*, Materials::Material*>>& Items,
+                                              const std::vector<int>& Counts, const glm::vec3& BasePosition,
+                                              float Spacing, float ItemsSizeMin, float ItemsSizeMax)
+    {
+        std::vector<std::pair<glm::vec3, glm::vec3>> usedAabBs;
+
+        Perlin perlin(1337);
+        float perlinScale = 0.2f;
+        float perlinMagnitude = 1.0f;
+
+        std::default_random_engine rng(std::random_device{}());
+        std::uniform_real_distribution<float> sizeDist(ItemsSizeMin, ItemsSizeMax);
+
+        for (size_t i = 0; i < Items.size(); ++i)
+        {
+            const auto& modelMaterialPair = Items[i];
             if (!modelMaterialPair.first || !modelMaterialPair.second)
                 continue;
 
-            for (int j = 0; j < counts[i]; ++j)
-            {
-                glm::vec3 spawnPos = basePosition + glm::vec3(offsetDist(rng), 0.0f, offsetDist(rng));
+            glm::vec3 minAabb = glm::vec3(std::numeric_limits<float>::max());
+            glm::vec3 maxAabb = glm::vec3(-std::numeric_limits<float>::max());
 
-                Engine::Entity* newEntity = scene->SpawnEntity(parent);
-                newEntity->GetTransform()->SetPosition(spawnPos);
+            for (size_t meshIndex = 0; meshIndex < modelMaterialPair.first->GetMeshCount(); ++meshIndex)
+            {
+                const auto& mesh = modelMaterialPair.first->GetMesh(meshIndex);
+                const auto& aabb = mesh->GetAabBox();
+
+                minAabb = glm::min(minAabb, aabb.min);
+                maxAabb = glm::max(maxAabb, aabb.max);
+            }
+
+            for (int j = 0; j < Counts[i]; ++j)
+            {
+                float scaleFactor = sizeDist(rng);
+                glm::vec3 scaledMin = minAabb * scaleFactor;
+                glm::vec3 scaledMax = maxAabb * scaleFactor;
+                float yOffset = scaledMin.y;
+
+                auto spawnPosOpt = GetNonOverlappingNavMeshPosition(BasePosition, Spacing, usedAabBs,
+                                                                    perlin, perlinScale, perlinMagnitude,
+                                                                    scaledMin, scaledMax);
+
+                if (!spawnPosOpt.has_value())
+                {
+                    spdlog::warn("Could not place item entity {} due to overlap. Skipping.", j + 1);
+                    continue;
+                }
+
+                glm::vec3 spawnPos = *spawnPosOpt;
+                glm::vec3 finalPos = glm::vec3(spawnPos.x, spawnPos.y - yOffset, spawnPos.z);
+
+                Engine::Entity* newEntity = Scene->SpawnEntity(Parent);
+                newEntity->GetTransform()->SetPosition(finalPos);
 
                 auto modelRenderer = newEntity->AddComponent<Engine::ModelRenderer>();
                 modelRenderer->SetModel(modelMaterialPair.first);
@@ -129,71 +226,11 @@ namespace Generation
                 std::filesystem::path modelPath(modelMaterialPair.first->GetPath());
                 std::string baseName = modelPath.stem().string();
                 newEntity->SetName(baseName + " " + std::to_string(j + 1));
-                newEntity->SetScene(scene);
+                newEntity->SetScene(Scene);
+                newEntity->GetTransform()->SetScale(glm::vec3(scaleFactor));
 
-                spdlog::info("Generated Trash at position: ({}, {}, {})", spawnPos.x, spawnPos.y, spawnPos.z);
+                usedAabBs.emplace_back(spawnPos + scaledMin, spawnPos + scaledMax);
             }
         }
     }
-
-    void GenerativeSystem::GenerateBlood(Engine::Scene* scene,
-                                         const std::vector<std::pair<Models::Model*, Materials::Material*>>& stains,
-                                         int BloodCount, float BloodSize, float BloodSpacing,
-                                         Engine::Entity*& LastGeneratedEntity)
-    {
-        if (!PrepareNavMesh(scene) || stains.empty())
-            return;
-
-        glm::vec3 basePosition = GetRandomNavMeshPosition(BloodSpacing);
-        Engine::Entity* parent = CreateParentEntity(scene, basePosition, "Generated Stains");
-
-        SpawnBloodEntities(scene, parent, stains, BloodCount, basePosition, BloodSpacing, BloodSize);
-
-        LastGeneratedEntity = parent;
-    }
-
-    void GenerativeSystem::SpawnBloodEntities(Engine::Scene* scene, Engine::Entity* parent,
-                                              const std::vector<std::pair<Models::Model*, Materials::Material*>>&
-                                              stains,
-                                              int count, const glm::vec3& basePosition, float spacing, float size)
-    {
-        std::default_random_engine rng(std::random_device{}());
-        std::uniform_real_distribution<float> offsetDist(-spacing, spacing);
-
-        for (int i = 0; i < count; ++i)
-        {
-            glm::vec3 spawnPos(basePosition.x + offsetDist(rng), 0.0f, basePosition.z + offsetDist(rng));
-
-            auto& modelMaterialPair = stains[i % stains.size()];
-            if (!modelMaterialPair.first || !modelMaterialPair.second)
-                continue;
-
-            Engine::Entity* newEntity = scene->SpawnEntity(parent);
-            newEntity->GetTransform()->SetPosition(spawnPos);
-            newEntity->GetTransform()->SetScale(glm::vec3(size));
-
-            auto modelRenderer = newEntity->AddComponent<Engine::ModelRenderer>();
-            modelRenderer->SetModel(modelMaterialPair.first);
-            modelRenderer->SetMaterial(modelMaterialPair.second);
-
-            std::filesystem::path modelPath(modelMaterialPair.first->GetPath());
-            std::string baseName = modelPath.stem().string();
-            newEntity->SetName(baseName + " " + std::to_string(i + 1));
-            newEntity->SetScene(scene);
-
-            spdlog::info("Generated Blood at position: ({}, {}, {})", spawnPos.x, spawnPos.y, spawnPos.z);
-        }
-    }
-
-    void GenerativeSystem::ClearGeneratedEntities(Engine::Entity*& GeneratedEntity)
-    {
-        if (GeneratedEntity && GeneratedEntity->GetScene())
-        {
-            GeneratedEntity->GetScene()->DeleteEntity(GeneratedEntity);
-            GeneratedEntity = nullptr;
-        }
-
-        spdlog::info("Cleared all generated entities.");
-    }
-
 }

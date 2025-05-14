@@ -1,9 +1,9 @@
 {
     "type": "PbrMaterial",
-    "BaseMap": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\textures\\Default.dds",
-    "RoughnessMetallicMap": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\textures\\Default.dds",
-    "NormalMap": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\textures\\Default.dds",
-    "EmissiveMap": "C:\\Users\\DD\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\textures\\Default.dds",
+    "BaseMap": "./res/textures/Default.dds",
+    "RoughnessMetallicMap": "./res/textures/Default.dds",
+    "NormalMap": "./res/textures/Default.dds",
+    "EmissiveMap": "./res/textures/Default.dds",
     "Roughness": 1.0,
     "Metallic": 1.0,
     "BaseColor": {

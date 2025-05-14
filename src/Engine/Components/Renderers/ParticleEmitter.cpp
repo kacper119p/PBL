@@ -16,6 +16,9 @@ Engine::ParticleEmitter::ParticleEmitter(Materials::Material* const Material, co
     UpdateShader(UpdateShader)
 {
     this->Material = Material;
+    ParticlesToSpawnProperty = SpawnShader.GetUniformLocation("ParticlesToSpawn");
+    RandomProperty = SpawnShader.GetUniformLocation("Random");
+    DeltaTimeProperty = UpdateShader.GetUniformLocation("DeltaTime");
 }
 
 void Engine::ParticleEmitter::Render(const Engine::CameraRenderData& RenderData)
@@ -68,15 +71,15 @@ void Engine::ParticleEmitter::Update(float DeltaTime)
         const int workGroupSize = SpawnShader.GetWorkGroupSize().x;
         const int workGroupsCount = (particlesToSpawn + workGroupSize - 1) / workGroupSize;
 
-        SpawnShader.SetUniform("ParticlesToSpawn", particlesToSpawn);
+        Shaders::ComputeShader::SetUniform(ParticlesToSpawnProperty, particlesToSpawn);
         float time = static_cast<float>(glfwGetTime());
-        SpawnShader.SetUniform("Random", *reinterpret_cast<unsigned int*>(&time));
+        Shaders::ComputeShader::SetUniform(RandomProperty, *reinterpret_cast<unsigned int*>(&time));
 
         Shaders::ComputeShader::Dispatch(glm::ivec3(workGroupsCount, 1, 1));
         glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
     }
     UpdateShader.Use();
-    UpdateShader.SetUniform("DeltaTime", DeltaTime);
+    Shaders::ComputeShader::SetUniform(DeltaTimeProperty, DeltaTime);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ParticlesBuffer);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, FreelistBuffer);
 
@@ -222,6 +225,9 @@ void Engine::ParticleEmitter::DeserializeValuePass(const rapidjson::Value& Objec
     DESERIALIZE_VALUE(Material)
     DESERIALIZE_VALUE(SpawnShader)
     DESERIALIZE_VALUE(UpdateShader)
+    ParticlesToSpawnProperty = SpawnShader.GetUniformLocation("ParticlesToSpawn");
+    RandomProperty = SpawnShader.GetUniformLocation("Random");
+    DeltaTimeProperty = UpdateShader.GetUniformLocation("DeltaTime");
     END_COMPONENT_DESERIALIZATION_VALUE_PASS
 }
 

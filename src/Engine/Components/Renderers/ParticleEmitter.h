@@ -59,6 +59,10 @@ namespace Engine
         unsigned int ParticlesBuffer;
         unsigned int FreelistBuffer;
 
+        uint32_t ParticlesToSpawnProperty;
+        uint32_t DeltaTimeProperty;
+        uint32_t RandomProperty;
+
         Shaders::ComputeShader SpawnShader;
         Shaders::ComputeShader UpdateShader;
 

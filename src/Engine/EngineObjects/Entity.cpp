@@ -20,7 +20,7 @@ namespace Engine
             component->DrawImGui();
         }
     }
-    #endif
+#endif
 
     rapidjson::Value Entity::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
