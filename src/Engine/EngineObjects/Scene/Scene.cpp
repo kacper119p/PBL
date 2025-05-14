@@ -33,6 +33,8 @@ namespace Engine
     {
         delete Root;
         delete Ui;
+        delete GameMode;
+        delete Player;
     }
 
     Entity* Scene::SpawnEntity(Entity* const Parent)
@@ -96,6 +98,10 @@ namespace Engine
         delete Root;
         Root = new Entity();
         Root->SetName("Root");
+
+        delete Ui;
+        delete GameMode;
+        delete Player;
 
         Serialization::Deserialize(Value, "Skybox", Skybox);
         LightManager::GetInstance()->SetEnvironmentMap(Skybox);

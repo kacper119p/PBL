@@ -3,11 +3,11 @@
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include "Engine/Textures/Texture.h"
-#include <vector>
 #include <string>
 
 #include "Engine/EngineObjects/GameMode/GameMode.h"
 #include "Engine/EngineObjects/Player/Player.h"
+#include "Engine/UI/Ui.h"
 
 namespace Materials
 {
@@ -63,7 +63,6 @@ namespace Engine
             return Root;
         }
 
-
         /**
          * @brief Returns this scene's skybox.
          */
@@ -106,15 +105,40 @@ namespace Engine
             return Ui;
         }
 
+
+#if EDITOR
         /**
-         * @brief Sets UI used in this scene.
-         * @param Ui A new UI.
+         * @brief Sets a game mode used in this scene.
+         * @param GameMode A new GameMode.
          */
-        void SetUi(Ui::Ui* const Ui)
+        void SetGameMode(Engine::GameMode* const GameMode)
         {
-            this->Ui = Ui;
+            delete this->GameMode;
+            this->GameMode = GameMode;
+            this->GameMode->SetScene(this);
         }
 
+        /**
+         * @brief Sets player used in this scene.
+         * @param Player A new Player.
+         */
+        void SetPlayer(Engine::Player* const Player)
+        {
+            delete this->Player;
+            this->Player = Player;
+            this->Player->SetScene(this);
+        }
+
+        /**
+        * @brief Sets UI used in this scene.
+        * @param Ui A new UI.
+        */
+        void SetUi(Ui::Ui* const Ui)
+        {
+            delete this->Ui;
+            this->Ui = Ui;
+        }
+#endif
         /**
          * @brief Spawns a new Entity in this scene.
          * @param Parent Parent of this object. If nullptr scene root becomes parent.
