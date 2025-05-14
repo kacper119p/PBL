@@ -28,6 +28,9 @@ namespace Engine::Ui
 
     private:
         std::unordered_map<std::string, IUiBuilder*> Builders;
+#if EDITOR
+        std::vector<std::string> AvailableUis;
+#endif
 
     private:
         [[nodiscard]] static UiSerializationFactory* GetInstance()
@@ -47,6 +50,12 @@ namespace Engine::Ui
         {
             static_assert(std::is_base_of_v<Ui, T>, "T must be derived from Ui.");
             GetInstance()->Builders.emplace(Name, new UiBuilder<T>());
+#if EDITOR
+            if constexpr (!std::is_abstract_v<T>)
+            {
+                GetInstance()->AvailableUis.emplace_back(Name);
+            }
+#endif
         }
 
 
@@ -56,7 +65,12 @@ namespace Engine::Ui
          */
         static void Unregister(const std::string& Name)
         {
-            GetInstance()->Builders.erase(Name);
+            const auto iterator = GetInstance()->Builders.find(Name);
+            delete iterator->second;
+            GetInstance()->Builders.erase(iterator);
+#if EDITOR
+            std::erase(GetInstance()->AvailableUis, Name);
+#endif
         }
 
         /**
@@ -66,7 +80,15 @@ namespace Engine::Ui
          */
         static Ui* CreateObject(const std::string& TypeName);
 
-    public:
+#if EDITOR
+        /**
+         * @brief Returns TypeNames of all available Uis.
+         */
+        static const std::vector<std::string>* GetAvailableUis()
+        {
+            return &GetInstance()->AvailableUis;
+        }
+#endif
 
     };
 }

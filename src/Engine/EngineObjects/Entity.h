@@ -16,7 +16,7 @@ namespace Engine
     /**
      * @brief Base class for all objects that exist in a scene.
      */
-    class Entity final : public Serialization::SerializedObject
+    class Entity : public Serialization::SerializedObject
     {
         friend class Scene;
 

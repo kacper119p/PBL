@@ -3,7 +3,7 @@
 
 namespace Engine::Ui
 {
-    class EmptyUi : public Ui
+    class EmptyUi final : public Ui
     {
     public:
         EmptyUi() = default;

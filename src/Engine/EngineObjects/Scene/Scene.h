@@ -3,8 +3,11 @@
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include "Engine/Textures/Texture.h"
-#include <vector>
 #include <string>
+
+#include "Engine/EngineObjects/GameMode/GameMode.h"
+#include "Engine/EngineObjects/Player/Player.h"
+#include "Engine/UI/Ui.h"
 
 namespace Materials
 {
@@ -29,10 +32,13 @@ namespace Engine
     class Scene final
     {
     private:
-        Entity* Root;
+        Entity* Root = nullptr;
+        GameMode* GameMode = nullptr;
+        Player* Player = nullptr;
         Ui::Ui* Ui = nullptr;
-        Texture Skybox;
-        std::string Path;
+        Texture Skybox = Texture();
+        std::string Path = "";
+
     public:
         /**
          * @brief Constructs a new scene.
@@ -57,7 +63,6 @@ namespace Engine
             return Root;
         }
 
-
         /**
          * @brief Returns this scene's skybox.
          */
@@ -77,6 +82,22 @@ namespace Engine
         }
 
         /**
+         * @brief Returns GameMode used in this scene.
+         */
+        [[nodiscard]] Engine::GameMode* GetGameMode() const
+        {
+            return GameMode;
+        }
+
+        /**
+         * @brief Returns Player used in this scene.
+         */
+        [[nodiscard]] Engine::Player* GetPlayer() const
+        {
+            return Player;
+        }
+
+        /**
          * @brief Returns UI used in this scene.
          */
         [[nodiscard]] Ui::Ui* GetUi() const
@@ -84,15 +105,40 @@ namespace Engine
             return Ui;
         }
 
+
+#if EDITOR
         /**
-         * @brief Sets UI used in this scene.
-         * @param Ui A new UI.
+         * @brief Sets a game mode used in this scene.
+         * @param GameMode A new GameMode.
          */
-        void SetUi(Ui::Ui* const Ui)
+        void SetGameMode(Engine::GameMode* const GameMode)
         {
-            this->Ui = Ui;
+            delete this->GameMode;
+            this->GameMode = GameMode;
+            this->GameMode->SetScene(this);
         }
 
+        /**
+         * @brief Sets player used in this scene.
+         * @param Player A new Player.
+         */
+        void SetPlayer(Engine::Player* const Player)
+        {
+            delete this->Player;
+            this->Player = Player;
+            this->Player->SetScene(this);
+        }
+
+        /**
+        * @brief Sets UI used in this scene.
+        * @param Ui A new UI.
+        */
+        void SetUi(Ui::Ui* const Ui)
+        {
+            delete this->Ui;
+            this->Ui = Ui;
+        }
+#endif
         /**
          * @brief Spawns a new Entity in this scene.
          * @param Parent Parent of this object. If nullptr scene root becomes parent.
@@ -121,9 +167,12 @@ namespace Engine
          * @param Value Serialized scene.
          */
         void Deserialize(const rapidjson::Value& Value);
+
         std::string GetPath() const { return Path; }
         void SetPath(const std::string& Path) { this->Path = Path; }
+
         void DeleteEntity(Entity* Entity);
+
     private:
         static void SerializeEntity(const Entity* Entity, rapidjson::Value& Object,
                                     rapidjson::Document::AllocatorType& Allocator);
