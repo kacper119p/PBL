@@ -11,6 +11,9 @@
 #include "Engine/Components/Renderers/ParticleEmitter.h"
 #include "Engine/Components/Audio/AudioSource.h"
 #include "Engine/EngineObjects/Scene/SceneManager.h"
+#include "Engine/EngineObjects/GameMode/GameMode.h"
+#include "Engine/EngineObjects/Player/Player.h"
+#include "Engine/UI/UiSerializationFactory.h"
 #include <filesystem>
 #include <random>
 #include "spdlog/spdlog.h"
@@ -117,8 +120,105 @@ void Engine::EditorGUI::RenderInspector(uint64_t Frame, Scene* scene)
             }
         }
 
+        ImGui::Separator();
+        // gamemode setter
+        static std::string selectedGamemodeType = "Select Gamemode Type";
+        static std::vector<std::string> gamemodeTypes = GameModeFactory::GetAvailableComponents();
+
+        if (ImGui::BeginCombo("Gamemode Type", selectedGamemodeType.c_str()))
+        {
+            for (const auto& gamemodeType : gamemodeTypes)
+            {
+                bool isSelected = (selectedGamemodeType == gamemodeType);
+                if (ImGui::Selectable(gamemodeType.c_str(), isSelected))
+                {
+                    selectedGamemodeType = gamemodeType;
+                }
+                if (isSelected)
+                {
+                    ImGui::SetItemDefaultFocus();
+                }
+            }
+            ImGui::EndCombo();
+        }
+
+        if (ImGui::Button("Add Gamemode"))
+        {
+            if (!selectedGamemodeType.empty() && selectedGamemodeType != "Select Gamemode Type")
+            {
+                GameMode* newGameMode = GameModeFactory::CreateObject(selectedGamemodeType);
+                scene->SetGameMode(newGameMode);
+                selectedGamemodeType = "Select Gamemode Type";
+            }
+        }
 
         ImGui::Separator();
+
+        // player setter
+        static std::string selectedPlayerType = "Select Player Type";
+        static std::vector<std::string> playerTypes = PlayerFactory::GetAvailableComponents();
+        if (ImGui::BeginCombo("Player Type", selectedPlayerType.c_str()))
+        {
+            for (const auto& playerType : playerTypes)
+            {
+                bool isSelected = (selectedPlayerType == playerType);
+                if (ImGui::Selectable(playerType.c_str(), isSelected))
+                {
+                    selectedPlayerType = playerType;
+                }
+                if (isSelected)
+                {
+                    ImGui::SetItemDefaultFocus();
+                }
+            }
+            ImGui::EndCombo();
+        }
+
+        if (ImGui::Button("Add Player"))
+        {
+            if (!selectedPlayerType.empty() && selectedPlayerType != "Select Player Type")
+            {
+                Player* newPlayer = PlayerFactory::CreateObject(selectedPlayerType);
+                scene->SetPlayer(newPlayer);
+                selectedPlayerType = "Select Player Type";
+            }
+        }
+
+        ImGui::Separator();
+
+        // UI setter
+        static std::string selectedUiType = "Select UI Type";
+        static std::vector<std::string> uiTypes = Ui::UiSerializationFactory::GetAvailableUis();
+
+        if (ImGui::BeginCombo("UI Type", selectedUiType.c_str()))
+        {
+            for (const auto& uiType : uiTypes)
+            {
+                bool isSelected = (selectedUiType == uiType);
+                if (ImGui::Selectable(uiType.c_str(), isSelected))
+                {
+                    selectedUiType = uiType;
+                }
+                if (isSelected)
+                {
+                    ImGui::SetItemDefaultFocus();
+                }
+            }
+            ImGui::EndCombo();
+        }
+
+        if (ImGui::Button("Add UI"))
+        {
+            if (!selectedUiType.empty() && selectedUiType != "Select UI Type")
+            {
+                Ui::Ui* newUi = Ui::UiSerializationFactory::CreateObject(selectedUiType);
+                scene->SetUi(newUi);
+                selectedUiType = "Select UI Type";
+            }
+        }
+
+        ImGui::Separator();
+
 
         //for inspector
         const GLubyte* renderer = glGetString(GL_RENDERER);
