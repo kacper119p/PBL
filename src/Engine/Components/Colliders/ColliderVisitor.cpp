@@ -733,11 +733,10 @@ namespace Engine
                         currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
                                 result.collisionNormal, result.collisionPoint, 0.001f);
                     }
-                    else
-                    {
+                  
                         currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
                                                                      separation);
-                    }
+                   
                 }
                 // TODO: emit collision event
                 break;

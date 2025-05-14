@@ -5,7 +5,7 @@
 #include "Engine/EngineObjects/CollisionUpdateManager.h"
 #include "Shaders/ShaderManager.h"
 #include <random>
-
+#include "spdlog/spdlog.h"
 #include "Engine/EngineObjects/Entity.h"
 
 namespace Engine
@@ -61,22 +61,21 @@ namespace Engine
 
     void Collider::Update(float DeltaTime)
     {
-        if (CurrentCellIndex != Spatial->GetCellIndex(transform->GetPosition()))
+        if (isStatic )
+            return;
+        
+        if (CurrentCellIndex != Spatial->GetCellIndex(transform->GetLocalToWorldMatrix()[3]))
         {
             Spatial->RemoveCollider(this);
             Spatial->AddCollider(this);
+            spdlog::info("current cell index: ", CurrentCellIndex,
+                         "\ncell index: ", Spatial->GetCellIndex(transform->GetLocalToWorldMatrix()[3]));
         }
         if (!isStatic)
         {
             // TODO: remove when rigidbody fully implemented
             const glm::vec3 newPosition = transform->GetPosition() + Gravity * DeltaTime;
             transform->SetPosition(newPosition);
-            const glm::vec3 randomRotation(GetRandomFloat(40.0f, 60.0f),
-                                           GetRandomFloat(40.0f, 60.0f),
-                                           GetRandomFloat(40.0f, 60.0f)
-                    );
-
-            transform->SetEulerAngles(transform->GetEulerAngles() + randomRotation * DeltaTime);
             // TODO END
         }
 

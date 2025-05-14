@@ -15,7 +15,7 @@ namespace Serialization
     {
         FILE* file;
         const int errorNumber = fopen_s(&file, FilePath, "rb");
-        assert(errorNumber == 0); //failed to read file
+        //assert(errorNumber == 0); //failed to read file
         char buffer[BufferSize];
         rapidjson::FileReadStream inputStream(file, buffer, sizeof(buffer));
 

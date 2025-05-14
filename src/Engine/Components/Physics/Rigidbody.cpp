@@ -83,14 +83,6 @@ namespace Engine
 
     void RigidBody::Update(float deltaTime)
     {
-        // TODO: remove when scriptable fully implemented
-        if (timeSinceLastForce >= 10.0f)
-        {
-            AddForce(glm::vec3(-.5f, 0.0f, 0.0f), ForceType::Impulse);
-            timeSinceLastForce = 0.0f;
-        }
-        timeSinceLastForce += deltaTime;
-        // TODO END
         if (inverseMass == 0.0f)
             return;
 
