@@ -1,6 +1,6 @@
 {
     "type": "AnimatedPbrMaterial",
-    "BaseMap": "./res/textures/Submarine/Base.dds",
+    "BaseMap": "./res/textures\\Default.dds",
     "RoughnessMetallicMap": "./res/textures/Submarine/RoughnessMetallicAmbientOcclusion.dds",
     "NormalMap": "./res/textures/Submarine/Normal.dds",
     "EmissiveMap": "./res/textures/EmissiveMapDefault.dds",

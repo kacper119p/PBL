@@ -95,212 +95,57 @@ namespace Materials
 #if EDITOR
     void PbrMaterial::DrawImGui()
     {
+        // Draw scalar and vector parameters
         glm::vec3 baseColor = BaseColor.GetValue();
         if (ImGui::ColorEdit3("Base Color", &baseColor.x))
         {
             BaseColor.SetValue(baseColor);
         }
+
         glm::vec3 emissiveColor = EmissiveColor.GetValue();
         if (ImGui::ColorEdit3("Emissive Color", &emissiveColor.x))
         {
             EmissiveColor.SetValue(emissiveColor);
         }
+
         float roughness = Roughness.GetValue();
         if (ImGui::SliderFloat("Roughness", &roughness, 0.0f, 1.0f))
         {
             Roughness.SetValue(roughness);
         }
+
         float metallic = Metallic.GetValue();
         if (ImGui::SliderFloat("Metallic", &metallic, 0.0f, 1.0f))
         {
             Metallic.SetValue(metallic);
         }
+
+        // Texture browsing support
+        static std::vector<std::string> availableTextures;
+        static bool scanned = false;
+        std::string texturePath = std::filesystem::relative("./res/textures").string();
+
+        EditorReadMaterial(availableTextures, scanned, texturePath);
+
+        // Draw texture selectors using base helper
         static bool showBaseTexPopup = false;
         static bool showRMTexPopup = false;
         static bool showNormalTexPopup = false;
         static bool showEmissiveTexPopup = false;
-        static std::vector<std::string> availableTextures;
-        std::string texturePath = std::filesystem::absolute("./res/textures").string();
-        static bool scanned = false;
 
-        if (!scanned)
-        {
-            for (const auto& entry : std::filesystem::recursive_directory_iterator(texturePath))
-            {
-                if (entry.is_regular_file() && entry.path().extension() == ".dds")
-                    availableTextures.emplace_back(entry.path().string());
-            }
-            scanned = true;
-        }
-
-        std::string baseMapPath = BaseMap.GetValue().GetId() != 0
-                                      ? Engine::TextureManager::GetTexturePath(BaseMap.GetValue())
-                                      : "None";
-        std::string roughnessMetallicMapPath = RoughnessMetallicMap.GetValue().GetId() != 0
-                                                   ? Engine::TextureManager::GetTexturePath(
-                                                           RoughnessMetallicMap.GetValue())
-                                                   : "None";
-        std::string normalMapPath = NormalMap.GetValue().GetId() != 0
-                                        ? Engine::TextureManager::GetTexturePath(NormalMap.GetValue())
-                                        : "None";
-        std::string emissiveMapPath =
-                EmissiveMap.GetValue().GetId() != 0
-                    ? Engine::TextureManager::GetTexturePath(EmissiveMap.GetValue())
-                    : "None";
+        EditorSetMaterial("Base Map", BaseMap, showBaseTexPopup, availableTextures, texturePath, "Base Map Picker");
         ImGui::Separator();
-        ImGui::Text("Base Map:");
-        ImGui::Selectable(baseMapPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
-        if (ImGui::BeginDragDropTarget())
-        {
-            if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
-            {
-                const char* droppedPath = static_cast<const char*>(payload->Data);
-                if (std::filesystem::path(droppedPath).extension() == ".dds")
-                {
-                    BaseMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
-                }
-            }
-            ImGui::EndDragDropTarget();
-        }
-        if (ImGui::IsItemClicked())
-            showBaseTexPopup = true;
 
-        if (showBaseTexPopup)
-        {
-            ImGui::OpenPopup("Base Map Picker");
-            showBaseTexPopup = false;
-        }
-        if (ImGui::BeginPopup("Base Map Picker"))
-        {
-            for (const auto& path : availableTextures)
-            {
-                std::filesystem::path fsPath(path);
-                std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
-                if (ImGui::Selectable(displayName.c_str()))
-                {
-                    BaseMap.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
-                    ImGui::CloseCurrentPopup();
-                }
-                ImGui::SameLine();
-                ImGui::TextDisabled("(%s)", path.c_str());
-            }
-            ImGui::EndPopup();
-        }
+        EditorSetMaterial("Roughness Metallic Map", RoughnessMetallicMap, showRMTexPopup, availableTextures,
+                          texturePath, "Roughness Metallic Map Picker");
         ImGui::Separator();
-        ImGui::Text("Roughness Metallic Map:");
-        ImGui::Selectable(roughnessMetallicMapPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
-        if (ImGui::BeginDragDropTarget())
-        {
-            if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
-            {
-                const char* droppedPath = static_cast<const char*>(payload->Data);
-                if (std::filesystem::path(droppedPath).extension() == ".dds")
-                {
-                    RoughnessMetallicMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
-                }
-            }
-            ImGui::EndDragDropTarget();
-        }
-        if (ImGui::IsItemClicked())
-            showRMTexPopup = true;
 
-        if (showRMTexPopup)
-        {
-            ImGui::OpenPopup("Rougness Metallic Map Picker");
-            showRMTexPopup = false;
-        }
-
-        if (ImGui::BeginPopup("Rougness Metallic Map Picker"))
-        {
-            for (const auto& path : availableTextures)
-            {
-                std::filesystem::path fsPath(path);
-                std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
-                if (ImGui::Selectable(displayName.c_str()))
-                {
-                    RoughnessMetallicMap.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
-                    ImGui::CloseCurrentPopup();
-                }
-                ImGui::SameLine();
-                ImGui::TextDisabled("(%s)", path.c_str());
-            }
-            ImGui::EndPopup();
-        }
+        EditorSetMaterial("Normal Map", NormalMap, showNormalTexPopup, availableTextures, texturePath,
+                          "Normal Map Picker");
         ImGui::Separator();
-        ImGui::Text("Normal Map:");
-        ImGui::Selectable(normalMapPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
-        if (ImGui::BeginDragDropTarget())
-        {
-            if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
-            {
-                const char* droppedPath = static_cast<const char*>(payload->Data);
-                if (std::filesystem::path(droppedPath).extension() == ".dds")
-                {
-                    NormalMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
-                }
-            }
-            ImGui::EndDragDropTarget();
-        }
-        if (ImGui::IsItemClicked())
-            showNormalTexPopup = true;
-        if (showNormalTexPopup)
-        {
-            ImGui::OpenPopup("Normal Map Picker");
-            showNormalTexPopup = false;
-        }
-        if (ImGui::BeginPopup("Normal Map Picker"))
-        {
-            for (const auto& path : availableTextures)
-            {
-                std::filesystem::path fsPath(path);
-                std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
-                if (ImGui::Selectable(displayName.c_str()))
-                {
-                    NormalMap.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
-                    ImGui::CloseCurrentPopup();
-                }
-                ImGui::SameLine();
-                ImGui::TextDisabled("(%s)", path.c_str());
-            }
-            ImGui::EndPopup();
-        }
-        ImGui::Text("Emissive Map:");
-        ImGui::Selectable(emissiveMapPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
-        if (ImGui::BeginDragDropTarget())
-        {
-            if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
-            {
-                const char* droppedPath = static_cast<const char*>(payload->Data);
-                if (std::filesystem::path(droppedPath).extension() == ".dds")
-                {
-                    EmissiveMap.SetValue(Engine::TextureManager::GetTexture(droppedPath));
-                }
-            }
-            ImGui::EndDragDropTarget();
-        }
-        if (ImGui::IsItemClicked())
-            showEmissiveTexPopup = true;
-        if (showEmissiveTexPopup)
-        {
-            ImGui::OpenPopup("Emissive Map Picker");
-            showEmissiveTexPopup = false;
-        }
-        if (ImGui::BeginPopup("Emissive Map Picker"))
-        {
-            for (const auto& path : availableTextures)
-            {
-                std::filesystem::path fsPath(path);
-                std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
-                if (ImGui::Selectable(displayName.c_str()))
-                {
-                    EmissiveMap.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
-                    ImGui::CloseCurrentPopup();
-                }
-                ImGui::SameLine();
-                ImGui::TextDisabled("(%s)", path.c_str());
-            }
-            ImGui::EndPopup();
-        }
+
+        EditorSetMaterial("Emissive Map", EmissiveMap, showEmissiveTexPopup, availableTextures, texturePath,
+                          "Emissive Map Picker");
     }
 #endif
 

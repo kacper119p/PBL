@@ -72,7 +72,7 @@ namespace Materials
     {
         static bool showBaseTexPopup = false;
         static std::vector<std::string> availableTextures;
-        std::string texturePath = std::filesystem::absolute("./res/textures").string();
+        std::string texturePath = std::filesystem::relative("./res/textures").string();
         static bool scanned = false;
         if (!scanned)
         {

@@ -6,6 +6,15 @@
 #include "rapidjson/document.h"
 #include "Shaders/Shader.h"
 
+#if EDITOR
+#include "Engine/Textures/TextureManager.h"
+#include "imgui.h"
+#include <filesystem>
+#include "Engine/Textures/Texture.h"
+#include "Properties/TextureMaterialProperty.h"
+#endif
+
+
 #define SERIALIZATION_EXPORT_MATERIAL(__CLASS__)\
 public:\
     static inline const std::string TypeName =std::string(#__CLASS__);\
@@ -133,6 +142,71 @@ namespace Materials
         virtual void Deserialize(const rapidjson::Value& Value) = 0;
 #if EDITOR
         virtual void DrawImGui() = 0;
+        virtual void EditorReadMaterial(std::vector<std::string>& availableTextures, bool& scanned,
+                                        const std::string& texturePath)
+        {
+            if (!scanned)
+            {
+                for (const auto& entry : std::filesystem::recursive_directory_iterator(texturePath))
+                {
+                    if (entry.is_regular_file() && entry.path().extension() == ".dds")
+                    {
+                        availableTextures.emplace_back(entry.path().string());
+                    }
+                }
+                scanned = true;
+            }
+        };
+        virtual void EditorSetMaterial(const char* label, TextureMaterialProperty& materialProp, bool& showPopup,
+                                       const std::vector<std::string>& availableTextures,
+                                       const std::string& texturePath, const char* popupLabel)
+        {
+            std::string currentPath = materialProp.GetValue().GetId() != 0
+                                              ? Engine::TextureManager::GetTexturePath(materialProp.GetValue())
+                                              : "None";
+
+            ImGui::Text("%s", label);
+            ImGui::Selectable(currentPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
+
+            if (ImGui::BeginDragDropTarget())
+            {
+                if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("ASSET_PATH"))
+                {
+                    const char* droppedPath = static_cast<const char*>(payload->Data);
+                    if (std::filesystem::path(droppedPath).extension() == ".dds")
+                    {
+                        materialProp.SetValue(Engine::TextureManager::GetTexture(droppedPath));
+                    }
+                }
+                ImGui::EndDragDropTarget();
+            }
+
+            if (ImGui::IsItemClicked())
+                showPopup = true;
+
+            if (showPopup)
+            {
+                ImGui::OpenPopup(popupLabel);
+                showPopup = false;
+            }
+
+            if (ImGui::BeginPopup(popupLabel))
+            {
+                for (const auto& path : availableTextures)
+                {
+                    std::filesystem::path fsPath(path);
+                    std::string displayName = std::filesystem::relative(fsPath, texturePath).string();
+                    if (ImGui::Selectable(displayName.c_str()))
+                    {
+                        materialProp.SetValue(Engine::TextureManager::GetTexture(path.c_str()));
+                        ImGui::CloseCurrentPopup();
+                    }
+                    ImGui::SameLine();
+                    ImGui::TextDisabled("(%s)", path.c_str());
+                }
+                ImGui::EndPopup();
+            }
+        };
 #endif
     };
 }
