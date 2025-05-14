@@ -5,9 +5,10 @@
 #include "Engine/EngineObjects/CollisionUpdateManager.h"
 #include "Shaders/ShaderManager.h"
 #include <random>
-
+#include "spdlog/spdlog.h"
 #include "Engine/EngineObjects/Entity.h"
-
+#include <iostream>
+#include "Engine/Components/BaseMovement/MovementComponent.h"
 namespace Engine
 {
 
@@ -61,22 +62,28 @@ namespace Engine
 
     void Collider::Update(float DeltaTime)
     {
-        if (CurrentCellIndex != Spatial->GetCellIndex(transform->GetPosition()))
+        if (isStatic)
+            return;
+        if (GetOwner()->GetComponent<MovementComponent>())
+        {
+            std::cout << "current cell index: " << CurrentCellIndex.x << " " << CurrentCellIndex.y << " "
+                      << CurrentCellIndex.z << std::endl;
+            std::cout << "current position: " << transform->GetPositionWorldSpace().x << " "
+                      << transform->GetPositionWorldSpace().y << " " << transform->GetPositionWorldSpace().z
+                      << std::endl;
+        }
+        
+        if (CurrentCellIndex != Spatial->GetCellIndex(transform->GetPositionWorldSpace()))
         {
             Spatial->RemoveCollider(this);
             Spatial->AddCollider(this);
+            CurrentCellIndex = Spatial->GetCellIndex(transform->GetPositionWorldSpace());
         }
         if (!isStatic)
         {
             // TODO: remove when rigidbody fully implemented
             const glm::vec3 newPosition = transform->GetPosition() + Gravity * DeltaTime;
             transform->SetPosition(newPosition);
-            const glm::vec3 randomRotation(GetRandomFloat(40.0f, 60.0f),
-                                           GetRandomFloat(40.0f, 60.0f),
-                                           GetRandomFloat(40.0f, 60.0f)
-                    );
-
-            transform->SetEulerAngles(transform->GetEulerAngles() + randomRotation * DeltaTime);
             // TODO END
         }
 

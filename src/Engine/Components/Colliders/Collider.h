@@ -63,6 +63,7 @@ namespace Engine
         virtual ~Collider();
 #endif
 
+        virtual glm::vec3 GetBoundingBox() const = 0;
 
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
 

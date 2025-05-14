@@ -29,5 +29,6 @@ namespace Engine
         void RemoveCollider(Collider* collider);
         std::vector<Collider*> GetPotentialCollisions(Collider* collider);
         void SetCellSize(float newCellSize);
+        std::vector<glm::ivec3> GetOccupiedCells(const glm::vec3& position, const glm::vec3& size) const;
     };
 } // namespace Engine

@@ -38,6 +38,8 @@ namespace Engine
 
         inline virtual Collider* GetInstance() override { return this; }
 
+        glm::vec3 GetBoundingBox() const override { return glm::vec3(_width, _height, _depth); }
+
         float GetWidth() const
         {
             return _width;
