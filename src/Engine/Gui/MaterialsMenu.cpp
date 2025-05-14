@@ -1,3 +1,4 @@
+#if EDITOR
 #include "MaterialsMenu.h"
 
 #include "imgui.h"
@@ -58,5 +59,4 @@ Materials::Material* Engine::MaterialsMenu::CreateMaterialAsset(const std::strin
     }
     return material;
 }
-
-
+#endif
