@@ -1,526 +1,526 @@
 {
-  "Skybox": "./res/textures/Skyboxes/Skybox.hdr",
-  "UI": "SampleUi",
-  "Root": {
-    "type": "Entity",
-    "id": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
-    "name": "Root",
-    "transform": {
-      "type": "Transform",
-      "id": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000",
-      "owner": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
-      "Position": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-      },
-      "EulerAngles": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-      },
-      "Scale": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-      },
-      "Children": [
-        "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
-        "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000",
-        "{ddc46a8a-64c6-4d0a-b377-3b9dbc0c62e0}\u0000",
-        "{4e07a2a2-18a0-4eb8-abda-4f7006e8f69d}\u0000",
-        "{473d53eb-2308-416a-b3ec-6890fc7ba617}\u0000",
-        "{a8eb14d7-ea4c-43a8-bf41-d398c792e344}\u0000",
-        "{5e181501-ae61-4af9-bb1f-40904c0439b7}\u0000",
-        "{ea2dc42e-0052-4bcd-9e28-25633c5cbb53}\u0000",
-        "{d627c39b-eb7a-420d-9975-c72077ecf8a4}\u0000",
-        "{dcbad2e1-4641-4cca-9643-91d246c80d5b}\u0000"
-      ],
-      "Parent": null
+    "Skybox": "./res/textures/Skyboxes/Skybox.hdr",
+    "UI": "EmptyUi",
+    "Root": {
+        "type": "Entity",
+        "id": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
+        "name": "Root",
+        "transform": {
+            "type": "Transform",
+            "id": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000",
+            "owner": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
+            "Position": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "EulerAngles": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "Children": [
+                "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
+                "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000",
+                "{ddc46a8a-64c6-4d0a-b377-3b9dbc0c62e0}\u0000",
+                "{4e07a2a2-18a0-4eb8-abda-4f7006e8f69d}\u0000",
+                "{473d53eb-2308-416a-b3ec-6890fc7ba617}\u0000",
+                "{a8eb14d7-ea4c-43a8-bf41-d398c792e344}\u0000",
+                "{5e181501-ae61-4af9-bb1f-40904c0439b7}\u0000",
+                "{ea2dc42e-0052-4bcd-9e28-25633c5cbb53}\u0000",
+                "{d627c39b-eb7a-420d-9975-c72077ecf8a4}\u0000",
+                "{dcbad2e1-4641-4cca-9643-91d246c80d5b}\u0000"
+            ],
+            "Parent": null
+        },
+        "components": []
     },
-    "components": []
-  },
-  "Objects": [
-    {
-      "type": "Entity",
-      "id": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
-      "name": "Floor",
-      "transform": {
-        "type": "Transform",
-        "id": "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
-        "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
-        "Position": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
+    "Objects": [
+        {
+            "type": "Entity",
+            "id": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+            "name": "Floor",
+            "transform": {
+                "type": "Transform",
+                "id": "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
+                "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 10.0,
+                    "y": 0.10000000149011612,
+                    "z": 10.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
+                "{3c9e0326-4e9a-4b13-9de5-d4d41c33d3b6}\u0000"
+            ]
         },
-        "EulerAngles": {
-          "x": 0.0,
-          "y": -0.0,
-          "z": 0.0
+        {
+            "type": "ModelRenderer",
+            "id": "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
+            "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Box.fbx"
         },
-        "Scale": {
-          "x": 10.0,
-          "y": 0.10000000149011612,
-          "z": 10.0
+        {
+            "type": "BoxCollider",
+            "id": "{3c9e0326-4e9a-4b13-9de5-d4d41c33d3b6}\u0000",
+            "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 100.0,
+            "_height": 1.0,
+            "_depth": 100.0
         },
-        "Children": [],
-        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-      },
-      "components": [
-        "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
-        "{3c9e0326-4e9a-4b13-9de5-d4d41c33d3b6}\u0000"
-      ]
-    },
-    {
-      "type": "ModelRenderer",
-      "id": "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
-      "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
-      "Material": "./res/materials/SampleScene/Default.mat",
-      "Model": "./res/Models/Box.fbx"
-    },
-    {
-      "type": "BoxCollider",
-      "id": "{3c9e0326-4e9a-4b13-9de5-d4d41c33d3b6}\u0000",
-      "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
-      "isTrigger": false,
-      "isStatic": true,
-      "colliderType": 0,
-      "_width": 100.0,
-      "_height": 1.0,
-      "_depth": 100.0
-    },
-    {
-      "type": "Entity",
-      "id": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
-      "name": "Directional light",
-      "transform": {
-        "type": "Transform",
-        "id": "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000",
-        "owner": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
-        "Position": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
+        {
+            "type": "Entity",
+            "id": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
+            "name": "Directional light",
+            "transform": {
+                "type": "Transform",
+                "id": "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000",
+                "owner": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{199fb480-7da5-459c-bc36-d10d5f80ab6b}\u0000"
+            ]
         },
-        "EulerAngles": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
+        {
+            "type": "DirectionalLight",
+            "id": "{199fb480-7da5-459c-bc36-d10d5f80ab6b}\u0000",
+            "owner": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
+            "Color": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            }
         },
-        "Scale": {
-          "x": 1.0,
-          "y": 1.0,
-          "z": 1.0
+        {
+            "type": "Entity",
+            "id": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
+            "name": "Wall1",
+            "transform": {
+                "type": "Transform",
+                "id": "{ddc46a8a-64c6-4d0a-b377-3b9dbc0c62e0}\u0000",
+                "owner": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
+                "Position": {
+                    "x": -11.0,
+                    "y": 2.5,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 2.5,
+                    "z": 10.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{76d1136b-13b3-493b-88af-816fb45b5ba3}\u0000",
+                "{3c030282-8290-419c-9840-dded7929768b}\u0000"
+            ]
         },
-        "Children": [],
-        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-      },
-      "components": [
-        "{199fb480-7da5-459c-bc36-d10d5f80ab6b}\u0000"
-      ]
-    },
-    {
-      "type": "DirectionalLight",
-      "id": "{199fb480-7da5-459c-bc36-d10d5f80ab6b}\u0000",
-      "owner": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
-      "Color": {
-        "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
-      }
-    },
-    {
-      "type": "Entity",
-      "id": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
-      "name": "Wall1",
-      "transform": {
-        "type": "Transform",
-        "id": "{ddc46a8a-64c6-4d0a-b377-3b9dbc0c62e0}\u0000",
-        "owner": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
-        "Position": {
-          "x": -11.0,
-          "y": 2.5,
-          "z": 0.0
+        {
+            "type": "ModelRenderer",
+            "id": "{76d1136b-13b3-493b-88af-816fb45b5ba3}\u0000",
+            "owner": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
+            "Material": "./res/materials/SampleScene/Wall.mat",
+            "Model": "./res/Models/Box.fbx"
         },
-        "EulerAngles": {
-          "x": 0.0,
-          "y": -0.0,
-          "z": 0.0
+        {
+            "type": "BoxCollider",
+            "id": "{3c030282-8290-419c-9840-dded7929768b}\u0000",
+            "owner": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 2.0,
+            "_depth": 2.0
         },
-        "Scale": {
-          "x": 1.0,
-          "y": 2.5,
-          "z": 10.0
+        {
+            "type": "Entity",
+            "id": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
+            "name": "Wall2",
+            "transform": {
+                "type": "Transform",
+                "id": "{4e07a2a2-18a0-4eb8-abda-4f7006e8f69d}\u0000",
+                "owner": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 2.5,
+                    "z": -11.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 10.0,
+                    "y": 2.5,
+                    "z": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{de16add4-a432-4be8-80c7-5b6b05d2e875}\u0000",
+                "{95ecf7b3-6989-494c-86df-d0981aefc26a}\u0000"
+            ]
         },
-        "Children": [],
-        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-      },
-      "components": [
-        "{76d1136b-13b3-493b-88af-816fb45b5ba3}\u0000",
-        "{3c030282-8290-419c-9840-dded7929768b}\u0000"
-      ]
-    },
-    {
-      "type": "ModelRenderer",
-      "id": "{76d1136b-13b3-493b-88af-816fb45b5ba3}\u0000",
-      "owner": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
-      "Material": "./res/materials/SampleScene/Wall.mat",
-      "Model": "./res/Models/Box.fbx"
-    },
-    {
-      "type": "BoxCollider",
-      "id": "{3c030282-8290-419c-9840-dded7929768b}\u0000",
-      "owner": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
-      "isTrigger": false,
-      "isStatic": true,
-      "colliderType": 0,
-      "_width": 2.0,
-      "_height": 2.0,
-      "_depth": 2.0
-    },
-    {
-      "type": "Entity",
-      "id": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
-      "name": "Wall2",
-      "transform": {
-        "type": "Transform",
-        "id": "{4e07a2a2-18a0-4eb8-abda-4f7006e8f69d}\u0000",
-        "owner": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
-        "Position": {
-          "x": 0.0,
-          "y": 2.5,
-          "z": -11.0
+        {
+            "type": "ModelRenderer",
+            "id": "{de16add4-a432-4be8-80c7-5b6b05d2e875}\u0000",
+            "owner": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
+            "Material": "./res/materials/SampleScene/Wall.mat",
+            "Model": "./res/Models/Box.fbx"
         },
-        "EulerAngles": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
+        {
+            "type": "BoxCollider",
+            "id": "{95ecf7b3-6989-494c-86df-d0981aefc26a}\u0000",
+            "owner": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 2.0,
+            "_depth": 2.0
         },
-        "Scale": {
-          "x": 10.0,
-          "y": 2.5,
-          "z": 1.0
+        {
+            "type": "Entity",
+            "id": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
+            "name": "Floor2",
+            "transform": {
+                "type": "Transform",
+                "id": "{473d53eb-2308-416a-b3ec-6890fc7ba617}\u0000",
+                "owner": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 12.5
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 2.5,
+                    "y": 0.10000000149011612,
+                    "z": 2.5
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{a9e349aa-d1f5-4d03-80bf-a22a13d058a8}\u0000",
+                "{23ba330a-4492-4bc7-8942-e0df6b4cd474}\u0000"
+            ]
         },
-        "Children": [],
-        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-      },
-      "components": [
-        "{de16add4-a432-4be8-80c7-5b6b05d2e875}\u0000",
-        "{95ecf7b3-6989-494c-86df-d0981aefc26a}\u0000"
-      ]
-    },
-    {
-      "type": "ModelRenderer",
-      "id": "{de16add4-a432-4be8-80c7-5b6b05d2e875}\u0000",
-      "owner": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
-      "Material": "./res/materials/SampleScene/Wall.mat",
-      "Model": "./res/Models/Box.fbx"
-    },
-    {
-      "type": "BoxCollider",
-      "id": "{95ecf7b3-6989-494c-86df-d0981aefc26a}\u0000",
-      "owner": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
-      "isTrigger": false,
-      "isStatic": true,
-      "colliderType": 0,
-      "_width": 2.0,
-      "_height": 2.0,
-      "_depth": 2.0
-    },
-    {
-      "type": "Entity",
-      "id": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
-      "name": "Floor2",
-      "transform": {
-        "type": "Transform",
-        "id": "{473d53eb-2308-416a-b3ec-6890fc7ba617}\u0000",
-        "owner": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
-        "Position": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 12.5
+        {
+            "type": "ModelRenderer",
+            "id": "{a9e349aa-d1f5-4d03-80bf-a22a13d058a8}\u0000",
+            "owner": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Box.fbx"
         },
-        "EulerAngles": {
-          "x": 0.0,
-          "y": -0.0,
-          "z": 0.0
+        {
+            "type": "BoxCollider",
+            "id": "{23ba330a-4492-4bc7-8942-e0df6b4cd474}\u0000",
+            "owner": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 1.0,
+            "_height": 1.0,
+            "_depth": 1.0
         },
-        "Scale": {
-          "x": 2.5,
-          "y": 0.10000000149011612,
-          "z": 2.5
+        {
+            "type": "Entity",
+            "id": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
+            "name": "Wall3",
+            "transform": {
+                "type": "Transform",
+                "id": "{a8eb14d7-ea4c-43a8-bf41-d398c792e344}\u0000",
+                "owner": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
+                "Position": {
+                    "x": 11.0,
+                    "y": 2.5,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 2.5,
+                    "z": 10.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{efd99244-36a8-49af-babd-431ee2c033fe}\u0000",
+                "{82ff2957-f6d2-460f-9adf-83cf7a17d872}\u0000"
+            ]
         },
-        "Children": [],
-        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-      },
-      "components": [
-        "{a9e349aa-d1f5-4d03-80bf-a22a13d058a8}\u0000",
-        "{23ba330a-4492-4bc7-8942-e0df6b4cd474}\u0000"
-      ]
-    },
-    {
-      "type": "ModelRenderer",
-      "id": "{a9e349aa-d1f5-4d03-80bf-a22a13d058a8}\u0000",
-      "owner": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
-      "Material": "./res/materials/SampleScene/Default.mat",
-      "Model": "./res/Models/Box.fbx"
-    },
-    {
-      "type": "BoxCollider",
-      "id": "{23ba330a-4492-4bc7-8942-e0df6b4cd474}\u0000",
-      "owner": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
-      "isTrigger": false,
-      "isStatic": true,
-      "colliderType": 0,
-      "_width": 1.0,
-      "_height": 1.0,
-      "_depth": 1.0
-    },
-    {
-      "type": "Entity",
-      "id": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
-      "name": "Wall3",
-      "transform": {
-        "type": "Transform",
-        "id": "{a8eb14d7-ea4c-43a8-bf41-d398c792e344}\u0000",
-        "owner": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
-        "Position": {
-          "x": 11.0,
-          "y": 2.5,
-          "z": 0.0
+        {
+            "type": "ModelRenderer",
+            "id": "{efd99244-36a8-49af-babd-431ee2c033fe}\u0000",
+            "owner": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
+            "Material": "./res/materials/SampleScene/Wall.mat",
+            "Model": "./res/Models/Box.fbx"
         },
-        "EulerAngles": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
+        {
+            "type": "BoxCollider",
+            "id": "{82ff2957-f6d2-460f-9adf-83cf7a17d872}\u0000",
+            "owner": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 2.0,
+            "_depth": 2.0
         },
-        "Scale": {
-          "x": 1.0,
-          "y": 2.5,
-          "z": 10.0
+        {
+            "type": "Entity",
+            "id": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
+            "name": "Wall4",
+            "transform": {
+                "type": "Transform",
+                "id": "{5e181501-ae61-4af9-bb1f-40904c0439b7}\u0000",
+                "owner": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
+                "Position": {
+                    "x": -6.5,
+                    "y": 2.5,
+                    "z": 11.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 4.0,
+                    "y": 2.5,
+                    "z": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{93f6f002-b9fe-4798-95b9-cfe8dd65b099}\u0000",
+                "{efac517c-cc44-490f-9c34-7e6955f9b895}\u0000"
+            ]
         },
-        "Children": [],
-        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-      },
-      "components": [
-        "{efd99244-36a8-49af-babd-431ee2c033fe}\u0000",
-        "{82ff2957-f6d2-460f-9adf-83cf7a17d872}\u0000"
-      ]
-    },
-    {
-      "type": "ModelRenderer",
-      "id": "{efd99244-36a8-49af-babd-431ee2c033fe}\u0000",
-      "owner": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
-      "Material": "./res/materials/SampleScene/Wall.mat",
-      "Model": "./res/Models/Box.fbx"
-    },
-    {
-      "type": "BoxCollider",
-      "id": "{82ff2957-f6d2-460f-9adf-83cf7a17d872}\u0000",
-      "owner": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
-      "isTrigger": false,
-      "isStatic": true,
-      "colliderType": 0,
-      "_width": 2.0,
-      "_height": 2.0,
-      "_depth": 2.0
-    },
-    {
-      "type": "Entity",
-      "id": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
-      "name": "Wall4",
-      "transform": {
-        "type": "Transform",
-        "id": "{5e181501-ae61-4af9-bb1f-40904c0439b7}\u0000",
-        "owner": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
-        "Position": {
-          "x": -6.5,
-          "y": 2.5,
-          "z": 11.0
+        {
+            "type": "ModelRenderer",
+            "id": "{93f6f002-b9fe-4798-95b9-cfe8dd65b099}\u0000",
+            "owner": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
+            "Material": "./res/materials/SampleScene/Wall.mat",
+            "Model": "./res/Models/Box.fbx"
         },
-        "EulerAngles": {
-          "x": 0.0,
-          "y": -0.0,
-          "z": 0.0
+        {
+            "type": "BoxCollider",
+            "id": "{efac517c-cc44-490f-9c34-7e6955f9b895}\u0000",
+            "owner": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 2.0,
+            "_depth": 2.0
         },
-        "Scale": {
-          "x": 4.0,
-          "y": 2.5,
-          "z": 1.0
+        {
+            "type": "Entity",
+            "id": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
+            "name": "Wall5",
+            "transform": {
+                "type": "Transform",
+                "id": "{ea2dc42e-0052-4bcd-9e28-25633c5cbb53}\u0000",
+                "owner": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
+                "Position": {
+                    "x": 6.5,
+                    "y": 2.5,
+                    "z": 11.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 4.0,
+                    "y": 2.5,
+                    "z": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{39690d01-b5e2-43d2-8d02-6e4637cd62ce}\u0000",
+                "{84858dd7-3a4c-487a-8687-7020bd9c45a2}\u0000"
+            ]
         },
-        "Children": [],
-        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-      },
-      "components": [
-        "{93f6f002-b9fe-4798-95b9-cfe8dd65b099}\u0000",
-        "{efac517c-cc44-490f-9c34-7e6955f9b895}\u0000"
-      ]
-    },
-    {
-      "type": "ModelRenderer",
-      "id": "{93f6f002-b9fe-4798-95b9-cfe8dd65b099}\u0000",
-      "owner": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
-      "Material": "./res/materials/SampleScene/Wall.mat",
-      "Model": "./res/Models/Box.fbx"
-    },
-    {
-      "type": "BoxCollider",
-      "id": "{efac517c-cc44-490f-9c34-7e6955f9b895}\u0000",
-      "owner": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
-      "isTrigger": false,
-      "isStatic": true,
-      "colliderType": 0,
-      "_width": 2.0,
-      "_height": 2.0,
-      "_depth": 2.0
-    },
-    {
-      "type": "Entity",
-      "id": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
-      "name": "Wall5",
-      "transform": {
-        "type": "Transform",
-        "id": "{ea2dc42e-0052-4bcd-9e28-25633c5cbb53}\u0000",
-        "owner": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
-        "Position": {
-          "x": 6.5,
-          "y": 2.5,
-          "z": 11.0
+        {
+            "type": "ModelRenderer",
+            "id": "{39690d01-b5e2-43d2-8d02-6e4637cd62ce}\u0000",
+            "owner": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
+            "Material": "./res/materials/SampleScene/Wall.mat",
+            "Model": "./res/Models/Box.fbx"
         },
-        "EulerAngles": {
-          "x": 0.0,
-          "y": 0.0,
-          "z": 0.0
+        {
+            "type": "BoxCollider",
+            "id": "{84858dd7-3a4c-487a-8687-7020bd9c45a2}\u0000",
+            "owner": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 2.0,
+            "_depth": 2.0
         },
-        "Scale": {
-          "x": 4.0,
-          "y": 2.5,
-          "z": 1.0
+        {
+            "type": "Entity",
+            "id": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
+            "name": "Wall6",
+            "transform": {
+                "type": "Transform",
+                "id": "{d627c39b-eb7a-420d-9975-c72077ecf8a4}\u0000",
+                "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
+                "Position": {
+                    "x": -3.6094212532043457,
+                    "y": 2.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 2.5,
+                    "z": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{3f52de67-c547-4ac2-b56e-a5c902ef60b5}\u0000",
+                "{6595ee88-03a4-41f6-9132-563aa8bf2fd0}\u0000"
+            ]
         },
-        "Children": [],
-        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-      },
-      "components": [
-        "{39690d01-b5e2-43d2-8d02-6e4637cd62ce}\u0000",
-        "{84858dd7-3a4c-487a-8687-7020bd9c45a2}\u0000"
-      ]
-    },
-    {
-      "type": "ModelRenderer",
-      "id": "{39690d01-b5e2-43d2-8d02-6e4637cd62ce}\u0000",
-      "owner": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
-      "Material": "./res/materials/SampleScene/Wall.mat",
-      "Model": "./res/Models/Box.fbx"
-    },
-    {
-      "type": "BoxCollider",
-      "id": "{84858dd7-3a4c-487a-8687-7020bd9c45a2}\u0000",
-      "owner": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
-      "isTrigger": false,
-      "isStatic": true,
-      "colliderType": 0,
-      "_width": 2.0,
-      "_height": 2.0,
-      "_depth": 2.0
-    },
-    {
-      "type": "Entity",
-      "id": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
-      "name": "Wall6",
-      "transform": {
-        "type": "Transform",
-        "id": "{d627c39b-eb7a-420d-9975-c72077ecf8a4}\u0000",
-        "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
-        "Position": {
-          "x": -3.6094212532043457,
-          "y": 2.0,
-          "z": 0.0
+        {
+            "type": "ModelRenderer",
+            "id": "{3f52de67-c547-4ac2-b56e-a5c902ef60b5}\u0000",
+            "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
+            "Material": "./res/materials/SampleScene/Wall.mat",
+            "Model": "./res/Models/Box.fbx"
         },
-        "EulerAngles": {
-          "x": 0.0,
-          "y": -0.0,
-          "z": 0.0
+        {
+            "type": "BoxCollider",
+            "id": "{6595ee88-03a4-41f6-9132-563aa8bf2fd0}\u0000",
+            "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 2.0,
+            "_depth": 2.0
         },
-        "Scale": {
-          "x": 1.0,
-          "y": 2.5,
-          "z": 1.0
+        {
+            "type": "Entity",
+            "id": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
+            "name": "Wall7",
+            "transform": {
+                "type": "Transform",
+                "id": "{dcbad2e1-4641-4cca-9643-91d246c80d5b}\u0000",
+                "owner": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
+                "Position": {
+                    "x": 4.465912342071533,
+                    "y": 2.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 2.5,
+                    "z": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{a83b86bd-7242-4337-aa26-210bd3372848}\u0000",
+                "{803ff7e6-b498-44ed-9ae0-90cf1a3f5e6e}\u0000"
+            ]
         },
-        "Children": [],
-        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-      },
-      "components": [
-        "{3f52de67-c547-4ac2-b56e-a5c902ef60b5}\u0000",
-        "{6595ee88-03a4-41f6-9132-563aa8bf2fd0}\u0000"
-      ]
-    },
-    {
-      "type": "ModelRenderer",
-      "id": "{3f52de67-c547-4ac2-b56e-a5c902ef60b5}\u0000",
-      "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
-      "Material": "./res/materials/SampleScene/Wall.mat",
-      "Model": "./res/Models/Box.fbx"
-    },
-    {
-      "type": "BoxCollider",
-      "id": "{6595ee88-03a4-41f6-9132-563aa8bf2fd0}\u0000",
-      "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
-      "isTrigger": false,
-      "isStatic": true,
-      "colliderType": 0,
-      "_width": 2.0,
-      "_height": 2.0,
-      "_depth": 2.0
-    },
-    {
-      "type": "Entity",
-      "id": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
-      "name": "Wall7",
-      "transform": {
-        "type": "Transform",
-        "id": "{dcbad2e1-4641-4cca-9643-91d246c80d5b}\u0000",
-        "owner": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
-        "Position": {
-          "x": 4.465912342071533,
-          "y": 2.0,
-          "z": 0.0
+        {
+            "type": "ModelRenderer",
+            "id": "{a83b86bd-7242-4337-aa26-210bd3372848}\u0000",
+            "owner": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
+            "Material": "./res/materials/SampleScene/Wall.mat",
+            "Model": "./res/Models/Box.fbx"
         },
-        "EulerAngles": {
-          "x": 0.0,
-          "y": -0.0,
-          "z": 0.0
-        },
-        "Scale": {
-          "x": 1.0,
-          "y": 2.5,
-          "z": 1.0
-        },
-        "Children": [],
-        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-      },
-      "components": [
-        "{a83b86bd-7242-4337-aa26-210bd3372848}\u0000",
-        "{803ff7e6-b498-44ed-9ae0-90cf1a3f5e6e}\u0000"
-      ]
-    },
-    {
-      "type": "ModelRenderer",
-      "id": "{a83b86bd-7242-4337-aa26-210bd3372848}\u0000",
-      "owner": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
-      "Material": "./res/materials/SampleScene/Wall.mat",
-      "Model": "./res/Models/Box.fbx"
-    },
-    {
-      "type": "BoxCollider",
-      "id": "{803ff7e6-b498-44ed-9ae0-90cf1a3f5e6e}\u0000",
-      "owner": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
-      "isTrigger": false,
-      "isStatic": true,
-      "colliderType": 0,
-      "_width": 2.0,
-      "_height": 2.0,
-      "_depth": 2.0
-    }
-  ]
+        {
+            "type": "BoxCollider",
+            "id": "{803ff7e6-b498-44ed-9ae0-90cf1a3f5e6e}\u0000",
+            "owner": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 2.0,
+            "_depth": 2.0
+        }
+    ]
 }
