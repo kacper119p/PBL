@@ -21,13 +21,6 @@ namespace Engine::Ui
         int atlasHeight;
         GlyphAtlas = Utility::LoadTexture2DFromFile(atlasPath.c_str(), GL_RGBA, 4,GL_RGBA, atlasWidth, atlasHeight);
 
-        glBindTexture(GL_TEXTURE_2D, GlyphAtlas);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glBindTexture(GL_TEXTURE_2D, 0);
-
         Serialization::ReadJsonFile(descriptorPath.c_str(), document);
 
         CHECK_MESSAGE(document.IsObject() && document.HasMember("glyphs"), "Invalid format.");

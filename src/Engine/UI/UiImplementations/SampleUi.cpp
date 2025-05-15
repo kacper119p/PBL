@@ -15,13 +15,13 @@ namespace Engine::Ui
         image->GetRect().SetSizePixels(glm::vec2(960, 540));
         Materials::UiMaterial* imageMaterial = new Materials::BasicImageMaterial();
         image->SetMaterial(imageMaterial);
-        image->SetTexture(TextureManager::GetTexture("./res/textures/Logos/WIR_logo_2.png"));
+        image->SetTexture(TextureManager::GetTexture("./res/textures/Logos/WIR_logo_2.dds"));
 
         MovingImage = AddElement<Image>(nullptr);
         MovingImage->GetRect().SetPositionPixels(glm::vec3(720, -200, 0.5));
         MovingImage->GetRect().SetSizePixels(glm::vec2(480, 270));
         MovingImage->SetMaterial(imageMaterial);
-        MovingImage->SetTexture(TextureManager::GetTexture("./res/textures/Logos/WIR_logo_2.png"));
+        MovingImage->SetTexture(TextureManager::GetTexture("./res/textures/Logos/WIR_logo_2.dds"));
 
         ChangingText = AddElement<Text>(nullptr);
         ChangingText->GetRect().SetPositionPixels(glm::vec3(-960, -400, 0.5));

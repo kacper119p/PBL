@@ -8,5 +8,7 @@ out vec4 FragColor;
 
 void main()
 {
-    FragColor = texture(Image, TexCoords);
+    vec4 textureInput = texture(Image, TexCoords);
+    vec3 color = pow(textureInput.rgb, vec3(2.2)); // To linear space
+    FragColor = vec4(color, textureInput.a);
 }
