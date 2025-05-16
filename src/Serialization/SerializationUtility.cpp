@@ -193,6 +193,14 @@ namespace Serialization
         return Serialize(value, Allocator);
     }
 
+    rapidjson::Value Serialize(const Models::AABBox3 Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kObjectType);
+        object.AddMember("min", Serialize(Value.min, Allocator), Allocator);
+        object.AddMember("max", Serialize(Value.max, Allocator), Allocator);
+        return object;
+    }
+
     void Deserialize(const rapidjson::Value& Object, const char* Name, int& Value)
     {
         const auto iterator = Object.FindMember(Name);
@@ -477,4 +485,30 @@ namespace Serialization
         Deserialize(Object, Name, value);
         Value.SetValue(value);
     }
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, Models::AABBox3& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsObject())
+        {
+            return;
+        }
+        const rapidjson::Value& vector = iterator->value;
+        const auto iteratorMin = vector.FindMember("min");
+
+
+        if (iteratorMin == vector.MemberEnd() || !iteratorMin->value.IsFloat())
+        {
+            return;
+        }
+        const auto iteratorMax = vector.FindMember("max");
+        if (iteratorMax == vector.MemberEnd() || !iteratorMax->value.IsFloat())
+        {
+            return;
+        }
+
+        Deserialize(iteratorMin->value, "min", Value.min);
+        Deserialize(iteratorMin->value, "max", Value.max);
+    }
+
 } // Serialization

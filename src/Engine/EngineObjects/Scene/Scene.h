@@ -8,6 +8,7 @@
 #include "Engine/EngineObjects/GameMode/GameMode.h"
 #include "Engine/EngineObjects/Player/Player.h"
 #include "Engine/UI/Ui.h"
+#include "Models/AabBox.h"
 
 namespace Materials
 {
@@ -38,6 +39,8 @@ namespace Engine
         Ui::Ui* Ui = nullptr;
         Texture Skybox = Texture();
         std::string Path = "";
+
+        Models::AABBox3 Bounds;
 
     public:
         /**
@@ -138,6 +141,14 @@ namespace Engine
             delete this->Ui;
             this->Ui = Ui;
         }
+
+        /**
+         * @brief Returns world space bounding box for scene geometry.
+         */
+        [[nodiscard]] Models::AABBox3 GetBounds() const
+        {
+            return Bounds;
+        }
 #endif
         /**
          * @brief Spawns a new Entity in this scene.
@@ -174,7 +185,12 @@ namespace Engine
         void DeleteEntity(Entity* Entity);
 
     private:
+        void CalculateBounds();
+
+    private:
         static void SerializeEntity(const Entity* Entity, rapidjson::Value& Object,
                                     rapidjson::Document::AllocatorType& Allocator);
+
+        void CalculateBounds(Entity* Entity);
     };
 }

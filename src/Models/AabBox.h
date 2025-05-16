@@ -1,6 +1,9 @@
 #pragma once
+#include <type_traits>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
 
 namespace Models
 {
@@ -43,6 +46,31 @@ namespace Models
             min(Min),
             max(Max)
         {
+        }
+
+        AABBox ToWorldSpace(const glm::mat4& ModelMatrix) requires std::is_same_v<T, glm::vec3>
+        {
+            glm::vec3 minWorld = glm::vec3(min.x, min.y, min.z);
+            glm::vec3 maxWorld = minWorld;
+
+            glm::vec3 corners[7];
+            corners[0] = glm::vec3(max.x, min.y, min.z);
+            corners[1] = glm::vec3(min.x, max.y, min.z);
+            corners[2] = glm::vec3(max.x, max.y, min.z);
+            corners[3] = glm::vec3(min.x, min.y, max.z);
+            corners[4] = glm::vec3(max.x, min.y, max.z);
+            corners[5] = glm::vec3(min.x, max.y, max.z);
+            corners[6] = glm::vec3(max.x, max.y, max.z);
+
+            for (auto corner : corners)
+            {
+                glm::vec3 worldPosition = glm::vec3(ModelMatrix * glm::vec4(corner, 1.0f));
+
+                minWorld = glm::min(minWorld, worldPosition);
+                maxWorld = glm::max(maxWorld, worldPosition);
+            }
+
+            return AABBox(minWorld, maxWorld);
         }
     };
 
