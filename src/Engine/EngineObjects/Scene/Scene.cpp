@@ -68,9 +68,9 @@ namespace Engine
         return result;
     }
 
-    rapidjson::Value Scene::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+    rapidjson::Value Scene::Serialize(rapidjson::Document::AllocatorType& Allocator)
     {
-        const_cast<Scene*>(this)->CalculateBounds();
+        CalculateBounds();
         rapidjson::Value documentRoot = rapidjson::Value(rapidjson::kObjectType);
         documentRoot.SetObject();
         rapidjson::Value root = Root->Serialize(Allocator);

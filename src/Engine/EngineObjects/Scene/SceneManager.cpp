@@ -5,7 +5,7 @@
 
 namespace Engine
 {
-    void SceneManager::SaveScene(const std::string& Path, const Scene* const Scene)
+    void SceneManager::SaveScene(const std::string& Path, Scene* const Scene)
     {
         rapidjson::MemoryPoolAllocator<> allocator;
         const rapidjson::Value json = Scene->Serialize(allocator);

@@ -171,7 +171,7 @@ namespace Engine
          * @param Allocator An allocator to be used.
          * @return Serialized scene.
          */
-        rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator) const;
+        rapidjson::Value Serialize(rapidjson::Document::AllocatorType& Allocator);
 
         /**
          * @brief Loads this scene from a json.
