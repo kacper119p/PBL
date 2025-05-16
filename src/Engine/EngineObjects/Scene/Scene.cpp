@@ -1,5 +1,7 @@
 #include "Scene.h"
 
+#include "Engine/Components/Renderers/AnimatedModelRenderer.h"
+#include "Engine/Components/Renderers/ModelRenderer.h"
 #include "Engine/EngineObjects/GameMode/DefaultGameMode.h"
 #include "Engine/EngineObjects/Player/DefaultPlayer.h"
 #include "Engine/UI/Ui.h"
@@ -66,12 +68,14 @@ namespace Engine
         return result;
     }
 
-    rapidjson::Value Scene::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+    rapidjson::Value Scene::Serialize(rapidjson::Document::AllocatorType& Allocator)
     {
+        CalculateBounds();
         rapidjson::Value documentRoot = rapidjson::Value(rapidjson::kObjectType);
         documentRoot.SetObject();
         rapidjson::Value root = Root->Serialize(Allocator);
         documentRoot.AddMember("Skybox", Serialization::Serialize(Skybox, Allocator), Allocator);
+        documentRoot.AddMember("Bounds", Serialization::Serialize(Bounds, Allocator), Allocator);
         documentRoot.AddMember("UI", Serialization::Serialize(Ui->GetType(), Allocator), Allocator);
         documentRoot.AddMember("GameMode", Serialization::Serialize(GameMode->GetType(), Allocator), Allocator);
         documentRoot.AddMember("Player", Serialization::Serialize(Player->GetType(), Allocator), Allocator);
@@ -105,6 +109,12 @@ namespace Engine
 
         Serialization::Deserialize(Value, "Skybox", Skybox);
         LightManager::GetInstance()->SetEnvironmentMap(Skybox);
+
+        const auto boundsIterator = Value.FindMember("Bounds");
+        if (boundsIterator != Value.MemberEnd())
+        {
+            Serialization::Deserialize(boundsIterator->value, "Bounds", Bounds);
+        }
 
         const auto uiIterator = Value.FindMember("UI");
         if (uiIterator != Value.MemberEnd())
@@ -193,6 +203,44 @@ namespace Engine
         delete entity;
     }
 
+    void Scene::CalculateBounds()
+    {
+        Bounds = Models::AABBox3(glm::vec3(0.0f), glm::vec3(0.0f));
+        CalculateBounds(Root);
+    }
+
+    void Scene::CalculateBounds(Entity* const Entity)
+    {
+        for (const Transform* child : *Entity->GetTransform())
+        {
+            CalculateBounds(child->GetOwner());
+        }
+        if (const ModelRenderer* renderer = Entity->GetComponent<ModelRenderer>())
+        {
+            const Models::Model* model = renderer->GetModel();
+            const glm::mat4& modelMatrix = Entity->GetTransform()->GetLocalToWorldMatrix();
+            for (int i = 0; i < model->GetMeshCount(); ++i)
+            {
+                const Models::Mesh* mesh = model->GetMesh(i);
+                Models::AABBox3 aabb = mesh->GetAabBox().ToWorldSpace(modelMatrix);
+                Bounds.min = glm::min(Bounds.min, aabb.min);
+                Bounds.max = glm::max(Bounds.max, aabb.max);
+            }
+        }
+        else if (const AnimatedModelRenderer* animatedRenderer = Entity->GetComponent<AnimatedModelRenderer>())
+        {
+            const Models::ModelAnimated* model = animatedRenderer->GetModel();
+            const glm::mat4& modelMatrix = Entity->GetTransform()->GetLocalToWorldMatrix();
+            for (int i = 0; i < model->GetMeshCount(); ++i)
+            {
+                const Models::MeshAnimated* mesh = model->GetMesh(i);
+                Models::AABBox3 aabb = mesh->GetAabBox().ToWorldSpace(modelMatrix);
+                Bounds.min = glm::min(Bounds.min, aabb.min);
+                Bounds.max = glm::max(Bounds.max, aabb.max);
+            }
+        }
+    }
+
     void Scene::SerializeEntity(const Entity* const Entity, rapidjson::Value& Object,
                                 rapidjson::Document::AllocatorType& Allocator)
     {
@@ -206,4 +254,4 @@ namespace Engine
             SerializeEntity(transform->GetOwner(), Object, Allocator);
         }
     }
-} // Engine
+}

@@ -7,6 +7,7 @@
 #include "Materials/Material.h"
 #include "Materials/Properties/MaterialProperty.h"
 #include "Materials/Properties/TextureMaterialProperty.h"
+#include "Models/AabBox.h"
 #include "Shaders/ComputeShader.h"
 #include "Shaders/Shader.h"
 
@@ -69,6 +70,8 @@ namespace Serialization
     rapidjson::Value Serialize(const Materials::TextureMaterialProperty& Value,
                                rapidjson::Document::AllocatorType& Allocator);
 
+    rapidjson::Value Serialize(const Models::AABBox3 Value, rapidjson::Document::AllocatorType& Allocator);
+
     template<class T>
     rapidjson::Value Serialize(const std::vector<T*>& Value,
                                rapidjson::Document::AllocatorType& Allocator)
@@ -93,7 +96,7 @@ namespace Serialization
     }
 
     template<typename E>
-    requires std::is_enum_v<E>
+        requires std::is_enum_v<E>
     rapidjson::Value Serialize(const E Value, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kNumberType);
@@ -137,7 +140,9 @@ namespace Serialization
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, Materials::Material*& Value);
 
-    void Deserialize(const rapidjson::Value& Object, const char* const Name, Materials::TextureMaterialProperty& Value);
+    void Deserialize(const rapidjson::Value& Object, const char* Name, Materials::TextureMaterialProperty& Value);
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, Models::AABBox3& Value);
 
     template<class T>
     void Deserialize(const rapidjson::Value& Object, const char* const Name, T*& Value,
@@ -182,7 +187,7 @@ namespace Serialization
     }
 
     template<typename E>
-    requires std::is_enum_v<E>
+        requires std::is_enum_v<E>
     void Deserialize(
             const rapidjson::Value& Object, const char* Name, E& Value)
     {
