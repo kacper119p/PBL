@@ -22,8 +22,8 @@ namespace Engine
         ~EditorGUI() = default;
 
         void Init(); // Call once on startup
-        void Render(uint64_t Frame, Scene* scene); // Call every frame
-        void SetHierarchyRoot(Transform* root) { m_Hierarchy.SetRoot(root); }
+        void Render(uint64_t Frame, Scene* scene, CameraRenderData renderData); // Call every frame
+        void SetHierarchyRoot(Transform* root) { SceneHierarchyGUI::GetInstance()->SetRoot(root); }
 
         void SetSceneViewFramebuffer(GLuint Texture)
         {
@@ -50,7 +50,6 @@ namespace Engine
     private:
         bool m_Initialized = false;
 
-        SceneHierarchyGUI m_Hierarchy;
         SceneViewGUI m_Scene;
         AudioManager* m_AudioManager;
         AssetsWindow m_AssetsWindow;

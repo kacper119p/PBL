@@ -23,12 +23,12 @@ void Engine::EditorGUI::Init()
 {
 }
 
-void Engine::EditorGUI::Render(uint64_t Frame, Scene* scene)
+void Engine::EditorGUI::Render(uint64_t Frame, Scene* scene, CameraRenderData renderData)
 {
     SetupDockspace();
-    m_Hierarchy.Draw(scene);
+    SceneHierarchyGUI::GetInstance()->Draw(scene);
     m_AssetsWindow.Draw();
-    m_Scene.Draw();
+    m_Scene.Draw(renderData, scene);
     RenderInspector(Frame, scene);
     AudioManager::GetInstance().RenderGlobalVolumeImGui();
     DrawSelectedEntitysComponents();
@@ -247,7 +247,7 @@ void Engine::EditorGUI::DrawSelectedEntitysComponents()
 
     ImGui::Begin("Components");
 
-    auto selectedEntity = m_Hierarchy.GetSelectedEntity();
+    auto selectedEntity = SceneHierarchyGUI::GetInstance()->GetSelectedEntity();
     if (selectedEntity)
     {
         Entity* owner = selectedEntity->GetOwner();
