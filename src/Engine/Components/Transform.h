@@ -162,6 +162,21 @@ namespace Engine
         const glm::mat4& GetLocalToWorldMatrix();
 
         /**
+         *@brief Returns forward orientation vector of this transform.
+         */
+        glm::vec3 GetForward() const;
+       
+        /**
+         * @brief Returns right orientation vector of this transform.
+         */
+        glm::vec3 GetRight() const;
+        
+        /**
+         * @brief Returns up orientation vector of this transform.
+         */
+        glm::vec3 GetUp() const;
+
+        /**
          * @brief Sets a new parent of this entity. Removes previous one if it has one.
          * @param InParent Parent.
          */

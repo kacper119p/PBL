@@ -64,14 +64,6 @@ namespace Engine
     {
         if (isStatic)
             return;
-        if (GetOwner()->GetComponent<MovementComponent>())
-        {
-            std::cout << "current cell index: " << CurrentCellIndex.x << " " << CurrentCellIndex.y << " "
-                      << CurrentCellIndex.z << std::endl;
-            std::cout << "current position: " << transform->GetPositionWorldSpace().x << " "
-                      << transform->GetPositionWorldSpace().y << " " << transform->GetPositionWorldSpace().z
-                      << std::endl;
-        }
         
         if (CurrentCellIndex != Spatial->GetCellIndex(transform->GetPositionWorldSpace()))
         {
@@ -79,14 +71,6 @@ namespace Engine
             Spatial->AddCollider(this);
             CurrentCellIndex = Spatial->GetCellIndex(transform->GetPositionWorldSpace());
         }
-        if (!isStatic)
-        {
-            // TODO: remove when rigidbody fully implemented
-            const glm::vec3 newPosition = transform->GetPosition() + Gravity * DeltaTime;
-            transform->SetPosition(newPosition);
-            // TODO END
-        }
-
         colliderVisitor.ManageCollisions();
     }
 

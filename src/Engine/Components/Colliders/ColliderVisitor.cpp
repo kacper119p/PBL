@@ -7,11 +7,10 @@
 #include "BoxCollider.h"
 #include "CapsuleCollider.h"
 #include "ColliderVisitor.h"
-#include "Engine/Components/Physics/RigidBody.h"
+#include "Engine/Components/Physics/Rigidbody.h"
 #include "SpatialPartitioning.h"
 #include "SphereCollider.h"
-#include "spdlog/spdlog.h"
-
+#include "spdlog/spdlog.h" 
 namespace Engine
 {
 
@@ -20,6 +19,7 @@ namespace Engine
     {
         result.collisionNormal = glm::vec3(0.0f);
         result.collisionPoint = glm::vec3(0.0f);
+        result.penetrationDepth = 0.0f;
         result.hasCollision = false;
     }
 
@@ -83,7 +83,7 @@ namespace Engine
 
         float minPenetration = std::numeric_limits<float>::max();
         glm::vec3 collisionNormal;
-
+        float penetration = 0.0f;
         for (const glm::vec3& axis : axes)
         {
             if (glm::length2(axis) < 1e-6f)
@@ -96,7 +96,7 @@ namespace Engine
                 return result;
             }
 
-            float penetration =
+            penetration =
                     glm::abs(glm::dot(toCenter, normAxis)) -
                     (glm::abs(glm::dot(normAxis, aX)) * half1.x + glm::abs(glm::dot(normAxis, aY)) * half1.y +
                      glm::abs(glm::dot(normAxis, aZ)) * half1.z + glm::abs(glm::dot(normAxis, bX)) * half2.x +
@@ -108,10 +108,10 @@ namespace Engine
                 collisionNormal = normAxis;
             }
         }
-
+        result.penetrationDepth = penetration;
         result.hasCollision = true;
-        result.collisionNormal = collisionNormal;
-        result.collisionPoint = center1 + collisionNormal * minPenetration;
+        result.collisionNormal = glm::normalize(center2 - center1);
+        result.collisionPoint = center1 + result.collisionNormal * minPenetration;
         return result;
     }
 
@@ -725,20 +725,47 @@ namespace Engine
 
                 if (result.hasCollision)
                 {
-                    box.isColliding = boxCollider->isColliding = result.hasCollision;
-                    glm::vec3 separation = GetSeparationBoxBox(box, *boxCollider);
+                    box.isColliding = boxCollider->isColliding = true;
 
+                    // Załóżmy, że result ma penetrationDepth (musisz to mieć w CollisionResult)
+                    float penetrationDepth = result.penetrationDepth; // np. dodaj do CollisionResult
+
+                    // Użyj rzeczywistej penetracji, a nie stałej 0.001f
                     if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
                     {
+                        Engine::RigidBody* otherRB = nullptr;
+                        if (box.GetOwner()->GetComponent<Engine::RigidBody>())
+                            otherRB = box.GetOwner()->GetComponent<Engine::RigidBody>();
+
                         currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, 0.001f);
+                                result.collisionNormal, result.collisionPoint, penetrationDepth, otherRB);
+                    }
+
+                    glm::vec3 separation = GetSeparationBoxBox(box, *boxCollider);
+                    // Jeśli oba mają rigidbody, rozdziel separację między oba ciała:
+                    Engine::RigidBody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::RigidBody>();
+                    Engine::RigidBody* boxRB = box.GetOwner()->GetComponent<Engine::RigidBody>();
+                    if (thisRB && boxRB)
+                    {
+                        float invMassSum = thisRB->inverseMass + boxRB->inverseMass;
+                        if (invMassSum > 0.0f)
+                        {
+                            glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
+                            glm::vec3 correctionOther = -separation * (boxRB->inverseMass / invMassSum);
+
+                            currentCollider->GetTransform()->SetPosition(
+                                    currentCollider->GetTransform()->GetPosition() + correctionThis);
+                            box.GetTransform()->SetPosition(box.GetTransform()->GetPosition() + correctionOther);
+                        }
                     }
                     else
                     {
+                        // Jeśli tylko jeden ma rigidbody lub są statyczne, przesuń tylko ten z rigidbody
                         currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
                                                                      separation);
                     }
                 }
+
                 // TODO: emit collision event
                 break;
             }
@@ -755,7 +782,7 @@ namespace Engine
                     if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
                     {
                         currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, 0.001f);
+                                 result.collisionNormal, result.collisionPoint, 0.001f);
                     }
                     else
                     {
@@ -779,7 +806,7 @@ namespace Engine
                     if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
                     {
                         currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, 0.001f);
+                                 result.collisionNormal, result.collisionPoint, 0.001f);
                     }
                     else
                     {
@@ -814,7 +841,7 @@ namespace Engine
                     if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
                     {
                         currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, 0.001f);
+                                 result.collisionNormal, result.collisionPoint, 0.001f);
                     }
                     else
                     {
@@ -838,7 +865,7 @@ namespace Engine
                     if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
                     {
                         currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, 0.001f);
+                                 result.collisionNormal, result.collisionPoint, 0.001f);
                     }
                     else
                     {
@@ -862,7 +889,7 @@ namespace Engine
                     if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
                     {
                         currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, 0.001f);
+                                 result.collisionNormal, result.collisionPoint, 0.001f);
                     }
                     else
                     {
@@ -897,13 +924,10 @@ namespace Engine
                     if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
                     {
                         currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, 0.001f);
+                                 result.collisionNormal, result.collisionPoint, 0.001f);
                     }
-                    else
-                    {
-                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                    currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
                                                                      separation);
-                    }
                 }
                 // TODO: emit collision event
                 break;
@@ -921,7 +945,7 @@ namespace Engine
                     if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
                     {
                         currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, 0.001f);
+                                 result.collisionNormal, result.collisionPoint, 0.001f);
                     }
                     else
                     {
@@ -946,7 +970,7 @@ namespace Engine
                     if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
                     {
                         currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, 0.001f);
+                                 result.collisionNormal, result.collisionPoint, 0.001f);
                     }
                     else
                     {

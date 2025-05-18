@@ -1,5 +1,6 @@
 #include "MovementComponent.h"
 #include "spdlog/spdlog.h"
+#include "Engine/Components/Physics/Rigidbody.h"
 namespace Engine
 {
 
@@ -12,22 +13,24 @@ namespace Engine
 
         if (input.IsKeyPressed(GLFW_KEY_W))
         {
-            position.z -= Speed * deltaTime;
+            GetOwner()->GetComponent<RigidBody>()->AddForce(GetOwner()->GetTransform()->GetForward() * Speed);
         }
             
         if (input.IsKeyPressed(GLFW_KEY_S))
         {
-            position.z += Speed * deltaTime;
+            GetOwner()->GetComponent<RigidBody>()->AddForce(-GetOwner()->GetTransform()->GetForward() * Speed);
         }
         if (input.IsKeyPressed(GLFW_KEY_A))
         {
-            position.x -= Speed * deltaTime;
+            GetOwner()->GetComponent<RigidBody>()->AddForce(-GetOwner()->GetTransform()->GetRight() * Speed);
         }
             
         if (input.IsKeyPressed(GLFW_KEY_D))
-            position.x += Speed * deltaTime;
+        {
+            GetOwner()->GetComponent<RigidBody>()->AddForce(GetOwner()->GetTransform()->GetRight() * Speed);
+        }
 
-        GetOwner()->GetTransform()->SetPosition(position);
+        //GetOwner()->GetTransform()->SetPosition(position);
         #endif
     }
 

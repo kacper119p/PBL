@@ -16,9 +16,10 @@ namespace Engine
     {
         bool hasCollision;
         glm::vec3 collisionPoint;
-        glm::vec3 collisionNormal; // will be edited by physics
+        glm::vec3 collisionNormal;
+        float penetrationDepth;
 
-        CollisionResult() : hasCollision(false), collisionPoint(0.0f), collisionNormal(0.0f) {}
+        CollisionResult() : hasCollision(false), collisionPoint(0.0f), collisionNormal(0.0f), penetrationDepth(0.0f) {}
     };
 
     class ColliderVisitor

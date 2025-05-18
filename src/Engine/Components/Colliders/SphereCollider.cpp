@@ -82,6 +82,12 @@ namespace Engine
         END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 
+    glm::mat3 SphereCollider::CalculateInertiaTensor(float mass) const
+    {
+        float I = 0.4f * mass * radius * radius;
+        return glm::mat3(I, 0.0f, 0.0f, 0.0f, I, 0.0f, 0.0f, 0.0f, I);
+    }
+
 #if EDITOR
     void SphereCollider::DrawDebugMesh(const CameraRenderData& RenderData)
     {

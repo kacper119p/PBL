@@ -76,7 +76,7 @@ namespace Scene
         secondBoxCollider2->SetWidth(2.0f);
         secondBoxCollider2->SetHeight(2.0f);
         secondBoxCollider2->SetDepth(2.0f);
-        secondBoxEntity2->GetTransform()->SetPosition(glm::vec3(0.0f, 7.0f, 0.0f));
+        secondBoxEntity2->GetTransform()->SetPosition(glm::vec3(0.0f, 7.0f, 4.0f));
         secondBoxCollider2->SetStatic(false);
 
         Engine::ModelRenderer* secondBoxModelRenderer2 = secondBoxEntity2->AddComponent<Engine::ModelRenderer>();
@@ -86,7 +86,9 @@ namespace Scene
         secondBoxModelRenderer2->GetMaterial()->GetMainPass().SetUniform("Tint", glm::vec3(0.0f, 25.0f, 0.0f));
 
         secondBoxEntity->AddComponent<Engine::MovementComponent>();
-        //Engine::RigidBody* rb = secondBoxEntity2->AddComponent<Engine::RigidBody>();
+        
+        Engine::RigidBody* rb2 = secondBoxEntity2->AddComponent<Engine::RigidBody>();
+        Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();
 
         CameraFollow::GetInstance().SetTarget(secondBoxEntity);
         #endif

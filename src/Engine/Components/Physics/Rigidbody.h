@@ -40,7 +40,6 @@ namespace Engine
         float timeSinceLastForce = 0.0f;
 
         float mass;
-        float inverseMass;
         glm::vec3 linearVelocity;
         glm::vec3 angularVelocity;
         glm::quat orientation;
@@ -54,15 +53,22 @@ namespace Engine
         float linearDamping;
         float angularDamping;
 
+        bool gravityEnabled = true;
+        glm::vec3 gravity = glm::vec3(0.0f, -9.81f, 0.0f);
+
         Constraints constraints;
 
     public:
+
+        float inverseMass;
+
         RigidBody();
         ~RigidBody();
 
         RigidBody& operator=(const RigidBody& other);
         
-        void OnCollision(const glm::vec3& collisionNormal, const glm::vec3& collisionPoint, float penetrationDepth);
+        void OnCollision(const glm::vec3& collisionNormal, const glm::vec3& collisionPoint, float penetrationDepth,
+                         RigidBody* otherBody = nullptr);
 
         void AddForce(const glm::vec3& force, ForceType type = ForceType::Force);
         void AddTorque(const glm::vec3& torque);
@@ -80,6 +86,11 @@ namespace Engine
         void AddConstraint(Constraints constraint);
         void RemoveConstraint(Constraints constraint);
         bool HasConstraint(Constraints constraint) const;
+
+        void EnableGravity(bool enabled);
+        bool IsGravityEnabled() const;
+        void SetGravity(const glm::vec3& newGravity);
+        const glm::vec3& GetGravity() const;
 
         void Start() override;
         void Update(float deltaTime) override;

@@ -44,27 +44,70 @@ namespace Engine
     }
 
     void RigidBody::OnCollision(const glm::vec3& collisionNormal, const glm::vec3& collisionPoint,
-                                float penetrationDepth)
+                                float penetrationDepth, RigidBody* otherBody)
     {
-        float velocityAlongNormal = glm::dot(linearVelocity, collisionNormal);
+        if (penetrationDepth < 0.05f && glm::dot(collisionNormal, glm::vec3(0, 1, 0)) > 0.7f)
+        {
+            // jeœli prêdkoœæ pionowa jest ma³a lub skierowana w dó³
+            if (linearVelocity.y < 0.1f)
+            {
+                linearVelocity.y = 0.0f; // blokujemy "przenikanie" i drgania
+            }
+        }
 
-        if (velocityAlongNormal > 0.0f)
+        const float minPenetrationThreshold = 0.01f;
+        if (penetrationDepth < minPenetrationThreshold)
             return;
 
-        float restitutionFactor = restitution;
+        // Upewnij siê, ¿e penetrationDepth jest dodatnie
+        float penetration = std::max(0.0f, penetrationDepth);
 
-        float impulseMagnitude = -(1.0f + restitutionFactor) * velocityAlongNormal;
-        impulseMagnitude /= inverseMass;
+        glm::vec3 normal = glm::normalize(collisionNormal);
 
-        glm::vec3 impulse = impulseMagnitude * collisionNormal;
+        if (!otherBody || otherBody->inverseMass == 0.0f)
+        {
+            float velocityAlongNormal = glm::dot(linearVelocity, normal);
+            if (velocityAlongNormal > 0.0f)
+                return;
+
+            float impulseMagnitude = -(1.0f + restitution) * velocityAlongNormal;
+            glm::vec3 impulse = impulseMagnitude * normal;
+            linearVelocity += impulse;
+
+            // Korekcja pozycji
+            const float correctionFactor = 0.8f;
+            glm::vec3 correction = correctionFactor * penetration * normal;
+            GetOwner()->GetTransform()->SetPosition(GetOwner()->GetTransform()->GetPosition() + correction);
+            return;
+        }
+
+        // Oblicz impuls z uwzglêdnieniem obu cia³
+        float e = (restitution + otherBody->restitution) * 0.5f;
+        glm::vec3 relativeVelocity = linearVelocity - otherBody->linearVelocity;
+        float velAlongNormal = glm::dot(relativeVelocity, normal);
+
+        if (velAlongNormal > 0.0f)
+            return;
+
+        float invMassSum = inverseMass + otherBody->inverseMass;
+        float j = -(1.0f + e) * velAlongNormal / invMassSum;
+
+        glm::vec3 impulse = j * normal;
 
         linearVelocity += impulse * inverseMass;
+        otherBody->linearVelocity -= impulse * otherBody->inverseMass;
 
         const float correctionFactor = 0.8f;
-        glm::vec3 correction = correctionFactor * penetrationDepth * collisionNormal;
-        GetOwner()->GetTransform()->SetPosition(GetOwner()->GetTransform()->GetPosition() + correction);
-    }
+        float totalInvMass = inverseMass + otherBody->inverseMass;
+        glm::vec3 correction = correctionFactor * penetration * normal;
 
+        glm::vec3 correctionThis = correction * (inverseMass / totalInvMass);
+        glm::vec3 correctionOther = -correction * (otherBody->inverseMass / totalInvMass);
+
+        GetOwner()->GetTransform()->SetPosition(GetOwner()->GetTransform()->GetPosition() + correctionThis);
+        otherBody->GetOwner()->GetTransform()->SetPosition(otherBody->GetOwner()->GetTransform()->GetPosition() +
+                                                           correctionOther);
+    }
 
     void RigidBody::SetConstraints(Constraints newConstraints) { constraints = newConstraints; }
 
@@ -79,20 +122,19 @@ namespace Engine
 
     void RigidBody::Start()
     {
+
     }
 
     void RigidBody::Update(float deltaTime)
     {
-        // TODO: remove when scriptable fully implemented
-        if (timeSinceLastForce >= 10.0f)
-        {
-            AddForce(glm::vec3(-.5f, 0.0f, 0.0f), ForceType::Impulse);
-            timeSinceLastForce = 0.0f;
-        }
-        timeSinceLastForce += deltaTime;
-        // TODO END
+        
         if (inverseMass == 0.0f)
             return;
+
+        if (gravityEnabled && inverseMass > 0.0f)
+        {
+            accumulatedForce += gravity * mass;
+        }
 
         if (!HasConstraint(Constraints::LockPositionX))
             linearVelocity.x += (accumulatedForce.x * inverseMass) * deltaTime;
@@ -169,6 +211,14 @@ namespace Engine
     const glm::vec3& RigidBody::GetAngularVelocity() const { return angularVelocity; }
 
     const glm::quat& RigidBody::GetOrientation() const { return orientation; }
+
+    void RigidBody::EnableGravity(bool enabled) { gravityEnabled = enabled; }
+
+    bool RigidBody::IsGravityEnabled() const { return gravityEnabled; }
+
+    void RigidBody::SetGravity(const glm::vec3& newGravity) { gravity = newGravity; }
+
+    const glm::vec3& RigidBody::GetGravity() const { return gravity; }
 
     rapidjson::Value RigidBody::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {

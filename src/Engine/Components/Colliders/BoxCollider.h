@@ -79,6 +79,8 @@ namespace Engine
 #endif
         }
 
+        glm::mat3 CalculateInertiaTensor(float mass) const override;
+
 #if EDITOR
         void RenderDepth(const CameraRenderData& RenderData) override;
 
