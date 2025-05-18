@@ -25,10 +25,8 @@ namespace Engine
         glm::vec2 mipSize(1920.0f, 1080.0f);
         glm::ivec2 mipIntSize(1920, 1080);
 
-        for (unsigned int i = 0; i < MipCount; ++i)
+        for (BloomMip& mip : BloomMips)
         {
-            BloomMip mip;
-
             mipSize *= 0.5f;
             mipIntSize /= 2;
             mip.Size = mipSize;
@@ -42,8 +40,6 @@ namespace Engine
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-            BloomMips[i] = mip;
         }
 
         glGenTextures(1, &PrefilteredColor);
@@ -101,7 +97,7 @@ namespace Engine
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, mip.Texture);
 
-            glViewport(0, 0, nextMip.Size.x, nextMip.Size.y);
+            glViewport(0, 0, static_cast<GLsizei>(nextMip.Size.x), static_cast<GLsizei>(nextMip.Size.y));
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                                    GL_TEXTURE_2D, nextMip.Texture, 0);
 
