@@ -8,15 +8,13 @@ namespace Engine
         mass(1.0f), inverseMass(1.0f), linearVelocity(0.0f), angularVelocity(0.0f),
         orientation(glm::quat(1.0f, 0.0f, 0.0f, 0.0f)), accumulatedForce(0.0f), accumulatedTorque(0.0f),
         staticFriction(0.0f), dynamicFriction(0.0f), restitution(0.5f), linearDamping(0.001f), angularDamping(0.001f),
-        constraints(Constraints::None)
+        constraints(Constraints::None), inertiaTensor(1.0f), inverseInertiaTensor(1.0f), gravityEnabled(true),
+        gravity(glm::vec3(0.0f, -9.81f, 0.0f))
     {
         UpdateManager::GetInstance()->RegisterComponent(this);
     }
 
-    RigidBody::~RigidBody() 
-    { 
-        UpdateManager::GetInstance()->UnregisterComponent(this); 
-    }
+    RigidBody::~RigidBody() { UpdateManager::GetInstance()->UnregisterComponent(this); }
 
     RigidBody& RigidBody::operator=(const RigidBody& other)
     {
@@ -40,7 +38,42 @@ namespace Engine
 
         constraints = other.constraints;
 
+        inertiaTensor = other.inertiaTensor;
+        inverseInertiaTensor = other.inverseInertiaTensor;
+
+        gravityEnabled = other.gravityEnabled;
+        gravity = other.gravity;
+
         return *this;
+    }
+
+    void RigidBody::UpdateInertiaTensor()
+    {
+        auto collider = GetOwner()->GetComponent<Collider>();
+        if (collider)
+        {
+            inertiaTensor = collider->CalculateInertiaTensor(mass);
+            inverseInertiaTensor = glm::inverse(inertiaTensor);
+        }
+        else
+        {
+            inertiaTensor = glm::mat3(1.0f);
+            inverseInertiaTensor = glm::mat3(1.0f);
+        }
+    }
+
+    void RigidBody::SetMass(float m)
+    {
+        mass = m;
+        inverseMass = (m == 0.0f) ? 0.0f : 1.0f / m;
+        UpdateInertiaTensor();
+    }
+
+    void RigidBody::SetInverseMass(float invM)
+    {
+        inverseMass = invM;
+        mass = (invM == 0.0f) ? 0.0f : 1.0f / invM;
+        UpdateInertiaTensor();
     }
 
     void RigidBody::OnCollision(const glm::vec3& collisionNormal, const glm::vec3& collisionPoint,
@@ -59,9 +92,7 @@ namespace Engine
         if (penetrationDepth < minPenetrationThreshold)
             return;
 
-        // Upewnij siê, ¿e penetrationDepth jest dodatnie
         float penetration = std::max(0.0f, penetrationDepth);
-
         glm::vec3 normal = glm::normalize(collisionNormal);
 
         if (!otherBody || otherBody->inverseMass == 0.0f)
@@ -74,7 +105,6 @@ namespace Engine
             glm::vec3 impulse = impulseMagnitude * normal;
             linearVelocity += impulse;
 
-            // Korekcja pozycji
             const float correctionFactor = 0.8f;
             glm::vec3 correction = correctionFactor * penetration * normal;
             GetOwner()->GetTransform()->SetPosition(GetOwner()->GetTransform()->GetPosition() + correction);
@@ -122,20 +152,20 @@ namespace Engine
 
     void RigidBody::Start()
     {
-
+        UpdateInertiaTensor();
     }
 
     void RigidBody::Update(float deltaTime)
     {
-        
         if (inverseMass == 0.0f)
             return;
 
-        if (gravityEnabled && inverseMass > 0.0f)
+        if (gravityEnabled)
         {
             accumulatedForce += gravity * mass;
         }
 
+        // Aktualizacja prêdkoœci liniowej z uwzglêdnieniem constraintów
         if (!HasConstraint(Constraints::LockPositionX))
             linearVelocity.x += (accumulatedForce.x * inverseMass) * deltaTime;
         if (!HasConstraint(Constraints::LockPositionY))
@@ -145,29 +175,60 @@ namespace Engine
 
         linearVelocity *= (1.0f - linearDamping);
 
+        // Obliczenie przyspieszenia k¹towego (w przestrzeni œwiata)
+        glm::mat3 R = glm::mat3_cast(orientation);
+        glm::mat3 worldInvInertiaTensor = R * inverseInertiaTensor * glm::transpose(R);
+        glm::vec3 angularAcceleration = worldInvInertiaTensor * accumulatedTorque;
+
+        // Aktualizacja prêdkoœci k¹towej z uwzglêdnieniem constraintów
         if (!HasConstraint(Constraints::LockRotationX))
-            angularVelocity.x += accumulatedTorque.x * inverseMass * deltaTime;
+            angularVelocity.x += angularAcceleration.x * deltaTime;
         if (!HasConstraint(Constraints::LockRotationY))
-            angularVelocity.y += accumulatedTorque.y * inverseMass * deltaTime;
+            angularVelocity.y += angularAcceleration.y * deltaTime;
         if (!HasConstraint(Constraints::LockRotationZ))
-            angularVelocity.z += accumulatedTorque.z * inverseMass * deltaTime;
+            angularVelocity.z += angularAcceleration.z * deltaTime;
 
         angularVelocity *= (1.0f - angularDamping);
 
+        // Aktualizacja pozycji
         Transform* transform = GetOwner()->GetTransform();
-        glm::vec3 position = transform->GetPosition();
+        glm::vec3 position = transform->GetPositionWorldSpace();
         position += linearVelocity * deltaTime;
-        GetOwner()->GetTransform()->SetPosition(position);
+        transform->SetPosition(position);
 
-        glm::quat angularDelta = glm::quat(0.0f, angularVelocity * deltaTime);
-        orientation = glm::normalize(orientation + angularDelta * orientation);
-        GetOwner()->GetTransform()->SetEulerAngles(glm::eulerAngles(orientation));
+        // Ogranicz prêdkoœæ k¹tow¹ wed³ug constraintów przed przeliczeniem rotacji
+        glm::vec3 effectiveAngularVelocity = angularVelocity;
 
+        if (HasConstraint(Constraints::LockRotationX))
+            effectiveAngularVelocity.x = 0.0f;
+        if (HasConstraint(Constraints::LockRotationY))
+            effectiveAngularVelocity.y = 0.0f;
+        if (HasConstraint(Constraints::LockRotationZ))
+            effectiveAngularVelocity.z = 0.0f;
+
+        if (glm::length(effectiveAngularVelocity) > 0.0001f)
+        {
+            float angle = glm::length(effectiveAngularVelocity) * deltaTime;
+            glm::vec3 axis = glm::normalize(effectiveAngularVelocity);
+
+            if (angle > 0.00001f)
+            {
+                glm::quat deltaRotation = glm::angleAxis(angle, axis);
+                orientation = glm::normalize(deltaRotation * orientation);
+            }
+        }
+
+        // Zaktualizuj rotacjê obiektu
+        transform->SetEulerAngles(glm::eulerAngles(orientation));
+
+        // Reset si³ i momentów
         accumulatedForce = glm::vec3(0.0f);
         accumulatedTorque = glm::vec3(0.0f);
     }
 
-    
+
+
+
     void RigidBody::AddForce(const glm::vec3& force, ForceType type)
     {
         if (type == ForceType::Impulse)
@@ -180,18 +241,20 @@ namespace Engine
         }
     }
 
-    void RigidBody::AddTorque(const glm::vec3& torque) { accumulatedTorque += torque; }
-
-    void RigidBody::SetMass(float m)
+    void RigidBody::AddTorque(const glm::vec3& torque, ForceType type)
     {
-        mass = m;
-        inverseMass = (m == 0.0f) ? 0.0f : 1.0f / m;
-    }
+        // Przekszta³æ tensor bezw³adnoœci do przestrzeni œwiata
+        glm::mat3 rotationMatrix = glm::mat3_cast(orientation);
+        glm::mat3 worldInvInertiaTensor = rotationMatrix * inverseInertiaTensor * glm::transpose(rotationMatrix);
 
-    void RigidBody::SetInverseMass(float invM)
-    {
-        inverseMass = invM;
-        mass = (invM == 0.0f) ? 0.0f : 1.0f / invM; 
+        if (type == ForceType::Impulse)
+        {
+            angularVelocity += worldInvInertiaTensor * torque;
+        }
+        else
+        {
+            accumulatedTorque += torque;
+        }
     }
 
     void RigidBody::SetFriction(float muStatic, float muDynamic)
@@ -226,15 +289,11 @@ namespace Engine
         END_COMPONENT_SERIALIZATION
     }
 
-    void RigidBody::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
-    {
-       
-    }
+    void RigidBody::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap) {}
 
     void RigidBody::DeserializeReferencesPass(const rapidjson::Value& Object,
-                                                Serialization::ReferenceTable& ReferenceMap)
+                                              Serialization::ReferenceTable& ReferenceMap)
     {
     }
-
 
 } // namespace Engine

@@ -90,6 +90,10 @@ namespace Scene
         Engine::RigidBody* rb2 = secondBoxEntity2->AddComponent<Engine::RigidBody>();
         Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();
 
+        rb->SetLinearDamping(.05f);
+        rb->AddConstraint(Engine::RigidBody::Constraints::LockRotationX);
+        rb->AddConstraint(Engine::RigidBody::Constraints::LockRotationZ);
+
         CameraFollow::GetInstance().SetTarget(secondBoxEntity);
         #endif
 
