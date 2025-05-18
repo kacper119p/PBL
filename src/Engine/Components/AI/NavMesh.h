@@ -47,18 +47,6 @@ namespace Engine
          */
         void RemoveNotWalkableNodes(Entity* Root);
 
-        /**
-         * @brief Tests if a ray intersects a triangle.
-         * @param RayOrigin The origin of the ray.
-         * @param RayDirection The direction of the ray.
-         * @param Vertex0, Vertex1, Vertex2 Triangle vertices.
-         * @param HitPoint The intersection point, if any.
-         * @return True if the ray intersects the triangle, otherwise false.
-         */
-        bool RayIntersectsTriangle(const glm::vec3& RayOrigin, const glm::vec3& RayDirection,
-                                   const glm::vec3& Vertex0, const glm::vec3& Vertex1, const glm::vec3& Vertex2,
-                                   glm::vec3* HitPoint = nullptr);
-
         [[nodiscard]] float GetSpacing() const
         {
             return Spacing;

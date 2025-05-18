@@ -1,13 +1,18 @@
 #if EDITOR
 #include "SceneHierarchyGUI.h"
-
 #include "TransformGui.h"
 #include "Engine/EngineObjects/GizmoManager.h"
 #include "Engine/EngineObjects/Scene/Scene.h"
 #include "Engine/Components/Renderers/ModelRenderer.h"
 
 #include "imgui.h"
-Engine::SceneHierarchyGUI::SceneHierarchyGUI(Transform* Root) : Root(Root), SelectedEntity(nullptr){}
+
+Engine::SceneHierarchyGUI::SceneHierarchyGUI(Transform* Root) :
+    Root(Root), SelectedEntity(nullptr)
+{
+}
+
+Engine::SceneHierarchyGUI* Engine::SceneHierarchyGUI::Instance = nullptr;
 
 void Engine::SceneHierarchyGUI::DrawHierarchy(Transform* entity, Scene* scene)
 {
@@ -33,7 +38,10 @@ void Engine::SceneHierarchyGUI::DrawHierarchy(Transform* entity, Scene* scene)
 
     // Handle left-click
     if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
+    {
         SelectedEntity = entity;
+        GizmoManager::GetInstance()->SetManaged(SelectedEntity);
+    }
 
     // Right-click context menu (now safe because of PushID)
     if (ImGui::BeginPopupContextItem())
@@ -97,8 +105,6 @@ void Engine::SceneHierarchyGUI::Draw(Scene* scene)
             ImGui::EndPopup();
         }
 
-
-        GizmoManager::GetInstance()->SetManaged(SelectedEntity);
     }
 
     if (SelectedEntity && ImGui::IsWindowFocused() && ImGui::IsKeyPressed(ImGuiKey_Delete))
@@ -113,7 +119,6 @@ void Engine::SceneHierarchyGUI::Draw(Scene* scene)
 
     ImGui::End();
 }
-
 
 
 void Engine::SceneHierarchyGUI::AddEntityToScene(Scene* scene, Entity* parent)
