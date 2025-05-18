@@ -11,13 +11,25 @@ namespace Engine
     class BloomPostprocessingEffect
     {
     private:
+        struct BloomMip
+        {
+            glm::vec2 Size;
+            glm::ivec2 IntSize;
+            unsigned int Texture;
+        };
+
+    private:
+        static constexpr size_t MipCount = 5;
+
         Rendering::ScreenQuad ScreenQuad;
 
-        unsigned int FrameBuffers[2];
-        unsigned int ColorBuffers[2];
+        uint32_t FrameBuffer;
+        uint32_t PrefilteredColor;
+        BloomMip BloomMips[MipCount];
 
-        Shaders::Shader FilterShader;
-        Shaders::Shader BlurShaders[2];
+        Shaders::Shader PrefilterShader;
+        Shaders::Shader DownSampleShader;
+        Shaders::Shader UpSampleShader;
         Shaders::Shader OutputShader;
 
     public:

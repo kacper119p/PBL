@@ -7,90 +7,130 @@
 namespace Engine
 {
     BloomPostprocessingEffect::BloomPostprocessingEffect() :
-        FilterShader(Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
-                "./res/shaders/Bloom/Bloom.vert",
-                nullptr,
-                "./res/shaders/Bloom/BloomFilter.frag"))),
-        BlurShaders{
-                Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
-                        "./res/shaders/Bloom/Bloom.vert",
-                        nullptr,
-                        "./res/shaders/Bloom/BloomHorizontal.frag")),
-                Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
-                        "./res/shaders/Bloom/Bloom.vert",
-                        nullptr,
-                        "./res/shaders/Bloom/BloomVertical.frag"))
-        },
-        OutputShader(Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
-                "./res/shaders/Bloom/Bloom.vert",
-                nullptr,
-                "./res/shaders/Bloom/BloomOutput.frag")))
+        PrefilterShader(Shaders::ShaderManager::GetShader(
+                Shaders::ShaderSourceFiles("./res/shaders/Bloom/Bloom.vert", nullptr,
+                                           "./res/shaders/Bloom/BloomFilter.frag"))),
+        DownSampleShader(Shaders::ShaderManager::GetShader(
+                Shaders::ShaderSourceFiles("./res/shaders/Bloom/Bloom.vert", nullptr,
+                                           "./res/shaders/Bloom/DownSample.frag"))),
+        UpSampleShader(Shaders::ShaderManager::GetShader(
+                Shaders::ShaderSourceFiles("./res/shaders/Bloom/Bloom.vert", nullptr,
+                                           "./res/shaders/Bloom/DownSample.frag"))),
+        OutputShader(Shaders::ShaderManager::GetShader(
+                Shaders::ShaderSourceFiles("./res/shaders/Bloom/Bloom.vert", nullptr,
+                                           "./res/shaders/Bloom/BloomOutput.frag")))
     {
-        glGenFramebuffers(2, FrameBuffers);
-        glGenTextures(2, ColorBuffers);
+        glGenFramebuffers(1, &FrameBuffer);
 
-        for (int i = 0; i < 2; i++)
+        glm::vec2 mipSize(1920.0f, 1080.0f);
+        glm::ivec2 mipIntSize(1920, 1080);
+
+        for (unsigned int i = 0; i < MipCount; ++i)
         {
-            glBindFramebuffer(GL_FRAMEBUFFER, FrameBuffers[i]);
+            BloomMip mip;
 
-            glBindTexture(GL_TEXTURE_2D, ColorBuffers[i]);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, 1920, 1080, 0, GL_RGBA, GL_FLOAT, NULL);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+            mipSize *= 0.5f;
+            mipIntSize /= 2;
+            mip.Size = mipSize;
+            mip.IntSize = mipIntSize;
+
+            glGenTextures(1, &mip.Texture);
+            glBindTexture(GL_TEXTURE_2D, mip.Texture);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_R11F_G11F_B10F, static_cast<int>(mipSize.x), static_cast<int>(mipSize.y),
+                         0, GL_RGB, GL_FLOAT, nullptr);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, ColorBuffers[i], 0);
+
+            BloomMips[i] = mip;
         }
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+        glGenTextures(1, &PrefilteredColor);
+        glBindTexture(GL_TEXTURE_2D, PrefilteredColor);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_R11F_G11F_B10F, static_cast<int>(1920), static_cast<int>(1080),
+                     0, GL_RGB, GL_FLOAT, nullptr);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     }
 
     void BloomPostprocessingEffect::Render(unsigned int SceneColorTexture)
     {
-        glBindFramebuffer(GL_FRAMEBUFFER, FrameBuffers[1]);
+        glBindFramebuffer(GL_FRAMEBUFFER, FrameBuffer);
 
         glDisable(GL_DEPTH_TEST);
         glDepthMask(GL_FALSE);
 
-        FilterShader.Use();
+        PrefilterShader.Use();
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+                               GL_TEXTURE_2D, PrefilteredColor, 0);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, SceneColorTexture);
-        FilterShader.SetUniform("Threshold", 1.0f);
-
-        glClear(GL_COLOR_BUFFER_BIT);
-
         ScreenQuad.Draw();
 
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        DownSampleShader.Use();
 
-        constexpr int passCount = 10;
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, PrefilteredColor);
 
-        for (int i = 0; i < passCount; ++i)
+        for (const BloomMip& mip : BloomMips)
         {
-            glBindFramebuffer(GL_FRAMEBUFFER, FrameBuffers[i % 2]);
-            BlurShaders[i % 2].Use();
-            glBindTexture(GL_TEXTURE_2D, ColorBuffers[(i + 1) % 2]);
-            glClear(GL_COLOR_BUFFER_BIT);
+            glViewport(0, 0, static_cast<GLsizei>(mip.Size.x), static_cast<GLsizei>(mip.Size.y));
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+                                   GL_TEXTURE_2D, mip.Texture, 0);
+            ScreenQuad.Draw();
+            glBindTexture(GL_TEXTURE_2D, mip.Texture);
+        }
+
+
+        UpSampleShader.Use();
+
+        glClear(GL_DEPTH_BUFFER_BIT);
+
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_ONE, GL_ONE);
+        glBlendEquation(GL_FUNC_ADD);
+
+        for (int i = MipCount - 1; i > 0; --i)
+        {
+            const BloomMip& mip = BloomMips[i];
+            const BloomMip& nextMip = BloomMips[i - 1];
+
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, mip.Texture);
+
+            glViewport(0, 0, nextMip.Size.x, nextMip.Size.y);
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+                                   GL_TEXTURE_2D, nextMip.Texture, 0);
+
             ScreenQuad.Draw();
         }
+
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+        glDisable(GL_BLEND);
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         OutputShader.Use();
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, SceneColorTexture);
         glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, ColorBuffers[(passCount - 1) % 2]);
-
-        OutputShader.SetUniform("Exposure", 0.25f);
-        OutputShader.SetUniform("Intensity", 0.1f);
+        glBindTexture(GL_TEXTURE_2D, BloomMips[0].Texture);
 
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+        glViewport(0, 0, 1920, 1080);
 
         ScreenQuad.Draw();
     }
 
     BloomPostprocessingEffect::~BloomPostprocessingEffect()
     {
-        glDeleteFramebuffers(2, FrameBuffers);
-        glDeleteTextures(2, ColorBuffers);
+        for (BloomMip& bloomMip : BloomMips)
+        {
+            glDeleteTextures(1, &bloomMip.Texture);
+        }
+        glDeleteTextures(1, &PrefilteredColor);
+        glDeleteFramebuffers(1, &FrameBuffer);
     }
 } // Engine

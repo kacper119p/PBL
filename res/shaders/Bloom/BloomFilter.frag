@@ -2,14 +2,17 @@
 
 in vec2 TexCoords;
 
-uniform float Threshold;
-
 layout (binding = 0) uniform sampler2D Image;
 
-out vec3 FragColor;
+out layout (location = 0) vec3 FragColor;
+
+const float THRESHOLD = 1.0;
 
 void main()
 {
-    vec3 result = texture(Image, TexCoords).rgb;
-    FragColor = result * step(Threshold, dot(result, vec3(0.2126, 0.7152, 0.0722)));
+    vec3 color = texture(Image, TexCoords).rgb;
+    float brightness = max(color.r, max(color.g, color.b));
+    float contribution = max(0, brightness - THRESHOLD);
+    contribution /= max(brightness, 0.00001);
+    FragColor = color * contribution;
 }
