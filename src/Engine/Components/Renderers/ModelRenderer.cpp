@@ -20,10 +20,7 @@ namespace Engine
     {
         if (Model == nullptr)
         {
-            return;
-        }
-        if (Material == nullptr)
-        {
+            Culled = true;
             return;
         }
 
@@ -48,10 +45,6 @@ namespace Engine
         {
             return;
         }
-        if (Material == nullptr)
-        {
-            return;
-        }
 
         SetupMatrices(RenderData, Material->GetMainPass());
         Draw();
@@ -59,7 +52,7 @@ namespace Engine
 
     void ModelRenderer::RenderDirectionalShadows(const CameraRenderData& RenderData)
     {
-        if (Material != nullptr)
+        if (Model != nullptr)
         {
             SetupMatrices(RenderData, Material->GetDirectionalShadowPass());
             Draw();
@@ -159,7 +152,7 @@ namespace Engine
                     const char* droppedPath = static_cast<const char*>(payload->Data);
                     if (fs::path(droppedPath).extension() == ".mat")
                     {
-                        Material = Materials::MaterialManager::GetMaterial(droppedPath);
+                        SetMaterial(Materials::MaterialManager::GetMaterial(droppedPath));
                     }
                 }
                 ImGui::EndDragDropTarget();
@@ -183,7 +176,7 @@ namespace Engine
 
                     if (ImGui::Selectable(displayName.c_str()))
                     {
-                        Material = Materials::MaterialManager::GetMaterial(path);
+                        SetMaterial(Materials::MaterialManager::GetMaterial(path));
                         ImGui::CloseCurrentPopup();
                     }
 
