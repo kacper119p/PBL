@@ -1,0 +1,140 @@
+{
+    "Skybox": "./res/textures/Skyboxes/Skybox.hdr",
+    "Bounds": {
+        "min": {
+            "x": -10.0,
+            "y": -1.0,
+            "z": -10.0
+        },
+        "max": {
+            "x": 10.0,
+            "y": 0.10000000149011612,
+            "z": 10.0
+        }
+    },
+    "UI": "EmptyUi",
+    "GameMode": "DefaultGameMode",
+    "Player": "DefaultPlayer",
+    "Root": {
+        "type": "Entity",
+        "id": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
+        "name": "Root",
+        "transform": {
+            "type": "Transform",
+            "id": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000",
+            "owner": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
+            "Position": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "EulerAngles": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "Children": [
+                "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
+                "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000"
+            ],
+            "Parent": null
+        },
+        "components": []
+    },
+    "Objects": [
+        {
+            "type": "Entity",
+            "id": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+            "name": "Floor",
+            "transform": {
+                "type": "Transform",
+                "id": "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
+                "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 10.0,
+                    "y": 0.10000000149011612,
+                    "z": 10.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
+                "{3c9e0326-4e9a-4b13-9de5-d4d41c33d3b6}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
+            "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+            "Material": "G:\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\materials\\SampleScene\\Floor.mat",
+            "Model": "./res/Models/Box.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{3c9e0326-4e9a-4b13-9de5-d4d41c33d3b6}\u0000",
+            "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 100.0,
+            "_height": 1.0,
+            "_depth": 100.0
+        },
+        {
+            "type": "Entity",
+            "id": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
+            "name": "Directional light",
+            "transform": {
+                "type": "Transform",
+                "id": "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000",
+                "owner": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{199fb480-7da5-459c-bc36-d10d5f80ab6b}\u0000"
+            ]
+        },
+        {
+            "type": "DirectionalLight",
+            "id": "{199fb480-7da5-459c-bc36-d10d5f80ab6b}\u0000",
+            "owner": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
+            "Color": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            }
+        }
+    ]
+}
