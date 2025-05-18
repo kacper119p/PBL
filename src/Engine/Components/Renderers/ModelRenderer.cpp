@@ -113,8 +113,8 @@ namespace Engine
 
 
             static bool scanned = false;
-            std::string materialPath = fs::absolute("./res/materials/SampleScene").string();
-            std::string modelPath = fs::absolute("./res/Models").string();
+            std::string materialPath = fs::relative("./res/materials/SampleScene").string();
+            std::string modelPath = fs::relative("./res/Models").string();
             if (!scanned)
             {
                 for (const auto& entry : fs::directory_iterator(materialPath))
