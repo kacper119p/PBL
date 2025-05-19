@@ -12,7 +12,7 @@ file(GLOB_RECURSE HEADER_FILES
 if (NOT DEFINED ENV{Editor})
     list(FILTER SOURCE_FILES EXCLUDE REGEX "${CMAKE_SOURCE_DIR}/src/imgui_impl/*")
     list(FILTER HEADER_FILES EXCLUDE REGEX "${CMAKE_SOURCE_DIR}/src/imgui_impl/*")
-endif () 
+endif ()
 # Search for the assets files
 file(GLOB_RECURSE ASSETS_FILES
         ${CMAKE_SOURCE_DIR}/res/*.*)
@@ -66,7 +66,8 @@ endif ()
 
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E create_symlink
+        COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_CURRENT_BINARY_DIR}/res
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/res
         ${CMAKE_CURRENT_BINARY_DIR}/res)
 
