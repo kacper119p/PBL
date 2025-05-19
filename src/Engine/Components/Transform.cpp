@@ -81,6 +81,25 @@ namespace Engine
         }
     }
 
+    glm::vec3 Transform::GetForward() const
+    {
+        glm::vec3 forward = -glm::vec3(LocalToWorldMatrix[2]);
+        return glm::normalize(forward);
+    }
+
+    glm::vec3 Transform::GetRight() const
+    {
+        glm::vec3 right = glm::vec3(LocalToWorldMatrix[0]);
+        return glm::normalize(right);
+    }
+
+    glm::vec3 Transform::GetUp() const
+    {
+        glm::vec3 up = glm::vec3(LocalToWorldMatrix[1]);
+        return glm::normalize(up);
+    }
+
+
     void Transform::UpdateMatrices()
     {
         if (!IsDirty)

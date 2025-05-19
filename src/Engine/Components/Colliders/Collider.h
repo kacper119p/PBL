@@ -50,9 +50,6 @@ namespace Engine
         Transform* transform;
         ColliderVisitor colliderVisitor;
 
-
-        // TODO: remove when spatial fully implemented
-        std::vector<Collider*> colliders;
         bool isColliding;
 
         Collider();
@@ -63,8 +60,11 @@ namespace Engine
         virtual ~Collider();
 #endif
 
+        virtual glm::vec3 GetBoundingBox() const = 0;
 
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
+
+        virtual glm::mat3 CalculateInertiaTensor(float mass) const = 0;
 
         void SetTrigger(bool isTrigger)
         {

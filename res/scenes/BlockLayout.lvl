@@ -86,9 +86,9 @@
             "isTrigger": false,
             "isStatic": true,
             "colliderType": 0,
-            "_width": 100.0,
-            "_height": 1.0,
-            "_depth": 100.0
+            "_width": 20.0,
+            "_height": 0.20000000298023224,
+            "_depth": 20.0
         },
         {
             "type": "Entity",
@@ -176,8 +176,8 @@
             "isStatic": true,
             "colliderType": 0,
             "_width": 2.0,
-            "_height": 2.0,
-            "_depth": 2.0
+            "_height": 5.0,
+            "_depth": 20.0
         },
         {
             "type": "Entity",
@@ -224,8 +224,8 @@
             "isTrigger": false,
             "isStatic": true,
             "colliderType": 0,
-            "_width": 2.0,
-            "_height": 2.0,
+            "_width": 20.0,
+            "_height": 5.0,
             "_depth": 2.0
         },
         {
@@ -273,9 +273,9 @@
             "isTrigger": false,
             "isStatic": true,
             "colliderType": 0,
-            "_width": 1.0,
-            "_height": 1.0,
-            "_depth": 1.0
+            "_width": 5.0,
+            "_height": 0.20000000298023224,
+            "_depth": 5.0
         },
         {
             "type": "Entity",
@@ -323,8 +323,8 @@
             "isStatic": true,
             "colliderType": 0,
             "_width": 2.0,
-            "_height": 2.0,
-            "_depth": 2.0
+            "_height": 5.0,
+            "_depth": 20.0
         },
         {
             "type": "Entity",
@@ -371,8 +371,8 @@
             "isTrigger": false,
             "isStatic": true,
             "colliderType": 0,
-            "_width": 2.0,
-            "_height": 2.0,
+            "_width": 8.0,
+            "_height": 5.0,
             "_depth": 2.0
         },
         {
@@ -420,8 +420,8 @@
             "isTrigger": false,
             "isStatic": true,
             "colliderType": 0,
-            "_width": 2.0,
-            "_height": 2.0,
+            "_width": 8.0,
+            "_height": 5.0,
             "_depth": 2.0
         },
         {
@@ -470,7 +470,7 @@
             "isStatic": true,
             "colliderType": 0,
             "_width": 2.0,
-            "_height": 2.0,
+            "_height": 5.0,
             "_depth": 2.0
         },
         {
@@ -519,7 +519,7 @@
             "isStatic": true,
             "colliderType": 0,
             "_width": 2.0,
-            "_height": 2.0,
+            "_height": 5.0,
             "_depth": 2.0
         }
     ]

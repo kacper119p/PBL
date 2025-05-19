@@ -85,6 +85,17 @@ namespace Engine
         END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 
+    glm::mat3 BoxCollider::CalculateInertiaTensor(float mass) const
+    {
+        float w = _width;
+        float h = _height;
+        float d = _depth;
+        float coeff = (1.0f / 12.0f) * mass;
+
+        return glm::mat3(coeff * (h * h + d * d), 0.0f, 0.0f, 0.0f, coeff * (w * w + d * d), 0.0f, 0.0f, 0.0f,
+                         coeff * (w * w + h * h));
+    }
+
 #if EDITOR
     void BoxCollider::DrawDebugMesh(const CameraRenderData& RenderData) const
     {
