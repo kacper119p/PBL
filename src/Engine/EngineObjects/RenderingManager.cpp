@@ -62,7 +62,7 @@ namespace Engine
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);
         glCullFace(GL_BACK);
-        LightManager::GetInstance()->SetupLightsForRendering();
+        LightManager::GetInstance()->SetupLightsForRendering(RenderData);
         for (const auto& renderersGroup : Renderers)
         {
             renderersGroup.first->Use();
@@ -82,6 +82,7 @@ namespace Engine
 
         MultiSampledBuffer.ResolveMultisampling();
         Bloom.Render(MultiSampledBuffer.GetResolvedColorBuffer());
+        GodRays.Render(MultiSampledBuffer.GetResolvedColorBuffer(), Bloom.GetPrefilteredColor());
     }
 
     void RenderingManager::RenderAllDirectionalShadowMap(const CameraRenderData& RenderData, unsigned int Target,

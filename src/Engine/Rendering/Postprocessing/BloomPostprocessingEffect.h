@@ -39,6 +39,11 @@ namespace Engine
         virtual ~BloomPostprocessingEffect();
 
     public:
+        [[nodiscard]] uint32_t GetPrefilteredColor() const
+        {
+            return PrefilteredColor;
+        }
+
         void Render(unsigned int SceneColorTexture);
     };
 
