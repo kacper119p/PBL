@@ -76,6 +76,7 @@ namespace Engine
         LightDataBuffer LightBufferData;
         uint32_t LightsScreenSpacePositionsBuffer;
         std::vector<glm::vec2> LightsScreenPositionBuffer;
+        uint32_t ScreenLightsCount;
 
         static LightManager* Instance;
 

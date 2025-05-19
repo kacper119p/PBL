@@ -240,7 +240,8 @@ namespace Engine
     void LightManager::UpdateLightBuffer(const CameraRenderData& RenderData)
     {
         LightsScreenPositionBuffer.clear();
-        LightsScreenPositionBuffer.emplace_back(0.0f); // light count
+        LightsScreenPositionBuffer.emplace_back(0.0f); // reserve for light count
+        ScreenLightsCount = 0;
         LightBufferData.DirectionalLightCount = DirectionalLight == nullptr ? 0 : 1;
         LightBufferData.PointLightCount = PointLights.size();
         LightBufferData.SpotlightCount = SpotLights.size();
@@ -281,6 +282,9 @@ namespace Engine
             AddLightScreenPosition(RenderData, PointLights[i]);
         }
 
+        //Avoids conversion (required to upload correct data)
+        LightsScreenPositionBuffer[0].x = *reinterpret_cast<float*>(&ScreenLightsCount);
+
         glBindBuffer(GL_SHADER_STORAGE_BUFFER, LightBuffer);
         glBufferData(GL_SHADER_STORAGE_BUFFER, LightBufferData.GetCurrentSize(), &LightBufferData, GL_DYNAMIC_DRAW);
 
@@ -302,8 +306,7 @@ namespace Engine
             return;
         }
         LightsScreenPositionBuffer.push_back(lightPosition);
-        LightsScreenPositionBuffer[0].x++; // light count
-
+        ScreenLightsCount++;
     }
 
     void LightManager::AddLightScreenPosition(const CameraRenderData& RenderData, const class PointLight* const Light)
@@ -316,8 +319,7 @@ namespace Engine
             return;
         }
         LightsScreenPositionBuffer.push_back(lightPosition);
-        LightsScreenPositionBuffer[0].x++; // light count
-
+        ScreenLightsCount++;
     }
 
     void LightManager::AddLightScreenPosition(const CameraRenderData& RenderData, const class SpotLight* const Light)
@@ -330,7 +332,7 @@ namespace Engine
             return;
         }
         LightsScreenPositionBuffer.push_back(lightPosition);
-        LightsScreenPositionBuffer[0].x++; // light count
+        ScreenLightsCount++;
     }
 
     void LightManager::SetEnvironmentMap(const Texture EnvironmentMap)
