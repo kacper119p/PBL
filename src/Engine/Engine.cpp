@@ -10,6 +10,7 @@
 #include "Engine/Gui/LightsGui.h"
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/EngineObjects/CollisionUpdateManager.h"
+#include "Engine/EngineObjects/RigidbodyUpdateManager.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialManager.h"
 #include "Models/ModelManager.h"
@@ -105,6 +106,7 @@ namespace Engine
 #endif
             // Update game objects' state here
             UpdateManager::GetInstance()->Update(deltaTime);
+            RigidbodyUpdateManager::GetInstance()->Update(deltaTime);
             CollisionUpdateManager::GetInstance()->Update(deltaTime);
             int displayW, displayH;
             glfwMakeContextCurrent(Window);
@@ -237,6 +239,7 @@ namespace Engine
         UpdateManager::Initialize();
         Materials::MaterialManager::Initialize();
         Ui::TextManager::Initialize();
+        RigidbodyUpdateManager::Initialize();
         CollisionUpdateManager::Initialize();
 #if EDITOR
         //for editor game screen

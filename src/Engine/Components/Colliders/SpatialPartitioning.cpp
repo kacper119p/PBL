@@ -8,7 +8,7 @@ namespace Engine
     SpatialPartitioning* SpatialPartitioning::instance_ = nullptr;
 
     SpatialPartitioning::SpatialPartitioning() :
-        cellSize(100.0f), gridDimensions(glm::ivec3(10, 10, 10)), origin(glm::vec3(-10.0f,-10.0f,-10.0f))
+        cellSize(3.0f), gridDimensions(glm::ivec3(10, 10, 10)), origin(glm::vec3(-10.0f,-10.0f,-10.0f))
     {
         grid.resize(gridDimensions.x);
         for (int x = 0; x < gridDimensions.x; ++x)
@@ -50,6 +50,33 @@ namespace Engine
                           static_cast<int>(std::floor(localPos.z / cellSize)));
     }
 
+   std::vector<glm::ivec3> SpatialPartitioning::GetOccupiedCells(const glm::vec3& position,
+                                                                  const glm::vec3& size) const
+    {
+        glm::vec3 minBounds = position - size * 0.5f;
+        glm::vec3 maxBounds = position + size * 0.5f;
+
+        glm::ivec3 minIndex = GetCellIndex(minBounds);
+        glm::ivec3 maxIndex = GetCellIndex(maxBounds);
+
+        std::vector<glm::ivec3> occupiedCells;
+        for (int x = minIndex.x; x <= maxIndex.x; ++x)
+        {
+            for (int y = minIndex.y; y <= maxIndex.y; ++y)
+            {
+                for (int z = minIndex.z; z <= maxIndex.z; ++z)
+                {
+                    glm::ivec3 index(x, y, z);
+                    if (IsValidIndex(index))
+                    {
+                        occupiedCells.push_back(index);
+                    }
+                }
+            }
+        }
+        return occupiedCells;
+    }
+
     bool SpatialPartitioning::IsValidIndex(const glm::ivec3& index) const
     {
         bool valid = index.x >= 0 && index.x < gridDimensions.x && index.y >= 0 && index.y < gridDimensions.y &&
@@ -60,20 +87,23 @@ namespace Engine
     void SpatialPartitioning::AddCollider(Collider* collider)
     {
         glm::vec3 position = collider->GetTransform()->GetPositionWorldSpace();
-        glm::ivec3 index = GetCellIndex(position);
+        glm::vec3 size = collider->GetBoundingBox();
 
-        if (IsValidIndex(index))
+        std::vector<glm::ivec3> occupiedCells = GetOccupiedCells(position, size);
+        for (const auto& index : occupiedCells)
         {
             grid[index.x][index.y][index.z].push_back(collider);
         }
     }
 
+
     void SpatialPartitioning::RemoveCollider(Collider* collider)
     {
         glm::vec3 position = collider->GetTransform()->GetPositionWorldSpace();
-        glm::ivec3 index = GetCellIndex(position);
+        glm::vec3 size = collider->GetBoundingBox();
 
-        if (IsValidIndex(index))
+        std::vector<glm::ivec3> occupiedCells = GetOccupiedCells(position, size);
+        for (const auto& index : occupiedCells)
         {
             auto& cell = grid[index.x][index.y][index.z];
             cell.erase(std::remove(cell.begin(), cell.end(), collider), cell.end());
@@ -83,24 +113,15 @@ namespace Engine
     std::vector<Collider*> SpatialPartitioning::GetPotentialCollisions(Collider* collider)
     {
         glm::vec3 position = collider->GetTransform()->GetPositionWorldSpace();
-        glm::ivec3 centerIndex = GetCellIndex(position);
+        glm::vec3 size = collider->GetBoundingBox();
 
+        std::vector<glm::ivec3> occupiedCells = GetOccupiedCells(position, size);
         std::vector<Collider*> potentialCollisions;
 
-        for (int x = -1; x <= 1; ++x)
+        for (const auto& index : occupiedCells)
         {
-            for (int y = -1; y <= 1; ++y)
-            {
-                for (int z = -1; z <= 1; ++z)
-                {
-                    glm::ivec3 neighborIndex = centerIndex + glm::ivec3(x, y, z);
-                    if (IsValidIndex(neighborIndex))
-                    {
-                        const auto& cell = grid[neighborIndex.x][neighborIndex.y][neighborIndex.z];
-                        potentialCollisions.insert(potentialCollisions.end(), cell.begin(), cell.end());
-                    }
-                }
-            }
+            const auto& cell = grid[index.x][index.y][index.z];
+            potentialCollisions.insert(potentialCollisions.end(), cell.begin(), cell.end());
         }
 
         return potentialCollisions;

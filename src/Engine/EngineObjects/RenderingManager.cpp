@@ -42,6 +42,10 @@ namespace Engine
 
         for (const auto& renderersGroup : Renderers)
         {
+            if (renderersGroup.first == nullptr)
+            {
+                continue;
+            }
             renderersGroup.first->UseDepthPass();
             for (Renderer* const renderer : renderersGroup.second)
             {
@@ -65,6 +69,10 @@ namespace Engine
         LightManager::GetInstance()->SetupLightsForRendering();
         for (const auto& renderersGroup : Renderers)
         {
+            if (renderersGroup.first == nullptr)
+            {
+                continue;
+            }
             renderersGroup.first->Use();
             for (Renderer* const renderer : renderersGroup.second)
             {
@@ -97,6 +105,10 @@ namespace Engine
         glClear(GL_DEPTH_BUFFER_BIT);
         for (const auto& renderersGroup : Renderers)
         {
+            if (renderersGroup.first == nullptr)
+            {
+                continue;
+            }
             renderersGroup.first->UseDirectionalShadows();
             for (Renderer* const renderer : renderersGroup.second)
             {
@@ -121,6 +133,10 @@ namespace Engine
         glClear(GL_DEPTH_BUFFER_BIT);
         for (const auto& renderersGroup : Renderers)
         {
+            if (renderersGroup.first == nullptr)
+            {
+                continue;
+            }
             renderersGroup.first->UsePointSpotShadows();
             for (Renderer* const renderer : renderersGroup.second)
             {
