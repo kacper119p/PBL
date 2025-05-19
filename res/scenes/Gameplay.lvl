@@ -2,14 +2,14 @@
     "Skybox": "./res/textures/Skyboxes/Skybox.hdr",
     "Bounds": {
         "min": {
-            "x": -10.0,
+            "x": -50.0,
             "y": -1.0,
-            "z": -10.0
+            "z": -50.0
         },
         "max": {
-            "x": 10.0,
-            "y": 0.10000000149011612,
-            "z": 10.0
+            "x": 20.0,
+            "y": 3.1300268173217773,
+            "z": 50.0
         }
     },
     "UI": "EmptyUi",
@@ -40,7 +40,9 @@
             },
             "Children": [
                 "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
-                "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000"
+                "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000",
+                "{b22dbc67-1b19-4fce-9aea-744bbadec0a3}\u0000",
+                "{0af31181-e953-4195-a7e1-4b597bdf4a50}\u0000"
             ],
             "Parent": null
         },
@@ -66,9 +68,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 10.0,
+                    "x": 20.0,
                     "y": 0.10000000149011612,
-                    "z": 10.0
+                    "z": 50.0
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
@@ -135,6 +137,98 @@
                 "y": 1.0,
                 "z": 1.0
             }
+        },
+        {
+            "type": "Entity",
+            "id": "{c35a0c8d-f316-4d03-a4b8-c0d56621d727}\u0000",
+            "name": "Floor2",
+            "transform": {
+                "type": "Transform",
+                "id": "{b22dbc67-1b19-4fce-9aea-744bbadec0a3}\u0000",
+                "owner": "{c35a0c8d-f316-4d03-a4b8-c0d56621d727}\u0000",
+                "Position": {
+                    "x": -35.0,
+                    "y": 0.0,
+                    "z": 30.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 15.0,
+                    "y": 0.10000000149011612,
+                    "z": 20.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{79d15fd4-86b4-4568-8ad3-82e2074834b5}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{79d15fd4-86b4-4568-8ad3-82e2074834b5}\u0000",
+            "owner": "{c35a0c8d-f316-4d03-a4b8-c0d56621d727}\u0000",
+            "Material": "..\\..\\..\\..\\res\\materials\\SampleScene\\Floor.mat",
+            "Model": "..\\..\\..\\..\\res\\models\\Box.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{350f1b78-5fa3-447b-a4a4-82710f019624}\u0000",
+            "name": "Player",
+            "transform": {
+                "type": "Transform",
+                "id": "{0af31181-e953-4195-a7e1-4b597bdf4a50}\u0000",
+                "owner": "{350f1b78-5fa3-447b-a4a4-82710f019624}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 2.1300268173217773,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{88574733-6ceb-4365-934b-db562d9093ba}\u0000",
+                "{dbf626e6-c7f4-413c-bf75-32888dbec6a3}\u0000",
+                "{dbe72c11-898c-455a-9142-313b23c78bcb}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{88574733-6ceb-4365-934b-db562d9093ba}\u0000",
+            "owner": "{350f1b78-5fa3-447b-a4a4-82710f019624}\u0000",
+            "Material": "..\\..\\..\\..\\res\\materials\\SampleScene\\Wall.mat",
+            "Model": "..\\..\\..\\..\\res\\models\\Box.fbx"
+        },
+        {
+            "type": "MovementComponent",
+            "id": "{dbf626e6-c7f4-413c-bf75-32888dbec6a3}\u0000",
+            "owner": null
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{dbe72c11-898c-455a-9142-313b23c78bcb}\u0000",
+            "owner": "{350f1b78-5fa3-447b-a4a4-82710f019624}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 2.0,
+            "_depth": 2.0
         }
     ]
 }

@@ -32,7 +32,9 @@ namespace Engine
         void DrawImGui() override
         {
             // Implementacja GUI dla edytora (opcjonalna)
-            std::cout << "MovementComponent: Speed = " << Speed << std::endl;
+            char speedBuffer[32];
+            snprintf(speedBuffer, sizeof(speedBuffer), "%.2f", Speed);
+            ImGui::Text("MovementComponent: Speed = %s", speedBuffer);
         }
         #endif
     };

@@ -51,9 +51,9 @@ namespace Scene
         Scene = new class Engine::Scene();
         Engine::SceneManager::LoadScene("./res/scenes/Gameplay.lvl", Scene);
         // TODO: remove when no longer needed
+        
 
-
-
+        
        
 
         // BOX BOX SCENARIO /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,13 +64,17 @@ namespace Scene
         secondBoxModelRenderer->SetMaterial(
                 Materials::MaterialManager::GetMaterial("./res/materials/SampleScene/Box.mat"));
 
-        Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
+        //Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
         secondBoxEntity->GetTransform()->SetPosition(glm::vec3(2.0f, 7.0f, 0.0f));
-        secondBoxCollider->SetWidth(2.0f);
-        secondBoxCollider->SetHeight(2.0f);
-        secondBoxCollider->SetDepth(2.0f);
 
-        Engine::Entity* secondBoxEntity2 = Scene->SpawnEntity(nullptr);
+        Scene->GetPlayer()->GetTransform()->AddChild(secondBoxEntity->GetTransform());
+        Scene->GetPlayer()->AddComponent<Engine::MovementComponent>();
+
+        //secondBoxCollider->SetWidth(2.0f);
+        //secondBoxCollider->SetHeight(2.0f);
+        //secondBoxCollider->SetDepth(2.0f);
+
+        /* Engine::Entity* secondBoxEntity2 = Scene->SpawnEntity(nullptr);
         Engine::BoxCollider* secondBoxCollider2 = secondBoxEntity2->AddComponent<Engine::BoxCollider>();
 
         secondBoxCollider2->SetWidth(2.0f);
@@ -98,8 +102,9 @@ namespace Scene
         rb->AddConstraint(Engine::RigidBody::Constraints::LockRotationZ);
 
         CameraFollow::GetInstance().SetTarget(secondBoxEntity);
+        */
         #endif
-
+        
         //secondBoxCollider->shouldMove = true;
         
         //Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();
