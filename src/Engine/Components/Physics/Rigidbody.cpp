@@ -283,4 +283,30 @@ namespace Engine
     {
     }
 
+   #if EDITOR
+    void RigidBody::DrawImGui()
+    {
+        ImGui::Text("Rigidbody");
+        ImGui::Separator();
+
+        ImGui::SliderFloat("Mass", &mass, 0.0f, 100.0f);
+        if (mass == 0.0f)
+            inverseMass = 0.0f;
+        else
+            inverseMass = 1.0f / mass;
+
+        ImGui::Checkbox("Gravity Enabled", &gravityEnabled);
+        ImGui::InputFloat3("Gravity", &gravity[0]);
+
+        ImGui::SliderFloat("Linear Damping", &linearDamping, 0.0f, 1.0f);
+        ImGui::SliderFloat("Angular Damping", &angularDamping, 0.0f, 1.0f);
+
+        ImGui::SliderFloat("Restitution", &restitution, 0.0f, 1.0f);
+
+        ImGui::SliderFloat("Static Friction", &staticFriction, 0.0f, 5.0f);
+        ImGui::SliderFloat("Dynamic Friction", &dynamicFriction, 0.0f, 5.0f);
+    }
+#endif
+
+
 } // namespace Engine

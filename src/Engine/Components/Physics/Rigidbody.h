@@ -99,7 +99,7 @@ namespace Engine
         SERIALIZATION_EXPORT_CLASS(RigidBody)
 
 #if EDITOR
-        void DrawImGui() override {};
+        void DrawImGui() override;
 #endif
 
     private:
