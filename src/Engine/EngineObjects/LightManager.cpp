@@ -299,14 +299,14 @@ namespace Engine
                                             Light->GetDirection()) * 0.5f + 0.5f;
         LightsScreenPositionBuffer.push_back(lightPosition);
         LightsScreenPositionBuffer[0].x++; // light count
-        printf("%f, %f\n", lightPosition.x, lightPosition.y);
+
     }
 
     void LightManager::AddLightScreenPosition(const CameraRenderData& RenderData, const class PointLight* const Light)
     {
-        const glm::vec2 lightPosition = static_cast<glm::vec2>(
-                                            RenderData.ProjectionMatrix * RenderData.ViewMatrix * glm::vec4(
-                                                    Light->GetPosition(), 1.0f)) * 0.5f + 0.5f;
+        const glm::vec4 ndc = RenderData.ProjectionMatrix * RenderData.ViewMatrix * glm::vec4(
+                                      Light->GetPosition(), 1.0f);
+        const glm::vec2 lightPosition = static_cast<glm::vec2>(ndc) / ndc.w * 0.5f + 0.5f;
         LightsScreenPositionBuffer.push_back(lightPosition);
         LightsScreenPositionBuffer[0].x++; // light count
 
@@ -314,9 +314,10 @@ namespace Engine
 
     void LightManager::AddLightScreenPosition(const CameraRenderData& RenderData, const class SpotLight* const Light)
     {
-        const glm::vec2 lightPosition = static_cast<glm::vec2>(
-            RenderData.ProjectionMatrix * RenderData.ViewMatrix * glm::vec4(Light->GetPosition(), 1.0f));
-        LightsScreenPositionBuffer.push_back(lightPosition * 0.5f + 0.5f);
+        const glm::vec4 ndc = RenderData.ProjectionMatrix * RenderData.ViewMatrix * glm::vec4(
+                                      Light->GetPosition(), 1.0f);
+        const glm::vec2 lightPosition = static_cast<glm::vec2>(ndc) / ndc.w * 0.5f + 0.5f;
+        LightsScreenPositionBuffer.push_back(lightPosition);
         LightsScreenPositionBuffer[0].x++; // light count
     }
 

@@ -7,10 +7,13 @@
 namespace Engine
 {
     GodRays::GodRays() :
-        Resolution(1920 / 8, 1080 / 8),
+        Resolution(1920 / 4, 1080 / 4),
+        BlendShader(Shaders::ShaderManager::GetShader(
+                Shaders::ShaderSourceFiles("./res/shaders/GodRays/GodRays.vert", nullptr,
+                                           "./res/shaders/GodRays/GodRays.frag"))),
         Shader(Shaders::ShaderManager::GetShader(
                 Shaders::ShaderSourceFiles("./res/shaders/GodRays/GodRays.vert", nullptr,
-                                           "./res/shaders/GodRays/GodRays.frag")))
+                                           "./res/shaders/GodRays/Blend.frag")))
     {
         glGenFramebuffers(1, &FrameBuffer);
 
@@ -34,17 +37,27 @@ namespace Engine
         glDeleteFramebuffers(1, &FrameBuffer);
     }
 
-    void GodRays::Render(const uint32_t SceneColor, const uint32_t OcclusionMap) const
+    void GodRays::Render(const uint32_t SceneColor, const uint32_t OcclusionMap,
+                         const SceneFrameBuffer& SceneFrameBuffer) const
     {
         Shader.Use();
         LightManager::GetInstance()->BindLightScreenPositionBuffer();
         glBindFramebuffer(GL_FRAMEBUFFER, FrameBuffer);
         glViewport(0, 0, Resolution.x, Resolution.y);
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, SceneColor);
-        glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, OcclusionMap);
-
         ScreenQuad.Draw();
+
+        SceneFrameBuffer.BindResolved();
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, OutputTexture);
+        glViewport(0, 0, 1920, 1080);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_ONE, GL_ONE);
+        glBlendEquation(GL_FUNC_ADD);
+        BlendShader.Use();
+        ScreenQuad.Draw();
+        glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+        glDisable(GL_BLEND);
     }
 } // Engine

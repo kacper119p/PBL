@@ -81,8 +81,9 @@ namespace Engine
         }
 
         MultiSampledBuffer.ResolveMultisampling();
+        Bloom.PrefilterBrightSpots(MultiSampledBuffer.GetResolvedColorBuffer());
+        GodRays.Render(MultiSampledBuffer.GetResolvedColorBuffer(), Bloom.GetPrefilteredColor(), MultiSampledBuffer);
         Bloom.Render(MultiSampledBuffer.GetResolvedColorBuffer());
-        GodRays.Render(MultiSampledBuffer.GetResolvedColorBuffer(), Bloom.GetPrefilteredColor());
     }
 
     void RenderingManager::RenderAllDirectionalShadowMap(const CameraRenderData& RenderData, unsigned int Target,
