@@ -104,10 +104,11 @@ namespace Engine
             InputManager::GetInstance().Update();
             CameraFollow::GetInstance().Update(deltaTime);
 #endif
-            // Update game objects' state here
+#if !EDITOR
             UpdateManager::GetInstance()->Update(deltaTime);
             RigidbodyUpdateManager::GetInstance()->Update(deltaTime);
             CollisionUpdateManager::GetInstance()->Update(deltaTime);
+#endif
             int displayW, displayH;
             glfwMakeContextCurrent(Window);
             glfwGetFramebufferSize(Window, &displayW, &displayH);
