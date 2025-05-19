@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../../EngineObjects/Entity.h" // TODO: Fix later. I'm using this way because of indexing problem.
-#include "../../EngineObjects/UpdateManager.h"
+#include "Engine/EngineObjects/Entity.h" 
 #include "../Component.h"
 #include "../Interfaces/IUpdateable.h"
 #include "Serialization/SerializationUtility.h"
@@ -12,7 +11,7 @@ namespace Engine
 {
     class Collider;
 
-    class RigidBody : public Component, public IUpdateable
+    class RigidBody : public Component
     {
     public:
         enum class Constraints : uint8_t
@@ -33,9 +32,6 @@ namespace Engine
         };
 
     private:
-        // TODO: remove when scriptable fully implemented
-        float timeSinceLastForce = 0.0f;
-
         float mass = 1.0f;
         
 
@@ -94,7 +90,7 @@ namespace Engine
         const glm::vec3& GetGravity() const;
 
         void Start() override;
-        void Update(float deltaTime) override;
+        void Update(float deltaTime);
 
         const glm::vec3& GetLinearVelocity() const;
         const glm::vec3& GetAngularVelocity() const;

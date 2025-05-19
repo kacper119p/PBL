@@ -1,6 +1,6 @@
 #include "Rigidbody.h"
 #include "../Colliders/Collider.h"
-
+#include "Engine/EngineObjects/RigidbodyUpdateManager.h"
 namespace Engine
 {
 
@@ -11,10 +11,10 @@ namespace Engine
         constraints(Constraints::None), inertiaTensor(1.0f), inverseInertiaTensor(1.0f), gravityEnabled(true),
         gravity(glm::vec3(0.0f, -9.81f, 0.0f))
     {
-        UpdateManager::GetInstance()->RegisterComponent(this);
+        RigidbodyUpdateManager::GetInstance()->RegisterRigidbody(this);
     }
 
-    RigidBody::~RigidBody() { UpdateManager::GetInstance()->UnregisterComponent(this); }
+    RigidBody::~RigidBody() { RigidbodyUpdateManager::GetInstance()->UnregisterRigidbody(this); }
 
     RigidBody& RigidBody::operator=(const RigidBody& other)
     {
@@ -81,10 +81,9 @@ namespace Engine
     {
         if (penetrationDepth < 0.05f && glm::dot(collisionNormal, glm::vec3(0, 1, 0)) > 0.7f)
         {
-            // jeœli prêdkoœæ pionowa jest ma³a lub skierowana w dó³
             if (linearVelocity.y < 0.1f)
             {
-                linearVelocity.y = 0.0f; // blokujemy "przenikanie" i drgania
+                linearVelocity.y = 0.0f;
             }
         }
 
@@ -107,11 +106,10 @@ namespace Engine
 
             const float correctionFactor = 0.8f;
             glm::vec3 correction = correctionFactor * penetration * normal;
-            GetOwner()->GetTransform()->SetPosition(GetOwner()->GetTransform()->GetPosition() + correction);
+            GetOwner()->GetTransform()->SetPosition(GetOwner()->GetTransform()->GetPositionWorldSpace() + correction);
             return;
         }
 
-        // Oblicz impuls z uwzglêdnieniem obu cia³
         float e = (restitution + otherBody->restitution) * 0.5f;
         glm::vec3 relativeVelocity = linearVelocity - otherBody->linearVelocity;
         float velAlongNormal = glm::dot(relativeVelocity, normal);
@@ -165,7 +163,6 @@ namespace Engine
             accumulatedForce += gravity * mass;
         }
 
-        // Aktualizacja prêdkoœci liniowej z uwzglêdnieniem constraintów
         if (!HasConstraint(Constraints::LockPositionX))
             linearVelocity.x += (accumulatedForce.x * inverseMass) * deltaTime;
         if (!HasConstraint(Constraints::LockPositionY))
@@ -175,12 +172,10 @@ namespace Engine
 
         linearVelocity *= (1.0f - linearDamping);
 
-        // Obliczenie przyspieszenia k¹towego (w przestrzeni œwiata)
         glm::mat3 R = glm::mat3_cast(orientation);
         glm::mat3 worldInvInertiaTensor = R * inverseInertiaTensor * glm::transpose(R);
         glm::vec3 angularAcceleration = worldInvInertiaTensor * accumulatedTorque;
 
-        // Aktualizacja prêdkoœci k¹towej z uwzglêdnieniem constraintów
         if (!HasConstraint(Constraints::LockRotationX))
             angularVelocity.x += angularAcceleration.x * deltaTime;
         if (!HasConstraint(Constraints::LockRotationY))
@@ -190,13 +185,11 @@ namespace Engine
 
         angularVelocity *= (1.0f - angularDamping);
 
-        // Aktualizacja pozycji
         Transform* transform = GetOwner()->GetTransform();
         glm::vec3 position = transform->GetPositionWorldSpace();
         position += linearVelocity * deltaTime;
         transform->SetPosition(position);
 
-        // Ogranicz prêdkoœæ k¹tow¹ wed³ug constraintów przed przeliczeniem rotacji
         glm::vec3 effectiveAngularVelocity = angularVelocity;
 
         if (HasConstraint(Constraints::LockRotationX))
@@ -218,16 +211,11 @@ namespace Engine
             }
         }
 
-        // Zaktualizuj rotacjê obiektu
         transform->SetEulerAngles(glm::eulerAngles(orientation));
 
-        // Reset si³ i momentów
         accumulatedForce = glm::vec3(0.0f);
         accumulatedTorque = glm::vec3(0.0f);
     }
-
-
-
 
     void RigidBody::AddForce(const glm::vec3& force, ForceType type)
     {
@@ -243,7 +231,6 @@ namespace Engine
 
     void RigidBody::AddTorque(const glm::vec3& torque, ForceType type)
     {
-        // Przekszta³æ tensor bezw³adnoœci do przestrzeni œwiata
         glm::mat3 rotationMatrix = glm::mat3_cast(orientation);
         glm::mat3 worldInvInertiaTensor = rotationMatrix * inverseInertiaTensor * glm::transpose(rotationMatrix);
 

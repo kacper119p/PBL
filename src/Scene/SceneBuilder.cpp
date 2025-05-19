@@ -90,6 +90,9 @@ namespace Scene
         Engine::RigidBody* rb2 = secondBoxEntity2->AddComponent<Engine::RigidBody>();
         Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();
 
+        rb2->SetRestitution(5.0f);
+        rb2->SetMass(0.1f);
+
         rb->SetLinearDamping(.05f);
         rb->AddConstraint(Engine::RigidBody::Constraints::LockRotationX);
         rb->AddConstraint(Engine::RigidBody::Constraints::LockRotationZ);

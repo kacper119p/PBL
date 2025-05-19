@@ -30,7 +30,6 @@ namespace Engine
             GetOwner()->GetComponent<RigidBody>()->AddForce(GetOwner()->GetTransform()->GetRight() * Speed);
         }
 
-        //GetOwner()->GetTransform()->SetPosition(position);
         #endif
     }
 
