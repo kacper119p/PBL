@@ -84,7 +84,7 @@
             "type": "ModelRenderer",
             "id": "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
             "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
-            "Material": "G:\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\materials\\SampleScene\\Floor.mat",
+            "Material": "..\\..\\..\\..\\res\\materials\\SampleScene\\Floor.mat",
             "Model": "./res/Models/Box.fbx"
         },
         {

@@ -1,5 +1,6 @@
 #include "MovementComponent.h"
 #include "spdlog/spdlog.h"
+#include "Engine/Components/Physics/RigidBody.h"
 namespace Engine
 {
 
@@ -18,7 +19,7 @@ namespace Engine
         const glm::vec3& eulerAngles = transform->GetEulerAngles();
         float yaw = eulerAngles.y;
 
-        glm::vec3 forward = glm::vec3(sin(glm::radians(yaw)), 0.0f, -cos(glm::radians(yaw)));
+        glm::vec3 forward = transform->GetForward();
 
         InputManager& input = InputManager::GetInstance();
 
@@ -35,12 +36,11 @@ namespace Engine
             isRightForward = true;
         }
 
-        float rotationSpeed = 45.0f; // degrees per second
-        float moveSpeed = Speed; // base movement speed
+        float rotationSpeed = 45.0f;
 
         if (isLeftForward && isRightForward)
         {
-            position += forward * moveSpeed * deltaTime;
+            GetOwner()->GetComponent<RigidBody>()->AddForce(GetOwner()->GetTransform()->GetForward() * Speed);
         }
         else if (isLeftForward || isRightForward)
         {
@@ -50,7 +50,7 @@ namespace Engine
             glm::vec3 newForward = rotation * forward;
 
             // Move slightly forward in the rotated direction
-            position += newForward * (moveSpeed * 0.5f) * deltaTime;
+            GetOwner()->GetComponent<RigidBody>()->AddForce(GetOwner()->GetTransform()->GetForward() * Speed * 0.5f);
 
             // Apply rotation to the transform
             transform->SetEulerAngles(rotation * transform->GetEulerAngles());
