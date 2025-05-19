@@ -66,7 +66,7 @@ namespace Scene
 
         //Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
         secondBoxEntity->GetTransform()->SetPosition(glm::vec3(2.0f, 7.0f, 0.0f));
-
+        Scene->GetPlayer()->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
         Scene->GetPlayer()->GetTransform()->AddChild(secondBoxEntity->GetTransform());
         Scene->GetPlayer()->AddComponent<Engine::MovementComponent>();
 
