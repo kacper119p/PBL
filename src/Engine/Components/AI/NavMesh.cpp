@@ -1,6 +1,7 @@
 #include "NavMesh.h"
 #include "Engine/Components/Renderers/ModelRenderer.h"
 #include "spdlog/spdlog.h"
+#include "Engine/EngineObjects/RayCast.h"
 
 namespace Engine
 {
@@ -191,7 +192,7 @@ namespace Engine
                             glm::vec3 v2 = glm::vec3(localToWorld * glm::vec4(vertices[indices[j + 2]].Position, 1.0f));
 
                             glm::vec3 hitPoint;
-                            if (RayIntersectsTriangle(position, rayDir, v0, v1, v2, &hitPoint))
+                            if (RayCast::RayIntersectsTriangle(position, rayDir, v0, v1, v2, &hitPoint))
                             {
                                 foundSurface = true;
                                 finalHitPoint = hitPoint;
@@ -253,44 +254,5 @@ namespace Engine
         }
 
         return closestNodeId;
-    }
-
-    bool NavMesh::RayIntersectsTriangle(const glm::vec3& RayOrigin, const glm::vec3& RayDirection,
-                                        const glm::vec3& Vertex0, const glm::vec3& Vertex1, const glm::vec3& Vertex2,
-                                        glm::vec3* HitPoint)
-    {
-        const float epsilon = 1e-6f;
-
-        glm::vec3 edge1 = Vertex1 - Vertex0;
-        glm::vec3 edge2 = Vertex2 - Vertex0;
-
-        glm::vec3 h = glm::cross(RayDirection, edge2);
-        float determinant = glm::dot(edge1, h);
-
-        if (determinant > -epsilon && determinant < epsilon)
-            return false;
-
-        float invDeterminant = 1.0f / determinant;
-        glm::vec3 s = RayOrigin - Vertex0;
-        float u = invDeterminant * glm::dot(s, h);
-
-        if (u < 0.0f || u > 1.0f)
-            return false;
-
-        glm::vec3 q = glm::cross(s, edge1);
-        float v = invDeterminant * glm::dot(RayDirection, q);
-
-        if (v < 0.0f || u + v > 1.0f)
-            return false;
-
-        float t = invDeterminant * glm::dot(edge2, q);
-        if (t > epsilon)
-        {
-            if (HitPoint)
-                *HitPoint = RayOrigin + RayDirection * t;
-            return true;
-        }
-
-        return false;
     }
 }

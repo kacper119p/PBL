@@ -10,6 +10,7 @@
 #include "Engine/Gui/LightsGui.h"
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/EngineObjects/CollisionUpdateManager.h"
+#include "Engine/EngineObjects/RigidbodyUpdateManager.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialManager.h"
 #include "Models/ModelManager.h"
@@ -67,9 +68,9 @@ namespace Engine
 
         Camera->SetProjectionMatrix(glm::perspective(glm::radians(70.0f), float(WindowWidth) /
                                                                           float(WindowHeight), 0.1f, 1000.0f));
-        #if !EDITOR
+#if !EDITOR
         CameraFollow::GetInstance().SetCamera(Camera);
-        #endif
+#endif
         try
         {
             SceneBuilding::SceneBuilder::Build(CurrentScene);
@@ -97,14 +98,15 @@ namespace Engine
             lastFrame = currentFrame;
 
             // Process I/O operations here
-            #if EDITOR
+#if EDITOR
             HandleInput(deltaTime);
-            #else
+#else
             InputManager::GetInstance().Update();
             CameraFollow::GetInstance().Update(deltaTime);
-            #endif
+#endif
             // Update game objects' state here
             UpdateManager::GetInstance()->Update(deltaTime);
+            RigidbodyUpdateManager::GetInstance()->Update(deltaTime);
             CollisionUpdateManager::GetInstance()->Update(deltaTime);
             int displayW, displayH;
             glfwMakeContextCurrent(Window);
@@ -115,8 +117,6 @@ namespace Engine
 
             RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
             AudioListener->UpdateListener();
-
-        
 
 
 #if EDITOR
@@ -130,7 +130,7 @@ namespace Engine
 #if EDITOR
             // Draw ImGui
             ImGuiBegin();
-            EditorGUI.Render(Frame, CurrentScene);
+            EditorGUI.Render(Frame, CurrentScene, renderData);
             GizmoManager::GetInstance()->Manipulate(renderData);
             ImGuiEnd(); // this call effectively renders ImGui
 #endif
@@ -239,6 +239,7 @@ namespace Engine
         UpdateManager::Initialize();
         Materials::MaterialManager::Initialize();
         Ui::TextManager::Initialize();
+        RigidbodyUpdateManager::Initialize();
         CollisionUpdateManager::Initialize();
 #if EDITOR
         //for editor game screen
@@ -261,9 +262,9 @@ namespace Engine
         spdlog::info("Sounds loaded.");
 
         //input manager init
-        #if !EDITOR
+#if !EDITOR
         InputManager::GetInstance().Init(Window);
-        #endif
+#endif
 
         return true;
     }
@@ -341,7 +342,7 @@ namespace Engine
     {
 #if EDITOR
         //LightsGui::Draw();
-        EditorGUI.Render(Frame, CurrentScene);
+        //EditorGUI.Render(Frame, CurrentScene);
 #endif
     }
 

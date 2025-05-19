@@ -1,55 +1,34 @@
 #include "MovementComponent.h"
 #include "spdlog/spdlog.h"
+#include "Engine/Components/Physics/Rigidbody.h"
 namespace Engine
 {
 
     void MovementComponent::Update(float deltaTime)
     {
 #if !EDITOR
-        Transform* transform = GetOwner()->GetTransform();
-        glm::vec3 position = transform->GetPosition();
-        float yaw = transform->GetEulerAngles().y;
-
-        glm::vec3 forward = glm::vec3(sin(glm::radians(yaw)), 0.0f, -cos(glm::radians(yaw)));
+        glm::vec3 position = GetOwner()->GetTransform()->GetPosition();
 
         InputManager& input = InputManager::GetInstance();
 
-        bool isLeftForward = false;
-        bool isRightForward = false;
-
-        if (input.IsKeyPressed(GLFW_KEY_W) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_AXIS_LEFT_TRIGGER))
+        if (input.IsKeyPressed(GLFW_KEY_W))
         {
-            isLeftForward = true;
+            GetOwner()->GetComponent<RigidBody>()->AddForce(GetOwner()->GetTransform()->GetForward() * Speed);
         }
-
-        if (input.IsKeyPressed(GLFW_KEY_UP) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER))
+            
+        if (input.IsKeyPressed(GLFW_KEY_S))
         {
-            isRightForward = true;
+            GetOwner()->GetComponent<RigidBody>()->AddForce(-GetOwner()->GetTransform()->GetForward() * Speed);
         }
-
-        float rotationSpeed = 45.0f; // degrees per second
-        float moveSpeed = Speed; // base movement speed
-
-        if (isLeftForward && isRightForward)
+        if (input.IsKeyPressed(GLFW_KEY_A))
         {
-            position += forward * moveSpeed * deltaTime;
+            GetOwner()->GetComponent<RigidBody>()->AddForce(-GetOwner()->GetTransform()->GetRight() * Speed);
         }
-        else if (isLeftForward || isRightForward)
+            
+        if (input.IsKeyPressed(GLFW_KEY_D))
         {
-            // Rotate slightly
-            float angle = (isLeftForward ? -1.0f : 1.0f) * rotationSpeed * deltaTime;
-            glm::quat rotation = glm::angleAxis(glm::radians(angle), glm::vec3(0, 1, 0));
-            glm::vec3 newForward = rotation * forward;
-
-            // Move slightly forward in the rotated direction
-            position += newForward * (moveSpeed * 0.5f) * deltaTime;
-
-            // Apply rotation to the transform
-            transform->SetEulerAngles(rotation * transform->GetEulerAngles());
+            GetOwner()->GetComponent<RigidBody>()->AddForce(GetOwner()->GetTransform()->GetRight() * Speed);
         }
-
-        transform->SetPosition(position);
-
 
         #endif
     }

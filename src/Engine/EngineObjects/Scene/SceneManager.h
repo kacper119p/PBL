@@ -19,7 +19,7 @@ namespace Engine
          * @param Path Path of a scene file.
          * @param Scene Scene to save.
          */
-        static void SaveScene(const std::string& Path, const Scene* Scene);
+        static void SaveScene(const std::string& Path, Scene* Scene);
 
         /**
          * @brief Loads scene from a file.

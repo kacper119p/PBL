@@ -1,21 +1,19 @@
 #pragma once
 
+#include "Engine/EngineObjects/Entity.h" 
 #include "../Component.h"
+#include "../Interfaces/IUpdateable.h"
+#include "Serialization/SerializationUtility.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/quaternion.hpp"
-#include "Serialization/SerializationUtility.h"
-#include "../../EngineObjects/Entity.h" // TODO: Fix later. I'm using this way because of indexing problem.
-#include "../Interfaces/IUpdateable.h"
-#include "../../EngineObjects/UpdateManager.h"
-
 
 namespace Engine
 {
     class Collider;
-    class RigidBody : public Component, public IUpdateable
+
+    class RigidBody : public Component
     {
     public:
-
         enum class Constraints : uint8_t
         {
             None = 0,
@@ -25,47 +23,52 @@ namespace Engine
             LockRotationX = 1 << 3,
             LockRotationY = 1 << 4,
             LockRotationZ = 1 << 5
-
         };
 
         enum class ForceType
         {
             Force,
-            Impulse 
+            Impulse
         };
 
     private:
+        float mass = 1.0f;
+        
 
-        // TODO: remove when scriptable fully implemented
-        float timeSinceLastForce = 0.0f;
+        glm::vec3 linearVelocity = glm::vec3(0.0f);
+        glm::vec3 angularVelocity = glm::vec3(0.0f);
+        glm::quat orientation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
 
-        float mass;
-        float inverseMass;
-        glm::vec3 linearVelocity;
-        glm::vec3 angularVelocity;
-        glm::quat orientation;
+        glm::vec3 accumulatedForce = glm::vec3(0.0f);
+        glm::vec3 accumulatedTorque = glm::vec3(0.0f);
 
-        glm::vec3 accumulatedForce;
-        glm::vec3 accumulatedTorque;
+        float staticFriction = 0.0f;
+        float dynamicFriction = 0.0f;
+        float restitution = 0.5f;
 
-        float staticFriction;
-        float dynamicFriction;
-        float restitution;
-        float linearDamping;
-        float angularDamping;
+        float linearDamping = 0.001f;
+        float angularDamping = 0.001f;
 
-        Constraints constraints;
+        bool gravityEnabled = true;
+        glm::vec3 gravity = glm::vec3(0.0f, -9.81f, 0.0f);
+
+        Constraints constraints = Constraints::None;
+
+        glm::mat3 inertiaTensor = glm::mat3(1.0f);
+        glm::mat3 inverseInertiaTensor = glm::mat3(1.0f);
 
     public:
+        float inverseMass = 1.0f;
         RigidBody();
         ~RigidBody();
 
         RigidBody& operator=(const RigidBody& other);
-        
-        void OnCollision(const glm::vec3& collisionNormal, const glm::vec3& collisionPoint, float penetrationDepth);
+
+        void OnCollision(const glm::vec3& collisionNormal, const glm::vec3& collisionPoint, float penetrationDepth,
+                         RigidBody* otherBody = nullptr);
 
         void AddForce(const glm::vec3& force, ForceType type = ForceType::Force);
-        void AddTorque(const glm::vec3& torque);
+        void AddTorque(const glm::vec3& torque, ForceType type = ForceType::Force);
 
         void SetMass(float m);
         void SetInverseMass(float invM);
@@ -81,8 +84,13 @@ namespace Engine
         void RemoveConstraint(Constraints constraint);
         bool HasConstraint(Constraints constraint) const;
 
+        void EnableGravity(bool enabled);
+        bool IsGravityEnabled() const;
+        void SetGravity(const glm::vec3& newGravity);
+        const glm::vec3& GetGravity() const;
+
         void Start() override;
-        void Update(float deltaTime) override;
+        void Update(float deltaTime);
 
         const glm::vec3& GetLinearVelocity() const;
         const glm::vec3& GetAngularVelocity() const;
@@ -90,12 +98,15 @@ namespace Engine
 
         SERIALIZATION_EXPORT_CLASS(RigidBody)
 
-        #if EDITOR
-        void DrawImGui() override {};
-        #endif
+#if EDITOR
+        void DrawImGui() override;
+#endif
+
+    private:
+        void UpdateInertiaTensor();
     };
 
-   inline RigidBody::Constraints operator|(RigidBody::Constraints a, RigidBody::Constraints b)
+    inline RigidBody::Constraints operator|(RigidBody::Constraints a, RigidBody::Constraints b)
     {
         return static_cast<RigidBody::Constraints>(static_cast<uint8_t>(a) | static_cast<uint8_t>(b));
     }

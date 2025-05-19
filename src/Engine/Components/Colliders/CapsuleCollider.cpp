@@ -83,6 +83,19 @@ namespace Engine
         START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
         END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
+
+    glm::mat3 CapsuleCollider::CalculateInertiaTensor(float mass) const
+    {
+        float r = Radius;
+        float h = Height;
+
+        float I_y = 0.5f * mass * r * r;
+
+        float I_xz = (1.0f / 12.0f) * mass * (3.0f * r * r + h * h);
+
+        return glm::mat3(I_xz, 0.0f, 0.0f, 0.0f, I_y, 0.0f, 0.0f, 0.0f, I_xz);
+    }
+
 #if EDITOR
     void CapsuleCollider::DrawDebugMesh(const CameraRenderData& RenderData)
     {

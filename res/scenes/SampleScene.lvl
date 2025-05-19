@@ -1,5 +1,17 @@
 {
     "Skybox": "./res/textures/Skyboxes/Skybox.hdr",
+    "Bounds": {
+        "min": {
+            "x": -1349.9998779296875,
+            "y": -6.706262111663818,
+            "z": -1350.0
+        },
+        "max": {
+            "x": 1349.9998779296875,
+            "y": 16.565580368041992,
+            "z": 1350.0
+        }
+    },
     "UI": "EmptyUi",
     "GameMode": "DefaultGameMode",
     "Player": "DefaultPlayer",

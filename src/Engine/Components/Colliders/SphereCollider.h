@@ -35,6 +35,10 @@ namespace Engine
 
         inline virtual Collider* GetInstance() override { return this; }
 
+        virtual glm::mat3 CalculateInertiaTensor(float mass) const override;
+
+        glm::vec3 GetBoundingBox() const override { return glm::vec3(2.0f * radius); }
+
         float GetRadius() const
         {
             return radius;
