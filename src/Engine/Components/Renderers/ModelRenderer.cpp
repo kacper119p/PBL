@@ -113,8 +113,8 @@ namespace Engine
 
 
             static bool scanned = false;
-            std::string materialPath = fs::relative("./res/materials/SampleScene").string();
-            std::string modelPath = fs::relative("./res/Models").string();
+            std::string materialPath = fs::path("./res/materials/SampleScene").string();
+            std::string modelPath = fs::path("./res/Models").string();
             if (!scanned)
             {
                 for (const auto& entry : fs::directory_iterator(materialPath))
@@ -152,7 +152,8 @@ namespace Engine
                     const char* droppedPath = static_cast<const char*>(payload->Data);
                     if (fs::path(droppedPath).extension() == ".mat")
                     {
-                        SetMaterial(Materials::MaterialManager::GetMaterial(droppedPath));
+                        fs::path relPath = fs::relative(droppedPath, fs::current_path());
+                        SetMaterial(Materials::MaterialManager::GetMaterial(relPath.string()));
                     }
                 }
                 ImGui::EndDragDropTarget();
@@ -176,6 +177,7 @@ namespace Engine
 
                     if (ImGui::Selectable(displayName.c_str()))
                     {
+                        fs::path relPath = fs::relative(path, fs::current_path());
                         SetMaterial(Materials::MaterialManager::GetMaterial(path));
                         ImGui::CloseCurrentPopup();
                     }
