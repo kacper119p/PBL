@@ -37,15 +37,14 @@ namespace Engine
         glDeleteFramebuffers(1, &FrameBuffer);
     }
 
-    void GodRays::Render(const uint32_t SceneColor, const uint32_t OcclusionMap,
-                         const SceneFrameBuffer& SceneFrameBuffer) const
+    void GodRays::Render(const SceneFrameBuffer& SceneFrameBuffer) const
     {
         Shader.Use();
         LightManager::GetInstance()->BindLightScreenPositionBuffer();
         glBindFramebuffer(GL_FRAMEBUFFER, FrameBuffer);
         glViewport(0, 0, Resolution.x, Resolution.y);
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, OcclusionMap);
+        glBindTexture(GL_TEXTURE_2D, SceneFrameBuffer.GetResolvedOcclusionBuffer());
         ScreenQuad.Draw();
 
         SceneFrameBuffer.BindResolved();

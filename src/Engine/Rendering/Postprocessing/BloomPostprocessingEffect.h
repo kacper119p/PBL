@@ -44,8 +44,6 @@ namespace Engine
             return PrefilteredColor;
         }
 
-        void PrefilterBrightSpots(uint32_t SceneColorTexture);
-
         void Render(uint32_t SceneColorTexture);
     };
 

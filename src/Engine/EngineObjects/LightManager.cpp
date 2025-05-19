@@ -311,7 +311,7 @@ namespace Engine
         const glm::vec4 ndc = RenderData.ProjectionMatrix * RenderData.ViewMatrix * glm::vec4(
                                       Light->GetPosition(), 1.0f);
         const glm::vec2 lightPosition = static_cast<glm::vec2>(ndc) / ndc.w * 0.5f + 0.5f;
-        if (lightPosition.x < -- || lightPosition.x > 1.5f || lightPosition.y < -0.5 || lightPosition.y > 1.5f)
+        if (lightPosition.x < -0.5f || lightPosition.x > 1.5f || lightPosition.y < -0.5 || lightPosition.y > 1.5f)
         {
             return;
         }

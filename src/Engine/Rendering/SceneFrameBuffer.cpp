@@ -23,10 +23,21 @@ namespace Engine
 
     void SceneFrameBuffer::ResolveMultisampling() const
     {
+        // Resolve color
         glBindFramebuffer(GL_READ_FRAMEBUFFER, MultiSampledId);
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, ResolvedId);
         glBlitFramebuffer(0, 0, Resolution.x, Resolution.y, 0, 0, Resolution.x, Resolution.y,
                           GL_COLOR_BUFFER_BIT, GL_LINEAR);
+
+        // Resolve occlusion mask
+        glReadBuffer(GL_COLOR_ATTACHMENT1);
+        glDrawBuffer(GL_COLOR_ATTACHMENT1);
+        glBlitFramebuffer(0, 0, Resolution.x, Resolution.y, 0, 0, Resolution.x, Resolution.y,
+                          GL_COLOR_BUFFER_BIT, GL_LINEAR);
+
+        // Return default state
+        glReadBuffer(GL_COLOR_ATTACHMENT0);
+        glDrawBuffer(GL_COLOR_ATTACHMENT0);
     }
 
     void SceneFrameBuffer::ResolveNormals() const
@@ -37,6 +48,8 @@ namespace Engine
         glDrawBuffer(GL_COLOR_ATTACHMENT0);
         glBlitFramebuffer(0, 0, Resolution.x, Resolution.y, 0, 0, Resolution.x, Resolution.y,
                           GL_COLOR_BUFFER_BIT, GL_LINEAR);
+
+        // Return default state
         glReadBuffer(GL_COLOR_ATTACHMENT0);
     }
 
@@ -48,20 +61,29 @@ namespace Engine
         glGenTextures(1, &ColorBuffer);
         glDeleteTextures(1, &NormalsBuffer);
         glGenTextures(1, &NormalsBuffer);
+        glDeleteTextures(1, &OcclusionBuffer);
+        glGenTextures(1, &OcclusionBuffer);
         glDeleteTextures(1, &ResolvedColorBuffer);
         glGenTextures(1, &ResolvedColorBuffer);
         glDeleteRenderbuffers(1, &DepthStencilBuffer);
         glGenRenderbuffers(1, &DepthStencilBuffer);
         glDeleteTextures(1, &ResolvedNormalsTexture);
         glGenTextures(1, &ResolvedNormalsTexture);
+        glDeleteTextures(1, &ResolvedOcclusionBuffer);
+        glGenTextures(1, &ResolvedOcclusionBuffer);
 
         glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, ColorBuffer);
         glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, Samples, GL_RGBA16F, Resolution.x, Resolution.y, GL_TRUE);;
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, ColorBuffer, 0);
 
         glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, NormalsBuffer);
-        glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, Samples, GL_RGBA32F, Resolution.x, Resolution.y, GL_TRUE);;
+        glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, Samples, GL_RGBA16F, Resolution.x, Resolution.y, GL_TRUE);;
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D_MULTISAMPLE, NormalsBuffer, 0);
+
+        glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, OcclusionBuffer);
+        glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, Samples, GL_R11F_G11F_B10F, Resolution.x, Resolution.y,
+                                GL_TRUE);;
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D_MULTISAMPLE, OcclusionBuffer, 0);
 
         constexpr uint32_t attachments[2] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
         glDrawBuffers(2, attachments);
@@ -80,6 +102,16 @@ namespace Engine
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, ResolvedColorBuffer, 0);
+
+        glBindTexture(GL_TEXTURE_2D, ResolvedOcclusionBuffer);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_R11F_G11F_B10F, Resolution.x, Resolution.y, 0, GL_RGB, GL_FLOAT, NULL);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, ResolvedOcclusionBuffer, 0);
+
+        glDrawBuffers(2, attachments);
 
         glBindFramebuffer(GL_FRAMEBUFFER, ResolvedNormalsFramebuffer);
 

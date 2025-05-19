@@ -18,10 +18,12 @@ namespace Engine
         glm::ivec2 Resolution;
         uint32_t ColorBuffer = 0;
         uint32_t NormalsBuffer = 0;
+        uint32_t OcclusionBuffer = 0;
         uint32_t DepthStencilBuffer = 0;
 
         uint32_t ResolvedNormalsFramebuffer = 0;
         uint32_t ResolvedNormalsTexture = 0;
+        uint32_t ResolvedOcclusionBuffer = 0;
 
         uint32_t ResolvedId = 0;
         uint32_t ResolvedColorBuffer = 0;
@@ -56,6 +58,11 @@ namespace Engine
         {
             Resolution = Value;
             UpdateBuffers();
+        }
+
+        [[nodiscard]] uint32_t GetResolvedOcclusionBuffer() const
+        {
+            return ResolvedOcclusionBuffer;
         }
 
         /**
@@ -102,6 +109,7 @@ namespace Engine
             return ResolvedNormalsTexture;
         }
 
+
         /**
          * @brief Resolves multisampling and writes result to Resolved color buffer.
          */
@@ -109,16 +117,14 @@ namespace Engine
 
         void ResolveNormals() const;
 
-        void EnableNormalWrite() const
+        void WriteNormals() const
         {
-            constexpr GLenum drawBuffers[2] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
-            glDrawBuffers(2, drawBuffers);
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D_MULTISAMPLE, NormalsBuffer, 0);
         }
 
-        void DisableNormalWrite() const
+        void WriteOcclusion() const
         {
-            constexpr GLenum drawBuffers[1] = {GL_COLOR_ATTACHMENT0};
-            glDrawBuffers(1, drawBuffers);
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D_MULTISAMPLE, OcclusionBuffer, 0);
         }
 
     private:

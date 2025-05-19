@@ -20,7 +20,8 @@ layout (bindless_sampler) uniform sampler2D RoughnessMetallicAmbientOcclusionMap
 layout (bindless_sampler) uniform sampler2D NormalMap;
 layout (bindless_sampler) uniform sampler2D EmissiveMap;
 
-out vec3 FragColor;
+layout (location = 0) out vec3 FragColor;
+layout (location = 1) out vec3 OcclusionMask;
 
 layout (early_fragment_tests) in;
 void main() {
@@ -46,4 +47,5 @@ void main() {
     Color += Emissive;
 
     FragColor = Color;
+    OcclusionMask = Emissive;
 }

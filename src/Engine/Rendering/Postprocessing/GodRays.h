@@ -27,7 +27,7 @@ namespace Engine
         ~GodRays();
 
     public:
-        void Render(uint32_t SceneColor, uint32_t OcclusionMap, const SceneFrameBuffer& SceneFrameBuffer) const;
+        void Render(const SceneFrameBuffer& SceneFrameBuffer) const;
     };
 
 } // Engine
