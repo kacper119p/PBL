@@ -1,39 +1,60 @@
 #include "MovementComponent.h"
 #include "spdlog/spdlog.h"
-#include "Engine/Components/Physics/Rigidbody.h"
 namespace Engine
 {
 
     void MovementComponent::Update(float deltaTime)
     {
 #if !EDITOR
-        glm::vec3 position = GetOwner()->GetTransform()->GetPosition();
+        Transform* transform = GetOwner()->GetTransform();
+        glm::vec3 position = transform->GetPosition();
+        float yaw = transform->GetEulerAngles().y;
+
+        glm::vec3 forward = glm::vec3(sin(glm::radians(yaw)), 0.0f, -cos(glm::radians(yaw)));
 
         InputManager& input = InputManager::GetInstance();
 
-        if (input.IsKeyPressed(GLFW_KEY_W))
+        bool isLeftForward = false;
+        bool isRightForward = false;
+
+        if (input.IsKeyPressed(GLFW_KEY_W) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_AXIS_LEFT_TRIGGER))
         {
-            GetOwner()->GetComponent<RigidBody>()->AddForce(GetOwner()->GetTransform()->GetForward() * Speed);
-        }
-            
-        if (input.IsKeyPressed(GLFW_KEY_S))
-        {
-            GetOwner()->GetComponent<RigidBody>()->AddForce(-GetOwner()->GetTransform()->GetForward() * Speed);
-        }
-        if (input.IsKeyPressed(GLFW_KEY_A))
-        {
-            GetOwner()->GetComponent<RigidBody>()->AddForce(-GetOwner()->GetTransform()->GetRight() * Speed);
-        }
-            
-        if (input.IsKeyPressed(GLFW_KEY_D))
-        {
-            GetOwner()->GetComponent<RigidBody>()->AddForce(GetOwner()->GetTransform()->GetRight() * Speed);
+            isLeftForward = true;
         }
 
-        #endif
+        if (input.IsKeyPressed(GLFW_KEY_UP) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER))
+        {
+            isRightForward = true;
+        }
+
+        float rotationSpeed = 45.0f; // degrees per second
+        float moveSpeed = Speed; // base movement speed
+
+        if (isLeftForward && isRightForward)
+        {
+            position += forward * moveSpeed * deltaTime;
+        }
+        else if (isLeftForward || isRightForward)
+        {
+            // Rotate slightly
+            float angle = (isLeftForward ? -1.0f : 1.0f) * rotationSpeed * deltaTime;
+            glm::quat rotation = glm::angleAxis(glm::radians(angle), glm::vec3(0, 1, 0));
+            glm::vec3 newForward = rotation * forward;
+
+            // Move slightly forward in the rotated direction
+            position += newForward * (moveSpeed * 0.5f) * deltaTime;
+
+            // Apply rotation to the transform
+            transform->SetEulerAngles(rotation * transform->GetEulerAngles());
+        }
+
+        transform->SetPosition(position);
+
+
+#endif
     }
 
-    rapidjson::Value MovementComponent::Serialize(rapidjson::Document::AllocatorType & Allocator) const
+    rapidjson::Value MovementComponent::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION
         END_COMPONENT_SERIALIZATION
@@ -51,4 +72,4 @@ namespace Engine
     {
         // Implementacja
     }
-}
+} // namespace Engine
