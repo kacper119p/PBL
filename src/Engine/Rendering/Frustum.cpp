@@ -94,4 +94,31 @@ namespace Engine
         return true;
     }
 
+    bool Frustum::IsSphereVisible(const glm::vec3& Center, float Radius, const glm::mat4& ObjectToWorldMatrix) const
+    {
+        glm::vec3 worldCenter = glm::vec3(ObjectToWorldMatrix * glm::vec4(Center, 1.0f));
+
+        float scaleX = glm::length(glm::vec3(ObjectToWorldMatrix[0]));
+        float scaleY = glm::length(glm::vec3(ObjectToWorldMatrix[1]));
+        float scaleZ = glm::length(glm::vec3(ObjectToWorldMatrix[2]));
+        float maxScale = std::max({scaleX, scaleY, scaleZ});
+
+        float worldRadius = Radius * maxScale;
+
+        for (int i = 0; i < 6; ++i)
+        {
+            auto normal = glm::vec3(Planes[i]);
+            float d = Planes[i].w;
+
+            float distance = glm::dot(normal, worldCenter) + d;
+
+            if (distance < -worldRadius)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }
