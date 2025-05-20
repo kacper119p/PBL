@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cmath>
 #include <spdlog/spdlog.h>
+#include <iostream>
 
 namespace Engine
 {
@@ -99,6 +100,8 @@ namespace Engine
 
     void SpatialPartitioning::RemoveCollider(Collider* collider)
     {
+        std::cout << "Removing collider from spatial partitioning" << std::endl;
+        std::cout <<  collider->GetOwner() << std::endl;
         glm::vec3 position = collider->GetTransform()->GetPositionWorldSpace();
         glm::vec3 size = collider->GetBoundingBox();
 

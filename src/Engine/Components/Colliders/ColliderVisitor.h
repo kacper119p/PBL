@@ -68,7 +68,7 @@ namespace Engine
 
         ColliderVisitor();
 
-        ColliderVisitor(Collider* collider);
+        ~ColliderVisitor() = default;
 
         void SetCurrentCollider(Collider* collider);
 
