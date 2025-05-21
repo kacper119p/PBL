@@ -4,6 +4,7 @@
 #include "Serialization/SerializedObject.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/type_ptr.hpp"
+#include "glm/gtx/euler_angles.hpp"
 
 #if EDITOR
 #include "imgui.h"
@@ -83,7 +84,14 @@ namespace Engine
          */
         void SetPosition(const glm::vec3& InPosition)
         {
-            Position = glm::vec3(glm::inverse(Parent->GetLocalToWorldMatrix()) * glm::vec4(InPosition, 1.0f));
+            if (Parent != nullptr)
+            {
+                Position = glm::vec3(glm::inverse(Parent->GetLocalToWorldMatrix()) * glm::vec4(InPosition, 1.0f));
+            }
+            else
+            {
+                Position = InPosition;
+            }
             MarkDirty();
         }
 
@@ -93,7 +101,14 @@ namespace Engine
          */
         void SetPositionWorldSpace(const glm::vec3& InPosition)
         {
-            Position = glm::vec3(glm::inverse(Parent->GetLocalToWorldMatrix()) * glm::vec4(InPosition, 1.0f));
+            if (Parent != nullptr)
+            {
+                Position = glm::vec3(glm::inverse(Parent->GetLocalToWorldMatrix()) * glm::vec4(InPosition, 1.0f));
+            }
+            else
+            {
+                Position = InPosition;
+            }
             MarkDirty();
         }
 
@@ -194,55 +209,128 @@ namespace Engine
         /**
          * @brief Returns local to parent's space transformation matrix.
          */
-        const glm::mat4& GetLocalMatrix();
+        const glm::mat4& GetLocalMatrix()
+        {
+            UpdateMatrices();
+            return LocalMatrix;
+        }
 
         /**
          * @brief Returns local to world space transformation matrix.
          */
-        const glm::mat4& GetLocalToWorldMatrix();
+        const glm::mat4& GetLocalToWorldMatrix()
+        {
+            UpdateMatrices();
+            return LocalToWorldMatrix;
+        }
+
+        /**
+         * @brief Returns right orientation vector of this transform.
+         */
+        [[nodiscard]] glm::vec3 GetRight()
+        {
+            return glm::normalize(glm::vec3(GetLocalToWorldMatrix()[0]));
+        }
+
+        /**
+         * @brief Returns up orientation vector of this transform.
+         */
+        [[nodiscard]] glm::vec3 GetUp()
+        {
+            return glm::normalize(glm::vec3(GetLocalToWorldMatrix()[1]));
+        }
 
         /**
          *@brief Returns forward orientation vector of this transform.
          */
-        glm::vec3 GetForward() const;
-       
+        [[nodiscard]] glm::vec3 GetForward()
+        {
+            return glm::normalize(-glm::vec3(GetLocalToWorldMatrix()[2]));
+        }
+
         /**
-         * @brief Returns right orientation vector of this transform.
+         * @brief Returns left orientation vector of this transform.
          */
-        glm::vec3 GetRight() const;
-        
+        [[nodiscard]] glm::vec3 GetLeft()
+        {
+            return -GetRight();
+        }
+
         /**
-         * @brief Returns up orientation vector of this transform.
+         * @brief Returns down orientation vector of this transform.
          */
-        glm::vec3 GetUp() const;
+        [[nodiscard]] glm::vec3 GetDown()
+        {
+            return -GetUp();
+        }
+
+        /**
+         *@brief Returns backwards orientation vector of this transform.
+         */
+        [[nodiscard]] glm::vec3 GetBackwards()
+        {
+            return -GetForward();
+        }
+
 
         /**
          * @brief Sets a new parent of this entity. Removes previous one if it has one.
          * @param InParent Parent.
          */
-        void SetParent(Transform* InParent);
+        void SetParent(Transform* InParent)
+        {
+            if (Parent != nullptr)
+            {
+                Parent->RemoveChild(this);
+            }
+            Parent = InParent;
+            Parent->AddChild(this);
+            MarkDirty();
+        }
 
         /**
          * @brief Returns parent of this transform.
          */
-        [[nodiscard]] Transform* GetParent() const;
+        [[nodiscard]] Transform* GetParent() const
+        {
+            return Parent;
+        }
 
         /**
          * @brief Attaches a new child to this transform.
          * @param Child A new child.
          */
-        void AddChild(Transform* Child);
+        void AddChild(Transform* Child)
+        {
+            if (Child->Parent != nullptr)
+            {
+                Child->Parent->RemoveChild(Child);
+            }
+            Child->Parent = this;
+            Child->MarkDirty();
+            Children.push_back(Child);
+        }
 
         /**
          * @brief Removes a child from this transform.
          * @param Child Child to be removed.
          */
-        void RemoveChild(Transform* Child);
+        void RemoveChild(Transform* Child)
+        {
+            if (std::erase(Children, Child))
+            {
+                Child->Parent = nullptr;
+                Child->MarkDirty();
+            }
+        }
 
         /**
          * @brief Returns all children of this transform.
          */
-        [[nodiscard]] const std::vector<Transform*>& GetChildren();
+        [[nodiscard]] const std::vector<Transform*>& GetChildren()
+        {
+            return Children;
+        }
 
     private:
         void SetOwner(Entity* const InOwner)
