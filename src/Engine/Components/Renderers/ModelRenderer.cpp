@@ -113,8 +113,8 @@ namespace Engine
 
 
             static bool scanned = false;
-            std::string materialPath = fs::path("./res/materials/SampleScene").string();
-            std::string modelPath = fs::path("./res/Models").string();
+            std::string materialPath = fs::absolute("./res/materials/SampleScene").string();
+            std::string modelPath = fs::absolute("./res/Models").string();
             if (!scanned)
             {
                 for (const auto& entry : fs::directory_iterator(materialPath))
@@ -175,10 +175,13 @@ namespace Engine
                     std::filesystem::path fsPath(path);
                     std::string displayName = fsPath.filename().string();
 
+                    static char currentMaterialName[256] = {};
+                    strncpy_s(currentMaterialName, fsPath.filename().string().c_str(), sizeof(currentMaterialName) - 1);
+
                     if (ImGui::Selectable(displayName.c_str()))
                     {
-                        fs::path relPath = fs::relative(path, fs::current_path());
-                        SetMaterial(Materials::MaterialManager::GetMaterial(path));
+                        fs::path relPath = fs::path("./res/materials/SampleScene/"+std::string(currentMaterialName));
+                        SetMaterial(Materials::MaterialManager::GetMaterial(relPath.string()));
                         ImGui::CloseCurrentPopup();
                     }
 
@@ -248,9 +251,13 @@ namespace Engine
                     std::filesystem::path fsPath(path);
                     std::string displayName = fsPath.filename().string();
 
+                    static char currentModelName[256] = {};
+                    strncpy_s(currentModelName, fsPath.filename().string().c_str(), sizeof(currentModelName) - 1);
+
                     if (ImGui::Selectable(displayName.c_str()))
                     {
-                        Model = Models::ModelManager::GetModel(path.c_str());
+                        fs::path relPath = fs::path("./res/models/" + std::string(currentModelName));
+                        Model = Models::ModelManager::GetModel(relPath.string().c_str());
                         ImGui::CloseCurrentPopup();
                     }
 
