@@ -26,6 +26,15 @@ namespace Engine
          */
         bool IsBoxVisible(const Models::AABBox3& Box, const glm::mat4& ObjectToWorldMatrix) const;
 
+        /**
+         * @brief Checks if the given world-space sphere is inside or intersects the frustum.
+         * @param Center The center of the sphere.
+         * @param Radius The radius of the sphere.
+         * @param ObjectToWorldMatrix Transformation matrix from local to world space.
+         * @return True if the sphere is at least partially inside the frustum.
+         */
+        bool IsSphereVisible(const glm::vec3& Center, float Radius, const glm::mat4& ObjectToWorldMatrix) const;
+
     private:
         /**
          * @brief Six frustum planes in world space, in the order:

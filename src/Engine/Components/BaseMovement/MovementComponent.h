@@ -16,7 +16,7 @@ namespace Engine
         float Speed;
 
     public:
-        MovementComponent(float speed = 2.0f) : Speed(speed)
+        MovementComponent(float speed = 20.0f) : Speed(speed)
         {
             UpdateManager::GetInstance()->RegisterComponent(this);
         }
