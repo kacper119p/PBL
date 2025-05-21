@@ -26,6 +26,11 @@ namespace Engine
         for (Component* component : Components)
         {
             component->DrawImGui();
+
+            if(ImGui::Button("Remove"))
+            {
+                this->RemoveComponent(component);
+            }
         }
     }
 #endif
