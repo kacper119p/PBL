@@ -83,7 +83,6 @@ namespace Engine
 
         float minPenetration = std::numeric_limits<float>::max();
         glm::vec3 collisionNormal;
-        float penetration = 0.0f;
         for (const glm::vec3& axis : axes)
         {
             if (glm::length2(axis) < 1e-6f)
@@ -96,22 +95,24 @@ namespace Engine
                 return result;
             }
 
-            penetration =
+            float penetration =
                     glm::abs(glm::dot(toCenter, normAxis)) -
                     (glm::abs(glm::dot(normAxis, aX)) * half1.x + glm::abs(glm::dot(normAxis, aY)) * half1.y +
                      glm::abs(glm::dot(normAxis, aZ)) * half1.z + glm::abs(glm::dot(normAxis, bX)) * half2.x +
                      glm::abs(glm::dot(normAxis, bY)) * half2.y + glm::abs(glm::dot(normAxis, bZ)) * half2.z);
 
-            if (penetration < minPenetration)
+            if (abs(penetration) < abs(minPenetration))
             {
                 minPenetration = penetration;
                 collisionNormal = normAxis;
             }
         }
-        result.penetrationDepth = penetration;
+
         result.hasCollision = true;
-        result.collisionNormal = glm::normalize(center2 - center1);
-        result.collisionPoint = center1 + result.collisionNormal * minPenetration;
+        result.penetrationDepth = -minPenetration;
+        result.collisionNormal = collisionNormal;
+        result.collisionPoint = center1 + collisionNormal * (box1.GetWidth() * 0.5f); // optional, depends on usage
+
         return result;
     }
 
@@ -744,7 +745,8 @@ namespace Engine
                                 result.collisionNormal, result.collisionPoint, penetrationDepth, otherRB);
                     }
 
-                    glm::vec3 separation = GetSeparationBoxBox(box, *boxCollider);
+                    //glm::vec3 separation = GetSeparationBoxBox(box, *boxCollider);
+                    glm::vec3 separation = result.collisionNormal * result.penetrationDepth * 0.8f; // 80% for damping
 
                     Engine::RigidBody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::RigidBody>();
                     Engine::RigidBody* boxRB = box.GetOwner()->GetComponent<Engine::RigidBody>();

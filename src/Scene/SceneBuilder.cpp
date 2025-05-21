@@ -65,10 +65,12 @@ namespace Scene
                 Materials::MaterialManager::GetMaterial("./res/materials/SampleScene/Box.mat"));
 
         //Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
-        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(2.0f, 7.0f, 0.0f));
         Scene->GetPlayer()->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
         Scene->GetPlayer()->GetTransform()->AddChild(secondBoxEntity->GetTransform());
+        Scene->GetPlayer()->AddComponent<Engine::RigidBody>();
         Scene->GetPlayer()->AddComponent<Engine::MovementComponent>();
+        Scene->GetPlayer()->AddComponent<Engine::BoxCollider>();
+        Scene->GetPlayer()->GetTransform()->SetPosition(glm::vec3(0.0f, 7.0f, 4.0f));
 
         //secondBoxCollider->SetWidth(2.0f);
         //secondBoxCollider->SetHeight(2.0f);
