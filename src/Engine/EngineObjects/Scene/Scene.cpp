@@ -179,28 +179,12 @@ namespace Engine
         }
     }
 
-    void Scene::DeleteEntity(Entity* entity)
+    void Scene::DeleteEntity(Entity* const Entity)
     {
-        if (!entity || entity == Root)
+        if (!Entity || Entity == Root)
             return;
 
-        // Recursively delete children
-        std::vector<Transform*> children = entity->GetTransform()->GetChildren();
-        for (Transform* child : children)
-        {
-            Entity* childEntity = child->GetOwner();
-            DeleteEntity(childEntity); // Recursive call
-        }
-
-        // Remove from parent
-        Transform* parentTransform = entity->GetTransform()->GetParent();
-        if (parentTransform)
-        {
-            parentTransform->RemoveChild(entity->GetTransform());
-        }
-
-        // Now delete the entity itself
-        delete entity;
+        delete Entity;
     }
 
     void Scene::CalculateBounds()

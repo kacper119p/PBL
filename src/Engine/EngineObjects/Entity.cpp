@@ -8,8 +8,9 @@ namespace Engine
 {
     Entity::~Entity()
     {
-        for (const Component* component : Components)
+        for (Component* component : Components)
         {
+            component->OnDestroy();
             delete component;
         }
 #if EDITOR
