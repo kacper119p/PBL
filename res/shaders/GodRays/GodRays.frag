@@ -14,7 +14,7 @@ out vec3 FragColor;
 const float DECAY = 0.95;
 const float DENSITY = 0.8;
 const float WEIGHT = 0.4;
-const float FALLOFF = 128.0;
+const float FALLOFF = 256.0;
 const float EPSILON = 0.00001;
 const uint MAX_SAMPLES = 64;
 
