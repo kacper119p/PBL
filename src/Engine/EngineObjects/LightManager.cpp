@@ -33,12 +33,14 @@ namespace Engine
         RenderSpotLightsShadowMaps();
     }
 
-    void LightManager::SetupLightsForRendering()
+    void LightManager::SetupLightsForRendering(const CameraRenderData& RenderData)
     {
         glActiveTexture(GL_TEXTURE11);
         glBindTexture(GL_TEXTURE_2D, DirectionalLightShadowMap);
 
-        UpdateLightBuffer();
+        UpdateLightBuffer(RenderData);
+
+        glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, LightBuffer);
 
         glActiveTexture(GL_TEXTURE12);
         glBindTexture(GL_TEXTURE_CUBE_MAP, PointLightShadowMaps[0]);
@@ -59,119 +61,9 @@ namespace Engine
         glBindTexture(GL_TEXTURE_2D, RenderingManager::GetInstance()->GetSsaoTextureId());
     }
 
-    void LightManager::SetupPointLightsForRendering(const Shaders::Shader& Shader)
+    void LightManager::BindLightScreenPositionBuffer() const
     {
-        Shader.SetUniform("PointLightsCount", static_cast<GLuint>(PointLights.size()));
-
-        if (PointLights.empty())
-        {
-            return;
-        }
-
-        Shader.SetUniform("PointLights[0].Position", PointLights[0]->GetPosition());
-        Shader.SetUniform("PointLights[0].Color", PointLights[0]->GetColor());
-        Shader.SetUniform("PointLights[0].LinearFalloff", PointLights[0]->GetLinearFalloff());
-        Shader.SetUniform("PointLights[0].QuadraticFalloff", PointLights[0]->GetQuadraticFalloff());
-        Shader.SetUniform("PointLights[0].Range", PointLights[0]->GetRange());
-        glActiveTexture(GL_TEXTURE12);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, PointLightShadowMaps[0]);
-
-        if (PointLights.size() < 2)
-        {
-            return;
-        }
-        Shader.SetUniform("PointLights[1].Position", PointLights[1]->GetPosition());
-        Shader.SetUniform("PointLights[1].Color", PointLights[1]->GetColor());
-        Shader.SetUniform("PointLights[1].LinearFalloff", PointLights[1]->GetLinearFalloff());
-        Shader.SetUniform("PointLights[1].QuadraticFalloff", PointLights[1]->GetQuadraticFalloff());
-        Shader.SetUniform("PointLights[1].Range", PointLights[1]->GetRange());
-        glActiveTexture(GL_TEXTURE13);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, PointLightShadowMaps[1]);
-
-        for (int i = 2; i < PointLights.size(); ++i)
-        {
-
-            Shader.SetUniform(std::format("PointLights[{}].Position", i).c_str(),
-                              PointLights[i]->GetPosition());
-
-            Shader.SetUniform(std::format("PointLights[{}].Color", i).c_str(),
-                              PointLights[i]->GetColor());
-
-            Shader.SetUniform(std::format("PointLights[{}].LinearFalloff", i).c_str(),
-                              PointLights[i]->GetLinearFalloff());
-
-            Shader.SetUniform(std::format("PointLights[{}].QuadraticFalloff", i).c_str(),
-                              PointLights[i]->GetQuadraticFalloff());
-            Shader.SetUniform(std::format("PointLights[{}].Range", i).c_str(),
-                              PointLights[i]->GetRange());
-        }
-    }
-
-    void LightManager::SetupSpotLightsForRendering(const Shaders::Shader& Shader)
-    {
-        Shader.SetUniform("SpotLightsCount", static_cast<GLuint>(SpotLights.size()));
-
-        if (SpotLights.empty())
-        {
-            return;
-        }
-        Shader.SetUniform("SpotLights[0].Position", SpotLights[0]->GetPosition());
-        Shader.SetUniform("SpotLights[0].Direction", SpotLights[0]->GetDirection());
-        Shader.SetUniform("SpotLights[0].Color", SpotLights[0]->GetColor());
-        Shader.SetUniform("SpotLights[0].OuterAngle",
-                          glm::cos(glm::radians(SpotLights[0]->GetOuterAngle())));
-        Shader.SetUniform("SpotLights[0].InnerAngle",
-                          glm::cos(glm::radians(SpotLights[0]->GetInnerAngle())));
-        Shader.SetUniform("SpotLights[0].LinearFalloff", SpotLights[0]->GetLinearFalloff());
-        Shader.SetUniform("SpotLights[0].QuadraticFalloff", SpotLights[0]->GetQuadraticFalloff());
-        Shader.SetUniform("SpotLights[0].Range", SpotLights[0]->GetRange());
-        glActiveTexture(GL_TEXTURE14);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, SpotLightShadowMaps[0]);
-
-        if (SpotLights.size() < 2)
-        {
-            return;
-        }
-        Shader.SetUniform("SpotLights[1].Position", SpotLights[1]->GetPosition());
-        Shader.SetUniform("SpotLights[1].Direction", SpotLights[1]->GetDirection());
-        Shader.SetUniform("SpotLights[1].Color", SpotLights[1]->GetColor());
-        Shader.SetUniform("SpotLights[1].OuterAngle",
-                          glm::cos(glm::radians(SpotLights[1]->GetOuterAngle())));
-        Shader.SetUniform("SpotLights[1].InnerAngle",
-                          glm::cos(glm::radians(SpotLights[1]->GetInnerAngle())));
-        Shader.SetUniform("SpotLights[1].LinearFalloff", SpotLights[1]->GetLinearFalloff());
-        Shader.SetUniform("SpotLights[1].QuadraticFalloff", SpotLights[1]->GetQuadraticFalloff());
-        Shader.SetUniform("SpotLights[1].Range", SpotLights[1]->GetRange());
-        glActiveTexture(GL_TEXTURE15);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, SpotLightShadowMaps[1]);
-
-        for (int i = 2; i < SpotLights.size(); ++i)
-        {
-
-            Shader.SetUniform(std::format("SpotLights[{}].Position", i).c_str(),
-                              SpotLights[i]->GetPosition());
-
-            Shader.SetUniform(std::format("SpotLights[{}].Direction", i).c_str(),
-                              SpotLights[i]->GetDirection());
-
-            Shader.SetUniform(std::format("SpotLights[{}].Color", i).c_str(),
-                              SpotLights[i]->GetColor());
-
-            Shader.SetUniform(std::format("SpotLights[{}].OuterAngle", i).c_str(),
-                              glm::cos(SpotLights[i]->GetOuterAngle()));
-
-            Shader.SetUniform(std::format("SpotLights[{}].InnerAngle", i).c_str(),
-                              glm::cos(glm::radians(SpotLights[i]->GetInnerAngle())));
-
-            Shader.SetUniform(std::format("SpotLights[{}].LinearFalloff", i).c_str(),
-                              glm::radians(SpotLights[i]->GetLinearFalloff()));
-
-            Shader.SetUniform(std::format("SpotLights[{}].QuadraticFalloff", i).c_str(),
-                              SpotLights[i]->GetQuadraticFalloff());
-
-            Shader.SetUniform(std::format("SpotLights[{}].Range", i).c_str(),
-                              SpotLights[i]->GetRange());
-        }
+        glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, LightsScreenSpacePositionsBuffer);
     }
 
     void LightManager::InitializeDirectionalLightShadowMap()
@@ -342,10 +234,14 @@ namespace Engine
     void LightManager::InitializeLightBuffer()
     {
         glGenBuffers(1, &LightBuffer);
+        glGenBuffers(1, &LightsScreenSpacePositionsBuffer);
     }
 
-    void LightManager::UpdateLightBuffer()
+    void LightManager::UpdateLightBuffer(const CameraRenderData& RenderData)
     {
+        LightsScreenPositionBuffer.clear();
+        LightsScreenPositionBuffer.emplace_back(0.0f); // reserve for light count
+        ScreenLightsCount = 0;
         LightBufferData.DirectionalLightCount = DirectionalLight == nullptr ? 0 : 1;
         LightBufferData.PointLightCount = PointLights.size();
         LightBufferData.SpotlightCount = SpotLights.size();
@@ -353,36 +249,90 @@ namespace Engine
         if (LightBufferData.DirectionalLightCount != 0)
         {
             LightBufferData.DirectionalLight = DirectionalLight->GetShaderData(DirectionalLightSpaceTransform);
+            AddLightScreenPosition(RenderData, DirectionalLight);
         }
 
         if (LightBufferData.PointLightCount > 0)
         {
             LightBufferData.PointLights[0] = PointLights[0]->GetShaderData();
+            AddLightScreenPosition(RenderData, PointLights[0]);
         }
 
         if (LightBufferData.PointLightCount > 1)
         {
             LightBufferData.PointLights[1] = PointLights[1]->GetShaderData();
+            AddLightScreenPosition(RenderData, PointLights[1]);
         }
 
         if (LightBufferData.SpotlightCount > 0)
         {
             LightBufferData.SpotLights[0] = SpotLights[0]->GetShaderData();
+            AddLightScreenPosition(RenderData, SpotLights[0]);
         }
 
         if (LightBufferData.SpotlightCount > 1)
         {
             LightBufferData.SpotLights[1] = SpotLights[1]->GetShaderData();
+            AddLightScreenPosition(RenderData, SpotLights[1]);
         }
 
         for (uint32_t i = 2; i < LightBufferData.PointLightCount; ++i)
         {
             LightBufferData.PointLightsDynamic[i - 2] = PointLights[i]->GetShaderData();
+            AddLightScreenPosition(RenderData, PointLights[i]);
         }
+
+        //Avoids conversion (required to upload correct data)
+        LightsScreenPositionBuffer[0].x = *reinterpret_cast<float*>(&ScreenLightsCount);
 
         glBindBuffer(GL_SHADER_STORAGE_BUFFER, LightBuffer);
         glBufferData(GL_SHADER_STORAGE_BUFFER, LightBufferData.GetCurrentSize(), &LightBufferData, GL_DYNAMIC_DRAW);
-        glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, LightBuffer);
+
+        glBindBuffer(GL_SHADER_STORAGE_BUFFER, LightsScreenSpacePositionsBuffer);
+        glBufferData(
+                GL_SHADER_STORAGE_BUFFER,
+                static_cast<GLsizeiptr>(LightsScreenPositionBuffer.size() * sizeof(glm::vec2)),
+                LightsScreenPositionBuffer.data(), GL_DYNAMIC_DRAW);
+    }
+
+    void LightManager::AddLightScreenPosition(const CameraRenderData& RenderData,
+                                              const class Engine::DirectionalLight* const Light)
+    {
+        const glm::vec2 lightPosition = static_cast<glm::vec2>(
+                                            static_cast<glm::mat3>(RenderData.ViewMatrix) *
+                                            Light->GetDirection()) * 0.5f + 0.5f;
+        if (lightPosition.x < -0.5 || lightPosition.x > 1.5f || lightPosition.y < -0.5 || lightPosition.y > 1.5f)
+        {
+            return;
+        }
+        LightsScreenPositionBuffer.push_back(lightPosition);
+        ScreenLightsCount++;
+    }
+
+    void LightManager::AddLightScreenPosition(const CameraRenderData& RenderData, const class PointLight* const Light)
+    {
+        const glm::vec4 ndc = RenderData.ProjectionMatrix * RenderData.ViewMatrix * glm::vec4(
+                                      Light->GetPosition(), 1.0f);
+        const glm::vec2 lightPosition = static_cast<glm::vec2>(ndc) / ndc.w * 0.5f + 0.5f;
+        if (lightPosition.x < -0.5f || lightPosition.x > 1.5f || lightPosition.y < -0.5 || lightPosition.y > 1.5f)
+        {
+            return;
+        }
+        LightsScreenPositionBuffer.push_back(lightPosition);
+        ScreenLightsCount++;
+    }
+
+    void LightManager::AddLightScreenPosition(const CameraRenderData& RenderData, const class SpotLight* const Light)
+    {
+        const glm::vec4 ndc = RenderData.ProjectionMatrix * RenderData.ViewMatrix * glm::vec4(
+                                      Light->GetPosition(), 1.0f);
+        const glm::vec2 lightPosition = static_cast<glm::vec2>(ndc) / ndc.w * 0.5f + 0.5f;
+        if (lightPosition.x < -0.5 || lightPosition.x > 1.5f || lightPosition.y < -0.5 || lightPosition.y > 1.5f)
+        {
+            return;
+        }
+        LightsScreenPositionBuffer.push_back(lightPosition);
+        ScreenLightsCount++;
     }
 
     void LightManager::SetEnvironmentMap(const Texture EnvironmentMap)

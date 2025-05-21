@@ -52,7 +52,7 @@ namespace Engine
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     }
 
-    void BloomPostprocessingEffect::Render(unsigned int SceneColorTexture)
+    void BloomPostprocessingEffect::Render(const uint32_t SceneColorTexture)
     {
         glBindFramebuffer(GL_FRAMEBUFFER, FrameBuffer);
 

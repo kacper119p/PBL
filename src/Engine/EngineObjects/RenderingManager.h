@@ -10,6 +10,7 @@
 #include "Engine/Rendering/Postprocessing/BloomPostprocessingEffect.h"
 #include "Engine/UI/Ui.h"
 #include "Engine/Rendering/Frustum.h"
+#include "Engine/Rendering/Postprocessing/GodRays.h"
 
 namespace Engine
 {
@@ -28,6 +29,7 @@ namespace Engine
 
         Ssao Ssao;
         BloomPostprocessingEffect Bloom;
+        GodRays GodRays;
 
         Frustum Frustum;
 

@@ -9,7 +9,8 @@ in vec3 Position;
 
 uniform vec3 CameraPosition;
 
-out vec4 FragColor;
+layout (location = 0) out vec4 FragColor;
+layout (location = 1) out vec3 OcclusionMask;
 
 layout (early_fragment_tests) in;
 void main() {
@@ -44,4 +45,5 @@ void main() {
     float Brightness = 0.299 * LightColor.r + 0.587 * LightColor.g + 0.144 * LightColor.b;
 
     FragColor = vec4(LightColor, clamp(Brightness, 0, 1) * Fresnel);
+    OcclusionMask = vec3(0.0);
 }
