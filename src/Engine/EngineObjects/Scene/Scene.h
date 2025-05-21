@@ -130,6 +130,7 @@ namespace Engine
             delete this->Player;
             this->Player = Player;
             this->Player->SetScene(this);
+            this->Player->GetTransform()->SetParent(Root->GetTransform());
         }
 
         /**
