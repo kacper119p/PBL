@@ -58,6 +58,16 @@ namespace Serialization
         return object;
     }
 
+    rapidjson::Value Serialize(const glm::quat& Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kObjectType);
+        object.AddMember("x", Value.x, Allocator);
+        object.AddMember("y", Value.y, Allocator);
+        object.AddMember("z", Value.z, Allocator);
+        object.AddMember("w", Value.w, Allocator);
+        return object;
+    }
+
     rapidjson::Value Serialize(const glm::vec4& Value, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kObjectType);
@@ -230,6 +240,43 @@ namespace Serialization
             return;
         }
         Value = iterator->value.GetBool();
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, glm::quat& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsObject())
+        {
+            return;
+        }
+        const rapidjson::Value& vector = iterator->value;
+        const auto iteratorX = vector.FindMember("x");
+
+
+        if (iteratorX == vector.MemberEnd() || !iteratorX->value.IsFloat())
+        {
+            return;
+        }
+        const auto iteratorY = vector.FindMember("y");
+        if (iteratorY == vector.MemberEnd() || !iteratorY->value.IsFloat())
+        {
+            return;
+        }
+        const auto iteratorZ = vector.FindMember("z");
+        if (iteratorZ == vector.MemberEnd() || !iteratorZ->value.IsFloat())
+        {
+            return;
+        }
+
+        const auto iteratorW = vector.FindMember("w");
+        if (iteratorW == vector.MemberEnd() || !iteratorW->value.IsFloat())
+        {
+            return;
+        }
+        Value.x = iteratorX->value.GetFloat();
+        Value.y = iteratorY->value.GetFloat();
+        Value.z = iteratorZ->value.GetFloat();
+        Value.w = iteratorW->value.GetFloat();
     }
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, glm::vec4& Value)
