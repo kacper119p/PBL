@@ -119,6 +119,7 @@ namespace Engine
         SERIALIZE_FIELD(Position)
         SERIALIZE_FIELD(EulerAngles)
         SERIALIZE_FIELD(Scale)
+        SERIALIZE_FIELD(Rotation)
         SERIALIZE_FIELD(Children)
         SERIALIZE_FIELD(Parent)
         END_COMPONENT_SERIALIZATION
@@ -130,6 +131,7 @@ namespace Engine
         DESERIALIZE_VALUE(Position);
         DESERIALIZE_VALUE(EulerAngles);
         DESERIALIZE_VALUE(Scale);
+        DESERIALIZE_VALUE(Rotation)
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 
