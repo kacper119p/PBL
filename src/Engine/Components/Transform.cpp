@@ -1,7 +1,10 @@
 #include "Transform.h"
 
+#include <glm/gtx/quaternion.hpp>
+
 #include "Engine/EngineObjects/Entity.h"
 #include "Serialization/SerializationUtility.h"
+#include "glm/gtc/quaternion.hpp"
 
 namespace Engine
 {
@@ -94,9 +97,7 @@ namespace Engine
 
         LocalMatrix = glm::translate(LocalMatrix, Position);
 
-        LocalMatrix *= glm::eulerAngleXYZ(glm::radians(EulerAngles.x),
-                                          glm::radians(EulerAngles.y),
-                                          glm::radians(EulerAngles.z));
+        LocalMatrix *= glm::toMat4(Rotation);
 
         LocalMatrix = glm::scale(LocalMatrix, Scale);
 
