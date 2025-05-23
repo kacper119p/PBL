@@ -21,7 +21,6 @@
 #include "UI/FontRendering/TextManager.h"
 #include "Engine/Components/Audio/AudioSource.h"
 #include "Engine/Components/Audio/AudioListener.h"
-#include "UI/FontRendering/TextManager.h"
 #include "UI/UiImplementations/SampleUi.h"
 #include "tracy/Tracy.hpp"
 #if DEBUG
@@ -103,6 +102,7 @@ namespace Engine
 #else
             InputManager::GetInstance().Update();
             CameraFollow::GetInstance().Update(deltaTime);
+            CameraFollow::GetInstance().SetTarget(CurrentScene->GetPlayer());
 #endif
 #if !EDITOR
             UpdateManager::GetInstance()->Update(deltaTime);
@@ -191,7 +191,7 @@ namespace Engine
 #endif
 
         // Create window with graphics context
-        Window = glfwCreateWindow(mode->width, mode->height, "Tide Engine", monitor, nullptr);
+        Window = glfwCreateWindow(mode->width, mode->height, "Tide Engine", nullptr, nullptr);
         if (!Window)
         {
             spdlog::error("Failed to create GLFW Window!");

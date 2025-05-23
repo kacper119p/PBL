@@ -37,7 +37,6 @@
 #include "Shaders/ShaderManager.h"
 #include "Shaders/ShaderSourceFiles.h"
 #include "tracy/Tracy.hpp"
-#include "Engine/Components/Colliders/SpatialPartitioning.h"
 #include "Engine/Components/Camera/CameraFollow.h"
 
 
@@ -67,7 +66,7 @@ namespace Scene
         //Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
         Scene->GetPlayer()->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
         Scene->GetPlayer()->GetTransform()->AddChild(secondBoxEntity->GetTransform());
-        Scene->GetPlayer()->AddComponent<Engine::RigidBody>();
+        //Scene->GetPlayer()->AddComponent<Engine::RigidBody>();
         Scene->GetPlayer()->AddComponent<Engine::MovementComponent>();
         Scene->GetPlayer()->AddComponent<Engine::BoxCollider>();
         Scene->GetPlayer()->GetTransform()->SetPosition(glm::vec3(0.0f, 7.0f, 4.0f));

@@ -25,35 +25,71 @@ namespace Engine
 
         bool isLeftForward = false;
         bool isRightForward = false;
+        bool isLeftBackward = false;
+        bool isRightBackward = false;
 
         if (input.IsKeyPressed(GLFW_KEY_W) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_AXIS_LEFT_TRIGGER))
         {
             isLeftForward = true;
+        }
+        if (input.IsKeyPressed(GLFW_KEY_S) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_BUTTON_LEFT_BUMPER))
+        {
+            isLeftBackward = true;
         }
 
         if (input.IsKeyPressed(GLFW_KEY_UP) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER))
         {
             isRightForward = true;
         }
-
-        float rotationSpeed = 45.0f;
+        if (input.IsKeyPressed(GLFW_KEY_DOWN) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER))
+        {
+            isRightBackward = true;
+        }
 
         if (isLeftForward && isRightForward)
         {
-            GetOwner()->GetComponent<RigidBody>()->AddForce(GetOwner()->GetTransform()->GetForward() * Speed);
+            CurrentVelocity = Speed*(1-smooth) + 1 * smooth;
         }
-        else if (isLeftForward || isRightForward)
+        else if (isLeftBackward && isRightBackward)
+        {
+            CurrentVelocity = -Speed * (1 - smooth) + 1 * smooth;
+        }
+        else if ((isLeftBackward || isRightBackward)&&!(isLeftForward||isRightForward))
         {
             // Rotate slightly
-            float angle = (isLeftForward ? -1.0f : 1.0f) * rotationSpeed * deltaTime;
-            glm::quat rotation = glm::angleAxis(glm::radians(angle), glm::vec3(0, 1, 0));
-            glm::vec3 newForward = rotation * forward;
+            float angle = (isLeftBackward ? -1.0f : 1.0f) * RotationSpeed * deltaTime;
+            glm::quat rotation = transform->GetRotation() * glm::angleAxis(glm::radians(angle), glm::vec3(0, 1, 0));
 
             // Move slightly forward in the rotated direction
-            GetOwner()->GetComponent<RigidBody>()->AddForce(GetOwner()->GetTransform()->GetForward() * Speed * 0.5f);
+            CurrentVelocity = -Speed * 0.2 * (1 - smooth) + 1 * smooth;
 
-            // Apply rotation to the transform
-            transform->SetEulerAngles(rotation * transform->GetEulerAngles());
+
+            transform->SetEulerAngles(glm::degrees(glm::eulerAngles(rotation)));
+        }
+        else if ((isLeftForward || isRightForward) && !(isLeftBackward || isRightBackward))
+        {
+            // Rotate slightly
+            float angle = (isLeftForward ? 1.0f : -1.0f) * RotationSpeed * deltaTime;
+            glm::quat rotation = transform->GetRotation() * glm::angleAxis(glm::radians(angle), glm::vec3(0, 1, 0));
+
+            // Move slightly forward in the rotated direction
+            CurrentVelocity = Speed * 0.2 * (1 - smooth) + 1 * smooth;
+            
+
+            transform->SetEulerAngles(glm::degrees(glm::eulerAngles(rotation)));
+            
+        }
+        else if ((isLeftForward && isRightBackward) || (isLeftBackward && isRightForward))
+        {
+            float angle = (isLeftForward ? 1.0f : -1.0f) * RotationSpeed * deltaTime;
+            glm::quat rotation = transform->GetRotation() * glm::angleAxis(glm::radians(angle), glm::vec3(0, 1, 0));
+
+            transform->SetEulerAngles(glm::degrees(glm::eulerAngles(rotation)));
+        }
+        else
+        {
+            if (abs(CurrentVelocity)>0.0f)
+            CurrentVelocity *=smooth;
         }
 
         if (!transform)
@@ -61,7 +97,7 @@ namespace Engine
             spdlog::error("MovementComponent: Attempted to set position on a null transform!");
             return;
         }
-        transform->SetPosition(position);
+        transform->SetPosition(position + CurrentVelocity * forward * deltaTime);
 
 
 #endif

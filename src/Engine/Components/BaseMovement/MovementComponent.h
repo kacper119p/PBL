@@ -14,9 +14,11 @@ namespace Engine
     {
     private:
         float Speed;
-
+        float RotationSpeed = 45.0f;
+        float CurrentVelocity = 0.0f;
+        float smooth = 0.97f;
     public:
-        MovementComponent(float speed = 20.0f) : Speed(speed)
+        MovementComponent(float speed = 300.0f) : Speed(speed)
         {
             UpdateManager::GetInstance()->RegisterComponent(this);
         }
