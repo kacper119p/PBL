@@ -10,7 +10,8 @@
 #include "Engine/Components/Physics/Rigidbody.h"
 #include "SpatialPartitioning.h"
 #include "SphereCollider.h"
-#include "spdlog/spdlog.h" 
+#include "spdlog/spdlog.h"
+
 namespace Engine
 {
 
@@ -118,7 +119,7 @@ namespace Engine
 
 
     CollisionResult ColliderVisitor::CheckBoxSphereCollision(const BoxCollider& box,
-                                                                     const SphereCollider& sphere)
+                                                             const SphereCollider& sphere)
     {
         CollisionResult result;
 
@@ -169,7 +170,7 @@ namespace Engine
 
 
     CollisionResult ColliderVisitor::CheckBoxCapsuleCollision(const BoxCollider& box,
-                                                                      const CapsuleCollider& capsule)
+                                                              const CapsuleCollider& capsule)
     {
         CollisionResult result;
         result.hasCollision = false;
@@ -244,7 +245,7 @@ namespace Engine
 
 
     CollisionResult ColliderVisitor::CheckSphereSphereCollision(const SphereCollider& sphere1,
-                                                                        const SphereCollider& sphere2)
+                                                                const SphereCollider& sphere2)
     {
         CollisionResult result;
 
@@ -270,7 +271,7 @@ namespace Engine
 
 
     CollisionResult ColliderVisitor::CheckCapsuleSphereCollision(const CapsuleCollider& capsule,
-                                                                         const SphereCollider& sphere)
+                                                                 const SphereCollider& sphere)
     {
         CollisionResult result;
 
@@ -306,7 +307,7 @@ namespace Engine
 
 
     CollisionResult ColliderVisitor::CheckCapsuleCapsuleCollision(const CapsuleCollider& capsule1,
-                                                                          const CapsuleCollider& capsule2)
+                                                                  const CapsuleCollider& capsule2)
     {
         CollisionResult result;
 
@@ -589,7 +590,7 @@ namespace Engine
 
 
     glm::vec3 ColliderVisitor::GetSeparationSphereSphere(const SphereCollider& sphere1,
-                                                                 const SphereCollider& sphere2)
+                                                         const SphereCollider& sphere2)
     {
         glm::vec3 center1 = sphere1.GetTransform()->GetPosition();
         glm::vec3 center2 = sphere2.GetTransform()->GetPosition();
@@ -608,7 +609,7 @@ namespace Engine
 
 
     glm::vec3 ColliderVisitor::GetSeparationSphereCapsule(const SphereCollider& sphere,
-                                                                  const CapsuleCollider& capsule)
+                                                          const CapsuleCollider& capsule)
     {
         const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
         const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
@@ -646,7 +647,7 @@ namespace Engine
 
 
     glm::vec3 ColliderVisitor::GetSeparationCapsuleCapsule(const CapsuleCollider& capsule1,
-                                                                   const CapsuleCollider& capsule2)
+                                                           const CapsuleCollider& capsule2)
     {
         const glm::mat4& transform1 = capsule1.GetTransform()->GetLocalToWorldMatrix();
         const glm::mat4& transform2 = capsule2.GetTransform()->GetLocalToWorldMatrix();
@@ -708,6 +709,19 @@ namespace Engine
         return glm::vec3(0.0f);
     }
 
+    void ColliderVisitor::EmitCollision(Collider* const Collider) const
+    {
+
+        currentCollider->EmitCollision(Collider);
+        Collider->EmitCollision(currentCollider);
+    }
+
+    void ColliderVisitor::EmitTrigger(Collider* Collider) const
+    {
+        currentCollider->EmitTrigger(Collider);
+        Collider->EmitTrigger(currentCollider);
+    }
+
 
     void ColliderVisitor::ResolveCollisionBox(BoxCollider& box)
     {
@@ -724,7 +738,7 @@ namespace Engine
 
                 if (box.IsTrigger())
                 {
-                    // TODO: emit ontrigger event
+                    EmitTrigger(&box);
                     return;
                 }
 
@@ -768,10 +782,10 @@ namespace Engine
                         currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
                                                                      separation);
                     }
-                    // TODO: emit collision event
+                    EmitCollision(&box);
                 }
 
-                
+
                 break;
             }
             case SPHERE:
@@ -782,7 +796,7 @@ namespace Engine
 
                 if (box.IsTrigger())
                 {
-                    // TODO: emit ontrigger event
+                    EmitTrigger(&box);
                     return;
                 }
 
@@ -822,9 +836,9 @@ namespace Engine
                         currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
                                                                      separation);
                     }
-                    // TODO: emit collision event
+                    EmitCollision(&box);
                 }
-                
+
                 break;
             }
             case CAPSULE:
@@ -835,7 +849,7 @@ namespace Engine
 
                 if (box.IsTrigger())
                 {
-                    // TODO: emit ontrigger event
+                    EmitTrigger(&box);
                     return;
                 }
 
@@ -875,9 +889,9 @@ namespace Engine
                         currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
                                                                      separation);
                     }
-                    // TODO: emit collision event
+                    EmitCollision(&box);
                 }
-                
+
                 break;
             }
         }
@@ -899,7 +913,7 @@ namespace Engine
 
                 if (sphere.IsTrigger())
                 {
-                    // TODO: emit ontrigger event
+                    EmitTrigger(&sphere);
                     return;
                 }
 
@@ -939,9 +953,9 @@ namespace Engine
                         currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
                                                                      separation);
                     }
-                    // TODO: emit collision event
+                    EmitCollision(&sphere);
                 }
-               
+
                 break;
             }
             case SPHERE:
@@ -952,7 +966,7 @@ namespace Engine
 
                 if (sphere.IsTrigger())
                 {
-                    // TODO: emit ontrigger event
+                    EmitTrigger(&sphere);
                     return;
                 }
 
@@ -992,9 +1006,9 @@ namespace Engine
                         currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
                                                                      separation);
                     }
-                    // TODO: emit collision event
+                    EmitCollision(&sphere);
                 }
-                
+
                 break;
             }
             case CAPSULE:
@@ -1005,7 +1019,7 @@ namespace Engine
 
                 if (sphere.IsTrigger())
                 {
-                    // TODO: emit ontrigger event
+                    EmitTrigger(&sphere);
                     return;
                 }
 
@@ -1045,9 +1059,9 @@ namespace Engine
                         currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
                                                                      separation);
                     }
-                    // TODO: emit collision event
+                    EmitCollision(&sphere);
                 }
-                
+
                 break;
             }
         }
@@ -1069,7 +1083,7 @@ namespace Engine
 
                 if (capsule.IsTrigger())
                 {
-                    // TODO: emit ontrigger event
+                    EmitTrigger(&capsule);
                     return;
                 }
 
@@ -1101,7 +1115,8 @@ namespace Engine
 
                             currentCollider->GetTransform()->SetPosition(
                                     currentCollider->GetTransform()->GetPosition() + correctionThis);
-                            capsule.GetTransform()->SetPosition(capsule.GetTransform()->GetPosition() + correctionOther);
+                            capsule.GetTransform()->
+                                    SetPosition(capsule.GetTransform()->GetPosition() + correctionOther);
                         }
                     }
                     else
@@ -1109,9 +1124,9 @@ namespace Engine
                         currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
                                                                      separation);
                     }
-                    // TODO: emit collision event
+                    EmitCollision(&capsule);
                 }
-               
+
                 break;
             }
             case SPHERE:
@@ -1122,7 +1137,7 @@ namespace Engine
 
                 if (capsule.IsTrigger())
                 {
-                    // TODO: emit ontrigger event
+                    EmitTrigger(&capsule);
                     return;
                 }
 
@@ -1158,9 +1173,9 @@ namespace Engine
                                                                 correctionOther);
                         }
                     }
-                    // TODO: emit collision event
+                    EmitCollision(&capsule);
                 }
-                
+
                 break;
             }
             case CAPSULE:
@@ -1171,7 +1186,7 @@ namespace Engine
 
                 if (capsule.IsTrigger())
                 {
-                    // TODO: emit ontrigger event
+                    EmitTrigger(&capsule);
                     return;
                 }
 
@@ -1207,9 +1222,9 @@ namespace Engine
                                                                 correctionOther);
                         }
                     }
-                    // TODO: emit collision event
+                    EmitCollision(&capsule);
                 }
-                
+
                 break;
             }
         }

@@ -74,6 +74,9 @@ namespace Engine
 
         uint32_t LightBuffer;
         LightDataBuffer LightBufferData;
+        uint32_t LightsScreenSpacePositionsBuffer;
+        std::vector<glm::vec2> LightsScreenPositionBuffer;
+        uint32_t ScreenLightsCount;
 
         static LightManager* Instance;
 
@@ -162,7 +165,9 @@ namespace Engine
 
         void RenderShadowMaps(const CameraRenderData& RenderData);
 
-        void SetupLightsForRendering();
+        void SetupLightsForRendering(const CameraRenderData& RenderData);
+
+        void BindLightScreenPositionBuffer() const;
 
     private:
         void InitializeDirectionalLightShadowMap();
@@ -177,15 +182,17 @@ namespace Engine
 
         void InitializeLightBuffer();
 
-        void UpdateLightBuffer();
+        void UpdateLightBuffer(const CameraRenderData& RenderData);
+
+        void AddLightScreenPosition(const CameraRenderData& RenderData, const class DirectionalLight* Light);
+
+        void AddLightScreenPosition(const CameraRenderData& RenderData, const class PointLight* Light);
+
+        void AddLightScreenPosition(const CameraRenderData& RenderData, const class SpotLight* Light);
 
         void
         RenderOmniDirectionalShadowMap(const unsigned int& Framebuffer, const glm::vec3& LightPosition,
                                        float LightRange, glm::mat4* SpaceTransformMatrices);
-
-        void SetupPointLightsForRendering(const Shaders::Shader& Shader);
-
-        void SetupSpotLightsForRendering(const Shaders::Shader& Shader);
     };
 
 } // Engine

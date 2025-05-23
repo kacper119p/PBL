@@ -27,7 +27,7 @@ namespace Engine
         LightManager::GetInstance()->RenderShadowMaps(RenderData);
 
         MultiSampledBuffer.BindMultiSampled();
-        MultiSampledBuffer.EnableNormalWrite();
+        MultiSampledBuffer.WriteNormals();
 
         glDepthMask(GL_TRUE);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
@@ -57,7 +57,7 @@ namespace Engine
         Ssao.Render(RenderData, MultiSampledBuffer.GetResolvedNormals());
 
         MultiSampledBuffer.BindMultiSampled();
-        MultiSampledBuffer.DisableNormalWrite();
+        MultiSampledBuffer.WriteOcclusion();
 
         glViewport(0, 0, ScreenWidth, ScreenHeight);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
@@ -66,7 +66,7 @@ namespace Engine
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);
         glCullFace(GL_BACK);
-        LightManager::GetInstance()->SetupLightsForRendering();
+        LightManager::GetInstance()->SetupLightsForRendering(RenderData);
         for (const auto& renderersGroup : Renderers)
         {
             if (renderersGroup.first == nullptr)
@@ -89,6 +89,7 @@ namespace Engine
         }
 
         MultiSampledBuffer.ResolveMultisampling();
+        GodRays.Render(MultiSampledBuffer);
         Bloom.Render(MultiSampledBuffer.GetResolvedColorBuffer());
     }
 

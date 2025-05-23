@@ -10,7 +10,8 @@ uniform vec3 CameraPosition;
 uniform float IOR;
 layout (bindless_sampler) uniform samplerCube EnvironmentMap;
 
-out vec4 FragColor;
+layout (location = 0) out vec3 FragColor;
+layout (location = 1) out vec3 OcclusionMask;
 
 layout (early_fragment_tests) in;
 void main()
@@ -22,5 +23,6 @@ void main()
 
     vec3 Color = texture(EnvironmentMap, R).rgb;
 
-    FragColor = vec4(Color, 1.0);
+    FragColor = Color;
+    OcclusionMask = vec3(0.0);
 }

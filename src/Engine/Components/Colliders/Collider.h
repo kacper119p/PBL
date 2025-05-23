@@ -6,6 +6,7 @@
 #include "Serialization/SerializationUtility.h"
 #include <glm/glm.hpp>
 #include "Engine/Components/Renderers/Renderer.h"
+#include "Events/Action.h"
 
 namespace Engine
 {
@@ -43,8 +44,8 @@ namespace Engine
 
     public:
         ColliderTypeE colliderType;
-        Events::TEvent<Collider*> onCollisionEnter;
-        Events::TEvent<Collider*> onCollisionExit;
+        Events::TEvent<Collider*> OnCollision;
+        Events::TEvent<Collider*> OnTrigger;
 
         /// TODO: move those to protected and add getters + setters
         Transform* transform;
@@ -91,24 +92,44 @@ namespace Engine
             this->transform = transform;
         }
 
-        Transform* GetTransform() const
+        [[nodiscard]] Transform* GetTransform() const
         {
             return transform;
         }
 
-        void EmitCollisionEnter(Collider* other)
+        void EmitCollision(Collider* Other)
         {
-            onCollisionEnter.Invoke(other);
+            OnCollision.Invoke(Other);
         }
 
-        void EmitCollisionExit(Collider* other)
+        void EmitTrigger(Collider* Other)
         {
-            onCollisionExit.Invoke(other);
+            OnTrigger.Invoke(Other);
+        }
+
+        void OnTriggerAddListener(const Events::TAction<Collider*>& Listener)
+        {
+            OnTrigger.AddListener(Listener);
+        }
+
+        void OnTriggerRemoveListener(const Events::TAction<Collider*>& Listener)
+        {
+            OnTrigger.RemoveListener(Listener);
+        }
+
+        void OnCollisionAddListener(const Events::TAction<Collider*>& Listener)
+        {
+            OnCollision.AddListener(Listener);
+        }
+
+        void OnCollisionRemoveListener(const Events::TAction<Collider*>& Listener)
+        {
+            OnCollision.RemoveListener(Listener);
         }
 
         virtual Collider* GetInstance() = 0;
 
-        bool GetCollisionStatus() const
+        [[nodiscard]] bool GetCollisionStatus() const
         {
             return isColliding;
         }

@@ -38,6 +38,8 @@ namespace Serialization
 
     rapidjson::Value Serialize(bool Value, rapidjson::Document::AllocatorType& Allocator);
 
+    rapidjson::Value Serialize(const glm::quat& Value, rapidjson::Document::AllocatorType& Allocator);
+
     rapidjson::Value Serialize(const glm::vec4& Value, rapidjson::Document::AllocatorType& Allocator);
 
     rapidjson::Value Serialize(const glm::vec3& Value, rapidjson::Document::AllocatorType& Allocator);
@@ -108,7 +110,9 @@ namespace Serialization
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, float& Value);
 
-    void Deserialize(const rapidjson::Value& Object, const char* const Name, bool& Value);
+    void Deserialize(const rapidjson::Value& Object, const char* Name, bool& Value);
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, glm::quat& Value);
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, glm::vec4& Value);
 

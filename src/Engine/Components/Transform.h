@@ -25,6 +25,7 @@ namespace Engine
         glm::vec3 Position = glm::vec3(0.0f, 0.0f, 0.0f);
         glm::vec3 EulerAngles = glm::vec3(0.0f, 0.0f, 0.0f);
         glm::vec3 Scale = glm::vec3(1.0f, 1.0f, 1.0f);
+        glm::quat Rotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
 
         glm::mat4 LocalMatrix = glm::mat4(1.0f);
         glm::mat4 LocalToWorldMatrix = glm::mat4(1.0f);
@@ -132,11 +133,31 @@ namespace Engine
 
         /**
          * @brief Sets rotation of this transform represented in euler angles in degrees.
-         * @param InEulerAngles New rotation.
+         * @param EulerAngles New rotation.
          */
-        void SetEulerAngles(const glm::vec3& InEulerAngles)
+        void SetEulerAngles(const glm::vec3& EulerAngles)
         {
-            EulerAngles = InEulerAngles;
+            this->EulerAngles = EulerAngles;
+            Rotation = glm::quat(glm::radians(EulerAngles));
+            MarkDirty();
+        }
+
+        /**
+         * @brief Sets rotation of this transform represented by quaternion..
+         * @return
+         */
+        [[nodiscard]] glm::quat GetRotation() const
+        {
+            return Rotation;
+        }
+
+        /**
+         * @brief Returns rotation of this transform represented iby quaternion.
+         */
+        void SetRotation(const glm::quat& Rotation)
+        {
+            this->Rotation = Rotation;
+            EulerAngles = glm::degrees(glm::eulerAngles(Rotation));
             MarkDirty();
         }
 
