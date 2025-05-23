@@ -9,6 +9,7 @@
 #include "Engine/EngineObjects/Entity.h"
 #include <iostream>
 #include "Engine/Components/BaseMovement/MovementComponent.h"
+
 namespace Engine
 {
 
@@ -37,8 +38,8 @@ namespace Engine
 
         isTrigger = Other.isTrigger;
         transform = Other.transform;
-        onCollisionEnter = Other.onCollisionEnter;
-        onCollisionExit = Other.onCollisionExit;
+        OnCollision = Other.OnCollision;
+        OnTrigger = Other.OnTrigger;
 
         return *this;
     }
@@ -68,7 +69,7 @@ namespace Engine
     {
         if (isStatic)
             return;
-        
+
         if (CurrentCellIndex != Spatial->GetCellIndex(transform->GetPositionWorldSpace()))
         {
             Spatial->RemoveCollider(this);
