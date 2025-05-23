@@ -2,6 +2,8 @@
 #include <glm/vec3.hpp>
 #include <vector>
 
+#include "Collider.h"
+
 namespace Engine
 {
     class Collider;
@@ -19,7 +21,10 @@ namespace Engine
         glm::vec3 collisionNormal;
         float penetrationDepth;
 
-        CollisionResult() : hasCollision(false), collisionPoint(0.0f), collisionNormal(0.0f), penetrationDepth(0.0f) {}
+        CollisionResult() :
+            hasCollision(false), collisionPoint(0.0f), collisionNormal(0.0f), penetrationDepth(0.0f)
+        {
+        }
     };
 
     class ColliderVisitor
@@ -59,6 +64,10 @@ namespace Engine
         glm::vec3 GetSeparationSphereCapsule(const SphereCollider& sphere, const CapsuleCollider& capsule);
 
         glm::vec3 GetSeparationCapsuleCapsule(const CapsuleCollider& capsule1, const CapsuleCollider& capsule2);
+
+        void EmitCollision(Collider* Collider) const;
+
+        void EmitTrigger(Collider* Collider) const;
 
     protected:
         Collider* currentCollider;
