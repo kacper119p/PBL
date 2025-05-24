@@ -4,6 +4,7 @@
 #include "Engine/Components/Component.h"
 #include "Engine/Components/Transform.h"
 #include "Engine/EngineObjects/Entity.h"
+
 namespace Engine
 {
     enum class Constraints : uint32_t
@@ -79,10 +80,15 @@ namespace Engine
         {
             constraints = static_cast<Constraints>(static_cast<uint32_t>(constraints) & ~static_cast<uint32_t>(c));
         }
-
-        void OnCollision(RigidBody& other, const glm::vec3& contactPoint, const glm::vec3& collisionNormal);
+        void UpdateInertiaTensorWorld();
+        void OnCollision(RigidBody& other, const glm::vec3& contactPoint, const glm::vec3& collisionNormal,
+                         float penetrationDepth);
         void OnCollision_Static(const glm::vec3& contactPoint, const glm::vec3& collisionNormal);
-
+        void ResolvePenetration(RigidBody& other, const glm::vec3& collisionNormal, float penetrationDepth);
+        void ResolveCollisionVelocity(RigidBody& other, const glm::vec3& contactPoint,
+                                      const glm::vec3& collisionNormal);
+        void ApplyUprightStabilization();
+        void StabilizeIfUpright();
         void Start() override;
         void OnDestroy() override;
         void Update(float DeltaTime);
@@ -117,9 +123,12 @@ namespace Engine
         float mass;
         glm::vec3 inertiaTensor;
         glm::vec3 inverseInertiaTensor;
+        glm::mat3 inverseInertiaTensorMatrix;
+        glm::mat3 inertiaTensorBody;
 
         glm::vec3 velocity = glm::vec3(0.0f);
         glm::vec3 angularVelocity = glm::vec3(0.0f);
+
 
     private:
         

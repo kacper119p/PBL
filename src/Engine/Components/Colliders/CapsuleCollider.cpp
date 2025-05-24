@@ -84,16 +84,25 @@ namespace Engine
         END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 
-    glm::mat3 CapsuleCollider::CalculateInertiaTensor(float mass) const
+    glm::mat3 CapsuleCollider::CalculateInertiaTensorBody(float mass) const
     {
-        float r = Radius;
-        float h = Height;
+        // Cylinder part
+        float cyl_mass = mass * (Height / (Height + (4.0f / 3.0f) * Radius)); // proporcjonalnie masa cylindra
+        float sphere_mass = mass - cyl_mass;
 
-        float I_y = 0.5f * mass * r * r;
+        // Cylinder tensor
+        float ix_cyl = (1.0f / 12.0f) * cyl_mass * (3.0f * Radius * Radius + Height * Height);
+        float iy_cyl = 0.5f * cyl_mass * Radius * Radius;
 
-        float I_xz = (1.0f / 12.0f) * mass * (3.0f * r * r + h * h);
+        // Sphere tensor (2 pó³kule = kula)
+        float i_sphere = (2.0f / 5.0f) * sphere_mass * Radius * Radius;
 
-        return glm::mat3(I_xz, 0.0f, 0.0f, 0.0f, I_y, 0.0f, 0.0f, 0.0f, I_xz);
+        // Sumujemy, przybli¿enie (dla osi y dodajemy cylinder + kula)
+        float ix = ix_cyl + i_sphere;
+        float iy = iy_cyl + i_sphere;
+        float iz = ix_cyl + i_sphere;
+
+        return glm::mat3(ix, 0.0f, 0.0f, 0.0f, iy, 0.0f, 0.0f, 0.0f, iz);
     }
 
 #if EDITOR

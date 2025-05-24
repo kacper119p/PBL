@@ -36,7 +36,7 @@ namespace Engine
 
         inline virtual Collider* GetInstance() override { return this; }
 
-        virtual glm::mat3 CalculateInertiaTensor(float mass) const override;
+        virtual glm::mat3 CalculateInertiaTensorBody(float mass) const override;
 
         glm::vec3 GetBoundingBox() const override
         {

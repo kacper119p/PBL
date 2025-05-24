@@ -769,7 +769,7 @@ namespace Engine
 
                 if (thisRB && otherRB)
                 {
-                    thisRB->OnCollision(*otherRB, contactPoint, normal);
+                    thisRB->OnCollision(*otherRB, contactPoint, normal, result.penetrationDepth);
                 }
                 else if (thisRB)
                 {

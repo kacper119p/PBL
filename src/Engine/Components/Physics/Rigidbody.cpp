@@ -3,17 +3,36 @@
 #include "Engine/Components/Transform.h" // Twoja klasa Transform
 #include "Engine/EngineObjects/RigidbodyUpdateManager.h"
 #include "Engine/EngineObjects/Entity.h"
+#include "Engine/Components/Colliders/Collider.h"
 
 namespace Engine
 {
     RigidBody::RigidBody()
     {
-        transform = GetOwner()->GetTransform();
-        mass = .1f; // Domyœlna masa
-        inertiaTensor = glm::vec3(1.0f, 1.0f, 1.0f); // Domyœlny tensor bezw³adnoœci
-        inverseInertiaTensor = glm::vec3(1.0f, 1.0f, 1.0f); // Domyœlny odwrotny tensor bezw³adnoœci
+        mass = 1.0f;
+        inverseMass = 1.0f / mass;
+        restitution = 0.5f; // domyœlna wartoœæ restitucji
+        frictionCoefficient = 0.5f; // domyœlna wartoœæ wspó³czynnika tarcia
+        linearDamping = 0.99f; // domyœlne t³umienie liniowe
+        angularDamping = 0.99f; // domyœlne t³umienie k¹towe
+        inertiaTensorBody = glm::mat3(1.0f); // macierz bezw³adnoœci w uk³adzie cia³a
         
+        lockPositionX = false;
+        lockPositionY = false;
+        lockPositionZ = false;
+        lockRotationX = false;
+        lockRotationY = false;
+        lockRotationZ = false;
     }
+
+
+    void RigidBody::UpdateInertiaTensorWorld()
+    {
+        glm::mat3 rotationMatrix = glm::mat3_cast(transform->GetRotation());
+        inverseInertiaTensorMatrix = glm::inverse(rotationMatrix * inertiaTensorBody * glm::transpose(rotationMatrix));
+    }
+
+    
 
     void RigidBody::AddForce(const glm::vec3& force) { accumulatedForce += force; }
 
@@ -27,11 +46,31 @@ namespace Engine
         velocity += impulse / mass;
     }
 
+    void RigidBody::StabilizeIfUpright()
+    {
+        glm::mat4 modelMatrix = transform->GetLocalToWorldMatrix();
+        glm::vec3 upLocal = glm::normalize(glm::vec3(modelMatrix[1])); // Y axis
+
+        glm::vec3 worldUp = glm::vec3(0, 1, 0);
+        float dot = glm::dot(upLocal, worldUp);
+        float angle = glm::acos(glm::clamp(dot, -1.0f, 1.0f)); // radians
+
+        if (glm::degrees(angle) < 45.0f)
+        {
+            // Stabilize: slerp back toward upright rotation
+            glm::quat currentRot = transform->GetRotation();
+            glm::quat uprightRot = glm::quatLookAt(glm::vec3(0, 0, -1), worldUp); // forward, up
+
+            // Avoid flipping when current rotation is close enough
+            glm::quat newRot = glm::slerp(currentRot, uprightRot, 4.0f); // smooth, tune factor
+            transform->SetRotation(glm::normalize(newRot));
+        }
+    }
+
+
     void RigidBody::AddAngularImpulse(const glm::vec3& angularImpulse)
     {
-        angularVelocity +=
-                glm::vec3(angularImpulse.x * inverseInertiaTensor.x, angularImpulse.y * inverseInertiaTensor.y,
-                          angularImpulse.z * inverseInertiaTensor.z);
+        angularVelocity += inverseInertiaTensorMatrix * angularImpulse;
     }
 
     void RigidBody::ApplyConstraints()
@@ -55,11 +94,23 @@ namespace Engine
     }
 
     void RigidBody::Start() {
+        transform = GetOwner()->GetTransform();
         RigidbodyUpdateManager::GetInstance()->RegisterRigidbody(this);
+        
         velocity = glm::vec3(0.0f);
         angularVelocity = glm::vec3(0.0f);
         accumulatedForce = glm::vec3(0.0f);
         accumulatedTorque = glm::vec3(0.0f);
+        mass = std::max(mass, 0.001f); // zabezpieczenie
+
+        Collider* collider = GetOwner()->GetComponent<Collider>();
+        if (collider != nullptr)
+        {
+            inertiaTensorBody = collider->CalculateInertiaTensorBody(mass);
+        }
+
+        UpdateInertiaTensorWorld();
+        inverseInertiaTensorMatrix = glm::inverse(inertiaTensorBody);
         ApplyConstraints();
     }
 
@@ -76,9 +127,7 @@ namespace Engine
         accumulatedForce += gravity * mass;
 
         glm::vec3 acceleration = accumulatedForce / mass;
-        glm::vec3 angularAcceleration =
-                glm::vec3(accumulatedTorque.x * inverseInertiaTensor.x, accumulatedTorque.y * inverseInertiaTensor.y,
-                          accumulatedTorque.z * inverseInertiaTensor.z);
+        glm::vec3 angularAcceleration = inverseInertiaTensorMatrix * accumulatedTorque;
 
         velocity += acceleration * deltaTime;
         angularVelocity += angularAcceleration * deltaTime;
@@ -88,7 +137,7 @@ namespace Engine
 
         glm::vec3 position = transform->GetPositionWorldSpace();
         position += velocity * deltaTime;
-        transform->SetPositionWorldSpace(position);
+        
 
         glm::quat rotation = transform->GetRotation();
 
@@ -98,40 +147,123 @@ namespace Engine
         rotation += deltaRotation * deltaTime;
         rotation = glm::normalize(rotation);
 
-        transform->SetRotation(rotation);
+       
 
         accumulatedForce = glm::vec3(0.0f);
         accumulatedTorque = glm::vec3(0.0f);
 
         ApplyConstraints();
-    }
+        
+        transform->SetPositionWorldSpace(position);
+        transform->SetRotation(rotation);
 
+        UpdateInertiaTensorWorld();
+        //ApplyUprightStabilization(); // Stabilizacja pionowa, jeœli potrzebna
+    }
 
     void RigidBody::OnCollision_Static(const glm::vec3& contactPoint, const glm::vec3& collisionNormal)
     {
-
         float velocityAlongNormal = glm::dot(velocity, collisionNormal);
 
         if (velocityAlongNormal > 0.0f)
             return;
 
-        float j = -(1.0f + restitution) * velocityAlongNormal;
+        float invMass = (mass > 0.0f) ? 1.0f / mass : 0.0f;
+        if (invMass == 0.0f)
+            return;
+
+        // Mniejsza restitucja na statycznym pod³o¿u
+        float localRestitution = 0.05f;
+
+        float j = -(1.0f + localRestitution) * velocityAlongNormal;
+
+        // Limitowanie impulsu
+        const float maxImpulse = 5.0f;
+        if (j > maxImpulse)
+            j = maxImpulse;
+
         glm::vec3 impulse = j * collisionNormal;
+        velocity += impulse * invMass;
 
-        velocity += impulse * inverseMass;
+        // Dodatkowe t³umienie prêdkoœci liniowej
+        velocity *= 0.5f;
 
-        glm::vec3 tangent = glm::normalize(velocity - glm::dot(velocity, collisionNormal) * collisionNormal);
-        glm::vec3 frictionImpulse = -frictionCoefficient * tangent;
-        velocity += frictionImpulse * inverseMass;
+        // T³umienie prêdkoœci k¹towej
+        angularVelocity *= 0.5f;
 
-        const float penetrationDepth = 0.01f;
-        glm::vec3 correction = collisionNormal * penetrationDepth;
+        // Tarcie liniowe
+        glm::vec3 tangent = velocity - glm::dot(velocity, collisionNormal) * collisionNormal;
+        if (glm::length(tangent) > 0.0001f)
+        {
+            tangent = glm::normalize(tangent);
+            glm::vec3 frictionImpulse = -frictionCoefficient * tangent;
+            velocity += frictionImpulse * invMass;
+        }
+
+        // Korekcja pozycji mniejsz¹ wartoœci¹
+        const float penetrationDepth = 0.001f;
         glm::vec3 pos = transform->GetPositionWorldSpace();
-        transform->SetPosition(pos + correction);
+        pos += collisionNormal * penetrationDepth;
+        transform->SetPositionWorldSpace(pos);
     }
 
 
-    void RigidBody::OnCollision(RigidBody& other, const glm::vec3& contactPoint, const glm::vec3& collisionNormal)
+   void RigidBody::ResolvePenetration(RigidBody& other, const glm::vec3& collisionNormal, float penetrationDepth)
+    {
+        float invMassA = (mass > 0) ? 1.0f / mass : 0.0f;
+        float invMassB = (other.mass > 0) ? 1.0f / other.mass : 0.0f;
+        float totalInvMass = invMassA + invMassB;
+
+        if (totalInvMass == 0.0f || penetrationDepth <= 0.0f)
+            return;
+
+        // Penetration correction constants
+        const float k_slop = 0.01f;
+        const float k_percent = 0.8f;
+
+        float correctionMagnitude = std::max(penetrationDepth - k_slop, 0.0f) / totalInvMass * k_percent;
+        glm::vec3 correction = correctionMagnitude * collisionNormal;
+
+        glm::vec3 posA = transform->GetPositionWorldSpace();
+        glm::vec3 posB = other.GetOwner()->GetTransform()->GetPositionWorldSpace();
+
+        posA -= correction * invMassA;
+        posB += correction * invMassB;
+
+        transform->SetPositionWorldSpace(posA);
+        other.GetOwner()->GetTransform()->SetPositionWorldSpace(posB);
+
+        // Optional: stabilize orientation if nearly upright
+        StabilizeIfUpright();
+    }
+
+
+   void RigidBody::ApplyUprightStabilization()
+    {
+        // Próg k¹ta — jeœli odchylenie jest mniejsze ni¿ 45°, stabilizujemy
+        const float angleThreshold = glm::radians(45.0f);
+        const float torqueStrength = 5.0f; // Im wiêksza wartoœæ, tym szybciej siê stabilizuje
+
+        glm::vec3 upWorld = glm::vec3(0, 1, 0);
+        glm::vec3 bodyUp = transform->GetUp(); // np. glm::vec3(transform->GetMatrix()[1])
+
+        float angle = glm::acos(glm::clamp(glm::dot(upWorld, bodyUp), -1.0f, 1.0f));
+
+        if (angle < angleThreshold)
+        {
+            glm::vec3 axis = glm::cross(bodyUp, upWorld);
+            if (glm::dot(axis, axis) > 1e-6f)
+            {
+                axis = glm::normalize(axis);
+                glm::vec3 correctiveTorque = axis * angle * torqueStrength;
+                AddTorque(correctiveTorque); // Musisz mieæ wsparcie momentu obrotowego
+            }
+        }
+    }
+
+
+    void RigidBody::ResolveCollisionVelocity(RigidBody& other, const glm::vec3& contactPoint,
+                                             const glm::vec3& collisionNormal)
     {
         Transform* otherTransform = other.GetOwner()->GetTransform();
 
@@ -141,38 +273,41 @@ namespace Engine
         glm::vec3 vRel =
                 velocity + glm::cross(angularVelocity, rA) - other.velocity - glm::cross(other.angularVelocity, rB);
 
-        float e = 0.8f;
+        float e = std::min(restitution, other.restitution); // wsp. odbicia (mo¿na dobieraæ)
 
-        float invMassSum = (mass > 0 ? 1.0f / mass : 0.0f) + (other.mass > 0 ? 1.0f / other.mass : 0.0f);
+        float invMassA = (mass > 0) ? 1.0f / mass : 0.0f;
+        float invMassB = (other.mass > 0) ? 1.0f / other.mass : 0.0f;
 
-        float angularEffectA =
-                glm::dot(glm::cross(rA, collisionNormal), glm::cross(rA, collisionNormal)) * inverseInertiaTensor.x;
-        float angularEffectB = glm::dot(glm::cross(rB, collisionNormal), glm::cross(rB, collisionNormal)) *
-                               other.inverseInertiaTensor.x;
+        glm::mat3 rotationA = glm::mat3_cast(transform->GetRotation());
+        glm::mat3 rotationB = glm::mat3_cast(otherTransform->GetRotation());
 
-        float j = -(1.0f + e) * glm::dot(vRel, collisionNormal) / (invMassSum + angularEffectA + angularEffectB);
+        // macierze inercji w przestrzeni œwiata
+        glm::mat3 invInertiaA = rotationA * inverseInertiaTensorMatrix * glm::transpose(rotationA);
+        glm::mat3 invInertiaB = rotationB * other.inverseInertiaTensorMatrix * glm::transpose(rotationB);
 
-        glm::vec3 impulse = collisionNormal * j;
+        // momenty obrotowe
+        glm::vec3 raCrossN = glm::cross(rA, collisionNormal);
+        glm::vec3 rbCrossN = glm::cross(rB, collisionNormal);
+
+        float angularEffectA = glm::dot(raCrossN, invInertiaA * raCrossN);
+        float angularEffectB = glm::dot(rbCrossN, invInertiaB * rbCrossN);
+
+        float denominator = invMassA + invMassB + angularEffectA + angularEffectB;
+        if (denominator == 0.0f)
+            return;
+
+        float j = -(1.0f + e) * glm::dot(vRel, collisionNormal) / denominator;
+
+        glm::vec3 impulse = j * collisionNormal;
 
         AddImpulse(impulse);
         AddAngularImpulse(glm::cross(rA, impulse));
 
-        const float penetrationDepth = 0.01f;
-        glm::vec3 posA = transform->GetPositionWorldSpace();
-        glm::vec3 posB = otherTransform->GetPositionWorldSpace();
+        other.AddImpulse(-impulse);
+        other.AddAngularImpulse(glm::cross(rB, -impulse));
 
-        float invMassA = (mass > 0) ? 1.0f / mass : 0.0f;
-        float invMassB = (other.mass > 0) ? 1.0f / other.mass : 0.0f;
-        float totalInvMass = invMassA + invMassB;
-
-        if (totalInvMass > 0.0f)
-        {
-            posA -= collisionNormal * penetrationDepth * (invMassA / totalInvMass);
-            posB += collisionNormal * penetrationDepth * (invMassB / totalInvMass);
-
-            transform->SetPositionWorldSpace(posA);        }
-
-        glm::vec3 tangent = vRel - collisionNormal * glm::dot(vRel, collisionNormal);
+        // Korekcja tarcia
+        glm::vec3 tangent = vRel - glm::dot(vRel, collisionNormal) * collisionNormal;
         if (glm::length(tangent) > 0.0001f)
         {
             tangent = glm::normalize(tangent);
@@ -183,6 +318,20 @@ namespace Engine
             other.AddImpulse(-frictionImpulse);
         }
     }
+
+    void RigidBody::OnCollision(RigidBody& other, const glm::vec3& contactPoint, const glm::vec3& collisionNormal,
+                                float penetrationDepth)
+    {
+        // 1. Korekcja pozycji (penetracji)
+        ResolvePenetration(other, collisionNormal, penetrationDepth);
+
+        // 2. Korekcja prêdkoœci (impulsy)
+        ResolveCollisionVelocity(other, contactPoint, collisionNormal);
+    }
+
+
+
+
 
     #if EDITOR
     void RigidBody::DrawImGui()

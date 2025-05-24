@@ -65,7 +65,7 @@ namespace Engine
 
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
 
-        virtual glm::mat3 CalculateInertiaTensor(float mass) const = 0;
+        virtual glm::mat3 CalculateInertiaTensorBody(float mass) const = 0;
 
         void SetTrigger(bool isTrigger)
         {
