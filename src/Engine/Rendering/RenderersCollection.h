@@ -5,8 +5,31 @@ namespace Engine
 {
     class RenderersCollection
     {
+    public:
+        struct Pair
+        {
+            Materials::Material* Material;
+            std::vector<Renderer*> Renderers;
+
+            Pair(Materials::Material* Material, const std::vector<Renderer*>& Renderers) :
+                Material(Material),
+                Renderers(Renderers)
+            {
+            }
+
+            friend bool operator==(const Pair& Lhs, const Materials::Material* const Rhs)
+            {
+                return Lhs.Material == Rhs;
+            }
+
+            friend bool operator!=(const Pair& Lhs, const Materials::Material* const Rhs)
+            {
+                return !(Lhs == Rhs);
+            }
+        };
+
     private:
-        std::unordered_map<Materials::Material*, std::vector<Renderer*>> Renderers;
+        std::vector<Pair> Renderers;
 
     public:
         void AddRenderer(Renderer* Renderer);
@@ -14,22 +37,22 @@ namespace Engine
         void RemoveRenderer(const Renderer* Renderer);
 
     public:
-        [[nodiscard]] std::unordered_map<Materials::Material*, std::vector<Renderer*>>::iterator begin()
+        [[nodiscard]] std::vector<Pair>::iterator begin()
         {
             return Renderers.begin();
         }
 
-        [[nodiscard]] std::unordered_map<Materials::Material*, std::vector<Renderer*>>::iterator end()
+        [[nodiscard]] std::vector<Pair>::iterator end()
         {
             return Renderers.end();
         }
 
-        [[nodiscard]] std::unordered_map<Materials::Material*, std::vector<Renderer*>>::const_iterator begin() const
+        [[nodiscard]] std::vector<Pair>::const_iterator begin() const
         {
             return Renderers.begin();
         }
 
-        [[nodiscard]] std::unordered_map<Materials::Material*, std::vector<Renderer*>>::const_iterator end() const
+        [[nodiscard]] std::vector<Pair>::const_iterator end() const
         {
             return Renderers.end();
         }

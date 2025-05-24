@@ -42,12 +42,8 @@ namespace Engine
 
         for (const auto& renderersGroup : Renderers)
         {
-            if (renderersGroup.first == nullptr)
-            {
-                continue;
-            }
-            renderersGroup.first->UseDepthPass();
-            for (Renderer* const renderer : renderersGroup.second)
+            renderersGroup.Material->UseDepthPass();
+            for (Renderer* const renderer : renderersGroup.Renderers)
             {
                 renderer->RenderDepth(RenderData);
             }
@@ -69,12 +65,8 @@ namespace Engine
         LightManager::GetInstance()->SetupLightsForRendering(RenderData);
         for (const auto& renderersGroup : Renderers)
         {
-            if (renderersGroup.first == nullptr)
-            {
-                continue;
-            }
-            renderersGroup.first->Use();
-            for (Renderer* const renderer : renderersGroup.second)
+            renderersGroup.Material->Use();
+            for (Renderer* const renderer : renderersGroup.Renderers)
             {
                 renderer->Render(RenderData);
             }
@@ -106,12 +98,8 @@ namespace Engine
         glClear(GL_DEPTH_BUFFER_BIT);
         for (const auto& renderersGroup : Renderers)
         {
-            if (renderersGroup.first == nullptr)
-            {
-                continue;
-            }
-            renderersGroup.first->UseDirectionalShadows();
-            for (Renderer* const renderer : renderersGroup.second)
+            renderersGroup.Material->UseDirectionalShadows();
+            for (Renderer* const renderer : renderersGroup.Renderers)
             {
                 renderer->RenderDirectionalShadows(RenderData);
             }
@@ -134,12 +122,8 @@ namespace Engine
         glClear(GL_DEPTH_BUFFER_BIT);
         for (const auto& renderersGroup : Renderers)
         {
-            if (renderersGroup.first == nullptr)
-            {
-                continue;
-            }
-            renderersGroup.first->UsePointSpotShadows();
-            for (Renderer* const renderer : renderersGroup.second)
+            renderersGroup.Material->UsePointSpotShadows();
+            for (Renderer* const renderer : renderersGroup.Renderers)
             {
                 renderer->RenderPointSpotShadows(LightPosition, LightRange, SpaceTransformMatrices);
             }
