@@ -21,9 +21,28 @@ namespace Engine
         Instance = new RenderingManager(Resolution);
     }
 
-    void RenderingManager::RenderAll(const CameraRenderData& RenderData, int ScreenWidth, int ScreenHeight)
+    void RenderingManager::RenderAll(const CameraRenderData& RenderData, const int ScreenWidth, const int ScreenHeight,
+                                     const float DeltaTime)
     {
         Frustum.UpdateFrustum(RenderData);
+        glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
+        for (const auto& renderersGroup : ParticleEmitters)
+        {
+            for (ParticleEmitter* const renderer : renderersGroup.Renderers)
+            {
+                renderer->DispatchSpawnShaders(DeltaTime);
+            }
+        }
+
+        glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
+        for (const auto& renderersGroup : ParticleEmitters)
+        {
+            for (ParticleEmitter* const renderer : renderersGroup.Renderers)
+            {
+                renderer->DispatchUpdateShaders(DeltaTime);
+            }
+        }
+
         LightManager::GetInstance()->RenderShadowMaps(RenderData);
 
         MultiSampledBuffer.BindMultiSampled();
@@ -72,6 +91,22 @@ namespace Engine
             }
         }
 
+        MultiSampledBuffer.ResolveMultisampling();
+        MultiSampledBuffer.BindResolved();
+
+        glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        glEnable(GL_BLEND);
+        for (const auto& renderersGroup : ParticleEmitters)
+        {
+            renderersGroup.Material->Use();
+            for (ParticleEmitter* const renderer : renderersGroup.Renderers)
+            {
+                renderer->Render(RenderData);
+            }
+        }
+        glDisable(GL_BLEND);
+
         if (Ui != nullptr)
         {
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -80,7 +115,6 @@ namespace Engine
             glDisable(GL_BLEND);
         }
 
-        MultiSampledBuffer.ResolveMultisampling();
         GodRays.Render(MultiSampledBuffer);
         Bloom.Render(MultiSampledBuffer.GetResolvedColorBuffer());
     }

@@ -1,4 +1,3 @@
-#include <iostream>
 #include "SceneFrameBuffer.h"
 
 namespace Engine
@@ -34,6 +33,10 @@ namespace Engine
         glDrawBuffer(GL_COLOR_ATTACHMENT1);
         glBlitFramebuffer(0, 0, Resolution.x, Resolution.y, 0, 0, Resolution.x, Resolution.y,
                           GL_COLOR_BUFFER_BIT, GL_LINEAR);
+
+        // Resolve depth buffer
+        glBlitFramebuffer(0, 0, Resolution.x, Resolution.y, 0, 0, Resolution.x, Resolution.y,
+                          GL_DEPTH_BUFFER_BIT, GL_NEAREST);
 
         // Return default state
         glReadBuffer(GL_COLOR_ATTACHMENT0);
@@ -71,6 +74,8 @@ namespace Engine
         glGenTextures(1, &ResolvedNormalsTexture);
         glDeleteTextures(1, &ResolvedOcclusionBuffer);
         glGenTextures(1, &ResolvedOcclusionBuffer);
+        glDeleteRenderbuffers(1, &ResolvedDepthBuffer);
+        glGenRenderbuffers(1, &ResolvedDepthBuffer);
 
         glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, ColorBuffer);
         glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, Samples, GL_RGBA16F, Resolution.x, Resolution.y, GL_TRUE);;
@@ -112,6 +117,10 @@ namespace Engine
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, ResolvedOcclusionBuffer, 0);
 
         glDrawBuffers(2, attachments);
+
+        glBindRenderbuffer(GL_RENDERBUFFER, ResolvedDepthBuffer);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, Resolution.x, Resolution.y);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, ResolvedDepthBuffer);
 
         glBindFramebuffer(GL_FRAMEBUFFER, ResolvedNormalsFramebuffer);
 

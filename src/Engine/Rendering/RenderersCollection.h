@@ -1,19 +1,21 @@
 #pragma once
+#include "Engine/Components/Renderers/ParticleEmitter.h"
 #include "Engine/Components/Renderers/Renderer.h"
 
 namespace Engine
 {
-    class RenderersCollection
+    template<class T>
+    class TRenderersCollection
     {
     public:
         struct Pair
         {
             Materials::Material* Material;
-            std::vector<Renderer*> Renderers;
+            std::vector<T*> Renderers;
 
-            Pair(Materials::Material* Material, const std::vector<Renderer*>& Renderers) :
+            Pair(Materials::Material* Material) :
                 Material(Material),
-                Renderers(Renderers)
+                Renderers(std::vector<T*>())
             {
             }
 
@@ -32,29 +34,54 @@ namespace Engine
         std::vector<Pair> Renderers;
 
     public:
-        void AddRenderer(Renderer* Renderer);
+        void AddRenderer(T* const Renderer)
+        {
+            const auto iterator = std::find(Renderers.begin(), Renderers.end(), Renderer->GetMaterial());
+            if (iterator != Renderers.end())
+            {
+                iterator->Renderers.emplace_back(Renderer);
+                return;
+            }
 
-        void RemoveRenderer(const Renderer* Renderer);
+            Pair& pair = Renderers.emplace_back(Renderer->GetMaterial());
+            pair.Renderers.emplace_back(Renderer);
+        }
+
+        void RemoveRenderer(const T* const Renderer)
+        {
+            const auto iterator = std::find(Renderers.begin(), Renderers.end(), Renderer->GetMaterial());
+            if (iterator != Renderers.end())
+            {
+                std::erase(iterator->Renderers, Renderer);
+                if (iterator->Renderers.empty())
+                {
+                    Renderers.erase(iterator);
+                }
+            }
+        }
 
     public:
-        [[nodiscard]] std::vector<Pair>::iterator begin()
+        [[nodiscard]] typename std::vector<Pair>::iterator begin()
         {
             return Renderers.begin();
         }
 
-        [[nodiscard]] std::vector<Pair>::iterator end()
+        [[nodiscard]] typename std::vector<Pair>::iterator end()
         {
             return Renderers.end();
         }
 
-        [[nodiscard]] std::vector<Pair>::const_iterator begin() const
+        [[nodiscard]] typename std::vector<Pair>::const_iterator begin() const
         {
             return Renderers.begin();
         }
 
-        [[nodiscard]] std::vector<Pair>::const_iterator end() const
+        [[nodiscard]] typename std::vector<Pair>::const_iterator end() const
         {
             return Renderers.end();
         }
     };
-} // Engine
+
+    typedef TRenderersCollection<Renderer> RenderersCollection;
+    typedef TRenderersCollection<ParticleEmitter> ParticleEmittersCollection;
+}
