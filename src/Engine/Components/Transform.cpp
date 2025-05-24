@@ -14,7 +14,7 @@ namespace Engine
         {
             Parent->RemoveChild(this);
         }
-        for (int i = Children.size() - 1; i >= 0; --i)
+        for (int32_t i = static_cast<int32_t>(Children.size()) - 1; i >= 0; --i)
         {
             const Entity* owner = Children[i]->GetOwner();
             delete owner;
@@ -33,9 +33,10 @@ namespace Engine
             }
 
             // Editable Euler Angles
-            if (ImGui::DragFloat3("Rotation (Euler)", glm::value_ptr(EulerAngles), 0.5f))
+            glm::vec3 tmpEuler = EulerAngles;
+            if (ImGui::DragFloat3("Rotation (Euler)", glm::value_ptr(tmpEuler), 0.5f))
             {
-                MarkDirty();
+                SetEulerAngles(tmpEuler);
             }
 
             // Editable Scale
@@ -128,9 +129,9 @@ namespace Engine
     void Transform::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
-        DESERIALIZE_VALUE(Position);
-        DESERIALIZE_VALUE(EulerAngles);
-        DESERIALIZE_VALUE(Scale);
+        DESERIALIZE_VALUE(Position)
+        DESERIALIZE_VALUE(EulerAngles)
+        DESERIALIZE_VALUE(Scale)
         DESERIALIZE_VALUE(Rotation)
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }

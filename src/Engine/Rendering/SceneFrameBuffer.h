@@ -24,6 +24,7 @@ namespace Engine
         uint32_t ResolvedNormalsFramebuffer = 0;
         uint32_t ResolvedNormalsTexture = 0;
         uint32_t ResolvedOcclusionBuffer = 0;
+        uint32_t ResolvedDepthBuffer = 0;
 
         uint32_t ResolvedId = 0;
         uint32_t ResolvedColorBuffer = 0;

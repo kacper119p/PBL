@@ -22,61 +22,45 @@ uniform mat4 finalBonesMatrices[MAX_BONES];
 
 void main()
 {
+    vec4 totalPosition = vec4(0.0);
+    vec3 totalNormal = vec3(0.0);
+    vec3 totalTangent = vec3(0.0);
 
-    float weightSum = 0.0;
-for (int i = 0; i < MAX_BONE_INFLUENCE; i++)
-{
-    if (boneIds[i] >= 0)
-        weightSum += weights[i];
-}
+    float totalWeight = 0.0;
 
-vec4 totalPosition = vec4(0.0f);
-vec3 localNormal = vec3(0.0f);
-vec3 localTangent = vec3(0.0f);
-if (weightSum == 0.0) {
-    totalPosition = vec4(inputPosition, 1.0);  // Use original position if no bones influence
-}
-if (weightSum > 0.0)
-{
     for (int i = 0; i < MAX_BONE_INFLUENCE; i++)
-   {
-      if (boneIds[i] == -1) continue;
-        if (boneIds[i] >= MAX_BONES) break;
-
-        //float normalizedWeight = weights[i] / weightSum; // Normalize each weight
-        vec4 localPosition = finalBonesMatrices[boneIds[i]] * vec4(inputPosition, 1.0f);
-        totalPosition += localPosition * weights[i];
-
-
-    }
-}
-else
-{
-    totalPosition = vec4(inputPosition, 1.0f); // Fallback to original position
-}
-    for(int i = 0 ; i < MAX_BONE_INFLUENCE ; i++)
     {
-        if(boneIds[i] == -1)
-            continue;
+        int boneId = boneIds[i];
+        float weight = weights[i];
 
-        if(boneIds[i] >= MAX_BONES)  // too many bones in the model
-        {
-            totalPosition = vec4(inputPosition,1.0f);
-            break;
-        }
-        vec4 localPosition = finalBonesMatrices[boneIds[i]] * vec4(inputPosition,1.0f);
-        totalPosition += localPosition * weights[i];
-        localNormal += (mat3(finalBonesMatrices[boneIds[i]]) * inputNormal) * weights[i];
-        localTangent += (mat3(finalBonesMatrices[boneIds[i]]) * inputTangent) * weights[i];
+        if (boneId < 0 || boneId >= MAX_BONES || weight == 0.0)
+        continue;
+
+        totalWeight += weight;
+
+        mat4 boneMatrix = finalBonesMatrices[boneId];
+        mat3 boneMatrix3 = mat3(boneMatrix); // Assumes no non-uniform scale
+
+        totalPosition += boneMatrix * vec4(inputPosition, 1.0) * weight;
+        totalNormal += boneMatrix3 * inputNormal * weight;
+        totalTangent += boneMatrix3 * inputTangent * weight;
     }
 
+    if (totalWeight == 0.0)
+    {
+        totalPosition = vec4(inputPosition, 1.0);
+        totalNormal = inputNormal;
+        totalTangent = inputTangent;
+    }
 
+    mat4 modelMatrix = ObjectToWorldMatrix;
+    mat4 viewProjMatrix = ProjectionMatrix * ViewMatrix;
 
-    gl_Position = ProjectionMatrix * ViewMatrix * ObjectToWorldMatrix * totalPosition;
+    gl_Position = viewProjMatrix * modelMatrix * totalPosition;
 
-
-    Position = (ObjectToWorldMatrix * totalPosition).xyz;
+    Position = (modelMatrix * totalPosition).xyz;
     TexCoord = inputTexCoord;
-    Normal = (ObjectToWorldMatrix * vec4(localNormal, 0.0)).xyz;
-    Tangent = (ObjectToWorldMatrix * vec4(localTangent, 0.0)).xyz;
+
+    Normal = normalize(mat3(modelMatrix) * totalNormal);
+    Tangent = normalize(mat3(modelMatrix) * totalTangent);
 }
