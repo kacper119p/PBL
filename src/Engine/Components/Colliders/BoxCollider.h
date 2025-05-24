@@ -32,7 +32,7 @@ namespace Engine
         ~BoxCollider() override;
 
     public:
-        virtual bool AcceptCollision(ColliderVisitor& visitor) override;
+        bool AcceptCollision(ColliderVisitor& visitor) override;
 
         //virtual bool CheckCollision(const Collider& other) override;
 

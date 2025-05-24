@@ -94,8 +94,8 @@ namespace Scene
         rb2->SetMass(0.1f);
 
         rb->SetLinearDamping(.05f);
-        rb->AddConstraint(Engine::RigidBody::Constraints::LockRotationX);
-        rb->AddConstraint(Engine::RigidBody::Constraints::LockRotationZ);
+        rb->AddConstraint(Engine::Constraints::LockRotationX);
+        rb->AddConstraint(Engine::Constraints::LockRotationZ);
 
         CameraFollow::GetInstance().SetTarget(secondBoxEntity);
         #endif

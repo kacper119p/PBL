@@ -31,7 +31,7 @@ namespace Engine
         ~SphereCollider() override;
 
     public:
-        virtual bool AcceptCollision(ColliderVisitor& visitor) override;
+        bool AcceptCollision(ColliderVisitor& visitor) override;
 
         inline virtual Collider* GetInstance() override { return this; }
 

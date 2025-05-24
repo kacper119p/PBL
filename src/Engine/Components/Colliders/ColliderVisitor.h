@@ -2,7 +2,6 @@
 #include <glm/vec3.hpp>
 #include <vector>
 
-#include "Collider.h"
 
 namespace Engine
 {

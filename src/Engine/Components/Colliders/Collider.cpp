@@ -9,6 +9,7 @@
 #include "Engine/EngineObjects/Entity.h"
 #include <iostream>
 #include "Engine/Components/BaseMovement/MovementComponent.h"
+#include "Engine/EngineObjects/Entity.h"
 
 namespace Engine
 {
@@ -27,8 +28,7 @@ namespace Engine
 
     Collider::~Collider()
     {
-        Spatial->RemoveCollider(this);
-        CollisionUpdateManager::GetInstance()->UnregisterCollider(this);
+        
     }
 
     Collider& Collider::operator=(const Collider& Other)
