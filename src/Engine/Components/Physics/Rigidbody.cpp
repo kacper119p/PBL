@@ -1,20 +1,24 @@
 #include "Rigidbody.h"
 #include <algorithm>
 #include <glm/gtx/quaternion.hpp>
+#include <iostream>
 #include <limits>
+#include "Engine/Components/Colliders/Collider.h"
+#include "Engine/Components/Colliders/PrimitiveMeshes.h"
 #include "Engine/Components/Renderers/ModelRenderer.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/EngineObjects/RigidbodyUpdateManager.h"
 #include "Serialization/SerializationUtility.h"
-#include <iostream>
+
 namespace Engine
 {
 
     Rigidbody::Rigidbody() :
-        transform(nullptr), mesh(nullptr), mass(1.0f), inverseMass(1.0f), inertiaTensor(1.0f),
-        inverseInertiaTensor(1.0f), velocity(0.0f), angularVelocity(0.0f), linearDamping(0.01f), angularDamping(0.01f),
-        friction(0.5f), frictionEnabled(true), restitution(0.3f), accumulatedForce(0.0f), accumulatedTorque(0.0f),
-        lastPosition(0.0f), lastRotation(1, 0, 0, 0)
+        transform(nullptr), mass(1.0f), inverseMass(1.0f), inertiaTensor(1.0f), inverseInertiaTensor(1.0f),
+        velocity(0.0f), angularVelocity(0.0f), linearDamping(0.01f), angularDamping(0.01f), friction(0.5f),
+        frictionEnabled(true), restitution(0.3f), accumulatedForce(0.0f), accumulatedTorque(0.0f), lastPosition(0.0f),
+        lastRotation(1, 0, 0, 0), lastCollisionNormal(0.0f, 1.0f, 0.0f), collisionNormalTimeout(0.0f),
+        collisionNormalTimer(0.0f)
     {
     }
 
@@ -27,13 +31,8 @@ namespace Engine
 
     void Rigidbody::computeInertiaTensor()
     {
-        float ix = (1.0f / 12.0f) * mass * (1.0f * 1.0f + 1.0f * 1.0f);
-        float iy = ix;
-        float iz = ix;
-
-        inertiaTensor = glm::vec3(ix, iy, iz);
-        inverseInertiaTensor =
-                glm::vec3(ix > 0.0f ? 1.0f / ix : 0.0f, iy > 0.0f ? 1.0f / iy : 0.0f, iz > 0.0f ? 1.0f / iz : 0.0f);
+        inertiaTensor = GetOwner()->GetComponent<Collider>()->CalculateInertiaTensorBody(mass);
+        inverseInertiaTensor = glm::inverse(inertiaTensor);
     }
 
     void Rigidbody::AddForce(const glm::vec3& force, ForceMode mode)
@@ -56,7 +55,7 @@ namespace Engine
         }
         else if (mode == ForceMode::Impulse)
         {
-            angularVelocity += torque * inverseInertiaTensor;
+            angularVelocity += inverseInertiaTensor * torque;
         }
     }
 
@@ -82,7 +81,7 @@ namespace Engine
         velocity += acceleration * deltaTime;
         velocity *= (1.0f - linearDamping);
 
-        glm::vec3 angularAcceleration = accumulatedTorque * inverseInertiaTensor;
+        glm::vec3 angularAcceleration = inverseInertiaTensor * accumulatedTorque;
         angularVelocity += angularAcceleration * deltaTime;
         angularVelocity *= (1.0f - angularDamping);
 
@@ -102,10 +101,11 @@ namespace Engine
         if (constraints.freezeRotationZ)
             newAngularVelocity.z = 0.0f;
 
-        glm::quat deltaRot = glm::quat(0, newAngularVelocity.x, newAngularVelocity.y, newAngularVelocity.z) *
-                             transform->GetRotation();
+        // Quaternion integration:
+        glm::quat rotation = transform->GetRotation();
+        glm::quat deltaRot = glm::quat(0, newAngularVelocity.x, newAngularVelocity.y, newAngularVelocity.z) * rotation;
         deltaRot *= 0.5f * deltaTime;
-        glm::quat updatedRot = transform->GetRotation() + deltaRot;
+        glm::quat updatedRot = rotation + deltaRot;
         transform->SetRotation(glm::normalize(updatedRot));
 
         transform->SetPosition(newPosition);
@@ -117,62 +117,118 @@ namespace Engine
             AddForce(frictionForce, ForceMode::Force);
         }
 
+        TryAlignToCollisionNormal(deltaTime);
+
         accumulatedForce = glm::vec3(0.0f);
         accumulatedTorque = glm::vec3(0.0f);
+    }
 
-        if (mesh)
+    void Rigidbody::QuaternionToAxisAngle(const glm::quat& q, glm::vec3& out_axis, float& out_angle)
+    {
+        glm::quat normalized = glm::normalize(q);
+        out_angle = 2.0f * acosf(normalized.w);
+        float s = sqrtf(1.0f - normalized.w * normalized.w);
+
+        if (s < 0.001f)
         {
-            SnapToGroundFace();
+            out_axis = glm::vec3(1.0f, 0.0f, 0.0f);
+        }
+        else
+        {
+            out_axis = glm::vec3(normalized.x, normalized.y, normalized.z) / s;
         }
     }
 
-    void Rigidbody::SnapToGroundFace()
+    glm::quat RotationBetweenVectors(const glm::vec3& start, const glm::vec3& dest)
     {
-        if (!transform || !mesh || mesh->VertexIndices.size() < 3)
-            return;
+        glm::vec3 s = glm::normalize(start);
+        glm::vec3 d = glm::normalize(dest);
 
-        float minAvgY = std::numeric_limits<float>::max();
-        glm::vec3 bestFaceWorldVerts[3];
+        float cosTheta = glm::dot(s, d);
+        glm::vec3 rotationAxis;
 
-        for (size_t i = 0; i + 2 < mesh->VertexIndices.size(); i += 3)
+        if (cosTheta >= 1.0f - 1e-6f)
+            return glm::quat(1, 0, 0, 0);
+
+        if (cosTheta < -1.0f + 1e-6f)
         {
-            glm::vec3 worldVerts[3];
+            rotationAxis = glm::cross(glm::vec3(0.0f, 0.0f, 1.0f), s);
+            if (glm::length(rotationAxis) < 1e-6f)
+                rotationAxis = glm::cross(glm::vec3(1.0f, 0.0f, 0.0f), s);
 
-            for (int j = 0; j < 3; ++j)
-            {
-                int index = mesh->VertexIndices[i + j];
-                const glm::vec3& localPos = mesh->VerticesData[index].Position;
-                worldVerts[j] = transform->GetPosition() + transform->GetRotation() * localPos;
-            }
-
-            float y0 = worldVerts[0].y;
-            float y1 = worldVerts[1].y;
-            float y2 = worldVerts[2].y;
-            float avgY = (y0 + y1 + y2) / 3.0f;
-
-            float maxDeltaY = std::max({std::abs(y0 - y1), std::abs(y1 - y2), std::abs(y2 - y0)});
-
-            if (maxDeltaY < 0.01f && avgY < minAvgY)
-            {
-                minAvgY = avgY;
-                bestFaceWorldVerts[0] = worldVerts[0];
-                bestFaceWorldVerts[1] = worldVerts[1];
-                bestFaceWorldVerts[2] = worldVerts[2];
-            }
+            rotationAxis = glm::normalize(rotationAxis);
+            return glm::angleAxis(glm::pi<float>(), rotationAxis);
         }
 
-        if (minAvgY == std::numeric_limits<float>::max())
+        rotationAxis = glm::cross(s, d);
+        float s_val = sqrtf((1 + cosTheta) * 2);
+        float invs = 1 / s_val;
+
+        return glm::quat(s_val * 0.5f, rotationAxis.x * invs, rotationAxis.y * invs, rotationAxis.z * invs);
+    }
+
+    void Rigidbody::TryAlignToCollisionNormal(float deltaTime)
+    {
+        if (glm::length(velocity) > 0.1f || glm::length(accumulatedForce) > 0.1f ||
+            glm::length(accumulatedTorque) > 0.1f)
+        {
+            collisionNormalTimer = 0.0f;
+            return;
+        }
+
+        collisionNormalTimer += deltaTime;
+        if (collisionNormalTimer > collisionNormalTimeout)
             return;
 
-        float minY = std::min({bestFaceWorldVerts[0].y, bestFaceWorldVerts[1].y, bestFaceWorldVerts[2].y});
-        float deltaY = 0.0f - minY;
+        if (glm::length(lastCollisionNormal) < 0.01f)
+            return;
 
-        glm::vec3 newPosition = transform->GetPosition();
-        newPosition.y += deltaY;
-        transform->SetPosition(newPosition);
+        glm::vec3 normal = glm::normalize(lastCollisionNormal);
 
-        if (velocity.y < 0.0f)
-            velocity.y = 0.0f;
+        glm::quat rotation = transform->GetRotation();
+        glm::vec3 localX = rotation * glm::vec3(1, 0, 0);
+        glm::vec3 localY = rotation * glm::vec3(0, 1, 0);
+        glm::vec3 localZ = rotation * glm::vec3(0, 0, 1);
+
+        auto angleToAxis = [&](const glm::vec3& axis) -> float
+        {
+            float dotVal = glm::dot(normal, axis);
+            float absDot = fabs(dotVal);
+            return acosf(absDot);
+        };
+
+        float angleX = angleToAxis(localX);
+        float angleY = angleToAxis(localY);
+        float angleZ = angleToAxis(localZ);
+
+        float minAngle = angleX;
+        glm::vec3 targetAxis = localX;
+
+        if (angleY < minAngle)
+        {
+            minAngle = angleY;
+            targetAxis = localY;
+        }
+        if (angleZ < minAngle)
+        {
+            minAngle = angleZ;
+            targetAxis = localZ;
+        }
+
+        glm::quat rotCorrection = RotationBetweenVectors(targetAxis, normal);
+
+        float angle;
+        glm::vec3 axis;
+        QuaternionToAxisAngle(rotCorrection, axis, angle);
+
+        float maxAngle = glm::radians(30.0f) * deltaTime;
+        if (angle > maxAngle)
+            angle = maxAngle;
+
+        glm::quat limitedCorrection = glm::angleAxis(angle, axis);
+
+        glm::quat newRotation = limitedCorrection * rotation;
+        transform->SetRotation(glm::normalize(newRotation));
     }
 
     void Rigidbody::OnCollision(Rigidbody* other, const glm::vec3& contactPoint, const glm::vec3& contactNormal)
@@ -198,8 +254,7 @@ namespace Engine
         glm::vec3 rA_cross_n = glm::cross(rA, contactNormal);
         glm::vec3 rB_cross_n = glm::cross(rB, contactNormal);
 
-        glm::vec3 Iinv_rA_cross_n =
-                inverseInertiaTensor * rA_cross_n;
+        glm::vec3 Iinv_rA_cross_n = inverseInertiaTensor * rA_cross_n;
         glm::vec3 Iinv_rB_cross_n = other->inverseInertiaTensor * rB_cross_n;
 
         float angularTerm = glm::dot(rA_cross_n, Iinv_rA_cross_n) + glm::dot(rB_cross_n, Iinv_rB_cross_n);
@@ -213,9 +268,10 @@ namespace Engine
 
         angularVelocity += inverseInertiaTensor * glm::cross(rA, impulse);
         other->angularVelocity -= other->inverseInertiaTensor * glm::cross(rB, impulse);
+
+        SetLastCollisionNormal(contactNormal);
+        TryAlignToCollisionNormal(1.0f / 60.0f);
     }
-
-
 
     void Rigidbody::OnCollisionStatic(const glm::vec3& contactPoint, const glm::vec3& contactNormal)
     {
@@ -237,14 +293,19 @@ namespace Engine
             glm::vec3 correction = (0.01f - glm::dot(transform->GetPosition() - contactPoint, normal)) * normal;
             transform->SetPosition(transform->GetPosition() + correction);
         }
-    }
 
+        lastCollisionNormal = normal;
+        collisionNormalTimeout = 1.0f;
+        SetLastCollisionNormal(contactNormal);
+        TryAlignToCollisionNormal(1.0f / 60.0f);
+    }
 
     void Rigidbody::Interpolate(float alpha)
     {
         if (!transform)
             return;
 
+        // Blend between previous and current transform to smooth jitter
         transform->SetPosition(glm::mix(lastPosition, transform->GetPosition(), alpha));
         transform->SetRotation(glm::slerp(lastRotation, transform->GetRotation(), alpha));
     }
@@ -252,50 +313,43 @@ namespace Engine
     void Rigidbody::Start()
     {
         transform = GetOwner()->GetTransform();
-        mesh = GetOwner()->GetComponent<ModelRenderer>()->GetModel()->GetMesh(0);
+        mesh = GetOwner()->GetComponent<Collider>()->GetMesh();
         RigidbodyUpdateManager::GetInstance()->RegisterRigidbody(this);
     }
 
-    void Rigidbody::OnDestroy() 
-    { 
-        RigidbodyUpdateManager::GetInstance()->UnregisterRigidbodyImmediate(this);
+    void Rigidbody::OnDestroy() { RigidbodyUpdateManager::GetInstance()->UnregisterRigidbodyImmediate(this); }
+
+    void Rigidbody::SetLastCollisionNormal(const glm::vec3& normal)
+    {
+        lastCollisionNormal = glm::normalize(normal);
+        collisionNormalTimer = 0.0f;
+        collisionNormalTimeout = 1.0f;
     }
 
-
-
-    #if EDITOR
+#if EDITOR
 #include <imgui.h>
 
     void Rigidbody::DrawImGui()
     {
         ImGui::Text("Rigidbody Settings");
 
-        // Mass
         if (ImGui::InputFloat("Mass", &mass, 0.1f, 1.0f, "%.3f"))
         {
             if (mass < 0.0001f)
-                mass = 0.0001f; // unikamy zerowej masy
+                mass = 0.0001f;
             inverseMass = 1.0f / mass;
             computeInertiaTensor();
         }
 
-        // Linear Damping
         ImGui::SliderFloat("Linear Damping", &linearDamping, 0.0f, 1.0f);
-
-        // Angular Damping
         ImGui::SliderFloat("Angular Damping", &angularDamping, 0.0f, 1.0f);
 
-        // Friction Enabled
         ImGui::Checkbox("Enable Friction", &frictionEnabled);
-
-        // Friction
         if (frictionEnabled)
             ImGui::SliderFloat("Friction", &friction, 0.0f, 1.0f);
 
-        // Restitution (bounciness)
         ImGui::SliderFloat("Restitution", &restitution, 0.0f, 1.0f);
 
-        // Constraints group
         if (ImGui::CollapsingHeader("Constraints"))
         {
             ImGui::Checkbox("Freeze Position X", &constraints.freezePositionX);
@@ -307,56 +361,21 @@ namespace Engine
             ImGui::Checkbox("Freeze Rotation Z", &constraints.freezeRotationZ);
         }
 
-        // Transform (readonly)
         if (transform)
         {
             ImGui::Separator();
             ImGui::Text("Transform (readonly):");
             glm::vec3 pos = transform->GetPosition();
+            ImGui::Text("Position: %.3f %.3f %.3f", pos.x, pos.y, pos.z);
+
             glm::quat rot = transform->GetRotation();
+            ImGui::Text("Rotation: %.3f %.3f %.3f %.3f", rot.w, rot.x, rot.y, rot.z);
 
-            ImGui::Text("Position: %.3f, %.3f, %.3f", pos.x, pos.y, pos.z);
-            ImGui::Text("Rotation (quat): %.3f, %.3f, %.3f, %.3f", rot.w, rot.x, rot.y, rot.z);
-        }
-
-        // Mesh selection
-        ImGui::Separator();
-        ImGui::Text("Mesh:");
-
-        // Za³ó¿my, ¿e masz dostêp do listy meshów w silniku, np:
-        // std::vector<Models::Mesh*> availableMeshes = GetAvailableMeshes();
-
-        static int currentMeshIndex = -1;
-        std::vector<Models::Mesh*> availableMeshes = /* pobierz listê meshów */;
-        std::vector<const char*> meshNames;
-        for (auto& m : availableMeshes)
-            meshNames.push_back(m->GetName().c_str());
-
-        if (mesh)
-        {
-            // ZnajdŸ index obecnego mesha w liœcie, jeœli nie znaleziony - -1
-            auto it = std::find(availableMeshes.begin(), availableMeshes.end(), mesh);
-            currentMeshIndex =
-                    (it != availableMeshes.end()) ? static_cast<int>(std::distance(availableMeshes.begin(), it)) : -1;
-        }
-        else
-        {
-            currentMeshIndex = -1;
-        }
-
-        if (ImGui::Combo("Select Mesh", &currentMeshIndex, meshNames.data(), static_cast<int>(meshNames.size())))
-        {
-            if (currentMeshIndex >= 0 && currentMeshIndex < (int) availableMeshes.size())
-            {
-                mesh = availableMeshes[currentMeshIndex];
-            }
-            else
-            {
-                mesh = nullptr;
-            }
+            ImGui::Text("Velocity: %.3f %.3f %.3f", velocity.x, velocity.y, velocity.z);
+            ImGui::Text("Angular Velocity: %.3f %.3f %.3f", angularVelocity.x, angularVelocity.y, angularVelocity.z);
         }
     }
-    #endif
+#endif
 
 
     rapidjson::Value Rigidbody::Serialize(rapidjson::Document::AllocatorType& Allocator) const
@@ -365,8 +384,6 @@ namespace Engine
         START_COMPONENT_SERIALIZATION
         SERIALIZE_FIELD(mass)
         SERIALIZE_FIELD(inverseMass)
-        SERIALIZE_FIELD(inertiaTensor)
-        SERIALIZE_FIELD(inverseInertiaTensor)
         SERIALIZE_FIELD(linearDamping)
         SERIALIZE_FIELD(angularDamping)
         SERIALIZE_FIELD(friction)
@@ -380,8 +397,6 @@ namespace Engine
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
         DESERIALIZE_VALUE(mass)
         DESERIALIZE_VALUE(inverseMass)
-        DESERIALIZE_VALUE(inertiaTensor)
-        DESERIALIZE_VALUE(inverseInertiaTensor)
         DESERIALIZE_VALUE(linearDamping)
         DESERIALIZE_VALUE(angularDamping)
         DESERIALIZE_VALUE(friction) 

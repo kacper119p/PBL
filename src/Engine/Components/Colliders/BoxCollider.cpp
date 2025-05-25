@@ -28,6 +28,21 @@ namespace Engine
 #endif
     }
 
+    void BoxCollider::Start() 
+    { 
+        Collider::Start();
+        mesh = PrimitiveMeshes::GetInstance().GetBoxMesh(transform->GetPosition(), transform->GetRotation(), _width, _height, _depth);
+    }
+
+    PrimitiveMesh* BoxCollider::GetMesh()
+    
+    {
+        mesh = PrimitiveMeshes::GetInstance().GetBoxMesh(transform->GetPosition(), transform->GetRotation(),
+                                                              _width, _height, _depth);
+        return &mesh;
+    }
+    
+
     bool BoxCollider::AcceptCollision(ColliderVisitor& visitor)
     {
         visitor.ResolveCollisionBox(*this);

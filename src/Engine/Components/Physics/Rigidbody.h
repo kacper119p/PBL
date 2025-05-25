@@ -7,6 +7,7 @@
 #include "Models/Mesh.h"
 #include "Engine/Components/Component.h"
 #include "Engine/Components/Colliders/ColliderVisitor.h"
+#include "Engine/Components/Colliders/PrimitiveMeshes.h"
 namespace Engine
 {
 
@@ -40,12 +41,12 @@ namespace Engine
 
         void Update(float deltaTime);
 
-        void SnapToGroundFace();
-
         void OnCollision(Rigidbody* other, const glm::vec3& contactPoint, const glm::vec3& contactNormal);
         void OnCollisionStatic(const glm::vec3& contactPoint, const glm::vec3& contactNormal);
 
         void Interpolate(float alpha);
+
+        void SetLastCollisionNormal(const glm::vec3& normal);
 
         void Start() override;
         void OnDestroy() override;
@@ -58,13 +59,13 @@ namespace Engine
 
     public:
         Transform* transform;
-        Models::Mesh* mesh;
+        PrimitiveMesh* mesh;
 
         float mass;
         float inverseMass;
 
-        glm::vec3 inertiaTensor;
-        glm::vec3 inverseInertiaTensor;
+        glm::mat3 inertiaTensor;
+        glm::mat3 inverseInertiaTensor;
 
         glm::vec3 velocity;
         glm::vec3 angularVelocity;
@@ -77,6 +78,7 @@ namespace Engine
 
         float restitution;
 
+        float alignmentStrength = 5.0f;
         Constraints constraints;
 
         glm::vec3 accumulatedForce;
@@ -87,6 +89,11 @@ namespace Engine
 
     private:
         void computeInertiaTensor();
-       
+        glm::vec3 lastCollisionNormal; // przechowuje normalê kolizji ostatniej kolizji
+        float collisionNormalTimeout; // jak d³ugo normalna jest wa¿na (np. 1s)
+        float collisionNormalTimer; // odlicza czas od ostatniej kolizji
+        void TryAlignToCollisionNormal(float deltaTime);
+        void QuaternionToAxisAngle(const glm::quat& q, glm::vec3& out_axis, float& out_angle);
+
     };
 } // namespace Engine

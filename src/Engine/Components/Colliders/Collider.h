@@ -7,7 +7,7 @@
 #include <glm/glm.hpp>
 #include "Engine/Components/Renderers/Renderer.h"
 #include "Events/Action.h"
-
+#include "PrimitiveMeshes.h"
 namespace Engine
 {
     class SpatialPartitioning;
@@ -50,7 +50,7 @@ namespace Engine
         /// TODO: move those to protected and add getters + setters
         Transform* transform;
         ColliderVisitor colliderVisitor;
-
+        PrimitiveMesh mesh;
         bool isColliding;
 
         Collider();
@@ -86,6 +86,8 @@ namespace Engine
         {
             return isStatic;
         }
+
+        PrimitiveMesh* GetMesh() { return &mesh; }
 
         void SetTransform(Transform* transform)
         {
@@ -142,6 +144,8 @@ namespace Engine
         {
             return this == other;
         }
+
+       
 
         void Start() override;
 
