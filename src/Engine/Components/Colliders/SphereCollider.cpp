@@ -37,6 +37,11 @@ namespace Engine
         return true;
     }
 
+    PrimitiveMesh* SphereCollider::GetMesh()
+    {
+        mesh = PrimitiveMeshes::GetInstance().GetSphereMesh(transform->GetPosition(), radius);
+        return &mesh;
+    }
 
     SphereCollider& SphereCollider::operator=(const SphereCollider& other)
     {
