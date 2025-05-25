@@ -43,7 +43,6 @@ namespace Engine
         return distance <= (projectionA + projectionB);
     }
 
-
     CollisionResult ColliderVisitor::CheckBoxBoxCollision(const BoxCollider& box1, const BoxCollider& box2)
     {
         CollisionResult result;
@@ -86,7 +85,6 @@ namespace Engine
         float minPenetration = std::numeric_limits<float>::max();
         glm::vec3 collisionNormal(0.0f);
 
-        // Sprawdź kolizję na każdej osi
         for (const glm::vec3& axis : axes)
         {
             if (glm::length2(axis) < 1e-6f)
@@ -96,7 +94,7 @@ namespace Engine
             if (!OverlapOnAxis(normAxis, toCenter, aX, aY, aZ, half1, bX, bY, bZ, half2))
             {
                 result.hasCollision = false;
-                return result; // brak kolizji
+                return result;
             }
 
             float projectedRadius1 = glm::abs(glm::dot(normAxis, aX)) * half1.x +
@@ -114,7 +112,6 @@ namespace Engine
             {
                 minPenetration = penetration;
                 collisionNormal = normAxis;
-                // Popraw kierunek normalnej tak, by wskazywała z box1 do box2
                 if (glm::dot(toCenter, collisionNormal) < 0.0f)
                     collisionNormal = -collisionNormal;
             }
@@ -124,19 +121,16 @@ namespace Engine
         result.penetrationDepth = minPenetration;
         result.collisionNormal = collisionNormal;
 
-        // Oblicz punkt kontaktu jako średni punkt powierzchni przecinających się, przesunięty wzdłuż normalnej
-        // Prosty sposób: punkt na powierzchni box1 przesunięty o połowę penetracji w kierunku kolizji
         result.collisionPoint =
                 center1 + collisionNormal * (glm::dot(toCenter, collisionNormal) - minPenetration * 0.5f);
 
         return result;
     }
 
-
-
     CollisionResult ColliderVisitor::CheckBoxSphereCollision(const BoxCollider& box, const SphereCollider& sphere)
     {
         CollisionResult result;
+        result.hasCollision = false;
 
         const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
         const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
@@ -176,12 +170,23 @@ namespace Engine
         if (distanceSquared <= (worldRadius * worldRadius))
         {
             result.hasCollision = true;
+
+            glm::vec3 collisionNormal = sphereCenter - closestPoint;
+            float dist = glm::length(collisionNormal);
+
+            if (dist > 1e-6f)
+                collisionNormal /= dist; // normalize
+            else
+                collisionNormal = glm::vec3(0, 1, 0); // fallback
+
+            result.collisionNormal = collisionNormal;
             result.collisionPoint = closestPoint;
-            result.collisionNormal = glm::normalize(closestPoint - sphereCenter);
+            result.penetrationDepth = worldRadius - dist;
         }
 
         return result;
     }
+
 
 
     CollisionResult ColliderVisitor::CheckBoxCapsuleCollision(const BoxCollider& box, const CapsuleCollider& capsule)
@@ -190,7 +195,6 @@ namespace Engine
         result.hasCollision = false;
 
         const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
-        const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
 
         glm::vec3 boxCenter = glm::vec3(boxTransform[3]);
         glm::vec3 xAxis = glm::normalize(glm::vec3(boxTransform[0]));
@@ -204,10 +208,11 @@ namespace Engine
         glm::vec3 halfExtents = glm::vec3(box.GetWidth() * 0.5f * scaleX, box.GetHeight() * 0.5f * scaleY,
                                           box.GetDepth() * 0.5f * scaleZ);
 
+        const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
         glm::vec3 capsuleCenter = glm::vec3(capsuleTransform[3]);
         glm::vec3 capsuleUp = glm::normalize(glm::vec3(capsuleTransform * glm::vec4(0, 1, 0, 0)));
 
-        float capsuleHalfHeight = (capsule.GetHeight() * 0.5f);
+        float capsuleHalfHeight = capsule.GetHeight() * 0.5f;
         glm::vec3 capsuleStart = capsuleCenter - capsuleUp * capsuleHalfHeight;
         glm::vec3 capsuleEnd = capsuleCenter + capsuleUp * capsuleHalfHeight;
         float capsuleRadius = capsule.GetRadius();
@@ -246,16 +251,27 @@ namespace Engine
         auto [capsuleP, boxP] = ClosestPointSegmentToOBB(capsuleStart, capsuleEnd);
         glm::vec3 delta = capsuleP - boxP;
         float distSq = glm::length2(delta);
+        float radiusSq = capsuleRadius * capsuleRadius;
 
-        if (distSq <= capsuleRadius * capsuleRadius)
+        if (distSq <= radiusSq)
         {
             result.hasCollision = true;
+
+            float dist = sqrt(distSq);
+            glm::vec3 collisionNormal;
+            if (dist > 1e-6f)
+                collisionNormal = delta / dist;
+            else
+                collisionNormal = glm::vec3(0, 1, 0); // fallback normal
+
+            result.collisionNormal = collisionNormal;
             result.collisionPoint = boxP;
-            result.collisionNormal = glm::length(delta) > 1e-6f ? glm::normalize(delta) : glm::vec3(0, 1, 0);
+            result.penetrationDepth = capsuleRadius - dist;
         }
 
         return result;
     }
+
 
 
     CollisionResult ColliderVisitor::CheckSphereSphereCollision(const SphereCollider& sphere1,
@@ -424,6 +440,7 @@ namespace Engine
         const glm::mat4& transform1 = box1.GetTransform()->GetLocalToWorldMatrix();
         const glm::mat4& transform2 = box2.GetTransform()->GetLocalToWorldMatrix();
 
+        // Half-extents bez dodatkowego mnożenia, bo GetWidth/Height/Depth to już wymiar ze skalą
         glm::vec3 halfExtents1 = glm::vec3(box1.GetWidth(), box1.GetHeight(), box1.GetDepth()) * 0.5f;
         glm::vec3 halfExtents2 = glm::vec3(box2.GetWidth(), box2.GetHeight(), box2.GetDepth()) * 0.5f;
 
@@ -433,17 +450,17 @@ namespace Engine
         glm::mat3 rot1 = glm::mat3(transform1);
         glm::mat3 rot2 = glm::mat3(transform2);
 
-        glm::vec3 axes1[3] = {rot1[0], rot1[1], rot1[2]};
-        glm::vec3 axes2[3] = {rot2[0], rot2[1], rot2[2]};
+        glm::vec3 axes1[3] = {glm::normalize(rot1[0]), glm::normalize(rot1[1]), glm::normalize(rot1[2])};
+        glm::vec3 axes2[3] = {glm::normalize(rot2[0]), glm::normalize(rot2[1]), glm::normalize(rot2[2])};
 
         glm::vec3 delta = center2 - center1;
 
         float minPenetration = std::numeric_limits<float>::max();
-        glm::vec3 smallestAxis = glm::vec3(0.0f);
+        glm::vec3 smallestAxis(0.0f);
 
         for (int i = 0; i < 3; ++i)
         {
-            glm::vec3 axis = glm::normalize(axes1[i]);
+            glm::vec3 axis = axes1[i];
             float proj1 = halfExtents1.x * glm::abs(glm::dot(axis, axes1[0])) +
                           halfExtents1.y * glm::abs(glm::dot(axis, axes1[1])) +
                           halfExtents1.z * glm::abs(glm::dot(axis, axes1[2]));
@@ -456,7 +473,7 @@ namespace Engine
             float overlap = proj1 + proj2 - distance;
 
             if (overlap < 0.0f)
-                return glm::vec3(0.0f); // no collision
+                return glm::vec3(0.0f);
 
             if (overlap < minPenetration)
             {
@@ -467,7 +484,7 @@ namespace Engine
 
         for (int i = 0; i < 3; ++i)
         {
-            glm::vec3 axis = glm::normalize(axes2[i]);
+            glm::vec3 axis = axes2[i];
             float proj1 = halfExtents1.x * glm::abs(glm::dot(axis, axes1[0])) +
                           halfExtents1.y * glm::abs(glm::dot(axis, axes1[1])) +
                           halfExtents1.z * glm::abs(glm::dot(axis, axes1[2]));
@@ -480,7 +497,7 @@ namespace Engine
             float overlap = proj1 + proj2 - distance;
 
             if (overlap < 0.0f)
-                return glm::vec3(0.0f); // no collision
+                return glm::vec3(0.0f);
 
             if (overlap < minPenetration)
             {
@@ -491,6 +508,7 @@ namespace Engine
 
         return smallestAxis * glm::max(0.0f, minPenetration);
     }
+
 
 
     glm::vec3 ColliderVisitor::GetSeparationBoxSphere(const BoxCollider& box, const SphereCollider& sphere)
@@ -760,7 +778,6 @@ namespace Engine
                 if (!result.hasCollision)
                     return;
 
-                
                 float penetrationDepth = result.penetrationDepth;
                 glm::vec3 normal = result.collisionNormal;
                 glm::vec3 contactPoint = result.collisionPoint;
@@ -815,17 +832,51 @@ namespace Engine
 
                 result = CheckBoxSphereCollision(box, *sphere);
                 box.isColliding = sphere->isColliding = result.hasCollision;
-                if (result.hasCollision)
-                {
 
-                    glm::vec3 separation = GetSeparationBoxSphere(box, *sphere);
+                if (!result.hasCollision)
+                    return;
+
+                float penetrationDepth =
+                        result.penetrationDepth; // wartość trzeba obliczyć w CheckBoxSphereCollision lub tu
+                glm::vec3 normal = result.collisionNormal;
+                glm::vec3 contactPoint = result.collisionPoint;
+
+                Engine::Rigidbody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::Rigidbody>();
+                Engine::Rigidbody* otherRB = box.GetOwner()->GetComponent<Engine::Rigidbody>();
+
+                if (thisRB && otherRB)
+                {
+                    thisRB->OnCollision(otherRB, contactPoint, normal);
+                }
+                else if (thisRB)
+                {
+                    thisRB->OnCollisionStatic(contactPoint, normal);
+                }
+
+                glm::vec3 separation = GetSeparationBoxSphere(box, *sphere);
+
+                if (thisRB && otherRB)
+                {
+                    float invMassSum = thisRB->inverseMass + otherRB->inverseMass;
+                    if (invMassSum > 0.0f)
+                    {
+                        glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
+
+                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                                                                     correctionThis);
+                    }
+                }
+                else if (thisRB)
+                {
                     currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
                                                                  separation);
-                    EmitCollision(&box);
                 }
+
+                EmitCollision(&box);
 
                 break;
             }
+
             case CAPSULE:
             {
                 auto* capsule = reinterpret_cast<CapsuleCollider*>(this->currentCollider);
@@ -840,20 +891,53 @@ namespace Engine
 
                 result = CheckBoxCapsuleCollision(box, *capsule);
                 box.isColliding = capsule->isColliding = result.hasCollision;
-                if (result.hasCollision)
+
+                if (!result.hasCollision)
+                    return;
+
+                float penetrationDepth =
+                        result.penetrationDepth; // analogicznie - może trzeba dodać do CheckBoxCapsuleCollision
+                glm::vec3 normal = result.collisionNormal;
+                glm::vec3 contactPoint = result.collisionPoint;
+
+                Engine::Rigidbody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::Rigidbody>();
+                Engine::Rigidbody* otherRB = box.GetOwner()->GetComponent<Engine::Rigidbody>();
+
+                if (thisRB && otherRB)
                 {
+                    thisRB->OnCollision(otherRB, contactPoint, normal);
+                }
+                else if (thisRB)
+                {
+                    thisRB->OnCollisionStatic(contactPoint, normal);
+                }
 
+                glm::vec3 separation = GetSeparationBoxCapsule(box, *capsule);
 
-                    glm::vec3 separation = GetSeparationBoxCapsule(box, *capsule);
+                if (thisRB && otherRB)
+                {
+                    float invMassSum = thisRB->inverseMass + otherRB->inverseMass;
+                    if (invMassSum > 0.0f)
+                    {
+                        glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
+
+                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                                                                     correctionThis);
+                    }
+                }
+                else if (thisRB)
+                {
                     currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
                                                                  separation);
-                    EmitCollision(&box);
                 }
+
+                EmitCollision(&box);
 
                 break;
             }
         }
     }
+
 
 
     void ColliderVisitor::ResolveCollisionSphere(SphereCollider& sphere)

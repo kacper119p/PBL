@@ -2,7 +2,6 @@
 #include <cmath>
 #include <glm/gtc/constants.hpp>
 
-
 namespace Engine
 {
     PrimitiveMesh PrimitiveMeshes::BoxMesh;
@@ -118,9 +117,13 @@ namespace Engine
     {
         glm::mat4 model = glm::translate(glm::mat4(1.0f), position);
         model *= glm::toMat4(rotation);
-        model = glm::scale(model, glm::vec3(width, height, depth) * 0.5f);
 
-        PrimitiveMesh result = BoxMesh;
+        PrimitiveMesh result;
+        result.Vertices = BoxMesh.Vertices;
+        result.Indices = BoxMesh.Indices;
+
+        for (auto& v : result.Vertices)
+            v *= glm::vec3(width * 0.5f, height * 0.5f, depth * 0.5f);
         for (auto& v : result.Vertices)
             v = glm::vec3(model * glm::vec4(v, 1.0f));
         return result;
@@ -129,9 +132,13 @@ namespace Engine
     PrimitiveMesh PrimitiveMeshes::GetSphereMesh(const glm::vec3& position, float radius)
     {
         glm::mat4 model = glm::translate(glm::mat4(1.0f), position);
-        model = glm::scale(model, glm::vec3(radius));
 
-        PrimitiveMesh result = SphereMesh;
+        PrimitiveMesh result;
+        result.Vertices = SphereMesh.Vertices;
+        result.Indices = SphereMesh.Indices;
+
+        for (auto& v : result.Vertices)
+            v *= radius;
         for (auto& v : result.Vertices)
             v = glm::vec3(model * glm::vec4(v, 1.0f));
         return result;
@@ -142,9 +149,13 @@ namespace Engine
     {
         glm::mat4 model = glm::translate(glm::mat4(1.0f), position);
         model *= glm::toMat4(rotation);
-        model = glm::scale(model, glm::vec3(radius, height * 0.5f, radius));
 
-        PrimitiveMesh result = CapsuleMesh;
+        PrimitiveMesh result;
+        result.Vertices = CapsuleMesh.Vertices;
+        result.Indices = CapsuleMesh.Indices;
+
+        for (auto& v : result.Vertices)
+            v *= glm::vec3(radius, height * 0.5f, radius);
         for (auto& v : result.Vertices)
             v = glm::vec3(model * glm::vec4(v, 1.0f));
         return result;
