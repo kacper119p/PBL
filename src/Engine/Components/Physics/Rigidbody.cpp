@@ -73,7 +73,7 @@ namespace Engine
             return;
 
         ApplyGravity(glm::vec3(0.0f, -9.81f, 0.0f));
-
+        ComputeGravityTorqueFromVertices();
         lastPosition = transform->GetPosition();
         lastRotation = transform->GetRotation();
 
@@ -101,7 +101,6 @@ namespace Engine
         if (constraints.freezeRotationZ)
             newAngularVelocity.z = 0.0f;
 
-        // Quaternion integration:
         glm::quat rotation = transform->GetRotation();
         glm::quat deltaRot = glm::quat(0, newAngularVelocity.x, newAngularVelocity.y, newAngularVelocity.z) * rotation;
         deltaRot *= 0.5f * deltaTime;
@@ -117,119 +116,10 @@ namespace Engine
             AddForce(frictionForce, ForceMode::Force);
         }
 
-        TryAlignToCollisionNormal(deltaTime);
-
         accumulatedForce = glm::vec3(0.0f);
         accumulatedTorque = glm::vec3(0.0f);
     }
 
-    void Rigidbody::QuaternionToAxisAngle(const glm::quat& q, glm::vec3& out_axis, float& out_angle)
-    {
-        glm::quat normalized = glm::normalize(q);
-        out_angle = 2.0f * acosf(normalized.w);
-        float s = sqrtf(1.0f - normalized.w * normalized.w);
-
-        if (s < 0.001f)
-        {
-            out_axis = glm::vec3(1.0f, 0.0f, 0.0f);
-        }
-        else
-        {
-            out_axis = glm::vec3(normalized.x, normalized.y, normalized.z) / s;
-        }
-    }
-
-    glm::quat RotationBetweenVectors(const glm::vec3& start, const glm::vec3& dest)
-    {
-        glm::vec3 s = glm::normalize(start);
-        glm::vec3 d = glm::normalize(dest);
-
-        float cosTheta = glm::dot(s, d);
-        glm::vec3 rotationAxis;
-
-        if (cosTheta >= 1.0f - 1e-6f)
-            return glm::quat(1, 0, 0, 0);
-
-        if (cosTheta < -1.0f + 1e-6f)
-        {
-            rotationAxis = glm::cross(glm::vec3(0.0f, 0.0f, 1.0f), s);
-            if (glm::length(rotationAxis) < 1e-6f)
-                rotationAxis = glm::cross(glm::vec3(1.0f, 0.0f, 0.0f), s);
-
-            rotationAxis = glm::normalize(rotationAxis);
-            return glm::angleAxis(glm::pi<float>(), rotationAxis);
-        }
-
-        rotationAxis = glm::cross(s, d);
-        float s_val = sqrtf((1 + cosTheta) * 2);
-        float invs = 1 / s_val;
-
-        return glm::quat(s_val * 0.5f, rotationAxis.x * invs, rotationAxis.y * invs, rotationAxis.z * invs);
-    }
-
-    void Rigidbody::TryAlignToCollisionNormal(float deltaTime)
-    {
-        if (glm::length(velocity) > 0.1f || glm::length(accumulatedForce) > 0.1f ||
-            glm::length(accumulatedTorque) > 0.1f)
-        {
-            collisionNormalTimer = 0.0f;
-            return;
-        }
-
-        collisionNormalTimer += deltaTime;
-        if (collisionNormalTimer > collisionNormalTimeout)
-            return;
-
-        if (glm::length(lastCollisionNormal) < 0.01f)
-            return;
-
-        glm::vec3 normal = glm::normalize(lastCollisionNormal);
-
-        glm::quat rotation = transform->GetRotation();
-        glm::vec3 localX = rotation * glm::vec3(1, 0, 0);
-        glm::vec3 localY = rotation * glm::vec3(0, 1, 0);
-        glm::vec3 localZ = rotation * glm::vec3(0, 0, 1);
-
-        auto angleToAxis = [&](const glm::vec3& axis) -> float
-        {
-            float dotVal = glm::dot(normal, axis);
-            float absDot = fabs(dotVal);
-            return acosf(absDot);
-        };
-
-        float angleX = angleToAxis(localX);
-        float angleY = angleToAxis(localY);
-        float angleZ = angleToAxis(localZ);
-
-        float minAngle = angleX;
-        glm::vec3 targetAxis = localX;
-
-        if (angleY < minAngle)
-        {
-            minAngle = angleY;
-            targetAxis = localY;
-        }
-        if (angleZ < minAngle)
-        {
-            minAngle = angleZ;
-            targetAxis = localZ;
-        }
-
-        glm::quat rotCorrection = RotationBetweenVectors(targetAxis, normal);
-
-        float angle;
-        glm::vec3 axis;
-        QuaternionToAxisAngle(rotCorrection, axis, angle);
-
-        float maxAngle = glm::radians(30.0f) * deltaTime;
-        if (angle > maxAngle)
-            angle = maxAngle;
-
-        glm::quat limitedCorrection = glm::angleAxis(angle, axis);
-
-        glm::quat newRotation = limitedCorrection * rotation;
-        transform->SetRotation(glm::normalize(newRotation));
-    }
 
     void Rigidbody::OnCollision(Rigidbody* other, const glm::vec3& contactPoint, const glm::vec3& contactNormal)
     {
@@ -268,9 +158,6 @@ namespace Engine
 
         angularVelocity += inverseInertiaTensor * glm::cross(rA, impulse);
         other->angularVelocity -= other->inverseInertiaTensor * glm::cross(rB, impulse);
-
-        SetLastCollisionNormal(contactNormal);
-        TryAlignToCollisionNormal(1.0f / 60.0f);
     }
 
     void Rigidbody::OnCollisionStatic(const glm::vec3& contactPoint, const glm::vec3& contactNormal)
@@ -296,16 +183,12 @@ namespace Engine
 
         lastCollisionNormal = normal;
         collisionNormalTimeout = 1.0f;
-        SetLastCollisionNormal(contactNormal);
-        TryAlignToCollisionNormal(1.0f / 60.0f);
     }
 
     void Rigidbody::Interpolate(float alpha)
     {
         if (!transform)
             return;
-
-        // Blend between previous and current transform to smooth jitter
         transform->SetPosition(glm::mix(lastPosition, transform->GetPosition(), alpha));
         transform->SetRotation(glm::slerp(lastRotation, transform->GetRotation(), alpha));
     }
@@ -319,11 +202,62 @@ namespace Engine
 
     void Rigidbody::OnDestroy() { RigidbodyUpdateManager::GetInstance()->UnregisterRigidbodyImmediate(this); }
 
-    void Rigidbody::SetLastCollisionNormal(const glm::vec3& normal)
+
+    void Rigidbody::ComputeGravityTorqueFromVertices()
     {
-        lastCollisionNormal = glm::normalize(normal);
-        collisionNormalTimer = 0.0f;
-        collisionNormalTimeout = 1.0f;
+        glm::mat4 modelMatrix = transform->GetLocalToWorldMatrix();
+
+        glm::vec3 localX = glm::normalize(glm::vec3(modelMatrix[0]));
+        glm::vec3 localY = glm::normalize(glm::vec3(modelMatrix[1]));
+        glm::vec3 localZ = glm::normalize(glm::vec3(modelMatrix[2]));
+
+        glm::vec3 gravityDir = glm::normalize(gravity);
+
+        struct AxisInfo
+        {
+            glm::vec3 axis;
+            float angle;
+        };
+        AxisInfo bestAxis = {localX, glm::degrees(glm::acos(glm::abs(glm::dot(localX, gravityDir))))};
+
+        float angleY = glm::degrees(glm::acos(glm::abs(glm::dot(localY, gravityDir))));
+        if (angleY < bestAxis.angle)
+            bestAxis = {localY, angleY};
+
+        float angleZ = glm::degrees(glm::acos(glm::abs(glm::dot(localZ, gravityDir))));
+        if (angleZ < bestAxis.angle)
+            bestAxis = {localZ, angleZ};
+
+        const float angleThreshold = 5.0f;
+        if (bestAxis.angle < angleThreshold)
+        {
+            const float angularVelocityThreshold = 0.01f;
+            if (glm::length(angularVelocity) < angularVelocityThreshold)
+                angularVelocity = glm::vec3(0.0f);
+            return;
+        }
+
+        glm::vec3 targetAxis = gravityDir;
+
+        float dotProd = glm::dot(bestAxis.axis, gravityDir);
+        if (dotProd < 0.0f)
+            targetAxis = -gravityDir;
+        glm::vec3 rotationAxis = glm::cross(bestAxis.axis, targetAxis);
+        if (glm::length(rotationAxis) < 0.001f)
+            return; 
+
+        rotationAxis = glm::normalize(rotationAxis);
+
+        float torqueStrength = glm::radians(bestAxis.angle) * 10.0f;
+
+        glm::vec3 correctiveTorque = rotationAxis * torqueStrength;
+
+        float dampingCoefficient = 0.1f;
+        glm::vec3 dampingTorque = -angularVelocity * dampingCoefficient;
+
+        glm::vec3 totalTorque = correctiveTorque + dampingTorque;
+
+        AddTorque(totalTorque, ForceMode::Force);
     }
 
 #if EDITOR

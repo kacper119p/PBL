@@ -67,6 +67,7 @@ namespace Engine
         glm::mat3 inertiaTensor;
         glm::mat3 inverseInertiaTensor;
 
+        glm::vec3 gravity = glm::vec3(0.0f, -9.81f, 0.0f); // default gravity vector
         glm::vec3 velocity;
         glm::vec3 angularVelocity;
 
@@ -94,6 +95,7 @@ namespace Engine
         float collisionNormalTimer; // odlicza czas od ostatniej kolizji
         void TryAlignToCollisionNormal(float deltaTime);
         void QuaternionToAxisAngle(const glm::quat& q, glm::vec3& out_axis, float& out_angle);
-
+        void ApplyUprightStabilization(float deltaTime);
+        void ComputeGravityTorqueFromVertices();
     };
 } // namespace Engine
