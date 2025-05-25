@@ -1,429 +1,401 @@
-#include "RigidBody.h"
-#include "Serialization/SerializationUtility.h"
-#include "Engine/Components/Transform.h" // Twoja klasa Transform
-#include "Engine/EngineObjects/RigidbodyUpdateManager.h"
+#include "Rigidbody.h"
+#include <algorithm>
+#include <glm/gtx/quaternion.hpp>
+#include <limits>
+#include "Engine/Components/Renderers/ModelRenderer.h"
 #include "Engine/EngineObjects/Entity.h"
-#include "Engine/Components/Colliders/Collider.h"
-
+#include "Engine/EngineObjects/RigidbodyUpdateManager.h"
+#include "Serialization/SerializationUtility.h"
+#include <iostream>
 namespace Engine
 {
-    RigidBody::RigidBody()
+
+    Rigidbody::Rigidbody() :
+        transform(nullptr), mesh(nullptr), mass(1.0f), inverseMass(1.0f), inertiaTensor(1.0f),
+        inverseInertiaTensor(1.0f), velocity(0.0f), angularVelocity(0.0f), linearDamping(0.01f), angularDamping(0.01f),
+        friction(0.5f), frictionEnabled(true), restitution(0.3f), accumulatedForce(0.0f), accumulatedTorque(0.0f),
+        lastPosition(0.0f), lastRotation(1, 0, 0, 0)
     {
-        mass = 1.0f;
-        inverseMass = 1.0f / mass;
-        restitution = 0.5f; // domyœlna wartoœæ restitucji
-        frictionCoefficient = 0.5f; // domyœlna wartoœæ wspó³czynnika tarcia
-        linearDamping = 0.99f; // domyœlne t³umienie liniowe
-        angularDamping = 0.99f; // domyœlne t³umienie k¹towe
-        inertiaTensorBody = glm::mat3(1.0f); // macierz bezw³adnoœci w uk³adzie cia³a
-        
-        lockPositionX = false;
-        lockPositionY = false;
-        lockPositionZ = false;
-        lockRotationX = false;
-        lockRotationY = false;
-        lockRotationZ = false;
     }
 
-
-    void RigidBody::UpdateInertiaTensorWorld()
+    void Rigidbody::SetMass(float m)
     {
-        glm::mat3 rotationMatrix = glm::mat3_cast(transform->GetRotation());
-        inverseInertiaTensorMatrix = glm::inverse(rotationMatrix * inertiaTensorBody * glm::transpose(rotationMatrix));
+        mass = m;
+        inverseMass = (mass > 0.0f) ? 1.0f / mass : 0.0f;
+        computeInertiaTensor();
     }
 
-    
-
-    void RigidBody::AddForce(const glm::vec3& force) { accumulatedForce += force; }
-
-    void RigidBody::AddTorque(const glm::vec3& torque) { accumulatedTorque += torque; }
-
-    void RigidBody::AddImpulse(const glm::vec3& impulse)
+    void Rigidbody::computeInertiaTensor()
     {
-        if (mass <= 0)
-            return; // nieruchome cia³o
+        float ix = (1.0f / 12.0f) * mass * (1.0f * 1.0f + 1.0f * 1.0f);
+        float iy = ix;
+        float iz = ix;
 
-        velocity += impulse / mass;
+        inertiaTensor = glm::vec3(ix, iy, iz);
+        inverseInertiaTensor =
+                glm::vec3(ix > 0.0f ? 1.0f / ix : 0.0f, iy > 0.0f ? 1.0f / iy : 0.0f, iz > 0.0f ? 1.0f / iz : 0.0f);
     }
 
-    void RigidBody::StabilizeIfUpright()
+    void Rigidbody::AddForce(const glm::vec3& force, ForceMode mode)
     {
-        glm::mat4 modelMatrix = transform->GetLocalToWorldMatrix();
-        glm::vec3 upLocal = glm::normalize(glm::vec3(modelMatrix[1])); // Y axis
-
-        glm::vec3 worldUp = glm::vec3(0, 1, 0);
-        float dot = glm::dot(upLocal, worldUp);
-        float angle = glm::acos(glm::clamp(dot, -1.0f, 1.0f)); // radians
-
-        if (glm::degrees(angle) < 45.0f)
+        if (mode == ForceMode::Force)
         {
-            // Stabilize: slerp back toward upright rotation
-            glm::quat currentRot = transform->GetRotation();
-            glm::quat uprightRot = glm::quatLookAt(glm::vec3(0, 0, -1), worldUp); // forward, up
-
-            // Avoid flipping when current rotation is close enough
-            glm::quat newRot = glm::slerp(currentRot, uprightRot, 4.0f); // smooth, tune factor
-            transform->SetRotation(glm::normalize(newRot));
+            accumulatedForce += force;
+        }
+        else if (mode == ForceMode::Impulse)
+        {
+            velocity += force * inverseMass;
         }
     }
 
-
-    void RigidBody::AddAngularImpulse(const glm::vec3& angularImpulse)
+    void Rigidbody::AddTorque(const glm::vec3& torque, ForceMode mode)
     {
-        angularVelocity += inverseInertiaTensorMatrix * angularImpulse;
-    }
-
-    void RigidBody::ApplyConstraints()
-    {
-
-        glm::vec3 pos = transform->GetPositionWorldSpace();
-        if (lockPositionX)
-            pos.x = 0.0f;
-        if (lockPositionY)
-            pos.y = 0.0f;
-        if (lockPositionZ)
-            pos.z = 0.0f;
-        transform->SetPositionWorldSpace(pos);
-
-        if (lockRotationX)
-            angularVelocity.x = 0.0f;
-        if (lockRotationY)
-            angularVelocity.y = 0.0f;
-        if (lockRotationZ)
-            angularVelocity.z = 0.0f;
-    }
-
-    void RigidBody::Start() {
-        transform = GetOwner()->GetTransform();
-        RigidbodyUpdateManager::GetInstance()->RegisterRigidbody(this);
-        
-        velocity = glm::vec3(0.0f);
-        angularVelocity = glm::vec3(0.0f);
-        accumulatedForce = glm::vec3(0.0f);
-        accumulatedTorque = glm::vec3(0.0f);
-        mass = std::max(mass, 0.001f); // zabezpieczenie
-
-        Collider* collider = GetOwner()->GetComponent<Collider>();
-        if (collider != nullptr)
+        if (mode == ForceMode::Force)
         {
-            inertiaTensorBody = collider->CalculateInertiaTensorBody(mass);
+            accumulatedTorque += torque;
         }
-
-        UpdateInertiaTensorWorld();
-        inverseInertiaTensorMatrix = glm::inverse(inertiaTensorBody);
-        ApplyConstraints();
+        else if (mode == ForceMode::Impulse)
+        {
+            angularVelocity += torque * inverseInertiaTensor;
+        }
     }
 
-    void RigidBody::OnDestroy() {
-        RigidbodyUpdateManager::GetInstance()->UnregisterRigidbody(this);
-    }
-
-    void RigidBody::Update(float deltaTime)
+    void Rigidbody::ApplyGravity(const glm::vec3& gravity)
     {
-        if (mass <= 0)
+        if (inverseMass > 0.0f)
+        {
+            AddForce(gravity * mass);
+        }
+    }
+
+    void Rigidbody::Update(float deltaTime)
+    {
+        if (!transform)
             return;
 
-        // Dodaj grawitacjê (tylko jeœli cia³o jest ruchome)
-        accumulatedForce += gravity * mass;
+        ApplyGravity(glm::vec3(0.0f, -9.81f, 0.0f));
 
-        glm::vec3 acceleration = accumulatedForce / mass;
-        glm::vec3 angularAcceleration = inverseInertiaTensorMatrix * accumulatedTorque;
+        lastPosition = transform->GetPosition();
+        lastRotation = transform->GetRotation();
 
+        glm::vec3 acceleration = accumulatedForce * inverseMass;
         velocity += acceleration * deltaTime;
+        velocity *= (1.0f - linearDamping);
+
+        glm::vec3 angularAcceleration = accumulatedTorque * inverseInertiaTensor;
         angularVelocity += angularAcceleration * deltaTime;
+        angularVelocity *= (1.0f - angularDamping);
 
-        velocity *= linearDamping;
-        angularVelocity *= angularDamping;
+        glm::vec3 newPosition = transform->GetPosition() + velocity * deltaTime;
+        if (constraints.freezePositionX)
+            newPosition.x = transform->GetPosition().x;
+        if (constraints.freezePositionY)
+            newPosition.y = transform->GetPosition().y;
+        if (constraints.freezePositionZ)
+            newPosition.z = transform->GetPosition().z;
 
-        glm::vec3 position = transform->GetPositionWorldSpace();
-        position += velocity * deltaTime;
-        
+        glm::vec3 newAngularVelocity = angularVelocity;
+        if (constraints.freezeRotationX)
+            newAngularVelocity.x = 0.0f;
+        if (constraints.freezeRotationY)
+            newAngularVelocity.y = 0.0f;
+        if (constraints.freezeRotationZ)
+            newAngularVelocity.z = 0.0f;
 
-        glm::quat rotation = transform->GetRotation();
+        glm::quat deltaRot = glm::quat(0, newAngularVelocity.x, newAngularVelocity.y, newAngularVelocity.z) *
+                             transform->GetRotation();
+        deltaRot *= 0.5f * deltaTime;
+        glm::quat updatedRot = transform->GetRotation() + deltaRot;
+        transform->SetRotation(glm::normalize(updatedRot));
 
-        glm::quat angularVelQuat(0.0f, angularVelocity.x, angularVelocity.y, angularVelocity.z);
-        glm::quat deltaRotation = 0.5f * angularVelQuat * rotation;
+        transform->SetPosition(newPosition);
+        angularVelocity = newAngularVelocity;
 
-        rotation += deltaRotation * deltaTime;
-        rotation = glm::normalize(rotation);
-
-       
+        if (frictionEnabled)
+        {
+            glm::vec3 frictionForce = -velocity * friction * mass;
+            AddForce(frictionForce, ForceMode::Force);
+        }
 
         accumulatedForce = glm::vec3(0.0f);
         accumulatedTorque = glm::vec3(0.0f);
 
-        ApplyConstraints();
-        
-        transform->SetPositionWorldSpace(position);
-        transform->SetRotation(rotation);
-
-        UpdateInertiaTensorWorld();
-        //ApplyUprightStabilization(); // Stabilizacja pionowa, jeœli potrzebna
-    }
-
-    void RigidBody::OnCollision_Static(const glm::vec3& contactPoint, const glm::vec3& collisionNormal)
-    {
-        float velocityAlongNormal = glm::dot(velocity, collisionNormal);
-
-        if (velocityAlongNormal > 0.0f)
-            return;
-
-        float invMass = (mass > 0.0f) ? 1.0f / mass : 0.0f;
-        if (invMass == 0.0f)
-            return;
-
-        // Mniejsza restitucja na statycznym pod³o¿u
-        float localRestitution = 0.05f;
-
-        float j = -(1.0f + localRestitution) * velocityAlongNormal;
-
-        // Limitowanie impulsu
-        const float maxImpulse = 5.0f;
-        if (j > maxImpulse)
-            j = maxImpulse;
-
-        glm::vec3 impulse = j * collisionNormal;
-        velocity += impulse * invMass;
-
-        // Dodatkowe t³umienie prêdkoœci liniowej
-        velocity *= 0.5f;
-
-        // T³umienie prêdkoœci k¹towej
-        angularVelocity *= 0.5f;
-
-        // Tarcie liniowe
-        glm::vec3 tangent = velocity - glm::dot(velocity, collisionNormal) * collisionNormal;
-        if (glm::length(tangent) > 0.0001f)
+        if (mesh)
         {
-            tangent = glm::normalize(tangent);
-            glm::vec3 frictionImpulse = -frictionCoefficient * tangent;
-            velocity += frictionImpulse * invMass;
+            SnapToGroundFace();
         }
-
-        // Korekcja pozycji mniejsz¹ wartoœci¹
-        const float penetrationDepth = 0.001f;
-        glm::vec3 pos = transform->GetPositionWorldSpace();
-        pos += collisionNormal * penetrationDepth;
-        transform->SetPositionWorldSpace(pos);
     }
 
-
-   void RigidBody::ResolvePenetration(RigidBody& other, const glm::vec3& collisionNormal, float penetrationDepth)
+    void Rigidbody::SnapToGroundFace()
     {
-        float invMassA = (mass > 0) ? 1.0f / mass : 0.0f;
-        float invMassB = (other.mass > 0) ? 1.0f / other.mass : 0.0f;
-        float totalInvMass = invMassA + invMassB;
-
-        if (totalInvMass == 0.0f || penetrationDepth <= 0.0f)
+        if (!transform || !mesh || mesh->VertexIndices.size() < 3)
             return;
 
-        // Penetration correction constants
-        const float k_slop = 0.01f;
-        const float k_percent = 0.8f;
+        float minAvgY = std::numeric_limits<float>::max();
+        glm::vec3 bestFaceWorldVerts[3];
 
-        float correctionMagnitude = std::max(penetrationDepth - k_slop, 0.0f) / totalInvMass * k_percent;
-        glm::vec3 correction = correctionMagnitude * collisionNormal;
-
-        glm::vec3 posA = transform->GetPositionWorldSpace();
-        glm::vec3 posB = other.GetOwner()->GetTransform()->GetPositionWorldSpace();
-
-        posA -= correction * invMassA;
-        posB += correction * invMassB;
-
-        transform->SetPositionWorldSpace(posA);
-        other.GetOwner()->GetTransform()->SetPositionWorldSpace(posB);
-
-        // Optional: stabilize orientation if nearly upright
-        StabilizeIfUpright();
-    }
-
-
-   void RigidBody::ApplyUprightStabilization()
-    {
-        // Próg k¹ta — jeœli odchylenie jest mniejsze ni¿ 45°, stabilizujemy
-        const float angleThreshold = glm::radians(45.0f);
-        const float torqueStrength = 5.0f; // Im wiêksza wartoœæ, tym szybciej siê stabilizuje
-
-        glm::vec3 upWorld = glm::vec3(0, 1, 0);
-        glm::vec3 bodyUp = transform->GetUp(); // np. glm::vec3(transform->GetMatrix()[1])
-
-        float angle = glm::acos(glm::clamp(glm::dot(upWorld, bodyUp), -1.0f, 1.0f));
-
-        if (angle < angleThreshold)
+        for (size_t i = 0; i + 2 < mesh->VertexIndices.size(); i += 3)
         {
-            glm::vec3 axis = glm::cross(bodyUp, upWorld);
-            if (glm::dot(axis, axis) > 1e-6f)
+            glm::vec3 worldVerts[3];
+
+            for (int j = 0; j < 3; ++j)
             {
-                axis = glm::normalize(axis);
-                glm::vec3 correctiveTorque = axis * angle * torqueStrength;
-                AddTorque(correctiveTorque); // Musisz mieæ wsparcie momentu obrotowego
+                int index = mesh->VertexIndices[i + j];
+                const glm::vec3& localPos = mesh->VerticesData[index].Position;
+                worldVerts[j] = transform->GetPosition() + transform->GetRotation() * localPos;
+            }
+
+            float y0 = worldVerts[0].y;
+            float y1 = worldVerts[1].y;
+            float y2 = worldVerts[2].y;
+            float avgY = (y0 + y1 + y2) / 3.0f;
+
+            float maxDeltaY = std::max({std::abs(y0 - y1), std::abs(y1 - y2), std::abs(y2 - y0)});
+
+            if (maxDeltaY < 0.01f && avgY < minAvgY)
+            {
+                minAvgY = avgY;
+                bestFaceWorldVerts[0] = worldVerts[0];
+                bestFaceWorldVerts[1] = worldVerts[1];
+                bestFaceWorldVerts[2] = worldVerts[2];
             }
         }
+
+        if (minAvgY == std::numeric_limits<float>::max())
+            return;
+
+        float minY = std::min({bestFaceWorldVerts[0].y, bestFaceWorldVerts[1].y, bestFaceWorldVerts[2].y});
+        float deltaY = 0.0f - minY;
+
+        glm::vec3 newPosition = transform->GetPosition();
+        newPosition.y += deltaY;
+        transform->SetPosition(newPosition);
+
+        if (velocity.y < 0.0f)
+            velocity.y = 0.0f;
+    }
+
+    void Rigidbody::OnCollision(Rigidbody* other, const glm::vec3& contactPoint, const glm::vec3& contactNormal)
+    {
+        if (!transform || !other || !other->transform)
+            return;
+
+        glm::vec3 rA = contactPoint - transform->GetPosition();
+        glm::vec3 rB = contactPoint - other->transform->GetPosition();
+
+        glm::vec3 vA = velocity + glm::cross(angularVelocity, rA);
+        glm::vec3 vB = other->velocity + glm::cross(other->angularVelocity, rB);
+        glm::vec3 relativeVelocity = vA - vB;
+
+        float relVelAlongNormal = glm::dot(relativeVelocity, contactNormal);
+        if (relVelAlongNormal > 0.0f)
+            return;
+
+        float e = std::min(restitution, other->restitution);
+
+        float invMassSum = inverseMass + other->inverseMass;
+
+        glm::vec3 rA_cross_n = glm::cross(rA, contactNormal);
+        glm::vec3 rB_cross_n = glm::cross(rB, contactNormal);
+
+        glm::vec3 Iinv_rA_cross_n =
+                inverseInertiaTensor * rA_cross_n;
+        glm::vec3 Iinv_rB_cross_n = other->inverseInertiaTensor * rB_cross_n;
+
+        float angularTerm = glm::dot(rA_cross_n, Iinv_rA_cross_n) + glm::dot(rB_cross_n, Iinv_rB_cross_n);
+
+        float j = -(1.0f + e) * relVelAlongNormal / (invMassSum + angularTerm);
+
+        glm::vec3 impulse = contactNormal * j;
+
+        velocity += impulse * inverseMass;
+        other->velocity -= impulse * other->inverseMass;
+
+        angularVelocity += inverseInertiaTensor * glm::cross(rA, impulse);
+        other->angularVelocity -= other->inverseInertiaTensor * glm::cross(rB, impulse);
     }
 
 
-    void RigidBody::ResolveCollisionVelocity(RigidBody& other, const glm::vec3& contactPoint,
-                                             const glm::vec3& collisionNormal)
+
+    void Rigidbody::OnCollisionStatic(const glm::vec3& contactPoint, const glm::vec3& contactNormal)
     {
-        Transform* otherTransform = other.GetOwner()->GetTransform();
-
-        glm::vec3 rA = contactPoint - transform->GetPositionWorldSpace();
-        glm::vec3 rB = contactPoint - otherTransform->GetPositionWorldSpace();
-
-        glm::vec3 vRel =
-                velocity + glm::cross(angularVelocity, rA) - other.velocity - glm::cross(other.angularVelocity, rB);
-
-        float e = std::min(restitution, other.restitution); // wsp. odbicia (mo¿na dobieraæ)
-
-        float invMassA = (mass > 0) ? 1.0f / mass : 0.0f;
-        float invMassB = (other.mass > 0) ? 1.0f / other.mass : 0.0f;
-
-        glm::mat3 rotationA = glm::mat3_cast(transform->GetRotation());
-        glm::mat3 rotationB = glm::mat3_cast(otherTransform->GetRotation());
-
-        // macierze inercji w przestrzeni œwiata
-        glm::mat3 invInertiaA = rotationA * inverseInertiaTensorMatrix * glm::transpose(rotationA);
-        glm::mat3 invInertiaB = rotationB * other.inverseInertiaTensorMatrix * glm::transpose(rotationB);
-
-        // momenty obrotowe
-        glm::vec3 raCrossN = glm::cross(rA, collisionNormal);
-        glm::vec3 rbCrossN = glm::cross(rB, collisionNormal);
-
-        float angularEffectA = glm::dot(raCrossN, invInertiaA * raCrossN);
-        float angularEffectB = glm::dot(rbCrossN, invInertiaB * rbCrossN);
-
-        float denominator = invMassA + invMassB + angularEffectA + angularEffectB;
-        if (denominator == 0.0f)
+        if (!transform)
             return;
 
-        float j = -(1.0f + e) * glm::dot(vRel, collisionNormal) / denominator;
+        glm::vec3 normal = glm::normalize(contactNormal);
+        float relativeNormalVelocity = glm::dot(velocity, normal);
 
-        glm::vec3 impulse = j * collisionNormal;
-
-        AddImpulse(impulse);
-        AddAngularImpulse(glm::cross(rA, impulse));
-
-        other.AddImpulse(-impulse);
-        other.AddAngularImpulse(glm::cross(rB, -impulse));
-
-        // Korekcja tarcia
-        glm::vec3 tangent = vRel - glm::dot(vRel, collisionNormal) * collisionNormal;
-        if (glm::length(tangent) > 0.0001f)
+        if (relativeNormalVelocity < 0.0f)
         {
-            tangent = glm::normalize(tangent);
-            float frictionImpulseMag = -frictionCoefficient * j;
-            glm::vec3 frictionImpulse = tangent * frictionImpulseMag;
+            velocity -= (1.0f + restitution) * relativeNormalVelocity * normal;
 
-            AddImpulse(frictionImpulse);
-            other.AddImpulse(-frictionImpulse);
+            if (glm::length(velocity) < 0.01f)
+            {
+                velocity = glm::vec3(0.0f);
+            }
+
+            glm::vec3 correction = (0.01f - glm::dot(transform->GetPosition() - contactPoint, normal)) * normal;
+            transform->SetPosition(transform->GetPosition() + correction);
         }
     }
 
-    void RigidBody::OnCollision(RigidBody& other, const glm::vec3& contactPoint, const glm::vec3& collisionNormal,
-                                float penetrationDepth)
-    {
-        // 1. Korekcja pozycji (penetracji)
-        ResolvePenetration(other, collisionNormal, penetrationDepth);
 
-        // 2. Korekcja prêdkoœci (impulsy)
-        ResolveCollisionVelocity(other, contactPoint, collisionNormal);
+    void Rigidbody::Interpolate(float alpha)
+    {
+        if (!transform)
+            return;
+
+        transform->SetPosition(glm::mix(lastPosition, transform->GetPosition(), alpha));
+        transform->SetRotation(glm::slerp(lastRotation, transform->GetRotation(), alpha));
     }
 
+    void Rigidbody::Start()
+    {
+        transform = GetOwner()->GetTransform();
+        mesh = GetOwner()->GetComponent<ModelRenderer>()->GetModel()->GetMesh(0);
+        RigidbodyUpdateManager::GetInstance()->RegisterRigidbody(this);
+    }
 
+    void Rigidbody::OnDestroy() 
+    { 
+        RigidbodyUpdateManager::GetInstance()->UnregisterRigidbodyImmediate(this);
+    }
 
 
 
     #if EDITOR
-    void RigidBody::DrawImGui()
+#include <imgui.h>
+
+    void Rigidbody::DrawImGui()
     {
-        if (ImGui::CollapsingHeader("RigidBody"))
+        ImGui::Text("Rigidbody Settings");
+
+        // Mass
+        if (ImGui::InputFloat("Mass", &mass, 0.1f, 1.0f, "%.3f"))
         {
-            ImGui::DragFloat("Mass", &mass, 0.1f, 0.0f, FLT_MAX);
-            inverseMass = (mass > 0.0f) ? 1.0f / mass : 0.0f;
+            if (mass < 0.0001f)
+                mass = 0.0001f; // unikamy zerowej masy
+            inverseMass = 1.0f / mass;
+            computeInertiaTensor();
+        }
 
-            ImGui::DragFloat("Restitution", &restitution, 0.01f, 0.0f, 1.0f);
-            ImGui::DragFloat("Friction", &frictionCoefficient, 0.01f, 0.0f, 10.0f);
+        // Linear Damping
+        ImGui::SliderFloat("Linear Damping", &linearDamping, 0.0f, 1.0f);
 
-            ImGui::DragFloat("Linear Damping", &linearDamping, 0.01f, 0.0f, 1.0f);
-            ImGui::DragFloat("Angular Damping", &angularDamping, 0.01f, 0.0f, 1.0f);
+        // Angular Damping
+        ImGui::SliderFloat("Angular Damping", &angularDamping, 0.0f, 1.0f);
 
-            if (ImGui::TreeNode("Constraints"))
+        // Friction Enabled
+        ImGui::Checkbox("Enable Friction", &frictionEnabled);
+
+        // Friction
+        if (frictionEnabled)
+            ImGui::SliderFloat("Friction", &friction, 0.0f, 1.0f);
+
+        // Restitution (bounciness)
+        ImGui::SliderFloat("Restitution", &restitution, 0.0f, 1.0f);
+
+        // Constraints group
+        if (ImGui::CollapsingHeader("Constraints"))
+        {
+            ImGui::Checkbox("Freeze Position X", &constraints.freezePositionX);
+            ImGui::Checkbox("Freeze Position Y", &constraints.freezePositionY);
+            ImGui::Checkbox("Freeze Position Z", &constraints.freezePositionZ);
+
+            ImGui::Checkbox("Freeze Rotation X", &constraints.freezeRotationX);
+            ImGui::Checkbox("Freeze Rotation Y", &constraints.freezeRotationY);
+            ImGui::Checkbox("Freeze Rotation Z", &constraints.freezeRotationZ);
+        }
+
+        // Transform (readonly)
+        if (transform)
+        {
+            ImGui::Separator();
+            ImGui::Text("Transform (readonly):");
+            glm::vec3 pos = transform->GetPosition();
+            glm::quat rot = transform->GetRotation();
+
+            ImGui::Text("Position: %.3f, %.3f, %.3f", pos.x, pos.y, pos.z);
+            ImGui::Text("Rotation (quat): %.3f, %.3f, %.3f, %.3f", rot.w, rot.x, rot.y, rot.z);
+        }
+
+        // Mesh selection
+        ImGui::Separator();
+        ImGui::Text("Mesh:");
+
+        // Za³ó¿my, ¿e masz dostêp do listy meshów w silniku, np:
+        // std::vector<Models::Mesh*> availableMeshes = GetAvailableMeshes();
+
+        static int currentMeshIndex = -1;
+        std::vector<Models::Mesh*> availableMeshes = /* pobierz listê meshów */;
+        std::vector<const char*> meshNames;
+        for (auto& m : availableMeshes)
+            meshNames.push_back(m->GetName().c_str());
+
+        if (mesh)
+        {
+            // ZnajdŸ index obecnego mesha w liœcie, jeœli nie znaleziony - -1
+            auto it = std::find(availableMeshes.begin(), availableMeshes.end(), mesh);
+            currentMeshIndex =
+                    (it != availableMeshes.end()) ? static_cast<int>(std::distance(availableMeshes.begin(), it)) : -1;
+        }
+        else
+        {
+            currentMeshIndex = -1;
+        }
+
+        if (ImGui::Combo("Select Mesh", &currentMeshIndex, meshNames.data(), static_cast<int>(meshNames.size())))
+        {
+            if (currentMeshIndex >= 0 && currentMeshIndex < (int) availableMeshes.size())
             {
-                bool posX = IsConstraintEnabled(Constraints::LockPositionX);
-                bool posY = IsConstraintEnabled(Constraints::LockPositionY);
-                bool posZ = IsConstraintEnabled(Constraints::LockPositionZ);
-
-                bool rotX = IsConstraintEnabled(Constraints::LockRotationX);
-                bool rotY = IsConstraintEnabled(Constraints::LockRotationY);
-                bool rotZ = IsConstraintEnabled(Constraints::LockRotationZ);
-
-                if (ImGui::Checkbox("Lock Position X", &posX))
-                    posX ? AddConstraint(Constraints::LockPositionX) : RemoveConstraint(Constraints::LockPositionX);
-                if (ImGui::Checkbox("Lock Position Y", &posY))
-                    posY ? AddConstraint(Constraints::LockPositionY) : RemoveConstraint(Constraints::LockPositionY);
-                if (ImGui::Checkbox("Lock Position Z", &posZ))
-                    posZ ? AddConstraint(Constraints::LockPositionZ) : RemoveConstraint(Constraints::LockPositionZ);
-
-                if (ImGui::Checkbox("Lock Rotation X", &rotX))
-                    rotX ? AddConstraint(Constraints::LockRotationX) : RemoveConstraint(Constraints::LockRotationX);
-                if (ImGui::Checkbox("Lock Rotation Y", &rotY))
-                    rotY ? AddConstraint(Constraints::LockRotationY) : RemoveConstraint(Constraints::LockRotationY);
-                if (ImGui::Checkbox("Lock Rotation Z", &rotZ))
-                    rotZ ? AddConstraint(Constraints::LockRotationZ) : RemoveConstraint(Constraints::LockRotationZ);
-
-                ImGui::TreePop();
+                mesh = availableMeshes[currentMeshIndex];
+            }
+            else
+            {
+                mesh = nullptr;
             }
         }
     }
     #endif
 
-     rapidjson::Value RigidBody::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+
+    rapidjson::Value Rigidbody::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
 
         START_COMPONENT_SERIALIZATION
-        SERIALIZE_FIELD(mass);
-        SERIALIZE_FIELD(inertiaTensor);
-        SERIALIZE_FIELD(inverseInertiaTensor);
-        SERIALIZE_FIELD(linearDamping);
-        SERIALIZE_FIELD(angularDamping);
-        SERIALIZE_FIELD(frictionCoefficient);
-        SERIALIZE_FIELD(restitution);
-        SERIALIZE_FIELD(inverseMass);
-        SERIALIZE_FIELD(lockPositionX);
-        SERIALIZE_FIELD(lockPositionY);
-        SERIALIZE_FIELD(lockPositionZ);
-        SERIALIZE_FIELD(lockRotationX);
-        SERIALIZE_FIELD(lockRotationY);
-        SERIALIZE_FIELD(lockRotationZ);
+        SERIALIZE_FIELD(mass)
+        SERIALIZE_FIELD(inverseMass)
+        SERIALIZE_FIELD(inertiaTensor)
+        SERIALIZE_FIELD(inverseInertiaTensor)
+        SERIALIZE_FIELD(linearDamping)
+        SERIALIZE_FIELD(angularDamping)
+        SERIALIZE_FIELD(friction)
+        SERIALIZE_FIELD(frictionEnabled)
+        SERIALIZE_FIELD(restitution)  
         END_COMPONENT_SERIALIZATION
     }
 
-    void RigidBody::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
+    void Rigidbody::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
-        DESERIALIZE_VALUE(mass);
-        DESERIALIZE_VALUE(inertiaTensor);
-        DESERIALIZE_VALUE(inverseInertiaTensor);
-        DESERIALIZE_VALUE(linearDamping);
-        DESERIALIZE_VALUE(angularDamping);
-        DESERIALIZE_VALUE(frictionCoefficient);
-        DESERIALIZE_VALUE(restitution);
-        DESERIALIZE_VALUE(inverseMass);
-        DESERIALIZE_VALUE(lockPositionX);
-        DESERIALIZE_VALUE(lockPositionY);
-        DESERIALIZE_VALUE(lockPositionZ);
-        DESERIALIZE_VALUE(lockRotationX);
-        DESERIALIZE_VALUE(lockRotationY);
-        DESERIALIZE_VALUE(lockRotationZ);
+        DESERIALIZE_VALUE(mass)
+        DESERIALIZE_VALUE(inverseMass)
+        DESERIALIZE_VALUE(inertiaTensor)
+        DESERIALIZE_VALUE(inverseInertiaTensor)
+        DESERIALIZE_VALUE(linearDamping)
+        DESERIALIZE_VALUE(angularDamping)
+        DESERIALIZE_VALUE(friction) 
+        DESERIALIZE_VALUE(frictionEnabled)
+        DESERIALIZE_VALUE(restitution)
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 
-    void RigidBody::DeserializeReferencesPass(const rapidjson::Value& Object,
-                                                Serialization::ReferenceTable& ReferenceMap)
+    void Rigidbody::DeserializeReferencesPass(const rapidjson::Value& Object,
+                                              Serialization::ReferenceTable& ReferenceMap)
     {
-
         START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
         DESERIALIZE_POINTER(transform)
+        DESERIALIZE_POINTER(mesh)
         END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 

@@ -13,21 +13,25 @@ namespace Engine
 
         if (input.IsKeyPressed(GLFW_KEY_W))
         {
-            GetOwner()->GetComponent<RigidBody>()->AddForce(GetOwner()->GetTransform()->GetForward() * Speed);
+            GetOwner()->GetComponent<Rigidbody>()->AddForce(GetOwner()->GetTransform()->GetForward() * Speed);
         }
             
         if (input.IsKeyPressed(GLFW_KEY_S))
         {
-            GetOwner()->GetComponent<RigidBody>()->AddForce(-GetOwner()->GetTransform()->GetForward() * Speed);
+            GetOwner()->GetComponent<Rigidbody>()->AddForce(-GetOwner()->GetTransform()->GetForward() * Speed);
         }
         if (input.IsKeyPressed(GLFW_KEY_A))
         {
-            GetOwner()->GetComponent<RigidBody>()->AddForce(-GetOwner()->GetTransform()->GetRight() * Speed);
+            GetOwner()->GetComponent<Rigidbody>()->AddForce(-GetOwner()->GetTransform()->GetRight() * Speed);
         }
             
         if (input.IsKeyPressed(GLFW_KEY_D))
         {
-            GetOwner()->GetComponent<RigidBody>()->AddForce(GetOwner()->GetTransform()->GetRight() * Speed);
+            GetOwner()->GetComponent<Rigidbody>()->AddForce(GetOwner()->GetTransform()->GetRight() * Speed);
+        }
+        if (input.IsKeyPressed(GLFW_KEY_Q))
+        {
+            GetOwner()->GetComponent<Rigidbody>()->AddTorque(GetOwner()->GetTransform()->GetLeft() * Speed);
         }
 
         #endif

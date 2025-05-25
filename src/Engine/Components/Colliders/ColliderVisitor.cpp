@@ -760,20 +760,21 @@ namespace Engine
                 if (!result.hasCollision)
                     return;
 
+                
                 float penetrationDepth = result.penetrationDepth;
                 glm::vec3 normal = result.collisionNormal;
                 glm::vec3 contactPoint = result.collisionPoint;
 
-                Engine::RigidBody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::RigidBody>();
-                Engine::RigidBody* otherRB = box.GetOwner()->GetComponent<Engine::RigidBody>();
+                Engine::Rigidbody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::Rigidbody>();
+                Engine::Rigidbody* otherRB = box.GetOwner()->GetComponent<Engine::Rigidbody>();
 
                 if (thisRB && otherRB)
                 {
-                    thisRB->OnCollision(*otherRB, contactPoint, normal, result.penetrationDepth);
+                    thisRB->OnCollision(otherRB, contactPoint, normal);
                 }
                 else if (thisRB)
                 {
-                    thisRB->OnCollision_Static(contactPoint, normal);
+                    thisRB->OnCollisionStatic(contactPoint, normal);
                 }
 
                 glm::vec3 separation = GetSeparationBoxBox(box, *boxCollider);
@@ -1053,6 +1054,7 @@ namespace Engine
                 continue;
 
             collider->AcceptCollision(*this);
+            
         }
     }
 } // namespace Engine

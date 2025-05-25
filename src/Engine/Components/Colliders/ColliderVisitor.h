@@ -68,6 +68,8 @@ namespace Engine
 
         void EmitTrigger(Collider* Collider) const;
 
+         std::vector<CollisionResult> contacts;
+        
     protected:
         Collider* currentCollider;
 

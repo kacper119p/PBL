@@ -87,15 +87,9 @@ namespace Scene
 
         secondBoxEntity->AddComponent<Engine::MovementComponent>();
         
-        Engine::RigidBody* rb2 = secondBoxEntity2->AddComponent<Engine::RigidBody>();
-        Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();
+        Engine::Rigidbody* rb2 = secondBoxEntity2->AddComponent<Engine::Rigidbody>();
+        Engine::Rigidbody* rb = secondBoxEntity->AddComponent<Engine::Rigidbody>();
 
-       
-        rb2->SetMass(0.1f);
-
-        rb->SetLinearDamping(.9f);
-        rb->SetRestitution(0.1f);
-        rb->frictionCoefficient = 0.1f;
 
         CameraFollow::GetInstance().SetTarget(secondBoxEntity);
         #endif
