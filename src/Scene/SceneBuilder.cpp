@@ -92,15 +92,17 @@ namespace Scene
 
         secondBoxEntity->AddComponent<Engine::MovementComponent>();
         
-        Engine::RigidBody* rb2 = secondBoxEntity2->AddComponent<Engine::RigidBody>();
-        Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();
+        Engine::Rigidbody* rb2 = secondBoxEntity2->AddComponent<Engine::Rigidbody>();
+        Engine::Rigidbody* rb = secondBoxEntity->AddComponent<Engine::Rigidbody>();
 
-        rb2->SetRestitution(5.0f);
-        rb2->SetMass(0.1f);
-
-        rb->SetLinearDamping(.05f);
-        rb->AddConstraint(Engine::RigidBody::Constraints::LockRotationX);
-        rb->AddConstraint(Engine::RigidBody::Constraints::LockRotationZ);
+        Engine::Entity* triggerBoxEntity = Scene->SpawnEntity(nullptr);
+        Engine::SphereCollider* triggerBoxCollider = triggerBoxEntity->AddComponent<Engine::SphereCollider>();
+        triggerBoxCollider->SetRadius(1.0f);
+        triggerBoxEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 2.1f, 0.0f));
+        triggerBoxCollider->SetTrigger(true);
+        Engine::ModelRenderer* modelTrigger = triggerBoxEntity->AddComponent<Engine::ModelRenderer>();
+        modelTrigger->SetModel(Models::ModelManager::GetModel("./res/models/SphereLowPoly.fbx"));
+        modelTrigger->SetMaterial(Materials::MaterialManager::GetMaterial("./res/materials/SampleScene/Default.mat"));
 
         CameraFollow::GetInstance().SetTarget(secondBoxEntity);
         */

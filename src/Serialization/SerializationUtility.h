@@ -152,7 +152,7 @@ namespace Serialization
     void Deserialize(const rapidjson::Value& Object, const char* const Name, T*& Value,
                      std::unordered_map<GUID, SerializedObject*, GuidHasher>& ReferenceMap)
     {
-        static_assert(std::is_base_of_v<SerializedObject, T>);
+        // static_assert(std::is_base_of_v<SerializedObject, T>);
 
         SerializedObject* result;
         Deserialize(Object, Name, result, ReferenceMap);

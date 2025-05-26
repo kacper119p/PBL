@@ -28,6 +28,21 @@ namespace Engine
 #endif
     }
 
+    void BoxCollider::Start() 
+    { 
+        Collider::Start();
+        mesh = PrimitiveMeshes::GetInstance().GetBoxMesh(transform->GetPosition(), transform->GetRotation(), _width, _height, _depth);
+    }
+
+    PrimitiveMesh* BoxCollider::GetMesh()
+    
+    {
+        mesh = PrimitiveMeshes::GetInstance().GetBoxMesh(transform->GetPosition(), transform->GetRotation(),
+                                                              _width, _height, _depth);
+        return &mesh;
+    }
+    
+
     bool BoxCollider::AcceptCollision(ColliderVisitor& visitor)
     {
         visitor.ResolveCollisionBox(*this);
@@ -85,15 +100,13 @@ namespace Engine
         END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 
-    glm::mat3 BoxCollider::CalculateInertiaTensor(float mass) const
+    glm::mat3 BoxCollider::CalculateInertiaTensorBody(float mass) const
     {
-        float w = _width;
-        float h = _height;
-        float d = _depth;
-        float coeff = (1.0f / 12.0f) * mass;
+        float ix = (1.0f / 12.0f) * mass * (_height * _height + _depth * _depth);
+        float iy = (1.0f / 12.0f) * mass * (_width * _width + _depth * _depth);
+        float iz = (1.0f / 12.0f) * mass * (_width * _width + _height * _height);
 
-        return glm::mat3(coeff * (h * h + d * d), 0.0f, 0.0f, 0.0f, coeff * (w * w + d * d), 0.0f, 0.0f, 0.0f,
-                         coeff * (w * w + h * h));
+        return glm::mat3(ix, 0.0f, 0.0f, 0.0f, iy, 0.0f, 0.0f, 0.0f, iz);
     }
 
 #if EDITOR

@@ -1,13 +1,14 @@
 ﻿#pragma once
 
+#include "ColliderVisitor.h"
 #include <cmath>
 #include <glm/glm.hpp>
 #include <glm/gtx/norm.hpp>
 #include <glm/gtx/transform.hpp>
 #include "BoxCollider.h"
 #include "CapsuleCollider.h"
-#include "ColliderVisitor.h"
 #include "Engine/Components/Physics/Rigidbody.h"
+#include "Engine/EngineObjects/Entity.h"
 #include "SpatialPartitioning.h"
 #include "SphereCollider.h"
 #include "spdlog/spdlog.h"
@@ -41,7 +42,6 @@ namespace Engine
 
         return distance <= (projectionA + projectionB);
     }
-
 
     CollisionResult ColliderVisitor::CheckBoxBoxCollision(const BoxCollider& box1, const BoxCollider& box2)
     {
@@ -83,7 +83,8 @@ namespace Engine
                             glm::cross(aZ, bZ)};
 
         float minPenetration = std::numeric_limits<float>::max();
-        glm::vec3 collisionNormal;
+        glm::vec3 collisionNormal(0.0f);
+
         for (const glm::vec3& axis : axes)
         {
             if (glm::length2(axis) < 1e-6f)
@@ -96,32 +97,40 @@ namespace Engine
                 return result;
             }
 
-            float penetration =
-                    glm::abs(glm::dot(toCenter, normAxis)) -
-                    (glm::abs(glm::dot(normAxis, aX)) * half1.x + glm::abs(glm::dot(normAxis, aY)) * half1.y +
-                     glm::abs(glm::dot(normAxis, aZ)) * half1.z + glm::abs(glm::dot(normAxis, bX)) * half2.x +
-                     glm::abs(glm::dot(normAxis, bY)) * half2.y + glm::abs(glm::dot(normAxis, bZ)) * half2.z);
+            float projectedRadius1 = glm::abs(glm::dot(normAxis, aX)) * half1.x +
+                                     glm::abs(glm::dot(normAxis, aY)) * half1.y +
+                                     glm::abs(glm::dot(normAxis, aZ)) * half1.z;
+
+            float projectedRadius2 = glm::abs(glm::dot(normAxis, bX)) * half2.x +
+                                     glm::abs(glm::dot(normAxis, bY)) * half2.y +
+                                     glm::abs(glm::dot(normAxis, bZ)) * half2.z;
+
+            float distance = glm::abs(glm::dot(toCenter, normAxis));
+            float penetration = projectedRadius1 + projectedRadius2 - distance;
 
             if (abs(penetration) < abs(minPenetration))
             {
                 minPenetration = penetration;
                 collisionNormal = normAxis;
+                if (glm::dot(toCenter, collisionNormal) < 0.0f)
+                    collisionNormal = -collisionNormal;
             }
         }
 
         result.hasCollision = true;
-        result.penetrationDepth = -minPenetration;
+        result.penetrationDepth = minPenetration;
         result.collisionNormal = collisionNormal;
-        result.collisionPoint = center1 + collisionNormal * (box1.GetWidth() * 0.5f); // optional, depends on usage
+
+        result.collisionPoint =
+                center1 + collisionNormal * (glm::dot(toCenter, collisionNormal) - minPenetration * 0.5f);
 
         return result;
     }
 
-
-    CollisionResult ColliderVisitor::CheckBoxSphereCollision(const BoxCollider& box,
-                                                             const SphereCollider& sphere)
+    CollisionResult ColliderVisitor::CheckBoxSphereCollision(const BoxCollider& box, const SphereCollider& sphere)
     {
         CollisionResult result;
+        result.hasCollision = false;
 
         const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
         const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
@@ -161,22 +170,31 @@ namespace Engine
         if (distanceSquared <= (worldRadius * worldRadius))
         {
             result.hasCollision = true;
+
+            glm::vec3 collisionNormal = sphereCenter - closestPoint;
+            float dist = glm::length(collisionNormal);
+
+            if (dist > 1e-6f)
+                collisionNormal /= dist; // normalize
+            else
+                collisionNormal = glm::vec3(0, 1, 0); // fallback
+
+            result.collisionNormal = collisionNormal;
             result.collisionPoint = closestPoint;
-            result.collisionNormal = glm::normalize(closestPoint - sphereCenter);
+            result.penetrationDepth = worldRadius - dist;
         }
 
         return result;
     }
 
 
-    CollisionResult ColliderVisitor::CheckBoxCapsuleCollision(const BoxCollider& box,
-                                                              const CapsuleCollider& capsule)
+
+    CollisionResult ColliderVisitor::CheckBoxCapsuleCollision(const BoxCollider& box, const CapsuleCollider& capsule)
     {
         CollisionResult result;
         result.hasCollision = false;
 
         const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
-        const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
 
         glm::vec3 boxCenter = glm::vec3(boxTransform[3]);
         glm::vec3 xAxis = glm::normalize(glm::vec3(boxTransform[0]));
@@ -190,10 +208,11 @@ namespace Engine
         glm::vec3 halfExtents = glm::vec3(box.GetWidth() * 0.5f * scaleX, box.GetHeight() * 0.5f * scaleY,
                                           box.GetDepth() * 0.5f * scaleZ);
 
+        const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
         glm::vec3 capsuleCenter = glm::vec3(capsuleTransform[3]);
         glm::vec3 capsuleUp = glm::normalize(glm::vec3(capsuleTransform * glm::vec4(0, 1, 0, 0)));
 
-        float capsuleHalfHeight = (capsule.GetHeight() * 0.5f);
+        float capsuleHalfHeight = capsule.GetHeight() * 0.5f;
         glm::vec3 capsuleStart = capsuleCenter - capsuleUp * capsuleHalfHeight;
         glm::vec3 capsuleEnd = capsuleCenter + capsuleUp * capsuleHalfHeight;
         float capsuleRadius = capsule.GetRadius();
@@ -232,16 +251,27 @@ namespace Engine
         auto [capsuleP, boxP] = ClosestPointSegmentToOBB(capsuleStart, capsuleEnd);
         glm::vec3 delta = capsuleP - boxP;
         float distSq = glm::length2(delta);
+        float radiusSq = capsuleRadius * capsuleRadius;
 
-        if (distSq <= capsuleRadius * capsuleRadius)
+        if (distSq <= radiusSq)
         {
             result.hasCollision = true;
+
+            float dist = sqrt(distSq);
+            glm::vec3 collisionNormal;
+            if (dist > 1e-6f)
+                collisionNormal = delta / dist;
+            else
+                collisionNormal = glm::vec3(0, 1, 0); // fallback normal
+
+            result.collisionNormal = collisionNormal;
             result.collisionPoint = boxP;
-            result.collisionNormal = glm::length(delta) > 1e-6f ? glm::normalize(delta) : glm::vec3(0, 1, 0);
+            result.penetrationDepth = capsuleRadius - dist;
         }
 
         return result;
     }
+
 
 
     CollisionResult ColliderVisitor::CheckSphereSphereCollision(const SphereCollider& sphere1,
@@ -410,6 +440,7 @@ namespace Engine
         const glm::mat4& transform1 = box1.GetTransform()->GetLocalToWorldMatrix();
         const glm::mat4& transform2 = box2.GetTransform()->GetLocalToWorldMatrix();
 
+        // Half-extents bez dodatkowego mnożenia, bo GetWidth/Height/Depth to już wymiar ze skalą
         glm::vec3 halfExtents1 = glm::vec3(box1.GetWidth(), box1.GetHeight(), box1.GetDepth()) * 0.5f;
         glm::vec3 halfExtents2 = glm::vec3(box2.GetWidth(), box2.GetHeight(), box2.GetDepth()) * 0.5f;
 
@@ -419,17 +450,17 @@ namespace Engine
         glm::mat3 rot1 = glm::mat3(transform1);
         glm::mat3 rot2 = glm::mat3(transform2);
 
-        glm::vec3 axes1[3] = {rot1[0], rot1[1], rot1[2]};
-        glm::vec3 axes2[3] = {rot2[0], rot2[1], rot2[2]};
+        glm::vec3 axes1[3] = {glm::normalize(rot1[0]), glm::normalize(rot1[1]), glm::normalize(rot1[2])};
+        glm::vec3 axes2[3] = {glm::normalize(rot2[0]), glm::normalize(rot2[1]), glm::normalize(rot2[2])};
 
         glm::vec3 delta = center2 - center1;
 
         float minPenetration = std::numeric_limits<float>::max();
-        glm::vec3 smallestAxis = glm::vec3(0.0f);
+        glm::vec3 smallestAxis(0.0f);
 
         for (int i = 0; i < 3; ++i)
         {
-            glm::vec3 axis = glm::normalize(axes1[i]);
+            glm::vec3 axis = axes1[i];
             float proj1 = halfExtents1.x * glm::abs(glm::dot(axis, axes1[0])) +
                           halfExtents1.y * glm::abs(glm::dot(axis, axes1[1])) +
                           halfExtents1.z * glm::abs(glm::dot(axis, axes1[2]));
@@ -442,7 +473,7 @@ namespace Engine
             float overlap = proj1 + proj2 - distance;
 
             if (overlap < 0.0f)
-                return glm::vec3(0.0f); // no collision
+                return glm::vec3(0.0f);
 
             if (overlap < minPenetration)
             {
@@ -453,7 +484,7 @@ namespace Engine
 
         for (int i = 0; i < 3; ++i)
         {
-            glm::vec3 axis = glm::normalize(axes2[i]);
+            glm::vec3 axis = axes2[i];
             float proj1 = halfExtents1.x * glm::abs(glm::dot(axis, axes1[0])) +
                           halfExtents1.y * glm::abs(glm::dot(axis, axes1[1])) +
                           halfExtents1.z * glm::abs(glm::dot(axis, axes1[2]));
@@ -466,7 +497,7 @@ namespace Engine
             float overlap = proj1 + proj2 - distance;
 
             if (overlap < 0.0f)
-                return glm::vec3(0.0f); // no collision
+                return glm::vec3(0.0f);
 
             if (overlap < minPenetration)
             {
@@ -477,6 +508,7 @@ namespace Engine
 
         return smallestAxis * glm::max(0.0f, minPenetration);
     }
+
 
 
     glm::vec3 ColliderVisitor::GetSeparationBoxSphere(const BoxCollider& box, const SphereCollider& sphere)
@@ -589,8 +621,7 @@ namespace Engine
     }
 
 
-    glm::vec3 ColliderVisitor::GetSeparationSphereSphere(const SphereCollider& sphere1,
-                                                         const SphereCollider& sphere2)
+    glm::vec3 ColliderVisitor::GetSeparationSphereSphere(const SphereCollider& sphere1, const SphereCollider& sphere2)
     {
         glm::vec3 center1 = sphere1.GetTransform()->GetPosition();
         glm::vec3 center2 = sphere2.GetTransform()->GetPosition();
@@ -608,8 +639,7 @@ namespace Engine
     }
 
 
-    glm::vec3 ColliderVisitor::GetSeparationSphereCapsule(const SphereCollider& sphere,
-                                                          const CapsuleCollider& capsule)
+    glm::vec3 ColliderVisitor::GetSeparationSphereCapsule(const SphereCollider& sphere, const CapsuleCollider& capsule)
     {
         const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
         const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
@@ -736,62 +766,68 @@ namespace Engine
                 if (box.GetOwner() == boxCollider->GetOwner())
                     return;
 
-                if (box.IsTrigger())
-                {
-                    EmitTrigger(&box);
-                    return;
-                }
-
                 result = CheckBoxBoxCollision(box, *boxCollider);
                 box.isColliding = boxCollider->isColliding = result.hasCollision;
 
-                if (result.hasCollision)
+                if (!result.hasCollision)
+                    return;
+                
+                if (box.IsTrigger())
                 {
-                    float penetrationDepth = result.penetrationDepth;
-
-                    if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
-                    {
-                        Engine::RigidBody* otherRB = nullptr;
-                        if (box.GetOwner()->GetComponent<Engine::RigidBody>())
-                            otherRB = box.GetOwner()->GetComponent<Engine::RigidBody>();
-
-                        currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, penetrationDepth, otherRB);
-                    }
-
-                    //glm::vec3 separation = GetSeparationBoxBox(box, *boxCollider);
-                    glm::vec3 separation = result.collisionNormal * result.penetrationDepth * 0.8f; // 80% for damping
-
-                    Engine::RigidBody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::RigidBody>();
-                    Engine::RigidBody* boxRB = box.GetOwner()->GetComponent<Engine::RigidBody>();
-                    if (thisRB && boxRB)
-                    {
-                        float invMassSum = thisRB->inverseMass + boxRB->inverseMass;
-                        if (invMassSum > 0.0f)
-                        {
-                            glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
-                            glm::vec3 correctionOther = -separation * (boxRB->inverseMass / invMassSum);
-
-                            currentCollider->GetTransform()->SetPosition(
-                                    currentCollider->GetTransform()->GetPosition() + correctionThis);
-                            box.GetTransform()->SetPosition(box.GetTransform()->GetPosition() + correctionOther);
-                        }
-                    }
-                    else
-                    {
-                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
-                                                                     separation);
-                    }
-                    EmitCollision(&box);
+                    EmitTrigger(&box);
+                    return;
                 }
 
+                float penetrationDepth = result.penetrationDepth;
+                glm::vec3 normal = result.collisionNormal;
+                glm::vec3 contactPoint = result.collisionPoint;
+
+                Engine::Rigidbody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::Rigidbody>();
+                Engine::Rigidbody* otherRB = box.GetOwner()->GetComponent<Engine::Rigidbody>();
+
+                if (thisRB && otherRB)
+                {
+                    thisRB->OnCollision(otherRB, contactPoint, normal);
+                }
+                else if (thisRB)
+                {
+                    thisRB->OnCollisionStatic(contactPoint, normal);
+                }
+
+                glm::vec3 separation = GetSeparationBoxBox(box, *boxCollider);
+
+                if (thisRB && otherRB)
+                {
+                    float invMassSum = thisRB->inverseMass + otherRB->inverseMass;
+                    if (invMassSum > 0.0f)
+                    {
+                        glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
+
+                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                                                                     correctionThis);
+                    }
+                }
+                else if (thisRB)
+                {
+                    currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                                                                 separation);
+                }
+
+                EmitCollision(&box);
 
                 break;
             }
+
             case SPHERE:
             {
                 auto* sphere = reinterpret_cast<SphereCollider*>(this->currentCollider);
-                if (sphere->GetOwner() == box.GetOwner())
+                if (sphere->GetOwner() == box.GetOwner() || box.IsTrigger())
+                    return;
+
+                result = CheckBoxSphereCollision(box, *sphere);
+                box.isColliding = sphere->isColliding = result.hasCollision;
+
+                if (!result.hasCollision)
                     return;
 
                 if (box.IsTrigger())
@@ -800,102 +836,108 @@ namespace Engine
                     return;
                 }
 
-                result = CheckBoxSphereCollision(box, *sphere);
-                box.isColliding = sphere->isColliding = result.hasCollision;
-                if (result.hasCollision)
+                float penetrationDepth =
+                        result.penetrationDepth; // wartość trzeba obliczyć w CheckBoxSphereCollision lub tu
+                glm::vec3 normal = result.collisionNormal;
+                glm::vec3 contactPoint = result.collisionPoint;
+
+                Engine::Rigidbody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::Rigidbody>();
+                Engine::Rigidbody* otherRB = box.GetOwner()->GetComponent<Engine::Rigidbody>();
+
+                if (thisRB && otherRB)
                 {
-                    if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
-                    {
-                        Engine::RigidBody* otherRB = nullptr;
-                        if (box.GetOwner()->GetComponent<Engine::RigidBody>())
-                            otherRB = box.GetOwner()->GetComponent<Engine::RigidBody>();
-
-                        currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, result.penetrationDepth, otherRB);
-                    }
-
-                    glm::vec3 separation = GetSeparationBoxSphere(box, *sphere);
-
-                    Engine::RigidBody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::RigidBody>();
-                    Engine::RigidBody* boxRB = box.GetOwner()->GetComponent<Engine::RigidBody>();
-                    if (thisRB && boxRB)
-                    {
-                        float invMassSum = thisRB->inverseMass + boxRB->inverseMass;
-                        if (invMassSum > 0.0f)
-                        {
-                            glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
-                            glm::vec3 correctionOther = -separation * (boxRB->inverseMass / invMassSum);
-
-                            currentCollider->GetTransform()->SetPosition(
-                                    currentCollider->GetTransform()->GetPosition() + correctionThis);
-                            box.GetTransform()->SetPosition(box.GetTransform()->GetPosition() + correctionOther);
-                        }
-                    }
-                    else
-                    {
-                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
-                                                                     separation);
-                    }
-                    EmitCollision(&box);
+                    thisRB->OnCollision(otherRB, contactPoint, normal);
                 }
+                else if (thisRB)
+                {
+                    thisRB->OnCollisionStatic(contactPoint, normal);
+                }
+
+                glm::vec3 separation = GetSeparationBoxSphere(box, *sphere);
+
+                if (thisRB && otherRB)
+                {
+                    float invMassSum = thisRB->inverseMass + otherRB->inverseMass;
+                    if (invMassSum > 0.0f)
+                    {
+                        glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
+
+                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                                                                     correctionThis);
+                    }
+                }
+                else if (thisRB)
+                {
+                    currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                                                                 separation);
+                }
+
+                EmitCollision(&box);
 
                 break;
             }
+
             case CAPSULE:
             {
                 auto* capsule = reinterpret_cast<CapsuleCollider*>(this->currentCollider);
                 if (capsule->GetOwner() == box.GetOwner())
                     return;
 
+                result = CheckBoxCapsuleCollision(box, *capsule);
+                box.isColliding = capsule->isColliding = result.hasCollision;
+
+                if (!result.hasCollision)
+                    return;
+
                 if (box.IsTrigger())
                 {
                     EmitTrigger(&box);
                     return;
                 }
 
-                result = CheckBoxCapsuleCollision(box, *capsule);
-                box.isColliding = capsule->isColliding = result.hasCollision;
-                if (result.hasCollision)
+                float penetrationDepth =
+                        result.penetrationDepth; // analogicznie - może trzeba dodać do CheckBoxCapsuleCollision
+                glm::vec3 normal = result.collisionNormal;
+                glm::vec3 contactPoint = result.collisionPoint;
+
+                Engine::Rigidbody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::Rigidbody>();
+                Engine::Rigidbody* otherRB = box.GetOwner()->GetComponent<Engine::Rigidbody>();
+
+                if (thisRB && otherRB)
                 {
-                    if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
-                    {
-                        Engine::RigidBody* otherRB = nullptr;
-                        if (box.GetOwner()->GetComponent<Engine::RigidBody>())
-                            otherRB = box.GetOwner()->GetComponent<Engine::RigidBody>();
-
-                        currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, result.penetrationDepth, otherRB);
-                    }
-
-                    glm::vec3 separation = GetSeparationBoxCapsule(box, *capsule);
-
-                    Engine::RigidBody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::RigidBody>();
-                    Engine::RigidBody* boxRB = box.GetOwner()->GetComponent<Engine::RigidBody>();
-                    if (thisRB && boxRB)
-                    {
-                        float invMassSum = thisRB->inverseMass + boxRB->inverseMass;
-                        if (invMassSum > 0.0f)
-                        {
-                            glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
-                            glm::vec3 correctionOther = -separation * (boxRB->inverseMass / invMassSum);
-
-                            currentCollider->GetTransform()->SetPosition(
-                                    currentCollider->GetTransform()->GetPosition() + correctionThis);
-                            box.GetTransform()->SetPosition(box.GetTransform()->GetPosition() + correctionOther);
-                        }
-                    }
-                    else
-                    {
-                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
-                                                                     separation);
-                    }
-                    EmitCollision(&box);
+                    thisRB->OnCollision(otherRB, contactPoint, normal);
                 }
+                else if (thisRB)
+                {
+                    thisRB->OnCollisionStatic(contactPoint, normal);
+                }
+
+                glm::vec3 separation = GetSeparationBoxCapsule(box, *capsule);
+
+                if (thisRB && otherRB)
+                {
+                    float invMassSum = thisRB->inverseMass + otherRB->inverseMass;
+                    if (invMassSum > 0.0f)
+                    {
+                        glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
+
+                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                                                                     correctionThis);
+                    }
+                }
+                else if (thisRB)
+                {
+                    currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                                                                 separation);
+                }
+
+                EmitCollision(&box);
 
                 break;
             }
         }
     }
+
 
 
     void ColliderVisitor::ResolveCollisionSphere(SphereCollider& sphere)
@@ -910,6 +952,12 @@ namespace Engine
                 auto* box = reinterpret_cast<BoxCollider*>(this->currentCollider);
                 if (box->GetOwner() == sphere.GetOwner())
                     return;
+                result = CheckBoxSphereCollision(*box, sphere);
+
+                if (!result.hasCollision)
+                {
+                    return;
+                }
 
                 if (sphere.IsTrigger())
                 {
@@ -917,42 +965,17 @@ namespace Engine
                     return;
                 }
 
-                result = CheckBoxSphereCollision(*box, sphere);
                 box->isColliding = sphere.isColliding = result.hasCollision;
                 if (result.hasCollision)
                 {
-                    if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
-                    {
-                        Engine::RigidBody* otherRB = nullptr;
-                        if (sphere.GetOwner()->GetComponent<Engine::RigidBody>())
-                            otherRB = sphere.GetOwner()->GetComponent<Engine::RigidBody>();
 
-                        currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, result.penetrationDepth, otherRB);
-                    }
 
                     glm::vec3 separation = GetSeparationBoxSphere(*box, sphere);
 
-                    Engine::RigidBody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::RigidBody>();
-                    Engine::RigidBody* boxRB = sphere.GetOwner()->GetComponent<Engine::RigidBody>();
-                    if (thisRB && boxRB)
-                    {
-                        float invMassSum = thisRB->inverseMass + boxRB->inverseMass;
-                        if (invMassSum > 0.0f)
-                        {
-                            glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
-                            glm::vec3 correctionOther = -separation * (boxRB->inverseMass / invMassSum);
 
-                            currentCollider->GetTransform()->SetPosition(
-                                    currentCollider->GetTransform()->GetPosition() + correctionThis);
-                            sphere.GetTransform()->SetPosition(sphere.GetTransform()->GetPosition() + correctionOther);
-                        }
-                    }
-                    else
-                    {
-                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
-                                                                     separation);
-                    }
+                    currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                                                                 separation);
+
                     EmitCollision(&sphere);
                 }
 
@@ -964,48 +987,30 @@ namespace Engine
                 if (otherSphere->GetOwner() == sphere.GetOwner())
                     return;
 
+                result = CheckSphereSphereCollision(sphere, *otherSphere);
+
+                if (!result.hasCollision)
+                {
+                    return;
+                }
+
                 if (sphere.IsTrigger())
                 {
                     EmitTrigger(&sphere);
                     return;
                 }
 
-                result = CheckSphereSphereCollision(sphere, *otherSphere);
                 otherSphere->isColliding = sphere.isColliding = result.hasCollision;
                 if (result.hasCollision)
                 {
-                    if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
-                    {
-                        Engine::RigidBody* otherRB = nullptr;
-                        if (sphere.GetOwner()->GetComponent<Engine::RigidBody>())
-                            otherRB = sphere.GetOwner()->GetComponent<Engine::RigidBody>();
 
-                        currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, result.penetrationDepth, otherRB);
-                    }
 
                     glm::vec3 separation = GetSeparationSphereSphere(*otherSphere, sphere);
 
-                    Engine::RigidBody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::RigidBody>();
-                    Engine::RigidBody* boxRB = sphere.GetOwner()->GetComponent<Engine::RigidBody>();
-                    if (thisRB && boxRB)
-                    {
-                        float invMassSum = thisRB->inverseMass + boxRB->inverseMass;
-                        if (invMassSum > 0.0f)
-                        {
-                            glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
-                            glm::vec3 correctionOther = -separation * (boxRB->inverseMass / invMassSum);
 
-                            currentCollider->GetTransform()->SetPosition(
-                                    currentCollider->GetTransform()->GetPosition() + correctionThis);
-                            sphere.GetTransform()->SetPosition(sphere.GetTransform()->GetPosition() + correctionOther);
-                        }
-                    }
-                    else
-                    {
-                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
-                                                                     separation);
-                    }
+                    currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                                                                 separation);
+
                     EmitCollision(&sphere);
                 }
 
@@ -1017,6 +1022,11 @@ namespace Engine
                 if (capsule->GetOwner() == sphere.GetOwner())
                     return;
 
+                if (!result.hasCollision)
+                {
+                    return;
+                }
+
                 if (sphere.IsTrigger())
                 {
                     EmitTrigger(&sphere);
@@ -1027,38 +1037,12 @@ namespace Engine
                 capsule->isColliding = sphere.isColliding = result.hasCollision;
                 if (result.hasCollision)
                 {
-                    if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
-                    {
-                        Engine::RigidBody* otherRB = nullptr;
-                        if (sphere.GetOwner()->GetComponent<Engine::RigidBody>())
-                            otherRB = sphere.GetOwner()->GetComponent<Engine::RigidBody>();
-
-                        currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, result.penetrationDepth, otherRB);
-                    }
 
                     glm::vec3 separation = GetSeparationSphereCapsule(sphere, *capsule);
 
-                    Engine::RigidBody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::RigidBody>();
-                    Engine::RigidBody* boxRB = sphere.GetOwner()->GetComponent<Engine::RigidBody>();
-                    if (thisRB && boxRB)
-                    {
-                        float invMassSum = thisRB->inverseMass + boxRB->inverseMass;
-                        if (invMassSum > 0.0f)
-                        {
-                            glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
-                            glm::vec3 correctionOther = -separation * (boxRB->inverseMass / invMassSum);
+                    currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                                                                 separation);
 
-                            currentCollider->GetTransform()->SetPosition(
-                                    currentCollider->GetTransform()->GetPosition() + correctionThis);
-                            sphere.GetTransform()->SetPosition(sphere.GetTransform()->GetPosition() + correctionOther);
-                        }
-                    }
-                    else
-                    {
-                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
-                                                                     separation);
-                    }
                     EmitCollision(&sphere);
                 }
 
@@ -1081,49 +1065,28 @@ namespace Engine
                 if (box->GetOwner() == capsule.GetOwner())
                     return;
 
+                result = CheckBoxCapsuleCollision(*box, capsule);
+
+                if (!result.hasCollision)
+                {
+                    return;
+                }
+
                 if (capsule.IsTrigger())
                 {
                     EmitTrigger(&capsule);
                     return;
                 }
 
-                result = CheckBoxCapsuleCollision(*box, capsule);
                 box->isColliding = capsule.isColliding = result.hasCollision;
                 if (result.hasCollision)
                 {
-                    if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
-                    {
-                        Engine::RigidBody* otherRB = nullptr;
-                        if (capsule.GetOwner()->GetComponent<Engine::RigidBody>())
-                            otherRB = capsule.GetOwner()->GetComponent<Engine::RigidBody>();
-
-                        currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, result.penetrationDepth, otherRB);
-                    }
 
                     glm::vec3 separation = GetSeparationBoxCapsule(*box, capsule);
 
-                    Engine::RigidBody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::RigidBody>();
-                    Engine::RigidBody* boxRB = capsule.GetOwner()->GetComponent<Engine::RigidBody>();
-                    if (thisRB && boxRB)
-                    {
-                        float invMassSum = thisRB->inverseMass + boxRB->inverseMass;
-                        if (invMassSum > 0.0f)
-                        {
-                            glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
-                            glm::vec3 correctionOther = -separation * (boxRB->inverseMass / invMassSum);
+                    currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                                                                 separation);
 
-                            currentCollider->GetTransform()->SetPosition(
-                                    currentCollider->GetTransform()->GetPosition() + correctionThis);
-                            capsule.GetTransform()->
-                                    SetPosition(capsule.GetTransform()->GetPosition() + correctionOther);
-                        }
-                    }
-                    else
-                    {
-                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
-                                                                     separation);
-                    }
                     EmitCollision(&capsule);
                 }
 
@@ -1135,44 +1098,26 @@ namespace Engine
                 if (sphere->GetOwner() == capsule.GetOwner())
                     return;
 
+                result = CheckCapsuleSphereCollision(capsule, *sphere);
+
+                if (!result.hasCollision)
+                {
+                    return;
+                }
+
                 if (capsule.IsTrigger())
                 {
                     EmitTrigger(&capsule);
                     return;
                 }
 
-                result = CheckCapsuleSphereCollision(capsule, *sphere);
                 sphere->isColliding = capsule.isColliding = result.hasCollision;
                 if (result.hasCollision)
                 {
-                    if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
-                    {
-                        Engine::RigidBody* otherRB = nullptr;
-                        if (capsule.GetOwner()->GetComponent<Engine::RigidBody>())
-                            otherRB = capsule.GetOwner()->GetComponent<Engine::RigidBody>();
-
-                        currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, result.penetrationDepth, otherRB);
-                    }
 
                     glm::vec3 separation = GetSeparationSphereCapsule(*sphere, capsule);
-
-                    Engine::RigidBody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::RigidBody>();
-                    Engine::RigidBody* boxRB = capsule.GetOwner()->GetComponent<Engine::RigidBody>();
-                    if (thisRB && boxRB)
-                    {
-                        float invMassSum = thisRB->inverseMass + boxRB->inverseMass;
-                        if (invMassSum > 0.0f)
-                        {
-                            glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
-                            glm::vec3 correctionOther = -separation * (boxRB->inverseMass / invMassSum);
-
-                            currentCollider->GetTransform()->SetPosition(
-                                    currentCollider->GetTransform()->GetPosition() + correctionThis);
-                            capsule.GetTransform()->SetPosition(capsule.GetTransform()->GetPosition() +
-                                                                correctionOther);
-                        }
-                    }
+                    currentCollider->GetOwner()->GetTransform()->SetPosition(
+                            currentCollider->GetOwner()->GetTransform()->GetPosition() + separation);
                     EmitCollision(&capsule);
                 }
 
@@ -1184,44 +1129,26 @@ namespace Engine
                 if (otherCapsule->GetOwner() == capsule.GetOwner())
                     return;
 
+                result = CheckCapsuleCapsuleCollision(capsule, *otherCapsule);
+
+                if (!result.hasCollision)
+                {
+                    return;
+                }
+
                 if (capsule.IsTrigger())
                 {
                     EmitTrigger(&capsule);
                     return;
                 }
 
-                result = CheckCapsuleCapsuleCollision(capsule, *otherCapsule);
                 otherCapsule->isColliding = capsule.isColliding = result.hasCollision;
                 if (result.hasCollision)
                 {
-                    if (currentCollider->GetOwner()->GetComponent<Engine::RigidBody>())
-                    {
-                        Engine::RigidBody* otherRB = nullptr;
-                        if (capsule.GetOwner()->GetComponent<Engine::RigidBody>())
-                            otherRB = capsule.GetOwner()->GetComponent<Engine::RigidBody>();
-
-                        currentCollider->GetOwner()->GetComponent<Engine::RigidBody>()->OnCollision(
-                                result.collisionNormal, result.collisionPoint, result.penetrationDepth, otherRB);
-                    }
 
                     glm::vec3 separation = GetSeparationCapsuleCapsule(*otherCapsule, capsule);
-
-                    Engine::RigidBody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::RigidBody>();
-                    Engine::RigidBody* boxRB = capsule.GetOwner()->GetComponent<Engine::RigidBody>();
-                    if (thisRB && boxRB)
-                    {
-                        float invMassSum = thisRB->inverseMass + boxRB->inverseMass;
-                        if (invMassSum > 0.0f)
-                        {
-                            glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
-                            glm::vec3 correctionOther = -separation * (boxRB->inverseMass / invMassSum);
-
-                            currentCollider->GetTransform()->SetPosition(
-                                    currentCollider->GetTransform()->GetPosition() + correctionThis);
-                            capsule.GetTransform()->SetPosition(capsule.GetTransform()->GetPosition() +
-                                                                correctionOther);
-                        }
-                    }
+                    currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                                                                 separation);
                     EmitCollision(&capsule);
                 }
 
@@ -1245,6 +1172,7 @@ namespace Engine
                 continue;
 
             collider->AcceptCollision(*this);
+            
         }
     }
 } // namespace Engine

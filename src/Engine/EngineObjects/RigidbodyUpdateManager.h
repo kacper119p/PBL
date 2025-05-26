@@ -12,8 +12,8 @@ namespace Engine
     private:
         static RigidbodyUpdateManager* Instance;
 
-        std::vector<RigidBody*> Updateables;
-        std::vector<RigidBody*> Dead;
+        std::vector<Rigidbody*> Updateables;
+        std::vector<Rigidbody*> Dead;
 
     private:
         RigidbodyUpdateManager();
@@ -33,19 +33,19 @@ namespace Engine
          * @brief Registers a new RigidBody to be updated.
          * @param Rigidbody The RigidBody to be registered.
          */
-        inline void RegisterRigidbody(RigidBody* Rigidbody) { Updateables.push_back(Rigidbody); }
+        inline void RegisterRigidbody(Rigidbody* Rigidbody) { Updateables.push_back(Rigidbody); }
 
         /**
          * @brief Marks a RigidBody to stop being updated after the current frame.
          * @param Rigidbody The RigidBody to be unregistered.
          */
-        inline void UnregisterRigidbody(RigidBody* Rigidbody) { Dead.push_back(Rigidbody); }
+        inline void UnregisterRigidbody(Rigidbody* Rigidbody) { Dead.push_back(Rigidbody); }
 
         /**
          * @brief Immediately stops updating a RigidBody. Should not be used inside the update loop.
          * @param Rigidbody The RigidBody to be unregistered.
          */
-        inline void UnregisterRigidbodyImmediate(RigidBody* Rigidbody) { std::erase(Updateables, Rigidbody); }
+        inline void UnregisterRigidbodyImmediate(Rigidbody* Rigidbody) { std::erase(Updateables, Rigidbody); }
 
         /**
          * @brief Updates all registered RigidBody components.

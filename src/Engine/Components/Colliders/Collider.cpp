@@ -9,6 +9,7 @@
 #include "Engine/EngineObjects/Entity.h"
 #include <iostream>
 #include "Engine/Components/BaseMovement/MovementComponent.h"
+#include "Engine/EngineObjects/Entity.h"
 
 namespace Engine
 {

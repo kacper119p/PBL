@@ -38,6 +38,13 @@ namespace Engine
         return true;
     }
 
+    PrimitiveMesh* CapsuleCollider::GetMesh()
+    {
+        mesh = PrimitiveMeshes::GetInstance().GetCapsuleMesh(transform->GetPosition(), transform->GetRotation(), Radius,
+                                                             Height);
+        return &mesh;
+    }
+
     CapsuleCollider& CapsuleCollider::operator=(const CapsuleCollider& other)
     {
         if (this == &other)
@@ -84,17 +91,41 @@ namespace Engine
         END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 
-    glm::mat3 CapsuleCollider::CalculateInertiaTensor(float mass) const
+    glm::mat3 CapsuleCollider::CalculateInertiaTensorBody(float mass) const
     {
-        float r = Radius;
-        float h = Height;
+        float sphereVolume = (4.0f / 3.0f) * glm::pi<float>() * Radius * Radius * Radius;
+        float cylinderVolume = glm::pi<float>() * Radius * Radius * Height;
+        float totalVolume = cylinderVolume + sphereVolume;
 
-        float I_y = 0.5f * mass * r * r;
+        float cyl_mass = mass * (cylinderVolume / totalVolume);
+        float sphere_mass = mass * (sphereVolume / totalVolume);
 
-        float I_xz = (1.0f / 12.0f) * mass * (3.0f * r * r + h * h);
+        // Cylinder moment of inertia (oœ Y - d³ugoœæ)
+        float I_cyl_y = 0.5f * cyl_mass * Radius * Radius;
+
+        // Cylinder moment in osi X i Z (prostopad³e do osi cylindra)
+        float I_cyl_xz = (1.0f / 12.0f) * cyl_mass * (3 * Radius * Radius + Height * Height);
+
+        // Sphere moment of inertia (pe³na kula)
+        float I_sphere = (2.0f / 5.0f) * sphere_mass * Radius * Radius;
+
+        // Odleg³oœæ œrodka masy pó³kuli od œrodka kapsu³y (wzd³u¿ osi Y)
+        float halfHeight = Height / 2.0f;
+        float d = halfHeight +
+                  (3.0f / 8.0f) * Radius; // Œrodek masy pó³kuli od jej podstawy, wiêc od œrodka kapsu³y przesuniêcie
+
+        // Zasada Steinera - przesuniêcie momentu bezw³adnoœci pó³kuli do œrodka kapsu³y
+        float I_sphere_shift = sphere_mass * d * d;
+
+        // Sumujemy momenty dla osi Y (obrót wzd³u¿ osi d³ugiej kapsu³y)
+        float I_y = I_cyl_y + I_sphere;
+
+        // Sumujemy momenty dla osi X i Z (obrót prostopad³y do osi kapsu³y)
+        float I_xz = I_cyl_xz + I_sphere + I_sphere_shift;
 
         return glm::mat3(I_xz, 0.0f, 0.0f, 0.0f, I_y, 0.0f, 0.0f, 0.0f, I_xz);
     }
+
 
 #if EDITOR
     void CapsuleCollider::DrawDebugMesh(const CameraRenderData& RenderData)

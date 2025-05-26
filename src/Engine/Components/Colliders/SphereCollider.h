@@ -31,11 +31,13 @@ namespace Engine
         ~SphereCollider() override;
 
     public:
-        virtual bool AcceptCollision(ColliderVisitor& visitor) override;
+        bool AcceptCollision(ColliderVisitor& visitor) override;
 
         inline virtual Collider* GetInstance() override { return this; }
 
-        virtual glm::mat3 CalculateInertiaTensor(float mass) const override;
+        glm::mat3 CalculateInertiaTensorBody(float mass) const override;
+
+        PrimitiveMesh* GetMesh();
 
         glm::vec3 GetBoundingBox() const override { return glm::vec3(2.0f * radius); }
 

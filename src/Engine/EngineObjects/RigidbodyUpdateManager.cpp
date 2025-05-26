@@ -17,7 +17,7 @@ namespace Engine
 
     void RigidbodyUpdateManager::Update(float DeltaTime)
     {
-        for (RigidBody* rigidbody : Updateables)
+        for (Rigidbody* rigidbody : Updateables)
         {
             if (rigidbody)
             {
@@ -25,7 +25,7 @@ namespace Engine
             }
         }
 
-        for (RigidBody* rigidbody : Dead)
+        for (Rigidbody* rigidbody : Dead)
         {
             std::erase(Updateables, rigidbody);
         }
