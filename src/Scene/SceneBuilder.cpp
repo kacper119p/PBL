@@ -66,10 +66,10 @@ namespace Scene
 
         Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
         secondBoxEntity->GetTransform()->SetPosition(glm::vec3(2.0f, 7.0f, 0.0f));
-        secondBoxCollider->SetWidth(2.0f);
-        secondBoxCollider->SetHeight(2.0f);
-        secondBoxCollider->SetDepth(2.0f);
-
+        secondBoxCollider->SetWidth(1.0f);
+        secondBoxCollider->SetHeight(3.0f);
+        secondBoxCollider->SetDepth(1.0f);
+        secondBoxEntity->GetTransform()->SetScale(glm::vec3(.5f, 1.5f, .5f));
         Engine::Entity* secondBoxEntity2 = Scene->SpawnEntity(nullptr);
         Engine::BoxCollider* secondBoxCollider2 = secondBoxEntity2->AddComponent<Engine::BoxCollider>();
 
@@ -90,6 +90,14 @@ namespace Scene
         Engine::Rigidbody* rb2 = secondBoxEntity2->AddComponent<Engine::Rigidbody>();
         Engine::Rigidbody* rb = secondBoxEntity->AddComponent<Engine::Rigidbody>();
 
+        Engine::Entity* triggerBoxEntity = Scene->SpawnEntity(nullptr);
+        Engine::SphereCollider* triggerBoxCollider = triggerBoxEntity->AddComponent<Engine::SphereCollider>();
+        triggerBoxCollider->SetRadius(1.0f);
+        triggerBoxEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 2.1f, 0.0f));
+        triggerBoxCollider->SetTrigger(true);
+        Engine::ModelRenderer* modelTrigger = triggerBoxEntity->AddComponent<Engine::ModelRenderer>();
+        modelTrigger->SetModel(Models::ModelManager::GetModel("./res/models/SphereLowPoly.fbx"));
+        modelTrigger->SetMaterial(Materials::MaterialManager::GetMaterial("./res/materials/SampleScene/Default.mat"));
 
         CameraFollow::GetInstance().SetTarget(secondBoxEntity);
         #endif

@@ -766,17 +766,17 @@ namespace Engine
                 if (box.GetOwner() == boxCollider->GetOwner())
                     return;
 
-                if (box.IsTrigger())
-                {
-                    EmitTrigger(&box);
-                    return;
-                }
-
                 result = CheckBoxBoxCollision(box, *boxCollider);
                 box.isColliding = boxCollider->isColliding = result.hasCollision;
 
                 if (!result.hasCollision)
                     return;
+                
+                if (box.IsTrigger())
+                {
+                    EmitTrigger(currentCollider);
+                    return;
+                }
 
                 float penetrationDepth = result.penetrationDepth;
                 glm::vec3 normal = result.collisionNormal;
@@ -821,20 +821,20 @@ namespace Engine
             case SPHERE:
             {
                 auto* sphere = reinterpret_cast<SphereCollider*>(this->currentCollider);
-                if (sphere->GetOwner() == box.GetOwner())
+                if (sphere->GetOwner() == box.GetOwner() || box.IsTrigger())
                     return;
-
-                if (box.IsTrigger())
-                {
-                    EmitTrigger(&box);
-                    return;
-                }
 
                 result = CheckBoxSphereCollision(box, *sphere);
                 box.isColliding = sphere->isColliding = result.hasCollision;
 
                 if (!result.hasCollision)
                     return;
+
+                if (box.IsTrigger())
+                {
+                    EmitTrigger(currentCollider);
+                    return;
+                }
 
                 float penetrationDepth =
                         result.penetrationDepth; // wartość trzeba obliczyć w CheckBoxSphereCollision lub tu
@@ -883,17 +883,17 @@ namespace Engine
                 if (capsule->GetOwner() == box.GetOwner())
                     return;
 
-                if (box.IsTrigger())
-                {
-                    EmitTrigger(&box);
-                    return;
-                }
-
                 result = CheckBoxCapsuleCollision(box, *capsule);
                 box.isColliding = capsule->isColliding = result.hasCollision;
 
                 if (!result.hasCollision)
                     return;
+
+                if (box.IsTrigger())
+                {
+                    EmitTrigger(currentCollider);
+                    return;
+                }
 
                 float penetrationDepth =
                         result.penetrationDepth; // analogicznie - może trzeba dodać do CheckBoxCapsuleCollision
@@ -952,14 +952,19 @@ namespace Engine
                 auto* box = reinterpret_cast<BoxCollider*>(this->currentCollider);
                 if (box->GetOwner() == sphere.GetOwner())
                     return;
+                result = CheckBoxSphereCollision(*box, sphere);
 
-                if (sphere.IsTrigger())
+                if (!result.hasCollision)
                 {
-                    EmitTrigger(&sphere);
                     return;
                 }
 
-                result = CheckBoxSphereCollision(*box, sphere);
+                if (sphere.IsTrigger())
+                {
+                    EmitTrigger(currentCollider);
+                    return;
+                }
+
                 box->isColliding = sphere.isColliding = result.hasCollision;
                 if (result.hasCollision)
                 {
@@ -982,13 +987,19 @@ namespace Engine
                 if (otherSphere->GetOwner() == sphere.GetOwner())
                     return;
 
-                if (sphere.IsTrigger())
+                result = CheckSphereSphereCollision(sphere, *otherSphere);
+
+                if (!result.hasCollision)
                 {
-                    EmitTrigger(&sphere);
                     return;
                 }
 
-                result = CheckSphereSphereCollision(sphere, *otherSphere);
+                if (sphere.IsTrigger())
+                {
+                    EmitTrigger(currentCollider);
+                    return;
+                }
+
                 otherSphere->isColliding = sphere.isColliding = result.hasCollision;
                 if (result.hasCollision)
                 {
@@ -1011,9 +1022,14 @@ namespace Engine
                 if (capsule->GetOwner() == sphere.GetOwner())
                     return;
 
+                if (!result.hasCollision)
+                {
+                    return;
+                }
+
                 if (sphere.IsTrigger())
                 {
-                    EmitTrigger(&sphere);
+                    EmitTrigger(currentCollider);
                     return;
                 }
 
@@ -1049,13 +1065,19 @@ namespace Engine
                 if (box->GetOwner() == capsule.GetOwner())
                     return;
 
-                if (capsule.IsTrigger())
+                result = CheckBoxCapsuleCollision(*box, capsule);
+
+                if (!result.hasCollision)
                 {
-                    EmitTrigger(&capsule);
                     return;
                 }
 
-                result = CheckBoxCapsuleCollision(*box, capsule);
+                if (capsule.IsTrigger())
+                {
+                    EmitTrigger(currentCollider);
+                    return;
+                }
+
                 box->isColliding = capsule.isColliding = result.hasCollision;
                 if (result.hasCollision)
                 {
@@ -1076,13 +1098,19 @@ namespace Engine
                 if (sphere->GetOwner() == capsule.GetOwner())
                     return;
 
-                if (capsule.IsTrigger())
+                result = CheckCapsuleSphereCollision(capsule, *sphere);
+
+                if (!result.hasCollision)
                 {
-                    EmitTrigger(&capsule);
                     return;
                 }
 
-                result = CheckCapsuleSphereCollision(capsule, *sphere);
+                if (capsule.IsTrigger())
+                {
+                    EmitTrigger(currentCollider);
+                    return;
+                }
+
                 sphere->isColliding = capsule.isColliding = result.hasCollision;
                 if (result.hasCollision)
                 {
@@ -1101,13 +1129,19 @@ namespace Engine
                 if (otherCapsule->GetOwner() == capsule.GetOwner())
                     return;
 
-                if (capsule.IsTrigger())
+                result = CheckCapsuleCapsuleCollision(capsule, *otherCapsule);
+
+                if (!result.hasCollision)
                 {
-                    EmitTrigger(&capsule);
                     return;
                 }
 
-                result = CheckCapsuleCapsuleCollision(capsule, *otherCapsule);
+                if (capsule.IsTrigger())
+                {
+                    EmitTrigger(currentCollider);
+                    return;
+                }
+
                 otherCapsule->isColliding = capsule.isColliding = result.hasCollision;
                 if (result.hasCollision)
                 {
