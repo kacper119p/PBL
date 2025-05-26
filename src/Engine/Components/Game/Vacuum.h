@@ -26,7 +26,6 @@ public:
     void SetMaxVolume(int newMaxVolume) { maxVolume = newMaxVolume; }
     void Update(float deltaTime) override;
     
-    Engine::SphereCollider* collider = ;
 
     #if EDITOR
     void DrawImGui() override;
