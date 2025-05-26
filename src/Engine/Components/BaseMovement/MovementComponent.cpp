@@ -52,7 +52,7 @@ namespace Engine
         }
         else if (isLeftBackward && isRightBackward)
         {
-            CurrentVelocity = -Speed * (1 - smooth) + 1 * smooth;
+            CurrentVelocity = -(Speed * (1 - smooth) + 1 * smooth);
         }
         else if ((isLeftBackward || isRightBackward)&&!(isLeftForward||isRightForward))
         {
@@ -61,7 +61,7 @@ namespace Engine
             glm::quat rotation = transform->GetRotation() * glm::angleAxis(glm::radians(angle), glm::vec3(0, 1, 0));
 
             // Move slightly forward in the rotated direction
-            CurrentVelocity = -Speed * 0.2 * (1 - smooth) + 1 * smooth;
+            CurrentVelocity = -(Speed * 0.2 * (1 - smooth) + 1 * smooth);
 
 
             transform->SetEulerAngles(glm::degrees(glm::eulerAngles(rotation)));

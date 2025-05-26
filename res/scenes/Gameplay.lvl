@@ -8,7 +8,7 @@
         },
         "max": {
             "x": 20.0,
-            "y": 0.10000000149011612,
+            "y": 1.2999999523162842,
             "z": 50.0
         }
     },
@@ -38,10 +38,17 @@
                 "y": 1.0,
                 "z": 1.0
             },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.0
+            },
             "Children": [
                 "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
                 "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000",
-                "{b22dbc67-1b19-4fce-9aea-744bbadec0a3}\u0000"
+                "{b22dbc67-1b19-4fce-9aea-744bbadec0a3}\u0000",
+                "{ad6ae354-b468-48d8-9aaa-341f42711ea2}\u0000"
             ],
             "Parent": null
         },
@@ -70,6 +77,12 @@
                     "x": 20.0,
                     "y": 0.10000000149011612,
                     "z": 50.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
@@ -120,6 +133,12 @@
                     "y": 1.0,
                     "z": 1.0
                 },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
@@ -160,6 +179,12 @@
                     "y": 0.10000000149011612,
                     "z": 20.0
                 },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
@@ -173,6 +198,55 @@
             "owner": "{c35a0c8d-f316-4d03-a4b8-c0d56621d727}\u0000",
             "Material": "./res/materials/SampleScene/Floor.mat",
             "Model": "./res/models/Box.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
+            "name": "Thrash 1",
+            "transform": {
+                "type": "Transform",
+                "id": "{ad6ae354-b468-48d8-9aaa-341f42711ea2}\u0000",
+                "owner": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.800000011920929,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{98cfb508-ecb7-4dc4-b9ef-a034cbae2cd6}\u0000",
+                "{1cd1c9fa-a67b-4632-b087-e77384e53cab}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{98cfb508-ecb7-4dc4-b9ef-a034cbae2cd6}\u0000",
+            "owner": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/models/Box.fbx"
+        },
+        {
+            "type": "Thrash",
+            "id": "{1cd1c9fa-a67b-4632-b087-e77384e53cab}\u0000",
+            "owner": true
         }
     ]
 }

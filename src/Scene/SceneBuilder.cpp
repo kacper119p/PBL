@@ -69,7 +69,7 @@ namespace Scene
         //Scene->GetPlayer()->AddComponent<Engine::RigidBody>();
         Scene->GetPlayer()->AddComponent<Engine::MovementComponent>();
         Scene->GetPlayer()->AddComponent<Engine::BoxCollider>();
-        Scene->GetPlayer()->GetTransform()->SetPosition(glm::vec3(0.0f, 7.0f, 4.0f));
+        Scene->GetPlayer()->GetTransform()->SetPosition(glm::vec3(0.0f, 1.0f, 4.0f));
 
         //secondBoxCollider->SetWidth(2.0f);
         //secondBoxCollider->SetHeight(2.0f);
