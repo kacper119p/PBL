@@ -33,7 +33,6 @@ namespace Engine
         #if EDITOR
         void DrawImGui() override
         {
-            // Implementacja GUI dla edytora (opcjonalna)
             char speedBuffer[32];
             snprintf(speedBuffer, sizeof(speedBuffer), "%.2f", Speed);
             ImGui::Text("MovementComponent: Speed = %s", speedBuffer);
