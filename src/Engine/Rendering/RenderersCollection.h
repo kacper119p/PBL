@@ -1,37 +1,87 @@
 #pragma once
+#include "Engine/Components/Renderers/ParticleEmitter.h"
 #include "Engine/Components/Renderers/Renderer.h"
 
 namespace Engine
 {
-    class RenderersCollection
+    template<class T>
+    class TRenderersCollection
     {
+    public:
+        struct Pair
+        {
+            Materials::Material* Material;
+            std::vector<T*> Renderers;
+
+            Pair(Materials::Material* Material) :
+                Material(Material),
+                Renderers(std::vector<T*>())
+            {
+            }
+
+            friend bool operator==(const Pair& Lhs, const Materials::Material* const Rhs)
+            {
+                return Lhs.Material == Rhs;
+            }
+
+            friend bool operator!=(const Pair& Lhs, const Materials::Material* const Rhs)
+            {
+                return !(Lhs == Rhs);
+            }
+        };
+
     private:
-        std::unordered_map<Materials::Material*, std::vector<Renderer*>> Renderers;
+        std::vector<Pair> Renderers;
 
     public:
-        void AddRenderer(Renderer* Renderer);
+        void AddRenderer(T* const Renderer)
+        {
+            const auto iterator = std::find(Renderers.begin(), Renderers.end(), Renderer->GetMaterial());
+            if (iterator != Renderers.end())
+            {
+                iterator->Renderers.emplace_back(Renderer);
+                return;
+            }
 
-        void RemoveRenderer(const Renderer* Renderer);
+            Pair& pair = Renderers.emplace_back(Renderer->GetMaterial());
+            pair.Renderers.emplace_back(Renderer);
+        }
+
+        void RemoveRenderer(const T* const Renderer)
+        {
+            const auto iterator = std::find(Renderers.begin(), Renderers.end(), Renderer->GetMaterial());
+            if (iterator != Renderers.end())
+            {
+                std::erase(iterator->Renderers, Renderer);
+                if (iterator->Renderers.empty())
+                {
+                    Renderers.erase(iterator);
+                }
+            }
+        }
 
     public:
-        [[nodiscard]] std::unordered_map<Materials::Material*, std::vector<Renderer*>>::iterator begin()
+        [[nodiscard]] typename std::vector<Pair>::iterator begin()
         {
             return Renderers.begin();
         }
 
-        [[nodiscard]] std::unordered_map<Materials::Material*, std::vector<Renderer*>>::iterator end()
+        [[nodiscard]] typename std::vector<Pair>::iterator end()
         {
             return Renderers.end();
         }
 
-        [[nodiscard]] std::unordered_map<Materials::Material*, std::vector<Renderer*>>::const_iterator begin() const
+        [[nodiscard]] typename std::vector<Pair>::const_iterator begin() const
         {
             return Renderers.begin();
         }
 
-        [[nodiscard]] std::unordered_map<Materials::Material*, std::vector<Renderer*>>::const_iterator end() const
+        [[nodiscard]] typename std::vector<Pair>::const_iterator end() const
         {
             return Renderers.end();
         }
     };
-} // Engine
+
+    typedef TRenderersCollection<Renderer> RenderersCollection;
+    typedef TRenderersCollection<ParticleEmitter> ParticleEmittersCollection;
+}

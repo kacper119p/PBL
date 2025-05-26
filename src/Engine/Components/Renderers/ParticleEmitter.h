@@ -11,7 +11,7 @@ namespace Engine
     /**
      * @brief Renders single particle system.
      */
-    class ParticleEmitter final : public Renderer, public IUpdateable
+    class ParticleEmitter final : public Component
     {
     private:
         struct Particle
@@ -51,13 +51,14 @@ namespace Engine
         };
 
     private:
+        Materials::Material* Material = nullptr;
         EmitterSettings Settings;
-        int MaxParticleCount = 0;
+        int32_t MaxParticleCount = 0;
 
         float Timer = 0.0f;
 
-        unsigned int ParticlesBuffer;
-        unsigned int FreelistBuffer;
+        uint32_t ParticlesBuffer;
+        uint32_t FreelistBuffer;
 
         uint32_t ParticlesToSpawnProperty;
         uint32_t DeltaTimeProperty;
@@ -107,19 +108,27 @@ namespace Engine
             ParticleEmitter::SpawnShader = SpawnShader;
         }
 
-    public:
+        /**
+         * @brief Sets material used by this emitter.
+         * @param Material A new material.
+         */
+        void SetMaterial(Materials::Material* Material);
+
+        /**
+         * @brief Returns Material used by this emitter.
+         */
+        [[nodiscard]] Materials::Material* GetMaterial() const
+        {
+            return Material;
+        }
+
         void Start() override;
 
-        void Update(float DeltaTime) override;
+        void DispatchSpawnShaders(float DeltaTime);
 
-        void RenderDepth(const CameraRenderData& RenderData) override;
+        void DispatchUpdateShaders(float DeltaTime);
 
-        void Render(const CameraRenderData& RenderData) override;
-
-        void RenderDirectionalShadows(const CameraRenderData& RenderData) override;
-
-        void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
-                                    const glm::mat4* SpaceTransformMatrices) override;
+        void Render(const CameraRenderData& RenderData);
 
     private:
         void SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const;

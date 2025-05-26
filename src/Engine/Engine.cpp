@@ -116,7 +116,7 @@ namespace Engine
             const CameraRenderData renderData(Camera->GetPosition(), Camera->GetTransform(),
                                               Camera->GetProjectionMatrix());
 
-            RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
+            RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight, deltaTime);
             AudioListener->UpdateListener();
 
 
@@ -342,8 +342,8 @@ namespace Engine
     void Engine::ImGuiRender()
     {
 #if EDITOR
-        //LightsGui::Draw();
-        //EditorGUI.Render(Frame, CurrentScene);
+    //LightsGui::Draw();
+    //EditorGUI.Render(Frame, CurrentScene);
 #endif
     }
 

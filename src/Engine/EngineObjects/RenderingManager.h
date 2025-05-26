@@ -1,6 +1,5 @@
 #pragma once
 
-#include <vector>
 #include <Engine/Rendering/RenderersCollection.h>
 
 #include "Engine/Components/Renderers/Renderer.h"
@@ -21,6 +20,7 @@ namespace Engine
         static uint8_t MultisampleLevel;
 
         RenderersCollection Renderers;
+        ParticleEmittersCollection ParticleEmitters;
         Ui::Ui* Ui = nullptr;
 
         static RenderingManager* Instance;
@@ -37,7 +37,7 @@ namespace Engine
         explicit RenderingManager(glm::ivec2 Resolution);
 
     public:
-        virtual ~RenderingManager();
+        ~RenderingManager();
 
     public:
         static void Initialize(glm::ivec2 Resolution);
@@ -61,6 +61,16 @@ namespace Engine
         void UnregisterRenderer(const Renderer* const Renderer)
         {
             Renderers.RemoveRenderer(Renderer);
+        }
+
+        void RegisterParticleEmitter(ParticleEmitter* const Renderer)
+        {
+            ParticleEmitters.AddRenderer(Renderer);
+        }
+
+        void UnregisterParticleEmitter(const ParticleEmitter* const Renderer)
+        {
+            ParticleEmitters.RemoveRenderer(Renderer);
         }
 
         void RegisterUi(Ui::Ui* const Ui)
@@ -87,7 +97,7 @@ namespace Engine
             return Frustum;
         }
 
-        void RenderAll(const CameraRenderData& RenderData, int ScreenWidth, int ScreenHeight);
+        void RenderAll(const CameraRenderData& RenderData, int ScreenWidth, int ScreenHeight, float DeltaTime);
 
         void RenderAllDirectionalShadowMap(const CameraRenderData& RenderData, unsigned int Target, unsigned int Width,
                                            unsigned int Height);
