@@ -3,6 +3,7 @@
 #include <cmath>
 #include <spdlog/spdlog.h>
 #include <iostream>
+#include <unordered_set>
 
 namespace Engine
 {
@@ -180,4 +181,52 @@ namespace Engine
         spdlog::info("Grid resized. New cell size: {}, New dimensions: ({}, {}, {})", cellSize, gridDimensions.x,
                      gridDimensions.y, gridDimensions.z);
     }
+
+    std::vector<Collider*> SpatialPartitioning::QuerySphere(const glm::vec3& position, float radius) const
+    {
+        std::vector<Collider*> result;
+
+        glm::vec3 minBounds = position - glm::vec3(radius);
+        glm::vec3 maxBounds = position + glm::vec3(radius);
+
+        glm::ivec3 minIndex = GetCellIndex(minBounds);
+        glm::ivec3 maxIndex = GetCellIndex(maxBounds);
+
+        std::unordered_set<Collider*> uniqueColliders;
+
+        for (int x = minIndex.x; x <= maxIndex.x; ++x)
+        {
+            for (int y = minIndex.y; y <= maxIndex.y; ++y)
+            {
+                for (int z = minIndex.z; z <= maxIndex.z; ++z)
+                {
+                    glm::ivec3 index(x, y, z);
+                    if (!IsValidIndex(index))
+                        continue;
+
+                    const auto& cell = grid[x][y][z];
+                    for (Collider* collider : cell)
+                    {
+                        if (!collider || uniqueColliders.count(collider))
+                            continue;
+
+                        // Opcjonalny wstêpny bounding-box check
+                        glm::vec3 colliderPos = collider->GetTransform()->GetPositionWorldSpace();
+                        float approxRange = glm::length(collider->GetBoundingBox()) * 0.5f;
+                        float totalRange = radius + approxRange;
+
+                        if (glm::distance2(position, colliderPos) <= totalRange * totalRange)
+                        {
+                            result.push_back(collider);
+                            uniqueColliders.insert(collider);
+                        }
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+
 } // namespace Engine

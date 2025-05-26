@@ -1160,7 +1160,6 @@ namespace Engine
 
     void ColliderVisitor::SetCurrentCollider(Collider* collider) { this->currentCollider = collider; }
 
-
     void ColliderVisitor::ManageCollisions()
     {
         if (!currentCollider || currentCollider->IsStatic())
@@ -1175,4 +1174,5 @@ namespace Engine
             
         }
     }
+
 } // namespace Engine

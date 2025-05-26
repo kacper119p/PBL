@@ -46,7 +46,6 @@ namespace Engine
         ColliderTypeE colliderType;
         Events::TEvent<Collider*> OnCollision;
         Events::TEvent<Collider*> OnTrigger;
-
         /// TODO: move those to protected and add getters + setters
         Transform* transform;
         ColliderVisitor colliderVisitor;
@@ -66,6 +65,11 @@ namespace Engine
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
 
         virtual glm::mat3 CalculateInertiaTensorBody(float mass) const = 0;
+
+        std::vector<Collider*> SphereOverlap(glm::vec3& position, float Radius) const 
+        {
+            return Spatial->QuerySphere(position, Radius);
+        }
 
         void SetTrigger(bool isTrigger)
         {
