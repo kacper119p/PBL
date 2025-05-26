@@ -774,7 +774,7 @@ namespace Engine
                 
                 if (box.IsTrigger())
                 {
-                    EmitTrigger(currentCollider);
+                    EmitTrigger(&box);
                     return;
                 }
 
@@ -832,7 +832,7 @@ namespace Engine
 
                 if (box.IsTrigger())
                 {
-                    EmitTrigger(currentCollider);
+                    EmitTrigger(&box);
                     return;
                 }
 
@@ -891,7 +891,7 @@ namespace Engine
 
                 if (box.IsTrigger())
                 {
-                    EmitTrigger(currentCollider);
+                    EmitTrigger(&box);
                     return;
                 }
 
@@ -961,7 +961,7 @@ namespace Engine
 
                 if (sphere.IsTrigger())
                 {
-                    EmitTrigger(currentCollider);
+                    EmitTrigger(&sphere);
                     return;
                 }
 
@@ -996,7 +996,7 @@ namespace Engine
 
                 if (sphere.IsTrigger())
                 {
-                    EmitTrigger(currentCollider);
+                    EmitTrigger(&sphere);
                     return;
                 }
 
@@ -1029,7 +1029,7 @@ namespace Engine
 
                 if (sphere.IsTrigger())
                 {
-                    EmitTrigger(currentCollider);
+                    EmitTrigger(&sphere);
                     return;
                 }
 
@@ -1074,7 +1074,7 @@ namespace Engine
 
                 if (capsule.IsTrigger())
                 {
-                    EmitTrigger(currentCollider);
+                    EmitTrigger(&capsule);
                     return;
                 }
 
@@ -1107,7 +1107,7 @@ namespace Engine
 
                 if (capsule.IsTrigger())
                 {
-                    EmitTrigger(currentCollider);
+                    EmitTrigger(&capsule);
                     return;
                 }
 
@@ -1138,7 +1138,7 @@ namespace Engine
 
                 if (capsule.IsTrigger())
                 {
-                    EmitTrigger(currentCollider);
+                    EmitTrigger(&capsule);
                     return;
                 }
 
