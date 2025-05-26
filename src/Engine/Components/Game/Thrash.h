@@ -2,7 +2,9 @@
 
 #include "../Component.h"
 #include "Serialization/SerializationUtility.h"
+#if EDITOR
 #include "imgui.h"
+#endif
 
 enum ThrashSize
 {
