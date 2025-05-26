@@ -27,7 +27,11 @@ namespace Engine
 
     Collider::~Collider()
     {
-        colliderVisitor.~ColliderVisitor();
+        colliderVisitor.~ColliderVisitor(); }
+
+    std::vector<Collider*> Collider::SphereOverlap(glm::vec3& position, float Radius) const
+    {
+        return SpatialPartitioning::GetInstance().QuerySphere(position, Radius);
     }
 
     Collider& Collider::operator=(const Collider& Other)

@@ -233,7 +233,8 @@
             },
             "components": [
                 "{98cfb508-ecb7-4dc4-b9ef-a034cbae2cd6}\u0000",
-                "{1cd1c9fa-a67b-4632-b087-e77384e53cab}\u0000"
+                "{1cd1c9fa-a67b-4632-b087-e77384e53cab}\u0000",
+                "{2b9bef5b-5d4b-43d8-97f2-c2714e4e4f15}\u0000"
             ]
         },
         {
@@ -246,7 +247,18 @@
         {
             "type": "Thrash",
             "id": "{1cd1c9fa-a67b-4632-b087-e77384e53cab}\u0000",
-            "owner": true
+            "owner": false
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{2b9bef5b-5d4b-43d8-97f2-c2714e4e4f15}\u0000",
+            "owner": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 1.0,
+            "_height": 1.0,
+            "_depth": 1.0
         }
     ]
 }

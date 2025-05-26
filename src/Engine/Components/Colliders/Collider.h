@@ -8,6 +8,7 @@
 #include "Engine/Components/Renderers/Renderer.h"
 #include "Events/Action.h"
 #include "PrimitiveMeshes.h"
+
 namespace Engine
 {
     class SpatialPartitioning;
@@ -66,10 +67,8 @@ namespace Engine
 
         virtual glm::mat3 CalculateInertiaTensorBody(float mass) const = 0;
 
-        std::vector<Collider*> SphereOverlap(glm::vec3& position, float Radius) const 
-        {
-            return Spatial->QuerySphere(position, Radius);
-        }
+        std::vector<Collider*> SphereOverlap(glm::vec3& position, float Radius) const;
+        
 
         void SetTrigger(bool isTrigger)
         {

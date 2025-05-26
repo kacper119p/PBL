@@ -30,6 +30,6 @@ namespace Engine
         std::vector<Collider*> GetPotentialCollisions(Collider* collider);
         void SetCellSize(float newCellSize);
         std::vector<glm::ivec3> GetOccupiedCells(const glm::vec3& position, const glm::vec3& size) const;
-        std::vector<Collider*> QuerySphere(const glm::vec3& position, float radius) const;
+        std::vector<Collider*> QuerySphere(glm::vec3& position, float radius) const;
     };
 } // namespace Engine

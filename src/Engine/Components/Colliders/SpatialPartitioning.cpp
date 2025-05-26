@@ -182,7 +182,7 @@ namespace Engine
                      gridDimensions.y, gridDimensions.z);
     }
 
-    std::vector<Collider*> SpatialPartitioning::QuerySphere(const glm::vec3& position, float radius) const
+    std::vector<Collider*> SpatialPartitioning::QuerySphere(glm::vec3& position, float radius) const
     {
         std::vector<Collider*> result;
 
