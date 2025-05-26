@@ -58,7 +58,7 @@ namespace Engine
         {
             float angle = (isLeftForward ? 1.0f : -1.0f) * RotationSpeed * deltaTime;
             glm::quat rotation = transform->GetRotation() * glm::angleAxis(glm::radians(angle), glm::vec3(0, 1, 0));
-            CurrentVelocity = 0.0f;
+            CurrentVelocity *= smooth;
             transform->SetEulerAngles(glm::degrees(glm::eulerAngles(rotation)));
         }
         else if ((isLeftBackward || isRightBackward)&&!(isLeftForward||isRightForward))
