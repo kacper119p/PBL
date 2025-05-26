@@ -2,6 +2,7 @@
 #include "Engine/EngineObjects/Entity.h"
 #include "Thrash.h"
 #include "Engine/EngineObjects/UpdateManager.h"
+#include "Engine/Components/Physics/Rigidbody.h"
 
 void Vacuum::Start() 
 { 
@@ -19,7 +20,8 @@ void Vacuum::Update(float deltaTime)
     {
         if (entities[i]->GetOwner()->GetComponent<Thrash>())
         {
-            continue;
+            glm::vec3 direction = position - entities[i]->GetOwner()->GetTransform()->GetPosition();
+            entities[i]->GetOwner()->GetComponent<Engine::Rigidbody>()->AddForce(direction, Engine::ForceMode::Force);
         }
     }
 }

@@ -80,6 +80,7 @@ namespace Scene
         playerVacuum->SetName("PlayerVacuum");
         Scene->GetPlayer()->GetTransform()->AddChild(playerVacuum->GetTransform());
         playerVacuum->AddComponent<Vacuum>();
+        playerVacuum->GetTransform()->SetPosition(glm::vec3(0.0f,0.0f,-3.0f));
 
         //secondBoxCollider->SetWidth(2.0f);
         //secondBoxCollider->SetHeight(2.0f);
