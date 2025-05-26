@@ -68,9 +68,12 @@ namespace Scene
         //Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
         Scene->GetPlayer()->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
         Scene->GetPlayer()->GetTransform()->AddChild(secondBoxEntity->GetTransform());
-        //Scene->GetPlayer()->AddComponent<Engine::RigidBody>();
+        Scene->GetPlayer()->AddComponent<Engine::Rigidbody>();
         Scene->GetPlayer()->AddComponent<Engine::MovementComponent>();
         Scene->GetPlayer()->AddComponent<Engine::BoxCollider>();
+        Scene->GetPlayer()->GetComponent<Engine::BoxCollider>()->SetWidth(2.0f);
+        Scene->GetPlayer()->GetComponent<Engine::BoxCollider>()->SetHeight(2.0f);
+        Scene->GetPlayer()->GetComponent<Engine::BoxCollider>()->SetDepth(2.0f);
         Scene->GetPlayer()->GetTransform()->SetPosition(glm::vec3(0.0f, 1.5f, 4.0f));
 
         Engine::Entity* playerVacuum = Scene->SpawnEntity(nullptr);

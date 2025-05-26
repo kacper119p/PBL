@@ -7,6 +7,7 @@
 #include "Serialization/SerializationUtility.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "../../EngineObjects/UpdateManager.h"
+#include "Engine/Components/Physics/Rigidbody.h"
 
 namespace Engine
 {
@@ -22,7 +23,12 @@ namespace Engine
         {
             UpdateManager::GetInstance()->RegisterComponent(this);
         }
-        void Start() override {}
+        void Start() override 
+        { 
+        GetOwner()->GetComponent<Rigidbody>()->constraints.freezeRotationX=true;
+        GetOwner()->GetComponent<Rigidbody>()->constraints.freezeRotationZ=true;
+        }
+        
         void Update(float deltaTime) override;
         void OnDestroy() override {}
 
