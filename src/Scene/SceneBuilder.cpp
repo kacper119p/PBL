@@ -37,7 +37,6 @@
 #include "Shaders/ShaderManager.h"
 #include "Shaders/ShaderSourceFiles.h"
 #include "tracy/Tracy.hpp"
-#include "Engine/Components/Colliders/SpatialPartitioning.h"
 #include "Engine/Components/Camera/CameraFollow.h"
 
 
@@ -49,11 +48,11 @@ namespace Scene
         ZoneScoped;
 
         Scene = new class Engine::Scene();
-        Engine::SceneManager::LoadScene("./res/scenes/BlockLayout.lvl", Scene);
+        Engine::SceneManager::LoadScene("./res/scenes/Gameplay.lvl", Scene);
         // TODO: remove when no longer needed
+        
 
-
-
+        
        
 
         // BOX BOX SCENARIO /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,13 +63,19 @@ namespace Scene
         secondBoxModelRenderer->SetMaterial(
                 Materials::MaterialManager::GetMaterial("./res/materials/SampleScene/Box.mat"));
 
-        Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
-        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(2.0f, 7.0f, 0.0f));
-        secondBoxCollider->SetWidth(2.0f);
-        secondBoxCollider->SetHeight(2.0f);
-        secondBoxCollider->SetDepth(2.0f);
+        //Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
+        Scene->GetPlayer()->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
+        Scene->GetPlayer()->GetTransform()->AddChild(secondBoxEntity->GetTransform());
+        //Scene->GetPlayer()->AddComponent<Engine::RigidBody>();
+        Scene->GetPlayer()->AddComponent<Engine::MovementComponent>();
+        Scene->GetPlayer()->AddComponent<Engine::BoxCollider>();
+        Scene->GetPlayer()->GetTransform()->SetPosition(glm::vec3(0.0f, 1.0f, 4.0f));
 
-        Engine::Entity* secondBoxEntity2 = Scene->SpawnEntity(nullptr);
+        //secondBoxCollider->SetWidth(2.0f);
+        //secondBoxCollider->SetHeight(2.0f);
+        //secondBoxCollider->SetDepth(2.0f);
+
+        /* Engine::Entity* secondBoxEntity2 = Scene->SpawnEntity(nullptr);
         Engine::BoxCollider* secondBoxCollider2 = secondBoxEntity2->AddComponent<Engine::BoxCollider>();
 
         secondBoxCollider2->SetWidth(2.0f);
@@ -98,13 +103,14 @@ namespace Scene
         rb->AddConstraint(Engine::RigidBody::Constraints::LockRotationZ);
 
         CameraFollow::GetInstance().SetTarget(secondBoxEntity);
+        */
         #endif
-
+        
         //secondBoxCollider->shouldMove = true;
         
         //Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();
 
 
-        // Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
+        //Engine::SceneManager::SaveScene("./res/scenes/Gameplay.lvl", Scene);
     }
 } // namespace Scene
