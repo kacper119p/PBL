@@ -96,6 +96,7 @@ namespace Engine
             float currentFrame = glfwGetTime();
             float deltaTime = currentFrame - lastFrame;
             lastFrame = currentFrame;
+            UpdateManager::GetInstance()->Update(deltaTime);
 
             // Process I/O operations here
 #if EDITOR
@@ -105,7 +106,6 @@ namespace Engine
             CameraFollow::GetInstance().Update(deltaTime);
 #endif
 #if !EDITOR
-            UpdateManager::GetInstance()->Update(deltaTime);
             RigidbodyUpdateManager::GetInstance()->Update(deltaTime);
             CollisionUpdateManager::GetInstance()->Update(deltaTime);
 #endif

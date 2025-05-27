@@ -64,8 +64,20 @@ namespace Engine
          */
         [[nodiscard]] int GetNodeIdFromPosition(const glm::vec3& Position) const;
 
+        void SetPadding(float Pad) { Padding = Pad; }
+        float GetPadding() const { return Padding; }
+
+        void RemovePaddingNodes();
+
+        const std::vector<std::pair<Models::Model*, glm::mat4>>& GetModelTransforms() const
+        {
+            return ModelTransforms;
+        }
+
     private:
+        float Padding = 1.0f;
         std::unique_ptr<Graph> NavGraph = std::make_unique<Graph>(); ///< The navigation graph.
         float Spacing = 1.0f; ///< Spacing between NavMesh nodes.
+        std::vector<std::pair<Models::Model*, glm::mat4>> ModelTransforms;
     };
 }

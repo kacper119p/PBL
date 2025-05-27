@@ -16,6 +16,26 @@ namespace Engine
         return NavGraph.get();
     }
 
+    void NavMesh::RemovePaddingNodes()
+    {
+        auto& nodes = GetGraph()->GetAllNodes();
+        std::vector<int> nodesToRemove;
+
+        for (const auto& [id, node] : nodes)
+        {
+            const auto& neighbors = GetGraph()->GetNode(id).GetNeighbors();
+            if (neighbors.size() < 8)
+            {
+                nodesToRemove.push_back(id);
+            }
+        }
+
+        for (int id : nodesToRemove)
+        {
+            GetGraph()->RemoveNode(id);
+        }
+    }
+
     void NavMesh::RemoveNotWalkableNodes(Entity* Root)
     {
         std::vector<Transform*> entities = Root->GetTransform()->GetChildren();
@@ -94,6 +114,8 @@ namespace Engine
         }
         BuildNavMesh(Root, Spacing);
         RemoveNotWalkableNodes(Root);
+        for (int i = 0; i < Padding; i++)
+            RemovePaddingNodes();
 
         if (GetGraph()->GetAllNodes().size() == 0)
         {
@@ -154,6 +176,8 @@ namespace Engine
                 largestModelSize = std::max(largestModelSize, std::max(sizeX, sizeZ));
             }
         }
+
+        ModelTransforms = modelTransforms;
 
         int width = static_cast<int>((sceneMax.x - sceneMin.x) / Spacing) + 1;
         int depth = static_cast<int>((sceneMax.y - sceneMin.y) / Spacing) + 1;

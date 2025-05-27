@@ -21,6 +21,16 @@ namespace Engine
         toNode->second.AddNeighbor(FromId);
     }
 
+    bool Graph::AreConnected(int FromId, int ToId) const
+    {
+        auto it = Nodes.find(FromId);
+        if (it == Nodes.end())
+            return false;
+
+        const auto& connections = it->second.GetNeighbors();
+        return std::find(connections.begin(), connections.end(), ToId) != connections.end();
+    }
+
     void Graph::RemoveNode(int Id)
     {
         for (auto& [otherId, node] : Nodes)

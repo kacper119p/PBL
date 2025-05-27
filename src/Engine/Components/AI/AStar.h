@@ -11,7 +11,7 @@ namespace Engine
     /**
      * @brief A* pathfinding component using a navigation graph.
      */
-    class AStar final : public IUpdateable, public Component
+    class AStar final
     {
     public:
         /**
@@ -24,10 +24,6 @@ namespace Engine
          */
         ~AStar();
 
-#if EDITOR
-        void DrawImGui() override;
-#endif
-
         /**
          * @brief Sets the navigation graph used for pathfinding.
          * @param NewGraph Pointer to the navigation graph.
@@ -38,7 +34,7 @@ namespace Engine
          * @brief Calculates a path from the selected entity to the given goal using A*.
          * @param GoalPosition World-space destination position.
          */
-        void ComputePath(const glm::vec3& GoalPosition);
+        void ComputePath(const glm::vec3& GoalPosition, Entity* Entity);
 
         /**
          * @brief Finds the path between two given node IDs.
@@ -48,16 +44,15 @@ namespace Engine
         void FindPath(int StartId, int GoalId);
 
         /**
-         * @brief Updates agent.
-         * @param DeltaTime Time elapsed since last update.
-         */
-        void Update(float DeltaTime) override;
-
-        /**
          * @brief Returns the current computed path.
          * @return Vector of node IDs forming the path.
          */
         [[nodiscard]] std::vector<int> GetPath() const;
+
+        void ClearPath(Entity* Entity)
+        {
+            Path.clear();
+        }
 
         /**
          * @brief Sets the start position in world space.
@@ -71,9 +66,33 @@ namespace Engine
          */
         void SetGoalPosition(const glm::vec3& Position);
 
-    private:
-        SERIALIZATION_EXPORT_CLASS(AStar)
+        [[nodiscard]] float GetMoveSpeed() const;
 
+        void SetMoveSpeed(float Speed);
+
+        [[nodiscard]] glm::vec3 GetGoalPosition() const;
+
+        [[nodiscard]] int GetCurrentPathIndex() const;
+
+        void SetCurrentPathIndex(int Index);
+
+        void UpdateMovement(float DeltaTime, Entity* Entity);
+
+        bool IsPathFinished() const
+        {
+            return Path.empty() || CurrentPathIndex >= Path.size();
+        }
+
+        void SetMovementEnabled(bool Enabled)
+        {
+            MovementEnabled = Enabled;
+        }
+
+        void SmoothPath();
+
+        bool IsLineWalkable(int FromId, int ToId);
+
+    private:
         const Graph* NavGraph = nullptr; ///< Pointer to the navigation graph.
 
         glm::vec2 ObjectPosition{}; ///< Current 2D position of the controlled object.
@@ -85,6 +104,9 @@ namespace Engine
         int StartId = -1; ///< ID of the start node.
         int GoalId = -1; ///< ID of the goal node.
 
+        bool MovementEnabled = true;
+
+        glm::vec3 StartPosition{}; ///< The starting position of the A* path.
         glm::vec3 GoalPosition{}; ///< The end position of the A* path.
 
         /**
