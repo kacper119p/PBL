@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Colliders/SphereCollider.h"
+#include "../Colliders/BoxCollider.h"
 #include "../Component.h"
 #include "../Updateable.h"
 #include "Serialization/SerializationUtility.h"
@@ -16,6 +17,7 @@ private:
     int maxVolume = 10;
 
     int size = 5;
+    int centerSize = 1;
     std::vector<Engine::Entity*> items;
     Engine::SphereCollider* collider;
 
