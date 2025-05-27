@@ -19,12 +19,12 @@ void Vacuum::Update(float deltaTime)
 
     if (input.IsKeyPressed(GLFW_KEY_1))
     {
-        isSuccing = !isSuccing;
+        isSuccing = true;
         isShooting = false;
     }
     else if (input.IsKeyPressed(GLFW_KEY_2))
     {
-        isShooting = !isShooting;
+        isShooting = true;
         isSuccing = false;
     }
 
@@ -37,7 +37,6 @@ void Vacuum::Update(float deltaTime)
         {
             if (entities[i]->GetOwner()->GetComponent<Thrash>())
             {
-                auto thrashSize = entities[i]->GetOwner()->GetComponent<Thrash>()->GetSize();
                 int thrashSizeInt = static_cast<int>(entities[i]->GetOwner()->GetComponent<Thrash>()->GetSize());
                 if (volume + thrashSizeInt <= maxVolume)
                 {
@@ -53,13 +52,14 @@ void Vacuum::Update(float deltaTime)
         {
             if (entities[i]->GetOwner()->GetComponent<Thrash>())
             {
-                auto thrashSize = entities[i]->GetOwner()->GetComponent<Thrash>()->GetSize();
                 int thrashSizeInt = static_cast<int>(entities[i]->GetOwner()->GetComponent<Thrash>()->GetSize());
                 if (volume+thrashSizeInt <= maxVolume)
                 {
                     items.push_back(entities[i]->GetOwner());
                     volume += thrashSizeInt;
-                    entities[i]->GetOwner()->GetScene()->DeleteEntity(entities[i]->GetOwner());
+                    entities[i]->GetOwner()->RemoveComponent<Engine::Rigidbody>();
+                    entities[i]->GetOwner()->GetComponent<Engine::BoxCollider>()->SetTrigger(true);
+                    entities[i]->GetOwner()->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
                 }
             }
         }
@@ -67,12 +67,18 @@ void Vacuum::Update(float deltaTime)
 
     if (isShooting&&!items.empty())
     {
-        Engine::Entity* owner = GetOwner();
-        Engine::Entity* thrownEntity = items.back();
-        Engine::Entity* spawnedEntity= GetOwner()->GetScene()->SpawnEntity(nullptr);
-        spawnedEntity = thrownEntity;
-        spawnedEntity->GetComponent<Engine::Rigidbody>()->AddForce(GetOwner()->GetTransform()->GetForward(),
-                                                                   Engine::ForceMode::Force);
+        Engine::Entity* item = items.back();
+        items.pop_back();
+        int thrashSizeInt = static_cast<int>(item->GetComponent<Thrash>()->GetSize());
+        volume -= thrashSizeInt;
+        item->AddComponent<Engine::Rigidbody>()->SetMass(0.1);
+        item->GetComponent<Engine::BoxCollider>()->SetTrigger(false);
+        glm::vec3 position = this->GetOwner()->GetTransform()->GetPosition();
+        glm::vec3 forward = this->GetOwner()->GetTransform()->GetForward();
+        item->GetTransform()->SetPosition(glm::vec3(position.x, position.y+1, position.z-1));
+        item->GetComponent<Engine::Rigidbody>()->AddForce(glm::vec3(forward.x* shootForce,forward.y,forward.z*shootForce),
+                                                          Engine::ForceMode::Force);
+        
         isShooting = false;
     }
 }

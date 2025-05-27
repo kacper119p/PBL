@@ -24,6 +24,8 @@ private:
     bool isSuccing = false;
     bool isShooting = false;
 
+    int shootForce = 100;
+
 public:
     Vacuum() = default;
     ~Vacuum() override = default;
