@@ -1,18 +1,16 @@
 #pragma once
-#include "Material.h"
+#include "Materials/Material.h"
 
 namespace Materials
 {
-
-    class GizmoMaterial final : public Material
+    class DebugBloodMaterial final : public Material
     {
     private:
         static Shaders::Shader Shader;
-        static Shaders::Shader DepthShader;
 
     public:
-        GizmoMaterial() :
-            Material(DepthShader, Shader, Shaders::Shader(), Shaders::Shader())
+        DebugBloodMaterial() :
+            Material(Shaders::Shader(), Shader, Shaders::Shader(), Shaders::Shader(), true)
         {
         }
 
@@ -28,7 +26,7 @@ namespace Materials
         void DrawImGui() override;
 #endif
 
-        SERIALIZATION_EXPORT_MATERIAL(GizmoMaterial);
+        SERIALIZATION_EXPORT_MATERIAL(DebugBloodMaterial);
     };
 
-} // Materials
+}

@@ -1,39 +1,37 @@
-#include "ScreenQuad.h"
+#include "Plane.h"
 #include "glad/glad.h"
 
-struct Engine::Rendering::ScreenQuad::CachedData Engine::Rendering::ScreenQuad::CachedData;
+struct Engine::Plane::CachedData Engine::Plane::Plane::CachedData;
 
-Engine::Rendering::ScreenQuad::CachedData::~CachedData()
+Engine::Plane::Plane::CachedData::~CachedData()
 {
     glDeleteBuffers(1, &VertexBuffer);
     glDeleteBuffers(1, &ElementBuffer);
     glDeleteVertexArrays(1, &VertexArray);
 }
 
-Engine::Rendering::ScreenQuad::ScreenQuad()
+Engine::Plane::Plane()
 {
-    if (CachedData.VertexArray == 0)
-    {
-        Initialize();
-    }
+    Initialize();
 }
 
-Engine::Rendering::ScreenQuad::~ScreenQuad() = default;
+Engine::Plane::~Plane() = default;
 
-void Engine::Rendering::ScreenQuad::Draw() const // NOLINT(*-convert-member-functions-to-static)
+void Engine::Plane::Draw()
 {
+    static Plane plane;
     glBindVertexArray(CachedData.VertexArray);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
 
-void Engine::Rendering::ScreenQuad::Initialize()
+void Engine::Plane::Initialize()
 {
     constexpr float vertices[] = {
-            -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, // bottom left
-            -1.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top left
-            1.0f, 1.0f, 0.0f, 1.0f, 1.0f, // top right
-            1.0f, -1.0f, 0.0f, 1.0f, 0.0f, // bottom right
+            -0.5f, 0.0f, 0.5f, 0.0f, 0.0f, // bottom left
+            -0.5f, 0.0f, -0.5f, 0.0f, 1.0f, // top left
+            0.5f, 0.0f, -0.5f, 1.0f, 1.0f, // top right
+            0.5f, 0.0f, 0.5f, 1.0f, 0.0f, // bottom right
     };
 
     constexpr unsigned int faceIndices[] = {

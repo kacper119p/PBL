@@ -146,6 +146,9 @@ namespace Engine
             Player = new DefaultPlayer();
         }
 
+        Root->Scene = this;
+        Player->Scene = this;
+        GameMode->Scene = this;
 
         Root->DeserializeValuePass(Value["Root"], referenceTable);
 
@@ -169,6 +172,9 @@ namespace Engine
         {
             pair.Object->DeserializeReferencesPass(pair.Json, referenceTable);
         }
+
+        GameMode->Start();
+        Player->Start();
 
         for (const DeserializationPair pair : objects)
         {

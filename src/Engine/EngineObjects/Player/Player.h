@@ -18,6 +18,9 @@ namespace Engine
 {
     class Player : public Entity
     {
+    public:
+        virtual void Start() = 0;
 
+        virtual void Update() = 0;
     };
-} // Engine
+}

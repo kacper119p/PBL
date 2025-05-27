@@ -13,7 +13,7 @@
         }
     },
     "UI": "EmptyUi",
-    "GameMode": "DefaultGameMode",
+    "GameMode": "CleaningGameMode",
     "Player": "DefaultPlayer",
     "Root": {
         "type": "Entity",
