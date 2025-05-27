@@ -19,6 +19,8 @@ namespace Engine
         glGenFramebuffers(1, &FrameBuffer);
         glGenTextures(1, &ColorBuffer);
 
+        glBindFramebuffer(GL_FRAMEBUFFER, FrameBuffer);
+
         CHECK_MESSAGE(FrameBuffer != 0, "Failed to create framebuffer.");
         CHECK_MESSAGE(ColorBuffer != 0, "Failed to create color buffer.");
 
@@ -29,12 +31,18 @@ namespace Engine
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+
         constexpr float borderColor[] = {0.0f, 0.0f, 0.0f, 0.0f};
         glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, ColorBuffer, 0);
+
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        const glm::vec3 cameraPosition = glm::vec3(0.0f, 0.0f, SceneBounds.max.y);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+        const glm::vec3 cameraPosition = glm::vec3(0.0f, SceneBounds.max.y, 0.0f);
         constexpr glm::vec3 origin = glm::vec3(0.0f, 0.0f, 0.0f);
         constexpr glm::vec3 upDirection = glm::vec3(0.0f, 1.0f, -1.0f);
 
@@ -72,11 +80,11 @@ namespace Engine
         glEnable(GL_CULL_FACE);
         glDisable(GL_DEPTH_TEST);
         glCullFace(GL_BACK);
-        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_BLEND);
 
         MaskShader.Use();
-        Shaders::Shader::SetUniform(GetViewProjectionMatrixUniformLocation(), ViewProjectionMatrix);
+        Shaders::Shader::SetUniform(GetViewProjectionMatrixUniformLocation(), GetMaskSpaceTransform());
         for (const BloodStain* const bloodStain : BloodStains)
         {
             bloodStain->Draw();

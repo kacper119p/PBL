@@ -110,11 +110,7 @@ namespace Engine
         Serialization::Deserialize(Value, "Skybox", Skybox);
         LightManager::GetInstance()->SetEnvironmentMap(Skybox);
 
-        const auto boundsIterator = Value.FindMember("Bounds");
-        if (boundsIterator != Value.MemberEnd())
-        {
-            Serialization::Deserialize(boundsIterator->value, "Bounds", Bounds);
-        }
+        Serialization::Deserialize(Value, "Bounds", Bounds);
 
         const auto uiIterator = Value.FindMember("UI");
         if (uiIterator != Value.MemberEnd())

@@ -1,5 +1,7 @@
 #include "UpdateManager.h"
 
+#include "GameMode/GameMode.h"
+
 namespace Engine
 {
     UpdateManager* UpdateManager::Instance = nullptr;
@@ -11,7 +13,7 @@ namespace Engine
         Instance = new UpdateManager;
     }
 
-    void UpdateManager::Update(float DeltaTime)
+    void UpdateManager::Update(const float DeltaTime)
     {
         if (!Dead.empty())
         {
@@ -22,9 +24,14 @@ namespace Engine
             Dead.clear();
         }
 
+        if (GameMode)
+        {
+            GameMode->Update(DeltaTime);
+        }
+
         for (IUpdateable* component : Updateables)
         {
-               component->Update(DeltaTime);
+            component->Update(DeltaTime);
         }
     }
 } // Engine

@@ -1,5 +1,6 @@
 #include "CleaningGameMode.h"
 
+#include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/EngineObjects/Scene/Scene.h"
 
 namespace Engine
@@ -12,15 +13,18 @@ namespace Engine
 
     CleaningGameMode::~CleaningGameMode()
     {
+        UpdateManager::GetInstance()->UnregisterGameMode(this);
         delete BloodManager;
     }
 
     void CleaningGameMode::Start()
     {
+        UpdateManager::GetInstance()->RegisterGameMode(this);
         BloodManager = new class BloodManager(GetScene()->GetBounds());
     }
 
-    void CleaningGameMode::Update(float DeltaTime)
+    void CleaningGameMode::Update(const float DeltaTime)
     {
+        BloodManager->Update(DeltaTime);
     }
 }

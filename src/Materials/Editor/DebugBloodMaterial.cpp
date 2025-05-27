@@ -25,9 +25,11 @@ namespace Materials
     {
     }
 
+#if EDITOR
     void DebugBloodMaterial::DrawImGui()
     {
     }
+#endif
 
     rapidjson::Value DebugBloodMaterial::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {

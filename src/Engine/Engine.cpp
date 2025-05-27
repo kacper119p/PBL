@@ -136,7 +136,6 @@ namespace Engine
             ImGuiEnd(); // this call effectively renders ImGui
 #endif
 
-            Entity::DestroyQueued();
             // End frame and swap buffers (double buffering)
             EndFrame();
             FrameMark;
@@ -343,8 +342,8 @@ namespace Engine
     void Engine::ImGuiRender()
     {
 #if EDITOR
-        //LightsGui::Draw();
-        //EditorGUI.Render(Frame, CurrentScene);
+    //LightsGui::Draw();
+    //EditorGUI.Render(Frame, CurrentScene);
 #endif
     }
 

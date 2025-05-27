@@ -2,9 +2,12 @@
 #include <glm/vec3.hpp>
 
 #include "Engine/Components/Component.h"
-#include "Engine/Components/Renderers/Renderer.h"
 #include "Engine/Textures/Texture.h"
 #include "Shaders/Shader.h"
+
+#if EDITOR
+#include "Engine/Components/Renderers/Renderer.h"
+#endif
 
 namespace Engine
 {
@@ -26,9 +29,9 @@ namespace Engine
     public:
         void Draw() const;
 
-#if EDITOR
         void Start() override;
 
+#if EDITOR
         void RenderDepth(const CameraRenderData& RenderData) override;
 
         void Render(const CameraRenderData& RenderData) override;

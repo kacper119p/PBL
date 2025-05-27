@@ -3,6 +3,7 @@
 #include "BloodManager.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/Rendering/Plane.h"
+#include "Engine/Textures/TextureManager.h"
 #include "Serialization/SerializationUtility.h"
 
 namespace Engine
