@@ -29,6 +29,7 @@ namespace Engine
 
         int32_t ViewProjectionMatrixUniformLocation = 0;
         int32_t ModelMatrixUniformLocation = 0;
+        int32_t ColorUniformLocation = 0;
 
     public:
         explicit BloodManager(const Models::AABBox3& SceneBounds);
@@ -59,6 +60,11 @@ namespace Engine
         [[nodiscard]] int32_t GetModelMatrixUniformLocation() const
         {
             return ModelMatrixUniformLocation;
+        }
+
+        [[nodiscard]] int32_t GetColorUniformLocation() const
+        {
+            return ColorUniformLocation;
         }
 
         void AddBloodSource(const BloodSource* const BloodSource)

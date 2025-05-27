@@ -61,6 +61,7 @@ namespace Engine
 
         ViewProjectionMatrixUniformLocation = MaskShader.GetUniformLocation("ViewProjectionMatrix");
         ModelMatrixUniformLocation = MaskShader.GetUniformLocation("ModelMatrix");
+        ColorUniformLocation = MaskShader.GetUniformLocation("Color");
     }
 
     BloodManager::~BloodManager()

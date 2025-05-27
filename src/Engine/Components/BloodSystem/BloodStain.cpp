@@ -22,6 +22,7 @@ namespace Engine
         glBindTexture(GL_TEXTURE_2D, Texture.GetId());
         Shaders::Shader::SetUniform(BloodManager::GetCurrent()->GetModelMatrixUniformLocation(),
                                     GetOwner()->GetTransform()->GetLocalToWorldMatrix());
+        Shaders::Shader::SetUniform(BloodManager::GetCurrent()->GetColorUniformLocation(), Color);
         Plane::Draw();
         GetOwner()->Destroy();
     }
@@ -51,6 +52,7 @@ namespace Engine
         shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
         shader.SetUniform("ObjectToWorldMatrix",
                           GetOwner()->GetTransform()->GetLocalToWorldMatrix());
+        shader.SetUniform("Color", Color);
         Plane::Draw();
     }
 
@@ -65,7 +67,10 @@ namespace Engine
 
     void BloodStain::DrawImGui()
     {
-
+        if (ImGui::CollapsingHeader("Blood Stain"))
+        {
+            ImGui::InputFloat3("Color##BloodStain", glm::value_ptr(Color));
+        }
     }
 #endif
 
@@ -73,6 +78,7 @@ namespace Engine
     {
         START_COMPONENT_SERIALIZATION
         SERIALIZE_FIELD(Texture);
+        SERIALIZE_FIELD(Color);
         END_COMPONENT_SERIALIZATION
     }
 
@@ -80,6 +86,7 @@ namespace Engine
     {
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
         DESERIALIZE_VALUE(Texture)
+        DESERIALIZE_VALUE(Color)
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 

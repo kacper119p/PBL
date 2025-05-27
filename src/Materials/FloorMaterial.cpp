@@ -1,9 +1,11 @@
 #include "FloorMaterial.h"
 
 #include "Engine/Components/BloodSystem/BloodManager.h"
+#include "Engine/Textures/TextureManager.h"
 #include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
 #include "Shaders/ShaderSourceFiles.h"
+#include "GLFW/glfw3.h"
 
 namespace Materials
 {
@@ -11,6 +13,9 @@ namespace Materials
     Shaders::Shader FloorMaterial::MainPass;
     Shaders::Shader FloorMaterial::DirectionalShadowPass;
     Shaders::Shader FloorMaterial::PointSpotShadowPass;
+    uint32_t FloorMaterial::BloodPropertiesUbo = 0;
+    TextureMaterialProperty FloorMaterial::BloodNormal0;
+    TextureMaterialProperty FloorMaterial::BloodNormal1;
 
     FloorMaterial::FloorMaterial(const Engine::Texture BaseMap, const Engine::Texture RoughnessMetallicMap,
                                  const Engine::Texture NormalMap, const Engine::Texture EmissiveMap,
@@ -26,7 +31,8 @@ namespace Materials
         Metallic(FloatMaterialProperty("Metallic", MainPass, Metallic)),
         BaseColor(Vector3MaterialProperty("BaseColor", MainPass, BaseColor)),
         EmissiveColor(Vector3MaterialProperty("EmissiveColor", MainPass, EmissiveColor)),
-        BloodMaskViewProjectionLocation(MainPass.GetUniformLocation("BloodMaskViewProjection"))
+        BloodMaskViewProjectionLocation(MainPass.GetUniformLocation("BloodMaskViewProjection")),
+        TimeLocation(MainPass.GetUniformLocation("Time"))
     {
     }
 
@@ -39,7 +45,8 @@ namespace Materials
         Roughness(FloatMaterialProperty("Roughness", MainPass)), Metallic(FloatMaterialProperty("Metallic", MainPass)),
         BaseColor(Vector3MaterialProperty("BaseColor", MainPass)),
         EmissiveColor(Vector3MaterialProperty("EmissiveColor", MainPass)),
-        BloodMaskViewProjectionLocation(MainPass.GetUniformLocation("BloodMaskViewProjection"))
+        BloodMaskViewProjectionLocation(MainPass.GetUniformLocation("BloodMaskViewProjection")),
+        TimeLocation(MainPass.GetUniformLocation("Time"))
     {
     }
 
@@ -58,6 +65,25 @@ namespace Materials
                 "./res/shaders/Common/BasicShadowPass/PointSpotLight.vert",
                 "./res/shaders/Common/BasicShadowPass/PointSpotLight.geom",
                 "./res/shaders/Common/BasicShadowPass/PointSpotLight.frag"));
+
+        glGenBuffers(1, &BloodPropertiesUbo);
+        glBindBuffer(GL_UNIFORM_BUFFER, BloodPropertiesUbo);
+        glBufferData(GL_UNIFORM_BUFFER, sizeof(BloodBufferData), nullptr, GL_STATIC_DRAW);
+
+        BloodBufferData buffer = {};
+        buffer.Roughness = 0.85f;
+        buffer.Metallic = 0.25999999910593033f;
+        buffer.Tiling0 = glm::vec2(0.3199999928474426f, 0.3199999928474426f);
+        buffer.Tiling1 = glm::vec2(0.1120000034570694f, 0.1120000034570694f);
+        buffer.Velocity0 = glm::vec2(0.07000000029802322f, 0.07000000029802322f);
+        buffer.Velocity1 = glm::vec2(-0.029999999329447746f, -0.029999999329447746f);
+
+        BloodNormal0 = TextureMaterialProperty("BloodNormal0", MainPass,
+                                               Engine::TextureManager::GetTexture("./res/textures/Water/Normal0.dds"));
+        BloodNormal0 = TextureMaterialProperty("BloodNormal1", MainPass,
+                                               Engine::TextureManager::GetTexture("./res/textures/Water/Normal1.dds"));
+
+        glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(buffer), &buffer);
     }
 
     void FloorMaterial::UseDepthPass() const
@@ -85,6 +111,11 @@ namespace Materials
         {
             return;
         }
+
+        BloodNormal0.Bind();
+        BloodNormal1.Bind();
+        Shaders::Shader::SetUniform(TimeLocation, static_cast<float>(glfwGetTime()));
+        glBindBufferBase(GL_UNIFORM_BUFFER, 0, BloodPropertiesUbo);
 
         glActiveTexture(GL_TEXTURE0 + BloodMaskLocation);
         glBindTexture(GL_TEXTURE_2D, bloodManager->GetMaskId());
