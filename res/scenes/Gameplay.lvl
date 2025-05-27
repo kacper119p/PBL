@@ -48,7 +48,8 @@
                 "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
                 "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000",
                 "{b22dbc67-1b19-4fce-9aea-744bbadec0a3}\u0000",
-                "{ad6ae354-b468-48d8-9aaa-341f42711ea2}\u0000"
+                "{ad6ae354-b468-48d8-9aaa-341f42711ea2}\u0000",
+                "{51f1be2e-27af-4778-9cf8-db1cc182c65f}\u0000"
             ],
             "Parent": null
         },
@@ -248,7 +249,8 @@
         {
             "type": "Thrash",
             "id": "{1cd1c9fa-a67b-4632-b087-e77384e53cab}\u0000",
-            "owner": false
+            "owner": false,
+            "size": 10
         },
         {
             "type": "BoxCollider",
@@ -265,6 +267,81 @@
             "type": "Rigidbody",
             "id": "{d849ce7d-5d11-4ac5-bb62-becc43799392}\u0000",
             "owner": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.009999999776482582,
+            "angularDamping": 0.009999999776482582,
+            "friction": 0.5,
+            "frictionEnabled": true,
+            "restitution": 0.30000001192092896
+        },
+        {
+            "type": "Entity",
+            "id": "{dcd1b9ad-acda-428a-b44b-3555e99fa5bd}\u0000",
+            "name": "Thrash 2",
+            "transform": {
+                "type": "Transform",
+                "id": "{51f1be2e-27af-4778-9cf8-db1cc182c65f}\u0000",
+                "owner": "{dcd1b9ad-acda-428a-b44b-3555e99fa5bd}\u0000",
+                "Position": {
+                    "x": -2.9000000953674316,
+                    "y": 0.800000011920929,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{56fbc966-a255-40f4-9d84-7bd6f15111b1}\u0000",
+                "{92b47558-5291-4552-a2db-d9b722d5bad1}\u0000",
+                "{e88ca7bc-dad1-4f2f-bf31-06d6a414efaf}\u0000",
+                "{f9a3e261-a954-41ac-bd54-24b671b60b79}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{56fbc966-a255-40f4-9d84-7bd6f15111b1}\u0000",
+            "owner": "{dcd1b9ad-acda-428a-b44b-3555e99fa5bd}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/models/Box.fbx"
+        },
+        {
+            "type": "Thrash",
+            "id": "{92b47558-5291-4552-a2db-d9b722d5bad1}\u0000",
+            "owner": false,
+            "size": 10
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{e88ca7bc-dad1-4f2f-bf31-06d6a414efaf}\u0000",
+            "owner": "{dcd1b9ad-acda-428a-b44b-3555e99fa5bd}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 1.0,
+            "_height": 1.0,
+            "_depth": 1.0
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{f9a3e261-a954-41ac-bd54-24b671b60b79}\u0000",
+            "owner": "{dcd1b9ad-acda-428a-b44b-3555e99fa5bd}\u0000",
             "mass": 0.10000000149011612,
             "inverseMass": 10.0,
             "linearDamping": 0.009999999776482582,

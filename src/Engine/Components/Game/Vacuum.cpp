@@ -34,8 +34,14 @@ void Vacuum::Update(float deltaTime)
         {
             if (entities[i]->GetOwner()->GetComponent<Thrash>())
             {
-                items.push_back(entities[i]->GetOwner());
-                entities[i]->GetOwner()->GetScene()->DeleteEntity(entities[i]->GetOwner());
+                auto thrashSize = entities[i]->GetOwner()->GetComponent<Thrash>()->GetSize();
+                int thrashSizeInt = static_cast<int>(entities[i]->GetOwner()->GetComponent<Thrash>()->GetSize());
+                if (volume+thrashSizeInt <= maxVolume)
+                {
+                    items.push_back(entities[i]->GetOwner());
+                    volume += thrashSizeInt;
+                    entities[i]->GetOwner()->GetScene()->DeleteEntity(entities[i]->GetOwner());
+                }
             }
         }
     }

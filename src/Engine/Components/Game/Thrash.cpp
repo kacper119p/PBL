@@ -1,8 +1,9 @@
 #include "Thrash.h"
-
+#include "Serialization/SerializationUtility.h"
 rapidjson::Value Thrash::Serialize(rapidjson::Document::AllocatorType& Allocator) const
 {
     START_COMPONENT_SERIALIZATION
+    SERIALIZE_FIELD(size)
     END_COMPONENT_SERIALIZATION
 }
 
@@ -10,13 +11,15 @@ void Thrash::DeserializeValuePass(const rapidjson::Value& Object,
                                              Serialization::ReferenceTable& ReferenceMap)
 {
     START_COMPONENT_DESERIALIZATION_VALUE_PASS
+    DESERIALIZE_VALUE(size)
     END_COMPONENT_DESERIALIZATION_VALUE_PASS
 }
 
 void Thrash::DeserializeReferencesPass(const rapidjson::Value& Object,
                                                   Serialization::ReferenceTable& ReferenceMap)
 {
-    // Implementacja
+    /*START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
+    END_COMPONENT_DESERIALIZATION_REFERENCES_PASS*/
 }
 #if EDITOR
 void Thrash::DrawImGui() 

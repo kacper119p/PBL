@@ -196,7 +196,7 @@ namespace Serialization
             const rapidjson::Value& Object, const char* Name, E& Value)
     {
         const auto iterator = Object.FindMember(Name);
-        if (iterator == Object.MemberEnd() || !iterator->value.IsString())
+        if (iterator == Object.MemberEnd() || !iterator->value.IsInt())
         {
             return;
         }
