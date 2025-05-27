@@ -23,9 +23,14 @@ void Vacuum::Update(float deltaTime)
         {
             if (entities[i]->GetOwner()->GetComponent<Thrash>())
             {
-                glm::vec3 direction = position - entities[i]->GetOwner()->GetTransform()->GetPosition();
-                entities[i]->GetOwner()->GetComponent<Engine::Rigidbody>()->AddForce(direction,
-                                                                                     Engine::ForceMode::Force);
+                auto thrashSize = entities[i]->GetOwner()->GetComponent<Thrash>()->GetSize();
+                int thrashSizeInt = static_cast<int>(entities[i]->GetOwner()->GetComponent<Thrash>()->GetSize());
+                if (volume + thrashSizeInt <= maxVolume)
+                {
+                    glm::vec3 direction = position - entities[i]->GetOwner()->GetTransform()->GetPosition();
+                    entities[i]->GetOwner()->GetComponent<Engine::Rigidbody>()->AddForce(direction,
+                                                                                         Engine::ForceMode::Force);
+                }
             }
         }
 
