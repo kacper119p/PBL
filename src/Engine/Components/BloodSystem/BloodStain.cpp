@@ -29,9 +29,7 @@ namespace Engine
 
     void BloodStain::Start()
     {
-#if EDITOR
-        Renderer::Start();
-#endif
+        BloodSourceBase::Start();
         if (BloodManager* bloodManager = BloodManager::GetCurrent())
         {
             bloodManager->AddBloodStain(this);
@@ -39,37 +37,11 @@ namespace Engine
     }
 
 #if EDITOR
-    void BloodStain::RenderDepth(const CameraRenderData& RenderData)
-    {
-    }
-
-    void BloodStain::Render(const CameraRenderData& RenderData)
-    {
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, Texture.GetId());
-        const Shaders::Shader shader = Material->GetMainPass();
-        shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
-        shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
-        shader.SetUniform("ObjectToWorldMatrix",
-                          GetOwner()->GetTransform()->GetLocalToWorldMatrix());
-        shader.SetUniform("Color", Color);
-        Plane::Draw();
-    }
-
-    void BloodStain::RenderDirectionalShadows(const CameraRenderData& RenderData)
-    {
-    }
-
-    void BloodStain::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
-                                            const glm::mat4* SpaceTransformMatrices)
-    {
-    }
-
     void BloodStain::DrawImGui()
     {
         if (ImGui::CollapsingHeader("Blood Stain"))
         {
-            ImGui::InputFloat3("Color##BloodStain", glm::value_ptr(Color));
+            BloodSourceBase::DrawImGui();
         }
     }
 #endif

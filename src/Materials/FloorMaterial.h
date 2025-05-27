@@ -10,24 +10,11 @@ namespace Materials
     class FloorMaterial final : public Material
     {
     private:
-        struct alignas(16) BloodBufferData
-        {
-            float Roughness{};
-            float Metallic{};
-            float Padding0[2]{};
-            glm::vec2 Tiling0{};
-            glm::vec2 Tiling1{};
-            glm::vec2 Velocity0{};
-            glm::vec2 Velocity1{};
-        };
-
-    private:
         static Shaders::Shader DepthPass;
         static Shaders::Shader MainPass;
         static Shaders::Shader DirectionalShadowPass;
         static Shaders::Shader PointSpotShadowPass;
 
-        static uint32_t BloodPropertiesUbo;
         static TextureMaterialProperty BloodNormal0;
         static TextureMaterialProperty BloodNormal1;
 

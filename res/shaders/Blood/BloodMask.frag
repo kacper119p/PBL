@@ -12,5 +12,6 @@ void main()
 {
     vec4 Result = texture(Image, TexCoords);
     Result.rgb *= Color;
+    Result.a = step(.33, Result.a);
     FragColor = Result;
 }

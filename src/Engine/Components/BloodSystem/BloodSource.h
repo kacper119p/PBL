@@ -1,14 +1,27 @@
 #pragma once
+#include "BloodSourceBase.h"
 #include "Engine/Components/Component.h"
+#include "Engine/Textures/Texture.h"
 #include "Shaders/Shader.h"
 
 namespace Engine
 {
 
-    class BloodSource : public Component
+    class BloodSource final : public BloodSourceBase
+
     {
     public:
-        void Draw() const;
-    };
+        BloodSource();
 
+    public:
+        void Draw() const;
+
+        void Start() override;
+
+#if EDITOR
+        void DrawImGui() override;
+#endif
+
+        SERIALIZATION_EXPORT_CLASS(BloodSource)
+    };
 }

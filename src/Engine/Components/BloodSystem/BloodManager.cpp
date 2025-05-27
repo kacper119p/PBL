@@ -81,7 +81,7 @@ namespace Engine
         glEnable(GL_CULL_FACE);
         glDisable(GL_DEPTH_TEST);
         glCullFace(GL_BACK);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE);
         glEnable(GL_BLEND);
 
         MaskShader.Use();

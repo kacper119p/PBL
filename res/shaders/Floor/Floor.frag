@@ -2,6 +2,7 @@
 #extension GL_ARB_bindless_texture: enable
 
 #include "Lighting.glsl"
+#include "Simplex.glsl"
 
 in vec2 TexCoord;
 in vec2 BloodMaskCoords;
@@ -14,16 +15,6 @@ uniform float Roughness;
 uniform float Metallic;
 uniform vec3 EmissiveColor;
 uniform float Time;
-
-layout (std140, binding = 0) uniform MaterialData
-{
-    float BloodRoughness;
-    float BloodMetallic;
-    vec2 BloodTiling0;
-    vec2 BloodTiling1;
-    vec2 BloodVelocity0;
-    vec2 BloodVelocity1;
-};
 
 uniform vec3 CameraPosition;
 
@@ -38,6 +29,13 @@ layout (binding = 0) uniform sampler2D BloodMask;
 layout (location = 0) out vec3 FragColor;
 layout (location = 1) out vec3 OcclusionMask;
 
+const float BLOOD_ROUGHNESS = 0.85;
+const float BLOOD_METALLIC = 0.03999999910593033f;
+const vec2 BLOOD_TILING0 = vec2(0.45f, 0.45f);
+const vec2 BLOOD_TILING1 = vec2(0.22f, 0.22f);
+const vec2 BLOOD_VELOCITY0 = vec2(0.07f, 0.07f);
+const vec2 BLOOD_VELOCITY1 = vec2(-0.03f, -0.03f);
+
 layout (early_fragment_tests) in;
 void main() {
     vec3 BaseColor = texture(BaseMap, TexCoord).rgb * BaseColor;
@@ -47,6 +45,10 @@ void main() {
     float AmbientOcclusion = RoughnessMetallicAmbientOcclusion.b;
 
     vec4 BloodColor = texture(BloodMask, BloodMaskCoords);
+    float noise = snoise(Position.xz, 4.0);
+    noise = noise * 0.5 + 0.5;
+    noise *= 0.33;
+    BloodColor.a = step(0.33, BloodColor.a + noise);
 
     vec3 Normal = normalize(Normal);
     vec3 Tangent = normalize(Tangent);
@@ -58,14 +60,14 @@ void main() {
     Normal = normalize(TangentToWorldMatrix * Normal);
 
     // Calculate Blood Normal
-    vec3 BloodNormalVector0 = texture(BloodNormal0, Position.xz * BloodTiling0 + BloodVelocity0 * Time).rgb * 2.0 - 1.0;
-    vec3 BloodNormalVector1 = texture(BloodNormal1, Position.xz * BloodTiling1 + BloodVelocity1 * Time).rgb * 2.0 - 1.0;
+    vec3 BloodNormalVector0 = texture(BloodNormal0, Position.xz * BLOOD_TILING0 + BLOOD_VELOCITY0 * Time).rgb * 2.0 - 1.0;
+    vec3 BloodNormalVector1 = texture(BloodNormal1, Position.xz * BLOOD_TILING1 + BLOOD_VELOCITY1 * Time).rgb * 2.0 - 1.0;
     vec3 BloodNormal = normalize(vec3(BloodNormalVector0.xy + BloodNormalVector1.xy, BloodNormalVector0.z * BloodNormalVector1.z));
     BloodNormal = normalize(TangentToWorldMatrix * BloodNormal);
 
     // Lerp Floor and Blood values
-    Roughness = mix(Roughness, BloodRoughness, BloodColor.a);
-    Metallic = mix(Metallic, BloodMetallic, BloodColor.a);
+    Roughness = mix(Roughness, BLOOD_ROUGHNESS, BloodColor.a);
+    Metallic = mix(Metallic, BLOOD_METALLIC, BloodColor.a);
     Normal = mix(Normal, BloodNormal, BloodColor.a);
     BaseColor = mix(BaseColor, BloodColor.rgb, BloodColor.a);
 
