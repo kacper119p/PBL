@@ -48,8 +48,8 @@
                 "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
                 "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000",
                 "{b22dbc67-1b19-4fce-9aea-744bbadec0a3}\u0000",
-                "{ad6ae354-b468-48d8-9aaa-341f42711ea2}\u0000",
-                "{51f1be2e-27af-4778-9cf8-db1cc182c65f}\u0000"
+                "{663d37c9-1f78-40b2-9aad-3a92fedea194}\u0000",
+                "{9d8d7b18-37b3-472b-be22-cd4089728de2}\u0000"
             ],
             "Parent": null
         },
@@ -202,12 +202,12 @@
         },
         {
             "type": "Entity",
-            "id": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
-            "name": "Thrash 1",
+            "id": "{c99f3e17-1941-4a55-aa2a-085c4b35d50b}\u0000",
+            "name": "Thrash1",
             "transform": {
                 "type": "Transform",
-                "id": "{ad6ae354-b468-48d8-9aaa-341f42711ea2}\u0000",
-                "owner": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
+                "id": "{663d37c9-1f78-40b2-9aad-3a92fedea194}\u0000",
+                "owner": "{c99f3e17-1941-4a55-aa2a-085c4b35d50b}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.800000011920929,
@@ -233,29 +233,23 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{98cfb508-ecb7-4dc4-b9ef-a034cbae2cd6}\u0000",
-                "{1cd1c9fa-a67b-4632-b087-e77384e53cab}\u0000",
-                "{2b9bef5b-5d4b-43d8-97f2-c2714e4e4f15}\u0000",
-                "{d849ce7d-5d11-4ac5-bb62-becc43799392}\u0000"
+                "{21450d9f-c51c-4c79-b527-77140e1f3861}\u0000",
+                "{ebe7a871-7c41-4b5a-a832-54a29286589f}\u0000",
+                "{1ed8ea4f-34a3-4655-97d4-4dd850fbc1fd}\u0000",
+                "{03c274d5-3206-46c8-b7a0-9aca43db1bfa}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{98cfb508-ecb7-4dc4-b9ef-a034cbae2cd6}\u0000",
-            "owner": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
+            "id": "{21450d9f-c51c-4c79-b527-77140e1f3861}\u0000",
+            "owner": "{c99f3e17-1941-4a55-aa2a-085c4b35d50b}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
             "Model": "./res/models/Box.fbx"
         },
         {
-            "type": "Thrash",
-            "id": "{1cd1c9fa-a67b-4632-b087-e77384e53cab}\u0000",
-            "owner": false,
-            "size": 10
-        },
-        {
             "type": "BoxCollider",
-            "id": "{2b9bef5b-5d4b-43d8-97f2-c2714e4e4f15}\u0000",
-            "owner": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
+            "id": "{ebe7a871-7c41-4b5a-a832-54a29286589f}\u0000",
+            "owner": "{c99f3e17-1941-4a55-aa2a-085c4b35d50b}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "colliderType": 0,
@@ -265,8 +259,8 @@
         },
         {
             "type": "Rigidbody",
-            "id": "{d849ce7d-5d11-4ac5-bb62-becc43799392}\u0000",
-            "owner": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
+            "id": "{1ed8ea4f-34a3-4655-97d4-4dd850fbc1fd}\u0000",
+            "owner": "{c99f3e17-1941-4a55-aa2a-085c4b35d50b}\u0000",
             "mass": 0.10000000149011612,
             "inverseMass": 10.0,
             "linearDamping": 0.009999999776482582,
@@ -276,15 +270,21 @@
             "restitution": 0.30000001192092896
         },
         {
+            "type": "Thrash",
+            "id": "{03c274d5-3206-46c8-b7a0-9aca43db1bfa}\u0000",
+            "owner": true,
+            "size": 10
+        },
+        {
             "type": "Entity",
-            "id": "{dcd1b9ad-acda-428a-b44b-3555e99fa5bd}\u0000",
-            "name": "Thrash 2",
+            "id": "{1e6e020e-707e-4925-a7b3-f2141dadb3a9}\u0000",
+            "name": "Thrash2",
             "transform": {
                 "type": "Transform",
-                "id": "{51f1be2e-27af-4778-9cf8-db1cc182c65f}\u0000",
-                "owner": "{dcd1b9ad-acda-428a-b44b-3555e99fa5bd}\u0000",
+                "id": "{9d8d7b18-37b3-472b-be22-cd4089728de2}\u0000",
+                "owner": "{1e6e020e-707e-4925-a7b3-f2141dadb3a9}\u0000",
                 "Position": {
-                    "x": -2.9000000953674316,
+                    "x": -5.599999904632568,
                     "y": 0.800000011920929,
                     "z": 0.0
                 },
@@ -308,29 +308,29 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{56fbc966-a255-40f4-9d84-7bd6f15111b1}\u0000",
-                "{92b47558-5291-4552-a2db-d9b722d5bad1}\u0000",
-                "{e88ca7bc-dad1-4f2f-bf31-06d6a414efaf}\u0000",
-                "{f9a3e261-a954-41ac-bd54-24b671b60b79}\u0000"
+                "{c9646a72-0335-41be-9f5b-47cca778ec52}\u0000",
+                "{881016d3-6bf6-41c1-915b-03f726d8ea04}\u0000",
+                "{f79da1af-b97d-4273-a7ba-1c5a95c947d2}\u0000",
+                "{12fd20a4-f0e9-47b2-8ba7-150266b49747}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{56fbc966-a255-40f4-9d84-7bd6f15111b1}\u0000",
-            "owner": "{dcd1b9ad-acda-428a-b44b-3555e99fa5bd}\u0000",
+            "id": "{c9646a72-0335-41be-9f5b-47cca778ec52}\u0000",
+            "owner": "{1e6e020e-707e-4925-a7b3-f2141dadb3a9}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
             "Model": "./res/models/Box.fbx"
         },
         {
             "type": "Thrash",
-            "id": "{92b47558-5291-4552-a2db-d9b722d5bad1}\u0000",
-            "owner": false,
+            "id": "{881016d3-6bf6-41c1-915b-03f726d8ea04}\u0000",
+            "owner": true,
             "size": 10
         },
         {
             "type": "BoxCollider",
-            "id": "{e88ca7bc-dad1-4f2f-bf31-06d6a414efaf}\u0000",
-            "owner": "{dcd1b9ad-acda-428a-b44b-3555e99fa5bd}\u0000",
+            "id": "{f79da1af-b97d-4273-a7ba-1c5a95c947d2}\u0000",
+            "owner": "{1e6e020e-707e-4925-a7b3-f2141dadb3a9}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "colliderType": 0,
@@ -340,8 +340,8 @@
         },
         {
             "type": "Rigidbody",
-            "id": "{f9a3e261-a954-41ac-bd54-24b671b60b79}\u0000",
-            "owner": "{dcd1b9ad-acda-428a-b44b-3555e99fa5bd}\u0000",
+            "id": "{12fd20a4-f0e9-47b2-8ba7-150266b49747}\u0000",
+            "owner": "{1e6e020e-707e-4925-a7b3-f2141dadb3a9}\u0000",
             "mass": 0.10000000149011612,
             "inverseMass": 10.0,
             "linearDamping": 0.009999999776482582,

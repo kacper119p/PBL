@@ -4,6 +4,7 @@
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/Components/Physics/Rigidbody.h"
 #include "Engine/EngineObjects/Scene/Scene.h"
+#include "Engine/Input/InputManager.h"
 
 void Vacuum::Start() 
 { 
@@ -14,6 +15,19 @@ void Vacuum::Start()
 
 void Vacuum::Update(float deltaTime) 
 {
+    InputManager& input = InputManager::GetInstance();
+
+    if (input.IsKeyPressed(GLFW_KEY_1))
+    {
+        isSuccing = !isSuccing;
+        isShooting = false;
+    }
+    else if (input.IsKeyPressed(GLFW_KEY_2))
+    {
+        isShooting = !isShooting;
+        isSuccing = false;
+    }
+
     if (volume<=maxVolume&&isSuccing)
     {
         auto position = this->GetOwner()->GetTransform()->GetPosition();
@@ -49,6 +63,17 @@ void Vacuum::Update(float deltaTime)
                 }
             }
         }
+    }
+
+    if (isShooting&&!items.empty())
+    {
+        Engine::Entity* owner = GetOwner();
+        Engine::Entity* thrownEntity = items.back();
+        Engine::Entity* spawnedEntity= GetOwner()->GetScene()->SpawnEntity(nullptr);
+        spawnedEntity = thrownEntity;
+        spawnedEntity->GetComponent<Engine::Rigidbody>()->AddForce(GetOwner()->GetTransform()->GetForward(),
+                                                                   Engine::ForceMode::Force);
+        isShooting = false;
     }
 }
 rapidjson::Value Vacuum::Serialize(rapidjson::Document::AllocatorType& Allocator) const

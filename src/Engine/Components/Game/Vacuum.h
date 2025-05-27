@@ -22,6 +22,7 @@ private:
     Engine::SphereCollider* collider;
 
     bool isSuccing = false;
+    bool isShooting = false;
 
 public:
     Vacuum() = default;

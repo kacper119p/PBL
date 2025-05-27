@@ -62,7 +62,7 @@ namespace Engine
         else if ((isLeftForward && isRightBackward) || (isLeftBackward && isRightForward))
         {
             //float angle = (isLeftForward ? 1.0f : -1.0f) * RotationSpeed * deltaTime;
-            rigidbody->AddTorque(glm::vec3(0, 1, 0), ForceMode::Force);
+            rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? 1.0f : -1.0f), 0), ForceMode::Force);
             
             //glm::quat rotation = transform->GetRotation() * glm::angleAxis(glm::radians(angle), glm::vec3(0, 1, 0));
             //CurrentVelocity *= smooth;

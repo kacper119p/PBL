@@ -53,6 +53,7 @@ namespace Engine
         {
             result->GetTransform()->SetParent(Root->GetTransform());
         }
+        result->SetScene(this);
         return result;
     }
 
@@ -65,6 +66,7 @@ namespace Engine
         result->GetTransform()->SetParent(Parent->GetTransform());
         result->GetTransform()->SetPosition(Position);
         result->GetTransform()->SetEulerAngles(Rotation);
+        result->SetScene(this);
         return result;
     }
 
