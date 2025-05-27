@@ -21,6 +21,8 @@ private:
     std::vector<Engine::Entity*> items;
     Engine::SphereCollider* collider;
 
+    bool isSuccing = false;
+
 public:
     Vacuum() = default;
     ~Vacuum() override = default;

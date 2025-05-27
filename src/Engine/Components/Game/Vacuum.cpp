@@ -14,7 +14,7 @@ void Vacuum::Start()
 
 void Vacuum::Update(float deltaTime) 
 {
-    if (volume<=maxVolume)
+    if (volume<=maxVolume&&isSuccing)
     {
         auto position = this->GetOwner()->GetTransform()->GetPosition();
         std::vector<Engine::Collider*> entities = collider->SphereOverlap(position, size);
