@@ -64,7 +64,6 @@ namespace Engine
         colliderVisitor.SetCurrentCollider(this);
         Spatial = &SpatialPartitioning::GetInstance();
         Spatial->AddCollider(this);
-        CurrentCellIndex = Spatial->GetCellIndex(transform->GetPositionWorldSpace());
         CollisionUpdateManager::GetInstance()->RegisterCollider(this);
     }
 
@@ -72,13 +71,6 @@ namespace Engine
     {
         if (isStatic)
             return;
-
-        if (CurrentCellIndex != Spatial->GetCellIndex(transform->GetPositionWorldSpace()))
-        {
-            Spatial->RemoveCollider(this);
-            Spatial->AddCollider(this);
-            CurrentCellIndex = Spatial->GetCellIndex(transform->GetPositionWorldSpace());
-        }
         colliderVisitor.ManageCollisions();
     }
 

@@ -36,7 +36,6 @@ namespace Engine
     protected:
         bool isStatic;
         bool isTrigger;
-        glm::ivec3 CurrentCellIndex = glm::ivec3(0, 0, 0); // non-definable by user
         SpatialPartitioning* Spatial;
 
         // TODO: remove when rigidbody fully implemented

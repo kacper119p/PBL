@@ -253,7 +253,7 @@ namespace Engine
         glm::vec3 correctiveTorque = rotationAxis * torqueStrength;
 
         float dampingCoefficient = 0.1f;
-        glm::vec3 dampingTorque = -angularVelocity * dampingCoefficient;
+        glm::vec3 dampingTorque = -angularVelocity * angularDamping;
 
         glm::vec3 totalTorque = correctiveTorque + dampingTorque;
 
