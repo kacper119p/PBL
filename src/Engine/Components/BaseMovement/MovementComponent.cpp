@@ -62,7 +62,7 @@ namespace Engine
         else if ((isLeftForward && isRightBackward) || (isLeftBackward && isRightForward))
         {
             //float angle = (isLeftForward ? 1.0f : -1.0f) * RotationSpeed * deltaTime;
-            rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? 1.0f : -1.0f), 0), ForceMode::Force);
+            rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? 1.0f : -1.0f)*RotationSpeed, 0), ForceMode::Force);
             
             //glm::quat rotation = transform->GetRotation() * glm::angleAxis(glm::radians(angle), glm::vec3(0, 1, 0));
             //CurrentVelocity *= smooth;
@@ -72,7 +72,7 @@ namespace Engine
         {
             // Rotate slightly
             //float angle = (isLeftBackward ? -1.0f : 1.0f) * RotationSpeed * deltaTime;
-            rigidbody->AddTorque(glm::vec3(0, (isLeftBackward ? -1.0f : 1.0f), 0), ForceMode::Force);
+            rigidbody->AddTorque(glm::vec3(0, (isLeftBackward ? -1.0f : 1.0f)*RotationSpeed, 0), ForceMode::Force);
 
             //glm::quat rotation = transform->GetRotation() * glm::angleAxis(glm::radians(angle), glm::vec3(0, 1, 0));
 
@@ -91,7 +91,7 @@ namespace Engine
 
             // Move slightly forward in the rotated direction
             //CurrentVelocity = Speed * 0.2 * (1 - smooth) + 1 * smooth;
-            rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? 1.0f : -1.0f), 0), ForceMode::Force);
+            rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? 1.0f : -1.0f)*RotationSpeed, 0), ForceMode::Force);
             rigidbody->AddForce(forward * Speed * 0.2f * (1 - smooth) + forward * smooth, ForceMode::Force);
 
             //transform->SetEulerAngles(glm::degrees(glm::eulerAngles(rotation)));
