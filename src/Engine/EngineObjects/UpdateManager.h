@@ -5,6 +5,11 @@
 
 namespace Engine
 {
+    class GameMode;
+}
+
+namespace Engine
+{
     /**
      * @brief Singleton responsible for ticking updateable components.
      */
@@ -15,6 +20,8 @@ namespace Engine
 
         std::vector<IUpdateable*> Updateables;
         std::vector<IUpdateable*> Dead;
+
+        GameMode* GameMode = nullptr;
 
     private:
         UpdateManager();
@@ -37,7 +44,7 @@ namespace Engine
          * @brief Registers new Updateable to be ticked.
          * @param Component Component to be registered.
          */
-        inline void RegisterComponent(IUpdateable* Component)
+        void RegisterComponent(IUpdateable* Component)
         {
             Updateables.push_back(Component);
         }
@@ -46,18 +53,30 @@ namespace Engine
          * @brief Stops component from being ticked afer this frame.
          * @param Component Component to be unregistered.
          */
-        inline void UnregisterComponent(IUpdateable* Component)
+        void UnregisterComponent(IUpdateable* Component)
         {
             Dead.push_back(Component);
         }
 
         /**
          * @brief Stops component from being ticked. Should not be used inside update loop.
-         * @param Component Component to be unregistered.
+         * @param GameMode GameMode  to be unregistered
          */
-        inline void UnregisterComponentImmediate(IUpdateable* Component)
+        void UnregisterGameMode(const class GameMode* const GameMode)
         {
-            std::erase(Updateables, Component);
+            if (this->GameMode == GameMode)
+            {
+                this->GameMode = nullptr;
+            }
+        }
+
+        /**
+         * @brief Registers new GameMode to be ticked.
+         * @param GameMode GameMode to be registered.
+         */
+        void RegisterGameMode(class GameMode* const GameMode)
+        {
+            this->GameMode = GameMode;
         }
 
         /**

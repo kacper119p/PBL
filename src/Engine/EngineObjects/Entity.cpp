@@ -6,6 +6,8 @@
 
 namespace Engine
 {
+    std::vector<Entity*> Entity::ToDestroy;
+
     Entity::~Entity()
     {
         for (Component* component : Components)

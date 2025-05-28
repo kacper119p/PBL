@@ -10,6 +10,7 @@
 #include "Engine/UI/Ui.h"
 #include "Engine/Rendering/Frustum.h"
 #include "Engine/Rendering/Postprocessing/GodRays.h"
+#include "Materials/Material.h"
 
 namespace Engine
 {
@@ -20,6 +21,7 @@ namespace Engine
         static uint8_t MultisampleLevel;
 
         RenderersCollection Renderers;
+        RenderersCollection TransparentRenderers;
         ParticleEmittersCollection ParticleEmitters;
         Ui::Ui* Ui = nullptr;
 
@@ -55,12 +57,26 @@ namespace Engine
 
         void RegisterRenderer(Renderer* const Renderer)
         {
-            Renderers.AddRenderer(Renderer);
+            if (Renderer->GetMaterial()->IsTransparent())
+            {
+                TransparentRenderers.AddRenderer(Renderer);
+            }
+            else
+            {
+                Renderers.AddRenderer(Renderer);
+            }
         }
 
         void UnregisterRenderer(const Renderer* const Renderer)
         {
-            Renderers.RemoveRenderer(Renderer);
+            if (Renderer->GetMaterial()->IsTransparent())
+            {
+                TransparentRenderers.RemoveRenderer(Renderer);
+            }
+            else
+            {
+                Renderers.RemoveRenderer(Renderer);
+            }
         }
 
         void RegisterParticleEmitter(ParticleEmitter* const Renderer)

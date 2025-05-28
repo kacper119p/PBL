@@ -19,7 +19,10 @@ namespace Engine
         {
             return;
         }
-        RenderingManager::GetInstance()->UnregisterRenderer(this);
+        if (this->Material != nullptr)
+        {
+            RenderingManager::GetInstance()->UnregisterRenderer(this);
+        }
         this->Material = Material;
         if (Material == nullptr)
         {

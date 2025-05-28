@@ -141,15 +141,16 @@ namespace Engine
             delete this->Ui;
             this->Ui = Ui;
         }
+#endif
 
         /**
-         * @brief Returns world space bounding box for scene geometry.
-         */
+        * @brief Returns world space bounding box for scene geometry.
+        */
         [[nodiscard]] Models::AABBox3 GetBounds() const
         {
             return Bounds;
         }
-#endif
+
         /**
          * @brief Spawns a new Entity in this scene.
          * @param Parent Parent of this object. If nullptr scene root becomes parent.
