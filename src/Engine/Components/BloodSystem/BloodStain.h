@@ -15,7 +15,10 @@ namespace Engine
         BloodStain();
 
     public:
-        void Draw() const;
+        /**
+         * @brief Draws blood stain to a blood mask.
+         */
+        void Draw() const; // Should not be virtual
 
         void Start() override;
 

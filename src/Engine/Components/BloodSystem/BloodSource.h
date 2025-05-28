@@ -14,7 +14,10 @@ namespace Engine
         BloodSource();
 
     public:
-        void Draw() const;
+        /**
+         * @brief Draws blood source to a blood mask.
+         */
+        void Draw() const; // Should not be virtual.
 
         void Start() override;
 

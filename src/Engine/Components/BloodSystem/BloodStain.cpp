@@ -2,7 +2,6 @@
 
 #include "BloodManager.h"
 #include "Engine/EngineObjects/Entity.h"
-#include "Engine/Rendering/Plane.h"
 #include "Engine/Textures/TextureManager.h"
 #include "Serialization/SerializationUtility.h"
 
@@ -10,7 +9,6 @@ namespace Engine
 {
     BloodStain::BloodStain()
     {
-        Texture = TextureManager::GetTexture("res/textures/BloodSplatter/BloodTest.dds");
 #if EDITOR
         SetMaterial(Materials::MaterialManager::GetMaterial("res/materials/Editor/BloodDebug.mat"));
 #endif
@@ -18,12 +16,7 @@ namespace Engine
 
     void BloodStain::Draw() const
     {
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, Texture.GetId());
-        Shaders::Shader::SetUniform(BloodManager::GetCurrent()->GetModelMatrixUniformLocation(),
-                                    GetOwner()->GetTransform()->GetLocalToWorldMatrix());
-        Shaders::Shader::SetUniform(BloodManager::GetCurrent()->GetColorUniformLocation(), Color);
-        Plane::Draw();
+        BloodSourceBase::Draw();
         GetOwner()->Destroy();
     }
 

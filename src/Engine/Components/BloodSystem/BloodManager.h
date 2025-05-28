@@ -84,7 +84,7 @@ namespace Engine
 
         void AddBloodEraser(BloodEraser* const BloodEraser)
         {
-            CHECK_MESSAGE(BloodEraser == nullptr, "Blood eraser already added");
+            CHECK_MESSAGE(Eraser == nullptr, "Blood eraser already added");
             Eraser = BloodEraser;
         }
 

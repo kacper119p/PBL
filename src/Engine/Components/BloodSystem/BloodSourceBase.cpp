@@ -1,5 +1,6 @@
 #include "BloodSourceBase.h"
 
+#include "BloodManager.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/Rendering/Plane.h"
 #include "Materials/Material.h"
@@ -12,6 +13,11 @@
 
 namespace Engine
 {
+    BloodSourceBase::BloodSourceBase()
+    {
+        Texture = TextureManager::GetTexture("res/textures/BloodSplatter/BloodTest.dds");
+    }
+
     void BloodSourceBase::Start()
     {
 #if EDITOR
@@ -19,11 +25,22 @@ namespace Engine
 #endif
     }
 
+    void BloodSourceBase::Draw() const
+    {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, Texture.GetId());
+        Shaders::Shader::SetUniform(BloodManager::GetCurrent()->GetModelMatrixUniformLocation(),
+                                    GetOwner()->GetTransform()->GetLocalToWorldMatrix());
+        Shaders::Shader::SetUniform(BloodManager::GetCurrent()->GetColorUniformLocation(), Color);
+        Plane::Draw();
+    }
+
 #if EDITOR
     void BloodSourceBase::DrawImGui()
     {
-        ImGui::InputFloat3("Color##BloodSourceBase", glm::value_ptr(Color));
+        ImGui::ColorEdit3("Color##BloodSourceBase", glm::value_ptr(Color));
     }
+
     void BloodSourceBase::RenderDepth(const CameraRenderData& RenderData)
     {
     }
