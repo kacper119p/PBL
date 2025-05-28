@@ -10,6 +10,7 @@
 #include <imgui.h>
 #include <glm/gtc/type_ptr.hpp>
 #include "Materials/Material.h"
+#include "Helper.h"
 #endif
 
 namespace Engine
@@ -39,7 +40,19 @@ namespace Engine
 #if EDITOR
     void BloodSourceBase::DrawImGui()
     {
+        ImGui::Separator();
         ImGui::ColorEdit3("Color##BloodSourceBase", glm::value_ptr(Color));
+        ImGui::Separator();
+        static std::vector<std::string> availableTextures;
+        static bool scanned = false;
+
+        Helpers::GetTextureList(availableTextures, scanned);
+
+        static bool showBaseTexPopup = false;
+
+        Helpers::ChangeTexture("BloodSourceBase", Texture, showBaseTexPopup, availableTextures,
+                               "BloodSourceBasePicker");
+        ImGui::Separator();
     }
 
     void BloodSourceBase::RenderDepth(const CameraRenderData& RenderData)

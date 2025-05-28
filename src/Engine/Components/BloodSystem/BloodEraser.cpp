@@ -7,6 +7,7 @@
 #include "Serialization/SerializationUtility.h"
 #include "Shaders/Shader.h"
 #include "glad/glad.h"
+#include "Helper.h"
 
 #if EDITOR
 #include "Materials/Material.h"
@@ -53,6 +54,17 @@ namespace Engine
     {
         if (ImGui::CollapsingHeader("Blood Eraser"))
         {
+            ImGui::Separator();
+            static std::vector<std::string> availableTextures;
+            static bool scanned = false;
+
+            Helpers::GetTextureList(availableTextures, scanned);
+
+            static bool showBaseTexPopup = false;
+
+            Helpers::ChangeTexture("BloodSourceBase", Texture, showBaseTexPopup, availableTextures,
+                                   "BloodSourceBasePicker");
+            ImGui::Separator();
         }
     }
 
