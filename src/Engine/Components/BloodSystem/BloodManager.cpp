@@ -97,7 +97,7 @@ namespace Engine
             bloodSource->Draw();
         }
 
-        glBlendFuncSeparate(GL_ZERO, GL_ONE, GL_ZERO, GL_ONE_MINUS_SRC_ALPHA);
+        glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ZERO, GL_ONE_MINUS_SRC_ALPHA);
         if (Eraser != nullptr)
         {
             Eraser->Draw();

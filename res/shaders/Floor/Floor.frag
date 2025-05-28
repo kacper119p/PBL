@@ -29,6 +29,7 @@ layout (binding = 0) uniform sampler2D BloodMask;
 layout (location = 0) out vec3 FragColor;
 layout (location = 1) out vec3 OcclusionMask;
 
+const float NOISE_SCALE = 30.0;
 const float BLOOD_ROUGHNESS = 0.02;
 const float BLOOD_METALLIC = 0.04;
 const vec2 BLOOD_TILING0 = vec2(0.45, 0.45);
@@ -45,7 +46,7 @@ void main() {
     float AmbientOcclusion = RoughnessMetallicAmbientOcclusion.b;
 
     vec4 BloodColor = texture(BloodMask, BloodMaskCoords);
-    float noise = snoise(Position.xz, 4.0);
+    float noise = snoise(Position.xz, NOISE_SCALE);
     noise = noise * 0.5 + 0.5;
     noise *= 0.33;
     BloodColor.a = step(0.33, BloodColor.a + noise);
