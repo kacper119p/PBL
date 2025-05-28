@@ -44,12 +44,67 @@
 namespace Scene
 {
     bool shouldContinue = true;
-
     void SceneBuilder::Build(Engine::Scene*& Scene)
     {
         ZoneScoped;
 
         Scene = new class Engine::Scene();
-        Engine::SceneManager::LoadScene("./res/scenes/SampleScene.lvl", Scene);
+        Engine::SceneManager::LoadScene("./res/scenes/BlockLayout.lvl", Scene);
+        // TODO: remove when no longer needed
+
+
+
+       
+
+        // BOX BOX SCENARIO /////////////////////////////////////////////////////////////////////////////////////////////////////////
+        #if !EDITOR
+        Engine::Entity* secondBoxEntity = Scene->SpawnEntity(nullptr);
+        Engine::ModelRenderer* secondBoxModelRenderer = secondBoxEntity->AddComponent<Engine::ModelRenderer>();
+        secondBoxModelRenderer->SetModel(Models::ModelManager::GetModel("./res/models/Box.fbx"));
+        secondBoxModelRenderer->SetMaterial(
+                Materials::MaterialManager::GetMaterial("./res/materials/SampleScene/Box.mat"));
+
+        Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
+        secondBoxEntity->GetTransform()->SetPosition(glm::vec3(2.0f, 7.0f, 0.0f));
+        secondBoxCollider->SetWidth(2.0f);
+        secondBoxCollider->SetHeight(2.0f);
+        secondBoxCollider->SetDepth(2.0f);
+
+        Engine::Entity* secondBoxEntity2 = Scene->SpawnEntity(nullptr);
+        Engine::BoxCollider* secondBoxCollider2 = secondBoxEntity2->AddComponent<Engine::BoxCollider>();
+
+        secondBoxCollider2->SetWidth(2.0f);
+        secondBoxCollider2->SetHeight(2.0f);
+        secondBoxCollider2->SetDepth(2.0f);
+        secondBoxEntity2->GetTransform()->SetPosition(glm::vec3(0.0f, 7.0f, 4.0f));
+        secondBoxCollider2->SetStatic(false);
+
+        Engine::ModelRenderer* secondBoxModelRenderer2 = secondBoxEntity2->AddComponent<Engine::ModelRenderer>();
+        secondBoxModelRenderer2->SetModel(Models::ModelManager::GetModel("./res/models/Box.fbx"));
+        secondBoxModelRenderer2->SetMaterial(
+                Materials::MaterialManager::GetMaterial("./res/materials/SampleScene/Box.mat"));
+        secondBoxModelRenderer2->GetMaterial()->GetMainPass().SetUniform("Tint", glm::vec3(0.0f, 25.0f, 0.0f));
+
+        secondBoxEntity->AddComponent<Engine::MovementComponent>();
+        
+        Engine::RigidBody* rb2 = secondBoxEntity2->AddComponent<Engine::RigidBody>();
+        Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();
+
+        rb2->SetRestitution(5.0f);
+        rb2->SetMass(0.1f);
+
+        rb->SetLinearDamping(.05f);
+        rb->AddConstraint(Engine::RigidBody::Constraints::LockRotationX);
+        rb->AddConstraint(Engine::RigidBody::Constraints::LockRotationZ);
+
+        CameraFollow::GetInstance().SetTarget(secondBoxEntity);
+        #endif
+
+        //secondBoxCollider->shouldMove = true;
+        
+        //Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();
+
+
+        // Engine::SceneManager::SaveScene("./res/scenes/SampleScene.lvl", Scene);
     }
 } // namespace Scene
