@@ -32,11 +32,11 @@ namespace Engine
         ~BoxCollider() override;
 
     public:
-        virtual bool AcceptCollision(ColliderVisitor& visitor) override;
+        bool AcceptCollision(ColliderVisitor& visitor) override;
 
         //virtual bool CheckCollision(const Collider& other) override;
 
-        inline virtual Collider* GetInstance() override { return this; }
+        inline Collider* GetInstance() override { return this; }
 
         glm::vec3 GetBoundingBox() const override { return glm::vec3(_width, _height, _depth); }
 

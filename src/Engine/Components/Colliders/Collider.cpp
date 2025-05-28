@@ -18,7 +18,6 @@ namespace Engine
         Spatial(&SpatialPartitioning::GetInstance())
     {
         this->colliderVisitor = ColliderVisitor();
-        Spatial = &SpatialPartitioning::GetInstance();
         transform = GetOwner()->GetTransform();
 #if EDITOR
         SetMaterial(Materials::MaterialManager::GetMaterial("res/materials/Editor/Gizmo.mat"));
@@ -27,8 +26,7 @@ namespace Engine
 
     Collider::~Collider()
     {
-        Spatial->RemoveCollider(this);
-        CollisionUpdateManager::GetInstance()->UnregisterCollider(this);
+        colliderVisitor.~ColliderVisitor();
     }
 
     Collider& Collider::operator=(const Collider& Other)
@@ -81,8 +79,8 @@ namespace Engine
 
     void Collider::OnDestroy()
     {
-        CollisionUpdateManager::GetInstance()->UnregisterCollider(this);
         Spatial->RemoveCollider(this);
+        CollisionUpdateManager::GetInstance()->UnregisterCollider(this);
     }
 
     // TODO: remove when rigidbody implemented

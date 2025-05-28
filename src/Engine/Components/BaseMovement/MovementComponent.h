@@ -14,9 +14,11 @@ namespace Engine
     {
     private:
         float Speed;
-
+        float RotationSpeed = 45.0f;
+        float CurrentVelocity = 0.0f;
+        float smooth = 0.97f;
     public:
-        MovementComponent(float speed = 20.0f) : Speed(speed)
+        MovementComponent(float speed = 300.0f) : Speed(speed)
         {
             UpdateManager::GetInstance()->RegisterComponent(this);
         }
@@ -31,8 +33,9 @@ namespace Engine
         #if EDITOR
         void DrawImGui() override
         {
-            // Implementacja GUI dla edytora (opcjonalna)
-            std::cout << "MovementComponent: Speed = " << Speed << std::endl;
+            char speedBuffer[32];
+            snprintf(speedBuffer, sizeof(speedBuffer), "%.2f", Speed);
+            ImGui::Text("MovementComponent: Speed = %s", speedBuffer);
         }
         #endif
     };

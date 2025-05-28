@@ -100,6 +100,13 @@ namespace Engine
             Components.push_back(Component);
             Component->Start();
         }
+
+        void RemoveComponent(Component* Component)
+        {
+            std::erase(Components, Component);
+            Component->OnDestroy();
+            delete Component;
+        }
 #endif
 
         /**
