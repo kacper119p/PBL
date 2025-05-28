@@ -1640,8 +1640,8 @@
       "type": "ModelRenderer",
       "id": "{bda7ce56-47cc-4540-b0c6-6fece310ef69}\u0000",
       "owner": "{40124080-f6ab-4c88-a73d-738fbc0baf38}\u0000",
-      "Material": "..\\..\\res\\materials\\SampleScene\\Table.mat",
-      "Model": "..\\..\\res\\models\\Torch.fbx"
+      "Material": "res\\materials\\SampleScene\\Table.mat",
+      "Model": "res\\models\\Torch.fbx"
     }
   ]
 }
