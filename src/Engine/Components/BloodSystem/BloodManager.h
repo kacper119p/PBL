@@ -14,7 +14,7 @@ namespace Engine
     class BloodManager
     {
     private:
-        static constexpr int32_t MaskSize = 2048;
+        static constexpr int32_t MaskSize = 4096;
 
         static BloodManager* Instance;
 

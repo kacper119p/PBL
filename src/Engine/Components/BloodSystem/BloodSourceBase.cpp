@@ -3,12 +3,13 @@
 #include "BloodManager.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/Rendering/Plane.h"
-#include "Materials/Material.h"
+#include "Engine/Textures/TextureManager.h"
 #include "Shaders/Shader.h"
 
 #if EDITOR
 #include <imgui.h>
 #include <glm/gtc/type_ptr.hpp>
+#include "Materials/Material.h"
 #endif
 
 namespace Engine

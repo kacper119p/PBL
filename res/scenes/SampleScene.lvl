@@ -1619,7 +1619,9 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{028be480-0c0f-4e33-a496-8b505e1f36f2}\u0000"
+                "{028be480-0c0f-4e33-a496-8b505e1f36f2}\u0000",
+                "{7cbce815-cf23-4c04-b377-52d1fece4689}\u0000",
+                "{bda7ce56-47cc-4540-b0c6-6fece310ef69}\u0000"
             ]
         },
         {
@@ -1627,6 +1629,19 @@
             "id": "{028be480-0c0f-4e33-a496-8b505e1f36f2}\u0000",
             "owner": "{40124080-f6ab-4c88-a73d-738fbc0baf38}\u0000",
             "Texture": "res/textures/BloodSplatter/BloodTest.dds"
+        },
+        {
+            "type": "MoveForward",
+            "id": "{7cbce815-cf23-4c04-b377-52d1fece4689}\u0000",
+            "owner": "{40124080-f6ab-4c88-a73d-738fbc0baf38}\u0000",
+            "Speed": 1.0
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{bda7ce56-47cc-4540-b0c6-6fece310ef69}\u0000",
+            "owner": "{40124080-f6ab-4c88-a73d-738fbc0baf38}\u0000",
+            "Material": "..\\..\\res\\materials\\SampleScene\\Table.mat",
+            "Model": "..\\..\\res\\models\\Torch.fbx"
         }
     ]
 }

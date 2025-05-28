@@ -3,6 +3,7 @@
 #include "BloodManager.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/Rendering/Plane.h"
+#include "Engine/Textures/TextureManager.h"
 #include "Serialization/SerializationUtility.h"
 #include "Shaders/Shader.h"
 #include "glad/glad.h"
@@ -50,6 +51,9 @@ namespace Engine
 #if EDITOR
     void BloodEraser::DrawImGui()
     {
+        if (ImGui::CollapsingHeader("Blood Eraser"))
+        {
+        }
     }
 
     void BloodEraser::RenderDepth(const CameraRenderData& RenderData)
