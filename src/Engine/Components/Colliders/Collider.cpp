@@ -71,6 +71,13 @@ namespace Engine
     {
         if (isStatic)
             return;
+
+        if (CurrentCellIndex != Spatial->GetCellIndex(transform->GetPositionWorldSpace()))
+        {
+            Spatial->RemoveCollider(this);
+            Spatial->AddCollider(this);
+            CurrentCellIndex = Spatial->GetCellIndex(transform->GetPositionWorldSpace());
+        }
         colliderVisitor.ManageCollisions();
     }
 
