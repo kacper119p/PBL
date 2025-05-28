@@ -1,1095 +1,1095 @@
 {
-    "Skybox": "./res/textures/Skyboxes/Skybox.hdr",
-    "Bounds": {
-        "min": {
-            "x": -12.0,
-            "y": -1.0,
-            "z": -12.0
-        },
-        "max": {
-            "x": 12.0,
-            "y": 5.0,
-            "z": 15.0
-        }
+  "Skybox": "./res/textures/Skyboxes/Skybox.hdr",
+  "Bounds": {
+    "min": {
+      "x": -12.0,
+      "y": -1.0,
+      "z": -12.0
     },
-    "UI": "EmptyUi",
-    "GameMode": "DefaultGameMode",
-    "Player": "DefaultPlayer",
-    "Root": {
-        "type": "Entity",
-        "id": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
-        "name": "Root",
-        "transform": {
-            "type": "Transform",
-            "id": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000",
-            "owner": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
-            "Position": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "EulerAngles": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            },
-            "Scale": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 1.0
-            },
-            "Rotation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0,
-                "w": 1.0
-            },
-            "Children": [
-                "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
-                "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000",
-                "{ddc46a8a-64c6-4d0a-b377-3b9dbc0c62e0}\u0000",
-                "{4e07a2a2-18a0-4eb8-abda-4f7006e8f69d}\u0000",
-                "{473d53eb-2308-416a-b3ec-6890fc7ba617}\u0000",
-                "{a8eb14d7-ea4c-43a8-bf41-d398c792e344}\u0000",
-                "{5e181501-ae61-4af9-bb1f-40904c0439b7}\u0000",
-                "{ea2dc42e-0052-4bcd-9e28-25633c5cbb53}\u0000",
-                "{d627c39b-eb7a-420d-9975-c72077ecf8a4}\u0000",
-                "{dcbad2e1-4641-4cca-9643-91d246c80d5b}\u0000",
-                "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
-            ],
-            "Parent": null
-        },
-        "components": []
+    "max": {
+      "x": 12.0,
+      "y": 5.0,
+      "z": 15.0
+    }
+  },
+  "UI": "EmptyUi",
+  "GameMode": "DefaultGameMode",
+  "Player": "DefaultPlayer",
+  "Root": {
+    "type": "Entity",
+    "id": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
+    "name": "Root",
+    "transform": {
+      "type": "Transform",
+      "id": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000",
+      "owner": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
+      "Position": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "EulerAngles": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "Scale": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      },
+      "Rotation": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 1.0
+      },
+      "Children": [
+        "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
+        "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000",
+        "{ddc46a8a-64c6-4d0a-b377-3b9dbc0c62e0}\u0000",
+        "{4e07a2a2-18a0-4eb8-abda-4f7006e8f69d}\u0000",
+        "{473d53eb-2308-416a-b3ec-6890fc7ba617}\u0000",
+        "{a8eb14d7-ea4c-43a8-bf41-d398c792e344}\u0000",
+        "{5e181501-ae61-4af9-bb1f-40904c0439b7}\u0000",
+        "{ea2dc42e-0052-4bcd-9e28-25633c5cbb53}\u0000",
+        "{d627c39b-eb7a-420d-9975-c72077ecf8a4}\u0000",
+        "{dcbad2e1-4641-4cca-9643-91d246c80d5b}\u0000",
+        "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
+      ],
+      "Parent": null
     },
-    "Objects": [
-        {
-            "type": "Entity",
-            "id": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
-            "name": "Floor",
-            "transform": {
-                "type": "Transform",
-                "id": "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
-                "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
-                "Position": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 10.0,
-                    "y": 0.10000000149011612,
-                    "z": 10.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
-                "{3c9e0326-4e9a-4b13-9de5-d4d41c33d3b6}\u0000",
-                "{97ca7f8c-ed2e-46b1-866d-3eaad705bb67}\u0000"
-            ]
+    "components": []
+  },
+  "Objects": [
+    {
+      "type": "Entity",
+      "id": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+      "name": "Floor",
+      "transform": {
+        "type": "Transform",
+        "id": "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
+        "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+        "Position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
-            "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Box.fbx"
+        "EulerAngles": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": 0.0
         },
-        {
-            "type": "BoxCollider",
-            "id": "{3c9e0326-4e9a-4b13-9de5-d4d41c33d3b6}\u0000",
-            "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "colliderType": 0,
-            "_width": 20.0,
-            "_height": 0.20000000298023224,
-            "_depth": 20.0
+        "Scale": {
+          "x": 10.0,
+          "y": 0.10000000149011612,
+          "z": 10.0
         },
-        {
-            "type": "NavArea",
-            "id": "{97ca7f8c-ed2e-46b1-866d-3eaad705bb67}\u0000",
-            "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
-            "IsWalkable": true
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
         },
-        {
-            "type": "Entity",
-            "id": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
-            "name": "Directional light",
-            "transform": {
-                "type": "Transform",
-                "id": "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000",
-                "owner": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
-                "Position": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{199fb480-7da5-459c-bc36-d10d5f80ab6b}\u0000"
-            ]
+        "Children": [],
+        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+      },
+      "components": [
+        "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
+        "{3c9e0326-4e9a-4b13-9de5-d4d41c33d3b6}\u0000",
+        "{97ca7f8c-ed2e-46b1-866d-3eaad705bb67}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
+      "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+      "Material": "./res/materials/SampleScene/Default.mat",
+      "Model": "./res/Models/Box.fbx"
+    },
+    {
+      "type": "BoxCollider",
+      "id": "{3c9e0326-4e9a-4b13-9de5-d4d41c33d3b6}\u0000",
+      "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+      "isTrigger": false,
+      "isStatic": true,
+      "colliderType": 0,
+      "_width": 20.0,
+      "_height": 0.20000000298023224,
+      "_depth": 20.0
+    },
+    {
+      "type": "NavArea",
+      "id": "{97ca7f8c-ed2e-46b1-866d-3eaad705bb67}\u0000",
+      "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+      "IsWalkable": true
+    },
+    {
+      "type": "Entity",
+      "id": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
+      "name": "Directional light",
+      "transform": {
+        "type": "Transform",
+        "id": "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000",
+        "owner": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
+        "Position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
         },
-        {
-            "type": "DirectionalLight",
-            "id": "{199fb480-7da5-459c-bc36-d10d5f80ab6b}\u0000",
-            "owner": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
-            "Color": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 1.0
-            }
+        "EulerAngles": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
         },
-        {
-            "type": "Entity",
-            "id": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
-            "name": "Wall1",
-            "transform": {
-                "type": "Transform",
-                "id": "{ddc46a8a-64c6-4d0a-b377-3b9dbc0c62e0}\u0000",
-                "owner": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
-                "Position": {
-                    "x": -11.0,
-                    "y": 2.5,
-                    "z": 0.0
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 1.0,
-                    "y": 2.5,
-                    "z": 10.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{76d1136b-13b3-493b-88af-816fb45b5ba3}\u0000",
-                "{3c030282-8290-419c-9840-dded7929768b}\u0000"
-            ]
+        "Scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{76d1136b-13b3-493b-88af-816fb45b5ba3}\u0000",
-            "owner": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
-            "Material": "./res/materials/SampleScene/Wall.mat",
-            "Model": "./res/Models/Box.fbx"
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
         },
-        {
-            "type": "BoxCollider",
-            "id": "{3c030282-8290-419c-9840-dded7929768b}\u0000",
-            "owner": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "colliderType": 0,
-            "_width": 2.0,
-            "_height": 5.0,
-            "_depth": 20.0
+        "Children": [],
+        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+      },
+      "components": [
+        "{199fb480-7da5-459c-bc36-d10d5f80ab6b}\u0000"
+      ]
+    },
+    {
+      "type": "DirectionalLight",
+      "id": "{199fb480-7da5-459c-bc36-d10d5f80ab6b}\u0000",
+      "owner": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
+      "Color": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+      }
+    },
+    {
+      "type": "Entity",
+      "id": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
+      "name": "Wall1",
+      "transform": {
+        "type": "Transform",
+        "id": "{ddc46a8a-64c6-4d0a-b377-3b9dbc0c62e0}\u0000",
+        "owner": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
+        "Position": {
+          "x": -11.0,
+          "y": 2.5,
+          "z": 0.0
         },
-        {
-            "type": "Entity",
-            "id": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
-            "name": "Wall2",
-            "transform": {
-                "type": "Transform",
-                "id": "{4e07a2a2-18a0-4eb8-abda-4f7006e8f69d}\u0000",
-                "owner": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
-                "Position": {
-                    "x": 0.0,
-                    "y": 2.5,
-                    "z": -11.0
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 10.0,
-                    "y": 2.5,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{de16add4-a432-4be8-80c7-5b6b05d2e875}\u0000",
-                "{95ecf7b3-6989-494c-86df-d0981aefc26a}\u0000"
-            ]
+        "EulerAngles": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": 0.0
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{de16add4-a432-4be8-80c7-5b6b05d2e875}\u0000",
-            "owner": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
-            "Material": "./res/materials/SampleScene/Wall.mat",
-            "Model": "./res/Models/Box.fbx"
+        "Scale": {
+          "x": 1.0,
+          "y": 2.5,
+          "z": 10.0
         },
-        {
-            "type": "BoxCollider",
-            "id": "{95ecf7b3-6989-494c-86df-d0981aefc26a}\u0000",
-            "owner": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "colliderType": 0,
-            "_width": 20.0,
-            "_height": 5.0,
-            "_depth": 2.0
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
         },
-        {
-            "type": "Entity",
-            "id": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
-            "name": "Floor2",
-            "transform": {
-                "type": "Transform",
-                "id": "{473d53eb-2308-416a-b3ec-6890fc7ba617}\u0000",
-                "owner": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
-                "Position": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 12.5
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 2.5,
-                    "y": 0.10000000149011612,
-                    "z": 2.5
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{a9e349aa-d1f5-4d03-80bf-a22a13d058a8}\u0000",
-                "{23ba330a-4492-4bc7-8942-e0df6b4cd474}\u0000"
-            ]
+        "Children": [],
+        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+      },
+      "components": [
+        "{76d1136b-13b3-493b-88af-816fb45b5ba3}\u0000",
+        "{3c030282-8290-419c-9840-dded7929768b}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{76d1136b-13b3-493b-88af-816fb45b5ba3}\u0000",
+      "owner": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
+      "Material": "./res/materials/SampleScene/Wall.mat",
+      "Model": "./res/Models/Box.fbx"
+    },
+    {
+      "type": "BoxCollider",
+      "id": "{3c030282-8290-419c-9840-dded7929768b}\u0000",
+      "owner": "{05572d38-0d82-4912-a1d9-0f84b96f5a00}\u0000",
+      "isTrigger": false,
+      "isStatic": true,
+      "colliderType": 0,
+      "_width": 2.0,
+      "_height": 5.0,
+      "_depth": 20.0
+    },
+    {
+      "type": "Entity",
+      "id": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
+      "name": "Wall2",
+      "transform": {
+        "type": "Transform",
+        "id": "{4e07a2a2-18a0-4eb8-abda-4f7006e8f69d}\u0000",
+        "owner": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
+        "Position": {
+          "x": 0.0,
+          "y": 2.5,
+          "z": -11.0
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{a9e349aa-d1f5-4d03-80bf-a22a13d058a8}\u0000",
-            "owner": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Box.fbx"
+        "EulerAngles": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
         },
-        {
-            "type": "BoxCollider",
-            "id": "{23ba330a-4492-4bc7-8942-e0df6b4cd474}\u0000",
-            "owner": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "colliderType": 0,
-            "_width": 5.0,
-            "_height": 0.20000000298023224,
-            "_depth": 5.0
+        "Scale": {
+          "x": 10.0,
+          "y": 2.5,
+          "z": 1.0
         },
-        {
-            "type": "Entity",
-            "id": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
-            "name": "Wall3",
-            "transform": {
-                "type": "Transform",
-                "id": "{a8eb14d7-ea4c-43a8-bf41-d398c792e344}\u0000",
-                "owner": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
-                "Position": {
-                    "x": 11.0,
-                    "y": 2.5,
-                    "z": 0.0
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 1.0,
-                    "y": 2.5,
-                    "z": 10.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{efd99244-36a8-49af-babd-431ee2c033fe}\u0000",
-                "{82ff2957-f6d2-460f-9adf-83cf7a17d872}\u0000"
-            ]
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{efd99244-36a8-49af-babd-431ee2c033fe}\u0000",
-            "owner": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
-            "Material": "./res/materials/SampleScene/Wall.mat",
-            "Model": "./res/Models/Box.fbx"
+        "Children": [],
+        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+      },
+      "components": [
+        "{de16add4-a432-4be8-80c7-5b6b05d2e875}\u0000",
+        "{95ecf7b3-6989-494c-86df-d0981aefc26a}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{de16add4-a432-4be8-80c7-5b6b05d2e875}\u0000",
+      "owner": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
+      "Material": "./res/materials/SampleScene/Wall.mat",
+      "Model": "./res/Models/Box.fbx"
+    },
+    {
+      "type": "BoxCollider",
+      "id": "{95ecf7b3-6989-494c-86df-d0981aefc26a}\u0000",
+      "owner": "{ce23e4f2-4b3f-4b9e-8c67-508e0c256498}\u0000",
+      "isTrigger": false,
+      "isStatic": true,
+      "colliderType": 0,
+      "_width": 20.0,
+      "_height": 5.0,
+      "_depth": 2.0
+    },
+    {
+      "type": "Entity",
+      "id": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
+      "name": "Floor2",
+      "transform": {
+        "type": "Transform",
+        "id": "{473d53eb-2308-416a-b3ec-6890fc7ba617}\u0000",
+        "owner": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
+        "Position": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 12.5
         },
-        {
-            "type": "BoxCollider",
-            "id": "{82ff2957-f6d2-460f-9adf-83cf7a17d872}\u0000",
-            "owner": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "colliderType": 0,
-            "_width": 2.0,
-            "_height": 5.0,
-            "_depth": 20.0
+        "EulerAngles": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": 0.0
         },
-        {
-            "type": "Entity",
-            "id": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
-            "name": "Wall4",
-            "transform": {
-                "type": "Transform",
-                "id": "{5e181501-ae61-4af9-bb1f-40904c0439b7}\u0000",
-                "owner": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
-                "Position": {
-                    "x": -6.5,
-                    "y": 2.5,
-                    "z": 11.0
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 4.0,
-                    "y": 2.5,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{93f6f002-b9fe-4798-95b9-cfe8dd65b099}\u0000",
-                "{efac517c-cc44-490f-9c34-7e6955f9b895}\u0000"
-            ]
+        "Scale": {
+          "x": 2.5,
+          "y": 0.10000000149011612,
+          "z": 2.5
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{93f6f002-b9fe-4798-95b9-cfe8dd65b099}\u0000",
-            "owner": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
-            "Material": "./res/materials/SampleScene/Wall.mat",
-            "Model": "./res/Models/Box.fbx"
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
         },
-        {
-            "type": "BoxCollider",
-            "id": "{efac517c-cc44-490f-9c34-7e6955f9b895}\u0000",
-            "owner": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "colliderType": 0,
-            "_width": 8.0,
-            "_height": 5.0,
-            "_depth": 2.0
+        "Children": [],
+        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+      },
+      "components": [
+        "{a9e349aa-d1f5-4d03-80bf-a22a13d058a8}\u0000",
+        "{23ba330a-4492-4bc7-8942-e0df6b4cd474}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{a9e349aa-d1f5-4d03-80bf-a22a13d058a8}\u0000",
+      "owner": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
+      "Material": "./res/materials/SampleScene/Default.mat",
+      "Model": "./res/Models/Box.fbx"
+    },
+    {
+      "type": "BoxCollider",
+      "id": "{23ba330a-4492-4bc7-8942-e0df6b4cd474}\u0000",
+      "owner": "{8d7403f9-595a-4048-9536-07f3fe6cc6b4}\u0000",
+      "isTrigger": false,
+      "isStatic": true,
+      "colliderType": 0,
+      "_width": 5.0,
+      "_height": 0.20000000298023224,
+      "_depth": 5.0
+    },
+    {
+      "type": "Entity",
+      "id": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
+      "name": "Wall3",
+      "transform": {
+        "type": "Transform",
+        "id": "{a8eb14d7-ea4c-43a8-bf41-d398c792e344}\u0000",
+        "owner": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
+        "Position": {
+          "x": 11.0,
+          "y": 2.5,
+          "z": 0.0
         },
-        {
-            "type": "Entity",
-            "id": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
-            "name": "Wall5",
-            "transform": {
-                "type": "Transform",
-                "id": "{ea2dc42e-0052-4bcd-9e28-25633c5cbb53}\u0000",
-                "owner": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
-                "Position": {
-                    "x": 6.5,
-                    "y": 2.5,
-                    "z": 11.0
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 4.0,
-                    "y": 2.5,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{39690d01-b5e2-43d2-8d02-6e4637cd62ce}\u0000",
-                "{84858dd7-3a4c-487a-8687-7020bd9c45a2}\u0000"
-            ]
+        "EulerAngles": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{39690d01-b5e2-43d2-8d02-6e4637cd62ce}\u0000",
-            "owner": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
-            "Material": "./res/materials/SampleScene/Wall.mat",
-            "Model": "./res/Models/Box.fbx"
+        "Scale": {
+          "x": 1.0,
+          "y": 2.5,
+          "z": 10.0
         },
-        {
-            "type": "BoxCollider",
-            "id": "{84858dd7-3a4c-487a-8687-7020bd9c45a2}\u0000",
-            "owner": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "colliderType": 0,
-            "_width": 8.0,
-            "_height": 5.0,
-            "_depth": 2.0
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
         },
-        {
-            "type": "Entity",
-            "id": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
-            "name": "Wall6",
-            "transform": {
-                "type": "Transform",
-                "id": "{d627c39b-eb7a-420d-9975-c72077ecf8a4}\u0000",
-                "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
-                "Position": {
-                    "x": -3.6094212532043457,
-                    "y": 2.0,
-                    "z": 0.0
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 1.0,
-                    "y": 2.5,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{3f52de67-c547-4ac2-b56e-a5c902ef60b5}\u0000",
-                "{6595ee88-03a4-41f6-9132-563aa8bf2fd0}\u0000",
-                "{e9605442-462b-45ec-b644-0bc08de719c5}\u0000"
-            ]
+        "Children": [],
+        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+      },
+      "components": [
+        "{efd99244-36a8-49af-babd-431ee2c033fe}\u0000",
+        "{82ff2957-f6d2-460f-9adf-83cf7a17d872}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{efd99244-36a8-49af-babd-431ee2c033fe}\u0000",
+      "owner": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
+      "Material": "./res/materials/SampleScene/Wall.mat",
+      "Model": "./res/Models/Box.fbx"
+    },
+    {
+      "type": "BoxCollider",
+      "id": "{82ff2957-f6d2-460f-9adf-83cf7a17d872}\u0000",
+      "owner": "{28d57543-daa2-4b17-90a5-93e5f7367f22}\u0000",
+      "isTrigger": false,
+      "isStatic": true,
+      "colliderType": 0,
+      "_width": 2.0,
+      "_height": 5.0,
+      "_depth": 20.0
+    },
+    {
+      "type": "Entity",
+      "id": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
+      "name": "Wall4",
+      "transform": {
+        "type": "Transform",
+        "id": "{5e181501-ae61-4af9-bb1f-40904c0439b7}\u0000",
+        "owner": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
+        "Position": {
+          "x": -6.5,
+          "y": 2.5,
+          "z": 11.0
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{3f52de67-c547-4ac2-b56e-a5c902ef60b5}\u0000",
-            "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
-            "Material": "./res/materials/SampleScene/Wall.mat",
-            "Model": "./res/Models/Box.fbx"
+        "EulerAngles": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": 0.0
         },
-        {
-            "type": "BoxCollider",
-            "id": "{6595ee88-03a4-41f6-9132-563aa8bf2fd0}\u0000",
-            "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "colliderType": 0,
-            "_width": 2.0,
-            "_height": 5.0,
-            "_depth": 2.0
+        "Scale": {
+          "x": 4.0,
+          "y": 2.5,
+          "z": 1.0
         },
-        {
-            "type": "AiManager",
-            "id": "{e9605442-462b-45ec-b644-0bc08de719c5}\u0000",
-            "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000"
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
         },
-        {
-            "type": "Entity",
-            "id": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
-            "name": "Wall7",
-            "transform": {
-                "type": "Transform",
-                "id": "{dcbad2e1-4641-4cca-9643-91d246c80d5b}\u0000",
-                "owner": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
-                "Position": {
-                    "x": 4.465912342071533,
-                    "y": 2.0,
-                    "z": 0.0
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 1.0,
-                    "y": 2.5,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{a83b86bd-7242-4337-aa26-210bd3372848}\u0000",
-                "{803ff7e6-b498-44ed-9ae0-90cf1a3f5e6e}\u0000"
-            ]
+        "Children": [],
+        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+      },
+      "components": [
+        "{93f6f002-b9fe-4798-95b9-cfe8dd65b099}\u0000",
+        "{efac517c-cc44-490f-9c34-7e6955f9b895}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{93f6f002-b9fe-4798-95b9-cfe8dd65b099}\u0000",
+      "owner": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
+      "Material": "./res/materials/SampleScene/Wall.mat",
+      "Model": "./res/Models/Box.fbx"
+    },
+    {
+      "type": "BoxCollider",
+      "id": "{efac517c-cc44-490f-9c34-7e6955f9b895}\u0000",
+      "owner": "{994ad137-4f6c-44c2-b5e1-b62b27986aac}\u0000",
+      "isTrigger": false,
+      "isStatic": true,
+      "colliderType": 0,
+      "_width": 8.0,
+      "_height": 5.0,
+      "_depth": 2.0
+    },
+    {
+      "type": "Entity",
+      "id": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
+      "name": "Wall5",
+      "transform": {
+        "type": "Transform",
+        "id": "{ea2dc42e-0052-4bcd-9e28-25633c5cbb53}\u0000",
+        "owner": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
+        "Position": {
+          "x": 6.5,
+          "y": 2.5,
+          "z": 11.0
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{a83b86bd-7242-4337-aa26-210bd3372848}\u0000",
-            "owner": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
-            "Material": "./res/materials/SampleScene/Wall.mat",
-            "Model": "./res/Models/Box.fbx"
+        "EulerAngles": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
         },
-        {
-            "type": "BoxCollider",
-            "id": "{803ff7e6-b498-44ed-9ae0-90cf1a3f5e6e}\u0000",
-            "owner": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "colliderType": 0,
-            "_width": 2.0,
-            "_height": 5.0,
-            "_depth": 2.0
+        "Scale": {
+          "x": 4.0,
+          "y": 2.5,
+          "z": 1.0
         },
-        {
-            "type": "Entity",
-            "id": "{43359f8b-8b78-4069-98d6-d147bc56d763}\u0000",
-            "name": "Generated Items",
-            "transform": {
-                "type": "Transform",
-                "id": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000",
-                "owner": "{43359f8b-8b78-4069-98d6-d147bc56d763}\u0000",
-                "Position": {
-                    "x": 2.594409465789795,
-                    "y": 0.09259033203125,
-                    "z": 1.0
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [
-                    "{f029a354-0801-4fc2-9e08-8572f7aa7862}\u0000",
-                    "{ffd068a6-1b7d-4d06-afab-34e887b57601}\u0000",
-                    "{d7796776-9107-4446-88c9-0f2725126dc0}\u0000",
-                    "{964047a3-94db-45a1-8ac9-6c2f07998795}\u0000",
-                    "{534ee381-b737-43a9-a2d0-6e414647ead5}\u0000",
-                    "{fe3c5451-332b-4908-bb19-766a119e69b4}\u0000",
-                    "{0b86bb3f-0d80-4bc1-a393-7cb595409a29}\u0000",
-                    "{d2fc9993-c195-430b-bfa4-a74dd54ab3b2}\u0000",
-                    "{5827bb74-447b-4437-9448-5cc0418dc50e}\u0000",
-                    "{e6fca259-daa0-4bb0-820a-b80da4d3e9dc}\u0000"
-                ],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": []
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
         },
-        {
-            "type": "Entity",
-            "id": "{a1d617a3-5a2b-4a1d-ab4a-6f5f9c786520}\u0000",
-            "name": "Bottle 1",
-            "transform": {
-                "type": "Transform",
-                "id": "{f029a354-0801-4fc2-9e08-8572f7aa7862}\u0000",
-                "owner": "{a1d617a3-5a2b-4a1d-ab4a-6f5f9c786520}\u0000",
-                "Position": {
-                    "x": -4.808083534240723,
-                    "y": 0.5648193359375,
-                    "z": -9.679006576538086
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 5.0,
-                    "y": 5.0,
-                    "z": 5.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
-            },
-            "components": [
-                "{5d256f23-d6c1-4f11-b9f9-8fcf6bd99a38}\u0000"
-            ]
+        "Children": [],
+        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+      },
+      "components": [
+        "{39690d01-b5e2-43d2-8d02-6e4637cd62ce}\u0000",
+        "{84858dd7-3a4c-487a-8687-7020bd9c45a2}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{39690d01-b5e2-43d2-8d02-6e4637cd62ce}\u0000",
+      "owner": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
+      "Material": "./res/materials/SampleScene/Wall.mat",
+      "Model": "./res/Models/Box.fbx"
+    },
+    {
+      "type": "BoxCollider",
+      "id": "{84858dd7-3a4c-487a-8687-7020bd9c45a2}\u0000",
+      "owner": "{6b82913e-22f8-48a0-b59e-c81fd93b2986}\u0000",
+      "isTrigger": false,
+      "isStatic": true,
+      "colliderType": 0,
+      "_width": 8.0,
+      "_height": 5.0,
+      "_depth": 2.0
+    },
+    {
+      "type": "Entity",
+      "id": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
+      "name": "Wall6",
+      "transform": {
+        "type": "Transform",
+        "id": "{d627c39b-eb7a-420d-9975-c72077ecf8a4}\u0000",
+        "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
+        "Position": {
+          "x": -3.6094212532043457,
+          "y": 2.0,
+          "z": 0.0
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{5d256f23-d6c1-4f11-b9f9-8fcf6bd99a38}\u0000",
-            "owner": "{a1d617a3-5a2b-4a1d-ab4a-6f5f9c786520}\u0000",
-            "Material": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/materials/SampleScene/RefractiveBottle.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Bottle.fbx"
+        "EulerAngles": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": 0.0
         },
-        {
-            "type": "Entity",
-            "id": "{1d6fd7ba-feec-434b-a11b-0939879f2177}\u0000",
-            "name": "Bottle 2",
-            "transform": {
-                "type": "Transform",
-                "id": "{ffd068a6-1b7d-4d06-afab-34e887b57601}\u0000",
-                "owner": "{1d6fd7ba-feec-434b-a11b-0939879f2177}\u0000",
-                "Position": {
-                    "x": -1.5024213790893555,
-                    "y": 0.75,
-                    "z": 3.4975786209106445
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 5.0,
-                    "y": 5.0,
-                    "z": 5.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
-            },
-            "components": [
-                "{4da5bb93-14cf-4fbf-a7dc-20005b4287e1}\u0000"
-            ]
+        "Scale": {
+          "x": 1.0,
+          "y": 2.5,
+          "z": 1.0
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{4da5bb93-14cf-4fbf-a7dc-20005b4287e1}\u0000",
-            "owner": "{1d6fd7ba-feec-434b-a11b-0939879f2177}\u0000",
-            "Material": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/materials/SampleScene/RefractiveBottle.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Bottle.fbx"
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
         },
-        {
-            "type": "Entity",
-            "id": "{02c99e4f-eb0e-43ba-966b-70f3e5e8c864}\u0000",
-            "name": "Bottle 3",
-            "transform": {
-                "type": "Transform",
-                "id": "{d7796776-9107-4446-88c9-0f2725126dc0}\u0000",
-                "owner": "{02c99e4f-eb0e-43ba-966b-70f3e5e8c864}\u0000",
-                "Position": {
-                    "x": -7.284160137176514,
-                    "y": 0.5648193359375,
-                    "z": -7.33900785446167
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 5.0,
-                    "y": 5.0,
-                    "z": 5.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
-            },
-            "components": [
-                "{ef7d0a99-bc70-4741-b24c-2fd47c098c51}\u0000"
-            ]
+        "Children": [],
+        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+      },
+      "components": [
+        "{3f52de67-c547-4ac2-b56e-a5c902ef60b5}\u0000",
+        "{6595ee88-03a4-41f6-9132-563aa8bf2fd0}\u0000",
+        "{e9605442-462b-45ec-b644-0bc08de719c5}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{3f52de67-c547-4ac2-b56e-a5c902ef60b5}\u0000",
+      "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
+      "Material": "./res/materials/SampleScene/Wall.mat",
+      "Model": "./res/Models/Box.fbx"
+    },
+    {
+      "type": "BoxCollider",
+      "id": "{6595ee88-03a4-41f6-9132-563aa8bf2fd0}\u0000",
+      "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000",
+      "isTrigger": false,
+      "isStatic": true,
+      "colliderType": 0,
+      "_width": 2.0,
+      "_height": 5.0,
+      "_depth": 2.0
+    },
+    {
+      "type": "AiManager",
+      "id": "{e9605442-462b-45ec-b644-0bc08de719c5}\u0000",
+      "owner": "{4e342747-e227-4b55-978e-0932229a295b}\u0000"
+    },
+    {
+      "type": "Entity",
+      "id": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
+      "name": "Wall7",
+      "transform": {
+        "type": "Transform",
+        "id": "{dcbad2e1-4641-4cca-9643-91d246c80d5b}\u0000",
+        "owner": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
+        "Position": {
+          "x": 4.465912342071533,
+          "y": 2.0,
+          "z": 0.0
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{ef7d0a99-bc70-4741-b24c-2fd47c098c51}\u0000",
-            "owner": "{02c99e4f-eb0e-43ba-966b-70f3e5e8c864}\u0000",
-            "Material": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/materials/SampleScene/RefractiveBottle.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Bottle.fbx"
+        "EulerAngles": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": 0.0
         },
-        {
-            "type": "Entity",
-            "id": "{c9ecf54c-7167-40c2-9230-cbaa50cc0a35}\u0000",
-            "name": "Bottle 4",
-            "transform": {
-                "type": "Transform",
-                "id": "{964047a3-94db-45a1-8ac9-6c2f07998795}\u0000",
-                "owner": "{c9ecf54c-7167-40c2-9230-cbaa50cc0a35}\u0000",
-                "Position": {
-                    "x": -7.431679725646973,
-                    "y": 0.5648193359375,
-                    "z": -2.2841601371765137
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 5.0,
-                    "y": 5.0,
-                    "z": 5.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
-            },
-            "components": [
-                "{f768360a-d1b6-412a-ab23-7618b5ca74a2}\u0000"
-            ]
+        "Scale": {
+          "x": 1.0,
+          "y": 2.5,
+          "z": 1.0
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{f768360a-d1b6-412a-ab23-7618b5ca74a2}\u0000",
-            "owner": "{c9ecf54c-7167-40c2-9230-cbaa50cc0a35}\u0000",
-            "Material": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/materials/SampleScene/RefractiveBottle.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Bottle.fbx"
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
         },
-        {
-            "type": "Entity",
-            "id": "{5a977ec5-b5b3-4ee4-a4e7-ceb04c69c229}\u0000",
-            "name": "Bottle 5",
-            "transform": {
-                "type": "Transform",
-                "id": "{534ee381-b737-43a9-a2d0-6e414647ead5}\u0000",
-                "owner": "{5a977ec5-b5b3-4ee4-a4e7-ceb04c69c229}\u0000",
-                "Position": {
-                    "x": -6.15320348739624,
-                    "y": 0.5648193359375,
-                    "z": 2.153203248977661
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 5.0,
-                    "y": 5.0,
-                    "z": 5.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
-            },
-            "components": [
-                "{cde3b227-0f95-4e82-91cd-5711daa6157f}\u0000"
-            ]
+        "Children": [],
+        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+      },
+      "components": [
+        "{a83b86bd-7242-4337-aa26-210bd3372848}\u0000",
+        "{803ff7e6-b498-44ed-9ae0-90cf1a3f5e6e}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{a83b86bd-7242-4337-aa26-210bd3372848}\u0000",
+      "owner": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
+      "Material": "./res/materials/SampleScene/Wall.mat",
+      "Model": "./res/Models/Box.fbx"
+    },
+    {
+      "type": "BoxCollider",
+      "id": "{803ff7e6-b498-44ed-9ae0-90cf1a3f5e6e}\u0000",
+      "owner": "{a7541404-e89f-45c3-aceb-00fa82d78ab7}\u0000",
+      "isTrigger": false,
+      "isStatic": true,
+      "colliderType": 0,
+      "_width": 2.0,
+      "_height": 5.0,
+      "_depth": 2.0
+    },
+    {
+      "type": "Entity",
+      "id": "{43359f8b-8b78-4069-98d6-d147bc56d763}\u0000",
+      "name": "Generated Items",
+      "transform": {
+        "type": "Transform",
+        "id": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000",
+        "owner": "{43359f8b-8b78-4069-98d6-d147bc56d763}\u0000",
+        "Position": {
+          "x": 2.594409465789795,
+          "y": 0.09259033203125,
+          "z": 1.0
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{cde3b227-0f95-4e82-91cd-5711daa6157f}\u0000",
-            "owner": "{5a977ec5-b5b3-4ee4-a4e7-ceb04c69c229}\u0000",
-            "Material": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/materials/SampleScene/RefractiveBottle.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Bottle.fbx"
+        "EulerAngles": {
+          "x": 0.0,
+          "y": -0.0,
+          "z": 0.0
         },
-        {
-            "type": "Entity",
-            "id": "{8cf4b8cb-653e-484e-a51b-52f2953a8ff4}\u0000",
-            "name": "Bottle 6",
-            "transform": {
-                "type": "Transform",
-                "id": "{fe3c5451-332b-4908-bb19-766a119e69b4}\u0000",
-                "owner": "{8cf4b8cb-653e-484e-a51b-52f2953a8ff4}\u0000",
-                "Position": {
-                    "x": -7.031271457672119,
-                    "y": 0.5648193359375,
-                    "z": 1.700878381729126
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 5.0,
-                    "y": 5.0,
-                    "z": 5.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
-            },
-            "components": [
-                "{8775841e-aa46-4f78-9762-1816f5676bff}\u0000"
-            ]
+        "Scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{8775841e-aa46-4f78-9762-1816f5676bff}\u0000",
-            "owner": "{8cf4b8cb-653e-484e-a51b-52f2953a8ff4}\u0000",
-            "Material": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/materials/SampleScene/RefractiveBottle.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Bottle.fbx"
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
         },
-        {
-            "type": "Entity",
-            "id": "{42a50b8b-ffe6-4fc6-8579-951a08c26e74}\u0000",
-            "name": "Bottle 7",
-            "transform": {
-                "type": "Transform",
-                "id": "{0b86bb3f-0d80-4bc1-a393-7cb595409a29}\u0000",
-                "owner": "{42a50b8b-ffe6-4fc6-8579-951a08c26e74}\u0000",
-                "Position": {
-                    "x": 0.2984328269958496,
-                    "y": 0.75,
-                    "z": 5.29843282699585
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 5.0,
-                    "y": 5.0,
-                    "z": 5.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
-            },
-            "components": [
-                "{ac77636f-c717-450b-9c41-ed14f97de19a}\u0000"
-            ]
+        "Children": [
+          "{f029a354-0801-4fc2-9e08-8572f7aa7862}\u0000",
+          "{ffd068a6-1b7d-4d06-afab-34e887b57601}\u0000",
+          "{d7796776-9107-4446-88c9-0f2725126dc0}\u0000",
+          "{964047a3-94db-45a1-8ac9-6c2f07998795}\u0000",
+          "{534ee381-b737-43a9-a2d0-6e414647ead5}\u0000",
+          "{fe3c5451-332b-4908-bb19-766a119e69b4}\u0000",
+          "{0b86bb3f-0d80-4bc1-a393-7cb595409a29}\u0000",
+          "{d2fc9993-c195-430b-bfa4-a74dd54ab3b2}\u0000",
+          "{5827bb74-447b-4437-9448-5cc0418dc50e}\u0000",
+          "{e6fca259-daa0-4bb0-820a-b80da4d3e9dc}\u0000"
+        ],
+        "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+      },
+      "components": []
+    },
+    {
+      "type": "Entity",
+      "id": "{a1d617a3-5a2b-4a1d-ab4a-6f5f9c786520}\u0000",
+      "name": "Bottle 1",
+      "transform": {
+        "type": "Transform",
+        "id": "{f029a354-0801-4fc2-9e08-8572f7aa7862}\u0000",
+        "owner": "{a1d617a3-5a2b-4a1d-ab4a-6f5f9c786520}\u0000",
+        "Position": {
+          "x": -4.808083534240723,
+          "y": 0.5648193359375,
+          "z": -9.679006576538086
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{ac77636f-c717-450b-9c41-ed14f97de19a}\u0000",
-            "owner": "{42a50b8b-ffe6-4fc6-8579-951a08c26e74}\u0000",
-            "Material": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/materials/SampleScene/RefractiveBottle.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Bottle.fbx"
+        "EulerAngles": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
         },
-        {
-            "type": "Entity",
-            "id": "{59fc6a80-c01a-42a5-ba4c-c4e84ed68cb9}\u0000",
-            "name": "Bottle 8",
-            "transform": {
-                "type": "Transform",
-                "id": "{d2fc9993-c195-430b-bfa4-a74dd54ab3b2}\u0000",
-                "owner": "{59fc6a80-c01a-42a5-ba4c-c4e84ed68cb9}\u0000",
-                "Position": {
-                    "x": 0.29230213165283203,
-                    "y": 0.5574951171875,
-                    "z": 7.0102434158325195
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 5.0,
-                    "y": 5.0,
-                    "z": 5.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
-            },
-            "components": [
-                "{9b7e3f55-dc24-4124-aecc-b87d05ae96dd}\u0000"
-            ]
+        "Scale": {
+          "x": 5.0,
+          "y": 5.0,
+          "z": 5.0
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{9b7e3f55-dc24-4124-aecc-b87d05ae96dd}\u0000",
-            "owner": "{59fc6a80-c01a-42a5-ba4c-c4e84ed68cb9}\u0000",
-            "Material": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/materials/SampleScene/RefractiveBottle.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Bottle.fbx"
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
         },
-        {
-            "type": "Entity",
-            "id": "{e3229e67-2d95-40d6-b811-cc32edb5db12}\u0000",
-            "name": "Bottle 9",
-            "transform": {
-                "type": "Transform",
-                "id": "{5827bb74-447b-4437-9448-5cc0418dc50e}\u0000",
-                "owner": "{e3229e67-2d95-40d6-b811-cc32edb5db12}\u0000",
-                "Position": {
-                    "x": -9.125127792358398,
-                    "y": 0.5648193359375,
-                    "z": -6.842309951782227
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 5.0,
-                    "y": 5.0,
-                    "z": 5.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
-            },
-            "components": [
-                "{a4928bc6-d408-4438-a377-adcd8a7a5d3b}\u0000"
-            ]
+        "Children": [],
+        "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
+      },
+      "components": [
+        "{5d256f23-d6c1-4f11-b9f9-8fcf6bd99a38}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{5d256f23-d6c1-4f11-b9f9-8fcf6bd99a38}\u0000",
+      "owner": "{a1d617a3-5a2b-4a1d-ab4a-6f5f9c786520}\u0000",
+      "Material": "res/materials/SampleScene/RefractiveBottle.mat",
+      "Model": "res/models/Bottle.fbx"
+    },
+    {
+      "type": "Entity",
+      "id": "{1d6fd7ba-feec-434b-a11b-0939879f2177}\u0000",
+      "name": "Bottle 2",
+      "transform": {
+        "type": "Transform",
+        "id": "{ffd068a6-1b7d-4d06-afab-34e887b57601}\u0000",
+        "owner": "{1d6fd7ba-feec-434b-a11b-0939879f2177}\u0000",
+        "Position": {
+          "x": -1.5024213790893555,
+          "y": 0.75,
+          "z": 3.4975786209106445
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{a4928bc6-d408-4438-a377-adcd8a7a5d3b}\u0000",
-            "owner": "{e3229e67-2d95-40d6-b811-cc32edb5db12}\u0000",
-            "Material": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/materials/SampleScene/RefractiveBottle.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Bottle.fbx"
+        "EulerAngles": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
         },
-        {
-            "type": "Entity",
-            "id": "{e7d226b6-e958-4942-a615-8117e6b3c3ea}\u0000",
-            "name": "Bottle 10",
-            "transform": {
-                "type": "Transform",
-                "id": "{e6fca259-daa0-4bb0-820a-b80da4d3e9dc}\u0000",
-                "owner": "{e7d226b6-e958-4942-a615-8117e6b3c3ea}\u0000",
-                "Position": {
-                    "x": -3.4777541160583496,
-                    "y": 0.75,
-                    "z": -1.3274409770965576
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 5.0,
-                    "y": 5.0,
-                    "z": 5.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
-            },
-            "components": [
-                "{cc8392ee-51c8-47e8-8269-504bcf9b1386}\u0000"
-            ]
+        "Scale": {
+          "x": 5.0,
+          "y": 5.0,
+          "z": 5.0
         },
-        {
-            "type": "ModelRenderer",
-            "id": "{cc8392ee-51c8-47e8-8269-504bcf9b1386}\u0000",
-            "owner": "{e7d226b6-e958-4942-a615-8117e6b3c3ea}\u0000",
-            "Material": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/materials/SampleScene/RefractiveBottle.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Bottle.fbx"
-        }
-    ]
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "Children": [],
+        "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
+      },
+      "components": [
+        "{4da5bb93-14cf-4fbf-a7dc-20005b4287e1}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{4da5bb93-14cf-4fbf-a7dc-20005b4287e1}\u0000",
+      "owner": "{1d6fd7ba-feec-434b-a11b-0939879f2177}\u0000",
+      "Material": "res/materials/SampleScene/RefractiveBottle.mat",
+      "Model": "res/models/Bottle.fbx"
+    },
+    {
+      "type": "Entity",
+      "id": "{02c99e4f-eb0e-43ba-966b-70f3e5e8c864}\u0000",
+      "name": "Bottle 3",
+      "transform": {
+        "type": "Transform",
+        "id": "{d7796776-9107-4446-88c9-0f2725126dc0}\u0000",
+        "owner": "{02c99e4f-eb0e-43ba-966b-70f3e5e8c864}\u0000",
+        "Position": {
+          "x": -7.284160137176514,
+          "y": 0.5648193359375,
+          "z": -7.33900785446167
+        },
+        "EulerAngles": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "Scale": {
+          "x": 5.0,
+          "y": 5.0,
+          "z": 5.0
+        },
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "Children": [],
+        "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
+      },
+      "components": [
+        "{ef7d0a99-bc70-4741-b24c-2fd47c098c51}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{ef7d0a99-bc70-4741-b24c-2fd47c098c51}\u0000",
+      "owner": "{02c99e4f-eb0e-43ba-966b-70f3e5e8c864}\u0000",
+      "Material": "res/materials/SampleScene/RefractiveBottle.mat",
+      "Model": "res/models/Bottle.fbx"
+    },
+    {
+      "type": "Entity",
+      "id": "{c9ecf54c-7167-40c2-9230-cbaa50cc0a35}\u0000",
+      "name": "Bottle 4",
+      "transform": {
+        "type": "Transform",
+        "id": "{964047a3-94db-45a1-8ac9-6c2f07998795}\u0000",
+        "owner": "{c9ecf54c-7167-40c2-9230-cbaa50cc0a35}\u0000",
+        "Position": {
+          "x": -7.431679725646973,
+          "y": 0.5648193359375,
+          "z": -2.2841601371765137
+        },
+        "EulerAngles": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "Scale": {
+          "x": 5.0,
+          "y": 5.0,
+          "z": 5.0
+        },
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "Children": [],
+        "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
+      },
+      "components": [
+        "{f768360a-d1b6-412a-ab23-7618b5ca74a2}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{f768360a-d1b6-412a-ab23-7618b5ca74a2}\u0000",
+      "owner": "{c9ecf54c-7167-40c2-9230-cbaa50cc0a35}\u0000",
+      "Material": "res/materials/SampleScene/RefractiveBottle.mat",
+      "Model": "res/models/Bottle.fbx"
+    },
+    {
+      "type": "Entity",
+      "id": "{5a977ec5-b5b3-4ee4-a4e7-ceb04c69c229}\u0000",
+      "name": "Bottle 5",
+      "transform": {
+        "type": "Transform",
+        "id": "{534ee381-b737-43a9-a2d0-6e414647ead5}\u0000",
+        "owner": "{5a977ec5-b5b3-4ee4-a4e7-ceb04c69c229}\u0000",
+        "Position": {
+          "x": -6.15320348739624,
+          "y": 0.5648193359375,
+          "z": 2.153203248977661
+        },
+        "EulerAngles": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "Scale": {
+          "x": 5.0,
+          "y": 5.0,
+          "z": 5.0
+        },
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "Children": [],
+        "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
+      },
+      "components": [
+        "{cde3b227-0f95-4e82-91cd-5711daa6157f}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{cde3b227-0f95-4e82-91cd-5711daa6157f}\u0000",
+      "owner": "{5a977ec5-b5b3-4ee4-a4e7-ceb04c69c229}\u0000",
+      "Material": "res/materials/SampleScene/RefractiveBottle.mat",
+      "Model": "res/models/Bottle.fbx"
+    },
+    {
+      "type": "Entity",
+      "id": "{8cf4b8cb-653e-484e-a51b-52f2953a8ff4}\u0000",
+      "name": "Bottle 6",
+      "transform": {
+        "type": "Transform",
+        "id": "{fe3c5451-332b-4908-bb19-766a119e69b4}\u0000",
+        "owner": "{8cf4b8cb-653e-484e-a51b-52f2953a8ff4}\u0000",
+        "Position": {
+          "x": -7.031271457672119,
+          "y": 0.5648193359375,
+          "z": 1.700878381729126
+        },
+        "EulerAngles": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "Scale": {
+          "x": 5.0,
+          "y": 5.0,
+          "z": 5.0
+        },
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "Children": [],
+        "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
+      },
+      "components": [
+        "{8775841e-aa46-4f78-9762-1816f5676bff}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{8775841e-aa46-4f78-9762-1816f5676bff}\u0000",
+      "owner": "{8cf4b8cb-653e-484e-a51b-52f2953a8ff4}\u0000",
+      "Material": "res/materials/SampleScene/RefractiveBottle.mat",
+      "Model": "res/models/Bottle.fbx"
+    },
+    {
+      "type": "Entity",
+      "id": "{42a50b8b-ffe6-4fc6-8579-951a08c26e74}\u0000",
+      "name": "Bottle 7",
+      "transform": {
+        "type": "Transform",
+        "id": "{0b86bb3f-0d80-4bc1-a393-7cb595409a29}\u0000",
+        "owner": "{42a50b8b-ffe6-4fc6-8579-951a08c26e74}\u0000",
+        "Position": {
+          "x": 0.2984328269958496,
+          "y": 0.75,
+          "z": 5.29843282699585
+        },
+        "EulerAngles": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "Scale": {
+          "x": 5.0,
+          "y": 5.0,
+          "z": 5.0
+        },
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "Children": [],
+        "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
+      },
+      "components": [
+        "{ac77636f-c717-450b-9c41-ed14f97de19a}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{ac77636f-c717-450b-9c41-ed14f97de19a}\u0000",
+      "owner": "{42a50b8b-ffe6-4fc6-8579-951a08c26e74}\u0000",
+      "Material": "res/materials/SampleScene/RefractiveBottle.mat",
+      "Model": "res/models/Bottle.fbx"
+    },
+    {
+      "type": "Entity",
+      "id": "{59fc6a80-c01a-42a5-ba4c-c4e84ed68cb9}\u0000",
+      "name": "Bottle 8",
+      "transform": {
+        "type": "Transform",
+        "id": "{d2fc9993-c195-430b-bfa4-a74dd54ab3b2}\u0000",
+        "owner": "{59fc6a80-c01a-42a5-ba4c-c4e84ed68cb9}\u0000",
+        "Position": {
+          "x": 0.29230213165283203,
+          "y": 0.5574951171875,
+          "z": 7.0102434158325195
+        },
+        "EulerAngles": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "Scale": {
+          "x": 5.0,
+          "y": 5.0,
+          "z": 5.0
+        },
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "Children": [],
+        "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
+      },
+      "components": [
+        "{9b7e3f55-dc24-4124-aecc-b87d05ae96dd}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{9b7e3f55-dc24-4124-aecc-b87d05ae96dd}\u0000",
+      "owner": "{59fc6a80-c01a-42a5-ba4c-c4e84ed68cb9}\u0000",
+      "Material": "res/materials/SampleScene/RefractiveBottle.mat",
+      "Model": "res/models/Bottle.fbx"
+    },
+    {
+      "type": "Entity",
+      "id": "{e3229e67-2d95-40d6-b811-cc32edb5db12}\u0000",
+      "name": "Bottle 9",
+      "transform": {
+        "type": "Transform",
+        "id": "{5827bb74-447b-4437-9448-5cc0418dc50e}\u0000",
+        "owner": "{e3229e67-2d95-40d6-b811-cc32edb5db12}\u0000",
+        "Position": {
+          "x": -9.125127792358398,
+          "y": 0.5648193359375,
+          "z": -6.842309951782227
+        },
+        "EulerAngles": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "Scale": {
+          "x": 5.0,
+          "y": 5.0,
+          "z": 5.0
+        },
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "Children": [],
+        "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
+      },
+      "components": [
+        "{a4928bc6-d408-4438-a377-adcd8a7a5d3b}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{a4928bc6-d408-4438-a377-adcd8a7a5d3b}\u0000",
+      "owner": "{e3229e67-2d95-40d6-b811-cc32edb5db12}\u0000",
+      "Material": "res/materials/SampleScene/RefractiveBottle.mat",
+      "Model": "res/models/Bottle.fbx"
+    },
+    {
+      "type": "Entity",
+      "id": "{e7d226b6-e958-4942-a615-8117e6b3c3ea}\u0000",
+      "name": "Bottle 10",
+      "transform": {
+        "type": "Transform",
+        "id": "{e6fca259-daa0-4bb0-820a-b80da4d3e9dc}\u0000",
+        "owner": "{e7d226b6-e958-4942-a615-8117e6b3c3ea}\u0000",
+        "Position": {
+          "x": -3.4777541160583496,
+          "y": 0.75,
+          "z": -1.3274409770965576
+        },
+        "EulerAngles": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "Scale": {
+          "x": 5.0,
+          "y": 5.0,
+          "z": 5.0
+        },
+        "Rotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0,
+          "w": 1.0
+        },
+        "Children": [],
+        "Parent": "{c19be93e-1fbc-4b20-b65d-abe88ca94172}\u0000"
+      },
+      "components": [
+        "{cc8392ee-51c8-47e8-8269-504bcf9b1386}\u0000"
+      ]
+    },
+    {
+      "type": "ModelRenderer",
+      "id": "{cc8392ee-51c8-47e8-8269-504bcf9b1386}\u0000",
+      "owner": "{e7d226b6-e958-4942-a615-8117e6b3c3ea}\u0000",
+      "Material": "res/materials/SampleScene/RefractiveBottle.mat",
+      "Model": "res/models/Bottle.fbx"
+    }
+  ]
 }
