@@ -32,8 +32,8 @@ layout (location = 1) out vec3 OcclusionMask;
 const float NOISE_SCALE = 30.0;
 const float BLOOD_ROUGHNESS = 0.02;
 const float BLOOD_METALLIC = 0.04;
-const vec2 BLOOD_TILING0 = vec2(0.45, 0.45);
-const vec2 BLOOD_TILING1 = vec2(0.22, 0.22);
+const vec2 BLOOD_TILING0 = vec2(0.90, 0.90);
+const vec2 BLOOD_TILING1 = vec2(0.44, 0.44);
 const vec2 BLOOD_VELOCITY0 = vec2(0.035, 0.035);
 const vec2 BLOOD_VELOCITY1 = vec2(-0.022, -0.022);
 
