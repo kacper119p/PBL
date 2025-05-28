@@ -29,12 +29,12 @@ layout (binding = 0) uniform sampler2D BloodMask;
 layout (location = 0) out vec3 FragColor;
 layout (location = 1) out vec3 OcclusionMask;
 
-const float BLOOD_ROUGHNESS = 0.85;
-const float BLOOD_METALLIC = 0.03999999910593033f;
-const vec2 BLOOD_TILING0 = vec2(0.45f, 0.45f);
-const vec2 BLOOD_TILING1 = vec2(0.22f, 0.22f);
-const vec2 BLOOD_VELOCITY0 = vec2(0.07f, 0.07f);
-const vec2 BLOOD_VELOCITY1 = vec2(-0.03f, -0.03f);
+const float BLOOD_ROUGHNESS = 0.02;
+const float BLOOD_METALLIC = 0.04;
+const vec2 BLOOD_TILING0 = vec2(0.45, 0.45);
+const vec2 BLOOD_TILING1 = vec2(0.22, 0.22);
+const vec2 BLOOD_VELOCITY0 = vec2(0.035, 0.035);
+const vec2 BLOOD_VELOCITY1 = vec2(-0.022, -0.022);
 
 layout (early_fragment_tests) in;
 void main() {
@@ -57,18 +57,18 @@ void main() {
     // Calculate Floor Normal
     mat3 TangentToWorldMatrix = mat3(Tangent, Binormal, Normal);
     Normal = texture(NormalMap, TexCoord).rgb * 2.0 - 1.0;
-    Normal = normalize(TangentToWorldMatrix * Normal);
+    Normal = normalize(Normal);
 
     // Calculate Blood Normal
     vec3 BloodNormalVector0 = texture(BloodNormal0, Position.xz * BLOOD_TILING0 + BLOOD_VELOCITY0 * Time).rgb * 2.0 - 1.0;
     vec3 BloodNormalVector1 = texture(BloodNormal1, Position.xz * BLOOD_TILING1 + BLOOD_VELOCITY1 * Time).rgb * 2.0 - 1.0;
     vec3 BloodNormal = normalize(vec3(BloodNormalVector0.xy + BloodNormalVector1.xy, BloodNormalVector0.z * BloodNormalVector1.z));
-    BloodNormal = normalize(TangentToWorldMatrix * BloodNormal);
+    BloodNormal = normalize(BloodNormal);
 
     // Lerp Floor and Blood values
     Roughness = mix(Roughness, BLOOD_ROUGHNESS, BloodColor.a);
     Metallic = mix(Metallic, BLOOD_METALLIC, BloodColor.a);
-    Normal = mix(Normal, BloodNormal, BloodColor.a);
+    Normal = normalize(TangentToWorldMatrix * mix(Normal, BloodNormal, BloodColor.a));
     BaseColor = mix(BaseColor, BloodColor.rgb, BloodColor.a);
 
     vec3 ViewDirection = normalize(CameraPosition - Position);

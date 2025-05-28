@@ -67,7 +67,7 @@ namespace Materials
 
         BloodNormal0 = TextureMaterialProperty("BloodNormal0", MainPass,
                                                Engine::TextureManager::GetTexture("./res/textures/Water/Normal0.dds"));
-        BloodNormal0 = TextureMaterialProperty("BloodNormal1", MainPass,
+        BloodNormal1 = TextureMaterialProperty("BloodNormal1", MainPass,
                                                Engine::TextureManager::GetTexture("./res/textures/Water/Normal1.dds"));
     }
 
