@@ -190,6 +190,8 @@ namespace Engine
 
         void AddLightScreenPosition(const CameraRenderData& RenderData, const class SpotLight* Light);
 
+        static bool IsPointLightVisible(const PointLight* Light);
+
         void
         RenderOmniDirectionalShadowMap(const unsigned int& Framebuffer, const glm::vec3& LightPosition,
                                        float LightRange, glm::mat4* SpaceTransformMatrices);

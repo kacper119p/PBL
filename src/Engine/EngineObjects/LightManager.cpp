@@ -276,9 +276,17 @@ namespace Engine
             AddLightScreenPosition(RenderData, SpotLights[1]);
         }
 
-        for (uint32_t i = 2; i < LightBufferData.PointLightCount; ++i)
+
+        for (uint32_t i = 2, skipped = 0; i < LightBufferData.PointLightCount; ++i)
         {
-            LightBufferData.PointLightsDynamic[i - 2] = PointLights[i]->GetShaderData();
+            if (!IsPointLightVisible(PointLights[i]))
+            {
+                LightBufferData.PointLightCount--;
+                skipped++;
+                continue;
+            }
+
+            LightBufferData.PointLightsDynamic[i - 2 - skipped] = PointLights[i]->GetShaderData();
             AddLightScreenPosition(RenderData, PointLights[i]);
         }
 
@@ -333,6 +341,14 @@ namespace Engine
         }
         LightsScreenPositionBuffer.push_back(lightPosition);
         ScreenLightsCount++;
+    }
+
+    bool LightManager::IsPointLightVisible(const PointLight* const Light)
+    {
+        const Frustum& frustum = RenderingManager::GetInstance()->GetFrustum();
+        const glm::vec3& position = Light->GetPosition();
+        const float radius = Light->GetRange();
+        return frustum.IsSphereVisible(position, radius);
     }
 
     void LightManager::SetEnvironmentMap(const Texture EnvironmentMap)
