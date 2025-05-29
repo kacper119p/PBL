@@ -40,10 +40,13 @@ namespace Engine
             {
             }
 
-            [[nodiscard]] int64_t GetCurrentSize() const
+            [[nodiscard]] size_t GetCurrentSize() const
             {
-                return sizeof(LightDataBuffer)
-                       - (MaxPointLights - PointLightCount - 2) * sizeof(PointLight::ShaderData);
+                constexpr size_t baseSize = offsetof(LightDataBuffer, PointLightsDynamic);
+                const size_t dynamicSize = PointLightCount > 2
+                                               ? (PointLightCount - 2) * sizeof(PointLight::ShaderData)
+                                               : 0;
+                return baseSize + dynamicSize;
             }
         };
 
@@ -189,6 +192,8 @@ namespace Engine
         void AddLightScreenPosition(const CameraRenderData& RenderData, const class PointLight* Light);
 
         void AddLightScreenPosition(const CameraRenderData& RenderData, const class SpotLight* Light);
+
+        static bool IsPointLightVisible(const PointLight* Light);
 
         void
         RenderOmniDirectionalShadowMap(const unsigned int& Framebuffer, const glm::vec3& LightPosition,
