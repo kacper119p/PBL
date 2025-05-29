@@ -40,10 +40,13 @@ namespace Engine
             {
             }
 
-            [[nodiscard]] int64_t GetCurrentSize() const
+            [[nodiscard]] size_t GetCurrentSize() const
             {
-                return sizeof(LightDataBuffer)
-                       - (MaxPointLights - PointLightCount - 2) * sizeof(PointLight::ShaderData);
+                constexpr size_t baseSize = offsetof(LightDataBuffer, PointLightsDynamic);
+                const size_t dynamicSize = PointLightCount > 2
+                                               ? (PointLightCount - 2) * sizeof(PointLight::ShaderData)
+                                               : 0;
+                return baseSize + dynamicSize;
             }
         };
 
