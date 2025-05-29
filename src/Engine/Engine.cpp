@@ -342,8 +342,8 @@ namespace Engine
     void Engine::ImGuiRender()
     {
 #if EDITOR
-    //LightsGui::Draw();
-    //EditorGUI.Render(Frame, CurrentScene);
+        //LightsGui::Draw();
+        //EditorGUI.Render(Frame, CurrentScene);
 #endif
     }
 
