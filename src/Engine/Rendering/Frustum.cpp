@@ -4,7 +4,7 @@ namespace Engine
 {
     glm::vec4 Frustum::NormalizePlane(const glm::vec4& Plane)
     {
-        float length = glm::length(glm::vec3(Plane));
+        const float length = glm::length(glm::vec3(Plane));
         if (length > 0.0f)
             return Plane / length;
         return Plane;
@@ -77,7 +77,7 @@ namespace Engine
 
             for (const auto& corner : corners)
             {
-                float distance = glm::dot(normal, corner) + d;
+                const float distance = glm::dot(normal, corner) + d;
                 if (distance >= 0.0f)
                 {
                     insideCount++;
@@ -108,7 +108,7 @@ namespace Engine
         return IsSphereVisible(worldCenter, worldRadius);
     }
 
-    bool Frustum::IsSphereVisible(const glm::vec3& Center, float Radius) const
+    bool Frustum::IsSphereVisible(const glm::vec3& Center, const float Radius) const
     {
         for (int i = 0; i < 6; ++i)
         {
