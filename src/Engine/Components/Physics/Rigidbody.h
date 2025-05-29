@@ -60,7 +60,7 @@ namespace Engine
     public:
         Transform* transform;
         PrimitiveMesh* mesh;
-
+        
         float mass;
         float inverseMass;
 

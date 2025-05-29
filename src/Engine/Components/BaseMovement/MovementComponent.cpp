@@ -51,13 +51,13 @@ namespace Engine
         if (isLeftForward && isRightForward)
         {
             //CurrentVelocity = Speed*(1-smooth) + 1 * smooth;
-            rigidbody->AddForce(forward * Speed * (1 - smooth) + forward * smooth, ForceMode::Force);
+            rigidbody->AddForce(forward * Speed, ForceMode::Force);
             
         }
         else if (isLeftBackward && isRightBackward)
         {
             //CurrentVelocity = -(Speed * (1 - smooth) + 1 * smooth);
-            rigidbody->AddForce(-forward * Speed * (1 - smooth) - forward * smooth, ForceMode::Force);
+            rigidbody->AddForce(-forward * Speed, ForceMode::Force);
         }
         else if ((isLeftForward && isRightBackward) || (isLeftBackward && isRightForward))
         {
@@ -92,7 +92,7 @@ namespace Engine
             // Move slightly forward in the rotated direction
             //CurrentVelocity = Speed * 0.2 * (1 - smooth) + 1 * smooth;
             rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? 1.0f : -1.0f)*RotationSpeed, 0), ForceMode::Force);
-            rigidbody->AddForce(forward * Speed * 0.2f * (1 - smooth) + forward * smooth, ForceMode::Force);
+            rigidbody->AddForce(forward * Speed, ForceMode::Force);
 
             //transform->SetEulerAngles(glm::degrees(glm::eulerAngles(rotation)));
             
