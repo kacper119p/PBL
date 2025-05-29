@@ -5,7 +5,9 @@
 #include "Serialization/SerializationUtility.h"
 #include "Events/TAction.h"
 #include "Engine/Components/Colliders/Collider.h"
+#if EDITOR
 #include "imgui.h"
+#endif
 
 enum ThrashSize
 {
@@ -25,8 +27,8 @@ public:
     ~Thrash() override = default;
     ThrashSize GetSize() const { return size; }
     void SetSize(ThrashSize newSize) { size = newSize; }
-    void Start() override 
-    { 
+    void Start() override
+    {
         collider = this->GetOwner()->GetComponent<Engine::Collider>();
         ThrowOut = Events::TAction<Engine::Collider*>(this, &Thrash::DeleteThrash);
     }

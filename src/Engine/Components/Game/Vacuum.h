@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../Colliders/SphereCollider.h"
 #include "../Colliders/BoxCollider.h"
 #include "../Component.h"
 #include "../Updateable.h"

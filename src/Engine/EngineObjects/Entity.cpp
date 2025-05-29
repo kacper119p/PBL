@@ -6,6 +6,8 @@
 
 namespace Engine
 {
+    std::vector<Entity*> Entity::ToDestroy;
+
     Entity::~Entity()
     {
         for (Component* component : Components)
@@ -27,6 +29,11 @@ namespace Engine
         for (Component* component : Components)
         {
             component->DrawImGui();
+
+            if(ImGui::Button("Remove"))
+            {
+                this->RemoveComponent(component);
+            }
         }
     }
 #endif

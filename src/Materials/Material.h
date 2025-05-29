@@ -59,11 +59,21 @@ namespace Materials
         const Shaders::Shader DirectionalShadowPass;
         const Shaders::Shader PointSpotShadowPass;
 
+        bool Transparent;
+
     public:
         Material(const Shaders::Shader& DepthPass, const Shaders::Shader& Shader,
                  const Shaders::Shader& DirectionalShadowPass, const Shaders::Shader& PointSpotShadowPass) :
             DepthPass(DepthPass), MainPass(Shader), DirectionalShadowPass(DirectionalShadowPass),
-            PointSpotShadowPass(PointSpotShadowPass)
+            PointSpotShadowPass(PointSpotShadowPass), Transparent(false)
+        {
+        }
+
+        Material(const Shaders::Shader& DepthPass, const Shaders::Shader& Shader,
+                 const Shaders::Shader& DirectionalShadowPass, const Shaders::Shader& PointSpotShadowPass,
+                 bool Transparent) :
+            DepthPass(DepthPass), MainPass(Shader), DirectionalShadowPass(DirectionalShadowPass),
+            PointSpotShadowPass(PointSpotShadowPass), Transparent(Transparent)
         {
         }
 
@@ -101,6 +111,11 @@ namespace Materials
         [[nodiscard]] const Shaders::Shader& GetDirectionalShadowPass() const
         {
             return DirectionalShadowPass;
+        }
+
+        [[nodiscard]] bool IsTransparent() const
+        {
+            return Transparent;
         }
 
         /**
@@ -142,6 +157,7 @@ namespace Materials
         virtual void Deserialize(const rapidjson::Value& Value) = 0;
 #if EDITOR
         virtual void DrawImGui() = 0;
+
         virtual void EditorReadMaterial(std::vector<std::string>& availableTextures, bool& scanned,
                                         const std::string& texturePath)
         {
@@ -157,13 +173,14 @@ namespace Materials
                 scanned = true;
             }
         };
+
         virtual void EditorSetMaterial(const char* label, TextureMaterialProperty& materialProp, bool& showPopup,
                                        const std::vector<std::string>& availableTextures,
                                        const std::string& texturePath, const char* popupLabel)
         {
             std::string currentPath = materialProp.GetValue().GetId() != 0
-                                              ? Engine::TextureManager::GetTexturePath(materialProp.GetValue())
-                                              : "None";
+                                          ? Engine::TextureManager::GetTexturePath(materialProp.GetValue())
+                                          : "None";
 
             ImGui::Text("%s", label);
             ImGui::Selectable(currentPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);

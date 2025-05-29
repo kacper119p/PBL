@@ -6,14 +6,14 @@
 #include "Engine/EngineObjects/Scene/Scene.h"
 #include "Engine/Input/InputManager.h"
 
-void Vacuum::Start() 
-{ 
+void Vacuum::Start()
+{
 	collider = this->GetOwner()->AddComponent<Engine::SphereCollider>();
     collider->SetTrigger(true);
     Engine::UpdateManager::GetInstance()->RegisterComponent(this);
 }
 
-void Vacuum::Update(float deltaTime) 
+void Vacuum::Update(float deltaTime)
 {
     InputManager& input = InputManager::GetInstance();
 
@@ -78,7 +78,7 @@ void Vacuum::Update(float deltaTime)
         item->GetTransform()->SetPosition(glm::vec3(position.x, position.y+1, position.z-1));
         item->GetComponent<Engine::Rigidbody>()->AddForce(glm::vec3(forward.x* shootForce,forward.y,forward.z*shootForce),
                                                           Engine::ForceMode::Force);
-        
+
         isShooting = false;
     }
 }

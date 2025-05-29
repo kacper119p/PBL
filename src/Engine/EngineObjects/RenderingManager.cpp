@@ -50,6 +50,7 @@ namespace Engine
 
         glDepthMask(GL_TRUE);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -83,6 +84,17 @@ namespace Engine
         glCullFace(GL_BACK);
         LightManager::GetInstance()->SetupLightsForRendering(RenderData);
         for (const auto& renderersGroup : Renderers)
+        {
+            renderersGroup.Material->Use();
+            for (Renderer* const renderer : renderersGroup.Renderers)
+            {
+                renderer->Render(RenderData);
+            }
+        }
+
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+        for (const auto& renderersGroup : TransparentRenderers)
         {
             renderersGroup.Material->Use();
             for (Renderer* const renderer : renderersGroup.Renderers)

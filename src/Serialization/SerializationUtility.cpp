@@ -540,22 +540,22 @@ namespace Serialization
         {
             return;
         }
-        const rapidjson::Value& vector = iterator->value;
-        const auto iteratorMin = vector.FindMember("min");
+        const rapidjson::Value& aabb = iterator->value;
+        const auto iteratorMin = aabb.FindMember("min");
 
 
-        if (iteratorMin == vector.MemberEnd() || !iteratorMin->value.IsFloat())
+        if (iteratorMin == aabb.MemberEnd() || !iteratorMin->value.IsObject())
         {
             return;
         }
-        const auto iteratorMax = vector.FindMember("max");
-        if (iteratorMax == vector.MemberEnd() || !iteratorMax->value.IsFloat())
+        const auto iteratorMax = aabb.FindMember("max");
+        if (iteratorMax == aabb.MemberEnd() || !iteratorMax->value.IsObject())
         {
             return;
         }
 
-        Deserialize(iteratorMin->value, "min", Value.min);
-        Deserialize(iteratorMin->value, "max", Value.max);
+        Deserialize(aabb, "min", Value.min);
+        Deserialize(aabb, "max", Value.max);
     }
 
 } // Serialization

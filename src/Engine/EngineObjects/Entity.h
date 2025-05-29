@@ -11,6 +11,7 @@
 namespace Engine
 {
     class Component;
+    class Component;
     class Scene;
 
     /**
@@ -19,6 +20,9 @@ namespace Engine
     class Entity : public Serialization::SerializedObject
     {
         friend class Scene;
+
+    private:
+        static std::vector<Entity*> ToDestroy;
 
     private:
         Transform Transform;
@@ -96,6 +100,13 @@ namespace Engine
             Components.push_back(Component);
             Component->Start();
         }
+
+        void RemoveComponent(Component* Component)
+        {
+            std::erase(Components, Component);
+            Component->OnDestroy();
+            delete Component;
+        }
 #endif
 
         /**
@@ -106,15 +117,15 @@ namespace Engine
         template<class T>
         [[nodiscard]] T* GetComponent() const
         {
-                static_assert(std::is_base_of_v<Component, T>, "Class not derived from IComponent");
-                for (Component* component : Components)
+            static_assert(std::is_base_of_v<Component, T>, "Class not derived from IComponent");
+            for (Component* component : Components)
+            {
+                if (T* result = dynamic_cast<T*>(component))
                 {
-                    if (T* result = dynamic_cast<T*>(component))
-                    {
-                        return result;
-                    }
+                    return result;
                 }
-                return nullptr;
+            }
+            return nullptr;
         }
 
         /**
@@ -170,6 +181,20 @@ namespace Engine
         [[nodiscard]] std::vector<Component*>::const_iterator end() const
         {
             return Components.end();
+        }
+
+        void Destroy()
+        {
+            ToDestroy.push_back(this);
+        }
+
+        static void DestroyQueued()
+        {
+            for (int i = 0; i < ToDestroy.size(); ++i)
+            {
+                delete ToDestroy[i];
+            }
+            ToDestroy.clear();
         }
 #if EDITOR
         void DrawImGui();
