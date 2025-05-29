@@ -67,7 +67,9 @@ namespace Engine
 
         Camera->SetProjectionMatrix(glm::perspective(glm::radians(70.0f), float(WindowWidth) /
                                                                           float(WindowHeight), 0.1f, 1000.0f));
-
+#if !EDITOR
+        CameraFollow::GetInstance().SetCamera(Camera);
+#endif
         try
         {
             SceneBuilding::SceneBuilder::Build(CurrentScene);
@@ -95,14 +97,18 @@ namespace Engine
             lastFrame = currentFrame;
 
             // Process I/O operations here
-
+#if EDITOR
             HandleInput(deltaTime);
-
-
+#else
+            InputManager::GetInstance().Update();
+            CameraFollow::GetInstance().Update(deltaTime);
+            CameraFollow::GetInstance().SetTarget(CurrentScene->GetPlayer());
+#endif
+#if !EDITOR
             UpdateManager::GetInstance()->Update(deltaTime);
             RigidbodyUpdateManager::GetInstance()->Update(deltaTime);
             CollisionUpdateManager::GetInstance()->Update(deltaTime);
-
+#endif
             int displayW, displayH;
             glfwMakeContextCurrent(Window);
             glfwGetFramebufferSize(Window, &displayW, &displayH);
@@ -255,6 +261,11 @@ namespace Engine
 
         AudioListener = new class AudioListener(*Camera);
         spdlog::info("Sounds loaded.");
+
+        //input manager init
+#if !EDITOR
+        InputManager::GetInstance().Init(Window);
+#endif
 
         return true;
     }
