@@ -90,6 +90,7 @@ light CalculatePointLight(pointLight Light, vec3 Position)
 
     result.Direction = -normalize(offset);
     result.Attenuation = 1.0 / (1.0f + Distance * (Light.LinearFalloff + Light.QuadraticFalloff * Distance));
+    result.Attenuation *= step(Distance, Light.Range);
 
     return result;
 }
@@ -298,7 +299,7 @@ vec3 CalculateLight(vec3 BaseColor, float Metallic, float Roughness, vec3 Normal
                                          F0);
     }
 
-    for (uint i = 0; i < PointLightsDynamic.length(); ++i)
+    for (uint i = 0; i < PointLightCount - 2; ++i)
     {
         Light += CalculateLightInfluence(CalculatePointLight(PointLightsDynamic[i], Position),
                                          BaseColor,
