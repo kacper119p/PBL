@@ -1,5 +1,6 @@
 #include "Thrash.h"
 #include "Serialization/SerializationUtility.h"
+#include "Engine/EngineObjects/Scene/Scene.h"
 rapidjson::Value Thrash::Serialize(rapidjson::Document::AllocatorType& Allocator) const
 {
     START_COMPONENT_SERIALIZATION
@@ -21,8 +22,16 @@ void Thrash::DeserializeReferencesPass(const rapidjson::Value& Object,
     /*START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     END_COMPONENT_DESERIALIZATION_REFERENCES_PASS*/
 }
+void Thrash::DeleteThrash(Engine::Collider* collider)
+{ 
+    if (collider->GetOwner()->GetComponent<Thrash>())
+    {
+        Engine::Scene* scene = this->GetOwner()->GetScene();
+        scene->DeleteEntity(this->GetOwner());
+    }
+}
 #if EDITOR
-void Thrash::DrawImGui() 
+void Thrash::DrawImGui()
 {
     static const char* sizeLabels[] = {"Small", "Medium", "Large"};
     int currentSizeIndex = 0;
