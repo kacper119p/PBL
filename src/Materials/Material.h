@@ -167,7 +167,12 @@ namespace Materials
                 {
                     if (entry.is_regular_file() && entry.path().extension() == ".dds")
                     {
-                        availableTextures.emplace_back(entry.path().string());
+                        std::string relPath = entry.path().lexically_normal().string();
+                        std::replace(relPath.begin(), relPath.end(), '\\', '/');
+                        size_t pos = relPath.find("/res/");
+                        if (pos != std::string::npos)
+                            relPath = "." + relPath.substr(pos);
+                        availableTextures.emplace_back(relPath);
                     }
                 }
                 scanned = true;
