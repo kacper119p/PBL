@@ -14,10 +14,10 @@ namespace Engine
 {
 
     Rigidbody::Rigidbody() :
-        transform(nullptr), mass(.01f), inverseMass(1.0f), inertiaTensor(1.0f), inverseInertiaTensor(1.0f),
-        velocity(0.0f), angularVelocity(0.0f), linearDamping(0.0f), angularDamping(0.0f), friction(0.0f),
-        frictionEnabled(false), restitution(2.0f), accumulatedForce(0.0f), accumulatedTorque(0.0f), lastPosition(0.0f),
-        lastRotation(1, 0, 0, 0), lastCollisionNormal(0.0f, 1.0f, 0.0f), collisionNormalTimeout(0.0f),
+        transform(nullptr), mass(1.0f), inverseMass(1.0f), inertiaTensor(1.0f), inverseInertiaTensor(1.0f),
+        velocity(0.0f), angularVelocity(0.0f), linearDamping(0.0f), angularDamping(0.0f), friction(0.2f),
+        frictionEnabled(true), restitution(0.1f), accumulatedForce(0.0f), accumulatedTorque(0.0f), lastPosition(0.0f),
+        lastRotation(1, 0, 0, 0), collisionNormalTimeout(0.0f),
         collisionNormalTimer(0.0f)
     {
     }
@@ -106,7 +106,7 @@ namespace Engine
         glm::quat deltaRot = glm::quat(0, newAngularVelocity.x, newAngularVelocity.y, newAngularVelocity.z) * rotation;
         deltaRot *= 0.5f * deltaTime;
         glm::quat updatedRot = rotation + deltaRot;
-        
+
         transform->SetRotation(glm::normalize(updatedRot));
         transform->SetPosition(newPosition);
         angularVelocity = newAngularVelocity;
@@ -116,7 +116,7 @@ namespace Engine
     }
 
 
-   void Rigidbody::OnCollision(Rigidbody* other, const glm::vec3& contactPoint, const glm::vec3& contactNormal)
+    void Rigidbody::OnCollision(Rigidbody* other, const glm::vec3& contactPoint, const glm::vec3& contactNormal)
     {
         if (!transform || !other || !other->transform)
             return;
@@ -150,7 +150,7 @@ namespace Engine
         if (restitution > 0.0f)
         {
             // += impulse * inverseMass;
-            //angularVelocity += inverseInertiaTensor * glm::cross(rA, impulse);
+            // angularVelocity += inverseInertiaTensor * glm::cross(rA, impulse);
             AddForce(impulse * inverseMass, ForceMode::Force);
             AddTorque(inverseInertiaTensor * glm::cross(rA, impulse), ForceMode::Force);
         }
@@ -186,24 +186,23 @@ namespace Engine
     }
 
 
-
     void Rigidbody::OnCollisionStatic(const glm::vec3& contactPoint, const glm::vec3& contactNormal)
     {
         if (!transform)
             return;
 
-        glm::vec3 normal = glm::normalize(contactNormal);
-        float relativeNormalVelocity = glm::dot(velocity, normal);
-
-        if (relativeNormalVelocity < 0.0f)
+        float vDotN = glm::dot(velocity, contactNormal);
+        if (vDotN < 0.0f)
         {
-            float e = restitution; // Twój wspó³czynnik odbicia dla odbicia sprê¿ystego
-            velocity -= (1.0f + e) * relativeNormalVelocity * normal;
+            glm::vec3 v_n = vDotN * contactNormal;
+            glm::vec3 v_t = velocity - v_n;
+            glm::vec3 v_n_reflected = -restitution * v_n;
+            velocity = v_t + v_n_reflected;
         }
 
         if (frictionEnabled)
         {
-            glm::vec3 tangent = velocity - glm::dot(velocity, normal) * normal;
+            glm::vec3 tangent = velocity - glm::dot(velocity, contactNormal) * contactNormal;
 
             if (glm::length2(tangent) > 0.0001f)
             {
@@ -220,10 +219,7 @@ namespace Engine
             AddTorque(rotationalFrictionImpulse, ForceMode::Impulse);
         }
 
-        lastCollisionNormal = normal;
-        collisionNormalTimeout = 1.0f;
     }
-
 
 
     void Rigidbody::Interpolate(float alpha)
@@ -237,7 +233,7 @@ namespace Engine
     void Rigidbody::Start()
     {
         transform = GetOwner()->GetTransform();
-        //mesh = GetOwner()->GetComponent<Collider>()->GetMesh();
+        // mesh = GetOwner()->GetComponent<Collider>()->GetMesh();
         RigidbodyUpdateManager::GetInstance()->RegisterRigidbody(this);
     }
 
@@ -285,7 +281,7 @@ namespace Engine
             targetAxis = -gravityDir;
         glm::vec3 rotationAxis = glm::cross(bestAxis.axis, targetAxis);
         if (glm::length(rotationAxis) < 0.001f)
-            return; 
+            return;
 
         rotationAxis = glm::normalize(rotationAxis);
 
@@ -363,7 +359,7 @@ namespace Engine
         SERIALIZE_FIELD(angularDamping)
         SERIALIZE_FIELD(friction)
         SERIALIZE_FIELD(frictionEnabled)
-        SERIALIZE_FIELD(restitution)  
+        SERIALIZE_FIELD(restitution)
         END_COMPONENT_SERIALIZATION
     }
 
@@ -374,7 +370,7 @@ namespace Engine
         DESERIALIZE_VALUE(inverseMass)
         DESERIALIZE_VALUE(linearDamping)
         DESERIALIZE_VALUE(angularDamping)
-        DESERIALIZE_VALUE(friction) 
+        DESERIALIZE_VALUE(friction)
         DESERIALIZE_VALUE(frictionEnabled)
         DESERIALIZE_VALUE(restitution)
         END_COMPONENT_DESERIALIZATION_VALUE_PASS

@@ -31,7 +31,7 @@ namespace Engine
     void BoxCollider::Start() 
     { 
         Collider::Start();
-        mesh = PrimitiveMeshes::GetInstance().GetBoxMesh(transform->GetPosition(), transform->GetRotation(), _width, _height, _depth);
+        transform = GetOwner()->GetTransform();
     }
 
     PrimitiveMesh* BoxCollider::GetMesh()

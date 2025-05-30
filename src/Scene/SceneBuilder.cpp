@@ -75,12 +75,32 @@ namespace Scene
         Scene->GetPlayer()->GetComponent<Engine::BoxCollider>()->SetHeight(2.0f);
         Scene->GetPlayer()->GetComponent<Engine::BoxCollider>()->SetDepth(2.0f);
         Scene->GetPlayer()->GetTransform()->SetPosition(glm::vec3(0.0f, 1.5f, 4.0f));
-
+        Engine::Rigidbody* rb = Scene->GetPlayer()->GetComponent<Engine::Rigidbody>();
+        rb->friction = 0.1f;
+        rb->angularDamping = 0.01f;
+        rb->linearDamping = 0.01f;
+        rb->restitution = 0.3f;
+        rb->SetMass(1.0f);
+        rb->frictionEnabled = true;
+        //rb->angularDamping = .05f;
+        
         Engine::Entity* playerVacuum = Scene->SpawnEntity(nullptr);
         playerVacuum->SetName("PlayerVacuum");
         Scene->GetPlayer()->GetTransform()->AddChild(playerVacuum->GetTransform());
-        playerVacuum->AddComponent<Vacuum>();
-        playerVacuum->GetTransform()->SetPosition(glm::vec3(0.0f,0.0f,-3.0f));
+        playerVacuum->AddComponent<Engine::Vacuum>();
+        playerVacuum->GetTransform()->SetPosition(glm::vec3(0.0f,1.0f,-3.0f));
+
+        Engine::Entity* box = Scene->SpawnEntity(nullptr);
+        box->SetName("Box");
+        Engine::BoxCollider* boxCollider = box->AddComponent<Engine::BoxCollider>();
+        boxCollider->SetWidth(.25f);
+        boxCollider->SetHeight(.25f);
+        boxCollider->SetDepth(.25f);
+        box->GetTransform()->SetScale(glm::vec3(0.25f, 0.25f, 0.25f));
+        Engine::Rigidbody* rb1 = box->AddComponent<Engine::Rigidbody>();
+        rb->restitution = 0.89f;
+        box->GetTransform()->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
+        box->AddComponent<Engine::ModelRenderer>()->SetModel(Models::ModelManager::GetModel("./res/models/Box.fbx"));
 
         //secondBoxCollider->SetWidth(2.0f);
         //secondBoxCollider->SetHeight(2.0f);

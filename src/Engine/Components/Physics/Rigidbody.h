@@ -90,7 +90,6 @@ namespace Engine
 
     private:
         void computeInertiaTensor();
-        glm::vec3 lastCollisionNormal; // przechowuje normalê kolizji ostatniej kolizji
         float collisionNormalTimeout; // jak d³ugo normalna jest wa¿na (np. 1s)
         float collisionNormalTimer; // odlicza czas od ostatniej kolizji
         void TryAlignToCollisionNormal(float deltaTime);

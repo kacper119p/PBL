@@ -54,7 +54,11 @@
                 "{f58588fd-f0e0-4727-ac84-e71e79abc4c4}\u0000",
                 "{9d275cd9-c8b3-425e-9573-043d697c8d12}\u0000",
                 "{41f24fba-1303-492e-82ca-a8fd5103e632}\u0000",
-                "{ba674ea7-26c4-46c3-93c4-d4dd24fafb33}\u0000"
+                "{ba674ea7-26c4-46c3-93c4-d4dd24fafb33}\u0000",
+                "{769ab52b-f805-4245-915f-62e432266c9a}\u0000",
+                "{01f967ed-94d3-4459-afdc-a9aa5ef3d5cb}\u0000",
+                "{23369c76-279f-41c8-a78b-d4ef6b778371}\u0000",
+                "{9d20d85d-0d14-47a7-bca4-b2e52e3775b8}\u0000"
             ],
             "Parent": null
         },
@@ -102,7 +106,7 @@
             "type": "ModelRenderer",
             "id": "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
             "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
-            "Material": "./res/materials/SampleScene/Floor.mat",
+            "Material": "./res/materials/SampleScene/Box.mat",
             "Model": "./res/models/Box.fbx"
         },
         {
@@ -203,7 +207,7 @@
             "type": "ModelRenderer",
             "id": "{79d15fd4-86b4-4568-8ad3-82e2074834b5}\u0000",
             "owner": "{c35a0c8d-f316-4d03-a4b8-c0d56621d727}\u0000",
-            "Material": "./res/materials/SampleScene/Floor.mat",
+            "Material": "./res/materials/SampleScene/Box.mat",
             "Model": "./res/models/Box.fbx"
         },
         {
@@ -226,13 +230,13 @@
                 "id": "{663d37c9-1f78-40b2-9aad-3a92fedea194}\u0000",
                 "owner": "{c99f3e17-1941-4a55-aa2a-085c4b35d50b}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": 0.800000011920929,
-                    "z": 0.0
+                    "x": -2.8986656665802,
+                    "y": 1.4796936511993408,
+                    "z": 1.8038088083267212
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": -0.0,
                     "z": 0.0
                 },
                 "Scale": {
@@ -244,7 +248,7 @@
                     "x": 0.0,
                     "y": 0.0,
                     "z": 0.0,
-                    "w": 0.0
+                    "w": 1.0
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
@@ -580,7 +584,7 @@
                 "id": "{41f24fba-1303-492e-82ca-a8fd5103e632}\u0000",
                 "owner": "{ca04ffb3-411d-4916-a1a2-e32fd2b7fea0}\u0000",
                 "Position": {
-                    "x": -48.525272369384766,
+                    "x": -36.25858688354492,
                     "y": 6.197237968444824,
                     "z": 26.688446044921875
                 },
@@ -668,7 +672,9 @@
                     "z": 0.0,
                     "w": 1.0
                 },
-                "Children": [],
+                "Children": [
+                    "{910a9f8f-06fa-41a8-9896-9a42eecd06a0}\u0000"
+                ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
@@ -692,6 +698,334 @@
             "colliderType": 2,
             "Radius": 1.7000000476837158,
             "Height": 0.0
+        },
+        {
+            "type": "Entity",
+            "id": "{8fe623f6-9f10-4381-9cc4-9e62fc8de5db}\u0000",
+            "name": "swiatlo",
+            "transform": {
+                "type": "Transform",
+                "id": "{910a9f8f-06fa-41a8-9896-9a42eecd06a0}\u0000",
+                "owner": "{8fe623f6-9f10-4381-9cc4-9e62fc8de5db}\u0000",
+                "Position": {
+                    "x": 0.01972198486328125,
+                    "y": -0.04245072603225708,
+                    "z": 0.07843399047851563
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{ba674ea7-26c4-46c3-93c4-d4dd24fafb33}\u0000"
+            },
+            "components": [
+                "{6b357e97-f873-48c6-8548-bd0bfec3e706}\u0000",
+                "{0a5a5270-0656-4b31-ac00-5330a40c2b86}\u0000"
+            ]
+        },
+        {
+            "type": "PointLight",
+            "id": "{6b357e97-f873-48c6-8548-bd0bfec3e706}\u0000",
+            "owner": "{8fe623f6-9f10-4381-9cc4-9e62fc8de5db}\u0000",
+            "Color": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "LinearFalloff": 0.0,
+            "QuadraticFalloff": 1.0,
+            "Range": 100.0
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{0a5a5270-0656-4b31-ac00-5330a40c2b86}\u0000",
+            "owner": "{8fe623f6-9f10-4381-9cc4-9e62fc8de5db}\u0000",
+            "Material": "./res/materials/SampleScene/CeilingLamp.mat",
+            "Model": "./res/models/SphereLowPoly.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{6a959160-ac1f-46ae-88f4-1f55cc6d94bf}\u0000",
+            "name": "skrzynka2",
+            "transform": {
+                "type": "Transform",
+                "id": "{769ab52b-f805-4245-915f-62e432266c9a}\u0000",
+                "owner": "{6a959160-ac1f-46ae-88f4-1f55cc6d94bf}\u0000",
+                "Position": {
+                    "x": -6.160893440246582,
+                    "y": 1.5068552494049072,
+                    "z": -27.281917572021484
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{675ce481-9df5-4b32-9858-ab34122bb7f0}\u0000",
+                "{31db1c49-f797-456e-9d3b-05e79479d5f6}\u0000",
+                "{0d989239-d5ca-4093-9a7d-5ac6c07cc2d6}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{675ce481-9df5-4b32-9858-ab34122bb7f0}\u0000",
+            "owner": "{6a959160-ac1f-46ae-88f4-1f55cc6d94bf}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "C:\\Users\\hanna\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res/models/Modele_Mati/Meble/Skrzynia1.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{31db1c49-f797-456e-9d3b-05e79479d5f6}\u0000",
+            "owner": "{6a959160-ac1f-46ae-88f4-1f55cc6d94bf}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.5,
+            "_height": 2.5,
+            "_depth": 2.5
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{0d989239-d5ca-4093-9a7d-5ac6c07cc2d6}\u0000",
+            "owner": "{6a959160-ac1f-46ae-88f4-1f55cc6d94bf}\u0000",
+            "mass": 1.0100001096725464,
+            "inverseMass": 0.9900988936424255,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.21899999678134918,
+            "frictionEnabled": true,
+            "restitution": 0.07699999958276749
+        },
+        {
+            "type": "Entity",
+            "id": "{0b8546fc-d379-41f2-839b-b45e55ba1b6e}\u0000",
+            "name": "ksiazka",
+            "transform": {
+                "type": "Transform",
+                "id": "{01f967ed-94d3-4459-afdc-a9aa5ef3d5cb}\u0000",
+                "owner": "{0b8546fc-d379-41f2-839b-b45e55ba1b6e}\u0000",
+                "Position": {
+                    "x": -43.48118209838867,
+                    "y": 0.3382549285888672,
+                    "z": 17.88132095336914
+                },
+                "EulerAngles": {
+                    "x": -91.15167999267578,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.9999999403953552,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": -0.7141776084899902,
+                    "y": -0.0,
+                    "z": 0.0,
+                    "w": 0.6999645233154297
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{885bdb17-d272-4f6d-a90a-f5751260652e}\u0000",
+                "{906512e0-7fdc-4db8-bf9a-1083cfdb0e4f}\u0000",
+                "{5afed809-1242-43de-967d-41c795206516}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{885bdb17-d272-4f6d-a90a-f5751260652e}\u0000",
+            "owner": "{0b8546fc-d379-41f2-839b-b45e55ba1b6e}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "C:\\Users\\hanna\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res/models/Modele_Mati/Meble/Ksiazka.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{906512e0-7fdc-4db8-bf9a-1083cfdb0e4f}\u0000",
+            "owner": "{0b8546fc-d379-41f2-839b-b45e55ba1b6e}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 1.0,
+            "_height": 1.7000000476837158,
+            "_depth": 0.6000000238418579
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{5afed809-1242-43de-967d-41c795206516}\u0000",
+            "owner": "{0b8546fc-d379-41f2-839b-b45e55ba1b6e}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{24356d72-5421-490d-8dfc-bdd4b513d12f}\u0000",
+            "name": "beczka",
+            "transform": {
+                "type": "Transform",
+                "id": "{23369c76-279f-41c8-a78b-d4ef6b778371}\u0000",
+                "owner": "{24356d72-5421-490d-8dfc-bdd4b513d12f}\u0000",
+                "Position": {
+                    "x": -7.044236660003662,
+                    "y": 1.9685142040252686,
+                    "z": -36.896728515625
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{ac5f1ab0-2987-4ab8-a0ea-b6ffd12ccd3c}\u0000",
+                "{dcf0f4aa-a6fd-4559-aaf3-15cf77abe5bd}\u0000",
+                "{d4e03842-de23-4efb-b089-1992c0ab10ae}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{ac5f1ab0-2987-4ab8-a0ea-b6ffd12ccd3c}\u0000",
+            "owner": "{24356d72-5421-490d-8dfc-bdd4b513d12f}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "C:\\Users\\hanna\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res/models/Modele_Mati/Meble/BeczkaZamknieta.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{dcf0f4aa-a6fd-4559-aaf3-15cf77abe5bd}\u0000",
+            "owner": "{24356d72-5421-490d-8dfc-bdd4b513d12f}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.799999952316284,
+            "_height": 3.200000047683716,
+            "_depth": 2.799999952316284
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{d4e03842-de23-4efb-b089-1992c0ab10ae}\u0000",
+            "owner": "{24356d72-5421-490d-8dfc-bdd4b513d12f}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{f77fe9b5-94c9-4c00-a4f0-8dda929325a4}\u0000",
+            "name": "kamien tumulec",
+            "transform": {
+                "type": "Transform",
+                "id": "{9d20d85d-0d14-47a7-bca4-b2e52e3775b8}\u0000",
+                "owner": "{f77fe9b5-94c9-4c00-a4f0-8dda929325a4}\u0000",
+                "Position": {
+                    "x": -2.3039889335632324,
+                    "y": 1.8218480348587036,
+                    "z": 15.092989921569824
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 2.0,
+                    "y": 2.0,
+                    "z": 2.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{3feb7894-b30d-432c-a1e3-5f433f87958e}\u0000",
+                "{dad624df-53e7-48eb-b761-3be46a8f3be0}\u0000",
+                "{e65d94f7-d9b1-4150-8c04-178171551e05}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{3feb7894-b30d-432c-a1e3-5f433f87958e}\u0000",
+            "owner": "{f77fe9b5-94c9-4c00-a4f0-8dda929325a4}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "C:\\Users\\hanna\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res/models/Modele_Mati/Kamienie/KamienTeren1.fbx"
+        },
+        {
+            "type": "CapsuleCollider",
+            "id": "{dad624df-53e7-48eb-b761-3be46a8f3be0}\u0000",
+            "owner": "{f77fe9b5-94c9-4c00-a4f0-8dda929325a4}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 2,
+            "Radius": 1.899999976158142,
+            "Height": 5.300000190734863
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{e65d94f7-d9b1-4150-8c04-178171551e05}\u0000",
+            "owner": "{f77fe9b5-94c9-4c00-a4f0-8dda929325a4}\u0000",
+            "mass": 0.00009999999747378752,
+            "inverseMass": 10000.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": false,
+            "restitution": 0.10000000149011612
         }
     ]
 }

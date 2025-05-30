@@ -8,35 +8,38 @@
 #include "imgui.h"
 #endif
 
-
-class Vacuum : public Engine::Updateable
+namespace Engine
 {
-private:
-    int volume = 0;
-    int maxVolume = 10;
 
-    int size = 5;
-    int centerSize = 1;
-    std::vector<Engine::Entity*> items;
-    Engine::SphereCollider* collider;
+    class Vacuum : public Engine::Updateable
+    {
+    private:
+        int volume = 0;
+        int maxVolume = 10;
 
-    bool isSuccing = false;
-    bool isShooting = false;
+        int size = 5;
+        int centerSize = 1;
+        std::vector<Engine::Entity*> items;
+        Engine::SphereCollider* collider;
 
-    int shootForce = 100;
+        bool isSuccing = false;
+        bool isShooting = false;
 
-public:
-    Vacuum() = default;
-    ~Vacuum() override = default;
-    int GetVolume() const { return volume; }
-    void SetVolume(int newVolume) { volume = newVolume; }
-    int GetMaxVolume() const { return maxVolume; }
-    void SetMaxVolume(int newMaxVolume) { maxVolume = newMaxVolume; }
-    void Start() override;
-    void Update(float deltaTime) override;
+        int shootForce = 50;
 
-    SERIALIZATION_EXPORT_CLASS(Vacuum);
+    public:
+        Vacuum() = default;
+        ~Vacuum() override = default;
+        int GetVolume() const { return volume; }
+        void SetVolume(int newVolume) { volume = newVolume; }
+        int GetMaxVolume() const { return maxVolume; }
+        void SetMaxVolume(int newMaxVolume) { maxVolume = newMaxVolume; }
+        void Start() override;
+        void Update(float deltaTime) override;
+
+        SERIALIZATION_EXPORT_CLASS(Vacuum);
 #if EDITOR
-    void DrawImGui() override;
+        void DrawImGui() override;
 #endif
-};
+    };
+} // namespace Engine
