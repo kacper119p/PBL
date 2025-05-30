@@ -33,6 +33,10 @@ namespace Engine
 
     Renderer::~Renderer()
     {
+        if (Material == nullptr)
+        {
+            return;
+        }
         RenderingManager::GetInstance()->UnregisterRenderer(this);
     }
 } // Engine
