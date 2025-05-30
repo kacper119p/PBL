@@ -287,12 +287,12 @@ namespace Engine
         {
             Camera->SetPosition(Camera->GetPosition() - cameraSpeed * Camera->GetForward());
         }
-        if (glfwGetKey(Window, GLFW_KEY_A) == GLFW_PRESS || glfwGetKey(Window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+        if (glfwGetKey(Window, GLFW_KEY_A) == GLFW_PRESS || glfwGetKey(Window, GLFW_KEY_LEFT) == GLFW_PRESS)
         {
             Camera->SetPosition(Camera->GetPosition() -
                                 cameraSpeed * glm::normalize(glm::cross(Camera->GetForward(), Camera->GetUp())));
         }
-        if (glfwGetKey(Window, GLFW_KEY_D) == GLFW_PRESS || glfwGetKey(Window, GLFW_KEY_LEFT) == GLFW_PRESS)
+        if (glfwGetKey(Window, GLFW_KEY_D) == GLFW_PRESS || glfwGetKey(Window, GLFW_KEY_RIGHT) == GLFW_PRESS)
         {
             Camera->SetPosition(Camera->GetPosition() +
                                 cameraSpeed * glm::normalize(glm::cross(Camera->GetForward(), Camera->GetUp())));
