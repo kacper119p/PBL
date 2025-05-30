@@ -52,34 +52,36 @@ namespace Engine
 
     void ModelRenderer::RenderDirectionalShadows(const CameraRenderData& RenderData)
     {
-        if (Model != nullptr)
+        if (Model == nullptr)
         {
-            SetupMatrices(RenderData, Material->GetDirectionalShadowPass());
-            Draw();
+            return;
         }
+        SetupMatrices(RenderData, Material->GetDirectionalShadowPass());
+        Draw();
     }
 
     void
     ModelRenderer::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                           const glm::mat4* const SpaceTransformMatrices)
     {
-        if (Material != nullptr)
+        if (Model == nullptr)
         {
-            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[0]", SpaceTransformMatrices[0]);
-            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[1]", SpaceTransformMatrices[1]);
-            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[2]", SpaceTransformMatrices[2]);
-            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[3]", SpaceTransformMatrices[3]);
-            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[4]", SpaceTransformMatrices[4]);
-            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[5]", SpaceTransformMatrices[5]);
-
-            Material->GetPointSpotShadowPass().SetUniform("LightPosition", LightPosition);
-            Material->GetPointSpotShadowPass().SetUniform("Range", LightRange);
-
-            Material->GetPointSpotShadowPass().SetUniform("ObjectToWorldMatrix",
-                                                          GetOwner()->GetTransform()->GetLocalToWorldMatrix());
-
-            Draw();
+            return;
         }
+        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[0]", SpaceTransformMatrices[0]);
+        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[1]", SpaceTransformMatrices[1]);
+        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[2]", SpaceTransformMatrices[2]);
+        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[3]", SpaceTransformMatrices[3]);
+        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[4]", SpaceTransformMatrices[4]);
+        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[5]", SpaceTransformMatrices[5]);
+
+        Material->GetPointSpotShadowPass().SetUniform("LightPosition", LightPosition);
+        Material->GetPointSpotShadowPass().SetUniform("Range", LightRange);
+
+        Material->GetPointSpotShadowPass().SetUniform("ObjectToWorldMatrix",
+                                                      GetOwner()->GetTransform()->GetLocalToWorldMatrix());
+
+        Draw();
     }
 
     void ModelRenderer::SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const
@@ -194,7 +196,7 @@ namespace Engine
 
                     if (ImGui::Selectable(displayName.c_str()))
                     {
-                        fs::path relPath = fs::path("./res/materials/SampleScene/"+std::string(currentMaterialName));
+                        fs::path relPath = fs::path("./res/materials/SampleScene/" + std::string(currentMaterialName));
                         SetMaterial(Materials::MaterialManager::GetMaterial(relPath.string()));
                         ImGui::CloseCurrentPopup();
                     }
