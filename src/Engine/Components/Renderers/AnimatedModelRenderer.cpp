@@ -102,20 +102,34 @@ namespace Engine
 
             static bool scanned = false;
 
-            std::string materialPath = fs::relative("./res/materials/SampleScene").string();
-            std::string modelPath = fs::relative("./res/Models").string();
+            std::string materialPath = fs::absolute("./res/materials/SampleScene").string();
+            std::string modelPath = fs::absolute("./res/Models").string();
 
             if (!scanned)
             {
-                for (const auto& entry : fs::directory_iterator(materialPath))
+                for (const auto& entry : fs::recursive_directory_iterator(materialPath))
                 {
                     if (entry.is_regular_file() && entry.path().extension() == ".mat")
-                        availableMaterials.emplace_back(entry.path().string());
+                    {
+                        std::string relPath = entry.path().lexically_normal().string();
+                        std::replace(relPath.begin(), relPath.end(), '\\', '/');
+                        size_t pos = relPath.find("/res/");
+                        if (pos != std::string::npos)
+                            relPath = "." + relPath.substr(pos);
+                        availableMaterials.emplace_back(relPath);
+                    }
                 }
-                for (const auto& entry : fs::directory_iterator(modelPath))
+                for (const auto& entry : fs::recursive_directory_iterator(modelPath))
                 {
                     if (entry.is_regular_file() && entry.path().extension() == ".fbx")
-                        availableModels.emplace_back(entry.path().string());
+                    {
+                        std::string relPath = entry.path().lexically_normal().string();
+                        std::replace(relPath.begin(), relPath.end(), '\\', '/');
+                        size_t pos = relPath.find("/res/");
+                        if (pos != std::string::npos)
+                            relPath = "." + relPath.substr(pos);
+                        availableModels.emplace_back(relPath);
+                    }
                 }
 
                 scanned = true;
