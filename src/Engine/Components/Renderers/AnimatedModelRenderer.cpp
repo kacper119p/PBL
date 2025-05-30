@@ -32,18 +32,30 @@ namespace Engine
 
     void AnimatedModelRenderer::RenderDepth(const CameraRenderData& RenderData)
     {
+        if (Model == nullptr || Animation == nullptr)
+        {
+            return;
+        }
         SetupMatrices(RenderData, Material->GetDepthPass());
         Draw();
     }
 
     void AnimatedModelRenderer::Render(const CameraRenderData& RenderData)
     {
+        if (Model == nullptr || Animation == nullptr)
+        {
+            return;
+        }
         SetupMatrices(RenderData, Material->GetMainPass());
         Draw();
     }
 
     void AnimatedModelRenderer::RenderDirectionalShadows(const CameraRenderData& RenderData)
     {
+        if (Model == nullptr || Animation == nullptr)
+        {
+            return;
+        }
         SetupMatrices(RenderData, Material->GetDirectionalShadowPass());
         Draw();
     }
@@ -51,6 +63,10 @@ namespace Engine
     void AnimatedModelRenderer::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                                        const glm::mat4* const SpaceTransformMatrices)
     {
+        if (Model == nullptr || Animation == nullptr)
+        {
+            return;
+        }
         Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[0]", SpaceTransformMatrices[0]);
         Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[1]", SpaceTransformMatrices[1]);
         Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[2]", SpaceTransformMatrices[2]);
