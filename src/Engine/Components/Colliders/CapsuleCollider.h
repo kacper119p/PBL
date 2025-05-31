@@ -72,7 +72,7 @@ namespace Engine
         CapsuleCollider& operator=(const CapsuleCollider& other);
 
 #if EDITOR
-        void DrawDebugMesh(const CameraRenderData& RenderData);
+        void DrawDebugMesh(const CameraRenderData& RenderData, Shaders::Shader Shader);
 
         void RenderDepth(const CameraRenderData& RenderData) override;
 
