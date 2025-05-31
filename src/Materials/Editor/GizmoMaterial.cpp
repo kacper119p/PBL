@@ -11,6 +11,7 @@ namespace Materials
 
     void GizmoMaterial::UseDepthPass() const
     {
+        DepthShader.Use();
     }
 
     void GizmoMaterial::Use() const
