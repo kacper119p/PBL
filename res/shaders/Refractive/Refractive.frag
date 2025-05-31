@@ -8,7 +8,7 @@ in vec3 Tangent;
 
 uniform vec3 CameraPosition;
 uniform float IOR;
-layout (bindless_sampler) uniform samplerCube EnvironmentMap;
+layout (binding = 0) uniform samplerCube EnvironmentMap;
 
 layout (location = 0) out vec3 FragColor;
 layout (location = 1) out vec3 OcclusionMask;
