@@ -74,7 +74,7 @@ namespace Materials
     {
         static bool showEnvironmentMapPopup = false;
         static std::vector<std::string> availableTextures;
-        std::string texturePath = std::filesystem::relative("./res/textures").string();
+        std::string texturePath = std::filesystem::absolute("./res/textures").string();
         static bool scanned = false;
 
         if (!scanned)
@@ -82,7 +82,14 @@ namespace Materials
             for (const auto& entry : std::filesystem::recursive_directory_iterator(texturePath))
             {
                 if (entry.is_regular_file() && entry.path().extension() == ".dds")
-                    availableTextures.emplace_back(entry.path().string());
+                {
+                    std::string relPath = entry.path().lexically_normal().string();
+                    std::replace(relPath.begin(), relPath.end(), '\\', '/');
+                    size_t pos = relPath.find("/res/");
+                    if (pos != std::string::npos)
+                        relPath = "." + relPath.substr(pos);
+                    availableTextures.emplace_back(relPath);
+                }
             }
             scanned = true;
         }

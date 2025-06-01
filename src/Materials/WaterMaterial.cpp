@@ -99,7 +99,7 @@ namespace Materials
         static bool showNormal0Popup = false;
         static bool showNormal1Popup = false;
         static std::vector<std::string> availableTextures;
-        std::string texturePath = std::filesystem::relative("./res/textures").string();
+        std::string texturePath = std::filesystem::absolute("./res/textures").string();
         static bool scanned = false;
 
         // Use the EditorReadMaterial method to scan and populate available textures if not already scanned

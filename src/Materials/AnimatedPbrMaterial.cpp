@@ -117,7 +117,7 @@ namespace Materials
 
         static std::vector<std::string> availableTextures;
         static bool scanned = false;
-        std::string texturePath = "./res/textures";
+        std::string texturePath = std::filesystem::absolute("./res/textures").string();
         EditorReadMaterial(availableTextures, scanned, texturePath);
 
         static bool showBaseTexPopup = false;
