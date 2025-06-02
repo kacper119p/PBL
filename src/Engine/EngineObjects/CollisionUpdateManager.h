@@ -40,7 +40,8 @@ namespace Engine
          * @brief Stops collider from being ticked afer this frame.
          * @param Collider Collider to be unregistered.
          */
-        inline void UnregisterCollider(Collider* Collider) { Dead.push_back(Collider); }
+        inline void UnregisterCollider(Collider* Collider) { Dead.push_back(Collider);
+        }
 
         /**
          * @brief Stops collider from being ticked. Should not be used inside update loop.

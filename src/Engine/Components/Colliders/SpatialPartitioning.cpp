@@ -7,6 +7,7 @@
 
 namespace Engine
 {
+
     SpatialPartitioning* SpatialPartitioning::instance_ = nullptr;
 
     SpatialPartitioning::SpatialPartitioning() : cellSize(2.0f), origin(glm::vec2(-100.0f, -100.0f)) {}
@@ -16,9 +17,7 @@ namespace Engine
     SpatialPartitioning& SpatialPartitioning::GetInstance()
     {
         if (!instance_)
-        {
             instance_ = new SpatialPartitioning();
-        }
         return *instance_;
     }
 
@@ -58,36 +57,50 @@ namespace Engine
 
     void SpatialPartitioning::AddCollider(Collider* collider)
     {
+        if (!collider || !collider->GetTransform())
+            return;
+
         glm::vec3 position = collider->GetTransform()->GetPositionWorldSpace();
         glm::vec3 size = collider->GetBoundingBox();
 
         std::vector<glm::ivec2> occupiedCells = GetOccupiedCells(position, size);
+
         for (const auto& index : occupiedCells)
-        {
             grid[index].push_back(collider);
-        }
+
+        colliderCellMap[collider] = occupiedCells;
     }
 
     void SpatialPartitioning::RemoveCollider(Collider* collider)
     {
-        glm::vec3 position = collider->GetTransform()->GetPositionWorldSpace();
-        glm::vec3 size = collider->GetBoundingBox();
+        if (!collider)
+            return;
 
-        std::vector<glm::ivec2> occupiedCells = GetOccupiedCells(position, size);
-        for (const auto& index : occupiedCells)
+        auto it = colliderCellMap.find(collider);
+        if (it == colliderCellMap.end())
+            return;
+
+        for (const auto& index : it->second)
         {
-            auto& cell = grid[index];
+            auto gridIt = grid.find(index);
+            if (gridIt == grid.end())
+                continue;
+
+            auto& cell = gridIt->second;
             cell.erase(std::remove(cell.begin(), cell.end(), collider), cell.end());
 
             if (cell.empty())
-            {
                 grid.erase(index);
-            }
         }
+
+        colliderCellMap.erase(collider);
     }
 
     std::vector<Collider*> SpatialPartitioning::GetPotentialCollisions(Collider* collider)
     {
+        if (!collider || !collider->GetTransform())
+            return {};
+
         glm::vec3 position = collider->GetTransform()->GetPositionWorldSpace();
         glm::vec3 size = collider->GetBoundingBox();
 
@@ -97,16 +110,16 @@ namespace Engine
 
         for (const auto& index : occupiedCells)
         {
-            // SprawdŸ równie¿ s¹siednie komórki (w promieniu 1)
             for (int dx = -1; dx <= 1; ++dx)
             {
                 for (int dy = -1; dy <= 1; ++dy)
                 {
                     glm::ivec2 neighborIndex = glm::ivec2(index.x + dx, index.y + dy);
                     const auto& cell = grid[neighborIndex];
+
                     for (Collider* other : cell)
                     {
-                        if (other && other != collider && unique.insert(other).second)
+                        if (other && other != collider && other->GetTransform() && unique.insert(other).second)
                         {
                             potentialCollisions.push_back(other);
                         }
@@ -118,7 +131,6 @@ namespace Engine
         return potentialCollisions;
     }
 
-
     void SpatialPartitioning::SetCellSize(float newCellSize)
     {
         if (newCellSize <= 0.0f)
@@ -127,7 +139,6 @@ namespace Engine
             return;
         }
 
-        // Rebuild the grid
         std::vector<Collider*> allColliders;
         for (auto& [index, cell] : grid)
         {
@@ -136,6 +147,7 @@ namespace Engine
 
         cellSize = newCellSize;
         grid.clear();
+        colliderCellMap.clear();
 
         for (Collider* collider : allColliders)
         {
@@ -166,7 +178,7 @@ namespace Engine
                 {
                     for (Collider* collider : it->second)
                     {
-                        if (!collider || uniqueColliders.count(collider))
+                        if (!collider || !collider->GetTransform() || uniqueColliders.count(collider))
                             continue;
 
                         glm::vec3 colliderPos = collider->GetTransform()->GetPositionWorldSpace();
@@ -185,4 +197,26 @@ namespace Engine
 
         return result;
     }
+
+    void SpatialPartitioning::ValidateGrid()
+    {
+        int totalInvalid = 0;
+        for (auto& [index, cell] : grid)
+        {
+            auto& vec = cell;
+            vec.erase(std::remove_if(vec.begin(), vec.end(),
+                                     [&](Collider* c)
+                                     {
+                                         bool bad = !c || !c->GetTransform();
+                                         if (bad)
+                                             totalInvalid++;
+                                         return bad;
+                                     }),
+                      vec.end());
+        }
+
+        if (totalInvalid > 0)
+            spdlog::warn("Removed {} invalid collider pointers from the grid during validation.", totalInvalid);
+    }
+
 } // namespace Engine

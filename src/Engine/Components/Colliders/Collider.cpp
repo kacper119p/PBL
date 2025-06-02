@@ -83,8 +83,8 @@ namespace Engine
 
     void Collider::OnDestroy()
     {
-        Spatial->RemoveCollider(this);
         CollisionUpdateManager::GetInstance()->UnregisterCollider(this);
+        SpatialPartitioning::GetInstance().RemoveCollider(this);
     }
 
     // TODO: remove when rigidbody implemented

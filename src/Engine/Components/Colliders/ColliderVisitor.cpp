@@ -742,20 +742,20 @@ namespace Engine
     void ColliderVisitor::EmitCollision(Collider* const Collider) const
     {
 
-        currentCollider->EmitCollision(Collider);
+        //currentCollider->EmitCollision(Collider);
         Collider->EmitCollision(currentCollider);
     }
 
     void ColliderVisitor::EmitTrigger(Collider* Collider) const
     {
-        currentCollider->EmitTrigger(Collider);
+        //currentCollider->EmitTrigger(Collider);
         Collider->EmitTrigger(currentCollider);
     }
 
 
     void ColliderVisitor::ResolveCollisionBox(BoxCollider& box)
     {
-        if (this->currentCollider == nullptr || this->currentCollider->IsStatic())
+        if (!currentCollider|| this->currentCollider->IsStatic())
             return;
 
         switch (this->currentCollider->colliderType)
@@ -1167,7 +1167,7 @@ namespace Engine
 
         for (auto* collider : spatialPartitioning->GetPotentialCollisions(currentCollider))
         {
-            if (collider == this->currentCollider)
+            if (collider == this->currentCollider || collider->GetOwner() == nullptr)
                 continue;
 
             collider->AcceptCollision(*this);

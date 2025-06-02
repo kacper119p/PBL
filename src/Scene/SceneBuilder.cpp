@@ -90,7 +90,7 @@ namespace Scene
         playerVacuum->AddComponent<Engine::Vacuum>();
         playerVacuum->GetTransform()->SetPosition(glm::vec3(0.0f,1.0f,-3.0f));
 
-        Engine::Entity* box = Scene->SpawnEntity(nullptr);
+        /*Engine::Entity* box = Scene->SpawnEntity(nullptr);
         box->SetName("Box");
         Engine::BoxCollider* boxCollider = box->AddComponent<Engine::BoxCollider>();
         boxCollider->SetWidth(.25f);
@@ -100,7 +100,7 @@ namespace Scene
         Engine::Rigidbody* rb1 = box->AddComponent<Engine::Rigidbody>();
         rb->restitution = 0.89f;
         box->GetTransform()->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
-        box->AddComponent<Engine::ModelRenderer>()->SetModel(Models::ModelManager::GetModel("./res/models/Box.fbx"));
+        box->AddComponent<Engine::ModelRenderer>()->SetModel(Models::ModelManager::GetModel("./res/models/Box.fbx"));*/
 
         //secondBoxCollider->SetWidth(2.0f);
         //secondBoxCollider->SetHeight(2.0f);

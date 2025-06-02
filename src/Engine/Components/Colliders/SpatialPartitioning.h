@@ -35,6 +35,7 @@ namespace Engine
         SpatialPartitioning();
         ~SpatialPartitioning();
 
+        void ValidateGrid();
        
         std::vector<glm::ivec2> GetOccupiedCells(const glm::vec3& position, const glm::vec3& size) const;
 
@@ -42,6 +43,7 @@ namespace Engine
         glm::vec2 origin;
 
         std::unordered_map<glm::ivec2, std::vector<Collider*>, Vec2Hash> grid;
+        std::unordered_map<Collider*, std::vector<glm::ivec2>> colliderCellMap;
 
         static SpatialPartitioning* instance_;
     };

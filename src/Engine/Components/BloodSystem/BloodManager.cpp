@@ -4,7 +4,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glad/glad.h>
 
-#include "../../../../cmake-build-release-visual-studio-editor/_deps/spdlog-src/include/spdlog/spdlog.h"
 #include "Shaders/ShaderManager.h"
 #include "Utility/AssertionsUtility.h"
 

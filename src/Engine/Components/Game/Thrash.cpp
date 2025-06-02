@@ -8,6 +8,7 @@ namespace Engine
     void Thrash::Start() { 
         collider = GetOwner()->GetComponent<Collider>();
         collider->OnCollisionAddListener(ThrowOut);
+        ThrashManager::GetInstance()->AddThrash(this);
     }
 
     rapidjson::Value Thrash::Serialize(rapidjson::Document::AllocatorType& Allocator) const
@@ -35,7 +36,11 @@ namespace Engine
     {
         if (collider->GetOwner()->GetName() == "ThrashCan")
         {
-            GetOwner()->GetScene()->DeleteEntity(GetOwner());
+            if (this->collider)
+            {
+                this->collider->OnCollisionRemoveListener(ThrowOut);
+            }
+            GetOwner()->Destroy();
         }
     }
 #if EDITOR
