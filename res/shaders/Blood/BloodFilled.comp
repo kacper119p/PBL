@@ -1,0 +1,38 @@
+#version 460 core
+
+layout (binding = 0) uniform sampler2D inputTexture;
+
+layout (std430, binding = 0) writeonly buffer ResultBuffer {
+    float partialSums[];
+};
+
+shared float localSums[256];
+
+layout (local_size_x = 16, local_size_y = 16) in;
+void main() {
+    ivec2 texSize = textureSize(inputTexture, 0);
+    ivec2 globalID = ivec2(gl_GlobalInvocationID.xy);
+    uint localIndex = gl_LocalInvocationIndex;
+
+    float alpha = 0.0;
+    if (globalID.x < texSize.x && globalID.y < texSize.y) {
+        vec4 texel = texelFetch(inputTexture, globalID, 0);
+        alpha = texel.a;
+    }
+
+    localSums[localIndex] = alpha;
+    memoryBarrierShared();
+    barrier();
+
+    for (uint stride = 128; stride > 0; stride >>= 1) {
+        barrier();
+        if (localIndex < stride) {
+            localSums[localIndex] += localSums[localIndex + stride];
+        }
+    }
+
+    if (localIndex == 0) {
+        uint groupIndex = gl_WorkGroupID.y * gl_NumWorkGroups.x + gl_WorkGroupID.x;
+        partialSums[groupIndex] = localSums[0];
+    }
+}

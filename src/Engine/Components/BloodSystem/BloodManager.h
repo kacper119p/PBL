@@ -6,6 +6,7 @@
 #include "BloodSource.h"
 #include "BloodStain.h"
 #include "Models/AabBox.h"
+#include "Shaders/ComputeShader.h"
 #include "Shaders/Shader.h"
 
 namespace Engine
@@ -15,6 +16,10 @@ namespace Engine
     {
     private:
         static constexpr int32_t MaskSize = 4096;
+        static constexpr int LocalSize = 16;
+        static constexpr int GroupsOneDimension = (MaskSize + LocalSize - 1) / LocalSize;
+        static constexpr int TotalGroups = GroupsOneDimension * GroupsOneDimension;
+        static_assert(MaskSize % 16 == 0, "MaskSize must be a multiple of 16");
 
         static BloodManager* Instance;
 
@@ -30,6 +35,12 @@ namespace Engine
         int32_t ViewProjectionMatrixUniformLocation = 0;
         int32_t ModelMatrixUniformLocation = 0;
         int32_t ColorUniformLocation = 0;
+
+        uint32_t AccumulationBuffer = 0;
+        Shaders::ComputeShader AccumulationShader;
+        glm::ivec3 DispatchSize;
+
+        float BloodFill;
 
     public:
         explicit BloodManager(const Models::AABBox3& SceneBounds);
@@ -80,6 +91,14 @@ namespace Engine
         void AddBloodStain(const BloodStain* const BloodStain)
         {
             BloodStains.push_back(BloodStain);
+        }
+
+        /**
+         * @brief Returns relative amount of blood in the scene in [0,1] range.
+         */
+        [[nodiscard]] float BloodFill1() const
+        {
+            return BloodFill;
         }
 
         void AddBloodEraser(BloodEraser* const BloodEraser)
