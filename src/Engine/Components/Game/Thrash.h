@@ -29,7 +29,7 @@ namespace Engine
         Events::TAction<Collider*> ThrowOut = Events::TAction<Collider*>(this, &Thrash::DeleteThrash);
 
     public:
-        Thrash();
+        Thrash() = default;
         ~Thrash() override = default;
         ThrashSize GetSize() const { return size; }
         void SetSize(ThrashSize newSize) { size = newSize; }

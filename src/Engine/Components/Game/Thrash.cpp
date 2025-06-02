@@ -4,9 +4,10 @@
 
 namespace Engine
 {
-    Thrash::Thrash() {}
+    
     void Thrash::Start() { 
-        //collider = GetOwner()->GetComponent<BoxCollider>(); 
+        collider = GetOwner()->GetComponent<Collider>();
+        collider->OnCollisionAddListener(ThrowOut);
     }
 
     rapidjson::Value Thrash::Serialize(rapidjson::Document::AllocatorType& Allocator) const
@@ -25,17 +26,16 @@ namespace Engine
 
     void Thrash::DeserializeReferencesPass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
-        /*START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
-        END_COMPONENT_DESERIALIZATION_REFERENCES_PASS*/
+        START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
+        END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 
 
     void Thrash::DeleteThrash(Engine::Collider* collider)
     {
-        if (collider->GetOwner()->GetComponent<Thrash>())
+        if (collider->GetOwner()->GetName() == "ThrashCan")
         {
-            Engine::Scene* scene = this->GetOwner()->GetScene();
-            scene->DeleteEntity(this->GetOwner());
+            
         }
     }
 #if EDITOR
