@@ -35,7 +35,7 @@ namespace Engine
     {
         if (collider->GetOwner()->GetName() == "ThrashCan")
         {
-            
+            GetOwner()->GetScene()->DeleteEntity(GetOwner());
         }
     }
 #if EDITOR

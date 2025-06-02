@@ -299,7 +299,7 @@
         {
             "type": "Entity",
             "id": "{1e6e020e-707e-4925-a7b3-f2141dadb3a9}\u0000",
-            "name": "Thrash2",
+            "name": "ThrashCan",
             "transform": {
                 "type": "Transform",
                 "id": "{9d8d7b18-37b3-472b-be22-cd4089728de2}\u0000",
@@ -330,7 +330,6 @@
             },
             "components": [
                 "{c9646a72-0335-41be-9f5b-47cca778ec52}\u0000",
-                "{881016d3-6bf6-41c1-915b-03f726d8ea04}\u0000",
                 "{f79da1af-b97d-4273-a7ba-1c5a95c947d2}\u0000",
                 "{12fd20a4-f0e9-47b2-8ba7-150266b49747}\u0000"
             ]
@@ -341,12 +340,6 @@
             "owner": "{1e6e020e-707e-4925-a7b3-f2141dadb3a9}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
             "Model": "./res/models/Box.fbx"
-        },
-        {
-            "type": "Thrash",
-            "id": "{881016d3-6bf6-41c1-915b-03f726d8ea04}\u0000",
-            "owner": "{c99f3e17-1941-4a55-aa2a-085c4b35d50b}\u0000",
-            "size": 10
         },
         {
             "type": "BoxCollider",
