@@ -62,7 +62,7 @@ namespace Engine
                     {
                         items.push_back(entities[i]->GetOwner());
                         volume += thrashSizeInt;
-                        entities[i]->GetOwner()->RemoveComponent<Engine::Rigidbody>();
+                        //entities[i]->GetOwner()->RemoveComponent<Engine::Rigidbody>();
                         entities[i]->GetOwner()->GetComponent<Engine::BoxCollider>()->SetTrigger(true);
                         entities[i]->GetOwner()->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
                     }
@@ -76,8 +76,8 @@ namespace Engine
             items.pop_back();
             int thrashSizeInt = static_cast<int>(item->GetComponent<Thrash>()->GetSize());
             volume -= thrashSizeInt;
-            item->AddComponent<Engine::Rigidbody>()->SetMass(0.1);
             item->GetComponent<Engine::BoxCollider>()->SetTrigger(false);
+            //item->AddComponent<Engine::Rigidbody>()->SetMass(0.1);
             glm::vec3 position = GetOwner()->GetTransform()->GetPosition();
             glm::vec3 forward = GetOwner()->GetTransform()->GetForward();
             item->GetTransform()->SetPosition(glm::vec3(position.x, position.y + 1, position.z - 1));
