@@ -110,13 +110,13 @@ namespace Engine
     }
 
 #if EDITOR
-    void BoxCollider::DrawDebugMesh(const CameraRenderData& RenderData) const
+    void BoxCollider::DrawDebugMesh(const CameraRenderData& RenderData, const Shaders::Shader Shader) const
     {
-        Material->GetMainPass().SetUniform("ViewMatrix", RenderData.ViewMatrix);
-        Material->GetMainPass().SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
-        Material->GetMainPass().SetUniform("ObjectToWorldMatrix",
-                                           Utility::RemoveScaleMat4(
-                                                   GetOwner()->GetTransform()->GetLocalToWorldMatrix()));
+        Shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
+        Shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
+        Shader.SetUniform("ObjectToWorldMatrix",
+                          Utility::RemoveScaleMat4(
+                                  GetOwner()->GetTransform()->GetLocalToWorldMatrix()));
 
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -128,12 +128,12 @@ namespace Engine
 
     void BoxCollider::Render(const CameraRenderData& RenderData)
     {
-        DrawDebugMesh(RenderData);
+        DrawDebugMesh(RenderData, Material->GetMainPass());
     }
 
     void BoxCollider::RenderDepth(const CameraRenderData& RenderData)
     {
-        DrawDebugMesh(RenderData);
+        DrawDebugMesh(RenderData, Material->GetDepthPass());
     }
 
     void BoxCollider::RenderDirectionalShadows(const CameraRenderData& RenderData)

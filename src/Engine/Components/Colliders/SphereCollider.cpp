@@ -94,30 +94,30 @@ namespace Engine
     }
 
 #if EDITOR
-    void SphereCollider::DrawDebugMesh(const CameraRenderData& RenderData)
+    void SphereCollider::DrawDebugMesh(const CameraRenderData& RenderData, const Shaders::Shader Shader)
     {
-        Material->GetMainPass().SetUniform("ViewMatrix", RenderData.ViewMatrix);
-        Material->GetMainPass().SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
-        Material->GetMainPass().SetUniform("ObjectToWorldMatrix",
-                                           Utility::RemoveScaleMat4(
-                                                   GetOwner()->GetTransform()->GetLocalToWorldMatrix()));
+        Shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
+        Shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
+        Shader.SetUniform("ObjectToWorldMatrix",
+                          Utility::RemoveScaleMat4(
+                                  GetOwner()->GetTransform()->GetLocalToWorldMatrix()));
 
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
         glBindVertexArray(Vao);
-        glDrawElements(GL_LINES, static_cast<GLsizei>(LongitudeSegments * LatitudeSegments * 4), GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_LINES, LongitudeSegments * LatitudeSegments * 4, GL_UNSIGNED_INT, nullptr);
 
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
 
     void SphereCollider::Render(const CameraRenderData& RenderData)
     {
-        DrawDebugMesh(RenderData);
+        DrawDebugMesh(RenderData, Material->GetMainPass());
     }
 
     void SphereCollider::RenderDepth(const CameraRenderData& RenderData)
     {
-        DrawDebugMesh(RenderData);
+        DrawDebugMesh(RenderData, Material->GetDepthPass());
     }
 
     void SphereCollider::RenderDirectionalShadows(const CameraRenderData& RenderData)

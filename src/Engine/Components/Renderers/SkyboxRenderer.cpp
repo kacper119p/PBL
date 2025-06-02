@@ -85,7 +85,7 @@ namespace Engine
                     const char* droppedPath = static_cast<const char*>(payload->Data);
                     if (fs::path(droppedPath).extension() == ".mat")
                     {
-                        Material = Materials::MaterialManager::GetMaterial(droppedPath);
+                        SetMaterial(Materials::MaterialManager::GetMaterial(droppedPath));
                     }
                 }
                 ImGui::EndDragDropTarget();
@@ -109,7 +109,7 @@ namespace Engine
 
                     if (ImGui::Selectable(displayName.c_str()))
                     {
-                        Material = Materials::MaterialManager::GetMaterial(path);
+                        SetMaterial(Materials::MaterialManager::GetMaterial(path));
                         ImGui::CloseCurrentPopup();
                     }
 
@@ -139,7 +139,6 @@ namespace Engine
                     fs::path newMaterialPath = fs::path("./res/materials/SampleScene");
                     Materials::MaterialManager::SaveMaterial(newMaterialPath.string() + "/" + editableMaterialName,
                                                              Material);
-                    //Material = Materials::MaterialManager::GetMaterial(newMaterialPath.string() + "/" + editableMaterialName);
                 }
             }
             ImGui::Separator();

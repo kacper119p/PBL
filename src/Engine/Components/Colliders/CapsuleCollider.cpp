@@ -128,13 +128,13 @@ namespace Engine
 
 
 #if EDITOR
-    void CapsuleCollider::DrawDebugMesh(const CameraRenderData& RenderData)
+    void CapsuleCollider::DrawDebugMesh(const CameraRenderData& RenderData, const Shaders::Shader Shader)
     {
-        Material->GetMainPass().SetUniform("ViewMatrix", RenderData.ViewMatrix);
-        Material->GetMainPass().SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
-        Material->GetMainPass().SetUniform("ObjectToWorldMatrix",
-                                           Utility::RemoveScaleMat4(
-                                                   GetOwner()->GetTransform()->GetLocalToWorldMatrix()));
+        Shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
+        Shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
+        Shader.SetUniform("ObjectToWorldMatrix",
+                          Utility::RemoveScaleMat4(
+                                  GetOwner()->GetTransform()->GetLocalToWorldMatrix()));
 
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -147,12 +147,12 @@ namespace Engine
 
     void CapsuleCollider::Render(const CameraRenderData& RenderData)
     {
-        DrawDebugMesh(RenderData);
+        DrawDebugMesh(RenderData, Material->GetMainPass());
     }
 
     void CapsuleCollider::RenderDepth(const CameraRenderData& RenderData)
     {
-        DrawDebugMesh(RenderData);
+        DrawDebugMesh(RenderData, Material->GetDepthPass());
     }
 
     void CapsuleCollider::RenderDirectionalShadows(const CameraRenderData& RenderData)
@@ -233,7 +233,7 @@ namespace Engine
                 indices.push_back(next + 1);
             }
         }
-        
+
         glBindVertexArray(Vao);
 
         glBindBuffer(GL_ARRAY_BUFFER, Vbo);

@@ -95,7 +95,7 @@ namespace Engine
         void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                     const glm::mat4* SpaceTransformMatrices) override;
 
-        void DrawDebugMesh(const CameraRenderData& RenderData) const;
+        void DrawDebugMesh(const CameraRenderData& RenderData, Shaders::Shader Shader) const;
 #endif
         BoxCollider& operator=(const BoxCollider& other);
 

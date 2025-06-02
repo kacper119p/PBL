@@ -123,7 +123,7 @@ namespace Materials
         // Texture browsing support
         static std::vector<std::string> availableTextures;
         static bool scanned = false;
-        std::string texturePath = std::filesystem::relative("./res/textures").string();
+        std::string texturePath = std::filesystem::absolute("./res/textures").string();
 
         EditorReadMaterial(availableTextures, scanned, texturePath);
 

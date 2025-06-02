@@ -57,7 +57,7 @@ namespace Engine
         SphereCollider& operator=(const SphereCollider& other);
 
 #if EDITOR
-        void DrawDebugMesh(const CameraRenderData& RenderData);
+        void DrawDebugMesh(const CameraRenderData& RenderData, Shaders::Shader Shader);
 
         void RenderDepth(const CameraRenderData& RenderData) override;
 

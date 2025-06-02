@@ -26,14 +26,20 @@ namespace Engine
     void Entity::DrawImGui()
     {
         Transform.DrawImGui();
-        for (Component* component : Components)
+        for (size_t i = 0; i < Components.size();)
         {
+            Component* component = Components[i];
             component->DrawImGui();
 
-            if(ImGui::Button("Remove"))
+            ImGui::PushID(static_cast<int>(i));
+            if (ImGui::Button("Remove"))
             {
                 this->RemoveComponent(component);
+                ImGui::PopID();
+                continue;
             }
+            ImGui::PopID();
+            ++i;
         }
     }
 #endif

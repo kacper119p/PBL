@@ -3,7 +3,7 @@
 
 in vec3 Direction;
 
-layout (bindless_sampler) uniform samplerCube Texture;
+layout (binding = 0) uniform samplerCube Texture;
 
 layout (location = 0) out vec3 FragColor;
 layout (location = 1) out vec3 OcclusionMask;

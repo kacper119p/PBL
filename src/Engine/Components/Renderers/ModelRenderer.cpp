@@ -52,34 +52,36 @@ namespace Engine
 
     void ModelRenderer::RenderDirectionalShadows(const CameraRenderData& RenderData)
     {
-        if (Model != nullptr)
+        if (Model == nullptr)
         {
-            SetupMatrices(RenderData, Material->GetDirectionalShadowPass());
-            Draw();
+            return;
         }
+        SetupMatrices(RenderData, Material->GetDirectionalShadowPass());
+        Draw();
     }
 
     void
     ModelRenderer::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                           const glm::mat4* const SpaceTransformMatrices)
     {
-        if (Material != nullptr)
+        if (Model == nullptr)
         {
-            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[0]", SpaceTransformMatrices[0]);
-            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[1]", SpaceTransformMatrices[1]);
-            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[2]", SpaceTransformMatrices[2]);
-            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[3]", SpaceTransformMatrices[3]);
-            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[4]", SpaceTransformMatrices[4]);
-            Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[5]", SpaceTransformMatrices[5]);
-
-            Material->GetPointSpotShadowPass().SetUniform("LightPosition", LightPosition);
-            Material->GetPointSpotShadowPass().SetUniform("Range", LightRange);
-
-            Material->GetPointSpotShadowPass().SetUniform("ObjectToWorldMatrix",
-                                                          GetOwner()->GetTransform()->GetLocalToWorldMatrix());
-
-            Draw();
+            return;
         }
+        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[0]", SpaceTransformMatrices[0]);
+        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[1]", SpaceTransformMatrices[1]);
+        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[2]", SpaceTransformMatrices[2]);
+        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[3]", SpaceTransformMatrices[3]);
+        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[4]", SpaceTransformMatrices[4]);
+        Material->GetPointSpotShadowPass().SetUniform("ShadowMatrices[5]", SpaceTransformMatrices[5]);
+
+        Material->GetPointSpotShadowPass().SetUniform("LightPosition", LightPosition);
+        Material->GetPointSpotShadowPass().SetUniform("Range", LightRange);
+
+        Material->GetPointSpotShadowPass().SetUniform("ObjectToWorldMatrix",
+                                                      GetOwner()->GetTransform()->GetLocalToWorldMatrix());
+
+        Draw();
     }
 
     void ModelRenderer::SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const
@@ -117,15 +119,29 @@ namespace Engine
             std::string modelPath = fs::absolute("./res/Models").string();
             if (!scanned)
             {
-                for (const auto& entry : fs::directory_iterator(materialPath))
+                for (const auto& entry : fs::recursive_directory_iterator(materialPath))
                 {
                     if (entry.is_regular_file() && entry.path().extension() == ".mat")
-                        availableMaterials.emplace_back(entry.path().string());
+                    {
+                        std::string relPath = entry.path().lexically_normal().string();
+                        std::replace(relPath.begin(), relPath.end(), '\\', '/');
+                        size_t pos = relPath.find("/res/");
+                        if (pos != std::string::npos)
+                            relPath = "." + relPath.substr(pos);
+                        availableMaterials.emplace_back(relPath);
+                    }
                 }
-                for (const auto& entry : fs::directory_iterator(modelPath))
+                for (const auto& entry : fs::recursive_directory_iterator(modelPath))
                 {
                     if (entry.is_regular_file() && entry.path().extension() == ".fbx")
-                        availableModels.emplace_back(entry.path().string());
+                    {
+                        std::string relPath = entry.path().lexically_normal().string();
+                        std::replace(relPath.begin(), relPath.end(), '\\', '/');
+                        size_t pos = relPath.find("/res/");
+                        if (pos != std::string::npos)
+                            relPath = "." + relPath.substr(pos);
+                        availableModels.emplace_back(relPath);
+                    }
                 }
 
                 scanned = true;
@@ -180,7 +196,7 @@ namespace Engine
 
                     if (ImGui::Selectable(displayName.c_str()))
                     {
-                        fs::path relPath = fs::path("./res/materials/SampleScene/"+std::string(currentMaterialName));
+                        fs::path relPath = fs::path("./res/materials/SampleScene/" + std::string(currentMaterialName));
                         SetMaterial(Materials::MaterialManager::GetMaterial(relPath.string()));
                         ImGui::CloseCurrentPopup();
                     }
