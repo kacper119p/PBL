@@ -4,6 +4,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glad/glad.h>
 
+#include "../../../../cmake-build-release-visual-studio-editor/_deps/spdlog-src/include/spdlog/spdlog.h"
 #include "Shaders/ShaderManager.h"
 #include "Utility/AssertionsUtility.h"
 
@@ -44,7 +45,7 @@ namespace Engine
 
         const glm::vec3 cameraPosition = glm::vec3(0.0f, SceneBounds.max.y, 0.0f);
         constexpr glm::vec3 origin = glm::vec3(0.0f, 0.0f, 0.0f);
-        constexpr glm::vec3 upDirection = glm::vec3(0.0f, 1.0f, -1.0f);
+        constexpr glm::vec3 upDirection = glm::vec3(0.0f, 0.0f, -1.0f);
 
         const glm::mat4 viewMatrix = glm::lookAt(cameraPosition, origin, upDirection);
 
@@ -62,6 +63,16 @@ namespace Engine
         ViewProjectionMatrixUniformLocation = MaskShader.GetUniformLocation("ViewProjectionMatrix");
         ModelMatrixUniformLocation = MaskShader.GetUniformLocation("ModelMatrix");
         ColorUniformLocation = MaskShader.GetUniformLocation("Color");
+
+        AccumulationShader = Shaders::ShaderManager::GetComputeShader("res/shaders/Blood/BloodFilled.comp");
+        DispatchSize = glm::ivec3(GroupsOneDimension, GroupsOneDimension, 1);
+
+        glGenBuffers(1, &AccumulationBuffer);
+        glBindBuffer(GL_SHADER_STORAGE_BUFFER, AccumulationBuffer);
+        constexpr float zero = 0.0f;
+        glBufferData(GL_SHADER_STORAGE_BUFFER, TotalGroups * sizeof(float), nullptr, GL_DYNAMIC_READ);
+
+
     }
 
     BloodManager::~BloodManager()
@@ -103,6 +114,28 @@ namespace Engine
             Eraser->Draw();
         }
 
+
         glDisable(GL_BLEND);
+
+        glBindBuffer(GL_SHADER_STORAGE_BUFFER, AccumulationBuffer);
+        AccumulationShader.Use();
+        glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, AccumulationBuffer);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, ColorBuffer);
+        Shaders::ComputeShader::Dispatch(DispatchSize);
+        glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT | GL_BUFFER_UPDATE_BARRIER_BIT);
+        const float* ptr = static_cast<float*>(glMapBufferRange(
+                GL_SHADER_STORAGE_BUFFER, 0, TotalGroups * sizeof(float), GL_MAP_READ_BIT));
+
+        float totalAlpha = 0.0f;
+        for (int i = 0; i < TotalGroups; ++i)
+        {
+            totalAlpha += ptr[i];
+        }
+        glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
+
+        const float averageAlpha = totalAlpha / (MaskSize * MaskSize);
+        BloodFill = averageAlpha;
+
     }
 }
