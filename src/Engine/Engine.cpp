@@ -137,6 +137,7 @@ namespace Engine
 #endif
 
             // End frame and swap buffers (double buffering)
+            Entity::DestroyQueued();
             EndFrame();
             FrameMark;
         }
