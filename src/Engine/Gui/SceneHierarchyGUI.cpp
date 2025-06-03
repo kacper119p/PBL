@@ -107,12 +107,25 @@ void Engine::SceneHierarchyGUI::Draw(Scene* scene)
 
     }
 
+    // Entity deletion
     if (SelectedEntity && ImGui::IsWindowFocused() && ImGui::IsKeyPressed(ImGuiKey_Delete))
     {
         if (SelectedEntity != Root)
         {
             scene->DeleteEntity(SelectedEntity->GetOwner());
             SelectedEntity = nullptr;
+        }
+    }
+
+    // Entity duplication
+    if (SelectedEntity
+        && ImGui::IsWindowFocused()
+        && (ImGui::IsKeyDown(ImGuiKey_LeftCtrl) || ImGui::IsKeyDown(ImGuiKey_RightCtrl))
+        && ImGui::IsKeyPressed(ImGuiKey_D))
+    {
+        if (SelectedEntity != Root)
+        {
+            SelectedEntity = SelectedEntity->GetOwner()->CloneAsConcrete()->GetTransform();
         }
     }
 

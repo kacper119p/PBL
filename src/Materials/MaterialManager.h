@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include <string>
 #include <unordered_map>
 
@@ -80,6 +81,7 @@ namespace Materials
                 if constexpr (std::is_base_of_v<Material, T> && !std::is_abstract_v<T>)
                 {
                     MaterialTypes.emplace_back(Name);
+                    std::ranges::sort(MaterialTypes);
                 }
 #endif
             }
