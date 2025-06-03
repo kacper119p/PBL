@@ -87,7 +87,7 @@ namespace Engine
         }
         for (const Transform* transform : *(Root->GetTransform()))
         {
-            SerializeEntity(transform->GetOwner(), objects, Allocator);
+            transform->GetOwner()->SerializeEntity(objects, Allocator);
         }
 
         documentRoot.AddMember("Objects", objects, Allocator);
@@ -224,20 +224,6 @@ namespace Engine
                 Bounds.min = glm::min(Bounds.min, aabb.min);
                 Bounds.max = glm::max(Bounds.max, aabb.max);
             }
-        }
-    }
-
-    void Scene::SerializeEntity(const Entity* const Entity, rapidjson::Value& Object,
-                                rapidjson::Document::AllocatorType& Allocator)
-    {
-        Object.PushBack(Entity->Serialize(Allocator), Allocator);
-        for (const Component* component : *Entity)
-        {
-            Object.PushBack(component->Serialize(Allocator), Allocator);
-        }
-        for (const Transform* transform : *(Entity->GetTransform()))
-        {
-            SerializeEntity(transform->GetOwner(), Object, Allocator);
         }
     }
 }
