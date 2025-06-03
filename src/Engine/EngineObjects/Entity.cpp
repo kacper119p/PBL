@@ -35,6 +35,7 @@ namespace Engine
     Entity* Entity::CloneAsConcrete() const
     {
         rapidjson::Document document;
+        document.SetArray();
         SerializeEntity(document, document.GetAllocator());
         return DeserializeEntity(document, GetScene());
     }
