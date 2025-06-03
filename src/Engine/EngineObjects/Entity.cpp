@@ -1,8 +1,17 @@
 #include "Entity.h"
 
 #include "GizmoManager.h"
+#include "Scene/Scene.h"
 #include "Serialization/SerializationUtility.h"
 
+namespace
+{
+    struct DeserializationPair
+    {
+        const rapidjson::Value& Json;
+        Serialization::SerializedObject* Object;
+    };
+}
 
 namespace Engine
 {
@@ -25,10 +34,12 @@ namespace Engine
 
     Entity* Entity::CloneAsConcrete() const
     {
-        return nullptr;
+        rapidjson::Document document;
+        SerializeEntity(document, document.GetAllocator());
+        return DeserializeEntity(document, GetScene());
     }
 
-    void Entity::SerializeEntity(rapidjson::Value& Object, rapidjson::Document::AllocatorType& Allocator)
+    void Entity::SerializeEntity(rapidjson::Value& Object, rapidjson::Document::AllocatorType& Allocator) const
     {
         {
             Object.PushBack(this->Serialize(Allocator), Allocator);
@@ -41,6 +52,55 @@ namespace Engine
                 transform->GetOwner()->SerializeEntity(Object, Allocator);
             }
         }
+    }
+
+    Entity* Entity::DeserializeEntity(rapidjson::Value& Object, class Scene* Scene)
+    {
+        Serialization::ReferenceTable referenceTable;
+        std::vector<DeserializationPair> objects;
+        Entity* root = nullptr;
+
+        for (const rapidjson::Value& jsonObject : Object.GetArray())
+        {
+            SerializedObject* deserializedObject = Serialization::SerializedObjectFactory::CreateObject(
+                    jsonObject["type"].GetString());
+            deserializedObject->DeserializeValuePass(jsonObject, referenceTable);
+            DeserializationPair pair{jsonObject, deserializedObject};
+            objects.emplace_back(pair);
+            if (Entity* entity = dynamic_cast<Entity*>(deserializedObject))
+            {
+                entity->Scene = Scene;
+                if (root == nullptr)
+                {
+                    root = entity;
+                }
+            }
+        }
+
+        for (DeserializationPair pair : objects)
+        {
+            pair.Object->DeserializeReferencesPass(pair.Json, referenceTable);
+        }
+
+        for (const DeserializationPair pair : objects)
+        {
+            pair.Object->SetId(Utility::GenerateGuid());
+        }
+
+        if (root->GetTransform()->GetParent() == nullptr)
+        {
+            root->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
+        }
+
+        for (const DeserializationPair pair : objects)
+        {
+            if (Component* component = dynamic_cast<Component*>(pair.Object))
+            {
+                component->Start();
+            }
+        }
+
+        return root;
     }
 
 #if EDITOR

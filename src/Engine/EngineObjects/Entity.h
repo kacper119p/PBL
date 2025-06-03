@@ -200,7 +200,9 @@ namespace Engine
 
         [[nodiscard]] Entity* CloneAsConcrete() const override;
 
-        void SerializeEntity(rapidjson::Value& Object, rapidjson::Document::AllocatorType& Allocator);
+        void SerializeEntity(rapidjson::Value& Object, rapidjson::Document::AllocatorType& Allocator) const;
+
+        static Entity* DeserializeEntity(rapidjson::Value& Object, class Scene* Scene);
 
 #if EDITOR
         void DrawImGui();
