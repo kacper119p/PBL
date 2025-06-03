@@ -1,0 +1,19 @@
+{
+    "type": "PbrMaterial",
+    "BaseMap": "res/textures/Default.dds",
+    "RoughnessMetallicMap": "res/textures/Default.dds",
+    "NormalMap": "res/textures/Default.dds",
+    "EmissiveMap": "res/textures/Default.dds",
+    "Roughness": 1.0,
+    "Metallic": 1.0,
+    "BaseColor": {
+        "x": 0.028282396495342255,
+        "y": 0.5245097875595093,
+        "z": 0.07206709682941437
+    },
+    "EmissiveColor": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    }
+}

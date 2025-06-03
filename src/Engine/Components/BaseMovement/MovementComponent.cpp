@@ -73,7 +73,7 @@ namespace Engine
             // Rotate slightly
             //float angle = (isLeftBackward ? -1.0f : 1.0f) * RotationSpeed * deltaTime;
             rigidbody->AddTorque(glm::vec3(0, (isLeftBackward ? -1.0f : 1.0f)*RotationSpeed, 0), ForceMode::Force);
-
+            rigidbody->AddForce(-forward * Speed, ForceMode::Force);
             //glm::quat rotation = transform->GetRotation() * glm::angleAxis(glm::radians(angle), glm::vec3(0, 1, 0));
 
             // Move slightly forward in the rotated direction
