@@ -55,7 +55,7 @@ namespace Engine
         Scene();
 
     public:
-        virtual ~Scene();
+        ~Scene();
 
     public:
         /**
@@ -180,7 +180,11 @@ namespace Engine
          */
         void Deserialize(const rapidjson::Value& Value);
 
-        std::string GetPath() const { return Path; }
+        [[nodiscard]] std::string GetPath() const
+        {
+            return Path;
+        }
+
         void SetPath(const std::string& Path) { this->Path = Path; }
 
         void DeleteEntity(Entity* Entity);
@@ -189,9 +193,6 @@ namespace Engine
         void CalculateBounds();
 
     private:
-        static void SerializeEntity(const Entity* Entity, rapidjson::Value& Object,
-                                    rapidjson::Document::AllocatorType& Allocator);
-
         void CalculateBounds(Entity* Entity);
     };
 }

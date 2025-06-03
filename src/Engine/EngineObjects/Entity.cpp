@@ -22,6 +22,27 @@ namespace Engine
         }
 #endif
     }
+
+    Entity* Entity::CloneAsConcrete() const
+    {
+        return nullptr;
+    }
+
+    void Entity::SerializeEntity(rapidjson::Value& Object, rapidjson::Document::AllocatorType& Allocator)
+    {
+        {
+            Object.PushBack(this->Serialize(Allocator), Allocator);
+            for (const Component* component : *this)
+            {
+                Object.PushBack(component->Serialize(Allocator), Allocator);
+            }
+            for (const class Transform* transform : *(this->GetTransform()))
+            {
+                transform->GetOwner()->SerializeEntity(Object, Allocator);
+            }
+        }
+    }
+
 #if EDITOR
     void Entity::DrawImGui()
     {
