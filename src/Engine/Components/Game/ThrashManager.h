@@ -13,6 +13,7 @@ namespace Engine
         std::vector<Thrash*> Thrashes;
         std::vector<Furniture*> Furnitures;
 
+
     public:
         ThrashManager() = default;
         ~ThrashManager() = default;
@@ -24,5 +25,8 @@ namespace Engine
 
         int GetThrashCount() { return Thrashes.size(); }
         int GetFurnitureCount() { return Furnitures.size(); }
+
+        int VacuumCount;
+        int VacuumVolume;
     };
 } // namespace Engine
