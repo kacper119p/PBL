@@ -1,0 +1,57 @@
+[
+    {
+        "type": "Entity",
+        "id": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+        "name": "Floor",
+        "transform": {
+            "type": "Transform",
+            "id": "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
+            "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+            "Position": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "EulerAngles": {
+                "x": 0.0,
+                "y": -0.0,
+                "z": 0.0
+            },
+            "Scale": {
+                "x": 20.0,
+                "y": 0.10000000149011612,
+                "z": 50.0
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.0
+            },
+            "Children": [],
+            "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+        },
+        "components": [
+            "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
+            "{3c9e0326-4e9a-4b13-9de5-d4d41c33d3b6}\u0000"
+        ]
+    },
+    {
+        "type": "ModelRenderer",
+        "id": "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
+        "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+        "Material": "./res/materials/SampleScene/Floor.mat",
+        "Model": "./res/models/Box.fbx"
+    },
+    {
+        "type": "BoxCollider",
+        "id": "{3c9e0326-4e9a-4b13-9de5-d4d41c33d3b6}\u0000",
+        "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+        "isTrigger": false,
+        "isStatic": true,
+        "colliderType": 0,
+        "_width": 100.0,
+        "_height": 1.0,
+        "_depth": 100.0
+    }
+]

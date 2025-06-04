@@ -4,6 +4,8 @@
 #include "Engine/EngineObjects/GizmoManager.h"
 #include "Engine/EngineObjects/Scene/Scene.h"
 #include "Engine/Components/Renderers/ModelRenderer.h"
+#include "Engine/Components/Renderers/AnimatedModelRenderer.h"
+#include "Engine/Prefabs/PrefabLoader.h"
 
 #include "imgui.h"
 
@@ -100,6 +102,9 @@ void Engine::SceneHierarchyGUI::Draw(Scene* scene)
             if (ImGui::MenuItem("Add Animated Model"))
             {
                 AddAnimatedModelToScene(scene, Root->GetOwner());
+            }if (ImGui::MenuItem("Add Prefab"))
+            {
+                AddPrefabToScene(scene, Root->GetOwner(), SelectedPrefabPath);
             }
 
             ImGui::EndPopup();
@@ -148,5 +153,13 @@ void Engine::SceneHierarchyGUI::AddModelToScene(Scene* scene, Entity* parent)
 void Engine::SceneHierarchyGUI::AddAnimatedModelToScene(Scene* scene, Entity* parent)
 {
     Entity* entity = scene->SpawnEntity(parent);
+    entity->AddComponent<AnimatedModelRenderer>();
+}
+void Engine::SceneHierarchyGUI::AddPrefabToScene(Scene* scene, Entity* parent, std::string prefabPath) 
+{
+    if (prefabPath != "None")
+    {
+        PrefabLoader::LoadPrefab(prefabPath, scene);
+    }
 }
 #endif

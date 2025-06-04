@@ -34,6 +34,7 @@ void Engine::EditorGUI::Render(uint64_t Frame, Scene* scene, CameraRenderData re
     DrawSelectedEntitysComponents();
     DrawGenerativeSystem(scene);
     m_MaterialMenu.DrawMaterialEditor();
+    m_PrefabWindow.DrawImGui(scene);
 
     //m_TopBar.Draw();
 

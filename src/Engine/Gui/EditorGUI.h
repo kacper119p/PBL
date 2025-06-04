@@ -11,6 +11,7 @@
 #include "Generation/GenerativeSystem.h"
 #include "Models/ModelManager.h"
 #include "Materials/MaterialManager.h"
+#include "PrefabWindow.h"
 
 namespace Engine
 {
@@ -55,6 +56,7 @@ namespace Engine
         AssetsWindow m_AssetsWindow;
         MaterialsMenu m_MaterialMenu;
         TopBar m_TopBar;
+        PrefabWindow m_PrefabWindow;
         Generation::GenerativeSystem GenerativeSystem;
         std::unique_ptr<Models::ModelManager> ModelManager;
         std::unique_ptr<Materials::MaterialManager> MaterialManager;
