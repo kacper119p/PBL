@@ -2,6 +2,7 @@
 
 #if DEBUG
 #include <cstdlib>
+#include <cstdio>
 #endif
 
 #if DEBUG
