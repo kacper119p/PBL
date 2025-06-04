@@ -1,5 +1,6 @@
 #include "Text.h"
 
+#include <common/TracyColor.hpp>
 #include <glad/glad.h>
 
 #include "FontRendering/FontVertex.h"
@@ -13,6 +14,10 @@ namespace Engine::Ui
     {
         Shader = Shaders::ShaderManager::GetShader(
                 Shaders::ShaderSourceFiles("./res/shaders/Font/Font.vert", "", "./res/shaders/Font/Font.frag"));
+
+        SizeUniformLocation = Shader.GetUniformLocation("Size");
+        TransformUniformLocation = Shader.GetUniformLocation("Transform");
+        ColorUniformLocation = Shader.GetUniformLocation("Color");
     }
 
     void Text::Render()
@@ -26,8 +31,9 @@ namespace Engine::Ui
             return;
         }
         Shader.Use();
-        Shader.SetUniform("Size", Rect.GetSize().y);
-        Shader.SetUniform("Transform", Rect.GetLocalToWorldMatrixNoScale());
+        Shaders::Shader::SetUniform(SizeUniformLocation, Rect.GetSize().y);
+        Shaders::Shader::SetUniform(TransformUniformLocation, Rect.GetLocalToWorldMatrixNoScale());
+        Shaders::Shader::SetUniform(ColorUniformLocation, Color);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, Font->GetGlyphAtlas());
         glBindVertexArray(VertexArray);

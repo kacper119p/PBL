@@ -12,13 +12,21 @@ namespace Engine::Ui
     class Text final : public UiElement
     {
     private:
+        std::string String;
+        Shaders::Shader Shader;
+
         uint32_t VertexBuffer = 0;
         uint32_t VertexArray = 0;
         int32_t VertexCount = 0;
-        std::string String;
-        Shaders::Shader Shader;
-        bool IsDirty = false;
+
+        int32_t SizeUniformLocation = -1;
+        int32_t TransformUniformLocation = -1;
+        int32_t ColorUniformLocation = -1;
+
+        glm::vec4 Color = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+
         FontId Font;
+        bool IsDirty = false;
 
     public:
         Text();
@@ -55,6 +63,16 @@ namespace Engine::Ui
         void SetShader(const Shaders::Shader& Shader)
         {
             this->Shader = Shader;
+        }
+
+        [[nodiscard]] glm::vec4 GetColor() const
+        {
+            return Color;
+        }
+
+        void SetColor(const glm::vec4& Color)
+        {
+            this->Color = Color;
         }
 
         void Render() override;
