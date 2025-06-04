@@ -170,7 +170,7 @@ namespace Engine
         if (!HasConstraint(Constraints::LockPositionZ))
             linearVelocity.z += (accumulatedForce.z * inverseMass) * deltaTime;
 
-        linearVelocity *= (1.0f - linearDamping);
+        linearVelocity *= pow(1.0f - linearDamping, deltaTime);
 
         glm::mat3 R = glm::mat3_cast(orientation);
         glm::mat3 worldInvInertiaTensor = R * inverseInertiaTensor * glm::transpose(R);
@@ -183,7 +183,7 @@ namespace Engine
         if (!HasConstraint(Constraints::LockRotationZ))
             angularVelocity.z += angularAcceleration.z * deltaTime;
 
-        angularVelocity *= (1.0f - angularDamping);
+        angularVelocity *= pow(1.0f - angularDamping, deltaTime);
 
         Transform* transform = GetOwner()->GetTransform();
         glm::vec3 position = transform->GetPositionWorldSpace();
