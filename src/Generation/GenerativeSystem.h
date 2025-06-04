@@ -79,13 +79,16 @@ namespace Generation
          * @param PerlinMagnitude Magnitude of noise perturbation.
          * @param AabbMin Minimum extent of the AABB to place.
          * @param AabbMax Maximum extent of the AABB to place.
+         * @param yOffset Vertical offset applied before stacking (e.g. object base height).
+         * @param yHeight Vertical stacking step size.
          * @return A valid non-overlapping position, or std::nullopt if not found.
          */
         std::optional<glm::vec3> GetNonOverlappingNavMeshPosition(
                 const glm::vec3& Center, float BaseSpacing,
                 const std::vector<std::pair<glm::vec3, glm::vec3>>& UsedAabbs,
-                Perlin& Perlin, float PerlinScale, float PerlinMagnitude, const glm::vec3& AabbMin,
-                const glm::vec3& AabbMax);
+                Perlin& Perlin, float PerlinScale, float PerlinMagnitude,
+                const glm::vec3& AabbMin, const glm::vec3& AabbMax,
+                float yOffset, float yHeight);
 
         /**
          * @brief Spawns all items entities in the scene based on given parameters.
