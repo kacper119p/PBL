@@ -40,6 +40,7 @@
 #include "Engine/Components/Camera/CameraFollow.h"
 #include "Engine/Components/BloodSystem/BloodEraser.h"
 #include "Engine/Components/Game/Vacuum.h"
+#include <random>
 
 
 namespace Scene
@@ -50,7 +51,7 @@ namespace Scene
         ZoneScoped;
 
         Scene = new class Engine::Scene();
-        Engine::SceneManager::LoadScene("./res/scenes/Gameplay.lvl", Scene);
+        Engine::SceneManager::LoadScene("./res/scenes/Gayplay.lvl", Scene);
         // TODO: remove when no longer needed
         
 
@@ -74,7 +75,7 @@ namespace Scene
         Scene->GetPlayer()->GetComponent<Engine::BoxCollider>()->SetWidth(2.0f);
         Scene->GetPlayer()->GetComponent<Engine::BoxCollider>()->SetHeight(2.0f);
         Scene->GetPlayer()->GetComponent<Engine::BoxCollider>()->SetDepth(2.0f);
-        Scene->GetPlayer()->GetTransform()->SetPosition(glm::vec3(0.0f, 1.5f, 4.0f));
+        Scene->GetPlayer()->GetTransform()->SetPosition(glm::vec3(10.0f, 1.5f, 10.0f));
         Engine::Rigidbody* rb = Scene->GetPlayer()->GetComponent<Engine::Rigidbody>();
         rb->friction = 0.1f;
         rb->angularDamping = 0.01f;
@@ -95,6 +96,38 @@ namespace Scene
         Scene->GetPlayer()->GetTransform()->AddChild(playerBroom->GetTransform());
         playerBroom->AddComponent<Engine::BloodEraser>();
         playerBroom->GetTransform()->SetPosition(glm::vec3(0.0f, 1.0f, -2.5f));
+
+
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_real_distribution<float> dis(0.0f, 360.0f);
+        const int gridSize = 7;
+        const float spacing = 4.0f;
+        for (int x = 0; x < gridSize; ++x)
+        {
+            for (int y = 0; y < gridSize; ++y)
+            {
+                for (int z = 0; z < gridSize; ++z)
+                {
+                    Engine::Entity* gridBox = Scene->SpawnEntity(nullptr);
+                    gridBox->SetName("GridBox");
+                    Engine::ModelRenderer* gridBoxRenderer = gridBox->AddComponent<Engine::ModelRenderer>();
+                    gridBoxRenderer->SetModel(Models::ModelManager::GetModel("./res/models/Box.fbx"));
+                    gridBoxRenderer->SetMaterial(
+                        Materials::MaterialManager::GetMaterial("./res/materials/SampleScene/Box.mat"));
+                    Engine::BoxCollider* gridBoxCollider = gridBox->AddComponent<Engine::BoxCollider>();
+                    gridBox->AddComponent<Engine::Rigidbody>();
+                    gridBoxCollider->SetWidth(1.0f);
+                    gridBoxCollider->SetHeight(1.0f);
+                    gridBoxCollider->SetDepth(1.0f);
+                    gridBox->GetTransform()->SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
+                    gridBox->GetTransform()->SetPosition(glm::vec3(x * spacing, y * spacing, z * spacing));
+                    gridBox->GetTransform()->SetEulerAngles(glm::vec3(dis(gen), dis(gen), dis(gen)));
+                }
+            }
+        }
+            
+        
 
         /*Engine::Entity* box = Scene->SpawnEntity(nullptr);
         box->SetName("Box");
