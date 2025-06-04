@@ -25,7 +25,13 @@ namespace Engine
         bool isSuccing = false;
         bool isShooting = false;
 
-        int shootForce = 50;
+        int shootForce = 100;
+
+        bool wasShootingKeyPressed = false;
+        bool isShootingKeyPressed = false;
+        float shootKeyHoldStartTime = 0.0f;
+        float lastShootTime = 0.0f;
+        const float shootCooldown = 0.3f; // 300 ms
 
     public:
         Vacuum() = default;
@@ -36,6 +42,7 @@ namespace Engine
         void SetMaxVolume(int newMaxVolume) { maxVolume = newMaxVolume; }
         void Start() override;
         void Update(float deltaTime) override;
+        void Shoot();
 
         SERIALIZATION_EXPORT_CLASS(Vacuum);
 #if EDITOR
