@@ -30,7 +30,7 @@ namespace Engine
 
         Rigidbody* rigidbody = GetOwner()->GetComponent<Rigidbody>();
 
-        if (input.IsKeyPressed(GLFW_KEY_W) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_AXIS_LEFT_TRIGGER))
+        if (input.IsKeyPressed(GLFW_KEY_W) || input.GetGamepadAxis(GLFW_GAMEPAD_AXIS_LEFT_TRIGGER) > 0.5f)
         {
             isLeftForward = true;
         }
@@ -39,7 +39,7 @@ namespace Engine
             isLeftBackward = true;
         }
 
-        if (input.IsKeyPressed(GLFW_KEY_UP) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER))
+        if (input.IsKeyPressed(GLFW_KEY_UP) || input.GetGamepadAxis(GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER) > 0.5f)
         {
             isRightForward = true;
         }
@@ -47,6 +47,7 @@ namespace Engine
         {
             isRightBackward = true;
         }
+
 
         if (isLeftForward && isRightForward)
         {
