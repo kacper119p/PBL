@@ -14,6 +14,11 @@ namespace Engine::Ui
         Text* FloorText;
 
         float ReferenceBloodFill = 0.0f;
+        int32_t ReferenceTrashCount = 0;
+
+        bool HideKeyPressedLastFrame = false;
+        bool Hidden = true;
+        float HiddenTime = 0.0f;
 
     public:
         CleaningUi();
