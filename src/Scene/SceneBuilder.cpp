@@ -38,6 +38,8 @@
 #include "Shaders/ShaderSourceFiles.h"
 #include "tracy/Tracy.hpp"
 #include "Engine/Components/Camera/CameraFollow.h"
+#include "Engine/Components/BloodSystem/BloodEraser.h"
+#include "Engine/Components/Game/Vacuum.h"
 
 
 namespace Scene
@@ -66,10 +68,45 @@ namespace Scene
         //Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
         Scene->GetPlayer()->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
         Scene->GetPlayer()->GetTransform()->AddChild(secondBoxEntity->GetTransform());
-        //Scene->GetPlayer()->AddComponent<Engine::RigidBody>();
+        Scene->GetPlayer()->AddComponent<Engine::Rigidbody>();
         Scene->GetPlayer()->AddComponent<Engine::MovementComponent>();
         Scene->GetPlayer()->AddComponent<Engine::BoxCollider>();
-        Scene->GetPlayer()->GetTransform()->SetPosition(glm::vec3(0.0f, 1.0f, 4.0f));
+        Scene->GetPlayer()->GetComponent<Engine::BoxCollider>()->SetWidth(2.0f);
+        Scene->GetPlayer()->GetComponent<Engine::BoxCollider>()->SetHeight(2.0f);
+        Scene->GetPlayer()->GetComponent<Engine::BoxCollider>()->SetDepth(2.0f);
+        Scene->GetPlayer()->GetTransform()->SetPosition(glm::vec3(0.0f, 1.5f, 4.0f));
+        Engine::Rigidbody* rb = Scene->GetPlayer()->GetComponent<Engine::Rigidbody>();
+        rb->friction = 0.1f;
+        rb->angularDamping = 0.01f;
+        rb->linearDamping = 0.01f;
+        rb->restitution = 0.3f;
+        rb->SetMass(1.0f);
+        rb->frictionEnabled = true;
+        //rb->angularDamping = .05f;
+        
+        Engine::Entity* playerVacuum = Scene->SpawnEntity(nullptr);
+        playerVacuum->SetName("PlayerVacuum");
+        Scene->GetPlayer()->GetTransform()->AddChild(playerVacuum->GetTransform());
+        playerVacuum->AddComponent<Engine::Vacuum>();
+        playerVacuum->GetTransform()->SetPosition(glm::vec3(0.0f,1.0f,-3.0f));
+
+        Engine::Entity* playerBroom = Scene->SpawnEntity(nullptr);
+        playerBroom->SetName("PlayerBroom");
+        Scene->GetPlayer()->GetTransform()->AddChild(playerBroom->GetTransform());
+        playerBroom->AddComponent<Engine::BloodEraser>();
+        playerBroom->GetTransform()->SetPosition(glm::vec3(0.0f, 1.0f, -2.5f));
+
+        /*Engine::Entity* box = Scene->SpawnEntity(nullptr);
+        box->SetName("Box");
+        Engine::BoxCollider* boxCollider = box->AddComponent<Engine::BoxCollider>();
+        boxCollider->SetWidth(.25f);
+        boxCollider->SetHeight(.25f);
+        boxCollider->SetDepth(.25f);
+        box->GetTransform()->SetScale(glm::vec3(0.25f, 0.25f, 0.25f));
+        Engine::Rigidbody* rb1 = box->AddComponent<Engine::Rigidbody>();
+        rb->restitution = 0.89f;
+        box->GetTransform()->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
+        box->AddComponent<Engine::ModelRenderer>()->SetModel(Models::ModelManager::GetModel("./res/models/Box.fbx"));*/
 
         //secondBoxCollider->SetWidth(2.0f);
         //secondBoxCollider->SetHeight(2.0f);
@@ -92,15 +129,17 @@ namespace Scene
 
         secondBoxEntity->AddComponent<Engine::MovementComponent>();
         
-        Engine::RigidBody* rb2 = secondBoxEntity2->AddComponent<Engine::RigidBody>();
-        Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();
+        Engine::Rigidbody* rb2 = secondBoxEntity2->AddComponent<Engine::Rigidbody>();
+        Engine::Rigidbody* rb = secondBoxEntity->AddComponent<Engine::Rigidbody>();
 
-        rb2->SetRestitution(5.0f);
-        rb2->SetMass(0.1f);
-
-        rb->SetLinearDamping(.05f);
-        rb->AddConstraint(Engine::RigidBody::Constraints::LockRotationX);
-        rb->AddConstraint(Engine::RigidBody::Constraints::LockRotationZ);
+        Engine::Entity* triggerBoxEntity = Scene->SpawnEntity(nullptr);
+        Engine::SphereCollider* triggerBoxCollider = triggerBoxEntity->AddComponent<Engine::SphereCollider>();
+        triggerBoxCollider->SetRadius(1.0f);
+        triggerBoxEntity->GetTransform()->SetPosition(glm::vec3(0.0f, 2.1f, 0.0f));
+        triggerBoxCollider->SetTrigger(true);
+        Engine::ModelRenderer* modelTrigger = triggerBoxEntity->AddComponent<Engine::ModelRenderer>();
+        modelTrigger->SetModel(Models::ModelManager::GetModel("./res/models/SphereLowPoly.fbx"));
+        modelTrigger->SetMaterial(Materials::MaterialManager::GetMaterial("./res/materials/SampleScene/Default.mat"));
 
         CameraFollow::GetInstance().SetTarget(secondBoxEntity);
         */

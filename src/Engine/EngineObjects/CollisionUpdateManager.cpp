@@ -21,7 +21,10 @@ namespace Engine
 
         for (Collider* component : Updateables)
         {
-            component->Update(DeltaTime);
+            if (component!=nullptr)
+            {
+                component->Update(DeltaTime);
+            }
         }
     }
 } // namespace Engine

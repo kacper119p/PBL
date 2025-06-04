@@ -267,13 +267,9 @@ namespace Engine
                     std::filesystem::path fsPath(path);
                     std::string displayName = fsPath.filename().string();
 
-                    static char currentModelName[256] = {};
-                    strncpy_s(currentModelName, fsPath.filename().string().c_str(), sizeof(currentModelName) - 1);
-
                     if (ImGui::Selectable(displayName.c_str()))
                     {
-                        fs::path relPath = fs::path("./res/models/" + std::string(currentModelName));
-                        Model = Models::ModelManager::GetModel(relPath.string().c_str());
+                        Model = Models::ModelManager::GetModel(path.c_str());
                         ImGui::CloseCurrentPopup();
                     }
 
@@ -282,6 +278,7 @@ namespace Engine
                 }
                 ImGui::EndPopup();
             }
+
 
         }
     }

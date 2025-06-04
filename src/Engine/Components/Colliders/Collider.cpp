@@ -9,6 +9,7 @@
 #include "Engine/EngineObjects/Entity.h"
 #include <iostream>
 #include "Engine/Components/BaseMovement/MovementComponent.h"
+#include "Engine/EngineObjects/Entity.h"
 
 namespace Engine
 {
@@ -26,7 +27,11 @@ namespace Engine
 
     Collider::~Collider()
     {
-        colliderVisitor.~ColliderVisitor();
+        colliderVisitor.~ColliderVisitor(); }
+
+    std::vector<Collider*> Collider::SphereOverlap(glm::vec3& position, float Radius) const
+    {
+        return SpatialPartitioning::GetInstance().QuerySphere(position, Radius);
     }
 
     Collider& Collider::operator=(const Collider& Other)
@@ -59,7 +64,6 @@ namespace Engine
         colliderVisitor.SetCurrentCollider(this);
         Spatial = &SpatialPartitioning::GetInstance();
         Spatial->AddCollider(this);
-        CurrentCellIndex = Spatial->GetCellIndex(transform->GetPositionWorldSpace());
         CollisionUpdateManager::GetInstance()->RegisterCollider(this);
     }
 
@@ -79,8 +83,8 @@ namespace Engine
 
     void Collider::OnDestroy()
     {
-        Spatial->RemoveCollider(this);
         CollisionUpdateManager::GetInstance()->UnregisterCollider(this);
+        SpatialPartitioning::GetInstance().RemoveCollider(this);
     }
 
     // TODO: remove when rigidbody implemented

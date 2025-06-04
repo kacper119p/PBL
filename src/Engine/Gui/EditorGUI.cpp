@@ -17,6 +17,7 @@
 #include <filesystem>
 #include <random>
 #include "spdlog/spdlog.h"
+#include "Engine/Components/Camera/CameraFollow.h"
 namespace fs = std::filesystem;
 
 void Engine::EditorGUI::Init()
@@ -237,6 +238,9 @@ void Engine::EditorGUI::RenderInspector(uint64_t Frame, Scene* scene)
                     1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
     }
 
+    ImGui::Separator();
+
+    CameraFollow::GetInstance().DrawImGui();
 
     ImGui::End();
 }
