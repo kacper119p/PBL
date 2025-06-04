@@ -27,8 +27,8 @@ public:
 
  void Update(float deltaTime);
  void SetCamera(Engine::Camera* Camera) { this->Camera = Camera; 
- Camera->SetYaw(45.0f);
- Camera->SetPitch(60.0f);
+ Camera->SetYaw(38.5f);
+ Camera->SetPitch(60.5f);
  };
  void SetTarget(Engine::Entity* target) { this->target = target; }
 
