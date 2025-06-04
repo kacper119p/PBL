@@ -7,7 +7,6 @@
 
 #include "Engine/Components/Component.h"
 #include "Engine/Components/Transform.h"
-#include "Utility/Cloneable/TCloneable.h"
 
 namespace Engine
 {
@@ -18,7 +17,7 @@ namespace Engine
     /**
      * @brief Base class for all objects that exist in a scene.
      */
-    class Entity : public Serialization::SerializedObject, public Utility::TCloneable<Entity>
+    class Entity : public Serialization::SerializedObject
     {
         friend class Scene;
 
@@ -197,13 +196,6 @@ namespace Engine
             }
             ToDestroy.clear();
         }
-
-        [[nodiscard]] Entity* CloneAsConcrete() const override;
-
-        void SerializeEntity(rapidjson::Value& Object, rapidjson::Document::AllocatorType& Allocator) const;
-
-        static Entity* DeserializeEntity(rapidjson::Value& Object, class Scene* Scene);
-
 #if EDITOR
         void DrawImGui();
 #endif

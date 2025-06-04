@@ -1,5 +1,4 @@
 #pragma once
-#include <algorithm>
 #include <string>
 #include <unordered_map>
 
@@ -63,7 +62,6 @@ namespace Serialization
             if constexpr (std::is_base_of_v<Engine::Component, T> && !std::is_abstract_v<T>)
             {
                 GetInstance()->AvailableComponents.emplace_back(Name);
-                std::ranges::sort(GetInstance()->AvailableComponents);
             }
 #endif
         }

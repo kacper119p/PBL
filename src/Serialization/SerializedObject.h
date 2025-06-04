@@ -1,9 +1,12 @@
 #pragma once
+#pragma comment(lib, "Ole32.lib")
+#include <windows.h>
+#include <combaseapi.h>
 #include <string>
 #include <unordered_map>
 
 #include "GuidHasher.h"
-#include "Utility/GuidUtility.h"
+#include "Utility/AssertionsUtility.h"
 #include "rapidjson/document.h"
 #include "Serialization/SerializedObjectRaii.h" // Used in macros.
 
@@ -68,9 +71,10 @@ namespace Serialization
         /**
          * @brief Initializes object with guid.
          */
-        SerializedObject() :
-            Id(Utility::GenerateGuid())
+        SerializedObject() // NOLINT(*-pro-type-member-init)
         {
+            const HRESULT result = CoCreateGuid(&Id); //ID Initialized here.
+            CHECK_MESSAGE(result == S_OK, "Failed to initialize GUID")
         }
 
     public:
@@ -82,6 +86,7 @@ namespace Serialization
             return Id;
         }
 
+    protected:
         /**
          * @brief Sets id of this object.
          * @param Id A New id.

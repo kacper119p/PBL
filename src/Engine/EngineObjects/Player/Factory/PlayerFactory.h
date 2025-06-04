@@ -1,5 +1,4 @@
 #pragma once
-#include <algorithm>
 #include <string>
 #include <unordered_map>
 
@@ -61,7 +60,6 @@ namespace Engine
             if constexpr (!std::is_abstract_v<T>)
             {
                 GetInstance()->AvailablePlayers.emplace_back(Name);
-                std::ranges::sort(GetInstance()->AvailablePlayers);
             }
 #endif
         }

@@ -1,5 +1,4 @@
 #pragma once
-#include <algorithm>
 #include <string>
 #include <unordered_map>
 
@@ -55,7 +54,6 @@ namespace Engine::Ui
             if constexpr (!std::is_abstract_v<T>)
             {
                 GetInstance()->AvailableUis.emplace_back(Name);
-                std::ranges::sort(GetInstance()->AvailableUis);
             }
 #endif
         }
