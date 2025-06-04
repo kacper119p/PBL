@@ -8,14 +8,17 @@ namespace Engine
     {
         rapidjson::Document document;
         Serialization::ReadJsonFile(Path.c_str(), document);
-        Entity::DeserializeEntity(document, Scene, Parent);
+        rapidjson::Value& content = document["Prefab"].GetArray();
+        Entity::DeserializeEntity(content, Scene, Parent);
     }
 
     void PrefabLoader::SavePrefabToFile(const std::string& Path, const Entity* Entity)
     {
         rapidjson::Document document;
-        document.SetArray();
-        Entity->SerializeEntity(document, document.GetAllocator());
+        document.SetObject();
+        rapidjson::Value content = rapidjson::Value(rapidjson::kArrayType);
+        Entity->SerializeEntity(content, document.GetAllocator());
+        document.AddMember("Prefab", content, document.GetAllocator());
         Serialization::WriteJsonFile(Path.c_str(), document);
     }
 }
