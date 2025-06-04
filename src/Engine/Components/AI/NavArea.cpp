@@ -1,4 +1,5 @@
 #include "NavArea.h"
+#include "NavMesh.h"
 #include "Serialization/SerializationUtility.h"
 #include "Engine/EngineObjects/Entity.h"
 
@@ -20,6 +21,18 @@ namespace Engine
         if (ImGui::CollapsingHeader("Navigation Area", ImGuiTreeNodeFlags_DefaultOpen))
         {
             ImGui::Checkbox("IsWalkable", &IsWalkable);
+        }
+
+        float spacing = NavMesh::Get().GetSpacing();
+        if (ImGui::InputFloat("Spacing", &spacing))
+        {
+            NavMesh::Get().SetSpacing(spacing);
+        }
+
+        float padding = NavMesh::Get().GetPadding();
+        if (ImGui::InputFloat("Padding", &padding))
+        {
+            NavMesh::Get().SetPadding(padding);
         }
     }
 #endif
