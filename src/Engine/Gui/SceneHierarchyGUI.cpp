@@ -102,7 +102,8 @@ void Engine::SceneHierarchyGUI::Draw(Scene* scene)
             if (ImGui::MenuItem("Add Animated Model"))
             {
                 AddAnimatedModelToScene(scene, Root->GetOwner());
-            }if (ImGui::MenuItem("Add Prefab"))
+            }
+            if (ImGui::MenuItem("Add Prefab"))
             {
                 AddPrefabToScene(scene, Root->GetOwner(), SelectedPrefabPath);
             }
@@ -155,11 +156,12 @@ void Engine::SceneHierarchyGUI::AddAnimatedModelToScene(Scene* scene, Entity* pa
     Entity* entity = scene->SpawnEntity(parent);
     entity->AddComponent<AnimatedModelRenderer>();
 }
-void Engine::SceneHierarchyGUI::AddPrefabToScene(Scene* scene, Entity* parent, std::string prefabPath) 
+
+void Engine::SceneHierarchyGUI::AddPrefabToScene(Scene* scene, Entity* parent, std::string prefabPath)
 {
     if (prefabPath != "None")
     {
-        PrefabLoader::LoadPrefab(prefabPath, scene);
+        PrefabLoader::LoadPrefab(prefabPath, scene, parent->GetTransform());
     }
 }
 #endif
