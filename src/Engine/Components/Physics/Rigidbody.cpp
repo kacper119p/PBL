@@ -61,7 +61,7 @@ namespace Engine
 
     void Rigidbody::ApplyGravity(const glm::vec3& gravity)
     {
-        if (inverseMass > 0.0f)
+        if (hasGravity && inverseMass > 0.0f)
         {
             AddForce(gravity * mass);
         }
@@ -72,7 +72,7 @@ namespace Engine
         if (!transform)
             return;
 
-        ApplyGravity(glm::vec3(0.0f, -9.81f, 0.0f));
+        ApplyGravity(glm::vec3(0.0f, -4.81f, 0.0f));
         ComputeGravityTorqueFromVertices();
 
         lastPosition = transform->GetPosition();

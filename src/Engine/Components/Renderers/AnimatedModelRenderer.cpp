@@ -194,8 +194,7 @@ namespace Engine
 
                     if (ImGui::Selectable(displayName.c_str()))
                     {
-                        std::filesystem::path relPath = fs::relative(path);
-                        SetMaterial(Materials::MaterialManager::GetMaterial(relPath.string()));
+                        SetMaterial(Materials::MaterialManager::GetMaterial(fsPath.string()));
                         ImGui::CloseCurrentPopup();
                     }
 

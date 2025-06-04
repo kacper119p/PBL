@@ -67,7 +67,7 @@ namespace Engine
         glm::mat3 inertiaTensor;
         glm::mat3 inverseInertiaTensor;
 
-        glm::vec3 gravity = glm::vec3(0.0f, -9.81f, 0.0f); // default gravity vector
+        glm::vec3 gravity = glm::vec3(0.0f, -9.81f*5, 0.0f); // default gravity vector
         glm::vec3 velocity;
         glm::vec3 angularVelocity;
 
@@ -76,6 +76,8 @@ namespace Engine
 
         float friction;
         bool frictionEnabled;
+
+        bool hasGravity = true;
 
         float restitution;
 

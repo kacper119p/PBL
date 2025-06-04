@@ -6,6 +6,8 @@
 #include "Engine/EngineObjects/Scene/Scene.h"
 #include "Engine/Input/InputManager.h"
 #include "Engine/Components/Colliders/SphereCollider.h"
+#include "Engine/Components/Game/ThrashManager.h"
+#include <iostream>
 
 namespace Engine
 {
@@ -43,14 +45,12 @@ namespace Engine
         {
             if (isShootingKeyPressed && !wasShootingKeyPressed)
             {
-                // Przycisk zosta³ w³aœnie wciœniêty
                 Shoot();
                 shootKeyHoldStartTime = currentTime;
                 lastShootTime = currentTime;
             }
             else if (isShootingKeyPressed)
             {
-                // Przycisk nadal wciœniêty – automatyczne strzelanie co cooldown
                 if (currentTime - lastShootTime >= shootCooldown)
                 {
                     Shoot();
@@ -90,6 +90,7 @@ namespace Engine
                         items.push_back(entityCollider->GetOwner());
                         volume += thrashSizeInt;
                         entityCollider->GetOwner()->GetComponent<Engine::BoxCollider>()->SetTrigger(true);
+                        entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->hasGravity = false;
                         entityCollider->GetOwner()->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
                     }
                 }
@@ -97,6 +98,12 @@ namespace Engine
         }
 
         wasShootingKeyPressed = isShootingKeyPressed;
+
+        ThrashManager::GetInstance()->VacuumCount = items.size();
+        ThrashManager::GetInstance()->VacuumVolume = volume;
+
+        std::cout << "Vacuum Volume: " << volume << ", Vacuum count: " << items.size() << std::endl;
+        std::cout << "Thrash count: " << ThrashManager::GetInstance()->GetThrashCount() << std::endl;
     }
 
     void Vacuum::Shoot()
@@ -112,9 +119,10 @@ namespace Engine
 
             glm::vec3 position = GetOwner()->GetTransform()->GetPosition();
             glm::vec3 forward = GetOwner()->GetTransform()->GetForward();
-            item->GetTransform()->SetPosition(glm::vec3(position.x, position.y + 1, position.z - 1));
-            item->GetComponent<Engine::Rigidbody>()->AddForce(
-                    glm::vec3(forward.x * shootForce, forward.y, forward.z * shootForce), Engine::ForceMode::Force);
+            item->GetTransform()->SetPosition((position + forward)*1.5f+glm::vec3(0,1,0)); 
+            item->GetComponent<Engine::Rigidbody>()->angularVelocity.y=0.0f;
+            item->GetComponent<Engine::Rigidbody>()->hasGravity = true;
+            item->GetComponent<Engine::Rigidbody>()->AddForce(forward * 100.0f, Engine::ForceMode::Force);
         }
     }
 
