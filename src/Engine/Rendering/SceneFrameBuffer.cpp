@@ -88,9 +88,8 @@ namespace Engine
         glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, OcclusionBuffer);
         glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, Samples, GL_R11F_G11F_B10F, Resolution.x, Resolution.y,
                                 GL_TRUE);;
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D_MULTISAMPLE, OcclusionBuffer, 0);
 
-        constexpr uint32_t attachments[2] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
+        constexpr GLenum attachments[2] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
         glDrawBuffers(2, attachments);
 
         glBindRenderbuffer(GL_RENDERBUFFER, DepthStencilBuffer);

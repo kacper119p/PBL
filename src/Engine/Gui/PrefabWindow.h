@@ -1,4 +1,7 @@
 #pragma once
+
+#if EDITOR
+
 #include <string>
 #include "Engine/EngineObjects/Scene/Scene.h"
 #include "Engine/Prefabs/PrefabLoader.h"
@@ -17,4 +20,6 @@ namespace Engine
         void DrawImGui(Scene* scene);
 
     };
-} // namespace Engine
+}
+
+#endif EDITOR
