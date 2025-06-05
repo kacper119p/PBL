@@ -115,54 +115,6 @@ namespace Engine
         return root;
     }
 
-    Entity* Entity::DeserializeEntityDetached(rapidjson::Value& Object, class Scene* Scene)
-    {
-        Serialization::ReferenceTable referenceTable;
-        std::vector<DeserializationPair> objects;
-        Entity* root = nullptr;
-
-        for (const rapidjson::Value& jsonObject : Object.GetArray())
-        {
-            SerializedObject* deserializedObject = Serialization::SerializedObjectFactory::CreateObject(
-                    jsonObject["type"].GetString());
-            deserializedObject->DeserializeValuePass(jsonObject, referenceTable);
-            DeserializationPair pair{jsonObject, deserializedObject};
-            objects.emplace_back(pair);
-            if (Entity* entity = dynamic_cast<Entity*>(deserializedObject))
-            {
-                entity->Scene = Scene;
-                if (root == nullptr)
-                {
-                    root = entity;
-                }
-            }
-        }
-
-        for (DeserializationPair pair : objects)
-        {
-            pair.Object->DeserializeReferencesPass(pair.Json, referenceTable);
-        }
-
-        for (const DeserializationPair pair : objects)
-        {
-            pair.Object->SetId(Utility::GenerateGuid());
-            if (Entity* entity = dynamic_cast<Entity*>(pair.Object))
-            {
-                entity->GetTransform()->SetId(Utility::GenerateGuid());
-            }
-        }
-
-        for (const DeserializationPair pair : objects)
-        {
-            if (Component* component = dynamic_cast<Component*>(pair.Object))
-            {
-                component->Start();
-            }
-        }
-
-        return root;
-    }
-
 #if EDITOR
     void Entity::DrawImGui()
     {
