@@ -1,0 +1,53 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
+            "name": "Thrash 1",
+            "transform": {
+                "type": "Transform",
+                "id": "{ad6ae354-b468-48d8-9aaa-341f42711ea2}\u0000",
+                "owner": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.800000011920929,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{98cfb508-ecb7-4dc4-b9ef-a034cbae2cd6}\u0000",
+                "{1cd1c9fa-a67b-4632-b087-e77384e53cab}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{98cfb508-ecb7-4dc4-b9ef-a034cbae2cd6}\u0000",
+            "owner": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/models/Box.fbx"
+        },
+        {
+            "type": "Thrash",
+            "id": "{1cd1c9fa-a67b-4632-b087-e77384e53cab}\u0000",
+            "owner": false
+        }
+    ]
+}
