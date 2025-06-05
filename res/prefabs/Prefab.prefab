@@ -2,78 +2,52 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{c99f3e17-1941-4a55-aa2a-085c4b35d50b}\u0000",
-            "name": "Thrash1",
+            "id": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
+            "name": "Thrash 1",
             "transform": {
                 "type": "Transform",
-                "id": "{663d37c9-1f78-40b2-9aad-3a92fedea194}\u0000",
-                "owner": "{c99f3e17-1941-4a55-aa2a-085c4b35d50b}\u0000",
+                "id": "{ad6ae354-b468-48d8-9aaa-341f42711ea2}\u0000",
+                "owner": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
                 "Position": {
-                    "x": -2.91532826423645,
-                    "y": 1.5000728368759155,
-                    "z": 1.7906862497329712
+                    "x": 0.0,
+                    "y": 0.800000011920929,
+                    "z": 0.0
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": -0.0,
+                    "y": 0.0,
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 0.25,
-                    "y": 0.25,
-                    "z": 0.25
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
                 },
                 "Rotation": {
                     "x": 0.0,
                     "y": 0.0,
                     "z": 0.0,
-                    "w": 1.0
+                    "w": 0.0
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{21450d9f-c51c-4c79-b527-77140e1f3861}\u0000",
-                "{ebe7a871-7c41-4b5a-a832-54a29286589f}\u0000",
-                "{1ed8ea4f-34a3-4655-97d4-4dd850fbc1fd}\u0000",
-                "{03c274d5-3206-46c8-b7a0-9aca43db1bfa}\u0000"
+                "{98cfb508-ecb7-4dc4-b9ef-a034cbae2cd6}\u0000",
+                "{1cd1c9fa-a67b-4632-b087-e77384e53cab}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{21450d9f-c51c-4c79-b527-77140e1f3861}\u0000",
-            "owner": "{c99f3e17-1941-4a55-aa2a-085c4b35d50b}\u0000",
+            "id": "{98cfb508-ecb7-4dc4-b9ef-a034cbae2cd6}\u0000",
+            "owner": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
             "Model": "./res/models/Box.fbx"
         },
         {
-            "type": "BoxCollider",
-            "id": "{ebe7a871-7c41-4b5a-a832-54a29286589f}\u0000",
-            "owner": "{c99f3e17-1941-4a55-aa2a-085c4b35d50b}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "colliderType": 0,
-            "_width": 0.5,
-            "_height": 0.5,
-            "_depth": 0.5
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{1ed8ea4f-34a3-4655-97d4-4dd850fbc1fd}\u0000",
-            "owner": "{c99f3e17-1941-4a55-aa2a-085c4b35d50b}\u0000",
-            "mass": 0.10000000149011612,
-            "inverseMass": 10.0,
-            "linearDamping": 0.009999999776482582,
-            "angularDamping": 0.009999999776482582,
-            "friction": 0.5,
-            "frictionEnabled": true,
-            "restitution": 0.30000001192092896
-        },
-        {
             "type": "Thrash",
-            "id": "{03c274d5-3206-46c8-b7a0-9aca43db1bfa}\u0000",
-            "owner": "{c99f3e17-1941-4a55-aa2a-085c4b35d50b}\u0000",
-            "size": 1
+            "id": "{1cd1c9fa-a67b-4632-b087-e77384e53cab}\u0000",
+            "owner": false
         }
     ]
 }
