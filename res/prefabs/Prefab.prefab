@@ -2,52 +2,58 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
-            "name": "Thrash 1",
+            "id": "{92a159d4-2570-4edc-890d-1eb53c7fd2e6}\u0000",
+            "name": "Filarr",
             "transform": {
                 "type": "Transform",
-                "id": "{ad6ae354-b468-48d8-9aaa-341f42711ea2}\u0000",
-                "owner": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
+                "id": "{d3af4c55-3293-4e1b-8301-f195d760d790}\u0000",
+                "owner": "{92a159d4-2570-4edc-890d-1eb53c7fd2e6}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": 0.800000011920929,
-                    "z": 0.0
+                    "x": 11.569415092468262,
+                    "y": 5.459367275238037,
+                    "z": 38.17195129394531
                 },
                 "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
+                    "x": 1.0630857766357263e-13,
+                    "y": -0.0,
+                    "z": 6.443863753702317e-7
                 },
                 "Scale": {
-                    "x": 0.5,
-                    "y": 0.5,
-                    "z": 0.5
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
                 },
                 "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 0.0
+                    "x": 9.27717388282364e-16,
+                    "y": 5.216862989540934e-24,
+                    "z": 5.62333202225318e-9,
+                    "w": 1.0
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{98cfb508-ecb7-4dc4-b9ef-a034cbae2cd6}\u0000",
-                "{1cd1c9fa-a67b-4632-b087-e77384e53cab}\u0000"
+                "{6b077122-98d1-4740-a3a3-15ef78d5ed48}\u0000",
+                "{1eb44fa9-11ce-47ba-8679-d8e4ef246f84}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{98cfb508-ecb7-4dc4-b9ef-a034cbae2cd6}\u0000",
-            "owner": "{85289a3d-ea14-449a-a7fd-4614ecb0bf03}\u0000",
+            "id": "{6b077122-98d1-4740-a3a3-15ef78d5ed48}\u0000",
+            "owner": "{92a159d4-2570-4edc-890d-1eb53c7fd2e6}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/Models/Modele_Mati/Otoczenie/Pilar.fbx"
         },
         {
-            "type": "Thrash",
-            "id": "{1cd1c9fa-a67b-4632-b087-e77384e53cab}\u0000",
-            "owner": false
+            "type": "BoxCollider",
+            "id": "{1eb44fa9-11ce-47ba-8679-d8e4ef246f84}\u0000",
+            "owner": "{92a159d4-2570-4edc-890d-1eb53c7fd2e6}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 3.5,
+            "_height": 12.5,
+            "_depth": 3.5
         }
     ]
 }
