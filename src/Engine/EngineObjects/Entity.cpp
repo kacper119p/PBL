@@ -86,6 +86,10 @@ namespace Engine
         for (const DeserializationPair pair : objects)
         {
             pair.Object->SetId(Utility::GenerateGuid());
+            if (Entity* entity = dynamic_cast<Entity*>(pair.Object))
+            {
+                entity->GetTransform()->SetId(Utility::GenerateGuid());
+            }
         }
 
         if (root->GetTransform()->GetParent() == nullptr)
