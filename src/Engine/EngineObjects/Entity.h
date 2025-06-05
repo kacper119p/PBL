@@ -204,6 +204,8 @@ namespace Engine
 
         static Entity* DeserializeEntity(rapidjson::Value& Object, class Scene* Scene, class Transform* Parent);
 
+        static Entity* DeserializeEntityDetached(rapidjson::Value& Object, class Scene* Scene);
+
 #if EDITOR
         void DrawImGui();
 #endif

@@ -14,6 +14,8 @@ namespace Engine
     public:
         static void LoadPrefab(const std::string& Path, Scene* Scene, Transform* Parent);
 
+        static Entity* LoadPrefabDetached(const std::string& Path, Scene* Scene);
+
         static void SavePrefabToFile(const std::string& Path, const Entity* Entity);
     };
 

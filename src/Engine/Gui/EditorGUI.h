@@ -37,13 +37,7 @@ namespace Engine
 
         void DrawGenerativeSystem(Scene* Scene);
 
-        void DrawModelDropZoneAndList(std::vector<std::pair<Models::Model*, Materials::Material*>>& Models,
-                                      Models::ModelManager* ModelManager, Materials::MaterialManager* MaterialManager,
-                                      const char* UniqueId);
-
-        void DrawModelDropZoneAndList(std::vector<Models::Model*>& Models, std::vector<Materials::Material*>& Materials,
-                                      Models::ModelManager* ModelManager, Materials::MaterialManager* MaterialManager,
-                                      const char* UniqueId);
+        void DrawModelDropZoneAndList(std::vector<Entity*>& Prefabs, Scene* Scene, const char* UniqueId);
 
     private:
         void SetupDockspace();
@@ -58,8 +52,6 @@ namespace Engine
         TopBar m_TopBar;
         PrefabWindow m_PrefabWindow;
         Generation::GenerativeSystem GenerativeSystem;
-        std::unique_ptr<Models::ModelManager> ModelManager;
-        std::unique_ptr<Materials::MaterialManager> MaterialManager;
 
     };
 
