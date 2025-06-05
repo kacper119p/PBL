@@ -1,0 +1,59 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{be815e64-5e41-44fc-b178-d0c778cc60bd}\u0000",
+            "name": "Czaszka",
+            "transform": {
+                "type": "Transform",
+                "id": "{609a0daf-afdb-41ad-83d3-cf2342b249c2}\u0000",
+                "owner": "{be815e64-5e41-44fc-b178-d0c778cc60bd}\u0000",
+                "Position": {
+                    "x": 4.510700225830078,
+                    "y": 4.517976760864258,
+                    "z": 25.828346252441406
+                },
+                "EulerAngles": {
+                    "x": -1.77640630612437e-13,
+                    "y": -0.0,
+                    "z": 6.443877964557032e-7
+                },
+                "Scale": {
+                    "x": 0.9999997615814209,
+                    "y": 1.0,
+                    "z": 0.9999998807907104
+                },
+                "Rotation": {
+                    "x": -1.5502069834172328e-15,
+                    "y": -8.717347665050957e-24,
+                    "z": 5.623344456751056e-9,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{489b56a6-4c23-4126-8357-0dd27b5d6388}\u0000",
+                "{ee50b3bc-7218-4d13-81ec-edbe6c83455e}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{489b56a6-4c23-4126-8357-0dd27b5d6388}\u0000",
+            "owner": "{be815e64-5e41-44fc-b178-d0c778cc60bd}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Smieci/Czaszka.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{ee50b3bc-7218-4d13-81ec-edbe6c83455e}\u0000",
+            "owner": "{be815e64-5e41-44fc-b178-d0c778cc60bd}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 1.2999999523162842,
+            "_depth": 2.0999999046325684
+        }
+    ]
+}

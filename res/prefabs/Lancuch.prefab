@@ -1,0 +1,59 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{0cacdf1e-3d1b-4ee7-956b-0e27988dd89c}\u0000",
+            "name": "Lancuch",
+            "transform": {
+                "type": "Transform",
+                "id": "{08c1d9c8-948b-4153-b9b0-e2184331cbdd}\u0000",
+                "owner": "{0cacdf1e-3d1b-4ee7-956b-0e27988dd89c}\u0000",
+                "Position": {
+                    "x": -11.782093048095703,
+                    "y": 5.809254169464111,
+                    "z": 8.382377624511719
+                },
+                "EulerAngles": {
+                    "x": -175.5,
+                    "y": 89.99994659423828,
+                    "z": 179.99989318847656
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 0.9999999403953552,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": -0.027761492878198624,
+                    "y": -0.7065619826316833,
+                    "z": 0.027761518955230713,
+                    "w": -0.7065613269805908
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{e8e0db3f-d42c-4df8-8494-19732f79f165}\u0000",
+                "{1b244421-4e9b-46ed-821d-1ea847775cb6}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{e8e0db3f-d42c-4df8-8494-19732f79f165}\u0000",
+            "owner": "{0cacdf1e-3d1b-4ee7-956b-0e27988dd89c}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Otoczenie/Lancuch.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{1b244421-4e9b-46ed-821d-1ea847775cb6}\u0000",
+            "owner": "{0cacdf1e-3d1b-4ee7-956b-0e27988dd89c}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 0.800000011920929,
+            "_height": 2.200000047683716,
+            "_depth": 10.899999618530273
+        }
+    ]
+}

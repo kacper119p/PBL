@@ -1,0 +1,59 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{86fa2298-8896-4f50-b486-bfda169bd2ca}\u0000",
+            "name": "Stolik",
+            "transform": {
+                "type": "Transform",
+                "id": "{f280f5db-1377-41d4-94a4-8e9da8484e63}\u0000",
+                "owner": "{86fa2298-8896-4f50-b486-bfda169bd2ca}\u0000",
+                "Position": {
+                    "x": -10.843457221984863,
+                    "y": 1.871222734451294,
+                    "z": 37.49577713012695
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 6.443887627938238e-7
+                },
+                "Scale": {
+                    "x": 0.9999997615814209,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 5.623352894446043e-9,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{c4d50d15-d304-43ae-9336-4721f782b911}\u0000",
+                "{8b360bf2-a63b-46d6-b594-ba15d9ad2501}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{c4d50d15-d304-43ae-9336-4721f782b911}\u0000",
+            "owner": "{86fa2298-8896-4f50-b486-bfda169bd2ca}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Stolik.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{8b360bf2-a63b-46d6-b594-ba15d9ad2501}\u0000",
+            "owner": "{86fa2298-8896-4f50-b486-bfda169bd2ca}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 4.300000190734863,
+            "_height": 3.5,
+            "_depth": 10.600000381469727
+        }
+    ]
+}

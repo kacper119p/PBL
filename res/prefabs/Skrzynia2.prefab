@@ -1,0 +1,59 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{78461e6c-1866-4b18-b7f5-7d2b11c59052}\u0000",
+            "name": "Skrzynia2",
+            "transform": {
+                "type": "Transform",
+                "id": "{3758ede2-4cef-4072-b157-bfc1eb59b807}\u0000",
+                "owner": "{78461e6c-1866-4b18-b7f5-7d2b11c59052}\u0000",
+                "Position": {
+                    "x": -10.843457221984863,
+                    "y": 1.4749383926391602,
+                    "z": 25.470382690429688
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 6.443887627938238e-7
+                },
+                "Scale": {
+                    "x": 0.9999997615814209,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 5.623352894446043e-9,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{45824d21-f402-4573-93fd-b90c82f36573}\u0000",
+                "{d88f86d1-3513-45ab-8bae-6634adfe165d}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{45824d21-f402-4573-93fd-b90c82f36573}\u0000",
+            "owner": "{78461e6c-1866-4b18-b7f5-7d2b11c59052}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia2.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{d88f86d1-3513-45ab-8bae-6634adfe165d}\u0000",
+            "owner": "{78461e6c-1866-4b18-b7f5-7d2b11c59052}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 2.5999999046325684,
+            "_height": 6.0,
+            "_depth": 2.5999999046325684
+        }
+    ]
+}

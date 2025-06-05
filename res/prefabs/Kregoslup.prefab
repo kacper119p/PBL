@@ -1,0 +1,59 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{0e4266ce-afb2-45f7-be7a-b252380618fb}\u0000",
+            "name": "Kregoslup",
+            "transform": {
+                "type": "Transform",
+                "id": "{0116b762-1301-4e25-a90d-a0ee3678ea75}\u0000",
+                "owner": "{0e4266ce-afb2-45f7-be7a-b252380618fb}\u0000",
+                "Position": {
+                    "x": 10.519262313842773,
+                    "y": 0.968400239944458,
+                    "z": 14.402151107788086
+                },
+                "EulerAngles": {
+                    "x": 1.0630857766357263e-13,
+                    "y": -0.0,
+                    "z": 6.443863753702317e-7
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 9.27717388282364e-16,
+                    "y": 5.216862989540934e-24,
+                    "z": 5.62333202225318e-9,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{d06a96c5-6bf0-4066-b2e0-d74435d1aa83}\u0000",
+                "{2e2a4726-2f2c-432f-abd5-148b26034991}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{d06a96c5-6bf0-4066-b2e0-d74435d1aa83}\u0000",
+            "owner": "{0e4266ce-afb2-45f7-be7a-b252380618fb}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Smieci/KoscKregoslup.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{2e2a4726-2f2c-432f-abd5-148b26034991}\u0000",
+            "owner": "{0e4266ce-afb2-45f7-be7a-b252380618fb}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 1.399999976158142,
+            "_height": 1.0,
+            "_depth": 2.799999952316284
+        }
+    ]
+}

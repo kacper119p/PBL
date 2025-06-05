@@ -1,0 +1,59 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{180b604b-563a-4e66-a95d-8c8bbf3a7aa7}\u0000",
+            "name": "krzesloo",
+            "transform": {
+                "type": "Transform",
+                "id": "{aae3d73b-c58d-4be5-8be0-777162cb5106}\u0000",
+                "owner": "{180b604b-563a-4e66-a95d-8c8bbf3a7aa7}\u0000",
+                "Position": {
+                    "x": -4.6732072830200195,
+                    "y": 1.871222734451294,
+                    "z": 38.420719146728516
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -8.909996032714844,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.07767606526613235,
+                    "z": 0.0,
+                    "w": 0.9969786405563354
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{d7e02a77-459b-490b-a718-9d0e4ebd9eb3}\u0000",
+                "{156221a5-e53a-46be-a7dc-c0ee2b34a4bc}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{d7e02a77-459b-490b-a718-9d0e4ebd9eb3}\u0000",
+            "owner": "{180b604b-563a-4e66-a95d-8c8bbf3a7aa7}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Krzeslo.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{156221a5-e53a-46be-a7dc-c0ee2b34a4bc}\u0000",
+            "owner": "{180b604b-563a-4e66-a95d-8c8bbf3a7aa7}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 2.5,
+            "_height": 3.4000000953674316,
+            "_depth": 1.899999976158142
+        }
+    ]
+}

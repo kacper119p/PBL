@@ -4,7 +4,7 @@
         "min": {
             "x": -49.9722900390625,
             "y": -5.570797920227051,
-            "z": -51.851619720458984
+            "z": -50.37188720703125
         },
         "max": {
             "x": 22.308387756347656,
@@ -76,7 +76,6 @@
                 "{5c721142-1493-458e-89af-f27ff33f20ef}\u0000",
                 "{ab94d58e-31de-4f94-896d-ef2d1da2031c}\u0000",
                 "{25048c66-467e-43e4-a195-18609fd5eecf}\u0000",
-                "{39130bc0-1604-4954-8530-2ce8a54f7682}\u0000",
                 "{34db00aa-46d8-4bfa-b128-41a0284b36b6}\u0000",
                 "{3758ede2-4cef-4072-b157-bfc1eb59b807}\u0000",
                 "{bb64fc8c-17d5-4fa8-aba6-7e95144fb8a6}\u0000",
@@ -135,8 +134,20 @@
                 "{2c8f1891-7a74-48af-adc7-e959f3a0b494}\u0000",
                 "{574f22da-9406-4a0c-af3b-23529b50d389}\u0000",
                 "{432170dd-5501-4fc0-80ce-82e3b6afe63f}\u0000",
-                "{c1ba7b65-65f4-4521-a616-7329a7be9f3c}\u0000",
-                "{39c051c0-6447-4475-b7d4-cd54e1230a6a}\u0000"
+                "{39c051c0-6447-4475-b7d4-cd54e1230a6a}\u0000",
+                "{ee301607-1439-4739-9cc5-31a48dd616e0}\u0000",
+                "{04f5908d-9a67-49fc-935c-bfc38de6f703}\u0000",
+                "{aca5e25f-13fe-4bb0-84b4-3b22e0b8226b}\u0000",
+                "{1a249298-95ed-41df-b7e5-46a711e4e5ee}\u0000",
+                "{dd6bcee4-19b0-462f-a66a-ca13fce8fec1}\u0000",
+                "{4545ef4a-5d06-4fb7-a5c3-88c555ce22b9}\u0000",
+                "{64a0be20-6b4a-4c48-90ff-2c8ace6320e3}\u0000",
+                "{a1d9a6cb-5776-4a5c-8667-f4ea4ab0fd40}\u0000",
+                "{29862509-6271-4e5a-bdc1-b6a280c078fd}\u0000",
+                "{a2194583-04bf-4ddd-9af5-00fb4f0005ca}\u0000",
+                "{b3378162-e34c-46f5-9c5a-9c6ea43a373c}\u0000",
+                "{3f6fd433-ee3f-48f6-a33e-98263669d1e9}\u0000",
+                "{ea6f9b13-04c7-4555-ae95-bbe2a04ef7e9}\u0000"
             ],
             "Parent": null
         },
@@ -177,7 +188,7 @@
             },
             "components": [
                 "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
-                "{3c9e0326-4e9a-4b13-9de5-d4d41c33d3b6}\u0000"
+                "{f88fce1f-f373-4270-afca-947668850a37}\u0000"
             ]
         },
         {
@@ -189,14 +200,14 @@
         },
         {
             "type": "BoxCollider",
-            "id": "{3c9e0326-4e9a-4b13-9de5-d4d41c33d3b6}\u0000",
+            "id": "{f88fce1f-f373-4270-afca-947668850a37}\u0000",
             "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
-            "_width": 40.0,
+            "_width": 49.29999923706055,
             "_height": 0.20000000298023224,
-            "_depth": 100.0
+            "_depth": 140.8000030517578
         },
         {
             "type": "Entity",
@@ -587,7 +598,7 @@
                 "id": "{9d275cd9-c8b3-425e-9573-043d697c8d12}\u0000",
                 "owner": "{cf9e91ad-5ce4-4875-9392-8b8a09bcae86}\u0000",
                 "Position": {
-                    "x": -18.70507049560547,
+                    "x": -18.21380615234375,
                     "y": 2.3064634799957275,
                     "z": 26.057641983032227
                 },
@@ -2090,7 +2101,7 @@
                 "id": "{f8f33b90-178a-41f8-b664-b6e2156cfd39}\u0000",
                 "owner": "{291c954c-0260-405f-9ae4-0cfe2e16db77}\u0000",
                 "Position": {
-                    "x": 7.165439128875732,
+                    "x": 6.3929443359375,
                     "y": 1.625731348991394,
                     "z": 0.0
                 },
@@ -2312,7 +2323,8 @@
             },
             "components": [
                 "{f4329000-192c-422c-abe9-5aa5b5e08886}\u0000",
-                "{a99d01be-c476-4f48-bdbc-baf258ddd91a}\u0000"
+                "{a99d01be-c476-4f48-bdbc-baf258ddd91a}\u0000",
+                "{f9183ea5-d097-4dff-98b4-02a139928226}\u0000"
             ]
         },
         {
@@ -2327,66 +2339,23 @@
             "id": "{a99d01be-c476-4f48-bdbc-baf258ddd91a}\u0000",
             "owner": "{a4f88878-4fe4-4109-af2a-98cf78264c2f}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 4.0,
             "_height": 4.099999904632568,
             "_depth": 6.199999809265137
         },
         {
-            "type": "Entity",
-            "id": "{d8df7844-d806-415a-9fbf-da4d513387c6}\u0000",
-            "name": "Skrzynia1",
-            "transform": {
-                "type": "Transform",
-                "id": "{39130bc0-1604-4954-8530-2ce8a54f7682}\u0000",
-                "owner": "{d8df7844-d806-415a-9fbf-da4d513387c6}\u0000",
-                "Position": {
-                    "x": -4.684256553649902,
-                    "y": 1.4749383926391602,
-                    "z": 20.018278121948242
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -0.0,
-                    "z": 6.443887627938238e-7
-                },
-                "Scale": {
-                    "x": 0.9999997615814209,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 5.623352894446043e-9,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{b79c6ac1-34e1-4f8b-b354-973fa5066350}\u0000",
-                "{39a69249-ee35-44ed-ae46-b0b15ee987b5}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{b79c6ac1-34e1-4f8b-b354-973fa5066350}\u0000",
-            "owner": "{d8df7844-d806-415a-9fbf-da4d513387c6}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{39a69249-ee35-44ed-ae46-b0b15ee987b5}\u0000",
-            "owner": "{d8df7844-d806-415a-9fbf-da4d513387c6}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "colliderType": 0,
-            "_width": 2.5999999046325684,
-            "_height": 2.5999999046325684,
-            "_depth": 2.5999999046325684
+            "type": "Rigidbody",
+            "id": "{f9183ea5-d097-4dff-98b4-02a139928226}\u0000",
+            "owner": "{a4f88878-4fe4-4109-af2a-98cf78264c2f}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -2397,9 +2366,9 @@
                 "id": "{34db00aa-46d8-4bfa-b128-41a0284b36b6}\u0000",
                 "owner": "{2ea2b819-9259-4751-a662-f4a5b9417056}\u0000",
                 "Position": {
-                    "x": -10.843457221984863,
+                    "x": 15.436511993408203,
                     "y": 1.4749383926391602,
-                    "z": 21.828105926513672
+                    "z": 15.430763244628906
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -2422,7 +2391,8 @@
             },
             "components": [
                 "{1e3fa081-762b-4094-acba-4bad1c852aaf}\u0000",
-                "{822218d5-1900-4e28-91d0-84207b85723e}\u0000"
+                "{822218d5-1900-4e28-91d0-84207b85723e}\u0000",
+                "{b0421348-66bb-4db4-8a8d-8df5bbe4a39d}\u0000"
             ]
         },
         {
@@ -2437,11 +2407,23 @@
             "id": "{822218d5-1900-4e28-91d0-84207b85723e}\u0000",
             "owner": "{2ea2b819-9259-4751-a662-f4a5b9417056}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 2.5999999046325684,
             "_height": 2.5999999046325684,
             "_depth": 2.5999999046325684
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{b0421348-66bb-4db4-8a8d-8df5bbe4a39d}\u0000",
+            "owner": "{2ea2b819-9259-4751-a662-f4a5b9417056}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -2477,7 +2459,8 @@
             },
             "components": [
                 "{45824d21-f402-4573-93fd-b90c82f36573}\u0000",
-                "{d88f86d1-3513-45ab-8bae-6634adfe165d}\u0000"
+                "{d88f86d1-3513-45ab-8bae-6634adfe165d}\u0000",
+                "{3c9aefde-f3ef-48eb-b562-5fb104a88a4e}\u0000"
             ]
         },
         {
@@ -2492,11 +2475,23 @@
             "id": "{d88f86d1-3513-45ab-8bae-6634adfe165d}\u0000",
             "owner": "{78461e6c-1866-4b18-b7f5-7d2b11c59052}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 2.5999999046325684,
             "_height": 6.0,
             "_depth": 2.5999999046325684
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{3c9aefde-f3ef-48eb-b562-5fb104a88a4e}\u0000",
+            "owner": "{78461e6c-1866-4b18-b7f5-7d2b11c59052}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -2507,32 +2502,33 @@
                 "id": "{bb64fc8c-17d5-4fa8-aba6-7e95144fb8a6}\u0000",
                 "owner": "{68dc6fe8-589b-417b-a2d8-b40c18755b52}\u0000",
                 "Position": {
-                    "x": 12.865180969238281,
+                    "x": -5.319836616516113,
                     "y": 1.871222734451294,
-                    "z": 32.387062072753906
+                    "z": -16.009363174438477
                 },
                 "EulerAngles": {
-                    "x": 1.856015205891834e-13,
-                    "y": -28.494661331176758,
-                    "z": 6.443867732741637e-7
+                    "x": 1.856006803324997e-13,
+                    "y": -28.494632720947266,
+                    "z": 6.443863753702317e-7
                 },
                 "Scale": {
-                    "x": 1.0,
+                    "x": 0.9999997019767761,
                     "y": 1.0,
-                    "z": 1.0
+                    "z": 0.9999997019767761
                 },
                 "Rotation": {
-                    "x": 1.3839502877033283e-9,
-                    "y": -0.24610814452171326,
-                    "z": 5.450375706317345e-9,
-                    "w": 0.9692423939704895
+                    "x": 1.3839479562349766e-9,
+                    "y": -0.24610789120197296,
+                    "z": 5.450372597692876e-9,
+                    "w": 0.9692424535751343
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
                 "{da9d24a1-6c5c-4b5e-b88a-4f188b36999f}\u0000",
-                "{2e9c1fdb-0b5e-4ba2-aca4-359a91bdf53e}\u0000"
+                "{2e9c1fdb-0b5e-4ba2-aca4-359a91bdf53e}\u0000",
+                "{053e8b26-a08c-44bf-8453-7f075f85ecab}\u0000"
             ]
         },
         {
@@ -2547,11 +2543,23 @@
             "id": "{2e9c1fdb-0b5e-4ba2-aca4-359a91bdf53e}\u0000",
             "owner": "{68dc6fe8-589b-417b-a2d8-b40c18755b52}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 2.700000047683716,
             "_height": 3.5,
             "_depth": 4.900000095367432
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{053e8b26-a08c-44bf-8453-7f075f85ecab}\u0000",
+            "owner": "{68dc6fe8-589b-417b-a2d8-b40c18755b52}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -2587,7 +2595,8 @@
             },
             "components": [
                 "{c4d50d15-d304-43ae-9336-4721f782b911}\u0000",
-                "{8b360bf2-a63b-46d6-b594-ba15d9ad2501}\u0000"
+                "{8b360bf2-a63b-46d6-b594-ba15d9ad2501}\u0000",
+                "{78f561dd-deb4-4b97-bcf6-2c197f8dd669}\u0000"
             ]
         },
         {
@@ -2602,11 +2611,23 @@
             "id": "{8b360bf2-a63b-46d6-b594-ba15d9ad2501}\u0000",
             "owner": "{86fa2298-8896-4f50-b486-bfda169bd2ca}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 4.300000190734863,
             "_height": 3.5,
             "_depth": 10.600000381469727
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{78f561dd-deb4-4b97-bcf6-2c197f8dd669}\u0000",
+            "owner": "{86fa2298-8896-4f50-b486-bfda169bd2ca}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -2642,7 +2663,8 @@
             },
             "components": [
                 "{d7e02a77-459b-490b-a718-9d0e4ebd9eb3}\u0000",
-                "{156221a5-e53a-46be-a7dc-c0ee2b34a4bc}\u0000"
+                "{156221a5-e53a-46be-a7dc-c0ee2b34a4bc}\u0000",
+                "{0bba433b-31ea-402d-8054-5e2efdd14973}\u0000"
             ]
         },
         {
@@ -2657,11 +2679,23 @@
             "id": "{156221a5-e53a-46be-a7dc-c0ee2b34a4bc}\u0000",
             "owner": "{180b604b-563a-4e66-a95d-8c8bbf3a7aa7}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 2.5,
             "_height": 3.4000000953674316,
             "_depth": 1.899999976158142
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{0bba433b-31ea-402d-8054-5e2efdd14973}\u0000",
+            "owner": "{180b604b-563a-4e66-a95d-8c8bbf3a7aa7}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -2672,9 +2706,9 @@
                 "id": "{19a601bd-51cb-4559-9cb6-cb1216b7335d}\u0000",
                 "owner": "{07e7b845-8da9-461f-b504-37b2697644be}\u0000",
                 "Position": {
-                    "x": 4.510700225830078,
-                    "y": 1.871222734451294,
-                    "z": 25.24361228942871
+                    "x": -13.632282257080078,
+                    "y": 2.0155909061431885,
+                    "z": -15.444622993469238
                 },
                 "EulerAngles": {
                     "x": -1.77640630612437e-13,
@@ -2697,7 +2731,8 @@
             },
             "components": [
                 "{a88ba829-42ed-4f3a-b987-d421a7830950}\u0000",
-                "{1d08fe88-0f67-4eed-894e-6e24bd92ab90}\u0000"
+                "{1d08fe88-0f67-4eed-894e-6e24bd92ab90}\u0000",
+                "{078c7f32-5b98-44f9-9518-3626e0f786f4}\u0000"
             ]
         },
         {
@@ -2712,11 +2747,23 @@
             "id": "{1d08fe88-0f67-4eed-894e-6e24bd92ab90}\u0000",
             "owner": "{07e7b845-8da9-461f-b504-37b2697644be}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 2.700000047683716,
             "_height": 3.5,
             "_depth": 4.900000095367432
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{078c7f32-5b98-44f9-9518-3626e0f786f4}\u0000",
+            "owner": "{07e7b845-8da9-461f-b504-37b2697644be}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -2728,7 +2775,7 @@
                 "owner": "{be815e64-5e41-44fc-b178-d0c778cc60bd}\u0000",
                 "Position": {
                     "x": -15.754483222961426,
-                    "y": 4.480525970458984,
+                    "y": 5.223708629608154,
                     "z": 42.798336029052734
                 },
                 "EulerAngles": {
@@ -2752,7 +2799,8 @@
             },
             "components": [
                 "{489b56a6-4c23-4126-8357-0dd27b5d6388}\u0000",
-                "{ee50b3bc-7218-4d13-81ec-edbe6c83455e}\u0000"
+                "{ee50b3bc-7218-4d13-81ec-edbe6c83455e}\u0000",
+                "{d2748f1d-e2e5-4238-abf0-59a627e3869e}\u0000"
             ]
         },
         {
@@ -2767,11 +2815,23 @@
             "id": "{ee50b3bc-7218-4d13-81ec-edbe6c83455e}\u0000",
             "owner": "{be815e64-5e41-44fc-b178-d0c778cc60bd}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 1.899999976158142,
             "_height": 1.2999999523162842,
             "_depth": 2.0999999046325684
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{d2748f1d-e2e5-4238-abf0-59a627e3869e}\u0000",
+            "owner": "{be815e64-5e41-44fc-b178-d0c778cc60bd}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -2868,9 +2928,9 @@
                 "id": "{7f86d2ea-6a59-42a4-a336-3ca8eaa4e9bc}\u0000",
                 "owner": "{102008f7-935e-4f3d-8d75-992850fefb92}\u0000",
                 "Position": {
-                    "x": -6.9371795654296875,
+                    "x": 15.61108684539795,
                     "y": 1.41150963306427,
-                    "z": 22.403770446777344
+                    "z": 20.317590713500977
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -3022,7 +3082,8 @@
             },
             "components": [
                 "{1645d46f-828c-489e-8568-6aca57c6c92d}\u0000",
-                "{02def971-ed3f-4b81-ac43-5019380e5bc6}\u0000"
+                "{02def971-ed3f-4b81-ac43-5019380e5bc6}\u0000",
+                "{a2cc2fbf-d0d5-40a7-b24d-47c884ba84ad}\u0000"
             ]
         },
         {
@@ -3037,11 +3098,23 @@
             "id": "{02def971-ed3f-4b81-ac43-5019380e5bc6}\u0000",
             "owner": "{236ffcd7-0b73-4dc8-820a-c6fdadd38b58}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 1.2999999523162842,
             "_height": 1.7000000476837158,
             "_depth": 3.0
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{a2cc2fbf-d0d5-40a7-b24d-47c884ba84ad}\u0000",
+            "owner": "{236ffcd7-0b73-4dc8-820a-c6fdadd38b58}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -3052,9 +3125,9 @@
                 "id": "{a8d8c039-e045-4218-b07a-d530506164d5}\u0000",
                 "owner": "{02d3a847-1f1b-41f7-b811-d8158f8bbe4a}\u0000",
                 "Position": {
-                    "x": 5.819693565368652,
+                    "x": 5.4274373054504395,
                     "y": 0.968400239944458,
-                    "z": 14.427488327026367
+                    "z": 9.545036315917969
                 },
                 "EulerAngles": {
                     "x": 1.0630857766357263e-13,
@@ -3077,7 +3150,8 @@
             },
             "components": [
                 "{760f0eb2-c8c4-48f5-923a-0fe8bda1ca1c}\u0000",
-                "{58cb8e0e-f55b-479f-bcd0-f64ceb104db3}\u0000"
+                "{58cb8e0e-f55b-479f-bcd0-f64ceb104db3}\u0000",
+                "{2ab32b29-bd87-4eee-8ab8-86cb91a9cd95}\u0000"
             ]
         },
         {
@@ -3092,11 +3166,23 @@
             "id": "{58cb8e0e-f55b-479f-bcd0-f64ceb104db3}\u0000",
             "owner": "{02d3a847-1f1b-41f7-b811-d8158f8bbe4a}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 1.2999999523162842,
             "_height": 1.7000000476837158,
             "_depth": 3.0
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{2ab32b29-bd87-4eee-8ab8-86cb91a9cd95}\u0000",
+            "owner": "{02d3a847-1f1b-41f7-b811-d8158f8bbe4a}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -3109,7 +3195,7 @@
                 "Position": {
                     "x": -16.492719650268555,
                     "y": 2.2846899032592773,
-                    "z": 39.08121109008789
+                    "z": 38.84889221191406
                 },
                 "EulerAngles": {
                     "x": 1.0630857766357263e-13,
@@ -3133,7 +3219,8 @@
             "components": [
                 "{00ebb68b-6fd3-4dc5-8ce4-620cb0add6af}\u0000",
                 "{2961b7e2-4154-4040-a270-b4f70052a31b}\u0000",
-                "{bb431c56-288a-4e04-8018-808998bbde39}\u0000"
+                "{bb431c56-288a-4e04-8018-808998bbde39}\u0000",
+                "{f2c61b2c-4385-4ce3-a47c-58068fb135ac}\u0000"
             ]
         },
         {
@@ -3165,6 +3252,18 @@
             "Height": 0.4000000059604645
         },
         {
+            "type": "Rigidbody",
+            "id": "{f2c61b2c-4385-4ce3-a47c-58068fb135ac}\u0000",
+            "owner": "{8605f5ac-cbd6-4ec0-aa68-b3b0bc0ce67c}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
             "type": "Entity",
             "id": "{164836ae-d86f-4a68-a086-bf4ab9a819f2}\u0000",
             "name": "Potion1",
@@ -3173,8 +3272,8 @@
                 "id": "{cb763534-7572-46b3-998b-f8ce4f81afbb}\u0000",
                 "owner": "{164836ae-d86f-4a68-a086-bf4ab9a819f2}\u0000",
                 "Position": {
-                    "x": -9.63864517211914,
-                    "y": 4.625420093536377,
+                    "x": -8.39997386932373,
+                    "y": 5.177757263183594,
                     "z": 36.00655746459961
                 },
                 "EulerAngles": {
@@ -3198,7 +3297,8 @@
             },
             "components": [
                 "{5179b6fc-b1fe-4fb4-893e-718ba2d4c814}\u0000",
-                "{db9c023e-07af-42ae-9539-50b2ba5d591a}\u0000"
+                "{db9c023e-07af-42ae-9539-50b2ba5d591a}\u0000",
+                "{31b1a96d-bcd8-48d2-9955-6c231d197fa4}\u0000"
             ]
         },
         {
@@ -3213,11 +3313,23 @@
             "id": "{db9c023e-07af-42ae-9539-50b2ba5d591a}\u0000",
             "owner": "{164836ae-d86f-4a68-a086-bf4ab9a819f2}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 0.8999999761581421,
             "_height": 1.7000000476837158,
             "_depth": 0.8999999761581421
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{31b1a96d-bcd8-48d2-9955-6c231d197fa4}\u0000",
+            "owner": "{164836ae-d86f-4a68-a086-bf4ab9a819f2}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -3253,7 +3365,8 @@
             },
             "components": [
                 "{788b2435-79e1-4824-a29b-9cf027ec33a8}\u0000",
-                "{78ed7e05-bf19-4525-9600-07cd67779da1}\u0000"
+                "{78ed7e05-bf19-4525-9600-07cd67779da1}\u0000",
+                "{67077986-8dd4-405d-bdc8-a91319a8c6ca}\u0000"
             ]
         },
         {
@@ -3268,11 +3381,23 @@
             "id": "{78ed7e05-bf19-4525-9600-07cd67779da1}\u0000",
             "owner": "{f515cf92-e0dd-4334-8480-4bf5790f540d}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 1.100000023841858,
             "_height": 1.7000000476837158,
             "_depth": 0.6000000238418579
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{67077986-8dd4-405d-bdc8-a91319a8c6ca}\u0000",
+            "owner": "{f515cf92-e0dd-4334-8480-4bf5790f540d}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -3308,7 +3433,8 @@
             },
             "components": [
                 "{8a749bdc-1e07-4fae-99cd-7b80edc80ba1}\u0000",
-                "{e29918e6-cbb1-4a7c-9757-3bf44dea2696}\u0000"
+                "{e29918e6-cbb1-4a7c-9757-3bf44dea2696}\u0000",
+                "{ffd5e1e9-3102-4f0a-8e69-1eae96a12af9}\u0000"
             ]
         },
         {
@@ -3323,11 +3449,23 @@
             "id": "{e29918e6-cbb1-4a7c-9757-3bf44dea2696}\u0000",
             "owner": "{b93492c4-256d-41d2-b2b0-479d99f5894b}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 2.700000047683716,
             "_height": 0.4000000059604645,
             "_depth": 1.2000000476837158
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{ffd5e1e9-3102-4f0a-8e69-1eae96a12af9}\u0000",
+            "owner": "{b93492c4-256d-41d2-b2b0-479d99f5894b}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -3449,7 +3587,7 @@
                 "owner": "{32b89a88-7c01-4edb-9da4-cf9183704368}\u0000",
                 "Position": {
                     "x": -7.280632019042969,
-                    "y": 4.023881435394287,
+                    "y": 4.512641429901123,
                     "z": 38.25653076171875
                 },
                 "EulerAngles": {
@@ -3473,7 +3611,8 @@
             },
             "components": [
                 "{0cffb052-c427-4399-ad6a-ff77ffda77bb}\u0000",
-                "{d70b11ec-ba05-4d49-9f88-305a371269a9}\u0000"
+                "{d70b11ec-ba05-4d49-9f88-305a371269a9}\u0000",
+                "{c7c2623c-8038-40c5-8346-6530478ada4d}\u0000"
             ]
         },
         {
@@ -3488,11 +3627,23 @@
             "id": "{d70b11ec-ba05-4d49-9f88-305a371269a9}\u0000",
             "owner": "{32b89a88-7c01-4edb-9da4-cf9183704368}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 1.2000000476837158,
             "_height": 0.30000001192092896,
             "_depth": 2.4000000953674316
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{c7c2623c-8038-40c5-8346-6530478ada4d}\u0000",
+            "owner": "{32b89a88-7c01-4edb-9da4-cf9183704368}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -3503,7 +3654,7 @@
                 "id": "{91087493-bc95-4d46-b55f-17148363f396}\u0000",
                 "owner": "{9616c118-3c52-42db-b563-860072d7c12a}\u0000",
                 "Position": {
-                    "x": 7.855946063995361,
+                    "x": 8.059548377990723,
                     "y": 0.968400239944458,
                     "z": 25.505584716796875
                 },
@@ -3528,7 +3679,8 @@
             },
             "components": [
                 "{4267dca2-3846-4409-99e0-d28316d47186}\u0000",
-                "{df5c4361-3097-4c30-a1d2-fff734e46f4f}\u0000"
+                "{df5c4361-3097-4c30-a1d2-fff734e46f4f}\u0000",
+                "{f5b330db-5f0b-48a8-ac13-5f00f8657ebc}\u0000"
             ]
         },
         {
@@ -3543,11 +3695,23 @@
             "id": "{df5c4361-3097-4c30-a1d2-fff734e46f4f}\u0000",
             "owner": "{9616c118-3c52-42db-b563-860072d7c12a}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 1.2000000476837158,
             "_height": 2.5,
             "_depth": 1.7999999523162842
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{f5b330db-5f0b-48a8-ac13-5f00f8657ebc}\u0000",
+            "owner": "{9616c118-3c52-42db-b563-860072d7c12a}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -3563,18 +3727,18 @@
                     "z": 40.3048095703125
                 },
                 "EulerAngles": {
-                    "x": 2.8044529047123457e-13,
-                    "y": 27.900634765625,
+                    "x": 2.8044523626112594e-13,
+                    "y": 27.900630950927734,
                     "z": 6.443858069360431e-7
                 },
                 "Scale": {
-                    "x": 0.9999998211860657,
+                    "x": 0.9999997019767761,
                     "y": 1.0,
-                    "z": 0.9999998211860657
+                    "z": 0.9999997019767761
                 },
                 "Rotation": {
-                    "x": -1.355671797043101e-9,
-                    "y": 0.24108043313026428,
+                    "x": -1.3556716860207985e-9,
+                    "y": 0.2410804033279419,
                     "z": 5.457467366909441e-9,
                     "w": 0.9705051183700562
                 },
@@ -3583,7 +3747,8 @@
             },
             "components": [
                 "{f3ba1596-ab2c-49de-9ac7-4dd9c09e7ca6}\u0000",
-                "{e5b7b651-76bd-4deb-9c63-913913d091c9}\u0000"
+                "{e5b7b651-76bd-4deb-9c63-913913d091c9}\u0000",
+                "{dfec58df-81ef-4798-8729-d19437e0e793}\u0000"
             ]
         },
         {
@@ -3598,11 +3763,23 @@
             "id": "{e5b7b651-76bd-4deb-9c63-913913d091c9}\u0000",
             "owner": "{294915d9-20fe-419b-a1f5-073d77360e18}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 3.4000000953674316,
             "_height": 0.10000000149011612,
             "_depth": 1.100000023841858
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{dfec58df-81ef-4798-8729-d19437e0e793}\u0000",
+            "owner": "{294915d9-20fe-419b-a1f5-073d77360e18}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -3613,9 +3790,9 @@
                 "id": "{bfcb093c-189b-4665-8519-456bca52ad23}\u0000",
                 "owner": "{d83d6c3e-710a-4d96-ab13-2e94c3ad7a96}\u0000",
                 "Position": {
-                    "x": -4.315945148468018,
-                    "y": 0.29442358016967773,
-                    "z": 29.143606185913086
+                    "x": 5.967221260070801,
+                    "y": 0.9570386409759521,
+                    "z": -11.305707931518555
                 },
                 "EulerAngles": {
                     "x": 1.195251037901246e-12,
@@ -3638,7 +3815,8 @@
             },
             "components": [
                 "{ba9b1e32-cd7a-43ac-932f-cb1d57e59cec}\u0000",
-                "{1973c0a2-d110-491c-92fc-9d0d4bbcee66}\u0000"
+                "{1973c0a2-d110-491c-92fc-9d0d4bbcee66}\u0000",
+                "{043dd096-cd7d-445d-95a3-6a0f1d889dad}\u0000"
             ]
         },
         {
@@ -3653,11 +3831,23 @@
             "id": "{1973c0a2-d110-491c-92fc-9d0d4bbcee66}\u0000",
             "owner": "{d83d6c3e-710a-4d96-ab13-2e94c3ad7a96}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 4.699999809265137,
             "_height": 0.30000001192092896,
             "_depth": 1.399999976158142
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{043dd096-cd7d-445d-95a3-6a0f1d889dad}\u0000",
+            "owner": "{d83d6c3e-710a-4d96-ab13-2e94c3ad7a96}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -3736,7 +3926,8 @@
             },
             "components": [
                 "{d06a96c5-6bf0-4066-b2e0-d74435d1aa83}\u0000",
-                "{2e2a4726-2f2c-432f-abd5-148b26034991}\u0000"
+                "{2e2a4726-2f2c-432f-abd5-148b26034991}\u0000",
+                "{e936257b-13da-428c-b2ba-8151977a77ab}\u0000"
             ]
         },
         {
@@ -3751,11 +3942,23 @@
             "id": "{2e2a4726-2f2c-432f-abd5-148b26034991}\u0000",
             "owner": "{0e4266ce-afb2-45f7-be7a-b252380618fb}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 1.399999976158142,
             "_height": 1.0,
             "_depth": 2.799999952316284
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{e936257b-13da-428c-b2ba-8151977a77ab}\u0000",
+            "owner": "{0e4266ce-afb2-45f7-be7a-b252380618fb}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -3767,7 +3970,7 @@
                 "owner": "{a1911c4f-a2b6-4a19-9b2a-32b529938eb5}\u0000",
                 "Position": {
                     "x": -8.25804328918457,
-                    "y": 4.625420093536377,
+                    "y": 4.889756679534912,
                     "z": 41.01045227050781
                 },
                 "EulerAngles": {
@@ -3791,7 +3994,8 @@
             },
             "components": [
                 "{c4da0938-79e3-4553-b5a5-c4722f136a05}\u0000",
-                "{5124da0c-b6b3-4436-ab75-d9e367460fe9}\u0000"
+                "{5124da0c-b6b3-4436-ab75-d9e367460fe9}\u0000",
+                "{36375a67-8008-4de6-b76a-a358706b9eed}\u0000"
             ]
         },
         {
@@ -3806,11 +4010,23 @@
             "id": "{5124da0c-b6b3-4436-ab75-d9e367460fe9}\u0000",
             "owner": "{a1911c4f-a2b6-4a19-9b2a-32b529938eb5}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 0.8999999761581421,
             "_height": 1.7000000476837158,
             "_depth": 0.8999999761581421
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{36375a67-8008-4de6-b76a-a358706b9eed}\u0000",
+            "owner": "{a1911c4f-a2b6-4a19-9b2a-32b529938eb5}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -3822,7 +4038,7 @@
                 "owner": "{28f6b88e-83ae-419a-9922-b4ad7c753a74}\u0000",
                 "Position": {
                     "x": -18.67962074279785,
-                    "y": 4.814114570617676,
+                    "y": 6.593234062194824,
                     "z": 24.229841232299805
                 },
                 "EulerAngles": {
@@ -3846,7 +4062,8 @@
             },
             "components": [
                 "{7fc897a0-855d-4b8f-820f-3fe8c9e9f10c}\u0000",
-                "{91424061-ca75-4af4-9540-8f573bede189}\u0000"
+                "{91424061-ca75-4af4-9540-8f573bede189}\u0000",
+                "{6c44b8e0-04b8-498a-9705-db1e4a2b077d}\u0000"
             ]
         },
         {
@@ -3861,11 +4078,23 @@
             "id": "{91424061-ca75-4af4-9540-8f573bede189}\u0000",
             "owner": "{28f6b88e-83ae-419a-9922-b4ad7c753a74}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 0.8999999761581421,
             "_height": 1.7000000476837158,
             "_depth": 0.8999999761581421
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{6c44b8e0-04b8-498a-9705-db1e4a2b077d}\u0000",
+            "owner": "{28f6b88e-83ae-419a-9922-b4ad7c753a74}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -3877,7 +4106,7 @@
                 "owner": "{e347c390-be23-4b83-ad39-2f344932188d}\u0000",
                 "Position": {
                     "x": -19.153141021728516,
-                    "y": 4.788610935211182,
+                    "y": 5.807960033416748,
                     "z": 28.265968322753906
                 },
                 "EulerAngles": {
@@ -3901,7 +4130,8 @@
             },
             "components": [
                 "{673bf08f-d162-45d2-a395-4b99eb422f22}\u0000",
-                "{fb2ab8a0-4d49-4de3-8c12-68dec8dc7dde}\u0000"
+                "{fb2ab8a0-4d49-4de3-8c12-68dec8dc7dde}\u0000",
+                "{0f0c09f0-331e-49ee-af0f-3421f1960fdb}\u0000"
             ]
         },
         {
@@ -3916,11 +4146,23 @@
             "id": "{fb2ab8a0-4d49-4de3-8c12-68dec8dc7dde}\u0000",
             "owner": "{e347c390-be23-4b83-ad39-2f344932188d}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 0.8999999761581421,
             "_height": 1.7000000476837158,
             "_depth": 0.8999999761581421
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{0f0c09f0-331e-49ee-af0f-3421f1960fdb}\u0000",
+            "owner": "{e347c390-be23-4b83-ad39-2f344932188d}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -4135,8 +4377,8 @@
                 "id": "{0afe8965-9501-4fc2-b044-17d57727e2d5}\u0000",
                 "owner": "{daec2471-7f84-4b95-98d7-4ed7162b0f8e}\u0000",
                 "Position": {
-                    "x": -18.623998641967773,
-                    "y": 4.474373817443848,
+                    "x": -18.432687759399414,
+                    "y": 5.711667060852051,
                     "z": 26.132522583007813
                 },
                 "EulerAngles": {
@@ -4160,7 +4402,8 @@
             },
             "components": [
                 "{2f5d399b-b391-4429-b4a4-61809c8b8165}\u0000",
-                "{e0093a2a-d1e1-4435-b587-add4c84d95b6}\u0000"
+                "{e0093a2a-d1e1-4435-b587-add4c84d95b6}\u0000",
+                "{3c39aaf9-aad5-4e09-b9e1-8e9d31cb0ae5}\u0000"
             ]
         },
         {
@@ -4175,11 +4418,23 @@
             "id": "{e0093a2a-d1e1-4435-b587-add4c84d95b6}\u0000",
             "owner": "{daec2471-7f84-4b95-98d7-4ed7162b0f8e}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 1.100000023841858,
             "_height": 1.7000000476837158,
             "_depth": 0.6000000238418579
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{3c39aaf9-aad5-4e09-b9e1-8e9d31cb0ae5}\u0000",
+            "owner": "{daec2471-7f84-4b95-98d7-4ed7162b0f8e}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -4215,7 +4470,8 @@
             },
             "components": [
                 "{0697808f-a5f6-4ecd-ab5c-948219510610}\u0000",
-                "{aff7388b-a9c7-4da4-91d4-9acf19270170}\u0000"
+                "{aff7388b-a9c7-4da4-91d4-9acf19270170}\u0000",
+                "{92af945e-cf0a-4b92-bbb4-f31cd0ca01b5}\u0000"
             ]
         },
         {
@@ -4230,11 +4486,23 @@
             "id": "{aff7388b-a9c7-4da4-91d4-9acf19270170}\u0000",
             "owner": "{fd16c84f-b327-47f1-89ba-875ef56e5e67}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 1.100000023841858,
             "_height": 1.7000000476837158,
             "_depth": 0.6000000238418579
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{92af945e-cf0a-4b92-bbb4-f31cd0ca01b5}\u0000",
+            "owner": "{fd16c84f-b327-47f1-89ba-875ef56e5e67}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -4540,32 +4808,33 @@
                 "id": "{f0efa86e-f339-4e33-89c7-ebcce684b1c7}\u0000",
                 "owner": "{752ce6dc-548b-4ad4-8a11-cdcf95039e0d}\u0000",
                 "Position": {
-                    "x": -11.571918487548828,
+                    "x": -12.651167869567871,
                     "y": 1.871222734451294,
-                    "z": 38.420719146728516
+                    "z": 40.088470458984375
                 },
                 "EulerAngles": {
                     "x": -179.99989318847656,
-                    "y": -43.053714752197266,
+                    "y": -43.0537109375,
                     "z": -179.99989318847656
                 },
                 "Scale": {
-                    "x": 0.9999999403953552,
+                    "x": 0.9999998807907104,
                     "y": 1.0,
-                    "z": 0.9999999403953552
+                    "z": 0.9999998807907104
                 },
                 "Rotation": {
-                    "x": -0.000001180388494503859,
+                    "x": -0.0000011803883808170212,
                     "y": 0.9302456974983215,
-                    "z": -0.000001180388494503859,
-                    "w": -0.3669373095035553
+                    "z": -0.0000011803883808170212,
+                    "w": -0.3669372797012329
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
                 "{424b845c-b4bf-43b4-a2c1-2bc6f343f1fa}\u0000",
-                "{b2cd0b00-7632-45d1-a175-f7ad4b483712}\u0000"
+                "{b2cd0b00-7632-45d1-a175-f7ad4b483712}\u0000",
+                "{cf744a5a-a415-43b1-a826-19e404d69ef9}\u0000"
             ]
         },
         {
@@ -4580,11 +4849,23 @@
             "id": "{b2cd0b00-7632-45d1-a175-f7ad4b483712}\u0000",
             "owner": "{752ce6dc-548b-4ad4-8a11-cdcf95039e0d}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 2.5,
             "_height": 3.4000000953674316,
             "_depth": 1.899999976158142
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{cf744a5a-a415-43b1-a826-19e404d69ef9}\u0000",
+            "owner": "{752ce6dc-548b-4ad4-8a11-cdcf95039e0d}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -4595,7 +4876,7 @@
                 "id": "{9e10b482-b1e4-4833-b863-298fed29aa88}\u0000",
                 "owner": "{ae32dad3-7300-4d31-8479-71cca05c5c3d}\u0000",
                 "Position": {
-                    "x": -4.6732072830200195,
+                    "x": -3.739694595336914,
                     "y": 1.871222734451294,
                     "z": 38.420719146728516
                 },
@@ -4620,7 +4901,8 @@
             },
             "components": [
                 "{35cb7b84-f9e3-4cb7-aebd-e5d17607488c}\u0000",
-                "{8713dfc0-8c26-4e7e-a31a-77245ec2e2fd}\u0000"
+                "{8713dfc0-8c26-4e7e-a31a-77245ec2e2fd}\u0000",
+                "{86187eef-3b29-43df-ad3b-7e8f2c6767f0}\u0000"
             ]
         },
         {
@@ -4635,11 +4917,23 @@
             "id": "{8713dfc0-8c26-4e7e-a31a-77245ec2e2fd}\u0000",
             "owner": "{ae32dad3-7300-4d31-8479-71cca05c5c3d}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 2.5,
             "_height": 3.4000000953674316,
             "_depth": 1.899999976158142
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{86187eef-3b29-43df-ad3b-7e8f2c6767f0}\u0000",
+            "owner": "{ae32dad3-7300-4d31-8479-71cca05c5c3d}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -4697,9 +4991,9 @@
                 "id": "{2a92c6b2-5c2a-4bab-b61c-0038f3b1db21}\u0000",
                 "owner": "{f7a27383-4b15-4663-8828-5abbc12baf12}\u0000",
                 "Position": {
-                    "x": 16.233718872070313,
+                    "x": 3.763948917388916,
                     "y": 2.2846899032592773,
-                    "z": 45.288028717041016
+                    "z": -17.028669357299805
                 },
                 "EulerAngles": {
                     "x": 1.0630857766357263e-13,
@@ -4723,7 +5017,8 @@
             "components": [
                 "{e5100798-6e91-42dc-b06d-6814528f3c21}\u0000",
                 "{18fe2ab2-557b-4658-9529-de9a158c02fd}\u0000",
-                "{656c8fb1-ff87-420c-bced-dd2a3d712c2d}\u0000"
+                "{656c8fb1-ff87-420c-bced-dd2a3d712c2d}\u0000",
+                "{458bffe5-a1df-4abe-8d2e-755c4e100947}\u0000"
             ]
         },
         {
@@ -4755,6 +5050,18 @@
             "Height": 0.4000000059604645
         },
         {
+            "type": "Rigidbody",
+            "id": "{458bffe5-a1df-4abe-8d2e-755c4e100947}\u0000",
+            "owner": "{f7a27383-4b15-4663-8828-5abbc12baf12}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
             "type": "Entity",
             "id": "{9c37ca1d-a140-4b1c-aef3-bc2345ac3cec}\u0000",
             "name": "BeczkaZamknieta",
@@ -4763,9 +5070,9 @@
                 "id": "{a27f07bf-c8c8-47a3-a46e-b45b7624f64e}\u0000",
                 "owner": "{9c37ca1d-a140-4b1c-aef3-bc2345ac3cec}\u0000",
                 "Position": {
-                    "x": 13.414688110351563,
+                    "x": 14.918505668640137,
                     "y": 2.2846899032592773,
-                    "z": 42.72124481201172
+                    "z": -13.158174514770508
                 },
                 "EulerAngles": {
                     "x": 1.0630857766357263e-13,
@@ -4789,7 +5096,8 @@
             "components": [
                 "{648b5022-e4c0-4edc-9c95-15056d3be4c8}\u0000",
                 "{5cca9624-a667-44af-91ed-f5a1a418fd71}\u0000",
-                "{8f0d1871-217c-4ff1-b4b1-1f2694df0a0f}\u0000"
+                "{8f0d1871-217c-4ff1-b4b1-1f2694df0a0f}\u0000",
+                "{abd0d06c-4b55-4a30-acec-f7d602c776d5}\u0000"
             ]
         },
         {
@@ -4821,6 +5129,18 @@
             "Height": 0.4000000059604645
         },
         {
+            "type": "Rigidbody",
+            "id": "{abd0d06c-4b55-4a30-acec-f7d602c776d5}\u0000",
+            "owner": "{9c37ca1d-a140-4b1c-aef3-bc2345ac3cec}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
             "type": "Entity",
             "id": "{3d1c7728-8908-4250-abd6-3994d7de3959}\u0000",
             "name": "Czaszka",
@@ -4830,7 +5150,7 @@
                 "owner": "{3d1c7728-8908-4250-abd6-3994d7de3959}\u0000",
                 "Position": {
                     "x": 4.510700225830078,
-                    "y": 4.517976760864258,
+                    "y": 5.157062530517578,
                     "z": 25.828346252441406
                 },
                 "EulerAngles": {
@@ -4854,7 +5174,8 @@
             },
             "components": [
                 "{90b9f171-cd51-4db8-9689-e558d8df3893}\u0000",
-                "{54abc1d4-d9c3-498a-ae6e-b30abe368b02}\u0000"
+                "{54abc1d4-d9c3-498a-ae6e-b30abe368b02}\u0000",
+                "{a1990bba-8ba1-403a-86c2-fb2621fa4a2b}\u0000"
             ]
         },
         {
@@ -4869,11 +5190,23 @@
             "id": "{54abc1d4-d9c3-498a-ae6e-b30abe368b02}\u0000",
             "owner": "{3d1c7728-8908-4250-abd6-3994d7de3959}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
             "_width": 1.899999976158142,
             "_height": 1.2999999523162842,
             "_depth": 2.0999999046325684
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{a1990bba-8ba1-403a-86c2-fb2621fa4a2b}\u0000",
+            "owner": "{3d1c7728-8908-4250-abd6-3994d7de3959}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -4910,7 +5243,8 @@
             "components": [
                 "{e784c34b-60eb-460b-a39c-7ffbfd15600d}\u0000",
                 "{c87f6376-7a34-4c30-aba5-905e4a7696eb}\u0000",
-                "{ace4f57e-2811-442a-b480-b9cc8b01347a}\u0000"
+                "{ace4f57e-2811-442a-b480-b9cc8b01347a}\u0000",
+                "{7ed7cb94-9d6c-40b8-9399-1c4a014adcb1}\u0000"
             ]
         },
         {
@@ -4942,6 +5276,18 @@
             "Height": 0.4000000059604645
         },
         {
+            "type": "Rigidbody",
+            "id": "{7ed7cb94-9d6c-40b8-9399-1c4a014adcb1}\u0000",
+            "owner": "{bed587a2-19d7-4ad4-81a4-c31d2fc460ab}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
             "type": "Entity",
             "id": "{530b6b2f-a560-4b0e-923b-a8c803ff8b5c}\u0000",
             "name": "BeczkaZamknieta",
@@ -4952,7 +5298,7 @@
                 "Position": {
                     "x": -15.203458786010742,
                     "y": 2.2846899032592773,
-                    "z": 42.72124481201172
+                    "z": 42.79328155517578
                 },
                 "EulerAngles": {
                     "x": 1.0630857766357263e-13,
@@ -4976,7 +5322,8 @@
             "components": [
                 "{5df101db-f0e6-43c2-9718-663cb7df3c59}\u0000",
                 "{b74f551d-7033-46aa-bfb2-c2a6d2d163df}\u0000",
-                "{3ee70f62-7762-429e-842a-d5ef1bbdf651}\u0000"
+                "{3ee70f62-7762-429e-842a-d5ef1bbdf651}\u0000",
+                "{a498464b-85d7-4193-82fc-abe196aac107}\u0000"
             ]
         },
         {
@@ -5006,6 +5353,18 @@
             "colliderType": 2,
             "Radius": 1.5,
             "Height": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{a498464b-85d7-4193-82fc-abe196aac107}\u0000",
+            "owner": "{530b6b2f-a560-4b0e-923b-a8c803ff8b5c}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -5183,7 +5542,7 @@
                 "Position": {
                     "x": -0.12665808200836182,
                     "y": 3.4000000953674316,
-                    "z": -50.851619720458984
+                    "z": -21.726442337036133
                 },
                 "EulerAngles": {
                     "x": 1.0630859121609978e-13,
@@ -5559,61 +5918,6 @@
         },
         {
             "type": "Entity",
-            "id": "{d5fd3139-a853-4adc-908e-4fa71308b48e}\u0000",
-            "name": "Skrzynia",
-            "transform": {
-                "type": "Transform",
-                "id": "{c1ba7b65-65f4-4521-a616-7329a7be9f3c}\u0000",
-                "owner": "{d5fd3139-a853-4adc-908e-4fa71308b48e}\u0000",
-                "Position": {
-                    "x": -9.426339149475098,
-                    "y": 1.4749383926391602,
-                    "z": 17.225860595703125
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -0.0,
-                    "z": 6.443887627938238e-7
-                },
-                "Scale": {
-                    "x": 0.9999997615814209,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 5.623352894446043e-9,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{7eeca773-fa2a-47cd-9107-82c6a9885da3}\u0000",
-                "{3ea5771b-9550-48c8-bb3c-957a7f7f9f85}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{7eeca773-fa2a-47cd-9107-82c6a9885da3}\u0000",
-            "owner": "{d5fd3139-a853-4adc-908e-4fa71308b48e}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{3ea5771b-9550-48c8-bb3c-957a7f7f9f85}\u0000",
-            "owner": "{d5fd3139-a853-4adc-908e-4fa71308b48e}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "colliderType": 0,
-            "_width": 2.5999999046325684,
-            "_height": 2.5999999046325684,
-            "_depth": 2.5999999046325684
-        },
-        {
-            "type": "Entity",
             "id": "{1de801a5-6d35-4358-adee-ba2776862d1b}\u0000",
             "name": "Roslina5",
             "transform": {
@@ -5654,6 +5958,887 @@
             "owner": "{1de801a5-6d35-4358-adee-ba2776862d1b}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
             "Model": "./res/Models/Modele_Mati/Rosliny/Roslina5.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{1ee0ce75-257f-43b6-a439-5d5e72b6bba7}\u0000",
+            "name": "Skrzynia1",
+            "transform": {
+                "type": "Transform",
+                "id": "{ee301607-1439-4739-9cc5-31a48dd616e0}\u0000",
+                "owner": "{1ee0ce75-257f-43b6-a439-5d5e72b6bba7}\u0000",
+                "Position": {
+                    "x": 14.524734497070313,
+                    "y": 1.4749383926391602,
+                    "z": -17.164628982543945
+                },
+                "EulerAngles": {
+                    "x": 1.5420654933106376e-13,
+                    "y": -28.432004928588867,
+                    "z": 6.443873417083523e-7
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 1.3809707821721418e-9,
+                    "y": -0.24557814002037048,
+                    "z": 5.451136431133818e-9,
+                    "w": 0.969376802444458
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{76f88442-d7ff-4e05-9e37-dfb1337a9b25}\u0000",
+                "{0085cdef-f2aa-417b-a8e8-626b5281dbf3}\u0000",
+                "{d1f629d3-4ea8-4ad8-ae3c-07dd869ee5d8}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{76f88442-d7ff-4e05-9e37-dfb1337a9b25}\u0000",
+            "owner": "{1ee0ce75-257f-43b6-a439-5d5e72b6bba7}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{0085cdef-f2aa-417b-a8e8-626b5281dbf3}\u0000",
+            "owner": "{1ee0ce75-257f-43b6-a439-5d5e72b6bba7}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.5999999046325684,
+            "_height": 2.5999999046325684,
+            "_depth": 2.5999999046325684
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{d1f629d3-4ea8-4ad8-ae3c-07dd869ee5d8}\u0000",
+            "owner": "{1ee0ce75-257f-43b6-a439-5d5e72b6bba7}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{00c7b417-af04-4c4b-8cee-d2554d3a93a1}\u0000",
+            "name": "Skrzynia1",
+            "transform": {
+                "type": "Transform",
+                "id": "{04f5908d-9a67-49fc-935c-bfc38de6f703}\u0000",
+                "owner": "{00c7b417-af04-4c4b-8cee-d2554d3a93a1}\u0000",
+                "Position": {
+                    "x": 9.204878807067871,
+                    "y": 1.4749383926391602,
+                    "z": -18.246129989624023
+                },
+                "EulerAngles": {
+                    "x": -2.0985676304347e-13,
+                    "y": 16.9208984375,
+                    "z": 6.443868301175826e-7
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": -8.273445817330582e-10,
+                    "y": 0.1471266746520996,
+                    "z": 5.56214141411715e-9,
+                    "w": 0.9891176819801331
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{23cfc0c0-3c72-4458-a55b-062b08583cf4}\u0000",
+                "{e5d19b1c-9f54-4324-a4ca-c26ada707f65}\u0000",
+                "{4ae23f35-0aed-4aac-b9ed-52be81ee0852}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{23cfc0c0-3c72-4458-a55b-062b08583cf4}\u0000",
+            "owner": "{00c7b417-af04-4c4b-8cee-d2554d3a93a1}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{e5d19b1c-9f54-4324-a4ca-c26ada707f65}\u0000",
+            "owner": "{00c7b417-af04-4c4b-8cee-d2554d3a93a1}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.5999999046325684,
+            "_height": 2.5999999046325684,
+            "_depth": 2.5999999046325684
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{4ae23f35-0aed-4aac-b9ed-52be81ee0852}\u0000",
+            "owner": "{00c7b417-af04-4c4b-8cee-d2554d3a93a1}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{4cd1c63f-49c7-47d9-bd46-b3cb87d3d32d}\u0000",
+            "name": "Skrzynia1",
+            "transform": {
+                "type": "Transform",
+                "id": "{aca5e25f-13fe-4bb0-84b4-3b22e0b8226b}\u0000",
+                "owner": "{4cd1c63f-49c7-47d9-bd46-b3cb87d3d32d}\u0000",
+                "Position": {
+                    "x": -6.5603346824646,
+                    "y": 1.4749383926391602,
+                    "z": 19.293657302856445
+                },
+                "EulerAngles": {
+                    "x": -2.0604342071493115e-13,
+                    "y": 26.950502395629883,
+                    "z": 6.443877396122843e-7
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": -1.3103833573779866e-9,
+                    "y": 0.23302532732486725,
+                    "z": 5.468537622732583e-9,
+                    "w": 0.9724706411361694
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{4ed54fa0-c499-4387-84f1-56e94cfc44a1}\u0000",
+                "{2f15996c-c5f7-45a8-8c35-9a049666786b}\u0000",
+                "{d94ec19f-14ef-40e1-abb5-f78578ec3b21}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{4ed54fa0-c499-4387-84f1-56e94cfc44a1}\u0000",
+            "owner": "{4cd1c63f-49c7-47d9-bd46-b3cb87d3d32d}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{2f15996c-c5f7-45a8-8c35-9a049666786b}\u0000",
+            "owner": "{4cd1c63f-49c7-47d9-bd46-b3cb87d3d32d}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.5999999046325684,
+            "_height": 2.5999999046325684,
+            "_depth": 2.5999999046325684
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{d94ec19f-14ef-40e1-abb5-f78578ec3b21}\u0000",
+            "owner": "{4cd1c63f-49c7-47d9-bd46-b3cb87d3d32d}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{9ff7c49a-bded-4652-8732-fde514ca446d}\u0000",
+            "name": "Skrzynia1",
+            "transform": {
+                "type": "Transform",
+                "id": "{1a249298-95ed-41df-b7e5-46a711e4e5ee}\u0000",
+                "owner": "{9ff7c49a-bded-4652-8732-fde514ca446d}\u0000",
+                "Position": {
+                    "x": -1.6149235963821411,
+                    "y": 1.4749383926391602,
+                    "z": -8.815600395202637
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 6.443887627938238e-7
+                },
+                "Scale": {
+                    "x": 0.9999997615814209,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 5.623352894446043e-9,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{f94c95bf-eb0c-4b43-9cda-9baeb75ae187}\u0000",
+                "{f6b1d611-2a40-4788-8325-3610d531e87f}\u0000",
+                "{009e4621-ca59-4020-b5d1-78ed6bb9f9e0}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{f94c95bf-eb0c-4b43-9cda-9baeb75ae187}\u0000",
+            "owner": "{9ff7c49a-bded-4652-8732-fde514ca446d}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{f6b1d611-2a40-4788-8325-3610d531e87f}\u0000",
+            "owner": "{9ff7c49a-bded-4652-8732-fde514ca446d}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.5999999046325684,
+            "_height": 2.5999999046325684,
+            "_depth": 2.5999999046325684
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{009e4621-ca59-4020-b5d1-78ed6bb9f9e0}\u0000",
+            "owner": "{9ff7c49a-bded-4652-8732-fde514ca446d}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{d07c6b7f-8cf6-4c3d-a079-2ce083427c40}\u0000",
+            "name": "BeczkaZamknieta",
+            "transform": {
+                "type": "Transform",
+                "id": "{dd6bcee4-19b0-462f-a66a-ca13fce8fec1}\u0000",
+                "owner": "{d07c6b7f-8cf6-4c3d-a079-2ce083427c40}\u0000",
+                "Position": {
+                    "x": 13.414688110351563,
+                    "y": 2.2846899032592773,
+                    "z": 42.72124481201172
+                },
+                "EulerAngles": {
+                    "x": 1.0630857766357263e-13,
+                    "y": -38.026268005371094,
+                    "z": 6.443863753702317e-7
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 1.831997553658482e-9,
+                    "y": -0.3257848918437958,
+                    "z": 5.31654542612614e-9,
+                    "w": 0.9454439282417297
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{46c53abf-9916-4fdc-ab81-0d435853c9cb}\u0000",
+                "{f1f7de1e-9eff-48e7-8e8c-079c88bafb80}\u0000",
+                "{bc84599b-0f10-4519-92e3-b15fea053860}\u0000",
+                "{360383df-2e0c-4dcb-90c6-7bf9c28257a4}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{46c53abf-9916-4fdc-ab81-0d435853c9cb}\u0000",
+            "owner": "{d07c6b7f-8cf6-4c3d-a079-2ce083427c40}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/BeczkaZamknieta.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{f1f7de1e-9eff-48e7-8e8c-079c88bafb80}\u0000",
+            "owner": "{d07c6b7f-8cf6-4c3d-a079-2ce083427c40}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 3.700000047683716,
+            "_depth": 1.899999976158142
+        },
+        {
+            "type": "CapsuleCollider",
+            "id": "{bc84599b-0f10-4519-92e3-b15fea053860}\u0000",
+            "owner": "{d07c6b7f-8cf6-4c3d-a079-2ce083427c40}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 2,
+            "Radius": 1.5,
+            "Height": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{360383df-2e0c-4dcb-90c6-7bf9c28257a4}\u0000",
+            "owner": "{d07c6b7f-8cf6-4c3d-a079-2ce083427c40}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{fd7dbd50-f956-46fb-89c0-ba1fcf5453b6}\u0000",
+            "name": "Skrzynia3",
+            "transform": {
+                "type": "Transform",
+                "id": "{4545ef4a-5d06-4fb7-a5c3-88c555ce22b9}\u0000",
+                "owner": "{fd7dbd50-f956-46fb-89c0-ba1fcf5453b6}\u0000",
+                "Position": {
+                    "x": 4.123444557189941,
+                    "y": 2.1217987537384033,
+                    "z": 25.24361228942871
+                },
+                "EulerAngles": {
+                    "x": -1.77640630612437e-13,
+                    "y": 47.88664627075195,
+                    "z": 6.443877964557032e-7
+                },
+                "Scale": {
+                    "x": 0.9999997615814209,
+                    "y": 1.0,
+                    "z": 0.9999998807907104
+                },
+                "Rotation": {
+                    "x": -2.282138700238079e-9,
+                    "y": 0.40583276748657227,
+                    "z": 5.139441316970306e-9,
+                    "w": 0.913947343826294
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{9c8acd9d-004a-46a1-829a-dd3f8fd478a2}\u0000",
+                "{f94b83b1-d8bb-498c-8af4-2cd8ebfa918f}\u0000",
+                "{34dad1e5-b3da-4383-b3a7-923eb1ee323f}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{9c8acd9d-004a-46a1-829a-dd3f8fd478a2}\u0000",
+            "owner": "{fd7dbd50-f956-46fb-89c0-ba1fcf5453b6}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia3.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{f94b83b1-d8bb-498c-8af4-2cd8ebfa918f}\u0000",
+            "owner": "{fd7dbd50-f956-46fb-89c0-ba1fcf5453b6}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.700000047683716,
+            "_height": 3.5,
+            "_depth": 4.900000095367432
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{34dad1e5-b3da-4383-b3a7-923eb1ee323f}\u0000",
+            "owner": "{fd7dbd50-f956-46fb-89c0-ba1fcf5453b6}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{495355d9-7071-4f3c-964e-cdb5c7581603}\u0000",
+            "name": "Skrzynia3",
+            "transform": {
+                "type": "Transform",
+                "id": "{64a0be20-6b4a-4c48-90ff-2c8ace6320e3}\u0000",
+                "owner": "{495355d9-7071-4f3c-964e-cdb5c7581603}\u0000",
+                "Position": {
+                    "x": 12.865180969238281,
+                    "y": 1.871222734451294,
+                    "z": 32.387062072753906
+                },
+                "EulerAngles": {
+                    "x": 1.8560150703665623e-13,
+                    "y": -28.494653701782227,
+                    "z": 6.443867732741637e-7
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 1.3839498436141184e-9,
+                    "y": -0.2461080700159073,
+                    "z": 5.450375706317345e-9,
+                    "w": 0.9692423939704895
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{50f390b2-ce34-4dee-b410-b83cadfc4dc4}\u0000",
+                "{52e95ad8-83fb-4097-aacb-c9859348a68c}\u0000",
+                "{9e3d1dba-7eb6-4c7a-a604-d125bd2f4c99}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{50f390b2-ce34-4dee-b410-b83cadfc4dc4}\u0000",
+            "owner": "{495355d9-7071-4f3c-964e-cdb5c7581603}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia3.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{52e95ad8-83fb-4097-aacb-c9859348a68c}\u0000",
+            "owner": "{495355d9-7071-4f3c-964e-cdb5c7581603}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.700000047683716,
+            "_height": 3.5,
+            "_depth": 4.900000095367432
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{9e3d1dba-7eb6-4c7a-a604-d125bd2f4c99}\u0000",
+            "owner": "{495355d9-7071-4f3c-964e-cdb5c7581603}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{f5fced66-3466-498f-acea-8ac0d1533d76}\u0000",
+            "name": "Beczka",
+            "transform": {
+                "type": "Transform",
+                "id": "{a1d9a6cb-5776-4a5c-8667-f4ea4ab0fd40}\u0000",
+                "owner": "{f5fced66-3466-498f-acea-8ac0d1533d76}\u0000",
+                "Position": {
+                    "x": 16.233718872070313,
+                    "y": 2.2846899032592773,
+                    "z": 45.288028717041016
+                },
+                "EulerAngles": {
+                    "x": 1.0630857766357263e-13,
+                    "y": -38.026268005371094,
+                    "z": 6.443863753702317e-7
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 1.831997553658482e-9,
+                    "y": -0.3257848918437958,
+                    "z": 5.31654542612614e-9,
+                    "w": 0.9454439282417297
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{dd1ce621-d426-48c2-95c6-484ece2949ff}\u0000",
+                "{a04e19d1-2e09-4dc5-9900-426ece3b4bc9}\u0000",
+                "{c678b2bf-1c66-437f-a8dc-e2339b914e9a}\u0000",
+                "{5f8e35ac-e21f-4e69-b97f-8eac77e7e6fe}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{dd1ce621-d426-48c2-95c6-484ece2949ff}\u0000",
+            "owner": "{f5fced66-3466-498f-acea-8ac0d1533d76}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/BeczkaOtwarta.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{a04e19d1-2e09-4dc5-9900-426ece3b4bc9}\u0000",
+            "owner": "{f5fced66-3466-498f-acea-8ac0d1533d76}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 3.700000047683716,
+            "_depth": 1.899999976158142
+        },
+        {
+            "type": "CapsuleCollider",
+            "id": "{c678b2bf-1c66-437f-a8dc-e2339b914e9a}\u0000",
+            "owner": "{f5fced66-3466-498f-acea-8ac0d1533d76}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 2,
+            "Radius": 1.5,
+            "Height": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{5f8e35ac-e21f-4e69-b97f-8eac77e7e6fe}\u0000",
+            "owner": "{f5fced66-3466-498f-acea-8ac0d1533d76}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{ec1b9a55-3a4b-4512-8c70-b229d0483bd9}\u0000",
+            "name": "Miecz",
+            "transform": {
+                "type": "Transform",
+                "id": "{29862509-6271-4e5a-bdc1-b6a280c078fd}\u0000",
+                "owner": "{ec1b9a55-3a4b-4512-8c70-b229d0483bd9}\u0000",
+                "Position": {
+                    "x": -4.315945148468018,
+                    "y": 1.2202470302581787,
+                    "z": 29.143606185913086
+                },
+                "EulerAngles": {
+                    "x": 1.195251037901246e-12,
+                    "y": -46.432960510253906,
+                    "z": 6.443819984269794e-7
+                },
+                "Scale": {
+                    "x": 0.9999999403953552,
+                    "y": 1.0,
+                    "z": 0.9999999403953552
+                },
+                "Rotation": {
+                    "x": 2.216747230221472e-9,
+                    "y": -0.39420628547668457,
+                    "z": 5.1679345247634956e-9,
+                    "w": 0.9190219640731812
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{33ab02ae-0b77-40bb-aa36-bd594a5024ad}\u0000",
+                "{28774793-ac12-46cf-9f29-9dd737e88091}\u0000",
+                "{9a360fae-7f4d-44d5-a8a2-16a22b8660d3}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{33ab02ae-0b77-40bb-aa36-bd594a5024ad}\u0000",
+            "owner": "{ec1b9a55-3a4b-4512-8c70-b229d0483bd9}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Bron/MieczCaly.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{28774793-ac12-46cf-9f29-9dd737e88091}\u0000",
+            "owner": "{ec1b9a55-3a4b-4512-8c70-b229d0483bd9}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 4.699999809265137,
+            "_height": 0.30000001192092896,
+            "_depth": 1.399999976158142
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{9a360fae-7f4d-44d5-a8a2-16a22b8660d3}\u0000",
+            "owner": "{ec1b9a55-3a4b-4512-8c70-b229d0483bd9}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{49f0602a-6598-4bae-8bf3-d1d65823852a}\u0000",
+            "name": "Skrzynia1",
+            "transform": {
+                "type": "Transform",
+                "id": "{a2194583-04bf-4ddd-9af5-00fb4f0005ca}\u0000",
+                "owner": "{49f0602a-6598-4bae-8bf3-d1d65823852a}\u0000",
+                "Position": {
+                    "x": -11.191452026367188,
+                    "y": 1.4749383926391602,
+                    "z": 15.61112117767334
+                },
+                "EulerAngles": {
+                    "x": 5.8562642480883016e-15,
+                    "y": -13.020584106445313,
+                    "z": 6.443858637794619e-7
+                },
+                "Scale": {
+                    "x": 0.9999997615814209,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 6.375824312954137e-10,
+                    "y": -0.11338169127702713,
+                    "z": 5.587065476930775e-9,
+                    "w": 0.99355149269104
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{6e595fee-8c82-42f1-9dab-1d61894082a0}\u0000",
+                "{1f5179eb-f191-4666-8ae5-85d398c106ac}\u0000",
+                "{b4ecbf57-23f9-4406-b954-367b6aaa987c}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{6e595fee-8c82-42f1-9dab-1d61894082a0}\u0000",
+            "owner": "{49f0602a-6598-4bae-8bf3-d1d65823852a}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{1f5179eb-f191-4666-8ae5-85d398c106ac}\u0000",
+            "owner": "{49f0602a-6598-4bae-8bf3-d1d65823852a}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.5999999046325684,
+            "_height": 2.5999999046325684,
+            "_depth": 2.5999999046325684
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{b4ecbf57-23f9-4406-b954-367b6aaa987c}\u0000",
+            "owner": "{49f0602a-6598-4bae-8bf3-d1d65823852a}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{804dc9b7-1748-4a49-81aa-c4312777bfa2}\u0000",
+            "name": "Roslina3",
+            "transform": {
+                "type": "Transform",
+                "id": "{b3378162-e34c-46f5-9c5a-9c6ea43a373c}\u0000",
+                "owner": "{804dc9b7-1748-4a49-81aa-c4312777bfa2}\u0000",
+                "Position": {
+                    "x": -6.748839855194092,
+                    "y": 1.41150963306427,
+                    "z": 22.403770446777344
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 26.078168869018555,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.7572001218795776,
+                    "y": 1.7572001218795776,
+                    "z": 1.7572001218795776
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.22561568021774292,
+                    "z": 0.0,
+                    "w": 0.9742164015769958
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{ce25c6a3-88c8-40c4-84e4-11ef34d4a6c0}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{ce25c6a3-88c8-40c4-84e4-11ef34d4a6c0}\u0000",
+            "owner": "{804dc9b7-1748-4a49-81aa-c4312777bfa2}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina3.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{07814323-8353-4292-9470-eba69753dc87}\u0000",
+            "name": "Skrzynia1",
+            "transform": {
+                "type": "Transform",
+                "id": "{3f6fd433-ee3f-48f6-a33e-98263669d1e9}\u0000",
+                "owner": "{07814323-8353-4292-9470-eba69753dc87}\u0000",
+                "Position": {
+                    "x": 11.711599349975586,
+                    "y": 1.4749383926391602,
+                    "z": 13.725787162780762
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 134.70916748046875
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 0.9999996423721313
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.9229053258895874,
+                    "w": 0.3850269615650177
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{ef98262c-fbbd-46de-a49a-0df9440f2c03}\u0000",
+                "{ccd73c8b-8e58-4d9e-8955-7df0eb0d34ee}\u0000",
+                "{fcaaf429-bb4e-4886-8927-c6bb04ee86be}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{ef98262c-fbbd-46de-a49a-0df9440f2c03}\u0000",
+            "owner": "{07814323-8353-4292-9470-eba69753dc87}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Kosztownosci/kamienDiament.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{ccd73c8b-8e58-4d9e-8955-7df0eb0d34ee}\u0000",
+            "owner": "{07814323-8353-4292-9470-eba69753dc87}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 1.600000023841858,
+            "_height": 1.2999999523162842,
+            "_depth": 1.399999976158142
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{fcaaf429-bb4e-4886-8927-c6bb04ee86be}\u0000",
+            "owner": "{07814323-8353-4292-9470-eba69753dc87}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{a7963cd5-03af-44b6-9979-56490c667b39}\u0000",
+            "name": "Szmaragd",
+            "transform": {
+                "type": "Transform",
+                "id": "{ea6f9b13-04c7-4555-ae95-bbe2a04ef7e9}\u0000",
+                "owner": "{a7963cd5-03af-44b6-9979-56490c667b39}\u0000",
+                "Position": {
+                    "x": 3.909522294998169,
+                    "y": 0.968400239944458,
+                    "z": 31.779855728149414
+                },
+                "EulerAngles": {
+                    "x": 1.0630857766357263e-13,
+                    "y": -38.026268005371094,
+                    "z": 6.443863753702317e-7
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 1.831997553658482e-9,
+                    "y": -0.3257848918437958,
+                    "z": 5.31654542612614e-9,
+                    "w": 0.9454439282417297
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{47556696-9b28-4af6-913e-5828e937e3a9}\u0000",
+                "{4f2b5418-5134-4adb-9364-5d5b95977cfa}\u0000",
+                "{a222cb9c-1b61-4ab2-b3b7-2027dddc86ca}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{47556696-9b28-4af6-913e-5828e937e3a9}\u0000",
+            "owner": "{a7963cd5-03af-44b6-9979-56490c667b39}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Kosztownosci/kamienSzmaragsd.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{4f2b5418-5134-4adb-9364-5d5b95977cfa}\u0000",
+            "owner": "{a7963cd5-03af-44b6-9979-56490c667b39}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 1.2999999523162842,
+            "_height": 0.20000000298023224,
+            "_depth": 0.699999988079071
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{a222cb9c-1b61-4ab2-b3b7-2027dddc86ca}\u0000",
+            "owner": "{a7963cd5-03af-44b6-9979-56490c667b39}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         }
     ]
 }
