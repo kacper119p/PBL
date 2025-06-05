@@ -309,11 +309,11 @@ void Engine::EditorGUI::DrawGenerativeSystem(Scene* Scene)
     static float itemsSizeMin = 1.0;
     static float itemsSizeMax = 1.0;
 
-    static std::vector<Entity*> items;
+    static std::vector<std::string> items;
 
     float totalPercentage = 0.0f;
 
-    DrawModelDropZoneAndList(items, Scene, "Items");
+    DrawPrefabList(items, "Items");
 
     ImGui::SeparatorText("Items Settings");
     ImGui::SliderInt("Item Count", &itemsCount, 0, 100);
@@ -356,9 +356,9 @@ void Engine::EditorGUI::DrawGenerativeSystem(Scene* Scene)
     ImGui::End();
 }
 
-void Engine::EditorGUI::DrawModelDropZoneAndList(std::vector<Entity*>& Prefabs, Scene* Scene, const char* UniqueId)
+void Engine::EditorGUI::DrawPrefabList(std::vector<std::string>& Prefabs, const char* UniqueId)
 {
-    static Entity* draggedPrefab = nullptr;
+    static std::string draggedPrefab;
 
     ImGui::SeparatorText("Generated Items");
 
@@ -372,11 +372,10 @@ void Engine::EditorGUI::DrawModelDropZoneAndList(std::vector<Entity*>& Prefabs, 
     {
         ImGui::PushID(i);
 
-        std::string iter = std::to_string(i) + ". ";
-        ImGui::Text(iter.c_str());
+        std::filesystem::path fsPath(Prefabs[i]);
+        std::string filename = fsPath.filename().stem().string();
 
-        ImGui::SameLine();
-        ImGui::Text(Prefabs[i]->GetName().c_str());
+        ImGui::Text("%d. %s", i, filename.c_str());
 
         ImGui::SameLine();
         if (ImGui::Button("Remove"))
@@ -401,17 +400,16 @@ void Engine::EditorGUI::DrawModelDropZoneAndList(std::vector<Entity*>& Prefabs, 
 
             if (filename.ends_with(".prefab"))
             {
-                draggedPrefab = PrefabLoader::LoadPrefabDetached(fullPath, Scene);
+                draggedPrefab = fullPath;
             }
         }
-
         ImGui::EndDragDropTarget();
     }
 
-    if (draggedPrefab)
+    if (!draggedPrefab.empty())
     {
-        Prefabs.emplace_back(draggedPrefab);
-        draggedPrefab = nullptr;
+        Prefabs.emplace_back(std::move(draggedPrefab));
+        draggedPrefab.clear();
     }
 }
 

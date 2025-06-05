@@ -4,14 +4,11 @@
 #include "Serialization/SerializationUtility.h"
 #include "spdlog/spdlog.h"
 #include "Engine/Components/AI/NavMesh.h"
-#include "Engine/Components/Colliders/SphereCollider.h"
-#include "Engine/Components/Game/Thrash.h"
-#include "Engine/Components/Physics/Rigidbody.h"
 
 namespace Generation
 {
     void GenerativeSystem::GenerateItems(Engine::Scene* Scene,
-                                         const std::vector<Engine::Entity*>& Items,
+                                         const std::vector<std::string>& Items,
                                          int ItemsCount, float ItemsDensity, std::vector<float> ItemsPercentages,
                                          float ItemsSizeMin, float ItemsSizeMax)
     {
@@ -211,26 +208,35 @@ namespace Generation
     {
         for (const auto& noisyPos : FailedPositions)
         {
-            for (int stackLevel = 1; stackLevel < MaxStackLevels; ++stackLevel)
+            float baseY = 0.0f;
+
+            for (int stackLevel = 0; stackLevel < MaxStackLevels; ++stackLevel)
             {
-                glm::vec3 stackYOffset(0.0f, stackLevel * YStep, 0.0f);
-                glm::vec3 baseYOffset(0.0f, YOffset, 0.0f);
+                glm::vec3 candidateMin = noisyPos + glm::vec3(AabbMin.x, baseY + YOffset, AabbMin.z);
+                glm::vec3 candidateMax = noisyPos + glm::vec3(AabbMax.x, baseY + YOffset, AabbMax.z);
 
-                glm::vec3 testMin = noisyPos + baseYOffset + stackYOffset + glm::vec3(AabbMin.x, 0.0f, AabbMin.z);
-                glm::vec3 testMax = noisyPos + baseYOffset + stackYOffset + glm::vec3(AabbMax.x, 0.0f, AabbMax.z);
+                bool intersects = false;
+                float topY = baseY;
 
-                bool valid = true;
                 for (const auto& [otherMin, otherMax] : UsedAabbs)
                 {
-                    if (AabBsIntersect(testMin, testMax, otherMin, otherMax))
+                    bool overlapsXZ =
+                            candidateMax.x > otherMin.x && candidateMin.x < otherMax.x &&
+                            candidateMax.z > otherMin.z && candidateMin.z < otherMax.z;
+
+                    if (overlapsXZ && candidateMin.y < otherMax.y && candidateMax.y > otherMin.y)
                     {
-                        valid = false;
-                        break;
+                        intersects = true;
+                        topY = std::max(topY, otherMax.y - noisyPos.y);
                     }
                 }
 
-                if (valid)
-                    return noisyPos + baseYOffset + stackYOffset;
+                if (!intersects)
+                {
+                    return noisyPos + glm::vec3(0.0f, baseY + YOffset, 0.0f);
+                }
+
+                baseY = topY + 0.01f;
             }
         }
 
@@ -249,7 +255,7 @@ namespace Generation
     }
 
     void GenerativeSystem::SpawnItemsEntities(Engine::Scene* Scene, Engine::Entity* Parent,
-                                              const std::vector<Engine::Entity*>& Items,
+                                              const std::vector<std::string>& Items,
                                               const std::vector<int>& Counts, const glm::vec3& BasePosition,
                                               float Spacing, float ItemsSizeMin, float ItemsSizeMax)
     {
@@ -272,7 +278,7 @@ namespace Generation
 
         for (size_t idx : modelIndices)
         {
-            Engine::Entity* prefab = Items[idx];
+            Engine::Entity* prefab = Engine::PrefabLoader::LoadPrefab(Items[idx], Scene, Parent->GetTransform());
             auto modelRenderer = prefab->GetComponent<Engine::ModelRenderer>();
             if (!modelRenderer)
                 continue;
@@ -360,7 +366,7 @@ namespace Generation
                                                            Engine::Entity* Parent, const glm::vec3& Position,
                                                            float YRotationDeg, float Scale, int InstanceIndex)
     {
-        Engine::Entity* entity = Prefab->CloneAsConcrete();
+        Engine::Entity* entity = Prefab;
         entity->SetScene(Scene);
         entity->GetTransform()->SetParent(Parent->GetTransform());
         entity->GetTransform()->SetPosition(Position);

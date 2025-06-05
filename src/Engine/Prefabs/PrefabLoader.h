@@ -12,9 +12,7 @@ namespace Engine
         PrefabLoader() = default;
 
     public:
-        static void LoadPrefab(const std::string& Path, Scene* Scene, Transform* Parent);
-
-        static Entity* LoadPrefabDetached(const std::string& Path, Scene* Scene);
+        static Entity* LoadPrefab(const std::string& Path, Scene* Scene, Transform* Parent);
 
         static void SavePrefabToFile(const std::string& Path, const Entity* Entity);
     };

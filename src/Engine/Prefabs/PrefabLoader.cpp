@@ -4,20 +4,12 @@
 
 namespace Engine
 {
-    void PrefabLoader::LoadPrefab(const std::string& Path, Scene* const Scene, Transform* const Parent)
+    Entity* PrefabLoader::LoadPrefab(const std::string& Path, Scene* const Scene, Transform* const Parent)
     {
         rapidjson::Document document;
         Serialization::ReadJsonFile(Path.c_str(), document);
         rapidjson::Value& content = document["Prefab"].GetArray();
-        Entity::DeserializeEntity(content, Scene, Parent);
-    }
-
-    Entity* PrefabLoader::LoadPrefabDetached(const std::string& Path, Scene* Scene)
-    {
-        rapidjson::Document document;
-        Serialization::ReadJsonFile(Path.c_str(), document);
-        rapidjson::Value& content = document["Prefab"].GetArray();
-        return Entity::DeserializeEntityDetached(content, Scene);
+        return Entity::DeserializeEntity(content, Scene, Parent);
     }
 
     void PrefabLoader::SavePrefabToFile(const std::string& Path, const Entity* Entity)

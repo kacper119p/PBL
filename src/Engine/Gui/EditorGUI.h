@@ -37,7 +37,7 @@ namespace Engine
 
         void DrawGenerativeSystem(Scene* Scene);
 
-        void DrawModelDropZoneAndList(std::vector<Entity*>& Prefabs, Scene* Scene, const char* UniqueId);
+        void DrawPrefabList(std::vector<std::string>& Prefabs, const char* UniqueId);
 
     private:
         void SetupDockspace();

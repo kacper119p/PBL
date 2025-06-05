@@ -28,7 +28,7 @@ namespace Generation
          * @param ItemsSizeMax Maximum scale factor for items size.
          */
         void GenerateItems(Engine::Scene* Scene,
-                           const std::vector<Engine::Entity*>& Items, int ItemsCount,
+                           const std::vector<std::string>& Items, int ItemsCount,
                            float ItemsDensity, std::vector<float> ItemsPercentages, float ItemsSizeMin,
                            float ItemsSizeMax);
 
@@ -146,7 +146,7 @@ namespace Generation
          * @param ItemsSizeMax Maximum scale factor for items.
          */
         void SpawnItemsEntities(Engine::Scene* Scene, Engine::Entity* Parent,
-                                const std::vector<Engine::Entity*>& Items,
+                                const std::vector<std::string>& Items,
                                 const std::vector<int>& Counts, const glm::vec3& BasePosition,
                                 float Density, float ItemsSizeMin, float ItemsSizeMax);
 
