@@ -32,7 +32,7 @@ namespace Engine
 
     void AnimatedModelRenderer::RenderDepth(const CameraRenderData& RenderData)
     {
-        if (Model == nullptr || Animation == nullptr)
+        if (Model == nullptr || Animation == nullptr||Material == nullptr)
         {
             return;
         }
@@ -42,7 +42,7 @@ namespace Engine
 
     void AnimatedModelRenderer::Render(const CameraRenderData& RenderData)
     {
-        if (Model == nullptr || Animation == nullptr)
+        if (Model == nullptr || Animation == nullptr || Material == nullptr)
         {
             return;
         }
@@ -52,7 +52,7 @@ namespace Engine
 
     void AnimatedModelRenderer::RenderDirectionalShadows(const CameraRenderData& RenderData)
     {
-        if (Model == nullptr || Animation == nullptr)
+        if (Model == nullptr || Animation == nullptr || Material == nullptr)
         {
             return;
         }
@@ -63,7 +63,7 @@ namespace Engine
     void AnimatedModelRenderer::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                                        const glm::mat4* const SpaceTransformMatrices)
     {
-        if (Model == nullptr || Animation == nullptr)
+        if (Model == nullptr || Animation == nullptr || Material == nullptr)
         {
             return;
         }
@@ -85,6 +85,10 @@ namespace Engine
 
     void AnimatedModelRenderer::SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const
     {
+        if (Model == nullptr || Animation == nullptr || Material == nullptr)
+        {
+            return;
+        }
         Shader.SetUniform("CameraPosition", RenderData.CameraPosition);
         Shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
         Shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
@@ -99,6 +103,10 @@ namespace Engine
 
     void AnimatedModelRenderer::Draw() const
     {
+        if (Model == nullptr || Animation == nullptr || Material == nullptr)
+        {
+            return;
+        }
         for (int i = 0; i < Model->GetMeshCount(); ++i)
         {
             Model->GetMesh(i)->Draw();
@@ -120,7 +128,6 @@ namespace Engine
 
             std::string materialPath = fs::absolute("./res/materials/SampleScene").string();
             std::string modelPath = fs::absolute("./res/Models").string();
-
             if (!scanned)
             {
                 for (const auto& entry : fs::recursive_directory_iterator(materialPath))
@@ -150,6 +157,8 @@ namespace Engine
 
                 scanned = true;
             }
+
+
             if (Material)
             {
                 ImGui::Text("Material Properties:");
@@ -170,7 +179,8 @@ namespace Engine
                     const char* droppedPath = static_cast<const char*>(payload->Data);
                     if (fs::path(droppedPath).extension() == ".mat")
                     {
-                        SetMaterial(Materials::MaterialManager::GetMaterial(droppedPath));
+                        fs::path relPath = fs::relative(droppedPath, fs::current_path());
+                        SetMaterial(Materials::MaterialManager::GetMaterial(relPath.string()));
                     }
                 }
                 ImGui::EndDragDropTarget();
@@ -192,9 +202,13 @@ namespace Engine
                     std::filesystem::path fsPath(path);
                     std::string displayName = fsPath.filename().string();
 
+                    static char currentMaterialName[256] = {};
+                    strncpy_s(currentMaterialName, fsPath.filename().string().c_str(), sizeof(currentMaterialName) - 1);
+
                     if (ImGui::Selectable(displayName.c_str()))
                     {
-                        SetMaterial(Materials::MaterialManager::GetMaterial(fsPath.string()));
+                        fs::path relPath = fs::path("./res/materials/SampleScene/" + std::string(currentMaterialName));
+                        SetMaterial(Materials::MaterialManager::GetMaterial(relPath.string()));
                         ImGui::CloseCurrentPopup();
                     }
 
@@ -280,8 +294,8 @@ namespace Engine
             ImGui::Separator();
 
             ImGui::Text("Animation:");
-            modelPath = Model ? Models::ModelManager::GetAnimationPath(Animation) : "None";
-            ImGui::Selectable(modelPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
+            std::string animationPath = Animation ? Models::ModelManager::GetAnimationPath(Animation) : "None";
+            ImGui::Selectable(animationPath.c_str(), false, ImGuiSelectableFlags_AllowDoubleClick);
 
             if (ImGui::BeginDragDropTarget())
             {
@@ -314,7 +328,7 @@ namespace Engine
 
                     if (ImGui::Selectable(displayName.c_str()))
                     {
-                        Model = Models::ModelManager::GetAnimatedModel(path.c_str());
+                        Animation = Models::ModelManager::GetAnimation(path.c_str());
                         ImGui::CloseCurrentPopup();
                     }
 
