@@ -58,6 +58,7 @@ namespace Utility
 
         int32_t format;
         int32_t blockSize;
+        GLenum dataType;
 
 #if DEBUG
         constexpr char DX10FourCC[4] = {'D', 'X', '1', '0'};
@@ -72,22 +73,32 @@ namespace Utility
             case DXGI_FORMAT_BC1_UNORM: // DXT1
                 format = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
                 blockSize = 8;
+                dataType = GL_NONE;
                 break;
             case DXGI_FORMAT_BC2_UNORM: // DXT3
                 format = GL_COMPRESSED_RGBA_S3TC_DXT3_EXT;
                 blockSize = 16;
+                dataType = GL_NONE;
                 break;
             case DXGI_FORMAT_BC3_UNORM: // DXT5
                 format = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
                 blockSize = 16;
+                dataType = GL_NONE;
                 break;
             case DXGI_FORMAT_BC7_UNORM: // BPTC
                 format = GL_COMPRESSED_RGBA_BPTC_UNORM;
                 blockSize = 16;
+                dataType = GL_NONE;
                 break;
-            case DXGI_FORMAT_R16G16B16A16_UNORM: // uncompressed
+            case DXGI_FORMAT_R16G16B16A16_UNORM: // uncompressed 16 bit
                 format = GL_RGBA16;
                 blockSize = 8;
+                dataType = GL_UNSIGNED_SHORT;
+                break;
+            case DXGI_FORMAT_R8G8B8A8_UNORM: // uncompressed 8 bit
+                format = GL_RGBA8;
+                blockSize = 4;
+                dataType = GL_UNSIGNED_BYTE;
                 break;
             default: // Unsupported format
 #if DEBUG
@@ -134,7 +145,8 @@ namespace Utility
         // loop through sending block at a time with the magic formula
         // upload to opengl properly, note the offset transverses the pointer
         // assumes each mipmap is 1/2 the size of the previous mipmap
-        if (headerDxt.dxgiFormat == DXGI_FORMAT_R16G16B16A16_UNORM)
+        if (headerDxt.dxgiFormat == DXGI_FORMAT_R16G16B16A16_UNORM ||
+            headerDxt.dxgiFormat == DXGI_FORMAT_R8G8B8A8_UNORM)
         {
             for (unsigned int i = 0; i < mipMapCount; i++)
             {
@@ -145,7 +157,7 @@ namespace Utility
                     continue;
                 }
                 size = w * h * blockSize;
-                glTexImage2D(GL_TEXTURE_2D, static_cast<GLint>(i), format, w, h, 0, GL_RGBA, GL_UNSIGNED_SHORT,
+                glTexImage2D(GL_TEXTURE_2D, static_cast<GLint>(i), format, w, h, 0, GL_RGBA, dataType,
                              buffer + offset);
                 offset += size;
                 w /= 2;

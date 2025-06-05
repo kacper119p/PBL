@@ -55,7 +55,7 @@ namespace Engine
         Scene();
 
     public:
-        virtual ~Scene();
+        ~Scene();
 
     public:
         /**
@@ -141,15 +141,16 @@ namespace Engine
             delete this->Ui;
             this->Ui = Ui;
         }
+#endif
 
         /**
-         * @brief Returns world space bounding box for scene geometry.
-         */
+        * @brief Returns world space bounding box for scene geometry.
+        */
         [[nodiscard]] Models::AABBox3 GetBounds() const
         {
             return Bounds;
         }
-#endif
+
         /**
          * @brief Spawns a new Entity in this scene.
          * @param Parent Parent of this object. If nullptr scene root becomes parent.
@@ -179,7 +180,11 @@ namespace Engine
          */
         void Deserialize(const rapidjson::Value& Value);
 
-        std::string GetPath() const { return Path; }
+        [[nodiscard]] std::string GetPath() const
+        {
+            return Path;
+        }
+
         void SetPath(const std::string& Path) { this->Path = Path; }
 
         void DeleteEntity(Entity* Entity);
@@ -188,9 +193,6 @@ namespace Engine
         void CalculateBounds();
 
     private:
-        static void SerializeEntity(const Entity* Entity, rapidjson::Value& Object,
-                                    rapidjson::Document::AllocatorType& Allocator);
-
         void CalculateBounds(Entity* Entity);
     };
 }

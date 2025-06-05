@@ -11,6 +11,7 @@
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/EngineObjects/CollisionUpdateManager.h"
 #include "Engine/EngineObjects/RigidbodyUpdateManager.h"
+#include "Engine/Components/Colliders/PrimitiveMeshes.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialManager.h"
 #include "Models/ModelManager.h"
@@ -21,7 +22,6 @@
 #include "UI/FontRendering/TextManager.h"
 #include "Engine/Components/Audio/AudioSource.h"
 #include "Engine/Components/Audio/AudioListener.h"
-#include "UI/FontRendering/TextManager.h"
 #include "UI/UiImplementations/SampleUi.h"
 #include "tracy/Tracy.hpp"
 #if DEBUG
@@ -104,6 +104,7 @@ namespace Engine
 #else
             InputManager::GetInstance().Update();
             CameraFollow::GetInstance().Update(deltaTime);
+            CameraFollow::GetInstance().SetTarget(CurrentScene->GetPlayer());
 #endif
 #if !EDITOR
             RigidbodyUpdateManager::GetInstance()->Update(deltaTime);
@@ -116,7 +117,7 @@ namespace Engine
             const CameraRenderData renderData(Camera->GetPosition(), Camera->GetTransform(),
                                               Camera->GetProjectionMatrix());
 
-            RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight);
+            RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight, deltaTime);
             AudioListener->UpdateListener();
 
 
@@ -137,6 +138,7 @@ namespace Engine
 #endif
 
             // End frame and swap buffers (double buffering)
+            Entity::DestroyQueued();
             EndFrame();
             FrameMark;
         }
@@ -242,6 +244,7 @@ namespace Engine
         Ui::TextManager::Initialize();
         RigidbodyUpdateManager::Initialize();
         CollisionUpdateManager::Initialize();
+        PrimitiveMeshes::Initialize();
 #if EDITOR
         //for editor game screen
         InitEditorFramebuffer();
@@ -287,12 +290,12 @@ namespace Engine
         {
             Camera->SetPosition(Camera->GetPosition() - cameraSpeed * Camera->GetForward());
         }
-        if (glfwGetKey(Window, GLFW_KEY_A) == GLFW_PRESS || glfwGetKey(Window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+        if (glfwGetKey(Window, GLFW_KEY_A) == GLFW_PRESS || glfwGetKey(Window, GLFW_KEY_LEFT) == GLFW_PRESS)
         {
             Camera->SetPosition(Camera->GetPosition() -
                                 cameraSpeed * glm::normalize(glm::cross(Camera->GetForward(), Camera->GetUp())));
         }
-        if (glfwGetKey(Window, GLFW_KEY_D) == GLFW_PRESS || glfwGetKey(Window, GLFW_KEY_LEFT) == GLFW_PRESS)
+        if (glfwGetKey(Window, GLFW_KEY_D) == GLFW_PRESS || glfwGetKey(Window, GLFW_KEY_RIGHT) == GLFW_PRESS)
         {
             Camera->SetPosition(Camera->GetPosition() +
                                 cameraSpeed * glm::normalize(glm::cross(Camera->GetForward(), Camera->GetUp())));

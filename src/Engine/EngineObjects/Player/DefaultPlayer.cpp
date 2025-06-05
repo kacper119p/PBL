@@ -1,4 +1,12 @@
 #include "DefaultPlayer.h"
 
-namespace Engine {
-} // Engine
+namespace Engine
+{
+    void DefaultPlayer::Start()
+    {
+    }
+
+    void DefaultPlayer::Update()
+    {
+    }
+}

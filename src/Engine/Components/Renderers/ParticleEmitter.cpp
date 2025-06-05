@@ -7,6 +7,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <GLFW/glfw3.h>
 
+#include "Engine/EngineObjects/RenderingManager.h"
 #include "Serialization/SerializationUtility.h"
 
 Engine::ParticleEmitter::ParticleEmitter(Materials::Material* const Material, const Shaders::ComputeShader& SpawnShader,
@@ -23,9 +24,6 @@ Engine::ParticleEmitter::ParticleEmitter(Materials::Material* const Material, co
 
 void Engine::ParticleEmitter::Render(const Engine::CameraRenderData& RenderData)
 {
-    glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-    glEnable(GL_BLEND);
     SetupMatrices(RenderData, Material->GetMainPass());
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, ParticlesBuffer);
     for (int i = 0; i < Settings.Model->GetMeshCount(); ++i)
@@ -35,26 +33,53 @@ void Engine::ParticleEmitter::Render(const Engine::CameraRenderData& RenderData)
         glDrawArraysInstanced(GL_TRIANGLES, 0, mesh->GetFaceCount(), MaxParticleCount);
         glBindVertexArray(0);
     }
-    glDisable(GL_BLEND);
 }
 
-void Engine::ParticleEmitter::RenderDepth(const CameraRenderData& RenderData)
+void Engine::ParticleEmitter::SetMaterial(Materials::Material* Material)
 {
+    if (Material == this->Material)
+    {
+        return;
+    }
+    RenderingManager::GetInstance()->UnregisterParticleEmitter(this);
+    this->Material = Material;
+    if (Material == nullptr)
+    {
+        return;
+    }
+    RenderingManager::GetInstance()->RegisterParticleEmitter(this);
 }
 
-void Engine::ParticleEmitter::RenderDirectionalShadows(const Engine::CameraRenderData& RenderData)
+void Engine::ParticleEmitter::Start()
 {
+    if (Material != nullptr)
+    {
+        RenderingManager::GetInstance()->RegisterParticleEmitter(this);
+    }
+
+    glGenBuffers(1, &ParticlesBuffer);
+    glGenBuffers(1, &FreelistBuffer);
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, ParticlesBuffer);
+
+    const Particle* particles = new Particle[MaxParticleCount]{};
+    glBufferData(GL_SHADER_STORAGE_BUFFER, MaxParticleCount * sizeof(Particle), particles, GL_DYNAMIC_DRAW);
+    delete[] particles;
+
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, FreelistBuffer);
+    int* freeList = new int[MaxParticleCount + 1]{0};
+    freeList[0] = MaxParticleCount;
+    for (int i = 1; i <= MaxParticleCount; ++i)
+    {
+        freeList[i] = i - 1;
+    }
+    glBufferData(GL_SHADER_STORAGE_BUFFER, (MaxParticleCount + 1) * sizeof(int), freeList, GL_DYNAMIC_DRAW);
+    delete[] freeList;
+
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 }
 
-void Engine::ParticleEmitter::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
-                                                     const glm::mat4* SpaceTransformMatrices)
+void Engine::ParticleEmitter::DispatchSpawnShaders(const float DeltaTime)
 {
-}
-
-void Engine::ParticleEmitter::Update(float DeltaTime)
-{
-    glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
-
     Timer += DeltaTime;
 
     const int particlesToSpawn = std::min(static_cast<int>(Timer * Settings.SpawnRate), MaxParticleCount);
@@ -78,6 +103,10 @@ void Engine::ParticleEmitter::Update(float DeltaTime)
         Shaders::ComputeShader::Dispatch(glm::ivec3(workGroupsCount, 1, 1));
         glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
     }
+}
+
+void Engine::ParticleEmitter::DispatchUpdateShaders(const float DeltaTime)
+{
     UpdateShader.Use();
     Shaders::ComputeShader::SetUniform(DeltaTimeProperty, DeltaTime);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ParticlesBuffer);
@@ -88,35 +117,8 @@ void Engine::ParticleEmitter::Update(float DeltaTime)
     Shaders::ComputeShader::Dispatch(glm::ivec3(workGroupsCount, 1, 1));
 }
 
-void Engine::ParticleEmitter::Start()
-{
-    Renderer::Start();
-    UpdateManager::GetInstance()->RegisterComponent(this);
-
-    glGenBuffers(1, &ParticlesBuffer);
-    glGenBuffers(1, &FreelistBuffer);
-    glBindBuffer(GL_SHADER_STORAGE_BUFFER, ParticlesBuffer);
-
-    const Particle* particles = new Particle[MaxParticleCount]{};
-    glBufferData(GL_SHADER_STORAGE_BUFFER, MaxParticleCount * sizeof(Particle), particles, GL_DYNAMIC_DRAW);
-    delete[] particles;
-
-    glBindBuffer(GL_SHADER_STORAGE_BUFFER, FreelistBuffer);
-    int* freeList = new int[MaxParticleCount + 1]{0};
-    freeList[0] = MaxParticleCount;
-    for (int i = 1; i <= MaxParticleCount; ++i)
-    {
-        freeList[i] = i - 1;
-    }
-    glBufferData(GL_SHADER_STORAGE_BUFFER, (MaxParticleCount + 1) * sizeof(int), freeList, GL_DYNAMIC_DRAW);
-    delete[] freeList;
-
-    glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
-}
-
 Engine::ParticleEmitter::~ParticleEmitter()
 {
-    UpdateManager::GetInstance()->UnregisterComponent(this);
 }
 
 void Engine::ParticleEmitter::SetupMatrices(const Engine::CameraRenderData& RenderData,

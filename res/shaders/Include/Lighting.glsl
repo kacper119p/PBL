@@ -90,6 +90,7 @@ light CalculatePointLight(pointLight Light, vec3 Position)
 
     result.Direction = -normalize(offset);
     result.Attenuation = 1.0 / (1.0f + Distance * (Light.LinearFalloff + Light.QuadraticFalloff * Distance));
+    result.Attenuation *= step(Distance, Light.Range);
 
     return result;
 }
@@ -263,18 +264,30 @@ vec3 CalculateLight(vec3 BaseColor, float Metallic, float Roughness, vec3 Normal
                                          Roughness,
                                          Metallic,
                                          F0);
+        if (PointLightCount > 1)
+        {
+            Light += CalculateLightInfluence(CalculatePointLightShadowed(PointLights[1], PointLightShadowMap1, Position),
+                                             BaseColor,
+                                             Normal,
+                                             ViewDirection,
+                                             Roughness,
+                                             Metallic,
+                                             F0);
+
+            for (uint i = 0; i < PointLightCount - 2; ++i)
+            {
+                Light += CalculateLightInfluence(CalculatePointLight(PointLightsDynamic[i], Position),
+                                                 BaseColor,
+                                                 Normal,
+                                                 ViewDirection,
+                                                 Roughness,
+                                                 Metallic,
+                                                 F0);
+            }
+        }
     }
 
-    if (PointLightCount > 1)
-    {
-        Light += CalculateLightInfluence(CalculatePointLightShadowed(PointLights[1], PointLightShadowMap1, Position),
-                                         BaseColor,
-                                         Normal,
-                                         ViewDirection,
-                                         Roughness,
-                                         Metallic,
-                                         F0);
-    }
+
 
     if (SpotlightCount > 0)
     {
@@ -285,29 +298,19 @@ vec3 CalculateLight(vec3 BaseColor, float Metallic, float Roughness, vec3 Normal
                                          Roughness,
                                          Metallic,
                                          F0);
+        if (SpotlightCount > 1)
+        {
+            Light += CalculateLightInfluence(CalculateSpotLightShadowed(SpotLights[1], SpotLightShadowMap1, Position),
+                                             BaseColor,
+                                             Normal,
+                                             ViewDirection,
+                                             Roughness,
+                                             Metallic,
+                                             F0);
+        }
     }
 
-    if (SpotlightCount > 1)
-    {
-        Light += CalculateLightInfluence(CalculateSpotLightShadowed(SpotLights[1], SpotLightShadowMap1, Position),
-                                         BaseColor,
-                                         Normal,
-                                         ViewDirection,
-                                         Roughness,
-                                         Metallic,
-                                         F0);
-    }
 
-    for (uint i = 0; i < PointLightsDynamic.length(); ++i)
-    {
-        Light += CalculateLightInfluence(CalculatePointLight(PointLightsDynamic[i], Position),
-                                         BaseColor,
-                                         Normal,
-                                         ViewDirection,
-                                         Roughness,
-                                         Metallic,
-                                         F0);
-    }
 
     vec3 Color = Light + CalculateEnvironmentInfluence(BaseColor,
                                                        Normal,

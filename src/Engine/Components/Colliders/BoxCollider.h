@@ -32,11 +32,11 @@ namespace Engine
         ~BoxCollider() override;
 
     public:
-        virtual bool AcceptCollision(ColliderVisitor& visitor) override;
+        bool AcceptCollision(ColliderVisitor& visitor) override;
 
         //virtual bool CheckCollision(const Collider& other) override;
 
-        inline virtual Collider* GetInstance() override { return this; }
+        inline Collider* GetInstance() override { return this; }
 
         glm::vec3 GetBoundingBox() const override { return glm::vec3(_width, _height, _depth); }
 
@@ -79,8 +79,12 @@ namespace Engine
 #endif
         }
 
-        glm::mat3 CalculateInertiaTensor(float mass) const override;
+        glm::mat3 CalculateInertiaTensorBody(float mass) const override;
 
+        PrimitiveMesh* GetMesh();
+        
+
+        void Start() override;
 #if EDITOR
         void RenderDepth(const CameraRenderData& RenderData) override;
 
@@ -91,7 +95,7 @@ namespace Engine
         void RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                     const glm::mat4* SpaceTransformMatrices) override;
 
-        void DrawDebugMesh(const CameraRenderData& RenderData) const;
+        void DrawDebugMesh(const CameraRenderData& RenderData, Shaders::Shader Shader) const;
 #endif
         BoxCollider& operator=(const BoxCollider& other);
 

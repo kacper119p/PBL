@@ -4,7 +4,7 @@ namespace Engine
 {
     glm::vec4 Frustum::NormalizePlane(const glm::vec4& Plane)
     {
-        float length = glm::length(glm::vec3(Plane));
+        const float length = glm::length(glm::vec3(Plane));
         if (length > 0.0f)
             return Plane / length;
         return Plane;
@@ -77,7 +77,7 @@ namespace Engine
 
             for (const auto& corner : corners)
             {
-                float distance = glm::dot(normal, corner) + d;
+                const float distance = glm::dot(normal, corner) + d;
                 if (distance >= 0.0f)
                 {
                     insideCount++;
@@ -96,23 +96,28 @@ namespace Engine
 
     bool Frustum::IsSphereVisible(const glm::vec3& Center, float Radius, const glm::mat4& ObjectToWorldMatrix) const
     {
-        glm::vec3 worldCenter = glm::vec3(ObjectToWorldMatrix * glm::vec4(Center, 1.0f));
+        const glm::vec3 worldCenter = glm::vec3(ObjectToWorldMatrix * glm::vec4(Center, 1.0f));
 
         float scaleX = glm::length(glm::vec3(ObjectToWorldMatrix[0]));
         float scaleY = glm::length(glm::vec3(ObjectToWorldMatrix[1]));
         float scaleZ = glm::length(glm::vec3(ObjectToWorldMatrix[2]));
-        float maxScale = std::max({scaleX, scaleY, scaleZ});
+        const float maxScale = std::max({scaleX, scaleY, scaleZ});
 
-        float worldRadius = Radius * maxScale;
+        const float worldRadius = Radius * maxScale;
 
+        return IsSphereVisible(worldCenter, worldRadius);
+    }
+
+    bool Frustum::IsSphereVisible(const glm::vec3& Center, const float Radius) const
+    {
         for (int i = 0; i < 6; ++i)
         {
             auto normal = glm::vec3(Planes[i]);
-            float d = Planes[i].w;
+            const float d = Planes[i].w;
 
-            float distance = glm::dot(normal, worldCenter) + d;
+            const float distance = glm::dot(normal, Center) + d;
 
-            if (distance < -worldRadius)
+            if (distance < -Radius)
             {
                 return false;
             }

@@ -36,7 +36,9 @@ namespace Engine
 
         inline virtual Collider* GetInstance() override { return this; }
 
-        virtual glm::mat3 CalculateInertiaTensor(float mass) const override;
+        glm::mat3 CalculateInertiaTensorBody(float mass) const override;
+
+        PrimitiveMesh* GetMesh();
 
         glm::vec3 GetBoundingBox() const override
         {
@@ -72,7 +74,7 @@ namespace Engine
         CapsuleCollider& operator=(const CapsuleCollider& other);
 
 #if EDITOR
-        void DrawDebugMesh(const CameraRenderData& RenderData);
+        void DrawDebugMesh(const CameraRenderData& RenderData, Shaders::Shader Shader);
 
         void RenderDepth(const CameraRenderData& RenderData) override;
 

@@ -7,6 +7,7 @@
 #include <glm/glm.hpp>
 #include "Engine/Components/Renderers/Renderer.h"
 #include "Events/Action.h"
+#include "PrimitiveMeshes.h"
 
 namespace Engine
 {
@@ -35,7 +36,7 @@ namespace Engine
     protected:
         bool isStatic;
         bool isTrigger;
-        glm::ivec3 CurrentCellIndex = glm::ivec3(0, 0, 0); // non-definable by user
+        glm::ivec2 CurrentCellIndex = glm::ivec2(0, 0); // non-definable by user
         SpatialPartitioning* Spatial;
 
         // TODO: remove when rigidbody fully implemented
@@ -46,11 +47,10 @@ namespace Engine
         ColliderTypeE colliderType;
         Events::TEvent<Collider*> OnCollision;
         Events::TEvent<Collider*> OnTrigger;
-
         /// TODO: move those to protected and add getters + setters
         Transform* transform;
         ColliderVisitor colliderVisitor;
-
+        PrimitiveMesh mesh;
         bool isColliding;
 
         Collider();
@@ -65,7 +65,10 @@ namespace Engine
 
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
 
-        virtual glm::mat3 CalculateInertiaTensor(float mass) const = 0;
+        virtual glm::mat3 CalculateInertiaTensorBody(float mass) const = 0;
+
+        std::vector<Collider*> SphereOverlap(glm::vec3& position, float Radius) const;
+        
 
         void SetTrigger(bool isTrigger)
         {
@@ -86,6 +89,8 @@ namespace Engine
         {
             return isStatic;
         }
+
+        PrimitiveMesh* GetMesh() { return &mesh; }
 
         void SetTransform(Transform* transform)
         {
@@ -142,6 +147,8 @@ namespace Engine
         {
             return this == other;
         }
+
+       
 
         void Start() override;
 

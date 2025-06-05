@@ -1,6 +1,5 @@
 #pragma once
 
-#include <vector>
 #include <Engine/Rendering/RenderersCollection.h>
 
 #include "Engine/Components/Renderers/Renderer.h"
@@ -11,6 +10,7 @@
 #include "Engine/UI/Ui.h"
 #include "Engine/Rendering/Frustum.h"
 #include "Engine/Rendering/Postprocessing/GodRays.h"
+#include "Materials/Material.h"
 
 namespace Engine
 {
@@ -21,6 +21,8 @@ namespace Engine
         static uint8_t MultisampleLevel;
 
         RenderersCollection Renderers;
+        RenderersCollection TransparentRenderers;
+        ParticleEmittersCollection ParticleEmitters;
         Ui::Ui* Ui = nullptr;
 
         static RenderingManager* Instance;
@@ -37,7 +39,7 @@ namespace Engine
         explicit RenderingManager(glm::ivec2 Resolution);
 
     public:
-        virtual ~RenderingManager();
+        ~RenderingManager();
 
     public:
         static void Initialize(glm::ivec2 Resolution);
@@ -55,12 +57,36 @@ namespace Engine
 
         void RegisterRenderer(Renderer* const Renderer)
         {
-            Renderers.AddRenderer(Renderer);
+            if (Renderer->GetMaterial()->IsTransparent())
+            {
+                TransparentRenderers.AddRenderer(Renderer);
+            }
+            else
+            {
+                Renderers.AddRenderer(Renderer);
+            }
         }
 
         void UnregisterRenderer(const Renderer* const Renderer)
         {
-            Renderers.RemoveRenderer(Renderer);
+            if (Renderer->GetMaterial()->IsTransparent())
+            {
+                TransparentRenderers.RemoveRenderer(Renderer);
+            }
+            else
+            {
+                Renderers.RemoveRenderer(Renderer);
+            }
+        }
+
+        void RegisterParticleEmitter(ParticleEmitter* const Renderer)
+        {
+            ParticleEmitters.AddRenderer(Renderer);
+        }
+
+        void UnregisterParticleEmitter(const ParticleEmitter* const Renderer)
+        {
+            ParticleEmitters.RemoveRenderer(Renderer);
         }
 
         void RegisterUi(Ui::Ui* const Ui)
@@ -87,7 +113,7 @@ namespace Engine
             return Frustum;
         }
 
-        void RenderAll(const CameraRenderData& RenderData, int ScreenWidth, int ScreenHeight);
+        void RenderAll(const CameraRenderData& RenderData, int ScreenWidth, int ScreenHeight, float DeltaTime);
 
         void RenderAllDirectionalShadowMap(const CameraRenderData& RenderData, unsigned int Target, unsigned int Width,
                                            unsigned int Height);

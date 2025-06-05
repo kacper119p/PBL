@@ -1,3 +1,4 @@
+#include "Engine/Rendering/Plane.h"
 #if EDITOR
 #include "SceneViewGUI.h"
 #include "imgui.h"
@@ -8,21 +9,22 @@
 #include "Engine/EngineObjects/RayCast.h"
 #include "Engine/Components/Renderers/ModelRenderer.h"
 #include "spdlog/spdlog.h"
+#include "Engine/Components/BloodSystem/BloodSourceBase.h"
 
 void RaycastRecursive(Engine::Transform* obj, const glm::vec3& rayOrigin, const glm::vec3& rayDir,
                       Engine::Transform*& outClosest, float& outClosestT)
 {
-    auto* renderer = obj->GetOwner()->GetComponent<Engine::ModelRenderer>();
+    const Engine::ModelRenderer* renderer = obj->GetOwner()->GetComponent<Engine::ModelRenderer>();
     if (renderer && renderer->GetModel())
     {
-        glm::mat4 modelMatrix = obj->GetLocalToWorldMatrix();
-        auto* model = renderer->GetModel();
+        const glm::mat4 modelMatrix = obj->GetLocalToWorldMatrix();
+        const Models::Model* model = renderer->GetModel();
 
         for (int i = 0; i < model->GetMeshCount(); ++i)
         {
-            auto* mesh = model->GetMesh(i);
-            const auto& vertices = mesh->VerticesData;
-            const auto& indices = mesh->VertexIndices;
+            const Models::Mesh* mesh = model->GetMesh(i);
+            const std::vector<Models::Vertex>& vertices = mesh->VerticesData;
+            const std::vector<unsigned>& indices = mesh->VertexIndices;
 
             for (size_t j = 0; j < indices.size(); j += 3)
             {
@@ -39,6 +41,31 @@ void RaycastRecursive(Engine::Transform* obj, const glm::vec3& rayOrigin, const 
                         outClosestT = t;
                         outClosest = obj;
                     }
+                }
+            }
+        }
+    }
+    else if (const Engine::BloodSourceBase* bloodSource = obj->GetOwner()->GetComponent<Engine::BloodSourceBase>())
+    {
+        const glm::mat4 modelMatrix = obj->GetLocalToWorldMatrix();
+
+        const uint32_t* const indices = Engine::Plane::GetIndices();
+
+        for (size_t j = 0; j < Engine::Plane::GetFaceCount(); j += 3)
+        {
+            glm::vec3 v0 = glm::vec3(
+                    modelMatrix * glm::vec4(Engine::Plane::GetVertexPosition(indices[j + 0]), 1.0f));
+            glm::vec3 v1 = glm::vec3(modelMatrix * glm::vec4(Engine::Plane::GetVertexPosition(indices[j + 1]), 1.0f));
+            glm::vec3 v2 = glm::vec3(modelMatrix * glm::vec4(Engine::Plane::GetVertexPosition(indices[j + 2]), 1.0f));
+
+            glm::vec3 hitPoint;
+            if (Engine::RayCast::RayIntersectsTriangle(rayOrigin, rayDir, v0, v1, v2, &hitPoint))
+            {
+                float t = glm::length(hitPoint - rayOrigin);
+                if (t < outClosestT)
+                {
+                    outClosestT = t;
+                    outClosest = obj;
                 }
             }
         }

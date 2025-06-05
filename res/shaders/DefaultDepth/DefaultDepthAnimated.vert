@@ -19,56 +19,40 @@ uniform mat4 finalBonesMatrices[MAX_BONES];
 
 void main()
 {
+    vec4 skinnedPosition = vec4(0.0);
+    vec3 skinnedNormal = vec3(0.0);
+    float totalWeight = 0.0;
 
-    float weightSum = 0.0;
-    for (int i = 0; i < MAX_BONE_INFLUENCE; i++)
+    for (int i = 0; i < MAX_BONE_INFLUENCE; ++i)
     {
-        if (boneIds[i] >= 0)
-        weightSum += weights[i];
-    }
+        int boneId = boneIds[i];
+        float weight = weights[i];
 
-    vec4 totalPosition = vec4(0.0f);
-    vec3 localNormal = vec3(0.0f);
-    if (weightSum == 0.0) {
-        totalPosition = vec4(inputPosition, 1.0);  // Use original position if no bones influence
-    }
-    if (weightSum > 0.0)
-    {
-        for (int i = 0; i < MAX_BONE_INFLUENCE; i++)
-        {
-            if (boneIds[i] == -1) continue;
-            if (boneIds[i] >= MAX_BONES) break;
-
-            vec4 localPosition = finalBonesMatrices[boneIds[i]] * vec4(inputPosition, 1.0f);
-            totalPosition += localPosition * weights[i];
-
-
-        }
-    }
-    else
-    {
-        totalPosition = vec4(inputPosition, 1.0f); // Fallback to original position
-    }
-    for (int i = 0; i < MAX_BONE_INFLUENCE; i++)
-    {
-        if (boneIds[i] == -1)
+        if (boneId < 0 || boneId >= MAX_BONES || weight == 0.0)
         continue;
 
-        if (boneIds[i] >= MAX_BONES)  // too many bones in the model
-        {
-            totalPosition = vec4(inputPosition, 1.0f);
-            break;
-        }
-        vec4 localPosition = finalBonesMatrices[boneIds[i]] * vec4(inputPosition, 1.0f);
-        totalPosition += localPosition * weights[i];
-        localNormal += (mat3(finalBonesMatrices[boneIds[i]]) * inputNormal) * weights[i];
+        totalWeight += weight;
+
+        mat4 boneMatrix = finalBonesMatrices[boneId];
+        mat3 boneMatrix3 = mat3(boneMatrix); // Assuming uniform scale
+
+        skinnedPosition += boneMatrix * vec4(inputPosition, 1.0) * weight;
+        skinnedNormal += boneMatrix3 * inputNormal * weight;
+    }
+    
+    if (totalWeight == 0.0) {
+        skinnedPosition = vec4(inputPosition, 1.0);
+        skinnedNormal = inputNormal;
     }
 
+    mat4 modelMatrix = ObjectToWorldMatrix;
+    mat4 viewMatrix = ViewMatrix;
+    mat4 viewProjMatrix = ProjectionMatrix * viewMatrix;
 
+    gl_Position = viewProjMatrix * modelMatrix * skinnedPosition;
 
-    gl_Position = ProjectionMatrix * ViewMatrix * ObjectToWorldMatrix * totalPosition;
+    vec3 viewNormal = normalize(mat3(viewMatrix * modelMatrix) * skinnedNormal);
+    float depth = -(viewMatrix * modelMatrix * skinnedPosition).z;
 
-    totalPosition.w = 1.0;
-    NormalDepth.xyz = (ViewMatrix * ObjectToWorldMatrix * vec4(localNormal, 0.0)).xyz;
-    NormalDepth.w = -(ViewMatrix * ObjectToWorldMatrix * totalPosition).z;
+    NormalDepth = vec4(viewNormal, depth);
 }

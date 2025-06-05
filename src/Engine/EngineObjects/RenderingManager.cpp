@@ -21,9 +21,28 @@ namespace Engine
         Instance = new RenderingManager(Resolution);
     }
 
-    void RenderingManager::RenderAll(const CameraRenderData& RenderData, int ScreenWidth, int ScreenHeight)
+    void RenderingManager::RenderAll(const CameraRenderData& RenderData, const int ScreenWidth, const int ScreenHeight,
+                                     const float DeltaTime)
     {
         Frustum.UpdateFrustum(RenderData);
+        glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
+        for (const auto& renderersGroup : ParticleEmitters)
+        {
+            for (ParticleEmitter* const renderer : renderersGroup.Renderers)
+            {
+                renderer->DispatchSpawnShaders(DeltaTime);
+            }
+        }
+
+        glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
+        for (const auto& renderersGroup : ParticleEmitters)
+        {
+            for (ParticleEmitter* const renderer : renderersGroup.Renderers)
+            {
+                renderer->DispatchUpdateShaders(DeltaTime);
+            }
+        }
+
         LightManager::GetInstance()->RenderShadowMaps(RenderData);
 
         MultiSampledBuffer.BindMultiSampled();
@@ -31,6 +50,7 @@ namespace Engine
 
         glDepthMask(GL_TRUE);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -42,12 +62,8 @@ namespace Engine
 
         for (const auto& renderersGroup : Renderers)
         {
-            if (renderersGroup.first == nullptr)
-            {
-                continue;
-            }
-            renderersGroup.first->UseDepthPass();
-            for (Renderer* const renderer : renderersGroup.second)
+            renderersGroup.Material->UseDepthPass();
+            for (Renderer* const renderer : renderersGroup.Renderers)
             {
                 renderer->RenderDepth(RenderData);
             }
@@ -69,26 +85,48 @@ namespace Engine
         LightManager::GetInstance()->SetupLightsForRendering(RenderData);
         for (const auto& renderersGroup : Renderers)
         {
-            if (renderersGroup.first == nullptr)
-            {
-                continue;
-            }
-            renderersGroup.first->Use();
-            for (Renderer* const renderer : renderersGroup.second)
+            renderersGroup.Material->Use();
+            for (Renderer* const renderer : renderersGroup.Renderers)
             {
                 renderer->Render(RenderData);
             }
         }
 
-        if (Ui != nullptr)
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_BLEND);
+        for (const auto& renderersGroup : TransparentRenderers)
         {
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            glEnable(GL_BLEND);
-            Ui->Render();
-            glDisable(GL_BLEND);
+            renderersGroup.Material->Use();
+            for (Renderer* const renderer : renderersGroup.Renderers)
+            {
+                renderer->Render(RenderData);
+            }
         }
 
         MultiSampledBuffer.ResolveMultisampling();
+        MultiSampledBuffer.BindResolved();
+
+        glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        glEnable(GL_BLEND);
+        for (const auto& renderersGroup : ParticleEmitters)
+        {
+            renderersGroup.Material->Use();
+            for (ParticleEmitter* const renderer : renderersGroup.Renderers)
+            {
+                renderer->Render(RenderData);
+            }
+        }
+
+#if !EDITOR
+        if (Ui != nullptr)
+        {
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            Ui->Render();
+        }
+#endif
+        glDisable(GL_BLEND);
+
         GodRays.Render(MultiSampledBuffer);
         Bloom.Render(MultiSampledBuffer.GetResolvedColorBuffer());
     }
@@ -106,12 +144,8 @@ namespace Engine
         glClear(GL_DEPTH_BUFFER_BIT);
         for (const auto& renderersGroup : Renderers)
         {
-            if (renderersGroup.first == nullptr)
-            {
-                continue;
-            }
-            renderersGroup.first->UseDirectionalShadows();
-            for (Renderer* const renderer : renderersGroup.second)
+            renderersGroup.Material->UseDirectionalShadows();
+            for (Renderer* const renderer : renderersGroup.Renderers)
             {
                 renderer->RenderDirectionalShadows(RenderData);
             }
@@ -134,12 +168,8 @@ namespace Engine
         glClear(GL_DEPTH_BUFFER_BIT);
         for (const auto& renderersGroup : Renderers)
         {
-            if (renderersGroup.first == nullptr)
-            {
-                continue;
-            }
-            renderersGroup.first->UsePointSpotShadows();
-            for (Renderer* const renderer : renderersGroup.second)
+            renderersGroup.Material->UsePointSpotShadows();
+            for (Renderer* const renderer : renderersGroup.Renderers)
             {
                 renderer->RenderPointSpotShadows(LightPosition, LightRange, SpaceTransformMatrices);
             }

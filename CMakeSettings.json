@@ -23,7 +23,7 @@
             "inheritEnvironments": [ "msvc_x64_x64" ],
             "environments": [
                 {
-                    "Editor": "0"
+                    "Editor": "1"
                 }
             ]
 

@@ -25,7 +25,7 @@ namespace Engine
         glm::vec3 Position = glm::vec3(0.0f, 0.0f, 0.0f);
         glm::vec3 EulerAngles = glm::vec3(0.0f, 0.0f, 0.0f);
         glm::vec3 Scale = glm::vec3(1.0f, 1.0f, 1.0f);
-        glm::quat Rotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+        glm::quat Rotation = glm::quat();
 
         glm::mat4 LocalMatrix = glm::mat4(1.0f);
         glm::mat4 LocalToWorldMatrix = glm::mat4(1.0f);
@@ -143,7 +143,7 @@ namespace Engine
         }
 
         /**
-         * @brief Sets rotation of this transform represented by quaternion..
+         * @brief Sets rotation of this transform represented by quaternion.
          * @return
          */
         [[nodiscard]] glm::quat GetRotation() const

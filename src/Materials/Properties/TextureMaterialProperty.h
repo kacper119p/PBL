@@ -27,6 +27,11 @@ namespace Materials
         {
         }
 
+        TextureMaterialProperty() :
+            Location(-1), TextureId(0), Handle(0)
+        {
+        }
+
     public:
         ~TextureMaterialProperty() = default;
 

@@ -6,6 +6,10 @@ namespace Engine
     void Renderer::Start()
     {
         Component::Start();
+        if (Material == nullptr)
+        {
+            return;
+        }
         RenderingManager::GetInstance()->RegisterRenderer(this);
     }
 
@@ -15,13 +19,24 @@ namespace Engine
         {
             return;
         }
-        RenderingManager::GetInstance()->UnregisterRenderer(this);
+        if (this->Material != nullptr)
+        {
+            RenderingManager::GetInstance()->UnregisterRenderer(this);
+        }
         this->Material = Material;
+        if (Material == nullptr)
+        {
+            return;
+        }
         RenderingManager::GetInstance()->RegisterRenderer(this);
     }
 
     Renderer::~Renderer()
     {
+        if (Material == nullptr)
+        {
+            return;
+        }
         RenderingManager::GetInstance()->UnregisterRenderer(this);
     }
 } // Engine

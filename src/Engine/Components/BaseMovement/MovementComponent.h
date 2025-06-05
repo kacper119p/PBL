@@ -7,6 +7,7 @@
 #include "Serialization/SerializationUtility.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "../../EngineObjects/UpdateManager.h"
+#include "Engine/Components/Physics/Rigidbody.h"
 
 namespace Engine
 {
@@ -14,13 +15,20 @@ namespace Engine
     {
     private:
         float Speed;
-
+        float RotationSpeed = 3.0f;
+        float CurrentVelocity = 0.0f;
+        float smooth = 0.97f;
     public:
-        MovementComponent(float speed = 20.0f) : Speed(speed)
+        MovementComponent(float speed = 50.0f) : Speed(speed)
         {
             UpdateManager::GetInstance()->RegisterComponent(this);
         }
-        void Start() override {}
+        void Start() override 
+        { 
+        GetOwner()->GetComponent<Rigidbody>()->constraints.freezeRotationX=true;
+        GetOwner()->GetComponent<Rigidbody>()->constraints.freezeRotationZ=true;
+        }
+        
         void Update(float deltaTime) override;
         void OnDestroy() override {}
 
@@ -31,8 +39,9 @@ namespace Engine
         #if EDITOR
         void DrawImGui() override
         {
-            // Implementacja GUI dla edytora (opcjonalna)
-            std::cout << "MovementComponent: Speed = " << Speed << std::endl;
+            char speedBuffer[32];
+            snprintf(speedBuffer, sizeof(speedBuffer), "%.2f", Speed);
+            ImGui::Text("MovementComponent: Speed = %s", speedBuffer);
         }
         #endif
     };

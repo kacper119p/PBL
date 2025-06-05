@@ -9,6 +9,7 @@
 #include "Engine/EngineObjects/Entity.h"
 #include <iostream>
 #include "Engine/Components/BaseMovement/MovementComponent.h"
+#include "Engine/EngineObjects/Entity.h"
 
 namespace Engine
 {
@@ -18,7 +19,6 @@ namespace Engine
         Spatial(&SpatialPartitioning::GetInstance())
     {
         this->colliderVisitor = ColliderVisitor();
-        Spatial = &SpatialPartitioning::GetInstance();
         transform = GetOwner()->GetTransform();
 #if EDITOR
         SetMaterial(Materials::MaterialManager::GetMaterial("res/materials/Editor/Gizmo.mat"));
@@ -27,6 +27,11 @@ namespace Engine
 
     Collider::~Collider()
     {
+        colliderVisitor.~ColliderVisitor(); }
+
+    std::vector<Collider*> Collider::SphereOverlap(glm::vec3& position, float Radius) const
+    {
+        return SpatialPartitioning::GetInstance().QuerySphere(position, Radius);
     }
 
     Collider& Collider::operator=(const Collider& Other)
@@ -59,7 +64,6 @@ namespace Engine
         colliderVisitor.SetCurrentCollider(this);
         Spatial = &SpatialPartitioning::GetInstance();
         Spatial->AddCollider(this);
-        CurrentCellIndex = Spatial->GetCellIndex(transform->GetPositionWorldSpace());
         CollisionUpdateManager::GetInstance()->RegisterCollider(this);
     }
 
@@ -80,7 +84,7 @@ namespace Engine
     void Collider::OnDestroy()
     {
         CollisionUpdateManager::GetInstance()->UnregisterCollider(this);
-        Spatial->RemoveCollider(this);
+        SpatialPartitioning::GetInstance().RemoveCollider(this);
     }
 
     // TODO: remove when rigidbody implemented

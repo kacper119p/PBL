@@ -28,6 +28,21 @@ namespace Engine
 #endif
     }
 
+    void BoxCollider::Start() 
+    { 
+        Collider::Start();
+        transform = GetOwner()->GetTransform();
+    }
+
+    PrimitiveMesh* BoxCollider::GetMesh()
+    
+    {
+        mesh = PrimitiveMeshes::GetInstance().GetBoxMesh(transform->GetPosition(), transform->GetRotation(),
+                                                              _width, _height, _depth);
+        return &mesh;
+    }
+    
+
     bool BoxCollider::AcceptCollision(ColliderVisitor& visitor)
     {
         visitor.ResolveCollisionBox(*this);
@@ -85,25 +100,23 @@ namespace Engine
         END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 
-    glm::mat3 BoxCollider::CalculateInertiaTensor(float mass) const
+    glm::mat3 BoxCollider::CalculateInertiaTensorBody(float mass) const
     {
-        float w = _width;
-        float h = _height;
-        float d = _depth;
-        float coeff = (1.0f / 12.0f) * mass;
+        float ix = (1.0f / 12.0f) * mass * (_height * _height + _depth * _depth);
+        float iy = (1.0f / 12.0f) * mass * (_width * _width + _depth * _depth);
+        float iz = (1.0f / 12.0f) * mass * (_width * _width + _height * _height);
 
-        return glm::mat3(coeff * (h * h + d * d), 0.0f, 0.0f, 0.0f, coeff * (w * w + d * d), 0.0f, 0.0f, 0.0f,
-                         coeff * (w * w + h * h));
+        return glm::mat3(ix, 0.0f, 0.0f, 0.0f, iy, 0.0f, 0.0f, 0.0f, iz);
     }
 
 #if EDITOR
-    void BoxCollider::DrawDebugMesh(const CameraRenderData& RenderData) const
+    void BoxCollider::DrawDebugMesh(const CameraRenderData& RenderData, const Shaders::Shader Shader) const
     {
-        Material->GetMainPass().SetUniform("ViewMatrix", RenderData.ViewMatrix);
-        Material->GetMainPass().SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
-        Material->GetMainPass().SetUniform("ObjectToWorldMatrix",
-                                           Utility::RemoveScaleMat4(
-                                                   GetOwner()->GetTransform()->GetLocalToWorldMatrix()));
+        Shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
+        Shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
+        Shader.SetUniform("ObjectToWorldMatrix",
+                          Utility::RemoveScaleMat4(
+                                  GetOwner()->GetTransform()->GetLocalToWorldMatrix()));
 
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -115,12 +128,12 @@ namespace Engine
 
     void BoxCollider::Render(const CameraRenderData& RenderData)
     {
-        DrawDebugMesh(RenderData);
+        DrawDebugMesh(RenderData, Material->GetMainPass());
     }
 
     void BoxCollider::RenderDepth(const CameraRenderData& RenderData)
     {
-        DrawDebugMesh(RenderData);
+        DrawDebugMesh(RenderData, Material->GetDepthPass());
     }
 
     void BoxCollider::RenderDirectionalShadows(const CameraRenderData& RenderData)

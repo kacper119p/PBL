@@ -53,6 +53,7 @@ namespace Engine
         {
             result->GetTransform()->SetParent(Root->GetTransform());
         }
+        result->SetScene(this);
         return result;
     }
 
@@ -65,6 +66,7 @@ namespace Engine
         result->GetTransform()->SetParent(Parent->GetTransform());
         result->GetTransform()->SetPosition(Position);
         result->GetTransform()->SetEulerAngles(Rotation);
+        result->SetScene(this);
         return result;
     }
 
@@ -87,7 +89,7 @@ namespace Engine
         }
         for (const Transform* transform : *(Root->GetTransform()))
         {
-            SerializeEntity(transform->GetOwner(), objects, Allocator);
+            transform->GetOwner()->SerializeEntity(objects, Allocator);
         }
 
         documentRoot.AddMember("Objects", objects, Allocator);
@@ -110,11 +112,7 @@ namespace Engine
         Serialization::Deserialize(Value, "Skybox", Skybox);
         LightManager::GetInstance()->SetEnvironmentMap(Skybox);
 
-        const auto boundsIterator = Value.FindMember("Bounds");
-        if (boundsIterator != Value.MemberEnd())
-        {
-            Serialization::Deserialize(boundsIterator->value, "Bounds", Bounds);
-        }
+        Serialization::Deserialize(Value, "Bounds", Bounds);
 
         const auto uiIterator = Value.FindMember("UI");
         if (uiIterator != Value.MemberEnd())
@@ -146,6 +144,9 @@ namespace Engine
             Player = new DefaultPlayer();
         }
 
+        Root->Scene = this;
+        Player->Scene = this;
+        GameMode->Scene = this;
 
         Root->DeserializeValuePass(Value["Root"], referenceTable);
 
@@ -169,6 +170,9 @@ namespace Engine
         {
             pair.Object->DeserializeReferencesPass(pair.Json, referenceTable);
         }
+
+        GameMode->Start();
+        Player->Start();
 
         for (const DeserializationPair pair : objects)
         {
@@ -222,20 +226,6 @@ namespace Engine
                 Bounds.min = glm::min(Bounds.min, aabb.min);
                 Bounds.max = glm::max(Bounds.max, aabb.max);
             }
-        }
-    }
-
-    void Scene::SerializeEntity(const Entity* const Entity, rapidjson::Value& Object,
-                                rapidjson::Document::AllocatorType& Allocator)
-    {
-        Object.PushBack(Entity->Serialize(Allocator), Allocator);
-        for (const Component* component : *Entity)
-        {
-            Object.PushBack(component->Serialize(Allocator), Allocator);
-        }
-        for (const Transform* transform : *(Entity->GetTransform()))
-        {
-            SerializeEntity(transform->GetOwner(), Object, Allocator);
         }
     }
 }

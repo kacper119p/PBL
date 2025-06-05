@@ -1,4 +1,10 @@
 #pragma once
+
+#if DEBUG
+#include <cstdlib>
+#include <cstdio>
+#endif
+
 #if DEBUG
 /**
  * @brief Halts application's execution if expression is false and prints message.

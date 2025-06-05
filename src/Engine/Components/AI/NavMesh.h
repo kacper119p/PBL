@@ -64,15 +64,17 @@ namespace Engine
          */
         [[nodiscard]] int GetNodeIdFromPosition(const glm::vec3& Position) const;
 
-        void SetPadding(float Pad) { Padding = Pad; }
-        float GetPadding() const { return Padding; }
-
         void RemovePaddingNodes();
 
         const std::vector<std::pair<Models::Model*, glm::mat4>>& GetModelTransforms() const
         {
             return ModelTransforms;
         }
+
+        bool IsOnNavMesh(const glm::vec3& Position, float MaxDistance);
+
+        void SetPadding(float Pad) { Padding = Pad; }
+        [[nodiscard]] float GetPadding() const { return Padding; }
 
     private:
         float Padding = 1.0f;

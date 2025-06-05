@@ -16,13 +16,13 @@ namespace
 {
     constexpr int GUID_STRING_SIZE = 39; // GUID is 36 chars + null terminator
 
-    void GuidToStr(const GUID& guid, char* buffer)
+    void GuidToStr(const GUID& Guid, char* Buffer)
     {
-        snprintf(buffer, GUID_STRING_SIZE * sizeof(char),
+        snprintf(Buffer, GUID_STRING_SIZE * sizeof(char),
                  "{%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x}",
-                 guid.Data1, guid.Data2, guid.Data3,
-                 guid.Data4[0], guid.Data4[1], guid.Data4[2], guid.Data4[3],
-                 guid.Data4[4], guid.Data4[5], guid.Data4[6], guid.Data4[7]);
+                 Guid.Data1, Guid.Data2, Guid.Data3,
+                 Guid.Data4[0], Guid.Data4[1], Guid.Data4[2], Guid.Data4[3],
+                 Guid.Data4[4], Guid.Data4[5], Guid.Data4[6], Guid.Data4[7]);
     }
 
     void StrToGuid(const std::string& str, GUID* guid)
@@ -37,7 +37,7 @@ namespace
 
 namespace Serialization
 {
-    rapidjson::Value Serialize(int Value, rapidjson::Document::AllocatorType& Allocator)
+    rapidjson::Value Serialize(const int Value, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kNumberType);
         object.SetInt(Value);
@@ -540,22 +540,22 @@ namespace Serialization
         {
             return;
         }
-        const rapidjson::Value& vector = iterator->value;
-        const auto iteratorMin = vector.FindMember("min");
+        const rapidjson::Value& aabb = iterator->value;
+        const auto iteratorMin = aabb.FindMember("min");
 
 
-        if (iteratorMin == vector.MemberEnd() || !iteratorMin->value.IsFloat())
+        if (iteratorMin == aabb.MemberEnd() || !iteratorMin->value.IsObject())
         {
             return;
         }
-        const auto iteratorMax = vector.FindMember("max");
-        if (iteratorMax == vector.MemberEnd() || !iteratorMax->value.IsFloat())
+        const auto iteratorMax = aabb.FindMember("max");
+        if (iteratorMax == aabb.MemberEnd() || !iteratorMax->value.IsObject())
         {
             return;
         }
 
-        Deserialize(iteratorMin->value, "min", Value.min);
-        Deserialize(iteratorMin->value, "max", Value.max);
+        Deserialize(aabb, "min", Value.min);
+        Deserialize(aabb, "max", Value.max);
     }
 
 } // Serialization

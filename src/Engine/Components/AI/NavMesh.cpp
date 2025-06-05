@@ -34,6 +34,20 @@ namespace Engine
         {
             GetGraph()->RemoveNode(id);
         }
+    bool NavMesh::IsOnNavMesh(const glm::vec3& Position, float MaxDistance)
+    {
+        const auto* graph = Engine::NavMesh::Get().GetGraph();
+        if (!graph)
+            return false;
+
+        const auto& nodes = graph->GetAllNodes();
+        for (const auto& [id, node] : nodes)
+        {
+            if (glm::distance(Position, node.GetPosition()) <= MaxDistance)
+                return true;
+        }
+
+        return false;
     }
 
     void NavMesh::RemoveNotWalkableNodes(Entity* Root)
@@ -197,6 +211,9 @@ namespace Engine
 
                 bool foundSurface = false;
                 glm::vec3 rayDir = glm::vec3(0.0f, -1.0f, 0.0f);
+                float closestDist = std::numeric_limits<float>::max();
+                glm::vec3 closestHit;
+                bool hitSomething = false;
 
                 for (const auto& modelPair : modelTransforms)
                 {
@@ -218,14 +235,21 @@ namespace Engine
                             glm::vec3 hitPoint;
                             if (RayCast::RayIntersectsTriangle(position, rayDir, v0, v1, v2, &hitPoint))
                             {
-                                foundSurface = true;
-                                finalHitPoint = hitPoint;
-                                break;
+                                float dist = glm::length(hitPoint - position);
+                                if (dist < closestDist)
+                                {
+                                    closestDist = dist;
+                                    closestHit = hitPoint;
+                                    hitSomething = true;
+                                }
                             }
                         }
 
-                        if (foundSurface)
-                            break;
+                        if (hitSomething)
+                        {
+                            foundSurface = true;
+                            finalHitPoint = closestHit;
+                        }
                     }
 
                     if (foundSurface)
@@ -247,6 +271,26 @@ namespace Engine
                         GetGraph()->AddConnection(id, nodeId(x + 1, z - 1));
                 }
             }
+        }
+    }
+
+    void NavMesh::RemovePaddingNodes()
+    {
+        auto& nodes = GetGraph()->GetAllNodes();
+        std::vector<int> nodesToRemove;
+
+        for (const auto& [id, node] : nodes)
+        {
+            const auto& neighbors = GetGraph()->GetNode(id).GetNeighbors();
+            if (neighbors.size() < 8)
+            {
+                nodesToRemove.push_back(id);
+            }
+        }
+
+        for (int id : nodesToRemove)
+        {
+            GetGraph()->RemoveNode(id);
         }
     }
 

@@ -19,7 +19,10 @@ namespace Engine
 
     class GameMode : public Entity
     {
+    public:
+        virtual void Start() = 0;
 
+        virtual void Update(float DeltaTime) = 0;
     };
 
 }
