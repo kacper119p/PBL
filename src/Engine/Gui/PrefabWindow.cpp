@@ -1,3 +1,5 @@
+#if EDITOR
+
 #include "PrefabWindow.h"
 #include "imgui.h"
 #include <filesystem>
@@ -109,4 +111,6 @@ namespace Engine
 
         ImGui::End();
     }
-} // namespace Engine
+}
+
+#endif

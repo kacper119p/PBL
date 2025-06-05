@@ -1,5 +1,7 @@
 #pragma once
 
+#if EDITOR
+
 #include "Engine/EngineObjects/Scene/SceneManager.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/Components/Renderers/ParticleEmitter.h"
@@ -186,3 +188,5 @@ namespace Generation
 
     };
 }
+
+#endif

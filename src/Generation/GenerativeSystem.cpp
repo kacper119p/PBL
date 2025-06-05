@@ -1,3 +1,5 @@
+#if EDITOR
+
 #include "GenerativeSystem.h"
 #include "Engine/Components/Renderers/ModelRenderer.h"
 #include "Engine/Gui/EditorGUI.h"
@@ -379,3 +381,5 @@ namespace Generation
         return entity;
     }
 }
+
+#endif
