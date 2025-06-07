@@ -8,7 +8,7 @@ namespace Engine
     {
         void Start() override;
 
-        void Update() override;
+        void Update(float DeltaTime) override;
 
         SERIALIZATION_EXPORT_PLAYER(DefaultPlayer)
     };
