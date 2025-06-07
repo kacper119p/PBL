@@ -18,7 +18,6 @@ namespace Materials
         TextureMaterialProperty(const char* const Name, const Shaders::Shader& Owner) :
             Location(glGetUniformLocation(Owner.GetId(), Name)), TextureId(0), Handle(0)
         {
-
         }
 
         TextureMaterialProperty(const char* const Name, const Shaders::Shader& Owner, const Engine::Texture Value) :
@@ -67,7 +66,10 @@ namespace Materials
          */
         void Bind() const
         {
-            Shaders::ShaderBase::SetTextureHandle(Location, Handle);
+            if (Handle != 0)
+            {
+                Shaders::ShaderBase::SetTextureHandle(Location, Handle);
+            }
         }
     };
 
