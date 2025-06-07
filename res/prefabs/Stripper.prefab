@@ -1,0 +1,59 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{c607d9e0-9bec-40b9-abf9-280d4d701eda}\u0000",
+            "name": "stripper",
+            "transform": {
+                "type": "Transform",
+                "id": "{47c9f9b9-6a8f-4975-9d4c-6edccca0f10a}\u0000",
+                "owner": "{c607d9e0-9bec-40b9-abf9-280d4d701eda}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 0.5,
+                    "z": 0.5
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{8b1cd97b-db9c-4184-af27-85fd9fb13cab}\u0000",
+                "{4f3faa77-bd14-4892-b19c-a79564141e51}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{8b1cd97b-db9c-4184-af27-85fd9fb13cab}\u0000",
+            "owner": "{c607d9e0-9bec-40b9-abf9-280d4d701eda}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Granny/spychacz.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{4f3faa77-bd14-4892-b19c-a79564141e51}\u0000",
+            "owner": "{c607d9e0-9bec-40b9-abf9-280d4d701eda}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 0.800000011920929,
+            "_depth": 1.0
+        }
+    ]
+}

@@ -59,30 +59,6 @@ namespace Scene
 
         // BOX BOX SCENARIO /////////////////////////////////////////////////////////////////////////////////////////////////////////
         #if !EDITOR
-        Engine::Entity* secondBoxEntity = Scene->SpawnEntity(nullptr);
-        Engine::ModelRenderer* secondBoxModelRenderer = secondBoxEntity->AddComponent<Engine::ModelRenderer>();
-        secondBoxModelRenderer->SetModel(Models::ModelManager::GetModel("./res/models/Box.fbx"));
-        secondBoxModelRenderer->SetMaterial(
-                Materials::MaterialManager::GetMaterial("./res/materials/SampleScene/Box.mat"));
-
-        //Engine::BoxCollider* secondBoxCollider = secondBoxEntity->AddComponent<Engine::BoxCollider>();
-        Scene->GetPlayer()->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
-        Scene->GetPlayer()->GetTransform()->AddChild(secondBoxEntity->GetTransform());
-        Scene->GetPlayer()->AddComponent<Engine::Rigidbody>();
-        Scene->GetPlayer()->AddComponent<Engine::MovementComponent>();
-        Scene->GetPlayer()->AddComponent<Engine::BoxCollider>();
-        Scene->GetPlayer()->GetComponent<Engine::BoxCollider>()->SetWidth(2.0f);
-        Scene->GetPlayer()->GetComponent<Engine::BoxCollider>()->SetHeight(2.0f);
-        Scene->GetPlayer()->GetComponent<Engine::BoxCollider>()->SetDepth(2.0f);
-        Scene->GetPlayer()->GetTransform()->SetPosition(glm::vec3(0.0f, 1.5f, 4.0f));
-        Engine::Rigidbody* rb = Scene->GetPlayer()->GetComponent<Engine::Rigidbody>();
-        rb->friction = 0.1f;
-        rb->angularDamping = 0.01f;
-        rb->linearDamping = 0.01f;
-        rb->restitution = 0.3f;
-        rb->SetMass(1.0f);
-        rb->frictionEnabled = true;
-        //rb->angularDamping = .05f;
         
         Engine::Entity* playerVacuum = Scene->SpawnEntity(nullptr);
         playerVacuum->SetName("PlayerVacuum");
