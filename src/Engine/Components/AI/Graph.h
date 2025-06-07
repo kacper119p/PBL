@@ -31,7 +31,7 @@ namespace Engine
          * @param ToId Destination node ID.
          * @return True if connected, false otherwise.
          */
-        bool AreConnected(int FromId, int ToId) const;
+        [[nodiscard]] bool AreConnected(int FromId, int ToId) const;
 
         /**
          * @brief Removes node from the graph.
@@ -44,7 +44,7 @@ namespace Engine
          * @param Id The ID of the node.
          * @return Const reference to the node.
          */
-        [[nodiscard]] const Node& GetNode(int Id) const;
+        [[nodiscard]] const Node* GetNode(int Id) const;
 
         /**
          * @brief Returns all nodes stored in the graph.

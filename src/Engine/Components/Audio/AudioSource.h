@@ -19,7 +19,7 @@ namespace Engine
     private:
         AudioManager& AudioManager; ///< Reference to the global AudioManager instance.
         std::string SelectedSoundId; ///< ID of the currently selected sound.
-        std::shared_ptr<ma_sound> SoundInstance; ///< Instance of the sound currently playing on this entity.
+        std::shared_ptr<ma_sound> SoundInstance; ///< Instance of the sound assigned to this entity.
 
         float SoundVolume = 1.0f; ///< Volume level of the selected sound (0.0 to 1.0).
         bool Looping = false; ///< Whether the selected sound should loop.
@@ -33,7 +33,6 @@ namespace Engine
     public:
         /**
          * @brief Constructs the AudioSource component.
-         *
          * Acquires a reference to the global AudioManager instance.
          */
         AudioSource();
@@ -42,6 +41,17 @@ namespace Engine
          * @brief Destructor for cleaning up any resources used by the AudioSource component.
          */
         ~AudioSource();
+
+        /**
+         * @brief Creates SoundInstance on start.
+         */
+        void Start() override;
+
+        /**
+         * @brief SoundInstance getter.
+         * @return SoundInstance.
+         */
+        std::shared_ptr<ma_sound> GetSoundInstance();
 
         /**
          * @brief Resets settings of sounds in the ImGui interface to default.

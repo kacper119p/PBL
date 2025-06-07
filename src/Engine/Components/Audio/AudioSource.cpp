@@ -14,6 +14,19 @@ Engine::AudioSource::~AudioSource()
     SoundInstance.reset();
 }
 
+void Engine::AudioSource::Start()
+{
+    if (!SelectedSoundId.empty() && !SoundInstance)
+    {
+        SoundInstance = AudioManager.CreateSoundInstance(SelectedSoundId);
+    }
+}
+
+std::shared_ptr<ma_sound> Engine::AudioSource::GetSoundInstance()
+{
+    return SoundInstance;
+}
+
 void Engine::AudioSource::ResetAudioSettings()
 {
     SoundVolume = 1.0f;
@@ -130,6 +143,7 @@ void Engine::AudioSource::DrawImGui()
 rapidjson::Value Engine::AudioSource::Serialize(rapidjson::Document::AllocatorType& Allocator) const
 {
     START_COMPONENT_SERIALIZATION
+    SERIALIZE_FIELD(SelectedSoundId)
     SERIALIZE_FIELD(SoundVolume)
     SERIALIZE_FIELD(Looping)
     SERIALIZE_FIELD(Position)
@@ -143,6 +157,7 @@ void Engine::AudioSource::DeserializeValuePass(const rapidjson::Value& Object,
                                                Serialization::ReferenceTable& ReferenceMap)
 {
     START_COMPONENT_DESERIALIZATION_VALUE_PASS
+    DESERIALIZE_VALUE(SelectedSoundId)
     DESERIALIZE_VALUE(SoundVolume)
     DESERIALIZE_VALUE(Looping)
     DESERIALIZE_VALUE(Position)

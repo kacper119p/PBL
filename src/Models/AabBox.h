@@ -1,9 +1,11 @@
 #pragma once
+
 #include <type_traits>
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
 #include <glm/mat4x4.hpp>
+#include <vector>
 
 namespace Models
 {
@@ -48,26 +50,41 @@ namespace Models
         {
         }
 
+        /**
+         * @brief Returns 8 corner points of the AABBox in local space.
+         * @return Corners in local space.
+         */
+        [[nodiscard]] std::vector<glm::vec3> GetCorners() const
+        {
+            return {
+                    {min.x, min.y, min.z},
+                    {max.x, min.y, min.z},
+                    {min.x, max.y, min.z},
+                    {max.x, max.y, min.z},
+                    {min.x, min.y, max.z},
+                    {max.x, min.y, max.z},
+                    {min.x, max.y, max.z},
+                    {max.x, max.y, max.z}
+            };
+        }
+
+        /**
+         * @brief Transforms AABBox to world space using a matrix.
+         * @param ModelMatrix Transformation matrix.
+         * @return Transformed AABBox.
+         */
         AABBox ToWorldSpace(const glm::mat4& ModelMatrix) requires std::is_same_v<T, glm::vec3>
         {
-            glm::vec3 minWorld = glm::vec3(min.x, min.y, min.z);
+            std::vector<glm::vec3> corners = GetCorners();
+
+            glm::vec3 minWorld = glm::vec3(ModelMatrix * glm::vec4(corners[0], 1.0f));
             glm::vec3 maxWorld = minWorld;
 
-            glm::vec3 corners[7];
-            corners[0] = glm::vec3(max.x, min.y, min.z);
-            corners[1] = glm::vec3(min.x, max.y, min.z);
-            corners[2] = glm::vec3(max.x, max.y, min.z);
-            corners[3] = glm::vec3(min.x, min.y, max.z);
-            corners[4] = glm::vec3(max.x, min.y, max.z);
-            corners[5] = glm::vec3(min.x, max.y, max.z);
-            corners[6] = glm::vec3(max.x, max.y, max.z);
-
-            for (auto corner : corners)
+            for (size_t i = 1; i < corners.size(); ++i)
             {
-                glm::vec3 worldPosition = glm::vec3(ModelMatrix * glm::vec4(corner, 1.0f));
-
-                minWorld = glm::min(minWorld, worldPosition);
-                maxWorld = glm::max(maxWorld, worldPosition);
+                glm::vec3 worldCorner = glm::vec3(ModelMatrix * glm::vec4(corners[i], 1.0f));
+                minWorld = glm::min(minWorld, worldCorner);
+                maxWorld = glm::max(maxWorld, worldCorner);
             }
 
             return AABBox(minWorld, maxWorld);

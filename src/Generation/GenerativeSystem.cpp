@@ -51,7 +51,7 @@ namespace Generation
         std::uniform_int_distribution<int> nodeDist(0, nodeIds.size() - 1);
 
         int randomNodeId = nodeIds[nodeDist(rng)];
-        const glm::vec3& pos = graph->GetNode(randomNodeId).GetPosition();
+        const glm::vec3& pos = graph->GetNode(randomNodeId)->GetPosition();
         return pos;
     }
 

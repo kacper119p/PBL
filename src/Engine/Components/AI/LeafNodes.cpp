@@ -1,10 +1,11 @@
 #include "LeafNodes.h"
 #include <queue>
 #include <random>
-
 #include "AiManager.h"
 #include "AStar.h"
 #include "NavMesh.h"
+#include "Engine/Components/Game/Thrash.h"
+#include "Engine/Components/Renderers/ModelRenderer.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "spdlog/spdlog.h"
 
@@ -46,8 +47,7 @@ namespace Engine
 
     NodeStatus UpdateChaseTimerNode::Tick(float DeltaTime)
     {
-        spdlog::info("UpdateChaseTimerNode");
-
+        //spdlog::info("UpdateChaseTimerNode");
         if (Ai->RestTimer >= Ai->RestCooldown)
         {
             Ai->ChaseTimer = 0.0f;
@@ -55,14 +55,12 @@ namespace Engine
             Ai->IsResting = false;
             Ai->IsChasing = true;
             Ai->SetRestFinished(true);
-            spdlog::info("Odpoczynek zakonczony");
+            //spdlog::info("Odpoczynek zakonczony");
             return NodeStatus::Success;
         }
 
         Ai->ChaseTimer += DeltaTime;
-
-        spdlog::info("Chase time: {:.2f}/{:.2f}", Ai->ChaseTimer, Ai->GetChaseCooldown());
-
+        //spdlog::info("Chase time: {:.2f}/{:.2f}", Ai->ChaseTimer, Ai->GetChaseCooldown());
         return NodeStatus::Success;
     }
 
@@ -77,7 +75,7 @@ namespace Engine
         {
             Ai->RestTimer = 0.0f;
             Ai->IsResting = true;
-            spdlog::info("Start odpoczynku");
+            //spdlog::info("Start odpoczynku");
         }
 
         Ai->RestTimer += DeltaTime;
@@ -88,7 +86,7 @@ namespace Engine
             Ai->SetIsChasingPlayer(false);
             Ai->IsResting = false;
             Ai->SetRestFinished(true);
-            spdlog::info("Odpoczynek zakonczony");
+            //spdlog::info("Odpoczynek zakonczony");
             return NodeStatus::Success;
         }
 
@@ -223,7 +221,7 @@ namespace Engine
         int currentNodeId = navMesh->GetNodeIdFromPosition(currentPos);
         if (currentNodeId == -1)
         {
-            spdlog::warn("WalkSlowly: brak aktualnego wêz³a.");
+            //spdlog::warn("WalkSlowly: brak aktualnego wêz³a.");
             return NodeStatus::Failure;
         }
 
@@ -295,6 +293,11 @@ namespace Engine
 
     NodeStatus IsTrashInRangeNode::Tick(float)
     {
+        Ai->RecalculateCurrentTrash();
+
+        if (!Ai || Ai->CurrentTrashValue >= Ai->MaxTrashCapacity)
+            return NodeStatus::Failure;
+
         bool inRange = Ai->IsTrashNearby();
 
         if (inRange)
@@ -317,11 +320,14 @@ namespace Engine
         if (!Ai || Ai->TrashEntities.empty())
             return NodeStatus::Failure;
 
+        if (Ai->CurrentTrashValue >= Ai->MaxTrashCapacity)
+            return NodeStatus::Failure;
+
         if (Ai->TargetTrash && !Ai->AStarComponent->IsPathFinished())
         {
             return NodeStatus::Success;
         }
-        spdlog::info("im in");
+        //spdlog::info("im in");
         glm::vec3 slimePos = Ai->GetOwner()->GetTransform()->GetPosition();
         Entity* closestTrash = nullptr;
         float closestDist = std::numeric_limits<float>::max();
@@ -357,69 +363,100 @@ namespace Engine
 
     NodeStatus AbsorbTrashNode::Tick(float DeltaTime)
     {
-        spdlog::info("Slime wchlania smiecia");
         if (!Ai || Ai->TrashEntities.empty())
             return NodeStatus::Failure;
 
-        glm::vec3 slimePos = Ai->GetOwner()->GetTransform()->GetPosition();
-        Entity* nearest = nullptr;
-        float minDist = std::numeric_limits<float>::max();
+        Entity* target = Ai->TargetTrash;
 
-        for (Entity* trash : Ai->TrashEntities)
-        {
-            if (!trash)
-                continue;
-
-            glm::vec3 trashPos = trash->GetTransform()->GetPositionWorldSpace();
-            glm::vec2 slimeXZ(slimePos.x, slimePos.z);
-            glm::vec2 trashXZ(trashPos.x, trashPos.z);
-            float dist = glm::distance(slimeXZ, trashXZ);
-
-            if (dist <= 1.5f && dist < minDist)
-            {
-                minDist = dist;
-                nearest = trash;
-            }
-        }
-
-        if (!nearest)
+        if (!target)
         {
             AbsorbStartTime = -1.0f;
             return NodeStatus::Failure;
         }
 
+        Thrash* trashComp = target->GetComponent<Thrash>();
+        if (!trashComp)
+        {
+            AbsorbStartTime = -1.0f;
+            Ai->TargetTrash = nullptr;
+            return NodeStatus::Failure;
+        }
+
+        int value = static_cast<int>(trashComp->GetSize());
+
         if (AbsorbStartTime < 0.0f)
         {
+            if (Ai->CurrentTrashValue + value > Ai->MaxTrashCapacity)
+            {
+                Ai->TargetTrash = nullptr;
+                return NodeStatus::Failure;
+            }
+
             AbsorbStartTime = 0.0f;
-            spdlog::info("Slime rozpoczyna wchlanianie...");
             return NodeStatus::Running;
+        }
+
+        if (!target)
+        {
+            AbsorbStartTime = -1.0f;
+            Ai->TargetTrash = nullptr;
+            return NodeStatus::Failure;
         }
 
         Ai->AStarComponent->SetMoveSpeed(Ai->GetSlowMovementSpeed() / 4);
         AbsorbStartTime += DeltaTime;
 
         if (AbsorbStartTime < 2.0f)
+            return NodeStatus::Running;
+
+        target->GetTransform()->SetParent(Ai->GetOwner()->GetTransform());
+
+        Models::Model* model = Ai->GetOwner()->GetComponent<ModelRenderer>()->GetModel();
+        if (!model || model->GetMeshCount() == 0)
+        {
+            AbsorbStartTime = -1.0f;
+            Ai->TargetTrash = nullptr;
             return NodeStatus::Failure;
+        }
 
-        // Reset
-        Ai->AStarComponent->SetMoveSpeed(Ai->GetSlowMovementSpeed());
-        AbsorbStartTime = -1.0f;
+        const auto& bounds = model->GetMesh(0)->GetAabBox();
+        glm::vec3 min = bounds.min;
+        glm::vec3 max = bounds.max;
 
-        nearest->GetTransform()->SetParent(Ai->GetOwner()->GetTransform());
+        auto RandomInRange = [](float a, float b)
+        {
+            return a + static_cast<float>(rand()) / static_cast<float>(RAND_MAX / (b - a));
+        };
 
-        const auto& children = Ai->GetOwner()->GetTransform()->GetChildren();
-        size_t index = children.size() - 1;
+        Models::Model* trashModel = target->GetComponent<ModelRenderer>()->GetModel();
+        if (!trashModel || trashModel->GetMeshCount() == 0)
+        {
+            AbsorbStartTime = -1.0f;
+            Ai->TargetTrash = nullptr;
+            return NodeStatus::Failure;
+        }
 
-        float angle = glm::two_pi<float>() * (float(index) / std::max(size_t(1), children.size()));
-        glm::vec3 offset = glm::vec3(std::cos(angle), 0.0f, std::sin(angle)) * 2.0f;
+        const auto& trashBounds = trashModel->GetMesh(0)->GetAabBox();
+        glm::vec3 trashSize = trashBounds.max - trashBounds.min;
 
-        nearest->GetTransform()->SetPositionLocalSpace(offset);
-        
-        auto it = std::find(Ai->TrashEntities.begin(), Ai->TrashEntities.end(), nearest);
+        glm::vec3 availableMin = min + trashSize * 0.5f;
+        glm::vec3 availableMax = max - trashSize * 0.5f;
+
+        glm::vec3 offset = {
+                RandomInRange(availableMin.x, availableMax.x),
+                RandomInRange(availableMin.y, availableMax.y),
+                RandomInRange(availableMin.z, availableMax.z)
+        };
+
+        target->GetTransform()->SetPositionLocalSpace(offset);
+
+        auto it = std::find(Ai->TrashEntities.begin(), Ai->TrashEntities.end(), target);
         if (it != Ai->TrashEntities.end())
             Ai->TrashEntities.erase(it);
 
         Ai->TargetTrash = nullptr;
+        Ai->AStarComponent->SetMoveSpeed(Ai->GetSlowMovementSpeed());
+        AbsorbStartTime = -1.0f;
 
         return NodeStatus::Success;
     }

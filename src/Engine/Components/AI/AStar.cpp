@@ -30,10 +30,16 @@ namespace Engine
         std::unordered_map<int, NodeRecord> allNodes;
         std::unordered_map<int, bool> closedList;
 
-        const glm::vec2& goalPos = glm::vec2(NavGraph->GetNode(GoalId).GetPosition().x,
-                                             NavGraph->GetNode(GoalId).GetPosition().z);
-        const glm::vec2& startPos = glm::vec2(NavGraph->GetNode(StartId).GetPosition().x,
-                                              NavGraph->GetNode(StartId).GetPosition().z);
+        const Node* goalNode = NavGraph->GetNode(GoalId);
+        const Node* startNode = NavGraph->GetNode(StartId);
+        if (!goalNode || !startNode)
+        {
+            Path.clear();
+            return;
+        }
+
+        const glm::vec2 goalPos = glm::vec2(goalNode->GetPosition().x, goalNode->GetPosition().z);
+        const glm::vec2 startPos = glm::vec2(startNode->GetPosition().x, startNode->GetPosition().z);
 
         const NodeRecord startRecord{StartId, 0.0f, glm::distance(startPos, goalPos), -1};
         openList.push(startRecord);
@@ -61,20 +67,24 @@ namespace Engine
 
             closedList[current.NodeId] = true;
 
-            for (int neighborId : NavGraph->GetNode(current.NodeId).GetNeighbors())
+            const Node* currentNode = NavGraph->GetNode(current.NodeId);
+            if (!currentNode)
+                continue;
+
+            for (int neighborId : currentNode->GetNeighbors())
             {
                 if (closedList.count(neighborId))
                     continue;
 
                 const float g = current.CostSoFar + glm::distance(
-                                        glm::vec2(NavGraph->GetNode(current.NodeId).GetPosition().x,
-                                                  NavGraph->GetNode(current.NodeId).GetPosition().z),
-                                        glm::vec2(NavGraph->GetNode(neighborId).GetPosition().x,
-                                                  NavGraph->GetNode(neighborId).GetPosition().z)
+                                        glm::vec2(NavGraph->GetNode(current.NodeId)->GetPosition().x,
+                                                  NavGraph->GetNode(current.NodeId)->GetPosition().z),
+                                        glm::vec2(NavGraph->GetNode(neighborId)->GetPosition().x,
+                                                  NavGraph->GetNode(neighborId)->GetPosition().z)
                                         );
 
-                const float h = glm::distance(glm::vec2(NavGraph->GetNode(neighborId).GetPosition().x,
-                                                        NavGraph->GetNode(neighborId).GetPosition().z), goalPos);
+                const float h = glm::distance(glm::vec2(NavGraph->GetNode(neighborId)->GetPosition().x,
+                                                        NavGraph->GetNode(neighborId)->GetPosition().z), goalPos);
                 const float f = g + h;
 
                 if (!allNodes.count(neighborId) || g < allNodes[neighborId].CostSoFar)
@@ -132,14 +142,12 @@ namespace Engine
         }
 
         glm::vec3 pos3D = Entity->GetTransform()->GetPosition();
-        ObjectPosition = glm::vec2(pos3D.x, pos3D.z);
 
         SetStartPosition(pos3D);
         SetGoalPosition(GoalPosition);
 
         if (StartId < 0 || GoalId < 0)
         {
-            spdlog::warn("Incorrect node IDs!");
             return;
         }
 
@@ -185,8 +193,8 @@ namespace Engine
         if (!NavGraph)
             return false;
 
-        glm::vec3 start = NavGraph->GetNode(FromId).GetPosition();
-        glm::vec3 end = NavGraph->GetNode(ToId).GetPosition();
+        glm::vec3 start = NavGraph->GetNode(FromId)->GetPosition();
+        glm::vec3 end = NavGraph->GetNode(ToId)->GetPosition();
 
         glm::vec3 rayDir = glm::vec3(0.0f, -1.0f, 0.0f);
         float segmentLength = glm::distance(start, end);
@@ -293,8 +301,12 @@ namespace Engine
         if (!Entity || Path.empty() || !NavGraph)
             return;
 
-        const glm::vec2& targetPos = glm::vec2(NavGraph->GetNode(Path[CurrentPathIndex]).GetPosition().x,
-                                               NavGraph->GetNode(Path[CurrentPathIndex]).GetPosition().z);
+        const Node* node = NavGraph->GetNode(Path[CurrentPathIndex]);
+        if (!node)
+            return;
+
+        const glm::vec2& targetPos = glm::vec2(node->GetPosition().x, node->GetPosition().z);
+
         glm::vec2 direction = targetPos - ObjectPosition;
 
         float distance = glm::length(direction);

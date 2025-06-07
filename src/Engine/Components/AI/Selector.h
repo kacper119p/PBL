@@ -6,14 +6,25 @@
 
 namespace Engine
 {
+    /**
+     * @brief Tries child nodes in order until one succeeds or all fail.
+     */
     class Selector : public BehaviorTreeNode
     {
     public:
+        /**
+         * @brief Adds a child node.
+         * @param Node Child behavior node.
+         */
         void AddChild(const std::shared_ptr<BehaviorTreeNode>& Node)
         {
             Children.push_back(Node);
         }
 
+        /**
+         * @brief Runs the selector logic.
+         * Returns Running, Failure, or Success based on child status.
+         */
         NodeStatus Tick(float DeltaTime) override
         {
             for (size_t i = CurrentIndex; i < Children.size(); ++i)
@@ -35,6 +46,9 @@ namespace Engine
             return NodeStatus::Failure;
         }
 
+        /**
+         * @brief Resets this node and all children.
+         */
         void Reset() override
         {
             CurrentIndex = 0;
@@ -43,7 +57,7 @@ namespace Engine
         }
 
     private:
-        std::vector<std::shared_ptr<BehaviorTreeNode>> Children;
-        size_t CurrentIndex = 0;
+        std::vector<std::shared_ptr<BehaviorTreeNode>> Children; ///< Child nodes.
+        size_t CurrentIndex = 0; ///< Index of the currently running child.
     };
 }

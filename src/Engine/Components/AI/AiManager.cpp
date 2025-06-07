@@ -3,6 +3,7 @@
 #include "Selector.h"
 #include "LeafNodes.h"
 #include "NavMesh.h"
+#include "Engine/Components/Game/Thrash.h"
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Serialization/SerializationUtility.h"
 #include "spdlog/spdlog.h"
@@ -112,7 +113,10 @@ namespace Engine
         if (RootBehavior)
             RootBehavior->Tick(DeltaTime);
 
-        AStarComponent->UpdateMovement(DeltaTime, GetOwner());
+        AStarComponent->SetObjectPosition(GetOwner()->GetTransform()->GetPosition());
+
+        if (NavMesh::Get().IsOnNavMesh(GetOwner()->GetTransform()->GetPosition(), NavMesh::Get().GetSpacing()))
+            AStarComponent->UpdateMovement(DeltaTime, GetOwner());
     }
 
     void AiManager::StartChase()
@@ -144,6 +148,22 @@ namespace Engine
         }
 
         return false;
+    }
+
+    void AiManager::RecalculateCurrentTrash()
+    {
+        CurrentTrashValue = 0;
+
+        auto children = GetOwner()->GetTransform()->GetChildren();
+        for (Transform* child : children)
+        {
+            Entity* entity = child->GetOwner();
+            Thrash* trash = entity->GetComponent<Thrash>();
+            if (trash)
+            {
+                CurrentTrashValue += static_cast<int>(trash->GetSize());
+            }
+        }
     }
 
 #if EDITOR
@@ -266,20 +286,9 @@ namespace Engine
                 AStarComponent->SetMoveSpeed(moveSpeed);
             }
 
-            float spacing = NavMesh::Get().GetSpacing();
-            if (ImGui::InputFloat("Spacing", &spacing))
-            {
-                NavMesh::Get().SetSpacing(spacing);
-            }
-
-            float padding = NavMesh::Get().GetPadding();
-            if (ImGui::InputFloat("Padding", &padding))
-            {
-                NavMesh::Get().SetPadding(padding);
-            }
-
             if (ImGui::Button("Bake NavMesh"))
             {
+                AStarComponent->ClearPath(GetOwner());
                 NavMesh::Get().BakeNavMesh(GetOwner()->GetScene()->GetRoot());
                 AStarComponent->SetGraph(NavMesh::Get().GetGraph());
             }

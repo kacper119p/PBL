@@ -78,7 +78,7 @@ namespace Engine
 
         void UpdateMovement(float DeltaTime, Entity* Entity);
 
-        bool IsPathFinished() const
+        [[nodiscard]] bool IsPathFinished() const
         {
             return Path.empty() || CurrentPathIndex >= Path.size();
         }
@@ -91,6 +91,11 @@ namespace Engine
         void SmoothPath();
 
         bool IsLineWalkable(int FromId, int ToId);
+
+        void SetObjectPosition(const glm::vec3& ObjectPosition)
+        {
+            this->ObjectPosition = glm::vec2(ObjectPosition.x, ObjectPosition.z);
+        }
 
     private:
         const Graph* NavGraph = nullptr; ///< Pointer to the navigation graph.

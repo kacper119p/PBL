@@ -42,6 +42,8 @@ namespace Engine
 
         bool IsTrashNearby() const;
 
+        void RecalculateCurrentTrash();
+
     private:
         void InitializeBehaviorTree();
 
@@ -74,6 +76,8 @@ namespace Engine
         std::vector<Entity*> TrashEntities;
         float TrashRange = 3.0f;
         Entity* TargetTrash = nullptr;
+        int CurrentTrashValue = 0;
+        int MaxTrashCapacity = 10;
 
         std::string SelectedPlayerName = "";
 

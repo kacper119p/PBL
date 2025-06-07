@@ -45,9 +45,11 @@ namespace Engine
         Nodes.erase(Id);
     }
 
-    const Node& Graph::GetNode(const int Id) const
+    const Node* Graph::GetNode(const int Id) const
     {
-        return Nodes.at(Id);
+        if (Id < 0 || Id >= static_cast<int>(Nodes.size()))
+            return nullptr;
+        return &Nodes.at(Id);
     }
 
     const std::unordered_map<int, Node>& Graph::GetAllNodes() const
