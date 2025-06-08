@@ -1,15 +1,19 @@
 #include "DefaultPlayer.h"
 #include "Engine/Prefabs/PrefabLoader.h"
 #include "spdlog/spdlog.h"
+#include "Engine/Components/Transform.h"
+#include "Engine/EngineObjects/UpdateManager.h"
+#include "Engine/Components/Game/Vacuum.h"
 
 
 namespace Engine
 {
     void DefaultPlayer::Start()
     {
+        #if !EDITOR
+        UpdateManager::GetInstance()->RegisterPlayer(this);
         if (!PrefabPath.empty())
         {
-            //loading model from prefab
             Entity* prefabEntity = PrefabLoader::LoadPrefab(PrefabPath, this->GetScene(), this->GetScene()->GetRoot()->GetTransform());
             if (prefabEntity)
             {
@@ -36,9 +40,49 @@ namespace Engine
         {
             spdlog::warn("DefaultPlayer: Prefab path is empty, cannot load player model.");
         }
+        #endif
     }
 
     void DefaultPlayer::Update(const float DeltaTime)
     {
+        #if !EDITOR
+        switch (currentTool)
+        {
+            case Tool::Stripper:
+                if (!hasStripper)
+                {
+                    Entity* stripper = PrefabLoader::LoadPrefab(StripperPath, this->GetScene(), this->GetTransform());
+                    this->GetTransform()->AddChild(stripper->GetTransform());
+                    hasStripper = true;
+                }
+                hasBroom = false;
+                hasVacuum = false;
+                break;
+            case Tool::Vacuum:
+                if (!hasVacuum)
+                {
+                    Entity* vacuum = PrefabLoader::LoadPrefab(VacuumPath, this->GetScene(), this->GetTransform());
+                    this->GetTransform()->AddChild(vacuum->GetTransform());
+                    vacuum->AddComponent<Engine::Vacuum>();
+                    hasVacuum = true;
+                }
+                hasBroom = false;
+                hasStripper = false;
+                break;
+            case Tool::Broom:
+                if (!hasBroom)
+                {
+                    Entity* broom = PrefabLoader::LoadPrefab(BroomPath, this->GetScene(), this->GetTransform());
+                    this->GetTransform()->AddChild(broom->GetTransform());
+                    hasBroom = true;
+                }
+                hasVacuum = false;
+                hasStripper = false;
+                break;
+            default:
+                spdlog::warn("DefaultPlayer: Unknown tool selected.");
+                break;
+        }
+        #endif
     }
 }

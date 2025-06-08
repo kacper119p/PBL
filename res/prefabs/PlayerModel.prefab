@@ -2,12 +2,12 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{e273d5a9-bd0e-44a6-b4a7-575ccda70e80}\u0000",
+            "id": "{f8ecddf0-dd7c-464c-9b50-2fd5da429b64}\u0000",
             "name": "PlayerModel",
             "transform": {
                 "type": "Transform",
-                "id": "{0832fabe-6182-4bfd-b8bd-c866df363b23}\u0000",
-                "owner": "{e273d5a9-bd0e-44a6-b4a7-575ccda70e80}\u0000",
+                "id": "{5f9306dd-f561-46a9-9380-9b2db8016511}\u0000",
+                "owner": "{f8ecddf0-dd7c-464c-9b50-2fd5da429b64}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -15,7 +15,7 @@
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": -0.0,
+                    "y": 180.0,
                     "z": 0.0
                 },
                 "Scale": {
@@ -24,24 +24,24 @@
                     "z": 1.0
                 },
                 "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
+                    "x": -0.0,
+                    "y": 1.0,
+                    "z": -0.0,
+                    "w": -4.371138828673793e-8
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{894caebd-f51f-4421-b7ab-6d3396e01bd3}\u0000"
+                "{3d1c640c-7dc4-449d-bb05-b2695d6fbbf0}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{894caebd-f51f-4421-b7ab-6d3396e01bd3}\u0000",
-            "owner": "{e273d5a9-bd0e-44a6-b4a7-575ccda70e80}\u0000",
+            "id": "{3d1c640c-7dc4-449d-bb05-b2695d6fbbf0}\u0000",
+            "owner": "{f8ecddf0-dd7c-464c-9b50-2fd5da429b64}\u0000",
             "Material": "./res/materials/SampleScene/Player.mat",
-            "Model": "./res/Models/Box.fbx"
+            "Model": "./res/Models/Granny/Ship.fbx"
         }
     ]
 }

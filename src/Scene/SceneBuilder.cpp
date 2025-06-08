@@ -60,11 +60,11 @@ namespace Scene
         // BOX BOX SCENARIO /////////////////////////////////////////////////////////////////////////////////////////////////////////
         #if !EDITOR
         
-        Engine::Entity* playerVacuum = Scene->SpawnEntity(nullptr);
+        /*Engine::Entity* playerVacuum = Scene->SpawnEntity(nullptr);
         playerVacuum->SetName("PlayerVacuum");
         Scene->GetPlayer()->GetTransform()->AddChild(playerVacuum->GetTransform());
         playerVacuum->AddComponent<Engine::Vacuum>();
-        playerVacuum->GetTransform()->SetPosition(glm::vec3(0.0f,1.0f,-3.0f));
+        playerVacuum->GetTransform()->SetPosition(glm::vec3(0.0f,1.0f,-3.0f));*/
 
         Engine::Entity* playerBroom = Scene->SpawnEntity(nullptr);
         playerBroom->SetName("PlayerBroom");

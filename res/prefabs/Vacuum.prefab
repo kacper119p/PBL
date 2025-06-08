@@ -2,15 +2,15 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{e820b946-7f11-4435-8eac-d623ea0e14d6}\u0000",
-            "name": "stripper",
+            "id": "{a8a19bb8-cf95-495b-b260-4493df32b0a6}\u0000",
+            "name": "Vacuum",
             "transform": {
                 "type": "Transform",
-                "id": "{ab6b5d9e-7273-41f6-912e-bd9639e9abe6}\u0000",
-                "owner": "{e820b946-7f11-4435-8eac-d623ea0e14d6}\u0000",
+                "id": "{85d0d1ed-4375-490d-8cef-d08d7a1f4586}\u0000",
+                "owner": "{a8a19bb8-cf95-495b-b260-4493df32b0a6}\u0000",
                 "Position": {
                     "x": 0.0,
-                    "y": 0.5,
+                    "y": 0.0,
                     "z": -0.800000011920929
                 },
                 "EulerAngles": {
@@ -33,15 +33,15 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{2ffd403c-2879-4661-9f43-0c97e124be82}\u0000"
+                "{43889fc7-3426-46ff-9164-a6ed7f2641c8}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{2ffd403c-2879-4661-9f43-0c97e124be82}\u0000",
-            "owner": "{e820b946-7f11-4435-8eac-d623ea0e14d6}\u0000",
+            "id": "{43889fc7-3426-46ff-9164-a6ed7f2641c8}\u0000",
+            "owner": "{a8a19bb8-cf95-495b-b260-4493df32b0a6}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Granny/spychacz.fbx"
+            "Model": "./res/Models/Granny/Odkurzacz.fbx"
         }
     ]
 }

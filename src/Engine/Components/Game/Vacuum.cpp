@@ -15,7 +15,14 @@ namespace Engine
 
     void Vacuum::Start()
     {
-        collider = this->GetOwner()->AddComponent<Engine::SphereCollider>();
+        if (this->GetOwner()->GetComponent<Engine::SphereCollider>())
+        {
+            collider = this->GetOwner()->GetComponent<Engine::SphereCollider>();
+        }
+        else
+        {
+            collider = this->GetOwner()->AddComponent<Engine::SphereCollider>();
+        }
         collider->SetTrigger(true);
         Engine::UpdateManager::GetInstance()->RegisterComponent(this);
     }
@@ -119,10 +126,10 @@ namespace Engine
 
             glm::vec3 position = GetOwner()->GetTransform()->GetPosition();
             glm::vec3 forward = GetOwner()->GetTransform()->GetForward();
-            item->GetTransform()->SetPosition((position + forward)*1.5f+glm::vec3(0,1,0)); 
+            item->GetTransform()->SetPosition(-(position + forward)*1.5f+glm::vec3(0,4,0)); 
             item->GetComponent<Engine::Rigidbody>()->angularVelocity.y=0.0f;
             item->GetComponent<Engine::Rigidbody>()->hasGravity = true;
-            item->GetComponent<Engine::Rigidbody>()->AddForce(forward * 100.0f, Engine::ForceMode::Force);
+            item->GetComponent<Engine::Rigidbody>()->AddForce(-forward * 100.0f, Engine::ForceMode::Force);
         }
     }
 
