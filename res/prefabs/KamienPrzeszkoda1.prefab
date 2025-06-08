@@ -1,0 +1,72 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{8d3f99d6-991a-4577-a809-c21cafaadc3c}\u0000",
+            "name": "KamienPrzeszkoda1",
+            "transform": {
+                "type": "Transform",
+                "id": "{a85b154c-b0bd-4fa9-885b-b2bf265bfa6d}\u0000",
+                "owner": "{8d3f99d6-991a-4577-a809-c21cafaadc3c}\u0000",
+                "Position": {
+                    "x": -6.560085773468018,
+                    "y": 1.2282638549804688,
+                    "z": 24.972599029541016
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{184a1ac3-5221-4b2a-bc16-ba24f7cad4a9}\u0000",
+                "{b4fee3d3-4d24-4b05-9c67-9cedb48df118}\u0000",
+                "{8570233f-a109-4bbf-89ad-9afb4aed3276}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{184a1ac3-5221-4b2a-bc16-ba24f7cad4a9}\u0000",
+            "owner": "{8d3f99d6-991a-4577-a809-c21cafaadc3c}\u0000",
+            "Material": "..\\..\\res\\materials\\SampleScene\\UV14.mat",
+            "Model": "./res/Models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx"
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{b4fee3d3-4d24-4b05-9c67-9cedb48df118}\u0000",
+            "owner": "{8d3f99d6-991a-4577-a809-c21cafaadc3c}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{8570233f-a109-4bbf-89ad-9afb4aed3276}\u0000",
+            "owner": "{8d3f99d6-991a-4577-a809-c21cafaadc3c}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 3.4000000953674316,
+            "_height": 1.600000023841858,
+            "_depth": 2.200000047683716
+        }
+    ]
+}

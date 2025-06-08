@@ -1,0 +1,72 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{edd1963e-d3c7-4ff5-ba1e-56d4aae99c6c}\u0000",
+            "name": "Potion4",
+            "transform": {
+                "type": "Transform",
+                "id": "{d16d2347-cb22-4156-8610-0cad96428cde}\u0000",
+                "owner": "{edd1963e-d3c7-4ff5-ba1e-56d4aae99c6c}\u0000",
+                "Position": {
+                    "x": -4.450071811676025,
+                    "y": 1.3309544324874878,
+                    "z": 24.972599029541016
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{5dc9fdc4-f31b-43ab-9268-4ccfb8f2ff1d}\u0000",
+                "{cceaf8f6-7e58-40c3-9497-ffd51dd6c108}\u0000",
+                "{093d2690-3b8a-411e-a559-77e4cc44abaf}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{5dc9fdc4-f31b-43ab-9268-4ccfb8f2ff1d}\u0000",
+            "owner": "{edd1963e-d3c7-4ff5-ba1e-56d4aae99c6c}\u0000",
+            "Material": "..\\..\\res\\materials\\SampleScene\\UV12.mat",
+            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Modele_Mati/Mikstury/Potion4.fbx"
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{cceaf8f6-7e58-40c3-9497-ffd51dd6c108}\u0000",
+            "owner": "{edd1963e-d3c7-4ff5-ba1e-56d4aae99c6c}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{093d2690-3b8a-411e-a559-77e4cc44abaf}\u0000",
+            "owner": "{edd1963e-d3c7-4ff5-ba1e-56d4aae99c6c}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 0.800000011920929,
+            "_height": 1.7999999523162842,
+            "_depth": 0.800000011920929
+        }
+    ]
+}
