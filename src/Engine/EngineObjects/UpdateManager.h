@@ -5,6 +5,7 @@
 
 namespace Engine
 {
+    class Player;
     class GameMode;
 }
 
@@ -22,6 +23,7 @@ namespace Engine
         std::vector<IUpdateable*> Dead;
 
         GameMode* GameMode = nullptr;
+        Player* Player = nullptr;
 
     private:
         UpdateManager();
@@ -60,7 +62,7 @@ namespace Engine
 
         /**
          * @brief Stops component from being ticked. Should not be used inside update loop.
-         * @param GameMode GameMode  to be unregistered
+         * @param GameMode GameMode to be unregistered
          */
         void UnregisterGameMode(const class GameMode* const GameMode)
         {
@@ -77,6 +79,27 @@ namespace Engine
         void RegisterGameMode(class GameMode* const GameMode)
         {
             this->GameMode = GameMode;
+        }
+
+        /**
+         * @brief Stops component from being ticked. Should not be used inside update loop.
+         * @param Player Player to be unregistered
+         */
+        void UnregisterPlayer(const class Player* const Player)
+        {
+            if (this->Player == Player)
+            {
+                this->Player = nullptr;
+            }
+        }
+
+        /**
+         * @brief Registers new GameMode to be ticked.
+         * @param Player Player to be registered.
+         */
+        void RegisterPlayer(class Player* const Player)
+        {
+            this->Player = Player;
         }
 
         /**

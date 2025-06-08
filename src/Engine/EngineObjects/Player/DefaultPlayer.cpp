@@ -38,7 +38,7 @@ namespace Engine
         }
     }
 
-    void DefaultPlayer::Update()
+    void DefaultPlayer::Update(const float DeltaTime)
     {
     }
 }
