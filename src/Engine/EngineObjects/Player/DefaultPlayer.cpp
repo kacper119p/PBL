@@ -4,6 +4,7 @@
 #include "Engine/Components/Transform.h"
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/Components/Game/Vacuum.h"
+#include "Engine/Components/BloodSystem/BloodEraser.h"
 
 
 namespace Engine

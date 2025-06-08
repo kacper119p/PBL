@@ -66,11 +66,11 @@ namespace Scene
         playerVacuum->AddComponent<Engine::Vacuum>();
         playerVacuum->GetTransform()->SetPosition(glm::vec3(0.0f,1.0f,-3.0f));*/
 
-        Engine::Entity* playerBroom = Scene->SpawnEntity(nullptr);
+        /*Engine::Entity* playerBroom = Scene->SpawnEntity(nullptr);
         playerBroom->SetName("PlayerBroom");
         Scene->GetPlayer()->GetTransform()->AddChild(playerBroom->GetTransform());
         playerBroom->AddComponent<Engine::BloodEraser>();
-        playerBroom->GetTransform()->SetPosition(glm::vec3(0.0f, 1.0f, -2.5f));
+        playerBroom->GetTransform()->SetPosition(glm::vec3(0.0f, 1.0f, -2.5f));*/
 
         /*Engine::Entity* box = Scene->SpawnEntity(nullptr);
         box->SetName("Box");

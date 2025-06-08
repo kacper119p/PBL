@@ -19,7 +19,7 @@ namespace Engine
         std::string PrefabPath = "./res/prefabs/PlayerModel.prefab";
         std::string StripperPath = "./res/prefabs/Stripper.prefab";
         std::string VacuumPath = "./res/prefabs/Vacuum.prefab";
-        std::string BroomPath = "./res/prefabs/PlayerModel.prefab";
+        std::string BroomPath = "./res/prefabs/Broom.prefab";
 
         Rigidbody* rb = nullptr;
         MovementComponent* movementComponent = nullptr;
@@ -29,7 +29,7 @@ namespace Engine
         bool hasVacuum = false;
         bool hasBroom = false;
 
-        Tool currentTool = Tool::Stripper;
+        Tool currentTool = Tool::Broom;
 
         void Start() override;
 
