@@ -631,7 +631,7 @@
             "type": "ModelRenderer",
             "id": "{73d0d32e-ae4e-4688-8cc3-9e600cbb94b9}\u0000",
             "owner": "{cf9e91ad-5ce4-4875-9392-8b8a09bcae86}\u0000",
-            "Material": "./res/materials/SampleScene/RefractiveBottle.mat",
+            "Material": "./res/materials/SampleScene/UV2.mat",
             "Model": "res/models/Modele_Mati/Meble/RegalNiski.fbx"
         },
         {
@@ -699,7 +699,7 @@
             "type": "ModelRenderer",
             "id": "{acabd039-12a9-4b57-8a2b-20d0d30d8984}\u0000",
             "owner": "{ca04ffb3-411d-4916-a1a2-e32fd2b7fea0}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV4.mat",
             "Model": "res/models/Modele_Mati/Meble/Krzeslo.fbx"
         },
         {
@@ -768,7 +768,7 @@
             "type": "ModelRenderer",
             "id": "{caeb5bcc-5500-4cd1-8c74-7be31358ae81}\u0000",
             "owner": "{87163dcc-0c9f-46af-985d-06edf485bef0}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV3.mat",
             "Model": "res/models/Modele_Mati/Meble/KotlarzOtwarty.fbx"
         },
         {
@@ -2399,7 +2399,7 @@
             "type": "ModelRenderer",
             "id": "{1e3fa081-762b-4094-acba-4bad1c852aaf}\u0000",
             "owner": "{2ea2b819-9259-4751-a662-f4a5b9417056}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV2.mat",
             "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
         },
         {
@@ -2467,7 +2467,7 @@
             "type": "ModelRenderer",
             "id": "{45824d21-f402-4573-93fd-b90c82f36573}\u0000",
             "owner": "{78461e6c-1866-4b18-b7f5-7d2b11c59052}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV2.mat",
             "Model": "./res/Models/Modele_Mati/Meble/Skrzynia2.fbx"
         },
         {
@@ -2535,7 +2535,7 @@
             "type": "ModelRenderer",
             "id": "{da9d24a1-6c5c-4b5e-b88a-4f188b36999f}\u0000",
             "owner": "{68dc6fe8-589b-417b-a2d8-b40c18755b52}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV2.mat",
             "Model": "./res/Models/Modele_Mati/Meble/Skrzynia3.fbx"
         },
         {
@@ -2603,7 +2603,7 @@
             "type": "ModelRenderer",
             "id": "{c4d50d15-d304-43ae-9336-4721f782b911}\u0000",
             "owner": "{86fa2298-8896-4f50-b486-bfda169bd2ca}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV4.mat",
             "Model": "./res/Models/Modele_Mati/Meble/Stolik.fbx"
         },
         {
@@ -2671,7 +2671,7 @@
             "type": "ModelRenderer",
             "id": "{d7e02a77-459b-490b-a718-9d0e4ebd9eb3}\u0000",
             "owner": "{180b604b-563a-4e66-a95d-8c8bbf3a7aa7}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV4.mat",
             "Model": "./res/Models/Modele_Mati/Meble/Krzeslo.fbx"
         },
         {
@@ -2739,7 +2739,7 @@
             "type": "ModelRenderer",
             "id": "{a88ba829-42ed-4f3a-b987-d421a7830950}\u0000",
             "owner": "{07e7b845-8da9-461f-b504-37b2697644be}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV2.mat",
             "Model": "./res/Models/Modele_Mati/Meble/Skrzynia3.fbx"
         },
         {
@@ -2807,7 +2807,7 @@
             "type": "ModelRenderer",
             "id": "{489b56a6-4c23-4126-8357-0dd27b5d6388}\u0000",
             "owner": "{be815e64-5e41-44fc-b178-d0c778cc60bd}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV8.mat",
             "Model": "./res/Models/Modele_Mati/Smieci/Czaszka.fbx"
         },
         {
@@ -3305,7 +3305,7 @@
             "type": "ModelRenderer",
             "id": "{5179b6fc-b1fe-4fb4-893e-718ba2d4c814}\u0000",
             "owner": "{164836ae-d86f-4a68-a086-bf4ab9a819f2}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV12.mat",
             "Model": "./res/Models/Modele_Mati/Mikstury/Potion1.fbx"
         },
         {
@@ -3934,7 +3934,7 @@
             "type": "ModelRenderer",
             "id": "{d06a96c5-6bf0-4066-b2e0-d74435d1aa83}\u0000",
             "owner": "{0e4266ce-afb2-45f7-be7a-b252380618fb}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV8.mat",
             "Model": "./res/Models/Modele_Mati/Smieci/KoscKregoslup.fbx"
         },
         {
@@ -4002,7 +4002,7 @@
             "type": "ModelRenderer",
             "id": "{c4da0938-79e3-4553-b5a5-c4722f136a05}\u0000",
             "owner": "{a1911c4f-a2b6-4a19-9b2a-32b529938eb5}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV12.mat",
             "Model": "./res/Models/Modele_Mati/Mikstury/Potion2.fbx"
         },
         {
@@ -4070,7 +4070,7 @@
             "type": "ModelRenderer",
             "id": "{7fc897a0-855d-4b8f-820f-3fe8c9e9f10c}\u0000",
             "owner": "{28f6b88e-83ae-419a-9922-b4ad7c753a74}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV12.mat",
             "Model": "./res/Models/Modele_Mati/Mikstury/Potion3.fbx"
         },
         {
@@ -4138,7 +4138,7 @@
             "type": "ModelRenderer",
             "id": "{673bf08f-d162-45d2-a395-4b99eb422f22}\u0000",
             "owner": "{e347c390-be23-4b83-ad39-2f344932188d}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV12.mat",
             "Model": "./res/Models/Modele_Mati/Mikstury/Potion4.fbx"
         },
         {
@@ -4274,7 +4274,7 @@
             "type": "ModelRenderer",
             "id": "{8d1721f8-46ca-410f-aa77-65eebf6039e4}\u0000",
             "owner": "{03e0c99a-0835-4c88-ab44-3fb52e0bb469}\u0000",
-            "Material": "./res/materials/SampleScene/RefractiveBottle.mat",
+            "Material": "./res/materials/SampleScene/UV2.mat",
             "Model": "res/models/Modele_Mati/Meble/RegalNiski.fbx"
         },
         {
@@ -4841,7 +4841,7 @@
             "type": "ModelRenderer",
             "id": "{424b845c-b4bf-43b4-a2c1-2bc6f343f1fa}\u0000",
             "owner": "{752ce6dc-548b-4ad4-8a11-cdcf95039e0d}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV4.mat",
             "Model": "./res/Models/Modele_Mati/Meble/Krzeslo.fbx"
         },
         {
@@ -4909,7 +4909,7 @@
             "type": "ModelRenderer",
             "id": "{35cb7b84-f9e3-4cb7-aebd-e5d17607488c}\u0000",
             "owner": "{ae32dad3-7300-4d31-8479-71cca05c5c3d}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV4.mat",
             "Model": "./res/Models/Modele_Mati/Meble/Krzeslo.fbx"
         },
         {
@@ -5182,7 +5182,7 @@
             "type": "ModelRenderer",
             "id": "{90b9f171-cd51-4db8-9689-e558d8df3893}\u0000",
             "owner": "{3d1c7728-8908-4250-abd6-3994d7de3959}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV8.mat",
             "Model": "./res/Models/Modele_Mati/Smieci/Czaszka.fbx"
         },
         {
@@ -6001,7 +6001,7 @@
             "type": "ModelRenderer",
             "id": "{76f88442-d7ff-4e05-9e37-dfb1337a9b25}\u0000",
             "owner": "{1ee0ce75-257f-43b6-a439-5d5e72b6bba7}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV2.mat",
             "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
         },
         {
@@ -6069,7 +6069,7 @@
             "type": "ModelRenderer",
             "id": "{23cfc0c0-3c72-4458-a55b-062b08583cf4}\u0000",
             "owner": "{00c7b417-af04-4c4b-8cee-d2554d3a93a1}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV2.mat",
             "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
         },
         {
@@ -6109,7 +6109,7 @@
                     "z": 19.293657302856445
                 },
                 "EulerAngles": {
-                    "x": -2.0604342071493115e-13,
+                    "x": -2.06043407162404e-13,
                     "y": 26.950502395629883,
                     "z": 6.443877396122843e-7
                 },
@@ -6137,7 +6137,7 @@
             "type": "ModelRenderer",
             "id": "{4ed54fa0-c499-4387-84f1-56e94cfc44a1}\u0000",
             "owner": "{4cd1c63f-49c7-47d9-bd46-b3cb87d3d32d}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV2.mat",
             "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
         },
         {
@@ -6205,7 +6205,7 @@
             "type": "ModelRenderer",
             "id": "{f94c95bf-eb0c-4b43-9cda-9baeb75ae187}\u0000",
             "owner": "{9ff7c49a-bded-4652-8732-fde514ca446d}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV2.mat",
             "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
         },
         {
@@ -6352,7 +6352,7 @@
             "type": "ModelRenderer",
             "id": "{9c8acd9d-004a-46a1-829a-dd3f8fd478a2}\u0000",
             "owner": "{fd7dbd50-f956-46fb-89c0-ba1fcf5453b6}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV2.mat",
             "Model": "./res/Models/Modele_Mati/Meble/Skrzynia3.fbx"
         },
         {
@@ -6392,8 +6392,8 @@
                     "z": 32.387062072753906
                 },
                 "EulerAngles": {
-                    "x": 1.8560150703665623e-13,
-                    "y": -28.494653701782227,
+                    "x": 1.8560149348412908e-13,
+                    "y": -28.494651794433594,
                     "z": 6.443867732741637e-7
                 },
                 "Scale": {
@@ -6402,8 +6402,8 @@
                     "z": 1.0
                 },
                 "Rotation": {
-                    "x": 1.3839498436141184e-9,
-                    "y": -0.2461080700159073,
+                    "x": 1.383949732591816e-9,
+                    "y": -0.2461080551147461,
                     "z": 5.450375706317345e-9,
                     "w": 0.9692423939704895
                 },
@@ -6420,7 +6420,7 @@
             "type": "ModelRenderer",
             "id": "{50f390b2-ce34-4dee-b410-b83cadfc4dc4}\u0000",
             "owner": "{495355d9-7071-4f3c-964e-cdb5c7581603}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV2.mat",
             "Model": "./res/Models/Modele_Mati/Meble/Skrzynia3.fbx"
         },
         {
@@ -6635,7 +6635,7 @@
             "type": "ModelRenderer",
             "id": "{6e595fee-8c82-42f1-9dab-1d61894082a0}\u0000",
             "owner": "{49f0602a-6598-4bae-8bf3-d1d65823852a}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV2.mat",
             "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
         },
         {
@@ -6746,7 +6746,7 @@
             "type": "ModelRenderer",
             "id": "{ef98262c-fbbd-46de-a49a-0df9440f2c03}\u0000",
             "owner": "{07814323-8353-4292-9470-eba69753dc87}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
+            "Material": "./res/materials/SampleScene/UV7.mat",
             "Model": "./res/Models/Modele_Mati/Kosztownosci/kamienDiament.fbx"
         },
         {

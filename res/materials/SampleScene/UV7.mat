@@ -4,12 +4,12 @@
     "RoughnessMetallicMap": "./res/textures/Tekstury_Mati/UV7/RMAOMap.dds",
     "NormalMap": "./res/textures/Tekstury_Mati/UV7/NormalMap.dds",
     "EmissiveMap": "./res/textures/Tekstury_Mati/UV7/EmissiveMap.dds",
-    "Roughness": 0.0,
-    "Metallic": 0.0,
+    "Roughness": 0.527999997138977,
+    "Metallic": 0.5109999775886536,
     "BaseColor": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
     },
     "EmissiveColor": {
         "x": 0.0,
