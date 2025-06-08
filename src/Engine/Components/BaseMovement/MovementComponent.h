@@ -15,7 +15,7 @@ namespace Engine
     {
     private:
         float Speed;
-        float RotationSpeed = 3.0f;
+        float RotationSpeed = 10.0f;
         float CurrentVelocity = 0.0f;
         float smooth = 0.97f;
     public:

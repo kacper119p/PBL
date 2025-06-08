@@ -1,0 +1,59 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{32b89a88-7c01-4edb-9da4-cf9183704368}\u0000",
+            "name": "Rybaawwsdwa",
+            "transform": {
+                "type": "Transform",
+                "id": "{9c56dcbd-3a0a-4839-90cb-aee759e9fd3d}\u0000",
+                "owner": "{32b89a88-7c01-4edb-9da4-cf9183704368}\u0000",
+                "Position": {
+                    "x": -7.280632019042969,
+                    "y": 4.023881435394287,
+                    "z": 38.25653076171875
+                },
+                "EulerAngles": {
+                    "x": 1.0630857766357263e-13,
+                    "y": -0.0,
+                    "z": 6.443863753702317e-7
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 9.27717388282364e-16,
+                    "y": 5.216862989540934e-24,
+                    "z": 5.62333202225318e-9,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{0cffb052-c427-4399-ad6a-ff77ffda77bb}\u0000",
+                "{d70b11ec-ba05-4d49-9f88-305a371269a9}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{0cffb052-c427-4399-ad6a-ff77ffda77bb}\u0000",
+            "owner": "{32b89a88-7c01-4edb-9da4-cf9183704368}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Smieci/Ryba.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{d70b11ec-ba05-4d49-9f88-305a371269a9}\u0000",
+            "owner": "{32b89a88-7c01-4edb-9da4-cf9183704368}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 1.2000000476837158,
+            "_height": 0.30000001192092896,
+            "_depth": 2.4000000953674316
+        }
+    ]
+}
