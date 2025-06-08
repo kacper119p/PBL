@@ -124,12 +124,12 @@ namespace Engine
 
             item->GetComponent<Engine::BoxCollider>()->SetTrigger(false);
 
-            glm::vec3 position = GetOwner()->GetTransform()->GetPosition();
-            glm::vec3 forward = GetOwner()->GetTransform()->GetForward();
-            item->GetTransform()->SetPosition(-(position + forward)*1.5f+glm::vec3(0,4,0)); 
+            glm::vec3 position = GetOwner()->GetTransform()->GetParent()->GetPosition();
+            glm::vec3 forward = GetOwner()->GetTransform()->GetParent()->GetForward();
+            item->GetTransform()->SetPosition((position + forward)+glm::vec3(0,1,0)); 
             item->GetComponent<Engine::Rigidbody>()->angularVelocity.y=0.0f;
             item->GetComponent<Engine::Rigidbody>()->hasGravity = true;
-            item->GetComponent<Engine::Rigidbody>()->AddForce(-forward * 100.0f, Engine::ForceMode::Force);
+            item->GetComponent<Engine::Rigidbody>()->AddForce(forward * 100.0f, Engine::ForceMode::Force);
         }
     }
 

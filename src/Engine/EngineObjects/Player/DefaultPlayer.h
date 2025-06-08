@@ -29,7 +29,7 @@ namespace Engine
         bool hasVacuum = false;
         bool hasBroom = false;
 
-        Tool currentTool = Tool::Vacuum;
+        Tool currentTool = Tool::Stripper;
 
         void Start() override;
 
