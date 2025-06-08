@@ -42,8 +42,8 @@
             "type": "ModelRenderer",
             "id": "{7ac8198c-018f-48c5-93bb-d8fcf762b253}\u0000",
             "owner": "{c743fe5f-7c4b-4750-8232-b874ec200ecc}\u0000",
-            "Material": "..\\..\\res\\materials\\SampleScene\\UV7.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Modele_Mati/Kosztownosci/kamienDiament.fbx"
+            "Material": "./res/materials/SampleScene/UV7.mat",
+            "Model": "./res/models/Modele_Mati/Kosztownosci/kamienDiament.fbx"
         },
         {
             "type": "Rigidbody",

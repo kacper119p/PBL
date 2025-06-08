@@ -42,8 +42,8 @@
             "type": "ModelRenderer",
             "id": "{4eac3520-bcb9-4e83-9ddc-302178438563}\u0000",
             "owner": "{a8648ac8-fbd9-4b71-b8cd-6979386729fb}\u0000",
-            "Material": "..\\..\\res\\materials\\SampleScene\\UV12.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Modele_Mati/Mikstury/Potion3.fbx"
+            "Material": "./res/materials/SampleScene/UV12.mat",
+            "Model": "./res/models/Modele_Mati/Mikstury/Potion3.fbx"
         },
         {
             "type": "Rigidbody",

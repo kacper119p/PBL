@@ -42,8 +42,8 @@
             "type": "ModelRenderer",
             "id": "{26d0ff30-2870-4c7d-8aca-3dd24bc6b2bd}\u0000",
             "owner": "{5e81f014-a07a-41c6-8ae4-4e9d0809c460}\u0000",
-            "Material": "..\\..\\res\\materials\\SampleScene\\UV4.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Modele_Mati/Meble/Krzeslo.fbx"
+            "Material": "./res/materials/SampleScene/UV4.mat",
+            "Model": "./res/models/Modele_Mati/Meble/Krzeslo.fbx"
         },
         {
             "type": "Rigidbody",

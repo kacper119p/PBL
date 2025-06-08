@@ -42,8 +42,8 @@
             "type": "ModelRenderer",
             "id": "{7b10cf8d-c130-4d55-8cdd-4739fe2de55f}\u0000",
             "owner": "{9ea87788-11df-4219-bba9-b0669811d3b1}\u0000",
-            "Material": "..\\..\\res\\materials\\SampleScene\\UV14.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Modele_Mati/Smieci/KamienPrzeszkoda5.fbx"
+            "Material": "./res/materials/SampleScene/UV14.mat",
+            "Model": "./res/models/Modele_Mati/Smieci/KamienPrzeszkoda5.fbx"
         },
         {
             "type": "Rigidbody",

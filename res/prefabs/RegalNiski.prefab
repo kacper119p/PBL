@@ -42,8 +42,8 @@
             "type": "ModelRenderer",
             "id": "{73d0d32e-ae4e-4688-8cc3-9e600cbb94b9}\u0000",
             "owner": "{cf9e91ad-5ce4-4875-9392-8b8a09bcae86}\u0000",
-            "Material": "..\\..\\res\\materials\\SampleScene\\UV2.mat",
-            "Model": "res/models/Modele_Mati/Meble/RegalNiski.fbx"
+            "Material": "./res/materials/SampleScene/UV2.mat",
+            "Model": "./res/models/Modele_Mati/Meble/RegalNiski.fbx"
         },
         {
             "type": "BoxCollider",

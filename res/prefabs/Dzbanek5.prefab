@@ -42,8 +42,8 @@
             "type": "ModelRenderer",
             "id": "{ee498a67-e37f-41b0-8c51-85231783ec20}\u0000",
             "owner": "{f022a3fa-8156-4ba1-814a-071763aa9714}\u0000",
-            "Material": "..\\..\\res\\materials\\SampleScene\\UV6.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Modele_Mati/Naczynia/Dzbanek5.fbx"
+            "Material": "./res/materials/SampleScene/UV6.mat",
+            "Model": "./res/models/Modele_Mati/Naczynia/Dzbanek5.fbx"
         },
         {
             "type": "Rigidbody",

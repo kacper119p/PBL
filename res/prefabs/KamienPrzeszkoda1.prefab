@@ -42,7 +42,7 @@
             "type": "ModelRenderer",
             "id": "{184a1ac3-5221-4b2a-bc16-ba24f7cad4a9}\u0000",
             "owner": "{8d3f99d6-991a-4577-a809-c21cafaadc3c}\u0000",
-            "Material": "..\\..\\res\\materials\\SampleScene\\UV14.mat",
+            "Material": "./res/materials/SampleScene/UV14.mat",
             "Model": "./res/Models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx"
         },
         {

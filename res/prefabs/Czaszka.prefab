@@ -42,8 +42,8 @@
             "type": "ModelRenderer",
             "id": "{b4720444-debe-4607-82c2-b9677c7485fc}\u0000",
             "owner": "{d2c43ef8-5b2b-4024-b1bb-f7988b72b73c}\u0000",
-            "Material": "..\\..\\res\\materials\\SampleScene\\UV8.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Modele_Mati/Smieci/Czaszka.fbx"
+            "Material": "./res/materials/SampleScene/UV8.mat",
+            "Model": "./res/models/Modele_Mati/Smieci/Czaszka.fbx"
         },
         {
             "type": "Rigidbody",

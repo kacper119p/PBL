@@ -193,7 +193,7 @@ namespace Engine
 #endif
 
         // Create window with graphics context
-        Window = glfwCreateWindow(mode->width, mode->height, "Tide Engine", nullptr, nullptr);
+        Window = glfwCreateWindow(mode->width, mode->height, "Tide Engine", monitor, nullptr);
         if (!Window)
         {
             spdlog::error("Failed to create GLFW Window!");

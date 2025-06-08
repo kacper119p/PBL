@@ -42,8 +42,8 @@
             "type": "ModelRenderer",
             "id": "{43c802ae-6e66-4bb1-bf6b-dbcdba3dbd1e}\u0000",
             "owner": "{c4db0eda-1159-4cac-81d2-5fb2c400e674}\u0000",
-            "Material": "..\\..\\res\\materials\\SampleScene\\UV2.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Modele_Mati/Meble/Skrzynia1.fbx"
+            "Material": "./res/materials/SampleScene/UV2.mat",
+            "Model": "./res/models/Modele_Mati/Meble/Skrzynia1.fbx"
         },
         {
             "type": "Rigidbody",

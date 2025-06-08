@@ -42,8 +42,8 @@
             "type": "ModelRenderer",
             "id": "{da5a8264-2ed9-4336-88f7-0fb7054ae8f7}\u0000",
             "owner": "{223a2997-ee6b-4638-a5a5-9b312c614bec}\u0000",
-            "Material": "..\\..\\res\\materials\\SampleScene\\UV3.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Modele_Mati/Meble/KotlarzOtwarty.fbx"
+            "Material": "./res/materials/SampleScene/UV3.mat",
+            "Model": "./res/models/Modele_Mati/Meble/KotlarzOtwarty.fbx"
         },
         {
             "type": "Rigidbody",

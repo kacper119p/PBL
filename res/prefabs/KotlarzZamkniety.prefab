@@ -42,7 +42,7 @@
             "type": "ModelRenderer",
             "id": "{e1945fd7-f656-4bcb-a448-d74532e5aa4a}\u0000",
             "owner": "{d36e2a3e-a2a4-4fdc-b124-8f94039b82d5}\u0000",
-            "Material": "..\\..\\res\\materials\\SampleScene\\UV3.mat",
+            "Material": "./res/materials/SampleScene/UV3.mat",
             "Model": "./res/Models/Modele_Mati/Meble/KotlarzZamkniety.fbx"
         },
         {

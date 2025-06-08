@@ -42,8 +42,8 @@
             "type": "ModelRenderer",
             "id": "{fa6e5e02-6be3-4dc3-9fb1-a8ede74a6ad2}\u0000",
             "owner": "{d374e7e3-8582-4441-bcac-e3437ea11732}\u0000",
-            "Material": "..\\..\\res\\materials\\SampleScene\\UV8.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Modele_Mati/Smieci/KoscDluga.fbx"
+            "Material": "./res/materials/SampleScene/UV8.mat",
+            "Model": "./res/models/Modele_Mati/Smieci/KoscDluga.fbx"
         },
         {
             "type": "Rigidbody",

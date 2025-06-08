@@ -42,8 +42,8 @@
             "type": "ModelRenderer",
             "id": "{ace64e76-e9dc-450e-8145-08bb76c4d5e6}\u0000",
             "owner": "{8b1a7a21-022e-4ce1-b141-ed403bcfd90b}\u0000",
-            "Material": "..\\..\\res\\materials\\SampleScene\\UV7.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Modele_Mati/Kosztownosci/kamienRubin.fbx"
+            "Material": "./res/materials/SampleScene/UV7.mat",
+            "Model": "./res/models/Modele_Mati/Kosztownosci/kamienRubin.fbx"
         },
         {
             "type": "Rigidbody",

@@ -42,8 +42,8 @@
             "type": "ModelRenderer",
             "id": "{c8aa4544-7d5e-4a65-af96-73b847cefcd4}\u0000",
             "owner": "{d7dd0248-98b8-4d98-82cd-81c3312928f6}\u0000",
-            "Material": "..\\..\\res\\materials\\SampleScene\\UV12.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Modele_Mati/Kosztownosci/Moneta.fbx"
+            "Material": "./res/materials/SampleScene/UV12.mat",
+            "Model": "./res/models/Modele_Mati/Kosztownosci/Moneta.fbx"
         },
         {
             "type": "Rigidbody",

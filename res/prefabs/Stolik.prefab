@@ -42,8 +42,8 @@
             "type": "ModelRenderer",
             "id": "{51c79cdd-7945-46c7-b7af-169e5c9bf6f2}\u0000",
             "owner": "{948995e3-afd2-48b7-a07a-c2e039efa5af}\u0000",
-            "Material": "..\\..\\res\\materials\\SampleScene\\UV4.mat",
-            "Model": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-debug-visual-studio-editor\\src\\res/models/Modele_Mati/Meble/Stolik.fbx"
+            "Material": "./res/materials/SampleScene/UV4.mat",
+            "Model": "./res/models/Modele_Mati/Meble/Stolik.fbx"
         },
         {
             "type": "Rigidbody",
