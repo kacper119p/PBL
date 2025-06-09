@@ -11,8 +11,6 @@
 
 namespace Engine
 {
-
-
     void Vacuum::Start()
     {
         if (this->GetOwner()->GetComponent<Engine::SphereCollider>())
@@ -147,7 +145,8 @@ namespace Engine
 
     void Vacuum::DeserializeReferencesPass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
-        // Implementacja
+        START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
+        END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 #if EDITOR
     void Vacuum::DrawImGui() {}

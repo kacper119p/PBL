@@ -5,6 +5,8 @@
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/Components/Game/Vacuum.h"
 #include "Engine/Components/BloodSystem/BloodEraser.h"
+#include "Engine/Input/InputManager.h"
+#include "Engine/Components/Game/ThrashManager.h"
 
 
 namespace Engine
@@ -27,6 +29,7 @@ namespace Engine
             boxCollider->SetHeight(2.0f);
             boxCollider->SetWidth(2.0f);
             boxCollider->SetDepth(2.0f);
+            boxCollider->OnCollisionAddListener(SwapTool);
             //rb settings
             rb->friction = 0.1f;
             rb->angularDamping = 0.01f;
@@ -47,43 +50,111 @@ namespace Engine
     void DefaultPlayer::Update(const float DeltaTime)
     {
         #if !EDITOR
+        InputManager& input = InputManager::GetInstance();
+        if (input.IsKeyPressed(GLFW_KEY_E) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_BUTTON_X))
+        {
+            canSwap = true;
+        }
+        else
+        {
+            canSwap = false;
+        }
         switch (currentTool)
         {
             case Tool::Stripper:
                 if (!hasStripper)
                 {
-                    Entity* stripper = PrefabLoader::LoadPrefab(StripperPath, this->GetScene(), this->GetTransform());
+                    stripper = PrefabLoader::LoadPrefab(StripperPath, this->GetScene(), this->GetTransform());
                     this->GetTransform()->AddChild(stripper->GetTransform());
                     hasStripper = true;
                 }
                 hasBroom = false;
                 hasVacuum = false;
+                if (vacuum)
+                {
+                    this->GetTransform()->RemoveChild(vacuum->GetTransform());
+                    vacuum->Destroy();
+                }
+                if (broom)
+                {
+                    this->GetTransform()->RemoveChild(broom->GetTransform());
+                    broom->Destroy();
+                }
+                vacuum = nullptr;
+                broom = nullptr;
                 break;
             case Tool::Vacuum:
                 if (!hasVacuum)
                 {
-                    Entity* vacuum = PrefabLoader::LoadPrefab(VacuumPath, this->GetScene(), this->GetTransform());
+                    vacuum = PrefabLoader::LoadPrefab(VacuumPath, this->GetScene(), this->GetTransform());
                     this->GetTransform()->AddChild(vacuum->GetTransform());
                     vacuum->AddComponent<Engine::Vacuum>();
                     hasVacuum = true;
                 }
                 hasBroom = false;
                 hasStripper = false;
+                if (broom)
+                {
+                    this->GetTransform()->RemoveChild(broom->GetTransform());
+                    broom->Destroy();
+                }
+                if (stripper)
+                {
+                    this->GetTransform()->RemoveChild(stripper->GetTransform());
+                    stripper->Destroy();
+                }
+                stripper = nullptr;
+                broom = nullptr;
                 break;
             case Tool::Broom:
                 if (!hasBroom)
                 {
-                    Entity* broom = PrefabLoader::LoadPrefab(BroomPath, this->GetScene(), this->GetTransform());
+                    broom = PrefabLoader::LoadPrefab(BroomPath, this->GetScene(), this->GetTransform());
                     this->GetTransform()->AddChild(broom->GetTransform());
                     hasBroom = true;
                 }
                 hasVacuum = false;
                 hasStripper = false;
+                if (stripper)
+                {
+                    this->GetTransform()->RemoveChild(stripper->GetTransform());
+                    stripper->Destroy();
+                }
+                if (vacuum)
+                {
+                    this->GetTransform()->RemoveChild(vacuum->GetTransform());
+                    vacuum->Destroy();
+                }
+                stripper = nullptr;
+                vacuum = nullptr;
                 break;
             default:
                 spdlog::warn("DefaultPlayer: Unknown tool selected.");
                 break;
         }
         #endif
+    }
+    void DefaultPlayer::SetTool(Tool tool) 
+    { 
+        this->currentTool = tool; 
+    }
+
+    void DefaultPlayer::ToolSwapper(Collider* collider) 
+    {
+        if (canSwap)
+        {
+            if (collider->GetOwner()->GetName() == "StripperCollider")
+            {
+                SetTool(Tool::Stripper);
+            }
+            else if (collider->GetOwner()->GetName() == "VacuumCollider")
+            {
+                SetTool(Tool::Vacuum);
+            }
+            else if (collider->GetOwner()->GetName() == "BroomCollider")
+            {
+                SetTool(Tool::Broom);
+            }
+        }
     }
 }
