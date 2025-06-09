@@ -98,18 +98,10 @@ namespace Engine
             lastFrame = currentFrame;
 
             // Process I/O operations here
-#if EDITOR
             HandleInput(deltaTime);
-#else
-            InputManager::GetInstance().Update();
-            CameraFollow::GetInstance().Update(deltaTime);
-            CameraFollow::GetInstance().SetTarget(CurrentScene->GetPlayer());
-#endif
-#if !EDITOR
             UpdateManager::GetInstance()->Update(deltaTime);
             RigidbodyUpdateManager::GetInstance()->Update(deltaTime);
             CollisionUpdateManager::GetInstance()->Update(deltaTime);
-#endif
             int displayW, displayH;
             glfwMakeContextCurrent(Window);
             glfwGetFramebufferSize(Window, &displayW, &displayH);
@@ -266,9 +258,6 @@ namespace Engine
         spdlog::info("Sounds loaded.");
 
         //input manager init
-#if !EDITOR
-        InputManager::GetInstance().Init(Window);
-#endif
 
         return true;
     }
@@ -345,8 +334,8 @@ namespace Engine
     void Engine::ImGuiRender()
     {
 #if EDITOR
-        //LightsGui::Draw();
-        //EditorGUI.Render(Frame, CurrentScene);
+    //LightsGui::Draw();
+    //EditorGUI.Render(Frame, CurrentScene);
 #endif
     }
 

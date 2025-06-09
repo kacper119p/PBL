@@ -127,7 +127,6 @@ namespace Engine
 #endif
         glDisable(GL_BLEND);
 
-        GodRays.Render(MultiSampledBuffer);
         Bloom.Render(MultiSampledBuffer.GetResolvedColorBuffer());
     }
 

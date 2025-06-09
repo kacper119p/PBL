@@ -199,42 +199,24 @@ float GeometrySmith(vec3 N, vec3 V, vec3 L, float roughness)
 
 vec3 CalculateLightInfluence(light Light, vec3 BaseColor, vec3 Normal, vec3 ViewDirection, float Roughness, float Metallic, vec3 F0)
 {
-    vec3 H = normalize(Light.Direction + ViewDirection);
+    vec3 L = normalize(Light.Direction);
+    vec3 H = normalize(L + ViewDirection);
     vec3 radiance = Light.Color * Light.Attenuation;
 
-    vec3 F = FresnelSchlick(max(dot(H, ViewDirection), 0.0), F0);
+    // Diffuse component
+    float NdotL = max(dot(Normal, L), 0.0);
+    vec3 diffuse = BaseColor * NdotL;
 
-    float NDF = DistributionGGX(Normal, H, Roughness);
-    float G = GeometrySmith(Normal, ViewDirection, Light.Direction, Roughness);
+    // Specular component
+    float NdotH = max(dot(Normal, H), 0.0);
+    vec3 specular = pow(NdotH, (1.0 - Roughness) * 1024.0) * radiance;
 
-    vec3 numerator = NDF * G * F;
-    float denominator = 4.0 * max(dot(Normal, ViewDirection), 0.0) * max(dot(Normal, Light.Direction), 0.0);
-    vec3 specular = numerator / max(denominator, 0.001);
-
-    vec3 kS = F;
-    vec3 kD = vec3(1.0) - kS;
-    kD *= 1.0 - Metallic;
-
-    float NdotL = max(dot(Normal, Light.Direction), 0.0);
-    return (kD * BaseColor / PI + specular) * radiance * NdotL;
+    return (diffuse + specular) * radiance;
 }
 
 vec3 CalculateEnvironmentInfluence(vec3 BaseColor, vec3 Normal, vec3 ViewDirection, float Roughness, float Metallic, vec3 F0, float AmbientOcclusion)
 {
-    vec3 R = reflect(-ViewDirection, Normal);
-
-    vec3 kS = FresnelSchlickRoughness(max(dot(Normal, ViewDirection), 0.0), F0, Roughness);
-    vec3 kD = 1.0 - kS;
-    kD *= 1.0 - Metallic;
-    vec3 irradiance = texture(IrradianceMap, Normal).rgb;
-    vec3 diffuse = irradiance * BaseColor;
-
-    vec3 prefilteredColor = textureLod(PrefilterMap, R, Roughness *
-    MAX_REFLECTION_LOD).rgb;
-    vec2 brdf = texture(BrdfLUT, vec2(max(dot(Normal, ViewDirection), 0.0), Roughness)).rg;
-    vec3 specular = prefilteredColor * (kS * brdf.x + brdf.y);
-
-    return (kD * diffuse + specular) * min(vec3(texture(SSAOMap, gl_FragCoord.xy / vec2(1920, 1080)).r), AmbientOcclusion);
+    return vec3(0.08, 0.08, 0.1) * 5 * BaseColor;
 }
 
 vec3 CalculateLight(vec3 BaseColor, float Metallic, float Roughness, vec3 Normal, vec3 Position, vec3 ViewDirection, float AmbientOcclusion)
