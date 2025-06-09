@@ -31,7 +31,7 @@ namespace Engine
             boxCollider->SetDepth(2.0f);
             boxCollider->OnCollisionAddListener(SwapTool);
             //rb settings
-            rb->friction = 0.1f;
+            rb->friction = 0.05f;
             rb->angularDamping = 0.01f;
             rb->linearDamping = 0.01f;
             rb->restitution = 0.3f;
