@@ -52,6 +52,10 @@ namespace Engine
 
     void ModelRenderer::RenderDirectionalShadows(const CameraRenderData& RenderData)
     {
+        if (!CastShadow)
+        {
+            return;
+        }
         if (Model == nullptr)
         {
             return;
@@ -64,6 +68,10 @@ namespace Engine
     ModelRenderer::RenderPointSpotShadows(const glm::vec3& LightPosition, float LightRange,
                                           const glm::mat4* const SpaceTransformMatrices)
     {
+        if (!CastShadow)
+        {
+            return;
+        }
         if (Model == nullptr)
         {
             return;
@@ -106,6 +114,8 @@ namespace Engine
     {
         if (ImGui::CollapsingHeader("Model Renderer", ImGuiTreeNodeFlags_DefaultOpen))
         {
+            ImGui::Checkbox("Cast Shadows", &CastShadow);
+
             static bool showMaterialPopup = false;
             static bool showModelPopup = false;
 
@@ -289,6 +299,7 @@ namespace Engine
         START_COMPONENT_SERIALIZATION
         SERIALIZE_FIELD(Material)
         SERIALIZE_FIELD(Model)
+        SERIALIZE_FIELD(CastShadow)
         END_COMPONENT_SERIALIZATION
     }
 
@@ -298,6 +309,7 @@ namespace Engine
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
         DESERIALIZE_VALUE(Material)
         DESERIALIZE_VALUE(Model)
+        DESERIALIZE_VALUE(CastShadow)
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 
