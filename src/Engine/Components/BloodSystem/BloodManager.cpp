@@ -39,7 +39,6 @@ namespace Engine
 
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT);
-
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         const glm::vec3 cameraPosition = glm::vec3(0.0f, SceneBounds.max.y, 0.0f);
@@ -47,11 +46,9 @@ namespace Engine
         constexpr glm::vec3 upDirection = glm::vec3(0.0f, 0.0f, -1.0f);
 
         const glm::mat4 viewMatrix = glm::lookAt(cameraPosition, origin, upDirection);
-
         const glm::mat4 projectionMatrix = glm::ortho(SceneBounds.min.x, SceneBounds.max.x,
                                                       SceneBounds.min.z, SceneBounds.max.z,
                                                       0.0f, SceneBounds.max.y - SceneBounds.min.y);
-
         ViewProjectionMatrix = projectionMatrix * viewMatrix;
 
         MaskShader = Shaders::ShaderManager::GetShader(
@@ -68,10 +65,13 @@ namespace Engine
 
         glGenBuffers(1, &AccumulationBuffer);
         glBindBuffer(GL_SHADER_STORAGE_BUFFER, AccumulationBuffer);
-        constexpr float zero = 0.0f;
-        glBufferData(GL_SHADER_STORAGE_BUFFER, TotalGroups * sizeof(float), nullptr, GL_DYNAMIC_READ);
+        glBufferStorage(GL_SHADER_STORAGE_BUFFER, TotalGroups * sizeof(float), nullptr,
+                        GL_MAP_READ_BIT | GL_MAP_PERSISTENT_BIT | GL_MAP_COHERENT_BIT);
 
-
+        AccumulationPtr = static_cast<float*>(glMapBufferRange(GL_SHADER_STORAGE_BUFFER, 0,
+                                                               TotalGroups * sizeof(float),
+                                                               GL_MAP_READ_BIT | GL_MAP_PERSISTENT_BIT |
+                                                               GL_MAP_COHERENT_BIT));
     }
 
     BloodManager::~BloodManager()
@@ -80,8 +80,12 @@ namespace Engine
         {
             Instance = nullptr;
         }
+
+        RemoveBloodEraser(Eraser);
         glDeleteFramebuffers(1, &FrameBuffer);
         glDeleteTextures(1, &ColorBuffer);
+
+        glDeleteBuffers(1, &AccumulationBuffer);
     }
 
     void BloodManager::Update(const float DeltaTime)
@@ -96,6 +100,7 @@ namespace Engine
 
         MaskShader.Use();
         Shaders::Shader::SetUniform(GetViewProjectionMatrixUniformLocation(), GetMaskSpaceTransform());
+
         for (const BloodStain* const bloodStain : BloodStains)
         {
             bloodStain->Draw();
@@ -113,7 +118,6 @@ namespace Engine
             Eraser->Draw();
         }
 
-
         glDisable(GL_BLEND);
 
         glBindBuffer(GL_SHADER_STORAGE_BUFFER, AccumulationBuffer);
@@ -123,18 +127,14 @@ namespace Engine
         glBindTexture(GL_TEXTURE_2D, ColorBuffer);
         Shaders::ComputeShader::Dispatch(DispatchSize);
         glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT | GL_BUFFER_UPDATE_BARRIER_BIT);
-        const float* ptr = static_cast<float*>(glMapBufferRange(
-                GL_SHADER_STORAGE_BUFFER, 0, TotalGroups * sizeof(float), GL_MAP_READ_BIT));
 
         float totalAlpha = 0.0f;
         for (int i = 0; i < TotalGroups; ++i)
         {
-            totalAlpha += ptr[i];
+            totalAlpha += AccumulationPtr[i];
         }
-        glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
 
         const float averageAlpha = totalAlpha / (MaskSize * MaskSize);
         BloodFill = averageAlpha;
-
     }
 }

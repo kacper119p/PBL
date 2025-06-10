@@ -1,25 +1,38 @@
 #include "AudioSource.h"
-
 #include "spdlog/spdlog.h"
 #include "Serialization/SerializationUtility.h"
 #include "Engine/EngineObjects/Entity.h"
+#include "Engine/EngineObjects/UpdateManager.h"
 
 Engine::AudioSource::AudioSource() :
     AudioManager(AudioManager::GetInstance())
 {
+    UpdateManager::GetInstance()->RegisterComponent(this);
 }
 
 Engine::AudioSource::~AudioSource()
 {
     SoundInstance.reset();
+    UpdateManager::GetInstance()->UnregisterComponent(this);
 }
 
 void Engine::AudioSource::Start()
 {
-    if (!SelectedSoundId.empty() && !SoundInstance)
+    if (!SelectedSoundId.empty() && !SoundInstance && !EDITOR)
     {
         SoundInstance = AudioManager.CreateSoundInstance(SelectedSoundId);
+        AudioManager.PlayAudio(SoundInstance);
+        AudioManager.SetLooping(SoundInstance, Looping);
+        AudioManager.SetVolume(SoundInstance, SoundVolume);
+        AudioManager.SetSoundPosition(SoundInstance, GetOwner()->GetTransform()->GetPosition());
+        AudioManager.ConfigureSoundAttenuation(SoundInstance, MinDist, MaxDist, RollOff);
     }
+}
+
+void Engine::AudioSource::Update(float DeltaTime)
+{
+    if (!EDITOR)
+        AudioManager.SetSoundPosition(SoundInstance, GetOwner()->GetTransform()->GetPosition());
 }
 
 std::shared_ptr<ma_sound> Engine::AudioSource::GetSoundInstance()
@@ -146,7 +159,6 @@ rapidjson::Value Engine::AudioSource::Serialize(rapidjson::Document::AllocatorTy
     SERIALIZE_FIELD(SelectedSoundId)
     SERIALIZE_FIELD(SoundVolume)
     SERIALIZE_FIELD(Looping)
-    SERIALIZE_FIELD(Position)
     SERIALIZE_FIELD(MinDist)
     SERIALIZE_FIELD(MaxDist)
     SERIALIZE_FIELD(RollOff)
@@ -160,7 +172,6 @@ void Engine::AudioSource::DeserializeValuePass(const rapidjson::Value& Object,
     DESERIALIZE_VALUE(SelectedSoundId)
     DESERIALIZE_VALUE(SoundVolume)
     DESERIALIZE_VALUE(Looping)
-    DESERIALIZE_VALUE(Position)
     DESERIALIZE_VALUE(MinDist)
     DESERIALIZE_VALUE(MaxDist)
     DESERIALIZE_VALUE(RollOff)

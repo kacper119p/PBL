@@ -1,10 +1,12 @@
 #include "AiManager.h"
+#include <tracy/Tracy.hpp>
 #include "Sequence.h"
 #include "Selector.h"
 #include "LeafNodes.h"
 #include "NavMesh.h"
 #include "Engine/Components/Game/Thrash.h"
 #include "Engine/EngineObjects/UpdateManager.h"
+#include "Engine/EngineObjects/Player/DefaultPlayer.h"
 #include "Serialization/SerializationUtility.h"
 #include "spdlog/spdlog.h"
 
@@ -13,7 +15,6 @@ namespace Engine
     AiManager::AiManager()
     {
         UpdateManager::GetInstance()->RegisterComponent(this);
-        InitializeAStar();
         InitializeBehaviorTree();
     }
 
@@ -23,12 +24,21 @@ namespace Engine
         UpdateManager::GetInstance()->UnregisterComponent(this);
     }
 
-    void AiManager::InitializeAStar()
+    void AiManager::Start()
     {
-        if (!AStarComponent)
+        AStarComponent = new AStar();
+        AStarComponent->SetGraph(NavMesh::Get().GetGraph());
+        NavMesh::Get().BakeNavMesh(GetOwner()->GetScene()->GetRoot());
+
+        if (dynamic_cast<Engine::DefaultPlayer*>(GetOwner()->GetScene()->GetPlayer()))
+            Player = GetOwner()->GetScene()->GetPlayer();
+
+        for (auto& transform : GetOwner()->GetScene()->GetRoot()->GetTransform()->GetChildren())
         {
-            AStarComponent = new AStar();
-            AStarComponent->SetGraph(NavMesh::Get().GetGraph());
+            if (transform->GetOwner()->GetComponent<Thrash>())
+            {
+                TrashEntities.emplace_back(transform->GetOwner());
+            }
         }
     }
 
@@ -107,6 +117,7 @@ namespace Engine
 
     void AiManager::Update(const float DeltaTime)
     {
+        ZoneScoped;
         if (!Player || !NavMesh::Get().GetGraph())
             return;
 
@@ -280,10 +291,33 @@ namespace Engine
 
         if (ImGui::CollapsingHeader("A* Pathfinding", ImGuiTreeNodeFlags_DefaultOpen))
         {
-            float moveSpeed = AStarComponent->GetMoveSpeed();
-            if (ImGui::InputFloat("Move Speed", &moveSpeed))
+            if (ImGui::InputFloat("Chase Cooldown", &ChaseCooldown))
             {
-                AStarComponent->SetMoveSpeed(moveSpeed);
+                AStarComponent->SetMoveSpeed(ChaseCooldown);
+            }
+            if (ImGui::InputFloat("Rest Cooldown", &RestCooldown))
+            {
+                AStarComponent->SetMoveSpeed(RestCooldown);
+            }
+            if (ImGui::InputFloat("Player Range", &PlayerRange))
+            {
+                AStarComponent->SetMoveSpeed(PlayerRange);
+            }
+            if (ImGui::InputFloat("Fast Movement Speed", &FastMovementSpeed))
+            {
+                AStarComponent->SetMoveSpeed(FastMovementSpeed);
+            }
+            if (ImGui::InputFloat("Slow Movement Speed", &SlowMovementSpeed))
+            {
+                AStarComponent->SetMoveSpeed(SlowMovementSpeed);
+            }
+            if (ImGui::InputFloat("Trash Range", &TrashRange))
+            {
+                AStarComponent->SetMoveSpeed(TrashRange);
+            }
+            if (ImGui::InputInt("Max Trash Capacity", &MaxTrashCapacity))
+            {
+                AStarComponent->SetMoveSpeed(MaxTrashCapacity);
             }
 
             if (ImGui::Button("Bake NavMesh"))
@@ -328,14 +362,26 @@ namespace Engine
     rapidjson::Value AiManager::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
         START_COMPONENT_SERIALIZATION
-
+        SERIALIZE_FIELD(ChaseCooldown)
+        SERIALIZE_FIELD(RestCooldown)
+        SERIALIZE_FIELD(PlayerRange)
+        SERIALIZE_FIELD(FastMovementSpeed)
+        SERIALIZE_FIELD(SlowMovementSpeed)
+        SERIALIZE_FIELD(TrashRange)
+        SERIALIZE_FIELD(MaxTrashCapacity)
         END_COMPONENT_SERIALIZATION
     }
 
     void AiManager::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
-
+        DESERIALIZE_VALUE(ChaseCooldown)
+        DESERIALIZE_VALUE(RestCooldown)
+        DESERIALIZE_VALUE(PlayerRange)
+        DESERIALIZE_VALUE(FastMovementSpeed)
+        DESERIALIZE_VALUE(SlowMovementSpeed)
+        DESERIALIZE_VALUE(TrashRange)
+        DESERIALIZE_VALUE(MaxTrashCapacity)
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 

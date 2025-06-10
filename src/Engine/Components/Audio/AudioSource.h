@@ -3,6 +3,7 @@
 #include "Engine/Components/Component.h"
 #include "audio/AudioManager.h"
 #include <glm/glm.hpp>
+#include "Engine/Components/Updateable.h"
 
 namespace Engine
 {
@@ -14,7 +15,7 @@ namespace Engine
      * associated with a specific entity and works with shared sound data managed
      * by AudioManager.
      */
-    class AudioSource final : public Component
+    class AudioSource final : public Component, IUpdateable
     {
     private:
         AudioManager& AudioManager; ///< Reference to the global AudioManager instance.
@@ -23,7 +24,6 @@ namespace Engine
 
         float SoundVolume = 1.0f; ///< Volume level of the selected sound (0.0 to 1.0).
         bool Looping = false; ///< Whether the selected sound should loop.
-        glm::vec3 Position = glm::vec3(0.0f); ///< 3D position of the sound in world space.
         float MinDist = 0.0f; ///< Minimum distance for full-volume playback.
         float MaxDist = 10.0f; ///< Maximum distance at which sound becomes inaudible.
         float RollOff = 1.0f; ///< Roll-off factor for sound attenuation.
@@ -46,6 +46,8 @@ namespace Engine
          * @brief Creates SoundInstance on start.
          */
         void Start() override;
+
+        void Update(float DeltaTime) override;
 
         /**
          * @brief SoundInstance getter.

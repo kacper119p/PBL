@@ -42,6 +42,8 @@ namespace Engine
 
         float BloodFill;
 
+        float* AccumulationPtr = nullptr;
+
     public:
         explicit BloodManager(const Models::AABBox3& SceneBounds);
 

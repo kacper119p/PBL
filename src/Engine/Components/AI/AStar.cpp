@@ -1,5 +1,6 @@
 #include "AStar.h"
 #include <queue>
+#include <tracy/Tracy.hpp>
 #include "NavMesh.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/EngineObjects/RayCast.h"
@@ -20,6 +21,7 @@ namespace Engine
 
     void AStar::FindPath(int StartId, int GoalId)
     {
+        ZoneScoped;
         if (!NavGraph)
         {
             Path.clear();
@@ -135,6 +137,7 @@ namespace Engine
 
     void AStar::ComputePath(const glm::vec3& GoalPosition, Entity* Entity)
     {
+        ZoneScoped;
         if (!NavGraph)
         {
             spdlog::warn("NavGraph is null!");
@@ -282,6 +285,7 @@ namespace Engine
 
     void AStar::UpdateMovement(const float DeltaTime, Entity* Entity)
     {
+        ZoneScoped;
         if (!MovementEnabled)
             return;
 

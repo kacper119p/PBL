@@ -76,46 +76,12 @@ namespace Engine
 
         NodeStatus Tick(float DeltaTime) override;
 
-        int FindFarNode(int CurrentNodeId, int MinDistance)
-        {
-            auto* graph = Engine::NavMesh::Get().GetGraph();
-            const auto& allNodes = graph->GetAllNodes();
-
-            std::unordered_map<int, int> distances;
-            std::queue<int> q;
-            q.push(CurrentNodeId);
-            distances[CurrentNodeId] = 0;
-
-            std::vector<int> candidates;
-
-            while (!q.empty())
-            {
-                int nodeId = q.front();
-                q.pop();
-                int dist = distances[nodeId];
-
-                if (dist >= MinDistance)
-                    candidates.push_back(nodeId);
-
-                for (const auto& [neighborId, node] : allNodes)
-                {
-                    if (graph->AreConnected(nodeId, neighborId) &&
-                        distances.find(neighborId) == distances.end())
-                    {
-                        distances[neighborId] = dist + 1;
-                        q.push(neighborId);
-                    }
-                }
-            }
-
-            if (!candidates.empty())
-            {
-                int idx = rand() % candidates.size();
-                return candidates[idx];
-            }
-
-            return -1;
-        }
+    private:
+        std::deque<int> LastChosenIds;
+        glm::vec3 LastPosition = glm::vec3(0.0f);
+        float TimeStandingStill = 0.0f;
+        const float MaxTimeStandingStill = 1.0f;
+        bool ShouldTurnAround = false;
 
     };
 

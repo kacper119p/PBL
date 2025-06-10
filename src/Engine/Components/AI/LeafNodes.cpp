@@ -1,6 +1,8 @@
 #include "LeafNodes.h"
 #include <queue>
 #include <random>
+#include <tracy/Tracy.hpp>
+
 #include "AiManager.h"
 #include "AStar.h"
 #include "NavMesh.h"
@@ -13,6 +15,7 @@ namespace Engine
 {
     NodeStatus IsPlayerInRangeNode::Tick(float DeltaTime)
     {
+        ZoneScoped;
         bool inRange = Ai->IsPlayerInRange();
 
         if (inRange)
@@ -37,6 +40,7 @@ namespace Engine
 
     NodeStatus IsChaseTimerOverNode::Tick(float DeltaTime)
     {
+        ZoneScoped;
         bool isChase = Ai->IsChaseTimerOver();
         //if (isChase)
         //spdlog::info("Poscig sie skonczyl, zaraz sie zatrzymuje");
@@ -47,6 +51,7 @@ namespace Engine
 
     NodeStatus UpdateChaseTimerNode::Tick(float DeltaTime)
     {
+        ZoneScoped;
         //spdlog::info("UpdateChaseTimerNode");
         if (Ai->RestTimer >= Ai->RestCooldown)
         {
@@ -66,6 +71,7 @@ namespace Engine
 
     NodeStatus UpdateRestTimerNode::Tick(float DeltaTime)
     {
+        ZoneScoped;
         if (Ai->IsRestFinished())
         {
             return NodeStatus::Success;
@@ -96,6 +102,7 @@ namespace Engine
 
     NodeStatus EntityStopNode::Tick(float)
     {
+        ZoneScoped;
         //spdlog::info("Slime zatrzymuje sie ze zmeczenia.");
         Ai->AStarComponent->ClearPath(Ai->GetOwner());
         Ai->ChaseTimer = 0.0f;
@@ -104,6 +111,7 @@ namespace Engine
 
     NodeStatus RunFromPlayerNode::Tick(float)
     {
+        ZoneScoped;
         //spdlog::info("RunFromPlayerNode");
 
         if (!Ai->IsChasing || Ai->IsResting)
@@ -153,15 +161,6 @@ namespace Engine
 
         bool shouldUpdate = Ai->AStarComponent->IsPathFinished();
 
-        if (!shouldUpdate)
-        {
-            glm::vec3 currentGoal = Ai->AStarComponent->GetGoalPosition();
-            float goalDistToPlayer = glm::distance(currentGoal, playerPos);
-
-            if (bestDist > goalDistToPlayer + 0.5f)
-                shouldUpdate = true;
-        }
-
         if (shouldUpdate)
         {
             glm::vec3 targetPos = allNodes.at(bestNodeId).GetPosition();
@@ -177,6 +176,7 @@ namespace Engine
     bool IsPathSafe(const std::vector<int>& path, const auto& allNodes, const glm::vec3& playerPos,
                     float detectionRange)
     {
+        ZoneScoped;
         if (path.empty())
             return false;
 
@@ -200,6 +200,7 @@ namespace Engine
 
     NodeStatus WalkSlowlyNode::Tick(float DeltaTime)
     {
+        ZoneScoped;
         if (Ai->TargetTrash)
             return NodeStatus::Failure;
 
@@ -215,8 +216,31 @@ namespace Engine
         auto* graph = navMesh->GetGraph();
 
         glm::vec3 currentPos = Ai->GetOwner()->GetTransform()->GetPosition();
+
+        float standThreshold = 0.05f;
+        if (glm::distance(currentPos, LastPosition) < standThreshold)
+        {
+            TimeStandingStill += DeltaTime;
+            if (TimeStandingStill >= MaxTimeStandingStill)
+            {
+                ShouldTurnAround = true;
+                TimeStandingStill = 0.0f;
+            }
+        }
+        else
+        {
+            TimeStandingStill = 0.0f;
+            ShouldTurnAround = false;
+        }
+
+        LastPosition = currentPos;
+
         glm::vec3 playerPos = Ai->GetPlayer()->GetTransform()->GetPosition();
         float detectionRange = Ai->GetPlayerRange();
+
+        glm::vec3 forward = Ai->GetOwner()->GetTransform()->GetForward();
+        forward.y = 0.0f;
+        forward = glm::normalize(forward);
 
         int currentNodeId = navMesh->GetNodeIdFromPosition(currentPos);
         if (currentNodeId == -1)
@@ -225,7 +249,42 @@ namespace Engine
             return NodeStatus::Failure;
         }
 
-        int minDistance = 1 / NavMesh::Get().GetSpacing();
+        float maxMinSide = 0.0f;
+
+        for (const auto& modelPair : NavMesh::Get().GetModelTransforms())
+        {
+            const auto* mesh = modelPair.first->GetMesh(0);
+            if (!mesh)
+                continue;
+
+            const auto& aabb = mesh->GetAabBox();
+
+            std::vector<glm::vec3> corners = aabb.GetCorners();
+
+            glm::mat4 modelMatrix = modelPair.second;
+
+            glm::vec3 globalMin(std::numeric_limits<float>::max());
+            glm::vec3 globalMax(-std::numeric_limits<float>::max());
+
+            for (const auto& corner : corners)
+            {
+                glm::vec4 transformed = modelMatrix * glm::vec4(corner, 1.0f);
+                glm::vec3 pos = glm::vec3(transformed);
+
+                globalMin = glm::min(globalMin, pos);
+                globalMax = glm::max(globalMax, pos);
+            }
+
+            glm::vec3 globalSize = globalMax - globalMin;
+
+            float minSide = std::min(globalSize.x, globalSize.z);
+            if (minSide > maxMinSide)
+                maxMinSide = minSide;
+        }
+
+        int minDistance = static_cast<int>(0.2f * maxMinSide);
+        minDistance = std::max(minDistance, 1);
+
         const auto& allNodes = graph->GetAllNodes();
 
         std::unordered_map<int, int> distances;
@@ -235,8 +294,10 @@ namespace Engine
 
         std::vector<int> candidates;
 
-        while (!q.empty())
+        const size_t maxCandidates = 100;
+        while (!q.empty() && candidates.size() < maxCandidates)
         {
+            ZoneScopedN("walkSlowly while");
             int nodeId = q.front();
             q.pop();
             int dist = distances[nodeId];
@@ -252,47 +313,88 @@ namespace Engine
                 }
             }
 
-            for (const auto& [neighborId, node] : allNodes)
+            auto* node = graph->GetNode(nodeId);
+            if (node)
             {
-                if (graph->AreConnected(nodeId, neighborId) &&
-                    distances.find(neighborId) == distances.end())
+                for (int neighborId : node->GetNeighbors())
                 {
-                    distances[neighborId] = dist + 1;
-                    q.push(neighborId);
+                    if (distances.find(neighborId) == distances.end())
+                    {
+                        distances[neighborId] = dist + 1;
+                        q.push(neighborId);
+                    }
                 }
             }
         }
 
+        candidates.erase(std::remove_if(candidates.begin(), candidates.end(), [&](int nodeId)
+        {
+            auto* node = graph->GetNode(nodeId);
+            if (!node)
+                return true;
+
+            if (node->GetNeighbors().size() < 8)
+                return true;
+
+            float distToCurrent = glm::distance(node->GetPosition(), currentPos);
+            if (distToCurrent < minDistance)
+                return true;
+
+            if (std::find(LastChosenIds.begin(), LastChosenIds.end(), nodeId) != LastChosenIds.end())
+                return true;
+
+            glm::vec3 toCandidate = glm::normalize(node->GetPosition() - currentPos);
+            toCandidate.y = 0.0f;
+
+            float dot = glm::dot(forward, toCandidate);
+
+            if (ShouldTurnAround)
+            {
+                if (dot > glm::cos(glm::radians(110.0f)))
+                    return true;
+            }
+            else
+            {
+                if (dot < glm::cos(glm::radians(70.0f)))
+                    return true;
+            }
+
+            return false;
+        }), candidates.end());
+
         if (!candidates.empty())
         {
-            std::shuffle(candidates.begin(), candidates.end(), std::mt19937(std::random_device()()));
+            std::random_device rd;
+            std::mt19937 g(rd());
+            std::shuffle(candidates.begin(), candidates.end(), g);
 
             for (int chosenId : candidates)
             {
                 Ai->AStarComponent->FindPath(currentNodeId, chosenId);
                 const std::vector<int>& path = Ai->AStarComponent->GetPath();
 
-                bool pathSafe = IsPathSafe(path, allNodes, playerPos, detectionRange);
-
-                if (pathSafe)
+                if (IsPathSafe(path, allNodes, playerPos, detectionRange))
                 {
                     glm::vec3 targetPos = allNodes.at(chosenId).GetPosition();
 
                     Ai->AStarComponent->SetMoveSpeed(Ai->GetSlowMovementSpeed());
                     Ai->AStarComponent->SetGoalPosition(targetPos);
 
-                    //spdlog::info("WalkSlowly: ruszamy do bezpiecznego wêz³a {}, z dala od gracza", chosenId);
+                    LastChosenIds.push_back(chosenId);
+                    if (LastChosenIds.size() > 10)
+                        LastChosenIds.pop_front();
+
                     return NodeStatus::Success;
                 }
             }
         }
-
         //spdlog::warn("WalkSlowly: nie znaleziono bezpiecznych wêz³ów do chodzenia.");
         return NodeStatus::Failure;
     }
 
     NodeStatus IsTrashInRangeNode::Tick(float)
     {
+        ZoneScoped;
         Ai->RecalculateCurrentTrash();
 
         if (!Ai || Ai->CurrentTrashValue >= Ai->MaxTrashCapacity)
@@ -317,6 +419,7 @@ namespace Engine
 
     NodeStatus WalkToTrashNode::Tick(float DeltaTime)
     {
+        ZoneScoped;
         if (!Ai || Ai->TrashEntities.empty())
             return NodeStatus::Failure;
 
@@ -363,10 +466,21 @@ namespace Engine
 
     NodeStatus AbsorbTrashNode::Tick(float DeltaTime)
     {
+        ZoneScoped;
         if (!Ai || Ai->TrashEntities.empty())
             return NodeStatus::Failure;
 
         Entity* target = Ai->TargetTrash;
+
+        glm::vec3 slimePos = Ai->GetOwner()->GetTransform()->GetPosition();
+        glm::vec3 trashPos = target->GetTransform()->GetPositionWorldSpace();
+        float distance = glm::distance(glm::vec2(slimePos.x, slimePos.z), glm::vec2(trashPos.x, trashPos.z));
+
+        if (distance > 1.0f)
+        {
+            AbsorbStartTime = -1.0f;
+            return NodeStatus::Failure;
+        }
 
         if (!target)
         {

@@ -22,6 +22,7 @@
 #include "UI/FontRendering/TextManager.h"
 #include "Engine/Components/Audio/AudioSource.h"
 #include "Engine/Components/Audio/AudioListener.h"
+#include "Engine/Components/Audio/BackgroundAudioPlayer.h"
 #include "UI/UiImplementations/SampleUi.h"
 #include "tracy/Tracy.hpp"
 #if DEBUG
@@ -96,7 +97,6 @@ namespace Engine
             float currentFrame = glfwGetTime();
             float deltaTime = currentFrame - lastFrame;
             lastFrame = currentFrame;
-            UpdateManager::GetInstance()->Update(deltaTime);
 
             // Process I/O operations here
 #if EDITOR
@@ -107,8 +107,11 @@ namespace Engine
             CameraFollow::GetInstance().SetTarget(CurrentScene->GetPlayer());
 #endif
 #if !EDITOR
+            UpdateManager::GetInstance()->Update(deltaTime);
             RigidbodyUpdateManager::GetInstance()->Update(deltaTime);
             CollisionUpdateManager::GetInstance()->Update(deltaTime);
+            if (!BackgroundAudioPlayer->IsPlaying())
+                BackgroundAudioPlayer->PlayLooping("music", 0.5f);
 #endif
             int displayW, displayH;
             glfwMakeContextCurrent(Window);
@@ -265,6 +268,8 @@ namespace Engine
         AudioListener = new class AudioListener(*Camera);
         spdlog::info("Sounds loaded.");
 
+        BackgroundAudioPlayer = new class BackgroundAudioPlayer();
+
         //input manager init
 #if !EDITOR
         InputManager::GetInstance().Init(Window);
@@ -345,8 +350,8 @@ namespace Engine
     void Engine::ImGuiRender()
     {
 #if EDITOR
-        //LightsGui::Draw();
-        //EditorGUI.Render(Frame, CurrentScene);
+    //LightsGui::Draw();
+    //EditorGUI.Render(Frame, CurrentScene);
 #endif
     }
 
@@ -371,8 +376,9 @@ namespace Engine
         Shaders::ShaderManager::FreeResources();
         Models::ModelManager::DeleteAllModels();
         Materials::MaterialManager::DeleteAllMaterials();
-        AudioManager::DestroyInstance();
+        delete BackgroundAudioPlayer;
         delete AudioListener;
+        AudioManager::DestroyInstance();
     }
 
     void Engine::GlfwErrorCallback(int Error, const char* Description)

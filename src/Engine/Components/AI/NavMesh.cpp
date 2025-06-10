@@ -1,4 +1,5 @@
 #include "NavMesh.h"
+#include <tracy/Tracy.hpp>
 #include "Engine/Components/Renderers/ModelRenderer.h"
 #include "spdlog/spdlog.h"
 #include "Engine/EngineObjects/RayCast.h"
@@ -16,28 +17,9 @@ namespace Engine
         return NavGraph.get();
     }
 
-    /*void NavMesh::RemovePaddingNodes()
-    {
-        auto& nodes = GetGraph()->GetAllNodes();
-        std::vector<int> nodesToRemove;
-
-        for (const auto& [id, node] : nodes)
-        {
-            const auto& neighbors = GetGraph()->GetNode(id).GetNeighbors();
-            if (neighbors.size() < 8)
-            {
-                nodesToRemove.push_back(id);
-            }
-        }
-
-        for (int id : nodesToRemove)
-        {
-            GetGraph()->RemoveNode(id);
-        }
-    }*/
-
     bool NavMesh::IsOnNavMesh(const glm::vec3& Position, float MaxDistance)
     {
+        ZoneScoped;
         const auto* graph = Engine::NavMesh::Get().GetGraph();
         if (!graph)
             return false;
@@ -56,70 +38,6 @@ namespace Engine
         return false;
     }
 
-    /*void NavMesh::RemoveNotWalkableNodes(Entity* Root)
-    {
-        std::vector<Transform*> entities = Root->GetTransform()->GetChildren();
-        for (const auto& entity : entities)
-        {
-            auto* navArea = entity->GetOwner()->GetComponent<NavArea>();
-            if (!navArea || navArea->GetWalkable())
-                continue;
-
-            auto* modelRenderer = entity->GetOwner()->GetComponent<ModelRenderer>();
-            if (!modelRenderer)
-                continue;
-
-            Models::Model* model = modelRenderer->GetModel();
-            glm::mat4 localToWorld = entity->GetLocalToWorldMatrix();
-
-            for (int i = 0; i < model->GetMeshCount(); ++i)
-            {
-                const Models::AABBox3& bounds = model->GetMesh(i)->GetAabBox();
-
-                glm::vec3 corners[8] = {
-                        bounds.min,
-                        glm::vec3(bounds.min.x, bounds.min.y, bounds.max.z),
-                        glm::vec3(bounds.min.x, bounds.max.y, bounds.min.z),
-                        glm::vec3(bounds.min.x, bounds.max.y, bounds.max.z),
-                        glm::vec3(bounds.max.x, bounds.min.y, bounds.min.z),
-                        glm::vec3(bounds.max.x, bounds.min.y, bounds.max.z),
-                        glm::vec3(bounds.max.x, bounds.max.y, bounds.min.z),
-                        bounds.max
-                };
-
-                glm::vec3 worldMin(FLT_MAX), worldMax(-FLT_MAX);
-
-                for (const glm::vec3& corner : corners)
-                {
-                    glm::vec3 worldCorner = glm::vec3(localToWorld * glm::vec4(corner, 1.0f));
-                    worldMin = glm::min(worldMin, worldCorner);
-                    worldMax = glm::max(worldMax, worldCorner);
-                }
-
-                auto& nodes = GetGraph()->GetAllNodes();
-                std::vector<int> nodesToRemove;
-
-                for (const auto& pair : nodes)
-                {
-                    int id = pair.first;
-                    const Node& node = pair.second;
-                    glm::vec2 pos = glm::vec2(node.GetPosition().x, node.GetPosition().z);
-
-                    if (pos.x >= worldMin.x && pos.x <= worldMax.x &&
-                        pos.y >= worldMin.z && pos.y <= worldMax.z)
-                    {
-                        nodesToRemove.push_back(id);
-                    }
-                }
-
-                for (int id : nodesToRemove)
-                {
-                    GetGraph()->RemoveNode(id);
-                }
-            }
-        }
-    }*/
-
     void NavMesh::ClearGraph()
     {
         NavGraph = nullptr;
@@ -127,6 +45,7 @@ namespace Engine
 
     void NavMesh::BakeNavMesh(Entity* Root)
     {
+        ZoneScoped;
         if (GetGraph())
         {
             ClearGraph();
@@ -148,6 +67,7 @@ namespace Engine
 
     void NavMesh::BuildNavMesh(Entity* Root, float Spacing, float Padding)
     {
+        ZoneScoped;
         if (!Root)
             return;
 
@@ -357,6 +277,7 @@ namespace Engine
 
     int NavMesh::GetNodeIdFromPosition(const glm::vec3& Position) const
     {
+        ZoneScoped;
         if (!NavGraph)
             return -1;
 

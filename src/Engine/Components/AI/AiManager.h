@@ -14,6 +14,8 @@ namespace Engine
 
         ~AiManager();
 
+        void Start() override;
+
         void Update(float DeltaTime) override;
 
         void StartChase();
@@ -33,7 +35,6 @@ namespace Engine
         [[nodiscard]] bool IsRestFinished() const { return RestFinished; }
         void SetRestFinished(bool Value) { RestFinished = Value; }
 
-
         bool IsPlayerInRange() const;
 
         bool IsChaseTimerOver() const;
@@ -46,8 +47,6 @@ namespace Engine
 
     private:
         void InitializeBehaviorTree();
-
-        void InitializeAStar();
 
         void InitPlayer();
 
@@ -78,7 +77,6 @@ namespace Engine
         Entity* TargetTrash = nullptr;
         int CurrentTrashValue = 0;
         int MaxTrashCapacity = 10;
-
         std::string SelectedPlayerName = "";
 
     };
