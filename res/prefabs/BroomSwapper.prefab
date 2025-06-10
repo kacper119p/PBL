@@ -1,0 +1,144 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{3a4c9df1-eb45-4f0d-b5a7-24b71054d3ce}\u0000",
+            "name": "BroomSwapper",
+            "transform": {
+                "type": "Transform",
+                "id": "{27cc72a2-fd83-449f-8d1b-6f7594957f4d}\u0000",
+                "owner": "{3a4c9df1-eb45-4f0d-b5a7-24b71054d3ce}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": -0.800000011920929
+                },
+                "EulerAngles": {
+                    "x": -179.99989318847656,
+                    "y": -0.000005008955668017734,
+                    "z": -179.99989318847656
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": -9.099629778575036e-7,
+                    "y": 1.0,
+                    "z": -9.099629778575036e-7,
+                    "w": -4.371055695173709e-8
+                },
+                "Children": [
+                    "{7a853d1e-49e3-40a8-a8e9-3898c7549be6}\u0000",
+                    "{cc218ec1-5e82-4560-ba8e-3b9a096093f6}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{bf61e18b-100e-4a33-ba3f-e95b84b68828}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{bf61e18b-100e-4a33-ba3f-e95b84b68828}\u0000",
+            "owner": "{3a4c9df1-eb45-4f0d-b5a7-24b71054d3ce}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Granny/mop.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{b697c22a-5617-4216-8b04-d858171949d9}\u0000",
+            "name": "Collider1",
+            "transform": {
+                "type": "Transform",
+                "id": "{7a853d1e-49e3-40a8-a8e9-3898c7549be6}\u0000",
+                "owner": "{b697c22a-5617-4216-8b04-d858171949d9}\u0000",
+                "Position": {
+                    "x": 0.6465482711791992,
+                    "y": -0.7626996040344238,
+                    "z": 0.75
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{27cc72a2-fd83-449f-8d1b-6f7594957f4d}\u0000"
+            },
+            "components": [
+                "{8ed8dbf9-2657-432a-be33-c97b6c3f3955}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{8ed8dbf9-2657-432a-be33-c97b6c3f3955}\u0000",
+            "owner": "{b697c22a-5617-4216-8b04-d858171949d9}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 0.800000011920929,
+            "_height": 0.30000001192092896,
+            "_depth": 0.800000011920929
+        },
+        {
+            "type": "Entity",
+            "id": "{58fb8365-ef97-4095-b14c-a7df2df62b6f}\u0000",
+            "name": "Collider2",
+            "transform": {
+                "type": "Transform",
+                "id": "{cc218ec1-5e82-4560-ba8e-3b9a096093f6}\u0000",
+                "owner": "{58fb8365-ef97-4095-b14c-a7df2df62b6f}\u0000",
+                "Position": {
+                    "x": -0.6470000147819519,
+                    "y": -0.7626999616622925,
+                    "z": 0.75
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{27cc72a2-fd83-449f-8d1b-6f7594957f4d}\u0000"
+            },
+            "components": [
+                "{2076d54b-e39b-48e9-8339-795b76bf6bfa}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{2076d54b-e39b-48e9-8339-795b76bf6bfa}\u0000",
+            "owner": "{58fb8365-ef97-4095-b14c-a7df2df62b6f}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 0.800000011920929,
+            "_height": 0.30000001192092896,
+            "_depth": 0.800000011920929
+        }
+    ]
+}
