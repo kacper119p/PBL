@@ -39,15 +39,23 @@ namespace Engine
 
     rapidjson::Value NavArea::Serialize(rapidjson::Document::AllocatorType& Allocator) const
     {
+        float spacing = NavMesh::Get().GetSpacing();
+        float padding = NavMesh::Get().GetPadding();
         START_COMPONENT_SERIALIZATION
         SERIALIZE_FIELD(IsWalkable)
+        SERIALIZE_FIELD(spacing)
+        SERIALIZE_FIELD(padding)
         END_COMPONENT_SERIALIZATION
     }
 
     void NavArea::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
+        float spacing = NavMesh::Get().GetSpacing();
+        float padding = NavMesh::Get().GetPadding();
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
         DESERIALIZE_VALUE(IsWalkable)
+        DESERIALIZE_VALUE(spacing)
+        DESERIALIZE_VALUE(padding)
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 

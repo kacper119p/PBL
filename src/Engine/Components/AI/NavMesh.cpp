@@ -1,4 +1,5 @@
 #include "NavMesh.h"
+#include <tracy/Tracy.hpp>
 #include "Engine/Components/Renderers/ModelRenderer.h"
 #include "spdlog/spdlog.h"
 #include "Engine/EngineObjects/RayCast.h"
@@ -18,6 +19,7 @@ namespace Engine
 
     bool NavMesh::IsOnNavMesh(const glm::vec3& Position, float MaxDistance)
     {
+        ZoneScoped;
         const auto* graph = Engine::NavMesh::Get().GetGraph();
         if (!graph)
             return false;
@@ -25,75 +27,15 @@ namespace Engine
         const auto& nodes = graph->GetAllNodes();
         for (const auto& [id, node] : nodes)
         {
-            if (glm::distance(Position, node.GetPosition()) <= MaxDistance)
+            glm::vec3 nodePos = node.GetPosition();
+            glm::vec2 nodeXz = glm::vec2(nodePos.x, nodePos.z);
+            glm::vec2 posXz = glm::vec2(Position.x, Position.z);
+
+            if (glm::distance(posXz, nodeXz) <= MaxDistance)
                 return true;
         }
 
         return false;
-    }
-
-    void NavMesh::RemoveNotWalkableNodes(Entity* Root)
-    {
-        std::vector<Transform*> entities = Root->GetTransform()->GetChildren();
-        for (const auto& entity : entities)
-        {
-            auto* navArea = entity->GetOwner()->GetComponent<NavArea>();
-            if (!navArea || navArea->GetWalkable())
-                continue;
-
-            auto* modelRenderer = entity->GetOwner()->GetComponent<ModelRenderer>();
-            if (!modelRenderer)
-                continue;
-
-            Models::Model* model = modelRenderer->GetModel();
-            glm::mat4 localToWorld = entity->GetLocalToWorldMatrix();
-
-            for (int i = 0; i < model->GetMeshCount(); ++i)
-            {
-                const Models::AABBox3& bounds = model->GetMesh(i)->GetAabBox();
-
-                glm::vec3 corners[8] = {
-                        bounds.min,
-                        glm::vec3(bounds.min.x, bounds.min.y, bounds.max.z),
-                        glm::vec3(bounds.min.x, bounds.max.y, bounds.min.z),
-                        glm::vec3(bounds.min.x, bounds.max.y, bounds.max.z),
-                        glm::vec3(bounds.max.x, bounds.min.y, bounds.min.z),
-                        glm::vec3(bounds.max.x, bounds.min.y, bounds.max.z),
-                        glm::vec3(bounds.max.x, bounds.max.y, bounds.min.z),
-                        bounds.max
-                };
-
-                glm::vec3 worldMin(FLT_MAX), worldMax(-FLT_MAX);
-
-                for (const glm::vec3& corner : corners)
-                {
-                    glm::vec3 worldCorner = glm::vec3(localToWorld * glm::vec4(corner, 1.0f));
-                    worldMin = glm::min(worldMin, worldCorner);
-                    worldMax = glm::max(worldMax, worldCorner);
-                }
-
-                auto& nodes = GetGraph()->GetAllNodes();
-                std::vector<int> nodesToRemove;
-
-                for (const auto& pair : nodes)
-                {
-                    int id = pair.first;
-                    const Node& node = pair.second;
-                    glm::vec2 pos = glm::vec2(node.GetPosition().x, node.GetPosition().z);
-
-                    if (pos.x >= worldMin.x && pos.x <= worldMax.x &&
-                        pos.y >= worldMin.z && pos.y <= worldMax.z)
-                    {
-                        nodesToRemove.push_back(id);
-                    }
-                }
-
-                for (int id : nodesToRemove)
-                {
-                    GetGraph()->RemoveNode(id);
-                }
-            }
-        }
     }
 
     void NavMesh::ClearGraph()
@@ -103,143 +45,222 @@ namespace Engine
 
     void NavMesh::BakeNavMesh(Entity* Root)
     {
+        ZoneScoped;
         if (GetGraph())
         {
             ClearGraph();
             NavGraph = std::make_unique<Graph>();
         }
-        BuildNavMesh(Root, Spacing);
-        RemoveNotWalkableNodes(Root);
-        for (int i = 0; i < Padding; i++)
-            RemovePaddingNodes();
+        BuildNavMesh(Root, Spacing, Padding);
 
-        if (GetGraph()->GetAllNodes().size() == 0)
+        if (GetGraph()->GetAllNodes().empty())
         {
             spdlog::warn("NavGraph has 0 nodes!");
         }
     }
 
-    void NavMesh::BuildNavMesh(Entity* Root, float Spacing)
+    bool IsPointInside(const glm::vec2& Point, const glm::vec4& Rect)
     {
-        std::vector<Transform*> entities = Root->GetTransform()->GetChildren();
-        if (entities.empty())
+        return Point.x >= Rect.x && Point.x <= Rect.z &&
+               Point.y >= Rect.y && Point.y <= Rect.w;
+    }
+
+    void NavMesh::BuildNavMesh(Entity* Root, float Spacing, float Padding)
+    {
+        ZoneScoped;
+        if (!Root)
             return;
 
         std::vector<std::pair<Models::Model*, glm::mat4>> modelTransforms;
-
-        glm::vec2 sceneMin(FLT_MAX, FLT_MAX);
-        glm::vec2 sceneMax(-FLT_MAX, -FLT_MAX);
-
+        std::vector<std::pair<glm::vec2, glm::vec2>> blockedAreas;
+        glm::vec2 sceneMin(FLT_MAX), sceneMax(-FLT_MAX);
         float largestModelSize = 1.0f;
+
+        CollectModelData(Root, modelTransforms, blockedAreas, sceneMin, sceneMax, largestModelSize);
+        ModelTransforms = modelTransforms;
+
+        GenerateNavigationGrid(modelTransforms, blockedAreas, sceneMin, sceneMax, Spacing, Padding);
+    }
+
+    void NavMesh::CollectModelData(Entity* Root,
+                                   std::vector<std::pair<Models::Model*, glm::mat4>>& ModelTransforms,
+                                   std::vector<std::pair<glm::vec2, glm::vec2>>& BlockedAreas,
+                                   glm::vec2& SceneMin,
+                                   glm::vec2& SceneMax,
+                                   float& LargestModelSize)
+    {
+        const auto& entities = Root->GetTransform()->GetChildren();
 
         for (const auto& entity : entities)
         {
-            auto* navArea = entity->GetOwner()->GetComponent<NavArea>();
-            if (!navArea || !navArea->GetWalkable() || !entity->GetOwner()->GetComponent<ModelRenderer>())
+            auto* owner = entity->GetOwner();
+            auto* navArea = owner->GetComponent<NavArea>();
+            auto* modelRenderer = owner->GetComponent<ModelRenderer>();
+            if (!modelRenderer)
                 continue;
 
-            Models::Model* model = entity->GetOwner()->GetComponent<ModelRenderer>()->GetModel();
-            glm::mat4 localToWorld = entity->GetLocalToWorldMatrix();
-            modelTransforms.emplace_back(model, localToWorld);
+            Models::Model* model = modelRenderer->GetModel();
+            glm::mat4 transform = entity->GetLocalToWorldMatrix();
 
+            if (navArea)
+            {
+                if (!navArea->GetWalkable())
+                {
+                    AddBlockedAreaFromModel(model, transform, BlockedAreas);
+                }
+                else
+                {
+                    ModelTransforms.emplace_back(model, transform);
+                    UpdateSceneBoundsFromModel(model, transform, SceneMin, SceneMax, LargestModelSize);
+                }
+            }
+        }
+    }
+
+    void NavMesh::AddBlockedAreaFromModel(Models::Model* Model, const glm::mat4& Transform,
+                                          std::vector<std::pair<glm::vec2, glm::vec2>>& BlockedAreas)
+    {
+        for (int i = 0; i < Model->GetMeshCount(); ++i)
+        {
+            const auto& bounds = Model->GetMesh(i)->GetAabBox();
+
+            glm::vec2 min(FLT_MAX), max(-FLT_MAX);
+            for (const glm::vec3& corner : bounds.GetCorners())
+            {
+                glm::vec3 world = glm::vec3(Transform * glm::vec4(corner, 1.0f));
+                min.x = std::min(min.x, world.x);
+                min.y = std::min(min.y, world.z);
+                max.x = std::max(max.x, world.x);
+                max.y = std::max(max.y, world.z);
+            }
+
+            BlockedAreas.emplace_back(min, max);
+        }
+    }
+
+    void NavMesh::UpdateSceneBoundsFromModel(Models::Model* Model, const glm::mat4& Transform,
+                                             glm::vec2& SceneMin, glm::vec2& SceneMax,
+                                             float& LargestModelSize)
+    {
+        for (int i = 0; i < Model->GetMeshCount(); ++i)
+        {
+            const auto& bounds = Model->GetMesh(i)->GetAabBox();
+
+            for (const glm::vec3& corner : bounds.GetCorners())
+            {
+                glm::vec3 world = glm::vec3(Transform * glm::vec4(corner, 1.0f));
+                SceneMin.x = std::min(SceneMin.x, world.x);
+                SceneMin.y = std::min(SceneMin.y, world.z);
+                SceneMax.x = std::max(SceneMax.x, world.x);
+                SceneMax.y = std::max(SceneMax.y, world.z);
+            }
+
+            float sizeX = bounds.max.x - bounds.min.x;
+            float sizeZ = bounds.max.z - bounds.min.z;
+            LargestModelSize = std::max(LargestModelSize, std::max(sizeX, sizeZ));
+        }
+    }
+
+    bool NavMesh::IsPointBlocked(const glm::vec2& Point,
+                                 const std::vector<std::pair<glm::vec2, glm::vec2>>& BlockedAreas) const
+    {
+        for (const auto& area : BlockedAreas)
+        {
+            if (Point.x >= area.first.x && Point.x <= area.second.x &&
+                Point.y >= area.first.y && Point.y <= area.second.y)
+                return true;
+        }
+        return false;
+    }
+
+    bool NavMesh::FindClosestSurfaceHit(const glm::vec3& Origin,
+                                        const std::vector<std::pair<Models::Model*, glm::mat4>>& ModelTransforms,
+                                        glm::vec3& OutHitPoint) const
+    {
+        float closestDist = std::numeric_limits<float>::max();
+        bool hit = false;
+        glm::vec3 rayDir = glm::vec3(0, -1, 0);
+
+        for (const auto& [model, transform] : ModelTransforms)
+        {
             for (int i = 0; i < model->GetMeshCount(); ++i)
             {
-                const Models::AABBox3& bounds = model->GetMesh(i)->GetAabBox();
+                const auto& mesh = *model->GetMesh(i);
+                const auto& verts = mesh.VerticesData;
+                const auto& indices = mesh.VertexIndices;
 
-                glm::vec3 corners[8] = {
-                        bounds.min,
-                        glm::vec3(bounds.min.x, bounds.min.y, bounds.max.z),
-                        glm::vec3(bounds.min.x, bounds.max.y, bounds.min.z),
-                        glm::vec3(bounds.min.x, bounds.max.y, bounds.max.z),
-                        glm::vec3(bounds.max.x, bounds.min.y, bounds.min.z),
-                        glm::vec3(bounds.max.x, bounds.min.y, bounds.max.z),
-                        glm::vec3(bounds.max.x, bounds.max.y, bounds.min.z),
-                        bounds.max
-                };
-
-                for (const glm::vec3& corner : corners)
+                for (size_t j = 0; j + 2 < indices.size(); j += 3)
                 {
-                    glm::vec3 worldCorner = glm::vec3(localToWorld * glm::vec4(corner, 1.0f));
-                    sceneMin.x = std::min(sceneMin.x, worldCorner.x);
-                    sceneMin.y = std::min(sceneMin.y, worldCorner.z);
+                    glm::vec3 v0 = glm::vec3(transform * glm::vec4(verts[indices[j]].Position, 1.0f));
+                    glm::vec3 v1 = glm::vec3(transform * glm::vec4(verts[indices[j + 1]].Position, 1.0f));
+                    glm::vec3 v2 = glm::vec3(transform * glm::vec4(verts[indices[j + 2]].Position, 1.0f));
+                    glm::vec3 hitPoint;
 
-                    sceneMax.x = std::max(sceneMax.x, worldCorner.x);
-                    sceneMax.y = std::max(sceneMax.y, worldCorner.z);
+                    if (RayCast::RayIntersectsTriangle(Origin, rayDir, v0, v1, v2, &hitPoint))
+                    {
+                        float dist = glm::length(hitPoint - Origin);
+                        if (dist < closestDist)
+                        {
+                            closestDist = dist;
+                            OutHitPoint = hitPoint;
+                            hit = true;
+                        }
+                    }
                 }
-
-                float sizeX = bounds.max.x - bounds.min.x;
-                float sizeZ = bounds.max.z - bounds.min.z;
-                largestModelSize = std::max(largestModelSize, std::max(sizeX, sizeZ));
             }
         }
 
-        int width = static_cast<int>((sceneMax.x - sceneMin.x) / Spacing) + 1;
-        int depth = static_cast<int>((sceneMax.y - sceneMin.y) / Spacing) + 1;
+        return hit;
+    }
 
-        auto nodeId = [width](int X, int Y) { return Y * width + X; };
-        glm::vec3 finalHitPoint;
+    void NavMesh::GenerateNavigationGrid(const std::vector<std::pair<Models::Model*, glm::mat4>>& ModelTransforms,
+                                         const std::vector<std::pair<glm::vec2, glm::vec2>>& BlockedAreas,
+                                         const glm::vec2& SceneMin,
+                                         const glm::vec2& SceneMax,
+                                         float Spacing,
+                                         float Padding)
+    {
+        glm::vec2 paddedSceneMin = SceneMin + glm::vec2(Padding, Padding);
+        glm::vec2 paddedSceneMax = SceneMax - glm::vec2(Padding, Padding);
+
+        int width = static_cast<int>((paddedSceneMax.x - paddedSceneMin.x) / Spacing) + 1;
+        int depth = static_cast<int>((paddedSceneMax.y - paddedSceneMin.y) / Spacing) + 1;
+
+        auto nodeId = [width](int x, int z) { return z * width + x; };
+
+        std::vector<std::pair<glm::vec2, glm::vec2>> expandedBlockedAreas;
+        expandedBlockedAreas.reserve(BlockedAreas.size());
+        for (const auto& area : BlockedAreas)
+        {
+            glm::vec2 expandedMin = area.first - glm::vec2(Padding, Padding);
+            glm::vec2 expandedMax = area.second + glm::vec2(Padding, Padding);
+            expandedBlockedAreas.emplace_back(expandedMin, expandedMax);
+        }
 
         for (int z = 0; z < depth; ++z)
         {
             for (int x = 0; x < width; ++x)
             {
                 glm::vec3 position = {
-                        sceneMin.x + (float) x * Spacing,
+                        paddedSceneMin.x + x * Spacing,
                         1000.0f,
-                        sceneMin.y + (float) z * Spacing
+                        paddedSceneMin.y + z * Spacing
                 };
 
-                bool foundSurface = false;
-                glm::vec3 rayDir = glm::vec3(0.0f, -1.0f, 0.0f);
-                float closestDist = std::numeric_limits<float>::max();
-                glm::vec3 closestHit;
-                bool hitSomething = false;
+                glm::vec2 flatPos(position.x, position.z);
 
-                for (const auto& modelPair : modelTransforms)
-                {
-                    Models::Model* model = modelPair.first;
-                    const glm::mat4& localToWorld = modelPair.second;
+                if (flatPos.x < paddedSceneMin.x || flatPos.x > paddedSceneMax.x ||
+                    flatPos.y < paddedSceneMin.y || flatPos.y > paddedSceneMax.y)
+                    continue;
 
-                    for (int i = 0; i < model->GetMeshCount(); i++)
-                    {
-                        const auto& mesh = *model->GetMesh(i);
-                        const auto& vertices = mesh.VerticesData;
-                        const auto& indices = mesh.VertexIndices;
+                if (IsPointBlocked(flatPos, expandedBlockedAreas))
+                    continue;
 
-                        for (size_t j = 0; j + 2 < indices.size(); j += 3)
-                        {
-                            glm::vec3 v0 = glm::vec3(localToWorld * glm::vec4(vertices[indices[j + 0]].Position, 1.0f));
-                            glm::vec3 v1 = glm::vec3(localToWorld * glm::vec4(vertices[indices[j + 1]].Position, 1.0f));
-                            glm::vec3 v2 = glm::vec3(localToWorld * glm::vec4(vertices[indices[j + 2]].Position, 1.0f));
-
-                            glm::vec3 hitPoint;
-                            if (RayCast::RayIntersectsTriangle(position, rayDir, v0, v1, v2, &hitPoint))
-                            {
-                                float dist = glm::length(hitPoint - position);
-                                if (dist < closestDist)
-                                {
-                                    closestDist = dist;
-                                    closestHit = hitPoint;
-                                    hitSomething = true;
-                                }
-                            }
-                        }
-
-                        if (hitSomething)
-                        {
-                            foundSurface = true;
-                            finalHitPoint = closestHit;
-                        }
-                    }
-
-                    if (foundSurface)
-                        break;
-                }
-
-                if (foundSurface)
+                glm::vec3 hit;
+                if (FindClosestSurfaceHit(position, ModelTransforms, hit))
                 {
                     int id = nodeId(x, z);
-                    GetGraph()->AddNode(id, finalHitPoint);
+                    GetGraph()->AddNode(id, hit);
 
                     if (x > 0)
                         GetGraph()->AddConnection(id, nodeId(x - 1, z));
@@ -254,28 +275,9 @@ namespace Engine
         }
     }
 
-    void NavMesh::RemovePaddingNodes()
-    {
-        auto& nodes = GetGraph()->GetAllNodes();
-        std::vector<int> nodesToRemove;
-
-        for (const auto& [id, node] : nodes)
-        {
-            const auto& neighbors = GetGraph()->GetNode(id).GetNeighbors();
-            if (neighbors.size() < 8)
-            {
-                nodesToRemove.push_back(id);
-            }
-        }
-
-        for (int id : nodesToRemove)
-        {
-            GetGraph()->RemoveNode(id);
-        }
-    }
-
     int NavMesh::GetNodeIdFromPosition(const glm::vec3& Position) const
     {
+        ZoneScoped;
         if (!NavGraph)
             return -1;
 
