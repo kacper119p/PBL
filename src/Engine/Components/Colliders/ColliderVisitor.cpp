@@ -647,47 +647,39 @@ namespace Engine
     }
 
 
-glm::vec3
-    ColliderVisitor::GetSeparationSphereCapsule(const SphereCollider& sphere, const CapsuleCollider& capsule)
+glm::vec3 ColliderVisitor::GetSeparationSphereCapsule(const SphereCollider& sphere, const CapsuleCollider& capsule)
     {
-        const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
-        const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
-
-        glm::vec3 sphereCenter = glm::vec3(sphereTransform * glm::vec4(0, 0, 0, 1));
+        glm::vec3 sphereCenter = glm::vec3(sphere.GetTransform()->GetLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1));
         float sphereRadius = sphere.GetRadius();
-        float capsuleRadius = capsule.GetRadius();
-        float capsuleHalfHeight = (capsule.GetHeight() * 0.5f) - capsuleRadius;
 
+        glm::mat4 capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
+        float capsuleRadius = capsule.GetRadius();
+        float halfHeight = (capsule.GetHeight() * 0.5f) - capsuleRadius;
         glm::vec3 capsuleCenter = glm::vec3(capsuleTransform[3]);
         glm::vec3 capsuleUp = glm::normalize(glm::vec3(capsuleTransform * glm::vec4(0, 1, 0, 0)));
 
-        glm::vec3 delta = sphereCenter - result.collisionPoint;
-        float distanceSq = glm::dot(delta, delta);
+        glm::vec3 start = capsuleCenter - capsuleUp * halfHeight;
+        glm::vec3 end = capsuleCenter + capsuleUp * halfHeight;
+
+        glm::vec3 line = end - start;
+        float t = glm::dot(sphereCenter - start, line) / glm::length2(line);
+        t = glm::clamp(t, 0.0f, 1.0f);
+        glm::vec3 closestPoint = start + t * line;
+
+        glm::vec3 delta = sphereCenter - closestPoint;
+        float distSq = glm::length2(delta);
         float combinedRadius = sphereRadius + capsuleRadius;
 
-        if (distanceSq < combinedRadius * combinedRadius)
+        if (distSq < combinedRadius * combinedRadius)
         {
-            float distance = glm::sqrt(distanceSq);
-            float penetration = combinedRadius - distance;
-
-            glm::vec3 direction;
-            if (distance > 1e-6f)
-            {
-                direction = delta / distance;
-            }
-            else
-            {
-                direction = glm::normalize(sphereCenter - capsuleCenter);
-                if (glm::length2(direction) < 1e-6f)
-                    direction = glm::vec3(1, 0, 0);
-            }
-
+            float dist = glm::sqrt(distSq);
+            float penetration = combinedRadius - dist;
+            glm::vec3 direction = (dist > 1e-6f) ? delta / dist : glm::vec3(1, 0, 0); // fallback
             return direction * penetration;
         }
 
         return glm::vec3(0.0f);
     }
-
 
     glm::vec3 ColliderVisitor::GetSeparationCapsuleCapsule(const CapsuleCollider& capsule1,
                                                            const CapsuleCollider& capsule2)
@@ -1060,13 +1052,13 @@ glm::vec3
                     if (invMassSum > 0.0f)
                     {
                         glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
-                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() -
                                                                      correctionThis);
                     }
                 }
                 else if (thisRB)
                 {
-                    currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                    currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() -
                                                                  separation);
                 }
 
@@ -1115,13 +1107,13 @@ glm::vec3
                     if (invMassSum > 0.0f)
                     {
                         glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
-                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() -
                                                                      correctionThis);
                     }
                 }
                 else if (thisRB)
                 {
-                    currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
+                    currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() -
                                                                  separation);
                 }
 
@@ -1236,13 +1228,13 @@ glm::vec3
                     if (invMassSum > 0.0f)
                     {
                         glm::vec3 correctionThis = separation * (thisRB->inverseMass / invMassSum);
-                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() -
+                        currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
                                                                      correctionThis);
                     }
                 }
                 else if (thisRB)
                 {
-                    currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() -
+                    currentCollider->GetTransform()->SetPosition(currentCollider->GetTransform()->GetPosition() +
                                                                  separation);
                 }
 

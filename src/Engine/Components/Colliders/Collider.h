@@ -22,6 +22,14 @@ namespace Engine
         MESH
     };
 
+    struct ColliderAABB
+    {
+        glm::vec3 min;
+        glm::vec3 max;
+
+        ColliderAABB() : min(glm::vec3(FLT_MAX)), max(glm::vec3(-FLT_MAX)) {}
+    };
+
     /*
      * @brief Base class for all colliders. Subtypes: boxCollider, sphereCollider, capsuleCollider, meshCollider.
      */
@@ -61,7 +69,7 @@ namespace Engine
         virtual ~Collider();
 #endif
 
-        virtual glm::vec3 GetBoundingBox() const = 0;
+        virtual ColliderAABB GetBoundingBox() const = 0;
 
         virtual bool AcceptCollision(ColliderVisitor& visitor) = 0;
 
@@ -156,7 +164,7 @@ namespace Engine
 
         void Update(float DeltaTime);
 
-        float GetRandomFloat(float Min, float Max);
+        void OnEndofFrame();
 
 #if EDITOR
         void DrawImGui() override

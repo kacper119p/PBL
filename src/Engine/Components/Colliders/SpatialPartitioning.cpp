@@ -61,7 +61,8 @@ namespace Engine
             return;
 
         glm::vec3 position = collider->GetTransform()->GetPositionWorldSpace();
-        glm::vec3 size = collider->GetBoundingBox();
+        ColliderAABB aabb = collider->GetBoundingBox();
+        glm::vec3 size = aabb.max - aabb.min;
 
         std::vector<glm::ivec2> occupiedCells = GetOccupiedCells(position, size);
 
@@ -102,7 +103,8 @@ namespace Engine
             return {};
 
         glm::vec3 position = collider->GetTransform()->GetPositionWorldSpace();
-        glm::vec3 size = collider->GetBoundingBox();
+        ColliderAABB aabb = collider->GetBoundingBox();
+        glm::vec3 size = aabb.max - aabb.min;
 
         std::vector<glm::ivec2> occupiedCells = GetOccupiedCells(position, size);
         std::unordered_set<Collider*> unique;
@@ -182,7 +184,9 @@ namespace Engine
                             continue;
 
                         glm::vec3 colliderPos = collider->GetTransform()->GetPositionWorldSpace();
-                        float approxRange = glm::length(collider->GetBoundingBox()) * 0.5f;
+                        ColliderAABB aabb = collider->GetBoundingBox();
+                        glm::vec3 aabbSize = aabb.max - aabb.min;
+                        float approxRange = glm::length(aabbSize) * 0.5f;
                         float totalRange = radius + approxRange;
 
                         if (glm::distance2(position, colliderPos) <= totalRange * totalRange)

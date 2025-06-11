@@ -39,7 +39,20 @@ namespace Engine
 
         PrimitiveMesh* GetMesh();
 
-        glm::vec3 GetBoundingBox() const override { return glm::vec3(2.0f * radius); }
+        ColliderAABB GetBoundingBox() const override
+        {
+            glm::vec3 center = glm::vec3(GetTransform()->GetLocalToWorldMatrix()[3]); // pozycja œwiata
+            float r = radius;
+
+            glm::vec3 min = center - glm::vec3(r);
+            glm::vec3 max = center + glm::vec3(r);
+
+            ColliderAABB aabb;
+            aabb.min = min;
+            aabb.max = max;
+            
+            return aabb;
+        }
 
         float GetRadius() const
         {

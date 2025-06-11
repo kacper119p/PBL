@@ -40,9 +40,49 @@ namespace Engine
 
         PrimitiveMesh* GetMesh();
 
-        glm::vec3 GetBoundingBox() const override
+        ColliderAABB GetBoundingBox() const override
         {
-            return glm::vec3(2.0f * Radius, Height + 2.0f * Radius, 2.0f * Radius);
+            glm::mat4 transform = GetTransform()->GetLocalToWorldMatrix();
+            glm::vec3 center = glm::vec3(transform[3]);
+
+            float halfHeight = Height * 0.5f;
+            float r = Radius;
+
+            glm::vec3 capsuleAxis = glm::normalize(glm::vec3(transform[1]));
+
+            glm::vec3 extentAlongAxis = capsuleAxis * halfHeight;
+
+            glm::vec3 axisX, axisZ;
+            if (glm::abs(glm::dot(capsuleAxis, glm::vec3(0, 1, 0))) < 0.99f)
+                axisX = glm::normalize(glm::cross(capsuleAxis, glm::vec3(0, 1, 0)));
+            else
+                axisX = glm::normalize(glm::cross(capsuleAxis, glm::vec3(1, 0, 0)));
+            axisZ = glm::cross(capsuleAxis, axisX);
+
+            glm::vec3 radiusX = axisX * r;
+            glm::vec3 radiusZ = axisZ * r;
+
+            glm::vec3 candidates[] = {
+                    center + extentAlongAxis + radiusX + radiusZ, center + extentAlongAxis + radiusX - radiusZ,
+                    center + extentAlongAxis - radiusX + radiusZ, center + extentAlongAxis - radiusX - radiusZ,
+                    center - extentAlongAxis + radiusX + radiusZ, center - extentAlongAxis + radiusX - radiusZ,
+                    center - extentAlongAxis - radiusX + radiusZ, center - extentAlongAxis - radiusX - radiusZ,
+            };
+
+            glm::vec3 min(FLT_MAX);
+            glm::vec3 max(-FLT_MAX);
+
+            for (const auto& p : candidates)
+            {
+                min = glm::min(min, p);
+                max = glm::max(max, p);
+            }
+
+            ColliderAABB aabb;
+            aabb.min = min;
+            aabb.max = max;
+
+            return aabb;
         }
 
         float GetRadius() const

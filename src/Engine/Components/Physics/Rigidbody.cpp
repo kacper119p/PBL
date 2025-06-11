@@ -191,17 +191,28 @@ namespace Engine
         if (!transform)
             return;
 
+        // Usuñ sk³adnik velocity w kierunku wnikania w obiekt statyczny
         float vDotN = glm::dot(velocity, contactNormal);
         if (vDotN < 0.0f)
         {
+            // Odbicie (z uwzglêdnieniem wspó³czynnika restitucji)
             glm::vec3 v_n = vDotN * contactNormal;
             glm::vec3 v_t = velocity - v_n;
             glm::vec3 v_n_reflected = -restitution * v_n;
+
             velocity = v_t + v_n_reflected;
+
+            // DODANE: Jeœli prêdkoœæ nadal jest skierowana do wewn¹trz — zerujemy j¹
+            if (glm::dot(velocity, contactNormal) < 0.0f)
+            {
+                velocity -= glm::dot(velocity, contactNormal) * contactNormal;
+            }
         }
 
+        // Obs³uga tarcia
         if (frictionEnabled)
         {
+            // Tarcie liniowe
             glm::vec3 tangent = velocity - glm::dot(velocity, contactNormal) * contactNormal;
 
             if (glm::length2(tangent) > 0.0001f)
@@ -214,12 +225,13 @@ namespace Engine
                 AddForce(frictionImpulse, ForceMode::Impulse);
             }
 
+            // Tarcie obrotowe (rotational friction)
             float rotationalFrictionCoeff = friction;
             glm::vec3 rotationalFrictionImpulse = -angularVelocity * rotationalFrictionCoeff;
             AddTorque(rotationalFrictionImpulse, ForceMode::Impulse);
         }
-
     }
+
 
 
     void Rigidbody::Interpolate(float alpha)

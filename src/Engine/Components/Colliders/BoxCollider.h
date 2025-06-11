@@ -38,7 +38,34 @@ namespace Engine
 
         inline Collider* GetInstance() override { return this; }
 
-        glm::vec3 GetBoundingBox() const override { return glm::vec3(_width, _height, _depth); }
+        ColliderAABB GetBoundingBox() const override
+        {
+            glm::mat4 transform = GetTransform()->GetLocalToWorldMatrix();
+            glm::vec3 halfExtents = glm::vec3(_width, _height, _depth) * 0.5f;
+
+            glm::vec3 localVertices[8] = {
+                    {-halfExtents.x, -halfExtents.y, -halfExtents.z}, {halfExtents.x, -halfExtents.y, -halfExtents.z},
+                    {-halfExtents.x, halfExtents.y, -halfExtents.z},  {halfExtents.x, halfExtents.y, -halfExtents.z},
+                    {-halfExtents.x, -halfExtents.y, halfExtents.z},  {halfExtents.x, -halfExtents.y, halfExtents.z},
+                    {-halfExtents.x, halfExtents.y, halfExtents.z},   {halfExtents.x, halfExtents.y, halfExtents.z},
+            };
+
+            glm::vec3 min(FLT_MAX);
+            glm::vec3 max(-FLT_MAX);
+
+            for (const auto& local : localVertices)
+            {
+                glm::vec3 world = glm::vec3(transform * glm::vec4(local, 1.0f));
+                min = glm::min(min, world);
+                max = glm::max(max, world);
+            }
+
+            ColliderAABB aabb;
+            aabb.min = min;
+            aabb.max = max;
+            return aabb;
+        }
+
 
         float GetWidth() const
         {

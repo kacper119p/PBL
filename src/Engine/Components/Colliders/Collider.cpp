@@ -87,14 +87,5 @@ namespace Engine
         SpatialPartitioning::GetInstance().RemoveCollider(this);
     }
 
-    // TODO: remove when rigidbody implemented
-    float Collider::GetRandomFloat(const float Min, const float Max)
-    {
-        static std::random_device rd;
-        static std::mt19937 gen(rd());
-        std::uniform_real_distribution<float> dis(Min, Max);
-        return dis(gen);
-    }
-
 
 } // namespace Engine

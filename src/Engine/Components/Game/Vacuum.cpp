@@ -102,8 +102,9 @@ namespace Engine
         ThrashManager::GetInstance()->VacuumCount = items.size();
         ThrashManager::GetInstance()->VacuumVolume = volume;
 
-        std::cout << "Vacuum Volume: " << volume << ", Vacuum count: " << items.size() << std::endl;
-        std::cout << "Thrash count: " << ThrashManager::GetInstance()->GetThrashCount() << std::endl;
+        // TODO: remove comment
+        /*std::cout << "Vacuum Volume: " << volume << ", Vacuum count: " << items.size() << std::endl;
+        std::cout << "Thrash count: " << ThrashManager::GetInstance()->GetThrashCount() << std::endl;*/
     }
 
     void Vacuum::Shoot()
