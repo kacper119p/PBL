@@ -1,0 +1,72 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{cf9e91ad-5ce4-4875-9392-8b8a09bcae86}\u0000",
+            "name": "RegalNiski",
+            "transform": {
+                "type": "Transform",
+                "id": "{9d275cd9-c8b3-425e-9573-043d697c8d12}\u0000",
+                "owner": "{cf9e91ad-5ce4-4875-9392-8b8a09bcae86}\u0000",
+                "Position": {
+                    "x": -48.577911376953125,
+                    "y": 2.256960391998291,
+                    "z": 25.939550399780273
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{73d0d32e-ae4e-4688-8cc3-9e600cbb94b9}\u0000",
+                "{91939144-88a5-4ed5-ae88-50123c31ca68}\u0000",
+                "{f1e6a90b-6a82-4321-b68b-ec2fb86e3e22}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{73d0d32e-ae4e-4688-8cc3-9e600cbb94b9}\u0000",
+            "owner": "{cf9e91ad-5ce4-4875-9392-8b8a09bcae86}\u0000",
+            "Material": "./res/materials/SampleScene/UV2.mat",
+            "Model": "./res/models/Modele_Mati/Meble/RegalNiski.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{91939144-88a5-4ed5-ae88-50123c31ca68}\u0000",
+            "owner": "{cf9e91ad-5ce4-4875-9392-8b8a09bcae86}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.5,
+            "_height": 3.799999952316284,
+            "_depth": 6.599999904632568
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{f1e6a90b-6a82-4321-b68b-ec2fb86e3e22}\u0000",
+            "owner": "{cf9e91ad-5ce4-4875-9392-8b8a09bcae86}\u0000",
+            "mass": 1.6100002527236938,
+            "inverseMass": 0.621117889881134,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.29600000381469727,
+            "frictionEnabled": true,
+            "restitution": 0.21899999678134918
+        }
+    ]
+}

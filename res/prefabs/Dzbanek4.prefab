@@ -1,0 +1,72 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{c464dc4b-74a1-4793-a783-71e18c39e622}\u0000",
+            "name": "Dzbanek4",
+            "transform": {
+                "type": "Transform",
+                "id": "{e5eb2b64-d8dd-4a56-b79d-1a29f23408b1}\u0000",
+                "owner": "{c464dc4b-74a1-4793-a783-71e18c39e622}\u0000",
+                "Position": {
+                    "x": 18.058778762817383,
+                    "y": 0.9506755471229553,
+                    "z": 22.27351188659668
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{5599aba5-28f9-4dad-87f0-b327d64feb16}\u0000",
+                "{792a7cca-f23a-48b1-9a90-a00f2470ba55}\u0000",
+                "{21d19f14-0d2c-4807-b75e-d39d8ca51f9b}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{5599aba5-28f9-4dad-87f0-b327d64feb16}\u0000",
+            "owner": "{c464dc4b-74a1-4793-a783-71e18c39e622}\u0000",
+            "Material": "./res/materials/SampleScene/UV6.mat",
+            "Model": "./res/models/Modele_Mati/Naczynia/Dzbanek4.fbx"
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{792a7cca-f23a-48b1-9a90-a00f2470ba55}\u0000",
+            "owner": "{c464dc4b-74a1-4793-a783-71e18c39e622}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{21d19f14-0d2c-4807-b75e-d39d8ca51f9b}\u0000",
+            "owner": "{c464dc4b-74a1-4793-a783-71e18c39e622}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 1.2000000476837158,
+            "_height": 1.5,
+            "_depth": 0.8999999761581421
+        }
+    ]
+}

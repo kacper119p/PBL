@@ -1,0 +1,70 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{8605f5ac-cbd6-4ec0-aa68-b3b0bc0ce67c}\u0000",
+            "name": "Beczka",
+            "transform": {
+                "type": "Transform",
+                "id": "{33ac34b0-033d-421e-b652-aa0b37b102e0}\u0000",
+                "owner": "{8605f5ac-cbd6-4ec0-aa68-b3b0bc0ce67c}\u0000",
+                "Position": {
+                    "x": -15.203458786010742,
+                    "y": 2.2846899032592773,
+                    "z": 42.72124481201172
+                },
+                "EulerAngles": {
+                    "x": 1.0630857766357263e-13,
+                    "y": -38.026268005371094,
+                    "z": 6.443863753702317e-7
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 1.831997553658482e-9,
+                    "y": -0.3257848918437958,
+                    "z": 5.31654542612614e-9,
+                    "w": 0.9454439282417297
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{00ebb68b-6fd3-4dc5-8ce4-620cb0add6af}\u0000",
+                "{2961b7e2-4154-4040-a270-b4f70052a31b}\u0000",
+                "{bb431c56-288a-4e04-8018-808998bbde39}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{00ebb68b-6fd3-4dc5-8ce4-620cb0add6af}\u0000",
+            "owner": "{8605f5ac-cbd6-4ec0-aa68-b3b0bc0ce67c}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/BeczkaOtwarta.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{2961b7e2-4154-4040-a270-b4f70052a31b}\u0000",
+            "owner": "{8605f5ac-cbd6-4ec0-aa68-b3b0bc0ce67c}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 3.700000047683716,
+            "_depth": 1.899999976158142
+        },
+        {
+            "type": "CapsuleCollider",
+            "id": "{bb431c56-288a-4e04-8018-808998bbde39}\u0000",
+            "owner": "{8605f5ac-cbd6-4ec0-aa68-b3b0bc0ce67c}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 2,
+            "Radius": 1.5,
+            "Height": 0.4000000059604645
+        }
+    ]
+}

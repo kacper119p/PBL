@@ -117,15 +117,15 @@ namespace Engine
                 renderer->Render(RenderData);
             }
         }
-        glDisable(GL_BLEND);
 
+#if !EDITOR
         if (Ui != nullptr)
         {
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            glEnable(GL_BLEND);
             Ui->Render();
-            glDisable(GL_BLEND);
         }
+#endif
+        glDisable(GL_BLEND);
 
         GodRays.Render(MultiSampledBuffer);
         Bloom.Render(MultiSampledBuffer.GetResolvedColorBuffer());

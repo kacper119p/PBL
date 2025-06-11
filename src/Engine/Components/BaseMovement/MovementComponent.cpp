@@ -30,7 +30,7 @@ namespace Engine
 
         Rigidbody* rigidbody = GetOwner()->GetComponent<Rigidbody>();
 
-        if (input.IsKeyPressed(GLFW_KEY_W) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_AXIS_LEFT_TRIGGER))
+        if (input.IsKeyPressed(GLFW_KEY_W) || input.GetGamepadAxis(GLFW_GAMEPAD_AXIS_LEFT_TRIGGER) > 0.5f)
         {
             isLeftForward = true;
         }
@@ -39,7 +39,7 @@ namespace Engine
             isLeftBackward = true;
         }
 
-        if (input.IsKeyPressed(GLFW_KEY_UP) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER))
+        if (input.IsKeyPressed(GLFW_KEY_UP) || input.GetGamepadAxis(GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER) > 0.5f)
         {
             isRightForward = true;
         }
@@ -48,59 +48,32 @@ namespace Engine
             isRightBackward = true;
         }
 
+
         if (isLeftForward && isRightForward)
         {
-            //CurrentVelocity = Speed*(1-smooth) + 1 * smooth;
-            rigidbody->AddForce(forward * Speed, ForceMode::Force);
+            rigidbody->AddForce(forward * Speed*1.25f, ForceMode::Force);
             
         }
         else if (isLeftBackward && isRightBackward)
         {
-            //CurrentVelocity = -(Speed * (1 - smooth) + 1 * smooth);
             rigidbody->AddForce(-forward * Speed, ForceMode::Force);
         }
         else if ((isLeftForward && isRightBackward) || (isLeftBackward && isRightForward))
         {
-            //float angle = (isLeftForward ? 1.0f : -1.0f) * RotationSpeed * deltaTime;
-            rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? 1.0f : -1.0f)*RotationSpeed, 0), ForceMode::Force);
+            rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? -1.0f : 1.0f)*BothRotationSpeed, 0), ForceMode::Force);
             
-            //glm::quat rotation = transform->GetRotation() * glm::angleAxis(glm::radians(angle), glm::vec3(0, 1, 0));
-            //CurrentVelocity *= smooth;
-            //transform->SetEulerAngles(glm::degrees(glm::eulerAngles(rotation)));
         }
         else if ((isLeftBackward || isRightBackward)&&!(isLeftForward||isRightForward))
         {
-            // Rotate slightly
-            //float angle = (isLeftBackward ? -1.0f : 1.0f) * RotationSpeed * deltaTime;
-            rigidbody->AddTorque(glm::vec3(0, (isLeftBackward ? -1.0f : 1.0f)*RotationSpeed, 0), ForceMode::Force);
+            rigidbody->AddTorque(glm::vec3(0, (isLeftBackward ? 1.0f : -1.0f)*RotationSpeed, 0), ForceMode::Force);
             rigidbody->AddForce(-forward * Speed, ForceMode::Force);
-            //glm::quat rotation = transform->GetRotation() * glm::angleAxis(glm::radians(angle), glm::vec3(0, 1, 0));
-
-            // Move slightly forward in the rotated direction
-            //CurrentVelocity = -(Speed * 0.2 * (1 - smooth) + 1 * smooth);
-
-
-            //transform->SetEulerAngles(glm::degrees(glm::eulerAngles(rotation)));
         }
         else if ((isLeftForward || isRightForward) && !(isLeftBackward || isRightBackward))
         {
-            // Rotate slightly
-            
-            //float angle = (isLeftForward ? 1.0f : -1.0f) * RotationSpeed * deltaTime;
-            //glm::quat rotation = transform->GetRotation() * glm::angleAxis(glm::radians(angle), glm::vec3(0, 1, 0));
-
-            // Move slightly forward in the rotated direction
-            //CurrentVelocity = Speed * 0.2 * (1 - smooth) + 1 * smooth;
-            rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? 1.0f : -1.0f)*RotationSpeed, 0), ForceMode::Force);
+            rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? -1.0f : 1.0f)*RotationSpeed, 0), ForceMode::Force);
             rigidbody->AddForce(forward * Speed, ForceMode::Force);
 
-            //transform->SetEulerAngles(glm::degrees(glm::eulerAngles(rotation)));
             
-        }
-        else
-        {
-            //if (abs(CurrentVelocity)>0.0f)
-            //CurrentVelocity *=smooth;
         }
 
         if (!transform)
@@ -108,7 +81,6 @@ namespace Engine
             spdlog::error("MovementComponent: Attempted to set position on a null transform!");
             return;
         }
-        //transform->SetPosition(position + CurrentVelocity * forward * deltaTime);
 
 
 #endif
