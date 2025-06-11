@@ -1,0 +1,59 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{294915d9-20fe-419b-a1f5-073d77360e18}\u0000",
+            "name": "Luk",
+            "transform": {
+                "type": "Transform",
+                "id": "{5a4709f5-d3a0-40d5-b6fc-230f7edd7116}\u0000",
+                "owner": "{294915d9-20fe-419b-a1f5-073d77360e18}\u0000",
+                "Position": {
+                    "x": 14.30794620513916,
+                    "y": 0.968400239944458,
+                    "z": 11.3894624710083
+                },
+                "EulerAngles": {
+                    "x": 1.0630857766357263e-13,
+                    "y": 0.0,
+                    "z": 6.443863753702317e-7
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 9.27717388282364e-16,
+                    "y": 5.216862989540934e-24,
+                    "z": 5.62333202225318e-9,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{f3ba1596-ab2c-49de-9ac7-4dd9c09e7ca6}\u0000",
+                "{e5b7b651-76bd-4deb-9c63-913913d091c9}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{f3ba1596-ab2c-49de-9ac7-4dd9c09e7ca6}\u0000",
+            "owner": "{294915d9-20fe-419b-a1f5-073d77360e18}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Bron/Luk.fbx"
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{e5b7b651-76bd-4deb-9c63-913913d091c9}\u0000",
+            "owner": "{294915d9-20fe-419b-a1f5-073d77360e18}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 3.4000000953674316,
+            "_height": 0.10000000149011612,
+            "_depth": 1.100000023841858
+        }
+    ]
+}

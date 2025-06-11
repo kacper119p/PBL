@@ -1,0 +1,72 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{d374e7e3-8582-4441-bcac-e3437ea11732}\u0000",
+            "name": "KoscDluga",
+            "transform": {
+                "type": "Transform",
+                "id": "{68b3a620-b752-41bd-99f9-b42ed9089194}\u0000",
+                "owner": "{d374e7e3-8582-4441-bcac-e3437ea11732}\u0000",
+                "Position": {
+                    "x": 7.263359069824219,
+                    "y": 0.855269193649292,
+                    "z": 24.972599029541016
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{fa6e5e02-6be3-4dc3-9fb1-a8ede74a6ad2}\u0000",
+                "{1f0616fb-2598-44af-ab15-a57ab7e16968}\u0000",
+                "{757ad835-1858-4188-9176-ee9dfe18fe34}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{fa6e5e02-6be3-4dc3-9fb1-a8ede74a6ad2}\u0000",
+            "owner": "{d374e7e3-8582-4441-bcac-e3437ea11732}\u0000",
+            "Material": "./res/materials/SampleScene/UV8.mat",
+            "Model": "./res/models/Modele_Mati/Smieci/KoscDluga.fbx"
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{1f0616fb-2598-44af-ab15-a57ab7e16968}\u0000",
+            "owner": "{d374e7e3-8582-4441-bcac-e3437ea11732}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{757ad835-1858-4188-9176-ee9dfe18fe34}\u0000",
+            "owner": "{d374e7e3-8582-4441-bcac-e3437ea11732}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.0999999046325684,
+            "_height": 0.4000000059604645,
+            "_depth": 1.7999999523162842
+        }
+    ]
+}
