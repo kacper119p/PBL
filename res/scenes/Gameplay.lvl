@@ -3,12 +3,12 @@
     "Bounds": {
         "min": {
             "x": -49.9722900390625,
-            "y": -1.0,
+            "y": -5.570797920227051,
             "z": -49.9999885559082
         },
         "max": {
             "x": 19.99999237060547,
-            "y": 2.6257314682006836,
+            "y": 11.973064422607422,
             "z": 50.34039306640625
         }
     },
@@ -74,7 +74,9 @@
                 "{f3fb2eea-cbe6-4930-9c03-d03c69b6c20a}\u0000",
                 "{f8f33b90-178a-41f8-b664-b6e2156cfd39}\u0000",
                 "{5c721142-1493-458e-89af-f27ff33f20ef}\u0000",
-                "{ab94d58e-31de-4f94-896d-ef2d1da2031c}\u0000"
+                "{ab94d58e-31de-4f94-896d-ef2d1da2031c}\u0000",
+                "{6280529b-a2b8-4233-9692-cb3dc9c06b76}\u0000",
+                "{6280529b-a2b8-4233-9692-cb3dc9c06b76}\u0000"
             ],
             "Parent": null
         },
@@ -618,8 +620,8 @@
             },
             "components": [
                 "{acabd039-12a9-4b57-8a2b-20d0d30d8984}\u0000",
-                "{de5323e3-4c2f-4ab3-80e3-48be19e2980c}\u0000",
-                "{0818df9c-ad67-4c5d-9540-0e4961d8c875}\u0000"
+                "{685fa1c9-78fd-474e-b866-775d6b607b19}\u0000",
+                "{c4c9ea86-6018-4c25-8c1e-55194b4feb14}\u0000"
             ]
         },
         {
@@ -630,27 +632,26 @@
             "Model": "C:\\Users\\hanna\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res/models/Modele_Mati/Meble/Krzeslo.fbx"
         },
         {
-            "type": "BoxCollider",
-            "id": "{de5323e3-4c2f-4ab3-80e3-48be19e2980c}\u0000",
+            "type": "CapsuleCollider",
+            "id": "{685fa1c9-78fd-474e-b866-775d6b607b19}\u0000",
             "owner": "{ca04ffb3-411d-4916-a1a2-e32fd2b7fea0}\u0000",
             "isTrigger": false,
             "isStatic": false,
-            "colliderType": 0,
-            "_width": 1.7999999523162842,
-            "_height": 3.5999999046325684,
-            "_depth": 1.5
+            "colliderType": 2,
+            "Radius": 1.2999999523162842,
+            "Height": 2.0
         },
         {
             "type": "Rigidbody",
-            "id": "{0818df9c-ad67-4c5d-9540-0e4961d8c875}\u0000",
+            "id": "{c4c9ea86-6018-4c25-8c1e-55194b4feb14}\u0000",
             "owner": "{ca04ffb3-411d-4916-a1a2-e32fd2b7fea0}\u0000",
-            "mass": 0.5099999904632568,
-            "inverseMass": 1.9607843160629272,
+            "mass": 1.0,
+            "inverseMass": 1.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
-            "friction": 0.2529999911785126,
+            "friction": 0.20000000298023224,
             "frictionEnabled": true,
-            "restitution": 0.9359999895095825
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -2215,6 +2216,139 @@
                 "y": 0.05226356163620949,
                 "z": 0.05226356163620949
             }
+        },
+        {
+            "type": "Entity",
+            "id": "{2eba3526-4e4b-49fd-9e28-672ba6dde8c3}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{6280529b-a2b8-4233-9692-cb3dc9c06b76}\u0000",
+                "owner": "{2eba3526-4e4b-49fd-9e28-672ba6dde8c3}\u0000",
+                "Position": {
+                    "x": -31.04353904724121,
+                    "y": 4.81906795501709,
+                    "z": 24.671871185302734
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{75394e5a-b3a3-4412-b8db-db5e8704fdbb}\u0000",
+                "{69228e18-f4eb-4b83-995b-c5a271439ee5}\u0000",
+                "{c44050f0-e556-4d6a-9aa2-b72c837495f2}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{75394e5a-b3a3-4412-b8db-db5e8704fdbb}\u0000",
+            "owner": "{2eba3526-4e4b-49fd-9e28-672ba6dde8c3}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/SphereLowPoly.fbx"
+        },
+        {
+            "type": "SphereCollider",
+            "id": "{69228e18-f4eb-4b83-995b-c5a271439ee5}\u0000",
+            "owner": "{2eba3526-4e4b-49fd-9e28-672ba6dde8c3}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 1,
+            "radius": 1.0
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{c44050f0-e556-4d6a-9aa2-b72c837495f2}\u0000",
+            "owner": "{2eba3526-4e4b-49fd-9e28-672ba6dde8c3}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{cc79fbbe-6589-41b9-8340-d7bae620f89b}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{6280529b-a2b8-4233-9692-cb3dc9c06b76}\u0000",
+                "owner": "{cc79fbbe-6589-41b9-8340-d7bae620f89b}\u0000",
+                "Position": {
+                    "x": -27.47003746032715,
+                    "y": 4.81906795501709,
+                    "z": 24.671871185302734
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 2.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{cdabebc3-c238-453d-a2c9-5cc16a7ae50c}\u0000",
+                "{14484ddd-54a2-4532-bc35-510e21c51af3}\u0000",
+                "{dbf017b8-27d0-4618-9811-db29e6ba008d}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{cdabebc3-c238-453d-a2c9-5cc16a7ae50c}\u0000",
+            "owner": "{cc79fbbe-6589-41b9-8340-d7bae620f89b}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/SphereLowPoly.fbx"
+        },
+        {
+            "type": "CapsuleCollider",
+            "id": "{14484ddd-54a2-4532-bc35-510e21c51af3}\u0000",
+            "owner": "{cc79fbbe-6589-41b9-8340-d7bae620f89b}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 2,
+            "Radius": 1.0,
+            "Height": 2.0
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{dbf017b8-27d0-4618-9811-db29e6ba008d}\u0000",
+            "owner": "{cc79fbbe-6589-41b9-8340-d7bae620f89b}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         }
     ]
 }
