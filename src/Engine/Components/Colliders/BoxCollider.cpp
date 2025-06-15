@@ -150,6 +150,7 @@ namespace Engine
         ImGui::Text("Box Collider");
         ImGui::Separator();
         ImGui::Checkbox("Is Static", &isStatic);
+        ImGui::Checkbox("Is Trigger", &isTrigger);
 
         bool changed = false;
 

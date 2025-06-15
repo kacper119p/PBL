@@ -133,8 +133,8 @@ namespace Engine
     {
         ImGui::Text("Sphere Collider");
         ImGui::Separator();
-        ImGui::Checkbox("Is Trigger", &isTrigger);
         ImGui::Checkbox("Is Static", &isStatic);
+        ImGui::Checkbox("Is Trigger", &isTrigger);
 
         bool changed = false;
 

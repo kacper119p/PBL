@@ -41,11 +41,13 @@ namespace Engine
 
         void Update(float deltaTime);
 
-        void OnCollision(Rigidbody* other, const glm::vec3& contactPoint, const glm::vec3& contactNormal);
+        void OnCollision(Rigidbody* other, const glm::vec3& contactPoint, const glm::vec3& contactNormal,
+                         float penetrationDepth);
+
         void OnCollisionStatic(const glm::vec3& contactPoint, const glm::vec3& contactNormal);
 
         void Interpolate(float alpha);
-
+        bool IsStabilized() const;
         void SetLastCollisionNormal(const glm::vec3& normal);
 
         void Start() override;
@@ -77,6 +79,9 @@ namespace Engine
         float friction;
         bool frictionEnabled;
 
+        float staticFriction = 0.9f;
+        float dynamicFriction = 0.1f;
+
         bool hasGravity = true;
 
         float restitution;
@@ -92,11 +97,6 @@ namespace Engine
 
     private:
         void computeInertiaTensor();
-        float collisionNormalTimeout; // jak d³ugo normalna jest wa¿na (np. 1s)
-        float collisionNormalTimer; // odlicza czas od ostatniej kolizji
-        void TryAlignToCollisionNormal(float deltaTime);
-        void QuaternionToAxisAngle(const glm::quat& q, glm::vec3& out_axis, float& out_angle);
-        void ApplyUprightStabilization(float deltaTime);
         void ComputeGravityTorqueFromVertices();
     };
 } // namespace Engine

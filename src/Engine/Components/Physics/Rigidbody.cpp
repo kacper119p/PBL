@@ -17,8 +17,7 @@ namespace Engine
         transform(nullptr), mass(1.0f), inverseMass(1.0f), inertiaTensor(1.0f), inverseInertiaTensor(1.0f),
         velocity(0.0f), angularVelocity(0.0f), linearDamping(0.0f), angularDamping(0.0f), friction(0.2f),
         frictionEnabled(true), restitution(0.1f), accumulatedForce(0.0f), accumulatedTorque(0.0f), lastPosition(0.0f),
-        lastRotation(1, 0, 0, 0), collisionNormalTimeout(0.0f),
-        collisionNormalTimer(0.0f)
+        lastRotation(1, 0, 0, 0)
     {
     }
 
@@ -115,14 +114,13 @@ namespace Engine
         accumulatedTorque = glm::vec3(0.0f);
     }
 
-
-    void Rigidbody::OnCollision(Rigidbody* other, const glm::vec3& contactPoint, const glm::vec3& contactNormal)
+    void Rigidbody::OnCollision(Rigidbody* other, const glm::vec3& contactPoint, const glm::vec3& contactNormal, float penetrationDepth)
     {
         if (!transform || !other || !other->transform)
             return;
 
-        glm::vec3 rA = contactPoint - transform->GetPosition();
-        glm::vec3 rB = contactPoint - other->transform->GetPosition();
+        glm::vec3 rA = -contactNormal * 0.5f;
+        glm::vec3 rB = contactNormal * 0.5f;
 
         glm::vec3 vA = velocity + glm::cross(angularVelocity, rA);
         glm::vec3 vB = other->velocity + glm::cross(other->angularVelocity, rB);
@@ -133,7 +131,6 @@ namespace Engine
             return;
 
         float e = restitution;
-
         float invMassSum = inverseMass + other->inverseMass;
 
         glm::vec3 rA_cross_n = glm::cross(rA, contactNormal);
@@ -147,40 +144,34 @@ namespace Engine
         float j = -(1.0f + e) * relVelAlongNormal / (invMassSum + angularTerm);
         glm::vec3 impulse = contactNormal * j;
 
-        if (restitution > 0.0f)
-        {
-            // += impulse * inverseMass;
-            // angularVelocity += inverseInertiaTensor * glm::cross(rA, impulse);
-            AddForce(impulse * inverseMass, ForceMode::Force);
-            AddTorque(inverseInertiaTensor * glm::cross(rA, impulse), ForceMode::Force);
-        }
+        velocity += impulse * inverseMass;
+        angularVelocity += inverseInertiaTensor * glm::cross(rA, impulse);
 
+        // Positional correction
+        const float percent = 0.5f;
+        const float slop = 0.01f;
+        float correctedDepth = glm::max(penetrationDepth - slop, 0.0f);
+        glm::vec3 correction = (correctedDepth / invMassSum) * percent * contactNormal;
+
+        transform->SetPosition(transform->GetPosition() + correction * inverseMass);
 
         if (frictionEnabled)
         {
             glm::vec3 tangent = relativeVelocity - glm::dot(relativeVelocity, contactNormal) * contactNormal;
-            if (glm::length2(tangent) > 0.0001f)
+
+            if (glm::length2(tangent) > 1e-6f)
             {
                 glm::vec3 frictionDir = glm::normalize(tangent);
-                float avgFriction = 0.5f * (friction + other->friction);
-                float maxFrictionImpulse = avgFriction * j;
-
                 float jt = -glm::dot(relativeVelocity, frictionDir) / (invMassSum + angularTerm);
-                jt = glm::clamp(jt, -maxFrictionImpulse, maxFrictionImpulse);
+                float avgFriction = 0.5f * (friction + other->friction);
+                jt = glm::clamp(jt, -avgFriction * j, avgFriction * j);
                 glm::vec3 frictionImpulse = frictionDir * jt;
 
-                if (friction > 0.0f)
-                {
-                    velocity += frictionImpulse * inverseMass;
-                    angularVelocity += inverseInertiaTensor * glm::cross(rA, frictionImpulse);
-                }
-
-                other->velocity -= frictionImpulse * other->inverseMass;
-                other->angularVelocity -= other->inverseInertiaTensor * glm::cross(rB, frictionImpulse);
+                velocity += frictionImpulse * inverseMass;
+                angularVelocity += inverseInertiaTensor * glm::cross(rA, frictionImpulse);
             }
 
-            float rotationalFrictionCoeff = friction;
-            glm::vec3 rotationalFrictionImpulse = -angularVelocity * rotationalFrictionCoeff * (1.0f / 60.0f);
+            glm::vec3 rotationalFrictionImpulse = -angularVelocity * friction * (1.0f / 60.0f);
             AddTorque(rotationalFrictionImpulse, ForceMode::Impulse);
         }
     }
@@ -197,7 +188,13 @@ namespace Engine
             glm::vec3 v_n = vDotN * contactNormal;
             glm::vec3 v_t = velocity - v_n;
             glm::vec3 v_n_reflected = -restitution * v_n;
+
             velocity = v_t + v_n_reflected;
+
+            if (glm::dot(velocity, contactNormal) < 0.0f)
+            {
+                velocity -= glm::dot(velocity, contactNormal) * contactNormal;
+            }
         }
 
         if (frictionEnabled)
@@ -218,7 +215,6 @@ namespace Engine
             glm::vec3 rotationalFrictionImpulse = -angularVelocity * rotationalFrictionCoeff;
             AddTorque(rotationalFrictionImpulse, ForceMode::Impulse);
         }
-
     }
 
 
@@ -296,6 +292,16 @@ namespace Engine
 
         AddTorque(totalTorque, ForceMode::Force);
     }
+
+    bool Rigidbody::IsStabilized() const
+    {
+        const float velocityThreshold = 0.05f;
+        const float angularThreshold = 0.05f;
+
+        return glm::length2(velocity) < velocityThreshold * velocityThreshold &&
+               glm::length2(angularVelocity) < angularThreshold * angularThreshold;
+    }
+
 
 #if EDITOR
 #include <imgui.h>

@@ -196,7 +196,8 @@
             "id": "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
             "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
             "Material": "./res/materials/SampleScene/Floor.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -297,7 +298,8 @@
             "id": "{79d15fd4-86b4-4568-8ad3-82e2074834b5}\u0000",
             "owner": "{c35a0c8d-f316-4d03-a4b8-c0d56621d727}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -354,7 +356,8 @@
             "id": "{21450d9f-c51c-4c79-b527-77140e1f3861}\u0000",
             "owner": "{c99f3e17-1941-4a55-aa2a-085c4b35d50b}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -419,8 +422,7 @@
             },
             "components": [
                 "{c9646a72-0335-41be-9f5b-47cca778ec52}\u0000",
-                "{f79da1af-b97d-4273-a7ba-1c5a95c947d2}\u0000",
-                "{12fd20a4-f0e9-47b2-8ba7-150266b49747}\u0000"
+                "{f79da1af-b97d-4273-a7ba-1c5a95c947d2}\u0000"
             ]
         },
         {
@@ -428,30 +430,19 @@
             "id": "{c9646a72-0335-41be-9f5b-47cca778ec52}\u0000",
             "owner": "{1e6e020e-707e-4925-a7b3-f2141dadb3a9}\u0000",
             "Material": "res\\materials\\SampleScene\\Default1.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
             "id": "{f79da1af-b97d-4273-a7ba-1c5a95c947d2}\u0000",
             "owner": "{1e6e020e-707e-4925-a7b3-f2141dadb3a9}\u0000",
             "isTrigger": false,
-            "isStatic": false,
+            "isStatic": true,
             "colliderType": 0,
             "_width": 2.0,
             "_height": 2.0,
             "_depth": 2.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{12fd20a4-f0e9-47b2-8ba7-150266b49747}\u0000",
-            "owner": "{1e6e020e-707e-4925-a7b3-f2141dadb3a9}\u0000",
-            "mass": 0.10000000149011612,
-            "inverseMass": 10.0,
-            "linearDamping": 0.009999999776482582,
-            "angularDamping": 0.009999999776482582,
-            "friction": 0.5,
-            "frictionEnabled": false,
-            "restitution": 0.7940000295639038
         },
         {
             "type": "Entity",
@@ -496,7 +487,8 @@
             "id": "{6a0e45e8-0ee3-4d98-b914-38c93ec6c18d}\u0000",
             "owner": "{b73a9501-9d71-4f8d-bfb3-c91375fb29e7}\u0000",
             "Material": "res\\materials\\SampleScene\\Default.mat",
-            "Model": "res/models/Modele_Mati/Meble/RegalZwykly.fbx"
+            "Model": "res/models/Modele_Mati/Meble/RegalZwykly.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -564,7 +556,8 @@
             "id": "{2415950a-0026-45dc-b47c-86c6206fbeaa}\u0000",
             "owner": "{b4bc7a06-bb1d-49fd-b56f-8bb24b3eabc5}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "res/models/Modele_Mati/Meble/RegalZabudowany.fbx"
+            "Model": "res/models/Modele_Mati/Meble/RegalZabudowany.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -632,7 +625,8 @@
             "id": "{73d0d32e-ae4e-4688-8cc3-9e600cbb94b9}\u0000",
             "owner": "{cf9e91ad-5ce4-4875-9392-8b8a09bcae86}\u0000",
             "Material": "./res/materials/SampleScene/UV2.mat",
-            "Model": "res/models/Modele_Mati/Meble/RegalNiski.fbx"
+            "Model": "res/models/Modele_Mati/Meble/RegalNiski.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -700,7 +694,8 @@
             "id": "{acabd039-12a9-4b57-8a2b-20d0d30d8984}\u0000",
             "owner": "{ca04ffb3-411d-4916-a1a2-e32fd2b7fea0}\u0000",
             "Material": "./res/materials/SampleScene/UV4.mat",
-            "Model": "res/models/Modele_Mati/Meble/Krzeslo.fbx"
+            "Model": "res/models/Modele_Mati/Meble/Krzeslo.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -769,7 +764,8 @@
             "id": "{caeb5bcc-5500-4cd1-8c74-7be31358ae81}\u0000",
             "owner": "{87163dcc-0c9f-46af-985d-06edf485bef0}\u0000",
             "Material": "./res/materials/SampleScene/UV3.mat",
-            "Model": "res/models/Modele_Mati/Meble/KotlarzOtwarty.fbx"
+            "Model": "res/models/Modele_Mati/Meble/KotlarzOtwarty.fbx",
+            "CastShadow": true
         },
         {
             "type": "CapsuleCollider",
@@ -836,7 +832,8 @@
             "id": "{0a5a5270-0656-4b31-ac00-5330a40c2b86}\u0000",
             "owner": "{8fe623f6-9f10-4381-9cc4-9e62fc8de5db}\u0000",
             "Material": "./res/materials/SampleScene/CeilingLamp.mat",
-            "Model": "./res/models/SphereLowPoly.fbx"
+            "Model": "./res/models/SphereLowPoly.fbx",
+            "CastShadow": true
         },
         {
             "type": "Entity",
@@ -881,7 +878,8 @@
             "id": "{675ce481-9df5-4b32-9858-ab34122bb7f0}\u0000",
             "owner": "{6a959160-ac1f-46ae-88f4-1f55cc6d94bf}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "res/models/Modele_Mati/Meble/Skrzynia1.fbx"
+            "Model": "res/models/Modele_Mati/Meble/Skrzynia1.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -949,7 +947,8 @@
             "id": "{885bdb17-d272-4f6d-a90a-f5751260652e}\u0000",
             "owner": "{0b8546fc-d379-41f2-839b-b45e55ba1b6e}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "res/models/Modele_Mati/Meble/Ksiazka.fbx"
+            "Model": "res/models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -1017,7 +1016,8 @@
             "id": "{ac5f1ab0-2987-4ab8-a0ea-b6ffd12ccd3c}\u0000",
             "owner": "{24356d72-5421-490d-8dfc-bdd4b513d12f}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "res/models/Modele_Mati/Meble/BeczkaZamknieta.fbx"
+            "Model": "res/models/Modele_Mati/Meble/BeczkaZamknieta.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -1086,7 +1086,8 @@
             "id": "{e1e95948-c3fb-4bd8-a9b3-7a85a851359f}\u0000",
             "owner": "{6b6003f5-045e-4251-8c03-15536fe68929}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -1161,7 +1162,8 @@
             "id": "{4f0969cf-e69f-4959-aa66-a8ebac6cf5b5}\u0000",
             "owner": "{475cd9bf-9dd5-4179-9079-7ff5fd37df63}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -1236,7 +1238,8 @@
             "id": "{8e9e4056-f155-414c-86bf-c10e9e0c2bdf}\u0000",
             "owner": "{da00a8f3-2215-41b8-8089-701778dfc65d}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -1311,7 +1314,8 @@
             "id": "{2f6542da-5f36-41cb-94e7-8ea68c352f65}\u0000",
             "owner": "{cf822b92-8ad3-4318-b6dd-5801932d16b1}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -1386,7 +1390,8 @@
             "id": "{841f1df2-d28d-44fa-83ff-92a708bea32f}\u0000",
             "owner": "{79472e0f-e48e-42d8-8b68-2c4c3b423b09}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -1461,7 +1466,8 @@
             "id": "{f9e0062a-4520-4e9a-9f22-2729fea23be5}\u0000",
             "owner": "{9dfbe922-d03a-428a-8efa-852c846838f0}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -1536,7 +1542,8 @@
             "id": "{a48f1569-1adf-4063-9ca3-ff9c7cec65ad}\u0000",
             "owner": "{ba0ae73c-e2df-4610-b394-89768688e438}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -1611,7 +1618,8 @@
             "id": "{820240cc-36de-4dcb-a030-ff4b5118a874}\u0000",
             "owner": "{961d1777-6f3c-4e59-b9d2-05e15ce1d6af}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -1686,7 +1694,8 @@
             "id": "{321890fe-2e12-429e-9f36-6724fc40d565}\u0000",
             "owner": "{fbc6ba0c-4c2f-4426-bf85-32b379e840a3}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -1761,7 +1770,8 @@
             "id": "{dbfd6add-1739-45e5-b4c2-503b07a762e0}\u0000",
             "owner": "{89f895c2-0589-46f2-a174-149801311dd1}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -1836,7 +1846,8 @@
             "id": "{76123743-eb24-4e22-93ac-99d79e54466c}\u0000",
             "owner": "{0ea1e3ca-3c83-48c1-b0e1-e5f64b6ceb57}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -1911,7 +1922,8 @@
             "id": "{4bd24f96-db01-4fec-9b18-35a7539a15e0}\u0000",
             "owner": "{82f48e6e-76d7-4778-8b2e-61a9f8001cdb}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -1986,7 +1998,8 @@
             "id": "{09280707-6fd8-47d0-ab5c-019c3da7e059}\u0000",
             "owner": "{51c14867-1c3f-4db0-a130-d24bb0528ec8}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -2061,7 +2074,8 @@
             "id": "{e6edb309-8785-4770-9dd7-fdbde9bce551}\u0000",
             "owner": "{4ac3f0a8-b792-43ff-825f-5abb7aecba36}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -2136,7 +2150,8 @@
             "id": "{b67f0c46-e1b5-48f9-8f01-c22b97f54073}\u0000",
             "owner": "{291c954c-0260-405f-9ae4-0cfe2e16db77}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -2211,7 +2226,8 @@
             "id": "{328c2f6e-7316-40db-a500-1333b5c31556}\u0000",
             "owner": "{1592d943-f7f8-49bc-8be0-9a10f7311806}\u0000",
             "Material": "./res/materials/SampleScene/Box.mat",
-            "Model": "./res/models/Box.fbx"
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -2332,7 +2348,8 @@
             "id": "{f4329000-192c-422c-abe9-5aa5b5e08886}\u0000",
             "owner": "{a4f88878-4fe4-4109-af2a-98cf78264c2f}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Skrzynka.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynka.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -2400,7 +2417,8 @@
             "id": "{1e3fa081-762b-4094-acba-4bad1c852aaf}\u0000",
             "owner": "{2ea2b819-9259-4751-a662-f4a5b9417056}\u0000",
             "Material": "./res/materials/SampleScene/UV2.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -2468,7 +2486,8 @@
             "id": "{45824d21-f402-4573-93fd-b90c82f36573}\u0000",
             "owner": "{78461e6c-1866-4b18-b7f5-7d2b11c59052}\u0000",
             "Material": "./res/materials/SampleScene/UV2.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia2.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia2.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -2536,7 +2555,8 @@
             "id": "{da9d24a1-6c5c-4b5e-b88a-4f188b36999f}\u0000",
             "owner": "{68dc6fe8-589b-417b-a2d8-b40c18755b52}\u0000",
             "Material": "./res/materials/SampleScene/UV2.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia3.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia3.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -2595,8 +2615,8 @@
             },
             "components": [
                 "{c4d50d15-d304-43ae-9336-4721f782b911}\u0000",
-                "{8b360bf2-a63b-46d6-b594-ba15d9ad2501}\u0000",
-                "{78f561dd-deb4-4b97-bcf6-2c197f8dd669}\u0000"
+                "{8ea1544f-7e5d-4107-aaa9-173eea9ebe3c}\u0000",
+                "{9a68a373-3eee-4159-9481-b46706f88bca}\u0000"
             ]
         },
         {
@@ -2604,22 +2624,23 @@
             "id": "{c4d50d15-d304-43ae-9336-4721f782b911}\u0000",
             "owner": "{86fa2298-8896-4f50-b486-bfda169bd2ca}\u0000",
             "Material": "./res/materials/SampleScene/UV4.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Stolik.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Stolik.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
-            "id": "{8b360bf2-a63b-46d6-b594-ba15d9ad2501}\u0000",
+            "id": "{8ea1544f-7e5d-4107-aaa9-173eea9ebe3c}\u0000",
             "owner": "{86fa2298-8896-4f50-b486-bfda169bd2ca}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "colliderType": 0,
-            "_width": 4.300000190734863,
+            "_width": 4.0,
             "_height": 3.5,
-            "_depth": 10.600000381469727
+            "_depth": 9.5
         },
         {
             "type": "Rigidbody",
-            "id": "{78f561dd-deb4-4b97-bcf6-2c197f8dd669}\u0000",
+            "id": "{9a68a373-3eee-4159-9481-b46706f88bca}\u0000",
             "owner": "{86fa2298-8896-4f50-b486-bfda169bd2ca}\u0000",
             "mass": 1.0,
             "inverseMass": 1.0,
@@ -2672,7 +2693,8 @@
             "id": "{d7e02a77-459b-490b-a718-9d0e4ebd9eb3}\u0000",
             "owner": "{180b604b-563a-4e66-a95d-8c8bbf3a7aa7}\u0000",
             "Material": "./res/materials/SampleScene/UV4.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Krzeslo.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Krzeslo.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -2740,7 +2762,8 @@
             "id": "{a88ba829-42ed-4f3a-b987-d421a7830950}\u0000",
             "owner": "{07e7b845-8da9-461f-b504-37b2697644be}\u0000",
             "Material": "./res/materials/SampleScene/UV2.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia3.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia3.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -2808,7 +2831,8 @@
             "id": "{489b56a6-4c23-4126-8357-0dd27b5d6388}\u0000",
             "owner": "{be815e64-5e41-44fc-b178-d0c778cc60bd}\u0000",
             "Material": "./res/materials/SampleScene/UV8.mat",
-            "Model": "./res/Models/Modele_Mati/Smieci/Czaszka.fbx"
+            "Model": "./res/Models/Modele_Mati/Smieci/Czaszka.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -2874,7 +2898,8 @@
             "id": "{f64c4275-7d98-4bbb-b1a7-c1024001b58c}\u0000",
             "owner": "{e6a2631d-06d3-4fb4-9bf4-a51261112993}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina4.fbx"
+            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina4.fbx",
+            "CastShadow": true
         },
         {
             "type": "Entity",
@@ -2917,7 +2942,8 @@
             "id": "{7fc67d5d-b963-4c09-bbde-893e874bd705}\u0000",
             "owner": "{3a30eef9-66f4-4ca1-8a75-202fc9b36e95}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina2.fbx"
+            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina2.fbx",
+            "CastShadow": true
         },
         {
             "type": "Entity",
@@ -2960,7 +2986,8 @@
             "id": "{0488de1f-15ad-4180-92f2-1e24aba3257a}\u0000",
             "owner": "{102008f7-935e-4f3d-8d75-992850fefb92}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina3.fbx"
+            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina3.fbx",
+            "CastShadow": true
         },
         {
             "type": "Entity",
@@ -3003,7 +3030,8 @@
             "id": "{60265c1c-b06b-4822-9c16-fb153fd2558f}\u0000",
             "owner": "{808a5315-3be4-4625-8d98-e26051d48ca9}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina5.fbx"
+            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina5.fbx",
+            "CastShadow": true
         },
         {
             "type": "Entity",
@@ -3046,7 +3074,8 @@
             "id": "{35cc9b76-aa28-4b9a-9f94-31a1b6b8099c}\u0000",
             "owner": "{7ef5a1a6-a914-4355-9788-967dc94da38a}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina1.fbx"
+            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina1.fbx",
+            "CastShadow": true
         },
         {
             "type": "Entity",
@@ -3091,7 +3120,8 @@
             "id": "{1645d46f-828c-489e-8568-6aca57c6c92d}\u0000",
             "owner": "{236ffcd7-0b73-4dc8-820a-c6fdadd38b58}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Smieci/But.fbx"
+            "Model": "./res/Models/Modele_Mati/Smieci/But.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -3159,7 +3189,8 @@
             "id": "{760f0eb2-c8c4-48f5-923a-0fe8bda1ca1c}\u0000",
             "owner": "{02d3a847-1f1b-41f7-b811-d8158f8bbe4a}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Smieci/But.fbx"
+            "Model": "./res/Models/Modele_Mati/Smieci/But.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -3228,7 +3259,8 @@
             "id": "{00ebb68b-6fd3-4dc5-8ce4-620cb0add6af}\u0000",
             "owner": "{8605f5ac-cbd6-4ec0-aa68-b3b0bc0ce67c}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/BeczkaOtwarta.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/BeczkaOtwarta.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -3306,7 +3338,8 @@
             "id": "{5179b6fc-b1fe-4fb4-893e-718ba2d4c814}\u0000",
             "owner": "{164836ae-d86f-4a68-a086-bf4ab9a819f2}\u0000",
             "Material": "./res/materials/SampleScene/UV12.mat",
-            "Model": "./res/Models/Modele_Mati/Mikstury/Potion1.fbx"
+            "Model": "./res/Models/Modele_Mati/Mikstury/Potion1.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -3323,8 +3356,8 @@
             "type": "Rigidbody",
             "id": "{31b1a96d-bcd8-48d2-9955-6c231d197fa4}\u0000",
             "owner": "{164836ae-d86f-4a68-a086-bf4ab9a819f2}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
@@ -3340,7 +3373,7 @@
                 "id": "{689f667d-3f10-4f5c-9166-672712aa8a66}\u0000",
                 "owner": "{f515cf92-e0dd-4334-8480-4bf5790f540d}\u0000",
                 "Position": {
-                    "x": -18.09429931640625,
+                    "x": -11.872886657714844,
                     "y": 5.916186332702637,
                     "z": 17.612171173095703
                 },
@@ -3374,7 +3407,8 @@
             "id": "{788b2435-79e1-4824-a29b-9cf027ec33a8}\u0000",
             "owner": "{f515cf92-e0dd-4334-8480-4bf5790f540d}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -3442,7 +3476,8 @@
             "id": "{8a749bdc-1e07-4fae-99cd-7b80edc80ba1}\u0000",
             "owner": "{b93492c4-256d-41d2-b2b0-479d99f5894b}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Smieci/KoscDluga.fbx"
+            "Model": "./res/Models/Modele_Mati/Smieci/KoscDluga.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -3509,7 +3544,8 @@
             "id": "{372b7109-d6cb-4700-976b-dcc69ef3f143}\u0000",
             "owner": "{b6733cc4-7eac-4fbe-8f2a-3730d44dd608}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Otoczenie/Pilar.fbx"
+            "Model": "./res/Models/Modele_Mati/Otoczenie/Pilar.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -3564,7 +3600,8 @@
             "id": "{e8e0db3f-d42c-4df8-8494-19732f79f165}\u0000",
             "owner": "{0cacdf1e-3d1b-4ee7-956b-0e27988dd89c}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Otoczenie/Lancuch.fbx"
+            "Model": "./res/Models/Modele_Mati/Otoczenie/Lancuch.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -3620,7 +3657,8 @@
             "id": "{0cffb052-c427-4399-ad6a-ff77ffda77bb}\u0000",
             "owner": "{32b89a88-7c01-4edb-9da4-cf9183704368}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Smieci/Ryba.fbx"
+            "Model": "./res/Models/Modele_Mati/Smieci/Ryba.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -3637,8 +3675,8 @@
             "type": "Rigidbody",
             "id": "{c7c2623c-8038-40c5-8346-6530478ada4d}\u0000",
             "owner": "{32b89a88-7c01-4edb-9da4-cf9183704368}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
@@ -3688,7 +3726,8 @@
             "id": "{4267dca2-3846-4409-99e0-d28316d47186}\u0000",
             "owner": "{9616c118-3c52-42db-b563-860072d7c12a}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Bron/Plecak.fbx"
+            "Model": "./res/Models/Modele_Mati/Bron/Plecak.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -3756,7 +3795,8 @@
             "id": "{f3ba1596-ab2c-49de-9ac7-4dd9c09e7ca6}\u0000",
             "owner": "{294915d9-20fe-419b-a1f5-073d77360e18}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Bron/Luk.fbx"
+            "Model": "./res/Models/Modele_Mati/Bron/Luk.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -3824,7 +3864,8 @@
             "id": "{ba9b1e32-cd7a-43ac-932f-cb1d57e59cec}\u0000",
             "owner": "{d83d6c3e-710a-4d96-ab13-2e94c3ad7a96}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Bron/MieczCaly.fbx"
+            "Model": "./res/Models/Modele_Mati/Bron/MieczCaly.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -3890,7 +3931,8 @@
             "id": "{ecfda86e-90a9-46d5-ae03-f468fbe60ea3}\u0000",
             "owner": "{e1ffc2c5-dc14-4d27-b0ea-b73708d9e240}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Otoczenie/Studzienka.fbx"
+            "Model": "./res/Models/Modele_Mati/Otoczenie/Studzienka.fbx",
+            "CastShadow": true
         },
         {
             "type": "Entity",
@@ -3935,7 +3977,8 @@
             "id": "{d06a96c5-6bf0-4066-b2e0-d74435d1aa83}\u0000",
             "owner": "{0e4266ce-afb2-45f7-be7a-b252380618fb}\u0000",
             "Material": "./res/materials/SampleScene/UV8.mat",
-            "Model": "./res/Models/Modele_Mati/Smieci/KoscKregoslup.fbx"
+            "Model": "./res/Models/Modele_Mati/Smieci/KoscKregoslup.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -4003,7 +4046,8 @@
             "id": "{c4da0938-79e3-4553-b5a5-c4722f136a05}\u0000",
             "owner": "{a1911c4f-a2b6-4a19-9b2a-32b529938eb5}\u0000",
             "Material": "./res/materials/SampleScene/UV12.mat",
-            "Model": "./res/Models/Modele_Mati/Mikstury/Potion2.fbx"
+            "Model": "./res/Models/Modele_Mati/Mikstury/Potion2.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -4020,8 +4064,8 @@
             "type": "Rigidbody",
             "id": "{36375a67-8008-4de6-b76a-a358706b9eed}\u0000",
             "owner": "{a1911c4f-a2b6-4a19-9b2a-32b529938eb5}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
@@ -4071,7 +4115,8 @@
             "id": "{7fc897a0-855d-4b8f-820f-3fe8c9e9f10c}\u0000",
             "owner": "{28f6b88e-83ae-419a-9922-b4ad7c753a74}\u0000",
             "Material": "./res/materials/SampleScene/UV12.mat",
-            "Model": "./res/Models/Modele_Mati/Mikstury/Potion3.fbx"
+            "Model": "./res/Models/Modele_Mati/Mikstury/Potion3.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -4139,7 +4184,8 @@
             "id": "{673bf08f-d162-45d2-a395-4b99eb422f22}\u0000",
             "owner": "{e347c390-be23-4b83-ad39-2f344932188d}\u0000",
             "Material": "./res/materials/SampleScene/UV12.mat",
-            "Model": "./res/Models/Modele_Mati/Mikstury/Potion4.fbx"
+            "Model": "./res/Models/Modele_Mati/Mikstury/Potion4.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -4207,7 +4253,8 @@
             "id": "{50cd3015-0e16-4902-90a2-f7af83de2666}\u0000",
             "owner": "{45411f16-e5fd-438d-bb3c-bb52bdafc116}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "res/models/Modele_Mati/Meble/RegalZabudowany.fbx"
+            "Model": "res/models/Modele_Mati/Meble/RegalZabudowany.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -4275,7 +4322,8 @@
             "id": "{8d1721f8-46ca-410f-aa77-65eebf6039e4}\u0000",
             "owner": "{03e0c99a-0835-4c88-ab44-3fb52e0bb469}\u0000",
             "Material": "./res/materials/SampleScene/UV2.mat",
-            "Model": "res/models/Modele_Mati/Meble/RegalNiski.fbx"
+            "Model": "res/models/Modele_Mati/Meble/RegalNiski.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -4343,7 +4391,8 @@
             "id": "{6a181b9b-f64b-4910-bacc-754658d27a1e}\u0000",
             "owner": "{578aaa93-edcf-449f-b130-5c904bad3554}\u0000",
             "Material": "res\\materials\\SampleScene\\Default.mat",
-            "Model": "res/models/Modele_Mati/Meble/RegalZwykly.fbx"
+            "Model": "res/models/Modele_Mati/Meble/RegalZwykly.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -4411,7 +4460,8 @@
             "id": "{2f5d399b-b391-4429-b4a4-61809c8b8165}\u0000",
             "owner": "{daec2471-7f84-4b95-98d7-4ed7162b0f8e}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -4445,9 +4495,9 @@
                 "id": "{4476052e-b6f1-4b4b-af70-d83c37c54007}\u0000",
                 "owner": "{fd16c84f-b327-47f1-89ba-875ef56e5e67}\u0000",
                 "Position": {
-                    "x": 5.819693565368652,
-                    "y": 0.968400239944458,
-                    "z": 3.3906054496765137
+                    "x": -1.7227044105529785,
+                    "y": 6.482274055480957,
+                    "z": -8.97789478302002
                 },
                 "EulerAngles": {
                     "x": 1.0630857766357263e-13,
@@ -4479,7 +4529,8 @@
             "id": "{0697808f-a5f6-4ecd-ab5c-948219510610}\u0000",
             "owner": "{fd16c84f-b327-47f1-89ba-875ef56e5e67}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -4496,8 +4547,8 @@
             "type": "Rigidbody",
             "id": "{92af945e-cf0a-4b92-bbb4-f31cd0ca01b5}\u0000",
             "owner": "{fd16c84f-b327-47f1-89ba-875ef56e5e67}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
@@ -4547,7 +4598,8 @@
             "id": "{ba0e9e3a-e5af-4b29-b305-9be38ed0f79f}\u0000",
             "owner": "{20a13ef1-dbca-49e4-bcfe-351d76c91e98}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "res/models/Modele_Mati/Meble/RegalZabudowany.fbx"
+            "Model": "res/models/Modele_Mati/Meble/RegalZabudowany.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -4614,7 +4666,8 @@
             "id": "{250fc363-b73f-471a-a4a3-b76624fad38f}\u0000",
             "owner": "{1311491b-70b9-45e6-b5af-5d9a772f546d}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Otoczenie/Pilar.fbx"
+            "Model": "./res/Models/Modele_Mati/Otoczenie/Pilar.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -4668,7 +4721,8 @@
             "id": "{707f50ac-782c-42b3-8bd3-1885d5a78a63}\u0000",
             "owner": "{4cbc79a7-c2c5-4823-b3ce-962af291087a}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina3.fbx"
+            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina3.fbx",
+            "CastShadow": true
         },
         {
             "type": "Entity",
@@ -4711,7 +4765,8 @@
             "id": "{3e3ca80b-2fbd-45bc-927a-3bac6b01cc66}\u0000",
             "owner": "{2837668f-47e5-465c-8bba-d0dd130112cd}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina5.fbx"
+            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina5.fbx",
+            "CastShadow": true
         },
         {
             "type": "Entity",
@@ -4754,7 +4809,8 @@
             "id": "{d0460809-22b1-4c51-a22e-919ed31569b8}\u0000",
             "owner": "{e094b328-88ed-4f18-9528-8266a298d1a7}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina5.fbx"
+            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina5.fbx",
+            "CastShadow": true
         },
         {
             "type": "Entity",
@@ -4797,7 +4853,8 @@
             "id": "{62a9c8d0-da95-4685-bb41-46a5af0bb389}\u0000",
             "owner": "{acc92057-ec5f-4152-ab65-0f30bfc4cd91}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina5.fbx"
+            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina5.fbx",
+            "CastShadow": true
         },
         {
             "type": "Entity",
@@ -4842,7 +4899,8 @@
             "id": "{424b845c-b4bf-43b4-a2c1-2bc6f343f1fa}\u0000",
             "owner": "{752ce6dc-548b-4ad4-8a11-cdcf95039e0d}\u0000",
             "Material": "./res/materials/SampleScene/UV4.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Krzeslo.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Krzeslo.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -4910,7 +4968,8 @@
             "id": "{35cb7b84-f9e3-4cb7-aebd-e5d17607488c}\u0000",
             "owner": "{ae32dad3-7300-4d31-8479-71cca05c5c3d}\u0000",
             "Material": "./res/materials/SampleScene/UV4.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Krzeslo.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Krzeslo.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -5026,7 +5085,8 @@
             "id": "{e5100798-6e91-42dc-b06d-6814528f3c21}\u0000",
             "owner": "{f7a27383-4b15-4663-8828-5abbc12baf12}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/BeczkaOtwarta.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/BeczkaOtwarta.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -5105,7 +5165,8 @@
             "id": "{648b5022-e4c0-4edc-9c95-15056d3be4c8}\u0000",
             "owner": "{9c37ca1d-a140-4b1c-aef3-bc2345ac3cec}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/BeczkaZamknieta.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/BeczkaZamknieta.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -5183,7 +5244,8 @@
             "id": "{90b9f171-cd51-4db8-9689-e558d8df3893}\u0000",
             "owner": "{3d1c7728-8908-4250-abd6-3994d7de3959}\u0000",
             "Material": "./res/materials/SampleScene/UV8.mat",
-            "Model": "./res/Models/Modele_Mati/Smieci/Czaszka.fbx"
+            "Model": "./res/Models/Modele_Mati/Smieci/Czaszka.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -5252,7 +5314,8 @@
             "id": "{e784c34b-60eb-460b-a39c-7ffbfd15600d}\u0000",
             "owner": "{bed587a2-19d7-4ad4-81a4-c31d2fc460ab}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/BeczkaZamknieta.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/BeczkaZamknieta.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -5331,7 +5394,8 @@
             "id": "{5df101db-f0e6-43c2-9718-663cb7df3c59}\u0000",
             "owner": "{530b6b2f-a560-4b0e-923b-a8c803ff8b5c}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/BeczkaZamknieta.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/BeczkaZamknieta.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -5408,7 +5472,8 @@
             "id": "{07cd68a4-b5ce-429c-8963-788df729ed95}\u0000",
             "owner": "{3b0a3173-586a-48e9-9015-048f7d431b7a}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Otoczenie/Pilar.fbx"
+            "Model": "./res/Models/Modele_Mati/Otoczenie/Pilar.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -5463,7 +5528,8 @@
             "id": "{6b077122-98d1-4740-a3a3-15ef78d5ed48}\u0000",
             "owner": "{92a159d4-2570-4edc-890d-1eb53c7fd2e6}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Box.fbx"
+            "Model": "./res/Models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -5518,7 +5584,8 @@
             "id": "{d3be1a2d-c5c8-4aee-b884-f493afb13542}\u0000",
             "owner": "{abcbefe7-abc2-4149-9b85-0e18d0103def}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Box.fbx"
+            "Model": "./res/Models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -5573,7 +5640,8 @@
             "id": "{8e417fcc-5160-4ad4-bf01-e738a5b5a6e0}\u0000",
             "owner": "{507af187-b962-4dca-9655-846d06d8899f}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Box.fbx"
+            "Model": "./res/Models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -5628,7 +5696,8 @@
             "id": "{2ad49f3b-9d65-4aff-bc1b-fe284b448ed8}\u0000",
             "owner": "{838a9b6e-b40b-458b-8acd-27b1339c2025}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Box.fbx"
+            "Model": "./res/Models/Box.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -5683,7 +5752,8 @@
             "id": "{66037efd-7111-4eed-b14c-6b2601bb1e72}\u0000",
             "owner": "{8a70faef-c98f-47ee-bede-3efa3a97840a}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Otoczenie/Pilar.fbx"
+            "Model": "./res/Models/Modele_Mati/Otoczenie/Pilar.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -5738,7 +5808,8 @@
             "id": "{be79bb74-9670-4183-9f6e-62386a21243b}\u0000",
             "owner": "{ebf0e422-a6f1-4bbc-98cf-4079bf3e3e38}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Otoczenie/Pilar.fbx"
+            "Model": "./res/Models/Modele_Mati/Otoczenie/Pilar.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -5793,7 +5864,8 @@
             "id": "{514cc931-a14e-4880-9f7e-83529e7e65cb}\u0000",
             "owner": "{68f0c1b2-36d3-469c-908c-a2c2ca4d4782}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Otoczenie/Pilar.fbx"
+            "Model": "./res/Models/Modele_Mati/Otoczenie/Pilar.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -5848,7 +5920,8 @@
             "id": "{4e796611-494a-4653-8824-eb969e951e02}\u0000",
             "owner": "{3db11ee2-6eef-403e-8096-ce5ece33f928}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Otoczenie/Lancuch.fbx"
+            "Model": "./res/Models/Modele_Mati/Otoczenie/Lancuch.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -5903,7 +5976,8 @@
             "id": "{d6733a74-dea6-400d-a287-4fed0d3a666b}\u0000",
             "owner": "{de3c200d-1914-416d-bd4e-c87559380b3b}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Otoczenie/Lancuch.fbx"
+            "Model": "./res/Models/Modele_Mati/Otoczenie/Lancuch.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -5957,7 +6031,8 @@
             "id": "{471c0631-2b77-43ba-b3b4-8f68748d9074}\u0000",
             "owner": "{1de801a5-6d35-4358-adee-ba2776862d1b}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina5.fbx"
+            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina5.fbx",
+            "CastShadow": true
         },
         {
             "type": "Entity",
@@ -6002,7 +6077,8 @@
             "id": "{76f88442-d7ff-4e05-9e37-dfb1337a9b25}\u0000",
             "owner": "{1ee0ce75-257f-43b6-a439-5d5e72b6bba7}\u0000",
             "Material": "./res/materials/SampleScene/UV2.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -6070,7 +6146,8 @@
             "id": "{23cfc0c0-3c72-4458-a55b-062b08583cf4}\u0000",
             "owner": "{00c7b417-af04-4c4b-8cee-d2554d3a93a1}\u0000",
             "Material": "./res/materials/SampleScene/UV2.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -6138,7 +6215,8 @@
             "id": "{4ed54fa0-c499-4387-84f1-56e94cfc44a1}\u0000",
             "owner": "{4cd1c63f-49c7-47d9-bd46-b3cb87d3d32d}\u0000",
             "Material": "./res/materials/SampleScene/UV2.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -6206,7 +6284,8 @@
             "id": "{f94c95bf-eb0c-4b43-9cda-9baeb75ae187}\u0000",
             "owner": "{9ff7c49a-bded-4652-8732-fde514ca446d}\u0000",
             "Material": "./res/materials/SampleScene/UV2.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -6223,8 +6302,8 @@
             "type": "Rigidbody",
             "id": "{009e4621-ca59-4020-b5d1-78ed6bb9f9e0}\u0000",
             "owner": "{9ff7c49a-bded-4652-8732-fde514ca446d}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
+            "mass": 5.0,
+            "inverseMass": 0.20000000298023224,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
@@ -6275,7 +6354,8 @@
             "id": "{46c53abf-9916-4fdc-ab81-0d435853c9cb}\u0000",
             "owner": "{d07c6b7f-8cf6-4c3d-a079-2ce083427c40}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/BeczkaZamknieta.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/BeczkaZamknieta.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -6353,7 +6433,8 @@
             "id": "{9c8acd9d-004a-46a1-829a-dd3f8fd478a2}\u0000",
             "owner": "{fd7dbd50-f956-46fb-89c0-ba1fcf5453b6}\u0000",
             "Material": "./res/materials/SampleScene/UV2.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia3.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia3.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -6421,7 +6502,8 @@
             "id": "{50f390b2-ce34-4dee-b410-b83cadfc4dc4}\u0000",
             "owner": "{495355d9-7071-4f3c-964e-cdb5c7581603}\u0000",
             "Material": "./res/materials/SampleScene/UV2.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia3.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia3.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -6490,7 +6572,8 @@
             "id": "{dd1ce621-d426-48c2-95c6-484ece2949ff}\u0000",
             "owner": "{f5fced66-3466-498f-acea-8ac0d1533d76}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/BeczkaOtwarta.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/BeczkaOtwarta.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -6568,7 +6651,8 @@
             "id": "{33ab02ae-0b77-40bb-aa36-bd594a5024ad}\u0000",
             "owner": "{ec1b9a55-3a4b-4512-8c70-b229d0483bd9}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Bron/MieczCaly.fbx"
+            "Model": "./res/Models/Modele_Mati/Bron/MieczCaly.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -6636,7 +6720,8 @@
             "id": "{6e595fee-8c82-42f1-9dab-1d61894082a0}\u0000",
             "owner": "{49f0602a-6598-4bae-8bf3-d1d65823852a}\u0000",
             "Material": "./res/materials/SampleScene/UV2.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx"
+            "Model": "./res/Models/Modele_Mati/Meble/Skrzynia1.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -6702,7 +6787,8 @@
             "id": "{ce25c6a3-88c8-40c4-84e4-11ef34d4a6c0}\u0000",
             "owner": "{804dc9b7-1748-4a49-81aa-c4312777bfa2}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina3.fbx"
+            "Model": "./res/Models/Modele_Mati/Rosliny/Roslina3.fbx",
+            "CastShadow": true
         },
         {
             "type": "Entity",
@@ -6747,7 +6833,8 @@
             "id": "{ef98262c-fbbd-46de-a49a-0df9440f2c03}\u0000",
             "owner": "{07814323-8353-4292-9470-eba69753dc87}\u0000",
             "Material": "./res/materials/SampleScene/UV7.mat",
-            "Model": "./res/Models/Modele_Mati/Kosztownosci/kamienDiament.fbx"
+            "Model": "./res/Models/Modele_Mati/Kosztownosci/kamienDiament.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
@@ -6815,7 +6902,8 @@
             "id": "{47556696-9b28-4af6-913e-5828e937e3a9}\u0000",
             "owner": "{a7963cd5-03af-44b6-9979-56490c667b39}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Kosztownosci/kamienSzmaragsd.fbx"
+            "Model": "./res/Models/Modele_Mati/Kosztownosci/kamienSzmaragsd.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",

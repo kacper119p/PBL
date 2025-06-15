@@ -19,6 +19,8 @@ namespace Engine
         glm::vec3 collisionPoint;
         glm::vec3 collisionNormal;
         float penetrationDepth;
+        const Collider* ownerCollider;
+        const Collider* otherCollider;
 
         CollisionResult() :
             hasCollision(false), collisionPoint(0.0f), collisionNormal(0.0f), penetrationDepth(0.0f)
@@ -43,6 +45,8 @@ namespace Engine
         CollisionResult CheckCapsuleSphereCollision(const CapsuleCollider& capsule, const SphereCollider& sphere);
 
         CollisionResult CheckCapsuleCapsuleCollision(const CapsuleCollider& capsule1, const CapsuleCollider& capsule2);
+
+        glm::vec3 GetSeparation();
 
         glm::vec3 GetSeparationBoxBox(const BoxCollider& box1, const BoxCollider& box2);
 
