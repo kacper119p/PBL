@@ -1,21 +1,18 @@
 #include "LeafNodes.h"
 #include <queue>
 #include <random>
-#include <tracy/Tracy.hpp>
-
 #include "AiManager.h"
 #include "AStar.h"
 #include "NavMesh.h"
 #include "Engine/Components/Game/Thrash.h"
+#include "Engine/Components/Physics/Rigidbody.h"
 #include "Engine/Components/Renderers/ModelRenderer.h"
 #include "Engine/EngineObjects/Entity.h"
-#include "spdlog/spdlog.h"
 
 namespace Engine
 {
     NodeStatus IsPlayerInRangeNode::Tick(float DeltaTime)
     {
-        ZoneScoped;
         bool inRange = Ai->IsPlayerInRange();
 
         if (inRange)
@@ -26,13 +23,15 @@ namespace Engine
             }
             Ai->AStarComponent->SetMovementEnabled(false);
             Ai->IsChasing = true;
-            //spdlog::info("Slime w zasiegu gracza");
         }
         else
         {
+            if (!Ai->AStarComponent->IsPathFinished() && Ai->IsChasing)
+            {
+                Ai->AStarComponent->ClearPath(Ai->GetOwner());
+            }
             Ai->IsChasing = false;
             Ai->ChaseTimer = 0.0f;
-            // spdlog::info("Slime nie w zasiegu gracza");
             Ai->AStarComponent->SetMovementEnabled(true);
         }
         return inRange ? NodeStatus::Success : NodeStatus::Failure;
@@ -40,19 +39,12 @@ namespace Engine
 
     NodeStatus IsChaseTimerOverNode::Tick(float DeltaTime)
     {
-        ZoneScoped;
         bool isChase = Ai->IsChaseTimerOver();
-        //if (isChase)
-        //spdlog::info("Poscig sie skonczyl, zaraz sie zatrzymuje");
-        //else
-        //spdlog::info("Poscig trwa");
         return isChase ? NodeStatus::Success : NodeStatus::Failure;
     }
 
     NodeStatus UpdateChaseTimerNode::Tick(float DeltaTime)
     {
-        ZoneScoped;
-        //spdlog::info("UpdateChaseTimerNode");
         if (Ai->RestTimer >= Ai->RestCooldown)
         {
             Ai->ChaseTimer = 0.0f;
@@ -60,18 +52,15 @@ namespace Engine
             Ai->IsResting = false;
             Ai->IsChasing = true;
             Ai->SetRestFinished(true);
-            //spdlog::info("Odpoczynek zakonczony");
             return NodeStatus::Success;
         }
 
         Ai->ChaseTimer += DeltaTime;
-        //spdlog::info("Chase time: {:.2f}/{:.2f}", Ai->ChaseTimer, Ai->GetChaseCooldown());
         return NodeStatus::Success;
     }
 
     NodeStatus UpdateRestTimerNode::Tick(float DeltaTime)
     {
-        ZoneScoped;
         if (Ai->IsRestFinished())
         {
             return NodeStatus::Success;
@@ -81,7 +70,6 @@ namespace Engine
         {
             Ai->RestTimer = 0.0f;
             Ai->IsResting = true;
-            //spdlog::info("Start odpoczynku");
         }
 
         Ai->RestTimer += DeltaTime;
@@ -92,18 +80,14 @@ namespace Engine
             Ai->SetIsChasingPlayer(false);
             Ai->IsResting = false;
             Ai->SetRestFinished(true);
-            //spdlog::info("Odpoczynek zakonczony");
             return NodeStatus::Success;
         }
 
-        //spdlog::info("Odpoczywa... {:.2f}/{:.2f}", Ai->RestTimer, Ai->GetRestCooldown());
         return NodeStatus::Running;
     }
 
     NodeStatus EntityStopNode::Tick(float)
     {
-        ZoneScoped;
-        //spdlog::info("Slime zatrzymuje sie ze zmeczenia.");
         Ai->AStarComponent->ClearPath(Ai->GetOwner());
         Ai->ChaseTimer = 0.0f;
         return NodeStatus::Success;
@@ -111,9 +95,6 @@ namespace Engine
 
     NodeStatus RunFromPlayerNode::Tick(float)
     {
-        ZoneScoped;
-        //spdlog::info("RunFromPlayerNode");
-
         if (!Ai->IsChasing || Ai->IsResting)
             return NodeStatus::Failure;
 
@@ -130,7 +111,6 @@ namespace Engine
         int currentNodeId = navMesh->GetNodeIdFromPosition(slimePos);
         if (currentNodeId == -1)
         {
-            //spdlog::warn("RunFromPlayerNode: brak aktualnego wêz³a.");
             return NodeStatus::Failure;
         }
 
@@ -155,7 +135,6 @@ namespace Engine
 
         if (bestNodeId == -1)
         {
-            //spdlog::warn("RunFromPlayerNode: brak lepszego wêz³a do ucieczki.");
             return NodeStatus::Failure;
         }
 
@@ -166,8 +145,6 @@ namespace Engine
             glm::vec3 targetPos = allNodes.at(bestNodeId).GetPosition();
             Ai->AStarComponent->SetGoalPosition(targetPos);
             Ai->AStarComponent->SetMoveSpeed(Ai->GetFastMovementSpeed());
-
-            //spdlog::info("RunFromPlayerNode: ustawiono nowy cel ucieczki (wêze³ {})", bestNodeId);
         }
 
         return NodeStatus::Success;
@@ -176,7 +153,6 @@ namespace Engine
     bool IsPathSafe(const std::vector<int>& path, const auto& allNodes, const glm::vec3& playerPos,
                     float detectionRange)
     {
-        ZoneScoped;
         if (path.empty())
             return false;
 
@@ -200,7 +176,6 @@ namespace Engine
 
     NodeStatus WalkSlowlyNode::Tick(float DeltaTime)
     {
-        ZoneScoped;
         if (Ai->TargetTrash)
             return NodeStatus::Failure;
 
@@ -211,7 +186,6 @@ namespace Engine
             return NodeStatus::Failure;
 
         Ai->SetRestFinished(false);
-
         auto* navMesh = &Engine::NavMesh::Get();
         auto* graph = navMesh->GetGraph();
 
@@ -245,7 +219,6 @@ namespace Engine
         int currentNodeId = navMesh->GetNodeIdFromPosition(currentPos);
         if (currentNodeId == -1)
         {
-            //spdlog::warn("WalkSlowly: brak aktualnego wêz³a.");
             return NodeStatus::Failure;
         }
 
@@ -297,7 +270,6 @@ namespace Engine
         const size_t maxCandidates = 100;
         while (!q.empty() && candidates.size() < maxCandidates)
         {
-            ZoneScopedN("walkSlowly while");
             int nodeId = q.front();
             q.pop();
             int dist = distances[nodeId];
@@ -346,7 +318,7 @@ namespace Engine
             glm::vec3 toCandidate = glm::normalize(node->GetPosition() - currentPos);
             toCandidate.y = 0.0f;
 
-            float dot = glm::dot(forward, toCandidate);
+            float dot = glm::dot(-forward, toCandidate);
 
             if (ShouldTurnAround)
             {
@@ -370,7 +342,9 @@ namespace Engine
 
             for (int chosenId : candidates)
             {
+                glm::vec3 goalPos = allNodes.at(chosenId).GetPosition();
                 Ai->AStarComponent->FindPath(currentNodeId, chosenId);
+
                 const std::vector<int>& path = Ai->AStarComponent->GetPath();
 
                 if (IsPathSafe(path, allNodes, playerPos, detectionRange))
@@ -388,13 +362,12 @@ namespace Engine
                 }
             }
         }
-        //spdlog::warn("WalkSlowly: nie znaleziono bezpiecznych wêz³ów do chodzenia.");
+
         return NodeStatus::Failure;
     }
 
     NodeStatus IsTrashInRangeNode::Tick(float)
     {
-        ZoneScoped;
         Ai->RecalculateCurrentTrash();
 
         if (!Ai || Ai->CurrentTrashValue >= Ai->MaxTrashCapacity)
@@ -404,7 +377,6 @@ namespace Engine
 
         if (inRange)
         {
-            //spdlog::info("Slime w zasiegu smiecia");
             if (!Ai->TargetTrash && !Ai->AStarComponent->IsPathFinished())
             {
                 Ai->AStarComponent->ClearPath(Ai->GetOwner());
@@ -412,14 +384,13 @@ namespace Engine
         }
         else
         {
-            //spdlog::info("Slime nie w zasiegu smiecia");
+            Ai->TargetTrash = nullptr;
         }
         return inRange ? NodeStatus::Success : NodeStatus::Failure;
     }
 
     NodeStatus WalkToTrashNode::Tick(float DeltaTime)
     {
-        ZoneScoped;
         if (!Ai || Ai->TrashEntities.empty())
             return NodeStatus::Failure;
 
@@ -430,7 +401,7 @@ namespace Engine
         {
             return NodeStatus::Success;
         }
-        //spdlog::info("im in");
+
         glm::vec3 slimePos = Ai->GetOwner()->GetTransform()->GetPosition();
         Entity* closestTrash = nullptr;
         float closestDist = std::numeric_limits<float>::max();
@@ -440,10 +411,20 @@ namespace Engine
             if (!trash)
                 continue;
 
+            auto thrashComp = trash->GetComponent<Thrash>();
+            if (!thrashComp)
+                continue;
+
+            if (Ai->CurrentTrashValue + thrashComp->GetSize() > Ai->MaxTrashCapacity)
+                continue;
+
             glm::vec3 trashPos = trash->GetTransform()->GetPositionWorldSpace();
             glm::vec2 slimeXZ(slimePos.x, slimePos.z);
             glm::vec2 trashXZ(trashPos.x, trashPos.z);
             float dist = glm::distance(slimeXZ, trashXZ);
+
+            if (dist > Ai->TrashRange + 1)
+                continue;
 
             if (dist < closestDist)
             {
@@ -466,25 +447,38 @@ namespace Engine
 
     NodeStatus AbsorbTrashNode::Tick(float DeltaTime)
     {
-        ZoneScoped;
         if (!Ai || Ai->TrashEntities.empty())
             return NodeStatus::Failure;
 
+        if ((AbsorbStartTime >= 0.0f && Ai->IsChasing) || Ai->IsResting)
+        {
+            AbsorbStartTime = -1.0f;
+            Ai->TargetTrash = nullptr;
+            return NodeStatus::Failure;
+        }
+
         Entity* target = Ai->TargetTrash;
 
-        glm::vec3 slimePos = Ai->GetOwner()->GetTransform()->GetPosition();
-        glm::vec3 trashPos = target->GetTransform()->GetPositionWorldSpace();
-        float distance = glm::distance(glm::vec2(slimePos.x, slimePos.z), glm::vec2(trashPos.x, trashPos.z));
-
-        if (distance > 1.0f)
+        if (!target)
         {
             AbsorbStartTime = -1.0f;
             return NodeStatus::Failure;
         }
 
-        if (!target)
+        glm::vec3 slimePos = Ai->GetOwner()->GetTransform()->GetPosition();
+        glm::vec3 trashPos = target->GetTransform()->GetPositionWorldSpace();
+        float distance = glm::distance(glm::vec2(slimePos.x, slimePos.z), glm::vec2(trashPos.x, trashPos.z));
+
+        constexpr float StartRange = 1.0f;
+        constexpr float CancelRange = 1.2f;
+
+        if (AbsorbStartTime < 0.0f && distance > StartRange)
+            return NodeStatus::Running;
+
+        if (AbsorbStartTime >= 0.0f && distance > CancelRange)
         {
             AbsorbStartTime = -1.0f;
+            Ai->TargetTrash = nullptr;
             return NodeStatus::Failure;
         }
 
@@ -507,21 +501,14 @@ namespace Engine
             }
 
             AbsorbStartTime = 0.0f;
-            return NodeStatus::Running;
-        }
-
-        if (!target)
-        {
-            AbsorbStartTime = -1.0f;
-            Ai->TargetTrash = nullptr;
+            Ai->AStarComponent->SetMoveSpeed(Ai->GetSlowMovementSpeed() / 4);
             return NodeStatus::Failure;
         }
 
-        Ai->AStarComponent->SetMoveSpeed(Ai->GetSlowMovementSpeed() / 4);
         AbsorbStartTime += DeltaTime;
 
         if (AbsorbStartTime < 2.0f)
-            return NodeStatus::Running;
+            return NodeStatus::Failure;
 
         target->GetTransform()->SetParent(Ai->GetOwner()->GetTransform());
 
@@ -563,6 +550,8 @@ namespace Engine
         };
 
         target->GetTransform()->SetPositionLocalSpace(offset);
+        target->RemoveComponent<Rigidbody>();
+        target->RemoveComponent<BoxCollider>();
 
         auto it = std::find(Ai->TrashEntities.begin(), Ai->TrashEntities.end(), target);
         if (it != Ai->TrashEntities.end())
