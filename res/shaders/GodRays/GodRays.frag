@@ -17,6 +17,7 @@ const float WEIGHT = 0.4;
 const float FALLOFF = 256.0;
 const float EPSILON = 0.00001;
 const uint MAX_SAMPLES = 64;
+const float MAX_SCREEN_DIST = 0.33333;
 
 void main() {
     vec3 illumination = vec3(0.0);
@@ -26,7 +27,8 @@ void main() {
     {
         vec2 offset = TexCoords - lightPositions[l];
         float distance2 = dot(offset, offset);
-        float weight = 1.0 / (distance2 * FALLOFF + EPSILON);
+        float attenuation = smoothstep(MAX_SCREEN_DIST, 0.0, sqrt(distance2));
+        float weight = attenuation / (distance2 * FALLOFF + EPSILON);
         totalWeight += weight;
 
         vec2 deltaTexCoord = offset * DENSITY / float(MAX_SAMPLES);
@@ -37,6 +39,9 @@ void main() {
         for (uint i = 0; i < MAX_SAMPLES; ++i)
         {
             sampleCoords -= deltaTexCoord;
+
+            if (sampleCoords.x < 0.0 || sampleCoords.y < 0.0 || sampleCoords.x > 1.0 || sampleCoords.y > 1.0)
+            break;
 
             vec3 sampled = texture(OcclusionMask, sampleCoords).rgb;
             accumulation += sampled * illuminationDecay;

@@ -22,6 +22,7 @@
 #include "UI/FontRendering/TextManager.h"
 #include "Engine/Components/Audio/AudioSource.h"
 #include "Engine/Components/Audio/AudioListener.h"
+#include "Engine/Components/Audio/BackgroundAudioPlayer.h"
 #include "UI/UiImplementations/SampleUi.h"
 #include "tracy/Tracy.hpp"
 #if DEBUG
@@ -109,6 +110,8 @@ namespace Engine
             UpdateManager::GetInstance()->Update(deltaTime);
             RigidbodyUpdateManager::GetInstance()->Update(deltaTime);
             CollisionUpdateManager::GetInstance()->Update(deltaTime);
+            if (!BackgroundAudioPlayer->IsPlaying())
+                BackgroundAudioPlayer->PlayLooping("music", 0.5f);
 #endif
             int displayW, displayH;
             glfwMakeContextCurrent(Window);
@@ -176,29 +179,31 @@ namespace Engine
         // For windowless fullscreen
         GLFWmonitor* monitor = glfwGetPrimaryMonitor();
         const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-        glfwWindowHint(GLFW_RED_BITS, mode->redBits);
-        glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
-        glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
-        glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
 
         // GL 4.6 + GLSL 460
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, GlVersionMajor);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, GlVersionMinor);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 3.2+ only
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // 3.0+ only
-
+        glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 
 #if DEBUG
         glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 #endif
 
         // Create window with graphics context
-        Window = glfwCreateWindow(mode->width, mode->height, "Tide Engine", monitor, nullptr);
+        Window = glfwCreateWindow(mode->width, mode->height, "Tide Engine", nullptr, nullptr);
         if (!Window)
         {
             spdlog::error("Failed to create GLFW Window!");
             return false;
         }
+
+        int32_t xPos;
+        int32_t yPos;
+
+        glfwGetMonitorPos(monitor, &xPos, &yPos);
+        glfwSetWindowPos(Window, xPos, yPos);
 
         glfwMakeContextCurrent(Window);
         glfwSwapInterval(1); // Enable VSync - fixes FPS at the refresh rate of your screen
@@ -264,6 +269,8 @@ namespace Engine
 
         AudioListener = new class AudioListener(*Camera);
         spdlog::info("Sounds loaded.");
+
+        BackgroundAudioPlayer = new class BackgroundAudioPlayer();
 
         //input manager init
 #if !EDITOR
@@ -371,8 +378,9 @@ namespace Engine
         Shaders::ShaderManager::FreeResources();
         Models::ModelManager::DeleteAllModels();
         Materials::MaterialManager::DeleteAllMaterials();
-        AudioManager::DestroyInstance();
+        delete BackgroundAudioPlayer;
         delete AudioListener;
+        AudioManager::DestroyInstance();
     }
 
     void Engine::GlfwErrorCallback(int Error, const char* Description)

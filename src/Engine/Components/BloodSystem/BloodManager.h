@@ -42,6 +42,8 @@ namespace Engine
 
         float BloodFill;
 
+        float* AccumulationPtr = nullptr;
+
     public:
         explicit BloodManager(const Models::AABBox3& SceneBounds);
 
@@ -96,7 +98,7 @@ namespace Engine
         /**
          * @brief Returns relative amount of blood in the scene in [0,1] range.
          */
-        [[nodiscard]] float BloodFill1() const
+        [[nodiscard]] float GetBloodFill() const
         {
             return BloodFill;
         }

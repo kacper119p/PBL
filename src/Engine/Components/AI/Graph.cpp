@@ -21,6 +21,16 @@ namespace Engine
         toNode->second.AddNeighbor(FromId);
     }
 
+    bool Graph::AreConnected(int FromId, int ToId) const
+    {
+        auto it = Nodes.find(FromId);
+        if (it == Nodes.end())
+            return false;
+
+        const auto& connections = it->second.GetNeighbors();
+        return std::find(connections.begin(), connections.end(), ToId) != connections.end();
+    }
+
     void Graph::RemoveNode(int Id)
     {
         for (auto& [otherId, node] : Nodes)
@@ -35,9 +45,11 @@ namespace Engine
         Nodes.erase(Id);
     }
 
-    const Node& Graph::GetNode(const int Id) const
+    const Node* Graph::GetNode(const int Id) const
     {
-        return Nodes.at(Id);
+        if (Id < 0 || Id >= static_cast<int>(Nodes.size()))
+            return nullptr;
+        return &Nodes.at(Id);
     }
 
     const std::unordered_map<int, Node>& Graph::GetAllNodes() const

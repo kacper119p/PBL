@@ -26,6 +26,14 @@ namespace Engine
         void AddConnection(int FromId, int ToId);
 
         /**
+         * @brief Checks if two nodes are directly connected.
+         * @param FromId Source node ID.
+         * @param ToId Destination node ID.
+         * @return True if connected, false otherwise.
+         */
+        [[nodiscard]] bool AreConnected(int FromId, int ToId) const;
+
+        /**
          * @brief Removes node from the graph.
          * @param Id ID of the node to be removed.
          */
@@ -36,7 +44,7 @@ namespace Engine
          * @param Id The ID of the node.
          * @return Const reference to the node.
          */
-        [[nodiscard]] const Node& GetNode(int Id) const;
+        [[nodiscard]] const Node* GetNode(int Id) const;
 
         /**
          * @brief Returns all nodes stored in the graph.

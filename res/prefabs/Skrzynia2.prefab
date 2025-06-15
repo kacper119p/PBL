@@ -1,0 +1,72 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{93b3eb47-191b-442f-822c-eacde6f02f00}\u0000",
+            "name": "Skrzynia2",
+            "transform": {
+                "type": "Transform",
+                "id": "{09dab844-b194-4de9-9df7-6c2f4a6e06a8}\u0000",
+                "owner": "{93b3eb47-191b-442f-822c-eacde6f02f00}\u0000",
+                "Position": {
+                    "x": -3.736363649368286,
+                    "y": 3.20290470123291,
+                    "z": 18.36220359802246
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{edb60f1b-65f3-4fda-8520-a33f028641f1}\u0000",
+                "{84e04e50-4f87-4892-a706-9204877673f7}\u0000",
+                "{bb0c6de9-9964-46cf-a371-25316fb9372a}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{edb60f1b-65f3-4fda-8520-a33f028641f1}\u0000",
+            "owner": "{93b3eb47-191b-442f-822c-eacde6f02f00}\u0000",
+            "Material": "./res/materials/SampleScene/UV2.mat",
+            "Model": "./res/models/Modele_Mati/Meble/Skrzynia2.fbx"
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{84e04e50-4f87-4892-a706-9204877673f7}\u0000",
+            "owner": "{93b3eb47-191b-442f-822c-eacde6f02f00}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{bb0c6de9-9964-46cf-a371-25316fb9372a}\u0000",
+            "owner": "{93b3eb47-191b-442f-822c-eacde6f02f00}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.5999999046325684,
+            "_height": 6.0,
+            "_depth": 2.5
+        }
+    ]
+}

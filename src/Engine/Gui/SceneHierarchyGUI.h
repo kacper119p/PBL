@@ -11,6 +11,7 @@ namespace Engine
         Transform* Root;
         Transform* SelectedEntity;
         static SceneHierarchyGUI* Instance;
+        std::string SelectedPrefabPath;
 
     public:
         SceneHierarchyGUI() = default;
@@ -43,6 +44,10 @@ namespace Engine
         void AddModelToScene(Scene* scene, Entity* parent);
 
         void AddAnimatedModelToScene(Scene* scene, Entity* parent);
+
+        void AddPrefabToScene(Scene* scene, Entity* parent, std::string prefabPath);
+
+        void SetSelectedPrefabPath(const std::string& path) { SelectedPrefabPath = path; }
     };
 } // namespace Engine
 #endif

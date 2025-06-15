@@ -1,0 +1,288 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{e3b12f71-6bec-4519-a785-916ef9634b56}\u0000",
+            "name": "StripperSwapper",
+            "transform": {
+                "type": "Transform",
+                "id": "{4c4126fb-e0bf-44be-b3fa-a01c3e8e37cb}\u0000",
+                "owner": "{e3b12f71-6bec-4519-a785-916ef9634b56}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.800000011920929
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [
+                    "{d6b3d7ff-e80a-489b-877c-750db795f751}\u0000",
+                    "{24c1edeb-156a-4e5f-baa5-ebd2524a02e2}\u0000",
+                    "{bda9a9a9-616a-45a1-8763-22397453d327}\u0000",
+                    "{599c476f-1416-4f17-aaaa-ad01635ff6d0}\u0000",
+                    "{d2f5e049-7606-4a81-bf80-27d1734f44f2}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{e5a2a976-8e82-43b6-a930-fbee8998a9eb}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{e5a2a976-8e82-43b6-a930-fbee8998a9eb}\u0000",
+            "owner": "{e3b12f71-6bec-4519-a785-916ef9634b56}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Granny/spychacz.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{6e3858df-a4d5-44d9-8cba-6b1f138843d3}\u0000",
+            "name": "collider1",
+            "transform": {
+                "type": "Transform",
+                "id": "{d6b3d7ff-e80a-489b-877c-750db795f751}\u0000",
+                "owner": "{6e3858df-a4d5-44d9-8cba-6b1f138843d3}\u0000",
+                "Position": {
+                    "x": 7.806993380654603e-7,
+                    "y": -0.44999998807907104,
+                    "z": 0.5586481690406799
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{4c4126fb-e0bf-44be-b3fa-a01c3e8e37cb}\u0000"
+            },
+            "components": [
+                "{47408d0f-1393-4aec-adc2-8a25c1cd44df}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{47408d0f-1393-4aec-adc2-8a25c1cd44df}\u0000",
+            "owner": "{6e3858df-a4d5-44d9-8cba-6b1f138843d3}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.549999952316284,
+            "_height": 0.8999999761581421,
+            "_depth": 0.30000001192092896
+        },
+        {
+            "type": "Entity",
+            "id": "{388dc401-bc2c-4125-bb9d-35d3418f8eb0}\u0000",
+            "name": "collider4",
+            "transform": {
+                "type": "Transform",
+                "id": "{24c1edeb-156a-4e5f-baa5-ebd2524a02e2}\u0000",
+                "owner": "{388dc401-bc2c-4125-bb9d-35d3418f8eb0}\u0000",
+                "Position": {
+                    "x": 1.2009164094924927,
+                    "y": -0.8248715400695801,
+                    "z": 1.133743166923523
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{4c4126fb-e0bf-44be-b3fa-a01c3e8e37cb}\u0000"
+            },
+            "components": [
+                "{f63c0245-12b3-4cd1-818a-d51b8dbb917b}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{f63c0245-12b3-4cd1-818a-d51b8dbb917b}\u0000",
+            "owner": "{388dc401-bc2c-4125-bb9d-35d3418f8eb0}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 0.20000000298023224,
+            "_height": 0.15000000596046448,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Entity",
+            "id": "{aa46bce8-367d-4114-aebf-5e3ec8c2d9cc}\u0000",
+            "name": "collider3",
+            "transform": {
+                "type": "Transform",
+                "id": "{bda9a9a9-616a-45a1-8763-22397453d327}\u0000",
+                "owner": "{aa46bce8-367d-4114-aebf-5e3ec8c2d9cc}\u0000",
+                "Position": {
+                    "x": -1.2009999752044678,
+                    "y": -0.4499998092651367,
+                    "z": 0.8187884092330933
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{4c4126fb-e0bf-44be-b3fa-a01c3e8e37cb}\u0000"
+            },
+            "components": [
+                "{09acc610-b8f5-4fca-89e7-5cea5083058a}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{09acc610-b8f5-4fca-89e7-5cea5083058a}\u0000",
+            "owner": "{aa46bce8-367d-4114-aebf-5e3ec8c2d9cc}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 0.20000000298023224,
+            "_height": 0.8999999761581421,
+            "_depth": 0.20000000298023224
+        },
+        {
+            "type": "Entity",
+            "id": "{91723252-927a-40eb-b06a-2cfb791de14e}\u0000",
+            "name": "collider2",
+            "transform": {
+                "type": "Transform",
+                "id": "{599c476f-1416-4f17-aaaa-ad01635ff6d0}\u0000",
+                "owner": "{91723252-927a-40eb-b06a-2cfb791de14e}\u0000",
+                "Position": {
+                    "x": 1.200915813446045,
+                    "y": -0.4499998092651367,
+                    "z": 0.8187884092330933
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{4c4126fb-e0bf-44be-b3fa-a01c3e8e37cb}\u0000"
+            },
+            "components": [
+                "{0fc7805d-5c20-40db-ad81-03fa8c09b4e9}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{0fc7805d-5c20-40db-ad81-03fa8c09b4e9}\u0000",
+            "owner": "{91723252-927a-40eb-b06a-2cfb791de14e}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 0.20000000298023224,
+            "_height": 0.8999999761581421,
+            "_depth": 0.20000000298023224
+        },
+        {
+            "type": "Entity",
+            "id": "{dccebf45-5b7a-4d70-80a2-3df8f96c157a}\u0000",
+            "name": "collider5",
+            "transform": {
+                "type": "Transform",
+                "id": "{d2f5e049-7606-4a81-bf80-27d1734f44f2}\u0000",
+                "owner": "{dccebf45-5b7a-4d70-80a2-3df8f96c157a}\u0000",
+                "Position": {
+                    "x": -1.2009999752044678,
+                    "y": -0.8248715400695801,
+                    "z": 1.133743166923523
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{4c4126fb-e0bf-44be-b3fa-a01c3e8e37cb}\u0000"
+            },
+            "components": [
+                "{3641f6ff-1e45-418e-ba1d-130bf879c22d}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{3641f6ff-1e45-418e-ba1d-130bf879c22d}\u0000",
+            "owner": "{dccebf45-5b7a-4d70-80a2-3df8f96c157a}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 0.20000000298023224,
+            "_height": 0.15000000596046448,
+            "_depth": 0.4000000059604645
+        }
+    ]
+}

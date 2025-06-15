@@ -1,0 +1,47 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{bafd7ff7-db7c-4dcf-b223-2492a283fcb9}\u0000",
+            "name": "VacuumSwapper",
+            "transform": {
+                "type": "Transform",
+                "id": "{f89ea3d3-e8cd-4876-b7ff-24e1cae98b11}\u0000",
+                "owner": "{bafd7ff7-db7c-4dcf-b223-2492a283fcb9}\u0000",
+                "Position": {
+                    "x": 1.5,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": -179.99989318847656,
+                    "y": 89.99994659423828,
+                    "z": -179.99989318847656
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 0.9999999403953552,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": -5.684341886080801e-13,
+                    "y": 0.7071071267127991,
+                    "z": -5.684341886080801e-13,
+                    "w": 0.7071064710617065
+                },
+                "Children": [],
+                "Parent": "{c3bdb271-81b0-4c2c-a55b-dfde43906d96}\u0000"
+            },
+            "components": [
+                "{83409766-382c-4141-a3b4-15b23a7bb279}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{83409766-382c-4141-a3b4-15b23a7bb279}\u0000",
+            "owner": "{bafd7ff7-db7c-4dcf-b223-2492a283fcb9}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Granny/Odkurzacz.fbx"
+        }
+    ]
+}
