@@ -14,7 +14,6 @@ namespace Engine
     {
     private:
         Models::Model* Model = nullptr;
-        bool CastShadow = true;
 
         bool Culled = false;
 
@@ -42,23 +41,7 @@ namespace Engine
             this->Model = Model;
         }
 
-        /**
-         * @brief Returns true if this object is a shadow caster.
-         */
-        [[nodiscard]] bool CastsShadow() const
-        {
-            return CastShadow;
-        }
-
-        /**
-         * @brief Should this object cast shadows?
-         * @param CastShadow Set to true if object should be a shadow caster, false otherwise.
-         */
-        void SetCastShadow(const bool CastShadow)
-        {
-            this->CastShadow = CastShadow;
-        }
-
+    public:
         void RenderDepth(const CameraRenderData& RenderData) override;
 
         void Render(const CameraRenderData& RenderData) override;

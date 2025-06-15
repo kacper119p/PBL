@@ -1,16 +1,17 @@
-#if EDITOR
-
 #include "GenerativeSystem.h"
 #include "Engine/Components/Renderers/ModelRenderer.h"
 #include "Engine/Gui/EditorGUI.h"
 #include "Serialization/SerializationUtility.h"
 #include "spdlog/spdlog.h"
 #include "Engine/Components/AI/NavMesh.h"
+#include "Engine/Components/Colliders/SphereCollider.h"
+#include "Engine/Components/Game/Thrash.h"
+#include "Engine/Components/Physics/Rigidbody.h"
 
 namespace Generation
 {
     void GenerativeSystem::GenerateItems(Engine::Scene* Scene,
-                                         const std::vector<std::string>& Items,
+                                         const std::vector<std::pair<Models::Model*, Materials::Material*>>& Items,
                                          int ItemsCount, float ItemsDensity, std::vector<float> ItemsPercentages,
                                          float ItemsSizeMin, float ItemsSizeMax)
     {
@@ -114,39 +115,7 @@ namespace Generation
             const std::vector<std::pair<glm::vec3, glm::vec3>>& UsedAabbs,
             Perlin& Perlin, float PerlinScale, float PerlinMagnitude,
             const glm::vec3& AabbMin, const glm::vec3& AabbMax,
-            float YOffset, float YHeight)
-    {
-        const int horizontalAttempts = 10;
-        const int maxStackLevels = 10;
-
-        for (int id : GetShuffledNodeIds())
-        {
-            glm::vec3 basePos = Engine::NavMesh::Get().GetGraph()->GetAllNodes().at(id).GetPosition();
-
-            if (glm::distance(basePos, Center) > BaseSpacing)
-                continue;
-
-            std::vector<glm::vec3> failedNoisyPositions;
-            auto horizontalPos = TryFindHorizontalPlacement(basePos, BaseSpacing, UsedAabbs,
-                                                            Perlin, PerlinScale, PerlinMagnitude,
-                                                            AabbMin, AabbMax, YOffset,
-                                                            horizontalAttempts, failedNoisyPositions);
-
-            if (horizontalPos.has_value())
-                return horizontalPos;
-
-            auto stackedPos = TryStackingPlacement(failedNoisyPositions, UsedAabbs,
-                                                   AabbMin, AabbMax, YOffset,
-                                                   YHeight, maxStackLevels);
-
-            if (stackedPos.has_value())
-                return stackedPos;
-        }
-
-        return std::nullopt;
-    }
-
-    std::vector<int> GenerativeSystem::GetShuffledNodeIds()
+            float yOffset, float yHeight)
     {
         const auto* graph = Engine::NavMesh::Get().GetGraph();
         const auto& nodes = graph->GetAllNodes();
@@ -157,88 +126,77 @@ namespace Generation
 
         std::default_random_engine rng(std::random_device{}());
         std::shuffle(nodeIds.begin(), nodeIds.end(), rng);
-        return nodeIds;
-    }
 
-    std::optional<glm::vec3> GenerativeSystem::TryFindHorizontalPlacement(
-            const glm::vec3& BasePos, float BaseSpacing,
-            const std::vector<std::pair<glm::vec3, glm::vec3>>& UsedAabbs,
-            Perlin& Perlin, float PerlinScale, float PerlinMagnitude,
-            const glm::vec3& AabbMin, const glm::vec3& AabbMax,
-            float YOffset, int Attempts, std::vector<glm::vec3>& FailedNoisyPositions)
-    {
-        for (int attempt = 0; attempt < Attempts; ++attempt)
+        const int horizontalAttempts = 10;
+        const int maxStackLevels = 10;
+        const float yStackStep = yHeight;
+
+        for (int id : nodeIds)
         {
-            float noiseX = Perlin.Noise(BasePos.x * PerlinScale, BasePos.z * PerlinScale);
-            float noiseZ = Perlin.Noise(BasePos.z * PerlinScale, BasePos.x * PerlinScale);
+            glm::vec3 basePos = nodes.at(id).GetPosition();
 
-            glm::vec3 noisyPos = BasePos;
-            noisyPos.x += (noiseX - 0.5f) * 2.0f * PerlinMagnitude;
-            noisyPos.z += (noiseZ - 0.5f) * 2.0f * PerlinMagnitude;
-
-            if (!Engine::NavMesh::Get().IsOnNavMesh(noisyPos, Engine::NavMesh::Get().GetSpacing()))
+            if (glm::distance(basePos, Center) > BaseSpacing)
                 continue;
 
-            glm::vec3 baseYOffset(0.0f, YOffset, 0.0f);
-            glm::vec3 testMin = noisyPos + baseYOffset + AabbMin;
-            glm::vec3 testMax = noisyPos + baseYOffset + AabbMax;
+            std::vector<glm::vec3> failedNoisyPositions;
 
-            bool valid = true;
-            for (const auto& [otherMin, otherMax] : UsedAabbs)
+            for (int attempt = 0; attempt < horizontalAttempts; ++attempt)
             {
-                if (AabBsIntersect(testMin, testMax, otherMin, otherMax))
-                {
-                    valid = false;
-                    break;
-                }
-            }
+                float noiseX = Perlin.Noise(basePos.x * PerlinScale, basePos.z * PerlinScale);
+                float noiseZ = Perlin.Noise(basePos.z * PerlinScale, basePos.x * PerlinScale);
 
-            if (valid)
-                return noisyPos + baseYOffset;
+                glm::vec3 noisyPos = basePos;
+                noisyPos.x += (noiseX - 0.5f) * 2.0f * PerlinMagnitude;
+                noisyPos.z += (noiseZ - 0.5f) * 2.0f * PerlinMagnitude;
 
-            FailedNoisyPositions.push_back(noisyPos);
-        }
+                if (!Engine::NavMesh::Get().IsOnNavMesh(noisyPos, Engine::NavMesh::Get().GetSpacing()))
+                    continue;
 
-        return std::nullopt;
-    }
+                glm::vec3 baseYOffset(0.0f, yOffset, 0.0f);
+                glm::vec3 testMin = noisyPos + baseYOffset + AabbMin;
+                glm::vec3 testMax = noisyPos + baseYOffset + AabbMax;
 
-    std::optional<glm::vec3> GenerativeSystem::TryStackingPlacement(
-            const std::vector<glm::vec3>& FailedPositions,
-            const std::vector<std::pair<glm::vec3, glm::vec3>>& UsedAabbs,
-            const glm::vec3& AabbMin, const glm::vec3& AabbMax,
-            float YOffset, float YStep, int MaxStackLevels)
-    {
-        for (const auto& noisyPos : FailedPositions)
-        {
-            float baseY = 0.0f;
-
-            for (int stackLevel = 0; stackLevel < MaxStackLevels; ++stackLevel)
-            {
-                glm::vec3 candidateMin = noisyPos + glm::vec3(AabbMin.x, baseY + YOffset, AabbMin.z);
-                glm::vec3 candidateMax = noisyPos + glm::vec3(AabbMax.x, baseY + YOffset, AabbMax.z);
-
-                bool intersects = false;
-                float topY = baseY;
-
+                bool valid = true;
                 for (const auto& [otherMin, otherMax] : UsedAabbs)
                 {
-                    bool overlapsXZ =
-                            candidateMax.x > otherMin.x && candidateMin.x < otherMax.x &&
-                            candidateMax.z > otherMin.z && candidateMin.z < otherMax.z;
-
-                    if (overlapsXZ && candidateMin.y < otherMax.y && candidateMax.y > otherMin.y)
+                    if (AabBsIntersect(testMin, testMax, otherMin, otherMax))
                     {
-                        intersects = true;
-                        topY = std::max(topY, otherMax.y - noisyPos.y);
+                        valid = false;
+                        break;
                     }
                 }
 
-                if (!intersects)
-                {
-                    return noisyPos + glm::vec3(0.0f, baseY + YOffset, 0.0f);
-                }
+                if (valid)
+                    return noisyPos + baseYOffset;
 
-                baseY = topY + 0.01f;
+                failedNoisyPositions.push_back(noisyPos);
+            }
+
+            for (const auto& noisyPos : failedNoisyPositions)
+            {
+                for (int stackLevel = 1; stackLevel < maxStackLevels; ++stackLevel)
+                {
+                    glm::vec3 stackYOffset(0.0f, stackLevel * yStackStep, 0.0f);
+                    glm::vec3 baseYOffset(0.0f, yOffset, 0.0f);
+
+                    glm::vec3 testMin = noisyPos + glm::vec3(AabbMin.x, 0.0f, AabbMin.z) + glm::vec3(
+                                                0.0f, yOffset, 0.0f) + stackYOffset;
+                    glm::vec3 testMax = noisyPos + glm::vec3(AabbMax.x, 0.0f, AabbMax.z) + glm::vec3(
+                                                0.0f, yOffset, 0.0f) + stackYOffset;
+
+                    bool valid = true;
+                    for (const auto& [otherMin, otherMax] : UsedAabbs)
+                    {
+                        if (AabBsIntersect(testMin, testMax, otherMin, otherMax))
+                        {
+                            valid = false;
+                            break;
+                        }
+                    }
+
+                    if (valid)
+                        return noisyPos + baseYOffset + stackYOffset;
+                }
             }
         }
 
@@ -257,43 +215,79 @@ namespace Generation
     }
 
     void GenerativeSystem::SpawnItemsEntities(Engine::Scene* Scene, Engine::Entity* Parent,
-                                              const std::vector<std::string>& Items,
+                                              const std::vector<std::pair<Models::Model*, Materials::Material*>>& Items,
                                               const std::vector<int>& Counts, const glm::vec3& BasePosition,
                                               float Spacing, float ItemsSizeMin, float ItemsSizeMax)
     {
-        if (Items.empty())
-            return;
-
         std::vector<std::pair<glm::vec3, glm::vec3>> usedAabBs;
-        std::default_random_engine rng(std::random_device{}());
 
-        Perlin perlin(std::random_device{}());
+        std::random_device rd;
+        Perlin perlin(rd());
         float perlinScale = 0.2f;
         float perlinMagnitude = 1.0f;
 
+        std::default_random_engine rng(std::random_device{}());
         std::uniform_real_distribution<float> sizeDist(ItemsSizeMin, ItemsSizeMax);
-        std::uniform_real_distribution<float> rotationDist(0.0f, 360.0f);
 
-        std::vector<size_t> modelIndices = CreateShuffledModelIndices(Counts, rng);
+        std::vector<size_t> modelIndices;
+        for (size_t i = 0; i < Counts.size(); ++i)
+        {
+            modelIndices.insert(modelIndices.end(), Counts[i], i);
+        }
+
+        std::shuffle(modelIndices.begin(), modelIndices.end(), rng);
 
         std::unordered_map<size_t, int> modelInstanceCounts;
 
-        for (size_t idx : modelIndices)
+        for (size_t idx = 0; idx < modelIndices.size(); ++idx)
         {
-            Engine::Entity* prefab = Engine::PrefabLoader::LoadPrefab(Items[idx], Scene, Parent->GetTransform());
-            auto modelRenderer = prefab->GetComponent<Engine::ModelRenderer>();
-            if (!modelRenderer)
+            size_t i = modelIndices[idx];
+            const auto& modelMaterialPair = Items[i];
+            if (!modelMaterialPair.first || !modelMaterialPair.second)
                 continue;
 
-            Models::Model* model = modelRenderer->GetModel();
+            glm::vec3 minAabb = glm::vec3(std::numeric_limits<float>::max());
+            glm::vec3 maxAabb = glm::vec3(-std::numeric_limits<float>::max());
+
+            for (size_t meshIndex = 0; meshIndex < modelMaterialPair.first->GetMeshCount(); ++meshIndex)
+            {
+                const auto& mesh = modelMaterialPair.first->GetMesh(meshIndex);
+                const auto& aabb = mesh->GetAabBox();
+                minAabb = glm::min(minAabb, aabb.min);
+                maxAabb = glm::max(maxAabb, aabb.max);
+            }
 
             float scaleFactor = sizeDist(rng);
+            glm::vec3 scaledMin = minAabb * scaleFactor;
+            glm::vec3 scaledMax = maxAabb * scaleFactor;
+            float yOffset = scaledMin.y;
+
+            std::uniform_real_distribution<float> rotationDist(0.0f, 360.0f);
             float randomYRotation = rotationDist(rng);
 
-            glm::vec3 rotMin, rotMax;
-            float rotYOffset, rotHeight;
-            std::tie(rotMin, rotMax, rotYOffset, rotHeight) = CalculateRotatedBoundingBox(
-                    model, scaleFactor, randomYRotation);
+            std::vector<glm::vec3> corners = {
+                    scaledMin,
+                    scaledMax,
+                    glm::vec3(scaledMin.x, scaledMin.y, scaledMax.z),
+                    glm::vec3(scaledMin.x, scaledMax.y, scaledMin.z),
+                    glm::vec3(scaledMax.x, scaledMin.y, scaledMin.z),
+                    glm::vec3(scaledMax.x, scaledMax.y, scaledMin.z),
+                    glm::vec3(scaledMin.x, scaledMax.y, scaledMax.z),
+                    glm::vec3(scaledMax.x, scaledMin.y, scaledMax.z)
+            };
+
+            glm::vec3 rotMin(std::numeric_limits<float>::max());
+            glm::vec3 rotMax(-std::numeric_limits<float>::max());
+
+            for (const auto& corner : corners)
+            {
+                glm::vec3 rotated = RotateY(corner, glm::radians(randomYRotation));
+                rotMin = glm::min(rotMin, rotated);
+                rotMax = glm::max(rotMax, rotated);
+            }
+
+            float rotYOffset = -rotMin.y;
+            float rotHeight = rotMax.y - rotMin.y;
 
             auto spawnPosOpt = GetNonOverlappingNavMeshPosition(BasePosition, Spacing, usedAabBs,
                                                                 perlin, perlinScale, perlinMagnitude,
@@ -306,80 +300,33 @@ namespace Generation
                 return;
             }
 
-            glm::vec3 finalPos = *spawnPosOpt;
-            Engine::Entity* newEntity = CreateAndPlaceEntity(Scene, prefab, Parent, finalPos, randomYRotation,
-                                                             scaleFactor, ++modelInstanceCounts[idx]);
-            usedAabBs.emplace_back(finalPos + rotMin, finalPos + rotMax);
+            glm::vec3 spawnPos = *spawnPosOpt;
+            glm::vec3 finalPos = spawnPos;
+
+            Engine::Entity* newEntity = Scene->SpawnEntity(Parent);
+            newEntity->GetTransform()->SetPosition(finalPos);
+            newEntity->GetTransform()->SetRotation(glm::vec3(0.0f, glm::radians(randomYRotation), 0.0f));
+
+            auto modelRenderer = newEntity->AddComponent<Engine::ModelRenderer>();
+            modelRenderer->SetModel(modelMaterialPair.first);
+            modelRenderer->SetMaterial(modelMaterialPair.second);
+
+            std::filesystem::path modelPath(modelMaterialPair.first->GetPath());
+            std::filesystem::path materialPath(
+                    Materials::MaterialManager::GetMaterialPath(modelMaterialPair.second));
+            std::string modelName = modelPath.filename().string();
+            std::string materialName = materialPath.filename().filename().string();
+            std::string baseName = modelName + " " + materialName;
+            modelInstanceCounts[i]++;
+            int instanceNumber = modelInstanceCounts[i];
+
+            newEntity->SetName(baseName + " " + std::to_string(instanceNumber));
+            newEntity->SetScene(Scene);
+            newEntity->GetTransform()->SetScale(glm::vec3(scaleFactor));
+
+            usedAabBs.emplace_back(
+                    finalPos + rotMin,
+                    finalPos + rotMax);
         }
-    }
-
-    std::vector<size_t> GenerativeSystem::CreateShuffledModelIndices(const std::vector<int>& Counts,
-                                                                     std::default_random_engine& Rng)
-    {
-        std::vector<size_t> indices;
-        for (size_t i = 0; i < Counts.size(); ++i)
-            indices.insert(indices.end(), Counts[i], i);
-
-        std::shuffle(indices.begin(), indices.end(), Rng);
-        return indices;
-    }
-
-    std::tuple<glm::vec3, glm::vec3, float, float> GenerativeSystem::CalculateRotatedBoundingBox(
-            Models::Model* Model, float ScaleFactor, float YRotationDeg)
-    {
-        glm::vec3 minAabb(FLT_MAX), maxAabb(-FLT_MAX);
-
-        for (size_t i = 0; i < Model->GetMeshCount(); ++i)
-        {
-            const auto& mesh = Model->GetMesh(i);
-            const auto& aabb = mesh->GetAabBox();
-            minAabb = glm::min(minAabb, aabb.min);
-            maxAabb = glm::max(maxAabb, aabb.max);
-        }
-
-        glm::vec3 scaledMin = minAabb * ScaleFactor;
-        glm::vec3 scaledMax = maxAabb * ScaleFactor;
-
-        std::vector<glm::vec3> corners = {
-                scaledMin, scaledMax,
-                {scaledMin.x, scaledMin.y, scaledMax.z},
-                {scaledMin.x, scaledMax.y, scaledMin.z},
-                {scaledMax.x, scaledMin.y, scaledMin.z},
-                {scaledMax.x, scaledMax.y, scaledMin.z},
-                {scaledMin.x, scaledMax.y, scaledMax.z},
-                {scaledMax.x, scaledMin.y, scaledMax.z}
-        };
-
-        glm::vec3 rotMin(FLT_MAX), rotMax(-FLT_MAX);
-        for (const auto& c : corners)
-        {
-            glm::vec3 rotated = RotateY(c, glm::radians(YRotationDeg));
-            rotMin = glm::min(rotMin, rotated);
-            rotMax = glm::max(rotMax, rotated);
-        }
-
-        float offsetY = -rotMin.y;
-        float height = rotMax.y - rotMin.y;
-
-        return {rotMin, rotMax, offsetY, height};
-    }
-
-    Engine::Entity* GenerativeSystem::CreateAndPlaceEntity(Engine::Scene* Scene, Engine::Entity* Prefab,
-                                                           Engine::Entity* Parent, const glm::vec3& Position,
-                                                           float YRotationDeg, float Scale, int InstanceIndex)
-    {
-        Engine::Entity* entity = Prefab;
-        entity->SetScene(Scene);
-        entity->GetTransform()->SetParent(Parent->GetTransform());
-        entity->GetTransform()->SetPosition(Position);
-        entity->GetTransform()->SetRotation(glm::vec3(0.0f, glm::radians(YRotationDeg), 0.0f));
-        entity->GetTransform()->SetScale(glm::vec3(Scale));
-
-        std::string baseName = Prefab->GetName();
-        entity->SetName(baseName + " " + std::to_string(InstanceIndex));
-
-        return entity;
     }
 }
-
-#endif

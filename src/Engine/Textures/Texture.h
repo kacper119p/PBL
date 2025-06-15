@@ -29,10 +29,7 @@ namespace Engine
 
         [[nodiscard]] uint64_t GetHandleReadonly() const
         {
-            if (TextureId == 0)
-            {
-                return 0;
-            }
+            CHECK_MESSAGE(TextureId != 0, "Texture not initialized");
             const uint64_t handle = glGetTextureHandleARB(TextureId);
             return handle;
         }

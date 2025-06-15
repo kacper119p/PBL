@@ -1,7 +1,6 @@
 #include "UpdateManager.h"
 
 #include "GameMode/GameMode.h"
-#include "Player/Player.h"
 
 namespace Engine
 {
@@ -28,11 +27,6 @@ namespace Engine
         if (GameMode)
         {
             GameMode->Update(DeltaTime);
-        }
-
-        if (Player)
-        {
-            Player->Update(DeltaTime);
         }
 
         for (IUpdateable* component : Updateables)

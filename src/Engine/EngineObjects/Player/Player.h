@@ -19,10 +19,8 @@ namespace Engine
     class Player : public Entity
     {
     public:
-        ~Player() override;
+        virtual void Start() = 0;
 
-        virtual void Start();
-
-        virtual void Update(float DeltaTime) = 0;
+        virtual void Update() = 0;
     };
 }

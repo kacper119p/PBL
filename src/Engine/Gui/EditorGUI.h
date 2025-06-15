@@ -11,7 +11,6 @@
 #include "Generation/GenerativeSystem.h"
 #include "Models/ModelManager.h"
 #include "Materials/MaterialManager.h"
-#include "PrefabWindow.h"
 
 namespace Engine
 {
@@ -37,7 +36,13 @@ namespace Engine
 
         void DrawGenerativeSystem(Scene* Scene);
 
-        void DrawPrefabList(std::vector<std::string>& Prefabs, const char* UniqueId);
+        void DrawModelDropZoneAndList(std::vector<std::pair<Models::Model*, Materials::Material*>>& Models,
+                                      Models::ModelManager* ModelManager, Materials::MaterialManager* MaterialManager,
+                                      const char* UniqueId);
+
+        void DrawModelDropZoneAndList(std::vector<Models::Model*>& Models, std::vector<Materials::Material*>& Materials,
+                                      Models::ModelManager* ModelManager, Materials::MaterialManager* MaterialManager,
+                                      const char* UniqueId);
 
     private:
         void SetupDockspace();
@@ -50,8 +55,9 @@ namespace Engine
         AssetsWindow m_AssetsWindow;
         MaterialsMenu m_MaterialMenu;
         TopBar m_TopBar;
-        PrefabWindow m_PrefabWindow;
         Generation::GenerativeSystem GenerativeSystem;
+        std::unique_ptr<Models::ModelManager> ModelManager;
+        std::unique_ptr<Materials::MaterialManager> MaterialManager;
 
     };
 

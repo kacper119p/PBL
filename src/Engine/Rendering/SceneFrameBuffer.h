@@ -77,8 +77,6 @@ namespace Engine
         void BindResolved() const
         {
             glBindFramebuffer(GL_FRAMEBUFFER, ResolvedId);
-            constexpr GLenum drawBuffers[2] = {GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1};
-            glDrawBuffers(2, drawBuffers);
         }
 
         /**
@@ -122,12 +120,12 @@ namespace Engine
 
         void WriteNormals() const
         {
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D_MULTISAMPLE, NormalsBuffer, 0);
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D_MULTISAMPLE, NormalsBuffer, 0);
         }
 
         void WriteOcclusion() const
         {
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D_MULTISAMPLE, OcclusionBuffer, 0);
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D_MULTISAMPLE, OcclusionBuffer, 0);
         }
 
     private:

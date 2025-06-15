@@ -202,7 +202,7 @@ namespace Engine
 
         void SerializeEntity(rapidjson::Value& Object, rapidjson::Document::AllocatorType& Allocator) const;
 
-        static Entity* DeserializeEntity(rapidjson::Value& Object, class Scene* Scene, class Transform* Parent);
+        static Entity* DeserializeEntity(rapidjson::Value& Object, class Scene* Scene);
 
 #if EDITOR
         void DrawImGui();

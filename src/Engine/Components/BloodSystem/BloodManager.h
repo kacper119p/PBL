@@ -96,7 +96,7 @@ namespace Engine
         /**
          * @brief Returns relative amount of blood in the scene in [0,1] range.
          */
-        [[nodiscard]] float GetBloodFill() const
+        [[nodiscard]] float BloodFill1() const
         {
             return BloodFill;
         }

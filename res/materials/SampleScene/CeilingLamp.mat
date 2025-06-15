@@ -1,19 +1,19 @@
 {
-  "type": "PbrMaterial",
-  "BaseMap": "./res/textures/CeilingLamp/Base.dds",
-  "RoughnessMetallicMap": "./res/textures/CeilingLamp/RoughnessMetallicAmbientOcclusion.dds",
-  "NormalMap": "res\\textures\\Default.dds",
-  "EmissiveMap": "res\\textures\\Default.dds",
-  "Roughness": 1.0,
-  "Metallic": 1.0,
-  "BaseColor": {
-    "x": 0.0,
-    "y": 0.0,
-    "z": 0.0
-  },
-  "EmissiveColor": {
-    "x": 100.0,
-    "y": 5.294117450714111,
-    "z": 0.7843137383460999
-  }
+    "type": "PbrMaterial",
+    "BaseMap": "./res/textures/CeilingLamp/Base.dds",
+    "RoughnessMetallicMap": "./res/textures/CeilingLamp/RoughnessMetallicAmbientOcclusion.dds",
+    "NormalMap": "..\\..\\..\\..\\res\\textures\\Default.dds",
+    "EmissiveMap": "..\\..\\..\\..\\res\\textures\\Default.dds",
+    "Roughness": 1.0,
+    "Metallic": 1.0,
+    "BaseColor": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "EmissiveColor": {
+        "x": 100.0,
+        "y": 5.294117450714111,
+        "z": 0.7843137383460999
+    }
 }

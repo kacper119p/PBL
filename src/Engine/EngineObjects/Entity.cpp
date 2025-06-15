@@ -37,7 +37,7 @@ namespace Engine
         rapidjson::Document document;
         document.SetArray();
         SerializeEntity(document, document.GetAllocator());
-        return DeserializeEntity(document, GetScene(), GetTransform()->GetParent());
+        return DeserializeEntity(document, GetScene());
     }
 
     void Entity::SerializeEntity(rapidjson::Value& Object, rapidjson::Document::AllocatorType& Allocator) const
@@ -55,7 +55,7 @@ namespace Engine
         }
     }
 
-    Entity* Entity::DeserializeEntity(rapidjson::Value& Object, class Scene* Scene, class Transform* Parent)
+    Entity* Entity::DeserializeEntity(rapidjson::Value& Object, class Scene* Scene)
     {
         Serialization::ReferenceTable referenceTable;
         std::vector<DeserializationPair> objects;
@@ -86,22 +86,11 @@ namespace Engine
         for (const DeserializationPair pair : objects)
         {
             pair.Object->SetId(Utility::GenerateGuid());
-            if (Entity* entity = dynamic_cast<Entity*>(pair.Object))
-            {
-                entity->GetTransform()->SetId(Utility::GenerateGuid());
-            }
         }
 
         if (root->GetTransform()->GetParent() == nullptr)
         {
-            if (Parent == nullptr)
-            {
-                root->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
-            }
-            else
-            {
-                root->GetTransform()->SetParent(Parent);
-            }
+            root->GetTransform()->SetParent(Scene->GetRoot()->GetTransform());
         }
 
         for (const DeserializationPair pair : objects)
