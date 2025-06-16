@@ -45,21 +45,19 @@
 namespace Scene
 {
     bool shouldContinue = true;
+
     void SceneBuilder::Build(Engine::Scene*& Scene)
     {
         ZoneScoped;
 
         Scene = new class Engine::Scene();
-        Engine::SceneManager::LoadScene("./res/scenes/Gameplay.lvl", Scene);
+        Engine::SceneManager::LoadScene("./res/scenes/SampleScene.lvl", Scene);
         // TODO: remove when no longer needed
-        
 
-        
-       
 
         // BOX BOX SCENARIO /////////////////////////////////////////////////////////////////////////////////////////////////////////
-        #if !EDITOR
-        
+#if !EDITOR
+
         /*Engine::Entity* playerVacuum = Scene->SpawnEntity(nullptr);
         playerVacuum->SetName("PlayerVacuum");
         Scene->GetPlayer()->GetTransform()->AddChild(playerVacuum->GetTransform());
@@ -119,10 +117,10 @@ namespace Scene
 
         CameraFollow::GetInstance().SetTarget(secondBoxEntity);
         */
-        #endif
-        
+#endif
+
         //secondBoxCollider->shouldMove = true;
-        
+
         //Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();
 
 

@@ -14,7 +14,7 @@
   },
   "UI": "EmptyUi",
   "GameMode": "CleaningGameMode",
-  "Player": "DefaultPlayer",
+  "Player": "EmptyPlayer",
   "Root": {
     "type": "Entity",
     "id": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
@@ -1384,7 +1384,7 @@
       ]
     },
     {
-      "type": "ParticleEmitter",
+      "type": "DustParticleEmitter",
       "id": "{4e5cfcaf-be56-443b-9cf9-b4024b80da48}\u0000",
       "owner": "{3957f4cf-9d1a-4637-86be-6aecd2d356ff}\u0000",
       "MaxParticleCount": 10000,

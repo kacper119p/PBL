@@ -12,7 +12,7 @@
 namespace Engine
 {
 
-    class BloodManager
+    class BloodManager final
     {
     private:
         static constexpr int32_t MaskSize = 4096;
