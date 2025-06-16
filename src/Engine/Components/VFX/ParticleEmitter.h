@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Renderer.h"
-#include "Engine/Components/Interfaces/IUpdateable.h"
+#include "Engine/Components/Component.h"
+#include "Engine/EngineObjects/CameraRenderData.h"
+#include "Materials/Material.h"
 #include "Shaders/ComputeShader.h"
-#include "Models/Model.h"
 #include "Shaders/Shader.h"
 
 namespace Engine

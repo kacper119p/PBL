@@ -1,10 +1,8 @@
 #pragma once
 
 #include "ParticleEmitter.h"
-#include "Renderer.h"
 #include "Shaders/ComputeShader.h"
 #include "Models/Model.h"
-#include "Shaders/Shader.h"
 
 namespace Engine
 {

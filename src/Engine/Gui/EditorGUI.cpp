@@ -8,7 +8,7 @@
 #include "Engine/EngineObjects/Scene/SceneManager.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/Components/Updateable.h"
-#include "Engine/Components/Renderers/ParticleEmitter.h"
+#include "Engine/Components/VFX/ParticleEmitter.h"
 #include "Engine/Components/Audio/AudioSource.h"
 #include "Engine/EngineObjects/Scene/SceneManager.h"
 #include "Engine/EngineObjects/GameMode/GameMode.h"
