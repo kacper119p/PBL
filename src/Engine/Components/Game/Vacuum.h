@@ -17,8 +17,8 @@ namespace Engine
         int volume = 0;
         int maxVolume = 10;
 
-        int size = 5;
-        int centerSize = 1;
+        int size = 2;
+        float centerSize = 1.0f;
         std::vector<Engine::Entity*> items;
         Engine::SphereCollider* collider;
 
