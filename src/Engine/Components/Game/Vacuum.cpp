@@ -67,7 +67,9 @@ namespace Engine
         // --- SSANIE ---
         if (volume <= maxVolume && isSuccing)
         {
-            auto position = this->GetOwner()->GetTransform()->GetPosition();
+            auto ownerTransform = this->GetOwner()->GetTransform();
+            glm::vec3 forward = ownerTransform->GetForward();
+            glm::vec3 position = ownerTransform->GetPosition() - forward * (size + 0.01f);
             std::vector<Engine::Collider*> entities = collider->SphereOverlap(position, size);
 
             for (auto* entityCollider : entities)
@@ -77,14 +79,15 @@ namespace Engine
                     int thrashSizeInt = static_cast<int>(entityCollider->GetOwner()->GetComponent<Thrash>()->GetSize());
                     if (volume + thrashSizeInt <= maxVolume)
                     {
-                        glm::vec3 direction = position - entityCollider->GetOwner()->GetTransform()->GetPosition();
+                        glm::vec3 direction = position + forward * (size/2.0f+0.01f) - entityCollider->GetOwner()->GetTransform()->GetPosition();
                         entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->AddForce(
                                 direction, Engine::ForceMode::Force);
                     }
                 }
             }
 
-            entities = collider->SphereOverlap(position, centerSize);
+            glm::vec3 centerPosition = position + forward * (size / 2.0f);
+            entities = collider->SphereOverlap(centerPosition, centerSize);
             for (auto* entityCollider : entities)
             {
                 if (entityCollider->GetOwner()->GetComponent<Thrash>())
