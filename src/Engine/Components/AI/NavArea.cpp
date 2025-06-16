@@ -50,12 +50,14 @@ namespace Engine
 
     void NavArea::DeserializeValuePass(const rapidjson::Value& Object, Serialization::ReferenceTable& ReferenceMap)
     {
-        float spacing = NavMesh::Get().GetSpacing();
-        float padding = NavMesh::Get().GetPadding();
+        float spacing;
+        float padding;
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
         DESERIALIZE_VALUE(IsWalkable)
         DESERIALIZE_VALUE(spacing)
         DESERIALIZE_VALUE(padding)
+        NavMesh::Get().SetSpacing(spacing);
+        NavMesh::Get().SetPadding(padding);
         END_COMPONENT_DESERIALIZATION_VALUE_PASS
     }
 

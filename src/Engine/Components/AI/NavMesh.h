@@ -43,12 +43,6 @@ namespace Engine
         void BakeNavMesh(Entity* Root);
 
         /**
-         * @brief Removes all nodes that have NavArea component and IsWalkable is false from the existing NavMesh.
-         * @param Root Scene root entity.
-         */
-        void RemoveNotWalkableNodes(Entity* Root);
-
-        /**
          * @brief Spacing getter.
          * @return Spacing of NavMesh nodes.
          */
@@ -71,11 +65,6 @@ namespace Engine
          * @return Node ID closest to the given position.
          */
         [[nodiscard]] int GetNodeIdFromPosition(const glm::vec3& Position) const;
-
-        /**
-        * @brief Removes nodes created solely for padding purposes.
-        */
-        void RemovePaddingNodes();
 
         /**
          * @brief Returns all models and their associated transforms used in the navigation mesh.

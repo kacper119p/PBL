@@ -1,5 +1,4 @@
 #include "AiManager.h"
-#include <tracy/Tracy.hpp>
 #include "Sequence.h"
 #include "Selector.h"
 #include "LeafNodes.h"
@@ -7,6 +6,7 @@
 #include "Engine/Components/Game/Thrash.h"
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/EngineObjects/Player/DefaultPlayer.h"
+#include "Engine/EngineObjects/Scene/Scene.h"
 #include "Serialization/SerializationUtility.h"
 #include "spdlog/spdlog.h"
 
@@ -26,9 +26,9 @@ namespace Engine
 
     void AiManager::Start()
     {
+        NavMesh::Get().BakeNavMesh(GetOwner()->GetScene()->GetRoot());
         AStarComponent = new AStar();
         AStarComponent->SetGraph(NavMesh::Get().GetGraph());
-        NavMesh::Get().BakeNavMesh(GetOwner()->GetScene()->GetRoot());
 
         if (dynamic_cast<Engine::DefaultPlayer*>(GetOwner()->GetScene()->GetPlayer()))
             Player = GetOwner()->GetScene()->GetPlayer();
@@ -117,7 +117,6 @@ namespace Engine
 
     void AiManager::Update(const float DeltaTime)
     {
-        ZoneScoped;
         if (!Player || !NavMesh::Get().GetGraph())
             return;
 
@@ -149,6 +148,12 @@ namespace Engine
         for (const auto& trash : TrashEntities)
         {
             if (!trash)
+                continue;
+
+            if (!trash->GetComponent<Thrash>())
+                continue;
+
+            if (CurrentTrashValue + trash->GetComponent<Thrash>()->GetSize() > MaxTrashCapacity)
                 continue;
 
             glm::vec3 trashPos = trash->GetTransform()->GetPosition();
