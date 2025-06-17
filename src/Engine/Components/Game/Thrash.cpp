@@ -1,13 +1,15 @@
 #include "Thrash.h"
 #include "Serialization/SerializationUtility.h"
 #include "Engine/EngineObjects/Scene/Scene.h"
+#include <iostream>
 
 namespace Engine
 {
     
     void Thrash::Start() { 
         collider = GetOwner()->GetComponent<Collider>();
-        collider->OnCollisionAddListener(ThrowOut);
+        collider->OnTriggerAddListener(ThrowOut);
+        collider->OnCollisionAddListener(DisableCollisionAction);
         ThrashManager::GetInstance()->AddThrash(this);
     }
 
@@ -31,18 +33,34 @@ namespace Engine
         END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 
+    void Thrash::DisableCollision(Collider* collider) 
+    {
+        if (collider->GetOwner()->GetName() == "ColliderDisabler")
+        {
+            std::cout << "Thrash: ColliderDisabler detected, disabling collider." << std::endl;
+            if (this->collider)
+            {
+                this->collider->SetTrigger(true);
+                std::cout << "Thrash: Removing DisableCollisionAction listener from collider." << std::endl;
+                this->collider->OnCollisionRemoveListener(DisableCollisionAction);
+            }
+        }
+    }
 
     void Thrash::DeleteThrash(Engine::Collider* collider)
     {
+        
         if (collider->GetOwner()->GetName() == "ThrashCan")
         {
             if (this->collider)
             {
-                this->collider->OnCollisionRemoveListener(ThrowOut);
+                std::cout << "Thrash: Removing ThrowOut listener from collider." << std::endl;
+                this->collider->OnTriggerRemoveListener(ThrowOut);
             }
             GetOwner()->Destroy();
         }
     }
+
 #if EDITOR
     void Thrash::DrawImGui()
     {

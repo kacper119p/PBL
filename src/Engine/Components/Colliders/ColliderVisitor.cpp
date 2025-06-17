@@ -536,9 +536,10 @@ namespace Engine
                 if (!result.hasCollision)
                     return;
 
-                if (box.IsTrigger())
+                if (currentCollider->IsTrigger() || box.IsTrigger())
                 {
                     EmitTrigger(&box);
+                    EmitTrigger(boxCollider);
                     return;
                 }
 
@@ -557,7 +558,6 @@ namespace Engine
                 {
                     thisRB->OnCollisionStatic(contactPoint, normal);
                 }
-
                 glm::vec3 separation = GetSeparation();
 
                if (thisRB && otherRB)
@@ -616,7 +616,10 @@ namespace Engine
                 {
                     thisRB->OnCollisionStatic(contactPoint, normal);
                 }
-
+                if (currentCollider->IsTrigger())
+                {
+                    break;
+                }
                 glm::vec3 separation = GetSeparation();
 
                 if (thisRB && otherRB)
@@ -743,7 +746,10 @@ namespace Engine
                 {
                     thisRB->OnCollisionStatic(contactPoint, normal);
                 }
-
+                if (currentCollider->IsTrigger())
+                {
+                    break;
+                }
                 glm::vec3 separation = GetSeparation();
 
                 if (thisRB && otherRB)
@@ -799,7 +805,10 @@ namespace Engine
                 {
                     thisRB->OnCollisionStatic(contactPoint, normal);
                 }
-
+                if (currentCollider->IsTrigger())
+                {
+                    break;
+                }
                 glm::vec3 separation = GetSeparation();
 
                 if (thisRB && otherRB)

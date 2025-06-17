@@ -28,6 +28,7 @@ namespace Engine
         ThrashSize size = ThrashSize::Small;
         Collider* collider = nullptr;
         Events::TAction<Collider*> ThrowOut = Events::TAction<Collider*>(this, &Thrash::DeleteThrash);
+        Events::TAction<Collider*> DisableCollisionAction = Events::TAction<Collider*>(this, &Thrash::DisableCollision);
 
     public:
         Thrash() = default;
@@ -41,7 +42,8 @@ namespace Engine
             ThrashManager::GetInstance()->RemoveThrash(this);
         }
 
-        void DeleteThrash(Collider* collider);
+        void DeleteThrash(Collider* collider); 
+        void DisableCollision(Collider* collider);
 
         SERIALIZATION_EXPORT_CLASS(Thrash);
 

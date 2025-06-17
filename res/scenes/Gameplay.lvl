@@ -3,7 +3,7 @@
     "Bounds": {
         "min": {
             "x": -49.9722900390625,
-            "y": -5.570797920227051,
+            "y": -9.775016784667969,
             "z": -50.37188720703125
         },
         "max": {
@@ -398,7 +398,7 @@
                 "owner": "{1e6e020e-707e-4925-a7b3-f2141dadb3a9}\u0000",
                 "Position": {
                     "x": -11.083074569702148,
-                    "y": 1.1330482959747314,
+                    "y": -8.775016784667969,
                     "z": -7.450580596923828e-9
                 },
                 "EulerAngles": {
@@ -407,9 +407,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 1.0,
+                    "x": 5.0,
                     "y": 1.0,
-                    "z": 1.0
+                    "z": 5.0
                 },
                 "Rotation": {
                     "x": 0.0,
@@ -438,11 +438,11 @@
             "id": "{f79da1af-b97d-4273-a7ba-1c5a95c947d2}\u0000",
             "owner": "{1e6e020e-707e-4925-a7b3-f2141dadb3a9}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "colliderType": 0,
-            "_width": 2.0,
+            "_width": 10.0,
             "_height": 2.0,
-            "_depth": 2.0
+            "_depth": 10.0
         },
         {
             "type": "Entity",
@@ -3893,7 +3893,7 @@
         {
             "type": "Entity",
             "id": "{e1ffc2c5-dc14-4d27-b0ea-b73708d9e240}\u0000",
-            "name": "Studzxienkaww",
+            "name": "ColliderDisabler",
             "transform": {
                 "type": "Transform",
                 "id": "{28774810-eb3e-4702-80ea-139d18c51aa4}\u0000",
@@ -3923,7 +3923,8 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{ecfda86e-90a9-46d5-ae03-f468fbe60ea3}\u0000"
+                "{ecfda86e-90a9-46d5-ae03-f468fbe60ea3}\u0000",
+                "{04b525c1-798d-461e-a05a-a3e92b2ad0e1}\u0000"
             ]
         },
         {
@@ -3933,6 +3934,15 @@
             "Material": "./res/materials/SampleScene/Default.mat",
             "Model": "./res/Models/Modele_Mati/Otoczenie/Studzienka.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "SphereCollider",
+            "id": "{04b525c1-798d-461e-a05a-a3e92b2ad0e1}\u0000",
+            "owner": "{e1ffc2c5-dc14-4d27-b0ea-b73708d9e240}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 1,
+            "radius": 3.799999952316284
         },
         {
             "type": "Entity",
