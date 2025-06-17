@@ -185,6 +185,8 @@ namespace Engine
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, GlVersionMinor);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 3.2+ only
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // 3.0+ only
+
+        glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
         glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 
 #if DEBUG

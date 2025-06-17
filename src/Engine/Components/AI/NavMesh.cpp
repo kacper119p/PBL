@@ -1,5 +1,4 @@
 #include "NavMesh.h"
-#include <tracy/Tracy.hpp>
 #include "Engine/Components/Renderers/ModelRenderer.h"
 #include "spdlog/spdlog.h"
 #include "Engine/EngineObjects/RayCast.h"
@@ -19,7 +18,6 @@ namespace Engine
 
     bool NavMesh::IsOnNavMesh(const glm::vec3& Position, float MaxDistance)
     {
-        ZoneScoped;
         const auto* graph = Engine::NavMesh::Get().GetGraph();
         if (!graph)
             return false;
@@ -45,7 +43,6 @@ namespace Engine
 
     void NavMesh::BakeNavMesh(Entity* Root)
     {
-        ZoneScoped;
         if (GetGraph())
         {
             ClearGraph();
@@ -67,7 +64,6 @@ namespace Engine
 
     void NavMesh::BuildNavMesh(Entity* Root, float Spacing, float Padding)
     {
-        ZoneScoped;
         if (!Root)
             return;
 
@@ -277,7 +273,6 @@ namespace Engine
 
     int NavMesh::GetNodeIdFromPosition(const glm::vec3& Position) const
     {
-        ZoneScoped;
         if (!NavGraph)
             return -1;
 
