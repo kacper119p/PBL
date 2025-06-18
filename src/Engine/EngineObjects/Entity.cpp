@@ -3,6 +3,8 @@
 #include "GizmoManager.h"
 #include "Scene/Scene.h"
 #include "Serialization/SerializationUtility.h"
+#include "Engine/Components/Transform.h"
+#include <ranges>
 
 namespace
 {
@@ -25,7 +27,8 @@ namespace Engine
             delete component;
         }
 #if EDITOR
-        if (GizmoManager::GetInstance()->GetManaged() == this->GetTransform())
+        std::vector<Engine::Transform*> Managed = GizmoManager::GetInstance()->GetManaged();
+        if (std::ranges::find(Managed,this->GetTransform())!=Managed.end())
         {
             GizmoManager::GetInstance()->SetManaged(nullptr);
         }
