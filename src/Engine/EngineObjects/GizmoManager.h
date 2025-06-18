@@ -15,7 +15,7 @@ namespace Engine
     {
     private:
         ImGuizmo::OPERATION CurrentOperation = ImGuizmo::OPERATION::TRANSLATE;
-        Transform* Managed = nullptr;
+        std::vector<Transform*> Managed;
 
         static GizmoManager* Instance;
 
@@ -41,14 +41,19 @@ namespace Engine
             GizmoManager::CurrentOperation = CurrentOperation;
         }
 
-        [[nodiscard]] Transform* GetManaged() const
-        {
-            return Managed;
-        }
+        [[nodiscard]] const std::vector<Transform*>& GetManaged() const 
+        { return Managed; }
 
         void SetManaged(Transform* Managed)
+        { 
+            this->Managed.clear();
+            this->Managed.push_back(Managed);
+        }
+
+        void AddToManaged(Transform* t)
         {
-            GizmoManager::Managed = Managed;
+            if (std::find(Managed.begin(), Managed.end(), t) == Managed.end())
+                Managed.push_back(t);
         }
 
     public:
