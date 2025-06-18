@@ -34,8 +34,8 @@ namespace Engine
     {
 
     protected:
-        bool isStatic;
-        bool isTrigger;
+        bool isStatic = false;
+        bool isTrigger = false;
         glm::ivec2 CurrentCellIndex = glm::ivec2(0, 0); // non-definable by user
         SpatialPartitioning* Spatial;
 
@@ -159,9 +159,7 @@ namespace Engine
         float GetRandomFloat(float Min, float Max);
 
 #if EDITOR
-        void DrawImGui() override
-        {
-        };
+        void DrawImGui() override;
 #endif
     };
 

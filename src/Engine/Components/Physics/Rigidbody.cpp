@@ -71,7 +71,7 @@ namespace Engine
         if (!transform)
             return;
 
-        ApplyGravity(glm::vec3(0.0f, -4.81f, 0.0f));
+        ApplyGravity(glm::vec3(0.0f, -9.81f, 0.0f));
         ComputeGravityTorqueFromVertices();
 
         lastPosition = transform->GetPosition();
@@ -147,7 +147,6 @@ namespace Engine
         velocity += impulse * inverseMass;
         angularVelocity += inverseInertiaTensor * glm::cross(rA, impulse);
 
-        // Positional correction
         const float percent = 0.5f;
         const float slop = 0.01f;
         float correctedDepth = glm::max(penetrationDepth - slop, 0.0f);
@@ -175,7 +174,6 @@ namespace Engine
             AddTorque(rotationalFrictionImpulse, ForceMode::Impulse);
         }
     }
-
 
     void Rigidbody::OnCollisionStatic(const glm::vec3& contactPoint, const glm::vec3& contactNormal)
     {
@@ -217,7 +215,6 @@ namespace Engine
         }
     }
 
-
     void Rigidbody::Interpolate(float alpha)
     {
         if (!transform)
@@ -234,7 +231,6 @@ namespace Engine
     }
 
     void Rigidbody::OnDestroy() { RigidbodyUpdateManager::GetInstance()->UnregisterRigidbodyImmediate(this); }
-
 
     void Rigidbody::ComputeGravityTorqueFromVertices()
     {
