@@ -310,15 +310,15 @@ namespace Engine
                                 cameraSpeed * glm::normalize(glm::cross(Camera->GetForward(), Camera->GetUp())));
         }
 #if EDITOR
-        if (glfwGetKey(Window, GLFW_KEY_E) == GLFW_PRESS && GizmoManager::GetInstance()->GetManaged() != nullptr)
+        if (glfwGetKey(Window, GLFW_KEY_E) == GLFW_PRESS && !GizmoManager::GetInstance()->GetManaged().empty())
         {
             GizmoManager::GetInstance()->SetCurrentOperation(ImGuizmo::OPERATION::TRANSLATE);
         }
-        if (glfwGetKey(Window, GLFW_KEY_R) == GLFW_PRESS && GizmoManager::GetInstance()->GetManaged() != nullptr)
+        if (glfwGetKey(Window, GLFW_KEY_R) == GLFW_PRESS && !GizmoManager::GetInstance()->GetManaged().empty())
         {
             GizmoManager::GetInstance()->SetCurrentOperation(ImGuizmo::OPERATION::ROTATE);
         }
-        if (glfwGetKey(Window, GLFW_KEY_T) == GLFW_PRESS && GizmoManager::GetInstance()->GetManaged() != nullptr)
+        if (glfwGetKey(Window, GLFW_KEY_T) == GLFW_PRESS && !GizmoManager::GetInstance()->GetManaged().empty())
         {
             GizmoManager::GetInstance()->SetCurrentOperation(ImGuizmo::OPERATION::SCALE);
         }

@@ -22,8 +22,11 @@ void Engine::SceneHierarchyGUI::DrawHierarchy(Transform* entity, Scene* scene)
         return;
 
     ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
-    if (entity == SelectedEntity)
-        flags |= ImGuiTreeNodeFlags_Selected;
+
+        
+
+    if (IsManagedTransform(entity))
+            flags |= ImGuiTreeNodeFlags_Selected;
 
     const bool hasChildren = !entity->GetChildren().empty();
     if (!hasChildren)
@@ -41,8 +44,16 @@ void Engine::SceneHierarchyGUI::DrawHierarchy(Transform* entity, Scene* scene)
     // Handle left-click
     if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
     {
-        SelectedEntity = entity;
-        GizmoManager::GetInstance()->SetManaged(SelectedEntity);
+        if (ImGui::IsKeyDown(ImGuiKey_LeftCtrl))
+        {
+            SelectedEntity = entity;
+            GizmoManager::GetInstance()->AddToManaged(SelectedEntity);
+        }
+        else
+        {
+            SelectedEntity = entity;
+            GizmoManager::GetInstance()->SetManaged(SelectedEntity);
+        }
     }
 
     // Right-click context menu (now safe because of PushID)
