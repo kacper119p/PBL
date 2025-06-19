@@ -36,7 +36,6 @@ namespace Models
                         m_CurrentTime = m_EndTime;
                         m_IsPaused = true;
                         m_PlayOnce = false;
-                        m_HasFinishedOnce = true;
                     }
                 }
                 else
@@ -47,8 +46,21 @@ namespace Models
                         m_CurrentTime = m_EndTime;
                         m_IsPaused = true;
                         m_PlayOnce = false;
-                        m_HasFinishedOnce = true;
                     }
+                }
+            }
+            else
+            {
+                if (m_IsPlayingBackward)
+                {
+                    m_CurrentTime -= timeAdvance;
+                    if (m_CurrentTime < 0.0f)
+                        m_CurrentTime += duration;
+                }
+                else
+                {
+                    m_CurrentTime += timeAdvance;
+                    m_CurrentTime = fmod(m_CurrentTime, duration);
                 }
             }
 
@@ -102,7 +114,6 @@ namespace Models
         m_IsPlayingBackward = startTime > endTime;
         m_PlayOnce = true;
         m_IsPaused = false;
-        m_HasFinishedOnce = false;
     }
 }
 

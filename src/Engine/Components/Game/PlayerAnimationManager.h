@@ -19,9 +19,6 @@ namespace Engine
         int LeftHandPosition = 1;
         int RightHandPosition = 1;
 
-        bool CanChangeLeftHandPosition() const;
-        bool CanChangeRightHandPosition() const;
-
         PlayerAnimationManager() = default;
         ~PlayerAnimationManager() = default;
         static PlayerAnimationManager* GetInstance()
@@ -43,11 +40,13 @@ namespace Engine
         {
             HandLeft = handLeft;
             LeftHandAnimationDuration = handLeft->GetAnimation()->GetDuration();
+            HandLeft->GetAnimator().PauseAnimation();
         }
         void SetHandRight(AnimatedModelRenderer* handRight)
         {
             HandRight = handRight;
             RightHandAnimationDuration = handRight->GetAnimation()->GetDuration();
+            HandRight->GetAnimator().PauseAnimation();
         }
         float GetTickForFrame(int frame, int totalFrames, float duration)
         {
@@ -55,10 +54,6 @@ namespace Engine
         }
         void ChangeLeftHandPosition(int newPosition);
         void ChangeRightHandPosition(int newPosition);
-        bool CanChangeLeftHandAnimation() { return HandLeft->GetAnimator().HasFinishedOnce(); }
-        bool CanChangeRightHandAnimation() { return HandRight->GetAnimator().HasFinishedOnce(); }
-
-
 
     };
 }

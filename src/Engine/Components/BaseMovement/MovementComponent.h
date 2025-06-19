@@ -19,6 +19,9 @@ namespace Engine
         float BothRotationSpeed = RotationSpeed * 3.0f;
         float CurrentVelocity = 0.0f;
         float smooth = 0.97f;
+
+        float LeftHandChangeTime = -20.0f;
+        float RightHandChangeTime = -20.0f;
     public:
         MovementComponent(float speed = 35.0f) : Speed(speed)
         {
@@ -32,7 +35,8 @@ namespace Engine
         
         void Update(float deltaTime) override;
         void OnDestroy() override {}
-
+        bool CanChangeLeftHand();
+        bool CanChangeRightHand();
 
         SERIALIZATION_EXPORT_CLASS(MovementComponent);
 

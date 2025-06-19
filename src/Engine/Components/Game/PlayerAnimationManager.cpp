@@ -6,8 +6,6 @@ void Engine::PlayerAnimationManager::StopAllAnimations()
 	TrackLeft->GetAnimator().PauseAnimation();
     if (TrackRight != nullptr)
     TrackRight->GetAnimator().PauseAnimation();
-    HandLeft->GetAnimator().PauseAnimation();
-    HandRight->GetAnimator().PauseAnimation();
 
 }
 

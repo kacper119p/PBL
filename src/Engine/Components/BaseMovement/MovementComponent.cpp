@@ -57,14 +57,16 @@ namespace Engine
             if (playerAnimationManager)
             {
                 playerAnimationManager->TrackLeftForward();
-                if (playerAnimationManager->LeftHandPosition != 2)
+                if (playerAnimationManager->LeftHandPosition != 2 && CanChangeLeftHand())
                 {
                     playerAnimationManager->ChangeLeftHandPosition(2);
+                    LeftHandChangeTime = glfwGetTime();
                 }
                 playerAnimationManager->TrackRightForward();
-                if (playerAnimationManager->RightHandPosition != 2)
+                if (playerAnimationManager->RightHandPosition != 2 && CanChangeRightHand())
                 {
                     playerAnimationManager->ChangeRightHandPosition(2);
+                    RightHandChangeTime = glfwGetTime();
                 }
             }
             
@@ -75,14 +77,16 @@ namespace Engine
             if (playerAnimationManager)
             {
                 playerAnimationManager->TrackLeftBackward();
-                if (playerAnimationManager->LeftHandPosition != 0)
+                if (playerAnimationManager->LeftHandPosition != 0 && CanChangeLeftHand())
                 {
                     playerAnimationManager->ChangeLeftHandPosition(0);
+                    LeftHandChangeTime = glfwGetTime();
                 }
                 playerAnimationManager->TrackRightBackward();
-                if (playerAnimationManager->RightHandPosition != 0)
+                if (playerAnimationManager->RightHandPosition != 0 && CanChangeRightHand())
                 {
                     playerAnimationManager->ChangeRightHandPosition(0);
+                    RightHandChangeTime = glfwGetTime();
                 }
             }
         }
@@ -94,14 +98,16 @@ namespace Engine
                 if (playerAnimationManager)
                 {
                     playerAnimationManager->TrackLeftForward();
-                    if (playerAnimationManager->LeftHandPosition != 2)
+                    if (playerAnimationManager->LeftHandPosition != 2 && CanChangeLeftHand())
                     {
                         playerAnimationManager->ChangeLeftHandPosition(2);
+                        LeftHandChangeTime = glfwGetTime();
                     }
                     playerAnimationManager->TrackRightBackward();
-                    if (playerAnimationManager->RightHandPosition != 0)
+                    if (playerAnimationManager->RightHandPosition != 0 && CanChangeRightHand())
                     {
                         playerAnimationManager->ChangeRightHandPosition(0);
+                        RightHandChangeTime = glfwGetTime();
                     }
                 }
             }
@@ -110,14 +116,16 @@ namespace Engine
                 if (playerAnimationManager)
                 {
                     playerAnimationManager->TrackLeftBackward();
-                    if (playerAnimationManager->LeftHandPosition != 0)
+                    if (playerAnimationManager->LeftHandPosition != 0 && CanChangeLeftHand())
                     {
                         playerAnimationManager->ChangeLeftHandPosition(0);
+                        LeftHandChangeTime = glfwGetTime();
                     }
                     playerAnimationManager->TrackRightForward();
-                    if (playerAnimationManager->RightHandPosition != 2)
+                    if (playerAnimationManager->RightHandPosition != 2 && CanChangeRightHand())
                     {
                         playerAnimationManager->ChangeRightHandPosition(2);
+                        RightHandChangeTime = glfwGetTime();
                     }
                 }
             }
@@ -132,27 +140,31 @@ namespace Engine
                 if (isLeftBackward)
                 {
                     playerAnimationManager->TrackLeftBackward();
-                    if (playerAnimationManager->LeftHandPosition != 0)
+                    if (playerAnimationManager->LeftHandPosition != 0 && CanChangeLeftHand())
                     {
                         playerAnimationManager->ChangeLeftHandPosition(0);
+                        LeftHandChangeTime = glfwGetTime();
                     }
                     playerAnimationManager->TrackRightStop();
-                    if (playerAnimationManager->RightHandPosition != 1)
+                    if (playerAnimationManager->RightHandPosition != 1 && CanChangeRightHand())
                     {
                         playerAnimationManager->ChangeRightHandPosition(1);
+                        RightHandChangeTime = glfwGetTime();
                     }
                 }
                 else
                 {
                     playerAnimationManager->TrackRightBackward();
-                    if (playerAnimationManager->RightHandPosition != 0)
+                    if (playerAnimationManager->RightHandPosition != 0 && CanChangeRightHand())
                     {
                         playerAnimationManager->ChangeRightHandPosition(0);
+                        RightHandChangeTime = glfwGetTime();
                     }
                     playerAnimationManager->TrackLeftStop();
-                    if (playerAnimationManager->LeftHandPosition != 1)
+                    if (playerAnimationManager->LeftHandPosition != 1 && CanChangeLeftHand())
                     {
                         playerAnimationManager->ChangeLeftHandPosition(1);
+                        LeftHandChangeTime = glfwGetTime();
                     }
                 }
             }
@@ -167,27 +179,31 @@ namespace Engine
                 if (isLeftForward)
                 {
                     playerAnimationManager->TrackLeftForward();
-                    if (playerAnimationManager->LeftHandPosition != 2)
+                    if (playerAnimationManager->LeftHandPosition != 2 && CanChangeLeftHand())
                     {
                         playerAnimationManager->ChangeLeftHandPosition(2);
+                        LeftHandChangeTime = glfwGetTime();
                     }
                     playerAnimationManager->TrackRightStop();
-                    if (playerAnimationManager->RightHandPosition != 1)
+                    if (playerAnimationManager->RightHandPosition != 1 && CanChangeRightHand())
                     {
                         playerAnimationManager->ChangeRightHandPosition(1);
+                        RightHandChangeTime = glfwGetTime();
                     }
                 }
                 else
                 {
                     playerAnimationManager->TrackRightForward();
-                    if (playerAnimationManager->RightHandPosition != 2)
+                    if (playerAnimationManager->RightHandPosition != 2 && CanChangeRightHand())
                     {
                         playerAnimationManager->ChangeRightHandPosition(2);
+                        RightHandChangeTime = glfwGetTime();
                     }
                     playerAnimationManager->TrackLeftStop();
-                    if (playerAnimationManager->LeftHandPosition != 1)
+                    if (playerAnimationManager->LeftHandPosition != 1 && CanChangeLeftHand())
                     {
                         playerAnimationManager->ChangeLeftHandPosition(1);
+                        LeftHandChangeTime = glfwGetTime();
                     }
                 }
             }
@@ -197,13 +213,15 @@ namespace Engine
             if (playerAnimationManager)
             {
                 playerAnimationManager->StopAllAnimations();
-                if (playerAnimationManager->LeftHandPosition != 1)
+                if (playerAnimationManager->LeftHandPosition != 1 && CanChangeLeftHand())
                 {
                     playerAnimationManager->ChangeLeftHandPosition(1);
+                    LeftHandChangeTime = glfwGetTime();
                 }
-                if (playerAnimationManager->RightHandPosition != 1)
+                if (playerAnimationManager->RightHandPosition != 1 && CanChangeRightHand())
                     {
                         playerAnimationManager->ChangeRightHandPosition(1);
+                        RightHandChangeTime = glfwGetTime();
                     }
             }
         }
@@ -216,6 +234,15 @@ namespace Engine
 
 
 #endif
+    }
+
+    bool MovementComponent::CanChangeLeftHand()
+    {   
+        return glfwGetTime() - LeftHandChangeTime > 0.2f; }
+
+    bool MovementComponent::CanChangeRightHand() 
+    { 
+        return glfwGetTime() - RightHandChangeTime > 0.2f;
     }
 
     rapidjson::Value MovementComponent::Serialize(rapidjson::Document::AllocatorType& Allocator) const
