@@ -68,6 +68,9 @@ namespace Engine
         START_COMPONENT_SERIALIZATION
         SERIALIZE_FIELD(isTrigger);
         SERIALIZE_FIELD(isStatic);
+        SERIALIZE_FIELD(skipCollisionSibling);
+        SERIALIZE_FIELD(collisionLayer);
+        SERIALIZE_FIELD(collisionMask);
         SERIALIZE_FIELD(colliderType);
         SERIALIZE_FIELD(_width)
         SERIALIZE_FIELD(_height);
@@ -81,6 +84,9 @@ namespace Engine
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
         DESERIALIZE_VALUE(isTrigger);
         DESERIALIZE_VALUE(isStatic);
+        DESERIALIZE_VALUE(skipCollisionSibling);
+        DESERIALIZE_VALUE(collisionLayer);
+        DESERIALIZE_VALUE(collisionMask);
         DESERIALIZE_VALUE(colliderType);
         DESERIALIZE_VALUE(_width);
         DESERIALIZE_VALUE(_height);
@@ -149,9 +155,9 @@ namespace Engine
     {
         ImGui::Text("Box Collider");
         ImGui::Separator();
-        ImGui::Checkbox("Is Trigger", &isTrigger);
-        ImGui::Separator();
         ImGui::Checkbox("Is Static", &isStatic);
+        ImGui::Checkbox("Is Trigger", &isTrigger);
+        ImGui::Checkbox("Skip sibling collision", &skipCollisionSibling);
         
         
 
@@ -165,6 +171,47 @@ namespace Engine
         if (changed)
         {
             UpdateBuffers();
+        }
+
+        ImGui::Separator();
+
+        static const char* layerNames[] = {
+                "Default", // 0
+                "Environment", // 1
+                "RigidBodyBase", // 2
+                "Shelf", // 3
+                "Book", // 4
+                "Player", // 5
+                "Custom1", // 6
+                "Custom2" // 7
+        };
+        constexpr int numLayers = sizeof(layerNames) / sizeof(layerNames[0]);
+
+        // Draw current layer as Combo
+        int currentLayerIndex = 0;
+        for (int i = 0; i < numLayers; ++i)
+        {
+            if ((1 << i) == collisionLayer)
+            {
+                currentLayerIndex = i;
+                break;
+            }
+        }
+
+        if (ImGui::Combo("Collision Layer", &currentLayerIndex, layerNames, numLayers))
+        {
+            collisionLayer = 1 << currentLayerIndex;
+        }
+
+        // Draw Collision Mask as checkboxes
+        ImGui::Text("Collision Mask:");
+        for (int i = 0; i < numLayers; ++i)
+        {
+            bool enabled = (collisionMask & (1 << i)) != 0;
+            if (ImGui::CheckboxFlags(layerNames[i], &collisionMask, 1 << i))
+            {
+                // toggled
+            }
         }
 
         ImGui::Separator();

@@ -450,9 +450,9 @@
                 "id": "{a14a02f0-8b96-49db-b173-7653fa793cce}\u0000",
                 "owner": "{b73a9501-9d71-4f8d-bfb3-c91375fb29e7}\u0000",
                 "Position": {
-                    "x": -13.922063827514648,
-                    "y": 4.8607563972473145,
-                    "z": 33.19786834716797
+                    "x": 5.5174431800842285,
+                    "y": 5.215563774108887,
+                    "z": -9.655460357666016
                 },
                 "EulerAngles": {
                     "x": -179.99989318847656,
@@ -471,7 +471,13 @@
                     "w": 0.7071064710617065
                 },
                 "Children": [
-                    "{3c5d0a18-f854-41a4-a439-394945519243}\u0000"
+                    "{3c5d0a18-f854-41a4-a439-394945519243}\u0000",
+                    "{19bd27e8-0790-4fcc-bf50-c6ddd8d69850}\u0000",
+                    "{09c64be6-6fe8-43e2-b8ce-85490bd77770}\u0000",
+                    "{5e3c84a8-3714-45a9-8491-59f471b5d2fc}\u0000",
+                    "{70ce4e14-be59-4979-b233-3b190bb6353c}\u0000",
+                    "{a0f4ff43-7ee6-45a8-8352-f71b79ba810a}\u0000",
+                    "{331bf593-7c4b-461e-afd0-54f9b391ca71}\u0000"
                 ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
@@ -504,8 +510,8 @@
             "type": "Rigidbody",
             "id": "{ee2a6cf2-77f0-4b09-979a-411070a91c99}\u0000",
             "owner": "{b73a9501-9d71-4f8d-bfb3-c91375fb29e7}\u0000",
-            "mass": 2.010000228881836,
-            "inverseMass": 0.4975123703479767,
+            "mass": 10.0,
+            "inverseMass": 0.10000000149011612,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.012000000104308128,
@@ -515,19 +521,19 @@
         {
             "type": "Entity",
             "id": "{a559e92c-6d69-44f3-a955-a375559fd2fd}\u0000",
-            "name": "New Entity",
+            "name": "dolna polka",
             "transform": {
                 "type": "Transform",
                 "id": "{3c5d0a18-f854-41a4-a439-394945519243}\u0000",
                 "owner": "{a559e92c-6d69-44f3-a955-a375559fd2fd}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
+                    "x": 0.000001832080670283176,
+                    "y": -0.19608211517333984,
+                    "z": 0.0009813308715820313
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": -0.0,
                     "z": 0.0
                 },
                 "Scale": {
@@ -539,12 +545,307 @@
                     "x": 0.0,
                     "y": 0.0,
                     "z": 0.0,
-                    "w": 0.0
+                    "w": 1.0
                 },
                 "Children": [],
                 "Parent": "{a14a02f0-8b96-49db-b173-7653fa793cce}\u0000"
             },
-            "components": []
+            "components": [
+                "{5c5629b2-75c4-4de6-abda-b0eae8696013}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{5c5629b2-75c4-4de6-abda-b0eae8696013}\u0000",
+            "owner": "{a559e92c-6d69-44f3-a955-a375559fd2fd}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{84a27e3a-8967-4760-addb-ed91cf4e7aae}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{19bd27e8-0790-4fcc-bf50-c6ddd8d69850}\u0000",
+                "owner": "{84a27e3a-8967-4760-addb-ed91cf4e7aae}\u0000",
+                "Position": {
+                    "x": 0.000001832673660828732,
+                    "y": -4.1641340255737305,
+                    "z": 0.0003662109375
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a14a02f0-8b96-49db-b173-7653fa793cce}\u0000"
+            },
+            "components": [
+                "{7e4cf578-02c9-4272-98d4-234480d4bfeb}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{7e4cf578-02c9-4272-98d4-234480d4bfeb}\u0000",
+            "owner": "{84a27e3a-8967-4760-addb-ed91cf4e7aae}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.299999952316284,
+            "_height": 0.75,
+            "_depth": 5.5
+        },
+        {
+            "type": "Entity",
+            "id": "{43b5c634-63f1-4a7b-938a-c531f7044367}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{09c64be6-6fe8-43e2-b8ce-85490bd77770}\u0000",
+                "owner": "{43b5c634-63f1-4a7b-938a-c531f7044367}\u0000",
+                "Position": {
+                    "x": 0.000001832048837968614,
+                    "y": 1.739750862121582,
+                    "z": 0.001010894775390625
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a14a02f0-8b96-49db-b173-7653fa793cce}\u0000"
+            },
+            "components": [
+                "{40b8f507-ebc8-4428-9e57-72afd23e7939}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{40b8f507-ebc8-4428-9e57-72afd23e7939}\u0000",
+            "owner": "{43b5c634-63f1-4a7b-938a-c531f7044367}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{cb6d2138-e8f6-49a2-a64b-3a2807935d96}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{5e3c84a8-3714-45a9-8491-59f471b5d2fc}\u0000",
+                "owner": "{cb6d2138-e8f6-49a2-a64b-3a2807935d96}\u0000",
+                "Position": {
+                    "x": 0.0000018317768990527838,
+                    "y": 3.6178760528564453,
+                    "z": 0.001293182373046875
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a14a02f0-8b96-49db-b173-7653fa793cce}\u0000"
+            },
+            "components": [
+                "{24f07f56-687b-4ed1-bef1-cc2704a0bb75}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{24f07f56-687b-4ed1-bef1-cc2704a0bb75}\u0000",
+            "owner": "{cb6d2138-e8f6-49a2-a64b-3a2807935d96}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{b36c3b2a-6498-41f3-b454-2d642e8b4038}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{70ce4e14-be59-4979-b233-3b190bb6353c}\u0000",
+                "owner": "{b36c3b2a-6498-41f3-b454-2d642e8b4038}\u0000",
+                "Position": {
+                    "x": 0.0000018321879906579852,
+                    "y": -2.1612634658813477,
+                    "z": 0.0008716583251953125
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a14a02f0-8b96-49db-b173-7653fa793cce}\u0000"
+            },
+            "components": [
+                "{0d01534c-6e51-40cf-be58-dfd578e2ee82}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{0d01534c-6e51-40cf-be58-dfd578e2ee82}\u0000",
+            "owner": "{b36c3b2a-6498-41f3-b454-2d642e8b4038}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{24717526-5288-4176-8124-8ae4a5a43640}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{a0f4ff43-7ee6-45a8-8352-f71b79ba810a}\u0000",
+                "owner": "{24717526-5288-4176-8124-8ae4a5a43640}\u0000",
+                "Position": {
+                    "x": 0.000004043909939355217,
+                    "y": 0.6881637573242188,
+                    "z": -2.318291664123535
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a14a02f0-8b96-49db-b173-7653fa793cce}\u0000"
+            },
+            "components": [
+                "{100c7b13-1ab6-40d4-bfb5-bae8a5569688}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{100c7b13-1ab6-40d4-bfb5-bae8a5569688}\u0000",
+            "owner": "{24717526-5288-4176-8124-8ae4a5a43640}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 9.0,
+            "_depth": 0.6499999761581421
+        },
+        {
+            "type": "Entity",
+            "id": "{50884da3-ef81-4c2a-99a6-2d42f30d1e5b}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{331bf593-7c4b-461e-afd0-54f9b391ca71}\u0000",
+                "owner": "{50884da3-ef81-4c2a-99a6-2d42f30d1e5b}\u0000",
+                "Position": {
+                    "x": -3.900295268977061e-7,
+                    "y": 0.6881637573242188,
+                    "z": 2.33103084564209
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a14a02f0-8b96-49db-b173-7653fa793cce}\u0000"
+            },
+            "components": [
+                "{30c4e030-3c2e-4807-bdb5-e8880f80a711}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{30c4e030-3c2e-4807-bdb5-e8880f80a711}\u0000",
+            "owner": "{50884da3-ef81-4c2a-99a6-2d42f30d1e5b}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 9.0,
+            "_depth": 0.6499999761581421
         },
         {
             "type": "Entity",
@@ -3794,9 +4095,9 @@
                 "id": "{bfcb093c-189b-4665-8519-456bca52ad23}\u0000",
                 "owner": "{d83d6c3e-710a-4d96-ab13-2e94c3ad7a96}\u0000",
                 "Position": {
-                    "x": 5.967221260070801,
+                    "x": 7.900975704193115,
                     "y": 0.9570386409759521,
-                    "z": -11.305707931518555
+                    "z": -15.569952964782715
                 },
                 "EulerAngles": {
                     "x": 1.195251037901246e-12,
@@ -3873,7 +4174,7 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 1.7699346542358398,
+                    "x": 1.7699345350265503,
                     "y": 1.7699999809265137,
                     "z": 1.7699999809265137
                 },
@@ -3908,7 +4209,7 @@
             "isTrigger": false,
             "isStatic": false,
             "colliderType": 1,
-            "radius": 3.200000047683716
+            "radius": 2.799999952316284
         },
         {
             "type": "Entity",
@@ -4449,9 +4750,9 @@
                 "id": "{0afe8965-9501-4fc2-b044-17d57727e2d5}\u0000",
                 "owner": "{daec2471-7f84-4b95-98d7-4ed7162b0f8e}\u0000",
                 "Position": {
-                    "x": -18.432687759399414,
-                    "y": 5.711667060852051,
-                    "z": 26.132522583007813
+                    "x": 5.2520833015441895,
+                    "y": 5.82084846496582,
+                    "z": -10.044185638427734
                 },
                 "EulerAngles": {
                     "x": 89.99961853027344,
@@ -4493,16 +4794,16 @@
             "isTrigger": false,
             "isStatic": false,
             "colliderType": 0,
-            "_width": 1.100000023841858,
-            "_height": 1.7000000476837158,
-            "_depth": 0.6000000238418579
+            "_width": 1.0,
+            "_height": 1.649999976158142,
+            "_depth": 0.550000011920929
         },
         {
             "type": "Rigidbody",
             "id": "{3c39aaf9-aad5-4e09-b9e1-8e9d31cb0ae5}\u0000",
             "owner": "{daec2471-7f84-4b95-98d7-4ed7162b0f8e}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,

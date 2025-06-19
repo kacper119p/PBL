@@ -135,7 +135,8 @@ namespace Engine
         ImGui::Separator();
         ImGui::Checkbox("Is Static", &isStatic);
         ImGui::Checkbox("Is Trigger", &isTrigger);
-
+        ImGui::Checkbox("Skip sibling collision", &skipCollisionSibling);
+        ImGui::Separator();
         bool changed = false;
 
         changed |= ImGui::DragFloat("Radius", &radius, 0.1f, 0.0f, FLT_MAX, "%.2f");
@@ -145,6 +146,47 @@ namespace Engine
         {
             UpdateBuffers();
         }
+
+        static const char* layerNames[] = {
+                "Default", // 0
+                "Environment", // 1
+                "RigidBodyBase", // 2
+                "Shelf", // 3
+                "Book", // 4
+                "Player", // 5
+                "Custom1", // 6
+                "Custom2" // 7
+        };
+        constexpr int numLayers = sizeof(layerNames) / sizeof(layerNames[0]);
+
+        // Draw current layer as Combo
+        int currentLayerIndex = 0;
+        for (int i = 0; i < numLayers; ++i)
+        {
+            if ((1 << i) == collisionLayer)
+            {
+                currentLayerIndex = i;
+                break;
+            }
+        }
+
+        if (ImGui::Combo("Collision Layer", &currentLayerIndex, layerNames, numLayers))
+        {
+            collisionLayer = 1 << currentLayerIndex;
+        }
+
+        // Draw Collision Mask as checkboxes
+        ImGui::Text("Collision Mask:");
+        for (int i = 0; i < numLayers; ++i)
+        {
+            bool enabled = (collisionMask & (1 << i)) != 0;
+            if (ImGui::CheckboxFlags(layerNames[i], &collisionMask, 1 << i))
+            {
+                // toggled
+            }
+        }
+
+        ImGui::Separator();
     }
 
     void SphereCollider::UpdateBuffers()

@@ -485,31 +485,9 @@ namespace Engine
     {
         if (!result.hasCollision)
             return glm::vec3(0.0f);
-
-        if (!currentCollider || !currentCollider->GetTransform() || !result.otherCollider)
-            return glm::vec3(0.0f);
-
-        glm::vec3 gravityDir = glm::normalize(glm::vec3(0,-9.81f,0));
-
-        float alignment = glm::dot(result.collisionNormal, gravityDir);
-
-        const float verticalThreshold = 0.7f;
-
-        glm::vec3 separation = result.collisionNormal * result.penetrationDepth;
-
-        if (alignment > verticalThreshold)
-        {
-            return separation;
-        }
-        else if (alignment < -verticalThreshold)
-        {
-            return separation;
-        }
-        else
-        {
-            return 0.5f * separation;
-        }
+        return result.collisionNormal * result.penetrationDepth;
     }
+
 
     void ColliderVisitor::EmitCollision(Collider* const Collider) const { Collider->EmitCollision(currentCollider); }
 
@@ -547,8 +525,21 @@ namespace Engine
                 glm::vec3 normal = result.collisionNormal;
                 glm::vec3 contactPoint = result.collisionPoint;
 
-                Engine::Rigidbody* thisRB = currentCollider->GetOwner()->GetComponent<Engine::Rigidbody>();
-                Engine::Rigidbody* otherRB = box.GetOwner()->GetComponent<Engine::Rigidbody>();
+                Rigidbody* thisRB = nullptr;
+                Transform* t = currentCollider->GetTransform();
+                while (t && !thisRB)
+                {
+                    thisRB = t->GetOwner()->GetComponent<Rigidbody>();
+                    t = t->GetParent();
+                }
+                
+                Engine::Rigidbody* otherRB = nullptr;
+                Transform* tOther = box.GetTransform();
+                while (tOther && !otherRB)
+                {
+                    otherRB = tOther->GetOwner()->GetComponent<Engine::Rigidbody>();
+                    tOther = tOther->GetParent();
+                }
 
                 if (thisRB && otherRB)
                 {
@@ -1075,13 +1066,34 @@ namespace Engine
         if (!currentCollider || currentCollider->IsStatic())
             return;
 
+        auto* currentOwner = currentCollider->GetOwner();
+        auto* currentParent = currentOwner ? currentOwner->GetTransform()->GetParent() : nullptr;
+
         for (auto* collider : spatialPartitioning->GetPotentialCollisions(currentCollider))
         {
-            if (collider == this->currentCollider || collider->GetOwner() == nullptr)
+            if (!collider || collider == currentCollider || !collider->GetOwner())
                 continue;
+
+            auto* otherOwner = collider->GetOwner();
+            auto* otherParent = otherOwner->GetTransform()->GetParent();
+
+            if ((currentCollider->collisionMask & collider->collisionLayer) == 0 ||
+                (collider->collisionMask & currentCollider->collisionLayer) == 0)
+            {
+                continue;
+            }
+
+            if (otherOwner == currentOwner ||
+                (currentCollider->skipCollisionSibling &&
+                 (otherParent == currentParent || otherOwner->GetTransform() == currentParent)))
+            {
+                continue;
+            }
 
             collider->AcceptCollision(*this);
         }
     }
+
+
 
 } // namespace Engine
