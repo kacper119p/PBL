@@ -52,7 +52,8 @@ namespace Models
         {
             int index = boneInfoMap[nodeName].id;
             glm::mat4 offset = boneInfoMap[nodeName].offset;
-            m_FinalBoneMatrices[index] = offset * globalTransformation;
+            m_FinalBoneMatrices[index] =m_CurrentAnimation->m_GlobalInverseTransform * globalTransformation * offset;
+
         }
 
         for (int i = 0; i < node->childrenCount; i++)

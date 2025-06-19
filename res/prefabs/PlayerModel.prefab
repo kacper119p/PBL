@@ -2,14 +2,14 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{f8ecddf0-dd7c-464c-9b50-2fd5da429b64}\u0000",
+            "id": "{d4760fec-124f-4390-a3e7-f80eaf2a0b02}\u0000",
             "name": "PlayerModel",
             "transform": {
                 "type": "Transform",
-                "id": "{5f9306dd-f561-46a9-9380-9b2db8016511}\u0000",
-                "owner": "{f8ecddf0-dd7c-464c-9b50-2fd5da429b64}\u0000",
+                "id": "{10d536c0-2650-4b68-b6f5-3b34f3be9a21}\u0000",
+                "owner": "{d4760fec-124f-4390-a3e7-f80eaf2a0b02}\u0000",
                 "Position": {
-                    "x": 0.0,
+                    "x": 1.4901161193847656e-8,
                     "y": 0.0,
                     "z": 0.0
                 },
@@ -29,19 +29,111 @@
                     "z": -0.0,
                     "w": -4.371138828673793e-8
                 },
-                "Children": [],
+                "Children": [
+                    "{2f7290a5-93d6-4a89-a6c6-7c876e92f4ca}\u0000",
+                    "{d3f878dd-7e12-4243-98fd-18269bf9e9d5}\u0000"
+                ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{3d1c640c-7dc4-449d-bb05-b2695d6fbbf0}\u0000"
+                "{5cb6c155-0a42-40a0-8f89-309b001fa4af}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{3d1c640c-7dc4-449d-bb05-b2695d6fbbf0}\u0000",
-            "owner": "{f8ecddf0-dd7c-464c-9b50-2fd5da429b64}\u0000",
+            "id": "{5cb6c155-0a42-40a0-8f89-309b001fa4af}\u0000",
+            "owner": "{d4760fec-124f-4390-a3e7-f80eaf2a0b02}\u0000",
             "Material": "./res/materials/SampleScene/Player.mat",
-            "Model": "./res/Models/Granny/Ship.fbx"
+            "Model": "./res/Models/Granny/Ship.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{8f3b9f19-abc5-474e-92eb-ee539aa6c322}\u0000",
+            "name": "Track_L",
+            "transform": {
+                "type": "Transform",
+                "id": "{2f7290a5-93d6-4a89-a6c6-7c876e92f4ca}\u0000",
+                "owner": "{8f3b9f19-abc5-474e-92eb-ee539aa6c322}\u0000",
+                "Position": {
+                    "x": 1.100000023841858,
+                    "y": 0.0,
+                    "z": 1.7614922853681492e-8
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{10d536c0-2650-4b68-b6f5-3b34f3be9a21}\u0000"
+            },
+            "components": [
+                "{03a5335a-8cc1-4e4c-9791-b8c0df2467b8}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{03a5335a-8cc1-4e4c-9791-b8c0df2467b8}\u0000",
+            "owner": "{8f3b9f19-abc5-474e-92eb-ee539aa6c322}\u0000",
+            "Material": "./res/materials/SampleScene/DefaultAnimated.mat",
+            "Model": "./res/Models/Granny/Track_L.fbx",
+            "Animation": "./res/Models/Granny/Track_L.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{1eacf447-43cc-42ec-93b4-f5fddf2676dd}\u0000",
+            "name": "Track_R",
+            "transform": {
+                "type": "Transform",
+                "id": "{d3f878dd-7e12-4243-98fd-18269bf9e9d5}\u0000",
+                "owner": "{1eacf447-43cc-42ec-93b4-f5fddf2676dd}\u0000",
+                "Position": {
+                    "x": -1.100000023841858,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{10d536c0-2650-4b68-b6f5-3b34f3be9a21}\u0000"
+            },
+            "components": [
+                "{0b036b1d-6f8c-426f-908f-359e9b85ea9b}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{0b036b1d-6f8c-426f-908f-359e9b85ea9b}\u0000",
+            "owner": "{1eacf447-43cc-42ec-93b4-f5fddf2676dd}\u0000",
+            "Material": "./res/materials/SampleScene/DefaultAnimated.mat",
+            "Model": "./res/Models/Granny/Track_R.fbx",
+            "Animation": "./res/Models/Granny/Track_R.fbx"
         }
     ]
 }
