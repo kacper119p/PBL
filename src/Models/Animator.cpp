@@ -24,22 +24,38 @@ namespace Models
         {
             float ticksPerSecond = m_CurrentAnimation->GetTicksPerSecond();
             float duration = m_CurrentAnimation->GetDuration();
+            float timeAdvance = ticksPerSecond * dt;
 
-            if (m_IsPlayingBackward)
+            if (m_PlayOnce)
             {
-                m_CurrentTime -= ticksPerSecond * dt;
-                if (m_CurrentTime < 0.0f)
-                    m_CurrentTime += duration;
-            }
-            else
-            {
-                m_CurrentTime += ticksPerSecond * dt;
-                m_CurrentTime = fmod(m_CurrentTime, duration);
+                if (m_IsPlayingBackward)
+                {
+                    m_CurrentTime -= timeAdvance;
+                    if (m_CurrentTime <= m_EndTime)
+                    {
+                        m_CurrentTime = m_EndTime;
+                        m_IsPaused = true;
+                        m_PlayOnce = false;
+                        m_HasFinishedOnce = true;
+                    }
+                }
+                else
+                {
+                    m_CurrentTime += timeAdvance;
+                    if (m_CurrentTime >= m_EndTime)
+                    {
+                        m_CurrentTime = m_EndTime;
+                        m_IsPaused = true;
+                        m_PlayOnce = false;
+                        m_HasFinishedOnce = true;
+                    }
+                }
             }
 
             CalculateBoneTransform(&m_CurrentAnimation->GetRootNode(), glm::mat4(1.0f));
         }
     }
+
 
     void Animator::PlayAnimation(Animation* pAnimation)
     {
@@ -73,6 +89,20 @@ namespace Models
 
         for (int i = 0; i < node->childrenCount; i++)
             CalculateBoneTransform(&node->children[i], globalTransformation);
+    }
+    void Animator::PlayOnceFromTo(float startTime, float endTime)
+    {
+        if (!m_CurrentAnimation)
+            return;
+
+        m_StartTime = startTime;
+        m_EndTime = endTime;
+        m_CurrentTime = startTime;
+
+        m_IsPlayingBackward = startTime > endTime;
+        m_PlayOnce = true;
+        m_IsPaused = false;
+        m_HasFinishedOnce = false;
     }
 }
 

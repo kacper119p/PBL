@@ -56,15 +56,14 @@ namespace Engine
                     playerAnimationManager->TrackRight =
                             child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>();
                 }
-                /*else if (child->GetOwner()->GetName() == "HandLeft")
+                else if (child->GetOwner()->GetName() == "HandLeft")
                 {
-                    playerAnimationManager->HandLeft = child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>();
+                    playerAnimationManager->SetHandLeft(child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>());
                 }
                 else if (child->GetOwner()->GetName() == "HandRight")
                 {
-                    playerAnimationManager->HandRight =
-                            child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>();
-                }*/
+                    playerAnimationManager->SetHandRight(child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>());
+                }
             }
 
             playerAnimationManager->StopAllAnimations();

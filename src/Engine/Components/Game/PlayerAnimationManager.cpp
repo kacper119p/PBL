@@ -6,8 +6,8 @@ void Engine::PlayerAnimationManager::StopAllAnimations()
 	TrackLeft->GetAnimator().PauseAnimation();
     if (TrackRight != nullptr)
     TrackRight->GetAnimator().PauseAnimation();
-    /*HandLeft->GetAnimator().PauseAnimation();
-    HandRight->GetAnimator().PauseAnimation();*/
+    HandLeft->GetAnimator().PauseAnimation();
+    HandRight->GetAnimator().PauseAnimation();
 
 }
 
@@ -40,3 +40,19 @@ void Engine::PlayerAnimationManager::TrackLeftStop()
 
 void Engine::PlayerAnimationManager::TrackRightStop() 
 { TrackRight->GetAnimator().PauseAnimation(); }
+
+void Engine::PlayerAnimationManager::ChangeLeftHandPosition(int newPosition) 
+{ 
+    float startTick = GetTickForFrame(LeftHandPosition*10, 20, LeftHandAnimationDuration);
+    float endTick = GetTickForFrame(newPosition * 10, 20, LeftHandAnimationDuration);
+    HandLeft->GetAnimator().PlayOnceFromTo(startTick, endTick);
+    LeftHandPosition = newPosition;
+}
+
+void Engine::PlayerAnimationManager::ChangeRightHandPosition(int newPosition) 
+{
+    float startTick = GetTickForFrame(RightHandPosition * 10, 20, RightHandAnimationDuration);
+    float endTick = GetTickForFrame(newPosition * 10, 20, RightHandAnimationDuration);
+    HandRight->GetAnimator().PlayOnceFromTo(startTick, endTick);
+    RightHandPosition = newPosition;
+}

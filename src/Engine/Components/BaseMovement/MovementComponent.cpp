@@ -57,7 +57,15 @@ namespace Engine
             if (playerAnimationManager)
             {
                 playerAnimationManager->TrackLeftForward();
+                if (playerAnimationManager->LeftHandPosition != 2)
+                {
+                    playerAnimationManager->ChangeLeftHandPosition(2);
+                }
                 playerAnimationManager->TrackRightForward();
+                if (playerAnimationManager->RightHandPosition != 2)
+                {
+                    playerAnimationManager->ChangeRightHandPosition(2);
+                }
             }
             
         }
@@ -67,7 +75,15 @@ namespace Engine
             if (playerAnimationManager)
             {
                 playerAnimationManager->TrackLeftBackward();
+                if (playerAnimationManager->LeftHandPosition != 0)
+                {
+                    playerAnimationManager->ChangeLeftHandPosition(0);
+                }
                 playerAnimationManager->TrackRightBackward();
+                if (playerAnimationManager->RightHandPosition != 0)
+                {
+                    playerAnimationManager->ChangeRightHandPosition(0);
+                }
             }
         }
         else if ((isLeftForward && isRightBackward) || (isLeftBackward && isRightForward))
@@ -78,7 +94,15 @@ namespace Engine
                 if (playerAnimationManager)
                 {
                     playerAnimationManager->TrackLeftForward();
+                    if (playerAnimationManager->LeftHandPosition != 2)
+                    {
+                        playerAnimationManager->ChangeLeftHandPosition(2);
+                    }
                     playerAnimationManager->TrackRightBackward();
+                    if (playerAnimationManager->RightHandPosition != 0)
+                    {
+                        playerAnimationManager->ChangeRightHandPosition(0);
+                    }
                 }
             }
             else
@@ -86,7 +110,15 @@ namespace Engine
                 if (playerAnimationManager)
                 {
                     playerAnimationManager->TrackLeftBackward();
+                    if (playerAnimationManager->LeftHandPosition != 0)
+                    {
+                        playerAnimationManager->ChangeLeftHandPosition(0);
+                    }
                     playerAnimationManager->TrackRightForward();
+                    if (playerAnimationManager->RightHandPosition != 2)
+                    {
+                        playerAnimationManager->ChangeRightHandPosition(2);
+                    }
                 }
             }
             
@@ -100,12 +132,28 @@ namespace Engine
                 if (isLeftBackward)
                 {
                     playerAnimationManager->TrackLeftBackward();
+                    if (playerAnimationManager->LeftHandPosition != 0)
+                    {
+                        playerAnimationManager->ChangeLeftHandPosition(0);
+                    }
                     playerAnimationManager->TrackRightStop();
+                    if (playerAnimationManager->RightHandPosition != 1)
+                    {
+                        playerAnimationManager->ChangeRightHandPosition(1);
+                    }
                 }
                 else
                 {
                     playerAnimationManager->TrackRightBackward();
+                    if (playerAnimationManager->RightHandPosition != 0)
+                    {
+                        playerAnimationManager->ChangeRightHandPosition(0);
+                    }
                     playerAnimationManager->TrackLeftStop();
+                    if (playerAnimationManager->LeftHandPosition != 1)
+                    {
+                        playerAnimationManager->ChangeLeftHandPosition(1);
+                    }
                 }
             }
 
@@ -119,12 +167,28 @@ namespace Engine
                 if (isLeftForward)
                 {
                     playerAnimationManager->TrackLeftForward();
+                    if (playerAnimationManager->LeftHandPosition != 2)
+                    {
+                        playerAnimationManager->ChangeLeftHandPosition(2);
+                    }
                     playerAnimationManager->TrackRightStop();
+                    if (playerAnimationManager->RightHandPosition != 1)
+                    {
+                        playerAnimationManager->ChangeRightHandPosition(1);
+                    }
                 }
                 else
                 {
                     playerAnimationManager->TrackRightForward();
+                    if (playerAnimationManager->RightHandPosition != 2)
+                    {
+                        playerAnimationManager->ChangeRightHandPosition(2);
+                    }
                     playerAnimationManager->TrackLeftStop();
+                    if (playerAnimationManager->LeftHandPosition != 1)
+                    {
+                        playerAnimationManager->ChangeLeftHandPosition(1);
+                    }
                 }
             }
         }
@@ -133,6 +197,14 @@ namespace Engine
             if (playerAnimationManager)
             {
                 playerAnimationManager->StopAllAnimations();
+                if (playerAnimationManager->LeftHandPosition != 1)
+                {
+                    playerAnimationManager->ChangeLeftHandPosition(1);
+                }
+                if (playerAnimationManager->RightHandPosition != 1)
+                    {
+                        playerAnimationManager->ChangeRightHandPosition(1);
+                    }
             }
         }
 

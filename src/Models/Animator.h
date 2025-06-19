@@ -17,6 +17,12 @@ namespace Models
         bool m_IsPaused = false;
         bool m_IsPlayingBackward = false;
 
+        bool m_PlayOnce = false;
+        float m_StartTime = 0.0f;
+        float m_EndTime = 0.0f;
+
+        bool m_HasFinishedOnce = true;
+
     public:
         Animator() = default;
         Animator(Animation* Animation);
@@ -30,5 +36,7 @@ namespace Models
         void SetPlayBackward(bool playBackward) { m_IsPlayingBackward = playBackward; }
         bool IsPaused() const { return m_IsPaused; }
         bool IsPlayingBackward() const { return m_IsPlayingBackward; }
+        bool HasFinishedOnce() const { return m_HasFinishedOnce; }
+        void PlayOnceFromTo(float startTime, float endTime);
 	};
 }
