@@ -2,15 +2,15 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{fd9c4d53-e503-4723-8533-b3847d483583}\u0000",
+            "id": "{86e7c78e-5adc-408f-b2b6-a5f8608822be}\u0000",
             "name": "PlayerModel",
             "transform": {
                 "type": "Transform",
-                "id": "{61f8e9e7-9ca4-4364-9be1-3214c82d98eb}\u0000",
-                "owner": "{fd9c4d53-e503-4723-8533-b3847d483583}\u0000",
+                "id": "{936232ec-f1fe-4a14-ae2f-4668591bcf54}\u0000",
+                "owner": "{86e7c78e-5adc-408f-b2b6-a5f8608822be}\u0000",
                 "Position": {
                     "x": 1.4901161193847656e-8,
-                    "y": 0.0,
+                    "y": 1.3586938381195068,
                     "z": 0.0
                 },
                 "EulerAngles": {
@@ -19,9 +19,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
+                    "x": 3.0,
+                    "y": 3.0,
+                    "z": 3.0
                 },
                 "Rotation": {
                     "x": -0.0,
@@ -30,37 +30,38 @@
                     "w": -4.371138828673793e-8
                 },
                 "Children": [
-                    "{46108cde-cab3-47ce-ac18-74f84f3c578a}\u0000",
-                    "{46ad66e8-1f15-404d-a66a-65054a308221}\u0000",
-                    "{33e3b237-9e02-440b-9b32-ca5f40e0a4a7}\u0000",
-                    "{a2e452b1-9f7f-4688-89f3-b3b8f2ca95e3}\u0000"
+                    "{748da660-55e3-4b67-8ad8-afca68d8872b}\u0000",
+                    "{128e79d9-2821-434f-91c6-332b577488e6}\u0000",
+                    "{e1b4c35c-8c23-423a-bdf1-d2384d385d87}\u0000",
+                    "{1e15c50e-8a8d-4f20-9806-21e6c41d0bcc}\u0000",
+                    "{8d1524fb-1b17-4ae0-8db2-fe834fb33cbc}\u0000"
                 ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{e223513d-c5b0-49fc-a9b9-3bb7fa37169e}\u0000"
+                "{13656dfc-ec36-4a0a-b5ce-6c63cede193c}\u0000"
             ]
         },
         {
-            "type": "ModelRenderer",
-            "id": "{e223513d-c5b0-49fc-a9b9-3bb7fa37169e}\u0000",
-            "owner": "{fd9c4d53-e503-4723-8533-b3847d483583}\u0000",
-            "Material": "./res/materials/SampleScene/Player.mat",
+            "type": "AnimatedModelRenderer",
+            "id": "{13656dfc-ec36-4a0a-b5ce-6c63cede193c}\u0000",
+            "owner": "{86e7c78e-5adc-408f-b2b6-a5f8608822be}\u0000",
+            "Material": "./res/materials/SampleScene/DefaultAnimated.mat",
             "Model": "./res/Models/Granny/Ship.fbx",
-            "CastShadow": true
+            "Animation": "./res/Models/Granny/Ship.fbx"
         },
         {
             "type": "Entity",
-            "id": "{b6611094-9c7c-48b2-abdd-245b735c82f9}\u0000",
+            "id": "{8719ab02-9713-42b3-bb5f-981a1544ab9b}\u0000",
             "name": "Track_L",
             "transform": {
                 "type": "Transform",
-                "id": "{46108cde-cab3-47ce-ac18-74f84f3c578a}\u0000",
-                "owner": "{b6611094-9c7c-48b2-abdd-245b735c82f9}\u0000",
+                "id": "{748da660-55e3-4b67-8ad8-afca68d8872b}\u0000",
+                "owner": "{8719ab02-9713-42b3-bb5f-981a1544ab9b}\u0000",
                 "Position": {
-                    "x": 1.100000023841858,
-                    "y": 0.0,
-                    "z": 1.7614922853681492e-8
+                    "x": 1.2480000257492065,
+                    "y": -0.625,
+                    "z": -0.011231075040996075
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -79,32 +80,32 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{61f8e9e7-9ca4-4364-9be1-3214c82d98eb}\u0000"
+                "Parent": "{936232ec-f1fe-4a14-ae2f-4668591bcf54}\u0000"
             },
             "components": [
-                "{6df20108-72dd-4375-bd71-5c38282c477c}\u0000"
+                "{080cd43a-b9ea-4923-9e7c-f6fd83c7243b}\u0000"
             ]
         },
         {
             "type": "AnimatedModelRenderer",
-            "id": "{6df20108-72dd-4375-bd71-5c38282c477c}\u0000",
-            "owner": "{b6611094-9c7c-48b2-abdd-245b735c82f9}\u0000",
+            "id": "{080cd43a-b9ea-4923-9e7c-f6fd83c7243b}\u0000",
+            "owner": "{8719ab02-9713-42b3-bb5f-981a1544ab9b}\u0000",
             "Material": "./res/materials/SampleScene/DefaultAnimated.mat",
             "Model": "./res/Models/Granny/Track_L.fbx",
             "Animation": "./res/Models/Granny/Track_L.fbx"
         },
         {
             "type": "Entity",
-            "id": "{ae99a567-5c5e-4a19-a814-80cede3a7117}\u0000",
+            "id": "{33af2b68-34c6-4ac5-b90f-86ec054e590e}\u0000",
             "name": "Track_R",
             "transform": {
                 "type": "Transform",
-                "id": "{46ad66e8-1f15-404d-a66a-65054a308221}\u0000",
-                "owner": "{ae99a567-5c5e-4a19-a814-80cede3a7117}\u0000",
+                "id": "{128e79d9-2821-434f-91c6-332b577488e6}\u0000",
+                "owner": "{33af2b68-34c6-4ac5-b90f-86ec054e590e}\u0000",
                 "Position": {
-                    "x": -1.100000023841858,
-                    "y": 0.0,
-                    "z": 0.0
+                    "x": -1.2482136487960815,
+                    "y": -0.6245821714401245,
+                    "z": -0.010811199434101582
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -123,32 +124,32 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{61f8e9e7-9ca4-4364-9be1-3214c82d98eb}\u0000"
+                "Parent": "{936232ec-f1fe-4a14-ae2f-4668591bcf54}\u0000"
             },
             "components": [
-                "{754ec2ee-5768-43d7-9955-a6e7cd4c4d67}\u0000"
+                "{75e6982e-8004-439d-8ae1-9c66605e7086}\u0000"
             ]
         },
         {
             "type": "AnimatedModelRenderer",
-            "id": "{754ec2ee-5768-43d7-9955-a6e7cd4c4d67}\u0000",
-            "owner": "{ae99a567-5c5e-4a19-a814-80cede3a7117}\u0000",
+            "id": "{75e6982e-8004-439d-8ae1-9c66605e7086}\u0000",
+            "owner": "{33af2b68-34c6-4ac5-b90f-86ec054e590e}\u0000",
             "Material": "./res/materials/SampleScene/DefaultAnimated.mat",
             "Model": "./res/Models/Granny/Track_R.fbx",
             "Animation": "./res/Models/Granny/Track_R.fbx"
         },
         {
             "type": "Entity",
-            "id": "{860180c5-b084-4854-8864-e3d51b2889ee}\u0000",
+            "id": "{671066a4-1867-4df4-8292-6b36f42b0dee}\u0000",
             "name": "HandLeft",
             "transform": {
                 "type": "Transform",
-                "id": "{33e3b237-9e02-440b-9b32-ca5f40e0a4a7}\u0000",
-                "owner": "{860180c5-b084-4854-8864-e3d51b2889ee}\u0000",
+                "id": "{e1b4c35c-8c23-423a-bdf1-d2384d385d87}\u0000",
+                "owner": "{671066a4-1867-4df4-8292-6b36f42b0dee}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
+                    "x": 0.008478586561977863,
+                    "y": 8.940696716308594e-8,
+                    "z": 7.412216396218696e-10
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -167,32 +168,32 @@
                     "w": 0.0
                 },
                 "Children": [],
-                "Parent": "{61f8e9e7-9ca4-4364-9be1-3214c82d98eb}\u0000"
+                "Parent": "{936232ec-f1fe-4a14-ae2f-4668591bcf54}\u0000"
             },
             "components": [
-                "{c3ddb841-21b5-4098-88c2-ea42c80f8af7}\u0000"
+                "{a02c5c66-6b69-4c8a-a45c-8051a358a853}\u0000"
             ]
         },
         {
             "type": "AnimatedModelRenderer",
-            "id": "{c3ddb841-21b5-4098-88c2-ea42c80f8af7}\u0000",
-            "owner": "{860180c5-b084-4854-8864-e3d51b2889ee}\u0000",
+            "id": "{a02c5c66-6b69-4c8a-a45c-8051a358a853}\u0000",
+            "owner": "{671066a4-1867-4df4-8292-6b36f42b0dee}\u0000",
             "Material": "./res/materials/SampleScene/DefaultAnimated.mat",
             "Model": "./res/Models/Granny/Hand_L.fbx",
             "Animation": "./res/Models/Granny/Hand_L.fbx"
         },
         {
             "type": "Entity",
-            "id": "{70fae57e-80b8-472f-a08c-ff21a29a21c0}\u0000",
+            "id": "{15225d94-1641-4707-bcc9-ecfa656b999c}\u0000",
             "name": "HandRight",
             "transform": {
                 "type": "Transform",
-                "id": "{a2e452b1-9f7f-4688-89f3-b3b8f2ca95e3}\u0000",
-                "owner": "{70fae57e-80b8-472f-a08c-ff21a29a21c0}\u0000",
+                "id": "{1e15c50e-8a8d-4f20-9806-21e6c41d0bcc}\u0000",
+                "owner": "{15225d94-1641-4707-bcc9-ecfa656b999c}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
+                    "x": -0.00800000037997961,
+                    "y": 8.940696716308594e-8,
+                    "z": 4.6074255521944e-15
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -211,19 +212,63 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{61f8e9e7-9ca4-4364-9be1-3214c82d98eb}\u0000"
+                "Parent": "{936232ec-f1fe-4a14-ae2f-4668591bcf54}\u0000"
             },
             "components": [
-                "{80b187f8-be75-461b-a4c8-d3e52852559f}\u0000"
+                "{7131c2d6-c21c-4370-8487-1d065cdfda91}\u0000"
             ]
         },
         {
             "type": "AnimatedModelRenderer",
-            "id": "{80b187f8-be75-461b-a4c8-d3e52852559f}\u0000",
-            "owner": "{70fae57e-80b8-472f-a08c-ff21a29a21c0}\u0000",
+            "id": "{7131c2d6-c21c-4370-8487-1d065cdfda91}\u0000",
+            "owner": "{15225d94-1641-4707-bcc9-ecfa656b999c}\u0000",
             "Material": "./res/materials/SampleScene/DefaultAnimated.mat",
             "Model": "./res/Models/Granny/Hand_L.fbx",
             "Animation": "./res/Models/Granny/Hand_L.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{4f9ad8c9-f21e-4f60-a85a-b63de57d6cd7}\u0000",
+            "name": "Body",
+            "transform": {
+                "type": "Transform",
+                "id": "{8d1524fb-1b17-4ae0-8db2-fe834fb33cbc}\u0000",
+                "owner": "{4f9ad8c9-f21e-4f60-a85a-b63de57d6cd7}\u0000",
+                "Position": {
+                    "x": -7.63234275780178e-9,
+                    "y": -0.5452252626419067,
+                    "z": 0.08730433881282806
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{936232ec-f1fe-4a14-ae2f-4668591bcf54}\u0000"
+            },
+            "components": [
+                "{cfaccd8d-ad1a-45fc-a67b-319bdfa3b725}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{cfaccd8d-ad1a-45fc-a67b-319bdfa3b725}\u0000",
+            "owner": "{4f9ad8c9-f21e-4f60-a85a-b63de57d6cd7}\u0000",
+            "Material": "./res/materials/SampleScene/DefaultAnimated.mat",
+            "Model": "./res/Models/Granny/Body.fbx",
+            "Animation": "./res/Models/Granny/Body.fbx"
         }
     ]
 }

@@ -16,8 +16,8 @@ namespace Engine
         AnimatedModelRenderer* TrackRight = nullptr;
         
 
-        int LeftHandPosition = 1;
-        int RightHandPosition = 1;
+        int LeftHandPosition = 0;
+        int RightHandPosition = 0;
 
         PlayerAnimationManager() = default;
         ~PlayerAnimationManager() = default;

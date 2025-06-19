@@ -28,7 +28,7 @@ namespace Engine
             movementComponent = this->AddComponent<Engine::MovementComponent>();
             boxCollider = this->AddComponent<Engine::BoxCollider>();
             //collider settings
-            boxCollider->SetHeight(2.0f);
+            boxCollider->SetHeight(3.0f);
             boxCollider->SetWidth(2.0f);
             boxCollider->SetDepth(2.0f);
             boxCollider->OnCollisionAddListener(SwapTool);
