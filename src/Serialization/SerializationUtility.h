@@ -32,7 +32,21 @@ namespace Serialization
 
 namespace Serialization
 {
-    rapidjson::Value Serialize(int Value, rapidjson::Document::AllocatorType& Allocator);
+    rapidjson::Value Serialize(int8_t Value, rapidjson::Document::AllocatorType& Allocator);
+
+    rapidjson::Value Serialize(uint8_t Value, rapidjson::Document::AllocatorType& Allocator);
+
+    rapidjson::Value Serialize(int16_t Value, rapidjson::Document::AllocatorType& Allocator);
+
+    rapidjson::Value Serialize(uint16_t Value, rapidjson::Document::AllocatorType& Allocator);
+
+    rapidjson::Value Serialize(int32_t Value, rapidjson::Document::AllocatorType& Allocator);
+
+    rapidjson::Value Serialize(uint32_t Value, rapidjson::Document::AllocatorType& Allocator);
+
+    rapidjson::Value Serialize(int64_t Value, rapidjson::Document::AllocatorType& Allocator);
+
+    rapidjson::Value Serialize(uint64_t Value, rapidjson::Document::AllocatorType& Allocator);
 
     rapidjson::Value Serialize(float Value, rapidjson::Document::AllocatorType& Allocator);
 
@@ -106,7 +120,21 @@ namespace Serialization
         return object;
     }
 
-    void Deserialize(const rapidjson::Value& Object, const char* Name, int& Value);
+    void Deserialize(const rapidjson::Value& Object, const char* Name, int8_t& Value);
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, uint8_t& Value);
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, int16_t& Value);
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, uint16_t& Value);
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, int32_t& Value);
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, uint32_t& Value);
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, uint64_t& Value);
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, uint64_t& Value);
 
     void Deserialize(const rapidjson::Value& Object, const char* Name, float& Value);
 
