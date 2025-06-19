@@ -19,13 +19,28 @@ namespace Models
     void Animator::UpdateAnimation(float dt)
     {
         m_DeltaTime = dt;
-        if (m_CurrentAnimation)
+
+        if (m_CurrentAnimation && !m_IsPaused)
         {
-            m_CurrentTime += m_CurrentAnimation->GetTicksPerSecond() * dt;
-            m_CurrentTime = fmod(m_CurrentTime, m_CurrentAnimation->GetDuration());
+            float ticksPerSecond = m_CurrentAnimation->GetTicksPerSecond();
+            float duration = m_CurrentAnimation->GetDuration();
+
+            if (m_IsPlayingBackward)
+            {
+                m_CurrentTime -= ticksPerSecond * dt;
+                if (m_CurrentTime < 0.0f)
+                    m_CurrentTime += duration;
+            }
+            else
+            {
+                m_CurrentTime += ticksPerSecond * dt;
+                m_CurrentTime = fmod(m_CurrentTime, duration);
+            }
+
             CalculateBoneTransform(&m_CurrentAnimation->GetRootNode(), glm::mat4(1.0f));
         }
     }
+
     void Animator::PlayAnimation(Animation* pAnimation)
     {
         m_CurrentAnimation = pAnimation;

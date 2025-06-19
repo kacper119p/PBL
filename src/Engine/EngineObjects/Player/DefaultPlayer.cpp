@@ -7,6 +7,8 @@
 #include "Engine/Components/BloodSystem/BloodEraser.h"
 #include "Engine/Input/InputManager.h"
 #include "Engine/Components/Game/ThrashManager.h"
+#include "Engine/Components/Game/PlayerAnimationManager.h"
+#include <vector>
 
 
 namespace Engine
@@ -39,6 +41,34 @@ namespace Engine
             rb->frictionEnabled = true;
             //player start position
             this->GetTransform()->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
+
+            PlayerAnimationManager* playerAnimationManager = PlayerAnimationManager::GetInstance();
+            std::vector<Engine::Transform*> children = prefabEntity->GetTransform()->GetChildren();
+            for (Engine::Transform* child : children)
+            {
+                if (child->GetOwner()->GetName() == "Track_L")
+                {
+                    playerAnimationManager->TrackLeft =
+                            child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>();
+                }
+                else if (child->GetOwner()->GetName() == "Track_R")
+                {
+                    playerAnimationManager->TrackRight =
+                            child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>();
+                }
+                /*else if (child->GetOwner()->GetName() == "HandLeft")
+                {
+                    playerAnimationManager->HandLeft = child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>();
+                }
+                else if (child->GetOwner()->GetName() == "HandRight")
+                {
+                    playerAnimationManager->HandRight =
+                            child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>();
+                }*/
+            }
+
+            playerAnimationManager->StopAllAnimations();
+
         }
         else
         {

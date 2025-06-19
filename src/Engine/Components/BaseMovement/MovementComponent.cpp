@@ -1,6 +1,7 @@
 #include "MovementComponent.h"
 #include "spdlog/spdlog.h"
 #include "Engine/Components/Physics/RigidBody.h"
+#include "Engine/Components/Game/PlayerAnimationManager.h"
 namespace Engine
 {
 
@@ -22,6 +23,7 @@ namespace Engine
         glm::vec3 forward = transform->GetForward();
 
         InputManager& input = InputManager::GetInstance();
+        PlayerAnimationManager* playerAnimationManager = PlayerAnimationManager::GetInstance();
 
         bool isLeftForward = false;
         bool isRightForward = false;
@@ -52,28 +54,86 @@ namespace Engine
         if (isLeftForward && isRightForward)
         {
             rigidbody->AddForce(forward * Speed*1.25f, ForceMode::Force);
+            if (playerAnimationManager)
+            {
+                playerAnimationManager->TrackLeftForward();
+                playerAnimationManager->TrackRightForward();
+            }
             
         }
         else if (isLeftBackward && isRightBackward)
         {
             rigidbody->AddForce(-forward * Speed, ForceMode::Force);
+            if (playerAnimationManager)
+            {
+                playerAnimationManager->TrackLeftBackward();
+                playerAnimationManager->TrackRightBackward();
+            }
         }
         else if ((isLeftForward && isRightBackward) || (isLeftBackward && isRightForward))
         {
             rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? -1.0f : 1.0f)*BothRotationSpeed, 0), ForceMode::Force);
+            if (isLeftForward)
+            {
+                if (playerAnimationManager)
+                {
+                    playerAnimationManager->TrackLeftForward();
+                    playerAnimationManager->TrackRightBackward();
+                }
+            }
+            else
+            {
+                if (playerAnimationManager)
+                {
+                    playerAnimationManager->TrackLeftBackward();
+                    playerAnimationManager->TrackRightForward();
+                }
+            }
             
         }
         else if ((isLeftBackward || isRightBackward)&&!(isLeftForward||isRightForward))
         {
             rigidbody->AddTorque(glm::vec3(0, (isLeftBackward ? 1.0f : -1.0f)*RotationSpeed, 0), ForceMode::Force);
             rigidbody->AddForce(-forward * Speed, ForceMode::Force);
+            if (playerAnimationManager)
+            {
+                if (isLeftBackward)
+                {
+                    playerAnimationManager->TrackLeftBackward();
+                    playerAnimationManager->TrackRightStop();
+                }
+                else
+                {
+                    playerAnimationManager->TrackRightBackward();
+                    playerAnimationManager->TrackLeftStop();
+                }
+            }
+
         }
         else if ((isLeftForward || isRightForward) && !(isLeftBackward || isRightBackward))
         {
             rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? -1.0f : 1.0f)*RotationSpeed, 0), ForceMode::Force);
             rigidbody->AddForce(forward * Speed, ForceMode::Force);
-
-            
+            if (playerAnimationManager)
+            {
+                if (isLeftForward)
+                {
+                    playerAnimationManager->TrackLeftForward();
+                    playerAnimationManager->TrackRightStop();
+                }
+                else
+                {
+                    playerAnimationManager->TrackRightForward();
+                    playerAnimationManager->TrackLeftStop();
+                }
+            }
+        }
+        else
+        {
+            if (playerAnimationManager)
+            {
+                playerAnimationManager->StopAllAnimations();
+            }
         }
 
         if (!transform)
