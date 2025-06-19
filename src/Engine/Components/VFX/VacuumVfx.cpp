@@ -1,8 +1,9 @@
 #include "VacuumVfx.h"
 
-#include "../../../../cmake-build-debug-visual-studio/_deps/glfw-src/include/GLFW/glfw3.h"
+#include "GLFW/glfw3.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/EngineObjects/UpdateManager.h"
+#include "Engine/Textures/TextureManager.h"
 #include "Math/Easings.h"
 #include "Math/Math.h"
 #include "Models/ModelManager.h"
