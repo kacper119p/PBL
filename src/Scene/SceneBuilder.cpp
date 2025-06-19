@@ -1,65 +1,33 @@
 #include "SceneBuilder.h"
-#include "Shaders/Shader.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h> // Include glfw3.h after our OpenGL definitions
 #include <spdlog/spdlog.h>
 #include "Utility/TextureUtilities.h"
-#include "Models/Model.h"
-#include "Models/ModelAnimated.h"
 #include "Engine/EngineObjects/Scene/Scene.h"
-#include "Engine/Components/Renderers/ModelRenderer.h"
 #include "Engine/Components/Renderers/AnimatedModelRenderer.h"
-#include "Engine/Components/Lights/DirectionalLight.h"
-#include "Engine/EngineObjects/LightManager.h"
 #include "Engine/Gui/LightsGui.h"
-#include "Materials/SkyboxMaterial.h"
-#include "Materials/ReflectiveMaterial.h"
-#include "Materials/RefractiveMaterial.h"
-#include "Shaders/ComputeShader.h"
-#include "Engine/Components/Renderers/ParticleEmitter.h"
-#include "Materials/WaterMaterial.h"
-#include "Engine/Components/Game/ShipRoller.h"
-#include "Engine/Components/Game/Rotator.h"
 #include "Engine/Components/Colliders/Collider.h"
-#include "Engine/Components/Colliders/BoxCollider.h"
-#include "Engine/Components/Colliders/SphereCollider.h"
-#include "Engine/Components/Colliders/CapsuleCollider.h"
-#include "Engine/Components/Colliders/SpatialPartitioning.h"
-#include "Engine/Components/Physics/RigidBody.h"
 #include "Engine/Components/BaseMovement/MovementComponent.h"
 #include "Engine/EngineObjects/Scene/SceneManager.h"
-#include "Engine/Textures/Texture.h"
-#include "Engine/Textures/TextureManager.h"
-#include "Materials/AnimatedPbrMaterial.h"
-#include "Materials/MaterialManager.h"
-#include "Materials/PbrMaterial.h"
-#include "Models/ModelManager.h"
-#include "Shaders/ShaderManager.h"
-#include "Shaders/ShaderSourceFiles.h"
 #include "tracy/Tracy.hpp"
-#include "Engine/Components/Camera/CameraFollow.h"
-#include "Engine/Components/BloodSystem/BloodEraser.h"
-#include "Engine/Components/Game/Vacuum.h"
 
 
 namespace Scene
 {
     bool shouldContinue = true;
+
     void SceneBuilder::Build(Engine::Scene*& Scene)
     {
         ZoneScoped;
 
         Scene = new class Engine::Scene();
-        Engine::SceneManager::LoadScene("./res/scenes/Gameplay.lvl", Scene);
+        Engine::SceneManager::LoadScene("./res/scenes/SampleScene.lvl", Scene);
         // TODO: remove when no longer needed
-        
 
-        
-       
 
         // BOX BOX SCENARIO /////////////////////////////////////////////////////////////////////////////////////////////////////////
-        #if !EDITOR
-        
+#if !EDITOR
+
         /*Engine::Entity* playerVacuum = Scene->SpawnEntity(nullptr);
         playerVacuum->SetName("PlayerVacuum");
         Scene->GetPlayer()->GetTransform()->AddChild(playerVacuum->GetTransform());
@@ -119,10 +87,10 @@ namespace Scene
 
         CameraFollow::GetInstance().SetTarget(secondBoxEntity);
         */
-        #endif
-        
+#endif
+
         //secondBoxCollider->shouldMove = true;
-        
+
         //Engine::RigidBody* rb = secondBoxEntity->AddComponent<Engine::RigidBody>();
 
 
