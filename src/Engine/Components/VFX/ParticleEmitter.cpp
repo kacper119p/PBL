@@ -15,7 +15,10 @@ Engine::ParticleEmitter::ParticleEmitter(Materials::Material* const Material, co
     SetMaterial(Material);
 }
 
-Engine::ParticleEmitter::~ParticleEmitter() = default;
+Engine::ParticleEmitter::~ParticleEmitter()
+{
+    RenderingManager::GetInstance()->UnregisterParticleEmitter(this);
+}
 
 void Engine::ParticleEmitter::SetMaterial(Materials::Material* Material)
 {

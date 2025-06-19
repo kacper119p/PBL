@@ -1,11 +1,12 @@
 #pragma once
+#include "Engine/Components/Interfaces/IUpdateable.h"
 #include "Engine/Components/Renderers/Renderer.h"
 #include "Models/Model.h"
 
 namespace Engine
 {
 
-    class VacuumVfx final : public Renderer
+    class VacuumVfx final : public Renderer, public IUpdateable
     {
     private:
         static constexpr float NoiseSpeed = 0.25f;
@@ -31,11 +32,17 @@ namespace Engine
     public:
         VacuumVfx();
 
+    public:
+        ~VacuumVfx() override;
+
+    public:
 #if EDITOR
         void DrawImGui() override;
 #endif
 
         void Start() override;
+
+        void Update(float DeltaTime) override;
 
         void RenderDepth(const CameraRenderData& RenderData) override;
 

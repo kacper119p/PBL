@@ -2,6 +2,7 @@
 
 #include "../../../../cmake-build-debug-visual-studio/_deps/glfw-src/include/GLFW/glfw3.h"
 #include "Engine/EngineObjects/Entity.h"
+#include "Engine/EngineObjects/UpdateManager.h"
 #include "Math/Easings.h"
 #include "Math/Math.h"
 #include "Models/ModelManager.h"
@@ -9,7 +10,6 @@
 
 namespace Engine
 {
-#if EDITOR
     VacuumVfx::VacuumVfx()
     {
         Material = Materials::MaterialManager::GetMaterial("res/materials/VFX/Vacuum.mat");
@@ -24,9 +24,14 @@ namespace Engine
         InnerTexture = TextureManager::GetTexture("res/textures/VFX/Vacuum/VacuumInner.dds").GetHandleReadonly();
         OuterTexture = TextureManager::GetTexture("res/textures/VFX/Vacuum/VacuumOuter.dds").GetHandleReadonly();
 
-        Model = Models::ModelManager::GetModel("res/models/VFX/Vacuum/VacuumVFX.fbx");
+        Model = Models::ModelManager::GetModel("res/models/VFX/Vacuum/VacuumVFX.glb");
     }
 
+    VacuumVfx::~VacuumVfx()
+    {
+        UpdateManager::GetInstance()->UnregisterComponent(this);
+    }
+#if EDITOR
     void VacuumVfx::DrawImGui()
     {
         if (ImGui::CollapsingHeader("Vacuum VFX"))
@@ -36,13 +41,20 @@ namespace Engine
 
         }
     }
-
+#endif
     void VacuumVfx::Start()
     {
         Renderer::Start();
+        UpdateManager::GetInstance()->RegisterComponent(this);
         Activate();
     }
-#endif
+
+    void VacuumVfx::Update(const float DeltaTime)
+    {
+        Time += (Active ? 1.0f : -1.0f) * DeltaTime;
+        Time = Math::Clamp(Time, 0.0f, 1.0f);
+    }
+
     void VacuumVfx::RenderDepth(const CameraRenderData& RenderData)
     {
     }
@@ -50,8 +62,6 @@ namespace Engine
     void VacuumVfx::Render(const CameraRenderData& RenderData)
     {
         glDisable(GL_CULL_FACE);
-        Time += Active ? 1.0f : -1.0f;
-        Time = Math::Clamp(Time, 0.0f, 1.0f);
 
         Shaders::Shader::SetUniform(TimeLocation, static_cast<float>(glfwGetTime()) * NoiseSpeed);
 
