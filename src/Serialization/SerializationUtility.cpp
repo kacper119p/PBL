@@ -14,33 +14,82 @@
 
 namespace
 {
-    constexpr int GUID_STRING_SIZE = 39; // GUID is 36 chars + null terminator
+    constexpr int GuidStringSize = 39; // GUID is 36 chars + null terminator
 
     void GuidToStr(const GUID& Guid, char* Buffer)
     {
-        snprintf(Buffer, GUID_STRING_SIZE * sizeof(char),
+        snprintf(Buffer, GuidStringSize * sizeof(char),
                  "{%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x}",
                  Guid.Data1, Guid.Data2, Guid.Data3,
                  Guid.Data4[0], Guid.Data4[1], Guid.Data4[2], Guid.Data4[3],
                  Guid.Data4[4], Guid.Data4[5], Guid.Data4[6], Guid.Data4[7]);
     }
 
-    void StrToGuid(const std::string& str, GUID* guid)
+    void StrToGuid(const std::string& Str, GUID* Guid)
     {
-        sscanf_s(str.c_str(),
+        sscanf_s(Str.c_str(),
                  "{%8x-%4hx-%4hx-%2hhx%2hhx-%2hhx%2hhx%2hhx%2hhx%2hhx%2hhx}",
-                 &guid->Data1, &guid->Data2, &guid->Data3,
-                 &guid->Data4[0], &guid->Data4[1], &guid->Data4[2], &guid->Data4[3],
-                 &guid->Data4[4], &guid->Data4[5], &guid->Data4[6], &guid->Data4[7]);
+                 &Guid->Data1, &Guid->Data2, &Guid->Data3,
+                 &Guid->Data4[0], &Guid->Data4[1], &Guid->Data4[2], &Guid->Data4[3],
+                 &Guid->Data4[4], &Guid->Data4[5], &Guid->Data4[6], &Guid->Data4[7]);
     }
 }
 
 namespace Serialization
 {
-    rapidjson::Value Serialize(const int Value, rapidjson::Document::AllocatorType& Allocator)
+    rapidjson::Value Serialize(const int8_t Value, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kNumberType);
         object.SetInt(Value);
+        return object;
+    }
+
+    rapidjson::Value Serialize(const uint8_t Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kNumberType);
+        object.SetUint(Value);
+        return object;
+    }
+
+    rapidjson::Value Serialize(const int16_t Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kNumberType);
+        object.SetInt(Value);
+        return object;
+    }
+
+    rapidjson::Value Serialize(const uint16_t Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kNumberType);
+        object.SetUint(Value);
+        return object;
+    }
+
+    rapidjson::Value Serialize(const int32_t Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kNumberType);
+        object.SetInt(Value);
+        return object;
+    }
+
+    rapidjson::Value Serialize(const uint32_t Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kNumberType);
+        object.SetUint(Value);
+        return object;
+    }
+
+    rapidjson::Value Serialize(const int64_t Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kNumberType);
+        object.SetInt64(Value);
+        return object;
+    }
+
+    rapidjson::Value Serialize(const uint64_t Value, rapidjson::Document::AllocatorType& Allocator)
+    {
+        rapidjson::Value object(rapidjson::kNumberType);
+        object.SetUint64(Value);
         return object;
     }
 
@@ -137,9 +186,9 @@ namespace Serialization
     rapidjson::Value Serialize(const GUID& Guid, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kStringType);
-        char guidStr[GUID_STRING_SIZE];
+        char guidStr[GuidStringSize];
         GuidToStr(Guid, guidStr);
-        object.SetString(guidStr, static_cast<rapidjson::SizeType>(GUID_STRING_SIZE), Allocator);
+        object.SetString(guidStr, static_cast<rapidjson::SizeType>(GuidStringSize), Allocator);
         return object;
     }
 
@@ -152,7 +201,7 @@ namespace Serialization
             return object;
         }
         const GUID guid = Value->GetID();
-        char guidStr[GUID_STRING_SIZE];
+        char guidStr[GuidStringSize];
         GuidToStr(guid, guidStr);
         object.SetString(guidStr, sizeof(guidStr), Allocator);
         return object;
@@ -211,7 +260,47 @@ namespace Serialization
         return object;
     }
 
-    void Deserialize(const rapidjson::Value& Object, const char* Name, int& Value)
+    void Deserialize(const rapidjson::Value& Object, const char* Name, int8_t& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsInt())
+        {
+            return;
+        }
+        Value = static_cast<int8_t>(iterator->value.GetInt());
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, uint8_t& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsUint())
+        {
+            return;
+        }
+        Value = static_cast<uint8_t>(iterator->value.GetUint());
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, int16_t& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsInt())
+        {
+            return;
+        }
+        Value = static_cast<int16_t>(iterator->value.GetInt());
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, uint16_t& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsUint())
+        {
+            return;
+        }
+        Value = static_cast<uint16_t>(iterator->value.GetInt());
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, int32_t& Value)
     {
         const auto iterator = Object.FindMember(Name);
         if (iterator == Object.MemberEnd() || !iterator->value.IsInt())
@@ -219,6 +308,36 @@ namespace Serialization
             return;
         }
         Value = iterator->value.GetInt();
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, uint32_t& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsUint())
+        {
+            return;
+        }
+        Value = iterator->value.GetUint();
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, int64_t& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsInt())
+        {
+            return;
+        }
+        Value = iterator->value.GetInt64();
+    }
+
+    void Deserialize(const rapidjson::Value& Object, const char* Name, uint64_t& Value)
+    {
+        const auto iterator = Object.FindMember(Name);
+        if (iterator == Object.MemberEnd() || !iterator->value.IsUint())
+        {
+            return;
+        }
+        Value = iterator->value.GetUint64();
     }
 
 
