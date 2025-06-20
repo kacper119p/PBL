@@ -19,10 +19,12 @@ uniform uint Random;
 void MakeParticle(out particle Particle) {
     uint seed = uint(gl_GlobalInvocationID.x) + Random;
     seed = pcg_hash(seed);
-    Particle.life = 2.66666666666666666666;
-    Particle.velocity.xyz = rng(vec3(-0.25, 0.0, -0.25), vec3(0.25, 0.25, 0.25), seed);
-    Particle.scale = 0.5;
-    Particle.position = rng(vec3(-0.25, 0.0, -0.25), vec3(0.25, 0.25, 0.25), seed);
+    Particle.life = MAX_LIFETIME;
+    Particle.velocity.y = rng(0.0, 2.0, seed);
+    Particle.scale = 2;
+    vec3 position = rng(vec3(-1.33, 0.0, -1.33), vec3(1.33, 0.33, 1.33), seed);
+    Particle.velocity.xz = normalize(-position.xz) * rng(0.2, 0.33, seed);
+    Particle.position = position;
 }
 
 layout (local_size_x = 64, local_size_y = 1, local_size_z = 1) in;

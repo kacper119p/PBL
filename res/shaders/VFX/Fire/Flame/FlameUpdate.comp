@@ -18,7 +18,10 @@ void UpdateParticle(inout particle Particle, int index) {
     if (Particle.life > 0) {
         Particle.position += Particle.velocity * DeltaTime;
         Particle.life -= DeltaTime;
-        Particle.scale = (1.0 - (Particle.life / MAX_LIFETIME)) * 0.5 + 0.5;
+        // Scale easeOutQuint
+        float scale = (Particle.life / MAX_LIFETIME);
+        float scale2 = scale * scale;
+        Particle.scale = (1.0 - scale2 * scale2 * scale) * 3.0;
 
         if (Particle.life <= 0.0) {
             Particle.life = 0.0;

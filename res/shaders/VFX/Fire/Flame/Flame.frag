@@ -13,5 +13,5 @@ void main()
 {
     vec4 Color = vec4(texture(SpriteSheet, UV).rgb, 1.0);
     FragColor = Color;
-    OcclusionMask = Color;
+    OcclusionMask = Color * 0.5;
 }
