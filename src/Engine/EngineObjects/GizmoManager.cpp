@@ -27,6 +27,20 @@ namespace Engine
         }
         center /= static_cast<float>(this->Managed.size());
 
+        glm::vec3 toObject = glm::normalize(center - CameraRenderData.CameraPosition);
+
+        glm::vec3 forward = glm::normalize(glm::vec3(
+                -CameraRenderData.ViewMatrix[0][2],
+                -CameraRenderData.ViewMatrix[1][2],
+                -CameraRenderData.ViewMatrix[2][2]
+                ));
+
+        float dot = glm::dot(toObject, forward);
+        if (dot < 0.1f)
+        {
+            return;
+        }
+
         float transformMatrix[16];
 
         glm::vec3 zeroRotation(0.0f);
