@@ -2,16 +2,16 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{a8a19bb8-cf95-495b-b260-4493df32b0a6}\u0000",
+            "id": "{b6db7074-4c4c-44a2-9e9b-120f779d64fc}\u0000",
             "name": "Vacuum",
             "transform": {
                 "type": "Transform",
-                "id": "{85d0d1ed-4375-490d-8cef-d08d7a1f4586}\u0000",
-                "owner": "{a8a19bb8-cf95-495b-b260-4493df32b0a6}\u0000",
+                "id": "{f5c62d78-1043-407c-bfbf-4cdc006cd077}\u0000",
+                "owner": "{b6db7074-4c4c-44a2-9e9b-120f779d64fc}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
-                    "z": -0.800000011920929
+                    "z": 0.0
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -29,19 +29,146 @@
                     "z": -0.0,
                     "w": -4.371138828673793e-8
                 },
-                "Children": [],
+                "Children": [
+                    "{e26ebc0e-0292-4722-b37a-3fa0da5d6e52}\u0000",
+                    "{d3594c64-0f24-4a5d-8be2-2e554d938f87}\u0000",
+                    "{0b68cfdf-9885-4f46-a3d8-a1590d957755}\u0000"
+                ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
+            "components": []
+        },
+        {
+            "type": "Entity",
+            "id": "{ef229261-035b-4e8d-bf35-0c5229ed8bd2}\u0000",
+            "name": "Front",
+            "transform": {
+                "type": "Transform",
+                "id": "{e26ebc0e-0292-4722-b37a-3fa0da5d6e52}\u0000",
+                "owner": "{ef229261-035b-4e8d-bf35-0c5229ed8bd2}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": -0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{f5c62d78-1043-407c-bfbf-4cdc006cd077}\u0000"
+            },
             "components": [
-                "{43889fc7-3426-46ff-9164-a6ed7f2641c8}\u0000"
+                "{8598d8e3-f310-4348-a882-4b0a3ef759cb}\u0000"
             ]
         },
         {
-            "type": "ModelRenderer",
-            "id": "{43889fc7-3426-46ff-9164-a6ed7f2641c8}\u0000",
-            "owner": "{a8a19bb8-cf95-495b-b260-4493df32b0a6}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Granny/Odkurzacz.fbx"
+            "type": "AnimatedModelRenderer",
+            "id": "{8598d8e3-f310-4348-a882-4b0a3ef759cb}\u0000",
+            "owner": "{ef229261-035b-4e8d-bf35-0c5229ed8bd2}\u0000",
+            "Material": "./res/materials/SampleScene/Tools_Anim.mat",
+            "Model": "./res/Models/Granny/Odkurzacz_front_anim.fbx",
+            "Animation": "./res/Models/Granny/Odkurzacz_front_anim.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{98933c7a-1baf-4e1f-ac68-a70d5aad1a18}\u0000",
+            "name": "Back",
+            "transform": {
+                "type": "Transform",
+                "id": "{d3594c64-0f24-4a5d-8be2-2e554d938f87}\u0000",
+                "owner": "{98933c7a-1baf-4e1f-ac68-a70d5aad1a18}\u0000",
+                "Position": {
+                    "x": 9.106580378670515e-9,
+                    "y": -0.800000011920929,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 40.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.3420201241970062,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.9396926164627075
+                },
+                "Children": [],
+                "Parent": "{f5c62d78-1043-407c-bfbf-4cdc006cd077}\u0000"
+            },
+            "components": [
+                "{695c8aed-98ad-41f7-944e-8955efe876e9}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{695c8aed-98ad-41f7-944e-8955efe876e9}\u0000",
+            "owner": "{98933c7a-1baf-4e1f-ac68-a70d5aad1a18}\u0000",
+            "Material": "./res/materials/SampleScene/Tools_Anim.mat",
+            "Model": "./res/Models/Granny/Odkurzacz_back_anim.fbx",
+            "Animation": "./res/Models/Granny/Odkurzacz_back_anim.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{6004ec2d-27fb-480d-885e-a70c3e58f773}\u0000",
+            "name": "Pasek",
+            "transform": {
+                "type": "Transform",
+                "id": "{0b68cfdf-9885-4f46-a3d8-a1590d957755}\u0000",
+                "owner": "{6004ec2d-27fb-480d-885e-a70c3e58f773}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": -0.800000011920929,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 40.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.3420201241970062,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.9396926164627075
+                },
+                "Children": [],
+                "Parent": "{f5c62d78-1043-407c-bfbf-4cdc006cd077}\u0000"
+            },
+            "components": [
+                "{36c6fdf7-8b92-4dc7-a650-43321cd48fdc}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{36c6fdf7-8b92-4dc7-a650-43321cd48fdc}\u0000",
+            "owner": "{6004ec2d-27fb-480d-885e-a70c3e58f773}\u0000",
+            "Material": "./res/materials/SampleScene/Pasek.mat",
+            "Model": "./res/Models/Granny/Pasek_anim.fbx",
+            "Animation": "./res/Models/Granny/Pasek_anim.fbx"
         }
     ]
 }
