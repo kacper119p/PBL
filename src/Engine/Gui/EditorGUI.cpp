@@ -252,7 +252,11 @@ void Engine::EditorGUI::DrawSelectedEntitysComponents()
 
     ImGui::Begin("Components");
 
-    auto selectedEntity = SceneHierarchyGUI::GetInstance()->GetSelectedEntity();
+    auto selectedEntities = SceneHierarchyGUI::GetInstance()->GetSelectedEntities();
+    Transform* selectedEntity = nullptr;
+    if (!selectedEntities.empty())
+        selectedEntity = *selectedEntities.begin();
+
     if (selectedEntity)
     {
         Entity* owner = selectedEntity->GetOwner();

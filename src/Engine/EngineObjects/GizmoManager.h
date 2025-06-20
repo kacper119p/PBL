@@ -22,6 +22,7 @@ namespace Engine
         float rectX, rectY = 0.0f;
         float rectWidth = 1920.0f;
         float rectHeight = 1080.0f;
+
     private:
         GizmoManager();
 
@@ -41,11 +42,10 @@ namespace Engine
             GizmoManager::CurrentOperation = CurrentOperation;
         }
 
-        [[nodiscard]] const std::vector<Transform*>& GetManaged() const 
-        { return Managed; }
+        [[nodiscard]] const std::vector<Transform*>& GetManaged() const { return Managed; }
 
         void SetManaged(Transform* Managed)
-        { 
+        {
             this->Managed.clear();
             this->Managed.push_back(Managed);
         }
@@ -56,10 +56,23 @@ namespace Engine
                 Managed.push_back(t);
         }
 
+        void RemoveFromManaged(Transform* t)
+        {
+            auto it = std::find(Managed.begin(), Managed.end(), t);
+            if (it != Managed.end())
+                Managed.erase(it);
+        }
+
+        void ClearManaged()
+        {
+            Managed.clear();
+        }
+
     public:
         static void Initialize();
 
         void Manipulate(const CameraRenderData& CameraRenderData);
+
         void SetRect(float x, float y, float width, float height)
         {
             rectX = x;
