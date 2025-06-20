@@ -7,6 +7,7 @@
 #include "Engine/Input/InputManager.h"
 #include "Engine/Components/Colliders/SphereCollider.h"
 #include "Engine/Components/Game/ThrashManager.h"
+#include "Engine/Components/Game/PlayerAnimationManager.h"
 #include <iostream>
 
 namespace Engine
@@ -28,6 +29,7 @@ namespace Engine
     void Vacuum::Update(float deltaTime)
     {
         InputManager& input = InputManager::GetInstance();
+        PlayerAnimationManager* playerAnimationManager = PlayerAnimationManager::GetInstance();
 
         isShootingKeyPressed = input.IsKeyPressed(GLFW_KEY_2);
         bool isSuccingKeyPressed = input.IsKeyPressed(GLFW_KEY_1);
@@ -36,12 +38,14 @@ namespace Engine
         {
             isSuccing = true;
             isShooting = false;
+            
         }
         else if (isShootingKeyPressed)
         {
             isShooting = true;
             isSuccing = false;
         }
+
 
         float currentTime = static_cast<float>(glfwGetTime());
 
@@ -102,6 +106,18 @@ namespace Engine
                         entityCollider->GetOwner()->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
                     }
                 }
+            }
+
+            if (!playerAnimationManager->isVacuumActive)
+            {
+                playerAnimationManager->SetVacuumActive();
+            }
+        }
+        else
+        {
+            if (playerAnimationManager->isVacuumActive)
+            {
+                playerAnimationManager->SetVacuumInactive();
             }
         }
 

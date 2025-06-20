@@ -26,6 +26,7 @@ namespace Models
         std::string Path;
 
     public:
+        glm::mat4 m_GlobalInverseTransform;
         Animation() = default;
         Animation(const std::string& animationPath, ModelAnimated* model);
 

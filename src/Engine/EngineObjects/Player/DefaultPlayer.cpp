@@ -1,23 +1,26 @@
 #include "DefaultPlayer.h"
-#include "Engine/Prefabs/PrefabLoader.h"
-#include "spdlog/spdlog.h"
+#include <vector>
+#include "Engine/Components/BloodSystem/BloodEraser.h"
+#include "Engine/Components/Game/PlayerAnimationManager.h"
+#include "Engine/Components/Game/ThrashManager.h"
+#include "Engine/Components/Game/Vacuum.h"
 #include "Engine/Components/Transform.h"
 #include "Engine/EngineObjects/UpdateManager.h"
-#include "Engine/Components/Game/Vacuum.h"
-#include "Engine/Components/BloodSystem/BloodEraser.h"
 #include "Engine/Input/InputManager.h"
-#include "Engine/Components/Game/ThrashManager.h"
+#include "Engine/Prefabs/PrefabLoader.h"
+#include "spdlog/spdlog.h"
 
 
 namespace Engine
 {
     void DefaultPlayer::Start()
     {
-        #if !EDITOR
+#if !EDITOR
         UpdateManager::GetInstance()->RegisterPlayer(this);
         if (!PrefabPath.empty())
         {
-            Entity* prefabEntity = PrefabLoader::LoadPrefab(PrefabPath, this->GetScene(), this->GetScene()->GetRoot()->GetTransform());
+            Entity* prefabEntity =
+                    PrefabLoader::LoadPrefab(PrefabPath, this->GetScene(), this->GetScene()->GetRoot()->GetTransform());
             if (prefabEntity)
             {
                 this->GetTransform()->AddChild(prefabEntity->GetTransform());
@@ -25,31 +28,59 @@ namespace Engine
             rb = this->AddComponent<Engine::Rigidbody>();
             movementComponent = this->AddComponent<Engine::MovementComponent>();
             boxCollider = this->AddComponent<Engine::BoxCollider>();
-            //collider settings
+            // collider settings
             boxCollider->SetHeight(2.0f);
             boxCollider->SetWidth(2.0f);
             boxCollider->SetDepth(2.0f);
             boxCollider->OnCollisionAddListener(SwapTool);
-            //rb settings
+            // rb settings
             rb->friction = 0.05f;
             rb->angularDamping = 0.01f;
             rb->linearDamping = 0.01f;
             rb->restitution = 0.3f;
             rb->SetMass(1.0f);
             rb->frictionEnabled = true;
-            //player start position
+            // player start position
             this->GetTransform()->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
+
+            PlayerAnimationManager* playerAnimationManager = PlayerAnimationManager::GetInstance();
+            std::vector<Engine::Transform*> children = prefabEntity->GetTransform()->GetChildren();
+            for (Engine::Transform* child : children)
+            {
+                if (child->GetOwner()->GetName() == "Track_L")
+                {
+                    playerAnimationManager->TrackLeft =
+                            child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>();
+                }
+                else if (child->GetOwner()->GetName() == "Track_R")
+                {
+                    playerAnimationManager->TrackRight =
+                            child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>();
+                }
+                else if (child->GetOwner()->GetName() == "HandLeft")
+                {
+                    playerAnimationManager->SetHandLeft(
+                            child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>());
+                }
+                else if (child->GetOwner()->GetName() == "HandRight")
+                {
+                    playerAnimationManager->SetHandRight(
+                            child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>());
+                }
+            }
+
+            playerAnimationManager->StopAllAnimations();
         }
         else
         {
             spdlog::warn("DefaultPlayer: Prefab path is empty, cannot load player model.");
         }
-        #endif
+#endif
     }
 
     void DefaultPlayer::Update(const float DeltaTime)
     {
-        #if !EDITOR
+#if !EDITOR
         InputManager& input = InputManager::GetInstance();
         if (input.IsKeyPressed(GLFW_KEY_E) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_BUTTON_X))
         {
@@ -73,6 +104,8 @@ namespace Engine
                 if (vacuum)
                 {
                     this->GetTransform()->RemoveChild(vacuum->GetTransform());
+                    this->GetTransform()->RemoveChild(vacuumVfx->GetTransform());
+                    PlayerAnimationManager::GetInstance()->SetVacuumVfx(nullptr);
                     vacuum->Destroy();
                 }
                 if (broom)
@@ -80,6 +113,7 @@ namespace Engine
                     this->GetTransform()->RemoveChild(broom->GetTransform());
                     broom->Destroy();
                 }
+                vacuumVfx = nullptr;
                 vacuum = nullptr;
                 broom = nullptr;
                 break;
@@ -87,9 +121,13 @@ namespace Engine
                 if (!hasVacuum)
                 {
                     vacuum = PrefabLoader::LoadPrefab(VacuumPath, this->GetScene(), this->GetTransform());
+                    vacuumVfx = PrefabLoader::LoadPrefab("./res/prefabs/VacuumVFX.prefab", this->GetScene(),
+                                                         vacuum->GetTransform());
                     this->GetTransform()->AddChild(vacuum->GetTransform());
+                    this->GetTransform()->AddChild(vacuumVfx->GetTransform());
                     vacuum->AddComponent<Engine::Vacuum>();
                     hasVacuum = true;
+                    PlayerAnimationManager::GetInstance()->SetVacuumVfx(vacuumVfx->GetComponent<VacuumVfx>());
                 }
                 hasBroom = false;
                 hasStripper = false;
@@ -123,23 +161,23 @@ namespace Engine
                 if (vacuum)
                 {
                     this->GetTransform()->RemoveChild(vacuum->GetTransform());
+                    this->GetTransform()->RemoveChild(vacuumVfx->GetTransform());
+                    PlayerAnimationManager::GetInstance()->SetVacuumVfx(nullptr);
                     vacuum->Destroy();
                 }
                 stripper = nullptr;
                 vacuum = nullptr;
+                vacuumVfx = nullptr;
                 break;
             default:
                 spdlog::warn("DefaultPlayer: Unknown tool selected.");
                 break;
         }
-        #endif
+#endif
     }
-    void DefaultPlayer::SetTool(Tool tool) 
-    { 
-        this->currentTool = tool; 
-    }
+    void DefaultPlayer::SetTool(Tool tool) { this->currentTool = tool; }
 
-    void DefaultPlayer::ToolSwapper(Collider* collider) 
+    void DefaultPlayer::ToolSwapper(Collider* collider)
     {
         if (canSwap)
         {
@@ -157,4 +195,4 @@ namespace Engine
             }
         }
     }
-}
+} // namespace Engine

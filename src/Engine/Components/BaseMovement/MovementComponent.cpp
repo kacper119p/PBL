@@ -1,6 +1,7 @@
 #include "MovementComponent.h"
 #include "spdlog/spdlog.h"
 #include "Engine/Components/Physics/RigidBody.h"
+#include "Engine/Components/Game/PlayerAnimationManager.h"
 namespace Engine
 {
 
@@ -22,6 +23,7 @@ namespace Engine
         glm::vec3 forward = transform->GetForward();
 
         InputManager& input = InputManager::GetInstance();
+        PlayerAnimationManager* playerAnimationManager = PlayerAnimationManager::GetInstance();
 
         bool isLeftForward = false;
         bool isRightForward = false;
@@ -52,28 +54,176 @@ namespace Engine
         if (isLeftForward && isRightForward)
         {
             rigidbody->AddForce(forward * Speed*1.25f, ForceMode::Force);
+            if (playerAnimationManager)
+            {
+                playerAnimationManager->TrackLeftForward();
+                if (playerAnimationManager->LeftHandPosition != 2 && CanChangeLeftHand())
+                {
+                    playerAnimationManager->ChangeLeftHandPosition(2);
+                    LeftHandChangeTime = glfwGetTime();
+                }
+                playerAnimationManager->TrackRightForward();
+                if (playerAnimationManager->RightHandPosition != 2 && CanChangeRightHand())
+                {
+                    playerAnimationManager->ChangeRightHandPosition(2);
+                    RightHandChangeTime = glfwGetTime();
+                }
+            }
             
         }
         else if (isLeftBackward && isRightBackward)
         {
             rigidbody->AddForce(-forward * Speed, ForceMode::Force);
+            if (playerAnimationManager)
+            {
+                playerAnimationManager->TrackLeftBackward();
+                if (playerAnimationManager->LeftHandPosition != 0 && CanChangeLeftHand())
+                {
+                    playerAnimationManager->ChangeLeftHandPosition(0);
+                    LeftHandChangeTime = glfwGetTime();
+                }
+                playerAnimationManager->TrackRightBackward();
+                if (playerAnimationManager->RightHandPosition != 0 && CanChangeRightHand())
+                {
+                    playerAnimationManager->ChangeRightHandPosition(0);
+                    RightHandChangeTime = glfwGetTime();
+                }
+            }
         }
         else if ((isLeftForward && isRightBackward) || (isLeftBackward && isRightForward))
         {
             rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? -1.0f : 1.0f)*BothRotationSpeed, 0), ForceMode::Force);
+            if (isLeftForward)
+            {
+                if (playerAnimationManager)
+                {
+                    playerAnimationManager->TrackLeftForward();
+                    if (playerAnimationManager->LeftHandPosition != 2 && CanChangeLeftHand())
+                    {
+                        playerAnimationManager->ChangeLeftHandPosition(2);
+                        LeftHandChangeTime = glfwGetTime();
+                    }
+                    playerAnimationManager->TrackRightBackward();
+                    if (playerAnimationManager->RightHandPosition != 0 && CanChangeRightHand())
+                    {
+                        playerAnimationManager->ChangeRightHandPosition(0);
+                        RightHandChangeTime = glfwGetTime();
+                    }
+                }
+            }
+            else
+            {
+                if (playerAnimationManager)
+                {
+                    playerAnimationManager->TrackLeftBackward();
+                    if (playerAnimationManager->LeftHandPosition != 0 && CanChangeLeftHand())
+                    {
+                        playerAnimationManager->ChangeLeftHandPosition(0);
+                        LeftHandChangeTime = glfwGetTime();
+                    }
+                    playerAnimationManager->TrackRightForward();
+                    if (playerAnimationManager->RightHandPosition != 2 && CanChangeRightHand())
+                    {
+                        playerAnimationManager->ChangeRightHandPosition(2);
+                        RightHandChangeTime = glfwGetTime();
+                    }
+                }
+            }
             
         }
         else if ((isLeftBackward || isRightBackward)&&!(isLeftForward||isRightForward))
         {
             rigidbody->AddTorque(glm::vec3(0, (isLeftBackward ? 1.0f : -1.0f)*RotationSpeed, 0), ForceMode::Force);
             rigidbody->AddForce(-forward * Speed, ForceMode::Force);
+            if (playerAnimationManager)
+            {
+                if (isLeftBackward)
+                {
+                    playerAnimationManager->TrackLeftBackward();
+                    if (playerAnimationManager->LeftHandPosition != 0 && CanChangeLeftHand())
+                    {
+                        playerAnimationManager->ChangeLeftHandPosition(0);
+                        LeftHandChangeTime = glfwGetTime();
+                    }
+                    playerAnimationManager->TrackRightStop();
+                    if (playerAnimationManager->RightHandPosition != 1 && CanChangeRightHand())
+                    {
+                        playerAnimationManager->ChangeRightHandPosition(1);
+                        RightHandChangeTime = glfwGetTime();
+                    }
+                }
+                else
+                {
+                    playerAnimationManager->TrackRightBackward();
+                    if (playerAnimationManager->RightHandPosition != 0 && CanChangeRightHand())
+                    {
+                        playerAnimationManager->ChangeRightHandPosition(0);
+                        RightHandChangeTime = glfwGetTime();
+                    }
+                    playerAnimationManager->TrackLeftStop();
+                    if (playerAnimationManager->LeftHandPosition != 1 && CanChangeLeftHand())
+                    {
+                        playerAnimationManager->ChangeLeftHandPosition(1);
+                        LeftHandChangeTime = glfwGetTime();
+                    }
+                }
+            }
+
         }
         else if ((isLeftForward || isRightForward) && !(isLeftBackward || isRightBackward))
         {
             rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? -1.0f : 1.0f)*RotationSpeed, 0), ForceMode::Force);
             rigidbody->AddForce(forward * Speed, ForceMode::Force);
-
-            
+            if (playerAnimationManager)
+            {
+                if (isLeftForward)
+                {
+                    playerAnimationManager->TrackLeftForward();
+                    if (playerAnimationManager->LeftHandPosition != 2 && CanChangeLeftHand())
+                    {
+                        playerAnimationManager->ChangeLeftHandPosition(2);
+                        LeftHandChangeTime = glfwGetTime();
+                    }
+                    playerAnimationManager->TrackRightStop();
+                    if (playerAnimationManager->RightHandPosition != 1 && CanChangeRightHand())
+                    {
+                        playerAnimationManager->ChangeRightHandPosition(1);
+                        RightHandChangeTime = glfwGetTime();
+                    }
+                }
+                else
+                {
+                    playerAnimationManager->TrackRightForward();
+                    if (playerAnimationManager->RightHandPosition != 2 && CanChangeRightHand())
+                    {
+                        playerAnimationManager->ChangeRightHandPosition(2);
+                        RightHandChangeTime = glfwGetTime();
+                    }
+                    playerAnimationManager->TrackLeftStop();
+                    if (playerAnimationManager->LeftHandPosition != 1 && CanChangeLeftHand())
+                    {
+                        playerAnimationManager->ChangeLeftHandPosition(1);
+                        LeftHandChangeTime = glfwGetTime();
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (playerAnimationManager)
+            {
+                playerAnimationManager->StopAllAnimations();
+                if (playerAnimationManager->LeftHandPosition != 1 && CanChangeLeftHand())
+                {
+                    playerAnimationManager->ChangeLeftHandPosition(1);
+                    LeftHandChangeTime = glfwGetTime();
+                }
+                if (playerAnimationManager->RightHandPosition != 1 && CanChangeRightHand())
+                    {
+                        playerAnimationManager->ChangeRightHandPosition(1);
+                        RightHandChangeTime = glfwGetTime();
+                    }
+            }
         }
 
         if (!transform)
@@ -84,6 +234,15 @@ namespace Engine
 
 
 #endif
+    }
+
+    bool MovementComponent::CanChangeLeftHand()
+    {   
+        return glfwGetTime() - LeftHandChangeTime > 0.2f; }
+
+    bool MovementComponent::CanChangeRightHand() 
+    { 
+        return glfwGetTime() - RightHandChangeTime > 0.2f;
     }
 
     rapidjson::Value MovementComponent::Serialize(rapidjson::Document::AllocatorType& Allocator) const

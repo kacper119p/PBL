@@ -19,13 +19,56 @@ namespace Models
     void Animator::UpdateAnimation(float dt)
     {
         m_DeltaTime = dt;
-        if (m_CurrentAnimation)
+
+        if (m_CurrentAnimation && !m_IsPaused)
         {
-            m_CurrentTime += m_CurrentAnimation->GetTicksPerSecond() * dt;
-            m_CurrentTime = fmod(m_CurrentTime, m_CurrentAnimation->GetDuration());
+            float ticksPerSecond = m_CurrentAnimation->GetTicksPerSecond();
+            float duration = m_CurrentAnimation->GetDuration();
+            float timeAdvance = ticksPerSecond * dt;
+
+            if (m_PlayOnce)
+            {
+                if (m_IsPlayingBackward)
+                {
+                    m_CurrentTime -= timeAdvance;
+                    if (m_CurrentTime <= m_EndTime)
+                    {
+                        m_CurrentTime = m_EndTime;
+                        m_IsPaused = true;
+                        m_PlayOnce = false;
+                    }
+                }
+                else
+                {
+                    m_CurrentTime += timeAdvance;
+                    if (m_CurrentTime >= m_EndTime)
+                    {
+                        m_CurrentTime = m_EndTime;
+                        m_IsPaused = true;
+                        m_PlayOnce = false;
+                    }
+                }
+            }
+            else
+            {
+                if (m_IsPlayingBackward)
+                {
+                    m_CurrentTime -= timeAdvance;
+                    if (m_CurrentTime < 0.0f)
+                        m_CurrentTime += duration;
+                }
+                else
+                {
+                    m_CurrentTime += timeAdvance;
+                    m_CurrentTime = fmod(m_CurrentTime, duration);
+                }
+            }
+
             CalculateBoneTransform(&m_CurrentAnimation->GetRootNode(), glm::mat4(1.0f));
         }
     }
+
+
     void Animator::PlayAnimation(Animation* pAnimation)
     {
         m_CurrentAnimation = pAnimation;
@@ -52,11 +95,25 @@ namespace Models
         {
             int index = boneInfoMap[nodeName].id;
             glm::mat4 offset = boneInfoMap[nodeName].offset;
-            m_FinalBoneMatrices[index] = offset * globalTransformation;
+            m_FinalBoneMatrices[index] =m_CurrentAnimation->m_GlobalInverseTransform * globalTransformation * offset;
+
         }
 
         for (int i = 0; i < node->childrenCount; i++)
             CalculateBoneTransform(&node->children[i], globalTransformation);
+    }
+    void Animator::PlayOnceFromTo(float startTime, float endTime)
+    {
+        if (!m_CurrentAnimation)
+            return;
+
+        m_StartTime = startTime;
+        m_EndTime = endTime;
+        m_CurrentTime = startTime;
+
+        m_IsPlayingBackward = startTime > endTime;
+        m_PlayOnce = true;
+        m_IsPaused = false;
     }
 }
 
