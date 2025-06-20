@@ -1,0 +1,45 @@
+#version 460 core
+
+#include "Constants.glsl"
+#include "EmbersParticleData.glsl"
+#include "Simplex.glsl"
+
+layout (location = 0) uniform float DeltaTime;
+
+layout (std430, binding = 0) buffer SSBO_0 {
+    particle Particles[];
+};
+
+layout (std430, binding = 1) coherent restrict buffer SSBO_1 {
+    int count;
+    int indices[];
+} freelist;
+
+void UpdateParticle(inout particle Particle, int index) {
+    if (Particle.life > 0)
+    {
+        Particle.life -= DeltaTime;
+
+        if (Particle.life <= 0.0)
+        {
+            Particle.life = 0.0;
+            freelist.indices[atomicAdd(freelist.count, 1)] = index;
+        }
+
+        Particle.velocity += snoise(Particle.position + vec3(index * 4), 1.0) * DeltaTime * 12.0;
+        Particle.position += Particle.velocity * DeltaTime;
+        float scale = (Particle.life / MAX_LIFETIME);
+        scale = scale * scale * pow(1.0 - scale, 0.5);
+        Particle.scale = scale * 0.5;
+    }
+}
+
+layout (local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
+void main() {
+    uint index = gl_GlobalInvocationID.x;
+
+    if (index >= Particles.length())
+    return;
+
+    UpdateParticle(Particles[index], int(index));
+}

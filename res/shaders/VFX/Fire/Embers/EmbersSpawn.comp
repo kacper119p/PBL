@@ -1,0 +1,45 @@
+#version 460 core
+
+#include "Random.glsl"
+#include "EmbersParticleData.glsl"
+
+layout (std430, binding = 0) writeonly restrict buffer SSBO_0 {
+    particle particles[];
+};
+
+layout (std430, binding = 1) coherent restrict buffer SSBO_1 {
+    int count;
+    int indices[];
+} freelist;
+
+uniform int ParticlesToSpawn;
+uniform uint Random;
+
+// make a particle with random attributes
+void MakeParticle(out particle Particle) {
+    uint seed = uint(gl_GlobalInvocationID.x) + Random;
+    seed = pcg_hash(seed);
+    Particle.life = MAX_LIFETIME;
+    Particle.velocity.y = rng(2.0, 5.0, seed);
+    Particle.scale = 0;
+    vec3 position = rng(vec3(-1.4, 0.0, -1.4), vec3(1.4, 0.33, 1.4), seed);
+    Particle.velocity.xz = normalize(-position.xz) * rng(-0.1, 0.5, seed);
+    Particle.position = position;
+}
+
+layout (local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
+void main() {
+    uint index = gl_GlobalInvocationID.x;
+
+    if (index >= ParticlesToSpawn)
+    return;
+
+    int freeListIndex = atomicAdd(freelist.count, -1) - 1;
+    if (freeListIndex < 0) {
+        atomicAdd(freelist.count, 1);
+        return;
+    }
+
+    int particleIndex = freelist.indices[freeListIndex];
+    MakeParticle(particles[particleIndex]);
+}

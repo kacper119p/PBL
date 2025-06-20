@@ -9,7 +9,7 @@ namespace Engine
     /**
      * @brief Renders single dust particle system.
      */
-    class FireParticleEmitter final : public ParticleEmitter
+    class EmbersParticleEmitter final : public ParticleEmitter
     {
     private:
 #pragma pack(push, 1)
@@ -25,8 +25,8 @@ namespace Engine
         static_assert(sizeof(Particle) == 32, "Size mismatch with GLSL buffer");
 
     private:
-        static constexpr float MaxLifetime = 64.0f / 24.0f;
-        static constexpr int32_t MaxParticleCount = 48;
+        static constexpr float MaxLifetime = 1.25;
+        static constexpr int32_t MaxParticleCount = 128;
         static constexpr float SpawnRate = MaxParticleCount / MaxLifetime;
 
         float Timer = 0.0f;
@@ -43,10 +43,10 @@ namespace Engine
         int32_t ObjectToWorldMatrixLocation;
 
     public:
-        FireParticleEmitter();
+        EmbersParticleEmitter();
 
     public:
-        ~FireParticleEmitter() override;
+        ~EmbersParticleEmitter() override;
 
     public:
         void Start() override;
@@ -60,6 +60,6 @@ namespace Engine
 #if EDITOR
         void DrawImGui() override;
 #endif
-        SERIALIZATION_EXPORT_CLASS(FireParticleEmitter)
+        SERIALIZATION_EXPORT_CLASS(EmbersParticleEmitter)
     };
 }

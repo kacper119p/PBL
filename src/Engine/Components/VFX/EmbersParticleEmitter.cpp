@@ -1,4 +1,4 @@
-#include "FireParticleEmitter.h"
+#include "EmbersParticleEmitter.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include <algorithm>
@@ -11,10 +11,10 @@
 #include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
 
-Engine::FireParticleEmitter::FireParticleEmitter() :
-    ParticleEmitter(Materials::MaterialManager::GetMaterial("res/materials/VFX/Flame.mat"),
-                    Shaders::ShaderManager::GetComputeShader("res/shaders/VFX/Fire/Flame/FlameSpawn.comp"),
-                    Shaders::ShaderManager::GetComputeShader("res/shaders/VFX/Fire/Flame/FlameUpdate.comp")),
+Engine::EmbersParticleEmitter::EmbersParticleEmitter() :
+    ParticleEmitter(Materials::MaterialManager::GetMaterial("res/materials/VFX/Embers.mat"),
+                    Shaders::ShaderManager::GetComputeShader("res/shaders/VFX/Fire/Embers/EmbersSpawn.comp"),
+                    Shaders::ShaderManager::GetComputeShader("res/shaders/VFX/Fire/Embers/EmbersUpdate.comp")),
     ParticlesToSpawnProperty(SpawnShader.GetUniformLocation("ParticlesToSpawn")),
     DeltaTimeProperty(UpdateShader.GetUniformLocation("DeltaTime")),
     RandomProperty(SpawnShader.GetUniformLocation("Random")),
@@ -24,13 +24,13 @@ Engine::FireParticleEmitter::FireParticleEmitter() :
 {
 }
 
-Engine::FireParticleEmitter::~FireParticleEmitter()
+Engine::EmbersParticleEmitter::~EmbersParticleEmitter()
 {
     glDeleteBuffers(1, &ParticlesBuffer);
     glDeleteBuffers(1, &FreelistBuffer);
 }
 
-void Engine::FireParticleEmitter::Render(const Engine::CameraRenderData& RenderData)
+void Engine::EmbersParticleEmitter::Render(const Engine::CameraRenderData& RenderData)
 {
     Shaders::Shader::SetUniform(ViewMatrixLocation, RenderData.ViewMatrix);
     Shaders::Shader::SetUniform(ProjectionMatrixLocation, RenderData.ProjectionMatrix);
@@ -41,7 +41,7 @@ void Engine::FireParticleEmitter::Render(const Engine::CameraRenderData& RenderD
     SpriteQuad::DrawInstanced(MaxParticleCount);
 }
 
-void Engine::FireParticleEmitter::Start()
+void Engine::EmbersParticleEmitter::Start()
 {
     ParticleEmitter::Start();
 
@@ -66,7 +66,7 @@ void Engine::FireParticleEmitter::Start()
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 }
 
-void Engine::FireParticleEmitter::DispatchSpawnShaders(const float DeltaTime)
+void Engine::EmbersParticleEmitter::DispatchSpawnShaders(const float DeltaTime)
 {
     Timer += DeltaTime;
 
@@ -92,7 +92,7 @@ void Engine::FireParticleEmitter::DispatchSpawnShaders(const float DeltaTime)
     }
 }
 
-void Engine::FireParticleEmitter::DispatchUpdateShaders(const float DeltaTime)
+void Engine::EmbersParticleEmitter::DispatchUpdateShaders(const float DeltaTime)
 {
     UpdateShader.Use();
     Shaders::ComputeShader::SetUniform(DeltaTimeProperty, DeltaTime);
@@ -105,28 +105,28 @@ void Engine::FireParticleEmitter::DispatchUpdateShaders(const float DeltaTime)
 }
 
 #if EDITOR
-void Engine::FireParticleEmitter::DrawImGui()
+void Engine::EmbersParticleEmitter::DrawImGui()
 {
-    if (ImGui::CollapsingHeader("Fire Particle Emitter"))
+    if (ImGui::CollapsingHeader("Embers Particle Emitter"))
     {
     }
 }
 #endif
-rapidjson::Value Engine::FireParticleEmitter::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+rapidjson::Value Engine::EmbersParticleEmitter::Serialize(rapidjson::Document::AllocatorType& Allocator) const
 {
     START_COMPONENT_SERIALIZATION
     END_COMPONENT_SERIALIZATION
 }
 
-void Engine::FireParticleEmitter::DeserializeValuePass(const rapidjson::Value& Object,
-                                                       Serialization::ReferenceTable& ReferenceMap)
+void Engine::EmbersParticleEmitter::DeserializeValuePass(const rapidjson::Value& Object,
+                                                         Serialization::ReferenceTable& ReferenceMap)
 {
     START_COMPONENT_DESERIALIZATION_VALUE_PASS
     END_COMPONENT_DESERIALIZATION_VALUE_PASS
 }
 
-void Engine::FireParticleEmitter::DeserializeReferencesPass(const rapidjson::Value& Object,
-                                                            Serialization::ReferenceTable& ReferenceMap)
+void Engine::EmbersParticleEmitter::DeserializeReferencesPass(const rapidjson::Value& Object,
+                                                              Serialization::ReferenceTable& ReferenceMap)
 {
     START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
