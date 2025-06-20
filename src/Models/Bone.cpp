@@ -1,4 +1,6 @@
 #include "Bone.h"
+
+#include "Utility/AssertionsUtility.h"
 #include "Utility/AssimpGLMHelpers.h"
 
 namespace Models
@@ -58,10 +60,10 @@ namespace Models
     {
         for (int index = 0; index < m_NumPositions - 1; ++index)
         {
-            if (animationTime < m_Positions[index + 1].timeStamp)
+            if (animationTime <= m_Positions[index + 1].timeStamp)
                 return index;
         }
-        return m_NumPositions - 2;
+        CHECK_MESSAGE(false, "Invalid animation time");
     }
 
     /* Gets the current index on mKeyRotations to interpolate to based on the
@@ -70,10 +72,10 @@ namespace Models
     {
         for (int index = 0; index < m_NumRotations - 1; ++index)
         {
-            if (animationTime < m_Rotations[index + 1].timeStamp)
+            if (animationTime <= m_Rotations[index + 1].timeStamp)
                 return index;
         }
-        return m_NumRotations - 2;
+        CHECK_MESSAGE(false, "Invalid animation time");
     }
 
     /* Gets the current index on mKeyScalings to interpolate to based on the
@@ -82,10 +84,10 @@ namespace Models
     {
         for (int index = 0; index < m_NumScalings - 1; ++index)
         {
-            if (animationTime < m_Scales[index + 1].timeStamp)
+            if (animationTime <= m_Scales[index + 1].timeStamp)
                 return index;
         }
-        return m_NumScalings - 2;
+        CHECK_MESSAGE(false, "Invalid animation time");
     }
 
     /* Gets normalized value for Lerp & Slerp*/
