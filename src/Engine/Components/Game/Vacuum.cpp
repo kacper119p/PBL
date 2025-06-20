@@ -38,19 +38,9 @@ namespace Engine
         {
             isSuccing = true;
             isShooting = false;
-            if (!playerAnimationManager->isVacuumActive)
-            {
-                playerAnimationManager->SetVacuumActive();
-            }
+            
         }
-        else
-        {
-            if (playerAnimationManager->isVacuumActive)
-            {
-                playerAnimationManager->SetVacuumInactive();
-            }
-        }
-        if (isShootingKeyPressed)
+        else if (isShootingKeyPressed)
         {
             isShooting = true;
             isSuccing = false;
@@ -116,6 +106,18 @@ namespace Engine
                         entityCollider->GetOwner()->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
                     }
                 }
+            }
+
+            if (!playerAnimationManager->isVacuumActive)
+            {
+                playerAnimationManager->SetVacuumActive();
+            }
+        }
+        else
+        {
+            if (playerAnimationManager->isVacuumActive)
+            {
+                playerAnimationManager->SetVacuumInactive();
             }
         }
 
