@@ -1,0 +1,76 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{cb7b6c5e-1c57-42df-8255-ce96677b15bc}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{1ab21694-1d8c-44be-acae-50a825ec666f}\u0000",
+                "owner": "{cb7b6c5e-1c57-42df-8255-ce96677b15bc}\u0000",
+                "Position": {
+                    "x": -14.634889602661133,
+                    "y": 5.300204277038574,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{25d0d22b-8967-41e9-989f-d93d056e4906}\u0000",
+                "{b2640ab9-977d-4a9b-b369-46d5b95b17c4}\u0000",
+                "{24ba5fe2-9f7e-4356-a9f2-64b46ad9eef0}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{25d0d22b-8967-41e9-989f-d93d056e4906}\u0000",
+            "owner": "{cb7b6c5e-1c57-42df-8255-ce96677b15bc}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{b2640ab9-977d-4a9b-b369-46d5b95b17c4}\u0000",
+            "owner": "{cb7b6c5e-1c57-42df-8255-ce96677b15bc}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{24ba5fe2-9f7e-4356-a9f2-64b46ad9eef0}\u0000",
+            "owner": "{cb7b6c5e-1c57-42df-8255-ce96677b15bc}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        }
+    ]
+}

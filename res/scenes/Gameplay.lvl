@@ -144,7 +144,25 @@
                 "{4ad19770-2bac-424c-9963-c428bf28ca0e}\u0000",
                 "{d6ed4862-523e-474f-886c-284cd07a3f5e}\u0000",
                 "{bd74a253-9343-4826-9e4b-74538d289406}\u0000",
-                "{499b08a0-eab5-4d52-a3c9-8280836f39b7}\u0000"
+                "{499b08a0-eab5-4d52-a3c9-8280836f39b7}\u0000",
+                "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000",
+                "{974eb68c-f788-4a95-afac-69e9ed53691d}\u0000",
+                "{1ab21694-1d8c-44be-acae-50a825ec666f}\u0000",
+                "{4769e917-684d-4c8e-8347-7e6ea0ca75ed}\u0000",
+                "{b058ce79-18d7-4fa5-976d-97ce013d1410}\u0000",
+                "{220eddff-2f49-4c32-bd7e-ea52defa40fa}\u0000",
+                "{47994291-b034-41cd-a8dc-8696295a3b07}\u0000",
+                "{6d672d27-5ba4-4825-ae1e-ddee0067cd3e}\u0000",
+                "{c618e643-5268-4632-a253-64a90bea8afe}\u0000",
+                "{a499b91f-bb8c-4b8d-bce0-8b70107fd125}\u0000",
+                "{9a599d94-9815-4fd8-8a91-3f05e1687c36}\u0000",
+                "{4d569b82-1ba6-4941-83c2-f237ed06e37b}\u0000",
+                "{9e9199e1-99d7-4584-88a5-c1de2b2a3a65}\u0000",
+                "{e1668ce1-a181-4892-ba38-5264d47f4837}\u0000",
+                "{d86907d4-7819-4fcf-b1f8-89aeffb0f378}\u0000",
+                "{126f334f-9685-4b6e-b812-075108ba3fa4}\u0000",
+                "{6b1e85d9-7932-4135-a691-20831ba51804}\u0000",
+                "{6a2b0819-0370-4a4a-9ba0-45346977e5eb}\u0000"
             ],
             "Parent": null
         },
@@ -202,6 +220,9 @@
             "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 14.0,
             "_height": 0.20000000298023224,
@@ -304,6 +325,9 @@
             "owner": "{c35a0c8d-f316-4d03-a4b8-c0d56621d727}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 30.0,
             "_height": 0.20000000298023224,
@@ -362,6 +386,9 @@
             "owner": "{c99f3e17-1941-4a55-aa2a-085c4b35d50b}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.5,
             "_height": 0.5,
@@ -436,6 +463,9 @@
             "owner": "{1e6e020e-707e-4925-a7b3-f2141dadb3a9}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 60.0,
             "_height": 2.0,
@@ -452,7 +482,7 @@
                 "Position": {
                     "x": 5.5174431800842285,
                     "y": 5.215563774108887,
-                    "z": -9.655460357666016
+                    "z": -18.374574661254883
                 },
                 "EulerAngles": {
                     "x": -179.99989318847656,
@@ -501,6 +531,9 @@
             "owner": "{b73a9501-9d71-4f8d-bfb3-c91375fb29e7}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4,
+            "collisionMask": 4294967271,
             "colliderType": 0,
             "_width": 2.299999952316284,
             "_height": 9.100000381469727,
@@ -527,7 +560,7 @@
                 "id": "{3c5d0a18-f854-41a4-a439-394945519243}\u0000",
                 "owner": "{a559e92c-6d69-44f3-a955-a375559fd2fd}\u0000",
                 "Position": {
-                    "x": 0.000001832080670283176,
+                    "x": 0.000002366606622672407,
                     "y": -0.19608211517333984,
                     "z": 0.0009813308715820313
                 },
@@ -560,6 +593,9 @@
             "owner": "{a559e92c-6d69-44f3-a955-a375559fd2fd}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
             "colliderType": 0,
             "_width": 1.899999976158142,
             "_height": 0.4000000059604645,
@@ -574,7 +610,7 @@
                 "id": "{19bd27e8-0790-4fcc-bf50-c6ddd8d69850}\u0000",
                 "owner": "{84a27e3a-8967-4760-addb-ed91cf4e7aae}\u0000",
                 "Position": {
-                    "x": 0.000001832673660828732,
+                    "x": 0.000002367199613217963,
                     "y": -4.1641340255737305,
                     "z": 0.0003662109375
                 },
@@ -607,6 +643,9 @@
             "owner": "{84a27e3a-8967-4760-addb-ed91cf4e7aae}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
             "colliderType": 0,
             "_width": 2.299999952316284,
             "_height": 0.75,
@@ -621,8 +660,8 @@
                 "id": "{09c64be6-6fe8-43e2-b8ce-85490bd77770}\u0000",
                 "owner": "{43b5c634-63f1-4a7b-938a-c531f7044367}\u0000",
                 "Position": {
-                    "x": 0.000001832048837968614,
-                    "y": 1.739750862121582,
+                    "x": 0.000002366575245105196,
+                    "y": 1.7398653030395508,
                     "z": 0.001010894775390625
                 },
                 "EulerAngles": {
@@ -654,6 +693,9 @@
             "owner": "{43b5c634-63f1-4a7b-938a-c531f7044367}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
             "colliderType": 0,
             "_width": 1.899999976158142,
             "_height": 0.4000000059604645,
@@ -668,8 +710,8 @@
                 "id": "{5e3c84a8-3714-45a9-8491-59f471b5d2fc}\u0000",
                 "owner": "{cb6d2138-e8f6-49a2-a64b-3a2807935d96}\u0000",
                 "Position": {
-                    "x": 0.0000018317768990527838,
-                    "y": 3.6178760528564453,
+                    "x": 0.0000023663033061893657,
+                    "y": 3.6178765296936035,
                     "z": 0.001293182373046875
                 },
                 "EulerAngles": {
@@ -701,6 +743,9 @@
             "owner": "{cb6d2138-e8f6-49a2-a64b-3a2807935d96}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
             "colliderType": 0,
             "_width": 1.899999976158142,
             "_height": 0.4000000059604645,
@@ -715,8 +760,8 @@
                 "id": "{70ce4e14-be59-4979-b233-3b190bb6353c}\u0000",
                 "owner": "{b36c3b2a-6498-41f3-b454-2d642e8b4038}\u0000",
                 "Position": {
-                    "x": 0.0000018321879906579852,
-                    "y": -2.1612634658813477,
+                    "x": 0.000002366714397794567,
+                    "y": -2.1612114906311035,
                     "z": 0.0008716583251953125
                 },
                 "EulerAngles": {
@@ -748,6 +793,9 @@
             "owner": "{b36c3b2a-6498-41f3-b454-2d642e8b4038}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
             "colliderType": 0,
             "_width": 1.899999976158142,
             "_height": 0.4000000059604645,
@@ -762,7 +810,7 @@
                 "id": "{a0f4ff43-7ee6-45a8-8352-f71b79ba810a}\u0000",
                 "owner": "{24717526-5288-4176-8124-8ae4a5a43640}\u0000",
                 "Position": {
-                    "x": 0.000004043909939355217,
+                    "x": 0.000004578436346491799,
                     "y": 0.6881637573242188,
                     "z": -2.318291664123535
                 },
@@ -795,6 +843,9 @@
             "owner": "{24717526-5288-4176-8124-8ae4a5a43640}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
             "colliderType": 0,
             "_width": 2.0,
             "_height": 9.0,
@@ -809,7 +860,7 @@
                 "id": "{331bf593-7c4b-461e-afd0-54f9b391ca71}\u0000",
                 "owner": "{50884da3-ef81-4c2a-99a6-2d42f30d1e5b}\u0000",
                 "Position": {
-                    "x": -3.900295268977061e-7,
+                    "x": 1.4449688023887575e-7,
                     "y": 0.6881637573242188,
                     "z": 2.33103084564209
                 },
@@ -842,6 +893,9 @@
             "owner": "{50884da3-ef81-4c2a-99a6-2d42f30d1e5b}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
             "colliderType": 0,
             "_width": 2.0,
             "_height": 9.0,
@@ -899,6 +953,9 @@
             "owner": "{b4bc7a06-bb1d-49fd-b56f-8bb24b3eabc5}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.299999952316284,
             "_height": 10.800000190734863,
@@ -968,6 +1025,9 @@
             "owner": "{cf9e91ad-5ce4-4875-9392-8b8a09bcae86}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.5,
             "_height": 3.799999952316284,
@@ -1037,6 +1097,9 @@
             "owner": "{ca04ffb3-411d-4916-a1a2-e32fd2b7fea0}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.7999999523162842,
             "_height": 3.5999999046325684,
@@ -1221,6 +1284,9 @@
             "owner": "{6a959160-ac1f-46ae-88f4-1f55cc6d94bf}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.5,
             "_height": 2.5,
@@ -1290,6 +1356,9 @@
             "owner": "{0b8546fc-d379-41f2-839b-b45e55ba1b6e}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.0,
             "_height": 1.7000000476837158,
@@ -1359,6 +1428,9 @@
             "owner": "{24356d72-5421-490d-8dfc-bdd4b513d12f}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.799999952316284,
             "_height": 3.200000047683716,
@@ -1429,6 +1501,9 @@
             "owner": "{6b6003f5-045e-4251-8c03-15536fe68929}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.5,
             "_height": 0.5,
@@ -1505,6 +1580,9 @@
             "owner": "{475cd9bf-9dd5-4179-9079-7ff5fd37df63}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.5,
             "_height": 0.5,
@@ -1581,6 +1659,9 @@
             "owner": "{da00a8f3-2215-41b8-8089-701778dfc65d}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.5,
             "_height": 0.5,
@@ -1657,6 +1738,9 @@
             "owner": "{cf822b92-8ad3-4318-b6dd-5801932d16b1}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.5,
             "_height": 0.5,
@@ -1733,6 +1817,9 @@
             "owner": "{79472e0f-e48e-42d8-8b68-2c4c3b423b09}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.5,
             "_height": 0.5,
@@ -1809,6 +1896,9 @@
             "owner": "{9dfbe922-d03a-428a-8efa-852c846838f0}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.5,
             "_height": 0.5,
@@ -1885,6 +1975,9 @@
             "owner": "{ba0ae73c-e2df-4610-b394-89768688e438}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.5,
             "_height": 0.5,
@@ -1961,6 +2054,9 @@
             "owner": "{961d1777-6f3c-4e59-b9d2-05e15ce1d6af}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.5,
             "_height": 0.5,
@@ -2037,6 +2133,9 @@
             "owner": "{fbc6ba0c-4c2f-4426-bf85-32b379e840a3}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.5,
             "_height": 0.5,
@@ -2113,6 +2212,9 @@
             "owner": "{89f895c2-0589-46f2-a174-149801311dd1}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.5,
             "_height": 0.5,
@@ -2189,6 +2291,9 @@
             "owner": "{0ea1e3ca-3c83-48c1-b0e1-e5f64b6ceb57}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.5,
             "_height": 0.5,
@@ -2265,6 +2370,9 @@
             "owner": "{82f48e6e-76d7-4778-8b2e-61a9f8001cdb}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.0,
             "_height": 1.0,
@@ -2341,6 +2449,9 @@
             "owner": "{51c14867-1c3f-4db0-a130-d24bb0528ec8}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.0,
             "_height": 1.0,
@@ -2417,6 +2528,9 @@
             "owner": "{4ac3f0a8-b792-43ff-825f-5abb7aecba36}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.0,
             "_height": 1.0,
@@ -2493,6 +2607,9 @@
             "owner": "{291c954c-0260-405f-9ae4-0cfe2e16db77}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.0,
             "_height": 2.0,
@@ -2569,6 +2686,9 @@
             "owner": "{1592d943-f7f8-49bc-8be0-9a10f7311806}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.0,
             "_height": 2.0,
@@ -2691,6 +2811,9 @@
             "owner": "{a4f88878-4fe4-4109-af2a-98cf78264c2f}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 4.0,
             "_height": 4.099999904632568,
@@ -2760,6 +2883,9 @@
             "owner": "{2ea2b819-9259-4751-a662-f4a5b9417056}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.5999999046325684,
             "_height": 2.5999999046325684,
@@ -2829,6 +2955,9 @@
             "owner": "{78461e6c-1866-4b18-b7f5-7d2b11c59052}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.5999999046325684,
             "_height": 6.0,
@@ -2898,6 +3027,9 @@
             "owner": "{68dc6fe8-589b-417b-a2d8-b40c18755b52}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.700000047683716,
             "_height": 3.5,
@@ -2967,6 +3099,9 @@
             "owner": "{86fa2298-8896-4f50-b486-bfda169bd2ca}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 4.0,
             "_height": 3.5,
@@ -3036,6 +3171,9 @@
             "owner": "{180b604b-563a-4e66-a95d-8c8bbf3a7aa7}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.5,
             "_height": 3.4000000953674316,
@@ -3105,6 +3243,9 @@
             "owner": "{07e7b845-8da9-461f-b504-37b2697644be}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.700000047683716,
             "_height": 3.5,
@@ -3131,7 +3272,7 @@
                 "id": "{609a0daf-afdb-41ad-83d3-cf2342b249c2}\u0000",
                 "owner": "{be815e64-5e41-44fc-b178-d0c778cc60bd}\u0000",
                 "Position": {
-                    "x": -15.754483222961426,
+                    "x": -13.264559745788574,
                     "y": 5.223708629608154,
                     "z": 42.798336029052734
                 },
@@ -3156,8 +3297,7 @@
             },
             "components": [
                 "{489b56a6-4c23-4126-8357-0dd27b5d6388}\u0000",
-                "{ee50b3bc-7218-4d13-81ec-edbe6c83455e}\u0000",
-                "{d2748f1d-e2e5-4238-abf0-59a627e3869e}\u0000"
+                "{84320743-05b5-485e-82c7-e8951f3b4adc}\u0000"
             ]
         },
         {
@@ -3169,27 +3309,13 @@
             "CastShadow": true
         },
         {
-            "type": "BoxCollider",
-            "id": "{ee50b3bc-7218-4d13-81ec-edbe6c83455e}\u0000",
+            "type": "SphereCollider",
+            "id": "{84320743-05b5-485e-82c7-e8951f3b4adc}\u0000",
             "owner": "{be815e64-5e41-44fc-b178-d0c778cc60bd}\u0000",
             "isTrigger": false,
             "isStatic": false,
-            "colliderType": 0,
-            "_width": 1.899999976158142,
-            "_height": 1.2999999523162842,
-            "_depth": 2.0999999046325684
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{d2748f1d-e2e5-4238-abf0-59a627e3869e}\u0000",
-            "owner": "{be815e64-5e41-44fc-b178-d0c778cc60bd}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
+            "colliderType": 1,
+            "radius": 1.100000023841858
         },
         {
             "type": "Entity",
@@ -3463,6 +3589,9 @@
             "owner": "{236ffcd7-0b73-4dc8-820a-c6fdadd38b58}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.2999999523162842,
             "_height": 1.7000000476837158,
@@ -3532,6 +3661,9 @@
             "owner": "{02d3a847-1f1b-41f7-b811-d8158f8bbe4a}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.2999999523162842,
             "_height": 1.7000000476837158,
@@ -3558,7 +3690,7 @@
                 "id": "{33ac34b0-033d-421e-b652-aa0b37b102e0}\u0000",
                 "owner": "{8605f5ac-cbd6-4ec0-aa68-b3b0bc0ce67c}\u0000",
                 "Position": {
-                    "x": -16.492719650268555,
+                    "x": -13.54236125946045,
                     "y": 2.2846899032592773,
                     "z": 38.84889221191406
                 },
@@ -3602,6 +3734,9 @@
             "owner": "{8605f5ac-cbd6-4ec0-aa68-b3b0bc0ce67c}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.899999976158142,
             "_height": 3.700000047683716,
@@ -3681,6 +3816,9 @@
             "owner": "{164836ae-d86f-4a68-a086-bf4ab9a819f2}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.8999999761581421,
             "_height": 1.7000000476837158,
@@ -3750,6 +3888,9 @@
             "owner": "{f515cf92-e0dd-4334-8480-4bf5790f540d}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.100000023841858,
             "_height": 1.7000000476837158,
@@ -3819,6 +3960,9 @@
             "owner": "{b93492c4-256d-41d2-b2b0-479d99f5894b}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.700000047683716,
             "_height": 0.4000000059604645,
@@ -3887,6 +4031,9 @@
             "owner": "{b6733cc4-7eac-4fbe-8f2a-3730d44dd608}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 3.5,
             "_height": 12.5,
@@ -3943,6 +4090,9 @@
             "owner": "{0cacdf1e-3d1b-4ee7-956b-0e27988dd89c}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.800000011920929,
             "_height": 2.200000047683716,
@@ -4000,6 +4150,9 @@
             "owner": "{9616c118-3c52-42db-b563-860072d7c12a}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.2000000476837158,
             "_height": 2.5,
@@ -4069,6 +4222,9 @@
             "owner": "{294915d9-20fe-419b-a1f5-073d77360e18}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 3.4000000953674316,
             "_height": 0.10000000149011612,
@@ -4095,9 +4251,9 @@
                 "id": "{bfcb093c-189b-4665-8519-456bca52ad23}\u0000",
                 "owner": "{d83d6c3e-710a-4d96-ab13-2e94c3ad7a96}\u0000",
                 "Position": {
-                    "x": 7.900975704193115,
+                    "x": 11.265483856201172,
                     "y": 0.9570386409759521,
-                    "z": -15.569952964782715
+                    "z": -7.639102935791016
                 },
                 "EulerAngles": {
                     "x": 1.195251037901246e-12,
@@ -4138,6 +4294,9 @@
             "owner": "{d83d6c3e-710a-4d96-ab13-2e94c3ad7a96}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 4.699999809265137,
             "_height": 0.30000001192092896,
@@ -4253,6 +4412,9 @@
             "owner": "{8aced6f4-1907-46b3-ab78-4ffcba078e42}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 16.0,
             "_height": 16.0,
@@ -4310,6 +4472,9 @@
             "owner": "{0e4266ce-afb2-45f7-be7a-b252380618fb}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.399999976158142,
             "_height": 1.0,
@@ -4379,6 +4544,9 @@
             "owner": "{a1911c4f-a2b6-4a19-9b2a-32b529938eb5}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.8999999761581421,
             "_height": 1.7000000476837158,
@@ -4448,6 +4616,9 @@
             "owner": "{28f6b88e-83ae-419a-9922-b4ad7c753a74}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.8999999761581421,
             "_height": 1.7000000476837158,
@@ -4517,6 +4688,9 @@
             "owner": "{e347c390-be23-4b83-ad39-2f344932188d}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.8999999761581421,
             "_height": 1.7000000476837158,
@@ -4586,6 +4760,9 @@
             "owner": "{45411f16-e5fd-438d-bb3c-bb52bdafc116}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.299999952316284,
             "_height": 10.800000190734863,
@@ -4655,6 +4832,9 @@
             "owner": "{03e0c99a-0835-4c88-ab44-3fb52e0bb469}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.5,
             "_height": 3.799999952316284,
@@ -4724,6 +4904,9 @@
             "owner": "{578aaa93-edcf-449f-b130-5c904bad3554}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.299999952316284,
             "_height": 9.100000381469727,
@@ -4744,15 +4927,15 @@
         {
             "type": "Entity",
             "id": "{daec2471-7f84-4b95-98d7-4ed7162b0f8e}\u0000",
-            "name": "Ksiazka",
+            "name": "Book",
             "transform": {
                 "type": "Transform",
                 "id": "{0afe8965-9501-4fc2-b044-17d57727e2d5}\u0000",
                 "owner": "{daec2471-7f84-4b95-98d7-4ed7162b0f8e}\u0000",
                 "Position": {
                     "x": 5.2520833015441895,
-                    "y": 5.82084846496582,
-                    "z": -10.044185638427734
+                    "y": 5.968062877655029,
+                    "z": -17.8784236907959
                 },
                 "EulerAngles": {
                     "x": 89.99961853027344,
@@ -4793,6 +4976,9 @@
             "owner": "{daec2471-7f84-4b95-98d7-4ed7162b0f8e}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
             "colliderType": 0,
             "_width": 1.0,
             "_height": 1.649999976158142,
@@ -4862,6 +5048,9 @@
             "owner": "{fd16c84f-b327-47f1-89ba-875ef56e5e67}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.100000023841858,
             "_height": 1.7000000476837158,
@@ -4931,6 +5120,9 @@
             "owner": "{20a13ef1-dbca-49e4-bcfe-351d76c91e98}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.299999952316284,
             "_height": 10.800000190734863,
@@ -4999,6 +5191,9 @@
             "owner": "{1311491b-70b9-45e6-b5af-5d9a772f546d}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 3.5,
             "_height": 12.5,
@@ -5056,6 +5251,9 @@
             "owner": "{ae32dad3-7300-4d31-8479-71cca05c5c3d}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.5,
             "_height": 3.4000000953674316,
@@ -5130,8 +5328,8 @@
                 "owner": "{f7a27383-4b15-4663-8828-5abbc12baf12}\u0000",
                 "Position": {
                     "x": 3.763948917388916,
-                    "y": 2.2846899032592773,
-                    "z": -17.028669357299805
+                    "y": 2.2855138778686523,
+                    "z": -2.8696248531341553
                 },
                 "EulerAngles": {
                     "x": 1.0630857766357263e-13,
@@ -5173,6 +5371,9 @@
             "owner": "{f7a27383-4b15-4663-8828-5abbc12baf12}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.899999976158142,
             "_height": 3.700000047683716,
@@ -5253,6 +5454,9 @@
             "owner": "{9c37ca1d-a140-4b1c-aef3-bc2345ac3cec}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.899999976158142,
             "_height": 3.700000047683716,
@@ -5332,6 +5536,9 @@
             "owner": "{3d1c7728-8908-4250-abd6-3994d7de3959}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.899999976158142,
             "_height": 1.2999999523162842,
@@ -5402,6 +5609,9 @@
             "owner": "{bed587a2-19d7-4ad4-81a4-c31d2fc460ab}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.899999976158142,
             "_height": 3.700000047683716,
@@ -5438,7 +5648,7 @@
                 "id": "{3381f2b1-e0ff-45f9-92f1-5dd1e1c27e56}\u0000",
                 "owner": "{530b6b2f-a560-4b0e-923b-a8c803ff8b5c}\u0000",
                 "Position": {
-                    "x": -15.203458786010742,
+                    "x": -13.288398742675781,
                     "y": 2.2846899032592773,
                     "z": 42.79328155517578
                 },
@@ -5482,6 +5692,9 @@
             "owner": "{530b6b2f-a560-4b0e-923b-a8c803ff8b5c}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.899999976158142,
             "_height": 3.700000047683716,
@@ -5560,6 +5773,9 @@
             "owner": "{3b0a3173-586a-48e9-9015-048f7d431b7a}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 3.5,
             "_height": 12.5,
@@ -5616,6 +5832,9 @@
             "owner": "{92a159d4-2570-4edc-890d-1eb53c7fd2e6}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 44.099998474121094,
             "_height": 14.300000190734863,
@@ -5672,6 +5891,9 @@
             "owner": "{abcbefe7-abc2-4149-9b85-0e18d0103def}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 102.80000305175781,
             "_height": 14.300000190734863,
@@ -5728,6 +5950,9 @@
             "owner": "{507af187-b962-4dca-9655-846d06d8899f}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 44.099998474121094,
             "_height": 14.300000190734863,
@@ -5784,6 +6009,9 @@
             "owner": "{838a9b6e-b40b-458b-8acd-27b1339c2025}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 102.80000305175781,
             "_height": 14.300000190734863,
@@ -5840,6 +6068,9 @@
             "owner": "{8a70faef-c98f-47ee-bede-3efa3a97840a}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 3.5,
             "_height": 12.5,
@@ -5896,6 +6127,9 @@
             "owner": "{ebf0e422-a6f1-4bbc-98cf-4079bf3e3e38}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 3.5,
             "_height": 12.5,
@@ -5952,6 +6186,9 @@
             "owner": "{68f0c1b2-36d3-469c-908c-a2c2ca4d4782}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 3.5,
             "_height": 12.5,
@@ -6008,6 +6245,9 @@
             "owner": "{3db11ee2-6eef-403e-8096-ce5ece33f928}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.800000011920929,
             "_height": 2.200000047683716,
@@ -6109,6 +6349,9 @@
             "owner": "{1ee0ce75-257f-43b6-a439-5d5e72b6bba7}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.5999999046325684,
             "_height": 2.5999999046325684,
@@ -6137,7 +6380,7 @@
                 "Position": {
                     "x": 9.204878807067871,
                     "y": 1.4749383926391602,
-                    "z": -18.246129989624023
+                    "z": -5.851563453674316
                 },
                 "EulerAngles": {
                     "x": -2.0985676304347e-13,
@@ -6178,6 +6421,9 @@
             "owner": "{00c7b417-af04-4c4b-8cee-d2554d3a93a1}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.5999999046325684,
             "_height": 2.5999999046325684,
@@ -6247,6 +6493,9 @@
             "owner": "{4cd1c63f-49c7-47d9-bd46-b3cb87d3d32d}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.5999999046325684,
             "_height": 2.5999999046325684,
@@ -6316,6 +6565,9 @@
             "owner": "{9ff7c49a-bded-4652-8732-fde514ca446d}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.5999999046325684,
             "_height": 2.5999999046325684,
@@ -6386,6 +6638,9 @@
             "owner": "{d07c6b7f-8cf6-4c3d-a079-2ce083427c40}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.899999976158142,
             "_height": 3.700000047683716,
@@ -6465,6 +6720,9 @@
             "owner": "{fd7dbd50-f956-46fb-89c0-ba1fcf5453b6}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.700000047683716,
             "_height": 3.5,
@@ -6534,6 +6792,9 @@
             "owner": "{495355d9-7071-4f3c-964e-cdb5c7581603}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.700000047683716,
             "_height": 3.5,
@@ -6604,6 +6865,9 @@
             "owner": "{f5fced66-3466-498f-acea-8ac0d1533d76}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.899999976158142,
             "_height": 3.700000047683716,
@@ -6683,6 +6947,9 @@
             "owner": "{ec1b9a55-3a4b-4512-8c70-b229d0483bd9}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 4.699999809265137,
             "_height": 0.30000001192092896,
@@ -6752,6 +7019,9 @@
             "owner": "{49f0602a-6598-4bae-8bf3-d1d65823852a}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 2.5999999046325684,
             "_height": 2.5999999046325684,
@@ -6821,6 +7091,9 @@
             "owner": "{07814323-8353-4292-9470-eba69753dc87}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.600000023841858,
             "_height": 1.2999999523162842,
@@ -6890,6 +7163,9 @@
             "owner": "{a7963cd5-03af-44b6-9979-56490c667b39}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.2999999523162842,
             "_height": 0.20000000298023224,
@@ -6958,6 +7234,9 @@
             "owner": "{e5acf789-d414-40aa-8f6a-4c18e5f56142}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 40.0,
             "_height": 0.20000000298023224,
@@ -7014,6 +7293,9 @@
             "owner": "{0a690f2e-1183-4958-ada9-d121d1650cd6}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 40.0,
             "_height": 0.20000000298023224,
@@ -7070,6 +7352,9 @@
             "owner": "{5a5c3a6e-ba57-449f-a474-e24b819a9237}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 14.0,
             "_height": 0.20000000298023224,
@@ -7126,6 +7411,9 @@
             "owner": "{d974e517-a191-4aed-bef0-6a33bf320493}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 3.5,
             "_height": 12.5,
@@ -7182,10 +7470,2025 @@
             "owner": "{5cdd65b9-8f10-41ad-8213-8dfaf22ad23e}\u0000",
             "isTrigger": false,
             "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 3.5,
             "_height": 12.5,
             "_depth": 3.5
+        },
+        {
+            "type": "Entity",
+            "id": "{3e75a22c-7fe6-4e8f-8e8c-2446b29a1c81}\u0000",
+            "name": "Regal",
+            "transform": {
+                "type": "Transform",
+                "id": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000",
+                "owner": "{3e75a22c-7fe6-4e8f-8e8c-2446b29a1c81}\u0000",
+                "Position": {
+                    "x": -7.408714294433594,
+                    "y": 4.688531875610352,
+                    "z": 33.10603713989258
+                },
+                "EulerAngles": {
+                    "x": -179.99989318847656,
+                    "y": 89.99994659423828,
+                    "z": -179.99989318847656
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 0.9999999403953552,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": -5.684341886080801e-13,
+                    "y": 0.7071071267127991,
+                    "z": -5.684341886080801e-13,
+                    "w": 0.7071064710617065
+                },
+                "Children": [
+                    "{46497939-8758-4a7b-88da-2832018e9225}\u0000",
+                    "{0b470104-e374-4c88-bb2b-417f81f5198c}\u0000",
+                    "{e9d3d1fb-bc59-4a9f-8af3-b82c5057c1cd}\u0000",
+                    "{4853b244-a287-46a2-9290-14aa573aa5c6}\u0000",
+                    "{afb40f4b-7d32-4db9-82e8-984e406236b3}\u0000",
+                    "{e2dab23b-5f34-4a94-a60c-6409d9bd5042}\u0000",
+                    "{108de750-5329-4cc2-b3ff-ae05671940db}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{5b67c6e0-ff25-4006-8e9d-7efd942ab55e}\u0000",
+                "{1681a201-0806-4f55-a3a3-5868bc0ba5e7}\u0000",
+                "{6a1b0cdf-30c2-44c8-8c9e-b3b657bf1dde}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{5b67c6e0-ff25-4006-8e9d-7efd942ab55e}\u0000",
+            "owner": "{3e75a22c-7fe6-4e8f-8e8c-2446b29a1c81}\u0000",
+            "Material": "res\\materials\\SampleScene\\Default.mat",
+            "Model": "res/models/Modele_Mati/Meble/RegalZwykly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{1681a201-0806-4f55-a3a3-5868bc0ba5e7}\u0000",
+            "owner": "{3e75a22c-7fe6-4e8f-8e8c-2446b29a1c81}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4,
+            "collisionMask": 4294967271,
+            "colliderType": 0,
+            "_width": 2.299999952316284,
+            "_height": 9.100000381469727,
+            "_depth": 5.199999809265137
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{6a1b0cdf-30c2-44c8-8c9e-b3b657bf1dde}\u0000",
+            "owner": "{3e75a22c-7fe6-4e8f-8e8c-2446b29a1c81}\u0000",
+            "mass": 10.0,
+            "inverseMass": 0.10000000149011612,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.012000000104308128,
+            "frictionEnabled": true,
+            "restitution": 0.20600000023841858
+        },
+        {
+            "type": "Entity",
+            "id": "{6c666124-0e52-4387-840c-cd0e943e22db}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{46497939-8758-4a7b-88da-2832018e9225}\u0000",
+                "owner": "{6c666124-0e52-4387-840c-cd0e943e22db}\u0000",
+                "Position": {
+                    "x": 0.000002366606622672407,
+                    "y": -0.19608211517333984,
+                    "z": 0.0009813308715820313
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000"
+            },
+            "components": [
+                "{7d4ff419-541b-43ab-adc9-700931979b3f}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{7d4ff419-541b-43ab-adc9-700931979b3f}\u0000",
+            "owner": "{6c666124-0e52-4387-840c-cd0e943e22db}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{696eb42a-f4bb-4750-a1b2-9d15469e11fc}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{0b470104-e374-4c88-bb2b-417f81f5198c}\u0000",
+                "owner": "{696eb42a-f4bb-4750-a1b2-9d15469e11fc}\u0000",
+                "Position": {
+                    "x": 0.000002367199613217963,
+                    "y": -4.1641340255737305,
+                    "z": 0.0003662109375
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000"
+            },
+            "components": [
+                "{a38e3d51-9ec8-40b6-901d-40914f36c8d3}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{a38e3d51-9ec8-40b6-901d-40914f36c8d3}\u0000",
+            "owner": "{696eb42a-f4bb-4750-a1b2-9d15469e11fc}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 2.299999952316284,
+            "_height": 0.75,
+            "_depth": 5.5
+        },
+        {
+            "type": "Entity",
+            "id": "{752bccc0-7879-4b99-a21c-3d6268c8f6b9}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{e9d3d1fb-bc59-4a9f-8af3-b82c5057c1cd}\u0000",
+                "owner": "{752bccc0-7879-4b99-a21c-3d6268c8f6b9}\u0000",
+                "Position": {
+                    "x": 0.000002366575245105196,
+                    "y": 1.7398653030395508,
+                    "z": 0.001010894775390625
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000"
+            },
+            "components": [
+                "{f4567574-2180-439e-8f52-e6df924fc827}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{f4567574-2180-439e-8f52-e6df924fc827}\u0000",
+            "owner": "{752bccc0-7879-4b99-a21c-3d6268c8f6b9}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{1e3e02ed-54b1-4247-b337-faf0d35ee709}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{4853b244-a287-46a2-9290-14aa573aa5c6}\u0000",
+                "owner": "{1e3e02ed-54b1-4247-b337-faf0d35ee709}\u0000",
+                "Position": {
+                    "x": 0.0000023663033061893657,
+                    "y": 3.6178765296936035,
+                    "z": 0.001293182373046875
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000"
+            },
+            "components": [
+                "{2affca91-bd29-4e08-a093-6f960c2c0313}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{2affca91-bd29-4e08-a093-6f960c2c0313}\u0000",
+            "owner": "{1e3e02ed-54b1-4247-b337-faf0d35ee709}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{fe5f1e30-e5dd-4884-a926-7d5b393e21e4}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{afb40f4b-7d32-4db9-82e8-984e406236b3}\u0000",
+                "owner": "{fe5f1e30-e5dd-4884-a926-7d5b393e21e4}\u0000",
+                "Position": {
+                    "x": 0.000002366714397794567,
+                    "y": -2.1612114906311035,
+                    "z": 0.0008716583251953125
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000"
+            },
+            "components": [
+                "{5de0f168-e1e5-481f-b5ef-57523bcd56c0}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{5de0f168-e1e5-481f-b5ef-57523bcd56c0}\u0000",
+            "owner": "{fe5f1e30-e5dd-4884-a926-7d5b393e21e4}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{c6333636-ffbd-4015-80b0-5feb8e7bf2f4}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{e2dab23b-5f34-4a94-a60c-6409d9bd5042}\u0000",
+                "owner": "{c6333636-ffbd-4015-80b0-5feb8e7bf2f4}\u0000",
+                "Position": {
+                    "x": 0.000004578436346491799,
+                    "y": 0.6881637573242188,
+                    "z": -2.318291664123535
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000"
+            },
+            "components": [
+                "{de918a7d-b58a-427b-8ffe-26444570a2f3}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{de918a7d-b58a-427b-8ffe-26444570a2f3}\u0000",
+            "owner": "{c6333636-ffbd-4015-80b0-5feb8e7bf2f4}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 9.0,
+            "_depth": 0.6499999761581421
+        },
+        {
+            "type": "Entity",
+            "id": "{a2dd6c2b-73cc-4a77-87c5-2561c6b95966}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{108de750-5329-4cc2-b3ff-ae05671940db}\u0000",
+                "owner": "{a2dd6c2b-73cc-4a77-87c5-2561c6b95966}\u0000",
+                "Position": {
+                    "x": 1.4449688023887575e-7,
+                    "y": 0.6881637573242188,
+                    "z": 2.33103084564209
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000"
+            },
+            "components": [
+                "{d74ec797-d58c-497d-a2b7-7980727d0094}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{d74ec797-d58c-497d-a2b7-7980727d0094}\u0000",
+            "owner": "{a2dd6c2b-73cc-4a77-87c5-2561c6b95966}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 9.0,
+            "_depth": 0.6499999761581421
+        },
+        {
+            "type": "Entity",
+            "id": "{4f93a81f-a276-451e-ae9d-fc4caaa85424}\u0000",
+            "name": "Regal",
+            "transform": {
+                "type": "Transform",
+                "id": "{974eb68c-f788-4a95-afac-69e9ed53691d}\u0000",
+                "owner": "{4f93a81f-a276-451e-ae9d-fc4caaa85424}\u0000",
+                "Position": {
+                    "x": -13.077034950256348,
+                    "y": 4.688531875610352,
+                    "z": 33.10603713989258
+                },
+                "EulerAngles": {
+                    "x": -179.99989318847656,
+                    "y": 89.99994659423828,
+                    "z": -179.99989318847656
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 0.9999999403953552,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": -5.684341886080801e-13,
+                    "y": 0.7071071267127991,
+                    "z": -5.684341886080801e-13,
+                    "w": 0.7071064710617065
+                },
+                "Children": [
+                    "{d7757fca-10b8-4d89-b5d3-bb0b5f86935d}\u0000",
+                    "{8511d71c-af44-4ffc-bd36-832960d6a936}\u0000",
+                    "{970f2331-299d-4e87-8503-66b1e034668c}\u0000",
+                    "{efd85c97-5588-465c-9f57-44339d8b4aeb}\u0000",
+                    "{5fb4d8e8-3b0a-4587-bc6c-dad76428b05b}\u0000",
+                    "{85aef1f4-5c8d-4ebb-bc58-b2932e92e689}\u0000",
+                    "{4c81509d-6850-4281-b272-7b38d81343cd}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{08032cc8-bf43-4e6f-b457-857366ffe65b}\u0000",
+                "{5040a7ba-8c31-4376-9de4-27a3e5dd24f2}\u0000",
+                "{bfb1f054-fe0e-489a-aa35-ba9565d11656}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{08032cc8-bf43-4e6f-b457-857366ffe65b}\u0000",
+            "owner": "{4f93a81f-a276-451e-ae9d-fc4caaa85424}\u0000",
+            "Material": "res\\materials\\SampleScene\\Default.mat",
+            "Model": "res/models/Modele_Mati/Meble/RegalZwykly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{5040a7ba-8c31-4376-9de4-27a3e5dd24f2}\u0000",
+            "owner": "{4f93a81f-a276-451e-ae9d-fc4caaa85424}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4,
+            "collisionMask": 4294967271,
+            "colliderType": 0,
+            "_width": 2.299999952316284,
+            "_height": 9.100000381469727,
+            "_depth": 5.199999809265137
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{bfb1f054-fe0e-489a-aa35-ba9565d11656}\u0000",
+            "owner": "{4f93a81f-a276-451e-ae9d-fc4caaa85424}\u0000",
+            "mass": 10.0,
+            "inverseMass": 0.10000000149011612,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.012000000104308128,
+            "frictionEnabled": true,
+            "restitution": 0.20600000023841858
+        },
+        {
+            "type": "Entity",
+            "id": "{92e22751-3c0b-4b8f-9476-b882877cc062}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{d7757fca-10b8-4d89-b5d3-bb0b5f86935d}\u0000",
+                "owner": "{92e22751-3c0b-4b8f-9476-b882877cc062}\u0000",
+                "Position": {
+                    "x": 0.000002366606622672407,
+                    "y": -0.19608211517333984,
+                    "z": 0.0009813308715820313
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{974eb68c-f788-4a95-afac-69e9ed53691d}\u0000"
+            },
+            "components": [
+                "{9cd2bd1d-e344-4f4e-bb24-0ef67fb41542}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{9cd2bd1d-e344-4f4e-bb24-0ef67fb41542}\u0000",
+            "owner": "{92e22751-3c0b-4b8f-9476-b882877cc062}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{4c7d2509-1719-49f0-ac72-c14f9a6fa6b9}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{8511d71c-af44-4ffc-bd36-832960d6a936}\u0000",
+                "owner": "{4c7d2509-1719-49f0-ac72-c14f9a6fa6b9}\u0000",
+                "Position": {
+                    "x": 0.000002367199613217963,
+                    "y": -4.1641340255737305,
+                    "z": 0.0003662109375
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{974eb68c-f788-4a95-afac-69e9ed53691d}\u0000"
+            },
+            "components": [
+                "{ed7ac2ef-79b0-496f-bd51-30cad484f7c0}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{ed7ac2ef-79b0-496f-bd51-30cad484f7c0}\u0000",
+            "owner": "{4c7d2509-1719-49f0-ac72-c14f9a6fa6b9}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 2.299999952316284,
+            "_height": 0.75,
+            "_depth": 5.5
+        },
+        {
+            "type": "Entity",
+            "id": "{02cf5a3d-e977-4eb9-aff1-bbb63b27a8b1}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{970f2331-299d-4e87-8503-66b1e034668c}\u0000",
+                "owner": "{02cf5a3d-e977-4eb9-aff1-bbb63b27a8b1}\u0000",
+                "Position": {
+                    "x": 0.000002366575245105196,
+                    "y": 1.7398653030395508,
+                    "z": 0.001010894775390625
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{974eb68c-f788-4a95-afac-69e9ed53691d}\u0000"
+            },
+            "components": [
+                "{6a7d5b6c-fdae-4b79-bab4-df0f81f1d19f}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{6a7d5b6c-fdae-4b79-bab4-df0f81f1d19f}\u0000",
+            "owner": "{02cf5a3d-e977-4eb9-aff1-bbb63b27a8b1}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{ca640ce8-a3a0-47ec-b036-d140eec9c47f}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{efd85c97-5588-465c-9f57-44339d8b4aeb}\u0000",
+                "owner": "{ca640ce8-a3a0-47ec-b036-d140eec9c47f}\u0000",
+                "Position": {
+                    "x": 0.0000023663033061893657,
+                    "y": 3.6178765296936035,
+                    "z": 0.001293182373046875
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{974eb68c-f788-4a95-afac-69e9ed53691d}\u0000"
+            },
+            "components": [
+                "{48688261-f7d4-462f-9216-2ec88fcaaefa}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{48688261-f7d4-462f-9216-2ec88fcaaefa}\u0000",
+            "owner": "{ca640ce8-a3a0-47ec-b036-d140eec9c47f}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{7b435643-8526-4fe5-99b3-f2326731e091}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{5fb4d8e8-3b0a-4587-bc6c-dad76428b05b}\u0000",
+                "owner": "{7b435643-8526-4fe5-99b3-f2326731e091}\u0000",
+                "Position": {
+                    "x": 0.000002366714397794567,
+                    "y": -2.1612114906311035,
+                    "z": 0.0008716583251953125
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{974eb68c-f788-4a95-afac-69e9ed53691d}\u0000"
+            },
+            "components": [
+                "{cac7b186-6acb-4cee-aa1d-bc57bedcab50}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{cac7b186-6acb-4cee-aa1d-bc57bedcab50}\u0000",
+            "owner": "{7b435643-8526-4fe5-99b3-f2326731e091}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{98e20f9b-8eb6-4edd-921b-8960317228ec}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{85aef1f4-5c8d-4ebb-bc58-b2932e92e689}\u0000",
+                "owner": "{98e20f9b-8eb6-4edd-921b-8960317228ec}\u0000",
+                "Position": {
+                    "x": 0.000004578436346491799,
+                    "y": 0.6881637573242188,
+                    "z": -2.318291664123535
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{974eb68c-f788-4a95-afac-69e9ed53691d}\u0000"
+            },
+            "components": [
+                "{81fcf3f9-914e-47fc-a63f-57d88f99f27a}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{81fcf3f9-914e-47fc-a63f-57d88f99f27a}\u0000",
+            "owner": "{98e20f9b-8eb6-4edd-921b-8960317228ec}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 9.0,
+            "_depth": 0.6499999761581421
+        },
+        {
+            "type": "Entity",
+            "id": "{be69182a-4b9c-4179-ad91-a6c91332a365}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{4c81509d-6850-4281-b272-7b38d81343cd}\u0000",
+                "owner": "{be69182a-4b9c-4179-ad91-a6c91332a365}\u0000",
+                "Position": {
+                    "x": 1.4449688023887575e-7,
+                    "y": 0.6881637573242188,
+                    "z": 2.33103084564209
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{974eb68c-f788-4a95-afac-69e9ed53691d}\u0000"
+            },
+            "components": [
+                "{9c6e5167-013e-4fc1-be28-5df7dc23251a}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{9c6e5167-013e-4fc1-be28-5df7dc23251a}\u0000",
+            "owner": "{be69182a-4b9c-4179-ad91-a6c91332a365}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 9.0,
+            "_depth": 0.6499999761581421
+        },
+        {
+            "type": "Entity",
+            "id": "{cb7b6c5e-1c57-42df-8255-ce96677b15bc}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{1ab21694-1d8c-44be-acae-50a825ec666f}\u0000",
+                "owner": "{cb7b6c5e-1c57-42df-8255-ce96677b15bc}\u0000",
+                "Position": {
+                    "x": -14.12588119506836,
+                    "y": 5.300204277038574,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{25d0d22b-8967-41e9-989f-d93d056e4906}\u0000",
+                "{b2640ab9-977d-4a9b-b369-46d5b95b17c4}\u0000",
+                "{24ba5fe2-9f7e-4356-a9f2-64b46ad9eef0}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{25d0d22b-8967-41e9-989f-d93d056e4906}\u0000",
+            "owner": "{cb7b6c5e-1c57-42df-8255-ce96677b15bc}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{b2640ab9-977d-4a9b-b369-46d5b95b17c4}\u0000",
+            "owner": "{cb7b6c5e-1c57-42df-8255-ce96677b15bc}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{24ba5fe2-9f7e-4356-a9f2-64b46ad9eef0}\u0000",
+            "owner": "{cb7b6c5e-1c57-42df-8255-ce96677b15bc}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{aff15d2b-9c15-4298-94dd-65322cde47e5}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{4769e917-684d-4c8e-8347-7e6ea0ca75ed}\u0000",
+                "owner": "{aff15d2b-9c15-4298-94dd-65322cde47e5}\u0000",
+                "Position": {
+                    "x": -12.899653434753418,
+                    "y": 7.31101655960083,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{c0f617cc-624e-4845-b69c-6212dacef00a}\u0000",
+                "{61f87a32-dfb9-4f86-ae3d-4fed6b25e402}\u0000",
+                "{5bc8960b-ede4-4bd1-9554-fde0535a9450}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{c0f617cc-624e-4845-b69c-6212dacef00a}\u0000",
+            "owner": "{aff15d2b-9c15-4298-94dd-65322cde47e5}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{61f87a32-dfb9-4f86-ae3d-4fed6b25e402}\u0000",
+            "owner": "{aff15d2b-9c15-4298-94dd-65322cde47e5}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{5bc8960b-ede4-4bd1-9554-fde0535a9450}\u0000",
+            "owner": "{aff15d2b-9c15-4298-94dd-65322cde47e5}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{f0341b70-1fe8-4459-b715-2315fbbd9348}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{b058ce79-18d7-4fa5-976d-97ce013d1410}\u0000",
+                "owner": "{f0341b70-1fe8-4459-b715-2315fbbd9348}\u0000",
+                "Position": {
+                    "x": -14.674625396728516,
+                    "y": 5.300204277038574,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{919fc296-73a2-4b50-9270-4fc67096d6cf}\u0000",
+                "{60d0f921-4bf2-4d30-8782-6b6d2a16c8fc}\u0000",
+                "{6bd37f76-2f14-443a-9f1e-2fbe1c7d710c}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{919fc296-73a2-4b50-9270-4fc67096d6cf}\u0000",
+            "owner": "{f0341b70-1fe8-4459-b715-2315fbbd9348}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{60d0f921-4bf2-4d30-8782-6b6d2a16c8fc}\u0000",
+            "owner": "{f0341b70-1fe8-4459-b715-2315fbbd9348}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{6bd37f76-2f14-443a-9f1e-2fbe1c7d710c}\u0000",
+            "owner": "{f0341b70-1fe8-4459-b715-2315fbbd9348}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{c98fde7e-c18d-4d4c-9b8f-e398a5f40615}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{220eddff-2f49-4c32-bd7e-ea52defa40fa}\u0000",
+                "owner": "{c98fde7e-c18d-4d4c-9b8f-e398a5f40615}\u0000",
+                "Position": {
+                    "x": -13.555408477783203,
+                    "y": 5.300204277038574,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{6c5dec35-4775-481b-b1d8-738bdcc68603}\u0000",
+                "{f101d420-f442-4e9a-b68a-02f08fd0441f}\u0000",
+                "{a7cd67df-b31a-4b07-8981-89c576975f02}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{6c5dec35-4775-481b-b1d8-738bdcc68603}\u0000",
+            "owner": "{c98fde7e-c18d-4d4c-9b8f-e398a5f40615}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{f101d420-f442-4e9a-b68a-02f08fd0441f}\u0000",
+            "owner": "{c98fde7e-c18d-4d4c-9b8f-e398a5f40615}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{a7cd67df-b31a-4b07-8981-89c576975f02}\u0000",
+            "owner": "{c98fde7e-c18d-4d4c-9b8f-e398a5f40615}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{e25e1c3b-a140-43c3-90c8-a3f589276fae}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{47994291-b034-41cd-a8dc-8696295a3b07}\u0000",
+                "owner": "{e25e1c3b-a140-43c3-90c8-a3f589276fae}\u0000",
+                "Position": {
+                    "x": -13.555408477783203,
+                    "y": 7.318380355834961,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{dae51882-f852-482c-926b-b98bb017a6b6}\u0000",
+                "{18201d99-690e-4172-8d46-c584eccda31d}\u0000",
+                "{94bee23f-b2b2-4216-92f2-96ef56ddcd9b}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{dae51882-f852-482c-926b-b98bb017a6b6}\u0000",
+            "owner": "{e25e1c3b-a140-43c3-90c8-a3f589276fae}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{18201d99-690e-4172-8d46-c584eccda31d}\u0000",
+            "owner": "{e25e1c3b-a140-43c3-90c8-a3f589276fae}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{94bee23f-b2b2-4216-92f2-96ef56ddcd9b}\u0000",
+            "owner": "{e25e1c3b-a140-43c3-90c8-a3f589276fae}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{4076aed4-3c15-4a49-8248-4e0f3837b781}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{6d672d27-5ba4-4825-ae1e-ddee0067cd3e}\u0000",
+                "owner": "{4076aed4-3c15-4a49-8248-4e0f3837b781}\u0000",
+                "Position": {
+                    "x": -13.555408477783203,
+                    "y": 7.318380355834961,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{73f02ca7-fc8d-466a-8d27-ffff353229c9}\u0000",
+                "{a4564a66-9058-4914-b33a-a0bd5b113c0e}\u0000",
+                "{566f73d4-daff-4a85-bfdc-cb0da50f1f38}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{73f02ca7-fc8d-466a-8d27-ffff353229c9}\u0000",
+            "owner": "{4076aed4-3c15-4a49-8248-4e0f3837b781}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{a4564a66-9058-4914-b33a-a0bd5b113c0e}\u0000",
+            "owner": "{4076aed4-3c15-4a49-8248-4e0f3837b781}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{566f73d4-daff-4a85-bfdc-cb0da50f1f38}\u0000",
+            "owner": "{4076aed4-3c15-4a49-8248-4e0f3837b781}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{3dca4665-eb34-4012-82cb-48aace7de126}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{c618e643-5268-4632-a253-64a90bea8afe}\u0000",
+                "owner": "{3dca4665-eb34-4012-82cb-48aace7de126}\u0000",
+                "Position": {
+                    "x": -7.320743083953857,
+                    "y": 9.156721115112305,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{f153bf72-5e0c-48c5-826e-f3621781471e}\u0000",
+                "{4f42fd63-9383-4a37-a582-0487e69af9d5}\u0000",
+                "{6a18a922-b120-4a1c-924d-42a3a6f34fb2}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{f153bf72-5e0c-48c5-826e-f3621781471e}\u0000",
+            "owner": "{3dca4665-eb34-4012-82cb-48aace7de126}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{4f42fd63-9383-4a37-a582-0487e69af9d5}\u0000",
+            "owner": "{3dca4665-eb34-4012-82cb-48aace7de126}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{6a18a922-b120-4a1c-924d-42a3a6f34fb2}\u0000",
+            "owner": "{3dca4665-eb34-4012-82cb-48aace7de126}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{b29971f7-a649-43f6-87c8-68645889b02c}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{a499b91f-bb8c-4b8d-bce0-8b70107fd125}\u0000",
+                "owner": "{b29971f7-a649-43f6-87c8-68645889b02c}\u0000",
+                "Position": {
+                    "x": -12.899653434753418,
+                    "y": 3.368169069290161,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{1b231f1a-c0fb-4b7c-ada5-5c9ae1b81944}\u0000",
+                "{b8cb1c74-ade0-4bb2-ace8-62edf43ee942}\u0000",
+                "{1f138efb-fd34-4ea2-9d05-35eb128739d8}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{1b231f1a-c0fb-4b7c-ada5-5c9ae1b81944}\u0000",
+            "owner": "{b29971f7-a649-43f6-87c8-68645889b02c}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{b8cb1c74-ade0-4bb2-ace8-62edf43ee942}\u0000",
+            "owner": "{b29971f7-a649-43f6-87c8-68645889b02c}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{1f138efb-fd34-4ea2-9d05-35eb128739d8}\u0000",
+            "owner": "{b29971f7-a649-43f6-87c8-68645889b02c}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{a22e0c23-b06b-4091-a050-aea1ecc7853d}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{9a599d94-9815-4fd8-8a91-3f05e1687c36}\u0000",
+                "owner": "{a22e0c23-b06b-4091-a050-aea1ecc7853d}\u0000",
+                "Position": {
+                    "x": -12.295575141906738,
+                    "y": 3.368169069290161,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{e46908b8-3d2f-4359-87ff-d7bcce2f8125}\u0000",
+                "{c8e217b7-264c-40b9-85f9-749e5ea33e30}\u0000",
+                "{596c5bdf-cfbf-4f25-b016-53494d9225e6}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{e46908b8-3d2f-4359-87ff-d7bcce2f8125}\u0000",
+            "owner": "{a22e0c23-b06b-4091-a050-aea1ecc7853d}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{c8e217b7-264c-40b9-85f9-749e5ea33e30}\u0000",
+            "owner": "{a22e0c23-b06b-4091-a050-aea1ecc7853d}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{596c5bdf-cfbf-4f25-b016-53494d9225e6}\u0000",
+            "owner": "{a22e0c23-b06b-4091-a050-aea1ecc7853d}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{008d6513-15dc-4e65-a0ea-fc51542ffd60}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{4d569b82-1ba6-4941-83c2-f237ed06e37b}\u0000",
+                "owner": "{008d6513-15dc-4e65-a0ea-fc51542ffd60}\u0000",
+                "Position": {
+                    "x": -12.295575141906738,
+                    "y": 3.368169069290161,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{afa16158-580d-496f-9980-6ab7c6a19eac}\u0000",
+                "{9494ba4f-d300-481d-ad6a-9f3deec3057f}\u0000",
+                "{e1a1c3b0-9daf-477e-99c9-083989a1eb95}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{afa16158-580d-496f-9980-6ab7c6a19eac}\u0000",
+            "owner": "{008d6513-15dc-4e65-a0ea-fc51542ffd60}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{9494ba4f-d300-481d-ad6a-9f3deec3057f}\u0000",
+            "owner": "{008d6513-15dc-4e65-a0ea-fc51542ffd60}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{e1a1c3b0-9daf-477e-99c9-083989a1eb95}\u0000",
+            "owner": "{008d6513-15dc-4e65-a0ea-fc51542ffd60}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{0dd82e8b-4b7f-4fa7-9823-dfb12fdc4889}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{9e9199e1-99d7-4584-88a5-c1de2b2a3a65}\u0000",
+                "owner": "{0dd82e8b-4b7f-4fa7-9823-dfb12fdc4889}\u0000",
+                "Position": {
+                    "x": -8.180933952331543,
+                    "y": 3.368169069290161,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{a15aae98-fcc5-4a4f-bca0-e67fc9841983}\u0000",
+                "{cdf3052e-1ad9-402c-a9f7-61a7ae565e96}\u0000",
+                "{5b4ec6a8-c3e4-4a7e-b8b0-4801be470993}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{a15aae98-fcc5-4a4f-bca0-e67fc9841983}\u0000",
+            "owner": "{0dd82e8b-4b7f-4fa7-9823-dfb12fdc4889}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{cdf3052e-1ad9-402c-a9f7-61a7ae565e96}\u0000",
+            "owner": "{0dd82e8b-4b7f-4fa7-9823-dfb12fdc4889}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{5b4ec6a8-c3e4-4a7e-b8b0-4801be470993}\u0000",
+            "owner": "{0dd82e8b-4b7f-4fa7-9823-dfb12fdc4889}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{2112e62c-23a3-4674-96a3-562a4de65af0}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{e1668ce1-a181-4892-ba38-5264d47f4837}\u0000",
+                "owner": "{2112e62c-23a3-4674-96a3-562a4de65af0}\u0000",
+                "Position": {
+                    "x": -7.603254795074463,
+                    "y": 3.368169069290161,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{0fae312a-4715-4760-8b8f-e1653fec4af4}\u0000",
+                "{0d1e26f3-afb4-49c4-bf27-bdc56114fc04}\u0000",
+                "{bac064ed-b7b0-473a-a2a8-a413f4590938}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{0fae312a-4715-4760-8b8f-e1653fec4af4}\u0000",
+            "owner": "{2112e62c-23a3-4674-96a3-562a4de65af0}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{0d1e26f3-afb4-49c4-bf27-bdc56114fc04}\u0000",
+            "owner": "{2112e62c-23a3-4674-96a3-562a4de65af0}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{bac064ed-b7b0-473a-a2a8-a413f4590938}\u0000",
+            "owner": "{2112e62c-23a3-4674-96a3-562a4de65af0}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{96950c33-b41d-4e83-9708-3d7b00a05fd5}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{d86907d4-7819-4fcf-b1f8-89aeffb0f378}\u0000",
+                "owner": "{96950c33-b41d-4e83-9708-3d7b00a05fd5}\u0000",
+                "Position": {
+                    "x": -7.01893424987793,
+                    "y": 3.368169069290161,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{acf536a1-d761-4bfd-a370-53909ec49089}\u0000",
+                "{1491b0a0-8ab7-4067-befa-99d44c18c69a}\u0000",
+                "{a36d53ea-1f9c-4200-8a4b-64d7b2d6883f}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{acf536a1-d761-4bfd-a370-53909ec49089}\u0000",
+            "owner": "{96950c33-b41d-4e83-9708-3d7b00a05fd5}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{1491b0a0-8ab7-4067-befa-99d44c18c69a}\u0000",
+            "owner": "{96950c33-b41d-4e83-9708-3d7b00a05fd5}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{a36d53ea-1f9c-4200-8a4b-64d7b2d6883f}\u0000",
+            "owner": "{96950c33-b41d-4e83-9708-3d7b00a05fd5}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{94612325-9523-42db-a5ac-3a2eb6343dd2}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{126f334f-9685-4b6e-b812-075108ba3fa4}\u0000",
+                "owner": "{94612325-9523-42db-a5ac-3a2eb6343dd2}\u0000",
+                "Position": {
+                    "x": -6.409078598022461,
+                    "y": 3.368169069290161,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{6a2bab7f-1bf5-47f9-bbfa-30504b7e3504}\u0000",
+                "{168708a9-9f91-4ead-aa05-77d65d084d3b}\u0000",
+                "{1079981b-9fff-4022-ab3e-d11d906ac6a3}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{6a2bab7f-1bf5-47f9-bbfa-30504b7e3504}\u0000",
+            "owner": "{94612325-9523-42db-a5ac-3a2eb6343dd2}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{168708a9-9f91-4ead-aa05-77d65d084d3b}\u0000",
+            "owner": "{94612325-9523-42db-a5ac-3a2eb6343dd2}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{1079981b-9fff-4022-ab3e-d11d906ac6a3}\u0000",
+            "owner": "{94612325-9523-42db-a5ac-3a2eb6343dd2}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{d428f6b1-eaf3-41b9-9420-c0d005bb6f7f}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{6b1e85d9-7932-4135-a691-20831ba51804}\u0000",
+                "owner": "{d428f6b1-eaf3-41b9-9420-c0d005bb6f7f}\u0000",
+                "Position": {
+                    "x": -6.585467338562012,
+                    "y": 5.319713115692139,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{8e241147-6f58-4cb7-93b1-bdd1dd6c32ff}\u0000",
+                "{eb24c95a-3cbb-42fb-8425-b3569035f711}\u0000",
+                "{3a88bbf0-cdf2-4aa0-b28f-2bf2dae38562}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{8e241147-6f58-4cb7-93b1-bdd1dd6c32ff}\u0000",
+            "owner": "{d428f6b1-eaf3-41b9-9420-c0d005bb6f7f}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{eb24c95a-3cbb-42fb-8425-b3569035f711}\u0000",
+            "owner": "{d428f6b1-eaf3-41b9-9420-c0d005bb6f7f}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{3a88bbf0-cdf2-4aa0-b28f-2bf2dae38562}\u0000",
+            "owner": "{d428f6b1-eaf3-41b9-9420-c0d005bb6f7f}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Entity",
+            "id": "{403c6cb3-6a7f-4491-8a53-c27474ea56aa}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{6a2b0819-0370-4a4a-9ba0-45346977e5eb}\u0000",
+                "owner": "{403c6cb3-6a7f-4491-8a53-c27474ea56aa}\u0000",
+                "Position": {
+                    "x": -8.661666870117188,
+                    "y": 9.156721115112305,
+                    "z": 33.27007293701172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.699999988079071,
+                    "y": 0.699999988079071,
+                    "z": 0.699999988079071
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{aa8f7ebe-5732-4aeb-9a88-c9b79a9ac937}\u0000",
+                "{1caa34a0-12fb-4d59-9d34-1fdb0597d541}\u0000",
+                "{d595f686-c565-4da9-9c07-99114d811d1b}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{aa8f7ebe-5732-4aeb-9a88-c9b79a9ac937}\u0000",
+            "owner": "{403c6cb3-6a7f-4491-8a53-c27474ea56aa}\u0000",
+            "Material": "./res/materials/SampleScene/Default.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{1caa34a0-12fb-4d59-9d34-1fdb0597d541}\u0000",
+            "owner": "{403c6cb3-6a7f-4491-8a53-c27474ea56aa}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.699999988079071,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{d595f686-c565-4da9-9c07-99114d811d1b}\u0000",
+            "owner": "{403c6cb3-6a7f-4491-8a53-c27474ea56aa}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
         }
     ]
 }
