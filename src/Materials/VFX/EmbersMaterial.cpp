@@ -1,5 +1,6 @@
 #include "EmbersMaterial.h"
 
+#include "Engine/Textures/TextureManager.h"
 #include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
 #include "Shaders/ShaderSourceFiles.h"
