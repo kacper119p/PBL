@@ -47,7 +47,6 @@ namespace Engine
     {
         Renderer::Start();
         UpdateManager::GetInstance()->RegisterComponent(this);
-        Activate();
     }
 
     void VacuumVfx::Update(const float DeltaTime)

@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine/Components/Renderers/AnimatedModelRenderer.h"
+#include "Engine/Components/VFX/VacuumVfx.h"
 namespace Engine
 {
     class PlayerAnimationManager
@@ -11,10 +12,13 @@ namespace Engine
         float RightHandAnimationDuration;
         AnimatedModelRenderer* HandLeft = nullptr;
         AnimatedModelRenderer* HandRight = nullptr;
+        
+        VacuumVfx* vacuumVfx = nullptr;
     public:
         AnimatedModelRenderer* TrackLeft = nullptr;
         AnimatedModelRenderer* TrackRight = nullptr;
-        
+
+        bool isVacuumActive = false;
 
         int LeftHandPosition = 0;
         int RightHandPosition = 0;
@@ -47,6 +51,28 @@ namespace Engine
             HandRight = handRight;
             RightHandAnimationDuration = handRight->GetAnimation()->GetDuration();
             HandRight->GetAnimator().PauseAnimation();
+        }
+        void SetVacuumVfx(VacuumVfx* Vfx) 
+        { 
+            vacuumVfx = Vfx; 
+            isVacuumActive = false;
+
+        }
+        void SetVacuumActive() 
+        { 
+            if (vacuumVfx!=nullptr) 
+            {
+                vacuumVfx->Activate();
+                isVacuumActive = true;
+            }
+        }
+        void SetVacuumInactive()
+        {
+            if (vacuumVfx != nullptr)
+            {
+                vacuumVfx->Deactivate();
+                isVacuumActive = false;
+            }
         }
         float GetTickForFrame(int frame, int totalFrames, float duration)
         {
