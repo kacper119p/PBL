@@ -1,5 +1,6 @@
 #pragma once
 #if EDITOR
+#include <unordered_set>
 #include "Engine/Components/Transform.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/EngineObjects/GizmoManager.h"
@@ -11,7 +12,7 @@ namespace Engine
     {
     private:
         Transform* Root;
-        Transform* SelectedEntity;
+        std::unordered_set<Transform*> SelectedEntities;
         static SceneHierarchyGUI* Instance;
         std::string SelectedPrefabPath;
 
@@ -27,19 +28,24 @@ namespace Engine
             return Instance;
         }
 
+        Transform* GetRoot() { return Root; }
+
         void SetRoot(Transform* root)
         {
             Root = root;
-            SelectedEntity = nullptr;
+            SelectedEntities.clear();
         }
 
         void DrawHierarchy(Transform* entity, Scene* scene);
 
         void Draw(Scene* scene);
 
-        Transform* GetSelectedEntity() const { return SelectedEntity; }
+        std::unordered_set<Transform*>& GetSelectedEntities() { return SelectedEntities; }
 
-        void SetSelectedEntity(Transform* entity) { SelectedEntity = entity; }
+        void SetSelectedEntities(const std::unordered_set<Transform*>& entities)
+        {
+            SelectedEntities = entities;
+        }
 
         void AddEntityToScene(Scene* scene, Entity* parent);
 

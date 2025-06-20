@@ -10,8 +10,9 @@
 #include "imgui.h"
 
 Engine::SceneHierarchyGUI::SceneHierarchyGUI(Transform* Root) :
-    Root(Root), SelectedEntity(nullptr)
+    Root(Root)
 {
+    SelectedEntities.clear();
 }
 
 Engine::SceneHierarchyGUI* Engine::SceneHierarchyGUI::Instance = nullptr;
@@ -23,10 +24,9 @@ void Engine::SceneHierarchyGUI::DrawHierarchy(Transform* entity, Scene* scene)
 
     ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
 
-        
 
     if (IsManagedTransform(entity))
-            flags |= ImGuiTreeNodeFlags_Selected;
+        flags |= ImGuiTreeNodeFlags_Selected;
 
     const bool hasChildren = !entity->GetChildren().empty();
     if (!hasChildren)
@@ -46,13 +46,22 @@ void Engine::SceneHierarchyGUI::DrawHierarchy(Transform* entity, Scene* scene)
     {
         if (ImGui::IsKeyDown(ImGuiKey_LeftCtrl))
         {
-            SelectedEntity = entity;
-            GizmoManager::GetInstance()->AddToManaged(SelectedEntity);
+            if (SelectedEntities.count(entity))
+            {
+                SelectedEntities.erase(entity);
+                GizmoManager::GetInstance()->RemoveFromManaged(entity);
+            }
+            else
+            {
+                SelectedEntities.insert(entity);
+                GizmoManager::GetInstance()->AddToManaged(entity);
+            }
         }
         else
         {
-            SelectedEntity = entity;
-            GizmoManager::GetInstance()->SetManaged(SelectedEntity);
+            SelectedEntities.clear();
+            GizmoManager::GetInstance()->SetManaged(entity);
+            SelectedEntities.insert(entity);
         }
     }
 
@@ -125,27 +134,40 @@ void Engine::SceneHierarchyGUI::Draw(Scene* scene)
     }
 
     // Entity deletion
-    if (SelectedEntity && ImGui::IsWindowFocused() && ImGui::IsKeyPressed(ImGuiKey_Delete))
+    if (!SelectedEntities.empty() && ImGui::IsWindowFocused() && ImGui::IsKeyPressed(ImGuiKey_Delete))
     {
-        if (SelectedEntity != Root)
+        for (Transform* entity : SelectedEntities)
         {
-            scene->DeleteEntity(SelectedEntity->GetOwner());
-            SelectedEntity = nullptr;
+            if (entity != Root)
+            {
+                scene->DeleteEntity(entity->GetOwner());
+            }
         }
+        SelectedEntities.clear();
+        GizmoManager::GetInstance()->ClearManaged();
     }
 
     // Entity duplication
-    if (SelectedEntity
+    if (!SelectedEntities.empty()
         && ImGui::IsWindowFocused()
         && (ImGui::IsKeyDown(ImGuiKey_LeftCtrl) || ImGui::IsKeyDown(ImGuiKey_RightCtrl))
         && ImGui::IsKeyPressed(ImGuiKey_D))
     {
-        if (SelectedEntity != Root)
-        {
-            SelectedEntity = SelectedEntity->GetOwner()->CloneAsConcrete()->GetTransform();
-        }
-    }
+        std::unordered_set<Transform*> newSelection;
+        GizmoManager::GetInstance()->ClearManaged();
 
+        for (Transform* entity : SelectedEntities)
+        {
+            if (entity != Root)
+            {
+                Transform* cloned = entity->GetOwner()->CloneAsConcrete()->GetTransform();
+                newSelection.insert(cloned);
+                GizmoManager::GetInstance()->AddToManaged(cloned);
+            }
+        }
+
+        SelectedEntities = std::move(newSelection);
+    }
 
     ImGui::End();
 }

@@ -152,24 +152,69 @@ void Engine::SceneViewGUI::Draw(CameraRenderData renderData, Scene* scene)
 
             RaycastRecursive(scene->GetRoot()->GetTransform(), rayOrigin, rayDirection, selectedObject, closestT);
 
+            auto gui = SceneHierarchyGUI::GetInstance();
+            auto gizmo = GizmoManager::GetInstance();
+
             if (selectedObject)
             {
                 if (ImGui::IsKeyDown(ImGuiKey_LeftCtrl))
                 {
-                    GizmoManager::GetInstance()->AddToManaged(selectedObject);
+                    gui->GetSelectedEntities().insert(selectedObject);
+                    gizmo->AddToManaged(selectedObject);
                 }
                 else
                 {
-                    GizmoManager::GetInstance()->SetManaged(selectedObject);
+                    gui->GetSelectedEntities().clear();
+                    gizmo->ClearManaged();
+
+                    gui->GetSelectedEntities().insert(selectedObject);
+                    gizmo->AddToManaged(selectedObject);
                 }
-                SceneHierarchyGUI::GetInstance()->SetSelectedEntity(selectedObject);
             }
             else
             {
-                GizmoManager::GetInstance()->SetManaged(nullptr);
-                SceneHierarchyGUI::GetInstance()->SetSelectedEntity(nullptr);
+                gui->GetSelectedEntities().clear();
+                gizmo->ClearManaged();
             }
         }
+    }
+
+    auto gui = SceneHierarchyGUI::GetInstance();
+    auto& SelectedEntities = gui->GetSelectedEntities();
+    auto gizmo = GizmoManager::GetInstance();
+
+    if (!SelectedEntities.empty() && ImGui::IsWindowFocused() && ImGui::IsKeyPressed(ImGuiKey_Delete))
+    {
+        for (Transform* entity : SelectedEntities)
+        {
+            if (entity != gui->GetRoot())
+            {
+                scene->DeleteEntity(entity->GetOwner());
+            }
+        }
+        SelectedEntities.clear();
+        gizmo->ClearManaged();
+    }
+
+    if (!SelectedEntities.empty()
+        && ImGui::IsWindowFocused()
+        && (ImGui::IsKeyDown(ImGuiKey_LeftCtrl) || ImGui::IsKeyDown(ImGuiKey_RightCtrl))
+        && ImGui::IsKeyPressed(ImGuiKey_D))
+    {
+        std::unordered_set<Transform*> newSelection;
+        gizmo->ClearManaged();
+
+        for (Transform* entity : SelectedEntities)
+        {
+            if (entity != gui->GetRoot())
+            {
+                Transform* cloned = entity->GetOwner()->CloneAsConcrete()->GetTransform();
+                newSelection.insert(cloned);
+                gizmo->AddToManaged(cloned);
+            }
+        }
+
+        SelectedEntities = std::move(newSelection);
     }
 
     ImGui::End();
