@@ -76,7 +76,8 @@
                 "{eea5f607-3077-4ab8-b07a-0aa3de3053ca}\u0000",
                 "{606cdcdb-ac3d-40fd-9cec-604f092e1d39}\u0000",
                 "{4d59a083-15a8-416a-8776-d6c10433f205}\u0000",
-                "{ca13a9c2-9640-46db-9e09-cd171096ea8d}\u0000"
+                "{ca13a9c2-9640-46db-9e09-cd171096ea8d}\u0000",
+                "{bc71f7dd-2d9a-4e88-a339-0a18dc3bf634}\u0000"
             ],
             "Parent": null
         },
@@ -1670,7 +1671,7 @@
         {
             "type": "Entity",
             "id": "{b7990cae-934f-4c9c-bbd2-bd71aa6d7944}\u0000",
-            "name": "New Entity",
+            "name": "VacuumEffect",
             "transform": {
                 "type": "Transform",
                 "id": "{ca13a9c2-9640-46db-9e09-cd171096ea8d}\u0000",
@@ -1707,6 +1708,47 @@
             "type": "VacuumVfx",
             "id": "{22151a91-d58c-4a13-82e9-7c23b8da6bde}\u0000",
             "owner": "{b7990cae-934f-4c9c-bbd2-bd71aa6d7944}\u0000"
+        },
+        {
+            "type": "Entity",
+            "id": "{e2e7dc68-fcfa-4feb-9372-d8ef6c0046ee}\u0000",
+            "name": "FireVFX",
+            "transform": {
+                "type": "Transform",
+                "id": "{bc71f7dd-2d9a-4e88-a339-0a18dc3bf634}\u0000",
+                "owner": "{e2e7dc68-fcfa-4feb-9372-d8ef6c0046ee}\u0000",
+                "Position": {
+                    "x": 6.64573860168457,
+                    "y": 3.1857619285583496,
+                    "z": 0.2999778389930725
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{eff9129c-9fdc-4fc9-aecf-fdb73eca254f}\u0000"
+            ]
+        },
+        {
+            "type": "FireParticleEmitter",
+            "id": "{eff9129c-9fdc-4fc9-aecf-fdb73eca254f}\u0000",
+            "owner": "{e2e7dc68-fcfa-4feb-9372-d8ef6c0046ee}\u0000"
         }
     ]
 }
