@@ -40,6 +40,7 @@ namespace Models
             m_Scales.push_back(data);
         }
     }
+
     /*interpolates  b/w positions,rotations & scaling keys based on the curren time of
     the animation and prepares the local transformation matrix by combining all keys
     tranformations*/
@@ -60,7 +61,7 @@ namespace Models
             if (animationTime < m_Positions[index + 1].timeStamp)
                 return index;
         }
-        assert(0);
+        return m_NumPositions - 2;
     }
 
     /* Gets the current index on mKeyRotations to interpolate to based on the
@@ -72,7 +73,7 @@ namespace Models
             if (animationTime < m_Rotations[index + 1].timeStamp)
                 return index;
         }
-        assert(0);
+        return m_NumRotations - 2;
     }
 
     /* Gets the current index on mKeyScalings to interpolate to based on the
@@ -84,7 +85,7 @@ namespace Models
             if (animationTime < m_Scales[index + 1].timeStamp)
                 return index;
         }
-        assert(0);
+        return m_NumScalings - 2;
     }
 
     /* Gets normalized value for Lerp & Slerp*/
