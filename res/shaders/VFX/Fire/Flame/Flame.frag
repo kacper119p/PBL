@@ -12,6 +12,6 @@ layout (early_fragment_tests) in;
 void main()
 {
     vec4 Color = vec4(texture(SpriteSheet, UV).rgb, 1.0);
-    FragColor = Color;
-    OcclusionMask = Color * 0.5;
+    FragColor = vec4(Color.rgb, Color.r / 20);
+    OcclusionMask = vec4(Color.rgb * 0.5, Color.r / 20);
 }

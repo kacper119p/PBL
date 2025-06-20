@@ -18,6 +18,7 @@ Engine::EmbersParticleEmitter::EmbersParticleEmitter() :
     ParticlesToSpawnProperty(SpawnShader.GetUniformLocation("ParticlesToSpawn")),
     DeltaTimeProperty(UpdateShader.GetUniformLocation("DeltaTime")),
     RandomProperty(SpawnShader.GetUniformLocation("Random")),
+    TimeProperty(UpdateShader.GetUniformLocation("Time")),
     ViewMatrixLocation(Material->GetMainPass().GetUniformLocation("ViewMatrix")),
     ProjectionMatrixLocation(Material->GetMainPass().GetUniformLocation("ProjectionMatrix")),
     ObjectToWorldMatrixLocation(Material->GetMainPass().GetUniformLocation("ObjectToWorldMatrix"))
@@ -98,6 +99,8 @@ void Engine::EmbersParticleEmitter::DispatchUpdateShaders(const float DeltaTime)
     Shaders::ComputeShader::SetUniform(DeltaTimeProperty, DeltaTime);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ParticlesBuffer);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, FreelistBuffer);
+
+    Shaders::ComputeShader::SetUniform(TimeProperty, static_cast<float>(glfwGetTime()));
 
     constexpr int workGroupSize = 64;
     constexpr int workGroupsCount = (MaxParticleCount + workGroupSize - 1) / workGroupSize;

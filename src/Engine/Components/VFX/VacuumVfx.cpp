@@ -71,21 +71,17 @@ namespace Engine
 
         const float size = Math::EaseInOutBounce(Time);
 
-        glm::mat4 objectToWorld = GetOwner()->GetTransform()->GetLocalToWorldMatrix();
-        objectToWorld[0][0] *= size;
-        objectToWorld[1][1] *= size;
-        objectToWorld[2][2] *= size;
-        Shaders::Shader::SetUniform(ObjectToWorldMatrixLocation, objectToWorld);
+        const glm::mat4& objectToWorld = GetOwner()->GetTransform()->GetLocalToWorldMatrix();
+        const glm::mat4 scaledMatrix = glm::scale(objectToWorld, glm::vec3(size));
+        Shaders::Shader::SetUniform(ObjectToWorldMatrixLocation, scaledMatrix);
 
         const Models::Mesh* mesh = Model->GetMesh(0);
 
         Shaders::Shader::SetTextureHandle(TextureLocation, InnerTexture);
         mesh->Draw();
-
-        objectToWorld[0][0] *= 1.1f;
-        objectToWorld[1][1] *= 1.1f;
-        objectToWorld[2][2] *= 1.1f;
-        Shaders::Shader::SetUniform(ObjectToWorldMatrixLocation, objectToWorld);
+        
+        const glm::mat4 outerScaledMatrix = glm::scale(objectToWorld, glm::vec3(size * 1.1f));
+        Shaders::Shader::SetUniform(ObjectToWorldMatrixLocation, outerScaledMatrix);
         Shaders::Shader::SetTextureHandle(TextureLocation, OuterTexture);
         mesh->Draw();
         glEnable(GL_CULL_FACE);

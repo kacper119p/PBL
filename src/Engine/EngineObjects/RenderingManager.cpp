@@ -92,7 +92,6 @@ namespace Engine
             }
         }
 
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glEnable(GL_BLEND);
         for (const auto& renderersGroup : TransparentRenderers)
         {
@@ -107,7 +106,6 @@ namespace Engine
         MultiSampledBuffer.BindResolved();
 
         glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
         glEnable(GL_BLEND);
         for (const auto& renderersGroup : ParticleEmitters)
         {
