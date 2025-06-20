@@ -185,6 +185,8 @@ namespace Engine
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, GlVersionMinor);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 3.2+ only
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // 3.0+ only
+
+        glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
         glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 
 #if DEBUG
@@ -308,15 +310,15 @@ namespace Engine
                                 cameraSpeed * glm::normalize(glm::cross(Camera->GetForward(), Camera->GetUp())));
         }
 #if EDITOR
-        if (glfwGetKey(Window, GLFW_KEY_E) == GLFW_PRESS && GizmoManager::GetInstance()->GetManaged() != nullptr)
+        if (glfwGetKey(Window, GLFW_KEY_E) == GLFW_PRESS && !GizmoManager::GetInstance()->GetManaged().empty())
         {
             GizmoManager::GetInstance()->SetCurrentOperation(ImGuizmo::OPERATION::TRANSLATE);
         }
-        if (glfwGetKey(Window, GLFW_KEY_R) == GLFW_PRESS && GizmoManager::GetInstance()->GetManaged() != nullptr)
+        if (glfwGetKey(Window, GLFW_KEY_R) == GLFW_PRESS && !GizmoManager::GetInstance()->GetManaged().empty())
         {
             GizmoManager::GetInstance()->SetCurrentOperation(ImGuizmo::OPERATION::ROTATE);
         }
-        if (glfwGetKey(Window, GLFW_KEY_T) == GLFW_PRESS && GizmoManager::GetInstance()->GetManaged() != nullptr)
+        if (glfwGetKey(Window, GLFW_KEY_T) == GLFW_PRESS && !GizmoManager::GetInstance()->GetManaged().empty())
         {
             GizmoManager::GetInstance()->SetCurrentOperation(ImGuizmo::OPERATION::SCALE);
         }

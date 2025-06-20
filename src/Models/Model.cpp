@@ -4,6 +4,7 @@
 #include "Assimp/postprocess.h"
 #include "assimp/scene.h"
 #include "Vertex.h"
+#include "Utility/AssertionsUtility.h"
 
 namespace Models
 {
@@ -47,16 +48,18 @@ namespace Models
         std::vector<unsigned int> indices;
         indices.reserve(Mesh->mNumFaces);
 
+        CHECK_MESSAGE(Mesh->mVertices != nullptr, "Invalid Mesh format: No position data.")
+        CHECK_MESSAGE(Mesh->mTextureCoords != nullptr, "Invalid Mesh format: No UV data.")
+        CHECK_MESSAGE(Mesh->mNormals != nullptr, "Invalid Mesh format: No normal Data.")
+        CHECK_MESSAGE(Mesh->mTangents != nullptr, "Invalid Mesh format: No tangent data.")
+
         {
             for (unsigned int i = 0; i < Mesh->mNumVertices; i++)
             {
                 glm::vec3 position(Mesh->mVertices[i].x, Mesh->mVertices[i].y, Mesh->mVertices[i].z);
                 glm::vec2 texCoord(Mesh->mTextureCoords[0][i].x, Mesh->mTextureCoords[0][i].y);
                 glm::vec3 normal(Mesh->mNormals[i].x, Mesh->mNormals[i].y, Mesh->mNormals[i].z);
-
-                glm::vec3 tangent = Mesh->mTangents == nullptr
-                                        ? glm::vec3(0.0f, 0.0f, 0.0f)
-                                        : glm::vec3(Mesh->mTangents[i].x, Mesh->mTangents[i].y, Mesh->mTangents[i].z);
+                glm::vec3 tangent(Mesh->mTangents[i].x, Mesh->mTangents[i].y, Mesh->mTangents[i].z);
 
                 Vertex vertex(position, texCoord, normal, tangent);
                 vertices.push_back(vertex);

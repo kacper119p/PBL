@@ -1,5 +1,5 @@
 #pragma once
-#include "Engine/Components/Renderers/ParticleEmitter.h"
+#include "Engine/Components/VFX/ParticleEmitter.h"
 #include "Engine/Components/Renderers/Renderer.h"
 
 namespace Engine

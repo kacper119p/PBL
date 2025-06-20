@@ -2,6 +2,8 @@
 #if EDITOR
 #include "Engine/Components/Transform.h"
 #include "Engine/EngineObjects/Entity.h"
+#include "Engine/EngineObjects/GizmoManager.h"
+#include <algorithm>
 
 namespace Engine
 {
@@ -48,6 +50,12 @@ namespace Engine
         void AddPrefabToScene(Scene* scene, Entity* parent, std::string prefabPath);
 
         void SetSelectedPrefabPath(const std::string& path) { SelectedPrefabPath = path; }
+
+        bool IsManagedTransform(Transform* t)
+        {
+            const auto& managed = GizmoManager::GetInstance()->GetManaged();
+            return std::find(managed.begin(), managed.end(), t) != managed.end();
+        }
     };
 } // namespace Engine
 #endif

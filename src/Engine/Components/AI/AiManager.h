@@ -33,15 +33,15 @@ namespace Engine
         [[nodiscard]] float GetRestTimer() const { return RestTimer; }
         [[nodiscard]] float GetRestCooldown() const { return RestCooldown; }
         [[nodiscard]] bool IsRestFinished() const { return RestFinished; }
-        void SetRestFinished(bool Value) { RestFinished = Value; }
 
-        bool IsPlayerInRange() const;
+        [[nodiscard]] bool IsTrashNearby() const;
 
-        bool IsChaseTimerOver() const;
+        [[nodiscard]] bool IsChaseTimerOver() const;
+
+        [[nodiscard]] bool IsPlayerInRange() const;
 
         void SetIsChasingPlayer(bool Value) { IsChasing = Value; }
-
-        bool IsTrashNearby() const;
+        void SetRestFinished(bool Value) { RestFinished = Value; }
 
         void RecalculateCurrentTrash();
 

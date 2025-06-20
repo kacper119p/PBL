@@ -154,7 +154,14 @@ void Engine::SceneViewGUI::Draw(CameraRenderData renderData, Scene* scene)
 
             if (selectedObject)
             {
-                GizmoManager::GetInstance()->SetManaged(selectedObject);
+                if (ImGui::IsKeyDown(ImGuiKey_LeftCtrl))
+                {
+                    GizmoManager::GetInstance()->AddToManaged(selectedObject);
+                }
+                else
+                {
+                    GizmoManager::GetInstance()->SetManaged(selectedObject);
+                }
                 SceneHierarchyGUI::GetInstance()->SetSelectedEntity(selectedObject);
             }
             else
