@@ -16,17 +16,18 @@ layout (std430, binding = 1) coherent restrict buffer SSBO_1 {
 
 void UpdateParticle(inout particle Particle, int index) {
     if (Particle.life > 0) {
-        Particle.position += Particle.velocity * DeltaTime;
-        Particle.life -= DeltaTime;
-        // Scale easeOutQuint
-        float scale = (Particle.life / MAX_LIFETIME);
-        float scale2 = scale * scale;
-        Particle.scale = (1.0 - scale2 * scale2 * scale) * 3.0;
 
-        if (Particle.life <= 0.0) {
+        Particle.life -= DeltaTime;
+        if (Particle.life <= 0.0)
+        {
             Particle.life = 0.0;
             freelist.indices[atomicAdd(freelist.count, 1)] = index;
         }
+
+        Particle.position += Particle.velocity * DeltaTime;
+        float scale = (Particle.life / MAX_LIFETIME);
+        float scale2 = scale * scale;
+        Particle.scale = (1.0 - scale2 * scale2 * scale) * 3;
     }
 }
 

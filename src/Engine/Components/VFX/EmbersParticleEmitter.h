@@ -26,7 +26,7 @@ namespace Engine
 
     private:
         static constexpr float MaxLifetime = 1.25;
-        static constexpr int32_t MaxParticleCount = 128;
+        static constexpr int32_t MaxParticleCount = 192;
         static constexpr float SpawnRate = MaxParticleCount / MaxLifetime;
 
         float Timer = 0.0f;

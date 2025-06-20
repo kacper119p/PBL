@@ -80,7 +80,7 @@ void Engine::EmbersParticleEmitter::DispatchSpawnShaders(const float DeltaTime)
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ParticlesBuffer);
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, FreelistBuffer);
 
-        const int workGroupSize = SpawnShader.GetWorkGroupSize().x;
+        constexpr int workGroupSize = 64;
         const int workGroupsCount = (particlesToSpawn + workGroupSize - 1) / workGroupSize;
 
         Shaders::ComputeShader::SetUniform(ParticlesToSpawnProperty, particlesToSpawn);
@@ -99,8 +99,8 @@ void Engine::EmbersParticleEmitter::DispatchUpdateShaders(const float DeltaTime)
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ParticlesBuffer);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, FreelistBuffer);
 
-    const int workGroupSize = UpdateShader.GetWorkGroupSize().x;
-    const int workGroupsCount = (MaxParticleCount + workGroupSize - 1) / workGroupSize;
+    constexpr int workGroupSize = 64;
+    constexpr int workGroupsCount = (MaxParticleCount + workGroupSize - 1) / workGroupSize;
     Shaders::ComputeShader::Dispatch(glm::ivec3(workGroupsCount, 1, 1));
 }
 
