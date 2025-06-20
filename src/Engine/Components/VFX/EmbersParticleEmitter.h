@@ -37,6 +37,7 @@ namespace Engine
         int32_t ParticlesToSpawnProperty = 0;
         int32_t DeltaTimeProperty = 0;
         int32_t RandomProperty = 0;
+        int32_t TimeProperty = 0;
 
         int32_t ViewMatrixLocation;
         int32_t ProjectionMatrixLocation;

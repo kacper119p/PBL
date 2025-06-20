@@ -4,7 +4,8 @@
 #include "EmbersParticleData.glsl"
 #include "Simplex.glsl"
 
-layout (location = 0) uniform float DeltaTime;
+uniform float DeltaTime;
+uniform float Time;
 
 layout (std430, binding = 0) buffer SSBO_0 {
     particle Particles[];
@@ -26,7 +27,7 @@ void UpdateParticle(inout particle Particle, int index) {
             freelist.indices[atomicAdd(freelist.count, 1)] = index;
         }
 
-        Particle.velocity += snoise(Particle.position + vec3(index * 4), 2.0) * DeltaTime * 10.0;
+        Particle.velocity += snoise(Particle.position + vec3(Time), 0.5) * DeltaTime * 8.0;
         Particle.position += Particle.velocity * DeltaTime;
         float scale = (Particle.life / MAX_LIFETIME);
         scale = scale * scale * pow(1.0 - scale, 0.5);

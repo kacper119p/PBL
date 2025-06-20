@@ -26,6 +26,7 @@ namespace Materials
 
     void ParticleMaterial::Use() const
     {
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
         Shader.Use();
     }
 

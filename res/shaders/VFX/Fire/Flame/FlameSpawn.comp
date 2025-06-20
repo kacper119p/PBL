@@ -21,8 +21,8 @@ void MakeParticle(out particle Particle) {
     seed = pcg_hash(seed);
     Particle.life = MAX_LIFETIME;
     Particle.velocity.y = rng(0.0, 1.0, seed);
-    Particle.scale = 2;
-    vec3 position = rng(vec3(-0.665, 0.0, -0.665), vec3(0.665, 0.165, 0.665), seed);
+    Particle.scale = 0.0;
+    vec3 position = rng(vec3(-0.5, 0.0, -0.5), vec3(0.5, 0.165, 0.5), seed);
     Particle.velocity.xz = normalize(-position.xz) * rng(0.1, 0.165, seed);
     Particle.position = position;
 }

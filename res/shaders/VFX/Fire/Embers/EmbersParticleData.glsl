@@ -5,4 +5,4 @@ struct particle {
     float life;
 };
 
-const float MAX_LIFETIME = 1.5;
+const float MAX_LIFETIME = 1.0;

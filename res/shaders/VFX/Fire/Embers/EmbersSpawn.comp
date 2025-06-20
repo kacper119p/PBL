@@ -23,7 +23,7 @@ void MakeParticle(out particle Particle) {
     Particle.velocity.y = rng(1.0, 4.0, seed);
     Particle.scale = 0;
     vec3 position = rng(vec3(-0.7, 0.0, -0.7), vec3(0.7, 0.165, 0.7), seed);
-    Particle.velocity.xz = normalize(-position.xz) * rng(-0.05, 0.25, seed);
+    Particle.velocity.xz = normalize(-position.xz) * rng(-0.05, 0.5, seed);
     Particle.position = position;
 }
 
