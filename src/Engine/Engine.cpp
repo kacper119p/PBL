@@ -12,10 +12,8 @@
 #include "Engine/EngineObjects/CollisionUpdateManager.h"
 #include "Engine/EngineObjects/RigidbodyUpdateManager.h"
 #include "Engine/Components/Colliders/PrimitiveMeshes.h"
-#include "Materials/Material.h"
 #include "Materials/MaterialManager.h"
 #include "Models/ModelManager.h"
-#include "Utility/SystemUtilities.h"
 #include "Scene/SceneBuilder.h"
 #include "Shaders/ShaderManager.h"
 #include "Textures/TextureManager.h"
@@ -23,7 +21,6 @@
 #include "Engine/Components/Audio/AudioSource.h"
 #include "Engine/Components/Audio/AudioListener.h"
 #include "Engine/Components/Audio/BackgroundAudioPlayer.h"
-#include "UI/UiImplementations/SampleUi.h"
 #include "tracy/Tracy.hpp"
 #if DEBUG
 #include "Utility/OpenGlDebugger.h"
@@ -225,19 +222,8 @@ namespace Engine
             return false;
         }
 
-        if (!GLAD_GL_ARB_bindless_texture)
+        if (!VerifyOpenGLExtensions())
         {
-            spdlog::error("Platform unsupported: GLAD_GL_ARB_bindless_texture.");
-            return false;
-        }
-        if (!GLAD_GL_EXT_texture_compression_s3tc)
-        {
-            spdlog::error("Platform unsupported: GLAD_GL_EXT_texture_compression_s3tc.");
-            return false;
-        }
-        if (!GLAD_GL_ARB_texture_compression_bptc)
-        {
-            spdlog::error("Platform unsupported: GLAD_GL_ARB_texture_compression_bptc.");
             return false;
         }
 
@@ -354,8 +340,8 @@ namespace Engine
     void Engine::ImGuiRender()
     {
 #if EDITOR
-        //LightsGui::Draw();
-        //EditorGUI.Render(Frame, CurrentScene);
+    //LightsGui::Draw();
+    //EditorGUI.Render(Frame, CurrentScene);
 #endif
     }
 
@@ -466,5 +452,25 @@ namespace Engine
         }
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
+
+    bool Engine::VerifyOpenGLExtensions()
+    {
+        if (!GLAD_GL_ARB_bindless_texture)
+        {
+            spdlog::error("Platform unsupported: GLAD_GL_ARB_bindless_texture.");
+            return false;
+        }
+        if (!GLAD_GL_EXT_texture_compression_s3tc)
+        {
+            spdlog::error("Platform unsupported: GLAD_GL_EXT_texture_compression_s3tc.");
+            return false;
+        }
+        if (!GLAD_GL_ARB_texture_compression_bptc)
+        {
+            spdlog::error("Platform unsupported: GLAD_GL_ARB_texture_compression_bptc.");
+            return false;
+        }
+        return true;
     }
 } // Engine

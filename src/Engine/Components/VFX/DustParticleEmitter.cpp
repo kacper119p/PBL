@@ -1,6 +1,5 @@
-#include "ParticleEmitter.h"
+#include "DustParticleEmitter.h"
 #include "Engine/EngineObjects/Entity.h"
-#include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/EngineObjects/LightManager.h"
 #include <algorithm>
 #include <imgui.h>
@@ -10,19 +9,20 @@
 #include "Engine/EngineObjects/RenderingManager.h"
 #include "Serialization/SerializationUtility.h"
 
-Engine::ParticleEmitter::ParticleEmitter(Materials::Material* const Material, const Shaders::ComputeShader& SpawnShader,
-                                         const Shaders::ComputeShader& UpdateShader,
-                                         const EmitterSettings& EmitterSettings, const int MaxParticleCount) :
-    Settings(EmitterSettings), MaxParticleCount(MaxParticleCount), SpawnShader(SpawnShader),
-    UpdateShader(UpdateShader)
+Engine::DustParticleEmitter::DustParticleEmitter(Materials::Material* const Material,
+                                                 const Shaders::ComputeShader& SpawnShader,
+                                                 const Shaders::ComputeShader& UpdateShader,
+                                                 const EmitterSettings& EmitterSettings, const int MaxParticleCount) :
+    ParticleEmitter(Material, SpawnShader, UpdateShader),
+    Settings(EmitterSettings), MaxParticleCount(MaxParticleCount)
+
 {
-    this->Material = Material;
     ParticlesToSpawnProperty = SpawnShader.GetUniformLocation("ParticlesToSpawn");
     RandomProperty = SpawnShader.GetUniformLocation("Random");
     DeltaTimeProperty = UpdateShader.GetUniformLocation("DeltaTime");
 }
 
-void Engine::ParticleEmitter::Render(const Engine::CameraRenderData& RenderData)
+void Engine::DustParticleEmitter::Render(const Engine::CameraRenderData& RenderData)
 {
     SetupMatrices(RenderData, Material->GetMainPass());
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, ParticlesBuffer);
@@ -30,32 +30,14 @@ void Engine::ParticleEmitter::Render(const Engine::CameraRenderData& RenderData)
     {
         Models::Mesh* mesh = Settings.Model->GetMesh(i);
         glBindVertexArray(mesh->GetVertexArray());
-        glDrawArraysInstanced(GL_TRIANGLES, 0, mesh->GetFaceCount(), MaxParticleCount);
+        glDrawElementsInstanced(GL_TRIANGLES, mesh->GetFaceCount(),GL_UNSIGNED_INT, 0, MaxParticleCount);
         glBindVertexArray(0);
     }
 }
 
-void Engine::ParticleEmitter::SetMaterial(Materials::Material* Material)
+void Engine::DustParticleEmitter::Start()
 {
-    if (Material == this->Material)
-    {
-        return;
-    }
-    RenderingManager::GetInstance()->UnregisterParticleEmitter(this);
-    this->Material = Material;
-    if (Material == nullptr)
-    {
-        return;
-    }
-    RenderingManager::GetInstance()->RegisterParticleEmitter(this);
-}
-
-void Engine::ParticleEmitter::Start()
-{
-    if (Material != nullptr)
-    {
-        RenderingManager::GetInstance()->RegisterParticleEmitter(this);
-    }
+    ParticleEmitter::Start();
 
     glGenBuffers(1, &ParticlesBuffer);
     glGenBuffers(1, &FreelistBuffer);
@@ -78,7 +60,7 @@ void Engine::ParticleEmitter::Start()
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 }
 
-void Engine::ParticleEmitter::DispatchSpawnShaders(const float DeltaTime)
+void Engine::DustParticleEmitter::DispatchSpawnShaders(const float DeltaTime)
 {
     Timer += DeltaTime;
 
@@ -105,7 +87,7 @@ void Engine::ParticleEmitter::DispatchSpawnShaders(const float DeltaTime)
     }
 }
 
-void Engine::ParticleEmitter::DispatchUpdateShaders(const float DeltaTime)
+void Engine::DustParticleEmitter::DispatchUpdateShaders(const float DeltaTime)
 {
     UpdateShader.Use();
     Shaders::ComputeShader::SetUniform(DeltaTimeProperty, DeltaTime);
@@ -117,23 +99,11 @@ void Engine::ParticleEmitter::DispatchUpdateShaders(const float DeltaTime)
     Shaders::ComputeShader::Dispatch(glm::ivec3(workGroupsCount, 1, 1));
 }
 
-Engine::ParticleEmitter::~ParticleEmitter()
+Engine::DustParticleEmitter::~DustParticleEmitter()
 {
 }
 
-void Engine::ParticleEmitter::SetupMatrices(const Engine::CameraRenderData& RenderData,
-                                            const Shaders::Shader& Shader) const
-{
-    {
-        Shader.SetUniform("CameraPosition", RenderData.CameraPosition);
-        Shader.SetUniform("ViewMatrix", RenderData.ViewMatrix);
-        Shader.SetUniform("ProjectionMatrix", RenderData.ProjectionMatrix);
-        Shader.SetUniform("ObjectToWorldMatrix",
-                          GetOwner()->GetTransform()->GetLocalToWorldMatrix());
-    }
-}
-
-void Engine::ParticleEmitter::SetEmitterSettingsUniforms(Shaders::ComputeShader Shader) const
+void Engine::DustParticleEmitter::SetEmitterSettingsUniforms(Shaders::ComputeShader Shader) const
 {
     Shader.SetUniform("EmitterSettings.MinColor", Settings.MinColor);
     Shader.SetUniform("EmitterSettings.MaxColor", Settings.MaxColor);
@@ -149,7 +119,7 @@ void Engine::ParticleEmitter::SetEmitterSettingsUniforms(Shaders::ComputeShader 
     Shader.SetUniform("EmitterSettings.MaxLife", Settings.MaxLife);
 }
 #if EDITOR
-void Engine::ParticleEmitter::DrawImGui()
+void Engine::DustParticleEmitter::DrawImGui()
 {
     if (ImGui::CollapsingHeader("Emitter Settings"))
     {
@@ -181,7 +151,7 @@ void Engine::ParticleEmitter::DrawImGui()
     }
 }
 #endif
-rapidjson::Value Engine::ParticleEmitter::Serialize(rapidjson::Document::AllocatorType& Allocator) const
+rapidjson::Value Engine::DustParticleEmitter::Serialize(rapidjson::Document::AllocatorType& Allocator) const
 {
     START_COMPONENT_SERIALIZATION
     SERIALIZE_FIELD(MaxParticleCount)
@@ -205,8 +175,8 @@ rapidjson::Value Engine::ParticleEmitter::Serialize(rapidjson::Document::Allocat
     END_COMPONENT_SERIALIZATION
 }
 
-void Engine::ParticleEmitter::DeserializeValuePass(const rapidjson::Value& Object,
-                                                   Serialization::ReferenceTable& ReferenceMap)
+void Engine::DustParticleEmitter::DeserializeValuePass(const rapidjson::Value& Object,
+                                                       Serialization::ReferenceTable& ReferenceMap)
 {
     START_COMPONENT_DESERIALIZATION_VALUE_PASS
     DESERIALIZE_VALUE(MaxParticleCount)
@@ -233,20 +203,21 @@ void Engine::ParticleEmitter::DeserializeValuePass(const rapidjson::Value& Objec
     END_COMPONENT_DESERIALIZATION_VALUE_PASS
 }
 
-void Engine::ParticleEmitter::DeserializeReferencesPass(const rapidjson::Value& Object,
-                                                        Serialization::ReferenceTable& ReferenceMap)
+void Engine::DustParticleEmitter::DeserializeReferencesPass(const rapidjson::Value& Object,
+                                                            Serialization::ReferenceTable& ReferenceMap)
 {
     START_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
 }
 
-Engine::ParticleEmitter::EmitterSettings::EmitterSettings(const float SpawnRate, Models::Model* Model,
-                                                          const glm::vec4& MinColor, const glm::vec4& MaxColor,
-                                                          const glm::vec3& MinOffset, const glm::vec3& MaxOffset,
-                                                          const glm::vec3& MinVelocity, const glm::vec3& MaxVelocity,
-                                                          const glm::vec3& MinScale, const glm::vec3& MaxScale,
-                                                          const glm::vec3& MinAccel, const glm::vec3& MaxAccel,
-                                                          const float MinLife, const float MaxLife) :
+Engine::DustParticleEmitter::EmitterSettings::EmitterSettings(const float SpawnRate, Models::Model* Model,
+                                                              const glm::vec4& MinColor, const glm::vec4& MaxColor,
+                                                              const glm::vec3& MinOffset, const glm::vec3& MaxOffset,
+                                                              const glm::vec3& MinVelocity,
+                                                              const glm::vec3& MaxVelocity,
+                                                              const glm::vec3& MinScale, const glm::vec3& MaxScale,
+                                                              const glm::vec3& MinAccel, const glm::vec3& MaxAccel,
+                                                              const float MinLife, const float MaxLife) :
     SpawnRate(SpawnRate),
     Model(Model),
     MinColor(MinColor),

@@ -10,7 +10,7 @@
 
 namespace Engine
 {
-    class BloodEraser
+    class BloodEraser final
 #if EDITOR
             : public Renderer
 #else

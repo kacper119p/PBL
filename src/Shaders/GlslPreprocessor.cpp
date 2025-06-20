@@ -57,9 +57,9 @@ namespace Shaders
     std::string GLSLPreprocessor::FindFile(const std::string& Path, const std::string& CallerPath)
     {
         //Search in Caller's directory.
-        const std::filesystem::path callerPath(Path);
-        std::filesystem::path CallerDirectory = callerPath.parent_path();
-        std::filesystem::path path = callerPath / Path;
+        const std::filesystem::path callerPath(CallerPath);
+        const std::filesystem::path callerDirectory = callerPath.parent_path();
+        std::filesystem::path path = callerDirectory / Path;
 
         if (exists(path))
         {

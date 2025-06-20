@@ -20,9 +20,15 @@ namespace Engine
         {
             return;
         }
-        float transformMatrix[16];
 
         Transform* currentManaged = this->Managed.back();
+
+        if (currentManaged == nullptr)
+        {
+            return;
+        }
+
+        float transformMatrix[16];
 
         ImGuizmo::RecomposeMatrixFromComponents(glm::value_ptr(currentManaged->GetPosition()),
                                                 glm::value_ptr(currentManaged->GetEulerAngles()),
@@ -35,7 +41,6 @@ namespace Engine
         const float* projectionMatrixPtr = glm::value_ptr(CameraRenderData.ProjectionMatrix);
         const ImGuiIO& io = ImGui::GetIO();
 
-        
 
         const ImGuizmo::MODE mode = (CurrentOperation == ImGuizmo::OPERATION::ROTATE)
                                         ? ImGuizmo::MODE::LOCAL
@@ -43,16 +48,16 @@ namespace Engine
         float deltaMatrix[16];
         ImGuizmo::Manipulate(viewMatrixPtr,
                              projectionMatrixPtr, CurrentOperation,
-                             mode, transformMatrix,deltaMatrix);
+                             mode, transformMatrix, deltaMatrix);
 
         float refMatrix[16] = {
-            1.0f, 0.0f, 0.0f, 0.0f,
-            0.0f, 1.0f, 0.0f, 0.0f,
-            0.0f, 0.0f, 1.0f, 0.0f,
-            0.0f, 0.0f, 0.0f, 1.0f
+                1.0f, 0.0f, 0.0f, 0.0f,
+                0.0f, 1.0f, 0.0f, 0.0f,
+                0.0f, 0.0f, 1.0f, 0.0f,
+                0.0f, 0.0f, 0.0f, 1.0f
         };
 
-        for (int i = 0; i < 16;i++)
+        for (int i = 0; i < 16; i++)
         {
             if (deltaMatrix[i] != refMatrix[i])
             {
@@ -82,7 +87,7 @@ namespace Engine
                     managed->SetScale(glm::vec3(managed->GetScale().x * scale[0], managed->GetScale().y * scale[1],
                                                 managed->GetScale().z * scale[2]));
                     break;
-                
+
             }
         }
     }
