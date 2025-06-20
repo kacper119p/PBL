@@ -85,6 +85,8 @@ namespace Engine
 
         void InitEditorFramebuffer();
 
+        bool VerifyOpenGLExtensions();
+
     public:
         Scene* GetCurrentScene() const { return CurrentScene; };
     };

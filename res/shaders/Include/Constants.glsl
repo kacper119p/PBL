@@ -5,3 +5,4 @@ const float SQRT2 = 1.414213562373095;
 const float SQRT3 = 1.732050807568877;
 const float PHI = 1.618033988749894;
 const float EULER = 2.718281828459045;
+const float EPSILON = 0.00005;

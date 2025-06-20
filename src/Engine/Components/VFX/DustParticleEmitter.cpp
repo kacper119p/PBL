@@ -30,7 +30,7 @@ void Engine::DustParticleEmitter::Render(const Engine::CameraRenderData& RenderD
     {
         Models::Mesh* mesh = Settings.Model->GetMesh(i);
         glBindVertexArray(mesh->GetVertexArray());
-        glDrawArraysInstanced(GL_TRIANGLES, 0, mesh->GetFaceCount(), MaxParticleCount);
+        glDrawElementsInstanced(GL_TRIANGLES, mesh->GetFaceCount(),GL_UNSIGNED_INT, 0, MaxParticleCount);
         glBindVertexArray(0);
     }
 }
