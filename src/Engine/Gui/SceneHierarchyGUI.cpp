@@ -192,7 +192,7 @@ void Engine::SceneHierarchyGUI::AddAnimatedModelToScene(Scene* scene, Entity* pa
 
 void Engine::SceneHierarchyGUI::AddPrefabToScene(Scene* scene, Entity* parent, std::string prefabPath)
 {
-    if (prefabPath != "None")
+    if (prefabPath != "None" && prefabPath != "")
     {
         PrefabLoader::LoadPrefab(prefabPath, scene, parent->GetTransform());
     }

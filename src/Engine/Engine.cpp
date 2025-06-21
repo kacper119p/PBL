@@ -104,6 +104,7 @@ namespace Engine
 #endif
 #if !EDITOR
             UpdateManager::GetInstance()->Update(deltaTime);
+            Entity::DestroyQueued();
             RigidbodyUpdateManager::GetInstance()->Update(deltaTime);
             CollisionUpdateManager::GetInstance()->Update(deltaTime);
             if (!BackgroundAudioPlayer->IsPlaying())
@@ -137,7 +138,6 @@ namespace Engine
 #endif
 
             // End frame and swap buffers (double buffering)
-            Entity::DestroyQueued();
             EndFrame();
             FrameMark;
         }
