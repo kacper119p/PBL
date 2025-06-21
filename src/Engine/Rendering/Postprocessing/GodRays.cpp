@@ -7,7 +7,7 @@
 namespace Engine
 {
     GodRays::GodRays() :
-        Resolution(1920 / 4, 1080 / 4),
+        Resolution(1920 / 2, 1080 / 2),
         BlendShader(Shaders::ShaderManager::GetShader(
                 Shaders::ShaderSourceFiles("./res/shaders/GodRays/GodRays.vert", nullptr,
                                            "./res/shaders/GodRays/GodRays.frag"))),
