@@ -1,3 +1,4 @@
+#include "Engine/Components/Renderers/OutlinedModelRenderer.h"
 #include "Engine/Rendering/Plane.h"
 #if EDITOR
 #include "SceneViewGUI.h"
@@ -14,11 +15,21 @@
 void RaycastRecursive(Engine::Transform* obj, const glm::vec3& rayOrigin, const glm::vec3& rayDir,
                       Engine::Transform*& outClosest, float& outClosestT)
 {
-    const Engine::ModelRenderer* renderer = obj->GetOwner()->GetComponent<Engine::ModelRenderer>();
-    if (renderer && renderer->GetModel())
+    const Models::Model* model = nullptr;
+
+    if (const Engine::ModelRenderer* modelRenderer = obj->GetOwner()->GetComponent<Engine::ModelRenderer>())
+    {
+        model = modelRenderer->GetModel();
+    }
+    else if (const Engine::OutlinedModelRenderer* outlinedModelRenderer
+            = obj->GetOwner()->GetComponent<Engine::OutlinedModelRenderer>())
+    {
+        model = outlinedModelRenderer->GetModel();
+    }
+
+    if (model != nullptr)
     {
         const glm::mat4 modelMatrix = obj->GetLocalToWorldMatrix();
-        const Models::Model* model = renderer->GetModel();
 
         for (int i = 0; i < model->GetMeshCount(); ++i)
         {
