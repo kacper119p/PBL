@@ -6,6 +6,11 @@ layout (std430, binding = 1) readonly restrict buffer Particles {
     particle particles[];
 };
 
+layout (std430, binding = 2) readonly buffer SortedIndices {
+    int sortedIndices[];
+};
+
+
 layout (location = 0) in vec2 inputTexCoord;
 
 out vec2 UV;
@@ -16,7 +21,7 @@ uniform mat4 ObjectToWorldMatrix;
 
 void main()
 {
-    particle particleData = particles[gl_InstanceID];
+    particle particleData = particles[sortedIndices[gl_InstanceID]];
 
     //Bilboarding
     vec3 cameraRight = vec3(ViewMatrix[0][0], ViewMatrix[1][0], ViewMatrix[2][0]);
