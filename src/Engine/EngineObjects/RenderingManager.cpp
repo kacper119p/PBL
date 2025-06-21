@@ -1,6 +1,7 @@
 #include "RenderingManager.h"
 #include "Engine/Exceptions/SingletonAlreadyExistsException.h"
 #include "LightManager.h"
+#include "Engine/Rendering/StencilBits.h"
 #include "Materials/Material.h"
 
 namespace Engine
@@ -51,8 +52,8 @@ namespace Engine
         glDepthMask(GL_TRUE);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-        glClear(GL_DEPTH_BUFFER_BIT);
+        glStencilMask(StencilBits_All);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
         glViewport(0, 0, ScreenWidth, ScreenHeight);
         glEnable(GL_CULL_FACE);
@@ -92,6 +93,16 @@ namespace Engine
             }
         }
 
+        OutlinedModelRenderer::BindForRendering();
+        glDisable(GL_DEPTH_TEST);
+        glEnable(GL_STENCIL_TEST);
+        for (const OutlinedModelRenderer* const renderer : OutlinedRenderers)
+        {
+            renderer->RenderOutline(RenderData);
+        }
+        glEnable(GL_DEPTH_TEST);
+        glDisable(GL_STENCIL_TEST);
+
         glEnable(GL_BLEND);
         for (const auto& renderersGroup : TransparentRenderers)
         {
@@ -129,11 +140,11 @@ namespace Engine
         Bloom.Render(MultiSampledBuffer.GetResolvedColorBuffer());
     }
 
-    void RenderingManager::RenderAllDirectionalShadowMap(const CameraRenderData& RenderData, unsigned int Target,
-                                                         unsigned int Width, unsigned int Height)
+    void RenderingManager::RenderAllDirectionalShadowMap(const CameraRenderData& RenderData, const unsigned int Target,
+                                                         const unsigned int Width, const unsigned int Height)
     {
         glBindFramebuffer(GL_FRAMEBUFFER, Target);
-        glViewport(0, 0, Width, Height);
+        glViewport(0, 0, static_cast<GLsizei>(Width), static_cast<GLsizei>(Height));
         glDepthMask(GL_TRUE);
         glEnable(GL_CULL_FACE);
         glCullFace(GL_FRONT);
@@ -150,14 +161,13 @@ namespace Engine
         }
     }
 
-    void
-    RenderingManager::RenderAllPointSpotShadowMap(const glm::vec3& LightPosition, float LightRange,
-                                                  glm::mat4* SpaceTransformMatrices,
-                                                  unsigned int Target,
-                                                  unsigned int Width, unsigned int Height)
+    void RenderingManager::RenderAllPointSpotShadowMap(const glm::vec3& LightPosition, const float LightRange,
+                                                       const glm::mat4* SpaceTransformMatrices,
+                                                       const unsigned int Target,
+                                                       const unsigned int Width, const unsigned int Height)
     {
         glBindFramebuffer(GL_FRAMEBUFFER, Target);
-        glViewport(0, 0, Width, Height);
+        glViewport(0, 0, static_cast<GLsizei>(Width), static_cast<GLsizei>(Height));
         glDepthMask(GL_TRUE);
         glEnable(GL_CULL_FACE);
         glCullFace(GL_FRONT);

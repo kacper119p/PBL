@@ -7,7 +7,6 @@
 #include "Engine.h"
 #include "Engine/EngineObjects/RenderingManager.h"
 #include "Engine/EngineObjects/LightManager.h"
-#include "Engine/Gui/LightsGui.h"
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/EngineObjects/CollisionUpdateManager.h"
 #include "Engine/EngineObjects/RigidbodyUpdateManager.h"
@@ -18,10 +17,10 @@
 #include "Shaders/ShaderManager.h"
 #include "Textures/TextureManager.h"
 #include "UI/FontRendering/TextManager.h"
-#include "Engine/Components/Audio/AudioSource.h"
 #include "Engine/Components/Audio/AudioListener.h"
 #include "Engine/Components/Audio/BackgroundAudioPlayer.h"
 #include "tracy/Tracy.hpp"
+#include "Components/Renderers/OutlinedModelRenderer.h"
 #if DEBUG
 #include "Utility/OpenGlDebugger.h"
 #endif
@@ -234,6 +233,7 @@ namespace Engine
         LightManager::Initialize();
         UpdateManager::Initialize();
         Materials::MaterialManager::Initialize();
+        OutlinedModelRenderer::InitializeShaders();
         Ui::TextManager::Initialize();
         RigidbodyUpdateManager::Initialize();
         CollisionUpdateManager::Initialize();
@@ -340,8 +340,8 @@ namespace Engine
     void Engine::ImGuiRender()
     {
 #if EDITOR
-    //LightsGui::Draw();
-    //EditorGUI.Render(Frame, CurrentScene);
+        //LightsGui::Draw();
+        //EditorGUI.Render(Frame, CurrentScene);
 #endif
     }
 
