@@ -123,10 +123,25 @@ namespace Engine
         if (!transform || !other || !other->transform)
             return;
 
-        bool thisLower = transform->GetPosition().y < other->transform->GetPosition().y;
+        Rigidbody* active = nullptr;
+        Rigidbody* passive = nullptr;
 
-        Rigidbody* active = thisLower ? other : this;
-        Rigidbody* passive = thisLower ? this : other;
+        if (GetOwner()->GetType() == "DefaultPlayer")
+        {
+            active = other;
+            passive = this;
+        }
+        else if (other->GetOwner()->GetType() == "DefaultPlayer")
+        {
+            active = this;
+            passive = other;
+        }
+        else
+        {
+            bool thisLower = transform->GetPosition().y < other->transform->GetPosition().y;
+            active = thisLower ? other : this;
+            passive = thisLower ? this : other;
+        }
 
         glm::vec3 rA = contactPoint - active->transform->GetPosition();
         glm::vec3 rB = contactPoint - passive->transform->GetPosition();
@@ -221,7 +236,6 @@ namespace Engine
         }
     }
 
-
     void Rigidbody::Interpolate(float alpha)
     {
         if (!transform)
@@ -233,19 +247,18 @@ namespace Engine
     void Rigidbody::Start()
     {
         transform = GetOwner()->GetTransform();
-        if (auto box = GetOwner()->GetComponent<BoxCollider>())
-            mesh = box->GetMesh();
-        else if (auto capsule = GetOwner()->GetComponent<CapsuleCollider>())
-            mesh = capsule->GetMesh();
-        else if (auto sphere = GetOwner()->GetComponent<SphereCollider>())
-            mesh = sphere->GetMesh();
+        if (auto collider = GetOwner()->GetComponent<Collider>())
+        {
+            mesh = collider->GetMesh();
+        }
         else
+        {
             mesh = nullptr;
+        }
         RigidbodyUpdateManager::GetInstance()->RegisterRigidbody(this);
     }
 
     void Rigidbody::OnDestroy() { RigidbodyUpdateManager::GetInstance()->UnregisterRigidbodyImmediate(this); }
-
 
     void Rigidbody::ComputeGravityTorqueFromVertices()
     {
@@ -313,7 +326,6 @@ namespace Engine
         return glm::length2(velocity) < velocityThreshold * velocityThreshold &&
                glm::length2(angularVelocity) < angularThreshold * angularThreshold;
     }
-
 
 #if EDITOR
 #include <imgui.h>
