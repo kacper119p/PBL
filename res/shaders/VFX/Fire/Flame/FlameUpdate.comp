@@ -27,7 +27,7 @@ void UpdateParticle(inout particle Particle, int index) {
         Particle.position += Particle.velocity * DeltaTime;
         float scale = (Particle.life / MAX_LIFETIME);
         float scale2 = scale * scale;
-        Particle.scale = (1.0 - scale2 * scale2 * scale) * 3.75;
+        Particle.scale = (1.0 - scale2 * scale2 * scale) * 1.75 + 2.0;
     }
 }
 

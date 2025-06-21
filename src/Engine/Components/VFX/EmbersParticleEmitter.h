@@ -12,15 +12,13 @@ namespace Engine
     class EmbersParticleEmitter final : public ParticleEmitter
     {
     private:
-#pragma pack(push, 1)
-        struct Particle
+        struct alignas(16) Particle
         {
             glm::vec3 Position = glm::vec3(0.0f);
             float Scale = 0.0f;
             glm::vec3 Velocity = glm::vec3(0.0f);
             float Life = -1.0f;
         };
-#pragma pack(pop)
 
         static_assert(sizeof(Particle) == 32, "Size mismatch with GLSL buffer");
 
