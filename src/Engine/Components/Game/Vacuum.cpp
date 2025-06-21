@@ -86,6 +86,8 @@ namespace Engine
                         glm::vec3 direction = position + forward * (size/2.0f+0.01f) - entityCollider->GetOwner()->GetTransform()->GetPosition();
                         entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->AddForce(
                                 direction, Engine::ForceMode::Force);
+                        if (thrashSizeInt == 10)
+                        playerAnimationManager->SuckBigObject();
                     }
                 }
             }
@@ -147,6 +149,9 @@ namespace Engine
             item->GetComponent<Engine::Rigidbody>()->angularVelocity.y=0.0f;
             item->GetComponent<Engine::Rigidbody>()->hasGravity = true;
             item->GetComponent<Engine::Rigidbody>()->AddForce(forward * 100.0f, Engine::ForceMode::Force);
+
+            if (thrashSizeInt == 10)
+                PlayerAnimationManager::GetInstance()->ShootBigObject();
         }
     }
 

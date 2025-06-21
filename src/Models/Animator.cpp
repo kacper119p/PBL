@@ -12,7 +12,6 @@ namespace Models
         size_t boneCount = Animation->GetBoneIDMap().size();
         m_FinalBoneMatrices.resize(boneCount, glm::mat4(1.0f));
 
-
         m_FinalBoneMatrices.assign(boneCount, glm::mat4(1.0f));
 
     }
@@ -63,9 +62,8 @@ namespace Models
                     m_CurrentTime = fmod(m_CurrentTime, duration);
                 }
             }
-
-            CalculateBoneTransform(&m_CurrentAnimation->GetRootNode(), glm::mat4(1.0f));
         }
+        CalculateBoneTransform(&m_CurrentAnimation->GetRootNode(), glm::mat4(1.0f));
     }
 
 
@@ -73,7 +71,13 @@ namespace Models
     {
         m_CurrentAnimation = pAnimation;
         m_CurrentTime = 0.0f;
+
+        if (m_CurrentAnimation)
+        {
+            CalculateBoneTransform(&m_CurrentAnimation->GetRootNode(), glm::mat4(1.0f));
+        }
     }
+
     void Animator::CalculateBoneTransform(const AssimpNodeData* node, glm::mat4 parentTransform)
     {
         std::string nodeName = node->name;
@@ -114,7 +118,11 @@ namespace Models
         m_IsPlayingBackward = startTime > endTime;
         m_PlayOnce = true;
         m_IsPaused = false;
+
+        // Ensure pose is set at start time
+        CalculateBoneTransform(&m_CurrentAnimation->GetRootNode(), glm::mat4(1.0f));
     }
+
 }
 
 
