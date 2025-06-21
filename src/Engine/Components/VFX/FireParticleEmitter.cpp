@@ -28,6 +28,7 @@ Engine::FireParticleEmitter::~FireParticleEmitter()
 {
     glDeleteBuffers(1, &ParticlesBuffer);
     glDeleteBuffers(1, &FreelistBuffer);
+    glDeleteBuffers(1, &SortedIndicesBuffer);
 }
 
 void Engine::FireParticleEmitter::Render(const Engine::CameraRenderData& RenderData)
@@ -38,6 +39,7 @@ void Engine::FireParticleEmitter::Render(const Engine::CameraRenderData& RenderD
 
     SetupMatrices(RenderData, Material->GetMainPass());
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, ParticlesBuffer);
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 2, SortedIndicesBuffer);
     SpriteQuad::DrawInstanced(MaxParticleCount);
 }
 
@@ -47,6 +49,7 @@ void Engine::FireParticleEmitter::Start()
 
     glGenBuffers(1, &ParticlesBuffer);
     glGenBuffers(1, &FreelistBuffer);
+    glGenBuffers(1, &SortedIndicesBuffer);
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, ParticlesBuffer);
 
     const Particle* particles = new Particle[MaxParticleCount]{};
@@ -54,14 +57,20 @@ void Engine::FireParticleEmitter::Start()
     delete[] particles;
 
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, FreelistBuffer);
-    int* freeList = new int[MaxParticleCount + 1]{0};
+    int* freeList = new int[MaxParticleCount + 1];
     freeList[0] = MaxParticleCount;
     for (int i = 1; i <= MaxParticleCount; ++i)
     {
         freeList[i] = i - 1;
+
     }
     glBufferData(GL_SHADER_STORAGE_BUFFER, (MaxParticleCount + 1) * sizeof(int), freeList, GL_DYNAMIC_DRAW);
     delete[] freeList;
+
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, SortedIndicesBuffer);
+    const int* sortedIndices = new int[MaxParticleCount];
+    glBufferData(GL_SHADER_STORAGE_BUFFER, (MaxParticleCount) * sizeof(int), sortedIndices, GL_DYNAMIC_DRAW);
+    delete[] sortedIndices;
 
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 }
@@ -98,6 +107,7 @@ void Engine::FireParticleEmitter::DispatchUpdateShaders(const float DeltaTime)
     Shaders::ComputeShader::SetUniform(DeltaTimeProperty, DeltaTime);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ParticlesBuffer);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, FreelistBuffer);
+    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 2, SortedIndicesBuffer);
 
     constexpr int workGroupSize = 64;
     constexpr int workGroupsCount = (MaxParticleCount + workGroupSize - 1) / workGroupSize;

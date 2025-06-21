@@ -15,8 +15,8 @@ layout (std430, binding = 1) coherent restrict buffer SSBO_1 {
 uniform int ParticlesToSpawn;
 uniform uint Random;
 
-// make a particle with random attributes
-void MakeParticle(out particle Particle) {
+void MakeParticle(out particle Particle)
+{
     uint seed = uint(gl_GlobalInvocationID.x) + Random;
     seed = pcg_hash(seed);
     Particle.life = MAX_LIFETIME;
@@ -28,7 +28,8 @@ void MakeParticle(out particle Particle) {
 }
 
 layout (local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
-void main() {
+void main()
+{
     uint index = gl_GlobalInvocationID.x;
 
     if (index >= ParticlesToSpawn)
