@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine/Components/Renderers/AnimatedModelRenderer.h"
 #include "Engine/Components/VFX/VacuumVfx.h"
+#include "Engine/Components/VFX/VacuumShotVfx.h"
 namespace Engine
 {
     class PlayerAnimationManager
@@ -15,6 +16,7 @@ namespace Engine
         AnimatedModelRenderer* VacuumFront = nullptr;
 
         VacuumVfx* vacuumVfx = nullptr;
+        VacuumShotVfx* vacuumShotVfx = nullptr;
     public:
         AnimatedModelRenderer* TrackLeft = nullptr;
         AnimatedModelRenderer* TrackRight = nullptr;
@@ -45,6 +47,7 @@ namespace Engine
         void SetHandLeft(AnimatedModelRenderer* handLeft);
         void SetHandRight(AnimatedModelRenderer* handRight);
         void SetVacuumVfx(VacuumVfx* Vfx);
+        void SetVacuumShotVfx(VacuumShotVfx* ShotVfx);
         void SetVacuumActive();
         void SetVacuumInactive();
         void SetVacuumFront(AnimatedModelRenderer* Front);
@@ -57,6 +60,7 @@ namespace Engine
 
         void SuckBigObject();
         void ShootBigObject();
+        void PlayVacuumShotVfx();
 
     };
 }
