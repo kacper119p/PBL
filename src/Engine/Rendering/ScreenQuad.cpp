@@ -9,18 +9,14 @@ Engine::Rendering::ScreenQuad::CachedData::~CachedData()
     glDeleteVertexArrays(1, &VertexArray);
 }
 
-Engine::Rendering::ScreenQuad::ScreenQuad()
+Engine::Rendering::ScreenQuad::~ScreenQuad() = default;
+
+void Engine::Rendering::ScreenQuad::Draw()
 {
-    if (CachedData.VertexArray == 0)
+    if (CachedData.VertexBuffer == 0)
     {
         Initialize();
     }
-}
-
-Engine::Rendering::ScreenQuad::~ScreenQuad() = default;
-
-void Engine::Rendering::ScreenQuad::Draw() const // NOLINT(*-convert-member-functions-to-static)
-{
     glBindVertexArray(CachedData.VertexArray);
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glBindVertexArray(0);

@@ -2,6 +2,7 @@
 #include "Engine/Exceptions/SingletonAlreadyExistsException.h"
 #include "LightManager.h"
 #include "Engine/Rendering/StencilBits.h"
+#include "Engine/Rendering/Postprocessing/TransitionTint.h"
 #include "Materials/Material.h"
 
 namespace Engine
@@ -138,6 +139,7 @@ namespace Engine
 
         GodRays.Render(MultiSampledBuffer);
         Bloom.Render(MultiSampledBuffer.GetResolvedColorBuffer());
+        TransitionTint::Render();
     }
 
     void RenderingManager::RenderAllDirectionalShadowMap(const CameraRenderData& RenderData, const unsigned int Target,

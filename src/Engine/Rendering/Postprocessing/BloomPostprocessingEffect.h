@@ -8,7 +8,7 @@ namespace Engine
     /**
      * @brief Class used to apply bloom effect to rendered scene.
      */
-    class BloomPostprocessingEffect
+    class BloomPostprocessingEffect final
     {
     private:
         struct BloomMip
@@ -20,8 +20,6 @@ namespace Engine
 
     private:
         static constexpr size_t MipCount = 5;
-
-        Rendering::ScreenQuad ScreenQuad;
 
         uint32_t FrameBuffer;
         uint32_t PrefilteredColor;
