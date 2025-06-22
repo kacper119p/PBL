@@ -106,6 +106,7 @@ namespace Engine
                     this->GetTransform()->RemoveChild(vacuum->GetTransform());
                     this->GetTransform()->RemoveChild(vacuumVfx->GetTransform());
                     PlayerAnimationManager::GetInstance()->SetVacuumVfx(nullptr);
+                    PlayerAnimationManager::GetInstance()->SetVacuumShotVfx(nullptr);
                     vacuum->Destroy();
                 }
                 if (broom)
@@ -114,6 +115,7 @@ namespace Engine
                     broom->Destroy();
                 }
                 vacuumVfx = nullptr;
+                vacuumShotVfx = nullptr;
                 vacuum = nullptr;
                 broom = nullptr;
                 break;
@@ -123,11 +125,15 @@ namespace Engine
                     vacuum = PrefabLoader::LoadPrefab(VacuumPath, this->GetScene(), this->GetTransform());
                     vacuumVfx = PrefabLoader::LoadPrefab("./res/prefabs/VacuumVFX.prefab", this->GetScene(),
                                                          vacuum->GetTransform());
+                    vacuumShotVfx = PrefabLoader::LoadPrefab("./res/prefabs/VacuumShotVFX.prefab", this->GetScene(),
+                                                             vacuum->GetTransform());
                     this->GetTransform()->AddChild(vacuum->GetTransform());
                     this->GetTransform()->AddChild(vacuumVfx->GetTransform());
+                    this->GetTransform()->AddChild(vacuumShotVfx->GetTransform());
                     vacuum->AddComponent<Engine::Vacuum>();
                     hasVacuum = true;
                     PlayerAnimationManager::GetInstance()->SetVacuumVfx(vacuumVfx->GetComponent<VacuumVfx>());
+                    PlayerAnimationManager::GetInstance()->SetVacuumShotVfx(vacuumShotVfx->GetComponent<VacuumShotVfx>());
 
                     std::vector<Engine::Transform*> children = vacuum->GetTransform()->GetChildren();
                     for (Engine::Transform* child : children)
@@ -173,11 +179,13 @@ namespace Engine
                     this->GetTransform()->RemoveChild(vacuum->GetTransform());
                     this->GetTransform()->RemoveChild(vacuumVfx->GetTransform());
                     PlayerAnimationManager::GetInstance()->SetVacuumVfx(nullptr);
+                    PlayerAnimationManager::GetInstance()->SetVacuumShotVfx(nullptr);
                     vacuum->Destroy();
                 }
                 stripper = nullptr;
                 vacuum = nullptr;
                 vacuumVfx = nullptr;
+                vacuumShotVfx = nullptr;
                 break;
             default:
                 spdlog::warn("DefaultPlayer: Unknown tool selected.");

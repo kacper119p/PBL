@@ -1,0 +1,45 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{98610845-c59d-4c11-831b-f35ee29b647f}\u0000",
+            "name": "VacuumShotVFX",
+            "transform": {
+                "type": "Transform",
+                "id": "{de9cd4b3-fc5b-4a90-8acc-aa36edad7ed5}\u0000",
+                "owner": "{98610845-c59d-4c11-831b-f35ee29b647f}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": -0.6000000238418579,
+                    "z": -2.268653154373169
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{c42b1b89-6ca3-4ecc-9a05-cc4f7d3938ce}\u0000"
+            ]
+        },
+        {
+            "type": "VacuumShotVfx",
+            "id": "{c42b1b89-6ca3-4ecc-9a05-cc4f7d3938ce}\u0000",
+            "owner": "{98610845-c59d-4c11-831b-f35ee29b647f}\u0000"
+        }
+    ]
+}

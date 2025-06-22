@@ -161,6 +161,8 @@ namespace Engine
 
             if (thrashSizeInt == 10)
                 PlayerAnimationManager::GetInstance()->ShootBigObject();
+            
+            PlayerAnimationManager::GetInstance()->PlayVacuumShotVfx();
         }
     }
 

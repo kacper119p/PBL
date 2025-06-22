@@ -59,6 +59,11 @@ void Engine::PlayerAnimationManager::SetVacuumVfx(VacuumVfx* Vfx)
     isVacuumActive = false;
 }
 
+void Engine::PlayerAnimationManager::SetVacuumShotVfx(VacuumShotVfx* ShotVfx) 
+{ 
+    vacuumShotVfx = ShotVfx;
+}
+
 void Engine::PlayerAnimationManager::SetVacuumActive()
 {
     if (vacuumVfx != nullptr)
@@ -117,4 +122,13 @@ void Engine::PlayerAnimationManager::ShootBigObject()
         VacuumFront->GetAnimator().PlayOnceFromTo(GetTickForFrame(20, 20, LeftHandAnimationDuration),
                                                   GetTickForFrame(0, 20, LeftHandAnimationDuration));
     }
+}
+
+void Engine::PlayerAnimationManager::PlayVacuumShotVfx() 
+{ 
+    if (vacuumShotVfx != nullptr)
+    {
+        vacuumShotVfx->Play();
+    }
+
 }
