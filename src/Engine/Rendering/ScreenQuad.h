@@ -1,4 +1,6 @@
 #pragma once
+#include <cstdint>
+
 
 namespace Engine::Rendering
 {
@@ -10,9 +12,8 @@ namespace Engine::Rendering
     private:
         struct CachedData
         {
-            unsigned int VertexArray = 0;
-            unsigned int VertexBuffer = 0;
-            unsigned int ElementBuffer = 0;
+            uint32_t VertexArray = 0;
+            uint32_t VertexBuffer = 0;
 
             ~CachedData();
         };
