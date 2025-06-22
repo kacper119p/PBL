@@ -42,7 +42,7 @@ namespace Engine
          */
         [[nodiscard]] Models::ModelAnimated* GetModel() const { return Model; }
         [[nodiscard]] Models::Animation* GetAnimation() const { return Animation; }
-        [[nodiscard]] Models::Animator GetAnimator() const { return Animator; }
+        [[nodiscard]] Models::Animator& GetAnimator() { return Animator; }
 
         /**
          * @brief Sets model used by this renderer.

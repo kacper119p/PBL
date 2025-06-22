@@ -7,6 +7,7 @@
 #include "Engine/Input/InputManager.h"
 #include "Engine/Components/Colliders/SphereCollider.h"
 #include "Engine/Components/Game/ThrashManager.h"
+#include "Engine/Components/Game/PlayerAnimationManager.h"
 #include <iostream>
 
 namespace Engine
@@ -28,19 +29,45 @@ namespace Engine
     void Vacuum::Update(float deltaTime)
     {
         InputManager& input = InputManager::GetInstance();
+        PlayerAnimationManager* playerAnimationManager = PlayerAnimationManager::GetInstance();
 
         isShootingKeyPressed = input.IsKeyPressed(GLFW_KEY_2);
         bool isSuccingKeyPressed = input.IsKeyPressed(GLFW_KEY_1);
 
-        if (isSuccingKeyPressed)
+        if (isSuccingKeyPressed&&volume<maxVolume)
         {
-            isSuccing = true;
-            isShooting = false;
+            if (static_cast<float>(glfwGetTime()) - lastSuckToggleTime > shootCooldown)
+            {
+                isSuccing = !isSuccing;
+                std::cout << "Vacuum toggled: " << (isSuccing ? "Sucking" : "Not Sucking") << std::endl;
+                isShooting = false;
+                lastSuckToggleTime = static_cast<float>(glfwGetTime());
+            }
         }
         else if (isShootingKeyPressed)
         {
             isShooting = true;
             isSuccing = false;
+        }
+
+        if (volume >= maxVolume)
+        {
+            isSuccing = false;
+        }
+
+        if (isSuccing)
+        {
+            if (!playerAnimationManager->isVacuumActive)
+            {
+                playerAnimationManager->SetVacuumActive();
+            }
+        }
+        else
+        {
+            if (playerAnimationManager->isVacuumActive)
+            {
+                playerAnimationManager->SetVacuumInactive();
+            }
         }
 
         float currentTime = static_cast<float>(glfwGetTime());
@@ -82,6 +109,8 @@ namespace Engine
                         glm::vec3 direction = position + forward * (size/2.0f+0.01f) - entityCollider->GetOwner()->GetTransform()->GetPosition();
                         entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->AddForce(
                                 direction, Engine::ForceMode::Force);
+                        if (thrashSizeInt == 10)
+                        playerAnimationManager->SuckBigObject();
                     }
                 }
             }
@@ -103,15 +132,13 @@ namespace Engine
                     }
                 }
             }
+
         }
 
         wasShootingKeyPressed = isShootingKeyPressed;
 
         ThrashManager::GetInstance()->VacuumCount = items.size();
         ThrashManager::GetInstance()->VacuumVolume = volume;
-
-        std::cout << "Vacuum Volume: " << volume << ", Vacuum count: " << items.size() << std::endl;
-        std::cout << "Thrash count: " << ThrashManager::GetInstance()->GetThrashCount() << std::endl;
     }
 
     void Vacuum::Shoot()
@@ -131,6 +158,11 @@ namespace Engine
             item->GetComponent<Engine::Rigidbody>()->angularVelocity.y=0.0f;
             item->GetComponent<Engine::Rigidbody>()->hasGravity = true;
             item->GetComponent<Engine::Rigidbody>()->AddForce(forward * 100.0f, Engine::ForceMode::Force);
+
+            if (thrashSizeInt == 10)
+                PlayerAnimationManager::GetInstance()->ShootBigObject();
+            
+            PlayerAnimationManager::GetInstance()->PlayVacuumShotVfx();
         }
     }
 

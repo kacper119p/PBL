@@ -14,6 +14,7 @@ namespace Materials
 
     void DebugBloodMaterial::Use() const
     {
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         Shader.Use();
     }
 

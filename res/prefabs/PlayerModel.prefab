@@ -2,14 +2,14 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{f8ecddf0-dd7c-464c-9b50-2fd5da429b64}\u0000",
+            "id": "{e0f9cf8c-2dc3-48ec-827b-d708b4370944}\u0000",
             "name": "PlayerModel",
             "transform": {
                 "type": "Transform",
-                "id": "{5f9306dd-f561-46a9-9380-9b2db8016511}\u0000",
-                "owner": "{f8ecddf0-dd7c-464c-9b50-2fd5da429b64}\u0000",
+                "id": "{d84717ea-05ac-4601-bb2e-7b1f67193830}\u0000",
+                "owner": "{e0f9cf8c-2dc3-48ec-827b-d708b4370944}\u0000",
                 "Position": {
-                    "x": 0.0,
+                    "x": 1.4901161193847656e-8,
                     "y": 0.0,
                     "z": 0.0
                 },
@@ -29,19 +29,246 @@
                     "z": -0.0,
                     "w": -4.371138828673793e-8
                 },
-                "Children": [],
+                "Children": [
+                    "{7c954828-f7bd-4807-893e-7f7f603f961a}\u0000",
+                    "{f941087d-b62b-49f2-9d8c-1d2192f48582}\u0000",
+                    "{e08a6146-a424-4a86-9d7f-60611577b46d}\u0000",
+                    "{c391fd4a-4877-4f3b-a91f-b0419c4aced0}\u0000",
+                    "{4ad93364-d523-4f90-93a4-418aac5002d2}\u0000"
+                ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{3d1c640c-7dc4-449d-bb05-b2695d6fbbf0}\u0000"
+                "{1597812c-ed8f-4c29-8e30-4c07172362f1}\u0000"
             ]
         },
         {
-            "type": "ModelRenderer",
-            "id": "{3d1c640c-7dc4-449d-bb05-b2695d6fbbf0}\u0000",
-            "owner": "{f8ecddf0-dd7c-464c-9b50-2fd5da429b64}\u0000",
-            "Material": "./res/materials/SampleScene/Player.mat",
-            "Model": "./res/Models/Granny/Ship.fbx"
+            "type": "AnimatedModelRenderer",
+            "id": "{1597812c-ed8f-4c29-8e30-4c07172362f1}\u0000",
+            "owner": "{e0f9cf8c-2dc3-48ec-827b-d708b4370944}\u0000",
+            "Material": "./res/materials/SampleScene/DefaultAnimated.mat",
+            "Model": "./res/Models/Granny/Ship.fbx",
+            "Animation": "./res/Models/Granny/Ship.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{a92f73ae-f6aa-4c68-9cdc-80ae7cab24fd}\u0000",
+            "name": "Track_L",
+            "transform": {
+                "type": "Transform",
+                "id": "{7c954828-f7bd-4807-893e-7f7f603f961a}\u0000",
+                "owner": "{a92f73ae-f6aa-4c68-9cdc-80ae7cab24fd}\u0000",
+                "Position": {
+                    "x": 1.2480000257492065,
+                    "y": -0.625,
+                    "z": -0.011231075040996075
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{d84717ea-05ac-4601-bb2e-7b1f67193830}\u0000"
+            },
+            "components": [
+                "{a0262b41-6ce8-4d7f-9d78-fb4bc61afde6}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{a0262b41-6ce8-4d7f-9d78-fb4bc61afde6}\u0000",
+            "owner": "{a92f73ae-f6aa-4c68-9cdc-80ae7cab24fd}\u0000",
+            "Material": "./res/materials/SampleScene/DefaultAnimated.mat",
+            "Model": "./res/Models/Granny/Track_L.fbx",
+            "Animation": "./res/Models/Granny/Track_L.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{220a5f82-2d13-4693-aff1-39c87966abaf}\u0000",
+            "name": "Track_R",
+            "transform": {
+                "type": "Transform",
+                "id": "{f941087d-b62b-49f2-9d8c-1d2192f48582}\u0000",
+                "owner": "{220a5f82-2d13-4693-aff1-39c87966abaf}\u0000",
+                "Position": {
+                    "x": -1.2482136487960815,
+                    "y": -0.6245821714401245,
+                    "z": -0.010811199434101582
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{d84717ea-05ac-4601-bb2e-7b1f67193830}\u0000"
+            },
+            "components": [
+                "{744a14d2-0b88-4174-a37f-18e4fd18f350}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{744a14d2-0b88-4174-a37f-18e4fd18f350}\u0000",
+            "owner": "{220a5f82-2d13-4693-aff1-39c87966abaf}\u0000",
+            "Material": "./res/materials/SampleScene/DefaultAnimated.mat",
+            "Model": "./res/Models/Granny/Track_R.fbx",
+            "Animation": "./res/Models/Granny/Track_R.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{0fe10dfe-1896-4e33-9d68-ce70d6136f99}\u0000",
+            "name": "HandLeft",
+            "transform": {
+                "type": "Transform",
+                "id": "{e08a6146-a424-4a86-9d7f-60611577b46d}\u0000",
+                "owner": "{0fe10dfe-1896-4e33-9d68-ce70d6136f99}\u0000",
+                "Position": {
+                    "x": 0.008478586561977863,
+                    "y": 8.940696716308594e-8,
+                    "z": 7.412216396218696e-10
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{d84717ea-05ac-4601-bb2e-7b1f67193830}\u0000"
+            },
+            "components": [
+                "{fc23dfab-1445-413a-8754-119305525f8e}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{fc23dfab-1445-413a-8754-119305525f8e}\u0000",
+            "owner": "{0fe10dfe-1896-4e33-9d68-ce70d6136f99}\u0000",
+            "Material": "./res/materials/SampleScene/DefaultAnimated.mat",
+            "Model": "./res/Models/Granny/Hand_L.fbx",
+            "Animation": "./res/Models/Granny/Hand_L.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{e1d2a688-4cc9-4a28-a6c3-c910638e1221}\u0000",
+            "name": "HandRight",
+            "transform": {
+                "type": "Transform",
+                "id": "{c391fd4a-4877-4f3b-a91f-b0419c4aced0}\u0000",
+                "owner": "{e1d2a688-4cc9-4a28-a6c3-c910638e1221}\u0000",
+                "Position": {
+                    "x": -0.00800000037997961,
+                    "y": 8.940696716308594e-8,
+                    "z": 4.6074255521944e-15
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": -1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{d84717ea-05ac-4601-bb2e-7b1f67193830}\u0000"
+            },
+            "components": [
+                "{a3a51809-073b-4df2-92a4-f37f03597c42}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{a3a51809-073b-4df2-92a4-f37f03597c42}\u0000",
+            "owner": "{e1d2a688-4cc9-4a28-a6c3-c910638e1221}\u0000",
+            "Material": "./res/materials/SampleScene/DefaultAnimated.mat",
+            "Model": "./res/Models/Granny/Hand_L.fbx",
+            "Animation": "./res/Models/Granny/Hand_L.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{069e47cc-d904-41e4-89c6-ac8a3506cdcf}\u0000",
+            "name": "Body",
+            "transform": {
+                "type": "Transform",
+                "id": "{4ad93364-d523-4f90-93a4-418aac5002d2}\u0000",
+                "owner": "{069e47cc-d904-41e4-89c6-ac8a3506cdcf}\u0000",
+                "Position": {
+                    "x": -7.63234275780178e-9,
+                    "y": -0.5452252626419067,
+                    "z": 0.08730433881282806
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{d84717ea-05ac-4601-bb2e-7b1f67193830}\u0000"
+            },
+            "components": [
+                "{9aa4bf6e-18c8-4ad2-a513-4fb571fd7f26}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{9aa4bf6e-18c8-4ad2-a513-4fb571fd7f26}\u0000",
+            "owner": "{069e47cc-d904-41e4-89c6-ac8a3506cdcf}\u0000",
+            "Material": "./res/materials/SampleScene/DefaultAnimated.mat",
+            "Model": "./res/Models/Granny/Body.fbx",
+            "Animation": "./res/Models/Granny/Body.fbx"
         }
     ]
 }

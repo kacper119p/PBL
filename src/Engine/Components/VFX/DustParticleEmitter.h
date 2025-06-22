@@ -1,17 +1,15 @@
 #pragma once
 
-#include "Renderer.h"
-#include "Engine/Components/Interfaces/IUpdateable.h"
+#include "ParticleEmitter.h"
 #include "Shaders/ComputeShader.h"
 #include "Models/Model.h"
-#include "Shaders/Shader.h"
 
 namespace Engine
 {
     /**
-     * @brief Renders single particle system.
+     * @brief Renders single dust particle system.
      */
-    class ParticleEmitter final : public Component
+    class DustParticleEmitter final : public ParticleEmitter
     {
     private:
         struct Particle
@@ -51,31 +49,27 @@ namespace Engine
         };
 
     private:
-        Materials::Material* Material = nullptr;
         EmitterSettings Settings;
         int32_t MaxParticleCount = 0;
 
         float Timer = 0.0f;
 
-        uint32_t ParticlesBuffer;
-        uint32_t FreelistBuffer;
+        uint32_t ParticlesBuffer = 0;
+        uint32_t FreelistBuffer = 0;
 
-        uint32_t ParticlesToSpawnProperty;
-        uint32_t DeltaTimeProperty;
-        uint32_t RandomProperty;
-
-        Shaders::ComputeShader SpawnShader;
-        Shaders::ComputeShader UpdateShader;
+        uint32_t ParticlesToSpawnProperty = 0;
+        uint32_t DeltaTimeProperty = 0;
+        uint32_t RandomProperty = 0;
 
     public:
-        ParticleEmitter() = default;
+        DustParticleEmitter() = default;
 
-        ParticleEmitter(Materials::Material* Material, const Shaders::ComputeShader& SpawnShader,
-                        const Shaders::ComputeShader& UpdateShader, const EmitterSettings& EmitterSettings,
-                        int MaxParticleCount);
+        DustParticleEmitter(Materials::Material* Material, const Shaders::ComputeShader& SpawnShader,
+                            const Shaders::ComputeShader& UpdateShader, const EmitterSettings& EmitterSettings,
+                            int MaxParticleCount);
 
     public:
-        ~ParticleEmitter() override;
+        ~DustParticleEmitter() override;
 
     public:
         [[nodiscard]] const EmitterSettings& GetSettings() const
@@ -85,58 +79,22 @@ namespace Engine
 
         void SetSettings(const EmitterSettings& Settings)
         {
-            ParticleEmitter::Settings = Settings;
-        }
-
-        [[nodiscard]] const Shaders::ComputeShader& GetUpdateShader() const
-        {
-            return UpdateShader;
-        }
-
-        void SetUpdateShader(const Shaders::ComputeShader& UpdateShader)
-        {
-            ParticleEmitter::UpdateShader = UpdateShader;
-        }
-
-        [[nodiscard]] const Shaders::ComputeShader& GetSpawnShader() const
-        {
-            return SpawnShader;
-        }
-
-        void SetSpawnShader(const Shaders::ComputeShader& SpawnShader)
-        {
-            ParticleEmitter::SpawnShader = SpawnShader;
-        }
-
-        /**
-         * @brief Sets material used by this emitter.
-         * @param Material A new material.
-         */
-        void SetMaterial(Materials::Material* Material);
-
-        /**
-         * @brief Returns Material used by this emitter.
-         */
-        [[nodiscard]] Materials::Material* GetMaterial() const
-        {
-            return Material;
+            DustParticleEmitter::Settings = Settings;
         }
 
         void Start() override;
 
-        void DispatchSpawnShaders(float DeltaTime);
+        void DispatchSpawnShaders(float DeltaTime) override;
 
-        void DispatchUpdateShaders(float DeltaTime);
+        void DispatchUpdateShaders(float DeltaTime) override;
 
-        void Render(const CameraRenderData& RenderData);
+        void Render(const CameraRenderData& RenderData) override;
 
     private:
-        void SetupMatrices(const CameraRenderData& RenderData, const Shaders::Shader& Shader) const;
-
         void SetEmitterSettingsUniforms(Shaders::ComputeShader Shader) const;
 #if EDITOR
         void DrawImGui() override;
 #endif
-        SERIALIZATION_EXPORT_CLASS(ParticleEmitter)
+        SERIALIZATION_EXPORT_CLASS(DustParticleEmitter)
     };
 }

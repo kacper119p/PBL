@@ -24,7 +24,8 @@ layout (location = 0) out vec3 FragColor;
 layout (location = 1) out vec3 OcclusionMask;
 
 layout (early_fragment_tests) in;
-void main() {
+void main()
+{
     vec3 BaseColor = texture(BaseMap, TexCoord).rgb * BaseColor;
     vec3 RoughnessMetallicAmbientOcclusion = texture(RoughnessMetallicAmbientOcclusionMap, TexCoord).rgb;
     float Roughness = RoughnessMetallicAmbientOcclusion.r * Roughness;

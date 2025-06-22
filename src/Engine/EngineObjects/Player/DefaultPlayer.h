@@ -30,6 +30,8 @@ namespace Engine
         Entity* stripper = nullptr;
         Entity* vacuum = nullptr;
         Entity* broom = nullptr;
+        Entity* vacuumVfx = nullptr;
+        Entity* vacuumShotVfx = nullptr;
 
         bool hasStripper = false;
         bool hasVacuum = false;
@@ -37,7 +39,7 @@ namespace Engine
 
         bool canSwap = false;
 
-        Tool currentTool = Tool::Broom;
+        Tool currentTool = Tool::Vacuum;
 
         void Start() override;
 

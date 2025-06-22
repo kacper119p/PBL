@@ -1,0 +1,96 @@
+#version 460 core
+
+#include "Constants.glsl"
+#include "FlameParticleData.glsl"
+
+layout (location = 0) uniform float DeltaTime;
+layout (location = 1) uniform mat4 ViewMatrix;
+
+struct ParticleDepth
+{
+    float depth;
+    int index;
+};
+
+layout (std430, binding = 0) buffer SSBO_Particles
+{
+    particle Particles[];
+};
+
+layout (std430, binding = 1) coherent restrict buffer SSBO_FreeList
+{
+    int count;
+    int indices[];
+};
+
+layout (std430, binding = 2) buffer SSBO_SortedIndices
+{
+    int sortedIndices[];
+};
+
+shared ParticleDepth sharedData[64];
+
+void UpdateParticle(inout particle Particle, int index)
+{
+    if (Particle.life > 0.0)
+    {
+        Particle.life -= DeltaTime;
+        if (Particle.life <= 0.0)
+        {
+            Particle.life = 0.0;
+            indices[atomicAdd(count, 1)] = index;
+        }
+
+        Particle.position += Particle.velocity * DeltaTime;
+
+        float scale = (Particle.life / MAX_LIFETIME);
+        float scale2 = scale * scale;
+        Particle.scale = (1.0 - scale2 * scale2 * scale) * 3.75;
+    }
+}
+
+void swap(inout ParticleDepth a, inout ParticleDepth b, bool descending)
+{
+    if ((a.depth < b.depth) == descending)
+    {
+        ParticleDepth temp = a;
+        a = b;
+        b = temp;
+    }
+}
+
+layout (local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
+void main()
+{
+    uint lid = gl_LocalInvocationID.x;
+    uint gid = gl_GlobalInvocationID.x;
+
+    if (gid >= Particles.length()) return;
+
+    UpdateParticle(Particles[gid], int(gid));
+
+    vec4 viewPos = ViewMatrix * vec4(Particles[gid].position, 1.0);
+    float depth = -viewPos.z;
+
+    sharedData[lid].depth = depth;
+    sharedData[lid].index = int(gid);
+
+    memoryBarrierShared();
+    barrier();
+
+    for (uint k = 2; k <= 64; k <<= 1)
+    {
+        for (uint j = k >> 1; j > 0; j >>= 1)
+        {
+            uint ixj = lid ^ j;
+            if (ixj > lid)
+            {
+                bool descending = ((lid & k) == 0);
+                swap(sharedData[lid], sharedData[ixj], descending);
+            }
+            barrier();
+        }
+    }
+
+    sortedIndices[lid] = sharedData[lid].index;
+}

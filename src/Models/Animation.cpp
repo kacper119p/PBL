@@ -19,6 +19,8 @@ namespace Models
         ReadHierarchyData(m_RootNode, scene->mRootNode);
         ReadMissingBones(animation, *model);
         Path = animationPath;
+        m_GlobalInverseTransform = AssimpGLMHelpers::ConvertMatrixToGLMFormat(scene->mRootNode->mTransformation);
+        m_GlobalInverseTransform = glm::inverse(m_GlobalInverseTransform);
     }
     Bone* Animation::FindBone(const std::string& name)
     {

@@ -8,7 +8,7 @@
 #include "Engine/EngineObjects/Scene/SceneManager.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/Components/Updateable.h"
-#include "Engine/Components/Renderers/ParticleEmitter.h"
+#include "Engine/Components/VFX/ParticleEmitter.h"
 #include "Engine/Components/Audio/AudioSource.h"
 #include "Engine/EngineObjects/Scene/SceneManager.h"
 #include "Engine/EngineObjects/GameMode/GameMode.h"
@@ -252,7 +252,11 @@ void Engine::EditorGUI::DrawSelectedEntitysComponents()
 
     ImGui::Begin("Components");
 
-    auto selectedEntity = SceneHierarchyGUI::GetInstance()->GetSelectedEntity();
+    auto selectedEntities = SceneHierarchyGUI::GetInstance()->GetSelectedEntities();
+    Transform* selectedEntity = nullptr;
+    if (!selectedEntities.empty())
+        selectedEntity = *selectedEntities.begin();
+
     if (selectedEntity)
     {
         Entity* owner = selectedEntity->GetOwner();

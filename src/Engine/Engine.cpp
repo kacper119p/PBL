@@ -7,24 +7,21 @@
 #include "Engine.h"
 #include "Engine/EngineObjects/RenderingManager.h"
 #include "Engine/EngineObjects/LightManager.h"
-#include "Engine/Gui/LightsGui.h"
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/EngineObjects/CollisionUpdateManager.h"
 #include "Engine/EngineObjects/RigidbodyUpdateManager.h"
 #include "Engine/Components/Colliders/PrimitiveMeshes.h"
-#include "Materials/Material.h"
 #include "Materials/MaterialManager.h"
 #include "Models/ModelManager.h"
-#include "Utility/SystemUtilities.h"
 #include "Scene/SceneBuilder.h"
 #include "Shaders/ShaderManager.h"
 #include "Textures/TextureManager.h"
 #include "UI/FontRendering/TextManager.h"
-#include "Engine/Components/Audio/AudioSource.h"
 #include "Engine/Components/Audio/AudioListener.h"
 #include "Engine/Components/Audio/BackgroundAudioPlayer.h"
-#include "UI/UiImplementations/SampleUi.h"
+#include "EngineObjects/Transitions/SplashScreen.h"
 #include "tracy/Tracy.hpp"
+#include "Components/Renderers/OutlinedModelRenderer.h"
 #if DEBUG
 #include "Utility/OpenGlDebugger.h"
 #endif
@@ -62,6 +59,11 @@ namespace Engine
         }
 
         spdlog::info("Initialized project.");
+
+#if !EDITOR
+        SplashScreen::Play(Window, WindowWidth, WindowHeight);
+# endif
+
 #if EDITOR
         ImGuiInit();
         spdlog::info("Initialized ImGui.");
@@ -86,15 +88,14 @@ namespace Engine
 
         spdlog::info("Successfully built scene.");
 
-        float lastFrame = glfwGetTime();
+        float lastFrame = static_cast<float>(glfwGetTime());
 
         // Main loop
         while (!glfwWindowShouldClose(Window))
         {
             ZoneScopedN("GameLoop");
             ++Frame;
-            glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
-            float currentFrame = glfwGetTime();
+            float currentFrame = static_cast<float>(glfwGetTime());
             float deltaTime = currentFrame - lastFrame;
             lastFrame = currentFrame;
 
@@ -108,6 +109,7 @@ namespace Engine
 #endif
 #if !EDITOR
             UpdateManager::GetInstance()->Update(deltaTime);
+            Entity::DestroyQueued();
             RigidbodyUpdateManager::GetInstance()->Update(deltaTime);
             CollisionUpdateManager::GetInstance()->Update(deltaTime);
             if (!BackgroundAudioPlayer->IsPlaying())
@@ -141,7 +143,6 @@ namespace Engine
 #endif
 
             // End frame and swap buffers (double buffering)
-            Entity::DestroyQueued();
             EndFrame();
             FrameMark;
         }
@@ -225,19 +226,8 @@ namespace Engine
             return false;
         }
 
-        if (!GLAD_GL_ARB_bindless_texture)
+        if (!VerifyOpenGLExtensions())
         {
-            spdlog::error("Platform unsupported: GLAD_GL_ARB_bindless_texture.");
-            return false;
-        }
-        if (!GLAD_GL_EXT_texture_compression_s3tc)
-        {
-            spdlog::error("Platform unsupported: GLAD_GL_EXT_texture_compression_s3tc.");
-            return false;
-        }
-        if (!GLAD_GL_ARB_texture_compression_bptc)
-        {
-            spdlog::error("Platform unsupported: GLAD_GL_ARB_texture_compression_bptc.");
             return false;
         }
 
@@ -248,6 +238,7 @@ namespace Engine
         LightManager::Initialize();
         UpdateManager::Initialize();
         Materials::MaterialManager::Initialize();
+        OutlinedModelRenderer::InitializeShaders();
         Ui::TextManager::Initialize();
         RigidbodyUpdateManager::Initialize();
         CollisionUpdateManager::Initialize();
@@ -354,8 +345,8 @@ namespace Engine
     void Engine::ImGuiRender()
     {
 #if EDITOR
-        //LightsGui::Draw();
-        //EditorGUI.Render(Frame, CurrentScene);
+    //LightsGui::Draw();
+    //EditorGUI.Render(Frame, CurrentScene);
 #endif
     }
 
@@ -466,5 +457,25 @@ namespace Engine
         }
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    }
+
+    bool Engine::VerifyOpenGLExtensions()
+    {
+        if (!GLAD_GL_ARB_bindless_texture)
+        {
+            spdlog::error("Platform unsupported: GLAD_GL_ARB_bindless_texture.");
+            return false;
+        }
+        if (!GLAD_GL_EXT_texture_compression_s3tc)
+        {
+            spdlog::error("Platform unsupported: GLAD_GL_EXT_texture_compression_s3tc.");
+            return false;
+        }
+        if (!GLAD_GL_ARB_texture_compression_bptc)
+        {
+            spdlog::error("Platform unsupported: GLAD_GL_ARB_texture_compression_bptc.");
+            return false;
+        }
+        return true;
     }
 } // Engine
