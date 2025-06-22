@@ -10,7 +10,7 @@ namespace Engine
     private:
         static constexpr float Duration = 3.0f;
 
-        static constexpr float FadeInTime = Duration * 0.1f;
+        static constexpr float FadeInTime = Duration * 0.25f;
         static constexpr float FadeOutStart = Duration * 0.75f;
         static constexpr float FadeOutTime = Duration - FadeOutStart;
 

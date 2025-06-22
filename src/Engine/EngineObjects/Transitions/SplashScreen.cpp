@@ -43,6 +43,19 @@ namespace Engine
                 EndFrame(Window);
                 return;
             }
+            if (glfwJoystickIsGamepad(GLFW_JOYSTICK_1))
+            {
+                GLFWgamepadstate state;
+                if (glfwGetGamepadState(GLFW_JOYSTICK_1, &state)
+                    && (state.buttons[GLFW_GAMEPAD_BUTTON_A] == GLFW_PRESS
+                        || state.buttons[GLFW_GAMEPAD_BUTTON_B] == GLFW_PRESS))
+                {
+                    glClear(GL_COLOR_BUFFER_BIT);
+                    EndFrame(Window);
+                    return;
+                }
+            }
+
             const float currentFrame = static_cast<float>(glfwGetTime());
             const float deltaTime = currentFrame - lastFrame;
             lastFrame = currentFrame;
