@@ -1,0 +1,19 @@
+{
+    "type": "AnimatedPbrMaterial",
+    "BaseMap": "./res/textures/Ship/BaseMap.dds",
+    "RoughnessMetallicMap": "./res/textures/Ship/RMAOMap.dds",
+    "NormalMap": "./res/textures/Ship/NormalMap.dds",
+    "EmissiveMap": "./res/textures/Ship/EmissiveMap.dds",
+    "Roughness": 1.0,
+    "Metallic": 1.0,
+    "BaseColor": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+    },
+    "EmissiveColor": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+    }
+}
