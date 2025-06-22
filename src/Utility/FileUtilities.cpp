@@ -31,10 +31,10 @@ namespace Utility
     void FindFilesWithExtension(const std::string& Directory, const std::string& Extension,
                                 std::vector<std::string>& Results)
     {
-        std::string searchPath = Directory + "\\*";
+        const std::string searchPath = Directory + "\\*";
 
         WIN32_FIND_DATAA findData;
-        HANDLE hFind = FindFirstFileA(searchPath.c_str(), &findData);
+        const HANDLE hFind = FindFirstFileA(searchPath.c_str(), &findData);
 
         if (hFind == INVALID_HANDLE_VALUE)
             return;
@@ -43,7 +43,6 @@ namespace Utility
         {
             std::string name = findData.cFileName;
 
-            // Skip "." and ".."
             if (name == "." || name == "..")
                 continue;
 
@@ -51,21 +50,18 @@ namespace Utility
 
             if (findData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
             {
-                // Recurse into subdirectory
                 FindFilesWithExtension(fullPath, Extension, Results);
             }
             else
             {
-                // Check file extension (case-insensitive)
-                size_t dotPos = name.rfind('.');
+                const size_t dotPos = name.rfind('.');
                 if (dotPos != std::string::npos)
                 {
                     std::string fileExt = name.substr(dotPos);
 
-                    // Make both lowercase for comparison
-                    std::transform(fileExt.begin(), fileExt.end(), fileExt.begin(), ::tolower);
+                    std::ranges::transform(fileExt, fileExt.begin(), ::tolower);
                     std::string lowerExt = Extension;
-                    std::transform(lowerExt.begin(), lowerExt.end(), lowerExt.begin(), ::tolower);
+                    std::ranges::transform(lowerExt, lowerExt.begin(), ::tolower);
 
                     if (fileExt == lowerExt)
                     {
@@ -77,22 +73,5 @@ namespace Utility
         } while (FindNextFileA(hFind, &findData) != 0);
 
         FindClose(hFind);
-    }
-
-    int main()
-    {
-        std::string folder = "C:\\Path\\To\\Folder";
-        std::string extension = ".txt"; // Must include the dot
-
-        std::vector<std::string> files;
-
-        FindFilesWithExtension(folder, extension, files);
-
-        for (const auto& path : files)
-        {
-            std::cout << path << std::endl;
-        }
-
-        return 0;
     }
 } // Utility

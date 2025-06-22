@@ -5,13 +5,63 @@
 #include "Engine/Textures/TextureManager.h"
 #include "GLFW/glfw3.h"
 #include "Math/Easings.h"
+#include "Models/ModelManager.h"
 #include "Shaders/Shader.h"
 #include "Shaders/ShaderManager.h"
+#include "Utility/FileUtilities.h"
 
 namespace Engine
 {
+    bool SplashScreen::IterativeLoader::Step()
+    {
+        switch (Stage)
+        {
+            case 0:
+            {
+                Utility::FindFilesWithExtension("res/textures", ".dds", Paths);
+                ++Stage;
+                return false;
+            }
+            case 1:
+            {
+                Texture _ = TextureManager::GetTexture(Paths[Index].c_str());
+                ++Index;
+                if (Index == Paths.size())
+                {
+                    ++Stage;
+                    Index = 0;
+                }
+                return false;
+            }
+            case 2:
+            {
+                Paths.clear();
+                Utility::FindFilesWithExtension("res/models", ".fbx", Paths);
+                ++Stage;
+                return false;
+            }
+            case 3:
+            {
+                Models::Model* _ = Models::ModelManager::GetModel(Paths[Index].c_str());
+                ++Index;
+                if (Index == Paths.size())
+                {
+                    ++Stage;
+                    Index = 0;
+                    return true;
+                }
+                return false;
+            }
+            default:
+            {
+                return true;
+            }
+        }
+    }
+
     void SplashScreen::Play(GLFWwindow* const Window, const int32_t ScreenWidth, const int32_t ScreenHeight)
     {
+        IterativeLoader loader;
         float totalTime = 0.0f;
         float lastFrame = static_cast<float>(glfwGetTime());
         const Texture texture = TextureManager::GetTexture("res/textures/Logos/TeamLogo.dds");
@@ -22,6 +72,8 @@ namespace Engine
 
         const int32_t sizePropertyLocation = shader.GetUniformLocation("Size");
         const int32_t alphaPropertyLocation = shader.GetUniformLocation("Alpha");
+        const int32_t imagePropertyLocation = shader.GetUniformLocation("Image");
+        Shaders::Shader::SetTextureHandle(imagePropertyLocation, texture.GetHandleReadonly());
 
         glViewport(0, 0, ScreenWidth, ScreenHeight);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -39,9 +91,7 @@ namespace Engine
                 || glfwGetKey(Window, GLFW_KEY_SPACE) == GLFW_PRESS
                 || glfwGetKey(Window, GLFW_KEY_ENTER) == GLFW_PRESS)
             {
-                glClear(GL_COLOR_BUFFER_BIT);
-                EndFrame(Window);
-                return;
+                break;
             }
             if (glfwJoystickIsGamepad(GLFW_JOYSTICK_1))
             {
@@ -50,14 +100,19 @@ namespace Engine
                     && (state.buttons[GLFW_GAMEPAD_BUTTON_A] == GLFW_PRESS
                         || state.buttons[GLFW_GAMEPAD_BUTTON_B] == GLFW_PRESS))
                 {
-                    glClear(GL_COLOR_BUFFER_BIT);
-                    EndFrame(Window);
-                    return;
+                    break;
                 }
             }
 
-            const float currentFrame = static_cast<float>(glfwGetTime());
-            const float deltaTime = currentFrame - lastFrame;
+            float currentFrame;
+            float deltaTime;
+            do
+            {
+                currentFrame = static_cast<float>(glfwGetTime());
+                deltaTime = currentFrame - lastFrame;
+                loader.Step();
+            } while (deltaTime < 1 / 40.0f);
+
             lastFrame = currentFrame;
             totalTime += deltaTime;
 
@@ -85,6 +140,12 @@ namespace Engine
 
             EndFrame(Window);
         }
+
+        while (!loader.Step())
+        {
+        }
+        glClear(GL_COLOR_BUFFER_BIT);
+        EndFrame(Window);
 
         glDisable(GL_BLEND);
         glEnable(GL_DEPTH_TEST);
