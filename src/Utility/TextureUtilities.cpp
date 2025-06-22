@@ -76,17 +76,14 @@ namespace
 
 namespace Utility
 {
-    [[nodiscard]] unsigned int LoadTexture2DFromFile(const char* const FilePath, const GLenum Format,
-                                                     const uint8_t SourceChannels, const GLenum SourceFormat)
+    [[nodiscard]] unsigned int LoadTexture2DFromFile(const char* const FilePath)
     {
         int width;
         int height;
-        return LoadTexture2DFromFile(FilePath, Format, SourceChannels, SourceFormat, width, height);
+        return LoadTexture2DFromFile(FilePath, width, height);
     }
 
-    [[nodiscard]] unsigned int LoadTexture2DFromFile(const char* FilePath, GLenum Format, uint8_t SourceChannels,
-                                                     GLenum SourceFormat,
-                                                     int& OutWidth, int& OutHeight)
+    [[nodiscard]] unsigned int LoadTexture2DFromFile(const char* FilePath, int& OutWidth, int& OutHeight)
     {
         int width;
         int height;

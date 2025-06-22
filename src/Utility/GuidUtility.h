@@ -8,6 +8,10 @@
 
 namespace Utility
 {
+    /**
+    * @brief Generates a new globally unique identifier (GUID).
+    * @return A newly generated GUID.
+    */
     [[nodiscard]] inline GUID GenerateGuid()
     {
         GUID out;
