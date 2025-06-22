@@ -2,16 +2,16 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{3f04d903-8e72-46fe-8d6b-be3d8419f0cc}\u0000",
+            "id": "{62404a5a-1c6e-49c1-8764-8ab972587093}\u0000",
             "name": "Broom",
             "transform": {
                 "type": "Transform",
-                "id": "{07e49890-8335-4628-8e29-0836c1b59fe9}\u0000",
-                "owner": "{3f04d903-8e72-46fe-8d6b-be3d8419f0cc}\u0000",
+                "id": "{1a74f06a-435d-453b-b022-b9cf372a8b6b}\u0000",
+                "owner": "{62404a5a-1c6e-49c1-8764-8ab972587093}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
-                    "z": -0.800000011920929
+                    "z": 0.0
                 },
                 "EulerAngles": {
                     "x": -179.99989318847656,
@@ -30,31 +30,32 @@
                     "w": -4.371055695173709e-8
                 },
                 "Children": [
-                    "{1e0afe1b-f972-4b60-b423-0943fc91ebc6}\u0000",
-                    "{a49fdddf-579e-4844-9bfc-9c56cae29094}\u0000",
-                    "{ef567099-4a65-4f1f-a781-e7e541f21325}\u0000"
+                    "{5cdac9d2-27d3-47ca-b9b1-085f747d2a2c}\u0000",
+                    "{91caa3ef-4c71-46f3-b29b-2c8f93cb4b53}\u0000",
+                    "{c2fdaab9-c949-47ff-bc73-8672da50d243}\u0000"
                 ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{1f8ac2b6-a5d5-4a52-9149-63c617cd6605}\u0000"
+                "{26f82119-e5a9-4802-840b-7d451c0bcd73}\u0000"
             ]
         },
         {
-            "type": "ModelRenderer",
-            "id": "{1f8ac2b6-a5d5-4a52-9149-63c617cd6605}\u0000",
-            "owner": "{3f04d903-8e72-46fe-8d6b-be3d8419f0cc}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Granny/mop.fbx"
+            "type": "AnimatedModelRenderer",
+            "id": "{26f82119-e5a9-4802-840b-7d451c0bcd73}\u0000",
+            "owner": "{62404a5a-1c6e-49c1-8764-8ab972587093}\u0000",
+            "Material": "./res/materials/SampleScene/Tools_Anim.mat",
+            "Model": "./res/Models/Granny/Mop_anim.fbx",
+            "Animation": "./res/Models/Granny/Mop_anim.fbx"
         },
         {
             "type": "Entity",
-            "id": "{2c5dfe6d-2828-48b4-876d-1b5be69f42b4}\u0000",
+            "id": "{26654bca-bfc1-446f-8854-cf8281f6224d}\u0000",
             "name": "Collider1",
             "transform": {
                 "type": "Transform",
-                "id": "{1e0afe1b-f972-4b60-b423-0943fc91ebc6}\u0000",
-                "owner": "{2c5dfe6d-2828-48b4-876d-1b5be69f42b4}\u0000",
+                "id": "{5cdac9d2-27d3-47ca-b9b1-085f747d2a2c}\u0000",
+                "owner": "{26654bca-bfc1-446f-8854-cf8281f6224d}\u0000",
                 "Position": {
                     "x": 0.6465482711791992,
                     "y": -0.7626996040344238,
@@ -77,16 +78,16 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{07e49890-8335-4628-8e29-0836c1b59fe9}\u0000"
+                "Parent": "{1a74f06a-435d-453b-b022-b9cf372a8b6b}\u0000"
             },
             "components": [
-                "{15b6367e-b8dd-4b2a-b080-b2935374debf}\u0000"
+                "{47678ea2-af90-4c65-945b-356b0796dbf7}\u0000"
             ]
         },
         {
             "type": "BoxCollider",
-            "id": "{15b6367e-b8dd-4b2a-b080-b2935374debf}\u0000",
-            "owner": "{2c5dfe6d-2828-48b4-876d-1b5be69f42b4}\u0000",
+            "id": "{47678ea2-af90-4c65-945b-356b0796dbf7}\u0000",
+            "owner": "{26654bca-bfc1-446f-8854-cf8281f6224d}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "colliderType": 0,
@@ -96,12 +97,12 @@
         },
         {
             "type": "Entity",
-            "id": "{ce53dc96-3558-455b-9be8-69db679db85a}\u0000",
+            "id": "{7d59a48e-c14a-4e0e-b074-2e8b4475db3d}\u0000",
             "name": "Collider2",
             "transform": {
                 "type": "Transform",
-                "id": "{a49fdddf-579e-4844-9bfc-9c56cae29094}\u0000",
-                "owner": "{ce53dc96-3558-455b-9be8-69db679db85a}\u0000",
+                "id": "{91caa3ef-4c71-46f3-b29b-2c8f93cb4b53}\u0000",
+                "owner": "{7d59a48e-c14a-4e0e-b074-2e8b4475db3d}\u0000",
                 "Position": {
                     "x": -0.6470000147819519,
                     "y": -0.7626999616622925,
@@ -124,16 +125,16 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{07e49890-8335-4628-8e29-0836c1b59fe9}\u0000"
+                "Parent": "{1a74f06a-435d-453b-b022-b9cf372a8b6b}\u0000"
             },
             "components": [
-                "{bcd0eae1-02a5-43c6-b1c4-93d76e414aa8}\u0000"
+                "{1c929762-a0d9-40cf-b743-1871ff883a1e}\u0000"
             ]
         },
         {
             "type": "BoxCollider",
-            "id": "{bcd0eae1-02a5-43c6-b1c4-93d76e414aa8}\u0000",
-            "owner": "{ce53dc96-3558-455b-9be8-69db679db85a}\u0000",
+            "id": "{1c929762-a0d9-40cf-b743-1871ff883a1e}\u0000",
+            "owner": "{7d59a48e-c14a-4e0e-b074-2e8b4475db3d}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "colliderType": 0,
@@ -143,12 +144,12 @@
         },
         {
             "type": "Entity",
-            "id": "{866520bc-ce89-43c8-866f-37e04bf37f41}\u0000",
+            "id": "{0f219e19-89e7-49e0-929e-1cd3758b8fa1}\u0000",
             "name": "Eraser",
             "transform": {
                 "type": "Transform",
-                "id": "{ef567099-4a65-4f1f-a781-e7e541f21325}\u0000",
-                "owner": "{866520bc-ce89-43c8-866f-37e04bf37f41}\u0000",
+                "id": "{c2fdaab9-c949-47ff-bc73-8672da50d243}\u0000",
+                "owner": "{0f219e19-89e7-49e0-929e-1cd3758b8fa1}\u0000",
                 "Position": {
                     "x": 0.0000051635342970257625,
                     "y": -0.9813207983970642,
@@ -171,16 +172,16 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{07e49890-8335-4628-8e29-0836c1b59fe9}\u0000"
+                "Parent": "{1a74f06a-435d-453b-b022-b9cf372a8b6b}\u0000"
             },
             "components": [
-                "{5709a214-4363-4cfb-9a69-e8a029453d3e}\u0000"
+                "{1b63fa77-2211-474a-af97-8547121c9962}\u0000"
             ]
         },
         {
             "type": "BloodEraser",
-            "id": "{5709a214-4363-4cfb-9a69-e8a029453d3e}\u0000",
-            "owner": "{866520bc-ce89-43c8-866f-37e04bf37f41}\u0000",
+            "id": "{1b63fa77-2211-474a-af97-8547121c9962}\u0000",
+            "owner": "{0f219e19-89e7-49e0-929e-1cd3758b8fa1}\u0000",
             "Texture": "res/textures/BloodSplatter/BloodTest.dds"
         }
     ]

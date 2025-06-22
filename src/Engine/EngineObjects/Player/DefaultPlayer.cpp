@@ -128,6 +128,16 @@ namespace Engine
                     vacuum->AddComponent<Engine::Vacuum>();
                     hasVacuum = true;
                     PlayerAnimationManager::GetInstance()->SetVacuumVfx(vacuumVfx->GetComponent<VacuumVfx>());
+
+                    std::vector<Engine::Transform*> children = vacuum->GetTransform()->GetChildren();
+                    for (Engine::Transform* child : children)
+                    {
+                        if (child->GetOwner()->GetName() == "Front")
+                        {
+                            PlayerAnimationManager::GetInstance()->SetVacuumFront(
+                                    child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>());
+                        }
+                    }
                 }
                 hasBroom = false;
                 hasStripper = false;
