@@ -4,11 +4,13 @@
 #include "Engine/Textures/Texture.h"
 #include "Engine/Textures/TextureManager.h"
 #include "GLFW/glfw3.h"
+#include "Materials/Material.h"
 #include "Math/Easings.h"
 #include "Models/ModelManager.h"
 #include "Shaders/Shader.h"
 #include "Shaders/ShaderManager.h"
 #include "Utility/FileUtilities.h"
+#include "spdlog/spdlog.h"
 
 namespace Engine
 {
@@ -48,6 +50,25 @@ namespace Engine
                 {
                     ++Stage;
                     Index = 0;
+                    return false;
+                }
+                return false;
+            }
+            case 4:
+            {
+                Paths.clear();
+                Utility::FindFilesWithExtension("res/materials", ".mat", Paths);
+                ++Stage;
+                return false;
+            }
+            case 5:
+            {
+                Materials::Material* _ = Materials::MaterialManager::GetMaterial(Paths[Index].c_str());
+                ++Index;
+                if (Index == Paths.size())
+                {
+                    ++Stage;
+                    Index = 0;
                     return true;
                 }
                 return false;
@@ -74,16 +95,6 @@ namespace Engine
         const int32_t alphaPropertyLocation = shader.GetUniformLocation("Alpha");
         const int32_t imagePropertyLocation = shader.GetUniformLocation("Image");
         Shaders::Shader::SetTextureHandle(imagePropertyLocation, texture.GetHandleReadonly());
-
-        glViewport(0, 0, ScreenWidth, ScreenHeight);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glEnable(GL_BLEND);
-        glDisable(GL_DEPTH_TEST);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture.GetId());
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
         while (totalTime < Duration && !glfwWindowShouldClose(Window))
         {
@@ -117,7 +128,6 @@ namespace Engine
             totalTime += deltaTime;
 
             const float size = Math::EaseOutSine(totalTime / Duration) * 0.125f + 0.375f;
-            Shaders::Shader::SetUniform(sizePropertyLocation, size);
 
             float alpha;
             if (totalTime <= FadeInTime)
@@ -133,22 +143,34 @@ namespace Engine
                 alpha = 1.0f;
             }
 
+            shader.Use();
+            glViewport(0, 0, ScreenWidth, ScreenHeight);
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+            glEnable(GL_BLEND);
+            glDisable(GL_DEPTH_TEST);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+            Shaders::Shader::SetUniform(sizePropertyLocation, size);
             Shaders::Shader::SetUniform(alphaPropertyLocation, alpha);
 
             glClear(GL_COLOR_BUFFER_BIT);
             SpriteQuad::Draw();
 
+            glDisable(GL_BLEND);
+            glEnable(GL_DEPTH_TEST);
+
             EndFrame(Window);
         }
 
-        while (!loader.Step())
-        {
-        }
         glClear(GL_COLOR_BUFFER_BIT);
         EndFrame(Window);
 
-        glDisable(GL_BLEND);
-        glEnable(GL_DEPTH_TEST);
+        spdlog::info("Splash screen animation finished.");
+        while (!loader.Step())
+        {
+        }
+
 
         TextureManager::DeleteTexture("res/Logos/TeamLogo.dds");
     }
