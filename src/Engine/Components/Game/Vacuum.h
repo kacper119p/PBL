@@ -32,6 +32,7 @@ namespace Engine
         float shootKeyHoldStartTime = 0.0f;
         float lastShootTime = 0.0f;
         const float shootCooldown = 0.3f; // 300 ms
+        float lastSuckToggleTime = 0.0f;
 
     public:
         Vacuum() = default;

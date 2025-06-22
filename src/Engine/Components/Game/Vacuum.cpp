@@ -34,11 +34,15 @@ namespace Engine
         isShootingKeyPressed = input.IsKeyPressed(GLFW_KEY_2);
         bool isSuccingKeyPressed = input.IsKeyPressed(GLFW_KEY_1);
 
-        if (isSuccingKeyPressed)
+        if (isSuccingKeyPressed&&volume<maxVolume)
         {
-            isSuccing = true;
-            isShooting = false;
-            
+            if (static_cast<float>(glfwGetTime()) - lastSuckToggleTime > shootCooldown)
+            {
+                isSuccing = !isSuccing;
+                std::cout << "Vacuum toggled: " << (isSuccing ? "Sucking" : "Not Sucking") << std::endl;
+                isShooting = false;
+                lastSuckToggleTime = static_cast<float>(glfwGetTime());
+            }
         }
         else if (isShootingKeyPressed)
         {
@@ -46,6 +50,25 @@ namespace Engine
             isSuccing = false;
         }
 
+        if (volume >= maxVolume)
+        {
+            isSuccing = false;
+        }
+
+        if (isSuccing)
+        {
+            if (!playerAnimationManager->isVacuumActive)
+            {
+                playerAnimationManager->SetVacuumActive();
+            }
+        }
+        else
+        {
+            if (playerAnimationManager->isVacuumActive)
+            {
+                playerAnimationManager->SetVacuumInactive();
+            }
+        }
 
         float currentTime = static_cast<float>(glfwGetTime());
 
@@ -110,26 +133,12 @@ namespace Engine
                 }
             }
 
-            if (!playerAnimationManager->isVacuumActive)
-            {
-                playerAnimationManager->SetVacuumActive();
-            }
-        }
-        else
-        {
-            if (playerAnimationManager->isVacuumActive)
-            {
-                playerAnimationManager->SetVacuumInactive();
-            }
         }
 
         wasShootingKeyPressed = isShootingKeyPressed;
 
         ThrashManager::GetInstance()->VacuumCount = items.size();
         ThrashManager::GetInstance()->VacuumVolume = volume;
-
-        std::cout << "Vacuum Volume: " << volume << ", Vacuum count: " << items.size() << std::endl;
-        std::cout << "Thrash count: " << ThrashManager::GetInstance()->GetThrashCount() << std::endl;
     }
 
     void Vacuum::Shoot()
