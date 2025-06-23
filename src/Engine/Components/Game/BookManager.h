@@ -23,6 +23,8 @@ namespace Engine
         Entity* book = nullptr;
         glm::vec3 start;
         glm::vec3 end;
+        glm::quat startRotation;
+        glm::quat endRotation;
         float time = 0.0f;
         float duration = 1.0f;
     };

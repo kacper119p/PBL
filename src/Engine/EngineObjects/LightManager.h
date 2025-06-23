@@ -18,7 +18,7 @@ namespace Engine
     {
     public:
         static constexpr uint8_t MaxDirectionalLights = 1;
-        static constexpr uint8_t MaxPointLights = 8;
+        static constexpr uint8_t MaxPointLights = 128;
         static constexpr uint8_t MaxSpotLights = 2;
         static constexpr uint8_t MaxDirectionalLightsShadowsSupported = 1;
         static constexpr uint8_t MaxPointLightsShadowsSupported = 2;

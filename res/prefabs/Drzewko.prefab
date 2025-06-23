@@ -10,7 +10,7 @@
                 "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
                 "Position": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": 0.870220959186554,
                     "z": 0.0
                 },
                 "EulerAngles": {
@@ -44,7 +44,7 @@
             "id": "{ca69cff5-2835-4420-8bf8-49c88ae84d48}\u0000",
             "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
             "Material": "res/materials/SampleScene/UV8.mat",
-            "Model": "res/models/Modele_Mati/Meble/Ksiazka.fbx",
+            "Model": "res/models/Modele_Mati/Rosliny/Drzewko.fbx",
             "CastShadow": true
         },
         {
@@ -57,9 +57,9 @@
             "collisionLayer": 4294967295,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 0.75,
-            "_height": 1.2000000476837158,
-            "_depth": 0.4099999964237213
+            "_width": 0.8999999761581421,
+            "_height": 1.5,
+            "_depth": 1.309999942779541
         },
         {
             "type": "Rigidbody",

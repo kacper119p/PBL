@@ -62,8 +62,13 @@ namespace Engine
         {
             it->time += dt;
             float t = glm::clamp(it->time / it->duration, 0.0f, 1.0f);
-            glm::vec3 interpolated = glm::mix(it->start, it->end, t);
-            it->book->GetTransform()->SetPosition(interpolated);
+
+            glm::vec3 interpolatedPos = glm::mix(it->start, it->end, t);
+            it->book->GetTransform()->SetPosition(interpolatedPos);
+
+            glm::quat interpolatedRot = glm::slerp(it->startRotation, it->endRotation, t);
+            it->book->GetTransform()->SetRotation(
+                    glm::eulerAngles(interpolatedRot)); // assumes SetRotation uses Euler angles
 
             if (t >= 1.0f)
             {
@@ -75,6 +80,8 @@ namespace Engine
             }
         }
     }
+
+
 
     void BookManager::GetUnoccupiedPlace()
     {
@@ -151,18 +158,23 @@ namespace Engine
         glm::vec3 targetPos = unoccupiedPlaces[index];
         unoccupiedPlaces.erase(unoccupiedPlaces.begin() + index);
 
-        currentBooksBeingPut.push_back(bookEntity);
+        glm::quat startRot = bookEntity->GetTransform()->GetRotation();
+        glm::quat endRot = glm::quat(glm::radians((rand() % 2 == 0) ? glm::vec3(0, -90, 0) : glm::vec3(0, 90, 0)));
 
+        currentBooksBeingPut.push_back(bookEntity);
         bookCollider->collisionMask = 0;
 
         BookLerpData lerp;
         lerp.book = bookEntity;
         lerp.start = bookEntity->GetTransform()->GetPosition();
         lerp.end = targetPos;
+        lerp.startRotation = startRot;
+        lerp.endRotation = endRot;
         lerp.duration = 1.0f;
 
         activeBookMoves.push_back(lerp);
     }
+
 
 #if EDITOR
     void BookManager::DrawImGui()

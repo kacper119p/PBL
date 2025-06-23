@@ -1,8 +1,8 @@
 {
     "type": "PbrMaterial",
-    "BaseMap": "./res/textures/Tekstury_Mati/UV14/BaseMap.dds",
-    "RoughnessMetallicMap": "./res/textures/Default.dds",
-    "NormalMap": "./res/textures/Tekstury_Mati/UV14/NormalMap.dds",
+    "BaseMap": "res/textures/Tekstury_Mati/UV15/BaseMap.dds",
+    "RoughnessMetallicMap": "res/textures/Tekstury_Mati/UV15/RMAOMap.dds",
+    "NormalMap": "res/textures/Tekstury_Mati/UV15/NormalMap.dds",
     "EmissiveMap": "./res/textures/EmissiveMapDefault.dds",
     "Roughness": 1.0,
     "Metallic": 0.0,

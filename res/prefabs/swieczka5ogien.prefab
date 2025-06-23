@@ -2,12 +2,12 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{8bc749fd-6dac-4eac-8b98-e21d89829987}\u0000",
+            "id": "{6437405d-e26c-4ab9-998c-b8d09f322aa9}\u0000",
             "name": "swieczka1",
             "transform": {
                 "type": "Transform",
-                "id": "{5bdb71eb-b93c-4511-adc0-bbadac3cd0d0}\u0000",
-                "owner": "{8bc749fd-6dac-4eac-8b98-e21d89829987}\u0000",
+                "id": "{9b432919-9980-422f-9041-f432008af86f}\u0000",
+                "owner": "{6437405d-e26c-4ab9-998c-b8d09f322aa9}\u0000",
                 "Position": {
                     "x": -17.88819122314453,
                     "y": 1.2075846195220947,
@@ -30,30 +30,30 @@
                     "w": 1.0
                 },
                 "Children": [
-                    "{dfffeded-f352-4db8-8cd1-4d7e1ddefdd7}\u0000"
+                    "{44708819-a662-4194-81b3-5ff7360ccab9}\u0000"
                 ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{496151fb-3f31-46df-8f54-2f3839536a1a}\u0000"
+                "{27b41848-c76c-4034-9fc7-34875797fb90}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{496151fb-3f31-46df-8f54-2f3839536a1a}\u0000",
-            "owner": "{8bc749fd-6dac-4eac-8b98-e21d89829987}\u0000",
+            "id": "{27b41848-c76c-4034-9fc7-34875797fb90}\u0000",
+            "owner": "{6437405d-e26c-4ab9-998c-b8d09f322aa9}\u0000",
             "Material": "res/materials/SampleScene/swieczkaswiecaca.mat",
             "Model": "res/models/Modele_Mati/Swieczki/Swieca5.fbx",
-            "CastShadow": true
+            "CastShadow": false
         },
         {
             "type": "Entity",
-            "id": "{44af9a94-906a-4ce4-a510-f90769f6ffea}\u0000",
+            "id": "{1e312697-7aa9-4591-9708-f9a182e68730}\u0000",
             "name": "New Entity",
             "transform": {
                 "type": "Transform",
-                "id": "{dfffeded-f352-4db8-8cd1-4d7e1ddefdd7}\u0000",
-                "owner": "{44af9a94-906a-4ce4-a510-f90769f6ffea}\u0000",
+                "id": "{44708819-a662-4194-81b3-5ff7360ccab9}\u0000",
+                "owner": "{1e312697-7aa9-4591-9708-f9a182e68730}\u0000",
                 "Position": {
                     "x": 0.1801586151123047,
                     "y": 1.1325616836547852,
@@ -76,22 +76,22 @@
                     "w": 0.0
                 },
                 "Children": [],
-                "Parent": "{5bdb71eb-b93c-4511-adc0-bbadac3cd0d0}\u0000"
+                "Parent": "{9b432919-9980-422f-9041-f432008af86f}\u0000"
             },
             "components": [
-                "{cc28434e-e7e0-4a37-944c-4ff668657a84}\u0000",
-                "{8f0431f5-abfd-48e2-9d07-539261e045a1}\u0000"
+                "{48ba5532-6bf3-47ca-8880-295fb09726be}\u0000",
+                "{fba22c43-7a1d-4461-86d4-22563faaae18}\u0000"
             ]
         },
         {
             "type": "EmbersParticleEmitter",
-            "id": "{cc28434e-e7e0-4a37-944c-4ff668657a84}\u0000",
-            "owner": "{44af9a94-906a-4ce4-a510-f90769f6ffea}\u0000"
+            "id": "{48ba5532-6bf3-47ca-8880-295fb09726be}\u0000",
+            "owner": "{1e312697-7aa9-4591-9708-f9a182e68730}\u0000"
         },
         {
             "type": "PointLight",
-            "id": "{8f0431f5-abfd-48e2-9d07-539261e045a1}\u0000",
-            "owner": "{44af9a94-906a-4ce4-a510-f90769f6ffea}\u0000",
+            "id": "{fba22c43-7a1d-4461-86d4-22563faaae18}\u0000",
+            "owner": "{1e312697-7aa9-4591-9708-f9a182e68730}\u0000",
             "Color": {
                 "x": 10.0,
                 "y": 3.9215686321258545,

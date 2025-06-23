@@ -51,7 +51,13 @@
                 "{de4c7217-dd89-42e3-b7c6-10926335f73d}\u0000",
                 "{4ad19770-2bac-424c-9963-c428bf28ca0e}\u0000",
                 "{d6ed4862-523e-474f-886c-284cd07a3f5e}\u0000",
-                "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000"
+                "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000",
+                "{43cbc4ef-a006-44bd-8484-9479f4cc92f3}\u0000",
+                "{6395d016-b863-4635-b12d-b77d2010b75d}\u0000",
+                "{243e89f1-e756-4c8a-a063-b57ebf007f52}\u0000",
+                "{ff7682f4-b2ff-4b37-a20c-f26ee6f9d4e1}\u0000",
+                "{b565ae64-6752-4167-a202-3afb26dbe706}\u0000",
+                "{eac44080-21f3-44e1-a999-6fcf843f46a3}\u0000"
             ],
             "Parent": null
         },
@@ -463,7 +469,7 @@
             "colliderType": 0,
             "_width": 6.0,
             "_height": 9.0,
-            "_depth": 9.800000190734863
+            "_depth": 4.900000095367432
         },
         {
             "type": "BookManager",
@@ -725,6 +731,494 @@
             "_width": 1.899999976158142,
             "_height": 0.4000000059604645,
             "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{2576e927-6e99-4464-8d33-d5c8fac1ad6a}\u0000",
+            "name": "swieczka1",
+            "transform": {
+                "type": "Transform",
+                "id": "{43cbc4ef-a006-44bd-8484-9479f4cc92f3}\u0000",
+                "owner": "{2576e927-6e99-4464-8d33-d5c8fac1ad6a}\u0000",
+                "Position": {
+                    "x": -17.88819122314453,
+                    "y": 1.2075846195220947,
+                    "z": 8.771533012390137
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [
+                    "{4934e2b6-e3c4-4c3d-b3b3-96cf47e884be}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{0bf1e7a2-ea4f-4971-b79d-f363896b4c1d}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{0bf1e7a2-ea4f-4971-b79d-f363896b4c1d}\u0000",
+            "owner": "{2576e927-6e99-4464-8d33-d5c8fac1ad6a}\u0000",
+            "Material": "res/materials/SampleScene/swieczkaswiecaca.mat",
+            "Model": "res/models/Modele_Mati/Swieczki/Swieca1.fbx",
+            "CastShadow": false
+        },
+        {
+            "type": "Entity",
+            "id": "{1c168675-88a1-4d9f-b6ba-a0e08a03b800}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{4934e2b6-e3c4-4c3d-b3b3-96cf47e884be}\u0000",
+                "owner": "{1c168675-88a1-4d9f-b6ba-a0e08a03b800}\u0000",
+                "Position": {
+                    "x": 0.030803680419921875,
+                    "y": 1.2092015743255615,
+                    "z": 0.021454811096191406
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.10000000149011612,
+                    "y": 0.20000000298023224,
+                    "z": 0.10000000149011612
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{43cbc4ef-a006-44bd-8484-9479f4cc92f3}\u0000"
+            },
+            "components": [
+                "{1c4462f4-7842-4027-b271-4f8c47f8c279}\u0000",
+                "{1e2b9dae-423c-4e00-814f-3acdd188437e}\u0000"
+            ]
+        },
+        {
+            "type": "EmbersParticleEmitter",
+            "id": "{1c4462f4-7842-4027-b271-4f8c47f8c279}\u0000",
+            "owner": "{1c168675-88a1-4d9f-b6ba-a0e08a03b800}\u0000"
+        },
+        {
+            "type": "PointLight",
+            "id": "{1e2b9dae-423c-4e00-814f-3acdd188437e}\u0000",
+            "owner": "{1c168675-88a1-4d9f-b6ba-a0e08a03b800}\u0000",
+            "Color": {
+                "x": 10.0,
+                "y": 3.9215686321258545,
+                "z": 0.0
+            },
+            "LinearFalloff": 0.0,
+            "QuadraticFalloff": 1.0,
+            "Range": 100.0
+        },
+        {
+            "type": "Entity",
+            "id": "{abfdf521-c41f-4a7a-b85f-c337c29bcfe8}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{6395d016-b863-4635-b12d-b77d2010b75d}\u0000",
+                "owner": "{abfdf521-c41f-4a7a-b85f-c337c29bcfe8}\u0000",
+                "Position": {
+                    "x": 12.330643653869629,
+                    "y": 1.5725492238998413,
+                    "z": 21.51014518737793
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.75,
+                    "y": 0.75,
+                    "z": 0.75
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{5bbe4ec6-047e-42af-b7e9-c9e97425a56a}\u0000",
+                "{895fe880-6ac6-4f02-9dbc-ca5ad2c7214b}\u0000",
+                "{e41745da-f9d5-44d5-8960-2062f6bbd321}\u0000",
+                "{31c28b0f-0041-4c4b-a79d-0dfcb3a4da1a}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{5bbe4ec6-047e-42af-b7e9-c9e97425a56a}\u0000",
+            "owner": "{abfdf521-c41f-4a7a-b85f-c337c29bcfe8}\u0000",
+            "Material": "res/materials/SampleScene/UV8.mat",
+            "Model": "res/models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{895fe880-6ac6-4f02-9dbc-ca5ad2c7214b}\u0000",
+            "owner": "{abfdf521-c41f-4a7a-b85f-c337c29bcfe8}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 0.75,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4099999964237213
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{e41745da-f9d5-44d5-8960-2062f6bbd321}\u0000",
+            "owner": "{abfdf521-c41f-4a7a-b85f-c337c29bcfe8}\u0000",
+            "mass": 0.30000001192092896,
+            "inverseMass": 3.3333332538604736,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.10100000351667404,
+            "frictionEnabled": true,
+            "restitution": 0.6869999766349792
+        },
+        {
+            "type": "Thrash",
+            "id": "{31c28b0f-0041-4c4b-a79d-0dfcb3a4da1a}\u0000",
+            "owner": "{abfdf521-c41f-4a7a-b85f-c337c29bcfe8}\u0000",
+            "size": 5
+        },
+        {
+            "type": "Entity",
+            "id": "{03369b85-2c7f-49a4-abfe-36ed77fd544e}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{243e89f1-e756-4c8a-a063-b57ebf007f52}\u0000",
+                "owner": "{03369b85-2c7f-49a4-abfe-36ed77fd544e}\u0000",
+                "Position": {
+                    "x": -11.951995849609375,
+                    "y": 2.3012843132019043,
+                    "z": -3.8658242225646973
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{1bbe80df-109d-46f3-9901-adcdfd8becbf}\u0000",
+                "{827a7f04-3805-4652-9c7b-2ed6cbf12d73}\u0000",
+                "{c386f633-c1fd-41c0-81be-e43f25012b39}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{1bbe80df-109d-46f3-9901-adcdfd8becbf}\u0000",
+            "owner": "{03369b85-2c7f-49a4-abfe-36ed77fd544e}\u0000",
+            "Material": "res/materials/SampleScene/UV2.mat",
+            "Model": "res/models/Modele_Mati/Meble/RegalNiski_LP.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{827a7f04-3805-4652-9c7b-2ed6cbf12d73}\u0000",
+            "owner": "{03369b85-2c7f-49a4-abfe-36ed77fd544e}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4,
+            "collisionMask": 4294967104,
+            "colliderType": 0,
+            "_width": 5.900000095367432,
+            "_height": 3.299999952316284,
+            "_depth": 6.300000190734863
+        },
+        {
+            "type": "BookManager",
+            "id": "{c386f633-c1fd-41c0-81be-e43f25012b39}\u0000",
+            "owner": "{03369b85-2c7f-49a4-abfe-36ed77fd544e}\u0000",
+            "bookWidth": 0.20000000298023224,
+            "bookDepth": 0.05000000074505806,
+            "bookHeight": 0.30000001192092896,
+            "bookMargin": 0.019999999552965164,
+            "sidePadding": 0.05000000074505806,
+            "backPadding": 0.029999999329447746
+        },
+        {
+            "type": "Entity",
+            "id": "{fb101b63-3f58-4584-a4bd-527233280d8f}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{ff7682f4-b2ff-4b37-a20c-f26ee6f9d4e1}\u0000",
+                "owner": "{fb101b63-3f58-4584-a4bd-527233280d8f}\u0000",
+                "Position": {
+                    "x": 11.479663848876953,
+                    "y": 1.5725492238998413,
+                    "z": 22.37950897216797
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.75,
+                    "y": 0.75,
+                    "z": 0.75
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{3a2ce02a-0f9b-46c3-bd17-4d70a9cfe4a6}\u0000",
+                "{c63bfb3c-b3a4-443d-8b5d-8b74f507760a}\u0000",
+                "{c85f143f-cc15-4911-9fe8-94013207a770}\u0000",
+                "{14f23fc8-45ed-49b2-8327-45feebc6cbba}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{3a2ce02a-0f9b-46c3-bd17-4d70a9cfe4a6}\u0000",
+            "owner": "{fb101b63-3f58-4584-a4bd-527233280d8f}\u0000",
+            "Material": "res/materials/SampleScene/UV8.mat",
+            "Model": "res/models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{c63bfb3c-b3a4-443d-8b5d-8b74f507760a}\u0000",
+            "owner": "{fb101b63-3f58-4584-a4bd-527233280d8f}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 0.75,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4099999964237213
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{c85f143f-cc15-4911-9fe8-94013207a770}\u0000",
+            "owner": "{fb101b63-3f58-4584-a4bd-527233280d8f}\u0000",
+            "mass": 0.30000001192092896,
+            "inverseMass": 3.3333332538604736,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.10100000351667404,
+            "frictionEnabled": true,
+            "restitution": 0.6869999766349792
+        },
+        {
+            "type": "Thrash",
+            "id": "{14f23fc8-45ed-49b2-8327-45feebc6cbba}\u0000",
+            "owner": "{fb101b63-3f58-4584-a4bd-527233280d8f}\u0000",
+            "size": 5
+        },
+        {
+            "type": "Entity",
+            "id": "{7275d96b-f6a2-4712-b36b-a17eb69ee039}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{b565ae64-6752-4167-a202-3afb26dbe706}\u0000",
+                "owner": "{7275d96b-f6a2-4712-b36b-a17eb69ee039}\u0000",
+                "Position": {
+                    "x": 11.479663848876953,
+                    "y": 1.5725492238998413,
+                    "z": 19.516218185424805
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.75,
+                    "y": 0.75,
+                    "z": 0.75
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{9e251acc-1c50-4c55-8c9f-b67eec0c2945}\u0000",
+                "{9d40ea66-f8cf-4484-94c9-52241a6fdcfa}\u0000",
+                "{32b6ff1e-a690-46aa-8f45-2e58107647a5}\u0000",
+                "{cef45ea5-2994-4211-a5b8-726437ad63ca}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{9e251acc-1c50-4c55-8c9f-b67eec0c2945}\u0000",
+            "owner": "{7275d96b-f6a2-4712-b36b-a17eb69ee039}\u0000",
+            "Material": "res/materials/SampleScene/UV8.mat",
+            "Model": "res/models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{9d40ea66-f8cf-4484-94c9-52241a6fdcfa}\u0000",
+            "owner": "{7275d96b-f6a2-4712-b36b-a17eb69ee039}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 0.75,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4099999964237213
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{32b6ff1e-a690-46aa-8f45-2e58107647a5}\u0000",
+            "owner": "{7275d96b-f6a2-4712-b36b-a17eb69ee039}\u0000",
+            "mass": 0.30000001192092896,
+            "inverseMass": 3.3333332538604736,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.10100000351667404,
+            "frictionEnabled": true,
+            "restitution": 0.6869999766349792
+        },
+        {
+            "type": "Thrash",
+            "id": "{cef45ea5-2994-4211-a5b8-726437ad63ca}\u0000",
+            "owner": "{7275d96b-f6a2-4712-b36b-a17eb69ee039}\u0000",
+            "size": 5
+        },
+        {
+            "type": "Entity",
+            "id": "{2c239096-3549-473c-b905-159d79e9175a}\u0000",
+            "name": "SmallBook",
+            "transform": {
+                "type": "Transform",
+                "id": "{eac44080-21f3-44e1-a999-6fcf843f46a3}\u0000",
+                "owner": "{2c239096-3549-473c-b905-159d79e9175a}\u0000",
+                "Position": {
+                    "x": 11.479663848876953,
+                    "y": 1.5725492238998413,
+                    "z": 20.60205841064453
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.75,
+                    "y": 0.75,
+                    "z": 0.75
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{b2639763-f54f-4055-a189-2ad4f34e9bde}\u0000",
+                "{36eceb2c-979b-498d-a37b-e7f9871149fd}\u0000",
+                "{4712ecaa-b3b8-4476-b833-90a365453035}\u0000",
+                "{cb17b756-31fb-40f2-8191-2c6310e7a6a9}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{b2639763-f54f-4055-a189-2ad4f34e9bde}\u0000",
+            "owner": "{2c239096-3549-473c-b905-159d79e9175a}\u0000",
+            "Material": "res/materials/SampleScene/UV8.mat",
+            "Model": "res/models/Modele_Mati/Meble/Ksiazka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{36eceb2c-979b-498d-a37b-e7f9871149fd}\u0000",
+            "owner": "{2c239096-3549-473c-b905-159d79e9175a}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 16,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 0.75,
+            "_height": 1.2000000476837158,
+            "_depth": 0.4099999964237213
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{4712ecaa-b3b8-4476-b833-90a365453035}\u0000",
+            "owner": "{2c239096-3549-473c-b905-159d79e9175a}\u0000",
+            "mass": 0.30000001192092896,
+            "inverseMass": 3.3333332538604736,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.10100000351667404,
+            "frictionEnabled": true,
+            "restitution": 0.6869999766349792
+        },
+        {
+            "type": "Thrash",
+            "id": "{cb17b756-31fb-40f2-8191-2c6310e7a6a9}\u0000",
+            "owner": "{2c239096-3549-473c-b905-159d79e9175a}\u0000",
+            "size": 5
         }
     ]
 }

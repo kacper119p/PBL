@@ -3,14 +3,14 @@
         {
             "type": "Entity",
             "id": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
-            "name": "New Entity",
+            "name": "SmallBook",
             "transform": {
                 "type": "Transform",
                 "id": "{32d3fe9b-21e1-4a01-92ed-1df0d76ec010}\u0000",
                 "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
                 "Position": {
                     "x": 0.0,
-                    "y": 1.7242627143859863,
+                    "y": 1.2359213829040527,
                     "z": 0.0
                 },
                 "EulerAngles": {
@@ -20,52 +20,40 @@
                 },
                 "Scale": {
                     "x": 1.0,
-                    "y": 0.8999999761581421,
+                    "y": 1.0,
                     "z": 1.0
                 },
                 "Rotation": {
                     "x": 0.0,
                     "y": 0.0,
                     "z": 0.0,
-                    "w": 0.0
+                    "w": 1.0
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{ca69cff5-2835-4420-8bf8-49c88ae84d48}\u0000",
-                "{86227664-449a-4370-8cf7-8c53ea5c731c}\u0000",
-                "{b6cdbc67-97fd-4be5-a0f4-086837e037b0}\u0000"
+                "{b0530dcc-b44e-4241-b424-ff0f5be2d50c}\u0000",
+                "{a028142e-ee3e-4c16-a49a-271fe69808b1}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{ca69cff5-2835-4420-8bf8-49c88ae84d48}\u0000",
+            "id": "{b0530dcc-b44e-4241-b424-ff0f5be2d50c}\u0000",
             "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
-            "Material": "res/materials/SampleScene/UV8.mat",
-            "Model": "res/models/Modele_Mati/Smieci/Czaszka.fbx",
+            "Material": "res/materials/SampleScene/UV15.mat",
+            "Model": "res/models/Modele_Mati/Kamienie/KamienTeren6.fbx",
             "CastShadow": true
         },
         {
-            "type": "SphereCollider",
-            "id": "{86227664-449a-4370-8cf7-8c53ea5c731c}\u0000",
+            "type": "CapsuleCollider",
+            "id": "{a028142e-ee3e-4c16-a49a-271fe69808b1}\u0000",
             "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
             "isTrigger": false,
-            "isStatic": false,
-            "colliderType": 1,
-            "radius": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{b6cdbc67-97fd-4be5-a0f4-086837e037b0}\u0000",
-            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
-            "mass": 0.30000001192092896,
-            "inverseMass": 3.3333332538604736,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
+            "isStatic": true,
+            "colliderType": 2,
+            "Radius": 0.8999999761581421,
+            "Height": 1.0
         }
     ]
 }
