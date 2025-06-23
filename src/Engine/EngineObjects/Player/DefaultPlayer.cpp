@@ -9,6 +9,7 @@
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/Input/InputManager.h"
 #include "Engine/Prefabs/PrefabLoader.h"
+#include "Materials/VacuumIndicatorMaterial.h"
 #include "spdlog/spdlog.h"
 
 
@@ -147,8 +148,9 @@ namespace Engine
                     {
                         AudioManager::GetInstance().PlayAudio(toolChangeSound);
                     }
-                  
-                    PlayerAnimationManager::GetInstance()->SetVacuumShotVfx(vacuumShotVfx->GetComponent<VacuumShotVfx>());
+
+                    PlayerAnimationManager::GetInstance()->SetVacuumShotVfx(
+                            vacuumShotVfx->GetComponent<VacuumShotVfx>());
 
                     std::vector<Engine::Transform*> children = vacuum->GetTransform()->GetChildren();
                     for (Engine::Transform* child : children)
@@ -160,8 +162,10 @@ namespace Engine
                         }
                         if (child->GetOwner()->GetName() == "Pasek")
                         {
-                            PlayerAnimationManager::GetInstance()->StrapMaterial =
-                                    child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>()->GetMaterial();
+                            PlayerAnimationManager::GetInstance()->StrapMaterial
+                                    = dynamic_cast<Materials::VacuumIndicatorMaterial*>(
+                                        child->GetOwner()->GetComponent<AnimatedModelRenderer>()->
+                                        GetMaterial());
                         }
                     }
                 }

@@ -10,6 +10,8 @@
 #include "Engine/Components/Game/PlayerAnimationManager.h"
 #include <iostream>
 
+#include "Materials/VacuumIndicatorMaterial.h"
+
 namespace Engine
 {
     void Vacuum::Start()
@@ -40,7 +42,7 @@ namespace Engine
         isShootingKeyPressed = input.IsKeyPressed(GLFW_KEY_2);
         bool isSuccingKeyPressed = input.IsKeyPressed(GLFW_KEY_1);
 
-        if (isSuccingKeyPressed&&volume<maxVolume)
+        if (isSuccingKeyPressed && volume < maxVolume)
         {
             if (static_cast<float>(glfwGetTime()) - lastSuckToggleTime > shootCooldown)
             {
@@ -123,7 +125,7 @@ namespace Engine
                         entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->AddForce(
                                 direction, Engine::ForceMode::Force);
                         if (thrashSizeInt == 10)
-                        playerAnimationManager->SuckBigObject();
+                            playerAnimationManager->SuckBigObject();
                     }
                 }
             }
@@ -139,6 +141,7 @@ namespace Engine
                     {
                         items.push_back(entityCollider->GetOwner());
                         volume += thrashSizeInt;
+                        UpdateFillIndicator();
                         entityCollider->GetOwner()->GetComponent<Engine::BoxCollider>()->SetTrigger(true);
                         entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->hasGravity = false;
                         entityCollider->GetOwner()->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
@@ -161,6 +164,7 @@ namespace Engine
             items.pop_back();
             int thrashSizeInt = static_cast<int>(item->GetComponent<Thrash>()->GetSize());
             volume -= thrashSizeInt;
+            UpdateFillIndicator();
 
             item->GetComponent<Engine::BoxCollider>()->SetTrigger(false);
 
@@ -173,8 +177,38 @@ namespace Engine
 
             if (thrashSizeInt == 10)
                 PlayerAnimationManager::GetInstance()->ShootBigObject();
-            
+
             PlayerAnimationManager::GetInstance()->PlayVacuumShotVfx();
+        }
+    }
+
+    void Vacuum::UpdateFillIndicator()
+    {
+        PlayerAnimationManager* playerAnimationManager = PlayerAnimationManager::GetInstance();
+        if (playerAnimationManager == nullptr)
+        {
+            return;
+        }
+        Materials::VacuumIndicatorMaterial* material = playerAnimationManager->StrapMaterial;
+        if (material == nullptr)
+        {
+            return;
+        }
+
+        const float fill = static_cast<float>(volume) / static_cast<float>(maxVolume);
+        material->SetFill(fill);
+
+        if (fill < 0.5f)
+        {
+            material->SetEmissiveColor(glm::vec3(0.0f, 10.0f, 0.0f));
+        }
+        else if (fill < 0.75f)
+        {
+            material->SetEmissiveColor(glm::vec3(10.0f, 8.0f, 0.0f));
+        }
+        else
+        {
+            material->SetEmissiveColor(glm::vec3(10.0f, 0.0f, 0.0f));
         }
     }
 

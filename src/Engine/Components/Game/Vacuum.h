@@ -54,6 +54,8 @@ namespace Engine
 
         void Shoot();
 
+        void UpdateFillIndicator();
+
         SERIALIZATION_EXPORT_CLASS(Vacuum);
 #if EDITOR
         void DrawImGui() override;

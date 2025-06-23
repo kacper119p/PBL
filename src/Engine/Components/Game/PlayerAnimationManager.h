@@ -3,6 +3,12 @@
 #include "Engine/Components/VFX/VacuumVfx.h"
 #include "Engine/Components/VFX/VacuumShotVfx.h"
 #include "Materials/Material.h"
+
+namespace Materials
+{
+    class VacuumIndicatorMaterial;
+}
+
 namespace Engine
 {
     class PlayerAnimationManager
@@ -18,11 +24,12 @@ namespace Engine
 
         VacuumVfx* vacuumVfx = nullptr;
         VacuumShotVfx* vacuumShotVfx = nullptr;
+
     public:
         AnimatedModelRenderer* TrackLeft = nullptr;
         AnimatedModelRenderer* TrackRight = nullptr;
 
-        Materials::Material* StrapMaterial = nullptr;
+        Materials::VacuumIndicatorMaterial* StrapMaterial = nullptr;
 
         bool isVacuumActive = false;
 
@@ -30,7 +37,9 @@ namespace Engine
         int RightHandPosition = 0;
 
         PlayerAnimationManager() = default;
+
         ~PlayerAnimationManager() = default;
+
         static PlayerAnimationManager* GetInstance()
         {
             if (!Instance)
@@ -39,31 +48,53 @@ namespace Engine
             }
             return Instance;
         }
+
         void StopAllAnimations();
+
         void TrackLeftForward();
+
         void TrackLeftBackward();
+
         void TrackRightForward();
+
         void TrackRightBackward();
+
         void TrackLeftStop();
+
         void TrackRightStop();
 
         void SetHandLeft(AnimatedModelRenderer* handLeft);
+
         void SetHandRight(AnimatedModelRenderer* handRight);
+
         void SetVacuumVfx(VacuumVfx* Vfx);
+
         void SetVacuumShotVfx(VacuumShotVfx* ShotVfx);
+
         void SetVacuumActive();
+
         void SetVacuumInactive();
+
         void SetVacuumFront(AnimatedModelRenderer* Front);
 
         AnimatedModelRenderer* GetVacuumFront() const { return VacuumFront; };
-        float GetTickForFrame(int frame, int totalFrames, float duration){return (frame / static_cast<float>(totalFrames)) * duration;}
+
+        float GetTickForFrame(int frame, int totalFrames, float duration)
+        {
+            return (frame / static_cast<float>(totalFrames)) * duration;
+        }
 
         void ChangeLeftHandPosition(int newPosition);
+
         void ChangeRightHandPosition(int newPosition);
 
         void SuckBigObject();
+
         void ShootBigObject();
+
         void PlayVacuumShotVfx();
+
+        void SetIndicator(float Fill, const glm::vec3& Color);
 
     };
 }
