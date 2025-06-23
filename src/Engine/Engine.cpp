@@ -37,6 +37,8 @@
 
 #include <iostream>
 
+#include "Math/Math.h"
+
 namespace SceneBuilding = Scene;
 
 namespace Engine
@@ -88,6 +90,8 @@ namespace Engine
 
         spdlog::info("Successfully built scene.");
 
+        constexpr float maxDeltaTime = 1.0f / 30.0f;
+
         float lastFrame = static_cast<float>(glfwGetTime());
 
         // Main loop
@@ -98,6 +102,8 @@ namespace Engine
             float currentFrame = static_cast<float>(glfwGetTime());
             float deltaTime = currentFrame - lastFrame;
             lastFrame = currentFrame;
+
+            deltaTime = Math::Min(deltaTime, maxDeltaTime);
 
             // Process I/O operations here
 #if EDITOR
