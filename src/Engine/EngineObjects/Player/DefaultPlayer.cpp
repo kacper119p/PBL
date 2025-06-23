@@ -9,6 +9,7 @@
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/Input/InputManager.h"
 #include "Engine/Prefabs/PrefabLoader.h"
+#include "Materials/VacuumIndicatorMaterial.h"
 #include "spdlog/spdlog.h"
 
 
@@ -115,6 +116,7 @@ namespace Engine
                     this->GetTransform()->RemoveChild(vacuumVfx->GetTransform());
                     PlayerAnimationManager::GetInstance()->SetVacuumVfx(nullptr);
                     PlayerAnimationManager::GetInstance()->SetVacuumShotVfx(nullptr);
+                    PlayerAnimationManager::GetInstance()->StrapMaterial = nullptr;
                     vacuum->Destroy();
                 }
                 if (broom)
@@ -146,8 +148,9 @@ namespace Engine
                     {
                         AudioManager::GetInstance().PlayAudio(toolChangeSound);
                     }
-                  
-                    PlayerAnimationManager::GetInstance()->SetVacuumShotVfx(vacuumShotVfx->GetComponent<VacuumShotVfx>());
+
+                    PlayerAnimationManager::GetInstance()->SetVacuumShotVfx(
+                            vacuumShotVfx->GetComponent<VacuumShotVfx>());
 
                     std::vector<Engine::Transform*> children = vacuum->GetTransform()->GetChildren();
                     for (Engine::Transform* child : children)
@@ -156,6 +159,13 @@ namespace Engine
                         {
                             PlayerAnimationManager::GetInstance()->SetVacuumFront(
                                     child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>());
+                        }
+                        if (child->GetOwner()->GetName() == "Pasek")
+                        {
+                            PlayerAnimationManager::GetInstance()->StrapMaterial
+                                    = dynamic_cast<Materials::VacuumIndicatorMaterial*>(
+                                        child->GetOwner()->GetComponent<AnimatedModelRenderer>()->
+                                        GetMaterial());
                         }
                     }
                 }
@@ -195,6 +205,7 @@ namespace Engine
                     this->GetTransform()->RemoveChild(vacuumVfx->GetTransform());
                     PlayerAnimationManager::GetInstance()->SetVacuumVfx(nullptr);
                     PlayerAnimationManager::GetInstance()->SetVacuumShotVfx(nullptr);
+                    PlayerAnimationManager::GetInstance()->StrapMaterial = nullptr;
                     vacuum->Destroy();
                 }
                 stripper = nullptr;
