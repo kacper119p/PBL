@@ -113,7 +113,7 @@ namespace Engine
             RigidbodyUpdateManager::GetInstance()->Update(deltaTime);
             CollisionUpdateManager::GetInstance()->Update(deltaTime);
             if (!BackgroundAudioPlayer->IsPlaying())
-                BackgroundAudioPlayer->PlayLooping("music", 0.5f);
+                BackgroundAudioPlayer->PlayLooping("music", 0.02f);
 #endif
             int displayW, displayH;
             glfwMakeContextCurrent(Window);

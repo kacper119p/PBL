@@ -4,6 +4,8 @@
 #include "Engine/Components/BaseMovement/MovementComponent.h"
 #include "Engine/Components/Colliders/BoxCollider.h"
 #include "Engine//Components/Game/Vacuum.h"
+#include "Audio/AudioManager.h"
+#include "Engine/Prefabs/PrefabLoader.h"
 
 namespace Engine
 {
@@ -41,12 +43,22 @@ namespace Engine
 
         Tool currentTool = Tool::Vacuum;
 
+        std::shared_ptr<ma_sound> toolChangeSound;
+        bool isFirstUpdate = true;
+        static DefaultPlayer* Instance;
+
         void Start() override;
 
         void Update(float DeltaTime) override;
 
-        public:
+    public:
+        static DefaultPlayer& GetInstance()
+        {
+            return *Instance;
+        }
+
         void SetTool(Tool tool);
+
         Tool GetCurrentTool() const { return currentTool; }
 
         void ToolSwapper(Collider* collider);

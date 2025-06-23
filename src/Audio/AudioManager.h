@@ -59,6 +59,23 @@ namespace Engine
         static void DestroyInstance();
 
         /**
+         * @brief Sets pitch for a sound.
+         *
+         * @param Sound Output reference to the created sound object.
+         * @param Pitch Value of pitch.
+         */
+        void SetPitch(std::shared_ptr<ma_sound> Sound, float Pitch);
+
+        /**
+         * @brief Plays sound with random pitch
+         *
+         * @param Sound Output reference to the created sound object.
+         * @param Min Bottom range of randomization.
+         * @param Max Top range of randomization.
+         */
+        void PlayAudioWithRandomPitch(std::shared_ptr<ma_sound> Sound, float Min, float Max);
+
+        /**
          * @brief Loads a single sound file into memory.
          *
          * @param Filename Path to the audio file to be loaded.

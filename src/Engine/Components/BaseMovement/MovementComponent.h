@@ -8,6 +8,7 @@
 #include "Engine/EngineObjects/Entity.h"
 #include "../../EngineObjects/UpdateManager.h"
 #include "Engine/Components/Physics/Rigidbody.h"
+#include "Audio/AudioManager.h"
 
 namespace Engine
 {
@@ -22,32 +23,48 @@ namespace Engine
 
         float LeftHandChangeTime = -20.0f;
         float RightHandChangeTime = -20.0f;
+
+        std::shared_ptr<ma_sound> DrivingSound;
+        std::shared_ptr<ma_sound> BloodCleaningSound;
+
     public:
-        MovementComponent(float speed = 35.0f) : Speed(speed)
+        MovementComponent(float speed = 35.0f) :
+            Speed(speed)
         {
             UpdateManager::GetInstance()->RegisterComponent(this);
         }
-        void Start() override 
-        { 
-        GetOwner()->GetComponent<Rigidbody>()->constraints.freezeRotationX=true;
-        GetOwner()->GetComponent<Rigidbody>()->constraints.freezeRotationZ=true;
+
+        void Start() override
+        {
+            GetOwner()->GetComponent<Rigidbody>()->constraints.freezeRotationX = true;
+            GetOwner()->GetComponent<Rigidbody>()->constraints.freezeRotationZ = true;
+            DrivingSound = AudioManager::GetInstance().CreateSoundInstance("jezdzenie");
+            AudioManager::GetInstance().SetLooping(DrivingSound, true);
+            AudioManager::GetInstance().SetVolume(DrivingSound, 6.5f);
+            BloodCleaningSound = AudioManager::GetInstance().CreateSoundInstance("mop");
+            AudioManager::GetInstance().SetVolume(BloodCleaningSound, 20.0f);
         }
-        
+
         void Update(float deltaTime) override;
-        void OnDestroy() override {}
+
+        void OnDestroy() override
+        {
+        }
+
         bool CanChangeLeftHand();
+
         bool CanChangeRightHand();
 
         SERIALIZATION_EXPORT_CLASS(MovementComponent);
 
 
-        #if EDITOR
+#if EDITOR
         void DrawImGui() override
         {
             char speedBuffer[32];
             snprintf(speedBuffer, sizeof(speedBuffer), "%.2f", Speed);
             ImGui::Text("MovementComponent: Speed = %s", speedBuffer);
         }
-        #endif
+#endif
     };
 } // namespace Engine
