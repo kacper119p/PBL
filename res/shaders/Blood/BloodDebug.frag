@@ -11,8 +11,7 @@ layout (location = 1) out vec3 OcclusionMask;
 
 void main()
 {
-    vec4 OutputColor = texture(Image, TexCoords);
-    OutputColor.rgb *= Color;
-    FragColor = OutputColor;
+    float mask = texture(Image, TexCoords).r;
+    FragColor = vec4(Color, mask);
     OcclusionMask = vec3(0.0);
 }

@@ -10,7 +10,7 @@ layout (location = 0) out vec4 FragColor;
 
 void main()
 {
-    float alpha = texture(Image, TexCoords).a;
+    float alpha = texture(Image, TexCoords).r;
     alpha = step(0.33, alpha);
-    FragColor = vec4(Color, alpha);
+    FragColor = vec4(Color * alpha, alpha);
 }
