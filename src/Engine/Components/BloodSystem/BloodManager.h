@@ -28,7 +28,7 @@ namespace Engine
         glm::mat4 ViewProjectionMatrix;
         Shaders::Shader MaskShader;
 
-        BloodEraser* Eraser = nullptr;
+        std::vector<const BloodEraser*> BloodErasers;
         std::vector<const BloodSource*> BloodSources;
         std::vector<const BloodStain*> BloodStains;
 
@@ -103,18 +103,14 @@ namespace Engine
             return BloodFill;
         }
 
-        void AddBloodEraser(BloodEraser* const BloodEraser)
+        void AddBloodEraser(const BloodEraser* const BloodEraser)
         {
-            CHECK_MESSAGE(Eraser == nullptr, "Blood eraser already added");
-            Eraser = BloodEraser;
+            BloodErasers.push_back(BloodEraser);
         }
 
         void RemoveBloodEraser(const BloodEraser* const BloodEraser)
         {
-            if (Eraser == BloodEraser)
-            {
-                Eraser = nullptr;
-            }
+            std::erase(BloodErasers, BloodEraser);
         }
 
     public:
