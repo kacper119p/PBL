@@ -6,15 +6,16 @@
 
 namespace Materials
 {
-    class EmbersMaterial final : public Material
+    class VacuumShotMaterial final : public Material
     {
     private:
         static Shaders::Shader Shader;
 
         TextureMaterialProperty SpriteProperty;
+    public:
+        VacuumShotMaterial();
 
     public:
-        EmbersMaterial();
 
     public:
         void UseDepthPass() const override;
@@ -29,6 +30,6 @@ namespace Materials
         void DrawImGui() override;
 #endif
 
-        SERIALIZATION_EXPORT_MATERIAL(EmbersMaterial)
+        SERIALIZATION_EXPORT_MATERIAL(VacuumShotMaterial)
     };
 } // Models

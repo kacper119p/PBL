@@ -3,7 +3,6 @@
 #include "Engine/EngineObjects/LightManager.h"
 #include <algorithm>
 #include <imgui.h>
-#include <glm/gtc/type_ptr.hpp>
 #include <GLFW/glfw3.h>
 
 #include "Engine/EngineObjects/RenderingManager.h"

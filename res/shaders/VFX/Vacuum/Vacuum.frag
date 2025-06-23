@@ -19,7 +19,8 @@ void main()
 {
     float alpha = texture(Texture, TexCoord + vec2(Time, -Time) * 1.25f).r;
     float edgeFade = smoothstep(0.0, 0.1, TexCoord.y) * smoothstep(1.0, 0.75, TexCoord.y);
-    float visibilityFade = smoothstep(Visibility - 0.1, Visibility + 0.1, TexCoord.y);
+    float oneMinusVisibility = 1.0 - Visibility;
+    float visibilityFade = smoothstep(oneMinusVisibility - 0.1, oneMinusVisibility + 0.1, TexCoord.y);
     vec3 ViewDir = normalize(CameraLocation - Position);
     float fresnel = pow((1.0 - clamp(dot(normalize(WorldNormal), ViewDir), 0, 1)), 1.0);
     alpha *= fresnel * edgeFade * visibilityFade;

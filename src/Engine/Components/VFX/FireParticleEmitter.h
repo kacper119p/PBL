@@ -6,9 +6,6 @@
 
 namespace Engine
 {
-    /**
-     * @brief Renders single dust particle system.
-     */
     class FireParticleEmitter final : public ParticleEmitter
     {
     private:
