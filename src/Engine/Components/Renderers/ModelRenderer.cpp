@@ -178,12 +178,23 @@ namespace Engine
                     const char* droppedPath = static_cast<const char*>(payload->Data);
                     if (fs::path(droppedPath).extension() == ".mat")
                     {
-                        fs::path relPath = fs::relative(droppedPath, fs::current_path());
-                        SetMaterial(Materials::MaterialManager::GetMaterial(relPath.string()));
+                        fs::path fullPath = fs::absolute(droppedPath).lexically_normal();
+
+                        auto it = std::find(fullPath.begin(), fullPath.end(), "res");
+                        if (it != fullPath.end())
+                        {
+                            fs::path relativeResPath;
+                            for (; it != fullPath.end(); ++it)
+                                relativeResPath /= *it;
+
+                            std::string normalizedPath = relativeResPath.generic_string(); // zamienia '\' na '/'
+                            SetMaterial(Materials::MaterialManager::GetMaterial(normalizedPath));
+                        }
                     }
                 }
                 ImGui::EndDragDropTarget();
             }
+
 
             if (ImGui::IsItemClicked())
                 showMaterialPopup = true;
@@ -206,9 +217,20 @@ namespace Engine
 
                     if (ImGui::Selectable(displayName.c_str()))
                     {
-                        fs::path relPath = fs::path("./res/materials/SampleScene/" + std::string(currentMaterialName));
-                        SetMaterial(Materials::MaterialManager::GetMaterial(relPath.string()));
-                        ImGui::CloseCurrentPopup();
+                        fs::path fullPath = fs::absolute(fsPath).lexically_normal();
+                        auto it = std::find(fullPath.begin(), fullPath.end(), "res");
+
+                        if (it != fullPath.end())
+                        {
+                            fs::path resRelativePath;
+                            for (; it != fullPath.end(); ++it)
+                                resRelativePath /= *it;
+
+                            std::string normalizedPath = resRelativePath.generic_string(); // zamienia \ na /
+
+                            SetMaterial(Materials::MaterialManager::GetMaterial(normalizedPath));
+                            ImGui::CloseCurrentPopup();
+                        }
                     }
 
                     ImGui::SameLine();
@@ -216,6 +238,7 @@ namespace Engine
                 }
                 ImGui::EndPopup();
             }
+
 
             static char editableMaterialName[256] = {};
             static std::string lastMaterialPath;
@@ -237,7 +260,6 @@ namespace Engine
                     fs::path newMaterialPath = fs::path("./res/materials/SampleScene");
                     Materials::MaterialManager::SaveMaterial(newMaterialPath.string() + "/" + editableMaterialName,
                                                              Material);
-                    //Material = Materials::MaterialManager::GetMaterial(newMaterialPath.string() + "/" + editableMaterialName);
                 }
             }
 
@@ -255,11 +277,24 @@ namespace Engine
                     const char* droppedPath = static_cast<const char*>(payload->Data);
                     if (fs::path(droppedPath).extension() == ".fbx")
                     {
-                        Model = Models::ModelManager::GetModel(droppedPath);
+                        fs::path fullPath = fs::absolute(droppedPath).lexically_normal();
+
+                        auto it = std::find(fullPath.begin(), fullPath.end(), "res");
+                        if (it != fullPath.end())
+                        {
+                            fs::path relativeResPath;
+                            for (; it != fullPath.end(); ++it)
+                                relativeResPath /= *it;
+
+                            std::string normalizedPath = relativeResPath.generic_string();
+                            Model = Models::ModelManager::GetModel(normalizedPath.c_str());
+                        }
                     }
                 }
                 ImGui::EndDragDropTarget();
             }
+
+
 
             if (ImGui::IsItemClicked())
                 showModelPopup = true;
