@@ -179,8 +179,18 @@ namespace Engine
                     const char* droppedPath = static_cast<const char*>(payload->Data);
                     if (fs::path(droppedPath).extension() == ".mat")
                     {
-                        fs::path relPath = fs::relative(droppedPath, fs::current_path());
-                        SetMaterial(Materials::MaterialManager::GetMaterial(relPath.string()));
+                        fs::path fullPath = fs::absolute(droppedPath).lexically_normal();
+
+                        auto it = std::find(fullPath.begin(), fullPath.end(), "res");
+                        if (it != fullPath.end())
+                        {
+                            fs::path relativeResPath;
+                            for (; it != fullPath.end(); ++it)
+                                relativeResPath /= *it;
+
+                            std::string normalizedPath = relativeResPath.generic_string(); // zamienia '\' na '/'
+                            SetMaterial(Materials::MaterialManager::GetMaterial(normalizedPath));
+                        }
                     }
                 }
                 ImGui::EndDragDropTarget();
@@ -207,9 +217,20 @@ namespace Engine
 
                     if (ImGui::Selectable(displayName.c_str()))
                     {
-                        fs::path relPath = fs::path("./res/materials/SampleScene/" + std::string(currentMaterialName));
-                        SetMaterial(Materials::MaterialManager::GetMaterial(relPath.string()));
-                        ImGui::CloseCurrentPopup();
+                        fs::path fullPath = fs::absolute(fsPath).lexically_normal();
+                        auto it = std::find(fullPath.begin(), fullPath.end(), "res");
+
+                        if (it != fullPath.end())
+                        {
+                            fs::path resRelativePath;
+                            for (; it != fullPath.end(); ++it)
+                                resRelativePath /= *it;
+
+                            std::string normalizedPath = resRelativePath.generic_string();
+
+                            SetMaterial(Materials::MaterialManager::GetMaterial(normalizedPath));
+                            ImGui::CloseCurrentPopup();
+                        }
                     }
 
                     ImGui::SameLine();
@@ -257,7 +278,18 @@ namespace Engine
                     const char* droppedPath = static_cast<const char*>(payload->Data);
                     if (fs::path(droppedPath).extension() == ".fbx")
                     {
-                        Model = Models::ModelManager::GetAnimatedModel(droppedPath);
+                        fs::path fullPath = fs::absolute(droppedPath).lexically_normal();
+
+                        auto it = std::find(fullPath.begin(), fullPath.end(), "res");
+                        if (it != fullPath.end())
+                        {
+                            fs::path relativeResPath;
+                            for (; it != fullPath.end(); ++it)
+                                relativeResPath /= *it;
+
+                            std::string normalizedPath = relativeResPath.generic_string();
+                            Model = Models::ModelManager::GetAnimatedModel(normalizedPath.c_str());
+                        }
                     }
                 }
                 ImGui::EndDragDropTarget();
@@ -304,7 +336,18 @@ namespace Engine
                     const char* droppedPath = static_cast<const char*>(payload->Data);
                     if (fs::path(droppedPath).extension() == ".fbx")
                     {
-                        Model = Models::ModelManager::GetAnimatedModel(droppedPath);
+                        fs::path fullPath = fs::absolute(droppedPath).lexically_normal();
+
+                        auto it = std::find(fullPath.begin(), fullPath.end(), "res");
+                        if (it != fullPath.end())
+                        {
+                            fs::path relativeResPath;
+                            for (; it != fullPath.end(); ++it)
+                                relativeResPath /= *it;
+
+                            std::string normalizedPath = relativeResPath.generic_string();
+                            Animation = Models::ModelManager::GetAnimation(normalizedPath.c_str());
+                        }
                     }
                 }
                 ImGui::EndDragDropTarget();
