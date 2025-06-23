@@ -39,18 +39,18 @@ namespace Engine
         glBindTexture(GL_TEXTURE_2D, NoiseTexture);
         Shaders::Shader::SetUniform(ProjectionMatrixLocation, CameraData.ProjectionMatrix);
         Shaders::Shader::SetUniform(InverseProjectionMatrixLocation, glm::inverse(CameraData.ProjectionMatrix));
-        ScreenQuad.Draw();
+        Rendering::ScreenQuad::Draw();
 
         BlurShader.Use();
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, ColorTexture);
         glBindFramebuffer(GL_FRAMEBUFFER, SecondaryFramebuffer);
         Shaders::Shader::SetUniform(BlurHorizontalBoolLocation, false);
-        ScreenQuad.Draw();
+        Rendering::ScreenQuad::Draw();
         glBindFramebuffer(GL_FRAMEBUFFER, FrameBuffer);
         glBindTexture(GL_TEXTURE_2D, SecondaryColorTexture);
         Shaders::Shader::SetUniform(BlurHorizontalBoolLocation, true);
-        ScreenQuad.Draw();
+        Rendering::ScreenQuad::Draw();
     }
 
     void Ssao::GenerateKernel(std::default_random_engine& Generator,

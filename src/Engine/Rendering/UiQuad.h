@@ -1,19 +1,18 @@
 #pragma once
-#include <cstdint>
 
-
-namespace Engine::Rendering
+namespace Engine
 {
     /**
      * @brief Class used for rendering full screen quads.
      */
-    class ScreenQuad
+    class UiQuad
     {
     private:
         struct CachedData
         {
-            uint32_t VertexArray = 0;
-            uint32_t VertexBuffer = 0;
+            unsigned int VertexArray = 0;
+            unsigned int VertexBuffer = 0;
+            unsigned int ElementBuffer = 0;
 
             ~CachedData();
         };
@@ -22,10 +21,10 @@ namespace Engine::Rendering
         static CachedData CachedData;
 
     private:
-        ScreenQuad() = default;
+        UiQuad() = default;
 
     public:
-        ~ScreenQuad();
+        ~UiQuad();
 
     public:
         /**
@@ -33,6 +32,7 @@ namespace Engine::Rendering
          */
         static void Draw();
 
+    private:
         static void Initialize();
     };
 } // Engine
