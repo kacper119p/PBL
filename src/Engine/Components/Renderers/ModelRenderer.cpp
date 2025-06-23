@@ -178,12 +178,23 @@ namespace Engine
                     const char* droppedPath = static_cast<const char*>(payload->Data);
                     if (fs::path(droppedPath).extension() == ".mat")
                     {
-                        fs::path relPath = fs::relative(droppedPath, fs::current_path());
-                        SetMaterial(Materials::MaterialManager::GetMaterial(relPath.string()));
+                        fs::path fullPath = fs::absolute(droppedPath).lexically_normal();
+
+                        auto it = std::find(fullPath.begin(), fullPath.end(), "res");
+                        if (it != fullPath.end())
+                        {
+                            fs::path relativeResPath;
+                            for (; it != fullPath.end(); ++it)
+                                relativeResPath /= *it;
+
+                            std::string normalizedPath = relativeResPath.generic_string(); // zamienia '\' na '/'
+                            SetMaterial(Materials::MaterialManager::GetMaterial(normalizedPath));
+                        }
                     }
                 }
                 ImGui::EndDragDropTarget();
             }
+
 
             if (ImGui::IsItemClicked())
                 showMaterialPopup = true;
@@ -255,11 +266,24 @@ namespace Engine
                     const char* droppedPath = static_cast<const char*>(payload->Data);
                     if (fs::path(droppedPath).extension() == ".fbx")
                     {
-                        Model = Models::ModelManager::GetModel(droppedPath);
+                        fs::path fullPath = fs::absolute(droppedPath).lexically_normal();
+
+                        auto it = std::find(fullPath.begin(), fullPath.end(), "res");
+                        if (it != fullPath.end())
+                        {
+                            fs::path relativeResPath;
+                            for (; it != fullPath.end(); ++it)
+                                relativeResPath /= *it;
+
+                            std::string normalizedPath = relativeResPath.generic_string();
+                            Model = Models::ModelManager::GetModel(normalizedPath.c_str());
+                        }
                     }
                 }
                 ImGui::EndDragDropTarget();
             }
+
+
 
             if (ImGui::IsItemClicked())
                 showModelPopup = true;
