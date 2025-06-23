@@ -17,20 +17,20 @@ add_library(stb_image STATIC ${STB_IMAGE_DIR}/stb_image.cpp)
 target_include_directories(stb_image PRIVATE ${STB_IMAGE_DIR})
 
 # other
-CPMAddPackage("gh:assimp/assimp@5.2.5")
+CPMAddPackage("gh:assimp/assimp@6.0.2")
 CPMAddPackage("gh:glfw/glfw#3.3.8")
 CPMAddPackage("gh:g-truc/glm#0.9.9.8")
 CPMAddPackage("gh:gabime/spdlog@1.10.0")
 CPMAddPackage("gh:mackron/miniaudio#0.11.22")
 
 set_target_properties(glad
-                      stb_image 
-                      assimp 
-                      glfw 
-                      glm
-                      spdlog
-                      miniaudio PROPERTIES FOLDER "thirdparty")
+        stb_image
+        assimp
+        glfw
+        glm
+        spdlog
+        miniaudio PROPERTIES FOLDER "thirdparty")
 
 if (TARGET zlibstatic)
     set_target_properties(zlibstatic PROPERTIES FOLDER "thirdparty")
-endif()
+endif ()
