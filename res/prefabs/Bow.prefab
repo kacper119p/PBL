@@ -1,0 +1,76 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{d8928338-f89c-4b61-afb3-ae09dd616960}\u0000",
+            "name": "Bow",
+            "transform": {
+                "type": "Transform",
+                "id": "{5fca2986-bc46-4bbc-b2f8-282844585fec}\u0000",
+                "owner": "{d8928338-f89c-4b61-afb3-ae09dd616960}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.5824989676475525,
+                    "z": -5.208743095397949
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{fa43dff8-af15-4865-b067-4541119d1366}\u0000",
+                "{f0151d87-a847-4fca-9330-96723b18e5d0}\u0000",
+                "{c80ed3e6-f8f9-49e7-b00d-4622149f008b}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{fa43dff8-af15-4865-b067-4541119d1366}\u0000",
+            "owner": "{d8928338-f89c-4b61-afb3-ae09dd616960}\u0000",
+            "Material": "res/materials/SampleScene/Sword.mat",
+            "Model": "./res/Models/Modele_Mati/Bron/Luk.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{f0151d87-a847-4fca-9330-96723b18e5d0}\u0000",
+            "owner": "{d8928338-f89c-4b61-afb3-ae09dd616960}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 64,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 3.200000047683716,
+            "_height": 0.15000000596046448,
+            "_depth": 1.2000000476837158
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{c80ed3e6-f8f9-49e7-b00d-4622149f008b}\u0000",
+            "owner": "{d8928338-f89c-4b61-afb3-ae09dd616960}\u0000",
+            "mass": 0.5,
+            "inverseMass": 2.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.22699999809265137,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        }
+    ]
+}

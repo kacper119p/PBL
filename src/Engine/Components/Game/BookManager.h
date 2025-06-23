@@ -18,6 +18,13 @@
 
 namespace Engine
 {
+    enum class ItemType
+    {
+        Book = 0,
+        Coin = 1,
+        Weapon = 2
+    };
+
     struct BookLerpData
     {
         Entity* book = nullptr;
@@ -41,8 +48,12 @@ namespace Engine
         std::vector<glm::vec3> unoccupiedPlaces = {};
         std::vector<Entity*> currentBooksBeingPut = {};
         std::vector<BookLerpData> activeBookMoves = {};
-
-        Events::TAction<Collider*> BookCollision = Events::TAction<Collider*>(this, &BookManager::PutBookOnShelf);
+        Transform* swordPlacementPoint = nullptr;
+        Transform* bowPlacementPoint = nullptr;
+        Transform* arrowPlacementPoint = nullptr;
+        Transform* shieldPlacementPoint = nullptr;
+        ItemType itemType = ItemType::Book;
+        Events::TAction<Collider*> BookCollision = Events::TAction<Collider*>(this, &BookManager::PutItem);
 
     public:
         BookManager() = default;
@@ -53,7 +64,8 @@ namespace Engine
         void Update(float dt) override;
 
         void GetUnoccupiedPlace();
-        void PutBookOnShelf(Collider* bookCollider);
+        void PutItem(Collider* bookCollider);
+        
 
 #if EDITOR
         void DrawImGui() override;
