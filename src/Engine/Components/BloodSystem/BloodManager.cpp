@@ -81,10 +81,8 @@ namespace Engine
             Instance = nullptr;
         }
 
-        RemoveBloodEraser(Eraser);
         glDeleteFramebuffers(1, &FrameBuffer);
         glDeleteTextures(1, &ColorBuffer);
-
         glDeleteBuffers(1, &AccumulationBuffer);
     }
 
@@ -113,9 +111,9 @@ namespace Engine
         }
 
         glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ZERO, GL_ONE_MINUS_SRC_ALPHA);
-        if (Eraser != nullptr)
+        for (const BloodEraser* const bloodEraser : BloodErasers)
         {
-            Eraser->Draw();
+            bloodEraser->Draw();
         }
 
         glDisable(GL_BLEND);
