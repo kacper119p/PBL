@@ -19,7 +19,7 @@ namespace Engine
         int maxVolume = 10;
 
         int size = 2;
-        float centerSize = 1.0f;
+        float centerSize = 1.5f;
         std::vector<Engine::Entity*> items;
         Engine::SphereCollider* collider;
 
@@ -33,6 +33,7 @@ namespace Engine
         float shootKeyHoldStartTime = 0.0f;
         float lastShootTime = 0.0f;
         const float shootCooldown = 0.3f; // 300 ms
+        float lastSuckToggleTime = 0.0f;
 
         std::shared_ptr<ma_sound> blowingSound;
         std::shared_ptr<ma_sound> suckingSound;

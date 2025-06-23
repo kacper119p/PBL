@@ -19,6 +19,7 @@
 #include "UI/FontRendering/TextManager.h"
 #include "Engine/Components/Audio/AudioListener.h"
 #include "Engine/Components/Audio/BackgroundAudioPlayer.h"
+#include "EngineObjects/Transitions/SplashScreen.h"
 #include "tracy/Tracy.hpp"
 #include "Components/Renderers/OutlinedModelRenderer.h"
 #if DEBUG
@@ -58,6 +59,11 @@ namespace Engine
         }
 
         spdlog::info("Initialized project.");
+
+#if !EDITOR
+        SplashScreen::Play(Window, WindowWidth, WindowHeight);
+# endif
+
 #if EDITOR
         ImGuiInit();
         spdlog::info("Initialized ImGui.");
@@ -82,15 +88,14 @@ namespace Engine
 
         spdlog::info("Successfully built scene.");
 
-        float lastFrame = glfwGetTime();
+        float lastFrame = static_cast<float>(glfwGetTime());
 
         // Main loop
         while (!glfwWindowShouldClose(Window))
         {
             ZoneScopedN("GameLoop");
             ++Frame;
-            glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
-            float currentFrame = glfwGetTime();
+            float currentFrame = static_cast<float>(glfwGetTime());
             float deltaTime = currentFrame - lastFrame;
             lastFrame = currentFrame;
 
