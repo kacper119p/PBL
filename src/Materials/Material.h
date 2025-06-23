@@ -197,7 +197,18 @@ namespace Materials
                     const char* droppedPath = static_cast<const char*>(payload->Data);
                     if (std::filesystem::path(droppedPath).extension() == ".dds")
                     {
-                        materialProp.SetValue(Engine::TextureManager::GetTexture(droppedPath));
+                        std::filesystem::path fullPath = std::filesystem::absolute(droppedPath).lexically_normal();
+                        auto it = std::find(fullPath.begin(), fullPath.end(), "res");
+
+                        if (it != fullPath.end())
+                        {
+                            std::filesystem::path resRelativePath;
+                            for (; it != fullPath.end(); ++it)
+                                resRelativePath /= *it;
+
+                            std::string normalizedPath = resRelativePath.generic_string(); // "res/Textures/file.dds"
+                            materialProp.SetValue(Engine::TextureManager::GetTexture(normalizedPath.c_str()));
+                        }
                     }
                 }
                 ImGui::EndDragDropTarget();
