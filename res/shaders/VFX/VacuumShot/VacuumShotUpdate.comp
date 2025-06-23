@@ -1,7 +1,7 @@
 #version 460 core
 
 #include "Constants.glsl"
-#include "EmbersParticleData.glsl"
+#include "VacuumShotData.glsl"
 #include "Simplex.glsl"
 
 uniform float DeltaTime;
@@ -24,15 +24,15 @@ void UpdateParticle(inout particle Particle, int index) {
         if (Particle.life <= 0.0)
         {
             Particle.life = 0.0;
+            Particle.scale = 0.0;
             freelist.indices[atomicAdd(freelist.count, 1)] = index;
             return;
         }
 
-        Particle.velocity += snoise(Particle.position + vec3(Time), 0.5) * DeltaTime * 8.0;
+        vec3 velocity = Particle.velocity * exp(-DRAG * DeltaTime);
+        Particle.velocity = velocity;
         Particle.position += Particle.velocity * DeltaTime;
-        float scale = (Particle.life / MAX_LIFETIME);
-        scale = scale * scale * pow(1.0 - scale, 0.5);
-        Particle.scale = scale * 0.33;
+        Particle.scale = START_SCALE * clamp(length(velocity) / (MAX_VELOCITY), 0.0, 1.0);
     }
 }
 

@@ -8,9 +8,6 @@
 
 namespace Engine
 {
-    /**
-     * @brief Renders single particle system.
-     */
     class ParticleEmitter : public Component
     {
     protected:
