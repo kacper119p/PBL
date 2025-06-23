@@ -115,6 +115,7 @@ namespace Engine
                     this->GetTransform()->RemoveChild(vacuumVfx->GetTransform());
                     PlayerAnimationManager::GetInstance()->SetVacuumVfx(nullptr);
                     PlayerAnimationManager::GetInstance()->SetVacuumShotVfx(nullptr);
+                    PlayerAnimationManager::GetInstance()->StrapMaterial = nullptr;
                     vacuum->Destroy();
                 }
                 if (broom)
@@ -157,6 +158,11 @@ namespace Engine
                             PlayerAnimationManager::GetInstance()->SetVacuumFront(
                                     child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>());
                         }
+                        if (child->GetOwner()->GetName() == "Pasek")
+                        {
+                            PlayerAnimationManager::GetInstance()->StrapMaterial =
+                                    child->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>()->GetMaterial();
+                        }
                     }
                 }
                 hasBroom = false;
@@ -195,6 +201,7 @@ namespace Engine
                     this->GetTransform()->RemoveChild(vacuumVfx->GetTransform());
                     PlayerAnimationManager::GetInstance()->SetVacuumVfx(nullptr);
                     PlayerAnimationManager::GetInstance()->SetVacuumShotVfx(nullptr);
+                    PlayerAnimationManager::GetInstance()->StrapMaterial = nullptr;
                     vacuum->Destroy();
                 }
                 stripper = nullptr;

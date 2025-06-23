@@ -2,6 +2,7 @@
 #include "Engine/Components/Renderers/AnimatedModelRenderer.h"
 #include "Engine/Components/VFX/VacuumVfx.h"
 #include "Engine/Components/VFX/VacuumShotVfx.h"
+#include "Materials/Material.h"
 namespace Engine
 {
     class PlayerAnimationManager
@@ -20,6 +21,8 @@ namespace Engine
     public:
         AnimatedModelRenderer* TrackLeft = nullptr;
         AnimatedModelRenderer* TrackRight = nullptr;
+
+        Materials::Material* StrapMaterial = nullptr;
 
         bool isVacuumActive = false;
 
