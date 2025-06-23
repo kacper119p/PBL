@@ -217,9 +217,20 @@ namespace Engine
 
                     if (ImGui::Selectable(displayName.c_str()))
                     {
-                        fs::path relPath = fs::path("./res/materials/SampleScene/" + std::string(currentMaterialName));
-                        SetMaterial(Materials::MaterialManager::GetMaterial(relPath.string()));
-                        ImGui::CloseCurrentPopup();
+                        fs::path fullPath = fs::absolute(fsPath).lexically_normal();
+                        auto it = std::find(fullPath.begin(), fullPath.end(), "res");
+
+                        if (it != fullPath.end())
+                        {
+                            fs::path resRelativePath;
+                            for (; it != fullPath.end(); ++it)
+                                resRelativePath /= *it;
+
+                            std::string normalizedPath = resRelativePath.generic_string(); // zamienia \ na /
+
+                            SetMaterial(Materials::MaterialManager::GetMaterial(normalizedPath));
+                            ImGui::CloseCurrentPopup();
+                        }
                     }
 
                     ImGui::SameLine();
@@ -227,6 +238,7 @@ namespace Engine
                 }
                 ImGui::EndPopup();
             }
+
 
             static char editableMaterialName[256] = {};
             static std::string lastMaterialPath;
@@ -248,7 +260,6 @@ namespace Engine
                     fs::path newMaterialPath = fs::path("./res/materials/SampleScene");
                     Materials::MaterialManager::SaveMaterial(newMaterialPath.string() + "/" + editableMaterialName,
                                                              Material);
-                    //Material = Materials::MaterialManager::GetMaterial(newMaterialPath.string() + "/" + editableMaterialName);
                 }
             }
 
