@@ -1,0 +1,76 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{70e58001-4cea-4021-b7ec-42546d6be9c9}\u0000",
+            "name": "Coin",
+            "transform": {
+                "type": "Transform",
+                "id": "{40d85435-7d6c-48f7-9bb4-57308941fadd}\u0000",
+                "owner": "{70e58001-4cea-4021-b7ec-42546d6be9c9}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.802398681640625,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{45e7f508-0296-4cad-9df1-c021534233b9}\u0000",
+                "{90604c06-4bbd-41d2-93a7-f520e322ff7a}\u0000",
+                "{2a52b985-4945-4487-9893-01f8041550a4}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{45e7f508-0296-4cad-9df1-c021534233b9}\u0000",
+            "owner": "{70e58001-4cea-4021-b7ec-42546d6be9c9}\u0000",
+            "Material": "res/materials/SampleScene/Coin.mat",
+            "Model": "res/models/Modele_Mati/Kosztownosci/Moneta.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{90604c06-4bbd-41d2-93a7-f520e322ff7a}\u0000",
+            "owner": "{70e58001-4cea-4021-b7ec-42546d6be9c9}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.75,
+            "_height": 0.10000000149011612,
+            "_depth": 0.75
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{2a52b985-4945-4487-9893-01f8041550a4}\u0000",
+            "owner": "{70e58001-4cea-4021-b7ec-42546d6be9c9}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        }
+    ]
+}

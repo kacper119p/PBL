@@ -45,7 +45,6 @@ namespace Engine
             if (static_cast<float>(glfwGetTime()) - lastSuckToggleTime > shootCooldown)
             {
                 isSuccing = !isSuccing;
-                std::cout << "Vacuum toggled: " << (isSuccing ? "Sucking" : "Not Sucking") << std::endl;
                 isShooting = false;
                 lastSuckToggleTime = static_cast<float>(glfwGetTime());
             }

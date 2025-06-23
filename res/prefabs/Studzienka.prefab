@@ -3,20 +3,76 @@
         {
             "type": "Entity",
             "id": "{e1ffc2c5-dc14-4d27-b0ea-b73708d9e240}\u0000",
-            "name": "Studzxienkaww",
+            "name": "ColliderDisabler",
             "transform": {
                 "type": "Transform",
                 "id": "{28774810-eb3e-4702-80ea-139d18c51aa4}\u0000",
                 "owner": "{e1ffc2c5-dc14-4d27-b0ea-b73708d9e240}\u0000",
                 "Position": {
-                    "x": 12.80373764038086,
-                    "y": 0.968400239944458,
-                    "z": 17.98369598388672
+                    "x": -0.21213388442993164,
+                    "y": 0.0625,
+                    "z": 9.521060943603516
                 },
                 "EulerAngles": {
-                    "x": 1.0630857766357263e-13,
-                    "y": -38.026268005371094,
-                    "z": 6.443863753702317e-7
+                    "x": -90.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.7699345350265503,
+                    "y": 1.7699999809265137,
+                    "z": 1.7699999809265137
+                },
+                "Rotation": {
+                    "x": -0.7071067690849304,
+                    "y": -0.0,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [
+                    "{d9ad6703-631a-4c3c-9af4-f4382ae0cae5}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{ecfda86e-90a9-46d5-ae03-f468fbe60ea3}\u0000",
+                "{04b525c1-798d-461e-a05a-a3e92b2ad0e1}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{ecfda86e-90a9-46d5-ae03-f468fbe60ea3}\u0000",
+            "owner": "{e1ffc2c5-dc14-4d27-b0ea-b73708d9e240}\u0000",
+            "Material": "./res/materials/SampleScene/Floor.mat",
+            "Model": "./res/Models/Modele_Mati/Otoczenie/Studzienka.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "SphereCollider",
+            "id": "{04b525c1-798d-461e-a05a-a3e92b2ad0e1}\u0000",
+            "owner": "{e1ffc2c5-dc14-4d27-b0ea-b73708d9e240}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 1,
+            "radius": 2.799999952316284
+        },
+        {
+            "type": "Entity",
+            "id": "{8aced6f4-1907-46b3-ab78-4ffcba078e42}\u0000",
+            "name": "podloga",
+            "transform": {
+                "type": "Transform",
+                "id": "{d9ad6703-631a-4c3c-9af4-f4382ae0cae5}\u0000",
+                "owner": "{8aced6f4-1907-46b3-ab78-4ffcba078e42}\u0000",
+                "Position": {
+                    "x": 0.00007829815149307251,
+                    "y": -0.0955052375793457,
+                    "z": -0.04994475096464157
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
                 },
                 "Scale": {
                     "x": 1.0,
@@ -24,24 +80,31 @@
                     "z": 1.0
                 },
                 "Rotation": {
-                    "x": 1.831997553658482e-9,
-                    "y": -0.3257848918437958,
-                    "z": 5.31654542612614e-9,
-                    "w": 0.9454439282417297
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+                "Parent": "{28774810-eb3e-4702-80ea-139d18c51aa4}\u0000"
             },
             "components": [
-                "{ecfda86e-90a9-46d5-ae03-f468fbe60ea3}\u0000"
+                "{376a874c-87e5-45c6-93a6-6a883f7fd0dc}\u0000"
             ]
         },
         {
-            "type": "ModelRenderer",
-            "id": "{ecfda86e-90a9-46d5-ae03-f468fbe60ea3}\u0000",
-            "owner": "{e1ffc2c5-dc14-4d27-b0ea-b73708d9e240}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Otoczenie/Studzienka.fbx"
+            "type": "BoxCollider",
+            "id": "{376a874c-87e5-45c6-93a6-6a883f7fd0dc}\u0000",
+            "owner": "{8aced6f4-1907-46b3-ab78-4ffcba078e42}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967231,
+            "colliderType": 0,
+            "_width": 16.0,
+            "_height": 16.0,
+            "_depth": 0.25
         }
     ]
 }

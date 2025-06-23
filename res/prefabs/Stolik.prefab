@@ -2,20 +2,20 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{948995e3-afd2-48b7-a07a-c2e039efa5af}\u0000",
-            "name": "Stolik",
+            "id": "{d3527566-02ec-42ec-8b43-a8668daa26d5}\u0000",
+            "name": "New Entity",
             "transform": {
                 "type": "Transform",
-                "id": "{9f4ba592-590e-4f8f-b021-ed634f52fa81}\u0000",
-                "owner": "{948995e3-afd2-48b7-a07a-c2e039efa5af}\u0000",
+                "id": "{bdf2f9bb-3dd7-416f-aee5-bb6d8e1553e3}\u0000",
+                "owner": "{d3527566-02ec-42ec-8b43-a8668daa26d5}\u0000",
                 "Position": {
-                    "x": 11.635370254516602,
-                    "y": 2.002141237258911,
-                    "z": 18.36220359802246
+                    "x": 0.0,
+                    "y": 3.2826361656188965,
+                    "z": -3.8658242225646973
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": -0.0,
+                    "y": 0.0,
                     "z": 0.0
                 },
                 "Scale": {
@@ -33,40 +33,44 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{51c79cdd-7945-46c7-b7af-169e5c9bf6f2}\u0000",
-                "{5f045c9b-8713-4976-ba9a-f5566416d7c1}\u0000",
-                "{ea49a5e9-820d-4656-a30f-3f62639d0c9d}\u0000"
+                "{59dd9299-254c-4157-b0ac-729f8103fd35}\u0000",
+                "{db106eff-0439-487e-bf91-8b653f24481a}\u0000",
+                "{d275517c-ca69-42a4-8153-b6685468904d}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{51c79cdd-7945-46c7-b7af-169e5c9bf6f2}\u0000",
-            "owner": "{948995e3-afd2-48b7-a07a-c2e039efa5af}\u0000",
-            "Material": "./res/materials/SampleScene/UV4.mat",
-            "Model": "./res/models/Modele_Mati/Meble/Stolik.fbx"
+            "id": "{59dd9299-254c-4157-b0ac-729f8103fd35}\u0000",
+            "owner": "{d3527566-02ec-42ec-8b43-a8668daa26d5}\u0000",
+            "Material": "res/materials/SampleScene/UV4.mat",
+            "Model": "res/models/Modele_Mati/Meble/Stolik.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{db106eff-0439-487e-bf91-8b653f24481a}\u0000",
+            "owner": "{d3527566-02ec-42ec-8b43-a8668daa26d5}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 3.799999952316284,
+            "_height": 3.5999999046325684,
+            "_depth": 10.600000381469727
         },
         {
             "type": "Rigidbody",
-            "id": "{5f045c9b-8713-4976-ba9a-f5566416d7c1}\u0000",
-            "owner": "{948995e3-afd2-48b7-a07a-c2e039efa5af}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
-            "linearDamping": 0.0,
+            "id": "{d275517c-ca69-42a4-8153-b6685468904d}\u0000",
+            "owner": "{d3527566-02ec-42ec-8b43-a8668daa26d5}\u0000",
+            "mass": 10.0,
+            "inverseMass": 0.10000000149011612,
+            "linearDamping": 0.20200000703334808,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
             "frictionEnabled": true,
             "restitution": 0.10000000149011612
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{ea49a5e9-820d-4656-a30f-3f62639d0c9d}\u0000",
-            "owner": "{948995e3-afd2-48b7-a07a-c2e039efa5af}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "colliderType": 0,
-            "_width": 3.700000047683716,
-            "_height": 3.700000047683716,
-            "_depth": 10.600000381469727
         }
     ]
 }
