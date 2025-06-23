@@ -1,0 +1,48 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{e72f4f25-43bf-43ec-8e9e-140a8d4e396f}\u0000",
+            "name": "SlimeIdle",
+            "transform": {
+                "type": "Transform",
+                "id": "{8f2e26c7-e7bd-479a-9e0e-986a564fbef9}\u0000",
+                "owner": "{e72f4f25-43bf-43ec-8e9e-140a8d4e396f}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 180.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 1.0,
+                    "y": 0.0,
+                    "z": -0.0,
+                    "w": -4.371138828673793e-8
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{01d04a37-0b07-4d90-ae96-b18496e5b692}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{01d04a37-0b07-4d90-ae96-b18496e5b692}\u0000",
+            "owner": "{e72f4f25-43bf-43ec-8e9e-140a8d4e396f}\u0000",
+            "Material": "res/materials/SampleScene/DefaultAnimated.mat",
+            "Model": "./res/Models/Slime/SlimeIdle.fbx",
+            "Animation": "./res/Models/Slime/SlimeIdle.fbx"
+        }
+    ]
+}
