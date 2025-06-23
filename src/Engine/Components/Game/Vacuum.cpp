@@ -23,6 +23,9 @@ namespace Engine
             collider = this->GetOwner()->AddComponent<Engine::SphereCollider>();
         }
         collider->SetTrigger(true);
+        blowingSound = AudioManager::GetInstance().CreateSoundInstance("strzeelanie odkurzacz");
+        suckingSound = AudioManager::GetInstance().CreateSoundInstance("odkurzaczito");
+        AudioManager::GetInstance().SetLooping(suckingSound, true);
         Engine::UpdateManager::GetInstance()->RegisterComponent(this);
     }
 
@@ -30,6 +33,9 @@ namespace Engine
     {
         InputManager& input = InputManager::GetInstance();
         PlayerAnimationManager* playerAnimationManager = PlayerAnimationManager::GetInstance();
+
+        AudioManager::GetInstance().SetSoundPosition(blowingSound, GetOwner()->GetTransform()->GetPosition());
+        AudioManager::GetInstance().SetSoundPosition(suckingSound, GetOwner()->GetTransform()->GetPosition());
 
         isShootingKeyPressed = input.IsKeyPressed(GLFW_KEY_2);
         bool isSuccingKeyPressed = input.IsKeyPressed(GLFW_KEY_1);
@@ -60,6 +66,7 @@ namespace Engine
             if (!playerAnimationManager->isVacuumActive)
             {
                 playerAnimationManager->SetVacuumActive();
+                AudioManager::GetInstance().PlayAudio(suckingSound);
             }
         }
         else
@@ -67,6 +74,7 @@ namespace Engine
             if (playerAnimationManager->isVacuumActive)
             {
                 playerAnimationManager->SetVacuumInactive();
+                AudioManager::GetInstance().StopSound(suckingSound);
             }
         }
 
@@ -75,18 +83,22 @@ namespace Engine
         // --- STRZELANIE ---
         if (isShooting)
         {
-            if (isShootingKeyPressed && !wasShootingKeyPressed)
+            if (isShootingKeyPressed && !wasShootingKeyPressed && volume > 0)
             {
                 Shoot();
                 shootKeyHoldStartTime = currentTime;
                 lastShootTime = currentTime;
+                AudioManager::GetInstance().StopSound(blowingSound);
+                AudioManager::GetInstance().PlayAudioWithRandomPitch(blowingSound, 0.8f, 1.2f);
             }
-            else if (isShootingKeyPressed)
+            else if (isShootingKeyPressed && volume > 0)
             {
                 if (currentTime - lastShootTime >= shootCooldown)
                 {
                     Shoot();
                     lastShootTime = currentTime;
+                    AudioManager::GetInstance().StopSound(blowingSound);
+                    AudioManager::GetInstance().PlayAudioWithRandomPitch(blowingSound, 0.8f, 1.5f);
                 }
             }
         }
@@ -106,7 +118,8 @@ namespace Engine
                     int thrashSizeInt = static_cast<int>(entityCollider->GetOwner()->GetComponent<Thrash>()->GetSize());
                     if (volume + thrashSizeInt <= maxVolume)
                     {
-                        glm::vec3 direction = position + forward * (size/2.0f+0.01f) - entityCollider->GetOwner()->GetTransform()->GetPosition();
+                        glm::vec3 direction = position + forward * (size / 2.0f + 0.01f) - entityCollider->GetOwner()->
+                                              GetTransform()->GetPosition();
                         entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->AddForce(
                                 direction, Engine::ForceMode::Force);
                         if (thrashSizeInt == 10)
@@ -132,7 +145,6 @@ namespace Engine
                     }
                 }
             }
-
         }
 
         wasShootingKeyPressed = isShootingKeyPressed;
@@ -154,8 +166,8 @@ namespace Engine
 
             glm::vec3 position = GetOwner()->GetTransform()->GetParent()->GetPosition();
             glm::vec3 forward = GetOwner()->GetTransform()->GetParent()->GetForward();
-            item->GetTransform()->SetPosition((position + forward)+glm::vec3(0,1,0)); 
-            item->GetComponent<Engine::Rigidbody>()->angularVelocity.y=0.0f;
+            item->GetTransform()->SetPosition((position + forward) + glm::vec3(0, 1, 0));
+            item->GetComponent<Engine::Rigidbody>()->angularVelocity.y = 0.0f;
             item->GetComponent<Engine::Rigidbody>()->hasGravity = true;
             item->GetComponent<Engine::Rigidbody>()->AddForce(forward * 100.0f, Engine::ForceMode::Force);
 

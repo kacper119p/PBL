@@ -4,6 +4,7 @@
 #include "../Component.h"
 #include "../Updateable.h"
 #include "Serialization/SerializationUtility.h"
+#include "Audio/AudioManager.h"
 #if EDITOR
 #include "imgui.h"
 #endif
@@ -34,15 +35,23 @@ namespace Engine
         const float shootCooldown = 0.3f; // 300 ms
         float lastSuckToggleTime = 0.0f;
 
+        std::shared_ptr<ma_sound> blowingSound;
+        std::shared_ptr<ma_sound> suckingSound;
+
     public:
         Vacuum() = default;
+
         ~Vacuum() override = default;
+
         int GetVolume() const { return volume; }
         void SetVolume(int newVolume) { volume = newVolume; }
         int GetMaxVolume() const { return maxVolume; }
         void SetMaxVolume(int newMaxVolume) { maxVolume = newMaxVolume; }
+
         void Start() override;
+
         void Update(float deltaTime) override;
+
         void Shoot();
 
         SERIALIZATION_EXPORT_CLASS(Vacuum);
