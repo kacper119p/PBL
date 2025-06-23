@@ -27,7 +27,7 @@ namespace Engine
         }
         else
         {
-            textureId = Utility::LoadTexture2DFromFile(Path, GL_RGBA, 4,GL_RGBA);
+            textureId = Utility::LoadTexture2DFromFile(Path);
         }
 
 

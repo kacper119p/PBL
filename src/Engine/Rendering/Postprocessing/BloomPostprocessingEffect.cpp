@@ -64,7 +64,7 @@ namespace Engine
                                GL_TEXTURE_2D, PrefilteredColor, 0);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, SceneColorTexture);
-        ScreenQuad.Draw();
+        Rendering::ScreenQuad::Draw();
 
         DownSampleShader.Use();
 
@@ -76,7 +76,7 @@ namespace Engine
             glViewport(0, 0, static_cast<GLsizei>(mip.Size.x), static_cast<GLsizei>(mip.Size.y));
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                                    GL_TEXTURE_2D, mip.Texture, 0);
-            ScreenQuad.Draw();
+            Rendering::ScreenQuad::Draw();
             glBindTexture(GL_TEXTURE_2D, mip.Texture);
         }
 
@@ -101,7 +101,7 @@ namespace Engine
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                                    GL_TEXTURE_2D, nextMip.Texture, 0);
 
-            ScreenQuad.Draw();
+            Rendering::ScreenQuad::Draw();
         }
 
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
@@ -117,7 +117,7 @@ namespace Engine
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         glViewport(0, 0, 1920, 1080);
 
-        ScreenQuad.Draw();
+        Rendering::ScreenQuad::Draw();
     }
 
     BloomPostprocessingEffect::~BloomPostprocessingEffect()

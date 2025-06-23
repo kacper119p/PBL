@@ -7,10 +7,10 @@ namespace Utility
     class FileException : public std::runtime_error
     {
     public:
-        explicit FileException(const runtime_error& other);
+        explicit FileException(const runtime_error& Other);
 
-        explicit FileException(const char* message);
+        explicit FileException(const char* Message);
 
-        explicit FileException(const std::string& message);
+        explicit FileException(const std::string& Message);
     };
 } // Utility

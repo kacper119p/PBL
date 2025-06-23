@@ -18,8 +18,6 @@ namespace Engine
         Shaders::Shader Shader;
         Shaders::Shader BlendShader;
 
-        Rendering::ScreenQuad ScreenQuad;
-
     public:
         GodRays();
 
