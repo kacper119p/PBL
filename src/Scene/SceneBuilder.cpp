@@ -21,7 +21,7 @@ namespace Scene
         ZoneScoped;
 
         Scene = new class Engine::Scene();
-        Engine::SceneManager::LoadScene("./res/scenes/MainMenu.lvl", Scene);
+        Engine::SceneManager::LoadScene("./res/scenes/Gameplay.lvl", Scene);
         // TODO: remove when no longer needed
 
 
