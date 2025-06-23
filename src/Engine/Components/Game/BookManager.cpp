@@ -2,11 +2,15 @@
 #include <algorithm>
 #include <random>
 #include "Engine/Engine.h"
+#include <iostream>
+#include "Engine/Components/Physics/Rigidbody.h"
+#include "Engine/EngineObjects/UpdateManager.h"
 
 namespace Engine
 {
     void BookManager::Start()
     {
+        UpdateManager::GetInstance()->RegisterComponent(this);
         Collider* collider = Component::GetOwner()->GetComponent<Collider>();
         if (collider)
         {
@@ -21,6 +25,7 @@ namespace Engine
         START_COMPONENT_SERIALIZATION
         SERIALIZE_FIELD(bookWidth)
         SERIALIZE_FIELD(bookDepth)
+        SERIALIZE_FIELD(bookHeight)
         SERIALIZE_FIELD(bookMargin)
         SERIALIZE_FIELD(sidePadding)
         SERIALIZE_FIELD(backPadding)
@@ -32,6 +37,7 @@ namespace Engine
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
         DESERIALIZE_VALUE(bookWidth)
         DESERIALIZE_VALUE(bookDepth)
+        DESERIALIZE_VALUE(bookHeight)
         DESERIALIZE_VALUE(bookMargin)
         DESERIALIZE_VALUE(sidePadding)
         DESERIALIZE_VALUE(backPadding)
@@ -46,8 +52,8 @@ namespace Engine
     }
 
     void BookManager::OnDestroy()
-    {
-
+    { 
+        UpdateManager::GetInstance()->UnregisterComponent(this);
     }
 
     void BookManager::Update(float dt)
@@ -85,18 +91,17 @@ namespace Engine
             glm::vec3 shelfCenter = shelf->GetOwner()->GetTransform()->GetPosition();
             glm::vec3 shelfSize = shelfCollider->GetBoundingBox();
 
-            float availableWidth = shelfSize.x - 2.0f * sidePadding;
+            float availableWidth = shelfSize.x;
             int countX = static_cast<int>((availableWidth + bookMargin) / (bookWidth + bookMargin));
+
+            float startX = shelfCenter.x - (availableWidth * 0.5f) + (bookWidth * 0.5f);
 
             for (int i = 0; i < countX; ++i)
             {
-                glm::vec3 pos = shelfCenter;
-
-                float startX = shelfCenter.x - (shelfSize.x * 0.5f) + sidePadding + (bookWidth * 0.5f);
+                glm::vec3 pos;
                 pos.x = startX + i * (bookWidth + bookMargin);
-
-                pos.z = shelfCenter.z + (shelfSize.z * 0.5f) - backPadding - (bookDepth * 0.5f);
-                pos.y = shelfCenter.y;
+                pos.z = shelfCenter.z;
+                pos.y = shelfCenter.y + (shelfSize.y * 0.5f) + (bookHeight * 0.5f);
 
                 bool occupied = false;
                 for (Entity* book : currentBooksBeingPut)
@@ -112,14 +117,20 @@ namespace Engine
                 if (!occupied)
                 {
                     unoccupiedPlaces.push_back(pos);
+
+                    glm::vec3 rotation = (rand() % 2 == 0) ? glm::vec3(0, -90, 0) : glm::vec3(0, 90, 0);
                 }
             }
         }
     }
 
+
+
     void BookManager::PutBookOnShelf(Collider* bookCollider)
     {
         if (!bookCollider || unoccupiedPlaces.empty())
+            return;
+        if (bookCollider->GetOwner()->GetName() != "SmallBook")
             return;
 
         Entity* bookEntity = bookCollider->GetOwner();
@@ -130,6 +141,11 @@ namespace Engine
 
         if (bookCollider->collisionMask == 0)
             return;
+
+        if (bookCollider->GetOwner()->GetComponent<Rigidbody>())
+        {
+            bookCollider->GetOwner()->RemoveComponent<Rigidbody>();
+        }
 
         size_t index = rand() % unoccupiedPlaces.size();
         glm::vec3 targetPos = unoccupiedPlaces[index];
@@ -154,6 +170,7 @@ namespace Engine
         ImGui::Text("Book Placement Settings:");
         ImGui::DragFloat("Book Width", &bookWidth, 0.01f, 0.01f, 1.0f);
         ImGui::DragFloat("Book Depth", &bookDepth, 0.005f, 0.005f, 0.5f);
+        ImGui::DragFloat("Book Height", &bookHeight, 0.01f, 0.01f, 1.0f);
         ImGui::DragFloat("Book Margin", &bookMargin, 0.005f, 0.0f, 0.2f);
         ImGui::DragFloat("Side Padding", &sidePadding, 0.005f, 0.0f, 0.2f);
         ImGui::DragFloat("Back Padding", &backPadding, 0.005f, 0.0f, 0.2f);

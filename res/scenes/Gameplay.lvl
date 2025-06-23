@@ -158,11 +158,7 @@
                 "{9a599d94-9815-4fd8-8a91-3f05e1687c36}\u0000",
                 "{4d569b82-1ba6-4941-83c2-f237ed06e37b}\u0000",
                 "{9e9199e1-99d7-4584-88a5-c1de2b2a3a65}\u0000",
-                "{e1668ce1-a181-4892-ba38-5264d47f4837}\u0000",
-                "{d86907d4-7819-4fcf-b1f8-89aeffb0f378}\u0000",
-                "{126f334f-9685-4b6e-b812-075108ba3fa4}\u0000",
-                "{6b1e85d9-7932-4135-a691-20831ba51804}\u0000",
-                "{6a2b0819-0370-4a4a-9ba0-45346977e5eb}\u0000"
+                "{e1668ce1-a181-4892-ba38-5264d47f4837}\u0000"
             ],
             "Parent": null
         },
@@ -4350,7 +4346,7 @@
             },
             "components": [
                 "{ecfda86e-90a9-46d5-ae03-f468fbe60ea3}\u0000",
-                "{04b525c1-798d-461e-a05a-a3e92b2ad0e1}\u0000"
+                "{ee2092b4-7df8-4f96-b1d0-d8c696a0fc34}\u0000"
             ]
         },
         {
@@ -4362,13 +4358,14 @@
             "CastShadow": true
         },
         {
-            "type": "SphereCollider",
-            "id": "{04b525c1-798d-461e-a05a-a3e92b2ad0e1}\u0000",
+            "type": "CapsuleCollider",
+            "id": "{ee2092b4-7df8-4f96-b1d0-d8c696a0fc34}\u0000",
             "owner": "{e1ffc2c5-dc14-4d27-b0ea-b73708d9e240}\u0000",
             "isTrigger": false,
             "isStatic": false,
-            "colliderType": 1,
-            "radius": 2.799999952316284
+            "colliderType": 2,
+            "Radius": 2.5999999046325684,
+            "Height": 0.10000000149011612
         },
         {
             "type": "Entity",
@@ -4379,9 +4376,9 @@
                 "id": "{d9ad6703-631a-4c3c-9af4-f4382ae0cae5}\u0000",
                 "owner": "{8aced6f4-1907-46b3-ab78-4ffcba078e42}\u0000",
                 "Position": {
-                    "x": 0.00006763637065887451,
-                    "y": -0.09474420547485352,
-                    "z": -0.049952298402786255
+                    "x": 0.00007668882608413696,
+                    "y": -0.0004248569894116372,
+                    "z": 0.04709774628281593
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -7487,8 +7484,8 @@
                 "id": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000",
                 "owner": "{3e75a22c-7fe6-4e8f-8e8c-2446b29a1c81}\u0000",
                 "Position": {
-                    "x": -7.408714294433594,
-                    "y": 4.688531875610352,
+                    "x": -7.404040813446045,
+                    "y": 4.7090744972229,
                     "z": 33.10603713989258
                 },
                 "EulerAngles": {
@@ -7512,16 +7509,14 @@
                     "{0b470104-e374-4c88-bb2b-417f81f5198c}\u0000",
                     "{e9d3d1fb-bc59-4a9f-8af3-b82c5057c1cd}\u0000",
                     "{4853b244-a287-46a2-9290-14aa573aa5c6}\u0000",
-                    "{afb40f4b-7d32-4db9-82e8-984e406236b3}\u0000",
-                    "{e2dab23b-5f34-4a94-a60c-6409d9bd5042}\u0000",
-                    "{108de750-5329-4cc2-b3ff-ae05671940db}\u0000"
+                    "{afb40f4b-7d32-4db9-82e8-984e406236b3}\u0000"
                 ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
                 "{5b67c6e0-ff25-4006-8e9d-7efd942ab55e}\u0000",
                 "{1681a201-0806-4f55-a3a3-5868bc0ba5e7}\u0000",
-                "{6a1b0cdf-30c2-44c8-8c9e-b3b657bf1dde}\u0000"
+                "{6369c7a0-5e41-4add-9dc3-86d56c4e7cd5}\u0000"
             ]
         },
         {
@@ -7540,23 +7535,22 @@
             "isStatic": true,
             "skipCollisionSibling": false,
             "collisionLayer": 4,
-            "collisionMask": 4294967271,
+            "collisionMask": 4294967056,
             "colliderType": 0,
-            "_width": 2.5,
-            "_height": 9.100000381469727,
-            "_depth": 5.5
+            "_width": 6.0,
+            "_height": 9.0,
+            "_depth": 9.800000190734863
         },
         {
-            "type": "Rigidbody",
-            "id": "{6a1b0cdf-30c2-44c8-8c9e-b3b657bf1dde}\u0000",
+            "type": "BookManager",
+            "id": "{6369c7a0-5e41-4add-9dc3-86d56c4e7cd5}\u0000",
             "owner": "{3e75a22c-7fe6-4e8f-8e8c-2446b29a1c81}\u0000",
-            "mass": 10.0,
-            "inverseMass": 0.10000000149011612,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.012000000104308128,
-            "frictionEnabled": true,
-            "restitution": 0.20600000023841858
+            "bookWidth": 0.4000000059604645,
+            "bookDepth": 0.699999988079071,
+            "bookHeight": 1.2000000476837158,
+            "bookMargin": 0.019999999552965164,
+            "sidePadding": 0.05000000074505806,
+            "backPadding": 0.029999999329447746
         },
         {
             "type": "Entity",
@@ -7567,9 +7561,9 @@
                 "id": "{46497939-8758-4a7b-88da-2832018e9225}\u0000",
                 "owner": "{6c666124-0e52-4387-840c-cd0e943e22db}\u0000",
                 "Position": {
-                    "x": 0.000003249181645514909,
-                    "y": -0.19608211517333984,
-                    "z": 0.0016932487487792969
+                    "x": 0.000003248990196880186,
+                    "y": -0.032029151916503906,
+                    "z": 0.0018939971923828125
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -7617,9 +7611,9 @@
                 "id": "{0b470104-e374-4c88-bb2b-417f81f5198c}\u0000",
                 "owner": "{696eb42a-f4bb-4750-a1b2-9d15469e11fc}\u0000",
                 "Position": {
-                    "x": 0.000002367199613217963,
-                    "y": -4.1641340255737305,
-                    "z": 0.0003662109375
+                    "x": 0.0000032500738598173484,
+                    "y": -4.000182151794434,
+                    "z": 0.0007643699645996094
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -7667,9 +7661,9 @@
                 "id": "{e9d3d1fb-bc59-4a9f-8af3-b82c5057c1cd}\u0000",
                 "owner": "{752bccc0-7879-4b99-a21c-3d6268c8f6b9}\u0000",
                 "Position": {
-                    "x": 0.000002366575245105196,
-                    "y": 1.7398653030395508,
-                    "z": 0.001010894775390625
+                    "x": 0.000003249726887588622,
+                    "y": 1.875074863433838,
+                    "z": 0.0011181831359863281
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -7717,9 +7711,9 @@
                 "id": "{4853b244-a287-46a2-9290-14aa573aa5c6}\u0000",
                 "owner": "{1e3e02ed-54b1-4247-b337-faf0d35ee709}\u0000",
                 "Position": {
-                    "x": 0.0000023663033061893657,
-                    "y": 3.6178765296936035,
-                    "z": 0.001293182373046875
+                    "x": 0.000003249447217967827,
+                    "y": 3.7544960975646973,
+                    "z": 0.0014081001281738281
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -7767,9 +7761,9 @@
                 "id": "{afb40f4b-7d32-4db9-82e8-984e406236b3}\u0000",
                 "owner": "{fe5f1e30-e5dd-4884-a926-7d5b393e21e4}\u0000",
                 "Position": {
-                    "x": 0.000002366714397794567,
-                    "y": -2.1612114906311035,
-                    "z": 0.0008716583251953125
+                    "x": 0.0000032497000574949197,
+                    "y": -2.0220696926116943,
+                    "z": 0.0011529922485351563
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -7807,106 +7801,6 @@
             "_width": 1.899999976158142,
             "_height": 0.4000000059604645,
             "_depth": 4.0
-        },
-        {
-            "type": "Entity",
-            "id": "{c6333636-ffbd-4015-80b0-5feb8e7bf2f4}\u0000",
-            "name": "New Entity",
-            "transform": {
-                "type": "Transform",
-                "id": "{e2dab23b-5f34-4a94-a60c-6409d9bd5042}\u0000",
-                "owner": "{c6333636-ffbd-4015-80b0-5feb8e7bf2f4}\u0000",
-                "Position": {
-                    "x": 0.000004578436346491799,
-                    "y": 0.6881637573242188,
-                    "z": -2.318291664123535
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000"
-            },
-            "components": [
-                "{de918a7d-b58a-427b-8ffe-26444570a2f3}\u0000"
-            ]
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{de918a7d-b58a-427b-8ffe-26444570a2f3}\u0000",
-            "owner": "{c6333636-ffbd-4015-80b0-5feb8e7bf2f4}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 8,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 2.0,
-            "_height": 9.0,
-            "_depth": 0.6499999761581421
-        },
-        {
-            "type": "Entity",
-            "id": "{a2dd6c2b-73cc-4a77-87c5-2561c6b95966}\u0000",
-            "name": "New Entity",
-            "transform": {
-                "type": "Transform",
-                "id": "{108de750-5329-4cc2-b3ff-ae05671940db}\u0000",
-                "owner": "{a2dd6c2b-73cc-4a77-87c5-2561c6b95966}\u0000",
-                "Position": {
-                    "x": 1.4449688023887575e-7,
-                    "y": 0.6881637573242188,
-                    "z": 2.33103084564209
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000"
-            },
-            "components": [
-                "{d74ec797-d58c-497d-a2b7-7980727d0094}\u0000"
-            ]
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{d74ec797-d58c-497d-a2b7-7980727d0094}\u0000",
-            "owner": "{a2dd6c2b-73cc-4a77-87c5-2561c6b95966}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 8,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 2.0,
-            "_height": 9.0,
-            "_depth": 0.6499999761581421
         },
         {
             "type": "Entity",
@@ -8347,9 +8241,9 @@
                 "id": "{1ab21694-1d8c-44be-acae-50a825ec666f}\u0000",
                 "owner": "{cb7b6c5e-1c57-42df-8255-ce96677b15bc}\u0000",
                 "Position": {
-                    "x": -14.12588119506836,
+                    "x": 0.5731961727142334,
                     "y": 5.300204277038574,
-                    "z": 33.27007293701172
+                    "z": -4.186694622039795
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -8373,7 +8267,8 @@
             "components": [
                 "{25d0d22b-8967-41e9-989f-d93d056e4906}\u0000",
                 "{b2640ab9-977d-4a9b-b369-46d5b95b17c4}\u0000",
-                "{24ba5fe2-9f7e-4356-a9f2-64b46ad9eef0}\u0000"
+                "{24ba5fe2-9f7e-4356-a9f2-64b46ad9eef0}\u0000",
+                "{eaa5948c-2853-47ed-a941-83d0f554b5d3}\u0000"
             ]
         },
         {
@@ -8392,7 +8287,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 16,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.699999988079071,
             "_height": 1.2000000476837158,
@@ -8411,6 +8306,12 @@
             "restitution": 0.10000000149011612
         },
         {
+            "type": "Thrash",
+            "id": "{eaa5948c-2853-47ed-a941-83d0f554b5d3}\u0000",
+            "owner": "{cb7b6c5e-1c57-42df-8255-ce96677b15bc}\u0000",
+            "size": 1
+        },
+        {
             "type": "Entity",
             "id": "{aff15d2b-9c15-4298-94dd-65322cde47e5}\u0000",
             "name": "SmallBook",
@@ -8419,9 +8320,9 @@
                 "id": "{4769e917-684d-4c8e-8347-7e6ea0ca75ed}\u0000",
                 "owner": "{aff15d2b-9c15-4298-94dd-65322cde47e5}\u0000",
                 "Position": {
-                    "x": -12.899653434753418,
+                    "x": 1.7994228601455688,
                     "y": 7.31101655960083,
-                    "z": 33.27007293701172
+                    "z": -4.186694622039795
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -8445,7 +8346,8 @@
             "components": [
                 "{c0f617cc-624e-4845-b69c-6212dacef00a}\u0000",
                 "{61f87a32-dfb9-4f86-ae3d-4fed6b25e402}\u0000",
-                "{5bc8960b-ede4-4bd1-9554-fde0535a9450}\u0000"
+                "{5bc8960b-ede4-4bd1-9554-fde0535a9450}\u0000",
+                "{c04c068f-e461-4573-9204-cf90a187674e}\u0000"
             ]
         },
         {
@@ -8464,7 +8366,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 16,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.699999988079071,
             "_height": 1.2000000476837158,
@@ -8483,6 +8385,12 @@
             "restitution": 0.10000000149011612
         },
         {
+            "type": "Thrash",
+            "id": "{c04c068f-e461-4573-9204-cf90a187674e}\u0000",
+            "owner": "{aff15d2b-9c15-4298-94dd-65322cde47e5}\u0000",
+            "size": 1
+        },
+        {
             "type": "Entity",
             "id": "{f0341b70-1fe8-4459-b715-2315fbbd9348}\u0000",
             "name": "SmallBook",
@@ -8491,9 +8399,9 @@
                 "id": "{b058ce79-18d7-4fa5-976d-97ce013d1410}\u0000",
                 "owner": "{f0341b70-1fe8-4459-b715-2315fbbd9348}\u0000",
                 "Position": {
-                    "x": -14.674625396728516,
+                    "x": 0.024451985955238342,
                     "y": 5.300204277038574,
-                    "z": 33.27007293701172
+                    "z": -4.186694622039795
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -8517,7 +8425,8 @@
             "components": [
                 "{919fc296-73a2-4b50-9270-4fc67096d6cf}\u0000",
                 "{60d0f921-4bf2-4d30-8782-6b6d2a16c8fc}\u0000",
-                "{6bd37f76-2f14-443a-9f1e-2fbe1c7d710c}\u0000"
+                "{6bd37f76-2f14-443a-9f1e-2fbe1c7d710c}\u0000",
+                "{15da519b-7580-4eae-be69-7e59436ef84e}\u0000"
             ]
         },
         {
@@ -8536,7 +8445,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 16,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.699999988079071,
             "_height": 1.2000000476837158,
@@ -8555,6 +8464,12 @@
             "restitution": 0.10000000149011612
         },
         {
+            "type": "Thrash",
+            "id": "{15da519b-7580-4eae-be69-7e59436ef84e}\u0000",
+            "owner": "{f0341b70-1fe8-4459-b715-2315fbbd9348}\u0000",
+            "size": 1
+        },
+        {
             "type": "Entity",
             "id": "{c98fde7e-c18d-4d4c-9b8f-e398a5f40615}\u0000",
             "name": "SmallBook",
@@ -8563,9 +8478,9 @@
                 "id": "{220eddff-2f49-4c32-bd7e-ea52defa40fa}\u0000",
                 "owner": "{c98fde7e-c18d-4d4c-9b8f-e398a5f40615}\u0000",
                 "Position": {
-                    "x": -13.555408477783203,
+                    "x": 1.1436678171157837,
                     "y": 5.300204277038574,
-                    "z": 33.27007293701172
+                    "z": -4.186694622039795
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -8589,7 +8504,8 @@
             "components": [
                 "{6c5dec35-4775-481b-b1d8-738bdcc68603}\u0000",
                 "{f101d420-f442-4e9a-b68a-02f08fd0441f}\u0000",
-                "{a7cd67df-b31a-4b07-8981-89c576975f02}\u0000"
+                "{a7cd67df-b31a-4b07-8981-89c576975f02}\u0000",
+                "{2ac4f2d4-0d9c-49ed-97f2-c88f5580ecfe}\u0000"
             ]
         },
         {
@@ -8608,7 +8524,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 16,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.699999988079071,
             "_height": 1.2000000476837158,
@@ -8627,6 +8543,12 @@
             "restitution": 0.10000000149011612
         },
         {
+            "type": "Thrash",
+            "id": "{2ac4f2d4-0d9c-49ed-97f2-c88f5580ecfe}\u0000",
+            "owner": "{c98fde7e-c18d-4d4c-9b8f-e398a5f40615}\u0000",
+            "size": 1
+        },
+        {
             "type": "Entity",
             "id": "{e25e1c3b-a140-43c3-90c8-a3f589276fae}\u0000",
             "name": "SmallBook",
@@ -8635,9 +8557,9 @@
                 "id": "{47994291-b034-41cd-a8dc-8696295a3b07}\u0000",
                 "owner": "{e25e1c3b-a140-43c3-90c8-a3f589276fae}\u0000",
                 "Position": {
-                    "x": -13.555408477783203,
+                    "x": 1.1436678171157837,
                     "y": 7.318380355834961,
-                    "z": 33.27007293701172
+                    "z": -4.186694622039795
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -8661,7 +8583,8 @@
             "components": [
                 "{dae51882-f852-482c-926b-b98bb017a6b6}\u0000",
                 "{18201d99-690e-4172-8d46-c584eccda31d}\u0000",
-                "{94bee23f-b2b2-4216-92f2-96ef56ddcd9b}\u0000"
+                "{94bee23f-b2b2-4216-92f2-96ef56ddcd9b}\u0000",
+                "{433ef396-a8aa-4242-87fc-1192193e0bce}\u0000"
             ]
         },
         {
@@ -8680,7 +8603,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 16,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.699999988079071,
             "_height": 1.2000000476837158,
@@ -8699,6 +8622,12 @@
             "restitution": 0.10000000149011612
         },
         {
+            "type": "Thrash",
+            "id": "{433ef396-a8aa-4242-87fc-1192193e0bce}\u0000",
+            "owner": "{e25e1c3b-a140-43c3-90c8-a3f589276fae}\u0000",
+            "size": 1
+        },
+        {
             "type": "Entity",
             "id": "{4076aed4-3c15-4a49-8248-4e0f3837b781}\u0000",
             "name": "SmallBook",
@@ -8707,9 +8636,9 @@
                 "id": "{6d672d27-5ba4-4825-ae1e-ddee0067cd3e}\u0000",
                 "owner": "{4076aed4-3c15-4a49-8248-4e0f3837b781}\u0000",
                 "Position": {
-                    "x": -13.555408477783203,
+                    "x": 1.1436678171157837,
                     "y": 7.318380355834961,
-                    "z": 33.27007293701172
+                    "z": -4.186694622039795
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -8733,7 +8662,8 @@
             "components": [
                 "{73f02ca7-fc8d-466a-8d27-ffff353229c9}\u0000",
                 "{a4564a66-9058-4914-b33a-a0bd5b113c0e}\u0000",
-                "{566f73d4-daff-4a85-bfdc-cb0da50f1f38}\u0000"
+                "{566f73d4-daff-4a85-bfdc-cb0da50f1f38}\u0000",
+                "{b2541204-70e8-468c-870a-811c99240b43}\u0000"
             ]
         },
         {
@@ -8752,7 +8682,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 16,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.699999988079071,
             "_height": 1.2000000476837158,
@@ -8771,6 +8701,12 @@
             "restitution": 0.10000000149011612
         },
         {
+            "type": "Thrash",
+            "id": "{b2541204-70e8-468c-870a-811c99240b43}\u0000",
+            "owner": "{4076aed4-3c15-4a49-8248-4e0f3837b781}\u0000",
+            "size": 1
+        },
+        {
             "type": "Entity",
             "id": "{3dca4665-eb34-4012-82cb-48aace7de126}\u0000",
             "name": "SmallBook",
@@ -8779,9 +8715,9 @@
                 "id": "{c618e643-5268-4632-a253-64a90bea8afe}\u0000",
                 "owner": "{3dca4665-eb34-4012-82cb-48aace7de126}\u0000",
                 "Position": {
-                    "x": -7.320743083953857,
+                    "x": 7.378334999084473,
                     "y": 9.156721115112305,
-                    "z": 33.27007293701172
+                    "z": -4.186694622039795
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -8805,7 +8741,8 @@
             "components": [
                 "{f153bf72-5e0c-48c5-826e-f3621781471e}\u0000",
                 "{4f42fd63-9383-4a37-a582-0487e69af9d5}\u0000",
-                "{6a18a922-b120-4a1c-924d-42a3a6f34fb2}\u0000"
+                "{6a18a922-b120-4a1c-924d-42a3a6f34fb2}\u0000",
+                "{a3aeca9b-e86b-4aa4-ab81-0ade83aad9fa}\u0000"
             ]
         },
         {
@@ -8824,7 +8761,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 16,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.699999988079071,
             "_height": 1.2000000476837158,
@@ -8843,6 +8780,12 @@
             "restitution": 0.10000000149011612
         },
         {
+            "type": "Thrash",
+            "id": "{a3aeca9b-e86b-4aa4-ab81-0ade83aad9fa}\u0000",
+            "owner": "{3dca4665-eb34-4012-82cb-48aace7de126}\u0000",
+            "size": 1
+        },
+        {
             "type": "Entity",
             "id": "{b29971f7-a649-43f6-87c8-68645889b02c}\u0000",
             "name": "SmallBook",
@@ -8851,9 +8794,9 @@
                 "id": "{a499b91f-bb8c-4b8d-bce0-8b70107fd125}\u0000",
                 "owner": "{b29971f7-a649-43f6-87c8-68645889b02c}\u0000",
                 "Position": {
-                    "x": -12.899653434753418,
+                    "x": 1.7994228601455688,
                     "y": 3.368169069290161,
-                    "z": 33.27007293701172
+                    "z": -4.186694622039795
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -8877,7 +8820,8 @@
             "components": [
                 "{1b231f1a-c0fb-4b7c-ada5-5c9ae1b81944}\u0000",
                 "{b8cb1c74-ade0-4bb2-ace8-62edf43ee942}\u0000",
-                "{1f138efb-fd34-4ea2-9d05-35eb128739d8}\u0000"
+                "{1f138efb-fd34-4ea2-9d05-35eb128739d8}\u0000",
+                "{49700fd4-3825-410c-b5ba-6706b773e9c2}\u0000"
             ]
         },
         {
@@ -8896,7 +8840,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 16,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.699999988079071,
             "_height": 1.2000000476837158,
@@ -8915,6 +8859,12 @@
             "restitution": 0.10000000149011612
         },
         {
+            "type": "Thrash",
+            "id": "{49700fd4-3825-410c-b5ba-6706b773e9c2}\u0000",
+            "owner": "{b29971f7-a649-43f6-87c8-68645889b02c}\u0000",
+            "size": 1
+        },
+        {
             "type": "Entity",
             "id": "{a22e0c23-b06b-4091-a050-aea1ecc7853d}\u0000",
             "name": "SmallBook",
@@ -8923,9 +8873,9 @@
                 "id": "{9a599d94-9815-4fd8-8a91-3f05e1687c36}\u0000",
                 "owner": "{a22e0c23-b06b-4091-a050-aea1ecc7853d}\u0000",
                 "Position": {
-                    "x": -12.295575141906738,
+                    "x": 2.403501033782959,
                     "y": 3.368169069290161,
-                    "z": 33.27007293701172
+                    "z": -4.186694622039795
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -8949,7 +8899,8 @@
             "components": [
                 "{e46908b8-3d2f-4359-87ff-d7bcce2f8125}\u0000",
                 "{c8e217b7-264c-40b9-85f9-749e5ea33e30}\u0000",
-                "{596c5bdf-cfbf-4f25-b016-53494d9225e6}\u0000"
+                "{596c5bdf-cfbf-4f25-b016-53494d9225e6}\u0000",
+                "{ee68241b-6066-466a-a314-67c9963cd45d}\u0000"
             ]
         },
         {
@@ -8968,7 +8919,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 16,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.699999988079071,
             "_height": 1.2000000476837158,
@@ -8987,6 +8938,12 @@
             "restitution": 0.10000000149011612
         },
         {
+            "type": "Thrash",
+            "id": "{ee68241b-6066-466a-a314-67c9963cd45d}\u0000",
+            "owner": "{a22e0c23-b06b-4091-a050-aea1ecc7853d}\u0000",
+            "size": 1
+        },
+        {
             "type": "Entity",
             "id": "{008d6513-15dc-4e65-a0ea-fc51542ffd60}\u0000",
             "name": "SmallBook",
@@ -8995,9 +8952,9 @@
                 "id": "{4d569b82-1ba6-4941-83c2-f237ed06e37b}\u0000",
                 "owner": "{008d6513-15dc-4e65-a0ea-fc51542ffd60}\u0000",
                 "Position": {
-                    "x": -12.295575141906738,
+                    "x": 2.403501033782959,
                     "y": 3.368169069290161,
-                    "z": 33.27007293701172
+                    "z": -4.186694622039795
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -9021,7 +8978,8 @@
             "components": [
                 "{afa16158-580d-496f-9980-6ab7c6a19eac}\u0000",
                 "{9494ba4f-d300-481d-ad6a-9f3deec3057f}\u0000",
-                "{e1a1c3b0-9daf-477e-99c9-083989a1eb95}\u0000"
+                "{e1a1c3b0-9daf-477e-99c9-083989a1eb95}\u0000",
+                "{fee24146-7791-4a4c-a212-82eabfa85d0d}\u0000"
             ]
         },
         {
@@ -9040,7 +8998,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 16,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.699999988079071,
             "_height": 1.2000000476837158,
@@ -9059,6 +9017,12 @@
             "restitution": 0.10000000149011612
         },
         {
+            "type": "Thrash",
+            "id": "{fee24146-7791-4a4c-a212-82eabfa85d0d}\u0000",
+            "owner": "{008d6513-15dc-4e65-a0ea-fc51542ffd60}\u0000",
+            "size": 1
+        },
+        {
             "type": "Entity",
             "id": "{0dd82e8b-4b7f-4fa7-9823-dfb12fdc4889}\u0000",
             "name": "SmallBook",
@@ -9067,9 +9031,9 @@
                 "id": "{9e9199e1-99d7-4584-88a5-c1de2b2a3a65}\u0000",
                 "owner": "{0dd82e8b-4b7f-4fa7-9823-dfb12fdc4889}\u0000",
                 "Position": {
-                    "x": -8.180933952331543,
+                    "x": 6.518143653869629,
                     "y": 3.368169069290161,
-                    "z": 33.27007293701172
+                    "z": -4.186694622039795
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -9093,7 +9057,8 @@
             "components": [
                 "{a15aae98-fcc5-4a4f-bca0-e67fc9841983}\u0000",
                 "{cdf3052e-1ad9-402c-a9f7-61a7ae565e96}\u0000",
-                "{5b4ec6a8-c3e4-4a7e-b8b0-4801be470993}\u0000"
+                "{5b4ec6a8-c3e4-4a7e-b8b0-4801be470993}\u0000",
+                "{015752c8-64d8-459b-8d94-3a33352aa9ff}\u0000"
             ]
         },
         {
@@ -9112,7 +9077,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 16,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.699999988079071,
             "_height": 1.2000000476837158,
@@ -9131,6 +9096,12 @@
             "restitution": 0.10000000149011612
         },
         {
+            "type": "Thrash",
+            "id": "{015752c8-64d8-459b-8d94-3a33352aa9ff}\u0000",
+            "owner": "{0dd82e8b-4b7f-4fa7-9823-dfb12fdc4889}\u0000",
+            "size": 1
+        },
+        {
             "type": "Entity",
             "id": "{2112e62c-23a3-4674-96a3-562a4de65af0}\u0000",
             "name": "SmallBook",
@@ -9139,9 +9110,9 @@
                 "id": "{e1668ce1-a181-4892-ba38-5264d47f4837}\u0000",
                 "owner": "{2112e62c-23a3-4674-96a3-562a4de65af0}\u0000",
                 "Position": {
-                    "x": -7.603254795074463,
+                    "x": 7.095822334289551,
                     "y": 3.368169069290161,
-                    "z": 33.27007293701172
+                    "z": -4.186694622039795
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -9165,7 +9136,8 @@
             "components": [
                 "{0fae312a-4715-4760-8b8f-e1653fec4af4}\u0000",
                 "{0d1e26f3-afb4-49c4-bf27-bdc56114fc04}\u0000",
-                "{bac064ed-b7b0-473a-a2a8-a413f4590938}\u0000"
+                "{bac064ed-b7b0-473a-a2a8-a413f4590938}\u0000",
+                "{b34fb1d2-cd31-4f98-aab5-4784f5237b9a}\u0000"
             ]
         },
         {
@@ -9184,7 +9156,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 16,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.699999988079071,
             "_height": 1.2000000476837158,
@@ -9203,292 +9175,10 @@
             "restitution": 0.10000000149011612
         },
         {
-            "type": "Entity",
-            "id": "{96950c33-b41d-4e83-9708-3d7b00a05fd5}\u0000",
-            "name": "SmallBook",
-            "transform": {
-                "type": "Transform",
-                "id": "{d86907d4-7819-4fcf-b1f8-89aeffb0f378}\u0000",
-                "owner": "{96950c33-b41d-4e83-9708-3d7b00a05fd5}\u0000",
-                "Position": {
-                    "x": -7.01893424987793,
-                    "y": 3.368169069290161,
-                    "z": 33.27007293701172
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -90.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.699999988079071,
-                    "y": 0.699999988079071,
-                    "z": 0.699999988079071
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": -0.7071067690849304,
-                    "z": 0.0,
-                    "w": 0.7071067690849304
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{acf536a1-d761-4bfd-a370-53909ec49089}\u0000",
-                "{1491b0a0-8ab7-4067-befa-99d44c18c69a}\u0000",
-                "{a36d53ea-1f9c-4200-8a4b-64d7b2d6883f}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{acf536a1-d761-4bfd-a370-53909ec49089}\u0000",
-            "owner": "{96950c33-b41d-4e83-9708-3d7b00a05fd5}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{1491b0a0-8ab7-4067-befa-99d44c18c69a}\u0000",
-            "owner": "{96950c33-b41d-4e83-9708-3d7b00a05fd5}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 16,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 0.699999988079071,
-            "_height": 1.2000000476837158,
-            "_depth": 0.4000000059604645
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{a36d53ea-1f9c-4200-8a4b-64d7b2d6883f}\u0000",
-            "owner": "{96950c33-b41d-4e83-9708-3d7b00a05fd5}\u0000",
-            "mass": 0.10000000149011612,
-            "inverseMass": 10.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Entity",
-            "id": "{94612325-9523-42db-a5ac-3a2eb6343dd2}\u0000",
-            "name": "SmallBook",
-            "transform": {
-                "type": "Transform",
-                "id": "{126f334f-9685-4b6e-b812-075108ba3fa4}\u0000",
-                "owner": "{94612325-9523-42db-a5ac-3a2eb6343dd2}\u0000",
-                "Position": {
-                    "x": -6.409078598022461,
-                    "y": 3.368169069290161,
-                    "z": 33.27007293701172
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -90.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.699999988079071,
-                    "y": 0.699999988079071,
-                    "z": 0.699999988079071
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": -0.7071067690849304,
-                    "z": 0.0,
-                    "w": 0.7071067690849304
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{6a2bab7f-1bf5-47f9-bbfa-30504b7e3504}\u0000",
-                "{168708a9-9f91-4ead-aa05-77d65d084d3b}\u0000",
-                "{1079981b-9fff-4022-ab3e-d11d906ac6a3}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{6a2bab7f-1bf5-47f9-bbfa-30504b7e3504}\u0000",
-            "owner": "{94612325-9523-42db-a5ac-3a2eb6343dd2}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{168708a9-9f91-4ead-aa05-77d65d084d3b}\u0000",
-            "owner": "{94612325-9523-42db-a5ac-3a2eb6343dd2}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 16,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 0.699999988079071,
-            "_height": 1.2000000476837158,
-            "_depth": 0.4000000059604645
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{1079981b-9fff-4022-ab3e-d11d906ac6a3}\u0000",
-            "owner": "{94612325-9523-42db-a5ac-3a2eb6343dd2}\u0000",
-            "mass": 0.10000000149011612,
-            "inverseMass": 10.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Entity",
-            "id": "{d428f6b1-eaf3-41b9-9420-c0d005bb6f7f}\u0000",
-            "name": "SmallBook",
-            "transform": {
-                "type": "Transform",
-                "id": "{6b1e85d9-7932-4135-a691-20831ba51804}\u0000",
-                "owner": "{d428f6b1-eaf3-41b9-9420-c0d005bb6f7f}\u0000",
-                "Position": {
-                    "x": -6.585467338562012,
-                    "y": 5.319713115692139,
-                    "z": 33.27007293701172
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -90.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.699999988079071,
-                    "y": 0.699999988079071,
-                    "z": 0.699999988079071
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": -0.7071067690849304,
-                    "z": 0.0,
-                    "w": 0.7071067690849304
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{8e241147-6f58-4cb7-93b1-bdd1dd6c32ff}\u0000",
-                "{eb24c95a-3cbb-42fb-8425-b3569035f711}\u0000",
-                "{3a88bbf0-cdf2-4aa0-b28f-2bf2dae38562}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{8e241147-6f58-4cb7-93b1-bdd1dd6c32ff}\u0000",
-            "owner": "{d428f6b1-eaf3-41b9-9420-c0d005bb6f7f}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{eb24c95a-3cbb-42fb-8425-b3569035f711}\u0000",
-            "owner": "{d428f6b1-eaf3-41b9-9420-c0d005bb6f7f}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 16,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 0.699999988079071,
-            "_height": 1.2000000476837158,
-            "_depth": 0.4000000059604645
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{3a88bbf0-cdf2-4aa0-b28f-2bf2dae38562}\u0000",
-            "owner": "{d428f6b1-eaf3-41b9-9420-c0d005bb6f7f}\u0000",
-            "mass": 0.10000000149011612,
-            "inverseMass": 10.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Entity",
-            "id": "{403c6cb3-6a7f-4491-8a53-c27474ea56aa}\u0000",
-            "name": "SmallBook",
-            "transform": {
-                "type": "Transform",
-                "id": "{6a2b0819-0370-4a4a-9ba0-45346977e5eb}\u0000",
-                "owner": "{403c6cb3-6a7f-4491-8a53-c27474ea56aa}\u0000",
-                "Position": {
-                    "x": -8.661666870117188,
-                    "y": 9.156721115112305,
-                    "z": 33.27007293701172
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -90.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.699999988079071,
-                    "y": 0.699999988079071,
-                    "z": 0.699999988079071
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": -0.7071067690849304,
-                    "z": 0.0,
-                    "w": 0.7071067690849304
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{aa8f7ebe-5732-4aeb-9a88-c9b79a9ac937}\u0000",
-                "{1caa34a0-12fb-4d59-9d34-1fdb0597d541}\u0000",
-                "{d595f686-c565-4da9-9c07-99114d811d1b}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{aa8f7ebe-5732-4aeb-9a88-c9b79a9ac937}\u0000",
-            "owner": "{403c6cb3-6a7f-4491-8a53-c27474ea56aa}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Meble/Ksiazka.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{1caa34a0-12fb-4d59-9d34-1fdb0597d541}\u0000",
-            "owner": "{403c6cb3-6a7f-4491-8a53-c27474ea56aa}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 16,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 0.699999988079071,
-            "_height": 1.2000000476837158,
-            "_depth": 0.4000000059604645
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{d595f686-c565-4da9-9c07-99114d811d1b}\u0000",
-            "owner": "{403c6cb3-6a7f-4491-8a53-c27474ea56aa}\u0000",
-            "mass": 0.10000000149011612,
-            "inverseMass": 10.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
+            "type": "Thrash",
+            "id": "{b34fb1d2-cd31-4f98-aab5-4784f5237b9a}\u0000",
+            "owner": "{2112e62c-23a3-4674-96a3-562a4de65af0}\u0000",
+            "size": 1
         }
     ]
 }

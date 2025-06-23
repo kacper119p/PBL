@@ -11,7 +11,7 @@
 #include "Serialization/SerializationUtility.h"
 #include "glm/glm.hpp"
 #include "Engine\Components\Interfaces\IUpdateable.h"
-
+#include "../Updateable.h"
 #if EDITOR
 #include "imgui.h"
 #endif
@@ -27,11 +27,12 @@ namespace Engine
         float duration = 1.0f;
     };
 
-    class BookManager : public Component, public IUpdateable
+    class BookManager : public Updateable
     {
     private:
         float bookWidth = 0.2f;
         float bookDepth = 0.05f;
+        float bookHeight = 0.3f;
         float bookMargin = 0.02f;
         float sidePadding = 0.05f;
         float backPadding = 0.03f;
