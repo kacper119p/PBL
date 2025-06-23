@@ -6,6 +6,6 @@ struct particle {
 };
 
 const float MAX_LIFETIME = 2.0;
-const float MAX_VELOCITY = 25.0;
-const float DRAG = 5.0;
+const float MAX_VELOCITY = 50.0;
+const float DRAG = 10.0;
 const float START_SCALE = 0.5;
