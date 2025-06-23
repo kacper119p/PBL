@@ -33,6 +33,10 @@ namespace Engine
         {
             UpdateManager::GetInstance()->RegisterComponent(this);
         }
+        ~MovementComponent() override
+        {
+            UpdateManager::GetInstance()->UnregisterComponent(this);
+        }
 
         void Start() override
         {
