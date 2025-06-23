@@ -34,7 +34,7 @@ void main()
     vec3 billboardRight = normalize(cross(cameraForward, velocity));
     vec3 billboardUp = velocity;
 
-    vec3 billboardOffset = ((inputTexCoord.x) * billboardRight + (inputTexCoord.y - 0.5) * billboardUp * 8.0) * particleData.scale;
+    vec3 billboardOffset = ((inputTexCoord.x) * billboardRight + (inputTexCoord.y - 0.5) * billboardUp * 4.0) * particleData.scale;
 
     vec3 finalPos = worldPosition + billboardOffset;
 
