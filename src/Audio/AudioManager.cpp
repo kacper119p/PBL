@@ -1,6 +1,7 @@
 #include "AudioManager.h"
 #include "spdlog/spdlog.h"
 #include "imgui.h"
+#include <random>
 
 Engine::AudioManager* Engine::AudioManager::Instance = nullptr;
 
@@ -77,6 +78,26 @@ void Engine::AudioManager::DestroyInstance()
         delete Instance;
         Instance = nullptr;
     }
+}
+
+void Engine::AudioManager::SetPitch(std::shared_ptr<ma_sound> Sound, float Pitch)
+{
+    if (Sound)
+    {
+        ma_sound_set_pitch(Sound.get(), Pitch);
+    }
+}
+
+void Engine::AudioManager::PlayAudioWithRandomPitch(std::shared_ptr<ma_sound> Sound, float Min, float Max)
+{
+    static thread_local std::mt19937 gen(
+            std::random_device{}() ^ static_cast<unsigned>(std::chrono::steady_clock::now().time_since_epoch().
+                count()));
+    std::uniform_real_distribution<float> dist(Min, Max);
+    float randomPitch = dist(gen);
+
+    SetPitch(Sound, randomPitch);
+    PlayAudio(Sound);
 }
 
 bool Engine::AudioManager::LoadSound(const std::string& Filename, ma_sound& Sound)

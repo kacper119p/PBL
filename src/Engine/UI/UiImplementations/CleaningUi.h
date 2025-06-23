@@ -1,4 +1,6 @@
 #pragma once
+#include <memory>
+#include "Audio/AudioManager.h"
 #include "Engine/UI/Image.h"
 #include "Engine/UI/Text.h"
 #include "Engine/UI/Ui.h"
@@ -19,6 +21,11 @@ namespace Engine::Ui
         bool HideKeyPressedLastFrame = false;
         bool Hidden = true;
         float HiddenTime = 0.0f;
+
+        std::shared_ptr<ma_sound> ListSound = AudioManager::GetInstance().CreateSoundInstance("lista");
+        std::shared_ptr<ma_sound> TaskSound = AudioManager::GetInstance().CreateSoundInstance("task");
+        bool TrashTaskCompleted = false;
+        bool FloorTaskCompleted = false;
 
     public:
         CleaningUi();

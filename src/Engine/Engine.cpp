@@ -108,7 +108,7 @@ namespace Engine
             RigidbodyUpdateManager::GetInstance()->Update(deltaTime);
             CollisionUpdateManager::GetInstance()->Update(deltaTime);
             if (!BackgroundAudioPlayer->IsPlaying())
-                BackgroundAudioPlayer->PlayLooping("music", 0.5f);
+                BackgroundAudioPlayer->PlayLooping("music", 0.02f);
 #endif
             int displayW, displayH;
             glfwMakeContextCurrent(Window);
@@ -340,8 +340,8 @@ namespace Engine
     void Engine::ImGuiRender()
     {
 #if EDITOR
-        //LightsGui::Draw();
-        //EditorGUI.Render(Frame, CurrentScene);
+    //LightsGui::Draw();
+    //EditorGUI.Render(Frame, CurrentScene);
 #endif
     }
 

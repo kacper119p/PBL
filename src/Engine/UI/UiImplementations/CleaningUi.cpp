@@ -2,6 +2,7 @@
 
 #include <format>
 
+#include "Audio/AudioManager.h"
 #include "Engine/Components/BloodSystem/BloodManager.h"
 #include "Engine/Components/Game/ThrashManager.h"
 #include "Engine/Input/InputManager.h"
@@ -33,6 +34,11 @@ namespace Engine::Ui
         FloorText->GetRect().SetSizePixels(glm::vec2(480, 100));
         FloorText->SetFont("Lato");
         FloorText->SetText("Clear floor xx%");
+
+        AudioManager::GetInstance().ConfigureSoundAttenuation(ListSound, 1.0f, 100.0f, 0.0f);
+        AudioManager::GetInstance().ConfigureSoundAttenuation(TaskSound, 1.0f, 100.0f, 0.0f);
+        AudioManager::GetInstance().SetVolume(ListSound, 0.5f);
+        AudioManager::GetInstance().SetVolume(TaskSound, 0.5f);
     }
 
     void CleaningUi::Update(float DeltaTime)
@@ -43,6 +49,8 @@ namespace Engine::Ui
         if (hideKeyPressed && !HideKeyPressedLastFrame)
         {
             Hidden = !Hidden;
+            AudioManager::GetInstance().StopSound(ListSound);
+            AudioManager::GetInstance().PlayAudio(ListSound);
         }
 
         HideKeyPressedLastFrame = hideKeyPressed;
@@ -54,6 +62,8 @@ namespace Engine::Ui
         const float t = Math::EaseInOutBack(HiddenTime);
         TaskListBackground->GetRect().SetPositionPixels(a + t * (b - a));
 
+        bool taskCompleted = false;
+
         if (const BloodManager* bloodManager = BloodManager::GetCurrent())
         {
             const float bloodFill = bloodManager->GetBloodFill();
@@ -61,7 +71,15 @@ namespace Engine::Ui
             {
                 ReferenceBloodFill = bloodFill;
             }
-            FloorText->SetText(std::format("Clear floor {:.2f}%", (1.0f - bloodFill / ReferenceBloodFill) * 100.0f));
+
+            const float cleanedPercent = (1.0f - bloodFill / ReferenceBloodFill) * 100.0f;
+            FloorText->SetText(std::format("Clear floor {:.2f}%", cleanedPercent));
+
+            if (cleanedPercent >= 90.0f && !FloorTaskCompleted)
+            {
+                AudioManager::GetInstance().PlayAudio(TaskSound);
+                FloorTaskCompleted = true;
+            }
         }
 
         if (ThrashManager* trashManager = ThrashManager::GetInstance())
@@ -71,7 +89,14 @@ namespace Engine::Ui
             {
                 ReferenceTrashCount = trashCount;
             }
+
             TrashText->SetText(std::format("Clear trash {:02}/{:02}", trashCount, ReferenceTrashCount));
+
+            if (trashCount >= ReferenceTrashCount && !TrashTaskCompleted)
+            {
+                AudioManager::GetInstance().PlayAudio(TaskSound);
+                TrashTaskCompleted = true;
+            }
         }
     }
 }

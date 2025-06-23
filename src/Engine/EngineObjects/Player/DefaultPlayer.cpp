@@ -1,5 +1,6 @@
 #include "DefaultPlayer.h"
 #include <vector>
+#include "Audio/AudioManager.h"
 #include "Engine/Components/BloodSystem/BloodEraser.h"
 #include "Engine/Components/Game/PlayerAnimationManager.h"
 #include "Engine/Components/Game/ThrashManager.h"
@@ -13,6 +14,8 @@
 
 namespace Engine
 {
+    DefaultPlayer* DefaultPlayer::Instance = nullptr;
+
     void DefaultPlayer::Start()
     {
 #if !EDITOR
@@ -70,6 +73,9 @@ namespace Engine
             }
 
             playerAnimationManager->StopAllAnimations();
+
+            toolChangeSound = AudioManager::GetInstance().CreateSoundInstance("zmiana sprzetu");
+            Instance = this;
         }
         else
         {
@@ -81,6 +87,7 @@ namespace Engine
     void DefaultPlayer::Update(const float DeltaTime)
     {
 #if !EDITOR
+        AudioManager::GetInstance().SetSoundPosition(toolChangeSound, GetTransform()->GetPosition());
         InputManager& input = InputManager::GetInstance();
         if (input.IsKeyPressed(GLFW_KEY_E) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_BUTTON_X))
         {
@@ -98,6 +105,7 @@ namespace Engine
                     stripper = PrefabLoader::LoadPrefab(StripperPath, this->GetScene(), this->GetTransform());
                     this->GetTransform()->AddChild(stripper->GetTransform());
                     hasStripper = true;
+                    AudioManager::GetInstance().PlayAudio(toolChangeSound);
                 }
                 hasBroom = false;
                 hasVacuum = false;
@@ -128,6 +136,10 @@ namespace Engine
                     vacuum->AddComponent<Engine::Vacuum>();
                     hasVacuum = true;
                     PlayerAnimationManager::GetInstance()->SetVacuumVfx(vacuumVfx->GetComponent<VacuumVfx>());
+                    if (!isFirstUpdate)
+                    {
+                        AudioManager::GetInstance().PlayAudio(toolChangeSound);
+                    }
                 }
                 hasBroom = false;
                 hasStripper = false;
@@ -150,6 +162,7 @@ namespace Engine
                     broom = PrefabLoader::LoadPrefab(BroomPath, this->GetScene(), this->GetTransform());
                     this->GetTransform()->AddChild(broom->GetTransform());
                     hasBroom = true;
+                    AudioManager::GetInstance().PlayAudio(toolChangeSound);
                 }
                 hasVacuum = false;
                 hasStripper = false;
@@ -173,8 +186,11 @@ namespace Engine
                 spdlog::warn("DefaultPlayer: Unknown tool selected.");
                 break;
         }
+        if (isFirstUpdate)
+            isFirstUpdate = false;
 #endif
     }
+
     void DefaultPlayer::SetTool(Tool tool) { this->currentTool = tool; }
 
     void DefaultPlayer::ToolSwapper(Collider* collider)

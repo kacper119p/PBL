@@ -1,7 +1,8 @@
-#include "MovementComponent.h"
 #include "spdlog/spdlog.h"
 #include "Engine/Components/Physics/RigidBody.h"
 #include "Engine/Components/Game/PlayerAnimationManager.h"
+#include "Engine/EngineObjects/Player/DefaultPlayer.h"
+
 namespace Engine
 {
 
@@ -14,6 +15,10 @@ namespace Engine
             spdlog::error("MovementComponent: Transform is null!");
             return;
         }
+
+        AudioManager::GetInstance().PlayAudio(DrivingSound);
+        AudioManager::GetInstance().SetSoundPosition(DrivingSound, GetOwner()->GetTransform()->GetPosition());
+        AudioManager::GetInstance().SetSoundPosition(BloodCleaningSound, GetOwner()->GetTransform()->GetPosition());
 
         glm::vec3 position = transform->GetPosition();
 
@@ -50,10 +55,14 @@ namespace Engine
             isRightBackward = true;
         }
 
+        if (DefaultPlayer::GetInstance().GetCurrentTool() != Tool::Broom)
+            AudioManager::GetInstance().PauseSound(BloodCleaningSound);
 
         if (isLeftForward && isRightForward)
         {
-            rigidbody->AddForce(forward * Speed*1.25f, ForceMode::Force);
+            if (DefaultPlayer::GetInstance().GetCurrentTool() == Tool::Broom)
+                AudioManager::GetInstance().PlayAudio(BloodCleaningSound);
+            rigidbody->AddForce(forward * Speed * 1.25f, ForceMode::Force);
             if (playerAnimationManager)
             {
                 playerAnimationManager->TrackLeftForward();
@@ -69,10 +78,12 @@ namespace Engine
                     RightHandChangeTime = glfwGetTime();
                 }
             }
-            
+            AudioManager::GetInstance().SetPitch(DrivingSound, 1.2f);
         }
         else if (isLeftBackward && isRightBackward)
         {
+            if (DefaultPlayer::GetInstance().GetCurrentTool() == Tool::Broom)
+                AudioManager::GetInstance().PlayAudio(BloodCleaningSound);
             rigidbody->AddForce(-forward * Speed, ForceMode::Force);
             if (playerAnimationManager)
             {
@@ -89,10 +100,13 @@ namespace Engine
                     RightHandChangeTime = glfwGetTime();
                 }
             }
+            AudioManager::GetInstance().SetPitch(DrivingSound, 1.0f);
         }
         else if ((isLeftForward && isRightBackward) || (isLeftBackward && isRightForward))
         {
-            rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? -1.0f : 1.0f)*BothRotationSpeed, 0), ForceMode::Force);
+            if (DefaultPlayer::GetInstance().GetCurrentTool() == Tool::Broom)
+                AudioManager::GetInstance().PlayAudio(BloodCleaningSound);
+            rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? -1.0f : 1.0f) * BothRotationSpeed, 0), ForceMode::Force);
             if (isLeftForward)
             {
                 if (playerAnimationManager)
@@ -129,11 +143,13 @@ namespace Engine
                     }
                 }
             }
-            
+            AudioManager::GetInstance().SetPitch(DrivingSound, 1.2f);
         }
-        else if ((isLeftBackward || isRightBackward)&&!(isLeftForward||isRightForward))
+        else if ((isLeftBackward || isRightBackward) && !(isLeftForward || isRightForward))
         {
-            rigidbody->AddTorque(glm::vec3(0, (isLeftBackward ? 1.0f : -1.0f)*RotationSpeed, 0), ForceMode::Force);
+            if (DefaultPlayer::GetInstance().GetCurrentTool() == Tool::Broom)
+                AudioManager::GetInstance().PlayAudio(BloodCleaningSound);
+            rigidbody->AddTorque(glm::vec3(0, (isLeftBackward ? 1.0f : -1.0f) * RotationSpeed, 0), ForceMode::Force);
             rigidbody->AddForce(-forward * Speed, ForceMode::Force);
             if (playerAnimationManager)
             {
@@ -168,11 +184,13 @@ namespace Engine
                     }
                 }
             }
-
+            AudioManager::GetInstance().SetPitch(DrivingSound, 1.0f);
         }
         else if ((isLeftForward || isRightForward) && !(isLeftBackward || isRightBackward))
         {
-            rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? -1.0f : 1.0f)*RotationSpeed, 0), ForceMode::Force);
+            if (DefaultPlayer::GetInstance().GetCurrentTool() == Tool::Broom)
+                AudioManager::GetInstance().PlayAudio(BloodCleaningSound);
+            rigidbody->AddTorque(glm::vec3(0, (isLeftForward ? -1.0f : 1.0f) * RotationSpeed, 0), ForceMode::Force);
             rigidbody->AddForce(forward * Speed, ForceMode::Force);
             if (playerAnimationManager)
             {
@@ -207,9 +225,12 @@ namespace Engine
                     }
                 }
             }
+            AudioManager::GetInstance().SetPitch(DrivingSound, 1.2f);
         }
         else
         {
+            if (DefaultPlayer::GetInstance().GetCurrentTool() == Tool::Broom)
+                AudioManager::GetInstance().PauseSound(BloodCleaningSound);
             if (playerAnimationManager)
             {
                 playerAnimationManager->StopAllAnimations();
@@ -219,11 +240,12 @@ namespace Engine
                     LeftHandChangeTime = glfwGetTime();
                 }
                 if (playerAnimationManager->RightHandPosition != 1 && CanChangeRightHand())
-                    {
-                        playerAnimationManager->ChangeRightHandPosition(1);
-                        RightHandChangeTime = glfwGetTime();
-                    }
+                {
+                    playerAnimationManager->ChangeRightHandPosition(1);
+                    RightHandChangeTime = glfwGetTime();
+                }
             }
+            AudioManager::GetInstance().SetPitch(DrivingSound, 0.8f);
         }
 
         if (!transform)
@@ -237,11 +259,12 @@ namespace Engine
     }
 
     bool MovementComponent::CanChangeLeftHand()
-    {   
-        return glfwGetTime() - LeftHandChangeTime > 0.2f; }
+    {
+        return glfwGetTime() - LeftHandChangeTime > 0.2f;
+    }
 
-    bool MovementComponent::CanChangeRightHand() 
-    { 
+    bool MovementComponent::CanChangeRightHand()
+    {
         return glfwGetTime() - RightHandChangeTime > 0.2f;
     }
 
