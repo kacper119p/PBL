@@ -33,19 +33,19 @@ namespace Engine
             movementComponent = this->AddComponent<Engine::MovementComponent>();
             boxCollider = this->AddComponent<Engine::BoxCollider>();
             // collider settings
-            boxCollider->SetHeight(2.0f);
-            boxCollider->SetWidth(2.0f);
-            boxCollider->SetDepth(2.0f);
+            boxCollider->SetHeight(6.0f);
+            boxCollider->SetWidth(6.0f);
+            boxCollider->SetDepth(6.0f);
             boxCollider->OnCollisionAddListener(SwapTool);
             // rb settings
-            rb->friction = 0.05f;
+            rb->friction = 0.2f;
             rb->angularDamping = 0.01f;
             rb->linearDamping = 0.01f;
             rb->restitution = 0.3f;
             rb->SetMass(1.0f);
             rb->frictionEnabled = true;
             // player start position
-            this->GetTransform()->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
+            this->GetTransform()->SetPosition(glm::vec3(0.0f, 6.0f, 0.0f));
 
             PlayerAnimationManager* playerAnimationManager = PlayerAnimationManager::GetInstance();
             std::vector<Engine::Transform*> children = prefabEntity->GetTransform()->GetChildren();
@@ -77,6 +77,7 @@ namespace Engine
 
             toolChangeSound = AudioManager::GetInstance().CreateSoundInstance("zmiana sprzetu");
             Instance = this;
+            this->GetTransform()->SetScale(glm::vec3(3.0f));
         }
         else
         {

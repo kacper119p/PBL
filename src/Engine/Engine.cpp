@@ -22,6 +22,7 @@
 #include "EngineObjects/Transitions/SplashScreen.h"
 #include "tracy/Tracy.hpp"
 #include "Components/Renderers/OutlinedModelRenderer.h"
+#include "Engine/EngineObjects/Scene/SceneManager.h"
 #if DEBUG
 #include "Utility/OpenGlDebugger.h"
 #endif
@@ -118,6 +119,7 @@ namespace Engine
             Entity::DestroyQueued();
             RigidbodyUpdateManager::GetInstance()->Update(deltaTime);
             CollisionUpdateManager::GetInstance()->Update(deltaTime);
+            SceneManager::UpdateScene(CurrentScene);
             if (!BackgroundAudioPlayer->IsPlaying())
                 BackgroundAudioPlayer->PlayLooping("music", 0.02f);
 #endif
