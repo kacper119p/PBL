@@ -138,7 +138,8 @@ namespace Engine
 
         if (IsResting)
         {
-            if (SlimeAnimationManager::GetInstance()->GetSlimeIdleModel())
+            if (SlimeAnimationManager::GetInstance()->GetSlimeIdleModel() && SlimeAnimationManager::GetInstance()->
+                GetSlimeWalkModel()->GetAnimator().IsAnimationFinished())
             {
                 GetOwner()->GetTransform()->GetChildren().at(0)->SetPosition(GetOwner()->GetTransform()->GetPosition());
                 GetOwner()->GetTransform()->GetChildren().at(1)->SetPosition(glm::vec3(0.0f, 1000.0f, 0.0f));
