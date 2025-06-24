@@ -2,76 +2,66 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{e1ffc2c5-dc14-4d27-b0ea-b73708d9e240}\u0000",
-            "name": "ColliderDisabler",
+            "id": "{8767a542-15ad-48e2-a44a-f03384e92728}\u0000",
+            "name": "Studzienka",
             "transform": {
                 "type": "Transform",
-                "id": "{28774810-eb3e-4702-80ea-139d18c51aa4}\u0000",
-                "owner": "{e1ffc2c5-dc14-4d27-b0ea-b73708d9e240}\u0000",
+                "id": "{d0da8b9d-2ad6-4526-8691-dee0d368c9f1}\u0000",
+                "owner": "{8767a542-15ad-48e2-a44a-f03384e92728}\u0000",
                 "Position": {
-                    "x": -0.21213388442993164,
-                    "y": 0.0625,
-                    "z": 9.521060943603516
+                    "x": -2.45086407661438,
+                    "y": 0.3143124580383301,
+                    "z": 10.252395629882813
                 },
                 "EulerAngles": {
-                    "x": -90.0,
-                    "y": -0.0,
+                    "x": 0.0,
+                    "y": 0.0,
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 1.7699345350265503,
-                    "y": 1.7699999809265137,
-                    "z": 1.7699999809265137
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
                 },
                 "Rotation": {
-                    "x": -0.7071067690849304,
-                    "y": -0.0,
+                    "x": 0.0,
+                    "y": 0.0,
                     "z": 0.0,
-                    "w": 0.7071067690849304
+                    "w": 1.0
                 },
                 "Children": [
-                    "{d9ad6703-631a-4c3c-9af4-f4382ae0cae5}\u0000"
+                    "{11affe84-ee04-45b7-8c2b-504a84087999}\u0000"
                 ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{ecfda86e-90a9-46d5-ae03-f468fbe60ea3}\u0000",
-                "{04b525c1-798d-461e-a05a-a3e92b2ad0e1}\u0000"
+                "{612769df-becb-46d8-9b15-6400836aba79}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{ecfda86e-90a9-46d5-ae03-f468fbe60ea3}\u0000",
-            "owner": "{e1ffc2c5-dc14-4d27-b0ea-b73708d9e240}\u0000",
-            "Material": "./res/materials/SampleScene/Floor.mat",
-            "Model": "./res/Models/Modele_Mati/Otoczenie/Studzienka.fbx",
+            "id": "{612769df-becb-46d8-9b15-6400836aba79}\u0000",
+            "owner": "{8767a542-15ad-48e2-a44a-f03384e92728}\u0000",
+            "Material": "res/materials/SampleScene/studzienka.mat",
+            "Model": "res/models/Modele_Mati/Otoczenie/Podloga_Dziura.fbx",
             "CastShadow": true
         },
         {
-            "type": "SphereCollider",
-            "id": "{04b525c1-798d-461e-a05a-a3e92b2ad0e1}\u0000",
-            "owner": "{e1ffc2c5-dc14-4d27-b0ea-b73708d9e240}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "colliderType": 1,
-            "radius": 2.799999952316284
-        },
-        {
             "type": "Entity",
-            "id": "{8aced6f4-1907-46b3-ab78-4ffcba078e42}\u0000",
-            "name": "podloga",
+            "id": "{fedea65f-7e4e-4927-b1c9-ea51fef0ceda}\u0000",
+            "name": "colliderDisabler",
             "transform": {
                 "type": "Transform",
-                "id": "{d9ad6703-631a-4c3c-9af4-f4382ae0cae5}\u0000",
-                "owner": "{8aced6f4-1907-46b3-ab78-4ffcba078e42}\u0000",
+                "id": "{11affe84-ee04-45b7-8c2b-504a84087999}\u0000",
+                "owner": "{fedea65f-7e4e-4927-b1c9-ea51fef0ceda}\u0000",
                 "Position": {
-                    "x": 0.00007829815149307251,
-                    "y": -0.0955052375793457,
-                    "z": -0.04994475096464157
+                    "x": 0.0,
+                    "y": -1.8748266696929932,
+                    "z": -0.5754928588867188
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": -0.0,
+                    "y": 0.0,
                     "z": 0.0
                 },
                 "Scale": {
@@ -86,25 +76,23 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{28774810-eb3e-4702-80ea-139d18c51aa4}\u0000"
+                "Parent": "{d0da8b9d-2ad6-4526-8691-dee0d368c9f1}\u0000"
             },
             "components": [
-                "{376a874c-87e5-45c6-93a6-6a883f7fd0dc}\u0000"
+                "{39c79ae2-4f88-441c-b518-4244b34a48d1}\u0000"
             ]
         },
         {
-            "type": "BoxCollider",
-            "id": "{376a874c-87e5-45c6-93a6-6a883f7fd0dc}\u0000",
-            "owner": "{8aced6f4-1907-46b3-ab78-4ffcba078e42}\u0000",
+            "type": "SphereCollider",
+            "id": "{39c79ae2-4f88-441c-b518-4244b34a48d1}\u0000",
+            "owner": "{fedea65f-7e4e-4927-b1c9-ea51fef0ceda}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 4294967295,
-            "collisionMask": 4294967231,
-            "colliderType": 0,
-            "_width": 16.0,
-            "_height": 16.0,
-            "_depth": 0.25
+            "collisionMask": 4294967295,
+            "colliderType": 1,
+            "radius": 4.099999904632568
         }
     ]
 }

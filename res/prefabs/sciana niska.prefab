@@ -1,0 +1,63 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{4e126a30-883c-494d-9ea3-26b5ec1d7aba}\u0000",
+            "name": "scianaNiska",
+            "transform": {
+                "type": "Transform",
+                "id": "{370fe923-d01c-441b-912c-8ba87fe0afaa}\u0000",
+                "owner": "{4e126a30-883c-494d-9ea3-26b5ec1d7aba}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{babbb4c3-f64f-40db-ae55-ed46b82eeb08}\u0000",
+                "{2033b697-2210-4ef7-a6b8-6c781abecf79}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{babbb4c3-f64f-40db-ae55-ed46b82eeb08}\u0000",
+            "owner": "{4e126a30-883c-494d-9ea3-26b5ec1d7aba}\u0000",
+            "Material": "res/materials/SampleScene/sciana.mat",
+            "Model": "res/models/Modele_Mati/Otoczenie/ScianaNiska.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{2033b697-2210-4ef7-a6b8-6c781abecf79}\u0000",
+            "owner": "{4e126a30-883c-494d-9ea3-26b5ec1d7aba}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 1.600000023841858,
+            "_height": 3.799999952316284,
+            "_depth": 27.0
+        }
+    ]
+}

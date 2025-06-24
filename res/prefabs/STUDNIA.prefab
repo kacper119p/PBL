@@ -1,0 +1,661 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{2b3763e5-4924-4d63-9c52-7952f70bc9ad}\u0000",
+            "name": "dziura",
+            "transform": {
+                "type": "Transform",
+                "id": "{e8e2487d-63d9-450c-8851-1eda2a8bd7b7}\u0000",
+                "owner": "{2b3763e5-4924-4d63-9c52-7952f70bc9ad}\u0000",
+                "Position": {
+                    "x": 38.132076263427734,
+                    "y": -0.005787372589111328,
+                    "z": 10.252395629882813
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [
+                    "{630cc3fc-baf7-46bf-a596-496454f8132f}\u0000",
+                    "{46931968-66c3-44ae-a65c-22292bb7513a}\u0000",
+                    "{64d5748d-e9dd-40dd-be50-9a6447f16ae3}\u0000",
+                    "{f94c5194-f749-4125-8efe-f29a781798eb}\u0000",
+                    "{6f608521-44df-4eab-8185-80233a25a261}\u0000",
+                    "{5ebb4421-46ac-4c14-a93b-7c0dc67340f9}\u0000",
+                    "{cdd97f23-d2e9-4b5b-9a8d-4d8b1256e135}\u0000",
+                    "{3387642a-1752-4109-bf3f-b71224bfdefd}\u0000",
+                    "{7c0d5a0c-0b08-420d-9eda-8f8763fc8d91}\u0000",
+                    "{fbf8bd9c-463e-4fab-ab1c-f6a7ec6f2991}\u0000",
+                    "{397ca145-c15f-48fe-a2e3-9aeef2778559}\u0000",
+                    "{1118b165-0e30-4835-93de-d0611f58e008}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{53f6ad27-5be3-47a5-8962-658653e298fe}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{53f6ad27-5be3-47a5-8962-658653e298fe}\u0000",
+            "owner": "{2b3763e5-4924-4d63-9c52-7952f70bc9ad}\u0000",
+            "Material": "res/materials/SampleScene/studzienka.mat",
+            "Model": "res/models/Modele_Mati/Otoczenie/Podloga_Dziura.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{7c497b5b-9983-4fc7-b86f-cf874569d942}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{630cc3fc-baf7-46bf-a596-496454f8132f}\u0000",
+                "owner": "{7c497b5b-9983-4fc7-b86f-cf874569d942}\u0000",
+                "Position": {
+                    "x": 8.490744590759277,
+                    "y": -1.5,
+                    "z": -0.8515911102294922
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{e8e2487d-63d9-450c-8851-1eda2a8bd7b7}\u0000"
+            },
+            "components": [
+                "{aa29ab02-b533-4948-ac65-44a2217ece41}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{aa29ab02-b533-4948-ac65-44a2217ece41}\u0000",
+            "owner": "{7c497b5b-9983-4fc7-b86f-cf874569d942}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 8.0,
+            "_height": 3.0,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{d4a8d932-01ef-4098-9780-a98435433c15}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{46931968-66c3-44ae-a65c-22292bb7513a}\u0000",
+                "owner": "{d4a8d932-01ef-4098-9780-a98435433c15}\u0000",
+                "Position": {
+                    "x": -0.08728814125061035,
+                    "y": -1.5,
+                    "z": 8.036954879760742
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{e8e2487d-63d9-450c-8851-1eda2a8bd7b7}\u0000"
+            },
+            "components": [
+                "{3b78e1b9-186a-43f4-b51a-18d6724ed1ae}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{3b78e1b9-186a-43f4-b51a-18d6724ed1ae}\u0000",
+            "owner": "{d4a8d932-01ef-4098-9780-a98435433c15}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 8.0,
+            "_height": 3.0,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{1c6c8b45-d0d4-42eb-8670-3b3c15a6570c}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{64d5748d-e9dd-40dd-be50-9a6447f16ae3}\u0000",
+                "owner": "{1c6c8b45-d0d4-42eb-8670-3b3c15a6570c}\u0000",
+                "Position": {
+                    "x": -8.382491111755371,
+                    "y": -1.5,
+                    "z": -0.8515911102294922
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{e8e2487d-63d9-450c-8851-1eda2a8bd7b7}\u0000"
+            },
+            "components": [
+                "{85351076-2025-4c17-8c69-3e6cc4e9ee6a}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{85351076-2025-4c17-8c69-3e6cc4e9ee6a}\u0000",
+            "owner": "{1c6c8b45-d0d4-42eb-8670-3b3c15a6570c}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 8.0,
+            "_height": 3.0,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{4ccc4bf8-5cdd-4807-b68b-59d1a53a4bce}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{f94c5194-f749-4125-8efe-f29a781798eb}\u0000",
+                "owner": "{4ccc4bf8-5cdd-4807-b68b-59d1a53a4bce}\u0000",
+                "Position": {
+                    "x": -0.08728814125061035,
+                    "y": -1.5,
+                    "z": -8.504889488220215
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{e8e2487d-63d9-450c-8851-1eda2a8bd7b7}\u0000"
+            },
+            "components": [
+                "{d1cce552-880c-4a95-831a-7494a718a17f}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{d1cce552-880c-4a95-831a-7494a718a17f}\u0000",
+            "owner": "{4ccc4bf8-5cdd-4807-b68b-59d1a53a4bce}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 7.0,
+            "_height": 3.0,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{37c37c1b-a211-40f1-b15a-9a247c5c24f5}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{6f608521-44df-4eab-8185-80233a25a261}\u0000",
+                "owner": "{37c37c1b-a211-40f1-b15a-9a247c5c24f5}\u0000",
+                "Position": {
+                    "x": -6.141599655151367,
+                    "y": -1.5,
+                    "z": 5.4124860763549805
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 45.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.3826834559440613,
+                    "z": 0.0,
+                    "w": 0.9238795042037964
+                },
+                "Children": [],
+                "Parent": "{e8e2487d-63d9-450c-8851-1eda2a8bd7b7}\u0000"
+            },
+            "components": [
+                "{21e25ed1-34d7-4238-ab8b-c5d6d17941fe}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{21e25ed1-34d7-4238-ab8b-c5d6d17941fe}\u0000",
+            "owner": "{37c37c1b-a211-40f1-b15a-9a247c5c24f5}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 8.0,
+            "_height": 3.0,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{90c9a3e9-8fd1-4600-9121-8920d154e07b}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{5ebb4421-46ac-4c14-a93b-7c0dc67340f9}\u0000",
+                "owner": "{90c9a3e9-8fd1-4600-9121-8920d154e07b}\u0000",
+                "Position": {
+                    "x": 5.963588237762451,
+                    "y": -1.5,
+                    "z": -6.704877853393555
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 45.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.3826834559440613,
+                    "z": 0.0,
+                    "w": 0.9238795042037964
+                },
+                "Children": [],
+                "Parent": "{e8e2487d-63d9-450c-8851-1eda2a8bd7b7}\u0000"
+            },
+            "components": [
+                "{64a86c54-39d7-4b95-b8e2-b48f1c8b3056}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{64a86c54-39d7-4b95-b8e2-b48f1c8b3056}\u0000",
+            "owner": "{90c9a3e9-8fd1-4600-9121-8920d154e07b}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 8.0,
+            "_height": 3.0,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{f0491b63-d860-471b-82f6-623faa274cb3}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{cdd97f23-d2e9-4b5b-9a8d-4d8b1256e135}\u0000",
+                "owner": "{f0491b63-d860-471b-82f6-623faa274cb3}\u0000",
+                "Position": {
+                    "x": -5.850594520568848,
+                    "y": -1.5,
+                    "z": -6.704877853393555
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -45.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.3826834559440613,
+                    "z": 0.0,
+                    "w": 0.9238795042037964
+                },
+                "Children": [],
+                "Parent": "{e8e2487d-63d9-450c-8851-1eda2a8bd7b7}\u0000"
+            },
+            "components": [
+                "{d3db8b6f-259c-4cad-aa1b-5b5f3dd7b066}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{d3db8b6f-259c-4cad-aa1b-5b5f3dd7b066}\u0000",
+            "owner": "{f0491b63-d860-471b-82f6-623faa274cb3}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 8.0,
+            "_height": 3.0,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{83b4a159-0cad-4946-ac84-dc92df1feeb4}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{3387642a-1752-4109-bf3f-b71224bfdefd}\u0000",
+                "owner": "{83b4a159-0cad-4946-ac84-dc92df1feeb4}\u0000",
+                "Position": {
+                    "x": 6.024274826049805,
+                    "y": -1.5,
+                    "z": 5.446196556091309
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -45.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.3826834559440613,
+                    "z": 0.0,
+                    "w": 0.9238795042037964
+                },
+                "Children": [],
+                "Parent": "{e8e2487d-63d9-450c-8851-1eda2a8bd7b7}\u0000"
+            },
+            "components": [
+                "{d8a6140a-1a5b-413a-9341-0a5f0e07aa69}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{d8a6140a-1a5b-413a-9341-0a5f0e07aa69}\u0000",
+            "owner": "{83b4a159-0cad-4946-ac84-dc92df1feeb4}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 8.0,
+            "_height": 3.0,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{44038a8e-39b3-4b8b-8cc1-e8a88c6002fe}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{7c0d5a0c-0b08-420d-9eda-8f8763fc8d91}\u0000",
+                "owner": "{44038a8e-39b3-4b8b-8cc1-e8a88c6002fe}\u0000",
+                "Position": {
+                    "x": 0.047945499420166016,
+                    "y": -1.5,
+                    "z": 8.133480072021484
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{e8e2487d-63d9-450c-8851-1eda2a8bd7b7}\u0000"
+            },
+            "components": [
+                "{8b6113c2-cc94-454d-8356-d6b2f73fa0c8}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{8b6113c2-cc94-454d-8356-d6b2f73fa0c8}\u0000",
+            "owner": "{44038a8e-39b3-4b8b-8cc1-e8a88c6002fe}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 2,
+            "collisionMask": 4294967293,
+            "colliderType": 0,
+            "_width": 24.799999237060547,
+            "_height": 3.0,
+            "_depth": 7.699999809265137
+        },
+        {
+            "type": "Entity",
+            "id": "{3fbfe8a6-9c32-407b-bf62-999ab874d908}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{fbf8bd9c-463e-4fab-ab1c-f6a7ec6f2991}\u0000",
+                "owner": "{3fbfe8a6-9c32-407b-bf62-999ab874d908}\u0000",
+                "Position": {
+                    "x": 0.10230088233947754,
+                    "y": -1.5,
+                    "z": -8.812280654907227
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{e8e2487d-63d9-450c-8851-1eda2a8bd7b7}\u0000"
+            },
+            "components": [
+                "{95177555-452d-45b1-b071-49e4d523bea8}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{95177555-452d-45b1-b071-49e4d523bea8}\u0000",
+            "owner": "{3fbfe8a6-9c32-407b-bf62-999ab874d908}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 2,
+            "collisionMask": 4294967293,
+            "colliderType": 0,
+            "_width": 24.799999237060547,
+            "_height": 3.0,
+            "_depth": 7.199999809265137
+        },
+        {
+            "type": "Entity",
+            "id": "{91079b60-1f01-4412-8adb-e92719ae0c61}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{397ca145-c15f-48fe-a2e3-9aeef2778559}\u0000",
+                "owner": "{91079b60-1f01-4412-8adb-e92719ae0c61}\u0000",
+                "Position": {
+                    "x": 8.704361915588379,
+                    "y": -1.5,
+                    "z": -0.4482250213623047
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{e8e2487d-63d9-450c-8851-1eda2a8bd7b7}\u0000"
+            },
+            "components": [
+                "{860ab4ed-ed68-419c-9795-613ec73f74a1}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{860ab4ed-ed68-419c-9795-613ec73f74a1}\u0000",
+            "owner": "{91079b60-1f01-4412-8adb-e92719ae0c61}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 9.5,
+            "_height": 3.0,
+            "_depth": 7.599999904632568
+        },
+        {
+            "type": "Entity",
+            "id": "{2539584f-add9-4200-9129-01c4a0bdfda1}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{1118b165-0e30-4835-93de-d0611f58e008}\u0000",
+                "owner": "{2539584f-add9-4200-9129-01c4a0bdfda1}\u0000",
+                "Position": {
+                    "x": -8.586905479431152,
+                    "y": -1.5,
+                    "z": -0.4482250213623047
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{e8e2487d-63d9-450c-8851-1eda2a8bd7b7}\u0000"
+            },
+            "components": [
+                "{5708f834-618f-4925-ad0a-009e7beab8bf}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{5708f834-618f-4925-ad0a-009e7beab8bf}\u0000",
+            "owner": "{2539584f-add9-4200-9129-01c4a0bdfda1}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 9.5,
+            "_height": 3.0,
+            "_depth": 7.599999904632568
+        }
+    ]
+}
