@@ -25,7 +25,10 @@ namespace Engine
 
     BloodEraser::~BloodEraser()
     {
-            BloodManager::GetCurrent()->RemoveBloodEraser(this);
+        if (BloodManager* bloodManager = BloodManager::GetCurrent())
+        {
+            bloodManager->RemoveBloodEraser(this);
+        }
     }
 
     void BloodEraser::Start()
