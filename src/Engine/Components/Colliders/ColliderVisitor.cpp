@@ -483,8 +483,6 @@ namespace Engine
 
     inline glm::vec3 ColliderVisitor::GetSeparation()
     {
-        if (!result.hasCollision)
-            return glm::vec3(0.0f);
         return result.collisionNormal * result.penetrationDepth;
     }
 
