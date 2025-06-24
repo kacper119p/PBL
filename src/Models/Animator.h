@@ -46,7 +46,7 @@ namespace Models
         bool IsAnimationFinished() const
         {
             if (m_CurrentAnimation)
-                return m_CurrentTime == m_CurrentAnimation->GetDuration();
+                return m_CurrentTime >= m_CurrentAnimation->GetDuration()-0.5f;
         }
     };
 }
