@@ -17,11 +17,11 @@ void main()
     vec3 cameraRight = normalize(cross(vec3(0.0, 1.0, 0.0), camForward));
     vec3 cameraUp = vec3(0.0, 1.0, 0.0);
 
-    vec3 worldPosition = (ObjectToWorldMatrix * vec4(vec3(0.0), 1.0)).xyz;
-    vec3 billboardOffset = ((inputTexCoord.x - 0.5) * cameraRight + (inputTexCoord.y - 0.5) * cameraUp);
-    vec3 finalPos = worldPosition + billboardOffset;
+    vec3 offset = (inputTexCoord.x - 0.5) * cameraRight + (inputTexCoord.y - 0.5) * cameraUp;
 
-    gl_Position = ProjectionMatrix * ViewMatrix * vec4(finalPos, 1.0);
+    vec4 worldPosition = ObjectToWorldMatrix * vec4(offset, 1.0);
+
+    gl_Position = ProjectionMatrix * ViewMatrix * worldPosition;
 
     UV = inputTexCoord;
 }
