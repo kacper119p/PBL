@@ -45,7 +45,7 @@ namespace Engine
         glViewport(0, 0, Resolution.x, Resolution.y);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, SceneFrameBuffer.GetResolvedOcclusionBuffer());
-        ScreenQuad.Draw();
+        Rendering::ScreenQuad::Draw();
 
         SceneFrameBuffer.BindResolved();
         glActiveTexture(GL_TEXTURE0);
@@ -55,7 +55,7 @@ namespace Engine
         glBlendFunc(GL_ONE, GL_ONE);
         glBlendEquation(GL_FUNC_ADD);
         BlendShader.Use();
-        ScreenQuad.Draw();
+        Rendering::ScreenQuad::Draw();
         glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
         glDisable(GL_BLEND);
     }

@@ -20,7 +20,7 @@ public:
  CameraFollow& operator=(const CameraFollow&) = delete;
 
  Engine::Camera* Camera = nullptr;
- glm::vec3 PositionOffset = glm::vec3(6.0f, 10.0f, 6.0f);
+ glm::vec3 PositionOffset = glm::vec3(18.0f, 30.0f, 18.0f);
  glm::vec3 EulerAngles = glm::vec3(0.0f, 0.0f, 0.0f);
 
  Engine::Entity* target = nullptr;

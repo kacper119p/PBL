@@ -8,6 +8,8 @@ IF (WIN32)
     message(NOTICE "To enable Developer Mode go to Settings -> Update & Security -> For developers -> Developer Mode ON")
     message(NOTICE "\n********************************************************************")
     message(NOTICE "\n")
+ELSE ()
+    message(FATAL_ERROR "Only Windows system is supported.")
 ENDIF ()
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)

@@ -21,18 +21,18 @@ namespace Engine::Rendering
     private:
         static CachedData CachedData;
 
-    public:
-        ScreenQuad();
+    private:
+        ScreenQuad() = default;
 
+    public:
         ~ScreenQuad();
 
     public:
         /**
          * @brief Draws quad covering whole screen
          */
-        void Draw() const;
+        static void Draw();
 
-    private:
         static void Initialize();
     };
 } // Engine

@@ -1,5 +1,6 @@
 #include "Image.h"
 
+#include "Engine/Rendering/UiQuad.h"
 #include "Materials/Ui/UiMaterial.h"
 #include "Utility/AssertionsUtility.h"
 
@@ -14,6 +15,6 @@ namespace Engine::Ui
         glBindTexture(GL_TEXTURE_2D, Texture.GetId());
         Material->Use();
         Material->GetMainPass().SetUniform("Transform", Rect.GetLocalToWorldMatrix());
-        Quad.Draw();
+        UiQuad::Draw();
     }
 }

@@ -18,8 +18,8 @@ namespace Engine
         int volume = 0;
         int maxVolume = 10;
 
-        int size = 2;
-        float centerSize = 1.5f;
+        int size = 2*3;
+        float centerSize = 1.5f*3;
         std::vector<Engine::Entity*> items;
         Engine::SphereCollider* collider;
 
@@ -53,6 +53,8 @@ namespace Engine
         void Update(float deltaTime) override;
 
         void Shoot();
+
+        void UpdateFillIndicator();
 
         SERIALIZATION_EXPORT_CLASS(Vacuum);
 #if EDITOR

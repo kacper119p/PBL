@@ -22,6 +22,7 @@
 #include "EngineObjects/Transitions/SplashScreen.h"
 #include "tracy/Tracy.hpp"
 #include "Components/Renderers/OutlinedModelRenderer.h"
+#include "Engine/EngineObjects/Scene/SceneManager.h"
 #if DEBUG
 #include "Utility/OpenGlDebugger.h"
 #endif
@@ -118,6 +119,7 @@ namespace Engine
             Entity::DestroyQueued();
             RigidbodyUpdateManager::GetInstance()->Update(deltaTime);
             CollisionUpdateManager::GetInstance()->Update(deltaTime);
+            SceneManager::UpdateScene(CurrentScene);
             if (!BackgroundAudioPlayer->IsPlaying())
                 BackgroundAudioPlayer->PlayLooping("music", 0.02f);
 #endif
@@ -193,6 +195,9 @@ namespace Engine
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 3.2+ only
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // 3.0+ only
 
+        glfwWindowHint(GLFW_RED_BITS, mode->redBits);
+        glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
+        glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
         glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
         glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 

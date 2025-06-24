@@ -24,7 +24,6 @@ namespace Engine
         int32_t BlurHorizontalBoolLocation = 0;
         int32_t ProjectionMatrixLocation;
         int32_t InverseProjectionMatrixLocation;
-        Rendering::ScreenQuad ScreenQuad;
 
     public:
         Ssao();

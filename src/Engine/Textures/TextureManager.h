@@ -26,7 +26,7 @@ namespace Engine
          * @param Path Path to a texture file.
          * @return A loaded texture.
          */
-        static Texture GetTexture(const char* Path);
+        [[nodiscard]] static Texture GetTexture(const char* Path);
 
         /**
          * @brief Frees resources used by an existing texture.
@@ -52,20 +52,20 @@ namespace Engine
          * @param Path Path to a texture file.
          * @return True if a texture is loaded. False otherwise.
          */
-        static bool IsValid(const char* Path);
+        [[nodiscard]] static bool IsValid(const char* Path);
 
         /**
          * @brief Checks if a texture is loaded and ready to use.
          * @param Texture Texture to be checked.
          * @return True if a texture is loaded. False otherwise.
          */
-        static bool IsValid(Texture Texture);
+        [[nodiscard]] static bool IsValid(Texture Texture);
 
         /**
          * @brief Checks if a texture is loaded and ready to use.
          * @param Texture Texture to be found.
          * @return
          */
-        static std::string GetTexturePath(Texture Texture);
+        [[nodiscard]] static std::string GetTexturePath(Texture Texture);
     };
 } // Engine

@@ -1,43 +1,49 @@
 #include "PlayerAnimationManager.h"
 
-void Engine::PlayerAnimationManager::StopAllAnimations() 
-{ 
-    if (TrackLeft!=nullptr)
-	TrackLeft->GetAnimator().PauseAnimation();
+#include "Materials/VacuumIndicatorMaterial.h"
+
+void Engine::PlayerAnimationManager::StopAllAnimations()
+{
+    if (TrackLeft != nullptr)
+        TrackLeft->GetAnimator().PauseAnimation();
     if (TrackRight != nullptr)
-    TrackRight->GetAnimator().PauseAnimation();
+        TrackRight->GetAnimator().PauseAnimation();
 
 }
 
-void Engine::PlayerAnimationManager::TrackLeftForward() 
-{ 
+void Engine::PlayerAnimationManager::TrackLeftForward()
+{
     TrackLeft->GetAnimator().SetPlayBackward(false);
     TrackLeft->GetAnimator().ResumeAnimation();
 }
 
-void Engine::PlayerAnimationManager::TrackLeftBackward() 
-{ 
+void Engine::PlayerAnimationManager::TrackLeftBackward()
+{
     TrackLeft->GetAnimator().SetPlayBackward(true);
     TrackLeft->GetAnimator().ResumeAnimation();
 }
 
-void Engine::PlayerAnimationManager::TrackRightForward() 
+void Engine::PlayerAnimationManager::TrackRightForward()
 {
     TrackRight->GetAnimator().SetPlayBackward(false);
     TrackRight->GetAnimator().ResumeAnimation();
 }
 
-void Engine::PlayerAnimationManager::TrackRightBackward() 
+void Engine::PlayerAnimationManager::TrackRightBackward()
 {
     TrackRight->GetAnimator().SetPlayBackward(true);
     TrackRight->GetAnimator().ResumeAnimation();
 }
 
-void Engine::PlayerAnimationManager::TrackLeftStop() 
-{ TrackLeft->GetAnimator().PauseAnimation(); }
+void Engine::PlayerAnimationManager::TrackLeftStop()
+{
+    TrackLeft->GetAnimator().PauseAnimation();
+}
 
-void Engine::PlayerAnimationManager::TrackRightStop() 
-{ TrackRight->GetAnimator().PauseAnimation(); }
+void Engine::PlayerAnimationManager::TrackRightStop()
+{
+    TrackRight->GetAnimator().PauseAnimation();
+}
 
 void Engine::PlayerAnimationManager::SetHandLeft(AnimatedModelRenderer* handLeft)
 {
@@ -59,8 +65,8 @@ void Engine::PlayerAnimationManager::SetVacuumVfx(VacuumVfx* Vfx)
     isVacuumActive = false;
 }
 
-void Engine::PlayerAnimationManager::SetVacuumShotVfx(VacuumShotVfx* ShotVfx) 
-{ 
+void Engine::PlayerAnimationManager::SetVacuumShotVfx(VacuumShotVfx* ShotVfx)
+{
     vacuumShotVfx = ShotVfx;
 }
 
@@ -82,8 +88,9 @@ void Engine::PlayerAnimationManager::SetVacuumInactive()
     }
 }
 
-void Engine::PlayerAnimationManager::SetVacuumFront(AnimatedModelRenderer* Front) 
-{ VacuumFront = Front;
+void Engine::PlayerAnimationManager::SetVacuumFront(AnimatedModelRenderer* Front)
+{
+    VacuumFront = Front;
     if (VacuumFront != nullptr)
     {
         VacuumFront->GetAnimator().PauseAnimation();
@@ -91,14 +98,14 @@ void Engine::PlayerAnimationManager::SetVacuumFront(AnimatedModelRenderer* Front
 }
 
 void Engine::PlayerAnimationManager::ChangeLeftHandPosition(int newPosition)
-{ 
-    float startTick = GetTickForFrame(LeftHandPosition*10, 20, LeftHandAnimationDuration);
+{
+    float startTick = GetTickForFrame(LeftHandPosition * 10, 20, LeftHandAnimationDuration);
     float endTick = GetTickForFrame(newPosition * 10, 20, LeftHandAnimationDuration);
     HandLeft->GetAnimator().PlayOnceFromTo(startTick, endTick);
     LeftHandPosition = newPosition;
 }
 
-void Engine::PlayerAnimationManager::ChangeRightHandPosition(int newPosition) 
+void Engine::PlayerAnimationManager::ChangeRightHandPosition(int newPosition)
 {
     float startTick = GetTickForFrame(RightHandPosition * 10, 20, RightHandAnimationDuration);
     float endTick = GetTickForFrame(newPosition * 10, 20, RightHandAnimationDuration);
@@ -106,12 +113,12 @@ void Engine::PlayerAnimationManager::ChangeRightHandPosition(int newPosition)
     RightHandPosition = newPosition;
 }
 
-void Engine::PlayerAnimationManager::SuckBigObject() 
+void Engine::PlayerAnimationManager::SuckBigObject()
 {
     if (VacuumFront != nullptr)
     {
         VacuumFront->GetAnimator().PlayOnceFromTo(GetTickForFrame(0, 20, LeftHandAnimationDuration),
-                                               GetTickForFrame(20, 20, LeftHandAnimationDuration));
+                                                  GetTickForFrame(20, 20, LeftHandAnimationDuration));
     }
 }
 
@@ -124,11 +131,32 @@ void Engine::PlayerAnimationManager::ShootBigObject()
     }
 }
 
-void Engine::PlayerAnimationManager::PlayVacuumShotVfx() 
-{ 
+void Engine::PlayerAnimationManager::PlayVacuumShotVfx()
+{
     if (vacuumShotVfx != nullptr)
     {
         vacuumShotVfx->Play();
     }
 
+}
+
+void Engine::PlayerAnimationManager::SetIndicator(float Fill, const glm::vec3& Color)
+{
+    if (StrapMaterial == nullptr)
+    {
+        return;
+    }
+
+    StrapMaterial->SetFill(Fill);
+    StrapMaterial->SetEmissiveColor(Color);
+}
+
+void Engine::PlayerAnimationManager::SetLeftTackSpeed(float speed)
+{
+    TrackLeft->GetAnimator().SetAnimationSpeed(speed);
+}
+
+void Engine::PlayerAnimationManager::SetRightTackSpeed(float speed) 
+{
+    TrackRight->GetAnimator().SetAnimationSpeed(speed);
 }
