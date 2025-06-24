@@ -9,6 +9,8 @@
 #include "Engine/EngineObjects/Scene/Scene.h"
 #include "Serialization/SerializationUtility.h"
 #include "spdlog/spdlog.h"
+#include "Engine/Components/Game/SlimeAnimationManager.h"
+#include "Engine/Components/Renderers/ModelRenderer.h"
 
 namespace Engine
 {
@@ -40,6 +42,12 @@ namespace Engine
                 TrashEntities.emplace_back(transform->GetOwner());
             }
         }
+
+        SlimeAnimationManager::GetInstance()->SetSlimeIdleModel(
+                GetOwner()->GetTransform()->GetChildren().at(0)->GetOwner()->GetComponent<AnimatedModelRenderer>());
+        SlimeAnimationManager::GetInstance()->SetSlimeWalkModel(
+                GetOwner()->GetTransform()->GetChildren().at(1)->GetOwner()->GetComponent<AnimatedModelRenderer>());
+        AudioManager::GetInstance().SetVolume(WalkingSound, 3.0f);
     }
 
     void AiManager::InitPlayer()
@@ -127,6 +135,28 @@ namespace Engine
 
         if (NavMesh::Get().IsOnNavMesh(GetOwner()->GetTransform()->GetPosition(), NavMesh::Get().GetSpacing()))
             AStarComponent->UpdateMovement(DeltaTime, GetOwner());
+
+        if (IsResting)
+        {
+            if (SlimeAnimationManager::GetInstance()->GetSlimeIdleModel())
+            {
+                GetOwner()->GetTransform()->GetChildren().at(0)->SetPosition(GetOwner()->GetTransform()->GetPosition());
+                GetOwner()->GetTransform()->GetChildren().at(1)->SetPosition(glm::vec3(0.0f, 1000.0f, 0.0f));
+                SlimeAnimationManager::GetInstance()->PlayIdle();
+                AudioManager::GetInstance().PauseSound(WalkingSound);
+            }
+        }
+        else
+        {
+            if (SlimeAnimationManager::GetInstance()->GetSlimeWalkModel())
+            {
+                GetOwner()->GetTransform()->GetChildren().at(0)->SetPosition(glm::vec3(0.0f, 1000.0f, 0.0f));
+                GetOwner()->GetTransform()->GetChildren().at(1)->SetPosition(GetOwner()->GetTransform()->GetPosition());
+                SlimeAnimationManager::GetInstance()->PlayWalk();
+                AudioManager::GetInstance().PlayAudio(WalkingSound);
+                AudioManager::GetInstance().SetSoundPosition(WalkingSound, GetOwner()->GetTransform()->GetPosition());
+            }
+        }
     }
 
     void AiManager::StartChase()
@@ -144,23 +174,32 @@ namespace Engine
     bool AiManager::IsTrashNearby() const
     {
         glm::vec3 slimePos = GetOwner()->GetTransform()->GetPosition();
+        glm::vec3 playerPos = GetPlayer()->GetTransform()->GetPosition();
+        float playerRange = GetPlayerRange();
 
         for (const auto& trash : TrashEntities)
         {
             if (!trash)
                 continue;
 
-            if (!trash->GetComponent<Thrash>())
+            auto* trashComp = trash->GetComponent<Thrash>();
+            if (!trashComp)
                 continue;
 
-            if (CurrentTrashValue + trash->GetComponent<Thrash>()->GetSize() > MaxTrashCapacity)
+            if (CurrentTrashValue + trashComp->GetSize() > MaxTrashCapacity)
                 continue;
 
             glm::vec3 trashPos = trash->GetTransform()->GetPosition();
-            if (glm::distance(slimePos, trashPos) <= TrashRange)
-            {
-                return true;
-            }
+
+            if (glm::distance(slimePos, trashPos) > TrashRange)
+                continue;
+
+            float distTrashToPlayer = glm::distance(glm::vec2(trashPos.x, trashPos.z),
+                                                    glm::vec2(playerPos.x, playerPos.z));
+            if (distTrashToPlayer <= playerRange)
+                continue;
+
+            return true;
         }
 
         return false;

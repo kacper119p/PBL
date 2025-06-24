@@ -1,0 +1,143 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{3fb881bf-adf9-4259-bd8b-627bcbec9bb6}\u0000",
+            "name": "Slime",
+            "transform": {
+                "type": "Transform",
+                "id": "{33e2f8a2-c6c9-43b1-9e95-61db6a090dfb}\u0000",
+                "owner": "{3fb881bf-adf9-4259-bd8b-627bcbec9bb6}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.2537727952003479,
+                    "z": 7.685242176055908
+                },
+                "EulerAngles": {
+                    "x": 180.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 1.0,
+                    "y": 0.0,
+                    "z": -0.0,
+                    "w": -4.371138828673793e-8
+                },
+                "Children": [
+                    "{779cbac6-aa45-40cb-894a-34ccd064fc89}\u0000",
+                    "{3b86f48b-6650-4b26-917c-e409c6db4f70}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{1cbb9f54-cda9-4379-8608-c87d26fb82f3}\u0000"
+            ]
+        },
+        {
+            "type": "AiManager",
+            "id": "{1cbb9f54-cda9-4379-8608-c87d26fb82f3}\u0000",
+            "owner": "{3fb881bf-adf9-4259-bd8b-627bcbec9bb6}\u0000",
+            "ChaseCooldown": 2.0,
+            "RestCooldown": 3.0,
+            "PlayerRange": 7.0,
+            "FastMovementSpeed": 8.0,
+            "SlowMovementSpeed": 3.0,
+            "TrashRange": 3.0,
+            "MaxTrashCapacity": 10
+        },
+        {
+            "type": "Entity",
+            "id": "{45756032-3c65-4a48-aa7e-d7857af99385}\u0000",
+            "name": "Idle",
+            "transform": {
+                "type": "Transform",
+                "id": "{779cbac6-aa45-40cb-894a-34ccd064fc89}\u0000",
+                "owner": "{45756032-3c65-4a48-aa7e-d7857af99385}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 2.2185522752238285e-8
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{33e2f8a2-c6c9-43b1-9e95-61db6a090dfb}\u0000"
+            },
+            "components": [
+                "{dae443ad-153e-4b2b-94b3-181f92039e92}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{dae443ad-153e-4b2b-94b3-181f92039e92}\u0000",
+            "owner": "{45756032-3c65-4a48-aa7e-d7857af99385}\u0000",
+            "Material": "res/materials/SampleScene/DefaultAnimated.mat",
+            "Model": "./res/Models/Slime/SlimeIdle.fbx",
+            "Animation": "./res/Models/Slime/SlimeIdle.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{5b0dcddd-4f03-42bb-b4e4-65f045108e5f}\u0000",
+            "name": "Walk",
+            "transform": {
+                "type": "Transform",
+                "id": "{3b86f48b-6650-4b26-917c-e409c6db4f70}\u0000",
+                "owner": "{5b0dcddd-4f03-42bb-b4e4-65f045108e5f}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 2.2185522752238285e-8
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{33e2f8a2-c6c9-43b1-9e95-61db6a090dfb}\u0000"
+            },
+            "components": [
+                "{53c9c664-0a59-4bc5-a1c2-05cd0fad2ad6}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{53c9c664-0a59-4bc5-a1c2-05cd0fad2ad6}\u0000",
+            "owner": "{5b0dcddd-4f03-42bb-b4e4-65f045108e5f}\u0000",
+            "Material": "res/materials/SampleScene/DefaultAnimated.mat",
+            "Model": "./res/Models/Slime/SlimeWalk.fbx",
+            "Animation": "./res/Models/Slime/SlimeWalk.fbx"
+        }
+    ]
+}
