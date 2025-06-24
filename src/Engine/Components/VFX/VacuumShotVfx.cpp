@@ -1,9 +1,7 @@
 #include "VacuumShotVfx.h"
 #include "Engine/EngineObjects/Entity.h"
-#include "Engine/EngineObjects/LightManager.h"
-#include <algorithm>
+#include "Engine/EngineObjects/LightManager.h"---
 #include <imgui.h>
-#include <glm/gtc/type_ptr.hpp>
 #include <GLFW/glfw3.h>
 
 #include "Engine/EngineObjects/RenderingManager.h"
@@ -12,9 +10,9 @@
 #include "Shaders/ShaderManager.h"
 
 Engine::VacuumShotVfx::VacuumShotVfx() :
-    ParticleEmitter(Materials::MaterialManager::GetMaterial("res/materials/VFX/Flame.mat"),
-                    Shaders::ShaderManager::GetComputeShader("res/shaders/VFX/Fire/Flame/FlameSpawn.comp"),
-                    Shaders::ShaderManager::GetComputeShader("res/shaders/VFX/Fire/Flame/FlameUpdate.comp")),
+    ParticleEmitter(Materials::MaterialManager::GetMaterial("res/materials/VFX/VacuumShot.mat"),
+                    Shaders::ShaderManager::GetComputeShader("res/shaders/VFX/VacuumShot/VacuumShotSpawn.comp"),
+                    Shaders::ShaderManager::GetComputeShader("res/shaders/VFX/VacuumShot/VacuumShotUpdate.comp")),
     ParticlesToSpawnProperty(SpawnShader.GetUniformLocation("ParticlesToSpawn")),
     DeltaTimeProperty(UpdateShader.GetUniformLocation("DeltaTime")),
     RandomProperty(SpawnShader.GetUniformLocation("Random")),

@@ -25,6 +25,7 @@ void UpdateParticle(inout particle Particle, int index) {
         {
             Particle.life = 0.0;
             freelist.indices[atomicAdd(freelist.count, 1)] = index;
+            return;
         }
 
         Particle.velocity += snoise(Particle.position + vec3(Time), 0.5) * DeltaTime * 8.0;

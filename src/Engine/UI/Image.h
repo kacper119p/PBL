@@ -1,6 +1,5 @@
 #pragma once
 #include "UiElement.h"
-#include "Engine/Rendering/ScreenQuad.h"
 #include "Engine/Textures/Texture.h"
 
 namespace Materials
@@ -15,7 +14,6 @@ namespace Engine::Ui
     private:
         Texture Texture;
         Materials::UiMaterial* Material = nullptr;
-        Rendering::ScreenQuad Quad;
 
     public:
         Image();

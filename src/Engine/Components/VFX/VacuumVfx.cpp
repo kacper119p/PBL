@@ -22,6 +22,8 @@ namespace Engine
         ProjectionMatrixLocation = Material->GetMainPass().GetUniformLocation("ProjectionMatrix");
         ObjectToWorldMatrixLocation = Material->GetMainPass().GetUniformLocation("ObjectToWorldMatrix");
 
+        VisibilityLocation = Material->GetMainPass().GetUniformLocation("Visibility");
+
         InnerTexture = TextureManager::GetTexture("res/textures/VFX/Vacuum/VacuumInner.dds").GetHandleReadonly();
         OuterTexture = TextureManager::GetTexture("res/textures/VFX/Vacuum/VacuumOuter.dds").GetHandleReadonly();
 
@@ -51,7 +53,7 @@ namespace Engine
 
     void VacuumVfx::Update(const float DeltaTime)
     {
-        Time += (Active ? 1.0f : -1.0f) * DeltaTime;
+        Time += (Active ? TransitionSpeed : -TransitionSpeed) * DeltaTime;
         Time = Math::Clamp(Time, 0.0f, 1.0f);
     }
 
@@ -61,26 +63,25 @@ namespace Engine
 
     void VacuumVfx::Render(const CameraRenderData& RenderData)
     {
-        glDisable(GL_CULL_FACE);
+        const float size = Math::EaseOutQuart(Time);
 
         Shaders::Shader::SetUniform(TimeLocation, static_cast<float>(glfwGetTime()) * NoiseSpeed);
 
         Shaders::Shader::SetUniform(CameraLocationLocation, RenderData.CameraPosition);
         Shaders::Shader::SetUniform(ViewMatrixLocation, RenderData.ViewMatrix);
         Shaders::Shader::SetUniform(ProjectionMatrixLocation, RenderData.ProjectionMatrix);
+        Shaders::Shader::SetUniform(VisibilityLocation, size);
 
-        const float size = Math::EaseInOutBounce(Time);
 
         const glm::mat4& objectToWorld = GetOwner()->GetTransform()->GetLocalToWorldMatrix();
-        const glm::mat4 scaledMatrix = glm::scale(objectToWorld, glm::vec3(size));
-        Shaders::Shader::SetUniform(ObjectToWorldMatrixLocation, scaledMatrix);
+        Shaders::Shader::SetUniform(ObjectToWorldMatrixLocation, objectToWorld);
 
         const Models::Mesh* mesh = Model->GetMesh(0);
 
         Shaders::Shader::SetTextureHandle(TextureLocation, InnerTexture);
         mesh->Draw();
-        
-        const glm::mat4 outerScaledMatrix = glm::scale(objectToWorld, glm::vec3(size * 1.1f));
+
+        const glm::mat4 outerScaledMatrix = glm::scale(objectToWorld, glm::vec3(1.1f));
         Shaders::Shader::SetUniform(ObjectToWorldMatrixLocation, outerScaledMatrix);
         Shaders::Shader::SetTextureHandle(TextureLocation, OuterTexture);
         mesh->Draw();

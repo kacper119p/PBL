@@ -39,6 +39,7 @@ void UpdateParticle(inout particle Particle, int index)
         {
             Particle.life = 0.0;
             indices[atomicAdd(count, 1)] = index;
+            return;
         }
 
         Particle.position += Particle.velocity * DeltaTime;

@@ -10,6 +10,7 @@ namespace Engine
     {
     private:
         static constexpr float NoiseSpeed = 0.25f;
+        static constexpr float TransitionSpeed = 1.0f / 0.2f;
 
     private:
         Models::Model* Model;
@@ -26,6 +27,7 @@ namespace Engine
         int32_t ViewMatrixLocation;
         int32_t ProjectionMatrixLocation;
         int32_t ObjectToWorldMatrixLocation;
+        int32_t VisibilityLocation;
 
         bool Active = false;
 

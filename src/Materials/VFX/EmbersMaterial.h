@@ -11,7 +11,7 @@ namespace Materials
     private:
         static Shaders::Shader Shader;
 
-        TextureMaterialProperty SpriteSheetProperty;
+        TextureMaterialProperty SpriteProperty;
 
     public:
         EmbersMaterial();

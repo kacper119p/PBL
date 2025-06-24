@@ -76,17 +76,14 @@ namespace
 
 namespace Utility
 {
-    [[nodiscard]] unsigned int LoadTexture2DFromFile(const char* const FilePath, const GLenum Format,
-                                                     const uint8_t SourceChannels, const GLenum SourceFormat)
+    [[nodiscard]] unsigned int LoadTexture2DFromFile(const char* const FilePath)
     {
         int width;
         int height;
-        return LoadTexture2DFromFile(FilePath, Format, SourceChannels, SourceFormat, width, height);
+        return LoadTexture2DFromFile(FilePath, width, height);
     }
 
-    [[nodiscard]] unsigned int LoadTexture2DFromFile(const char* FilePath, GLenum Format, uint8_t SourceChannels,
-                                                     GLenum SourceFormat,
-                                                     int& OutWidth, int& OutHeight)
+    [[nodiscard]] unsigned int LoadTexture2DFromFile(const char* FilePath, int& OutWidth, int& OutHeight)
     {
         int width;
         int height;
@@ -323,8 +320,6 @@ namespace Utility
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                                GL_TEXTURE_2D, resultTexture, 0);
 
-        Engine::Rendering::ScreenQuad quad;
-
         const Shaders::Shader shader = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
                 "./res/shaders/Utility/SpecularIBLSetup/BRDF.vert",
                 nullptr,
@@ -334,7 +329,7 @@ namespace Utility
 
         shader.Use();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        quad.Draw();
+        Engine::Rendering::ScreenQuad::Draw();
 
         glDeleteFramebuffers(1, &fbo);
         glDeleteRenderbuffers(1, &rbo);

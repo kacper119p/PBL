@@ -14,9 +14,9 @@ namespace Materials
 
     EmbersMaterial::EmbersMaterial() :
         Material(Shaders::Shader(), Shader, Shaders::Shader(), Shaders::Shader(), true),
-        SpriteSheetProperty(TextureMaterialProperty("Sprite", Shader,
-                                                    Engine::TextureManager::GetTexture(
-                                                            "res/textures/VFX/Fire/Ember.dds")))
+        SpriteProperty(TextureMaterialProperty("Sprite", Shader,
+                                               Engine::TextureManager::GetTexture(
+                                                       "res/textures/VFX/Fire/Ember.dds")))
     {
     }
 
@@ -37,7 +37,7 @@ namespace Materials
     {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         GetMainPass().Use();
-        SpriteSheetProperty.Bind();
+        SpriteProperty.Bind();
     }
 
     void EmbersMaterial::UseDirectionalShadows() const

@@ -1,0 +1,53 @@
+#version 460 core
+
+#include "Random.glsl"
+#include "VacuumShotData.glsl"
+
+layout (std430, binding = 0) writeonly restrict buffer SSBO_0 {
+    particle particles[];
+};
+
+layout (std430, binding = 1) coherent restrict buffer SSBO_1 {
+    int count;
+    int indices[];
+} freelist;
+
+uniform int ParticlesToSpawn;
+uniform uint Random;
+
+const float CONE_ANGLE = radians(30.0);
+
+void MakeParticle(out particle Particle)
+{
+    uint seed = uint(gl_GlobalInvocationID.x) + Random;
+    seed = pcg_hash(seed);
+    Particle.life = MAX_LIFETIME;
+    Particle.velocity.z = rng(1.0, 4.0, seed);
+    Particle.scale = START_SCALE;
+
+    float cosTheta = rng(cos(CONE_ANGLE), 1.0, seed);
+    float sinTheta = sqrt(1.0 - cosTheta * cosTheta);
+    float phi = rng(0.0, 6.2831853, seed);
+
+    vec3 dir = vec3(sinTheta * cos(phi), sinTheta * sin(phi), -cosTheta);
+    Particle.velocity = dir * rng(MAX_VELOCITY * 0.7, MAX_VELOCITY, seed);
+    Particle.position = dir * START_SCALE * 1.1;
+}
+
+layout (local_size_x = 64, local_size_y = 1, local_size_z = 1) in;
+void main()
+{
+    uint index = gl_GlobalInvocationID.x;
+
+    if (index >= ParticlesToSpawn)
+    return;
+
+    int freeListIndex = atomicAdd(freelist.count, -1) - 1;
+    if (freeListIndex < 0) {
+        atomicAdd(freelist.count, 1);
+        return;
+    }
+
+    int particleIndex = freelist.indices[freeListIndex];
+    MakeParticle(particles[particleIndex]);
+}

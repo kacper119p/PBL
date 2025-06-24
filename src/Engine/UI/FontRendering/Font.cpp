@@ -19,7 +19,7 @@ namespace Engine::Ui
 
         int atlasWidth;
         int atlasHeight;
-        GlyphAtlas = Utility::LoadTexture2DFromFile(atlasPath.c_str(), GL_RGBA, 4,GL_RGBA, atlasWidth, atlasHeight);
+        GlyphAtlas = Utility::LoadTexture2DFromFile(atlasPath.c_str(), atlasWidth, atlasHeight);
 
         Serialization::ReadJsonFile(descriptorPath.c_str(), document);
 
