@@ -150,3 +150,13 @@ void Engine::PlayerAnimationManager::SetIndicator(float Fill, const glm::vec3& C
     StrapMaterial->SetFill(Fill);
     StrapMaterial->SetEmissiveColor(Color);
 }
+
+void Engine::PlayerAnimationManager::SetLeftTackSpeed(float speed)
+{
+    TrackLeft->GetAnimator().SetAnimationSpeed(speed);
+}
+
+void Engine::PlayerAnimationManager::SetRightTackSpeed(float speed) 
+{
+    TrackRight->GetAnimator().SetAnimationSpeed(speed);
+}
