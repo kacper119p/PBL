@@ -1,0 +1,453 @@
+{
+    "Skybox": "./res/textures/Skyboxes/Skybox.hdr",
+    "Bounds": {
+        "min": {
+            "x": -30.0,
+            "y": -1.0,
+            "z": -30.0
+        },
+        "max": {
+            "x": 30.0,
+            "y": 0.10000000149011612,
+            "z": 30.0
+        }
+    },
+    "UI": "EmptyUi",
+    "GameMode": "CleaningGameMode",
+    "Player": "DefaultPlayer",
+    "Root": {
+        "type": "Entity",
+        "id": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
+        "name": "Root",
+        "transform": {
+            "type": "Transform",
+            "id": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000",
+            "owner": "{f6ceccda-f5bb-4529-ab5b-9c9c2ad09401}\u0000",
+            "Position": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "EulerAngles": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0
+            },
+            "Scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 0.0
+            },
+            "Children": [
+                "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
+                "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000",
+                "{ab94d58e-31de-4f94-896d-ef2d1da2031c}\u0000",
+                "{f32fac05-e529-4064-ac1e-7559be969349}\u0000",
+                "{ddb0f30e-848a-440a-9e29-1d6f05c97d5f}\u0000",
+                "{7dbbbf7e-0716-4b31-958a-01eea8526572}\u0000",
+                "{d0e17687-fd20-4f20-a9a1-36ddcd3495e9}\u0000",
+                "{fb55658e-d834-414b-b9b9-b31f90a02a34}\u0000"
+            ],
+            "Parent": null
+        },
+        "components": []
+    },
+    "Objects": [
+        {
+            "type": "Entity",
+            "id": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+            "name": "Floor",
+            "transform": {
+                "type": "Transform",
+                "id": "{71609bfd-674c-41c8-a269-c087a80f8afc}\u0000",
+                "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 30.0,
+                    "y": 0.10000000149011612,
+                    "z": 30.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
+                "{f88fce1f-f373-4270-afca-947668850a37}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{5c708fff-c0c6-48ac-b4da-dc4033d9a2ef}\u0000",
+            "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+            "Material": "./res/materials/SampleScene/Floor.mat",
+            "Model": "./res/models/Box.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{f88fce1f-f373-4270-afca-947668850a37}\u0000",
+            "owner": "{1b6e5aa1-812b-4d9b-9d8e-a60807f40fee}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 60.0,
+            "_height": 0.20000000298023224,
+            "_depth": 60.0
+        },
+        {
+            "type": "Entity",
+            "id": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
+            "name": "Directional light",
+            "transform": {
+                "type": "Transform",
+                "id": "{0179e3cf-8ea3-40f8-8262-d522a6231a83}\u0000",
+                "owner": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{199fb480-7da5-459c-bc36-d10d5f80ab6b}\u0000"
+            ]
+        },
+        {
+            "type": "DirectionalLight",
+            "id": "{199fb480-7da5-459c-bc36-d10d5f80ab6b}\u0000",
+            "owner": "{6ce160d0-0620-4178-95fa-f5d243b1d7bd}\u0000",
+            "Color": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            }
+        },
+        {
+            "type": "Entity",
+            "id": "{a108a6d0-d728-4d2c-a22e-5a3071d374f0}\u0000",
+            "name": "New Game",
+            "transform": {
+                "type": "Transform",
+                "id": "{ab94d58e-31de-4f94-896d-ef2d1da2031c}\u0000",
+                "owner": "{a108a6d0-d728-4d2c-a22e-5a3071d374f0}\u0000",
+                "Position": {
+                    "x": -5.982804298400879,
+                    "y": 0.10000000149011612,
+                    "z": -13.952117919921875
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 12.82800006866455,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 40.0,
+                    "y": 0.5299999713897705,
+                    "z": 40.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.11171175539493561,
+                    "z": 0.0,
+                    "w": 0.9937406778335571
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{17be8524-e51a-410d-94e9-d2737c066b48}\u0000"
+            ]
+        },
+        {
+            "type": "BloodStain",
+            "id": "{17be8524-e51a-410d-94e9-d2737c066b48}\u0000",
+            "owner": "{a108a6d0-d728-4d2c-a22e-5a3071d374f0}\u0000",
+            "Texture": "res/textures/BloodSplatter\\StartButtonLochMess.dds",
+            "Color": {
+                "x": 0.7107843160629272,
+                "y": 0.05226356163620949,
+                "z": 0.05226356163620949
+            }
+        },
+        {
+            "type": "Entity",
+            "id": "{8c68e791-8d55-4c39-9433-098c8d326314}\u0000",
+            "name": "Credits",
+            "transform": {
+                "type": "Transform",
+                "id": "{f32fac05-e529-4064-ac1e-7559be969349}\u0000",
+                "owner": "{8c68e791-8d55-4c39-9433-098c8d326314}\u0000",
+                "Position": {
+                    "x": 10.32572078704834,
+                    "y": 0.10000000149011612,
+                    "z": 0.36882829666137695
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -5.038000106811523,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 25.0,
+                    "y": 0.5299999713897705,
+                    "z": 25.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.043950680643320084,
+                    "z": 0.0,
+                    "w": 0.9990336894989014
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{13bc1b53-ad18-418b-9356-af5a12af036e}\u0000"
+            ]
+        },
+        {
+            "type": "BloodStain",
+            "id": "{13bc1b53-ad18-418b-9356-af5a12af036e}\u0000",
+            "owner": "{8c68e791-8d55-4c39-9433-098c8d326314}\u0000",
+            "Texture": "res/textures/BloodSplatter\\CreditsButtonLochMess.dds",
+            "Color": {
+                "x": 0.7107843160629272,
+                "y": 0.05226356163620949,
+                "z": 0.05226356163620949
+            }
+        },
+        {
+            "type": "Entity",
+            "id": "{1ca8e7b8-5187-4a04-a605-38020a39d3db}\u0000",
+            "name": "Quit",
+            "transform": {
+                "type": "Transform",
+                "id": "{ddb0f30e-848a-440a-9e29-1d6f05c97d5f}\u0000",
+                "owner": "{1ca8e7b8-5187-4a04-a605-38020a39d3db}\u0000",
+                "Position": {
+                    "x": -5.287178039550781,
+                    "y": 0.10000000149011612,
+                    "z": 19.6141414642334
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 19.633338928222656,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 30.0,
+                    "y": 0.5299999713897705,
+                    "z": 30.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.17049619555473328,
+                    "z": 0.0,
+                    "w": 0.9853583574295044
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{4de42aa1-fa17-4e43-a0a9-37cc2a5d80ac}\u0000"
+            ]
+        },
+        {
+            "type": "BloodStain",
+            "id": "{4de42aa1-fa17-4e43-a0a9-37cc2a5d80ac}\u0000",
+            "owner": "{1ca8e7b8-5187-4a04-a605-38020a39d3db}\u0000",
+            "Texture": "res/textures/BloodSplatter\\QuitButtonLochMess.dds",
+            "Color": {
+                "x": 0.7107843160629272,
+                "y": 0.05226356163620949,
+                "z": 0.05226356163620949
+            }
+        },
+        {
+            "type": "Entity",
+            "id": "{f2fe7132-db66-4bf6-b991-46bcf1d68b6c}\u0000",
+            "name": "New Game Collider",
+            "transform": {
+                "type": "Transform",
+                "id": "{7dbbbf7e-0716-4b31-958a-01eea8526572}\u0000",
+                "owner": "{f2fe7132-db66-4bf6-b991-46bcf1d68b6c}\u0000",
+                "Position": {
+                    "x": -7.6009063720703125,
+                    "y": 0.6728209257125854,
+                    "z": -16.837949752807617
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 17.661378860473633,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.15351513028144836,
+                    "z": 0.0,
+                    "w": 0.9881463050842285
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{30a77ac2-eb0f-44f9-bd5b-5f06483eacff}\u0000",
+                "{a1340d20-ce24-4793-ba8e-5cf13b01f12f}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{30a77ac2-eb0f-44f9-bd5b-5f06483eacff}\u0000",
+            "owner": "{f2fe7132-db66-4bf6-b991-46bcf1d68b6c}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 0.4000000059604645,
+            "_height": 1.0,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "StartGameButton",
+            "id": "{a1340d20-ce24-4793-ba8e-5cf13b01f12f}\u0000",
+            "owner": "{f2fe7132-db66-4bf6-b991-46bcf1d68b6c}\u0000"
+        },
+        {
+            "type": "Entity",
+            "id": "{a21696d5-6581-4dc2-b014-7da271de026c}\u0000",
+            "name": "Credits Collider",
+            "transform": {
+                "type": "Transform",
+                "id": "{d0e17687-fd20-4f20-a9a1-36ddcd3495e9}\u0000",
+                "owner": "{a21696d5-6581-4dc2-b014-7da271de026c}\u0000",
+                "Position": {
+                    "x": 10.024605751037598,
+                    "y": 0.6728209257125854,
+                    "z": -0.7655096054077148
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.4226524233818054,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.003688329830765724,
+                    "z": 0.0,
+                    "w": 0.9999932050704956
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{6c018d60-182f-4ba4-8fa1-8d1f3848926a}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{6c018d60-182f-4ba4-8fa1-8d1f3848926a}\u0000",
+            "owner": "{a21696d5-6581-4dc2-b014-7da271de026c}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 0.4000000059604645,
+            "_height": 1.0,
+            "_depth": 0.4000000059604645
+        },
+        {
+            "type": "Entity",
+            "id": "{da1fa60a-d79d-4403-b943-0ca8eee89466}\u0000",
+            "name": "Quit Collider",
+            "transform": {
+                "type": "Transform",
+                "id": "{fb55658e-d834-414b-b9b9-b31f90a02a34}\u0000",
+                "owner": "{da1fa60a-d79d-4403-b943-0ca8eee89466}\u0000",
+                "Position": {
+                    "x": -6.789675712585449,
+                    "y": 0.6728209257125854,
+                    "z": 19.870586395263672
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.4226524233818054,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.003688329830765724,
+                    "z": 0.0,
+                    "w": 0.9999932050704956
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{08cf762d-91f1-4588-bd03-942551dda037}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{08cf762d-91f1-4588-bd03-942551dda037}\u0000",
+            "owner": "{da1fa60a-d79d-4403-b943-0ca8eee89466}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 0,
+            "_width": 0.4000000059604645,
+            "_height": 1.0,
+            "_depth": 0.4000000059604645
+        }
+    ]
+}

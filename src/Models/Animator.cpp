@@ -23,7 +23,7 @@ namespace Models
         {
             float ticksPerSecond = m_CurrentAnimation->GetTicksPerSecond();
             float duration = m_CurrentAnimation->GetDuration();
-            float timeAdvance = ticksPerSecond * dt;
+            float timeAdvance = ticksPerSecond * dt * m_AnimationSpeed;
 
             if (m_PlayOnce)
             {

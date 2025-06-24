@@ -62,7 +62,7 @@ namespace Engine
         {
             if (DefaultPlayer::GetInstance().GetCurrentTool() == Tool::Broom)
                 AudioManager::GetInstance().PlayAudio(BloodCleaningSound);
-            rigidbody->AddForce(forward * Speed * 1.25f, ForceMode::Force);
+            rigidbody->AddForce(forward * Speed * 1.5f, ForceMode::Force);
             if (playerAnimationManager)
             {
                 playerAnimationManager->TrackLeftForward();
@@ -84,7 +84,7 @@ namespace Engine
         {
             if (DefaultPlayer::GetInstance().GetCurrentTool() == Tool::Broom)
                 AudioManager::GetInstance().PlayAudio(BloodCleaningSound);
-            rigidbody->AddForce(-forward * Speed, ForceMode::Force);
+            rigidbody->AddForce(-forward * Speed * 1.5f, ForceMode::Force);
             if (playerAnimationManager)
             {
                 playerAnimationManager->TrackLeftBackward();
@@ -254,6 +254,13 @@ namespace Engine
             return;
         }
 
+        float MovementSpeed = rigidbody->velocity.x * rigidbody->velocity.x +
+                              rigidbody->velocity.y * rigidbody->velocity.y +
+                              rigidbody->velocity.z * rigidbody->velocity.z;
+        MovementSpeed = std::sqrt(MovementSpeed)/10;
+
+        playerAnimationManager->SetLeftTackSpeed(MovementSpeed);
+        playerAnimationManager->SetRightTackSpeed(MovementSpeed);
 
 #endif
     }

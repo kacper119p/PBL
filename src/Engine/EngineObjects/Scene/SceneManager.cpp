@@ -5,6 +5,9 @@
 
 namespace Engine
 {
+    bool SceneManager::isSceneChanging = false;
+    std::string SceneManager::NewScene = "";
+
     void SceneManager::SaveScene(const std::string& Path, Scene* const Scene)
     {
         rapidjson::MemoryPoolAllocator<> allocator;
@@ -18,5 +21,19 @@ namespace Engine
         Serialization::ReadJsonFile(Path.c_str(), data);
         Scene->Deserialize(data);
         Scene->SetPath(Path);
+    }
+    void SceneManager::ChangeScene(const std::string& Path) 
+    { 
+        isSceneChanging = true;
+        NewScene = Path;
+    }
+    void SceneManager::UpdateScene(Scene* Scene) 
+    {
+        if (isSceneChanging)
+        {
+            LoadScene(NewScene, Scene);
+            isSceneChanging = false;
+            NewScene = "";
+        }
     }
 } // Engine
