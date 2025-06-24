@@ -2,12 +2,12 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{0bbacb9e-2a97-4715-93f5-0e6cb749b70b}\u0000",
+            "id": "{4db1cb56-09a1-4c35-8111-58ceaf1e3a16}\u0000",
             "name": "BroomSwapper",
             "transform": {
                 "type": "Transform",
-                "id": "{79cce163-887d-4e16-95bd-b92008c6d7dc}\u0000",
-                "owner": "{0bbacb9e-2a97-4715-93f5-0e6cb749b70b}\u0000",
+                "id": "{a0f30b95-6b00-44a1-b028-1ed5e8fdadf0}\u0000",
+                "owner": "{4db1cb56-09a1-4c35-8111-58ceaf1e3a16}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -29,20 +29,17 @@
                     "z": -9.099629778575036e-7,
                     "w": -4.371055695173709e-8
                 },
-                "Children": [
-                    "{57dd0edc-0c2e-4225-b785-b2893c47e3d2}\u0000",
-                    "{f365f454-2fbe-4268-8653-02f76ec37bbf}\u0000"
-                ],
+                "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{eee2c811-f91c-464a-b1b4-13021cb03bff}\u0000"
+                "{aba8c943-70bb-4be2-a1c4-aa94d07f9d10}\u0000"
             ]
         },
         {
             "type": "OutlinedModelRenderer",
-            "id": "{eee2c811-f91c-464a-b1b4-13021cb03bff}\u0000",
-            "owner": "{0bbacb9e-2a97-4715-93f5-0e6cb749b70b}\u0000",
+            "id": "{aba8c943-70bb-4be2-a1c4-aa94d07f9d10}\u0000",
+            "owner": "{4db1cb56-09a1-4c35-8111-58ceaf1e3a16}\u0000",
             "Material": "./res/materials/SampleScene/Tools.mat",
             "Model": "./res/Models/Granny/mop.fbx",
             "CastShadow": true,
@@ -53,100 +50,6 @@
             },
             "OutlineSize": 0.009999999776482582,
             "Active": false
-        },
-        {
-            "type": "Entity",
-            "id": "{49ecc5e7-efec-4634-ba21-bb172d0a233b}\u0000",
-            "name": "Collider1",
-            "transform": {
-                "type": "Transform",
-                "id": "{57dd0edc-0c2e-4225-b785-b2893c47e3d2}\u0000",
-                "owner": "{49ecc5e7-efec-4634-ba21-bb172d0a233b}\u0000",
-                "Position": {
-                    "x": 0.6465482711791992,
-                    "y": -0.7626996040344238,
-                    "z": 0.75
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{79cce163-887d-4e16-95bd-b92008c6d7dc}\u0000"
-            },
-            "components": [
-                "{7d93fad5-2471-4693-91ae-73d66e7f821f}\u0000"
-            ]
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{7d93fad5-2471-4693-91ae-73d66e7f821f}\u0000",
-            "owner": "{49ecc5e7-efec-4634-ba21-bb172d0a233b}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "colliderType": 0,
-            "_width": 0.800000011920929,
-            "_height": 0.30000001192092896,
-            "_depth": 0.800000011920929
-        },
-        {
-            "type": "Entity",
-            "id": "{c41d96f0-c698-4296-a6ae-91f86e058c43}\u0000",
-            "name": "Collider2",
-            "transform": {
-                "type": "Transform",
-                "id": "{f365f454-2fbe-4268-8653-02f76ec37bbf}\u0000",
-                "owner": "{c41d96f0-c698-4296-a6ae-91f86e058c43}\u0000",
-                "Position": {
-                    "x": -0.6470000147819519,
-                    "y": -0.7626999616622925,
-                    "z": 0.75
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 1.0
-                },
-                "Children": [],
-                "Parent": "{79cce163-887d-4e16-95bd-b92008c6d7dc}\u0000"
-            },
-            "components": [
-                "{756728be-e066-48b8-8664-deb951abce81}\u0000"
-            ]
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{756728be-e066-48b8-8664-deb951abce81}\u0000",
-            "owner": "{c41d96f0-c698-4296-a6ae-91f86e058c43}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "colliderType": 0,
-            "_width": 0.800000011920929,
-            "_height": 0.30000001192092896,
-            "_depth": 0.800000011920929
         }
     ]
 }

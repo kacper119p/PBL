@@ -6,6 +6,7 @@
 #include "Engine/Components/Renderers/OutlinedModelRenderer.h"
 #include "Engine/EngineObjects/Player/DefaultPlayer.h"
 #include "Engine/Components/Colliders/SphereCollider.h"
+#include "Engine/Components/Renderers/OutlinedModelRenderer.h"
 
 namespace Engine
 {
@@ -113,28 +114,45 @@ namespace Engine
                 hasBroom = false;
                 break;
         }
+        if (stripper != nullptr)
+        {
+            stripper->GetComponent<OutlinedModelRenderer>()->Deactivate();
+        }
+        if (vacuum != nullptr)
+        {
+            vacuum->GetComponent<OutlinedModelRenderer>()->Deactivate();
+        }
+        if (broom != nullptr)
+        {
+            broom->GetComponent<OutlinedModelRenderer>()->Deactivate();
+        }
     }
 
     void Swapper::SwapPlayerToolStripper(Collider* collider) 
     {
         auto defaultPlayer = static_cast<Engine::DefaultPlayer*>(player);
-        if (defaultPlayer->GetCanSwap())
+        if (defaultPlayer->GetCurrentTool()!=Tool::Stripper &&  defaultPlayer->GetCanSwap())
         defaultPlayer->SetTool(Tool::Stripper);
+        if (stripper!=nullptr)
+        stripper->GetComponent<OutlinedModelRenderer>()->Activate();
     }
 
     void Swapper::SwapPlayerToolBroom(Collider* collider) 
     {
         auto defaultPlayer = static_cast<Engine::DefaultPlayer*>(player);
-        if (defaultPlayer->GetCanSwap())
+        if (defaultPlayer->GetCurrentTool() != Tool::Broom && defaultPlayer->GetCanSwap())
         defaultPlayer->SetTool(Tool::Broom);
+        if (broom != nullptr)
+        broom->GetComponent<OutlinedModelRenderer>()->Activate();
     }
 
     void Swapper::SwapPlayerToolVacuum(Collider* collider) 
     {
         auto defaultPlayer = static_cast<Engine::DefaultPlayer*>(player);
-        if (defaultPlayer->GetCanSwap())
+        if (defaultPlayer->GetCurrentTool() != Tool::Vacuum && defaultPlayer->GetCanSwap())
             defaultPlayer->SetTool(Tool::Vacuum);
-
+        if (vacuum != nullptr)
+        vacuum->GetComponent<OutlinedModelRenderer>()->Activate();
     }
 
     rapidjson::Value Swapper::Serialize(rapidjson::Document::AllocatorType& Allocator) const
