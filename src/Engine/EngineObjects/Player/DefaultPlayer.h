@@ -34,6 +34,7 @@ namespace Engine
         Entity* broom = nullptr;
         Entity* vacuumVfx = nullptr;
         Entity* vacuumShotVfx = nullptr;
+        Entity* exhaustVfx = nullptr;
 
         bool hasStripper = false;
         bool hasVacuum = false;
