@@ -2,6 +2,7 @@
 
 #include "Materials/Material.h"
 #include "Materials/Properties/MaterialProperty.h"
+#include "Materials/Properties/TextureMaterialProperty.h"
 
 namespace Materials
 {
