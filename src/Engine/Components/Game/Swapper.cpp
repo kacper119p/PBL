@@ -3,6 +3,9 @@
 #include "Engine/Prefabs/PrefabLoader.h"
 #include "Serialization/SerializationFilesUtility.h"
 #include "Engine/EngineObjects/UpdateManager.h"
+#include "Engine/Components/Renderers/OutlinedModelRenderer.h"
+#include "Engine/EngineObjects/Player/DefaultPlayer.h"
+#include "Engine/Components/Colliders/SphereCollider.h"
 
 namespace Engine
 {
@@ -13,6 +16,25 @@ namespace Engine
             return; 
         player = owner->GetScene()->GetPlayer();
         UpdateManager::GetInstance()->RegisterComponent(this);
+        std::vector<Transform*> children = owner->GetTransform()->GetChildren();
+        for (Transform* child : children)
+        {
+            if (child->GetOwner()->GetName() == "StripperCollider")
+            {
+                stripperCollider = child->GetOwner()->GetComponent < SphereCollider>();
+                stripperCollider->OnTriggerAddListener(SwapToolStripper);
+            }
+            else if (child->GetOwner()->GetName() == "VacuumCollider")
+            {
+                vacuumCollider = child->GetOwner()->GetComponent<SphereCollider>();
+                vacuumCollider->OnTriggerAddListener(SwapToolVacuum);
+            }
+            else if (child->GetOwner()->GetName() == "BroomCollider")
+            {
+                broomCollider = child->GetOwner()->GetComponent<SphereCollider>();
+                broomCollider->OnTriggerAddListener(SwapToolBroom);
+            }
+        }
     }
 
     void Engine::Swapper::Update(float DeltaTime)
@@ -91,6 +113,28 @@ namespace Engine
                 hasBroom = false;
                 break;
         }
+    }
+
+    void Swapper::SwapPlayerToolStripper(Collider* collider) 
+    {
+        auto defaultPlayer = static_cast<Engine::DefaultPlayer*>(player);
+        if (defaultPlayer->GetCanSwap())
+        defaultPlayer->SetTool(Tool::Stripper);
+    }
+
+    void Swapper::SwapPlayerToolBroom(Collider* collider) 
+    {
+        auto defaultPlayer = static_cast<Engine::DefaultPlayer*>(player);
+        if (defaultPlayer->GetCanSwap())
+        defaultPlayer->SetTool(Tool::Broom);
+    }
+
+    void Swapper::SwapPlayerToolVacuum(Collider* collider) 
+    {
+        auto defaultPlayer = static_cast<Engine::DefaultPlayer*>(player);
+        if (defaultPlayer->GetCanSwap())
+            defaultPlayer->SetTool(Tool::Vacuum);
+
     }
 
     rapidjson::Value Swapper::Serialize(rapidjson::Document::AllocatorType& Allocator) const

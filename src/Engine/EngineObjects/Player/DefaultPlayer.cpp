@@ -36,8 +36,8 @@ namespace Engine
             boxCollider->SetHeight(2.0f);
             boxCollider->SetWidth(2.0f);
             boxCollider->SetDepth(2.0f);
-            boxCollider->OnCollisionAddListener(SwapTool);
             boxCollider->collisionMask &= ~(1 << 2);
+            boxCollider->collisionLayer |= (1 << 2);
             // rb settings
             rb->friction = 0.05f;
             rb->angularDamping = 0.01f;
@@ -225,22 +225,4 @@ namespace Engine
 
     void DefaultPlayer::SetTool(Tool tool) { this->currentTool = tool; }
 
-    void DefaultPlayer::ToolSwapper(Collider* collider)
-    {
-        if (canSwap)
-        {
-            if (collider->GetOwner()->GetName() == "StripperCollider")
-            {
-                SetTool(Tool::Stripper);
-            }
-            else if (collider->GetOwner()->GetName() == "VacuumCollider")
-            {
-                SetTool(Tool::Vacuum);
-            }
-            else if (collider->GetOwner()->GetName() == "BroomCollider")
-            {
-                SetTool(Tool::Broom);
-            }
-        }
-    }
 } // namespace Engine

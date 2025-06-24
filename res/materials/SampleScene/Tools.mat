@@ -1,15 +1,15 @@
 {
     "type": "PbrMaterial",
-    "BaseMap": "",
-    "RoughnessMetallicMap": "",
-    "NormalMap": "",
-    "EmissiveMap": "",
-    "Roughness": 0.0,
-    "Metallic": 0.0,
+    "BaseMap": "./res/textures/Tools/BaseMap.dds",
+    "RoughnessMetallicMap": "./res/textures/Tools/RMAOMap.dds",
+    "NormalMap": "./res/textures/Tools/NormalMap.dds",
+    "EmissiveMap": "./res/textures/Tools/EmissiveMap.dds",
+    "Roughness": 1.0,
+    "Metallic": 1.0,
     "BaseColor": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
     },
     "EmissiveColor": {
         "x": 0.0,

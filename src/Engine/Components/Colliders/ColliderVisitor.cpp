@@ -1071,7 +1071,7 @@ namespace Engine
 
         for (auto* collider : spatialPartitioning->GetPotentialCollisions(currentCollider))
         {
-            if (!collider || collider == currentCollider || !collider->GetOwner())
+            if (!collider || collider->GetOwner() == currentCollider->GetOwner() || !collider->GetOwner())
                 continue;
 
             auto* otherOwner = collider->GetOwner();
