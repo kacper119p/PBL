@@ -46,7 +46,7 @@ namespace Engine
             rb->SetMass(1.0f);
             rb->frictionEnabled = true;
             // player start position
-            this->GetTransform()->SetPosition(glm::vec3(0.0f, 6.0f, 0.0f));
+            this->GetTransform()->SetPosition(glm::vec3(-10.0f, 9.0f, 10.0f));
 
             PlayerAnimationManager* playerAnimationManager = PlayerAnimationManager::GetInstance();
             std::vector<Engine::Transform*> children = prefabEntity->GetTransform()->GetChildren();

@@ -2,16 +2,16 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{3e75a22c-7fe6-4e8f-8e8c-2446b29a1c81}\u0000",
+            "id": "{4d5a7091-92fd-4b72-b845-72a31b832f9b}\u0000",
             "name": "Regal",
             "transform": {
                 "type": "Transform",
-                "id": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000",
-                "owner": "{3e75a22c-7fe6-4e8f-8e8c-2446b29a1c81}\u0000",
+                "id": "{200e3d27-9872-43eb-8dea-cc7d6716d118}\u0000",
+                "owner": "{4d5a7091-92fd-4b72-b845-72a31b832f9b}\u0000",
                 "Position": {
                     "x": -7.404040813446045,
-                    "y": 4.7090744972229,
-                    "z": 33.10603713989258
+                    "y": 4.561714172363281,
+                    "z": -36.508331298828125
                 },
                 "EulerAngles": {
                     "x": -179.99989318847656,
@@ -30,61 +30,66 @@
                     "w": 0.7071064710617065
                 },
                 "Children": [
-                    "{46497939-8758-4a7b-88da-2832018e9225}\u0000",
-                    "{0b470104-e374-4c88-bb2b-417f81f5198c}\u0000",
-                    "{e9d3d1fb-bc59-4a9f-8af3-b82c5057c1cd}\u0000",
-                    "{4853b244-a287-46a2-9290-14aa573aa5c6}\u0000",
-                    "{afb40f4b-7d32-4db9-82e8-984e406236b3}\u0000"
+                    "{93502c80-5f22-4c65-8ccb-cc8703139ac2}\u0000",
+                    "{dfe2cdf3-4afd-4a68-94b5-e7d6247593bc}\u0000",
+                    "{85827f63-9080-40b2-9a58-1d6b0c5a8eff}\u0000",
+                    "{2bb3d68e-bafb-4d6d-bfce-cbb4fd9e03fe}\u0000",
+                    "{0a9f3088-1cc8-49de-ad81-768aca18363d}\u0000"
                 ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{5b67c6e0-ff25-4006-8e9d-7efd942ab55e}\u0000",
-                "{1681a201-0806-4f55-a3a3-5868bc0ba5e7}\u0000",
-                "{6369c7a0-5e41-4add-9dc3-86d56c4e7cd5}\u0000"
+                "{8dd65f4b-06e4-4934-b1b3-26ee04de6e99}\u0000",
+                "{8bc00372-9705-4ea3-8ab4-6e472866e01c}\u0000",
+                "{824c7e0e-1ff3-402c-bb38-1519c78b8740}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{5b67c6e0-ff25-4006-8e9d-7efd942ab55e}\u0000",
-            "owner": "{3e75a22c-7fe6-4e8f-8e8c-2446b29a1c81}\u0000",
+            "id": "{8dd65f4b-06e4-4934-b1b3-26ee04de6e99}\u0000",
+            "owner": "{4d5a7091-92fd-4b72-b845-72a31b832f9b}\u0000",
             "Material": "./res/materials/SampleScene/Default.mat",
             "Model": "./res/models/Modele_Mati/Meble/RegalZwykly.fbx",
             "CastShadow": true
         },
         {
             "type": "BoxCollider",
-            "id": "{1681a201-0806-4f55-a3a3-5868bc0ba5e7}\u0000",
-            "owner": "{3e75a22c-7fe6-4e8f-8e8c-2446b29a1c81}\u0000",
+            "id": "{8bc00372-9705-4ea3-8ab4-6e472866e01c}\u0000",
+            "owner": "{4d5a7091-92fd-4b72-b845-72a31b832f9b}\u0000",
             "isTrigger": false,
             "isStatic": true,
             "skipCollisionSibling": false,
             "collisionLayer": 4,
             "collisionMask": 4294967056,
             "colliderType": 0,
-            "_width": 6.0,
+            "_width": 11.0,
             "_height": 9.0,
             "_depth": 4.900000095367432
         },
         {
             "type": "BookManager",
-            "id": "{6369c7a0-5e41-4add-9dc3-86d56c4e7cd5}\u0000",
-            "owner": "{3e75a22c-7fe6-4e8f-8e8c-2446b29a1c81}\u0000",
+            "id": "{824c7e0e-1ff3-402c-bb38-1519c78b8740}\u0000",
+            "owner": "{4d5a7091-92fd-4b72-b845-72a31b832f9b}\u0000",
             "bookWidth": 0.4000000059604645,
             "bookDepth": 0.699999988079071,
             "bookHeight": 1.2000000476837158,
             "bookMargin": 0.019999999552965164,
             "sidePadding": 0.05000000074505806,
-            "backPadding": 0.029999999329447746
+            "backPadding": 0.029999999329447746,
+            "itemType": 0,
+            "swordPlacementPoint": null,
+            "bowPlacementPoint": null,
+            "arrowPlacementPoint": null,
+            "shieldPlacementPoint": null
         },
         {
             "type": "Entity",
-            "id": "{6c666124-0e52-4387-840c-cd0e943e22db}\u0000",
+            "id": "{2057fa7f-8410-4771-b573-36340e598867}\u0000",
             "name": "dolna polka",
             "transform": {
                 "type": "Transform",
-                "id": "{46497939-8758-4a7b-88da-2832018e9225}\u0000",
-                "owner": "{6c666124-0e52-4387-840c-cd0e943e22db}\u0000",
+                "id": "{93502c80-5f22-4c65-8ccb-cc8703139ac2}\u0000",
+                "owner": "{2057fa7f-8410-4771-b573-36340e598867}\u0000",
                 "Position": {
                     "x": 0.000003248990196880186,
                     "y": -0.032029151916503906,
@@ -107,16 +112,16 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000"
+                "Parent": "{200e3d27-9872-43eb-8dea-cc7d6716d118}\u0000"
             },
             "components": [
-                "{7d4ff419-541b-43ab-adc9-700931979b3f}\u0000"
+                "{03b74687-62b2-43c3-bd04-466c4792ddf6}\u0000"
             ]
         },
         {
             "type": "BoxCollider",
-            "id": "{7d4ff419-541b-43ab-adc9-700931979b3f}\u0000",
-            "owner": "{6c666124-0e52-4387-840c-cd0e943e22db}\u0000",
+            "id": "{03b74687-62b2-43c3-bd04-466c4792ddf6}\u0000",
+            "owner": "{2057fa7f-8410-4771-b573-36340e598867}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
@@ -129,12 +134,12 @@
         },
         {
             "type": "Entity",
-            "id": "{696eb42a-f4bb-4750-a1b2-9d15469e11fc}\u0000",
+            "id": "{9f9ebcb2-944d-4e03-a338-0d25426727f2}\u0000",
             "name": "dolna polka",
             "transform": {
                 "type": "Transform",
-                "id": "{0b470104-e374-4c88-bb2b-417f81f5198c}\u0000",
-                "owner": "{696eb42a-f4bb-4750-a1b2-9d15469e11fc}\u0000",
+                "id": "{dfe2cdf3-4afd-4a68-94b5-e7d6247593bc}\u0000",
+                "owner": "{9f9ebcb2-944d-4e03-a338-0d25426727f2}\u0000",
                 "Position": {
                     "x": 0.0000032500738598173484,
                     "y": -4.000182151794434,
@@ -157,16 +162,16 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000"
+                "Parent": "{200e3d27-9872-43eb-8dea-cc7d6716d118}\u0000"
             },
             "components": [
-                "{a38e3d51-9ec8-40b6-901d-40914f36c8d3}\u0000"
+                "{bd9b90b8-8123-4a57-a5a5-e1a6abaad3a1}\u0000"
             ]
         },
         {
             "type": "BoxCollider",
-            "id": "{a38e3d51-9ec8-40b6-901d-40914f36c8d3}\u0000",
-            "owner": "{696eb42a-f4bb-4750-a1b2-9d15469e11fc}\u0000",
+            "id": "{bd9b90b8-8123-4a57-a5a5-e1a6abaad3a1}\u0000",
+            "owner": "{9f9ebcb2-944d-4e03-a338-0d25426727f2}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
@@ -179,12 +184,12 @@
         },
         {
             "type": "Entity",
-            "id": "{752bccc0-7879-4b99-a21c-3d6268c8f6b9}\u0000",
+            "id": "{3aa046ed-1c1c-4fae-9f95-c8a844a30c60}\u0000",
             "name": "dolna polka",
             "transform": {
                 "type": "Transform",
-                "id": "{e9d3d1fb-bc59-4a9f-8af3-b82c5057c1cd}\u0000",
-                "owner": "{752bccc0-7879-4b99-a21c-3d6268c8f6b9}\u0000",
+                "id": "{85827f63-9080-40b2-9a58-1d6b0c5a8eff}\u0000",
+                "owner": "{3aa046ed-1c1c-4fae-9f95-c8a844a30c60}\u0000",
                 "Position": {
                     "x": 0.000003249726887588622,
                     "y": 1.875074863433838,
@@ -207,16 +212,16 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000"
+                "Parent": "{200e3d27-9872-43eb-8dea-cc7d6716d118}\u0000"
             },
             "components": [
-                "{f4567574-2180-439e-8f52-e6df924fc827}\u0000"
+                "{dd22514d-d45b-44c2-8e26-e5e62a51aa3c}\u0000"
             ]
         },
         {
             "type": "BoxCollider",
-            "id": "{f4567574-2180-439e-8f52-e6df924fc827}\u0000",
-            "owner": "{752bccc0-7879-4b99-a21c-3d6268c8f6b9}\u0000",
+            "id": "{dd22514d-d45b-44c2-8e26-e5e62a51aa3c}\u0000",
+            "owner": "{3aa046ed-1c1c-4fae-9f95-c8a844a30c60}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
@@ -229,12 +234,12 @@
         },
         {
             "type": "Entity",
-            "id": "{1e3e02ed-54b1-4247-b337-faf0d35ee709}\u0000",
+            "id": "{319059b5-0077-4329-87d3-4d856786b064}\u0000",
             "name": "dolna polka",
             "transform": {
                 "type": "Transform",
-                "id": "{4853b244-a287-46a2-9290-14aa573aa5c6}\u0000",
-                "owner": "{1e3e02ed-54b1-4247-b337-faf0d35ee709}\u0000",
+                "id": "{2bb3d68e-bafb-4d6d-bfce-cbb4fd9e03fe}\u0000",
+                "owner": "{319059b5-0077-4329-87d3-4d856786b064}\u0000",
                 "Position": {
                     "x": 0.000003249447217967827,
                     "y": 3.7544960975646973,
@@ -257,16 +262,16 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000"
+                "Parent": "{200e3d27-9872-43eb-8dea-cc7d6716d118}\u0000"
             },
             "components": [
-                "{2affca91-bd29-4e08-a093-6f960c2c0313}\u0000"
+                "{cd0cedf7-a5a0-46da-a121-a8e250b234cf}\u0000"
             ]
         },
         {
             "type": "BoxCollider",
-            "id": "{2affca91-bd29-4e08-a093-6f960c2c0313}\u0000",
-            "owner": "{1e3e02ed-54b1-4247-b337-faf0d35ee709}\u0000",
+            "id": "{cd0cedf7-a5a0-46da-a121-a8e250b234cf}\u0000",
+            "owner": "{319059b5-0077-4329-87d3-4d856786b064}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
@@ -279,12 +284,12 @@
         },
         {
             "type": "Entity",
-            "id": "{fe5f1e30-e5dd-4884-a926-7d5b393e21e4}\u0000",
+            "id": "{d1aab356-5bcf-479e-abc1-8a57b5987da3}\u0000",
             "name": "dolna polka",
             "transform": {
                 "type": "Transform",
-                "id": "{afb40f4b-7d32-4db9-82e8-984e406236b3}\u0000",
-                "owner": "{fe5f1e30-e5dd-4884-a926-7d5b393e21e4}\u0000",
+                "id": "{0a9f3088-1cc8-49de-ad81-768aca18363d}\u0000",
+                "owner": "{d1aab356-5bcf-479e-abc1-8a57b5987da3}\u0000",
                 "Position": {
                     "x": 0.0000032497000574949197,
                     "y": -2.0220696926116943,
@@ -307,16 +312,16 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{0f911dbd-2c6c-470a-b536-de6d7b42b4b2}\u0000"
+                "Parent": "{200e3d27-9872-43eb-8dea-cc7d6716d118}\u0000"
             },
             "components": [
-                "{5de0f168-e1e5-481f-b5ef-57523bcd56c0}\u0000"
+                "{92713500-bc8a-4914-ad9f-025437629b6c}\u0000"
             ]
         },
         {
             "type": "BoxCollider",
-            "id": "{5de0f168-e1e5-481f-b5ef-57523bcd56c0}\u0000",
-            "owner": "{fe5f1e30-e5dd-4884-a926-7d5b393e21e4}\u0000",
+            "id": "{92713500-bc8a-4914-ad9f-025437629b6c}\u0000",
+            "owner": "{d1aab356-5bcf-479e-abc1-8a57b5987da3}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,

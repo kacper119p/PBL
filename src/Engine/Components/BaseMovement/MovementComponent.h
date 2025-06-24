@@ -15,7 +15,7 @@ namespace Engine
     class MovementComponent : public Component, public IUpdateable
     {
     private:
-        float Speed;
+        float Speed = 120.0f;
         float RotationSpeed = 3.0f;
         float BothRotationSpeed = RotationSpeed * 3.0f;
         float CurrentVelocity = 0.0f;
@@ -28,8 +28,7 @@ namespace Engine
         std::shared_ptr<ma_sound> BloodCleaningSound;
 
     public:
-        MovementComponent(float speed = 30.0f) :
-            Speed(speed)
+        MovementComponent()
         {
             UpdateManager::GetInstance()->RegisterComponent(this);
         }

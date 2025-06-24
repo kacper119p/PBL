@@ -2,16 +2,16 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{4c846f8b-62f8-435c-9310-1d209b2eaf1e}\u0000",
+            "id": "{f2296811-a45e-4b19-9a81-2e6b3e79cc2f}\u0000",
             "name": "GoldDigger",
             "transform": {
                 "type": "Transform",
-                "id": "{e2b379ac-d4d0-45b2-804d-de0d296948fa}\u0000",
-                "owner": "{4c846f8b-62f8-435c-9310-1d209b2eaf1e}\u0000",
+                "id": "{d106f882-2206-4bc3-968f-7598276573a9}\u0000",
+                "owner": "{f2296811-a45e-4b19-9a81-2e6b3e79cc2f}\u0000",
                 "Position": {
-                    "x": 14.383217811584473,
+                    "x": -30.170122146606445,
                     "y": 0.990814208984375,
-                    "z": -11.096906661987305
+                    "z": -28.7468318939209
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -30,31 +30,31 @@
                     "w": 1.0
                 },
                 "Children": [
-                    "{dfc49a2b-ba07-4f9b-acc8-c866445c86c4}\u0000",
-                    "{e3e403e3-1add-4226-aa67-7cd429c026ad}\u0000"
+                    "{c627c9eb-2f04-4dc3-9ff1-26e13facffff}\u0000",
+                    "{b6df018a-d480-41b8-ba29-ce18770bc5d1}\u0000"
                 ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{be4ba8e5-b597-4bc6-9b61-9b603d531dd6}\u0000"
+                "{42f1f159-4332-4390-b97c-bb52d47b9fc0}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{be4ba8e5-b597-4bc6-9b61-9b603d531dd6}\u0000",
-            "owner": "{4c846f8b-62f8-435c-9310-1d209b2eaf1e}\u0000",
+            "id": "{42f1f159-4332-4390-b97c-bb52d47b9fc0}\u0000",
+            "owner": "{f2296811-a45e-4b19-9a81-2e6b3e79cc2f}\u0000",
             "Material": "res/materials/SampleScene/KotlarzOtwarty.mat",
             "Model": "./res/Models/Modele_Mati/Meble/KotlarzZamkniety.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{e43cbb7a-9f6e-4733-8960-edc27456218a}\u0000",
+            "id": "{4284abc4-3ca2-446f-91a1-65760faa6bb5}\u0000",
             "name": "Collider",
             "transform": {
                 "type": "Transform",
-                "id": "{dfc49a2b-ba07-4f9b-acc8-c866445c86c4}\u0000",
-                "owner": "{e43cbb7a-9f6e-4733-8960-edc27456218a}\u0000",
+                "id": "{c627c9eb-2f04-4dc3-9ff1-26e13facffff}\u0000",
+                "owner": "{4284abc4-3ca2-446f-91a1-65760faa6bb5}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -77,16 +77,16 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{e2b379ac-d4d0-45b2-804d-de0d296948fa}\u0000"
+                "Parent": "{d106f882-2206-4bc3-968f-7598276573a9}\u0000"
             },
             "components": [
-                "{3f8044f7-5ed8-4c18-8c9f-a1a494a3c2c0}\u0000"
+                "{2ebf1488-e6ce-40c4-b77b-0da6a6e5c138}\u0000"
             ]
         },
         {
             "type": "CapsuleCollider",
-            "id": "{3f8044f7-5ed8-4c18-8c9f-a1a494a3c2c0}\u0000",
-            "owner": "{e43cbb7a-9f6e-4733-8960-edc27456218a}\u0000",
+            "id": "{2ebf1488-e6ce-40c4-b77b-0da6a6e5c138}\u0000",
+            "owner": "{4284abc4-3ca2-446f-91a1-65760faa6bb5}\u0000",
             "isTrigger": false,
             "isStatic": true,
             "skipCollisionSibling": false,
@@ -98,15 +98,15 @@
         },
         {
             "type": "Entity",
-            "id": "{ee9815f9-eb86-4d7b-a51c-8b9801033800}\u0000",
+            "id": "{cb8df018-aaa1-44a4-bdaf-9122ea302f87}\u0000",
             "name": "New Entity",
             "transform": {
                 "type": "Transform",
-                "id": "{e3e403e3-1add-4226-aa67-7cd429c026ad}\u0000",
-                "owner": "{ee9815f9-eb86-4d7b-a51c-8b9801033800}\u0000",
+                "id": "{b6df018a-d480-41b8-ba29-ce18770bc5d1}\u0000",
+                "owner": "{cb8df018-aaa1-44a4-bdaf-9122ea302f87}\u0000",
                 "Position": {
                     "x": 0.0,
-                    "y": 0.4777388572692871,
+                    "y": 0.5453119277954102,
                     "z": 0.0
                 },
                 "EulerAngles": {
@@ -126,29 +126,29 @@
                     "w": 0.0
                 },
                 "Children": [],
-                "Parent": "{e2b379ac-d4d0-45b2-804d-de0d296948fa}\u0000"
+                "Parent": "{d106f882-2206-4bc3-968f-7598276573a9}\u0000"
             },
             "components": [
-                "{8448c0e8-7165-41d7-97bb-5377648e2849}\u0000",
-                "{33a87c8c-893f-4226-83d8-7085dc17d81d}\u0000"
+                "{998edfdb-f636-41ce-9931-e4f5dc4e5404}\u0000",
+                "{0858d041-809d-45cc-b071-88ee880d5087}\u0000"
             ]
         },
         {
             "type": "SphereCollider",
-            "id": "{8448c0e8-7165-41d7-97bb-5377648e2849}\u0000",
-            "owner": "{ee9815f9-eb86-4d7b-a51c-8b9801033800}\u0000",
+            "id": "{998edfdb-f636-41ce-9931-e4f5dc4e5404}\u0000",
+            "owner": "{cb8df018-aaa1-44a4-bdaf-9122ea302f87}\u0000",
             "isTrigger": false,
             "isStatic": true,
             "skipCollisionSibling": false,
             "collisionLayer": 4,
             "collisionMask": 4294967168,
             "colliderType": 1,
-            "radius": 3.0999999046325684
+            "radius": 6.0
         },
         {
             "type": "BookManager",
-            "id": "{33a87c8c-893f-4226-83d8-7085dc17d81d}\u0000",
-            "owner": "{ee9815f9-eb86-4d7b-a51c-8b9801033800}\u0000",
+            "id": "{0858d041-809d-45cc-b071-88ee880d5087}\u0000",
+            "owner": "{cb8df018-aaa1-44a4-bdaf-9122ea302f87}\u0000",
             "bookWidth": 0.20000000298023224,
             "bookDepth": 0.05000000074505806,
             "bookHeight": 0.30000001192092896,

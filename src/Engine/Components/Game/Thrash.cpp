@@ -8,9 +8,20 @@ namespace Engine
     
     void Thrash::Start() { 
         collider = GetOwner()->GetComponent<Collider>();
-        collider->OnTriggerAddListener(ThrowOut);
         collider->OnCollisionAddListener(DisableCollisionAction);
-        ThrashManager::GetInstance()->AddThrash(this);
+        if (size == ThrashSize::Coin)
+        {
+            ThrashManager::GetInstance()->AddCoin(GetOwner());
+        }
+        else if (size == ThrashSize::Book)
+        {
+            ThrashManager::GetInstance()->AddBook(GetOwner());
+        }
+        else
+        {
+            collider->OnTriggerAddListener(ThrowOut);
+            ThrashManager::GetInstance()->AddThrash(this);
+        }
     }
 
     rapidjson::Value Thrash::Serialize(rapidjson::Document::AllocatorType& Allocator) const
@@ -49,7 +60,6 @@ namespace Engine
 
     void Thrash::DeleteThrash(Engine::Collider* collider)
     {
-        
         if (collider->GetOwner()->GetName() == "ThrashCan")
         {
             if (this->collider)
@@ -64,7 +74,7 @@ namespace Engine
 #if EDITOR
     void Thrash::DrawImGui()
     {
-        static const char* sizeLabels[] = {"Small", "Medium", "Large"};
+        static const char* sizeLabels[] = {"Small", "Medium", "Large", "Coin", "Book"};
         int currentSizeIndex = 0;
 
         switch (size)
@@ -77,6 +87,12 @@ namespace Engine
                 break;
             case ThrashSize::Large:
                 currentSizeIndex = 2;
+                break;
+            case ThrashSize::Coin:
+                currentSizeIndex = 3;
+                break;
+            case ThrashSize::Book:
+                currentSizeIndex = 4;
                 break;
         }
 
@@ -92,6 +108,12 @@ namespace Engine
                     break;
                 case 2:
                     size = ThrashSize::Large;
+                    break;
+                case 3:
+                    size = ThrashSize::Coin;
+                    break;
+                case 4:
+                    size = ThrashSize::Book;
                     break;
             }
         }

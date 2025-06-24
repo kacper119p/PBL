@@ -8,7 +8,15 @@ namespace Engine
     {
         collider = GetOwner()->GetComponent<Collider>();
         collider->OnCollisionAddListener(ThrowOut);
-        ThrashManager::GetInstance()->AddFurniture(this);
+        if (isWeapon)
+        {
+            ThrashManager::GetInstance()->AddWeapon(GetOwner());
+        }
+        else
+        {
+            ThrashManager::GetInstance()->AddFurniture(this);
+        }
+        
     }
 
     void Furniture::OnDestroy() 
@@ -17,7 +25,15 @@ namespace Engine
         {
             collider->OnCollisionRemoveListener(ThrowOut);
         }
-        ThrashManager::GetInstance()->RemoveFurniture(this);
+        if (isWeapon)
+        {
+            ThrashManager::GetInstance()->RemoveWeapon(GetOwner());
+            ThrashManager::GetInstance()->RemoveCleanedUpWeapon(GetOwner());
+        }
+        else
+        {
+            ThrashManager::GetInstance()->RemoveFurniture(this);
+        }
     }
 
     void Furniture::DeleteFurniture(Collider* collider) 
@@ -25,13 +41,22 @@ namespace Engine
         if (collider->GetOwner()->GetName() == "ThrashCan")
         {
             GetOwner()->GetScene()->DeleteEntity(GetOwner());
-            ThrashManager::GetInstance()->RemoveFurniture(this);
+            if (isWeapon)
+            {
+                ThrashManager::GetInstance()->RemoveWeapon(GetOwner());
+                ThrashManager::GetInstance()->RemoveCleanedUpWeapon(GetOwner());
+            }
+            else
+            {
+                ThrashManager::GetInstance()->RemoveFurniture(this);
+            }
         }
     }
     #if EDITOR
     void Furniture::DrawImGui() 
     {
         ImGui::Text("Furniture Component");
+        ImGui::Checkbox("Is Weapon", &isWeapon);
     }
     #endif
 

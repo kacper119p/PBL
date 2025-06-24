@@ -4,6 +4,7 @@
 #include "Engine/Components/Physics/Rigidbody.h"
 #include "Engine/Engine.h"
 #include "Engine/EngineObjects/UpdateManager.h"
+#include "Engine/Components/Game/ThrashManager.h"
 #include <iostream>
 #if EDITOR
 #include "ImGuizmo.h"
@@ -93,7 +94,15 @@ namespace Engine
             it->book->GetTransform()->SetRotation(glm::eulerAngles(rot));
 
             if (t >= 1.5f)
+            {
                 it = activeBookMoves.erase(it);
+                if (itemType == ItemType::Book)
+                    ThrashManager::GetInstance()->AddCleanedUpBook(it->book);
+                else if (itemType == ItemType::Coin)
+                    ThrashManager::GetInstance()->AddCleanedUpCoin(it->book);
+                else if (itemType == ItemType::Weapon)
+                    ThrashManager::GetInstance()->AddCleanedUpWeapon(it->book);
+            }
             else
                 ++it;
         }
@@ -157,7 +166,7 @@ namespace Engine
         glm::vec3 end = glm::vec3(0.0f);
         glm::quat endRot = glm::quat(glm::vec3(0.0f));
 
-        if (itemType == ItemType::Book && name.find("Book") != std::string::npos)
+        if (itemType == ItemType::Book && name.find("SmallBook") != std::string::npos)
         {
             if (unoccupiedPlaces.empty())
                 return;

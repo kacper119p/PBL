@@ -33,7 +33,7 @@ namespace Engine
         glm::quat startRotation;
         glm::quat endRotation;
         float time = 0.0f;
-        float duration = 1.0f;
+        float duration = .3f;
     };
 
     class BookManager : public Updateable

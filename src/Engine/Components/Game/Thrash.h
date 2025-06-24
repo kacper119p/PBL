@@ -19,8 +19,10 @@ namespace Engine
     enum ThrashSize
     {
         Small = 1,
+        Book = 2,
+        Coin = 3,
         Medium = 5,
-        Large = 10
+        Large = 20
     };
 
     class Thrash : public Component
@@ -33,13 +35,29 @@ namespace Engine
     public:
         Thrash() = default;
         ~Thrash() override = default;
-        ThrashSize GetSize() const { return size; }
+        ThrashSize GetSize() const 
+        { 
+            return (size == ThrashSize::Coin) ? ThrashSize::Small : size; 
+        }
         void SetSize(ThrashSize newSize) { size = newSize; }
         void Start() override;
         
         void OnDestroy() override 
         {
-            ThrashManager::GetInstance()->RemoveThrash(this);
+            if (size == ThrashSize::Coin)
+            {
+                ThrashManager::GetInstance()->RemoveCoin(GetOwner());
+                ThrashManager::GetInstance()->RemoveCleanedUpCoin(GetOwner());
+            }
+            else if (size == ThrashSize::Book)
+            {
+                ThrashManager::GetInstance()->RemoveBook(GetOwner());
+                ThrashManager::GetInstance()->RemoveCleanedUpBook(GetOwner());
+            }
+            else
+            {
+                ThrashManager::GetInstance()->RemoveThrash(this);
+            }
         }
 
         void DeleteThrash(Collider* collider); 

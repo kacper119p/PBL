@@ -2,16 +2,16 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{12079383-65b8-4a3f-95b8-c46976596e34}\u0000",
+            "id": "{1a79f2dd-4064-491d-808e-662c9c081b75}\u0000",
             "name": "Coin",
             "transform": {
                 "type": "Transform",
-                "id": "{84eb1d04-27b6-4d6a-a7b7-0110fb11863f}\u0000",
-                "owner": "{12079383-65b8-4a3f-95b8-c46976596e34}\u0000",
+                "id": "{d02f9a32-f12c-4ad6-b281-0b988c58574b}\u0000",
+                "owner": "{1a79f2dd-4064-491d-808e-662c9c081b75}\u0000",
                 "Position": {
-                    "x": 9.834064483642578,
-                    "y": 0.802398681640625,
-                    "z": 0.0
+                    "x": -24.2359676361084,
+                    "y": 2.156351089477539,
+                    "z": -18.669151306152344
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -33,29 +33,29 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{bafe13fe-104f-4215-92c0-b5c6e3472ae6}\u0000",
-                "{1b296da8-1876-403f-a721-dcd86e0f1357}\u0000",
-                "{c39137ac-aaa9-49bb-b584-0d335fc496bd}\u0000",
-                "{a4f0550a-bfdb-47c0-b6d4-c83ca4c1d516}\u0000"
+                "{86e1c509-18e0-4b6c-9451-2d87b474f6c5}\u0000",
+                "{30864189-b6dc-470b-82f1-10d9c6d82c32}\u0000",
+                "{3898bee9-a361-45cb-9fe2-57b14fbd9614}\u0000",
+                "{c939d3b0-b21d-4349-963c-717bc699dc74}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{bafe13fe-104f-4215-92c0-b5c6e3472ae6}\u0000",
-            "owner": "{12079383-65b8-4a3f-95b8-c46976596e34}\u0000",
+            "id": "{86e1c509-18e0-4b6c-9451-2d87b474f6c5}\u0000",
+            "owner": "{1a79f2dd-4064-491d-808e-662c9c081b75}\u0000",
             "Material": "res/materials/SampleScene/Coin.mat",
             "Model": "res/models/Modele_Mati/Kosztownosci/Moneta.fbx",
             "CastShadow": true
         },
         {
             "type": "BoxCollider",
-            "id": "{1b296da8-1876-403f-a721-dcd86e0f1357}\u0000",
-            "owner": "{12079383-65b8-4a3f-95b8-c46976596e34}\u0000",
+            "id": "{30864189-b6dc-470b-82f1-10d9c6d82c32}\u0000",
+            "owner": "{1a79f2dd-4064-491d-808e-662c9c081b75}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 128,
-            "collisionMask": 4294967293,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 0.75,
             "_height": 0.10000000149011612,
@@ -63,21 +63,21 @@
         },
         {
             "type": "Rigidbody",
-            "id": "{c39137ac-aaa9-49bb-b584-0d335fc496bd}\u0000",
-            "owner": "{12079383-65b8-4a3f-95b8-c46976596e34}\u0000",
+            "id": "{3898bee9-a361-45cb-9fe2-57b14fbd9614}\u0000",
+            "owner": "{1a79f2dd-4064-491d-808e-662c9c081b75}\u0000",
             "mass": 0.10000000149011612,
             "inverseMass": 10.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
+            "friction": 0.574999988079071,
             "frictionEnabled": true,
-            "restitution": 0.8970000147819519
+            "restitution": 0.7250000238418579
         },
         {
             "type": "Thrash",
-            "id": "{a4f0550a-bfdb-47c0-b6d4-c83ca4c1d516}\u0000",
-            "owner": "{12079383-65b8-4a3f-95b8-c46976596e34}\u0000",
-            "size": 1
+            "id": "{c939d3b0-b21d-4349-963c-717bc699dc74}\u0000",
+            "owner": "{1a79f2dd-4064-491d-808e-662c9c081b75}\u0000",
+            "size": 2
         }
     ]
 }

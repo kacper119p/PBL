@@ -2,16 +2,16 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{e1132d70-4f2b-41ba-b3ad-7a5e8b01f5bd}\u0000",
+            "id": "{8a0ad94f-e5ef-486d-891d-51e74e70e95c}\u0000",
             "name": "Sword",
             "transform": {
                 "type": "Transform",
-                "id": "{98e4e0a8-6573-432f-a1cc-2c808d981de8}\u0000",
-                "owner": "{e1132d70-4f2b-41ba-b3ad-7a5e8b01f5bd}\u0000",
+                "id": "{5cb32777-7feb-4ece-bfa1-d85761727ae9}\u0000",
+                "owner": "{8a0ad94f-e5ef-486d-891d-51e74e70e95c}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": 0.5824989676475525,
-                    "z": 0.0
+                    "x": -17.58822250366211,
+                    "y": 1.0599288940429688,
+                    "z": 15.117951393127441
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -33,23 +33,24 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{9c949277-5cca-4e66-ae8c-ffed3c24064d}\u0000",
-                "{b39b193b-8d41-466f-97e6-59e7a36f29f5}\u0000",
-                "{a0776072-621d-4e28-a530-69ac85444f1e}\u0000"
+                "{63cee7d3-803b-424e-bfc8-cb1f8b4f37a2}\u0000",
+                "{48e6ce2e-c513-4d58-8e41-e533d78cedb0}\u0000",
+                "{f3d36046-e4ac-4096-aeb0-824c7468ee24}\u0000",
+                "{21f36450-57ac-4e71-88fe-d7d84a04515d}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{9c949277-5cca-4e66-ae8c-ffed3c24064d}\u0000",
-            "owner": "{e1132d70-4f2b-41ba-b3ad-7a5e8b01f5bd}\u0000",
+            "id": "{63cee7d3-803b-424e-bfc8-cb1f8b4f37a2}\u0000",
+            "owner": "{8a0ad94f-e5ef-486d-891d-51e74e70e95c}\u0000",
             "Material": "res/materials/SampleScene/Sword.mat",
             "Model": "res/models/Modele_Mati/Bron/MieczCaly.fbx",
             "CastShadow": true
         },
         {
             "type": "BoxCollider",
-            "id": "{b39b193b-8d41-466f-97e6-59e7a36f29f5}\u0000",
-            "owner": "{e1132d70-4f2b-41ba-b3ad-7a5e8b01f5bd}\u0000",
+            "id": "{48e6ce2e-c513-4d58-8e41-e533d78cedb0}\u0000",
+            "owner": "{8a0ad94f-e5ef-486d-891d-51e74e70e95c}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
@@ -62,8 +63,8 @@
         },
         {
             "type": "Rigidbody",
-            "id": "{a0776072-621d-4e28-a530-69ac85444f1e}\u0000",
-            "owner": "{e1132d70-4f2b-41ba-b3ad-7a5e8b01f5bd}\u0000",
+            "id": "{f3d36046-e4ac-4096-aeb0-824c7468ee24}\u0000",
+            "owner": "{8a0ad94f-e5ef-486d-891d-51e74e70e95c}\u0000",
             "mass": 0.5,
             "inverseMass": 2.0,
             "linearDamping": 0.0,
@@ -71,6 +72,11 @@
             "friction": 0.0,
             "frictionEnabled": false,
             "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Furniture",
+            "id": "{21f36450-57ac-4e71-88fe-d7d84a04515d}\u0000",
+            "owner": "{8a0ad94f-e5ef-486d-891d-51e74e70e95c}\u0000"
         }
     ]
 }

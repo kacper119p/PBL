@@ -15,6 +15,7 @@ namespace Engine
     {
         Collider* collider = nullptr;
         Events::TAction<Collider*> ThrowOut = Events::TAction<Collider*>(this, &Furniture::DeleteFurniture);
+        bool isWeapon = false;
 
         public:
         Furniture() = default;
