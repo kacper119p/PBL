@@ -1,0 +1,272 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{03369b85-2c7f-49a4-abfe-36ed77fd544e}\u0000",
+            "name": "WeaponHolder",
+            "transform": {
+                "type": "Transform",
+                "id": "{243e89f1-e756-4c8a-a063-b57ebf007f52}\u0000",
+                "owner": "{03369b85-2c7f-49a4-abfe-36ed77fd544e}\u0000",
+                "Position": {
+                    "x": -11.951995849609375,
+                    "y": 2.3012843132019043,
+                    "z": -3.8658242225646973
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [
+                    "{78ed1be2-5921-4999-8562-591539937696}\u0000",
+                    "{5cd18041-84a8-4c75-be60-2b82ccc9dac1}\u0000",
+                    "{e9667ca4-68b4-49e9-908b-6065ccf532da}\u0000",
+                    "{04517eab-0403-40eb-8b15-67eda5d08c49}\u0000",
+                    "{647d55fb-ad23-4490-ae96-8f85a4e6e2d0}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{1bbe80df-109d-46f3-9901-adcdfd8becbf}\u0000",
+                "{827a7f04-3805-4652-9c7b-2ed6cbf12d73}\u0000",
+                "{c386f633-c1fd-41c0-81be-e43f25012b39}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{1bbe80df-109d-46f3-9901-adcdfd8becbf}\u0000",
+            "owner": "{03369b85-2c7f-49a4-abfe-36ed77fd544e}\u0000",
+            "Material": "res/materials/SampleScene/UV2.mat",
+            "Model": "res/models/Modele_Mati/Meble/RegalNiski_LP.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{827a7f04-3805-4652-9c7b-2ed6cbf12d73}\u0000",
+            "owner": "{03369b85-2c7f-49a4-abfe-36ed77fd544e}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4,
+            "collisionMask": 4294967104,
+            "colliderType": 0,
+            "_width": 10.800000190734863,
+            "_height": 4.900000095367432,
+            "_depth": 6.300000190734863
+        },
+        {
+            "type": "BookManager",
+            "id": "{c386f633-c1fd-41c0-81be-e43f25012b39}\u0000",
+            "owner": "{03369b85-2c7f-49a4-abfe-36ed77fd544e}\u0000",
+            "bookWidth": 0.20000000298023224,
+            "bookDepth": 0.05000000074505806,
+            "bookHeight": 0.30000001192092896,
+            "bookMargin": 0.019999999552965164,
+            "sidePadding": 0.05000000074505806,
+            "backPadding": 0.029999999329447746,
+            "itemType": 2,
+            "swordPlacementPoint": "{78ed1be2-5921-4999-8562-591539937696}\u0000",
+            "bowPlacementPoint": "{5cd18041-84a8-4c75-be60-2b82ccc9dac1}\u0000",
+            "arrowPlacementPoint": "{e9667ca4-68b4-49e9-908b-6065ccf532da}\u0000",
+            "shieldPlacementPoint": "{04517eab-0403-40eb-8b15-67eda5d08c49}\u0000"
+        },
+        {
+            "type": "Entity",
+            "id": "{f155e0c4-f53d-443a-912c-1bec7a9efe2c}\u0000",
+            "name": "sword",
+            "transform": {
+                "type": "Transform",
+                "id": "{78ed1be2-5921-4999-8562-591539937696}\u0000",
+                "owner": "{f155e0c4-f53d-443a-912c-1bec7a9efe2c}\u0000",
+                "Position": {
+                    "x": 0.20468521118164063,
+                    "y": 3.6842918395996094,
+                    "z": 2.4113237857818604
+                },
+                "EulerAngles": {
+                    "x": 81.44975280761719,
+                    "y": 3.3716723918914795,
+                    "z": -105.7614517211914
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.4113319516181946,
+                    "y": -0.5065534114837646,
+                    "z": -0.6156175136566162,
+                    "w": 0.44184237718582153
+                },
+                "Children": [],
+                "Parent": "{243e89f1-e756-4c8a-a063-b57ebf007f52}\u0000"
+            },
+            "components": []
+        },
+        {
+            "type": "Entity",
+            "id": "{9928cec1-1d91-4bcb-9112-4412b51a1560}\u0000",
+            "name": "bow",
+            "transform": {
+                "type": "Transform",
+                "id": "{5cd18041-84a8-4c75-be60-2b82ccc9dac1}\u0000",
+                "owner": "{9928cec1-1d91-4bcb-9112-4412b51a1560}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 1.727872371673584,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 16.37849998474121,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.1424432247877121,
+                    "z": 0.0,
+                    "w": 0.9898029565811157
+                },
+                "Children": [],
+                "Parent": "{243e89f1-e756-4c8a-a063-b57ebf007f52}\u0000"
+            },
+            "components": []
+        },
+        {
+            "type": "Entity",
+            "id": "{587aafc8-345d-43d5-ab51-f6250f22ebc1}\u0000",
+            "name": "arrow",
+            "transform": {
+                "type": "Transform",
+                "id": "{e9667ca4-68b4-49e9-908b-6065ccf532da}\u0000",
+                "owner": "{587aafc8-345d-43d5-ab51-f6250f22ebc1}\u0000",
+                "Position": {
+                    "x": 1.9365768432617188,
+                    "y": 2.1367545127868652,
+                    "z": -0.9211506843566895
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 10.897383689880371,
+                    "z": 38.600799560546875
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": -0.03138440102338791,
+                    "y": 0.0896177738904953,
+                    "z": 0.32902756333351135,
+                    "w": 0.9395341873168945
+                },
+                "Children": [],
+                "Parent": "{243e89f1-e756-4c8a-a063-b57ebf007f52}\u0000"
+            },
+            "components": []
+        },
+        {
+            "type": "Entity",
+            "id": "{4e8549cd-a3fe-488f-bc2d-dc8e438e8835}\u0000",
+            "name": "shield",
+            "transform": {
+                "type": "Transform",
+                "id": "{04517eab-0403-40eb-8b15-67eda5d08c49}\u0000",
+                "owner": "{4e8549cd-a3fe-488f-bc2d-dc8e438e8835}\u0000",
+                "Position": {
+                    "x": 1.5065813064575195,
+                    "y": 0.0,
+                    "z": -3.4649643898010254
+                },
+                "EulerAngles": {
+                    "x": -26.831693649291992,
+                    "y": -3.276005268096924,
+                    "z": -88.34794616699219
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": -0.18571621179580688,
+                    "y": 0.14167022705078125,
+                    "z": -0.6823035478591919,
+                    "w": 0.6927487254142761
+                },
+                "Children": [],
+                "Parent": "{243e89f1-e756-4c8a-a063-b57ebf007f52}\u0000"
+            },
+            "components": []
+        },
+        {
+            "type": "Entity",
+            "id": "{c84fa1a3-7d95-4141-b4ea-2f567d5b75b2}\u0000",
+            "name": "Collider",
+            "transform": {
+                "type": "Transform",
+                "id": "{647d55fb-ad23-4490-ae96-8f85a4e6e2d0}\u0000",
+                "owner": "{c84fa1a3-7d95-4141-b4ea-2f567d5b75b2}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{243e89f1-e756-4c8a-a063-b57ebf007f52}\u0000"
+            },
+            "components": [
+                "{b45d13fd-4bba-4cda-a04b-9dc29f8f72ed}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{b45d13fd-4bba-4cda-a04b-9dc29f8f72ed}\u0000",
+            "owner": "{c84fa1a3-7d95-4141-b4ea-2f567d5b75b2}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 2.5999999046325684,
+            "_height": 3.799999952316284,
+            "_depth": 6.699999809265137
+        }
+    ]
+}

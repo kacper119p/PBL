@@ -2,14 +2,14 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{70e58001-4cea-4021-b7ec-42546d6be9c9}\u0000",
+            "id": "{12079383-65b8-4a3f-95b8-c46976596e34}\u0000",
             "name": "Coin",
             "transform": {
                 "type": "Transform",
-                "id": "{40d85435-7d6c-48f7-9bb4-57308941fadd}\u0000",
-                "owner": "{70e58001-4cea-4021-b7ec-42546d6be9c9}\u0000",
+                "id": "{84eb1d04-27b6-4d6a-a7b7-0110fb11863f}\u0000",
+                "owner": "{12079383-65b8-4a3f-95b8-c46976596e34}\u0000",
                 "Position": {
-                    "x": 0.0,
+                    "x": 9.834064483642578,
                     "y": 0.802398681640625,
                     "z": 0.0
                 },
@@ -33,28 +33,29 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{45e7f508-0296-4cad-9df1-c021534233b9}\u0000",
-                "{90604c06-4bbd-41d2-93a7-f520e322ff7a}\u0000",
-                "{2a52b985-4945-4487-9893-01f8041550a4}\u0000"
+                "{bafe13fe-104f-4215-92c0-b5c6e3472ae6}\u0000",
+                "{1b296da8-1876-403f-a721-dcd86e0f1357}\u0000",
+                "{c39137ac-aaa9-49bb-b584-0d335fc496bd}\u0000",
+                "{a4f0550a-bfdb-47c0-b6d4-c83ca4c1d516}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{45e7f508-0296-4cad-9df1-c021534233b9}\u0000",
-            "owner": "{70e58001-4cea-4021-b7ec-42546d6be9c9}\u0000",
+            "id": "{bafe13fe-104f-4215-92c0-b5c6e3472ae6}\u0000",
+            "owner": "{12079383-65b8-4a3f-95b8-c46976596e34}\u0000",
             "Material": "res/materials/SampleScene/Coin.mat",
             "Model": "res/models/Modele_Mati/Kosztownosci/Moneta.fbx",
             "CastShadow": true
         },
         {
             "type": "BoxCollider",
-            "id": "{90604c06-4bbd-41d2-93a7-f520e322ff7a}\u0000",
-            "owner": "{70e58001-4cea-4021-b7ec-42546d6be9c9}\u0000",
+            "id": "{1b296da8-1876-403f-a721-dcd86e0f1357}\u0000",
+            "owner": "{12079383-65b8-4a3f-95b8-c46976596e34}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967291,
+            "collisionLayer": 128,
+            "collisionMask": 4294967293,
             "colliderType": 0,
             "_width": 0.75,
             "_height": 0.10000000149011612,
@@ -62,15 +63,21 @@
         },
         {
             "type": "Rigidbody",
-            "id": "{2a52b985-4945-4487-9893-01f8041550a4}\u0000",
-            "owner": "{70e58001-4cea-4021-b7ec-42546d6be9c9}\u0000",
+            "id": "{c39137ac-aaa9-49bb-b584-0d335fc496bd}\u0000",
+            "owner": "{12079383-65b8-4a3f-95b8-c46976596e34}\u0000",
             "mass": 0.10000000149011612,
             "inverseMass": 10.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
             "frictionEnabled": true,
-            "restitution": 0.10000000149011612
+            "restitution": 0.8970000147819519
+        },
+        {
+            "type": "Thrash",
+            "id": "{a4f0550a-bfdb-47c0-b6d4-c83ca4c1d516}\u0000",
+            "owner": "{12079383-65b8-4a3f-95b8-c46976596e34}\u0000",
+            "size": 1
         }
     ]
 }

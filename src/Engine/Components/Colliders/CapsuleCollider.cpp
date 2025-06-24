@@ -63,6 +63,9 @@ namespace Engine
         START_COMPONENT_SERIALIZATION
         SERIALIZE_FIELD(isTrigger);
         SERIALIZE_FIELD(isStatic);
+        SERIALIZE_FIELD(skipCollisionSibling);
+        SERIALIZE_FIELD(collisionLayer);
+        SERIALIZE_FIELD(collisionMask);
         SERIALIZE_FIELD(colliderType);
         SERIALIZE_FIELD(Radius)
         SERIALIZE_FIELD(Height);
@@ -75,6 +78,9 @@ namespace Engine
         START_COMPONENT_DESERIALIZATION_VALUE_PASS
         DESERIALIZE_VALUE(isTrigger);
         DESERIALIZE_VALUE(isStatic);
+        DESERIALIZE_VALUE(skipCollisionSibling);
+        DESERIALIZE_VALUE(collisionLayer);
+        DESERIALIZE_VALUE(collisionMask);
         DESERIALIZE_VALUE(colliderType);
         DESERIALIZE_VALUE(Height);
         DESERIALIZE_VALUE(Radius);

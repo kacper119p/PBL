@@ -92,7 +92,7 @@ namespace Engine
             it->book->GetTransform()->SetPosition(pos);
             it->book->GetTransform()->SetRotation(glm::eulerAngles(rot));
 
-            if (t >= 1.0f)
+            if (t >= 1.5f)
                 it = activeBookMoves.erase(it);
             else
                 ++it;
@@ -150,21 +150,22 @@ namespace Engine
         if (itemCollider->collisionMask == 0)
             return;
 
-        if (item->GetComponent<Rigidbody>())
-            item->RemoveComponent<Rigidbody>();
-
-        itemCollider->collisionMask = 0;
         currentBooksBeingPut.push_back(item);
-
+        std::string name = item->GetName();
         glm::vec3 start = item->GetTransform()->GetPosition();
         glm::quat startRot = item->GetTransform()->GetRotation();
         glm::vec3 end = glm::vec3(0.0f);
         glm::quat endRot = glm::quat(glm::vec3(0.0f));
 
-        if (itemType == ItemType::Book)
+        if (itemType == ItemType::Book && name.find("Book") != std::string::npos)
         {
             if (unoccupiedPlaces.empty())
                 return;
+
+            if (item->GetComponent<Rigidbody>())
+            {
+                item->RemoveComponent<Rigidbody>();
+            }
 
             size_t index = rand() % unoccupiedPlaces.size();
             end = unoccupiedPlaces[index];
@@ -172,32 +173,53 @@ namespace Engine
 
             endRot = glm::quat(glm::radians((rand() % 2 == 0) ? glm::vec3(0, -90, 0) : glm::vec3(0, 90, 0)));
         }
-        else if (itemType == ItemType::Coin)
+        else if (itemType == ItemType::Coin && name.find("Coin") != std::string::npos)
         {
-            end = Component::GetOwner()->GetTransform()->GetPosition() +
-                  glm::vec3(RandomRange(-0.2f, 0.2f), RandomRange(0.0f, 0.2f), RandomRange(-0.2f, 0.2f));
+            if (item->GetComponent<Rigidbody>())
+            {
+                item->RemoveComponent<Rigidbody>();
+            }
+            end = this->GetOwner()->GetTransform()->GetPosition() +
+                          glm::vec3(RandomRange(-0.5f, 0.5f), RandomRange(0.0f, 0.2f), RandomRange(-0.5f, 0.5f));
+            
         }
         else if (itemType == ItemType::Weapon)
         {
             std::string name = item->GetName();
             if (name.find("Sword") != std::string::npos)
             {
+                if (item->GetComponent<Rigidbody>())
+                {
+                    item->RemoveComponent<Rigidbody>();
+                }
                 endRot = swordPlacementPoint->GetRotation();
                 end = swordPlacementPoint->GetPosition();
                 std::cout << std::endl << "Sword found" << std::endl;    
             }
             else if (name.find("Bow") != std::string::npos)
             {
+                if (item->GetComponent<Rigidbody>())
+                {
+                    item->RemoveComponent<Rigidbody>();
+                }
                 endRot = bowPlacementPoint->GetRotation();
                 end = bowPlacementPoint->GetPosition();
             }
             else if (name.find("Arrow") != std::string::npos)
             {
+                if (item->GetComponent<Rigidbody>())
+                {
+                    item->RemoveComponent<Rigidbody>();
+                }
                 endRot = arrowPlacementPoint->GetRotation();
                 end = arrowPlacementPoint->GetPosition();
             }
             else if (name.find("Shield") != std::string::npos)
             {
+                if (item->GetComponent<Rigidbody>())
+                {
+                    item->RemoveComponent<Rigidbody>();
+                }
                 endRot = shieldPlacementPoint->GetRotation();
                 end = shieldPlacementPoint->GetPosition();
             }
