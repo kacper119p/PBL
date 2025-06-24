@@ -23,6 +23,7 @@
 #include "tracy/Tracy.hpp"
 #include "Components/Renderers/OutlinedModelRenderer.h"
 #include "Engine/EngineObjects/Scene/SceneManager.h"
+#include "Engine/EngineObjects/WindowManager.h"
 #if DEBUG
 #include "Utility/OpenGlDebugger.h"
 #endif
@@ -65,6 +66,7 @@ namespace Engine
 
 #if !EDITOR
         SplashScreen::Play(Window, WindowWidth, WindowHeight);
+        WindowManager::GetInstance()->SetWindow(Window);
 # endif
 
 #if EDITOR
