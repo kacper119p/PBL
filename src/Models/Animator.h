@@ -21,6 +21,7 @@ namespace Models
         float m_StartTime = 0.0f;
         float m_EndTime = 0.0f;
 
+        float m_AnimationSpeed = 1.0f;
 
     public:
         Animator() = default;
@@ -36,5 +37,7 @@ namespace Models
         bool IsPaused() const { return m_IsPaused; }
         bool IsPlayingBackward() const { return m_IsPlayingBackward; }
         void PlayOnceFromTo(float startTime, float endTime);
+        void SetAnimationSpeed(float speed) { m_AnimationSpeed = speed; }
+        float GetAnimationSpeed() const { return m_AnimationSpeed; }
 	};
 }

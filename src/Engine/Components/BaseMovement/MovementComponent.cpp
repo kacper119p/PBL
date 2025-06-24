@@ -254,6 +254,13 @@ namespace Engine
             return;
         }
 
+        float MovementSpeed = rigidbody->velocity.x * rigidbody->velocity.x +
+                              rigidbody->velocity.y * rigidbody->velocity.y +
+                              rigidbody->velocity.z * rigidbody->velocity.z;
+        MovementSpeed = std::sqrt(MovementSpeed)/10;
+
+        playerAnimationManager->SetLeftTackSpeed(MovementSpeed);
+        playerAnimationManager->SetRightTackSpeed(MovementSpeed);
 
 #endif
     }

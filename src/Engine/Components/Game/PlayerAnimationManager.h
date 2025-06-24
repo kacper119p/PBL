@@ -96,5 +96,8 @@ namespace Engine
 
         void SetIndicator(float Fill, const glm::vec3& Color);
 
+        void SetLeftTackSpeed(float speed);
+        void SetRightTackSpeed(float speed);
+
     };
 }
