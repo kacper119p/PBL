@@ -77,6 +77,13 @@ namespace Engine
 
             toolChangeSound = AudioManager::GetInstance().CreateSoundInstance("zmiana sprzetu");
             Instance = this;
+
+            exhaustVfx = PrefabLoader::LoadPrefab("./res/prefabs/ExhaustVFX.prefab", this->GetScene(), this->GetTransform());
+            if (exhaustVfx)
+            {
+                this->GetTransform()->AddChild(exhaustVfx->GetTransform());
+            }
+
             this->GetTransform()->SetScale(glm::vec3(3.0f));
         }
         else
