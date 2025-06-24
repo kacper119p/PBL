@@ -45,6 +45,10 @@ namespace Engine
         {
             return;
         }
+        if (Model == nullptr)
+        {
+            return;
+        }
 
         SetupMatrices(RenderData, Material->GetMainPass());
         Draw();
@@ -293,7 +297,6 @@ namespace Engine
                 }
                 ImGui::EndDragDropTarget();
             }
-
 
 
             if (ImGui::IsItemClicked())
