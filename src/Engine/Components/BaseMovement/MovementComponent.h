@@ -28,7 +28,7 @@ namespace Engine
         std::shared_ptr<ma_sound> BloodCleaningSound;
 
     public:
-        MovementComponent(float speed = 20.0f) :
+        MovementComponent(float speed = 30.0f) :
             Speed(speed)
         {
             UpdateManager::GetInstance()->RegisterComponent(this);

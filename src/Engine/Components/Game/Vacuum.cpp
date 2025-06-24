@@ -173,7 +173,7 @@ namespace Engine
             item->GetTransform()->SetPosition((position + forward * (size + 0.5f)));
             item->GetComponent<Engine::Rigidbody>()->angularVelocity.y = 0.0f;
             item->GetComponent<Engine::Rigidbody>()->hasGravity = true;
-            item->GetComponent<Engine::Rigidbody>()->AddForce(forward * 100.0f, Engine::ForceMode::Force);
+            item->GetComponent<Engine::Rigidbody>()->AddForce(forward * 100.0f * float(thrashSizeInt), Engine::ForceMode::Force);
 
             if (thrashSizeInt == 10)
                 PlayerAnimationManager::GetInstance()->ShootBigObject();
