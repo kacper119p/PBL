@@ -10,6 +10,12 @@ namespace Materials
     private:
         static Shaders::Shader Shader;
 
+        TextureMaterialProperty SpriteProperty;
+        Vector4MaterialProperty NoiseProperty;
+        Vector3MaterialProperty ColorProperty;
+        Vector2MaterialProperty NoiseStrengthProperty;
+        int32_t TimeLocation = -1;
+
     public:
         CandleFlameMaterial();
 
