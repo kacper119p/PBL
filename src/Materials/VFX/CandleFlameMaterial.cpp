@@ -1,5 +1,6 @@
 #include "CandleFlameMaterial.h"
 
+#include "Engine/Textures/TextureManager.h"
 #include "GLFW/glfw3.h"
 #include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
