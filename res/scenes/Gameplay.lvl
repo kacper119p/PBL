@@ -1513,7 +1513,7 @@
         {
             "type": "Entity",
             "id": "{a2e540a9-dab2-47b8-9727-bdbb9296652e}\u0000",
-            "name": "TrashCan",
+            "name": "ThrashCan",
             "transform": {
                 "type": "Transform",
                 "id": "{3cdbf5ec-e202-4c4d-8062-dcc58014f978}\u0000",
