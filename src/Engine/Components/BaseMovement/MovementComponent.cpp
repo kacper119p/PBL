@@ -35,25 +35,41 @@ namespace Engine
         bool isLeftBackward = false;
         bool isRightBackward = false;
 
+        float leftStickY = input.GetGamepadAxis(GLFW_GAMEPAD_AXIS_LEFT_Y);
+        float rightStickY = input.GetGamepadAxis(GLFW_GAMEPAD_AXIS_RIGHT_Y);
+
+        const float deadzone = 0.2f;
+        if (fabs(leftStickY) < deadzone)
+            leftStickY = 0.0f;
+        if (fabs(rightStickY) < deadzone)
+            rightStickY = 0.0f;
+
         Rigidbody* rigidbody = GetOwner()->GetComponent<Rigidbody>();
 
-        if (input.IsKeyPressed(GLFW_KEY_W) || input.GetGamepadAxis(GLFW_GAMEPAD_AXIS_LEFT_TRIGGER) > 0.5f)
+        if (input.IsKeyPressed(GLFW_KEY_W) || input.GetGamepadAxis(GLFW_GAMEPAD_AXIS_LEFT_TRIGGER) > 0.5f ||
+            leftStickY < -0.5f)
         {
             isLeftForward = true;
         }
-        if (input.IsKeyPressed(GLFW_KEY_S) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_BUTTON_LEFT_BUMPER))
+
+        if (input.IsKeyPressed(GLFW_KEY_S) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_BUTTON_LEFT_BUMPER) ||
+            leftStickY > 0.5f)
         {
             isLeftBackward = true;
         }
 
-        if (input.IsKeyPressed(GLFW_KEY_UP) || input.GetGamepadAxis(GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER) > 0.5f)
+        if (input.IsKeyPressed(GLFW_KEY_UP) || input.GetGamepadAxis(GLFW_GAMEPAD_AXIS_RIGHT_TRIGGER) > 0.5f ||
+            rightStickY < -0.5f)
         {
             isRightForward = true;
         }
-        if (input.IsKeyPressed(GLFW_KEY_DOWN) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER))
+
+        if (input.IsKeyPressed(GLFW_KEY_DOWN) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_BUTTON_RIGHT_BUMPER) ||
+            rightStickY > 0.5f)
         {
             isRightBackward = true;
         }
+
 
         if (DefaultPlayer::GetInstance().GetCurrentTool() != Tool::Broom)
             AudioManager::GetInstance().PauseSound(BloodCleaningSound);
@@ -257,7 +273,10 @@ namespace Engine
         float MovementSpeed = rigidbody->velocity.x * rigidbody->velocity.x +
                               rigidbody->velocity.y * rigidbody->velocity.y +
                               rigidbody->velocity.z * rigidbody->velocity.z;
-        MovementSpeed = std::sqrt(MovementSpeed)/10;
+        float RotationSpeed = rigidbody->angularVelocity.x * rigidbody->angularVelocity.x +
+                              rigidbody->angularVelocity.y * rigidbody->angularVelocity.y +
+                              rigidbody->angularVelocity.z * rigidbody->angularVelocity.z;
+        MovementSpeed = std::sqrt(MovementSpeed) / 10 + RotationSpeed;
 
         playerAnimationManager->SetLeftTackSpeed(MovementSpeed);
         playerAnimationManager->SetRightTackSpeed(MovementSpeed);

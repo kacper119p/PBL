@@ -13,7 +13,7 @@ namespace Engine
     {
         Stripper = 1,
         Vacuum = 2,
-        Broom = 3
+        Broom = 3,
     };
 
     class DefaultPlayer final : public Player
@@ -40,7 +40,7 @@ namespace Engine
 
         bool canSwap = false;
 
-        Tool currentTool = Tool::Broom;
+        Tool currentTool = Tool::Vacuum;
 
         std::shared_ptr<ma_sound> toolChangeSound;
         bool isFirstUpdate = true;

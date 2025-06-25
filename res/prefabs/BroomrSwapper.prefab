@@ -2,12 +2,12 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{8833bb0d-c294-46be-ba86-d5d83bbc7803}\u0000",
-            "name": "VacuumSwapper",
+            "id": "{802b16d3-0022-4f8e-aa43-ff046a2871e8}\u0000",
+            "name": "BroomSwapper",
             "transform": {
                 "type": "Transform",
-                "id": "{277eefa2-4776-40db-b1e0-39d6560f966e}\u0000",
-                "owner": "{8833bb0d-c294-46be-ba86-d5d83bbc7803}\u0000",
+                "id": "{0c4e5954-4cb5-4a8a-82fa-64b458f88004}\u0000",
+                "owner": "{802b16d3-0022-4f8e-aa43-ff046a2871e8}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -15,7 +15,7 @@
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": -0.000005008955668017734,
                     "z": 0.0
                 },
                 "Scale": {
@@ -25,7 +25,7 @@
                 },
                 "Rotation": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": -4.371138473402425e-8,
                     "z": 0.0,
                     "w": 1.0
                 },
@@ -33,20 +33,20 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{b24d180a-a3db-4330-8c77-7ca63126d903}\u0000"
+                "{c011944e-6bc6-44cc-9c4c-23338619a091}\u0000"
             ]
         },
         {
             "type": "OutlinedModelRenderer",
-            "id": "{b24d180a-a3db-4330-8c77-7ca63126d903}\u0000",
-            "owner": "{8833bb0d-c294-46be-ba86-d5d83bbc7803}\u0000",
+            "id": "{c011944e-6bc6-44cc-9c4c-23338619a091}\u0000",
+            "owner": "{802b16d3-0022-4f8e-aa43-ff046a2871e8}\u0000",
             "Material": "./res/materials/SampleScene/Tools.mat",
-            "Model": "./res/models/Swapper/Odkurzacz_stojak.fbx",
+            "Model": "G:\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res/models/Swapper/Mop_stojak.fbx",
             "CastShadow": true,
             "Color": {
                 "x": 10.0,
                 "y": 9.803921699523926,
-                "z": 8.823529243469238
+                "z": 9.215685844421387
             },
             "OutlineSize": 0.009999999776482582,
             "Active": false

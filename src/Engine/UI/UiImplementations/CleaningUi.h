@@ -12,6 +12,9 @@ namespace Engine::Ui
     {
     private:
         Image* TaskListBackground;
+        Image* SummaryBackground;
+        Image* Grade;
+        Image* Frame;
 
         Text* TrashText;
         Text* FloorText;
@@ -35,6 +38,10 @@ namespace Engine::Ui
         Text* DontBooksFailed;
         Text* DontCoinsFailed;
 
+        Text* TimerText;
+
+        bool ShowSummary = false;
+
         glm::vec4 PositiveColor = glm::vec4(0.0, 0.15, 0.0, 1);
         glm::vec4 FailedColor = glm::vec4(0.8, 0.05, 0.0,1);
         glm::vec4 HeaderColor = glm::vec4(0.1, 0.0, 0.0, 1);
@@ -52,6 +59,13 @@ namespace Engine::Ui
         std::shared_ptr<ma_sound> TaskSound = AudioManager::GetInstance().CreateSoundInstance("task");
         bool TrashTaskCompleted = false;
         bool FloorTaskCompleted = false;
+
+        float SummaryAnimationTime = 0.0f;
+        bool SummaryAppeared = false;
+
+        bool GradeAnimationStarted = false;
+        bool GradeAnimationFinished = false;
+        float GradeAnimationTime = 0.0f;
 
     public:
         CleaningUi();
