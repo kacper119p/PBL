@@ -75,6 +75,8 @@ namespace Engine
 
         void SetVacuumInactive();
 
+        void SetVacuumInactiveImmediate();
+
         void SetVacuumFront(AnimatedModelRenderer* Front);
 
         AnimatedModelRenderer* GetVacuumFront() const { return VacuumFront; };
@@ -97,6 +99,7 @@ namespace Engine
         void SetIndicator(float Fill, const glm::vec3& Color);
 
         void SetLeftTackSpeed(float speed);
+
         void SetRightTackSpeed(float speed);
 
     };

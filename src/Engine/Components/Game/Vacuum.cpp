@@ -55,6 +55,7 @@ namespace Engine
         {
             isShooting = true;
             isSuccing = false;
+            playerAnimationManager->SetVacuumInactiveImmediate();
         }
 
         if (volume >= maxVolume)
@@ -210,6 +211,10 @@ namespace Engine
         else if (fill < 0.75f)
         {
             material->SetEmissiveColor(glm::vec3(10.0f, 8.0f, 0.0f));
+        }
+        else if (fill < 0.99f)
+        {
+            material->SetEmissiveColor(glm::vec3(10.0f, 1.0f, 0.0f));
         }
         else
         {

@@ -6,6 +6,7 @@
 #include "NavMesh.h"
 #include "Engine/Components/Game/Thrash.h"
 #include "Engine/Components/Physics/Rigidbody.h"
+#include "Engine/Components/Renderers/AnimatedModelRenderer.h"
 #include "Engine/Components/Renderers/ModelRenderer.h"
 #include "Engine/EngineObjects/Entity.h"
 
@@ -406,6 +407,9 @@ namespace Engine
         Entity* closestTrash = nullptr;
         float closestDist = std::numeric_limits<float>::max();
 
+        glm::vec3 playerPos = Ai->GetPlayer()->GetTransform()->GetPosition();
+        float playerRange = Ai->GetPlayerRange();
+
         for (Entity* trash : Ai->TrashEntities)
         {
             if (!trash)
@@ -422,6 +426,11 @@ namespace Engine
             glm::vec2 slimeXZ(slimePos.x, slimePos.z);
             glm::vec2 trashXZ(trashPos.x, trashPos.z);
             float dist = glm::distance(slimeXZ, trashXZ);
+
+            glm::vec2 playerXZ(playerPos.x, playerPos.z);
+            float distTrashToPlayer = glm::distance(trashXZ, playerXZ);
+            if (distTrashToPlayer <= playerRange)
+                continue;
 
             if (dist > Ai->TrashRange + 1)
                 continue;
@@ -512,7 +521,8 @@ namespace Engine
 
         target->GetTransform()->SetParent(Ai->GetOwner()->GetTransform());
 
-        Models::Model* model = Ai->GetOwner()->GetComponent<ModelRenderer>()->GetModel();
+        Models::ModelAnimated* model = Ai->GetOwner()->GetTransform()->GetChildren().at(1)->GetOwner()->
+                GetComponent<AnimatedModelRenderer>()->GetModel();
         if (!model || model->GetMeshCount() == 0)
         {
             AbsorbStartTime = -1.0f;

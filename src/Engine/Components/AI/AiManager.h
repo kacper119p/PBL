@@ -4,6 +4,7 @@
 #include "BehaviorTreeNode.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/Components/Updateable.h"
+#include "Audio/AudioManager.h"
 
 namespace Engine
 {
@@ -78,6 +79,7 @@ namespace Engine
         int CurrentTrashValue = 0;
         int MaxTrashCapacity = 10;
         std::string SelectedPlayerName = "";
+        std::shared_ptr<ma_sound> WalkingSound = AudioManager::GetInstance().CreateSoundInstance("glut");
 
     };
 }
