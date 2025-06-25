@@ -21,7 +21,7 @@ namespace Engine
         static_assert(sizeof(Particle) == 48, "Size mismatch with GLSL buffer");
 
     private:
-        static constexpr float MaxLifetime = 64.0f / 24.0f;
+        static constexpr float MaxLifetime = 1.5f;
         static constexpr int32_t MaxParticleCount = 64;
         static constexpr float SpawnRate = MaxParticleCount / MaxLifetime;
 

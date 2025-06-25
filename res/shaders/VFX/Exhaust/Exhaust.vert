@@ -14,6 +14,7 @@ layout (std430, binding = 2) readonly buffer SortedIndices {
 layout (location = 0) in vec2 inputTexCoord;
 
 out vec2 UV;
+out float Lifetime;
 
 uniform mat4 ViewMatrix;
 uniform mat4 ProjectionMatrix;
@@ -44,5 +45,18 @@ void main()
 
     gl_Position = ProjectionMatrix * ViewMatrix * vec4(finalPos, 1.0);
 
-    UV = inputTexCoord;
+    // SpriteSheet Animation
+    int frameIndex = min(int(floor((MAX_LIFETIME - particleData.life) / FRAME_DURATION)), SPRITE_ROWS * SPRITE_COLUMNS - 1);
+    frameIndex = frameIndex % (SPRITE_COLUMNS * SPRITE_ROWS);
+
+    int frameX = frameIndex % SPRITE_COLUMNS;
+    int frameY = frameIndex / SPRITE_COLUMNS;
+
+    frameY = (SPRITE_ROWS - 1) - frameY;
+
+    vec2 frameOffset = vec2(frameX, frameY) / vec2(SPRITE_COLUMNS, SPRITE_ROWS);
+    vec2 frameScale = vec2(1.0 / SPRITE_COLUMNS, 1.0 / SPRITE_ROWS);
+
+    UV = inputTexCoord * frameScale + frameOffset;
+    Lifetime = particleData.life;
 }
