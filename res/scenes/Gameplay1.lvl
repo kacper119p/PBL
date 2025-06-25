@@ -6331,7 +6331,8 @@
             "components": [
                 "{86ab4880-dfbf-46d3-a439-76e1ea69fdd3}\u0000",
                 "{76cf0df9-c9a4-4762-ad32-a213b2628e59}\u0000",
-                "{3f6853da-c7e5-43c4-8da4-1b480fa2655f}\u0000"
+                "{3f6853da-c7e5-43c4-8da4-1b480fa2655f}\u0000",
+                "{7f026abd-8776-49ca-b78f-54c8a986f9ba}\u0000"
             ]
         },
         {
@@ -6369,6 +6370,12 @@
             "restitution": 0.10000000149011612
         },
         {
+            "type": "Thrash",
+            "id": "{7f026abd-8776-49ca-b78f-54c8a986f9ba}\u0000",
+            "owner": "{2846475c-4a5f-44e1-aee3-076a323d90fe}\u0000",
+            "size": 10
+        },
+        {
             "type": "Entity",
             "id": "{e15d6af1-c412-41d7-a6c8-a359585286a8}\u0000",
             "name": "Potion1",
@@ -6404,7 +6411,8 @@
                 "{99d3b509-7e83-4271-8eea-1a1b6c865c23}\u0000",
                 "{662d466d-2dcc-4072-a35a-88de4f1c1ae2}\u0000",
                 "{9a5872e6-bf64-4d49-b593-86f8bcd38d37}\u0000",
-                "{d342fcf9-2d80-4d9b-be87-54868e11c013}\u0000"
+                "{d342fcf9-2d80-4d9b-be87-54868e11c013}\u0000",
+                "{684b8f71-d1fd-4d9f-8158-593b08cd079b}\u0000"
             ]
         },
         {
@@ -6447,6 +6455,12 @@
             "owner": "{e15d6af1-c412-41d7-a6c8-a359585286a8}\u0000"
         },
         {
+            "type": "Thrash",
+            "id": "{684b8f71-d1fd-4d9f-8158-593b08cd079b}\u0000",
+            "owner": "{e15d6af1-c412-41d7-a6c8-a359585286a8}\u0000",
+            "size": 5
+        },
+        {
             "type": "Entity",
             "id": "{77561c28-a897-473c-af63-d5812f50b0f8}\u0000",
             "name": "Kregoslup",
@@ -6481,7 +6495,8 @@
             "components": [
                 "{1400f74c-9543-4c35-9644-d28367897646}\u0000",
                 "{19f945a0-bd3b-4fcf-8566-8c47acfb3bd1}\u0000",
-                "{c4a93003-5a86-4bc8-a185-667422f2bad4}\u0000"
+                "{c4a93003-5a86-4bc8-a185-667422f2bad4}\u0000",
+                "{79ed7f3c-f25f-4335-a233-691997fffa61}\u0000"
             ]
         },
         {
@@ -6519,6 +6534,12 @@
             "restitution": 0.10000000149011612
         },
         {
+            "type": "Thrash",
+            "id": "{79ed7f3c-f25f-4335-a233-691997fffa61}\u0000",
+            "owner": "{77561c28-a897-473c-af63-d5812f50b0f8}\u0000",
+            "size": 5
+        },
+        {
             "type": "Entity",
             "id": "{0ae3e669-479a-45fa-8eeb-6f1dd28cdbea}\u0000",
             "name": "New Entity",
@@ -6553,7 +6574,8 @@
             "components": [
                 "{3524518c-1acf-4c99-9ed6-bec6c4f6f63a}\u0000",
                 "{0bc31259-7a35-4564-baff-8315d266308d}\u0000",
-                "{cd1af90b-88de-4d4a-8d67-ffecf0510655}\u0000"
+                "{cd1af90b-88de-4d4a-8d67-ffecf0510655}\u0000",
+                "{b4216bc1-c8d3-436f-8bb0-0ecb2cb3dad8}\u0000"
             ]
         },
         {
@@ -6587,6 +6609,12 @@
             "friction": 0.20000000298023224,
             "frictionEnabled": true,
             "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Thrash",
+            "id": "{b4216bc1-c8d3-436f-8bb0-0ecb2cb3dad8}\u0000",
+            "owner": "{0ae3e669-479a-45fa-8eeb-6f1dd28cdbea}\u0000",
+            "size": 20
         },
         {
             "type": "Entity",
