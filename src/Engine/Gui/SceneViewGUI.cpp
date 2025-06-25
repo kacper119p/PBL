@@ -1,3 +1,4 @@
+#include "Engine/Components/Renderers/AnimatedModelRenderer.h"
 #include "Engine/Components/Renderers/OutlinedModelRenderer.h"
 #include "Engine/Rendering/Plane.h"
 #if EDITOR
@@ -16,6 +17,7 @@ void RaycastRecursive(Engine::Transform* obj, const glm::vec3& rayOrigin, const 
                       Engine::Transform*& outClosest, float& outClosestT)
 {
     const Models::Model* model = nullptr;
+    const Models::ModelAnimated* modelAnimated = nullptr;
 
     if (const Engine::ModelRenderer* modelRenderer = obj->GetOwner()->GetComponent<Engine::ModelRenderer>())
     {
@@ -26,7 +28,11 @@ void RaycastRecursive(Engine::Transform* obj, const glm::vec3& rayOrigin, const 
     {
         model = outlinedModelRenderer->GetModel();
     }
-
+    else if (const Engine::AnimatedModelRenderer* animatedModelRenderer
+            = obj->GetOwner()->GetComponent<Engine::AnimatedModelRenderer>())
+    {
+        modelAnimated = animatedModelRenderer->GetModel();
+    }
     if (model != nullptr)
     {
         const glm::mat4 modelMatrix = obj->GetLocalToWorldMatrix();
@@ -66,8 +72,10 @@ void RaycastRecursive(Engine::Transform* obj, const glm::vec3& rayOrigin, const 
         {
             glm::vec3 v0 = glm::vec3(
                     modelMatrix * glm::vec4(Engine::Plane::GetVertexPosition(indices[j + 0]), 1.0f));
-            glm::vec3 v1 = glm::vec3(modelMatrix * glm::vec4(Engine::Plane::GetVertexPosition(indices[j + 1]), 1.0f));
-            glm::vec3 v2 = glm::vec3(modelMatrix * glm::vec4(Engine::Plane::GetVertexPosition(indices[j + 2]), 1.0f));
+            glm::vec3 v1 = glm::vec3(
+                    modelMatrix * glm::vec4(Engine::Plane::GetVertexPosition(indices[j + 1]), 1.0f));
+            glm::vec3 v2 = glm::vec3(
+                    modelMatrix * glm::vec4(Engine::Plane::GetVertexPosition(indices[j + 2]), 1.0f));
 
             glm::vec3 hitPoint;
             if (Engine::RayCast::RayIntersectsTriangle(rayOrigin, rayDir, v0, v1, v2, &hitPoint))
@@ -77,6 +85,35 @@ void RaycastRecursive(Engine::Transform* obj, const glm::vec3& rayOrigin, const 
                 {
                     outClosestT = t;
                     outClosest = obj;
+                }
+            }
+        }
+    }
+    else if (modelAnimated != nullptr)
+    {
+        const glm::mat4 modelMatrix = obj->GetLocalToWorldMatrix();
+
+        for (int i = 0; i < modelAnimated->GetMeshCount(); ++i)
+        {
+            const Models::MeshAnimated* mesh = modelAnimated->GetMesh(i);
+            const std::vector<Models::VertexAnimated>& vertices = mesh->VerticesData;
+            const std::vector<unsigned>& indices = mesh->VertexIndices;
+
+            for (size_t j = 0; j < indices.size(); j += 3)
+            {
+                glm::vec3 v0 = glm::vec3(modelMatrix * glm::vec4(vertices[indices[j + 0]].Position, 1.0f));
+                glm::vec3 v1 = glm::vec3(modelMatrix * glm::vec4(vertices[indices[j + 1]].Position, 1.0f));
+                glm::vec3 v2 = glm::vec3(modelMatrix * glm::vec4(vertices[indices[j + 2]].Position, 1.0f));
+
+                glm::vec3 hitPoint;
+                if (Engine::RayCast::RayIntersectsTriangle(rayOrigin, rayDir, v0, v1, v2, &hitPoint))
+                {
+                    float t = glm::length(hitPoint - rayOrigin);
+                    if (t < outClosestT)
+                    {
+                        outClosestT = t;
+                        outClosest = obj;
+                    }
                 }
             }
         }

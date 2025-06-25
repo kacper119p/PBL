@@ -18,6 +18,15 @@ namespace Engine::Ui
         SizeUniformLocation = Shader.GetUniformLocation("Size");
         TransformUniformLocation = Shader.GetUniformLocation("Transform");
         ColorUniformLocation = Shader.GetUniformLocation("Color");
+
+        glGenVertexArrays(1, &VertexArray);
+        glGenBuffers(1, &VertexBuffer);
+    }
+
+    Text::~Text()
+    {
+        glDeleteVertexArrays(1, &VertexArray);
+        glDeleteBuffers(1, &VertexBuffer);
     }
 
     void Text::Render()
@@ -109,8 +118,6 @@ namespace Engine::Ui
             ++j;
         }
 
-        glGenVertexArrays(1, &VertexArray);
-        glGenBuffers(1, &VertexBuffer);
         glBindVertexArray(VertexArray);
         glBindBuffer(GL_ARRAY_BUFFER, VertexBuffer);
 

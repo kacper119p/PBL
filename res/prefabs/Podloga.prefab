@@ -2,12 +2,12 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{de873768-7526-4651-a668-5be8dd7c824c}\u0000",
+            "id": "{f27396ae-67e1-4223-873b-b2ddb50a3812}\u0000",
             "name": "Podloga",
             "transform": {
                 "type": "Transform",
-                "id": "{27091725-316a-4d24-bf39-37127fc13d26}\u0000",
-                "owner": "{de873768-7526-4651-a668-5be8dd7c824c}\u0000",
+                "id": "{c3fede2e-9c86-4c80-bdf3-bf1162162f48}\u0000",
+                "owner": "{f27396ae-67e1-4223-873b-b2ddb50a3812}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.9497056007385254,
@@ -33,16 +33,25 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{35d07559-0fba-4646-9685-7bdf4a8c0c26}\u0000"
+                "{54b94356-f18c-4a16-81b1-02066bd4eae6}\u0000",
+                "{cf2aed2e-3a33-44cf-9da9-5909414a05ff}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{35d07559-0fba-4646-9685-7bdf4a8c0c26}\u0000",
-            "owner": "{de873768-7526-4651-a668-5be8dd7c824c}\u0000",
+            "id": "{54b94356-f18c-4a16-81b1-02066bd4eae6}\u0000",
+            "owner": "{f27396ae-67e1-4223-873b-b2ddb50a3812}\u0000",
             "Material": "res/materials/SampleScene/podloga.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/Podloga.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "NavArea",
+            "id": "{cf2aed2e-3a33-44cf-9da9-5909414a05ff}\u0000",
+            "owner": "{f27396ae-67e1-4223-873b-b2ddb50a3812}\u0000",
+            "IsWalkable": true,
+            "spacing": 1.0,
+            "padding": 0.0
         }
     ]
 }

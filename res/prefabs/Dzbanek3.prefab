@@ -10,7 +10,7 @@
                 "owner": "{814e4907-dbb0-464b-bee0-a5f6a33d8aea}\u0000",
                 "Position": {
                     "x": 0.0,
-                    "y": 3.1894798278808594,
+                    "y": 3.708811044692993,
                     "z": 90.47037506103516
                 },
                 "EulerAngles": {
@@ -34,9 +34,9 @@
             },
             "components": [
                 "{ccc30e6a-bc55-4bdc-86cf-b2dbf8a8bb66}\u0000",
-                "{c0077eae-3aeb-4b4b-a81b-2df2b5aae942}\u0000",
-                "{d9acf910-ec7f-460c-8375-981da94149e7}\u0000",
-                "{aaaf53c7-9888-475e-b7c2-0c4a5f06c0d8}\u0000"
+                "{59fcee02-600f-4ce4-99fe-fb03e0a851a3}\u0000",
+                "{cd7b47e2-a59d-4d1b-a4f2-4595cd5e7181}\u0000",
+                "{2df37519-22fa-4c45-87f2-f40d9040ca20}\u0000"
             ]
         },
         {
@@ -48,24 +48,25 @@
             "CastShadow": true
         },
         {
-            "type": "CapsuleCollider",
-            "id": "{c0077eae-3aeb-4b4b-a81b-2df2b5aae942}\u0000",
+            "type": "BoxCollider",
+            "id": "{59fcee02-600f-4ce4-99fe-fb03e0a851a3}\u0000",
             "owner": "{814e4907-dbb0-464b-bee0-a5f6a33d8aea}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 4294967295,
             "collisionMask": 4294967291,
-            "colliderType": 2,
-            "Radius": 1.350000023841858,
-            "Height": 1.5
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 5.0,
+            "_depth": 2.0
         },
         {
             "type": "Rigidbody",
-            "id": "{d9acf910-ec7f-460c-8375-981da94149e7}\u0000",
+            "id": "{cd7b47e2-a59d-4d1b-a4f2-4595cd5e7181}\u0000",
             "owner": "{814e4907-dbb0-464b-bee0-a5f6a33d8aea}\u0000",
-            "mass": 0.5,
-            "inverseMass": 2.0,
+            "mass": 0.30000001192092896,
+            "inverseMass": 3.3333332538604736,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
@@ -74,7 +75,7 @@
         },
         {
             "type": "Furniture",
-            "id": "{aaaf53c7-9888-475e-b7c2-0c4a5f06c0d8}\u0000",
+            "id": "{2df37519-22fa-4c45-87f2-f40d9040ca20}\u0000",
             "owner": "{814e4907-dbb0-464b-bee0-a5f6a33d8aea}\u0000"
         }
     ]

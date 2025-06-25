@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 
+#include "GLFW/glfw3.h"
 #include "Scene.h"
 
 namespace Engine
@@ -9,14 +10,13 @@ namespace Engine
     class SceneManager
     {
     private:
-        static bool isSceneChanging;
+        static bool IsSceneChanging;
         static std::string NewScene;
-        SceneManager()
-        {
-        }
+
+    private:
+        SceneManager() = delete;
 
     public:
-        
         /**
          * @brief Saves scene to a file.
          * @param Path Path of a scene file.
@@ -30,8 +30,10 @@ namespace Engine
          * @param Scene Scene to load data to.
          */
         static void LoadScene(const std::string& Path, Scene* Scene);
+
         static void ChangeScene(const std::string& Path);
-        static void UpdateScene(Scene* Scene);
-        
+
+        static void UpdateScene(Scene* Scene, const CameraRenderData& RenderData, GLFWwindow* Window);
+
     };
 } // Engine

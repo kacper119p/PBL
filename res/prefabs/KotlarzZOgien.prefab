@@ -2,16 +2,16 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{1af76653-efd4-484e-ba9e-933618aceed9}\u0000",
+            "id": "{5aa16cdd-48a1-49c7-bc13-ba42bb4ab6d6}\u0000",
             "name": "KotlarzZ",
             "transform": {
                 "type": "Transform",
-                "id": "{e651c72a-c31d-4465-9ed6-1064a880b096}\u0000",
-                "owner": "{1af76653-efd4-484e-ba9e-933618aceed9}\u0000",
+                "id": "{ecc20f3e-4fd9-4b94-b6f1-efe49acefe22}\u0000",
+                "owner": "{5aa16cdd-48a1-49c7-bc13-ba42bb4ab6d6}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": 1.229279637336731,
-                    "z": 0.0
+                    "x": -39.718292236328125,
+                    "y": 2.1470723152160645,
+                    "z": -25.107528686523438
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -19,9 +19,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
+                    "x": 2.0,
+                    "y": 2.0,
+                    "z": 2.0
                 },
                 "Rotation": {
                     "x": 0.0,
@@ -30,44 +30,44 @@
                     "w": 1.0
                 },
                 "Children": [
-                    "{9560bc42-ea66-4041-8f4d-69f5f7ec578b}\u0000",
-                    "{a16ea909-5c43-4838-b792-24e1627a2c58}\u0000",
-                    "{cb199823-bcc7-4240-889d-aeec7fac832a}\u0000",
-                    "{fb33415f-58b4-4e9e-a0ad-2edf52f1e37d}\u0000",
-                    "{a2125c79-5940-4733-864b-3adac9fe6edd}\u0000",
-                    "{43443923-f1ae-4149-87ee-53156475bb17}\u0000",
-                    "{b42b49a9-0bfd-4535-b8ca-335c048510aa}\u0000",
-                    "{1e367270-3cb7-4517-890b-fa7bd0368d8b}\u0000",
-                    "{52f79fb8-f108-4d43-8658-764ec97565cc}\u0000",
-                    "{a27f7ed0-ad31-48f4-aa49-f6ea076f7beb}\u0000",
-                    "{6628e728-5957-4a02-9bd5-32189a933eab}\u0000",
-                    "{ed8f6ea6-e2dc-45f1-aec5-916f529e57f1}\u0000",
-                    "{7be09622-dea7-4a29-aa41-1d2b5f219fe0}\u0000",
-                    "{e211bb47-c006-4168-aa33-b011e37de351}\u0000",
-                    "{25f6c286-628b-4b0f-93ef-15deaef7540f}\u0000"
+                    "{38407ef2-f649-4e55-a9e6-ec59a0fea46f}\u0000",
+                    "{b143c332-9132-4df3-8c81-c3527773acd7}\u0000",
+                    "{1c3795d0-dd44-49fd-9ca3-0e301970e46b}\u0000",
+                    "{067870de-2876-4ec5-94d0-ca3f8d190add}\u0000",
+                    "{1a52dd52-104e-4cc9-bc43-9e103e3ef0ed}\u0000",
+                    "{0eb0e617-2a14-4849-bfba-e37f45295148}\u0000",
+                    "{375ad71a-177c-4ff1-951a-99155990358a}\u0000",
+                    "{7a45dacd-f456-4076-b132-dd78655f89e7}\u0000",
+                    "{c2cbfcda-e828-49eb-aded-7b21a8a184bb}\u0000",
+                    "{01d40e70-a3a4-4137-9954-315fbe3c4d50}\u0000",
+                    "{4b713d70-9637-4ee0-a026-a618f1bc1823}\u0000",
+                    "{9d11f283-06fe-4e9b-86e9-4d8c6b05304b}\u0000",
+                    "{5c693367-4617-48d4-962b-59cf4b87c33a}\u0000",
+                    "{7e424301-d804-4137-a5bb-18446dea04dd}\u0000",
+                    "{d27425d4-1fca-445c-a351-88ca503796b9}\u0000"
                 ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{a38f7c66-0ece-47f5-ad3a-28b5744a853e}\u0000"
+                "{314dc79d-6180-436d-bfbc-1dc7b9fc15ef}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{a38f7c66-0ece-47f5-ad3a-28b5744a853e}\u0000",
-            "owner": "{1af76653-efd4-484e-ba9e-933618aceed9}\u0000",
+            "id": "{314dc79d-6180-436d-bfbc-1dc7b9fc15ef}\u0000",
+            "owner": "{5aa16cdd-48a1-49c7-bc13-ba42bb4ab6d6}\u0000",
             "Material": "res/materials/SampleScene/KotlarzOtwarty.mat",
             "Model": "res/models/Modele_Mati/Meble/KotlarzZamkniety.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{c2930e72-0b4d-4806-b441-e6a67bba0693}\u0000",
+            "id": "{cc284216-4b0e-448c-8d45-f9caec50e8f5}\u0000",
             "name": "firestone",
             "transform": {
                 "type": "Transform",
-                "id": "{9560bc42-ea66-4041-8f4d-69f5f7ec578b}\u0000",
-                "owner": "{c2930e72-0b4d-4806-b441-e6a67bba0693}\u0000",
+                "id": "{38407ef2-f649-4e55-a9e6-ec59a0fea46f}\u0000",
+                "owner": "{cc284216-4b0e-448c-8d45-f9caec50e8f5}\u0000",
                 "Position": {
                     "x": -0.6423564553260803,
                     "y": 0.5568902492523193,
@@ -90,28 +90,28 @@
                     "w": 0.9603564143180847
                 },
                 "Children": [],
-                "Parent": "{e651c72a-c31d-4465-9ed6-1064a880b096}\u0000"
+                "Parent": "{ecc20f3e-4fd9-4b94-b6f1-efe49acefe22}\u0000"
             },
             "components": [
-                "{cc71ebe6-390e-4798-888a-3fae3400a7cf}\u0000"
+                "{62410f8f-f8d8-4eee-9b07-122cd215bf42}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{cc71ebe6-390e-4798-888a-3fae3400a7cf}\u0000",
-            "owner": "{c2930e72-0b4d-4806-b441-e6a67bba0693}\u0000",
+            "id": "{62410f8f-f8d8-4eee-9b07-122cd215bf42}\u0000",
+            "owner": "{cc284216-4b0e-448c-8d45-f9caec50e8f5}\u0000",
             "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "./res/Models/SphereLowPoly.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{4636f0d2-0cd3-4032-a485-10db76f057c9}\u0000",
+            "id": "{b8911698-a3ff-4fa3-96e7-eaeb505ce1d2}\u0000",
             "name": "firesphere",
             "transform": {
                 "type": "Transform",
-                "id": "{a16ea909-5c43-4838-b792-24e1627a2c58}\u0000",
-                "owner": "{4636f0d2-0cd3-4032-a485-10db76f057c9}\u0000",
+                "id": "{b143c332-9132-4df3-8c81-c3527773acd7}\u0000",
+                "owner": "{b8911698-a3ff-4fa3-96e7-eaeb505ce1d2}\u0000",
                 "Position": {
                     "x": 0.278538316488266,
                     "y": 0.5568902492523193,
@@ -134,28 +134,28 @@
                     "w": 0.7959816455841064
                 },
                 "Children": [],
-                "Parent": "{e651c72a-c31d-4465-9ed6-1064a880b096}\u0000"
+                "Parent": "{ecc20f3e-4fd9-4b94-b6f1-efe49acefe22}\u0000"
             },
             "components": [
-                "{b75f9f6b-136e-4cb5-b6f5-0eba4b022aa6}\u0000"
+                "{977f8eee-4941-4c2f-94c2-c2d59814e2be}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{b75f9f6b-136e-4cb5-b6f5-0eba4b022aa6}\u0000",
-            "owner": "{4636f0d2-0cd3-4032-a485-10db76f057c9}\u0000",
+            "id": "{977f8eee-4941-4c2f-94c2-c2d59814e2be}\u0000",
+            "owner": "{b8911698-a3ff-4fa3-96e7-eaeb505ce1d2}\u0000",
             "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "./res/Models/SphereLowPoly.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{8b396cfc-4faf-408e-a08e-de0568e01012}\u0000",
+            "id": "{fce1bc10-393b-461b-9b63-f4cafa7b13ff}\u0000",
             "name": "firestone",
             "transform": {
                 "type": "Transform",
-                "id": "{cb199823-bcc7-4240-889d-aeec7fac832a}\u0000",
-                "owner": "{8b396cfc-4faf-408e-a08e-de0568e01012}\u0000",
+                "id": "{1c3795d0-dd44-49fd-9ca3-0e301970e46b}\u0000",
+                "owner": "{fce1bc10-393b-461b-9b63-f4cafa7b13ff}\u0000",
                 "Position": {
                     "x": 0.28372055292129517,
                     "y": 0.46002018451690674,
@@ -178,28 +178,28 @@
                     "w": 0.9799796938896179
                 },
                 "Children": [],
-                "Parent": "{e651c72a-c31d-4465-9ed6-1064a880b096}\u0000"
+                "Parent": "{ecc20f3e-4fd9-4b94-b6f1-efe49acefe22}\u0000"
             },
             "components": [
-                "{5f1149da-8b18-46f3-8973-484f791e5a61}\u0000"
+                "{e4bd8f2a-d9c8-4106-a670-bfae73614888}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{5f1149da-8b18-46f3-8973-484f791e5a61}\u0000",
-            "owner": "{8b396cfc-4faf-408e-a08e-de0568e01012}\u0000",
+            "id": "{e4bd8f2a-d9c8-4106-a670-bfae73614888}\u0000",
+            "owner": "{fce1bc10-393b-461b-9b63-f4cafa7b13ff}\u0000",
             "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "./res/Models/SphereLowPoly.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{c9b150e0-d30b-4f48-9ff7-324ed72e3b05}\u0000",
+            "id": "{5489b61f-1c13-4512-b7c6-1015be41aaec}\u0000",
             "name": "wegiel",
             "transform": {
                 "type": "Transform",
-                "id": "{fb33415f-58b4-4e9e-a0ad-2edf52f1e37d}\u0000",
-                "owner": "{c9b150e0-d30b-4f48-9ff7-324ed72e3b05}\u0000",
+                "id": "{067870de-2876-4ec5-94d0-ca3f8d190add}\u0000",
+                "owner": "{5489b61f-1c13-4512-b7c6-1015be41aaec}\u0000",
                 "Position": {
                     "x": 0.7648077607154846,
                     "y": 0.46002018451690674,
@@ -222,28 +222,28 @@
                     "w": 0.9799796938896179
                 },
                 "Children": [],
-                "Parent": "{e651c72a-c31d-4465-9ed6-1064a880b096}\u0000"
+                "Parent": "{ecc20f3e-4fd9-4b94-b6f1-efe49acefe22}\u0000"
             },
             "components": [
-                "{41d669a8-a9f0-4206-8f54-185d09d3a7ef}\u0000"
+                "{5d9e6ae6-5e4e-485b-a3f4-f35fdc004cb2}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{41d669a8-a9f0-4206-8f54-185d09d3a7ef}\u0000",
-            "owner": "{c9b150e0-d30b-4f48-9ff7-324ed72e3b05}\u0000",
+            "id": "{5d9e6ae6-5e4e-485b-a3f4-f35fdc004cb2}\u0000",
+            "owner": "{5489b61f-1c13-4512-b7c6-1015be41aaec}\u0000",
             "Material": "res/materials/SampleScene/coal.mat",
             "Model": "./res/Models/SphereLowPoly.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{f922bdb9-d047-411b-9b4e-b21b5e980f8f}\u0000",
+            "id": "{ee7938f2-c783-41a4-907c-58746f2c22c6}\u0000",
             "name": "wegiel",
             "transform": {
                 "type": "Transform",
-                "id": "{a2125c79-5940-4733-864b-3adac9fe6edd}\u0000",
-                "owner": "{f922bdb9-d047-411b-9b4e-b21b5e980f8f}\u0000",
+                "id": "{1a52dd52-104e-4cc9-bc43-9e103e3ef0ed}\u0000",
+                "owner": "{ee7938f2-c783-41a4-907c-58746f2c22c6}\u0000",
                 "Position": {
                     "x": 0.7648077607154846,
                     "y": 0.46002018451690674,
@@ -266,28 +266,28 @@
                     "w": 0.8348730206489563
                 },
                 "Children": [],
-                "Parent": "{e651c72a-c31d-4465-9ed6-1064a880b096}\u0000"
+                "Parent": "{ecc20f3e-4fd9-4b94-b6f1-efe49acefe22}\u0000"
             },
             "components": [
-                "{3f7d58fd-c301-48b3-9004-646ef7d7db38}\u0000"
+                "{8375e056-c345-4f00-9dde-5d37aacec012}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{3f7d58fd-c301-48b3-9004-646ef7d7db38}\u0000",
-            "owner": "{f922bdb9-d047-411b-9b4e-b21b5e980f8f}\u0000",
+            "id": "{8375e056-c345-4f00-9dde-5d37aacec012}\u0000",
+            "owner": "{ee7938f2-c783-41a4-907c-58746f2c22c6}\u0000",
             "Material": "res/materials/SampleScene/coal.mat",
             "Model": "./res/Models/SphereLowPoly.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{0ba43f1e-671c-4784-8313-2cc1bcc879be}\u0000",
+            "id": "{1a8004c8-cd52-47a8-8f41-36ccdc5f1c12}\u0000",
             "name": "wegiel",
             "transform": {
                 "type": "Transform",
-                "id": "{43443923-f1ae-4149-87ee-53156475bb17}\u0000",
-                "owner": "{0ba43f1e-671c-4784-8313-2cc1bcc879be}\u0000",
+                "id": "{0eb0e617-2a14-4849-bfba-e37f45295148}\u0000",
+                "owner": "{1a8004c8-cd52-47a8-8f41-36ccdc5f1c12}\u0000",
                 "Position": {
                     "x": -0.3310687243938446,
                     "y": 0.46002018451690674,
@@ -310,28 +310,28 @@
                     "w": 0.8348730206489563
                 },
                 "Children": [],
-                "Parent": "{e651c72a-c31d-4465-9ed6-1064a880b096}\u0000"
+                "Parent": "{ecc20f3e-4fd9-4b94-b6f1-efe49acefe22}\u0000"
             },
             "components": [
-                "{5e8ae574-1b1c-436e-b24b-56ab63817924}\u0000"
+                "{73b6c40f-ffe3-4750-a679-68be449eaca1}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{5e8ae574-1b1c-436e-b24b-56ab63817924}\u0000",
-            "owner": "{0ba43f1e-671c-4784-8313-2cc1bcc879be}\u0000",
+            "id": "{73b6c40f-ffe3-4750-a679-68be449eaca1}\u0000",
+            "owner": "{1a8004c8-cd52-47a8-8f41-36ccdc5f1c12}\u0000",
             "Material": "res/materials/SampleScene/coal.mat",
             "Model": "./res/Models/SphereLowPoly.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{f23c496e-9fcb-4444-856c-3774a4095343}\u0000",
+            "id": "{8da3482b-b05b-474a-803f-b142b8e10d5b}\u0000",
             "name": "wegiel",
             "transform": {
                 "type": "Transform",
-                "id": "{b42b49a9-0bfd-4535-b8ca-335c048510aa}\u0000",
-                "owner": "{f23c496e-9fcb-4444-856c-3774a4095343}\u0000",
+                "id": "{375ad71a-177c-4ff1-951a-99155990358a}\u0000",
+                "owner": "{8da3482b-b05b-474a-803f-b142b8e10d5b}\u0000",
                 "Position": {
                     "x": -0.02286367118358612,
                     "y": 0.6001206636428833,
@@ -354,28 +354,28 @@
                     "w": 0.5531995892524719
                 },
                 "Children": [],
-                "Parent": "{e651c72a-c31d-4465-9ed6-1064a880b096}\u0000"
+                "Parent": "{ecc20f3e-4fd9-4b94-b6f1-efe49acefe22}\u0000"
             },
             "components": [
-                "{396d52ee-78f2-4b68-b765-11426570044f}\u0000"
+                "{1f4e3911-4fe9-4fe6-9bd8-248d30988691}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{396d52ee-78f2-4b68-b765-11426570044f}\u0000",
-            "owner": "{f23c496e-9fcb-4444-856c-3774a4095343}\u0000",
+            "id": "{1f4e3911-4fe9-4fe6-9bd8-248d30988691}\u0000",
+            "owner": "{8da3482b-b05b-474a-803f-b142b8e10d5b}\u0000",
             "Material": "res/materials/SampleScene/coal.mat",
             "Model": "./res/Models/SphereLowPoly.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{bb903968-8cbf-42d4-8719-a34671b24156}\u0000",
+            "id": "{b817594f-44db-45d5-872b-ad90947ea2f0}\u0000",
             "name": "wegiel",
             "transform": {
                 "type": "Transform",
-                "id": "{1e367270-3cb7-4517-890b-fa7bd0368d8b}\u0000",
-                "owner": "{bb903968-8cbf-42d4-8719-a34671b24156}\u0000",
+                "id": "{7a45dacd-f456-4076-b132-dd78655f89e7}\u0000",
+                "owner": "{b817594f-44db-45d5-872b-ad90947ea2f0}\u0000",
                 "Position": {
                     "x": 0.15849696099758148,
                     "y": 0.427187442779541,
@@ -398,28 +398,28 @@
                     "w": 0.13823246955871582
                 },
                 "Children": [],
-                "Parent": "{e651c72a-c31d-4465-9ed6-1064a880b096}\u0000"
+                "Parent": "{ecc20f3e-4fd9-4b94-b6f1-efe49acefe22}\u0000"
             },
             "components": [
-                "{980a4e87-1c42-4ba6-9c98-2b4405ce6619}\u0000"
+                "{7ef65066-75e1-4ca1-a729-9284d1a619f2}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{980a4e87-1c42-4ba6-9c98-2b4405ce6619}\u0000",
-            "owner": "{bb903968-8cbf-42d4-8719-a34671b24156}\u0000",
+            "id": "{7ef65066-75e1-4ca1-a729-9284d1a619f2}\u0000",
+            "owner": "{b817594f-44db-45d5-872b-ad90947ea2f0}\u0000",
             "Material": "res/materials/SampleScene/coal.mat",
             "Model": "./res/Models/SphereLowPoly.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{50f98988-5b65-48c6-9ed5-d4d9ab7e5b5f}\u0000",
+            "id": "{97e24d4c-8c7c-4f14-bbae-b0623ec7c481}\u0000",
             "name": "wegiel",
             "transform": {
                 "type": "Transform",
-                "id": "{52f79fb8-f108-4d43-8658-764ec97565cc}\u0000",
-                "owner": "{50f98988-5b65-48c6-9ed5-d4d9ab7e5b5f}\u0000",
+                "id": "{c2cbfcda-e828-49eb-aded-7b21a8a184bb}\u0000",
+                "owner": "{97e24d4c-8c7c-4f14-bbae-b0623ec7c481}\u0000",
                 "Position": {
                     "x": 0.5242189168930054,
                     "y": 0.427187442779541,
@@ -442,28 +442,28 @@
                     "w": 0.09942492842674255
                 },
                 "Children": [],
-                "Parent": "{e651c72a-c31d-4465-9ed6-1064a880b096}\u0000"
+                "Parent": "{ecc20f3e-4fd9-4b94-b6f1-efe49acefe22}\u0000"
             },
             "components": [
-                "{e592840b-c311-465f-9c9c-6eb69242ba3b}\u0000"
+                "{6b4ae4cb-2ae3-418d-bf20-ee3e97877ae6}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{e592840b-c311-465f-9c9c-6eb69242ba3b}\u0000",
-            "owner": "{50f98988-5b65-48c6-9ed5-d4d9ab7e5b5f}\u0000",
+            "id": "{6b4ae4cb-2ae3-418d-bf20-ee3e97877ae6}\u0000",
+            "owner": "{97e24d4c-8c7c-4f14-bbae-b0623ec7c481}\u0000",
             "Material": "res/materials/SampleScene/coal.mat",
             "Model": "./res/Models/SphereLowPoly.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{7fb2fce0-ec18-496f-9be2-74ac00747733}\u0000",
+            "id": "{b4cabdbb-78c0-49dd-98b1-f0347180366e}\u0000",
             "name": "wegiel",
             "transform": {
                 "type": "Transform",
-                "id": "{a27f7ed0-ad31-48f4-aa49-f6ea076f7beb}\u0000",
-                "owner": "{7fb2fce0-ec18-496f-9be2-74ac00747733}\u0000",
+                "id": "{01d40e70-a3a4-4137-9954-315fbe3c4d50}\u0000",
+                "owner": "{b4cabdbb-78c0-49dd-98b1-f0347180366e}\u0000",
                 "Position": {
                     "x": -0.47502732276916504,
                     "y": 0.5210031270980835,
@@ -486,28 +486,28 @@
                     "w": 0.44117826223373413
                 },
                 "Children": [],
-                "Parent": "{e651c72a-c31d-4465-9ed6-1064a880b096}\u0000"
+                "Parent": "{ecc20f3e-4fd9-4b94-b6f1-efe49acefe22}\u0000"
             },
             "components": [
-                "{06e06f99-66b4-41a9-9239-eaac0b81f791}\u0000"
+                "{c04fe12c-9443-4d85-ad19-eda8ede63efd}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{06e06f99-66b4-41a9-9239-eaac0b81f791}\u0000",
-            "owner": "{7fb2fce0-ec18-496f-9be2-74ac00747733}\u0000",
+            "id": "{c04fe12c-9443-4d85-ad19-eda8ede63efd}\u0000",
+            "owner": "{b4cabdbb-78c0-49dd-98b1-f0347180366e}\u0000",
             "Material": "res/materials/SampleScene/coal.mat",
             "Model": "./res/Models/SphereLowPoly.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{ea4b91d1-aaba-4a06-a2f9-0bab0f586661}\u0000",
+            "id": "{7f417ddb-0b59-4eb1-b40b-bbe4b1cc96cb}\u0000",
             "name": "firesphere",
             "transform": {
                 "type": "Transform",
-                "id": "{6628e728-5957-4a02-9bd5-32189a933eab}\u0000",
-                "owner": "{ea4b91d1-aaba-4a06-a2f9-0bab0f586661}\u0000",
+                "id": "{4b713d70-9637-4ee0-a026-a618f1bc1823}\u0000",
+                "owner": "{7f417ddb-0b59-4eb1-b40b-bbe4b1cc96cb}\u0000",
                 "Position": {
                     "x": 0.14013752341270447,
                     "y": 0.46002018451690674,
@@ -530,28 +530,28 @@
                     "w": 0.8417674899101257
                 },
                 "Children": [],
-                "Parent": "{e651c72a-c31d-4465-9ed6-1064a880b096}\u0000"
+                "Parent": "{ecc20f3e-4fd9-4b94-b6f1-efe49acefe22}\u0000"
             },
             "components": [
-                "{bd5f179b-29f0-4ad4-9abc-54829d5dbfb8}\u0000"
+                "{186dcd92-7274-49ad-a78d-4dbda1973aae}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{bd5f179b-29f0-4ad4-9abc-54829d5dbfb8}\u0000",
-            "owner": "{ea4b91d1-aaba-4a06-a2f9-0bab0f586661}\u0000",
+            "id": "{186dcd92-7274-49ad-a78d-4dbda1973aae}\u0000",
+            "owner": "{7f417ddb-0b59-4eb1-b40b-bbe4b1cc96cb}\u0000",
             "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "./res/Models/SphereLowPoly.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{19575706-11e8-4b14-b542-5bfd1439b52a}\u0000",
+            "id": "{ab9358c0-7add-4cba-81a3-edde446370d1}\u0000",
             "name": "firesphere",
             "transform": {
                 "type": "Transform",
-                "id": "{ed8f6ea6-e2dc-45f1-aec5-916f529e57f1}\u0000",
-                "owner": "{19575706-11e8-4b14-b542-5bfd1439b52a}\u0000",
+                "id": "{9d11f283-06fe-4e9b-86e9-4d8c6b05304b}\u0000",
+                "owner": "{ab9358c0-7add-4cba-81a3-edde446370d1}\u0000",
                 "Position": {
                     "x": -0.17547857761383057,
                     "y": 0.5568902492523193,
@@ -574,25 +574,25 @@
                     "w": 0.9987456798553467
                 },
                 "Children": [],
-                "Parent": "{e651c72a-c31d-4465-9ed6-1064a880b096}\u0000"
+                "Parent": "{ecc20f3e-4fd9-4b94-b6f1-efe49acefe22}\u0000"
             },
             "components": [
-                "{101fdf23-e011-4247-93ab-0a70d1789f49}\u0000",
-                "{d5aba0f6-bd80-4d4d-a8c2-c0f62432fed6}\u0000"
+                "{76dcfa6e-2196-44a9-98a0-b12850c3917b}\u0000",
+                "{8290c528-aca9-410c-b72e-960a08bc1d17}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{101fdf23-e011-4247-93ab-0a70d1789f49}\u0000",
-            "owner": "{19575706-11e8-4b14-b542-5bfd1439b52a}\u0000",
+            "id": "{76dcfa6e-2196-44a9-98a0-b12850c3917b}\u0000",
+            "owner": "{ab9358c0-7add-4cba-81a3-edde446370d1}\u0000",
             "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "./res/Models/SphereLowPoly.fbx",
             "CastShadow": true
         },
         {
             "type": "PointLight",
-            "id": "{d5aba0f6-bd80-4d4d-a8c2-c0f62432fed6}\u0000",
-            "owner": "{19575706-11e8-4b14-b542-5bfd1439b52a}\u0000",
+            "id": "{8290c528-aca9-410c-b72e-960a08bc1d17}\u0000",
+            "owner": "{ab9358c0-7add-4cba-81a3-edde446370d1}\u0000",
             "Color": {
                 "x": 100.0,
                 "y": 39.2156867980957,
@@ -604,12 +604,12 @@
         },
         {
             "type": "Entity",
-            "id": "{9d2a3562-ffd6-4ccd-a50d-bcbe48999f36}\u0000",
+            "id": "{e6e5b3f0-cd60-4cf5-bcac-36b3248f32a0}\u0000",
             "name": "firestone",
             "transform": {
                 "type": "Transform",
-                "id": "{7be09622-dea7-4a29-aa41-1d2b5f219fe0}\u0000",
-                "owner": "{9d2a3562-ffd6-4ccd-a50d-bcbe48999f36}\u0000",
+                "id": "{5c693367-4617-48d4-962b-59cf4b87c33a}\u0000",
+                "owner": "{e6e5b3f0-cd60-4cf5-bcac-36b3248f32a0}\u0000",
                 "Position": {
                     "x": -0.5477604269981384,
                     "y": 0.5568902492523193,
@@ -632,28 +632,28 @@
                     "w": 0.9273048043251038
                 },
                 "Children": [],
-                "Parent": "{e651c72a-c31d-4465-9ed6-1064a880b096}\u0000"
+                "Parent": "{ecc20f3e-4fd9-4b94-b6f1-efe49acefe22}\u0000"
             },
             "components": [
-                "{39d256c7-9128-4aef-8ccc-1024e88261a8}\u0000"
+                "{f8bb75c5-260c-4832-882d-87e739cf826e}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{39d256c7-9128-4aef-8ccc-1024e88261a8}\u0000",
-            "owner": "{9d2a3562-ffd6-4ccd-a50d-bcbe48999f36}\u0000",
+            "id": "{f8bb75c5-260c-4832-882d-87e739cf826e}\u0000",
+            "owner": "{e6e5b3f0-cd60-4cf5-bcac-36b3248f32a0}\u0000",
             "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "./res/Models/SphereLowPoly.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{07a55526-87c5-4b51-8b9a-e82b91266159}\u0000",
+            "id": "{34d4bffa-9813-4c40-8e7f-786c956089c5}\u0000",
             "name": "ogien",
             "transform": {
                 "type": "Transform",
-                "id": "{e211bb47-c006-4168-aa33-b011e37de351}\u0000",
-                "owner": "{07a55526-87c5-4b51-8b9a-e82b91266159}\u0000",
+                "id": "{7e424301-d804-4137-a5bb-18446dea04dd}\u0000",
+                "owner": "{34d4bffa-9813-4c40-8e7f-786c956089c5}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -676,23 +676,23 @@
                     "w": 0.0
                 },
                 "Children": [],
-                "Parent": "{e651c72a-c31d-4465-9ed6-1064a880b096}\u0000"
+                "Parent": "{ecc20f3e-4fd9-4b94-b6f1-efe49acefe22}\u0000"
             },
             "components": [
-                "{7cc2e7d2-2bad-43cd-872b-42dcfb423e5f}\u0000",
-                "{cff3aec0-2585-4870-bcc5-11f01b26f98c}\u0000",
-                "{216662df-d3d4-49c3-b815-2f6d4f7473ae}\u0000"
+                "{4ef59a60-6058-42d9-ac4c-f926a8857192}\u0000",
+                "{117dcbe3-8997-4b40-bdd4-338d31796fec}\u0000",
+                "{0ae76104-c296-4f99-8a88-efad576d7dfc}\u0000"
             ]
         },
         {
             "type": "FireParticleEmitter",
-            "id": "{7cc2e7d2-2bad-43cd-872b-42dcfb423e5f}\u0000",
-            "owner": "{07a55526-87c5-4b51-8b9a-e82b91266159}\u0000"
+            "id": "{4ef59a60-6058-42d9-ac4c-f926a8857192}\u0000",
+            "owner": "{34d4bffa-9813-4c40-8e7f-786c956089c5}\u0000"
         },
         {
             "type": "PointLight",
-            "id": "{cff3aec0-2585-4870-bcc5-11f01b26f98c}\u0000",
-            "owner": "{07a55526-87c5-4b51-8b9a-e82b91266159}\u0000",
+            "id": "{117dcbe3-8997-4b40-bdd4-338d31796fec}\u0000",
+            "owner": "{34d4bffa-9813-4c40-8e7f-786c956089c5}\u0000",
             "Color": {
                 "x": 1.0,
                 "y": 1.0,
@@ -704,20 +704,20 @@
         },
         {
             "type": "EmbersParticleEmitter",
-            "id": "{216662df-d3d4-49c3-b815-2f6d4f7473ae}\u0000",
-            "owner": "{07a55526-87c5-4b51-8b9a-e82b91266159}\u0000"
+            "id": "{0ae76104-c296-4f99-8a88-efad576d7dfc}\u0000",
+            "owner": "{34d4bffa-9813-4c40-8e7f-786c956089c5}\u0000"
         },
         {
             "type": "Entity",
-            "id": "{89fafdb6-1ecb-47b8-b900-8e97cab4f9b5}\u0000",
+            "id": "{3e52f052-065b-4505-90c4-5faaf789046b}\u0000",
             "name": "collider",
             "transform": {
                 "type": "Transform",
-                "id": "{25f6c286-628b-4b0f-93ef-15deaef7540f}\u0000",
-                "owner": "{89fafdb6-1ecb-47b8-b900-8e97cab4f9b5}\u0000",
+                "id": "{d27425d4-1fca-445c-a351-88ca503796b9}\u0000",
+                "owner": "{3e52f052-065b-4505-90c4-5faaf789046b}\u0000",
                 "Position": {
                     "x": 0.0,
-                    "y": -0.7355974912643433,
+                    "y": 0.3057788610458374,
                     "z": 0.0
                 },
                 "EulerAngles": {
@@ -737,20 +737,25 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{e651c72a-c31d-4465-9ed6-1064a880b096}\u0000"
+                "Parent": "{ecc20f3e-4fd9-4b94-b6f1-efe49acefe22}\u0000"
             },
             "components": [
-                "{46e132ed-3316-4612-bde1-7fc428bc9b47}\u0000"
+                "{01257f24-94ad-4d67-8745-6988e48a4692}\u0000"
             ]
         },
         {
-            "type": "SphereCollider",
-            "id": "{46e132ed-3316-4612-bde1-7fc428bc9b47}\u0000",
-            "owner": "{89fafdb6-1ecb-47b8-b900-8e97cab4f9b5}\u0000",
+            "type": "BoxCollider",
+            "id": "{01257f24-94ad-4d67-8745-6988e48a4692}\u0000",
+            "owner": "{3e52f052-065b-4505-90c4-5faaf789046b}\u0000",
             "isTrigger": false,
             "isStatic": false,
-            "colliderType": 1,
-            "radius": 2.0
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 6.5,
+            "_height": 6.5,
+            "_depth": 6.5
         }
     ]
 }

@@ -34,9 +34,9 @@
             },
             "components": [
                 "{fb737cde-6b76-4e51-bc22-9757982542be}\u0000",
-                "{04df54a0-d3bc-4927-8142-aea7c85b114d}\u0000",
-                "{ec8f1385-3cfe-41da-8d19-c403f87132d9}\u0000",
-                "{a6f55e5f-12d8-4d64-9e64-2dc662c02b3d}\u0000"
+                "{ccf5281c-6d75-4e9b-8c33-b2a51cbb6c42}\u0000",
+                "{59768c2f-e651-4eda-8d20-ec69620b3fad}\u0000",
+                "{14f766fc-16d3-4b03-9213-b7f315f5fc39}\u0000"
             ]
         },
         {
@@ -48,24 +48,25 @@
             "CastShadow": true
         },
         {
-            "type": "CapsuleCollider",
-            "id": "{04df54a0-d3bc-4927-8142-aea7c85b114d}\u0000",
+            "type": "BoxCollider",
+            "id": "{ccf5281c-6d75-4e9b-8c33-b2a51cbb6c42}\u0000",
             "owner": "{0b4f2ec2-5a9a-4274-adda-e9b2e91c2bbc}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 4294967295,
             "collisionMask": 4294967291,
-            "colliderType": 2,
-            "Radius": 0.6499999761581421,
-            "Height": 0.30000001192092896
+            "colliderType": 0,
+            "_width": 1.0,
+            "_height": 1.2999999523162842,
+            "_depth": 1.0
         },
         {
             "type": "Rigidbody",
-            "id": "{ec8f1385-3cfe-41da-8d19-c403f87132d9}\u0000",
+            "id": "{59768c2f-e651-4eda-8d20-ec69620b3fad}\u0000",
             "owner": "{0b4f2ec2-5a9a-4274-adda-e9b2e91c2bbc}\u0000",
-            "mass": 0.5,
-            "inverseMass": 2.0,
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
@@ -74,7 +75,7 @@
         },
         {
             "type": "Furniture",
-            "id": "{a6f55e5f-12d8-4d64-9e64-2dc662c02b3d}\u0000",
+            "id": "{14f766fc-16d3-4b03-9213-b7f315f5fc39}\u0000",
             "owner": "{0b4f2ec2-5a9a-4274-adda-e9b2e91c2bbc}\u0000"
         }
     ]
