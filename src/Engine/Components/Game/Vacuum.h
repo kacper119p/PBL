@@ -50,15 +50,10 @@ namespace Engine
             int totalSize;
             int currentAbsorbed;
             float nextAbsorbTime;
-            glm::vec3 originalScale;
-            bool cancelled = false;
         };
 
         std::vector<PendingSlimeIntake> activeSlimeAbsorptions;
         std::vector<GravityDisableTask> pendingGravityDisables;
-        std::vector<Engine::Entity*> slimeItems;
-
-        void OnTriggerExit(Collider* other);
 
     public:
         Vacuum() = default;

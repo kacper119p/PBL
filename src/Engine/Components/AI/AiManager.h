@@ -90,7 +90,7 @@ namespace Engine
         std::string SelectedPlayerName = "";
         std::shared_ptr<ma_sound> WalkingSound = AudioManager::GetInstance().CreateSoundInstance("glut");
         bool Enabled = true;
-        int Size = 20;
+        int Size = 5;
 
     };
 }
