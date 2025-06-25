@@ -27,6 +27,10 @@ namespace Engine
         bool CoinTaskFailed = false;
 
         int currentLevel = 0;
+        bool isCurrentLevelCompleted = true;
+
+        float LevelStartTime = 0.0f;
+        float LevelEndTime = 0.0f;
         
     public:
         ThrashManager() = default;
@@ -67,6 +71,15 @@ namespace Engine
         int GetCleanedUpBookCount() { return CleanedUpBooks.size(); }
 
         int GetCurrentLevel() const { return currentLevel; }
+
+        bool IsCurrentLevelCompleted() const { return isCurrentLevelCompleted; }
+
+        void SetIsCurrentLevelCompleted(bool completed) { isCurrentLevelCompleted = completed; }
+
+        void SetLevelStartTime(float time) { LevelStartTime = time; }
+        float GetLevelStartTime() const { return LevelStartTime; }
+        void SetLevelEndTime(float time) { LevelEndTime = time; }
+        float GetLevelEndTime() const { return LevelEndTime; }
 
         int VacuumCount;
         int VacuumVolume;

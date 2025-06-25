@@ -4,6 +4,7 @@
 #include "Engine/EngineObjects/Scene/Scene.h"
 #include "Engine/Components/BloodSystem/BloodManager.h"
 #include "Engine/Components/Game/ThrashManager.h"
+#include "GLFW/glfw3.h"
 
 namespace Engine
 {
@@ -19,6 +20,8 @@ namespace Engine
     {
         UpdateManager::GetInstance()->RegisterGameMode(this);
         BloodManager = new class BloodManager(GetScene()->GetBounds());
+        ThrashManager::GetInstance()->SetLevelStartTime(glfwGetTime());
+        //ThrashManager::GetInstance()->SetIsCurrentLevelCompleted(false);
     }
 
     void CleaningGameMode::Update(const float DeltaTime)
@@ -44,13 +47,15 @@ namespace Engine
     }
     bool CleaningGameMode::isLevelFinished()
     {
-        if (cleanedPercent >= 99.0f /* && ThrashManager::GetInstance()->GetThrashCount() == 0*/)
+        if (cleanedPercent >= 99.0f  && ThrashManager::GetInstance()->GetThrashCount() == 0)
         {
             return true;
+            //ThrashManager::GetInstance()->SetIsCurrentLevelCompleted(true);
         }
         else
         {
             return false;
+            //ThrashManager::GetInstance()->SetIsCurrentLevelCompleted(false);
         }
     }
 } // namespace Engine
