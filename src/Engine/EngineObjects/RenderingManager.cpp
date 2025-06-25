@@ -10,7 +10,7 @@ namespace Engine
     RenderingManager* RenderingManager::Instance = nullptr;
 
     RenderingManager::RenderingManager(const glm::ivec2 Resolution) :
-        MultiSampledBuffer(Resolution)
+        MultiSampledBuffer(Resolution), Ssao(Resolution), Bloom(Resolution), GodRays(Resolution)
     {
     }
 

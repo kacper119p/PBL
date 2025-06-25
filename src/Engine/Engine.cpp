@@ -225,7 +225,6 @@ namespace Engine
         glfwGetFramebufferSize(Window, &WindowWidth, &WindowHeight);
 
         glfwSetWindowUserPointer(Window, this);
-        glfwSetFramebufferSizeCallback(Window, FramebufferSizeCallback);
         glfwSetCursorPosCallback(Window, MouseCallback);
         glfwSetMouseButtonCallback(Window, MouseButtonCallback);
 
@@ -246,7 +245,7 @@ namespace Engine
         glEnable(GL_MULTISAMPLE);
 
         RenderingManager::Initialize(glm::ivec2(WindowWidth, WindowHeight));
-        LightManager::Initialize();
+        LightManager::Initialize(glm::uvec2(WindowWidth, WindowHeight));
         UpdateManager::Initialize();
         Materials::MaterialManager::Initialize();
         OutlinedModelRenderer::InitializeShaders();
@@ -356,8 +355,8 @@ namespace Engine
     void Engine::ImGuiRender()
     {
 #if EDITOR
-    //LightsGui::Draw();
-    //EditorGUI.Render(Frame, CurrentScene);
+        //LightsGui::Draw();
+        //EditorGUI.Render(Frame, CurrentScene);
 #endif
     }
 

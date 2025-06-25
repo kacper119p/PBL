@@ -15,8 +15,9 @@ namespace Engine
 
     LightManager* LightManager::Instance = nullptr;
 
-    LightManager::LightManager() :
-        BrdfLUT(Utility::GenerateIblBrdfLut())
+    LightManager::LightManager(const glm::uvec2 Resolution) :
+        BrdfLUT(Utility::GenerateIblBrdfLut()),
+        Resolution(Resolution)
     {
         InitializeDirectionalLightShadowMap();
         InitializeLightBuffer();
@@ -175,13 +176,13 @@ namespace Engine
 
     }
 
-    void LightManager::Initialize()
+    void LightManager::Initialize(const glm::uvec2 Resolution)
     {
         if (Instance)
         {
             throw SingletonAlreadyExistsException("Instance of LightManager already exists.");
         }
-        Instance = new LightManager();
+        Instance = new LightManager(Resolution);
     }
 
     void LightManager::ClearAllLights()
@@ -245,6 +246,7 @@ namespace Engine
         LightBufferData.DirectionalLightCount = DirectionalLight == nullptr ? 0 : 1;
         LightBufferData.PointLightCount = PointLights.size();
         LightBufferData.SpotlightCount = SpotLights.size();
+        LightBufferData.Resolution = Resolution;
 
         if (LightBufferData.DirectionalLightCount != 0)
         {
