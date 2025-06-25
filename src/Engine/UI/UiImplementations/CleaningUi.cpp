@@ -180,13 +180,17 @@ namespace Engine::Ui
                 ReferenceTrashCount = trashCount;
             }
 
-            TrashProgressText->SetText(std::format("({:02}/{:02})", trashCount, ReferenceTrashCount));
+            TrashProgressText->SetText(std::format("({:02}/{:02})", ReferenceTrashCount - trashCount, ReferenceTrashCount));
 
             if (trashCount >= ReferenceTrashCount && !TrashTaskCompleted)
             {
                 AudioManager::GetInstance().PlayAudio(TaskSound);
                 TrashTaskCompleted = true;
             }
+
+            WeaponProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetCleanedUpWeaponCount(),trashManager->GetWeaponCount()));
+            BooksProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetCleanedUpBookCount(), trashManager->GetBookCount()));
+            CoinsProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetCleanedUpCoinCount(), trashManager->GetCoinCount()));
         }
     }
 }

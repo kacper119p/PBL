@@ -20,6 +20,13 @@ namespace Engine
         std::vector<Entity*> CleanedUpCoins;
         std::vector<Entity*> CleanedUpWeapons;
         std::vector<Entity*> CleanedUpBooks;
+
+        bool FurnitureTaskFailed = false;
+        bool WeaponTaskFailed = false;
+        bool BookTaskFailed = false;
+        bool CoinTaskFailed = false;
+
+        int currentLevel = 0;
         
     public:
         ThrashManager() = default;
@@ -35,6 +42,8 @@ namespace Engine
         void AddCleanedUpCoin(Entity* coin) { CleanedUpCoins.push_back(coin); }
         void AddCleanedUpWeapon(Entity* weapon) { CleanedUpWeapons.push_back(weapon); }
         void AddCleanedUpBook(Entity* book) { CleanedUpBooks.push_back(book); }
+
+        void SetCurrentLevel(int level) { currentLevel = level; }
 
         void RemoveThrash(Thrash* thrash);
         void RemoveFurniture(Furniture* furniture);
@@ -56,6 +65,8 @@ namespace Engine
         int GetCleanedUpCoinCount() { return CleanedUpCoins.size(); }
         int GetCleanedUpWeaponCount() { return CleanedUpWeapons.size(); }
         int GetCleanedUpBookCount() { return CleanedUpBooks.size(); }
+
+        int GetCurrentLevel() const { return currentLevel; }
 
         int VacuumCount;
         int VacuumVolume;
