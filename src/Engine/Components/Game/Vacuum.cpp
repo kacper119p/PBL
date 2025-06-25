@@ -31,6 +31,20 @@ namespace Engine
         Engine::UpdateManager::GetInstance()->RegisterComponent(this);
     }
 
+    void Vacuum::OnTriggerExit(Collider* other)
+    {
+        Entity* exitedEntity = other->GetOwner();
+
+        for (auto& slimeTask : activeSlimeAbsorptions)
+        {
+            if (slimeTask.entity == exitedEntity)
+            {
+                slimeTask.cancelled = true;
+                break;
+            }
+        }
+    }
+
     void Vacuum::Update(float deltaTime)
     {
         InputManager& input = InputManager::GetInstance();
@@ -193,30 +207,90 @@ namespace Engine
 
                     if (volume < maxVolume)
                     {
-                        entity->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
-                        volume += slimeSizeInt;
-                        items.push_back(entityCollider->GetOwner());
-                        UpdateFillIndicator();
+                        bool alreadyInProgress = std::any_of(
+                                activeSlimeAbsorptions.begin(),
+                                activeSlimeAbsorptions.end(),
+                                [&](const PendingSlimeIntake& task)
+                                {
+                                    return task.entity == entity;
+                                });
 
-                        Rigidbody* rb = entity->GetComponent<Rigidbody>();
-                        if (rb)
+                        if (!alreadyInProgress)
                         {
-                            rb->hasGravity = false;
+                            PendingSlimeIntake slimeTask;
+                            slimeTask.entity = entity;
+                            slimeTask.totalSize = slimeSizeInt;
+                            slimeTask.currentAbsorbed = 0;
+                            slimeTask.nextAbsorbTime = currentTime + 1.0f;
+                            slimeTask.originalScale = entity->GetTransform()->GetScale();
+                            activeSlimeAbsorptions.push_back(slimeTask);
+
+                            Rigidbody* rb = entity->GetComponent<Rigidbody>();
+                            if (rb)
+                                rb->hasGravity = false;
+
+                            BoxCollider* box = entity->GetComponent<BoxCollider>();
+                            if (box)
+                                box->SetTrigger(true);
                         }
-
-                        BoxCollider* box = entity->GetComponent<BoxCollider>();
-                        if (box)
-                        {
-                            box->SetTrigger(true);
-                        }
-
-                        slimeAi->SetEnabled(false);
-
-                        if (slimeSizeInt == 10)
-                            playerAnimationManager->SuckBigObject();
                     }
                 }
             }
+        }
+
+        for (auto it = activeSlimeAbsorptions.begin(); it != activeSlimeAbsorptions.end();)
+        {
+            if (it->cancelled || !isSuccing)
+            {
+                activeSlimeAbsorptions.erase(it);
+                continue;
+            }
+
+            if (currentTime >= it->nextAbsorbTime)
+            {
+                int absorbChunk = 2;
+                if (volume + absorbChunk <= maxVolume)
+                {
+                    it->currentAbsorbed += absorbChunk;
+                    volume += absorbChunk;
+                    UpdateFillIndicator();
+
+                    AiManager* ai = it->entity->GetComponent<AiManager>();
+                    if (ai)
+                    {
+                        ai->SetSize(ai->GetSize() - absorbChunk);
+                        float absorbedRatio = static_cast<float>(it->currentAbsorbed) / static_cast<float>(it->
+                                                  totalSize);
+                        float scaleFactor = glm::clamp(1.0f - absorbedRatio, 0.1f, 1.0f);
+
+                        glm::vec3 targetScale = it->originalScale * scaleFactor;
+                        glm::vec3 currentScale = it->entity->GetTransform()->GetScale();
+                        glm::vec3 newScale = glm::mix(currentScale, targetScale, deltaTime * 5.0f);
+                        it->entity->GetTransform()->SetScale(newScale);
+                        slimeItems.push_back(it->entity);
+                    }
+
+                    if (it->currentAbsorbed >= it->totalSize)
+                    {
+                        Entity* absorbedSlime = it->entity;
+                        it = activeSlimeAbsorptions.erase(it);
+                        absorbedSlime->GetComponent<AiManager>()->SetEnabled(false);
+                        absorbedSlime->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
+                        continue;
+                    }
+                    else
+                    {
+                        it->nextAbsorbTime = currentTime + 1.0f;
+                    }
+                }
+                else
+                {
+                    it = activeSlimeAbsorptions.erase(it);
+                    continue;
+                }
+            }
+
+            ++it;
         }
 
         wasShootingKeyPressed = isShootingKeyPressed;
@@ -227,57 +301,94 @@ namespace Engine
 
     void Vacuum::Shoot()
     {
+        Entity* item = nullptr;
+
         if (!items.empty())
         {
-            Engine::Entity* item = items.back();
+            item = items.back();
             items.pop_back();
+        }
+        else if (!slimeItems.empty())
+        {
+            item = slimeItems.back();
 
-            int itemSize = 0;
+            Entity* newEntity = item->CloneAsConcrete();
+            GUID newGuid;
+            CoCreateGuid(&newGuid);
+            newEntity->SetId(newGuid);
 
-            if (item->GetComponent<Thrash>())
-            {
-                itemSize = static_cast<int>(item->GetComponent<Thrash>()->GetSize());
-            }
-            else if (item->GetComponent<AiManager>())
-            {
-                itemSize = item->GetComponent<AiManager>()->GetSize();
+            int count = static_cast<int>(slimeItems.size());
 
-                AiManager* ai = item->GetComponent<AiManager>();
-                ai->SetEnabled(true);
-            }
-            else
-            {
-                return;
-            }
+            slimeItems.clear();
 
-            volume -= itemSize;
+            int totalSlimeSize = count * 2;
+            volume -= totalSlimeSize;
             UpdateFillIndicator();
 
-            BoxCollider* collider = item->GetComponent<BoxCollider>();
-            if (collider)
-                collider->SetTrigger(false);
+            if (auto* ai = newEntity->GetComponent<AiManager>())
+            {
+                ai->SetEnabled(true);
+                ai->SetSize(totalSlimeSize);
+            }
 
-            Rigidbody* rb = item->GetComponent<Rigidbody>();
-            if (rb)
+            if (auto* rb = newEntity->GetComponent<Rigidbody>())
             {
                 rb->hasGravity = true;
                 rb->angularVelocity = glm::vec3(0);
-
-                pendingGravityDisables.push_back({item, static_cast<float>(glfwGetTime()) + 2.0f});
+                pendingGravityDisables.push_back({newEntity, static_cast<float>(glfwGetTime()) + 2.0f});
             }
+
+            if (auto* col = newEntity->GetComponent<BoxCollider>())
+                col->SetTrigger(false);
+
+            float scale = static_cast<float>(totalSlimeSize) / 20.0f;
+            newEntity->GetTransform()->SetScale(glm::vec3(scale * 2));
 
             glm::vec3 position = GetOwner()->GetTransform()->GetParent()->GetPosition();
             glm::vec3 forward = GetOwner()->GetTransform()->GetParent()->GetForward();
-            item->GetTransform()->SetPosition(position + forward * (size + 0.5f));
+            newEntity->GetTransform()->SetPosition(position + forward * (size + 0.5f));
+            newEntity->GetTransform()->SetPosition(glm::vec3(newEntity->GetTransform()->GetPosition().x,
+                                                             newEntity->GetTransform()->GetPosition().y - 2.0f,
+                                                             newEntity->GetTransform()->GetPosition().z));
 
-            if (rb)
-                rb->AddForce(forward * 100.0f * float(itemSize), Engine::ForceMode::Force);
+            if (auto* rb = newEntity->GetComponent<Rigidbody>())
+                rb->AddForce(forward * 100.0f * float(totalSlimeSize), Engine::ForceMode::Force);
 
-            if (itemSize == 10)
+            if (totalSlimeSize >= 10)
                 PlayerAnimationManager::GetInstance()->ShootBigObject();
 
             PlayerAnimationManager::GetInstance()->PlayVacuumShotVfx();
+            return;
         }
+
+        if (!item)
+            return;
+
+        int itemSize = static_cast<int>(item->GetComponent<Thrash>()->GetSize());
+        volume -= itemSize;
+        UpdateFillIndicator();
+
+        if (auto* col = item->GetComponent<BoxCollider>())
+            col->SetTrigger(false);
+
+        if (auto* rb = item->GetComponent<Rigidbody>())
+        {
+            rb->hasGravity = true;
+            rb->angularVelocity = glm::vec3(0);
+            pendingGravityDisables.push_back({item, static_cast<float>(glfwGetTime()) + 2.0f});
+        }
+
+        glm::vec3 position = GetOwner()->GetTransform()->GetParent()->GetPosition();
+        glm::vec3 forward = GetOwner()->GetTransform()->GetParent()->GetForward();
+        item->GetTransform()->SetPosition(position + forward * (size + 0.5f));
+
+        if (auto* rb = item->GetComponent<Rigidbody>())
+            rb->AddForce(forward * 100.0f * float(itemSize), Engine::ForceMode::Force);
+
+        if (itemSize == 10)
+            PlayerAnimationManager::GetInstance()->ShootBigObject();
+
+        PlayerAnimationManager::GetInstance()->PlayVacuumShotVfx();
     }
 
     void Vacuum::UpdateFillIndicator()

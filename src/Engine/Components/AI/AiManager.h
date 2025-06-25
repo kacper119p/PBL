@@ -47,7 +47,11 @@ namespace Engine
         void SetEnabled(bool Value) { Enabled = Value; }
         [[nodiscard]] bool IsEnabled() const { return Enabled; }
         [[nodiscard]] int GetSize() { return Size; }
-        void SetSize(int Value) { Size = Value; }
+
+        void SetSize(int Value)
+        {
+            Size = std::max(0, Value);
+        }
 
         void RecalculateCurrentTrash();
 
@@ -86,7 +90,7 @@ namespace Engine
         std::string SelectedPlayerName = "";
         std::shared_ptr<ma_sound> WalkingSound = AudioManager::GetInstance().CreateSoundInstance("glut");
         bool Enabled = true;
-        int Size = 5;
+        int Size = 20;
 
     };
 }

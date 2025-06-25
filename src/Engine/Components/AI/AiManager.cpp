@@ -52,6 +52,8 @@ namespace Engine
         if (GetOwner()->GetComponent<Rigidbody>())
         {
             GetOwner()->GetComponent<Rigidbody>()->hasGravity = false;
+            GetOwner()->GetComponent<Rigidbody>()->constraints.freezeRotationX = true;
+            GetOwner()->GetComponent<Rigidbody>()->constraints.freezeRotationZ = true;
         }
     }
 
