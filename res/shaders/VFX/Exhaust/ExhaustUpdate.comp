@@ -43,10 +43,11 @@ void UpdateParticle(inout particle Particle, int index)
         }
 
         Particle.position += Particle.velocity * DeltaTime;
+        Particle.rotation += DeltaTime * 0;
 
         float scale = (Particle.life / MAX_LIFETIME);
-        float scale2 = scale * scale;
-        Particle.scale = (1.0 - scale2 * scale2 * scale) * 3.75;
+        float oneMinusScale = 1.0 - scale;
+        Particle.scale = (1.0 - scale * scale) * MAX_SCALE;
     }
 }
 
