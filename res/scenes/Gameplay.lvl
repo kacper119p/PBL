@@ -212,14 +212,12 @@
                 "{23f80f00-5802-4f6a-811f-079a0385139d}\u0000",
                 "{13be7a10-a8df-48d6-91a5-f43c62570db8}\u0000",
                 "{0c088c3e-b32e-4cbf-a4c9-9c72c910276c}\u0000",
-                "{0d79e5b4-c9b7-4d1a-8647-b78eb6b502d2}\u0000",
                 "{db59a659-0680-4116-a1a1-9d6a698eb6a6}\u0000",
                 "{2701708d-fc61-49a3-9f78-f68aa164e0d4}\u0000",
                 "{690b72f0-5501-4e7b-9ea9-0d5ca57b5d40}\u0000",
                 "{e4829680-5003-4581-b035-231d0ab9b4dd}\u0000",
                 "{778f3c28-984d-473d-870c-710a372ca7b3}\u0000",
                 "{43de86eb-a468-479e-936d-2df352c62e97}\u0000",
-                "{a7f220b6-c906-4fcf-a96e-2e3045ae3eda}\u0000",
                 "{f52eeda6-2fa8-4f72-a8c4-2526889f8732}\u0000",
                 "{93d4192d-d509-4b27-9e0e-4cf369a8b179}\u0000",
                 "{dcc0a11a-cff8-42d8-842d-8b2fc9275697}\u0000"
@@ -10582,8 +10580,8 @@
             "type": "Rigidbody",
             "id": "{e14aefcb-b3be-442d-89b5-b5b6091aea8e}\u0000",
             "owner": "{3908bdf6-0ec1-4294-ad15-8f334407a773}\u0000",
-            "mass": 10.0,
-            "inverseMass": 0.10000000149011612,
+            "mass": 2.0,
+            "inverseMass": 0.5,
             "linearDamping": 0.20200000703334808,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
@@ -13474,8 +13472,8 @@
             "type": "Rigidbody",
             "id": "{1a039dcd-7e3c-446a-a15f-13ed809cba78}\u0000",
             "owner": "{474cae5c-fedd-4a10-9b3f-6d76aea12fe9}\u0000",
-            "mass": 10.0,
-            "inverseMass": 0.10000000149011612,
+            "mass": 2.0,
+            "inverseMass": 0.5,
             "linearDamping": 0.20200000703334808,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
@@ -13496,9 +13494,9 @@
                 "id": "{c0da5257-92b2-4cc2-b175-5380839536fe}\u0000",
                 "owner": "{6281a069-c6ab-4453-9d9d-8c8691a7bee3}\u0000",
                 "Position": {
-                    "x": -34.66865921020508,
-                    "y": 2.699050188064575,
-                    "z": -13.193587303161621
+                    "x": -34.74428176879883,
+                    "y": 2.812453031539917,
+                    "z": -13.255507469177246
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -13552,8 +13550,8 @@
             "type": "Rigidbody",
             "id": "{5d515c85-e8af-499c-b7dc-2999623a4279}\u0000",
             "owner": "{6281a069-c6ab-4453-9d9d-8c8691a7bee3}\u0000",
-            "mass": 10.0,
-            "inverseMass": 0.10000000149011612,
+            "mass": 2.0,
+            "inverseMass": 0.5,
             "linearDamping": 0.20200000703334808,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
@@ -15245,83 +15243,6 @@
         },
         {
             "type": "Entity",
-            "id": "{6795558e-b683-4b57-bded-6a63166e52c7}\u0000",
-            "name": "Dzbanek5",
-            "transform": {
-                "type": "Transform",
-                "id": "{0d79e5b4-c9b7-4d1a-8647-b78eb6b502d2}\u0000",
-                "owner": "{6795558e-b683-4b57-bded-6a63166e52c7}\u0000",
-                "Position": {
-                    "x": 7.528194427490234,
-                    "y": 2.1635255813598633,
-                    "z": 17.787899017333984
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 2.0,
-                    "y": 2.0,
-                    "z": 2.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 0.0
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{05424679-be84-4b6a-a4b7-666dd9f14a7c}\u0000",
-                "{d298f8ef-7400-4ada-82af-7fe53ddb42e7}\u0000",
-                "{b64f7314-15aa-46ce-9b97-3997c8afe881}\u0000",
-                "{bb5c7abe-e59c-4d0a-a2d0-b158de4fb1c8}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{05424679-be84-4b6a-a4b7-666dd9f14a7c}\u0000",
-            "owner": "{6795558e-b683-4b57-bded-6a63166e52c7}\u0000",
-            "Material": "res/materials/SampleScene/UV6.mat",
-            "Model": "res/models/Modele_Mati/Naczynia/Dzbanek5.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "CapsuleCollider",
-            "id": "{d298f8ef-7400-4ada-82af-7fe53ddb42e7}\u0000",
-            "owner": "{6795558e-b683-4b57-bded-6a63166e52c7}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967291,
-            "colliderType": 2,
-            "Radius": 1.7999999523162842,
-            "Height": 0.6000000238418579
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{b64f7314-15aa-46ce-9b97-3997c8afe881}\u0000",
-            "owner": "{6795558e-b683-4b57-bded-6a63166e52c7}\u0000",
-            "mass": 0.5,
-            "inverseMass": 2.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Furniture",
-            "id": "{bb5c7abe-e59c-4d0a-a2d0-b158de4fb1c8}\u0000",
-            "owner": "{6795558e-b683-4b57-bded-6a63166e52c7}\u0000"
-        },
-        {
-            "type": "Entity",
             "id": "{20e0ca94-f5e2-4cab-98fe-fe05bc0c90cd}\u0000",
             "name": "gwiazda",
             "transform": {
@@ -15464,8 +15385,8 @@
             "type": "Rigidbody",
             "id": "{8ec998dd-0132-4e3f-882d-415557822e1c}\u0000",
             "owner": "{8b994880-14f1-4a1f-856b-a9fc0902af57}\u0000",
-            "mass": 3.0,
-            "inverseMass": 0.3333333432674408,
+            "mass": 0.30000001192092896,
+            "inverseMass": 3.3333332538604736,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.3799999952316284,
@@ -15543,8 +15464,8 @@
             "type": "Rigidbody",
             "id": "{9992e58a-9060-4c4d-a4d6-061ec61dc765}\u0000",
             "owner": "{87d474f7-b692-4555-8bfc-380f22b83d8e}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
+            "mass": 0.20000000298023224,
+            "inverseMass": 5.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
@@ -15621,8 +15542,8 @@
             "type": "Rigidbody",
             "id": "{b11e26b8-e0d7-460d-8477-beb9a1bce270}\u0000",
             "owner": "{93c02852-d321-4d6b-bb38-73548658eb4c}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
+            "mass": 0.20000000298023224,
+            "inverseMass": 5.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
@@ -15771,8 +15692,8 @@
             "type": "Rigidbody",
             "id": "{8bb1f89e-e46d-4047-820e-6cbf60826e14}\u0000",
             "owner": "{620f3bca-b1f5-45eb-b0c8-7f3515a39c44}\u0000",
-            "mass": 4.0,
-            "inverseMass": 0.25,
+            "mass": 0.4000000059604645,
+            "inverseMass": 2.5,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.44200000166893005,
@@ -15784,83 +15705,6 @@
             "id": "{4c2344ac-471a-4388-a7ff-5ea3e2ff3796}\u0000",
             "owner": "{620f3bca-b1f5-45eb-b0c8-7f3515a39c44}\u0000",
             "size": 5
-        },
-        {
-            "type": "Entity",
-            "id": "{eaf4d6b4-d5d5-4275-8b0b-ae2e464d5d3e}\u0000",
-            "name": "Dzbanek5",
-            "transform": {
-                "type": "Transform",
-                "id": "{a7f220b6-c906-4fcf-a96e-2e3045ae3eda}\u0000",
-                "owner": "{eaf4d6b4-d5d5-4275-8b0b-ae2e464d5d3e}\u0000",
-                "Position": {
-                    "x": 7.528194427490234,
-                    "y": 2.1635255813598633,
-                    "z": 13.516636848449707
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 2.0,
-                    "y": 2.0,
-                    "z": 2.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 0.0
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{69d4258e-b000-49a1-8649-6d0b240b74bb}\u0000",
-                "{a7dde967-620e-4046-9dc0-31645a410155}\u0000",
-                "{d2d33715-c921-47e8-a05d-86715cd0f7b4}\u0000",
-                "{9eb278e7-b77c-4331-a379-987de177d8b8}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{69d4258e-b000-49a1-8649-6d0b240b74bb}\u0000",
-            "owner": "{eaf4d6b4-d5d5-4275-8b0b-ae2e464d5d3e}\u0000",
-            "Material": "res/materials/SampleScene/UV6.mat",
-            "Model": "res/models/Modele_Mati/Naczynia/Dzbanek5.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "CapsuleCollider",
-            "id": "{a7dde967-620e-4046-9dc0-31645a410155}\u0000",
-            "owner": "{eaf4d6b4-d5d5-4275-8b0b-ae2e464d5d3e}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967291,
-            "colliderType": 2,
-            "Radius": 1.7999999523162842,
-            "Height": 0.6000000238418579
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{d2d33715-c921-47e8-a05d-86715cd0f7b4}\u0000",
-            "owner": "{eaf4d6b4-d5d5-4275-8b0b-ae2e464d5d3e}\u0000",
-            "mass": 0.5,
-            "inverseMass": 2.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Furniture",
-            "id": "{9eb278e7-b77c-4331-a379-987de177d8b8}\u0000",
-            "owner": "{eaf4d6b4-d5d5-4275-8b0b-ae2e464d5d3e}\u0000"
         },
         {
             "type": "Entity",
@@ -16084,8 +15928,8 @@
             "type": "Rigidbody",
             "id": "{f621ce54-5272-4b15-b68a-4c802f60da09}\u0000",
             "owner": "{a11f601c-65e7-4ce2-8f50-3b5eb4968fae}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
+            "mass": 0.20000000298023224,
+            "inverseMass": 5.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
