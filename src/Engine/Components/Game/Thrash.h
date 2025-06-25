@@ -21,7 +21,11 @@ namespace Engine
         Small = 1,
         Book = 2,
         Coin = 3,
+        Arrow = 4,
         Medium = 5,
+        Bow = 6,
+        Sword = 10,
+        Shield = 19,
         Large = 20
     };
 
@@ -30,7 +34,6 @@ namespace Engine
         ThrashSize size = ThrashSize::Small;
         Collider* collider = nullptr;
         Events::TAction<Collider*> ThrowOut = Events::TAction<Collider*>(this, &Thrash::DeleteThrash);
-        Events::TAction<Collider*> DisableCollisionAction = Events::TAction<Collider*>(this, &Thrash::DisableCollision);
 
     public:
         Thrash() = default;
@@ -54,6 +57,11 @@ namespace Engine
                 ThrashManager::GetInstance()->RemoveBook(GetOwner());
                 ThrashManager::GetInstance()->RemoveCleanedUpBook(GetOwner());
             }
+            else if (size == ThrashSize::Arrow || size == ThrashSize::Bow || size == ThrashSize::Shield || size == ThrashSize::Sword)
+            {
+                ThrashManager::GetInstance()->RemoveWeapon(GetOwner());
+                ThrashManager::GetInstance()->RemoveCleanedUpWeapon(GetOwner());
+            }
             else
             {
                 ThrashManager::GetInstance()->RemoveThrash(this);
@@ -61,7 +69,7 @@ namespace Engine
         }
 
         void DeleteThrash(Collider* collider); 
-        void DisableCollision(Collider* collider);
+
 
         SERIALIZATION_EXPORT_CLASS(Thrash);
 

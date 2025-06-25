@@ -36,7 +36,7 @@
                 "{3d6d50d4-4371-441e-aa14-41d1bdf085af}\u0000",
                 "{595b1951-869a-420c-b8b4-b8fab8a3b05b}\u0000",
                 "{9b855a55-601f-41da-99d5-5c6d62ca42b0}\u0000",
-                "{0ab0f4ab-866f-48f4-a2aa-a42cc5ccab04}\u0000"
+                "{5b67c61e-9257-4e89-a2cd-c42c5b6fafe7}\u0000"
             ]
         },
         {
@@ -74,9 +74,10 @@
             "restitution": 0.10000000149011612
         },
         {
-            "type": "Furniture",
-            "id": "{0ab0f4ab-866f-48f4-a2aa-a42cc5ccab04}\u0000",
-            "owner": "{3cf4fb75-2c76-4a11-bc6b-4915b5d3d383}\u0000"
+            "type": "Thrash",
+            "id": "{5b67c61e-9257-4e89-a2cd-c42c5b6fafe7}\u0000",
+            "owner": "{3cf4fb75-2c76-4a11-bc6b-4915b5d3d383}\u0000",
+            "size": 6
         }
     ]
 }

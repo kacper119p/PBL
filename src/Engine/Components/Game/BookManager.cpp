@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <random>
 #include "Engine/Components/Physics/Rigidbody.h"
+#include "Engine/Components/Game/Thrash.h"
 #include "Engine/Engine.h"
 #include "Engine/EngineObjects/UpdateManager.h"
 #include "Engine/Components/Game/ThrashManager.h"
@@ -151,7 +152,10 @@ namespace Engine
     {
         if (!itemCollider)
             return;
-
+        if (!itemCollider->GetOwner()->GetComponent<Thrash>())
+        {
+            return;
+        }
         Entity* item = itemCollider->GetOwner();
         if (std::find(currentBooksBeingPut.begin(), currentBooksBeingPut.end(), item) != currentBooksBeingPut.end())
             return;

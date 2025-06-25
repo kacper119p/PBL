@@ -8,14 +8,8 @@ namespace Engine
     {
         collider = GetOwner()->GetComponent<Collider>();
         collider->OnCollisionAddListener(ThrowOut);
-        if (isWeapon)
-        {
-            ThrashManager::GetInstance()->AddWeapon(GetOwner());
-        }
-        else
-        {
+        
             ThrashManager::GetInstance()->AddFurniture(this);
-        }
         
     }
 
@@ -24,14 +18,6 @@ namespace Engine
         if (collider)
         {
             collider->OnCollisionRemoveListener(ThrowOut);
-        }
-        if (isWeapon)
-        {
-            ThrashManager::GetInstance()->RemoveWeapon(GetOwner());
-            ThrashManager::GetInstance()->RemoveCleanedUpWeapon(GetOwner());
-        }
-        else
-        {
             ThrashManager::GetInstance()->RemoveFurniture(this);
         }
     }
@@ -41,22 +27,13 @@ namespace Engine
         if (collider->GetOwner()->GetName() == "ThrashCan")
         {
             GetOwner()->GetScene()->DeleteEntity(GetOwner());
-            if (isWeapon)
-            {
-                ThrashManager::GetInstance()->RemoveWeapon(GetOwner());
-                ThrashManager::GetInstance()->RemoveCleanedUpWeapon(GetOwner());
-            }
-            else
-            {
                 ThrashManager::GetInstance()->RemoveFurniture(this);
-            }
         }
     }
     #if EDITOR
     void Furniture::DrawImGui() 
     {
         ImGui::Text("Furniture Component");
-        ImGui::Checkbox("Is Weapon", &isWeapon);
     }
     #endif
 

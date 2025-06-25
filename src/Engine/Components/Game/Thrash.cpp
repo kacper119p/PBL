@@ -8,7 +8,7 @@ namespace Engine
     
     void Thrash::Start() { 
         collider = GetOwner()->GetComponent<Collider>();
-        collider->OnCollisionAddListener(DisableCollisionAction);
+        collider->OnCollisionAddListener(ThrowOut);
         if (size == ThrashSize::Coin)
         {
             ThrashManager::GetInstance()->AddCoin(GetOwner());
@@ -16,6 +16,10 @@ namespace Engine
         else if (size == ThrashSize::Book)
         {
             ThrashManager::GetInstance()->AddBook(GetOwner());
+        }
+        else if (size == ThrashSize::Arrow || size == ThrashSize::Bow || size == ThrashSize::Sword || size == ThrashSize::Shield)
+        {
+            ThrashManager::GetInstance()->AddWeapon(GetOwner());
         }
         else
         {
@@ -44,20 +48,6 @@ namespace Engine
         END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 
-    void Thrash::DisableCollision(Collider* collider) 
-    {
-        if (collider->GetOwner()->GetName() == "ColliderDisabler")
-        {
-            std::cout << "Thrash: ColliderDisabler detected, disabling collider." << std::endl;
-            if (this->collider)
-            {
-                this->collider->SetTrigger(true);
-                std::cout << "Thrash: Removing DisableCollisionAction listener from collider." << std::endl;
-                this->collider->OnCollisionRemoveListener(DisableCollisionAction);
-            }
-        }
-    }
-
     void Thrash::DeleteThrash(Engine::Collider* collider)
     {
         if (collider->GetOwner()->GetName() == "ThrashCan")
@@ -74,7 +64,7 @@ namespace Engine
 #if EDITOR
     void Thrash::DrawImGui()
     {
-        static const char* sizeLabels[] = {"Small", "Medium", "Large", "Coin", "Book"};
+        static const char* sizeLabels[] = {"Small", "Medium", "Large", "Coin", "Book", "Arrow", "Bow", "Sword", "Shield"};
         int currentSizeIndex = 0;
 
         switch (size)
@@ -93,6 +83,18 @@ namespace Engine
                 break;
             case ThrashSize::Book:
                 currentSizeIndex = 4;
+                break;
+            case ThrashSize::Arrow:
+                currentSizeIndex = 5;
+                break;
+            case ThrashSize::Bow:
+                currentSizeIndex = 6;
+                break;
+            case ThrashSize::Sword:
+                currentSizeIndex = 7;
+                break;
+            case ThrashSize::Shield:
+                currentSizeIndex = 8;
                 break;
         }
 
@@ -114,6 +116,18 @@ namespace Engine
                     break;
                 case 4:
                     size = ThrashSize::Book;
+                    break;
+                case 5:
+                    size = ThrashSize::Arrow;
+                    break;
+                case 6:
+                    size = ThrashSize::Bow;
+                    break;
+                case 7:
+                    size = ThrashSize::Sword;
+                    break;
+                case 8:
+                    size = ThrashSize::Shield;
                     break;
             }
         }

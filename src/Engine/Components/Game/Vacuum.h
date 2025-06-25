@@ -26,7 +26,7 @@ namespace Engine
         bool isSuccing = false;
         bool isShooting = false;
 
-        float shootForce = 70;
+        float shootForce = 30;
 
         bool wasShootingKeyPressed = false;
         bool isShootingKeyPressed = false;
