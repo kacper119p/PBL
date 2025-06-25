@@ -37,6 +37,8 @@ namespace Engine
 
         Frustum Frustum;
 
+        const glm::ivec2 Resolution;
+
     private:
         explicit RenderingManager(glm::ivec2 Resolution);
 
@@ -129,7 +131,7 @@ namespace Engine
             return Frustum;
         }
 
-        void RenderAll(const CameraRenderData& RenderData, int ScreenWidth, int ScreenHeight, float DeltaTime);
+        void RenderAll(const CameraRenderData& RenderData, float DeltaTime);
 
         void RenderAllDirectionalShadowMap(const CameraRenderData& RenderData, unsigned int Target, unsigned int Width,
                                            unsigned int Height);

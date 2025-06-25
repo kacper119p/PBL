@@ -14,10 +14,11 @@ namespace Engine
         static glm::vec4 TintColor;
         static bool Enabled;
 
+    private:
+        TransitionTint() = default;
+
     public:
         static void Initialize();
-
-        static void Play();
 
         static void Render();
 
