@@ -52,6 +52,7 @@ namespace Engine
         Transform* bowPlacementPoint = nullptr;
         Transform* arrowPlacementPoint = nullptr;
         Transform* shieldPlacementPoint = nullptr;
+        bool canHoldSword=true, canHoldBow=true, canHoldArrow=true, canHoldShield=true;
         ItemType itemType = ItemType::Book;
         Events::TAction<Collider*> BookCollision = Events::TAction<Collider*>(this, &BookManager::PutItem);
 

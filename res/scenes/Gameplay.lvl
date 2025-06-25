@@ -3303,7 +3303,8 @@
                 },
                 "Children": [
                     "{c627c9eb-2f04-4dc3-9ff1-26e13facffff}\u0000",
-                    "{c3501239-be23-4201-82d0-60a91a47447e}\u0000"
+                    "{c3501239-be23-4201-82d0-60a91a47447e}\u0000",
+                    "{b8aee628-beac-4d3e-93da-7d06a9584c04}\u0000"
                 ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
@@ -3434,6 +3435,55 @@
             "bowPlacementPoint": null,
             "arrowPlacementPoint": null,
             "shieldPlacementPoint": null
+        },
+        {
+            "type": "Entity",
+            "id": "{2785f7de-ac3a-4a85-bf2d-042bd95d6689}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{b8aee628-beac-4d3e-93da-7d06a9584c04}\u0000",
+                "owner": "{2785f7de-ac3a-4a85-bf2d-042bd95d6689}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 3.187084674835205,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 180.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": -0.0,
+                    "y": 1.0,
+                    "z": -0.0,
+                    "w": -4.371138828673793e-8
+                },
+                "Children": [],
+                "Parent": "{d106f882-2206-4bc3-968f-7598276573a9}\u0000"
+            },
+            "components": [
+                "{d5842862-f9d5-4ae5-bfb7-1b715714413e}\u0000"
+            ]
+        },
+        {
+            "type": "PointLight",
+            "id": "{d5842862-f9d5-4ae5-bfb7-1b715714413e}\u0000",
+            "owner": "{2785f7de-ac3a-4a85-bf2d-042bd95d6689}\u0000",
+            "Color": {
+                "x": 217.64706420898438,
+                "y": 98.03921508789063,
+                "z": 1.0
+            },
+            "LinearFalloff": 0.0,
+            "QuadraticFalloff": 1.0,
+            "Range": 100.0
         },
         {
             "type": "Entity",
@@ -3844,7 +3894,7 @@
             "type": "Thrash",
             "id": "{b3bb609a-5c88-4523-aa31-f33ca924d8a8}\u0000",
             "owner": "{f2d1c446-d4fb-4b3a-8fc1-81321cc1a629}\u0000",
-            "size": 4
+            "size": 2
         },
         {
             "type": "Entity",
@@ -3923,7 +3973,7 @@
             "type": "Thrash",
             "id": "{fa6ad0bd-c351-4a92-b60e-f6d44c8eaf11}\u0000",
             "owner": "{81ad8f2d-adc7-4d1b-9c6e-0345d21b484a}\u0000",
-            "size": 2
+            "size": 3
         },
         {
             "type": "Entity",
@@ -9362,13 +9412,13 @@
                 "id": "{f8abd9b4-3e50-41aa-baf3-e9da34544d62}\u0000",
                 "owner": "{eb742823-62e8-4fde-b844-ba15fe50f93e}\u0000",
                 "Position": {
-                    "x": -53.509071350097656,
-                    "y": 11.300398826599121,
-                    "z": 15.611579895019531
+                    "x": -54.87224197387695,
+                    "y": 11.38174819946289,
+                    "z": 15.393413543701172
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": 120.0,
+                    "y": 141.01358032226563,
                     "z": 0.0
                 },
                 "Scale": {
@@ -9378,9 +9428,9 @@
                 },
                 "Rotation": {
                     "x": 0.0,
-                    "y": 0.866025447845459,
+                    "y": 0.942681074142456,
                     "z": 0.0,
-                    "w": 0.4999999701976776
+                    "w": 0.33369511365890503
                 },
                 "Children": [
                     "{e8bd75b4-bf85-42ee-a5d8-90c0703de0cf}\u0000",
@@ -9401,7 +9451,7 @@
                 "owner": "{49c3cb74-0b88-4b7d-a2e2-ee4694d9870d}\u0000",
                 "Position": {
                     "x": 0.49681663513183594,
-                    "y": 0.37127685546875,
+                    "y": 0.396270751953125,
                     "z": -0.5251197814941406
                 },
                 "EulerAngles": {
@@ -16818,7 +16868,7 @@
                 "id": "{77ca031a-13a4-42a2-85ae-ed3f6e4a1179}\u0000",
                 "owner": "{6b1b8e9d-2abb-43f9-b194-2dbd152b8f60}\u0000",
                 "Position": {
-                    "x": -28.845664978027344,
+                    "x": -28.856950759887695,
                     "y": 1.1524142026901245,
                     "z": 88.955810546875
                 },
@@ -16864,7 +16914,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 128,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.399999976158142,
             "_height": 0.6000000238418579,
@@ -16943,7 +16993,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 128,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.5,
             "_height": 0.4000000059604645,
@@ -16978,7 +17028,7 @@
                 "Position": {
                     "x": -27.438814163208008,
                     "y": 1.1524142026901245,
-                    "z": 88.859619140625
+                    "z": 88.87997436523438
                 },
                 "EulerAngles": {
                     "x": 5.416220188140869,
@@ -17022,7 +17072,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 128,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.2999999523162842,
             "_height": 0.3499999940395355,
@@ -17123,7 +17173,7 @@
             "type": "Thrash",
             "id": "{82aaeee4-871f-426c-a5c7-89f32148566d}\u0000",
             "owner": "{ea5fd6e3-4384-40ec-b2be-628d23f93046}\u0000",
-            "size": 2
+            "size": 3
         },
         {
             "type": "Entity",
@@ -17202,7 +17252,7 @@
             "type": "Thrash",
             "id": "{ef24b2f1-f8db-4951-b3de-5ce3f1fe2409}\u0000",
             "owner": "{69c9f371-9fea-4680-9a40-e770d32c90ba}\u0000",
-            "size": 2
+            "size": 3
         },
         {
             "type": "Entity",
@@ -17281,7 +17331,7 @@
             "type": "Thrash",
             "id": "{92986d0c-01e3-4237-a3df-ee4286e18cfe}\u0000",
             "owner": "{6e3ea9fb-c465-43b6-8cce-fcca0983465c}\u0000",
-            "size": 2
+            "size": 3
         },
         {
             "type": "Entity",
@@ -17360,7 +17410,7 @@
             "type": "Thrash",
             "id": "{7a9dc358-3b9f-41af-964f-8de6ccd84b7e}\u0000",
             "owner": "{be748e28-6563-4c58-80da-88175b1f6c8f}\u0000",
-            "size": 2
+            "size": 3
         },
         {
             "type": "Entity",
@@ -17439,7 +17489,7 @@
             "type": "Thrash",
             "id": "{e5a1bed1-1d94-4a25-96d6-9964d9b63bcb}\u0000",
             "owner": "{d3806f72-41e2-4ff1-b790-3142dc71854b}\u0000",
-            "size": 2
+            "size": 3
         },
         {
             "type": "Entity",
@@ -17518,7 +17568,7 @@
             "type": "Thrash",
             "id": "{a37895a2-0b76-4d52-8ec4-29bbad44b21e}\u0000",
             "owner": "{a9d17eea-2c4e-42e4-a86a-9ae9709d1f6a}\u0000",
-            "size": 2
+            "size": 3
         },
         {
             "type": "Entity",
@@ -17597,7 +17647,7 @@
             "type": "Thrash",
             "id": "{ffc8fe2e-19d8-4102-9bb6-42788d759eee}\u0000",
             "owner": "{32466db3-52df-4042-96ea-d9737c508ca0}\u0000",
-            "size": 2
+            "size": 3
         },
         {
             "type": "Entity",
@@ -17676,7 +17726,7 @@
             "type": "Thrash",
             "id": "{a620e82e-e865-4caf-aa25-c716e47f7b3a}\u0000",
             "owner": "{41381f91-2cc5-49c1-a956-e5ffc0fa9efb}\u0000",
-            "size": 2
+            "size": 3
         },
         {
             "type": "Entity",
@@ -22761,7 +22811,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 128,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.399999976158142,
             "_height": 0.6000000238418579,
@@ -22840,7 +22890,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 128,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.2999999523162842,
             "_height": 0.3499999940395355,
@@ -22919,7 +22969,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 128,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.5,
             "_height": 0.4000000059604645,
@@ -22998,7 +23048,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 128,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.5,
             "_height": 0.4000000059604645,
@@ -23077,7 +23127,7 @@
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 128,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.2999999523162842,
             "_height": 0.3499999940395355,
@@ -23178,7 +23228,7 @@
             "type": "Thrash",
             "id": "{c31b77ba-ffd6-4ac4-9557-14e7cd53e422}\u0000",
             "owner": "{456175fb-09ab-4cc6-8e41-961aaf429ffe}\u0000",
-            "size": 2
+            "size": 3
         },
         {
             "type": "Entity",
@@ -23257,7 +23307,7 @@
             "type": "Thrash",
             "id": "{ffaf483c-da42-44d9-9c16-6e9571dc9c87}\u0000",
             "owner": "{6245ea6e-63f2-4e84-b4fc-a5a62ec688b8}\u0000",
-            "size": 2
+            "size": 3
         },
         {
             "type": "Entity",
@@ -23336,7 +23386,7 @@
             "type": "Thrash",
             "id": "{1027d5e5-bd42-42a6-bf6c-fb88b65ec7bf}\u0000",
             "owner": "{8b7d5352-feb8-44fe-9587-d537cd3c8ee9}\u0000",
-            "size": 2
+            "size": 3
         },
         {
             "type": "Entity",
@@ -24442,7 +24492,7 @@
             "type": "Thrash",
             "id": "{2f0527fc-5754-466a-a250-49ae13e2c119}\u0000",
             "owner": "{19e3ad9a-4a04-4922-bf36-4b272defe4d6}\u0000",
-            "size": 4
+            "size": 2
         },
         {
             "type": "Entity",
@@ -24521,7 +24571,7 @@
             "type": "Thrash",
             "id": "{0f695338-70ec-453e-b670-412ec02e9583}\u0000",
             "owner": "{b3133619-283a-4057-9e51-ec68743c79cb}\u0000",
-            "size": 4
+            "size": 2
         },
         {
             "type": "Entity",
@@ -24600,7 +24650,7 @@
             "type": "Thrash",
             "id": "{fdc14ded-214c-4d36-9f69-425fc470e8d3}\u0000",
             "owner": "{4f2967d4-0c04-4d90-8f24-918339f60377}\u0000",
-            "size": 4
+            "size": 2
         },
         {
             "type": "Entity",
@@ -24679,7 +24729,7 @@
             "type": "Thrash",
             "id": "{944bfb39-d1f9-4af3-bb92-5f445da7ccfe}\u0000",
             "owner": "{9ba1e219-37cd-4f14-bac6-da74aa2a5b73}\u0000",
-            "size": 4
+            "size": 2
         },
         {
             "type": "Entity",
@@ -24758,7 +24808,7 @@
             "type": "Thrash",
             "id": "{4ab342a7-b540-4adf-a954-30a8846a946c}\u0000",
             "owner": "{75ba15b0-8afc-432b-988e-e7031c172e1f}\u0000",
-            "size": 4
+            "size": 2
         },
         {
             "type": "Entity",
@@ -24915,7 +24965,7 @@
             "type": "Thrash",
             "id": "{1db0a8cc-097c-4895-a38c-51abd8433d5c}\u0000",
             "owner": "{8c41d316-2f39-4c20-a5e3-ebd6c9727a83}\u0000",
-            "size": 4
+            "size": 2
         },
         {
             "type": "Entity",
@@ -24994,7 +25044,7 @@
             "type": "Thrash",
             "id": "{27b76c94-907a-41e4-aa13-c3a62efc9fdf}\u0000",
             "owner": "{782eb361-60f4-4e0c-98a5-739e7a60fff6}\u0000",
-            "size": 4
+            "size": 2
         },
         {
             "type": "Entity",
@@ -29272,16 +29322,16 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{6fafde47-9ed9-42ea-b556-9cd87c868118}\u0000"
+                "{5f8cf961-f003-40ac-9263-d0566f97076a}\u0000"
             ]
         },
         {
-            "type": "BloodSource",
-            "id": "{6fafde47-9ed9-42ea-b556-9cd87c868118}\u0000",
+            "type": "BloodStain",
+            "id": "{5f8cf961-f003-40ac-9263-d0566f97076a}\u0000",
             "owner": "{570e6651-7506-4841-b6ad-7d4074389a07}\u0000",
             "Texture": "res/textures/BloodSplatter/BloodTest.dds",
             "Color": {
-                "x": 0.19607843458652496,
+                "x": 0.09803921729326248,
                 "y": 0.0,
                 "z": 0.0
             }
@@ -29319,16 +29369,16 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{4fc6a287-7783-478e-929a-4f425f49112f}\u0000"
+                "{c8875952-a456-4da2-9ba4-7c15fd5aef88}\u0000"
             ]
         },
         {
-            "type": "BloodSource",
-            "id": "{4fc6a287-7783-478e-929a-4f425f49112f}\u0000",
+            "type": "BloodStain",
+            "id": "{c8875952-a456-4da2-9ba4-7c15fd5aef88}\u0000",
             "owner": "{ea7475e4-6a36-4b2d-9ec3-6d9d9d3dc9b8}\u0000",
             "Texture": "res/textures/BloodSplatter/BloodTest.dds",
             "Color": {
-                "x": 0.19607843458652496,
+                "x": 0.0784313753247261,
                 "y": 0.0,
                 "z": 0.0
             }
@@ -29366,12 +29416,12 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{03fb4893-c467-4a11-a3d3-67638a199459}\u0000"
+                "{01aa1480-98d6-4635-b7d8-b65780174b17}\u0000"
             ]
         },
         {
-            "type": "BloodSource",
-            "id": "{03fb4893-c467-4a11-a3d3-67638a199459}\u0000",
+            "type": "BloodStain",
+            "id": "{01aa1480-98d6-4635-b7d8-b65780174b17}\u0000",
             "owner": "{0dd76c1c-ae92-4a13-8300-365002fb3f81}\u0000",
             "Texture": "res/textures/BloodSplatter/BloodTest.dds",
             "Color": {
@@ -29413,16 +29463,16 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{b1015827-b31a-460a-bd99-f81fe1ff449d}\u0000"
+                "{3aaffb19-82fa-4c16-9d92-57f8b6631e70}\u0000"
             ]
         },
         {
-            "type": "BloodSource",
-            "id": "{b1015827-b31a-460a-bd99-f81fe1ff449d}\u0000",
+            "type": "BloodStain",
+            "id": "{3aaffb19-82fa-4c16-9d92-57f8b6631e70}\u0000",
             "owner": "{115ce385-c5f9-49ab-bdd6-969f0085a118}\u0000",
             "Texture": "res/textures/BloodSplatter/BloodTest.dds",
             "Color": {
-                "x": 0.19607843458652496,
+                "x": 0.11764705926179886,
                 "y": 0.0,
                 "z": 0.0
             }
@@ -29460,12 +29510,12 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{9be6faf2-5cb3-42ad-9f7e-cc98b7b11f26}\u0000"
+                "{d3cd27d6-f34e-49b1-96c7-a4083b05c6a2}\u0000"
             ]
         },
         {
-            "type": "BloodSource",
-            "id": "{9be6faf2-5cb3-42ad-9f7e-cc98b7b11f26}\u0000",
+            "type": "BloodStain",
+            "id": "{d3cd27d6-f34e-49b1-96c7-a4083b05c6a2}\u0000",
             "owner": "{b2848163-d161-4d0a-9bfe-a912ea2fd6ff}\u0000",
             "Texture": "res/textures/BloodSplatter/BloodTest.dds",
             "Color": {
@@ -29507,12 +29557,12 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{a5ee6b75-b920-4f56-82f5-47267f01a2ec}\u0000"
+                "{3cd645b4-a2b9-483e-9ca0-ab800a59036e}\u0000"
             ]
         },
         {
-            "type": "BloodSource",
-            "id": "{a5ee6b75-b920-4f56-82f5-47267f01a2ec}\u0000",
+            "type": "BloodStain",
+            "id": "{3cd645b4-a2b9-483e-9ca0-ab800a59036e}\u0000",
             "owner": "{dd3e1bce-e7fd-4b49-9b88-dfe49dab5e4e}\u0000",
             "Texture": "res/textures/BloodSplatter/BloodTest.dds",
             "Color": {

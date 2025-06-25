@@ -265,7 +265,7 @@ namespace Engine
                 rb->hasGravity = true;
                 rb->angularVelocity = glm::vec3(0);
 
-                pendingGravityDisables.push_back({item, static_cast<float>(glfwGetTime()) + 2.0f});
+                //pendingGravityDisables.push_back({item, static_cast<float>(glfwGetTime()) + 2.0f});
             }
 
             glm::vec3 position = GetOwner()->GetTransform()->GetParent()->GetPosition();

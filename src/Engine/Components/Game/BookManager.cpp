@@ -195,11 +195,15 @@ namespace Engine
                 item->RemoveComponent<Rigidbody>();
             }
             end = this->GetOwner()->GetTransform()->GetPosition() +
-                          glm::vec3(RandomRange(-0.5f, 0.5f), RandomRange(0.0f, 0.2f), RandomRange(-0.5f, 0.5f));
+                          glm::vec3(RandomRange(-1.5f, 1.5f), RandomRange(0.0f, 0.5f), RandomRange(-1.5f, 1.5f));
             
         }
         else if (itemType == ItemType::Weapon)
         {
+            if (!swordPlacementPoint || !bowPlacementPoint || !arrowPlacementPoint || !shieldPlacementPoint)
+            {
+                return;
+            }
             std::string name = item->GetName();
             if (name.find("Sword") != std::string::npos)
             {
@@ -209,7 +213,8 @@ namespace Engine
                 }
                 endRot = swordPlacementPoint->GetRotation();
                 end = swordPlacementPoint->GetPosition();
-                std::cout << std::endl << "Sword found" << std::endl;    
+                std::cout << std::endl << "Sword found" << std::endl;   
+                canHoldSword = false;
             }
             else if (name.find("Bow") != std::string::npos)
             {
