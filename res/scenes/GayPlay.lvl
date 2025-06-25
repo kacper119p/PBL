@@ -407,7 +407,7 @@
       "id": "{6a0e45e8-0ee3-4d98-b914-38c93ec6c18d}\u0000",
       "owner": "{b73a9501-9d71-4f8d-bfb3-c91375fb29e7}\u0000",
       "Material": "..\\..\\..\\..\\res\\materials\\SampleScene\\Default.mat",
-      "Model": "C:\\Users\\hanna\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR/src/res/models/Modele_Mati/Meble/RegalZwykly.fbx"
+      "Model": "./res/models/Modele_Mati/Meble/RegalZwykly.fbx"
     },
     {
       "type": "BoxCollider",

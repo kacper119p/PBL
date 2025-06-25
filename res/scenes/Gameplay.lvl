@@ -1508,7 +1508,7 @@
             "type": "SkyboxRenderer",
             "id": "{833af17d-6d11-4556-86f4-05262dc71638}\u0000",
             "owner": "{376d4219-8fd9-4c0c-b64e-a4a8cf350a8f}\u0000",
-            "Material": "C:\\Users\\hanna\\Documents\\GitHub\\PBL\\out\\build\\x64-Debug-EDITOR\\src\\res\\materials\\SampleScene\\Skybox.mat"
+            "Material": "./res\\materials\\SampleScene\\Skybox.mat"
         },
         {
             "type": "Entity",
