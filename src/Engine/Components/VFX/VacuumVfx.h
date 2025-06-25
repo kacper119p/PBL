@@ -65,6 +65,12 @@ namespace Engine
             Active = false;
         }
 
+        void DeactivateImmediate()
+        {
+            Active = false;
+            Time = 0.0f;
+        }
+
         SERIALIZATION_EXPORT_CLASS(VacuumVfx)
     };
 }
