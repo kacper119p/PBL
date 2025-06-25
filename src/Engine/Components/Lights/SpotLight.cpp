@@ -14,11 +14,12 @@ namespace Engine
 #endif
     }
 #if EDITOR
-    void SpotLight::DrawImGui() {
+    void SpotLight::DrawImGui()
+    {
         if (ImGui::CollapsingHeader("SpotLight", ImGuiTreeNodeFlags_DefaultOpen))
         {
             // Editable Color (with color picker)
-            if (ImGui::ColorEdit3("Color", glm::value_ptr(Color)))
+            if (ImGui::ColorPicker3("Color", glm::value_ptr(Color)))
             {
                 SetColor(Color);
             }
@@ -54,7 +55,7 @@ namespace Engine
             }
         }
     }
-    #endif
+#endif
     SpotLight::~SpotLight()
     {
         LightManager::GetInstance()->UnregisterLight(this);
