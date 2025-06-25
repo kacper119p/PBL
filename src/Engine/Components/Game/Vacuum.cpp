@@ -142,7 +142,7 @@ namespace Engine
                                                   entityCollider->GetOwner()->GetTransform()->GetPosition();
                             entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->AddForce(
                                     direction, Engine::ForceMode::Force);
-                            if (thrashSizeInt == 10)
+                            if (thrashSizeInt == 20)
                                 playerAnimationManager->SuckBigObject();
                         }
                     }
@@ -281,7 +281,7 @@ namespace Engine
             item->GetTransform()->SetPosition(position + forward * (size + 0.5f));
 
             if (rb)
-                rb->AddForce(forward * 100.0f * float(itemSize), Engine::ForceMode::Force);
+                rb->AddForce(forward * shootForce * float(itemSize), Engine::ForceMode::Force);
 
             if (itemSize == 20)
                 PlayerAnimationManager::GetInstance()->ShootBigObject();
