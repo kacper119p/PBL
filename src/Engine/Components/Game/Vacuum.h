@@ -32,7 +32,7 @@ namespace Engine
         bool isShootingKeyPressed = false;
         float shootKeyHoldStartTime = 0.0f;
         float lastShootTime = 0.0f;
-        const float shootCooldown = 0.3f; // 300 ms
+        const float shootCooldown = .3f; // 300 ms
         float lastSuckToggleTime = 0.0f;
 
         std::shared_ptr<ma_sound> blowingSound;

@@ -2,12 +2,12 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{802b16d3-0022-4f8e-aa43-ff046a2871e8}\u0000",
+            "id": "{fb280c7c-0098-4693-8198-0737f61ca5b9}\u0000",
             "name": "BroomSwapper",
             "transform": {
                 "type": "Transform",
-                "id": "{0c4e5954-4cb5-4a8a-82fa-64b458f88004}\u0000",
-                "owner": "{802b16d3-0022-4f8e-aa43-ff046a2871e8}\u0000",
+                "id": "{b5bf70a7-7792-485d-a31a-e495cb20447e}\u0000",
+                "owner": "{fb280c7c-0098-4693-8198-0737f61ca5b9}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -19,9 +19,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 3.0,
-                    "y": 3.0,
-                    "z": 3.0
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
                 },
                 "Rotation": {
                     "x": 0.0,
@@ -33,13 +33,13 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{c011944e-6bc6-44cc-9c4c-23338619a091}\u0000"
+                "{89ac0388-b5e6-410c-aa27-808128c0f8b1}\u0000"
             ]
         },
         {
             "type": "OutlinedModelRenderer",
-            "id": "{c011944e-6bc6-44cc-9c4c-23338619a091}\u0000",
-            "owner": "{802b16d3-0022-4f8e-aa43-ff046a2871e8}\u0000",
+            "id": "{89ac0388-b5e6-410c-aa27-808128c0f8b1}\u0000",
+            "owner": "{fb280c7c-0098-4693-8198-0737f61ca5b9}\u0000",
             "Material": "./res/materials/SampleScene/Tools.mat",
             "Model": "./res/models/Swapper/Mop_stojak.fbx",
             "CastShadow": true,

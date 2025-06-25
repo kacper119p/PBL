@@ -186,20 +186,26 @@ namespace Engine
 
             endRot = glm::quat(glm::radians((rand() % 2 == 0) ? glm::vec3(0, -90, 0) : glm::vec3(0, 90, 0)));
         }
-        else if (itemType == ItemType::Coin && name.find("Coin") != std::string::npos)
+        else if (itemType == ItemType::Coin &&
+                 (name.find("Coin") != std::string::npos || name.find("rubin") != std::string::npos ||
+                  name.find("szafir") != std::string::npos || name.find("szmaragd") != std::string::npos))
         {
             if (item->GetComponent<Rigidbody>())
             {
                 item->RemoveComponent<Rigidbody>();
             }
             end = this->GetOwner()->GetTransform()->GetPosition() +
-                          glm::vec3(RandomRange(-0.5f, 0.5f), RandomRange(0.0f, 0.2f), RandomRange(-0.5f, 0.5f));
+                          glm::vec3(RandomRange(-1.5f, 1.5f), RandomRange(0.0f, 0.5f), RandomRange(-1.5f, 1.5f));
             
         }
         else if (itemType == ItemType::Weapon)
         {
+            if (!swordPlacementPoint || !bowPlacementPoint || !arrowPlacementPoint || !shieldPlacementPoint)
+            {
+                return;
+            }
             std::string name = item->GetName();
-            if (name.find("Sword") != std::string::npos)
+            if (name.find("Sword") != std::string::npos && canHoldSword)
             {
                 if (item->GetComponent<Rigidbody>())
                 {
@@ -207,9 +213,10 @@ namespace Engine
                 }
                 endRot = swordPlacementPoint->GetRotation();
                 end = swordPlacementPoint->GetPosition();
-                std::cout << std::endl << "Sword found" << std::endl;    
+                std::cout << std::endl << "Sword found" << std::endl;   
+                canHoldSword = false;
             }
-            else if (name.find("Bow") != std::string::npos)
+            else if (name.find("Bow") != std::string::npos && canHoldBow)
             {
                 if (item->GetComponent<Rigidbody>())
                 {
@@ -217,8 +224,9 @@ namespace Engine
                 }
                 endRot = bowPlacementPoint->GetRotation();
                 end = bowPlacementPoint->GetPosition();
+                canHoldBow = false;
             }
-            else if (name.find("Arrow") != std::string::npos)
+            else if (name.find("Arrow") != std::string::npos && canHoldArrow)
             {
                 if (item->GetComponent<Rigidbody>())
                 {
@@ -226,8 +234,9 @@ namespace Engine
                 }
                 endRot = arrowPlacementPoint->GetRotation();
                 end = arrowPlacementPoint->GetPosition();
+                canHoldArrow = false;
             }
-            else if (name.find("Shield") != std::string::npos)
+            else if (name.find("Shield") != std::string::npos && canHoldShield)
             {
                 if (item->GetComponent<Rigidbody>())
                 {
@@ -235,6 +244,7 @@ namespace Engine
                 }
                 endRot = shieldPlacementPoint->GetRotation();
                 end = shieldPlacementPoint->GetPosition();
+                canHoldShield = false;
             }
             else
                 return; // Unrecognized

@@ -102,7 +102,10 @@ namespace Engine
         InputManager& input = InputManager::GetInstance();
         if (input.IsKeyPressed(GLFW_KEY_E) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_BUTTON_X))
         {
-            canSwap = true;
+            if (ThrashManager::GetInstance()->VacuumCount == 0)
+                canSwap = true;
+            else
+                canSwap = false;
         }
         else
         {

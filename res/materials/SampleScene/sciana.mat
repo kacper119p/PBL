@@ -4,7 +4,7 @@
     "RoughnessMetallicMap": "res/textures/Tekstury_Mati/UV24/RMAOMap.dds",
     "NormalMap": "res/textures/Tekstury_Mati/UV24/NormalMap.dds",
     "EmissiveMap": "res/textures/Default.dds",
-    "Roughness": 1.0,
+    "Roughness": 0.0,
     "Metallic": 1.0,
     "BaseColor": {
         "x": 1.0,

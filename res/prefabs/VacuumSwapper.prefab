@@ -2,12 +2,12 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{8833bb0d-c294-46be-ba86-d5d83bbc7803}\u0000",
+            "id": "{db82c462-77fa-4cf7-aed2-6197d3641eb4}\u0000",
             "name": "VacuumSwapper",
             "transform": {
                 "type": "Transform",
-                "id": "{277eefa2-4776-40db-b1e0-39d6560f966e}\u0000",
-                "owner": "{8833bb0d-c294-46be-ba86-d5d83bbc7803}\u0000",
+                "id": "{514ce8c5-29ea-4c2a-ac2b-1a09963ff92d}\u0000",
+                "owner": "{db82c462-77fa-4cf7-aed2-6197d3641eb4}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -19,9 +19,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 3.0,
-                    "y": 3.0,
-                    "z": 3.0
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
                 },
                 "Rotation": {
                     "x": 0.0,
@@ -33,13 +33,13 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{b24d180a-a3db-4330-8c77-7ca63126d903}\u0000"
+                "{b7f47854-069d-4cea-a6a7-0ca6e83afd6a}\u0000"
             ]
         },
         {
             "type": "OutlinedModelRenderer",
-            "id": "{b24d180a-a3db-4330-8c77-7ca63126d903}\u0000",
-            "owner": "{8833bb0d-c294-46be-ba86-d5d83bbc7803}\u0000",
+            "id": "{b7f47854-069d-4cea-a6a7-0ca6e83afd6a}\u0000",
+            "owner": "{db82c462-77fa-4cf7-aed2-6197d3641eb4}\u0000",
             "Material": "./res/materials/SampleScene/Tools.mat",
             "Model": "./res/models/Swapper/Odkurzacz_stojak.fbx",
             "CastShadow": true,

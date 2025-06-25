@@ -9,9 +9,9 @@
                 "id": "{b350d415-bdbf-423e-9f83-c8b19bceb604}\u0000",
                 "owner": "{f41b6dd7-047c-4f90-b0bb-af13303be013}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": 3.2826361656188965,
-                    "z": -3.8658242225646973
+                    "x": -24.01714324951172,
+                    "y": 3.2419323921203613,
+                    "z": -7.449085235595703
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -52,7 +52,7 @@
             "id": "{9d5d7afb-40f4-4e4b-b02b-cf4016cdc388}\u0000",
             "owner": "{f41b6dd7-047c-4f90-b0bb-af13303be013}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 4294967295,
             "collisionMask": 4294967291,

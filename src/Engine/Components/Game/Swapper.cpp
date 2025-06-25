@@ -22,17 +22,17 @@ namespace Engine
         {
             if (child->GetOwner()->GetName() == "StripperCollider")
             {
-                stripperCollider = child->GetOwner()->GetComponent < SphereCollider>();
+                stripperCollider = child->GetOwner()->GetComponent <Collider>();
                 stripperCollider->OnTriggerAddListener(SwapToolStripper);
             }
             else if (child->GetOwner()->GetName() == "VacuumCollider")
             {
-                vacuumCollider = child->GetOwner()->GetComponent<SphereCollider>();
+                vacuumCollider = child->GetOwner()->GetComponent<Collider>();
                 vacuumCollider->OnTriggerAddListener(SwapToolVacuum);
             }
             else if (child->GetOwner()->GetName() == "BroomCollider")
             {
-                broomCollider = child->GetOwner()->GetComponent<SphereCollider>();
+                broomCollider = child->GetOwner()->GetComponent<Collider>();
                 broomCollider->OnTriggerAddListener(SwapToolBroom);
             }
         }

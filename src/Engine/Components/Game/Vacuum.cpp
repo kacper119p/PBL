@@ -265,7 +265,7 @@ namespace Engine
                 rb->hasGravity = true;
                 rb->angularVelocity = glm::vec3(0);
 
-                pendingGravityDisables.push_back({item, static_cast<float>(glfwGetTime()) + 2.0f});
+                //pendingGravityDisables.push_back({item, static_cast<float>(glfwGetTime()) + 2.0f});
             }
 
             glm::vec3 position = GetOwner()->GetTransform()->GetParent()->GetPosition();
@@ -273,7 +273,7 @@ namespace Engine
             item->GetTransform()->SetPosition(position + forward * (size + 0.5f));
 
             if (rb)
-                rb->AddForce(forward * 100.0f * float(itemSize), Engine::ForceMode::Force);
+                rb->AddForce(forward * shootForce * float(itemSize), Engine::ForceMode::Force);
 
             if (itemSize == 20)
                 PlayerAnimationManager::GetInstance()->ShootBigObject();

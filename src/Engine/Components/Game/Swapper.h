@@ -27,9 +27,9 @@ namespace Engine
         bool hasVacuum = false;
         bool hasBroom = false;
 
-        SphereCollider* stripperCollider = nullptr;
-        SphereCollider* vacuumCollider = nullptr;
-        SphereCollider* broomCollider = nullptr;
+        Collider* stripperCollider = nullptr;
+        Collider* vacuumCollider = nullptr;
+        Collider* broomCollider = nullptr;
 
 
         Entity* stripper = nullptr;
