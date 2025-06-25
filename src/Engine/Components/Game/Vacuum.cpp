@@ -147,7 +147,7 @@ namespace Engine
                             items.push_back(entityCollider->GetOwner());
                             volume += thrashSizeInt;
                             UpdateFillIndicator();
-                            entityCollider->GetOwner()->GetComponent<Engine::BoxCollider>()->SetTrigger(true);
+                            entityCollider->GetOwner()->GetComponent<Collider>()->SetTrigger(true);
                             entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->hasGravity = false;
                             entityCollider->GetOwner()->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
                         }
@@ -172,7 +172,7 @@ namespace Engine
             volume -= thrashSizeInt;
             UpdateFillIndicator();
 
-            item->GetComponent<Engine::BoxCollider>()->SetTrigger(false);
+            item->GetComponent<Collider>()->SetTrigger(false);
 
             glm::vec3 position = GetOwner()->GetTransform()->GetParent()->GetPosition();
             glm::vec3 forward = GetOwner()->GetTransform()->GetParent()->GetForward();

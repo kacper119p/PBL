@@ -2,12 +2,12 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{c187783c-e519-4427-8128-6e63c77907da}\u0000",
-            "name": "swieczka1",
+            "id": "{96e986e8-0053-4317-929c-3822e103676c}\u0000",
+            "name": "swieczka6ogien",
             "transform": {
                 "type": "Transform",
-                "id": "{46f732c6-11c3-4dc9-bb88-fa567c97ed13}\u0000",
-                "owner": "{c187783c-e519-4427-8128-6e63c77907da}\u0000",
+                "id": "{1de146ad-e2b5-4d0e-9248-8bc225d24736}\u0000",
+                "owner": "{96e986e8-0053-4317-929c-3822e103676c}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -30,35 +30,35 @@
                     "w": 1.0
                 },
                 "Children": [
-                    "{572d9203-497f-4a87-87b5-d87c151dc80e}\u0000",
-                    "{4703a298-1c47-4358-b489-0adbe4240f6a}\u0000",
-                    "{73ab0ebf-f7ce-4289-aae3-77fd0d1dd19b}\u0000"
+                    "{52e33b50-634d-4b76-a709-6d6348774716}\u0000",
+                    "{9e783e87-0a37-4357-84d9-f1de356915ef}\u0000",
+                    "{8ca516c7-8b85-440c-b323-6cc34a2a78ad}\u0000"
                 ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{2e836c2f-2955-4baa-9c02-b092ec2661cf}\u0000"
+                "{fab799f4-266e-412c-9d9d-3cd5dd8581f4}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{2e836c2f-2955-4baa-9c02-b092ec2661cf}\u0000",
-            "owner": "{c187783c-e519-4427-8128-6e63c77907da}\u0000",
+            "id": "{fab799f4-266e-412c-9d9d-3cd5dd8581f4}\u0000",
+            "owner": "{96e986e8-0053-4317-929c-3822e103676c}\u0000",
             "Material": "res/materials/SampleScene/swieczkaswiecaca.mat",
             "Model": "res/models/Modele_Mati/Swieczki/Swieca6.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{8e88c1cb-0102-4e90-9fbf-9aca35e1bb1d}\u0000",
+            "id": "{d2d4efb7-2899-4bbb-ac45-ce7a009ac2bb}\u0000",
             "name": "New Entity",
             "transform": {
                 "type": "Transform",
-                "id": "{572d9203-497f-4a87-87b5-d87c151dc80e}\u0000",
-                "owner": "{8e88c1cb-0102-4e90-9fbf-9aca35e1bb1d}\u0000",
+                "id": "{52e33b50-634d-4b76-a709-6d6348774716}\u0000",
+                "owner": "{d2d4efb7-2899-4bbb-ac45-ce7a009ac2bb}\u0000",
                 "Position": {
-                    "x": -0.0248870849609375,
-                    "y": 1.6634836196899414,
+                    "x": 0.020747140049934387,
+                    "y": 1.914685845375061,
                     "z": -0.29111576080322266
                 },
                 "EulerAngles": {
@@ -67,9 +67,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 0.10000000149011612,
-                    "y": 0.10000000149011612,
-                    "z": 0.10000000149011612
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
                 },
                 "Rotation": {
                     "x": 0.0,
@@ -78,22 +78,17 @@
                     "w": 0.0
                 },
                 "Children": [],
-                "Parent": "{46f732c6-11c3-4dc9-bb88-fa567c97ed13}\u0000"
+                "Parent": "{1de146ad-e2b5-4d0e-9248-8bc225d24736}\u0000"
             },
             "components": [
-                "{84ebd107-ed49-4dec-b02a-ae8f89f20933}\u0000",
-                "{60365142-3b0a-41d8-9746-6d214351cf09}\u0000"
+                "{2a314514-a9e8-49c1-bd79-31f728caea01}\u0000",
+                "{8761f844-d315-4b2c-b708-4af223cf51b2}\u0000"
             ]
         },
         {
-            "type": "EmbersParticleEmitter",
-            "id": "{84ebd107-ed49-4dec-b02a-ae8f89f20933}\u0000",
-            "owner": "{8e88c1cb-0102-4e90-9fbf-9aca35e1bb1d}\u0000"
-        },
-        {
             "type": "PointLight",
-            "id": "{60365142-3b0a-41d8-9746-6d214351cf09}\u0000",
-            "owner": "{8e88c1cb-0102-4e90-9fbf-9aca35e1bb1d}\u0000",
+            "id": "{2a314514-a9e8-49c1-bd79-31f728caea01}\u0000",
+            "owner": "{d2d4efb7-2899-4bbb-ac45-ce7a009ac2bb}\u0000",
             "Color": {
                 "x": 10.0,
                 "y": 3.9215686321258545,
@@ -104,17 +99,25 @@
             "Range": 100.0
         },
         {
+            "type": "ModelRenderer",
+            "id": "{8761f844-d315-4b2c-b708-4af223cf51b2}\u0000",
+            "owner": "{d2d4efb7-2899-4bbb-ac45-ce7a009ac2bb}\u0000",
+            "Material": "res/materials/SampleScene/CandleFlame.mat",
+            "Model": "res/models/VFX/Candle/CandleFlame.fbx",
+            "CastShadow": true
+        },
+        {
             "type": "Entity",
-            "id": "{3f08a959-0ab0-4f24-9807-ed98c4589422}\u0000",
+            "id": "{9735b40c-bf20-4d36-82d4-030467d950cc}\u0000",
             "name": "New Entity",
             "transform": {
                 "type": "Transform",
-                "id": "{4703a298-1c47-4358-b489-0adbe4240f6a}\u0000",
-                "owner": "{3f08a959-0ab0-4f24-9807-ed98c4589422}\u0000",
+                "id": "{9e783e87-0a37-4357-84d9-f1de356915ef}\u0000",
+                "owner": "{9735b40c-bf20-4d36-82d4-030467d950cc}\u0000",
                 "Position": {
                     "x": -0.07825851440429688,
-                    "y": 0.8977029323577881,
-                    "z": 0.758082389831543
+                    "y": 1.1234018802642822,
+                    "z": 0.7193235754966736
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -122,9 +125,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 0.10000000149011612,
-                    "y": 0.20000000298023224,
-                    "z": 0.10000000149011612
+                    "x": 0.800000011920929,
+                    "y": 0.800000011920929,
+                    "z": 0.800000011920929
                 },
                 "Rotation": {
                     "x": 0.0,
@@ -133,22 +136,17 @@
                     "w": 0.0
                 },
                 "Children": [],
-                "Parent": "{46f732c6-11c3-4dc9-bb88-fa567c97ed13}\u0000"
+                "Parent": "{1de146ad-e2b5-4d0e-9248-8bc225d24736}\u0000"
             },
             "components": [
-                "{a7b051c4-c94c-4544-ae44-d4d7bed164ef}\u0000",
-                "{8d97f9b9-3fa3-43be-a5f5-d60bcc354620}\u0000"
+                "{29de12b6-43aa-43f3-987c-4b855d30d7f5}\u0000",
+                "{eed8b00b-35c1-4823-9510-b6088e87542c}\u0000"
             ]
         },
         {
-            "type": "EmbersParticleEmitter",
-            "id": "{a7b051c4-c94c-4544-ae44-d4d7bed164ef}\u0000",
-            "owner": "{3f08a959-0ab0-4f24-9807-ed98c4589422}\u0000"
-        },
-        {
             "type": "PointLight",
-            "id": "{8d97f9b9-3fa3-43be-a5f5-d60bcc354620}\u0000",
-            "owner": "{3f08a959-0ab0-4f24-9807-ed98c4589422}\u0000",
+            "id": "{29de12b6-43aa-43f3-987c-4b855d30d7f5}\u0000",
+            "owner": "{9735b40c-bf20-4d36-82d4-030467d950cc}\u0000",
             "Color": {
                 "x": 10.0,
                 "y": 3.9215686321258545,
@@ -157,53 +155,56 @@
             "LinearFalloff": 0.0,
             "QuadraticFalloff": 1.0,
             "Range": 100.0
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{eed8b00b-35c1-4823-9510-b6088e87542c}\u0000",
+            "owner": "{9735b40c-bf20-4d36-82d4-030467d950cc}\u0000",
+            "Material": "res/materials/SampleScene/CandleFlame.mat",
+            "Model": "res/models/VFX/Candle/CandleFlame.fbx",
+            "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{7061c40b-155d-4785-ba72-ec9142578519}\u0000",
+            "id": "{78e39bdb-760c-4a48-9ee4-dc1ee0965774}\u0000",
             "name": "New Entity",
             "transform": {
                 "type": "Transform",
-                "id": "{73ab0ebf-f7ce-4289-aae3-77fd0d1dd19b}\u0000",
-                "owner": "{7061c40b-155d-4785-ba72-ec9142578519}\u0000",
+                "id": "{8ca516c7-8b85-440c-b323-6cc34a2a78ad}\u0000",
+                "owner": "{78e39bdb-760c-4a48-9ee4-dc1ee0965774}\u0000",
                 "Position": {
-                    "x": 0.7502937316894531,
-                    "y": 0.5086592435836792,
-                    "z": -0.02499675750732422
+                    "x": 0.7630727291107178,
+                    "y": 0.6299587488174438,
+                    "z": -0.034847766160964966
                 },
                 "EulerAngles": {
-                    "x": -3.5358104705810547,
-                    "y": -2.682978868484497,
-                    "z": -18.29241943359375
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
                 },
                 "Scale": {
-                    "x": 0.05000000074505806,
-                    "y": 0.20000000298023224,
-                    "z": 0.05000000074505806
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
                 },
                 "Rotation": {
-                    "x": -0.03416983783245087,
-                    "y": -0.01820007525384426,
-                    "z": -0.15954825282096863,
-                    "w": 0.9864307045936584
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{46f732c6-11c3-4dc9-bb88-fa567c97ed13}\u0000"
+                "Parent": "{1de146ad-e2b5-4d0e-9248-8bc225d24736}\u0000"
             },
             "components": [
-                "{f5b744bf-8f5c-4406-b1dd-2532d179d898}\u0000",
-                "{ea0d700e-85fb-4c82-86c0-14005eb5d6f8}\u0000"
+                "{bce61f36-aa4e-4dac-9dd6-6916037a5b0b}\u0000",
+                "{4b498832-f06c-4738-88b9-f1e3b6c4ea57}\u0000"
             ]
         },
         {
-            "type": "EmbersParticleEmitter",
-            "id": "{f5b744bf-8f5c-4406-b1dd-2532d179d898}\u0000",
-            "owner": "{7061c40b-155d-4785-ba72-ec9142578519}\u0000"
-        },
-        {
             "type": "PointLight",
-            "id": "{ea0d700e-85fb-4c82-86c0-14005eb5d6f8}\u0000",
-            "owner": "{7061c40b-155d-4785-ba72-ec9142578519}\u0000",
+            "id": "{bce61f36-aa4e-4dac-9dd6-6916037a5b0b}\u0000",
+            "owner": "{78e39bdb-760c-4a48-9ee4-dc1ee0965774}\u0000",
             "Color": {
                 "x": 10.0,
                 "y": 3.9215686321258545,
@@ -212,6 +213,14 @@
             "LinearFalloff": 0.0,
             "QuadraticFalloff": 1.0,
             "Range": 100.0
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{4b498832-f06c-4738-88b9-f1e3b6c4ea57}\u0000",
+            "owner": "{78e39bdb-760c-4a48-9ee4-dc1ee0965774}\u0000",
+            "Material": "res/materials/SampleScene/CandleFlame.mat",
+            "Model": "res/models/VFX/Candle/CandleFlame.fbx",
+            "CastShadow": true
         }
     ]
 }

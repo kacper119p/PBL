@@ -2,16 +2,16 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{4d52f370-303a-4715-a8a2-2a29aad0b8b9}\u0000",
-            "name": "swieczka1",
+            "id": "{5619cfe8-d753-478d-98b4-e253360d7362}\u0000",
+            "name": "swieczka4ogien",
             "transform": {
                 "type": "Transform",
-                "id": "{9701596e-5696-4665-8b58-3797638b5923}\u0000",
-                "owner": "{4d52f370-303a-4715-a8a2-2a29aad0b8b9}\u0000",
+                "id": "{731fe9d4-da36-416c-a5be-c7717780693a}\u0000",
+                "owner": "{5619cfe8-d753-478d-98b4-e253360d7362}\u0000",
                 "Position": {
                     "x": -17.88819122314453,
                     "y": 1.2075846195220947,
-                    "z": 8.771533012390137
+                    "z": 7.348489284515381
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -30,34 +30,34 @@
                     "w": 1.0
                 },
                 "Children": [
-                    "{46e59042-a3b6-4e27-8a82-43825adcf6df}\u0000"
+                    "{cfed5cd8-abea-41d6-8ad7-6b4bfdd91dfe}\u0000"
                 ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{2b6d57cd-03e8-4c38-88fb-41cff5ba4b6c}\u0000"
+                "{aa3c7b13-c817-49c7-a6e6-0950a0a7c159}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{2b6d57cd-03e8-4c38-88fb-41cff5ba4b6c}\u0000",
-            "owner": "{4d52f370-303a-4715-a8a2-2a29aad0b8b9}\u0000",
+            "id": "{aa3c7b13-c817-49c7-a6e6-0950a0a7c159}\u0000",
+            "owner": "{5619cfe8-d753-478d-98b4-e253360d7362}\u0000",
             "Material": "res/materials/SampleScene/swieczkaswiecaca.mat",
             "Model": "res/models/Modele_Mati/Swieczki/Swieca4.fbx",
             "CastShadow": false
         },
         {
             "type": "Entity",
-            "id": "{17ad5ede-c974-44d5-bcf6-a2ce4ebed3ba}\u0000",
+            "id": "{686990de-eb10-43b4-9e53-f7fe5402b666}\u0000",
             "name": "New Entity",
             "transform": {
                 "type": "Transform",
-                "id": "{46e59042-a3b6-4e27-8a82-43825adcf6df}\u0000",
-                "owner": "{17ad5ede-c974-44d5-bcf6-a2ce4ebed3ba}\u0000",
+                "id": "{cfed5cd8-abea-41d6-8ad7-6b4bfdd91dfe}\u0000",
+                "owner": "{686990de-eb10-43b4-9e53-f7fe5402b666}\u0000",
                 "Position": {
                     "x": 0.07490348815917969,
-                    "y": 0.9891698360443115,
-                    "z": 0.03515911102294922
+                    "y": 1.1664445400238037,
+                    "z": 0.0003581047058105469
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -65,9 +65,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 0.10000000149011612,
-                    "y": 0.20000000298023224,
-                    "z": 0.10000000149011612
+                    "x": 0.800000011920929,
+                    "y": 0.800000011920929,
+                    "z": 0.800000011920929
                 },
                 "Rotation": {
                     "x": 0.0,
@@ -76,22 +76,17 @@
                     "w": 0.0
                 },
                 "Children": [],
-                "Parent": "{9701596e-5696-4665-8b58-3797638b5923}\u0000"
+                "Parent": "{731fe9d4-da36-416c-a5be-c7717780693a}\u0000"
             },
             "components": [
-                "{5e36e33a-3e6c-49a5-8040-ae491fee1d15}\u0000",
-                "{b4c6f2a8-f24f-4b74-bd98-fd23cb762a45}\u0000"
+                "{00c6e784-fb67-4cec-8523-4f0c78973c34}\u0000",
+                "{fb415a47-6b8e-44d1-bb43-7ce88e8bfca3}\u0000"
             ]
         },
         {
-            "type": "EmbersParticleEmitter",
-            "id": "{5e36e33a-3e6c-49a5-8040-ae491fee1d15}\u0000",
-            "owner": "{17ad5ede-c974-44d5-bcf6-a2ce4ebed3ba}\u0000"
-        },
-        {
             "type": "PointLight",
-            "id": "{b4c6f2a8-f24f-4b74-bd98-fd23cb762a45}\u0000",
-            "owner": "{17ad5ede-c974-44d5-bcf6-a2ce4ebed3ba}\u0000",
+            "id": "{00c6e784-fb67-4cec-8523-4f0c78973c34}\u0000",
+            "owner": "{686990de-eb10-43b4-9e53-f7fe5402b666}\u0000",
             "Color": {
                 "x": 10.0,
                 "y": 3.9215686321258545,
@@ -100,6 +95,14 @@
             "LinearFalloff": 0.0,
             "QuadraticFalloff": 1.0,
             "Range": 100.0
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{fb415a47-6b8e-44d1-bb43-7ce88e8bfca3}\u0000",
+            "owner": "{686990de-eb10-43b4-9e53-f7fe5402b666}\u0000",
+            "Material": "res/materials/SampleScene/CandleFlame.mat",
+            "Model": "res/models/VFX/Candle/CandleFlame.fbx",
+            "CastShadow": true
         }
     ]
 }
