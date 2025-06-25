@@ -2,15 +2,15 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{68263ba4-9f7e-4c36-ae08-58975bf4150a}\u0000",
+            "id": "{df8bd53d-cebc-4180-bac6-3c7215a0cc5a}\u0000",
             "name": "KotlarzO",
             "transform": {
                 "type": "Transform",
-                "id": "{2a4e1a4c-02fa-44ee-845a-4db52811cc35}\u0000",
-                "owner": "{68263ba4-9f7e-4c36-ae08-58975bf4150a}\u0000",
+                "id": "{c4d1ad61-e5b5-4b18-ac86-a8bd9d6925b6}\u0000",
+                "owner": "{df8bd53d-cebc-4180-bac6-3c7215a0cc5a}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": 1.1071314811706543,
+                    "x": -5.69801139831543,
+                    "y": 2.917736530303955,
                     "z": -1.2635917663574219
                 },
                 "EulerAngles": {
@@ -19,9 +19,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
+                    "x": 2.0,
+                    "y": 2.0,
+                    "z": 2.0
                 },
                 "Rotation": {
                     "x": 0.0,
@@ -30,36 +30,36 @@
                     "w": 0.9997340440750122
                 },
                 "Children": [
-                    "{8be541db-5e17-4ed9-b62c-edca06eceda1}\u0000",
-                    "{205d63e0-ea6a-40a6-abc7-3c19c7ac6a28}\u0000",
-                    "{f1fea790-a119-4d31-aa9f-71688f097e62}\u0000",
-                    "{a79f20d3-16c5-4c8f-810c-8c68f0a9a5d0}\u0000"
+                    "{9fe5d8f3-dd9e-4af1-abb6-ac817813ef16}\u0000",
+                    "{7c1a78ca-a25e-4d12-b6cb-a6f948e6f659}\u0000",
+                    "{6dd30570-46cb-4ffa-859b-773992c8968e}\u0000",
+                    "{68aba597-e76f-4551-8915-5ee10c7d1a67}\u0000"
                 ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{1d5e21c5-56af-450c-a958-14a929a9eeee}\u0000"
+                "{6a40af17-680c-457c-8278-4a4e30210397}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{1d5e21c5-56af-450c-a958-14a929a9eeee}\u0000",
-            "owner": "{68263ba4-9f7e-4c36-ae08-58975bf4150a}\u0000",
+            "id": "{6a40af17-680c-457c-8278-4a4e30210397}\u0000",
+            "owner": "{df8bd53d-cebc-4180-bac6-3c7215a0cc5a}\u0000",
             "Material": "res/materials/SampleScene/KotlarzOtwarty.mat",
             "Model": "res/models/Modele_Mati/Meble/KotlarzOtwarty.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{2f7097cf-372f-499d-8826-8c553fff757a}\u0000",
+            "id": "{17340749-ce43-4d18-b7ae-fc96adc263dc}\u0000",
             "name": "deska",
             "transform": {
                 "type": "Transform",
-                "id": "{8be541db-5e17-4ed9-b62c-edca06eceda1}\u0000",
-                "owner": "{2f7097cf-372f-499d-8826-8c553fff757a}\u0000",
+                "id": "{9fe5d8f3-dd9e-4af1-abb6-ac817813ef16}\u0000",
+                "owner": "{17340749-ce43-4d18-b7ae-fc96adc263dc}\u0000",
                 "Position": {
                     "x": 1.8025368975216338e-9,
-                    "y": 0.0,
+                    "y": -0.053441643714904785,
                     "z": 8.3201646960962e-11
                 },
                 "EulerAngles": {
@@ -79,28 +79,28 @@
                     "w": 0.7071067690849304
                 },
                 "Children": [],
-                "Parent": "{2a4e1a4c-02fa-44ee-845a-4db52811cc35}\u0000"
+                "Parent": "{c4d1ad61-e5b5-4b18-ac86-a8bd9d6925b6}\u0000"
             },
             "components": [
-                "{b3969d01-a5b0-4591-8806-9107bedfa2e1}\u0000"
+                "{86f4f82a-f27d-4c56-8645-4b3e61d8827a}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{b3969d01-a5b0-4591-8806-9107bedfa2e1}\u0000",
-            "owner": "{2f7097cf-372f-499d-8826-8c553fff757a}\u0000",
+            "id": "{86f4f82a-f27d-4c56-8645-4b3e61d8827a}\u0000",
+            "owner": "{17340749-ce43-4d18-b7ae-fc96adc263dc}\u0000",
             "Material": "res/materials/SampleScene/Deska.mat",
             "Model": "res/models/Modele_Mati/Meble/zestawdesek.fbx",
             "CastShadow": true
         },
         {
             "type": "Entity",
-            "id": "{f707a6d3-52f4-4019-b090-b2e3e65b9442}\u0000",
+            "id": "{fb02aefe-567c-4931-8c67-9c09468cd146}\u0000",
             "name": "ogien",
             "transform": {
                 "type": "Transform",
-                "id": "{205d63e0-ea6a-40a6-abc7-3c19c7ac6a28}\u0000",
-                "owner": "{f707a6d3-52f4-4019-b090-b2e3e65b9442}\u0000",
+                "id": "{7c1a78ca-a25e-4d12-b6cb-a6f948e6f659}\u0000",
+                "owner": "{fb02aefe-567c-4931-8c67-9c09468cd146}\u0000",
                 "Position": {
                     "x": -0.00046783045399934053,
                     "y": -0.4931774139404297,
@@ -123,22 +123,22 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{2a4e1a4c-02fa-44ee-845a-4db52811cc35}\u0000"
+                "Parent": "{c4d1ad61-e5b5-4b18-ac86-a8bd9d6925b6}\u0000"
             },
             "components": [
-                "{9f989993-8c40-4f68-b58b-efa6051233f1}\u0000",
-                "{22b97149-2223-4932-b729-5f3650560c32}\u0000"
+                "{f301ee4b-ede2-4c8c-be3a-c6a2b88bd9a7}\u0000",
+                "{4f1a567b-b215-4c08-8b73-639c372fe234}\u0000"
             ]
         },
         {
             "type": "FireParticleEmitter",
-            "id": "{9f989993-8c40-4f68-b58b-efa6051233f1}\u0000",
-            "owner": "{f707a6d3-52f4-4019-b090-b2e3e65b9442}\u0000"
+            "id": "{f301ee4b-ede2-4c8c-be3a-c6a2b88bd9a7}\u0000",
+            "owner": "{fb02aefe-567c-4931-8c67-9c09468cd146}\u0000"
         },
         {
             "type": "PointLight",
-            "id": "{22b97149-2223-4932-b729-5f3650560c32}\u0000",
-            "owner": "{f707a6d3-52f4-4019-b090-b2e3e65b9442}\u0000",
+            "id": "{4f1a567b-b215-4c08-8b73-639c372fe234}\u0000",
+            "owner": "{fb02aefe-567c-4931-8c67-9c09468cd146}\u0000",
             "Color": {
                 "x": 10.0,
                 "y": 3.9215686321258545,
@@ -150,12 +150,12 @@
         },
         {
             "type": "Entity",
-            "id": "{ed8b40c1-6a49-4842-b601-74b6c30b7159}\u0000",
+            "id": "{fae11b87-50d3-4e2d-b3da-93082b2ff42c}\u0000",
             "name": "embers",
             "transform": {
                 "type": "Transform",
-                "id": "{f1fea790-a119-4d31-aa9f-71688f097e62}\u0000",
-                "owner": "{ed8b40c1-6a49-4842-b601-74b6c30b7159}\u0000",
+                "id": "{6dd30570-46cb-4ffa-859b-773992c8968e}\u0000",
+                "owner": "{fae11b87-50d3-4e2d-b3da-93082b2ff42c}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -178,29 +178,29 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{2a4e1a4c-02fa-44ee-845a-4db52811cc35}\u0000"
+                "Parent": "{c4d1ad61-e5b5-4b18-ac86-a8bd9d6925b6}\u0000"
             },
             "components": [
-                "{df9705cb-1273-4d86-8e54-779c6057f545}\u0000"
+                "{0c773196-e4ea-41ca-8304-7a35ff27d019}\u0000"
             ]
         },
         {
             "type": "EmbersParticleEmitter",
-            "id": "{df9705cb-1273-4d86-8e54-779c6057f545}\u0000",
-            "owner": "{ed8b40c1-6a49-4842-b601-74b6c30b7159}\u0000"
+            "id": "{0c773196-e4ea-41ca-8304-7a35ff27d019}\u0000",
+            "owner": "{fae11b87-50d3-4e2d-b3da-93082b2ff42c}\u0000"
         },
         {
             "type": "Entity",
-            "id": "{4429a850-d724-426b-a28b-dc2c3dcc7c46}\u0000",
+            "id": "{73e94782-37de-4f3d-9021-46280957b71d}\u0000",
             "name": "collider",
             "transform": {
                 "type": "Transform",
-                "id": "{a79f20d3-16c5-4c8f-810c-8c68f0a9a5d0}\u0000",
-                "owner": "{4429a850-d724-426b-a28b-dc2c3dcc7c46}\u0000",
+                "id": "{68aba597-e76f-4551-8915-5ee10c7d1a67}\u0000",
+                "owner": "{73e94782-37de-4f3d-9021-46280957b71d}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": -0.9133173823356628,
-                    "z": 0.0
+                    "x": -0.03551512211561203,
+                    "y": 0.5749619007110596,
+                    "z": -0.0016393099213019013
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -219,20 +219,25 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{2a4e1a4c-02fa-44ee-845a-4db52811cc35}\u0000"
+                "Parent": "{c4d1ad61-e5b5-4b18-ac86-a8bd9d6925b6}\u0000"
             },
             "components": [
-                "{dd8d4ed9-4071-43af-b49d-1f7db1549911}\u0000"
+                "{6d4a8361-dc5e-4438-a4e0-ea08338718a5}\u0000"
             ]
         },
         {
-            "type": "SphereCollider",
-            "id": "{dd8d4ed9-4071-43af-b49d-1f7db1549911}\u0000",
-            "owner": "{4429a850-d724-426b-a28b-dc2c3dcc7c46}\u0000",
+            "type": "BoxCollider",
+            "id": "{6d4a8361-dc5e-4438-a4e0-ea08338718a5}\u0000",
+            "owner": "{73e94782-37de-4f3d-9021-46280957b71d}\u0000",
             "isTrigger": false,
             "isStatic": true,
-            "colliderType": 1,
-            "radius": 2.200000047683716
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 8.0,
+            "_height": 8.0,
+            "_depth": 8.0
         }
     ]
 }

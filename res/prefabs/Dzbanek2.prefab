@@ -34,9 +34,9 @@
             },
             "components": [
                 "{95f9b5d4-488b-4ddf-a041-82126097fca7}\u0000",
-                "{b4af3340-69b2-44e0-88a7-af0567b4dbd1}\u0000",
-                "{6c30b2de-ff88-4ee8-aeda-9d240c82d5ec}\u0000",
-                "{a7f2b21c-bf3c-4f0f-8f05-fd419a8bfe52}\u0000"
+                "{63bd5ca2-4b7b-46c6-a899-d92121f3b309}\u0000",
+                "{01d4127b-c0d2-4e6c-b441-c22c9da45679}\u0000",
+                "{78e6cad0-2d7d-407d-ad7b-ace5c8769c83}\u0000"
             ]
         },
         {
@@ -48,24 +48,25 @@
             "CastShadow": true
         },
         {
-            "type": "CapsuleCollider",
-            "id": "{b4af3340-69b2-44e0-88a7-af0567b4dbd1}\u0000",
+            "type": "BoxCollider",
+            "id": "{63bd5ca2-4b7b-46c6-a899-d92121f3b309}\u0000",
             "owner": "{57a8debc-bf19-4eba-9ef4-adf7342b3f33}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 4294967295,
             "collisionMask": 4294967291,
-            "colliderType": 2,
-            "Radius": 1.2000000476837158,
-            "Height": 2.0
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 4.0,
+            "_depth": 2.0
         },
         {
             "type": "Rigidbody",
-            "id": "{6c30b2de-ff88-4ee8-aeda-9d240c82d5ec}\u0000",
+            "id": "{01d4127b-c0d2-4e6c-b441-c22c9da45679}\u0000",
             "owner": "{57a8debc-bf19-4eba-9ef4-adf7342b3f33}\u0000",
-            "mass": 0.5,
-            "inverseMass": 2.0,
+            "mass": 0.30000001192092896,
+            "inverseMass": 3.3333332538604736,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
@@ -74,7 +75,7 @@
         },
         {
             "type": "Furniture",
-            "id": "{a7f2b21c-bf3c-4f0f-8f05-fd419a8bfe52}\u0000",
+            "id": "{78e6cad0-2d7d-407d-ad7b-ace5c8769c83}\u0000",
             "owner": "{57a8debc-bf19-4eba-9ef4-adf7342b3f33}\u0000"
         }
     ]

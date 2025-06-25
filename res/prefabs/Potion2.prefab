@@ -2,12 +2,12 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
-            "name": "SmallBook",
+            "id": "{019698c9-b9ce-447d-bf32-46566cc8968c}\u0000",
+            "name": "Potion2",
             "transform": {
                 "type": "Transform",
-                "id": "{32d3fe9b-21e1-4a01-92ed-1df0d76ec010}\u0000",
-                "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+                "id": "{9632f553-95f9-46a4-ab38-e90475821e80}\u0000",
+                "owner": "{019698c9-b9ce-447d-bf32-46566cc8968c}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 1.2359213829040527,
@@ -33,40 +33,50 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{b0530dcc-b44e-4241-b424-ff0f5be2d50c}\u0000",
-                "{d5872045-f337-421f-9789-ffcb5f03d9c3}\u0000",
-                "{45882e5b-b01f-497d-9cb1-4db0b9137632}\u0000"
+                "{027ecf43-b767-470c-882f-72d019f36096}\u0000",
+                "{220f357c-0e63-417a-bbdb-680b09a3a9c3}\u0000",
+                "{9488645e-573e-43ca-84e7-c5b7db8ad2a6}\u0000",
+                "{2acb2652-c470-4245-863b-fc2e649e887e}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{b0530dcc-b44e-4241-b424-ff0f5be2d50c}\u0000",
-            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+            "id": "{027ecf43-b767-470c-882f-72d019f36096}\u0000",
+            "owner": "{019698c9-b9ce-447d-bf32-46566cc8968c}\u0000",
             "Material": "res/materials/SampleScene/UV12.mat",
             "Model": "res/models/Modele_Mati/Mikstury/Potion2.fbx",
             "CastShadow": true
         },
         {
-            "type": "CapsuleCollider",
-            "id": "{d5872045-f337-421f-9789-ffcb5f03d9c3}\u0000",
-            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+            "type": "BoxCollider",
+            "id": "{220f357c-0e63-417a-bbdb-680b09a3a9c3}\u0000",
+            "owner": "{019698c9-b9ce-447d-bf32-46566cc8968c}\u0000",
             "isTrigger": false,
             "isStatic": false,
-            "colliderType": 2,
-            "Radius": 0.3700000047683716,
-            "Height": 1.7000000476837158
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 0.5,
+            "_height": 2.200000047683716,
+            "_depth": 0.5
         },
         {
             "type": "Rigidbody",
-            "id": "{45882e5b-b01f-497d-9cb1-4db0b9137632}\u0000",
-            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
+            "id": "{9488645e-573e-43ca-84e7-c5b7db8ad2a6}\u0000",
+            "owner": "{019698c9-b9ce-447d-bf32-46566cc8968c}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
-            "friction": 0.0,
-            "frictionEnabled": false,
-            "restitution": 0.8069999814033508
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Furniture",
+            "id": "{2acb2652-c470-4245-863b-fc2e649e887e}\u0000",
+            "owner": "{019698c9-b9ce-447d-bf32-46566cc8968c}\u0000"
         }
     ]
 }

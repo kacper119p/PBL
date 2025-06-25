@@ -54,7 +54,7 @@
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
+            "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
             "_width": 1.2999999523162842,

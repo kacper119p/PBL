@@ -2,20 +2,20 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
-            "name": "SmallBook",
+            "id": "{d881f895-201e-4e32-ba93-6852f365f0c1}\u0000",
+            "name": "Potion1",
             "transform": {
                 "type": "Transform",
-                "id": "{32d3fe9b-21e1-4a01-92ed-1df0d76ec010}\u0000",
-                "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+                "id": "{97574cb8-2dc5-497a-b556-8185d386fde9}\u0000",
+                "owner": "{d881f895-201e-4e32-ba93-6852f365f0c1}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": 1.2359213829040527,
-                    "z": 0.0
+                    "x": 21.167781829833984,
+                    "y": 6.16871976852417,
+                    "z": -16.87708854675293
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": 95.03916931152344,
                     "z": 0.0
                 },
                 "Scale": {
@@ -25,48 +25,58 @@
                 },
                 "Rotation": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": 0.7375081777572632,
                     "z": 0.0,
-                    "w": 1.0
+                    "w": 0.6753381490707397
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{b0530dcc-b44e-4241-b424-ff0f5be2d50c}\u0000",
-                "{d5872045-f337-421f-9789-ffcb5f03d9c3}\u0000",
-                "{45882e5b-b01f-497d-9cb1-4db0b9137632}\u0000"
+                "{725bc4b8-b9da-45de-9d68-e83f438d5e28}\u0000",
+                "{902ad087-057e-46c8-98f7-c51b4382b287}\u0000",
+                "{2e4ef07e-b5f6-4c69-9b2a-c649b08000a0}\u0000",
+                "{54910b33-00ad-440b-98b3-e1504eb78c8a}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{b0530dcc-b44e-4241-b424-ff0f5be2d50c}\u0000",
-            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+            "id": "{725bc4b8-b9da-45de-9d68-e83f438d5e28}\u0000",
+            "owner": "{d881f895-201e-4e32-ba93-6852f365f0c1}\u0000",
             "Material": "res/materials/SampleScene/UV12.mat",
             "Model": "res/models/Modele_Mati/Mikstury/Potion1.fbx",
             "CastShadow": true
         },
         {
-            "type": "CapsuleCollider",
-            "id": "{d5872045-f337-421f-9789-ffcb5f03d9c3}\u0000",
-            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+            "type": "BoxCollider",
+            "id": "{902ad087-057e-46c8-98f7-c51b4382b287}\u0000",
+            "owner": "{d881f895-201e-4e32-ba93-6852f365f0c1}\u0000",
             "isTrigger": false,
             "isStatic": false,
-            "colliderType": 2,
-            "Radius": 0.550000011920929,
-            "Height": 0.699999988079071
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.0,
+            "_height": 1.5,
+            "_depth": 1.0
         },
         {
             "type": "Rigidbody",
-            "id": "{45882e5b-b01f-497d-9cb1-4db0b9137632}\u0000",
-            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
+            "id": "{2e4ef07e-b5f6-4c69-9b2a-c649b08000a0}\u0000",
+            "owner": "{d881f895-201e-4e32-ba93-6852f365f0c1}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
-            "friction": 0.0,
-            "frictionEnabled": false,
-            "restitution": 0.8069999814033508
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Furniture",
+            "id": "{54910b33-00ad-440b-98b3-e1504eb78c8a}\u0000",
+            "owner": "{d881f895-201e-4e32-ba93-6852f365f0c1}\u0000"
         }
     ]
 }

@@ -35,7 +35,8 @@
             "components": [
                 "{35c6a7ef-2261-4da1-84fe-d743045bdef0}\u0000",
                 "{36b1adb3-72fe-441e-8f77-26fe4d9d9213}\u0000",
-                "{b11e26b8-e0d7-460d-8477-beb9a1bce270}\u0000"
+                "{b11e26b8-e0d7-460d-8477-beb9a1bce270}\u0000",
+                "{4bbd4d4b-ccfb-4dd1-8e53-307a22d4f88b}\u0000"
             ]
         },
         {
@@ -53,7 +54,7 @@
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
+            "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
             "_width": 1.0,
@@ -71,6 +72,12 @@
             "friction": 0.20000000298023224,
             "frictionEnabled": true,
             "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Thrash",
+            "id": "{4bbd4d4b-ccfb-4dd1-8e53-307a22d4f88b}\u0000",
+            "owner": "{93c02852-d321-4d6b-bb38-73548658eb4c}\u0000",
+            "size": 1
         }
     ]
 }

@@ -2,12 +2,12 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{d3527566-02ec-42ec-8b43-a8668daa26d5}\u0000",
-            "name": "New Entity",
+            "id": "{f41b6dd7-047c-4f90-b0bb-af13303be013}\u0000",
+            "name": "Skrzynia2",
             "transform": {
                 "type": "Transform",
-                "id": "{bdf2f9bb-3dd7-416f-aee5-bb6d8e1553e3}\u0000",
-                "owner": "{d3527566-02ec-42ec-8b43-a8668daa26d5}\u0000",
+                "id": "{b350d415-bdbf-423e-9f83-c8b19bceb604}\u0000",
+                "owner": "{f41b6dd7-047c-4f90-b0bb-af13303be013}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 3.2826361656188965,
@@ -33,23 +33,24 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{59dd9299-254c-4157-b0ac-729f8103fd35}\u0000",
-                "{db106eff-0439-487e-bf91-8b653f24481a}\u0000",
-                "{d275517c-ca69-42a4-8153-b6685468904d}\u0000"
+                "{22ae11a6-41cd-4ff3-81b9-bc5f9920dcf2}\u0000",
+                "{9d5d7afb-40f4-4e4b-b02b-cf4016cdc388}\u0000",
+                "{465ec86a-2291-4a55-96df-2156d222af12}\u0000",
+                "{f1503019-7f78-4ce2-8f6c-8295e6faa2e7}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{59dd9299-254c-4157-b0ac-729f8103fd35}\u0000",
-            "owner": "{d3527566-02ec-42ec-8b43-a8668daa26d5}\u0000",
+            "id": "{22ae11a6-41cd-4ff3-81b9-bc5f9920dcf2}\u0000",
+            "owner": "{f41b6dd7-047c-4f90-b0bb-af13303be013}\u0000",
             "Material": "res/materials/SampleScene/UV2.mat",
             "Model": "res/models/Modele_Mati/Meble/Skrzynia2.fbx",
             "CastShadow": true
         },
         {
             "type": "BoxCollider",
-            "id": "{db106eff-0439-487e-bf91-8b653f24481a}\u0000",
-            "owner": "{d3527566-02ec-42ec-8b43-a8668daa26d5}\u0000",
+            "id": "{9d5d7afb-40f4-4e4b-b02b-cf4016cdc388}\u0000",
+            "owner": "{f41b6dd7-047c-4f90-b0bb-af13303be013}\u0000",
             "isTrigger": false,
             "isStatic": true,
             "skipCollisionSibling": false,
@@ -62,15 +63,20 @@
         },
         {
             "type": "Rigidbody",
-            "id": "{d275517c-ca69-42a4-8153-b6685468904d}\u0000",
-            "owner": "{d3527566-02ec-42ec-8b43-a8668daa26d5}\u0000",
-            "mass": 5.0,
-            "inverseMass": 0.20000000298023224,
+            "id": "{465ec86a-2291-4a55-96df-2156d222af12}\u0000",
+            "owner": "{f41b6dd7-047c-4f90-b0bb-af13303be013}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
             "linearDamping": 0.20200000703334808,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
             "frictionEnabled": true,
             "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Furniture",
+            "id": "{f1503019-7f78-4ce2-8f6c-8295e6faa2e7}\u0000",
+            "owner": "{f41b6dd7-047c-4f90-b0bb-af13303be013}\u0000"
         }
     ]
 }

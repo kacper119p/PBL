@@ -2,14 +2,14 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
-            "name": "swieczka1",
+            "id": "{7c3e2fbc-dd6c-4cb4-b19c-6362308e16ea}\u0000",
+            "name": "rubin",
             "transform": {
                 "type": "Transform",
-                "id": "{79076f10-fc9f-43d0-ad05-c03abdb7619b}\u0000",
-                "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
+                "id": "{f7338db7-4566-4c1b-8074-960f73e42e41}\u0000",
+                "owner": "{7c3e2fbc-dd6c-4cb4-b19c-6362308e16ea}\u0000",
                 "Position": {
-                    "x": 0.0,
+                    "x": -6.495155334472656,
                     "y": 1.1524142026901245,
                     "z": 0.0
                 },
@@ -33,24 +33,24 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{60d52f02-6524-4499-b50e-1eaa15f2a451}\u0000",
-                "{f739f587-ddeb-44b7-b5de-18b65e1ec0f4}\u0000",
-                "{b0a37001-3bbd-4e6a-95e6-389917b06919}\u0000",
-                "{5218ca14-0545-4a16-9d40-924ee4bba9a3}\u0000"
+                "{57470866-b9cd-492b-ae3c-166a0c2934c2}\u0000",
+                "{423764bf-4de7-4c43-b780-c82785ec3ea8}\u0000",
+                "{9467c288-41ae-4f84-b7af-747cb47f8cb7}\u0000",
+                "{54ff5267-ccc8-4ad9-a5db-b7f87b88b5f5}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{60d52f02-6524-4499-b50e-1eaa15f2a451}\u0000",
-            "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
+            "id": "{57470866-b9cd-492b-ae3c-166a0c2934c2}\u0000",
+            "owner": "{7c3e2fbc-dd6c-4cb4-b19c-6362308e16ea}\u0000",
             "Material": "res/materials/SampleScene/drogikamien.mat",
             "Model": "res/models/Modele_Mati/Kosztownosci/kamienRubin.fbx",
             "CastShadow": true
         },
         {
             "type": "BoxCollider",
-            "id": "{f739f587-ddeb-44b7-b5de-18b65e1ec0f4}\u0000",
-            "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
+            "id": "{423764bf-4de7-4c43-b780-c82785ec3ea8}\u0000",
+            "owner": "{7c3e2fbc-dd6c-4cb4-b19c-6362308e16ea}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
@@ -63,10 +63,10 @@
         },
         {
             "type": "Rigidbody",
-            "id": "{b0a37001-3bbd-4e6a-95e6-389917b06919}\u0000",
-            "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
+            "id": "{9467c288-41ae-4f84-b7af-747cb47f8cb7}\u0000",
+            "owner": "{7c3e2fbc-dd6c-4cb4-b19c-6362308e16ea}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
@@ -75,9 +75,9 @@
         },
         {
             "type": "Thrash",
-            "id": "{5218ca14-0545-4a16-9d40-924ee4bba9a3}\u0000",
-            "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
-            "size": 1
+            "id": "{54ff5267-ccc8-4ad9-a5db-b7f87b88b5f5}\u0000",
+            "owner": "{7c3e2fbc-dd6c-4cb4-b19c-6362308e16ea}\u0000",
+            "size": 3
         }
     ]
 }
