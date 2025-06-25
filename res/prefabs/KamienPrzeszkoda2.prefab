@@ -9,9 +9,9 @@
                 "id": "{690b72f0-5501-4e7b-9ea9-0d5ca57b5d40}\u0000",
                 "owner": "{87d474f7-b692-4555-8bfc-380f22b83d8e}\u0000",
                 "Position": {
-                    "x": 0.0,
+                    "x": 6.755946159362793,
                     "y": 1.2359213829040527,
-                    "z": 0.0
+                    "z": 27.2298583984375
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -34,9 +34,9 @@
             },
             "components": [
                 "{d6028a34-117f-481c-990a-c40dc825b4a7}\u0000",
-                "{e3decac4-dac0-4394-8ffb-7cc0430ba517}\u0000",
-                "{039e74c2-b201-4371-a337-9330b96c98c8}\u0000",
-                "{9333ec35-8af8-48e8-83f2-4962440d8c60}\u0000"
+                "{d230ba56-8d07-4574-81e4-872b47b971d6}\u0000",
+                "{9992e58a-9060-4c4d-a4d6-061ec61dc765}\u0000",
+                "{8325c710-fe27-4e41-acf2-bf8375bca8f7}\u0000"
             ]
         },
         {
@@ -48,33 +48,34 @@
             "CastShadow": true
         },
         {
-            "type": "CapsuleCollider",
-            "id": "{e3decac4-dac0-4394-8ffb-7cc0430ba517}\u0000",
+            "type": "BoxCollider",
+            "id": "{d230ba56-8d07-4574-81e4-872b47b971d6}\u0000",
             "owner": "{87d474f7-b692-4555-8bfc-380f22b83d8e}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 4294967295,
             "collisionMask": 4294967291,
-            "colliderType": 2,
-            "Radius": 0.800000011920929,
-            "Height": 0.30000001192092896
+            "colliderType": 0,
+            "_width": 1.2000000476837158,
+            "_height": 1.2999999523162842,
+            "_depth": 1.0
         },
         {
             "type": "Rigidbody",
-            "id": "{039e74c2-b201-4371-a337-9330b96c98c8}\u0000",
+            "id": "{9992e58a-9060-4c4d-a4d6-061ec61dc765}\u0000",
             "owner": "{87d474f7-b692-4555-8bfc-380f22b83d8e}\u0000",
-            "mass": 3.0,
-            "inverseMass": 0.3333333432674408,
+            "mass": 1.0,
+            "inverseMass": 1.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
-            "friction": 0.3160000145435333,
+            "friction": 0.20000000298023224,
             "frictionEnabled": true,
-            "restitution": 0.04399999976158142
+            "restitution": 0.10000000149011612
         },
         {
             "type": "Thrash",
-            "id": "{9333ec35-8af8-48e8-83f2-4962440d8c60}\u0000",
+            "id": "{8325c710-fe27-4e41-acf2-bf8375bca8f7}\u0000",
             "owner": "{87d474f7-b692-4555-8bfc-380f22b83d8e}\u0000",
             "size": 1
         }
