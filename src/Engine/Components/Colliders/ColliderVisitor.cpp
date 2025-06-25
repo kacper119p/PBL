@@ -141,6 +141,7 @@ namespace Engine
         const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
         const glm::mat4& sphereTransform = sphere.GetTransform()->GetLocalToWorldMatrix();
 
+        glm::vec3 boxCenter = glm::vec3(boxTransform[3]);
         glm::vec3 sphereCenter = glm::vec3(sphereTransform * glm::vec4(0, 0, 0, 1));
 
         glm::vec3 xAxis = glm::normalize(glm::vec3(boxTransform[0]));
@@ -154,44 +155,43 @@ namespace Engine
         glm::vec3 halfExtents = glm::vec3(box.GetWidth() * 0.5f * scaleX, box.GetHeight() * 0.5f * scaleY,
                                           box.GetDepth() * 0.5f * scaleZ);
 
-        glm::vec3 boxCenter = glm::vec3(boxTransform * glm::vec4(0, 0, 0, 1));
-
         glm::vec3 delta = sphereCenter - boxCenter;
 
-        float distanceX = glm::dot(delta, xAxis);
-        float distanceY = glm::dot(delta, yAxis);
-        float distanceZ = glm::dot(delta, zAxis);
+        float localX = glm::clamp(glm::dot(delta, xAxis), -halfExtents.x, halfExtents.x);
+        float localY = glm::clamp(glm::dot(delta, yAxis), -halfExtents.y, halfExtents.y);
+        float localZ = glm::clamp(glm::dot(delta, zAxis), -halfExtents.z, halfExtents.z);
 
-        distanceX = glm::clamp(distanceX, -halfExtents.x, halfExtents.x);
-        distanceY = glm::clamp(distanceY, -halfExtents.y, halfExtents.y);
-        distanceZ = glm::clamp(distanceZ, -halfExtents.z, halfExtents.z);
+        glm::vec3 closestPoint = boxCenter + localX * xAxis + localY * yAxis + localZ * zAxis;
 
-        glm::vec3 closestPoint = boxCenter + distanceX * xAxis + distanceY * yAxis + distanceZ * zAxis;
+        glm::vec3 separation = sphereCenter - closestPoint;
+        float distSq = glm::dot(separation, separation);
 
-        float distanceSquared = glm::length2(closestPoint - sphereCenter);
+        float sphereScale = glm::length(glm::vec3(sphereTransform[0])); // assume uniform scale
+        float sphereRadius = sphere.GetRadius() * sphereScale;
 
-        float scaleSphere = glm::length(glm::vec3(sphereTransform[0]));
-        float worldRadius = sphere.GetRadius() * scaleSphere;
+        const float contactSkin = 0.01f;
+        const float radiusWithSkin = sphereRadius + contactSkin;
 
-        if (distanceSquared <= (worldRadius * worldRadius))
+        if (distSq <= radiusWithSkin * radiusWithSkin)
         {
             result.hasCollision = true;
 
-            glm::vec3 collisionNormal = sphereCenter - closestPoint;
-            float dist = glm::length(collisionNormal);
+            float dist = glm::sqrt(distSq);
+            glm::vec3 normal;
 
-            if (dist > 1e-6f)
-                collisionNormal /= dist;
+            if (dist > 1e-4f)
+                normal = separation / dist;
             else
-                collisionNormal = glm::vec3(0, 1, 0);
+                normal = glm::normalize(boxCenter - sphereCenter); // fallback direction
 
-            result.collisionNormal = collisionNormal;
+            result.collisionNormal = normal;
             result.collisionPoint = closestPoint;
-            result.penetrationDepth = worldRadius - dist;
+            result.penetrationDepth = glm::max(sphereRadius - dist, 0.0f);
         }
 
         return result;
     }
+
 
     CollisionResult ColliderVisitor::CheckBoxCapsuleCollision(const BoxCollider& box, const CapsuleCollider& capsule)
     {
@@ -202,8 +202,8 @@ namespace Engine
         result.otherCollider = &capsule;
 
         const glm::mat4& boxTransform = box.GetTransform()->GetLocalToWorldMatrix();
-
         glm::vec3 boxCenter = glm::vec3(boxTransform[3]);
+
         glm::vec3 xAxis = glm::normalize(glm::vec3(boxTransform[0]));
         glm::vec3 yAxis = glm::normalize(glm::vec3(boxTransform[1]));
         glm::vec3 zAxis = glm::normalize(glm::vec3(boxTransform[2]));
@@ -217,67 +217,63 @@ namespace Engine
 
         const glm::mat4& capsuleTransform = capsule.GetTransform()->GetLocalToWorldMatrix();
         glm::vec3 capsuleCenter = glm::vec3(capsuleTransform[3]);
-        glm::vec3 capsuleUp = glm::normalize(glm::vec3(capsuleTransform * glm::vec4(0, 1, 0, 0)));
 
+        glm::vec3 capsuleUp = glm::normalize(glm::vec3(capsuleTransform * glm::vec4(0, 1, 0, 0)));
         float capsuleHalfHeight = capsule.GetHeight() * 0.5f;
-        glm::vec3 capsuleStart = capsuleCenter - capsuleUp * capsuleHalfHeight;
-        glm::vec3 capsuleEnd = capsuleCenter + capsuleUp * capsuleHalfHeight;
         float capsuleRadius = capsule.GetRadius();
 
-        auto ClosestPointSegmentToOBB = [&](const glm::vec3& segStart,
-                                            const glm::vec3& segEnd) -> std::pair<glm::vec3, glm::vec3>
+        glm::vec3 capsuleStart = capsuleCenter - capsuleUp * capsuleHalfHeight;
+        glm::vec3 capsuleEnd = capsuleCenter + capsuleUp * capsuleHalfHeight;
+
+        glm::vec3 bestPointSeg, bestPointBox;
+        float bestDistSq = std::numeric_limits<float>::max();
+
+        const int samples = 12;
+        for (int i = 0; i <= samples; ++i)
         {
-            float bestDistSq = std::numeric_limits<float>::max();
-            glm::vec3 bestPointSeg, bestPointBox;
+            float t = static_cast<float>(i) / samples;
+            glm::vec3 p = glm::mix(capsuleStart, capsuleEnd, t);
+            glm::vec3 d = p - boxCenter;
 
-            const int samples = 16;
-            for (int i = 0; i <= samples; ++i)
+            float dx = glm::clamp(glm::dot(d, xAxis), -halfExtents.x, halfExtents.x);
+            float dy = glm::clamp(glm::dot(d, yAxis), -halfExtents.y, halfExtents.y);
+            float dz = glm::clamp(glm::dot(d, zAxis), -halfExtents.z, halfExtents.z);
+
+            glm::vec3 q = boxCenter + dx * xAxis + dy * yAxis + dz * zAxis;
+
+            float distSq = glm::length2(p - q);
+            if (distSq < bestDistSq)
             {
-                float t = static_cast<float>(i) / samples;
-                glm::vec3 p = glm::mix(segStart, segEnd, t);
-                glm::vec3 d = p - boxCenter;
-
-                float dx = glm::clamp(glm::dot(d, xAxis), -halfExtents.x, halfExtents.x);
-                float dy = glm::clamp(glm::dot(d, yAxis), -halfExtents.y, halfExtents.y);
-                float dz = glm::clamp(glm::dot(d, zAxis), -halfExtents.z, halfExtents.z);
-
-                glm::vec3 q = boxCenter + dx * xAxis + dy * yAxis + dz * zAxis;
-                float distSq = glm::length2(p - q);
-
-                if (distSq < bestDistSq)
-                {
-                    bestDistSq = distSq;
-                    bestPointSeg = p;
-                    bestPointBox = q;
-                }
+                bestDistSq = distSq;
+                bestPointSeg = p;
+                bestPointBox = q;
             }
+        }
 
-            return {bestPointSeg, bestPointBox};
-        };
+        glm::vec3 delta = bestPointSeg - bestPointBox;
+        float distSq = glm::dot(delta, delta);
+        const float contactSkin = 0.01f;
+        float radiusWithSkin = capsuleRadius + contactSkin;
 
-        auto [capsuleP, boxP] = ClosestPointSegmentToOBB(capsuleStart, capsuleEnd);
-        glm::vec3 delta = capsuleP - boxP;
-        float distSq = glm::length2(delta);
-        float radiusSq = capsuleRadius * capsuleRadius;
-
-        if (distSq <= radiusSq)
+        if (distSq <= radiusWithSkin * radiusWithSkin)
         {
             result.hasCollision = true;
 
-            float dist = sqrt(distSq);
-            glm::vec3 collisionNormal;
-            if (dist > 1e-6f)
-                collisionNormal = delta / dist;
+            float dist = glm::sqrt(distSq);
+            glm::vec3 normal;
+            if (dist > 1e-4f)
+                normal = delta / dist;
             else
-                collisionNormal = glm::vec3(0, 1, 0);
+                normal = glm::normalize(capsuleUp); // fallback
 
-            result.collisionNormal = collisionNormal;
-            result.collisionPoint = boxP;
-            result.penetrationDepth = capsuleRadius - dist;
+            result.collisionNormal = normal;
+            result.collisionPoint = bestPointBox;
+            result.penetrationDepth = glm::max(capsuleRadius - dist, 0.0f);
         }
 
         return result;
     }
+
 
     CollisionResult ColliderVisitor::CheckSphereSphereCollision(const SphereCollider& sphere1,
                                                                 const SphereCollider& sphere2)
@@ -483,8 +479,16 @@ namespace Engine
 
     inline glm::vec3 ColliderVisitor::GetSeparation()
     {
-        return result.collisionNormal * result.penetrationDepth;
+        const float slop = 0.01f; // Penetration slop (tolerance)
+        const float percent = 1.0f; // Only correct 20% of penetration
+        const float maxCorrection = 0.3f; // Optional: cap to prevent big jumps
+
+        float correctedDepth = glm::max(result.penetrationDepth - slop, 0.0f);
+        correctedDepth = glm::min(correctedDepth, maxCorrection);
+
+        return result.collisionNormal * correctedDepth * percent;
     }
+
 
 
     void ColliderVisitor::EmitCollision(Collider* const Collider) const { Collider->EmitCollision(currentCollider); }
