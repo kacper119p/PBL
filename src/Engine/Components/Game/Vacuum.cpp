@@ -39,8 +39,8 @@ namespace Engine
         AudioManager::GetInstance().SetSoundPosition(blowingSound, GetOwner()->GetTransform()->GetPosition());
         AudioManager::GetInstance().SetSoundPosition(suckingSound, GetOwner()->GetTransform()->GetPosition());
 
-        isShootingKeyPressed = input.IsKeyPressed(GLFW_KEY_2);
-        bool isSuccingKeyPressed = input.IsKeyPressed(GLFW_KEY_1);
+        isShootingKeyPressed = input.IsKeyPressed(GLFW_KEY_2) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_BUTTON_B);
+        bool isSuccingKeyPressed = input.IsKeyPressed(GLFW_KEY_1) || input.IsGamepadButtonPressed(GLFW_GAMEPAD_BUTTON_A);
 
         if (isSuccingKeyPressed && volume < maxVolume)
         {
