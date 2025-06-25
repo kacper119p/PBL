@@ -88,6 +88,15 @@ void Engine::PlayerAnimationManager::SetVacuumInactive()
     }
 }
 
+void Engine::PlayerAnimationManager::SetVacuumInactiveImmediate()
+{
+    if (vacuumVfx != nullptr)
+    {
+        vacuumVfx->DeactivateImmediate();
+        isVacuumActive = false;
+    }
+}
+
 void Engine::PlayerAnimationManager::SetVacuumFront(AnimatedModelRenderer* Front)
 {
     VacuumFront = Front;
@@ -156,7 +165,7 @@ void Engine::PlayerAnimationManager::SetLeftTackSpeed(float speed)
     TrackLeft->GetAnimator().SetAnimationSpeed(speed);
 }
 
-void Engine::PlayerAnimationManager::SetRightTackSpeed(float speed) 
+void Engine::PlayerAnimationManager::SetRightTackSpeed(float speed)
 {
     TrackRight->GetAnimator().SetAnimationSpeed(speed);
 }

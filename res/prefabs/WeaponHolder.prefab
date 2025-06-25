@@ -1,0 +1,542 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{fa2124cb-e99b-4488-b03d-7a713ba59c83}\u0000",
+            "name": "WeaponHolder",
+            "transform": {
+                "type": "Transform",
+                "id": "{1d66998e-d6cb-417d-9b46-6c2c879c5f67}\u0000",
+                "owner": "{fa2124cb-e99b-4488-b03d-7a713ba59c83}\u0000",
+                "Position": {
+                    "x": -36.99427795410156,
+                    "y": 1.447066307067871,
+                    "z": 16.85919189453125
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.009999999776482582,
+                    "y": 0.009999999776482582,
+                    "z": 0.009999999776482582
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [
+                    "{8fa9f89a-ab42-46a5-afad-df4aaa0eacef}\u0000",
+                    "{f9fc13a8-459d-4982-9c0e-82dc21fe217a}\u0000",
+                    "{f23b1abf-4c3a-4dde-a6e0-10bf123afff6}\u0000",
+                    "{e113ec82-92ad-40d3-83e5-e6ea78dd66a2}\u0000",
+                    "{5800d9af-18e4-4ea3-a8d0-a0876884bed7}\u0000",
+                    "{4dd62335-6bf5-4fac-9a0b-2d2a26cdf6f4}\u0000",
+                    "{0c7f4a70-632b-4e15-85ed-7b618784e9c4}\u0000",
+                    "{2744ea4f-e74e-485f-ad74-a64411d9cbd1}\u0000",
+                    "{24ed60f1-c1c7-4fca-bb49-c06b3c50b86b}\u0000",
+                    "{e85d9eac-7e7b-4fb0-bf13-c4e704f86f8e}\u0000",
+                    "{ee4bf11d-605b-4414-b200-5dd80b0cdddd}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{f068fc6a-7742-49ed-a444-c81cda8d2fbb}\u0000",
+                "{389bebe5-ef0d-4a36-a148-4d96f0520b90}\u0000",
+                "{bf94e087-d955-4cc3-b290-97ebac02cfb8}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{f068fc6a-7742-49ed-a444-c81cda8d2fbb}\u0000",
+            "owner": "{fa2124cb-e99b-4488-b03d-7a713ba59c83}\u0000",
+            "Material": "res/materials/SampleScene/Default.mat",
+            "Model": "res/models/Modele_Mati/Meble/StojakNaBron.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{389bebe5-ef0d-4a36-a148-4d96f0520b90}\u0000",
+            "owner": "{fa2124cb-e99b-4488-b03d-7a713ba59c83}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4,
+            "collisionMask": 4294967104,
+            "colliderType": 0,
+            "_width": 11.100000381469727,
+            "_height": 4.900000095367432,
+            "_depth": 6.300000190734863
+        },
+        {
+            "type": "BookManager",
+            "id": "{bf94e087-d955-4cc3-b290-97ebac02cfb8}\u0000",
+            "owner": "{fa2124cb-e99b-4488-b03d-7a713ba59c83}\u0000",
+            "bookWidth": 0.20000000298023224,
+            "bookDepth": 0.05000000074505806,
+            "bookHeight": 0.30000001192092896,
+            "bookMargin": 0.019999999552965164,
+            "sidePadding": 0.05000000074505806,
+            "backPadding": 0.029999999329447746,
+            "itemType": 2,
+            "swordPlacementPoint": "{8fa9f89a-ab42-46a5-afad-df4aaa0eacef}\u0000",
+            "bowPlacementPoint": "{f9fc13a8-459d-4982-9c0e-82dc21fe217a}\u0000",
+            "arrowPlacementPoint": "{f23b1abf-4c3a-4dde-a6e0-10bf123afff6}\u0000",
+            "shieldPlacementPoint": "{e113ec82-92ad-40d3-83e5-e6ea78dd66a2}\u0000"
+        },
+        {
+            "type": "Entity",
+            "id": "{38d8e09a-c089-4c88-8115-99577179e7b2}\u0000",
+            "name": "sword",
+            "transform": {
+                "type": "Transform",
+                "id": "{8fa9f89a-ab42-46a5-afad-df4aaa0eacef}\u0000",
+                "owner": "{38d8e09a-c089-4c88-8115-99577179e7b2}\u0000",
+                "Position": {
+                    "x": -0.967041015625,
+                    "y": 458.3816223144531,
+                    "z": 252.2293701171875
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": -90.0
+                },
+                "Scale": {
+                    "x": 100.0,
+                    "y": 100.0,
+                    "z": 100.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": -0.7071067690849304,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{1d66998e-d6cb-417d-9b46-6c2c879c5f67}\u0000"
+            },
+            "components": []
+        },
+        {
+            "type": "Entity",
+            "id": "{104d1106-0de5-4683-9d96-360349fe773d}\u0000",
+            "name": "bow",
+            "transform": {
+                "type": "Transform",
+                "id": "{f9fc13a8-459d-4982-9c0e-82dc21fe217a}\u0000",
+                "owner": "{104d1106-0de5-4683-9d96-360349fe773d}\u0000",
+                "Position": {
+                    "x": 31.391845703125,
+                    "y": 410.8468322753906,
+                    "z": 132.767578125
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": -90.0
+                },
+                "Scale": {
+                    "x": 100.0,
+                    "y": 100.0,
+                    "z": 100.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": -0.7071067690849304,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{1d66998e-d6cb-417d-9b46-6c2c879c5f67}\u0000"
+            },
+            "components": []
+        },
+        {
+            "type": "Entity",
+            "id": "{53d0b32c-3292-4211-b6d1-b6169e693262}\u0000",
+            "name": "arrow",
+            "transform": {
+                "type": "Transform",
+                "id": "{f23b1abf-4c3a-4dde-a6e0-10bf123afff6}\u0000",
+                "owner": "{53d0b32c-3292-4211-b6d1-b6169e693262}\u0000",
+                "Position": {
+                    "x": -3.618408203125,
+                    "y": 99.06086730957031,
+                    "z": 274.40234375
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 100.0,
+                    "y": 100.0,
+                    "z": 100.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{1d66998e-d6cb-417d-9b46-6c2c879c5f67}\u0000"
+            },
+            "components": []
+        },
+        {
+            "type": "Entity",
+            "id": "{59bcec35-e5f1-4272-a829-a6b8affb71b3}\u0000",
+            "name": "shield",
+            "transform": {
+                "type": "Transform",
+                "id": "{e113ec82-92ad-40d3-83e5-e6ea78dd66a2}\u0000",
+                "owner": "{59bcec35-e5f1-4272-a829-a6b8affb71b3}\u0000",
+                "Position": {
+                    "x": 54.6083984375,
+                    "y": 388.5063781738281,
+                    "z": -467.0882568359375
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": -90.0
+                },
+                "Scale": {
+                    "x": 100.0,
+                    "y": 100.0,
+                    "z": 100.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": -0.7071067690849304,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{1d66998e-d6cb-417d-9b46-6c2c879c5f67}\u0000"
+            },
+            "components": []
+        },
+        {
+            "type": "Entity",
+            "id": "{9fa41abb-148d-4414-b869-b892cee3e768}\u0000",
+            "name": "Collider",
+            "transform": {
+                "type": "Transform",
+                "id": "{5800d9af-18e4-4ea3-a8d0-a0876884bed7}\u0000",
+                "owner": "{9fa41abb-148d-4414-b869-b892cee3e768}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0008544921875
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{1d66998e-d6cb-417d-9b46-6c2c879c5f67}\u0000"
+            },
+            "components": [
+                "{7120d299-3e0e-4a8b-ad16-f04fb0f65986}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{7120d299-3e0e-4a8b-ad16-f04fb0f65986}\u0000",
+            "owner": "{9fa41abb-148d-4414-b869-b892cee3e768}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 2.700000047683716,
+            "_height": 9.800000190734863,
+            "_depth": 9.399999618530273
+        },
+        {
+            "type": "Entity",
+            "id": "{9b938531-a255-47f6-af94-7706c08c4f02}\u0000",
+            "name": "sword",
+            "transform": {
+                "type": "Transform",
+                "id": "{4dd62335-6bf5-4fac-9a0b-2d2a26cdf6f4}\u0000",
+                "owner": "{9b938531-a255-47f6-af94-7706c08c4f02}\u0000",
+                "Position": {
+                    "x": -0.967041015625,
+                    "y": 458.3816223144531,
+                    "z": 6.1722412109375
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": -90.0
+                },
+                "Scale": {
+                    "x": 100.0,
+                    "y": 100.0,
+                    "z": 100.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": -0.7071067690849304,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{1d66998e-d6cb-417d-9b46-6c2c879c5f67}\u0000"
+            },
+            "components": [
+                "{17dc6252-43e4-49ff-b611-6e3ad7dde11c}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{17dc6252-43e4-49ff-b611-6e3ad7dde11c}\u0000",
+            "owner": "{9b938531-a255-47f6-af94-7706c08c4f02}\u0000",
+            "Material": "res/materials/SampleScene/Sword.mat",
+            "Model": "./res/Models/Modele_Mati/Bron/MieczCaly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{fdbab5db-30da-4356-a295-c502aac69c85}\u0000",
+            "name": "sword",
+            "transform": {
+                "type": "Transform",
+                "id": "{0c7f4a70-632b-4e15-85ed-7b618784e9c4}\u0000",
+                "owner": "{fdbab5db-30da-4356-a295-c502aac69c85}\u0000",
+                "Position": {
+                    "x": 4.131591796875,
+                    "y": 458.3816223144531,
+                    "z": -250.195068359375
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": -90.0
+                },
+                "Scale": {
+                    "x": 100.0,
+                    "y": 100.0,
+                    "z": 100.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": -0.7071067690849304,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{1d66998e-d6cb-417d-9b46-6c2c879c5f67}\u0000"
+            },
+            "components": [
+                "{aa26ce0c-21be-4dd0-a74c-523dd3d7e158}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{aa26ce0c-21be-4dd0-a74c-523dd3d7e158}\u0000",
+            "owner": "{fdbab5db-30da-4356-a295-c502aac69c85}\u0000",
+            "Material": "res/materials/SampleScene/Sword.mat",
+            "Model": "./res/Models/Modele_Mati/Bron/MieczCaly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{a08a7e0a-ca23-4478-90dc-14e6815d8358}\u0000",
+            "name": "bow",
+            "transform": {
+                "type": "Transform",
+                "id": "{2744ea4f-e74e-485f-ad74-a64411d9cbd1}\u0000",
+                "owner": "{a08a7e0a-ca23-4478-90dc-14e6815d8358}\u0000",
+                "Position": {
+                    "x": 25.399658203125,
+                    "y": 410.8468322753906,
+                    "z": -135.9281005859375
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -180.0,
+                    "z": -90.0
+                },
+                "Scale": {
+                    "x": 100.0,
+                    "y": 100.0,
+                    "z": 100.0
+                },
+                "Rotation": {
+                    "x": -0.7071067690849304,
+                    "y": -0.7071067690849304,
+                    "z": 3.0908619663705394e-8,
+                    "w": -3.0908619663705394e-8
+                },
+                "Children": [],
+                "Parent": "{1d66998e-d6cb-417d-9b46-6c2c879c5f67}\u0000"
+            },
+            "components": [
+                "{1667d0a9-8823-4ed0-b1d8-989d5d1650c8}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{1667d0a9-8823-4ed0-b1d8-989d5d1650c8}\u0000",
+            "owner": "{a08a7e0a-ca23-4478-90dc-14e6815d8358}\u0000",
+            "Material": "res/materials/SampleScene/Sword.mat",
+            "Model": "./res/Models/Modele_Mati/Bron/Luk.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{4531f778-3b86-4076-a2b2-82cfe58027b4}\u0000",
+            "name": "arrow",
+            "transform": {
+                "type": "Transform",
+                "id": "{24ed60f1-c1c7-4fca-bb49-c06b3c50b86b}\u0000",
+                "owner": "{4531f778-3b86-4076-a2b2-82cfe58027b4}\u0000",
+                "Position": {
+                    "x": -3.618408203125,
+                    "y": 99.06086730957031,
+                    "z": 41.2928466796875
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 100.0,
+                    "y": 100.0,
+                    "z": 100.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{1d66998e-d6cb-417d-9b46-6c2c879c5f67}\u0000"
+            },
+            "components": [
+                "{3f4d6576-a36e-4094-889a-f565a3f73fda}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{3f4d6576-a36e-4094-889a-f565a3f73fda}\u0000",
+            "owner": "{4531f778-3b86-4076-a2b2-82cfe58027b4}\u0000",
+            "Material": "res/materials/SampleScene/Sword.mat",
+            "Model": "./res/Models/Modele_Mati/Bron/Strzala.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{26daec2e-4a53-4919-865a-d51d0536cdb8}\u0000",
+            "name": "arrow",
+            "transform": {
+                "type": "Transform",
+                "id": "{e85d9eac-7e7b-4fb0-bf13-c4e704f86f8e}\u0000",
+                "owner": "{26daec2e-4a53-4919-865a-d51d0536cdb8}\u0000",
+                "Position": {
+                    "x": -3.618408203125,
+                    "y": 99.06086730957031,
+                    "z": -219.39306640625
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 90.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 100.0,
+                    "y": 100.0,
+                    "z": 100.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.7071067690849304,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{1d66998e-d6cb-417d-9b46-6c2c879c5f67}\u0000"
+            },
+            "components": [
+                "{abe44283-49ce-47c4-abf5-f5f7c70bdcdd}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{abe44283-49ce-47c4-abf5-f5f7c70bdcdd}\u0000",
+            "owner": "{26daec2e-4a53-4919-865a-d51d0536cdb8}\u0000",
+            "Material": "res/materials/SampleScene/Sword.mat",
+            "Model": "./res/Models/Modele_Mati/Bron/Strzala.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{e819224d-d114-4ca9-bfb2-8ef9f7930770}\u0000",
+            "name": "shield",
+            "transform": {
+                "type": "Transform",
+                "id": "{ee4bf11d-605b-4414-b200-5dd80b0cdddd}\u0000",
+                "owner": "{e819224d-d114-4ca9-bfb2-8ef9f7930770}\u0000",
+                "Position": {
+                    "x": 43.193359375,
+                    "y": 388.5063781738281,
+                    "z": 483.9849853515625
+                },
+                "EulerAngles": {
+                    "x": 27.498584747314453,
+                    "y": -2.984914541244507,
+                    "z": -90.0
+                },
+                "Scale": {
+                    "x": 100.0,
+                    "y": 100.0,
+                    "z": 100.0
+                },
+                "Rotation": {
+                    "x": 0.15011470019817352,
+                    "y": -0.18589292466640472,
+                    "z": -0.6822344660758972,
+                    "w": 0.6909888386726379
+                },
+                "Children": [],
+                "Parent": "{1d66998e-d6cb-417d-9b46-6c2c879c5f67}\u0000"
+            },
+            "components": [
+                "{0ac8768b-276d-4837-885b-0b2f2b362775}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{0ac8768b-276d-4837-885b-0b2f2b362775}\u0000",
+            "owner": "{e819224d-d114-4ca9-bfb2-8ef9f7930770}\u0000",
+            "Material": "res/materials/SampleScene/Sword.mat",
+            "Model": "./res/Models/Modele_Mati/Bron/Tarcza.fbx",
+            "CastShadow": true
+        }
+    ]
+}

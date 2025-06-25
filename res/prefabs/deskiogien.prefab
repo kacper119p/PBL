@@ -1,0 +1,182 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{823fc98e-e3dd-4578-98cb-6ab1ef2c270a}\u0000",
+            "name": "deskiogien",
+            "transform": {
+                "type": "Transform",
+                "id": "{8b509c46-2a6e-4716-a6f1-c79e5e3cf811}\u0000",
+                "owner": "{823fc98e-e3dd-4578-98cb-6ab1ef2c270a}\u0000",
+                "Position": {
+                    "x": -23.94925308227539,
+                    "y": 11.300398826599121,
+                    "z": -40.981849670410156
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 120.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.866025447845459,
+                    "z": 0.0,
+                    "w": 0.4999999701976776
+                },
+                "Children": [
+                    "{11205754-da69-426c-a92d-0d3a8263f01a}\u0000",
+                    "{9174ff08-1152-4bcc-b3c3-75a436efdc44}\u0000",
+                    "{0cf07cf1-8695-433a-812d-6f2dd88137c9}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": []
+        },
+        {
+            "type": "Entity",
+            "id": "{36df99cb-e3f4-4b48-9546-ea038ed0911f}\u0000",
+            "name": "deska",
+            "transform": {
+                "type": "Transform",
+                "id": "{11205754-da69-426c-a92d-0d3a8263f01a}\u0000",
+                "owner": "{36df99cb-e3f4-4b48-9546-ea038ed0911f}\u0000",
+                "Position": {
+                    "x": 0.00001621246337890625,
+                    "y": 0.3242015838623047,
+                    "z": -0.000003814697265625
+                },
+                "EulerAngles": {
+                    "x": -90.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 100.0,
+                    "y": 100.0,
+                    "z": 100.0
+                },
+                "Rotation": {
+                    "x": -0.7071067690849304,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{8b509c46-2a6e-4716-a6f1-c79e5e3cf811}\u0000"
+            },
+            "components": [
+                "{42932b0e-d98a-4cbe-8276-d3e3f175e832}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{42932b0e-d98a-4cbe-8276-d3e3f175e832}\u0000",
+            "owner": "{36df99cb-e3f4-4b48-9546-ea038ed0911f}\u0000",
+            "Material": "res/materials/SampleScene/Deska.mat",
+            "Model": "res/models/Modele_Mati/Meble/zestawdesek.fbx",
+            "CastShadow": false
+        },
+        {
+            "type": "Entity",
+            "id": "{d2558b99-4e4f-472e-98df-939068bef347}\u0000",
+            "name": "ogien",
+            "transform": {
+                "type": "Transform",
+                "id": "{9174ff08-1152-4bcc-b3c3-75a436efdc44}\u0000",
+                "owner": "{d2558b99-4e4f-472e-98df-939068bef347}\u0000",
+                "Position": {
+                    "x": -0.0003681182861328125,
+                    "y": -0.4904365539550781,
+                    "z": 0.007488250732421875
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 2.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{8b509c46-2a6e-4716-a6f1-c79e5e3cf811}\u0000"
+            },
+            "components": [
+                "{8515c940-6b0f-46b1-b6b9-04136984bc18}\u0000",
+                "{21bc660a-31b6-4753-9c4a-54769f71049d}\u0000"
+            ]
+        },
+        {
+            "type": "FireParticleEmitter",
+            "id": "{8515c940-6b0f-46b1-b6b9-04136984bc18}\u0000",
+            "owner": "{d2558b99-4e4f-472e-98df-939068bef347}\u0000"
+        },
+        {
+            "type": "PointLight",
+            "id": "{21bc660a-31b6-4753-9c4a-54769f71049d}\u0000",
+            "owner": "{d2558b99-4e4f-472e-98df-939068bef347}\u0000",
+            "Color": {
+                "x": 1000.0,
+                "y": 392.1568603515625,
+                "z": 39.2156867980957
+            },
+            "LinearFalloff": 0.5,
+            "QuadraticFalloff": 2.0,
+            "Range": 400.0
+        },
+        {
+            "type": "Entity",
+            "id": "{f35ecb2b-b8ab-4d6f-823c-2b0543105761}\u0000",
+            "name": "embers",
+            "transform": {
+                "type": "Transform",
+                "id": "{0cf07cf1-8695-433a-812d-6f2dd88137c9}\u0000",
+                "owner": "{f35ecb2b-b8ab-4d6f-823c-2b0543105761}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 2.0,
+                    "y": 1.0,
+                    "z": 2.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{8b509c46-2a6e-4716-a6f1-c79e5e3cf811}\u0000"
+            },
+            "components": [
+                "{82b640bb-b23e-4c3e-bee4-edb72b14db31}\u0000"
+            ]
+        },
+        {
+            "type": "EmbersParticleEmitter",
+            "id": "{82b640bb-b23e-4c3e-bee4-edb72b14db31}\u0000",
+            "owner": "{f35ecb2b-b8ab-4d6f-823c-2b0543105761}\u0000"
+        }
+    ]
+}

@@ -11,7 +11,7 @@ layout (location = 1) out vec3 OcclusionMask;
 layout (early_fragment_tests) in;
 void main()
 {
-    float mask = step(TexCoord.y, Fill);
+    float mask = step(TexCoord.y, Fill - 0.01);
     FragColor = Color * mask;
     OcclusionMask = vec3(0.0);
 }

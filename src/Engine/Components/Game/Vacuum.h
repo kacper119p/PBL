@@ -16,7 +16,7 @@ namespace Engine
     {
     private:
         int volume = 0;
-        int maxVolume = 10;
+        int maxVolume = 20;
 
         int size = 2 * 3;
         float centerSize = 1.5f * 3;
@@ -26,7 +26,7 @@ namespace Engine
         bool isSuccing = false;
         bool isShooting = false;
 
-        int shootForce = 100;
+        float shootForce = 30;
 
         bool wasShootingKeyPressed = false;
         bool isShootingKeyPressed = false;

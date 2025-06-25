@@ -36,16 +36,18 @@ namespace Engine
             boxCollider->SetHeight(6.0f);
             boxCollider->SetWidth(6.0f);
             boxCollider->SetDepth(6.0f);
-            boxCollider->OnCollisionAddListener(SwapTool);
+            boxCollider->collisionMask &= ~(1 << 2);
+            boxCollider->collisionLayer |= (1 << 2);
             // rb settings
-            rb->friction = 0.2f;
-            rb->angularDamping = 0.01f;
-            rb->linearDamping = 0.01f;
-            rb->restitution = 0.3f;
-            rb->SetMass(1.0f);
+            //rb->constraints.freezePositionY = true;
+            rb->friction = 0.3f;
+            rb->angularDamping = 0.03f;
+            rb->linearDamping = 0.03f;
+            rb->restitution = 0.2f;
+            rb->SetMass(5.0f);
             rb->frictionEnabled = true;
             // player start position
-            this->GetTransform()->SetPosition(glm::vec3(0.0f, 6.0f, 0.0f));
+            this->GetTransform()->SetPosition(glm::vec3(-10.0f, 5.0f, 10.0f));
 
             PlayerAnimationManager* playerAnimationManager = PlayerAnimationManager::GetInstance();
             std::vector<Engine::Transform*> children = prefabEntity->GetTransform()->GetChildren();
@@ -232,22 +234,4 @@ namespace Engine
 
     void DefaultPlayer::SetTool(Tool tool) { this->currentTool = tool; }
 
-    void DefaultPlayer::ToolSwapper(Collider* collider)
-    {
-        if (canSwap)
-        {
-            if (collider->GetOwner()->GetName() == "StripperCollider")
-            {
-                SetTool(Tool::Stripper);
-            }
-            else if (collider->GetOwner()->GetName() == "VacuumCollider")
-            {
-                SetTool(Tool::Vacuum);
-            }
-            else if (collider->GetOwner()->GetName() == "BroomCollider")
-            {
-                SetTool(Tool::Broom);
-            }
-        }
-    }
 } // namespace Engine

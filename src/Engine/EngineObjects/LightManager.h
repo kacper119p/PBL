@@ -18,7 +18,7 @@ namespace Engine
     {
     public:
         static constexpr uint8_t MaxDirectionalLights = 1;
-        static constexpr uint8_t MaxPointLights = 8;
+        static constexpr uint8_t MaxPointLights = 128;
         static constexpr uint8_t MaxSpotLights = 2;
         static constexpr uint8_t MaxDirectionalLightsShadowsSupported = 1;
         static constexpr uint8_t MaxPointLightsShadowsSupported = 2;
@@ -31,6 +31,8 @@ namespace Engine
             uint32_t PointLightCount = 0;
             uint32_t SpotlightCount = 0;
             float _padding0{};
+            glm::uvec2 Resolution;
+            float _padding1[2]{};
             DirectionalLight::ShaderData DirectionalLight{};
             PointLight::ShaderData PointLights[2]{};
             SpotLight::ShaderData SpotLights[2]{};
@@ -81,6 +83,8 @@ namespace Engine
         std::vector<glm::vec2> LightsScreenPositionBuffer;
         uint32_t ScreenLightsCount;
 
+        glm::uvec2 Resolution;
+
         static LightManager* Instance;
 
         static constexpr uint32_t DirectionalShadowWidth = 4096;
@@ -89,13 +93,13 @@ namespace Engine
         static constexpr uint32_t OmnidirectionalShadowHeight = 1024;
 
     private:
-        LightManager();
+        LightManager(glm::uvec2 Resolution);
 
     public:
         virtual ~LightManager();
 
     public:
-        static void Initialize();
+        static void Initialize(glm::uvec2 Resolution);
 
     public:
         LightManager(LightManager const&) = delete;

@@ -23,8 +23,6 @@ namespace Engine
         std::string VacuumPath = "./res/prefabs/Vacuum.prefab";
         std::string BroomPath = "./res/prefabs/Broom.prefab";
 
-        Events::TAction<Collider*> SwapTool = Events::TAction<Collider*>(this, &DefaultPlayer::ToolSwapper);
-
         Rigidbody* rb = nullptr;
         MovementComponent* movementComponent = nullptr;
         BoxCollider* boxCollider = nullptr;
@@ -62,7 +60,7 @@ namespace Engine
 
         Tool GetCurrentTool() const { return currentTool; }
 
-        void ToolSwapper(Collider* collider);
+        bool GetCanSwap() const { return canSwap; }
 
         SERIALIZATION_EXPORT_PLAYER(DefaultPlayer)
     };

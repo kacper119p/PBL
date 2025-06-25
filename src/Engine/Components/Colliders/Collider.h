@@ -34,8 +34,9 @@ namespace Engine
     {
 
     protected:
-        bool isStatic;
-        bool isTrigger;
+        bool isStatic = false;
+        bool isTrigger = false;
+        
         glm::ivec2 CurrentCellIndex = glm::ivec2(0, 0); // non-definable by user
         SpatialPartitioning* Spatial;
 
@@ -44,15 +45,17 @@ namespace Engine
         // TODO END
 
     public:
+        /// TODO: move those to protected and add getters + setters
         ColliderTypeE colliderType;
         Events::TEvent<Collider*> OnCollision;
         Events::TEvent<Collider*> OnTrigger;
-        /// TODO: move those to protected and add getters + setters
+        uint32_t collisionLayer = 0xFFFFFFFF; // Default layer: collide with everything
+        uint32_t collisionMask = 0xFFFFFFFF; // Default mask: collide with everything        
         Transform* transform;
         ColliderVisitor colliderVisitor;
         PrimitiveMesh mesh;
         bool isColliding;
-
+        bool skipCollisionSibling = false;
         Collider();
 
 #if EDITOR
@@ -159,9 +162,7 @@ namespace Engine
         float GetRandomFloat(float Min, float Max);
 
 #if EDITOR
-        void DrawImGui() override
-        {
-        };
+        void DrawImGui() override = 0;
 #endif
     };
 

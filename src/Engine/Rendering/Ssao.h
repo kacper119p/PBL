@@ -13,7 +13,7 @@ namespace Engine
     {
     private:
         static constexpr uint8_t KernelSize = 64;
-        static constexpr glm::ivec2 Resolution = glm::ivec2(1920 / 2, 1080 / 2);
+        glm::uvec2 Resolution;
         uint32_t FrameBuffer = 0;
         uint32_t ColorTexture = 0;
         uint32_t NoiseTexture = 0;
@@ -24,9 +24,10 @@ namespace Engine
         int32_t BlurHorizontalBoolLocation = 0;
         int32_t ProjectionMatrixLocation;
         int32_t InverseProjectionMatrixLocation;
+        int32_t ScreenSizeLocation;
 
     public:
-        Ssao();
+        explicit Ssao(glm::uvec2 Resolution);
 
     public:
         ~Ssao();

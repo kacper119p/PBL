@@ -2,20 +2,20 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{ea674b6b-04c5-4a4e-8502-fa31988a08c6}\u0000",
-            "name": "Dzbanek1",
+            "id": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
+            "name": "New Entity",
             "transform": {
                 "type": "Transform",
-                "id": "{b68332a1-7cd4-4a02-9b09-1569b87ca3cc}\u0000",
-                "owner": "{ea674b6b-04c5-4a4e-8502-fa31988a08c6}\u0000",
+                "id": "{3deab416-9c15-44bc-a6e3-2fc0fe356d35}\u0000",
+                "owner": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
                 "Position": {
-                    "x": 16.02110481262207,
-                    "y": 1.5190821886062622,
-                    "z": 18.36220359802246
+                    "x": 0.0,
+                    "y": 1.3093535900115967,
+                    "z": 0.0
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": -0.0,
+                    "y": 0.0,
                     "z": 0.0
                 },
                 "Scale": {
@@ -27,46 +27,46 @@
                     "x": 0.0,
                     "y": 0.0,
                     "z": 0.0,
-                    "w": 1.0
+                    "w": 0.0
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{8f9fd5c9-046b-4309-89e1-2b850e47a4ed}\u0000",
-                "{4ca10f3a-809e-4697-ba8b-9c3234760ae5}\u0000",
-                "{e3eebb36-e1d2-439f-83e3-5505022e0d38}\u0000"
+                "{507ef287-3f3b-4b13-b7a9-719aed7bd1bb}\u0000",
+                "{6ff575c0-5071-4dee-b991-519a341f794e}\u0000",
+                "{0b149841-fc39-4235-a2e2-65c2bc1f9ef2}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{8f9fd5c9-046b-4309-89e1-2b850e47a4ed}\u0000",
-            "owner": "{ea674b6b-04c5-4a4e-8502-fa31988a08c6}\u0000",
-            "Material": "./res/materials/SampleScene/UV6.mat",
-            "Model": "./res/models/Modele_Mati/Naczynia/Dzbanek1.fbx"
+            "id": "{507ef287-3f3b-4b13-b7a9-719aed7bd1bb}\u0000",
+            "owner": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
+            "Material": "res/materials/SampleScene/UV6.mat",
+            "Model": "res/models/Modele_Mati/Naczynia/Dzbanek1.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "CapsuleCollider",
+            "id": "{6ff575c0-5071-4dee-b991-519a341f794e}\u0000",
+            "owner": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 2,
+            "Radius": 0.6399999856948853,
+            "Height": 1.2999999523162842
         },
         {
             "type": "Rigidbody",
-            "id": "{4ca10f3a-809e-4697-ba8b-9c3234760ae5}\u0000",
-            "owner": "{ea674b6b-04c5-4a4e-8502-fa31988a08c6}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
+            "id": "{0b149841-fc39-4235-a2e2-65c2bc1f9ef2}\u0000",
+            "owner": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
+            "mass": 0.5,
+            "inverseMass": 2.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
             "frictionEnabled": true,
             "restitution": 0.10000000149011612
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{e3eebb36-e1d2-439f-83e3-5505022e0d38}\u0000",
-            "owner": "{ea674b6b-04c5-4a4e-8502-fa31988a08c6}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 2.4000000953674316,
-            "_depth": 1.100000023841858
         }
     ]
 }

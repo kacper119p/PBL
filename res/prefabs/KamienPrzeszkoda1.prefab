@@ -2,20 +2,20 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{8d3f99d6-991a-4577-a809-c21cafaadc3c}\u0000",
-            "name": "KamienPrzeszkoda1",
+            "id": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+            "name": "SmallBook",
             "transform": {
                 "type": "Transform",
-                "id": "{a85b154c-b0bd-4fa9-885b-b2bf265bfa6d}\u0000",
-                "owner": "{8d3f99d6-991a-4577-a809-c21cafaadc3c}\u0000",
+                "id": "{32d3fe9b-21e1-4a01-92ed-1df0d76ec010}\u0000",
+                "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
                 "Position": {
-                    "x": -6.560085773468018,
-                    "y": 1.2282638549804688,
-                    "z": 24.972599029541016
+                    "x": 0.0,
+                    "y": 1.2359213829040527,
+                    "z": 0.0
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": -0.0,
+                    "y": 0.0,
                     "z": 0.0
                 },
                 "Scale": {
@@ -33,40 +33,44 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{184a1ac3-5221-4b2a-bc16-ba24f7cad4a9}\u0000",
-                "{b4fee3d3-4d24-4b05-9c67-9cedb48df118}\u0000",
-                "{8570233f-a109-4bbf-89ad-9afb4aed3276}\u0000"
+                "{b0530dcc-b44e-4241-b424-ff0f5be2d50c}\u0000",
+                "{20f82bdd-d1cc-40a4-b142-bc419afb218e}\u0000",
+                "{1e91040a-55e5-404a-9f14-79d3658a2f84}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{184a1ac3-5221-4b2a-bc16-ba24f7cad4a9}\u0000",
-            "owner": "{8d3f99d6-991a-4577-a809-c21cafaadc3c}\u0000",
-            "Material": "./res/materials/SampleScene/UV14.mat",
-            "Model": "./res/Models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx"
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{b4fee3d3-4d24-4b05-9c67-9cedb48df118}\u0000",
-            "owner": "{8d3f99d6-991a-4577-a809-c21cafaadc3c}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
+            "id": "{b0530dcc-b44e-4241-b424-ff0f5be2d50c}\u0000",
+            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+            "Material": "res/materials/SampleScene/UV14.mat",
+            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
-            "id": "{8570233f-a109-4bbf-89ad-9afb4aed3276}\u0000",
-            "owner": "{8d3f99d6-991a-4577-a809-c21cafaadc3c}\u0000",
+            "id": "{20f82bdd-d1cc-40a4-b142-bc419afb218e}\u0000",
+            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
             "isTrigger": false,
             "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 3.4000000953674316,
-            "_height": 1.600000023841858,
-            "_depth": 2.200000047683716
+            "_width": 3.200000047683716,
+            "_height": 1.2699999809265137,
+            "_depth": 1.899999976158142
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{1e91040a-55e5-404a-9f14-79d3658a2f84}\u0000",
+            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+            "mass": 3.0,
+            "inverseMass": 0.3333333432674408,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.3799999952316284,
+            "frictionEnabled": true,
+            "restitution": 0.0560000017285347
         }
     ]
 }

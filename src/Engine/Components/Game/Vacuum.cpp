@@ -47,7 +47,6 @@ namespace Engine
             if (static_cast<float>(glfwGetTime()) - lastSuckToggleTime > shootCooldown)
             {
                 isSuccing = !isSuccing;
-                std::cout << "Vacuum toggled: " << (isSuccing ? "Sucking" : "Not Sucking") << std::endl;
                 isShooting = false;
                 lastSuckToggleTime = static_cast<float>(glfwGetTime());
             }
@@ -56,6 +55,7 @@ namespace Engine
         {
             isShooting = true;
             isSuccing = false;
+            playerAnimationManager->SetVacuumInactiveImmediate();
         }
 
         if (volume >= maxVolume)
@@ -136,13 +136,15 @@ namespace Engine
                     int thrashSizeInt = static_cast<int>(entityCollider->GetOwner()->GetComponent<Thrash>()->GetSize());
                     if (volume + thrashSizeInt <= maxVolume)
                     {
-                        glm::vec3 direction = position + forward * (size / 2.0f + 0.01f) - entityCollider->GetOwner()->
-                                              GetTransform()->GetPosition();
                         if (entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>())
+                        {
+                            glm::vec3 direction = position + forward * (size / 2.0f + 0.01f) -
+                                                  entityCollider->GetOwner()->GetTransform()->GetPosition();
                             entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->AddForce(
                                     direction, Engine::ForceMode::Force);
-                        if (thrashSizeInt == 10)
-                            playerAnimationManager->SuckBigObject();
+                            if (thrashSizeInt == 10)
+                                playerAnimationManager->SuckBigObject();
+                        }
                     }
                 }
 
@@ -273,7 +275,7 @@ namespace Engine
             if (rb)
                 rb->AddForce(forward * 100.0f * float(itemSize), Engine::ForceMode::Force);
 
-            if (itemSize == 10)
+            if (itemSize == 20)
                 PlayerAnimationManager::GetInstance()->ShootBigObject();
 
             PlayerAnimationManager::GetInstance()->PlayVacuumShotVfx();
@@ -303,6 +305,10 @@ namespace Engine
         else if (fill < 0.75f)
         {
             material->SetEmissiveColor(glm::vec3(10.0f, 8.0f, 0.0f));
+        }
+        else if (fill < 0.99f)
+        {
+            material->SetEmissiveColor(glm::vec3(10.0f, 1.0f, 0.0f));
         }
         else
         {

@@ -2,20 +2,20 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{cf9e91ad-5ce4-4875-9392-8b8a09bcae86}\u0000",
-            "name": "RegalNiski",
+            "id": "{d3527566-02ec-42ec-8b43-a8668daa26d5}\u0000",
+            "name": "New Entity",
             "transform": {
                 "type": "Transform",
-                "id": "{9d275cd9-c8b3-425e-9573-043d697c8d12}\u0000",
-                "owner": "{cf9e91ad-5ce4-4875-9392-8b8a09bcae86}\u0000",
+                "id": "{bdf2f9bb-3dd7-416f-aee5-bb6d8e1553e3}\u0000",
+                "owner": "{d3527566-02ec-42ec-8b43-a8668daa26d5}\u0000",
                 "Position": {
-                    "x": -48.577911376953125,
-                    "y": 2.256960391998291,
-                    "z": 25.939550399780273
+                    "x": 0.0,
+                    "y": 2.3012843132019043,
+                    "z": -3.8658242225646973
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": -0.0,
+                    "y": 0.0,
                     "z": 0.0
                 },
                 "Scale": {
@@ -33,40 +33,44 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{73d0d32e-ae4e-4688-8cc3-9e600cbb94b9}\u0000",
-                "{91939144-88a5-4ed5-ae88-50123c31ca68}\u0000",
-                "{f1e6a90b-6a82-4321-b68b-ec2fb86e3e22}\u0000"
+                "{59dd9299-254c-4157-b0ac-729f8103fd35}\u0000",
+                "{db106eff-0439-487e-bf91-8b653f24481a}\u0000",
+                "{d275517c-ca69-42a4-8153-b6685468904d}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{73d0d32e-ae4e-4688-8cc3-9e600cbb94b9}\u0000",
-            "owner": "{cf9e91ad-5ce4-4875-9392-8b8a09bcae86}\u0000",
-            "Material": "./res/materials/SampleScene/UV2.mat",
-            "Model": "./res/models/Modele_Mati/Meble/RegalNiski.fbx"
+            "id": "{59dd9299-254c-4157-b0ac-729f8103fd35}\u0000",
+            "owner": "{d3527566-02ec-42ec-8b43-a8668daa26d5}\u0000",
+            "Material": "res/materials/SampleScene/UV2.mat",
+            "Model": "res/models/Modele_Mati/Meble/RegalNiski_LP.fbx",
+            "CastShadow": true
         },
         {
             "type": "BoxCollider",
-            "id": "{91939144-88a5-4ed5-ae88-50123c31ca68}\u0000",
-            "owner": "{cf9e91ad-5ce4-4875-9392-8b8a09bcae86}\u0000",
+            "id": "{db106eff-0439-487e-bf91-8b653f24481a}\u0000",
+            "owner": "{d3527566-02ec-42ec-8b43-a8668daa26d5}\u0000",
             "isTrigger": false,
-            "isStatic": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967291,
             "colliderType": 0,
             "_width": 2.5,
-            "_height": 3.799999952316284,
-            "_depth": 6.599999904632568
+            "_height": 3.299999952316284,
+            "_depth": 6.300000190734863
         },
         {
             "type": "Rigidbody",
-            "id": "{f1e6a90b-6a82-4321-b68b-ec2fb86e3e22}\u0000",
-            "owner": "{cf9e91ad-5ce4-4875-9392-8b8a09bcae86}\u0000",
-            "mass": 1.6100002527236938,
-            "inverseMass": 0.621117889881134,
-            "linearDamping": 0.0,
+            "id": "{d275517c-ca69-42a4-8153-b6685468904d}\u0000",
+            "owner": "{d3527566-02ec-42ec-8b43-a8668daa26d5}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.20200000703334808,
             "angularDamping": 0.0,
-            "friction": 0.29600000381469727,
+            "friction": 0.20000000298023224,
             "frictionEnabled": true,
-            "restitution": 0.21899999678134918
+            "restitution": 0.10000000149011612
         }
     ]
 }

@@ -56,7 +56,7 @@ namespace Materials
                 "./res/shaders/DefaultDepth/DefaultDepth.frag"));
         MainPass = Shaders::ShaderManager::GetShader(
                 Shaders::ShaderSourceFiles("./res/shaders/PBR/PBRAnimated.vert", nullptr,
-                                           "./res/shaders/PBR/PBR.frag"));
+                                           "./res/shaders/PBR/PBRAnimated.frag"));
         DirectionalShadowPass = Shaders::ShaderManager::GetShader(Shaders::ShaderSourceFiles(
                 "./res/shaders/PBR/PBRAnimated.vert", nullptr,
                 "./res/shaders/Common/BasicShadowPass/DirectionalLight.frag"));

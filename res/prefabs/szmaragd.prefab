@@ -1,0 +1,83 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
+            "name": "swieczka1",
+            "transform": {
+                "type": "Transform",
+                "id": "{79076f10-fc9f-43d0-ad05-c03abdb7619b}\u0000",
+                "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 1.1524142026901245,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 2.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{60d52f02-6524-4499-b50e-1eaa15f2a451}\u0000",
+                "{f739f587-ddeb-44b7-b5de-18b65e1ec0f4}\u0000",
+                "{b0a37001-3bbd-4e6a-95e6-389917b06919}\u0000",
+                "{5218ca14-0545-4a16-9d40-924ee4bba9a3}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{60d52f02-6524-4499-b50e-1eaa15f2a451}\u0000",
+            "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
+            "Material": "res/materials/SampleScene/drogikamien.mat",
+            "Model": "res/models/Modele_Mati/Kosztownosci/kamienSzmaragsd.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{f739f587-ddeb-44b7-b5de-18b65e1ec0f4}\u0000",
+            "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.2999999523162842,
+            "_height": 0.3499999940395355,
+            "_depth": 0.699999988079071
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{b0a37001-3bbd-4e6a-95e6-389917b06919}\u0000",
+            "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Thrash",
+            "id": "{5218ca14-0545-4a16-9d40-924ee4bba9a3}\u0000",
+            "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
+            "size": 1
+        }
+    ]
+}

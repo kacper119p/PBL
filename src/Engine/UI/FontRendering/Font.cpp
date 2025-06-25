@@ -25,7 +25,7 @@ namespace Engine::Ui
 
         CHECK_MESSAGE(document.IsObject() && document.HasMember("glyphs"), "Invalid format.");
 
-        LineHeight = document["metrics"]["lineHeight"].GetFloat();
+        LineHeight = document["metrics"]["lineHeight"].GetFloat() * 2.0f;
 
         rapidjson::GenericArray glyphsJson = document["glyphs"].GetArray();
 
@@ -41,7 +41,8 @@ namespace Engine::Ui
             {
                 const rapidjson::Value& planeBounds = planeBoundsIterator->value.GetObj();
                 horizontalPlaneBounds = glm::vec2(planeBounds["left"].GetFloat(), planeBounds["right"].GetFloat());
-                verticalPlaneBounds = glm::vec2(-planeBounds["bottom"].GetFloat(), -planeBounds["top"].GetFloat());
+                verticalPlaneBounds = glm::vec2(-planeBounds["bottom"].GetFloat(),
+                                                -planeBounds["top"].GetFloat() * 2.0f);
             }
 
             glm::vec2 horizontalAtlasBounds(0.0f, 0.0f);

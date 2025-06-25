@@ -109,7 +109,6 @@ namespace Engine::Ui
             ++j;
         }
 
-
         glGenVertexArrays(1, &VertexArray);
         glGenBuffers(1, &VertexBuffer);
         glBindVertexArray(VertexArray);

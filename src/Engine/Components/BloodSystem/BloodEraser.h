@@ -28,6 +28,7 @@ namespace Engine
 
         void Start() override;
 
+        void OnDestroy() override;
 #if EDITOR
 
     public:

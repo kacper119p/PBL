@@ -19,7 +19,7 @@ namespace Engine
         Shaders::Shader BlendShader;
 
     public:
-        GodRays();
+        explicit GodRays(glm::uvec2 Resolution);
 
     public:
         ~GodRays();
