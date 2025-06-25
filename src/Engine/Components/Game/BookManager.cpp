@@ -186,7 +186,9 @@ namespace Engine
 
             endRot = glm::quat(glm::radians((rand() % 2 == 0) ? glm::vec3(0, -90, 0) : glm::vec3(0, 90, 0)));
         }
-        else if (itemType == ItemType::Coin && name.find("Coin") != std::string::npos)
+        else if (itemType == ItemType::Coin &&
+                 (name.find("Coin") != std::string::npos || name.find("rubin") != std::string::npos ||
+                  name.find("szafir") != std::string::npos || name.find("szmaragd") != std::string::npos))
         {
             if (item->GetComponent<Rigidbody>())
             {
