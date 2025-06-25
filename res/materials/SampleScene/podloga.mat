@@ -1,5 +1,5 @@
 {
-    "type": "PbrMaterial",
+    "type": "FloorMaterial",
     "BaseMap": "res/textures/Tekstury_Mati/UV27/BaseMap.dds",
     "RoughnessMetallicMap": "res/textures/Tekstury_Mati/UV27/RMAOMap.dds",
     "NormalMap": "res/textures/Tekstury_Mati/UV27/NormalMap.dds",
