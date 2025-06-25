@@ -19,7 +19,9 @@ namespace Engine
 
         glGenTextures(1, &OutputTexture);
         glBindTexture(GL_TEXTURE_2D, OutputTexture);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_R11F_G11F_B10F, Resolution.x, Resolution.y, 0, GL_RGB, GL_FLOAT, nullptr);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_R11F_G11F_B10F,
+                     static_cast<GLsizei>(Resolution.x / 2), static_cast<GLsizei>(Resolution.y / 2),
+                     0, GL_RGB, GL_FLOAT, nullptr);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
