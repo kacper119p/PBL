@@ -1,0 +1,19 @@
+{
+    "type": "PbrMaterial",
+    "BaseMap": "res/textures/Tekstury_Mati/UV13/BaseMap.dds",
+    "RoughnessMetallicMap": "res/textures/Tekstury_Mati/UV13/RMAOMap.dds",
+    "NormalMap": "res/textures/Tekstury_Mati/UV13/NormalMap.dds",
+    "EmissiveMap": "res/textures/Tekstury_Mati/UV13/EmissiveMap.dds",
+    "Roughness": 0.0,
+    "Metallic": 0.0,
+    "BaseColor": {
+        "x": 1.9607843160629272,
+        "y": 1.9607843160629272,
+        "z": 1.9607843160629272
+    },
+    "EmissiveColor": {
+        "x": 3.9215686321258545,
+        "y": 1.9607843160629272,
+        "z": 0.7843137383460999
+    }
+}

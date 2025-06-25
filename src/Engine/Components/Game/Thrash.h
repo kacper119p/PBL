@@ -19,8 +19,14 @@ namespace Engine
     enum ThrashSize
     {
         Small = 1,
+        Book = 2,
+        Coin = 3,
+        Arrow = 4,
         Medium = 5,
-        Large = 10
+        Bow = 6,
+        Sword = 10,
+        Shield = 19,
+        Large = 20
     };
 
     class Thrash : public Component
@@ -32,16 +38,38 @@ namespace Engine
     public:
         Thrash() = default;
         ~Thrash() override = default;
-        ThrashSize GetSize() const { return size; }
+        ThrashSize GetSize() const 
+        { 
+            return (size == ThrashSize::Coin) ? ThrashSize::Small : size; 
+        }
         void SetSize(ThrashSize newSize) { size = newSize; }
         void Start() override;
         
         void OnDestroy() override 
         {
-            ThrashManager::GetInstance()->RemoveThrash(this);
+            if (size == ThrashSize::Coin)
+            {
+                ThrashManager::GetInstance()->RemoveCoin(GetOwner());
+                ThrashManager::GetInstance()->RemoveCleanedUpCoin(GetOwner());
+            }
+            else if (size == ThrashSize::Book)
+            {
+                ThrashManager::GetInstance()->RemoveBook(GetOwner());
+                ThrashManager::GetInstance()->RemoveCleanedUpBook(GetOwner());
+            }
+            else if (size == ThrashSize::Arrow || size == ThrashSize::Bow || size == ThrashSize::Shield || size == ThrashSize::Sword)
+            {
+                ThrashManager::GetInstance()->RemoveWeapon(GetOwner());
+                ThrashManager::GetInstance()->RemoveCleanedUpWeapon(GetOwner());
+            }
+            else
+            {
+                ThrashManager::GetInstance()->RemoveThrash(this);
+            }
         }
 
-        void DeleteThrash(Collider* collider);
+        void DeleteThrash(Collider* collider); 
+
 
         SERIALIZATION_EXPORT_CLASS(Thrash);
 

@@ -8,7 +8,9 @@ namespace Engine
     {
         collider = GetOwner()->GetComponent<Collider>();
         collider->OnCollisionAddListener(ThrowOut);
-        ThrashManager::GetInstance()->AddFurniture(this);
+        
+            ThrashManager::GetInstance()->AddFurniture(this);
+        
     }
 
     void Furniture::OnDestroy() 
@@ -16,8 +18,8 @@ namespace Engine
         if (collider)
         {
             collider->OnCollisionRemoveListener(ThrowOut);
+            ThrashManager::GetInstance()->RemoveFurniture(this);
         }
-        ThrashManager::GetInstance()->RemoveFurniture(this);
     }
 
     void Furniture::DeleteFurniture(Collider* collider) 
@@ -25,7 +27,7 @@ namespace Engine
         if (collider->GetOwner()->GetName() == "ThrashCan")
         {
             GetOwner()->GetScene()->DeleteEntity(GetOwner());
-            ThrashManager::GetInstance()->RemoveFurniture(this);
+                ThrashManager::GetInstance()->RemoveFurniture(this);
         }
     }
     #if EDITOR

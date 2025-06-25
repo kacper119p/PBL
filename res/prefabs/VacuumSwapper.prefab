@@ -2,12 +2,12 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{bafd7ff7-db7c-4dcf-b223-2492a283fcb9}\u0000",
+            "id": "{3eeb715e-99a4-48cb-979c-4916e753c3f2}\u0000",
             "name": "VacuumSwapper",
             "transform": {
                 "type": "Transform",
-                "id": "{f89ea3d3-e8cd-4876-b7ff-24e1cae98b11}\u0000",
-                "owner": "{bafd7ff7-db7c-4dcf-b223-2492a283fcb9}\u0000",
+                "id": "{3f065eed-d317-4c33-8b82-e41e4ca46c90}\u0000",
+                "owner": "{3eeb715e-99a4-48cb-979c-4916e753c3f2}\u0000",
                 "Position": {
                     "x": 1.5,
                     "y": 0.0,
@@ -30,18 +30,26 @@
                     "w": 0.7071064710617065
                 },
                 "Children": [],
-                "Parent": "{c3bdb271-81b0-4c2c-a55b-dfde43906d96}\u0000"
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{83409766-382c-4141-a3b4-15b23a7bb279}\u0000"
+                "{d6b354dc-b8d5-47f4-9e85-bd23756f79d2}\u0000"
             ]
         },
         {
-            "type": "ModelRenderer",
-            "id": "{83409766-382c-4141-a3b4-15b23a7bb279}\u0000",
-            "owner": "{bafd7ff7-db7c-4dcf-b223-2492a283fcb9}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Granny/Odkurzacz.fbx"
+            "type": "OutlinedModelRenderer",
+            "id": "{d6b354dc-b8d5-47f4-9e85-bd23756f79d2}\u0000",
+            "owner": "{3eeb715e-99a4-48cb-979c-4916e753c3f2}\u0000",
+            "Material": "./res/materials/SampleScene/Tools.mat",
+            "Model": "./res/Models/Granny/Odkurzacz.fbx",
+            "CastShadow": true,
+            "Color": {
+                "x": 10.0,
+                "y": 9.803921699523926,
+                "z": 8.823529243469238
+            },
+            "OutlineSize": 0.009999999776482582,
+            "Active": true
         }
     ]
 }

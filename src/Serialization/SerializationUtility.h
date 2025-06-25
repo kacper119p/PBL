@@ -116,7 +116,7 @@ namespace Serialization
     rapidjson::Value Serialize(const E Value, rapidjson::Document::AllocatorType& Allocator)
     {
         rapidjson::Value object(rapidjson::kNumberType);
-        object.SetInt(Value);
+        object.SetInt(static_cast<int>(Value));
         return object;
     }
 

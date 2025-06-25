@@ -2,21 +2,21 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{e1ffc2c5-dc14-4d27-b0ea-b73708d9e240}\u0000",
-            "name": "Studzxienkaww",
+            "id": "{8767a542-15ad-48e2-a44a-f03384e92728}\u0000",
+            "name": "Studzienka",
             "transform": {
                 "type": "Transform",
-                "id": "{28774810-eb3e-4702-80ea-139d18c51aa4}\u0000",
-                "owner": "{e1ffc2c5-dc14-4d27-b0ea-b73708d9e240}\u0000",
+                "id": "{d0da8b9d-2ad6-4526-8691-dee0d368c9f1}\u0000",
+                "owner": "{8767a542-15ad-48e2-a44a-f03384e92728}\u0000",
                 "Position": {
-                    "x": 12.80373764038086,
-                    "y": 0.968400239944458,
-                    "z": 17.98369598388672
+                    "x": -2.45086407661438,
+                    "y": 0.3143124580383301,
+                    "z": 10.252395629882813
                 },
                 "EulerAngles": {
-                    "x": 1.0630857766357263e-13,
-                    "y": -38.026268005371094,
-                    "z": 6.443863753702317e-7
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
                 },
                 "Scale": {
                     "x": 1.0,
@@ -24,24 +24,75 @@
                     "z": 1.0
                 },
                 "Rotation": {
-                    "x": 1.831997553658482e-9,
-                    "y": -0.3257848918437958,
-                    "z": 5.31654542612614e-9,
-                    "w": 0.9454439282417297
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
                 },
-                "Children": [],
+                "Children": [
+                    "{11affe84-ee04-45b7-8c2b-504a84087999}\u0000"
+                ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{ecfda86e-90a9-46d5-ae03-f468fbe60ea3}\u0000"
+                "{612769df-becb-46d8-9b15-6400836aba79}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{ecfda86e-90a9-46d5-ae03-f468fbe60ea3}\u0000",
-            "owner": "{e1ffc2c5-dc14-4d27-b0ea-b73708d9e240}\u0000",
-            "Material": "./res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Modele_Mati/Otoczenie/Studzienka.fbx"
+            "id": "{612769df-becb-46d8-9b15-6400836aba79}\u0000",
+            "owner": "{8767a542-15ad-48e2-a44a-f03384e92728}\u0000",
+            "Material": "res/materials/SampleScene/studzienka.mat",
+            "Model": "res/models/Modele_Mati/Otoczenie/Podloga_Dziura.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{fedea65f-7e4e-4927-b1c9-ea51fef0ceda}\u0000",
+            "name": "colliderDisabler",
+            "transform": {
+                "type": "Transform",
+                "id": "{11affe84-ee04-45b7-8c2b-504a84087999}\u0000",
+                "owner": "{fedea65f-7e4e-4927-b1c9-ea51fef0ceda}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": -1.8748266696929932,
+                    "z": -0.5754928588867188
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{d0da8b9d-2ad6-4526-8691-dee0d368c9f1}\u0000"
+            },
+            "components": [
+                "{39c79ae2-4f88-441c-b518-4244b34a48d1}\u0000"
+            ]
+        },
+        {
+            "type": "SphereCollider",
+            "id": "{39c79ae2-4f88-441c-b518-4244b34a48d1}\u0000",
+            "owner": "{fedea65f-7e4e-4927-b1c9-ea51fef0ceda}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 1,
+            "radius": 4.099999904632568
         }
     ]
 }

@@ -1,0 +1,165 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{f2296811-a45e-4b19-9a81-2e6b3e79cc2f}\u0000",
+            "name": "GoldDigger",
+            "transform": {
+                "type": "Transform",
+                "id": "{d106f882-2206-4bc3-968f-7598276573a9}\u0000",
+                "owner": "{f2296811-a45e-4b19-9a81-2e6b3e79cc2f}\u0000",
+                "Position": {
+                    "x": -30.170122146606445,
+                    "y": 0.990814208984375,
+                    "z": -28.7468318939209
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [
+                    "{c627c9eb-2f04-4dc3-9ff1-26e13facffff}\u0000",
+                    "{b6df018a-d480-41b8-ba29-ce18770bc5d1}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{42f1f159-4332-4390-b97c-bb52d47b9fc0}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{42f1f159-4332-4390-b97c-bb52d47b9fc0}\u0000",
+            "owner": "{f2296811-a45e-4b19-9a81-2e6b3e79cc2f}\u0000",
+            "Material": "res/materials/SampleScene/KotlarzOtwarty.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/KotlarzZamkniety.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{4284abc4-3ca2-446f-91a1-65760faa6bb5}\u0000",
+            "name": "Collider",
+            "transform": {
+                "type": "Transform",
+                "id": "{c627c9eb-2f04-4dc3-9ff1-26e13facffff}\u0000",
+                "owner": "{4284abc4-3ca2-446f-91a1-65760faa6bb5}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{d106f882-2206-4bc3-968f-7598276573a9}\u0000"
+            },
+            "components": [
+                "{2ebf1488-e6ce-40c4-b77b-0da6a6e5c138}\u0000"
+            ]
+        },
+        {
+            "type": "CapsuleCollider",
+            "id": "{2ebf1488-e6ce-40c4-b77b-0da6a6e5c138}\u0000",
+            "owner": "{4284abc4-3ca2-446f-91a1-65760faa6bb5}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 2,
+            "collisionMask": 4294967167,
+            "colliderType": 2,
+            "Radius": 1.7999999523162842,
+            "Height": 0.20000000298023224
+        },
+        {
+            "type": "Entity",
+            "id": "{cb8df018-aaa1-44a4-bdaf-9122ea302f87}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{b6df018a-d480-41b8-ba29-ce18770bc5d1}\u0000",
+                "owner": "{cb8df018-aaa1-44a4-bdaf-9122ea302f87}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.5453119277954102,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.30000001192092896,
+                    "y": 0.30000001192092896,
+                    "z": 0.30000001192092896
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{d106f882-2206-4bc3-968f-7598276573a9}\u0000"
+            },
+            "components": [
+                "{998edfdb-f636-41ce-9931-e4f5dc4e5404}\u0000",
+                "{0858d041-809d-45cc-b071-88ee880d5087}\u0000"
+            ]
+        },
+        {
+            "type": "SphereCollider",
+            "id": "{998edfdb-f636-41ce-9931-e4f5dc4e5404}\u0000",
+            "owner": "{cb8df018-aaa1-44a4-bdaf-9122ea302f87}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4,
+            "collisionMask": 4294967168,
+            "colliderType": 1,
+            "radius": 6.0
+        },
+        {
+            "type": "BookManager",
+            "id": "{0858d041-809d-45cc-b071-88ee880d5087}\u0000",
+            "owner": "{cb8df018-aaa1-44a4-bdaf-9122ea302f87}\u0000",
+            "bookWidth": 0.20000000298023224,
+            "bookDepth": 0.05000000074505806,
+            "bookHeight": 0.30000001192092896,
+            "bookMargin": 0.019999999552965164,
+            "sidePadding": 0.05000000074505806,
+            "backPadding": 0.029999999329447746,
+            "itemType": 1,
+            "swordPlacementPoint": null,
+            "bowPlacementPoint": null,
+            "arrowPlacementPoint": null,
+            "shieldPlacementPoint": null
+        }
+    ]
+}

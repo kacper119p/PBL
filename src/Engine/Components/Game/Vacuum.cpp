@@ -47,7 +47,6 @@ namespace Engine
             if (static_cast<float>(glfwGetTime()) - lastSuckToggleTime > shootCooldown)
             {
                 isSuccing = !isSuccing;
-                std::cout << "Vacuum toggled: " << (isSuccing ? "Sucking" : "Not Sucking") << std::endl;
                 isShooting = false;
                 lastSuckToggleTime = static_cast<float>(glfwGetTime());
             }
@@ -121,12 +120,15 @@ namespace Engine
                     int thrashSizeInt = static_cast<int>(entityCollider->GetOwner()->GetComponent<Thrash>()->GetSize());
                     if (volume + thrashSizeInt <= maxVolume)
                     {
-                        glm::vec3 direction = position + forward * (size / 2.0f + 0.01f) - entityCollider->GetOwner()->
-                                              GetTransform()->GetPosition();
-                        entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->AddForce(
-                                direction, Engine::ForceMode::Force);
-                        if (thrashSizeInt == 10)
-                            playerAnimationManager->SuckBigObject();
+                        if (entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>())
+                        {
+                            glm::vec3 direction = position + forward * (size / 2.0f + 0.01f) -
+                                                  entityCollider->GetOwner()->GetTransform()->GetPosition();
+                            entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->AddForce(
+                                    direction, Engine::ForceMode::Force);
+                            if (thrashSizeInt == 10)
+                                playerAnimationManager->SuckBigObject();
+                        }
                     }
                 }
             }
@@ -140,12 +142,15 @@ namespace Engine
                     int thrashSizeInt = static_cast<int>(entityCollider->GetOwner()->GetComponent<Thrash>()->GetSize());
                     if (volume + thrashSizeInt <= maxVolume)
                     {
-                        items.push_back(entityCollider->GetOwner());
-                        volume += thrashSizeInt;
-                        UpdateFillIndicator();
-                        entityCollider->GetOwner()->GetComponent<Engine::BoxCollider>()->SetTrigger(true);
-                        entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->hasGravity = false;
-                        entityCollider->GetOwner()->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
+                        if (entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>())
+                        {
+                            items.push_back(entityCollider->GetOwner());
+                            volume += thrashSizeInt;
+                            UpdateFillIndicator();
+                            entityCollider->GetOwner()->GetComponent<Engine::BoxCollider>()->SetTrigger(true);
+                            entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->hasGravity = false;
+                            entityCollider->GetOwner()->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
+                        }
                     }
                 }
             }
@@ -174,10 +179,9 @@ namespace Engine
             item->GetTransform()->SetPosition((position + forward * (size + 0.5f)));
             item->GetComponent<Engine::Rigidbody>()->angularVelocity.y = 0.0f;
             item->GetComponent<Engine::Rigidbody>()->hasGravity = true;
-            item->GetComponent<Engine::Rigidbody>()->AddForce(forward * 100.0f * float(thrashSizeInt),
-                                                              Engine::ForceMode::Force);
+            item->GetComponent<Engine::Rigidbody>()->AddForce(forward * shootForce * float(thrashSizeInt), Engine::ForceMode::Force);
 
-            if (thrashSizeInt == 10)
+            if (thrashSizeInt == 20)
                 PlayerAnimationManager::GetInstance()->ShootBigObject();
 
             PlayerAnimationManager::GetInstance()->PlayVacuumShotVfx();

@@ -1,0 +1,750 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{95797c21-89e4-4c94-a180-eae125409a9e}\u0000",
+            "name": "KotlarzZ",
+            "transform": {
+                "type": "Transform",
+                "id": "{eaef549f-d793-4dbd-a3cb-835a4d5ce6f7}\u0000",
+                "owner": "{95797c21-89e4-4c94-a180-eae125409a9e}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 1.229279637336731,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [
+                    "{57c4d059-f691-4b40-93f1-0b6bcc38e5a3}\u0000",
+                    "{8e066139-8cae-4934-b1eb-2bb8121e7702}\u0000",
+                    "{a2b473b7-2e37-4d41-8098-c60f8051afed}\u0000",
+                    "{8418107a-1e25-45bc-9e33-27b8b1698c64}\u0000",
+                    "{d8e0ddc7-a7e1-4a88-8db6-f112aa402492}\u0000",
+                    "{8cab9563-fce3-4383-9553-098720e2de1a}\u0000",
+                    "{e8302563-7e63-43a1-973e-60a9515c5976}\u0000",
+                    "{af731511-8238-453f-9651-f4754f317967}\u0000",
+                    "{2453fc5a-61b7-42b0-840c-282e48f2aa8a}\u0000",
+                    "{f92ccd09-beb9-44a3-acae-078aef777269}\u0000",
+                    "{054445c6-39bc-49a5-bccc-8273677228d8}\u0000",
+                    "{71baf8e3-b19b-4f2b-b0f8-26b5b25b439b}\u0000",
+                    "{1edb1f0a-90ca-413f-9093-5a78e7e6523b}\u0000",
+                    "{d2b41fca-8994-4765-93ac-3a3be67b2b2f}\u0000",
+                    "{2f56b3e4-6bde-4a3a-af3c-8da6f47b1099}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{e5bf313c-6e8e-428c-a1ac-1065f54ecfa7}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{e5bf313c-6e8e-428c-a1ac-1065f54ecfa7}\u0000",
+            "owner": "{95797c21-89e4-4c94-a180-eae125409a9e}\u0000",
+            "Material": "res/materials/SampleScene/KotlarzOtwarty.mat",
+            "Model": "res/models/Modele_Mati/Meble/KotlarzZamkniety.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{93a446af-0427-4a79-aa16-9e39d1dfd274}\u0000",
+            "name": "firestone",
+            "transform": {
+                "type": "Transform",
+                "id": "{57c4d059-f691-4b40-93f1-0b6bcc38e5a3}\u0000",
+                "owner": "{93a446af-0427-4a79-aa16-9e39d1dfd274}\u0000",
+                "Position": {
+                    "x": -0.6423564553260803,
+                    "y": 0.5568902492523193,
+                    "z": 0.26378756761550903
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 32.37423324584961,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.20000000298023224,
+                    "y": 0.20000000298023224,
+                    "z": 0.30000001192092896
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.278775155544281,
+                    "z": 0.0,
+                    "w": 0.9603564143180847
+                },
+                "Children": [],
+                "Parent": "{eaef549f-d793-4dbd-a3cb-835a4d5ce6f7}\u0000"
+            },
+            "components": [
+                "{ce811f9c-a28c-407f-b906-ddd9f0176802}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{ce811f9c-a28c-407f-b906-ddd9f0176802}\u0000",
+            "owner": "{93a446af-0427-4a79-aa16-9e39d1dfd274}\u0000",
+            "Material": "res/materials/SampleScene/FireStone.mat",
+            "Model": "./res/Models/SphereLowPoly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{ca494f69-2d39-4a20-8a05-977fc1fa1a09}\u0000",
+            "name": "firesphere",
+            "transform": {
+                "type": "Transform",
+                "id": "{8e066139-8cae-4934-b1eb-2bb8121e7702}\u0000",
+                "owner": "{ca494f69-2d39-4a20-8a05-977fc1fa1a09}\u0000",
+                "Position": {
+                    "x": 0.278538316488266,
+                    "y": 0.5568902492523193,
+                    "z": -0.5937700271606445
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 74.50385284423828,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.4000000059604645,
+                    "y": 0.4000000059604645,
+                    "z": 0.5600000023841858
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.6053207516670227,
+                    "z": 0.0,
+                    "w": 0.7959816455841064
+                },
+                "Children": [],
+                "Parent": "{eaef549f-d793-4dbd-a3cb-835a4d5ce6f7}\u0000"
+            },
+            "components": [
+                "{58eb6a1c-d988-4715-ad92-5bd3b0ff02b4}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{58eb6a1c-d988-4715-ad92-5bd3b0ff02b4}\u0000",
+            "owner": "{ca494f69-2d39-4a20-8a05-977fc1fa1a09}\u0000",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
+            "Model": "./res/Models/SphereLowPoly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{953bf995-36a4-427d-8c6e-474107e80cb5}\u0000",
+            "name": "firestone",
+            "transform": {
+                "type": "Transform",
+                "id": "{a2b473b7-2e37-4d41-8098-c60f8051afed}\u0000",
+                "owner": "{953bf995-36a4-427d-8c6e-474107e80cb5}\u0000",
+                "Position": {
+                    "x": 0.28372055292129517,
+                    "y": 0.46002018451690674,
+                    "z": 0.08790138363838196
+                },
+                "EulerAngles": {
+                    "x": 12.705118179321289,
+                    "y": -19.051311492919922,
+                    "z": -5.1915364265441895
+                },
+                "Scale": {
+                    "x": 0.30000001192092896,
+                    "y": 0.30000001192092896,
+                    "z": 0.4000000059604645
+                },
+                "Rotation": {
+                    "x": 0.1015595942735672,
+                    "y": -0.16924630105495453,
+                    "z": -0.026098547503352165,
+                    "w": 0.9799796938896179
+                },
+                "Children": [],
+                "Parent": "{eaef549f-d793-4dbd-a3cb-835a4d5ce6f7}\u0000"
+            },
+            "components": [
+                "{8ce7e7dd-d644-49f4-ba94-da75ce60b3eb}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{8ce7e7dd-d644-49f4-ba94-da75ce60b3eb}\u0000",
+            "owner": "{953bf995-36a4-427d-8c6e-474107e80cb5}\u0000",
+            "Material": "res/materials/SampleScene/FireStone.mat",
+            "Model": "./res/Models/SphereLowPoly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{71b39681-e684-42ec-a667-908659e2c165}\u0000",
+            "name": "wegiel",
+            "transform": {
+                "type": "Transform",
+                "id": "{8418107a-1e25-45bc-9e33-27b8b1698c64}\u0000",
+                "owner": "{71b39681-e684-42ec-a667-908659e2c165}\u0000",
+                "Position": {
+                    "x": 0.7648077607154846,
+                    "y": 0.46002018451690674,
+                    "z": -0.11867249011993408
+                },
+                "EulerAngles": {
+                    "x": 12.705118179321289,
+                    "y": -19.051311492919922,
+                    "z": -5.1915364265441895
+                },
+                "Scale": {
+                    "x": 0.20000000298023224,
+                    "y": 0.20000000298023224,
+                    "z": 0.2529999911785126
+                },
+                "Rotation": {
+                    "x": 0.1015595942735672,
+                    "y": -0.16924630105495453,
+                    "z": -0.026098547503352165,
+                    "w": 0.9799796938896179
+                },
+                "Children": [],
+                "Parent": "{eaef549f-d793-4dbd-a3cb-835a4d5ce6f7}\u0000"
+            },
+            "components": [
+                "{bfa87123-59d0-4543-9965-a7e8dbe96d19}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{bfa87123-59d0-4543-9965-a7e8dbe96d19}\u0000",
+            "owner": "{71b39681-e684-42ec-a667-908659e2c165}\u0000",
+            "Material": "res/materials/SampleScene/coal.mat",
+            "Model": "./res/Models/SphereLowPoly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{0ee31a7b-590f-4207-8f06-5c3804211dab}\u0000",
+            "name": "wegiel",
+            "transform": {
+                "type": "Transform",
+                "id": "{d8e0ddc7-a7e1-4a88-8db6-f112aa402492}\u0000",
+                "owner": "{0ee31a7b-590f-4207-8f06-5c3804211dab}\u0000",
+                "Position": {
+                    "x": 0.7648077607154846,
+                    "y": 0.46002018451690674,
+                    "z": 0.3779454827308655
+                },
+                "EulerAngles": {
+                    "x": 14.01815414428711,
+                    "y": -65.92288208007813,
+                    "z": -5.011604309082031
+                },
+                "Scale": {
+                    "x": 0.20000000298023224,
+                    "y": 0.20000000298023224,
+                    "z": 0.2529999911785126
+                },
+                "Rotation": {
+                    "x": 0.07867743074893951,
+                    "y": -0.5439684391021729,
+                    "z": 0.029919050633907318,
+                    "w": 0.8348730206489563
+                },
+                "Children": [],
+                "Parent": "{eaef549f-d793-4dbd-a3cb-835a4d5ce6f7}\u0000"
+            },
+            "components": [
+                "{e421236e-c6a7-4849-98cc-ca345ca1bc9c}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{e421236e-c6a7-4849-98cc-ca345ca1bc9c}\u0000",
+            "owner": "{0ee31a7b-590f-4207-8f06-5c3804211dab}\u0000",
+            "Material": "res/materials/SampleScene/coal.mat",
+            "Model": "./res/Models/SphereLowPoly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{db00864f-c8eb-406c-80ca-e3bd7f10058e}\u0000",
+            "name": "wegiel",
+            "transform": {
+                "type": "Transform",
+                "id": "{8cab9563-fce3-4383-9553-098720e2de1a}\u0000",
+                "owner": "{db00864f-c8eb-406c-80ca-e3bd7f10058e}\u0000",
+                "Position": {
+                    "x": -0.3310687243938446,
+                    "y": 0.46002018451690674,
+                    "z": 0.6463517546653748
+                },
+                "EulerAngles": {
+                    "x": 14.01815414428711,
+                    "y": -65.92288208007813,
+                    "z": -5.011604309082031
+                },
+                "Scale": {
+                    "x": 0.20000000298023224,
+                    "y": 0.20000000298023224,
+                    "z": 0.2529999911785126
+                },
+                "Rotation": {
+                    "x": 0.07867743074893951,
+                    "y": -0.5439684391021729,
+                    "z": 0.029919050633907318,
+                    "w": 0.8348730206489563
+                },
+                "Children": [],
+                "Parent": "{eaef549f-d793-4dbd-a3cb-835a4d5ce6f7}\u0000"
+            },
+            "components": [
+                "{c77d905a-a64d-4f5d-a01d-dab3d4ceccbd}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{c77d905a-a64d-4f5d-a01d-dab3d4ceccbd}\u0000",
+            "owner": "{db00864f-c8eb-406c-80ca-e3bd7f10058e}\u0000",
+            "Material": "res/materials/SampleScene/coal.mat",
+            "Model": "./res/Models/SphereLowPoly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{77c1f233-c18e-4a18-9946-0e142d8c9382}\u0000",
+            "name": "wegiel",
+            "transform": {
+                "type": "Transform",
+                "id": "{e8302563-7e63-43a1-973e-60a9515c5976}\u0000",
+                "owner": "{77c1f233-c18e-4a18-9946-0e142d8c9382}\u0000",
+                "Position": {
+                    "x": -0.02286367118358612,
+                    "y": 0.6001206636428833,
+                    "z": -0.11142422258853912
+                },
+                "EulerAngles": {
+                    "x": 14.01815414428711,
+                    "y": -65.92288208007813,
+                    "z": -106.18216705322266
+                },
+                "Scale": {
+                    "x": 0.20000000298023224,
+                    "y": 0.20000000298023224,
+                    "z": 0.2529999911785126
+                },
+                "Rotation": {
+                    "x": -0.37029939889907837,
+                    "y": -0.4061651825904846,
+                    "z": -0.62600177526474,
+                    "w": 0.5531995892524719
+                },
+                "Children": [],
+                "Parent": "{eaef549f-d793-4dbd-a3cb-835a4d5ce6f7}\u0000"
+            },
+            "components": [
+                "{05dcd439-0c15-4f98-9a76-1e7940822042}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{05dcd439-0c15-4f98-9a76-1e7940822042}\u0000",
+            "owner": "{77c1f233-c18e-4a18-9946-0e142d8c9382}\u0000",
+            "Material": "res/materials/SampleScene/coal.mat",
+            "Model": "./res/Models/SphereLowPoly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{9ba76a88-7ae8-4cd7-8247-c32594a8c321}\u0000",
+            "name": "wegiel",
+            "transform": {
+                "type": "Transform",
+                "id": "{af731511-8238-453f-9651-f4754f317967}\u0000",
+                "owner": "{9ba76a88-7ae8-4cd7-8247-c32594a8c321}\u0000",
+                "Position": {
+                    "x": 0.15849696099758148,
+                    "y": 0.427187442779541,
+                    "z": 0.9362454414367676
+                },
+                "EulerAngles": {
+                    "x": 4.651431083679199,
+                    "y": -97.16073608398438,
+                    "z": -161.1560516357422
+                },
+                "Scale": {
+                    "x": 0.10000000149011612,
+                    "y": 0.10000000149011612,
+                    "z": 0.15000000596046448
+                },
+                "Rotation": {
+                    "x": -0.7347638010978699,
+                    "y": -0.14914268255233765,
+                    "z": -0.647124707698822,
+                    "w": 0.13823246955871582
+                },
+                "Children": [],
+                "Parent": "{eaef549f-d793-4dbd-a3cb-835a4d5ce6f7}\u0000"
+            },
+            "components": [
+                "{727193b9-5556-4701-a1d9-94bfd0e5b012}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{727193b9-5556-4701-a1d9-94bfd0e5b012}\u0000",
+            "owner": "{9ba76a88-7ae8-4cd7-8247-c32594a8c321}\u0000",
+            "Material": "res/materials/SampleScene/coal.mat",
+            "Model": "./res/Models/SphereLowPoly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{758706ed-944b-489b-9ca6-923c2b2aff1c}\u0000",
+            "name": "wegiel",
+            "transform": {
+                "type": "Transform",
+                "id": "{2453fc5a-61b7-42b0-840c-282e48f2aa8a}\u0000",
+                "owner": "{758706ed-944b-489b-9ca6-923c2b2aff1c}\u0000",
+                "Position": {
+                    "x": 0.5242189168930054,
+                    "y": 0.427187442779541,
+                    "z": 0.8079927563667297
+                },
+                "EulerAngles": {
+                    "x": 4.651431083679199,
+                    "y": -135.13150024414063,
+                    "z": -161.1560516357422
+                },
+                "Scale": {
+                    "x": 0.10000000149011612,
+                    "y": 0.10000000149011612,
+                    "z": 0.15000000596046448
+                },
+                "Rotation": {
+                    "x": -0.9085622429847717,
+                    "y": -0.16646769642829895,
+                    "z": -0.3700242042541504,
+                    "w": 0.09942492842674255
+                },
+                "Children": [],
+                "Parent": "{eaef549f-d793-4dbd-a3cb-835a4d5ce6f7}\u0000"
+            },
+            "components": [
+                "{a5962ba6-1b2d-4d5c-91c9-59dec1762ba8}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{a5962ba6-1b2d-4d5c-91c9-59dec1762ba8}\u0000",
+            "owner": "{758706ed-944b-489b-9ca6-923c2b2aff1c}\u0000",
+            "Material": "res/materials/SampleScene/coal.mat",
+            "Model": "./res/Models/SphereLowPoly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{eb6ef4e5-fcb1-45a9-a3da-cc563544d23f}\u0000",
+            "name": "wegiel",
+            "transform": {
+                "type": "Transform",
+                "id": "{f92ccd09-beb9-44a3-acae-078aef777269}\u0000",
+                "owner": "{eb6ef4e5-fcb1-45a9-a3da-cc563544d23f}\u0000",
+                "Position": {
+                    "x": -0.47502732276916504,
+                    "y": 0.5210031270980835,
+                    "z": -0.6908037662506104
+                },
+                "EulerAngles": {
+                    "x": 49.8846321105957,
+                    "y": -135.13150024414063,
+                    "z": -161.1560516357422
+                },
+                "Scale": {
+                    "x": 0.10000000149011612,
+                    "y": 0.10000000149011612,
+                    "z": 0.15000000596046448
+                },
+                "Rotation": {
+                    "x": -0.8004575371742249,
+                    "y": -0.29596370458602905,
+                    "z": -0.2775516211986542,
+                    "w": 0.44117826223373413
+                },
+                "Children": [],
+                "Parent": "{eaef549f-d793-4dbd-a3cb-835a4d5ce6f7}\u0000"
+            },
+            "components": [
+                "{f0140f7f-7e4e-4c31-b5f2-a11564517fe4}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{f0140f7f-7e4e-4c31-b5f2-a11564517fe4}\u0000",
+            "owner": "{eb6ef4e5-fcb1-45a9-a3da-cc563544d23f}\u0000",
+            "Material": "res/materials/SampleScene/coal.mat",
+            "Model": "./res/Models/SphereLowPoly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{63fe6a91-973a-40f1-993a-2749fac956b8}\u0000",
+            "name": "embers",
+            "transform": {
+                "type": "Transform",
+                "id": "{054445c6-39bc-49a5-bccc-8273677228d8}\u0000",
+                "owner": "{63fe6a91-973a-40f1-993a-2749fac956b8}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 0.5,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{eaef549f-d793-4dbd-a3cb-835a4d5ce6f7}\u0000"
+            },
+            "components": [
+                "{019fc85f-0555-4b2f-bc28-4a40a6740cb7}\u0000",
+                "{cf866b8d-02be-4249-bd1f-5f3f6d8f81f3}\u0000"
+            ]
+        },
+        {
+            "type": "EmbersParticleEmitter",
+            "id": "{019fc85f-0555-4b2f-bc28-4a40a6740cb7}\u0000",
+            "owner": "{63fe6a91-973a-40f1-993a-2749fac956b8}\u0000"
+        },
+        {
+            "type": "PointLight",
+            "id": "{cf866b8d-02be-4249-bd1f-5f3f6d8f81f3}\u0000",
+            "owner": "{63fe6a91-973a-40f1-993a-2749fac956b8}\u0000",
+            "Color": {
+                "x": 10.0,
+                "y": 3.9215686321258545,
+                "z": 1.0
+            },
+            "LinearFalloff": 0.0,
+            "QuadraticFalloff": 1.0,
+            "Range": 100.0
+        },
+        {
+            "type": "Entity",
+            "id": "{5a16f2e7-2faa-452d-9ca0-5f4cc40d00da}\u0000",
+            "name": "firesphere",
+            "transform": {
+                "type": "Transform",
+                "id": "{71baf8e3-b19b-4f2b-b0f8-26b5b25b439b}\u0000",
+                "owner": "{5a16f2e7-2faa-452d-9ca0-5f4cc40d00da}\u0000",
+                "Position": {
+                    "x": 0.14013752341270447,
+                    "y": 0.46002018451690674,
+                    "z": 0.6115481853485107
+                },
+                "EulerAngles": {
+                    "x": 12.705118179321289,
+                    "y": -64.6261215209961,
+                    "z": -5.1915364265441895
+                },
+                "Scale": {
+                    "x": 0.30000001192092896,
+                    "y": 0.30000001192092896,
+                    "z": 0.4000000059604645
+                },
+                "Rotation": {
+                    "x": 0.06935498118400574,
+                    "y": -0.534952700138092,
+                    "z": 0.02104390412569046,
+                    "w": 0.8417674899101257
+                },
+                "Children": [],
+                "Parent": "{eaef549f-d793-4dbd-a3cb-835a4d5ce6f7}\u0000"
+            },
+            "components": [
+                "{68301dcc-7a14-4eca-8e84-80639dcbf00f}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{68301dcc-7a14-4eca-8e84-80639dcbf00f}\u0000",
+            "owner": "{5a16f2e7-2faa-452d-9ca0-5f4cc40d00da}\u0000",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
+            "Model": "./res/Models/SphereLowPoly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{addeae90-4aa5-468f-ace8-0352b7112a3b}\u0000",
+            "name": "firesphere",
+            "transform": {
+                "type": "Transform",
+                "id": "{1edb1f0a-90ca-413f-9093-5a78e7e6523b}\u0000",
+                "owner": "{addeae90-4aa5-468f-ace8-0352b7112a3b}\u0000",
+                "Position": {
+                    "x": -0.17547857761383057,
+                    "y": 0.5568902492523193,
+                    "z": 0.26378756761550903
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -5.740038871765137,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.20000000298023224,
+                    "y": 0.20000000298023224,
+                    "z": 0.30000001192092896
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.050070345401763916,
+                    "z": 0.0,
+                    "w": 0.9987456798553467
+                },
+                "Children": [],
+                "Parent": "{eaef549f-d793-4dbd-a3cb-835a4d5ce6f7}\u0000"
+            },
+            "components": [
+                "{f7d94600-b008-4e69-a31f-102c1f2cdb5b}\u0000",
+                "{77af1e1e-0dc9-47ff-87ee-5cf4f2ab50af}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{f7d94600-b008-4e69-a31f-102c1f2cdb5b}\u0000",
+            "owner": "{addeae90-4aa5-468f-ace8-0352b7112a3b}\u0000",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
+            "Model": "./res/Models/SphereLowPoly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "PointLight",
+            "id": "{77af1e1e-0dc9-47ff-87ee-5cf4f2ab50af}\u0000",
+            "owner": "{addeae90-4aa5-468f-ace8-0352b7112a3b}\u0000",
+            "Color": {
+                "x": 100.0,
+                "y": 39.2156867980957,
+                "z": 1.0
+            },
+            "LinearFalloff": 0.0,
+            "QuadraticFalloff": 1.0,
+            "Range": 50.0
+        },
+        {
+            "type": "Entity",
+            "id": "{fe3cc81e-4c0c-4090-a54a-c9c599549980}\u0000",
+            "name": "firestone",
+            "transform": {
+                "type": "Transform",
+                "id": "{d2b41fca-8994-4765-93ac-3a3be67b2b2f}\u0000",
+                "owner": "{fe3cc81e-4c0c-4090-a54a-c9c599549980}\u0000",
+                "Position": {
+                    "x": -0.5477604269981384,
+                    "y": 0.5568902492523193,
+                    "z": -0.2594228684902191
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -43.962989807128906,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.20000000298023224,
+                    "y": 0.20000000298023224,
+                    "z": 0.30000001192092896
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.37430712580680847,
+                    "z": 0.0,
+                    "w": 0.9273048043251038
+                },
+                "Children": [],
+                "Parent": "{eaef549f-d793-4dbd-a3cb-835a4d5ce6f7}\u0000"
+            },
+            "components": [
+                "{2461e8db-5f60-4179-99c9-a647156fe2cd}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{2461e8db-5f60-4179-99c9-a647156fe2cd}\u0000",
+            "owner": "{fe3cc81e-4c0c-4090-a54a-c9c599549980}\u0000",
+            "Material": "res/materials/SampleScene/FireStone.mat",
+            "Model": "./res/Models/SphereLowPoly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{5e0ed2d1-16cd-4855-8181-496a7e4597bd}\u0000",
+            "name": "collider",
+            "transform": {
+                "type": "Transform",
+                "id": "{2f56b3e4-6bde-4a3a-af3c-8da6f47b1099}\u0000",
+                "owner": "{5e0ed2d1-16cd-4855-8181-496a7e4597bd}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": -0.8431828618049622,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{eaef549f-d793-4dbd-a3cb-835a4d5ce6f7}\u0000"
+            },
+            "components": [
+                "{5b1bd1c5-d090-486f-92de-e386558a159f}\u0000"
+            ]
+        },
+        {
+            "type": "SphereCollider",
+            "id": "{5b1bd1c5-d090-486f-92de-e386558a159f}\u0000",
+            "owner": "{5e0ed2d1-16cd-4855-8181-496a7e4597bd}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 1,
+            "radius": 2.0
+        }
+    ]
+}

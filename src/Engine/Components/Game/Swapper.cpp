@@ -3,6 +3,10 @@
 #include "Engine/Prefabs/PrefabLoader.h"
 #include "Serialization/SerializationFilesUtility.h"
 #include "Engine/EngineObjects/UpdateManager.h"
+#include "Engine/Components/Renderers/OutlinedModelRenderer.h"
+#include "Engine/EngineObjects/Player/DefaultPlayer.h"
+#include "Engine/Components/Colliders/SphereCollider.h"
+#include "Engine/Components/Renderers/OutlinedModelRenderer.h"
 
 namespace Engine
 {
@@ -13,6 +17,25 @@ namespace Engine
             return; 
         player = owner->GetScene()->GetPlayer();
         UpdateManager::GetInstance()->RegisterComponent(this);
+        std::vector<Transform*> children = owner->GetTransform()->GetChildren();
+        for (Transform* child : children)
+        {
+            if (child->GetOwner()->GetName() == "StripperCollider")
+            {
+                stripperCollider = child->GetOwner()->GetComponent < SphereCollider>();
+                stripperCollider->OnTriggerAddListener(SwapToolStripper);
+            }
+            else if (child->GetOwner()->GetName() == "VacuumCollider")
+            {
+                vacuumCollider = child->GetOwner()->GetComponent<SphereCollider>();
+                vacuumCollider->OnTriggerAddListener(SwapToolVacuum);
+            }
+            else if (child->GetOwner()->GetName() == "BroomCollider")
+            {
+                broomCollider = child->GetOwner()->GetComponent<SphereCollider>();
+                broomCollider->OnTriggerAddListener(SwapToolBroom);
+            }
+        }
     }
 
     void Engine::Swapper::Update(float DeltaTime)
@@ -91,6 +114,45 @@ namespace Engine
                 hasBroom = false;
                 break;
         }
+        if (stripper != nullptr)
+        {
+            stripper->GetComponent<OutlinedModelRenderer>()->Deactivate();
+        }
+        if (vacuum != nullptr)
+        {
+            vacuum->GetComponent<OutlinedModelRenderer>()->Deactivate();
+        }
+        if (broom != nullptr)
+        {
+            broom->GetComponent<OutlinedModelRenderer>()->Deactivate();
+        }
+    }
+
+    void Swapper::SwapPlayerToolStripper(Collider* collider) 
+    {
+        auto defaultPlayer = static_cast<Engine::DefaultPlayer*>(player);
+        if (defaultPlayer->GetCurrentTool()!=Tool::Stripper &&  defaultPlayer->GetCanSwap())
+        defaultPlayer->SetTool(Tool::Stripper);
+        if (stripper!=nullptr)
+        stripper->GetComponent<OutlinedModelRenderer>()->Activate();
+    }
+
+    void Swapper::SwapPlayerToolBroom(Collider* collider) 
+    {
+        auto defaultPlayer = static_cast<Engine::DefaultPlayer*>(player);
+        if (defaultPlayer->GetCurrentTool() != Tool::Broom && defaultPlayer->GetCanSwap())
+        defaultPlayer->SetTool(Tool::Broom);
+        if (broom != nullptr)
+        broom->GetComponent<OutlinedModelRenderer>()->Activate();
+    }
+
+    void Swapper::SwapPlayerToolVacuum(Collider* collider) 
+    {
+        auto defaultPlayer = static_cast<Engine::DefaultPlayer*>(player);
+        if (defaultPlayer->GetCurrentTool() != Tool::Vacuum && defaultPlayer->GetCanSwap())
+            defaultPlayer->SetTool(Tool::Vacuum);
+        if (vacuum != nullptr)
+        vacuum->GetComponent<OutlinedModelRenderer>()->Activate();
     }
 
     rapidjson::Value Swapper::Serialize(rapidjson::Document::AllocatorType& Allocator) const

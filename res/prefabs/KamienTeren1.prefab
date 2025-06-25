@@ -1,0 +1,62 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{aa53a4b8-3343-434b-85c8-f4f20a0f5b2a}\u0000",
+            "name": "kamienteren1",
+            "transform": {
+                "type": "Transform",
+                "id": "{1cfc9c59-f51a-47b3-965a-7b8ced0a64b1}\u0000",
+                "owner": "{aa53a4b8-3343-434b-85c8-f4f20a0f5b2a}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 1.2359213829040527,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{965ea773-39b3-4661-b850-af399523e490}\u0000",
+                "{a0d64661-f03b-44cd-9c35-76a34bf9d576}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{965ea773-39b3-4661-b850-af399523e490}\u0000",
+            "owner": "{aa53a4b8-3343-434b-85c8-f4f20a0f5b2a}\u0000",
+            "Material": "res/materials/SampleScene/UV15.mat",
+            "Model": "res/models/Modele_Mati/Kamienie/KamienTeren1.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "CapsuleCollider",
+            "id": "{a0d64661-f03b-44cd-9c35-76a34bf9d576}\u0000",
+            "owner": "{aa53a4b8-3343-434b-85c8-f4f20a0f5b2a}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 2,
+            "Radius": 1.0,
+            "Height": 2.9000000953674316
+        }
+    ]
+}
