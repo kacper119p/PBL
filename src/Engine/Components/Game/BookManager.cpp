@@ -205,7 +205,7 @@ namespace Engine
                 return;
             }
             std::string name = item->GetName();
-            if (name.find("Sword") != std::string::npos)
+            if (name.find("Sword") != std::string::npos && canHoldSword)
             {
                 if (item->GetComponent<Rigidbody>())
                 {
@@ -216,7 +216,7 @@ namespace Engine
                 std::cout << std::endl << "Sword found" << std::endl;   
                 canHoldSword = false;
             }
-            else if (name.find("Bow") != std::string::npos)
+            else if (name.find("Bow") != std::string::npos && canHoldBow)
             {
                 if (item->GetComponent<Rigidbody>())
                 {
@@ -224,8 +224,9 @@ namespace Engine
                 }
                 endRot = bowPlacementPoint->GetRotation();
                 end = bowPlacementPoint->GetPosition();
+                canHoldBow = false;
             }
-            else if (name.find("Arrow") != std::string::npos)
+            else if (name.find("Arrow") != std::string::npos && canHoldArrow)
             {
                 if (item->GetComponent<Rigidbody>())
                 {
@@ -233,8 +234,9 @@ namespace Engine
                 }
                 endRot = arrowPlacementPoint->GetRotation();
                 end = arrowPlacementPoint->GetPosition();
+                canHoldArrow = false;
             }
-            else if (name.find("Shield") != std::string::npos)
+            else if (name.find("Shield") != std::string::npos && canHoldShield)
             {
                 if (item->GetComponent<Rigidbody>())
                 {
@@ -242,6 +244,7 @@ namespace Engine
                 }
                 endRot = shieldPlacementPoint->GetRotation();
                 end = shieldPlacementPoint->GetPosition();
+                canHoldShield = false;
             }
             else
                 return; // Unrecognized
