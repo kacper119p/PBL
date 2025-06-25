@@ -220,7 +220,8 @@
                 "{43de86eb-a468-479e-936d-2df352c62e97}\u0000",
                 "{f52eeda6-2fa8-4f72-a8c4-2526889f8732}\u0000",
                 "{93d4192d-d509-4b27-9e0e-4cf369a8b179}\u0000",
-                "{dcc0a11a-cff8-42d8-842d-8b2fc9275697}\u0000"
+                "{dcc0a11a-cff8-42d8-842d-8b2fc9275697}\u0000",
+                "{d93acedc-112d-4d83-8367-ffddf3b971bd}\u0000"
             ],
             "Parent": null
         },
@@ -15941,6 +15942,53 @@
             "id": "{7324c7a6-3f7b-4088-99d3-89e3ef4ac705}\u0000",
             "owner": "{a11f601c-65e7-4ce2-8f50-3b5eb4968fae}\u0000",
             "size": 1
+        },
+        {
+            "type": "Entity",
+            "id": "{a8efdd52-30b6-4b05-87c6-66fb2f75a8aa}\u0000",
+            "name": "Blood",
+            "transform": {
+                "type": "Transform",
+                "id": "{d93acedc-112d-4d83-8367-ffddf3b971bd}\u0000",
+                "owner": "{a8efdd52-30b6-4b05-87c6-66fb2f75a8aa}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.3497828245162964,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 20.0,
+                    "y": 1.0,
+                    "z": 20.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{ce745f0a-e4a5-4dfe-a07b-00f65321bded}\u0000"
+            ]
+        },
+        {
+            "type": "BloodStain",
+            "id": "{ce745f0a-e4a5-4dfe-a07b-00f65321bded}\u0000",
+            "owner": "{a8efdd52-30b6-4b05-87c6-66fb2f75a8aa}\u0000",
+            "Texture": "res/textures/BloodSplatter/BloodTest.dds",
+            "Color": {
+                "x": 0.1813725233078003,
+                "y": 0.0,
+                "z": 0.0
+            }
         }
     ]
 }
