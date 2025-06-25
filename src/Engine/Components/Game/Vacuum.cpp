@@ -56,6 +56,7 @@ namespace Engine
         {
             isShooting = true;
             isSuccing = false;
+            playerAnimationManager->SetVacuumInactiveImmediate();
         }
 
         if (volume >= maxVolume)
@@ -173,7 +174,8 @@ namespace Engine
             item->GetTransform()->SetPosition((position + forward * (size + 0.5f)));
             item->GetComponent<Engine::Rigidbody>()->angularVelocity.y = 0.0f;
             item->GetComponent<Engine::Rigidbody>()->hasGravity = true;
-            item->GetComponent<Engine::Rigidbody>()->AddForce(forward * 100.0f * float(thrashSizeInt), Engine::ForceMode::Force);
+            item->GetComponent<Engine::Rigidbody>()->AddForce(forward * 100.0f * float(thrashSizeInt),
+                                                              Engine::ForceMode::Force);
 
             if (thrashSizeInt == 10)
                 PlayerAnimationManager::GetInstance()->ShootBigObject();
@@ -205,6 +207,10 @@ namespace Engine
         else if (fill < 0.75f)
         {
             material->SetEmissiveColor(glm::vec3(10.0f, 8.0f, 0.0f));
+        }
+        else if (fill < 0.99f)
+        {
+            material->SetEmissiveColor(glm::vec3(10.0f, 1.0f, 0.0f));
         }
         else
         {
