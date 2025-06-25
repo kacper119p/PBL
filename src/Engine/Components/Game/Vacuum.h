@@ -18,8 +18,8 @@ namespace Engine
         int volume = 0;
         int maxVolume = 10;
 
-        int size = 2*3;
-        float centerSize = 1.5f*3;
+        int size = 2 * 3;
+        float centerSize = 1.5f * 3;
         std::vector<Engine::Entity*> items;
         Engine::SphereCollider* collider;
 
@@ -37,6 +37,23 @@ namespace Engine
 
         std::shared_ptr<ma_sound> blowingSound;
         std::shared_ptr<ma_sound> suckingSound;
+
+        struct GravityDisableTask
+        {
+            Engine::Entity* entity;
+            float disableTime;
+        };
+
+        struct PendingSlimeIntake
+        {
+            Engine::Entity* entity;
+            int totalSize;
+            int currentAbsorbed;
+            float nextAbsorbTime;
+        };
+
+        std::vector<PendingSlimeIntake> activeSlimeAbsorptions;
+        std::vector<GravityDisableTask> pendingGravityDisables;
 
     public:
         Vacuum() = default;

@@ -44,6 +44,11 @@ namespace Engine
         void SetIsChasingPlayer(bool Value) { IsChasing = Value; }
         void SetRestFinished(bool Value) { RestFinished = Value; }
 
+        void SetEnabled(bool Value) { Enabled = Value; }
+        [[nodiscard]] bool IsEnabled() const { return Enabled; }
+        [[nodiscard]] int GetSize() { return Size; }
+        void SetSize(int Value) { Size = Value; }
+
         void RecalculateCurrentTrash();
 
     private:
@@ -80,6 +85,8 @@ namespace Engine
         int MaxTrashCapacity = 10;
         std::string SelectedPlayerName = "";
         std::shared_ptr<ma_sound> WalkingSound = AudioManager::GetInstance().CreateSoundInstance("glut");
+        bool Enabled = true;
+        int Size = 5;
 
     };
 }
