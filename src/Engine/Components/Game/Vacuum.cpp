@@ -9,7 +9,7 @@
 #include "Engine/Components/Game/ThrashManager.h"
 #include "Engine/Components/Game/PlayerAnimationManager.h"
 #include <iostream>
-
+#include "Engine/Components/AI/AiManager.h"
 #include "Materials/VacuumIndicatorMaterial.h"
 
 namespace Engine
@@ -82,6 +82,22 @@ namespace Engine
 
         float currentTime = static_cast<float>(glfwGetTime());
 
+        for (auto it = pendingGravityDisables.begin(); it != pendingGravityDisables.end();)
+        {
+            if (currentTime >= it->disableTime)
+            {
+                if (it->entity && it->entity->GetComponent<Rigidbody>())
+                {
+                    it->entity->GetComponent<Rigidbody>()->hasGravity = false;
+                }
+                it = pendingGravityDisables.erase(it);
+            }
+            else
+            {
+                ++it;
+            }
+        }
+
         // --- STRZELANIE ---
         if (isShooting)
         {
@@ -131,6 +147,24 @@ namespace Engine
                         }
                     }
                 }
+
+                if (entityCollider->GetOwner()->GetComponent<AiManager>())
+                {
+                    int slimeSizeInt = entityCollider->GetOwner()->GetComponent<AiManager>()->GetSize();
+                    if (volume + slimeSizeInt <= maxVolume)
+                    {
+                        glm::vec3 direction = position + forward * (size / 2.0f + 0.01f) - entityCollider->GetOwner()->
+                                              GetTransform()->GetPosition();
+                        if (entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>())
+                        {
+                            entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->hasGravity = false;
+                            entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->AddForce(
+                                    direction, Engine::ForceMode::Force);
+                        }
+                        if (slimeSizeInt == 10)
+                            playerAnimationManager->SuckBigObject();
+                    }
+                }
             }
 
             glm::vec3 centerPosition = position + forward * (size / 2.0f);
@@ -148,9 +182,47 @@ namespace Engine
                             volume += thrashSizeInt;
                             UpdateFillIndicator();
                             entityCollider->GetOwner()->GetComponent<Collider>()->SetTrigger(true);
-                            entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->hasGravity = false;
-                            entityCollider->GetOwner()->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
+
+                        items.push_back(entityCollider->GetOwner());
+                        volume += thrashSizeInt;
+                        UpdateFillIndicator();
+                        if (entityCollider->GetOwner()->GetComponent<BoxCollider>())
+                            entityCollider->GetOwner()->GetComponent<Engine::BoxCollider>()->SetTrigger(true);
+
+                        entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->hasGravity = false;
+                        entityCollider->GetOwner()->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
                         }
+                    }
+
+                Entity* entity = entityCollider->GetOwner();
+                if (entity->GetComponent<AiManager>())
+                {
+                    AiManager* slimeAi = entity->GetComponent<AiManager>();
+                    int slimeSizeInt = slimeAi->GetSize();
+
+                    if (volume < maxVolume)
+                    {
+                        entity->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
+                        volume += slimeSizeInt;
+                        items.push_back(entityCollider->GetOwner());
+                        UpdateFillIndicator();
+
+                        Rigidbody* rb = entity->GetComponent<Rigidbody>();
+                        if (rb)
+                        {
+                            rb->hasGravity = false;
+                        }
+
+                        BoxCollider* box = entity->GetComponent<BoxCollider>();
+                        if (box)
+                        {
+                            box->SetTrigger(true);
+                        }
+
+                        slimeAi->SetEnabled(false);
+
+                        if (slimeSizeInt == 10)
+                            playerAnimationManager->SuckBigObject();
                     }
                 }
             }
@@ -168,20 +240,49 @@ namespace Engine
         {
             Engine::Entity* item = items.back();
             items.pop_back();
-            int thrashSizeInt = static_cast<int>(item->GetComponent<Thrash>()->GetSize());
-            volume -= thrashSizeInt;
+
+            int itemSize = 0;
+
+            if (item->GetComponent<Thrash>())
+            {
+                itemSize = static_cast<int>(item->GetComponent<Thrash>()->GetSize());
+            }
+            else if (item->GetComponent<AiManager>())
+            {
+                itemSize = item->GetComponent<AiManager>()->GetSize();
+
+                AiManager* ai = item->GetComponent<AiManager>();
+                ai->SetEnabled(true);
+            }
+            else
+            {
+                return;
+            }
+
+            volume -= itemSize;
             UpdateFillIndicator();
 
-            item->GetComponent<Collider>()->SetTrigger(false);
+            BoxCollider* collider = item->GetComponent<BoxCollider>();
+            if (collider)
+                collider->SetTrigger(false);
+
+            Rigidbody* rb = item->GetComponent<Rigidbody>();
+            if (rb)
+            {
+                rb->hasGravity = true;
+                rb->angularVelocity = glm::vec3(0);
+
+                pendingGravityDisables.push_back({item, static_cast<float>(glfwGetTime()) + 2.0f});
+            }
 
             glm::vec3 position = GetOwner()->GetTransform()->GetParent()->GetPosition();
             glm::vec3 forward = GetOwner()->GetTransform()->GetParent()->GetForward();
-            item->GetTransform()->SetPosition((position + forward * (size + 0.5f)));
-            item->GetComponent<Engine::Rigidbody>()->angularVelocity.y = 0.0f;
-            item->GetComponent<Engine::Rigidbody>()->hasGravity = true;
-            item->GetComponent<Engine::Rigidbody>()->AddForce(forward * shootForce * float(thrashSizeInt), Engine::ForceMode::Force);
+            item->GetTransform()->SetPosition(position + forward * (size + 0.5f));
 
-            if (thrashSizeInt == 20)
+            if (rb)
+                rb->AddForce(forward * 100.0f * float(itemSize), Engine::ForceMode::Force);
+
+            if (itemSize == 20)
                 PlayerAnimationManager::GetInstance()->ShootBigObject();
 
             PlayerAnimationManager::GetInstance()->PlayVacuumShotVfx();
@@ -240,6 +341,8 @@ namespace Engine
         END_COMPONENT_DESERIALIZATION_REFERENCES_PASS
     }
 #if EDITOR
-    void Vacuum::DrawImGui() {}
+    void Vacuum::DrawImGui()
+    {
+    }
 #endif
 } // namespace Engine
