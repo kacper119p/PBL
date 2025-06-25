@@ -1,0 +1,83 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{98aa9e64-7c20-415c-a6da-bfc124cda552}\u0000",
+            "name": "Shield",
+            "transform": {
+                "type": "Transform",
+                "id": "{06eb36a7-7f01-4361-95df-abba66d04fce}\u0000",
+                "owner": "{98aa9e64-7c20-415c-a6da-bfc124cda552}\u0000",
+                "Position": {
+                    "x": -20.386741638183594,
+                    "y": 1.2397563457489014,
+                    "z": 11.032139778137207
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{32ee1c1a-9874-4060-82ef-f5a145e7034c}\u0000",
+                "{ef1f59b1-456f-4058-b3a8-b567cb070238}\u0000",
+                "{905dfe99-9ce0-435a-b968-1655bc01184a}\u0000",
+                "{a29a6c03-0498-4688-bc44-3a83d9b3a801}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{32ee1c1a-9874-4060-82ef-f5a145e7034c}\u0000",
+            "owner": "{98aa9e64-7c20-415c-a6da-bfc124cda552}\u0000",
+            "Material": "res/materials/SampleScene/Sword.mat",
+            "Model": "./res/Models/Modele_Mati/Bron/Tarcza.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{ef1f59b1-456f-4058-b3a8-b567cb070238}\u0000",
+            "owner": "{98aa9e64-7c20-415c-a6da-bfc124cda552}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 64,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 2.5999999046325684,
+            "_height": 0.30000001192092896,
+            "_depth": 2.200000047683716
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{905dfe99-9ce0-435a-b968-1655bc01184a}\u0000",
+            "owner": "{98aa9e64-7c20-415c-a6da-bfc124cda552}\u0000",
+            "mass": 0.5,
+            "inverseMass": 2.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.22699999809265137,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Thrash",
+            "id": "{a29a6c03-0498-4688-bc44-3a83d9b3a801}\u0000",
+            "owner": "{98aa9e64-7c20-415c-a6da-bfc124cda552}\u0000",
+            "size": 19
+        }
+    ]
+}

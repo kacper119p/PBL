@@ -14,5 +14,5 @@ void main()
     vec3 color = texture(Texture, normalize(Direction)).rgb;
     FragColor = color;
     float luminance = 0.2126 * FragColor.r + 0.7152 * FragColor.g + 0.0722 * FragColor.b;
-    OcclusionMask = FragColor * step(5.0f, luminance);
+    OcclusionMask = FragColor * step(15.0f, luminance);
 }

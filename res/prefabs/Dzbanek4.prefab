@@ -2,71 +2,71 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{c464dc4b-74a1-4793-a783-71e18c39e622}\u0000",
-            "name": "Dzbanek4",
+            "id": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
+            "name": "New Entity",
             "transform": {
                 "type": "Transform",
-                "id": "{e5eb2b64-d8dd-4a56-b79d-1a29f23408b1}\u0000",
-                "owner": "{c464dc4b-74a1-4793-a783-71e18c39e622}\u0000",
+                "id": "{3deab416-9c15-44bc-a6e3-2fc0fe356d35}\u0000",
+                "owner": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
                 "Position": {
-                    "x": 18.058778762817383,
-                    "y": 0.9506755471229553,
-                    "z": 22.27351188659668
+                    "x": 0.0,
+                    "y": 1.7242627143859863,
+                    "z": 0.0
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": -0.0,
+                    "y": 0.0,
                     "z": 0.0
                 },
                 "Scale": {
                     "x": 1.0,
-                    "y": 1.0,
+                    "y": 0.8999999761581421,
                     "z": 1.0
                 },
                 "Rotation": {
                     "x": 0.0,
                     "y": 0.0,
                     "z": 0.0,
-                    "w": 1.0
+                    "w": 0.0
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{5599aba5-28f9-4dad-87f0-b327d64feb16}\u0000",
-                "{792a7cca-f23a-48b1-9a90-a00f2470ba55}\u0000",
-                "{21d19f14-0d2c-4807-b75e-d39d8ca51f9b}\u0000"
+                "{507ef287-3f3b-4b13-b7a9-719aed7bd1bb}\u0000",
+                "{6ff575c0-5071-4dee-b991-519a341f794e}\u0000",
+                "{0b149841-fc39-4235-a2e2-65c2bc1f9ef2}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{5599aba5-28f9-4dad-87f0-b327d64feb16}\u0000",
-            "owner": "{c464dc4b-74a1-4793-a783-71e18c39e622}\u0000",
-            "Material": "./res/materials/SampleScene/UV6.mat",
-            "Model": "./res/models/Modele_Mati/Naczynia/Dzbanek4.fbx"
+            "id": "{507ef287-3f3b-4b13-b7a9-719aed7bd1bb}\u0000",
+            "owner": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
+            "Material": "res/materials/SampleScene/UV6.mat",
+            "Model": "res/models/Modele_Mati/Naczynia/Dzbanek4.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "CapsuleCollider",
+            "id": "{6ff575c0-5071-4dee-b991-519a341f794e}\u0000",
+            "owner": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 2,
+            "Radius": 0.6499999761581421,
+            "Height": 0.30000001192092896
         },
         {
             "type": "Rigidbody",
-            "id": "{792a7cca-f23a-48b1-9a90-a00f2470ba55}\u0000",
-            "owner": "{c464dc4b-74a1-4793-a783-71e18c39e622}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
+            "id": "{0b149841-fc39-4235-a2e2-65c2bc1f9ef2}\u0000",
+            "owner": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
+            "mass": 0.5,
+            "inverseMass": 2.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
             "frictionEnabled": true,
             "restitution": 0.10000000149011612
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{21d19f14-0d2c-4807-b75e-d39d8ca51f9b}\u0000",
-            "owner": "{c464dc4b-74a1-4793-a783-71e18c39e622}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.5,
-            "_depth": 0.8999999761581421
         }
     ]
 }

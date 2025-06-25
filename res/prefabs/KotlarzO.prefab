@@ -1,0 +1,238 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{68263ba4-9f7e-4c36-ae08-58975bf4150a}\u0000",
+            "name": "KotlarzO",
+            "transform": {
+                "type": "Transform",
+                "id": "{2a4e1a4c-02fa-44ee-845a-4db52811cc35}\u0000",
+                "owner": "{68263ba4-9f7e-4c36-ae08-58975bf4150a}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 1.1071314811706543,
+                    "z": -1.2635917663574219
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 2.6427876949310303,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.023060627281665802,
+                    "z": 0.0,
+                    "w": 0.9997340440750122
+                },
+                "Children": [
+                    "{8be541db-5e17-4ed9-b62c-edca06eceda1}\u0000",
+                    "{205d63e0-ea6a-40a6-abc7-3c19c7ac6a28}\u0000",
+                    "{f1fea790-a119-4d31-aa9f-71688f097e62}\u0000",
+                    "{a79f20d3-16c5-4c8f-810c-8c68f0a9a5d0}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{1d5e21c5-56af-450c-a958-14a929a9eeee}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{1d5e21c5-56af-450c-a958-14a929a9eeee}\u0000",
+            "owner": "{68263ba4-9f7e-4c36-ae08-58975bf4150a}\u0000",
+            "Material": "res/materials/SampleScene/KotlarzOtwarty.mat",
+            "Model": "res/models/Modele_Mati/Meble/KotlarzOtwarty.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{2f7097cf-372f-499d-8826-8c553fff757a}\u0000",
+            "name": "deska",
+            "transform": {
+                "type": "Transform",
+                "id": "{8be541db-5e17-4ed9-b62c-edca06eceda1}\u0000",
+                "owner": "{2f7097cf-372f-499d-8826-8c553fff757a}\u0000",
+                "Position": {
+                    "x": 1.8025368975216338e-9,
+                    "y": 0.0,
+                    "z": 8.3201646960962e-11
+                },
+                "EulerAngles": {
+                    "x": -90.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 100.0,
+                    "y": 100.0,
+                    "z": 100.0
+                },
+                "Rotation": {
+                    "x": -0.7071067690849304,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.7071067690849304
+                },
+                "Children": [],
+                "Parent": "{2a4e1a4c-02fa-44ee-845a-4db52811cc35}\u0000"
+            },
+            "components": [
+                "{b3969d01-a5b0-4591-8806-9107bedfa2e1}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{b3969d01-a5b0-4591-8806-9107bedfa2e1}\u0000",
+            "owner": "{2f7097cf-372f-499d-8826-8c553fff757a}\u0000",
+            "Material": "res/materials/SampleScene/Deska.mat",
+            "Model": "res/models/Modele_Mati/Meble/zestawdesek.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{f707a6d3-52f4-4019-b090-b2e3e65b9442}\u0000",
+            "name": "ogien",
+            "transform": {
+                "type": "Transform",
+                "id": "{205d63e0-ea6a-40a6-abc7-3c19c7ac6a28}\u0000",
+                "owner": "{f707a6d3-52f4-4019-b090-b2e3e65b9442}\u0000",
+                "Position": {
+                    "x": -0.00046783045399934053,
+                    "y": -0.4931774139404297,
+                    "z": 0.007453581318259239
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 2.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{2a4e1a4c-02fa-44ee-845a-4db52811cc35}\u0000"
+            },
+            "components": [
+                "{9f989993-8c40-4f68-b58b-efa6051233f1}\u0000",
+                "{22b97149-2223-4932-b729-5f3650560c32}\u0000"
+            ]
+        },
+        {
+            "type": "FireParticleEmitter",
+            "id": "{9f989993-8c40-4f68-b58b-efa6051233f1}\u0000",
+            "owner": "{f707a6d3-52f4-4019-b090-b2e3e65b9442}\u0000"
+        },
+        {
+            "type": "PointLight",
+            "id": "{22b97149-2223-4932-b729-5f3650560c32}\u0000",
+            "owner": "{f707a6d3-52f4-4019-b090-b2e3e65b9442}\u0000",
+            "Color": {
+                "x": 10.0,
+                "y": 3.9215686321258545,
+                "z": 1.0
+            },
+            "LinearFalloff": 0.5,
+            "QuadraticFalloff": 2.0,
+            "Range": 200.0
+        },
+        {
+            "type": "Entity",
+            "id": "{ed8b40c1-6a49-4842-b601-74b6c30b7159}\u0000",
+            "name": "embers",
+            "transform": {
+                "type": "Transform",
+                "id": "{f1fea790-a119-4d31-aa9f-71688f097e62}\u0000",
+                "owner": "{ed8b40c1-6a49-4842-b601-74b6c30b7159}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 2.0,
+                    "y": 1.0,
+                    "z": 2.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{2a4e1a4c-02fa-44ee-845a-4db52811cc35}\u0000"
+            },
+            "components": [
+                "{df9705cb-1273-4d86-8e54-779c6057f545}\u0000"
+            ]
+        },
+        {
+            "type": "EmbersParticleEmitter",
+            "id": "{df9705cb-1273-4d86-8e54-779c6057f545}\u0000",
+            "owner": "{ed8b40c1-6a49-4842-b601-74b6c30b7159}\u0000"
+        },
+        {
+            "type": "Entity",
+            "id": "{4429a850-d724-426b-a28b-dc2c3dcc7c46}\u0000",
+            "name": "collider",
+            "transform": {
+                "type": "Transform",
+                "id": "{a79f20d3-16c5-4c8f-810c-8c68f0a9a5d0}\u0000",
+                "owner": "{4429a850-d724-426b-a28b-dc2c3dcc7c46}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": -0.9133173823356628,
+                    "z": 0.0
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{2a4e1a4c-02fa-44ee-845a-4db52811cc35}\u0000"
+            },
+            "components": [
+                "{dd8d4ed9-4071-43af-b49d-1f7db1549911}\u0000"
+            ]
+        },
+        {
+            "type": "SphereCollider",
+            "id": "{dd8d4ed9-4071-43af-b49d-1f7db1549911}\u0000",
+            "owner": "{4429a850-d724-426b-a28b-dc2c3dcc7c46}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "colliderType": 1,
+            "radius": 2.200000047683716
+        }
+    ]
+}

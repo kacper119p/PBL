@@ -1,0 +1,19 @@
+{
+    "type": "PbrMaterial",
+    "BaseMap": "res/textures/Tekstury_Mati/UV1/BaseMap.dds",
+    "RoughnessMetallicMap": "res/textures/Tekstury_Mati/UV1/RMAOMap.dds",
+    "NormalMap": "res/textures/Tekstury_Mati/UV1/NormalMap.dds",
+    "EmissiveMap": "res/textures/Default.dds",
+    "Roughness": 1.0,
+    "Metallic": 1.0,
+    "BaseColor": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+    },
+    "EmissiveColor": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    }
+}

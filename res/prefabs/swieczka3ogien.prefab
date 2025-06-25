@@ -1,0 +1,105 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{1ceae816-5d62-41d1-b32d-168500734c27}\u0000",
+            "name": "swieczka1",
+            "transform": {
+                "type": "Transform",
+                "id": "{878221c5-d70e-49f1-b31a-bc46d6afbb5c}\u0000",
+                "owner": "{1ceae816-5d62-41d1-b32d-168500734c27}\u0000",
+                "Position": {
+                    "x": -17.88819122314453,
+                    "y": 1.2075846195220947,
+                    "z": 8.771533012390137
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [
+                    "{89075b3f-0cc7-490d-91e9-a0239806e69b}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{de1a6c04-1566-45b7-84d2-60e26fef3899}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{de1a6c04-1566-45b7-84d2-60e26fef3899}\u0000",
+            "owner": "{1ceae816-5d62-41d1-b32d-168500734c27}\u0000",
+            "Material": "res/materials/SampleScene/swieczkaswiecaca.mat",
+            "Model": "res/models/Modele_Mati/Swieczki/Swieca3.fbx",
+            "CastShadow": false
+        },
+        {
+            "type": "Entity",
+            "id": "{d2ac0ac7-10e7-4939-b7a5-00666f80b6c7}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{89075b3f-0cc7-490d-91e9-a0239806e69b}\u0000",
+                "owner": "{d2ac0ac7-10e7-4939-b7a5-00666f80b6c7}\u0000",
+                "Position": {
+                    "x": 0.041004180908203125,
+                    "y": 1.404487133026123,
+                    "z": 0.0110321044921875
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 0.10000000149011612,
+                    "y": 0.20000000298023224,
+                    "z": 0.10000000149011612
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{878221c5-d70e-49f1-b31a-bc46d6afbb5c}\u0000"
+            },
+            "components": [
+                "{ecb32796-cc73-4683-92ce-67d7143860e0}\u0000",
+                "{3e42638d-f010-471a-a6b1-50529410b5fa}\u0000"
+            ]
+        },
+        {
+            "type": "EmbersParticleEmitter",
+            "id": "{ecb32796-cc73-4683-92ce-67d7143860e0}\u0000",
+            "owner": "{d2ac0ac7-10e7-4939-b7a5-00666f80b6c7}\u0000"
+        },
+        {
+            "type": "PointLight",
+            "id": "{3e42638d-f010-471a-a6b1-50529410b5fa}\u0000",
+            "owner": "{d2ac0ac7-10e7-4939-b7a5-00666f80b6c7}\u0000",
+            "Color": {
+                "x": 10.0,
+                "y": 3.9215686321258545,
+                "z": 0.0
+            },
+            "LinearFalloff": 0.0,
+            "QuadraticFalloff": 1.0,
+            "Range": 100.0
+        }
+    ]
+}

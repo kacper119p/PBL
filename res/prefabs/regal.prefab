@@ -1,0 +1,336 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{4d5a7091-92fd-4b72-b845-72a31b832f9b}\u0000",
+            "name": "Regal",
+            "transform": {
+                "type": "Transform",
+                "id": "{200e3d27-9872-43eb-8dea-cc7d6716d118}\u0000",
+                "owner": "{4d5a7091-92fd-4b72-b845-72a31b832f9b}\u0000",
+                "Position": {
+                    "x": 8.061469078063965,
+                    "y": 4.561714172363281,
+                    "z": -21.109695434570313
+                },
+                "EulerAngles": {
+                    "x": -179.99989318847656,
+                    "y": 89.99994659423828,
+                    "z": -179.99989318847656
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 0.9999999403953552,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": -5.684341886080801e-13,
+                    "y": 0.7071071267127991,
+                    "z": -5.684341886080801e-13,
+                    "w": 0.7071064710617065
+                },
+                "Children": [
+                    "{93502c80-5f22-4c65-8ccb-cc8703139ac2}\u0000",
+                    "{dfe2cdf3-4afd-4a68-94b5-e7d6247593bc}\u0000",
+                    "{85827f63-9080-40b2-9a58-1d6b0c5a8eff}\u0000",
+                    "{2bb3d68e-bafb-4d6d-bfce-cbb4fd9e03fe}\u0000",
+                    "{0a9f3088-1cc8-49de-ad81-768aca18363d}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{8dd65f4b-06e4-4934-b1b3-26ee04de6e99}\u0000",
+                "{8bc00372-9705-4ea3-8ab4-6e472866e01c}\u0000",
+                "{824c7e0e-1ff3-402c-bb38-1519c78b8740}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{8dd65f4b-06e4-4934-b1b3-26ee04de6e99}\u0000",
+            "owner": "{4d5a7091-92fd-4b72-b845-72a31b832f9b}\u0000",
+            "Material": "res/materials/SampleScene/Regal.mat",
+            "Model": "./res/models/Modele_Mati/Meble/RegalZwykly.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{8bc00372-9705-4ea3-8ab4-6e472866e01c}\u0000",
+            "owner": "{4d5a7091-92fd-4b72-b845-72a31b832f9b}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4,
+            "collisionMask": 4294967056,
+            "colliderType": 0,
+            "_width": 11.0,
+            "_height": 9.0,
+            "_depth": 4.900000095367432
+        },
+        {
+            "type": "BookManager",
+            "id": "{824c7e0e-1ff3-402c-bb38-1519c78b8740}\u0000",
+            "owner": "{4d5a7091-92fd-4b72-b845-72a31b832f9b}\u0000",
+            "bookWidth": 0.4000000059604645,
+            "bookDepth": 0.699999988079071,
+            "bookHeight": 1.2000000476837158,
+            "bookMargin": 0.019999999552965164,
+            "sidePadding": 0.05000000074505806,
+            "backPadding": 0.029999999329447746,
+            "itemType": 0,
+            "swordPlacementPoint": null,
+            "bowPlacementPoint": null,
+            "arrowPlacementPoint": null,
+            "shieldPlacementPoint": null
+        },
+        {
+            "type": "Entity",
+            "id": "{2057fa7f-8410-4771-b573-36340e598867}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{93502c80-5f22-4c65-8ccb-cc8703139ac2}\u0000",
+                "owner": "{2057fa7f-8410-4771-b573-36340e598867}\u0000",
+                "Position": {
+                    "x": 0.000003244456820539199,
+                    "y": -0.032029151916503906,
+                    "z": 0.0019741058349609375
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{200e3d27-9872-43eb-8dea-cc7d6716d118}\u0000"
+            },
+            "components": [
+                "{03b74687-62b2-43c3-bd04-466c4792ddf6}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{03b74687-62b2-43c3-bd04-466c4792ddf6}\u0000",
+            "owner": "{2057fa7f-8410-4771-b573-36340e598867}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{9f9ebcb2-944d-4e03-a338-0d25426727f2}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{dfe2cdf3-4afd-4a68-94b5-e7d6247593bc}\u0000",
+                "owner": "{9f9ebcb2-944d-4e03-a338-0d25426727f2}\u0000",
+                "Position": {
+                    "x": 0.0000032500738598173484,
+                    "y": -4.000182151794434,
+                    "z": 0.0007643699645996094
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{200e3d27-9872-43eb-8dea-cc7d6716d118}\u0000"
+            },
+            "components": [
+                "{bd9b90b8-8123-4a57-a5a5-e1a6abaad3a1}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{bd9b90b8-8123-4a57-a5a5-e1a6abaad3a1}\u0000",
+            "owner": "{9f9ebcb2-944d-4e03-a338-0d25426727f2}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 2.299999952316284,
+            "_height": 0.75,
+            "_depth": 5.5
+        },
+        {
+            "type": "Entity",
+            "id": "{3aa046ed-1c1c-4fae-9f95-c8a844a30c60}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{85827f63-9080-40b2-9a58-1d6b0c5a8eff}\u0000",
+                "owner": "{3aa046ed-1c1c-4fae-9f95-c8a844a30c60}\u0000",
+                "Position": {
+                    "x": 0.000003245220796088688,
+                    "y": 1.8751263618469238,
+                    "z": 0.0011696815490722656
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{200e3d27-9872-43eb-8dea-cc7d6716d118}\u0000"
+            },
+            "components": [
+                "{dd22514d-d45b-44c2-8e26-e5e62a51aa3c}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{dd22514d-d45b-44c2-8e26-e5e62a51aa3c}\u0000",
+            "owner": "{3aa046ed-1c1c-4fae-9f95-c8a844a30c60}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{319059b5-0077-4329-87d3-4d856786b064}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{2bb3d68e-bafb-4d6d-bfce-cbb4fd9e03fe}\u0000",
+                "owner": "{319059b5-0077-4329-87d3-4d856786b064}\u0000",
+                "Position": {
+                    "x": 0.000003249447217967827,
+                    "y": 3.7544960975646973,
+                    "z": 0.0014081001281738281
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{200e3d27-9872-43eb-8dea-cc7d6716d118}\u0000"
+            },
+            "components": [
+                "{cd0cedf7-a5a0-46da-a121-a8e250b234cf}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{cd0cedf7-a5a0-46da-a121-a8e250b234cf}\u0000",
+            "owner": "{319059b5-0077-4329-87d3-4d856786b064}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{d1aab356-5bcf-479e-abc1-8a57b5987da3}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{0a9f3088-1cc8-49de-ad81-768aca18363d}\u0000",
+                "owner": "{d1aab356-5bcf-479e-abc1-8a57b5987da3}\u0000",
+                "Position": {
+                    "x": 0.000003244900199206313,
+                    "y": -2.0220696926116943,
+                    "z": 0.0015125274658203125
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{200e3d27-9872-43eb-8dea-cc7d6716d118}\u0000"
+            },
+            "components": [
+                "{92713500-bc8a-4914-ad9f-025437629b6c}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{92713500-bc8a-4914-ad9f-025437629b6c}\u0000",
+            "owner": "{d1aab356-5bcf-479e-abc1-8a57b5987da3}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        }
+    ]
+}

@@ -1,15 +1,15 @@
 {
     "type": "PbrMaterial",
-    "BaseMap": "./res/textures/Tekstury_Mati/UV8/BaseMap.dds",
-    "RoughnessMetallicMap": "./res/textures/Tekstury_Mati/UV8/RMAOMap.dds",
-    "NormalMap": "./res/textures/Tekstury_Mati/UV8/NormalMap.dds",
+    "BaseMap": "res/textures/Tekstury_Mati/UV11/BaseMap.dds",
+    "RoughnessMetallicMap": "./res/textures/Default.dds",
+    "NormalMap": "res/textures/Tekstury_Mati/UV11/NormalMap.dds",
     "EmissiveMap": "./res/textures/EmissiveMapDefault.dds",
-    "Roughness": 0.527999997138977,
-    "Metallic": 0.5059999823570251,
+    "Roughness": 0.2529999911785126,
+    "Metallic": 0.16699999570846558,
     "BaseColor": {
         "x": 1.0,
-        "y": 1.0,
-        "z": 1.0
+        "y": 0.5833333730697632,
+        "z": 0.5833333730697632
     },
     "EmissiveColor": {
         "x": 0.0,

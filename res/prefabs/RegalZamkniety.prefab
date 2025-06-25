@@ -1,0 +1,234 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{815fe8a9-b7b9-46fc-a872-a8d0dbe38ad9}\u0000",
+            "name": "RegalZamkniety",
+            "transform": {
+                "type": "Transform",
+                "id": "{44aaf7df-527e-4aa7-82d6-7a63e40f464a}\u0000",
+                "owner": "{815fe8a9-b7b9-46fc-a872-a8d0dbe38ad9}\u0000",
+                "Position": {
+                    "x": 3.0175185203552246,
+                    "y": 4.7090744972229,
+                    "z": 33.10603713989258
+                },
+                "EulerAngles": {
+                    "x": -179.99989318847656,
+                    "y": 89.99994659423828,
+                    "z": -179.99989318847656
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 0.9999999403953552,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": -5.684341886080801e-13,
+                    "y": 0.7071071267127991,
+                    "z": -5.684341886080801e-13,
+                    "w": 0.7071064710617065
+                },
+                "Children": [
+                    "{4b4b080f-96ed-4d90-a7fe-fce78699489f}\u0000",
+                    "{1707de94-f382-4248-9c1e-476a0c65106e}\u0000",
+                    "{603544f4-a242-4fd1-855c-91e9379ce908}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{8164d2ad-b436-4ef2-8db8-cf3f562ad980}\u0000",
+                "{4fcee190-e908-4470-a765-ed04eed60a7c}\u0000",
+                "{6a4d543b-6adc-4911-be6e-a8071f86bbb1}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{8164d2ad-b436-4ef2-8db8-cf3f562ad980}\u0000",
+            "owner": "{815fe8a9-b7b9-46fc-a872-a8d0dbe38ad9}\u0000",
+            "Material": "res/materials/SampleScene/Regal.mat",
+            "Model": "./res/Models/Modele_Mati/Meble/RegalZabudowany.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{4fcee190-e908-4470-a765-ed04eed60a7c}\u0000",
+            "owner": "{815fe8a9-b7b9-46fc-a872-a8d0dbe38ad9}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4,
+            "collisionMask": 4294967056,
+            "colliderType": 0,
+            "_width": 6.0,
+            "_height": 9.0,
+            "_depth": 4.900000095367432
+        },
+        {
+            "type": "BookManager",
+            "id": "{6a4d543b-6adc-4911-be6e-a8071f86bbb1}\u0000",
+            "owner": "{815fe8a9-b7b9-46fc-a872-a8d0dbe38ad9}\u0000",
+            "bookWidth": 0.4000000059604645,
+            "bookDepth": 0.699999988079071,
+            "bookHeight": 1.2000000476837158,
+            "bookMargin": 0.019999999552965164,
+            "sidePadding": 0.05000000074505806,
+            "backPadding": 0.029999999329447746,
+            "itemType": 0,
+            "swordPlacementPoint": null,
+            "bowPlacementPoint": null,
+            "arrowPlacementPoint": null,
+            "shieldPlacementPoint": null
+        },
+        {
+            "type": "Entity",
+            "id": "{2a97f2e6-e57e-4aa1-a851-79178531f1af}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{4b4b080f-96ed-4d90-a7fe-fce78699489f}\u0000",
+                "owner": "{2a97f2e6-e57e-4aa1-a851-79178531f1af}\u0000",
+                "Position": {
+                    "x": 0.14098452031612396,
+                    "y": -1.4374480247497559,
+                    "z": 0.0014920234680175781
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{44aaf7df-527e-4aa7-82d6-7a63e40f464a}\u0000"
+            },
+            "components": [
+                "{2cb4975b-6b5a-40c5-8f1c-ee71f0b806e8}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{2cb4975b-6b5a-40c5-8f1c-ee71f0b806e8}\u0000",
+            "owner": "{2a97f2e6-e57e-4aa1-a851-79178531f1af}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        },
+        {
+            "type": "Entity",
+            "id": "{47404d58-953d-47bb-a531-5e1f4c0c9149}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{1707de94-f382-4248-9c1e-476a0c65106e}\u0000",
+                "owner": "{47404d58-953d-47bb-a531-5e1f4c0c9149}\u0000",
+                "Position": {
+                    "x": 0.23479555547237396,
+                    "y": -3.361273765563965,
+                    "z": -0.005187273025512695
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{44aaf7df-527e-4aa7-82d6-7a63e40f464a}\u0000"
+            },
+            "components": [
+                "{b83a599e-796d-4e71-a5f8-536d7d376496}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{b83a599e-796d-4e71-a5f8-536d7d376496}\u0000",
+            "owner": "{47404d58-953d-47bb-a531-5e1f4c0c9149}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 2.299999952316284,
+            "_height": 0.75,
+            "_depth": 4.800000190734863
+        },
+        {
+            "type": "Entity",
+            "id": "{44deddbb-488f-40c6-badb-8c8fab416f80}\u0000",
+            "name": "dolna polka",
+            "transform": {
+                "type": "Transform",
+                "id": "{603544f4-a242-4fd1-855c-91e9379ce908}\u0000",
+                "owner": "{44deddbb-488f-40c6-badb-8c8fab416f80}\u0000",
+                "Position": {
+                    "x": 0.23709963262081146,
+                    "y": 1.0757408142089844,
+                    "z": 0.0008592605590820313
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{44aaf7df-527e-4aa7-82d6-7a63e40f464a}\u0000"
+            },
+            "components": [
+                "{42c79890-2436-4e10-8e5a-a8aa0a573ca0}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{42c79890-2436-4e10-8e5a-a8aa0a573ca0}\u0000",
+            "owner": "{44deddbb-488f-40c6-badb-8c8fab416f80}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 8,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.899999976158142,
+            "_height": 0.4000000059604645,
+            "_depth": 4.0
+        }
+    ]
+}
