@@ -153,8 +153,8 @@ namespace Engine
                     int slimeSizeInt = entityCollider->GetOwner()->GetComponent<AiManager>()->GetSize();
                     if (volume + slimeSizeInt <= maxVolume)
                     {
-                        glm::vec3 direction = position + forward * (size / 2.0f + 0.01f) - entityCollider->GetOwner()->
-                                              GetTransform()->GetPosition();
+                        glm::vec3 direction = position + forward * (size / 2.0f + 0.01f) -
+                                              entityCollider->GetOwner()->GetTransform()->GetPosition();
                         if (entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>())
                         {
                             entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->hasGravity = false;
@@ -183,55 +183,56 @@ namespace Engine
                             UpdateFillIndicator();
                             entityCollider->GetOwner()->GetComponent<Collider>()->SetTrigger(true);
 
-                        items.push_back(entityCollider->GetOwner());
-                        volume += thrashSizeInt;
-                        UpdateFillIndicator();
-                        if (entityCollider->GetOwner()->GetComponent<BoxCollider>())
-                            entityCollider->GetOwner()->GetComponent<Engine::BoxCollider>()->SetTrigger(true);
+                            items.push_back(entityCollider->GetOwner());
+                            volume += thrashSizeInt;
+                            UpdateFillIndicator();
+                            if (entityCollider->GetOwner()->GetComponent<BoxCollider>())
+                                entityCollider->GetOwner()->GetComponent<Engine::BoxCollider>()->SetTrigger(true);
 
-                        entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->hasGravity = false;
-                        entityCollider->GetOwner()->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
+                            entityCollider->GetOwner()->GetComponent<Engine::Rigidbody>()->hasGravity = false;
+                            entityCollider->GetOwner()->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
                         }
                     }
 
-                Entity* entity = entityCollider->GetOwner();
-                if (entity->GetComponent<AiManager>())
-                {
-                    AiManager* slimeAi = entity->GetComponent<AiManager>();
-                    int slimeSizeInt = slimeAi->GetSize();
-
-                    if (volume < maxVolume)
+                    Entity* entity = entityCollider->GetOwner();
+                    if (entity->GetComponent<AiManager>())
                     {
-                        entity->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
-                        volume += slimeSizeInt;
-                        items.push_back(entityCollider->GetOwner());
-                        UpdateFillIndicator();
+                        AiManager* slimeAi = entity->GetComponent<AiManager>();
+                        int slimeSizeInt = slimeAi->GetSize();
 
-                        Rigidbody* rb = entity->GetComponent<Rigidbody>();
-                        if (rb)
+                        if (volume < maxVolume)
                         {
-                            rb->hasGravity = false;
+                            entity->GetTransform()->SetPosition(glm::vec3(1000, 1, 1000));
+                            volume += slimeSizeInt;
+                            items.push_back(entityCollider->GetOwner());
+                            UpdateFillIndicator();
+
+                            Rigidbody* rb = entity->GetComponent<Rigidbody>();
+                            if (rb)
+                            {
+                                rb->hasGravity = false;
+                            }
+
+                            BoxCollider* box = entity->GetComponent<BoxCollider>();
+                            if (box)
+                            {
+                                box->SetTrigger(true);
+                            }
+
+                            slimeAi->SetEnabled(false);
+
+                            if (slimeSizeInt == 10)
+                                playerAnimationManager->SuckBigObject();
                         }
-
-                        BoxCollider* box = entity->GetComponent<BoxCollider>();
-                        if (box)
-                        {
-                            box->SetTrigger(true);
-                        }
-
-                        slimeAi->SetEnabled(false);
-
-                        if (slimeSizeInt == 10)
-                            playerAnimationManager->SuckBigObject();
                     }
                 }
             }
+
+            wasShootingKeyPressed = isShootingKeyPressed;
+
+            ThrashManager::GetInstance()->VacuumCount = items.size();
+            ThrashManager::GetInstance()->VacuumVolume = volume;
         }
-
-        wasShootingKeyPressed = isShootingKeyPressed;
-
-        ThrashManager::GetInstance()->VacuumCount = items.size();
-        ThrashManager::GetInstance()->VacuumVolume = volume;
     }
 
     void Vacuum::Shoot()

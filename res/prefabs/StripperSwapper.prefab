@@ -2,12 +2,12 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{9e899c40-e6e8-4f3d-b98a-9ec252fb458c}\u0000",
+            "id": "{9f0722ce-454f-43af-8f95-bfafed1c2ea5}\u0000",
             "name": "StripperSwapper",
             "transform": {
                 "type": "Transform",
-                "id": "{547f9159-b98a-48c6-9d99-ddbced206d78}\u0000",
-                "owner": "{9e899c40-e6e8-4f3d-b98a-9ec252fb458c}\u0000",
+                "id": "{b6b81454-b947-447c-b67e-6e59f26e2867}\u0000",
+                "owner": "{9f0722ce-454f-43af-8f95-bfafed1c2ea5}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
@@ -19,9 +19,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 3.0,
-                    "y": 3.0,
-                    "z": 3.0
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
                 },
                 "Rotation": {
                     "x": 0.0,
@@ -33,13 +33,13 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{9ffb933f-3b50-48ef-b644-351a73ddbf29}\u0000"
+                "{e40d3912-56d6-41ff-a026-b91417bb4d84}\u0000"
             ]
         },
         {
             "type": "OutlinedModelRenderer",
-            "id": "{9ffb933f-3b50-48ef-b644-351a73ddbf29}\u0000",
-            "owner": "{9e899c40-e6e8-4f3d-b98a-9ec252fb458c}\u0000",
+            "id": "{e40d3912-56d6-41ff-a026-b91417bb4d84}\u0000",
+            "owner": "{9f0722ce-454f-43af-8f95-bfafed1c2ea5}\u0000",
             "Material": "./res/materials/SampleScene/Tools.mat",
             "Model": "./res/models/Swapper/Spychacz_stojak.fbx",
             "CastShadow": true,

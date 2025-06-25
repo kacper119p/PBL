@@ -2650,7 +2650,7 @@
             "type": "ModelRenderer",
             "id": "{6ecc347e-ff7a-418b-8a49-a1eb0084ebcd}\u0000",
             "owner": "{b6a27306-0fe6-4439-bb7d-fcf4daa89a10}\u0000",
-            "Material": "res/materials/SampleScene/Sword.mat",
+            "Material": "res/materials/SampleScene/UV5.mat",
             "Model": "./res/Models/Modele_Mati/Bron/MieczCaly.fbx",
             "CastShadow": true
         },
@@ -2694,7 +2694,7 @@
             "type": "ModelRenderer",
             "id": "{8ceb5214-c42e-4283-9af9-80fa49a0df79}\u0000",
             "owner": "{7580efb9-7596-403b-957c-68bb91b8c89d}\u0000",
-            "Material": "res/materials/SampleScene/Sword.mat",
+            "Material": "res/materials/SampleScene/UV5.mat",
             "Model": "./res/Models/Modele_Mati/Bron/MieczCaly.fbx",
             "CastShadow": true
         },
@@ -3015,14 +3015,14 @@
                 "id": "{8799593b-f97d-4223-8ba3-7250bd2de1d3}\u0000",
                 "owner": "{f5c27708-fe41-4992-8f64-8347b807a369}\u0000",
                 "Position": {
-                    "x": -49.16216278076172,
-                    "y": 15.487138748168945,
-                    "z": 75.11727905273438
+                    "x": -49.50321578979492,
+                    "y": 15.985809326171875,
+                    "z": 74.54109191894531
                 },
                 "EulerAngles": {
-                    "x": -33.292015075683594,
-                    "y": 22.442583084106445,
-                    "z": -102.79210662841797
+                    "x": 90.0,
+                    "y": 122.16521453857422,
+                    "z": 0.0
                 },
                 "Scale": {
                     "x": 2.0,
@@ -3030,10 +3030,10 @@
                     "z": 2.0
                 },
                 "Rotation": {
-                    "x": -0.029612168669700623,
-                    "y": 0.33590930700302124,
-                    "z": -0.6996337175369263,
-                    "w": 0.6299211978912354
+                    "x": 0.3419201374053955,
+                    "y": 0.6189430952072144,
+                    "z": -0.6189430952072144,
+                    "w": 0.3419201374053955
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
@@ -12376,8 +12376,8 @@
             "type": "ModelRenderer",
             "id": "{b56bc1d5-3c5d-4e7b-88c7-7623dac0c8a6}\u0000",
             "owner": "{98a39fbf-8e49-4a2c-994d-4334e270b1cb}\u0000",
-            "Material": "res/materials/SampleScene/Sword.mat",
-            "Model": "res/models/Modele_Mati/Bron/MieczCaly.fbx",
+            "Material": "res/materials/SampleScene/UV5.mat",
+            "Model": "./res/Models/Modele_Mati/Bron/MieczCaly.fbx",
             "CastShadow": true
         },
         {
@@ -13639,7 +13639,7 @@
             "type": "ModelRenderer",
             "id": "{ed4cd4f2-d74b-4551-871d-3e1240ab3240}\u0000",
             "owner": "{e77462b7-b801-4529-829a-2b612a29c456}\u0000",
-            "Material": "res/materials/SampleScene/Sword.mat",
+            "Material": "res/materials/SampleScene/UV5.mat",
             "Model": "./res/Models/Modele_Mati/Bron/MieczCaly.fbx",
             "CastShadow": true
         },
@@ -13683,7 +13683,7 @@
             "type": "ModelRenderer",
             "id": "{dddcc39b-d4dd-4597-847d-5d340cd7f23b}\u0000",
             "owner": "{338ef499-ec3c-40bf-b63c-223e9d079e6e}\u0000",
-            "Material": "res/materials/SampleScene/Sword.mat",
+            "Material": "res/materials/SampleScene/UV5.mat",
             "Model": "./res/Models/Modele_Mati/Bron/MieczCaly.fbx",
             "CastShadow": true
         },
@@ -23396,7 +23396,7 @@
             "type": "ModelRenderer",
             "id": "{b01bdc56-7f76-471b-832c-0f9aa42ff6cd}\u0000",
             "owner": "{d0a2192d-bf88-4cfd-af0b-21882c9d4591}\u0000",
-            "Material": "res/materials/SampleScene/Sword.mat",
+            "Material": "res/materials/SampleScene/UV5.mat",
             "Model": "res/models/Modele_Mati/Bron/MieczCaly.fbx",
             "CastShadow": true
         },
