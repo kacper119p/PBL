@@ -52,6 +52,17 @@
             "MaxTrashCapacity": 10
         },
         {
+            "type": "BoxCollider",
+            "id": "{eae769d9-9c71-4147-9955-8a46a3c0eda9}\u0000",
+            "owner": "{ed452e3c-1f27-48b2-9796-78cbf1ce9dbd}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "colliderType": 0,
+            "_width": 1.7999999523162842,
+            "_height": 2.5999999046325684,
+            "_depth": 1.7000000476837158
+        },
+        {
             "type": "Entity",
             "id": "{944581ec-f29e-4caf-a03b-c745cec7de45}\u0000",
             "name": "Idle",
