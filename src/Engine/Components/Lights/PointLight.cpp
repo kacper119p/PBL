@@ -20,7 +20,7 @@ namespace Engine
         {
             // Display and edit the Color (glm::vec3)
             float color[3] = {Color.r, Color.g, Color.b};
-            if (ImGui::ColorEdit3("Color", color))
+            if (ImGui::ColorPicker3("Color", color))
             {
                 SetColor(glm::vec3(color[0], color[1], color[2]));
             }
@@ -47,7 +47,7 @@ namespace Engine
             }
         }
     }
-    #endif
+#endif
     PointLight::~PointLight()
     {
         LightManager::GetInstance()->UnregisterLight(this);
