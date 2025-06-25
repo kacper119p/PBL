@@ -10,7 +10,7 @@ namespace Engine
     RenderingManager* RenderingManager::Instance = nullptr;
 
     RenderingManager::RenderingManager(const glm::ivec2 Resolution) :
-        MultiSampledBuffer(Resolution)
+        MultiSampledBuffer(Resolution), Ssao(Resolution), Bloom(Resolution), GodRays(Resolution), Resolution(Resolution)
     {
     }
 
@@ -23,8 +23,7 @@ namespace Engine
         Instance = new RenderingManager(Resolution);
     }
 
-    void RenderingManager::RenderAll(const CameraRenderData& RenderData, const int ScreenWidth, const int ScreenHeight,
-                                     const float DeltaTime)
+    void RenderingManager::RenderAll(const CameraRenderData& RenderData, const float DeltaTime)
     {
         Frustum.UpdateFrustum(RenderData);
         glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
@@ -56,7 +55,7 @@ namespace Engine
         glStencilMask(StencilBits_All);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-        glViewport(0, 0, ScreenWidth, ScreenHeight);
+        glViewport(0, 0, Resolution.x, Resolution.y);
         glEnable(GL_CULL_FACE);
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LEQUAL);
@@ -77,7 +76,7 @@ namespace Engine
         MultiSampledBuffer.BindMultiSampled();
         MultiSampledBuffer.WriteOcclusion();
 
-        glViewport(0, 0, ScreenWidth, ScreenHeight);
+        glViewport(0, 0, Resolution.x, Resolution.y);
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
         glDepthMask(GL_FALSE);
         glEnable(GL_CULL_FACE);

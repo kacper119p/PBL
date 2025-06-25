@@ -52,6 +52,9 @@ layout (std430, binding = 0) buffer Lights {
     uint DirectionalLightCount;
     uint PointLightCount;
     uint SpotlightCount;
+    float _padding;
+    uvec2 Resolution;
+    float _padding1[2];
     directionalLight DirectionalLight;
     pointLight PointLights[2];
     spotLight SpotLights[2];
@@ -234,7 +237,7 @@ vec3 CalculateEnvironmentInfluence(vec3 BaseColor, vec3 Normal, vec3 ViewDirecti
     vec2 brdf = texture(BrdfLUT, vec2(max(dot(Normal, ViewDirection), 0.0), Roughness)).rg;
     vec3 specular = prefilteredColor * (kS * brdf.x + brdf.y);
 
-    return (kD * diffuse + specular) * min(vec3(texture(SSAOMap, gl_FragCoord.xy / vec2(1920, 1080)).r), AmbientOcclusion);
+    return (kD * diffuse + specular) * min(vec3(texture(SSAOMap, gl_FragCoord.xy / vec2(Resolution.x, Resolution.y)).r), AmbientOcclusion);
 }
 
 vec3 CalculateLight(vec3 BaseColor, float Metallic, float Roughness, vec3 Normal, vec3 Position, vec3 ViewDirection, float AmbientOcclusion)
