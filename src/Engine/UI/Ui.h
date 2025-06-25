@@ -48,7 +48,5 @@ namespace Engine::Ui
         void Render() const;
 
         [[nodiscard]] virtual std::string GetType() const = 0;
-
-        virtual void Update(float DeltaTime) = 0;
     };
 }
