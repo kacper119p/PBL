@@ -2,16 +2,16 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
-            "name": "swieczka1",
+            "id": "{6b1b8e9d-2abb-43f9-b194-2dbd152b8f60}\u0000",
+            "name": "szafir",
             "transform": {
                 "type": "Transform",
-                "id": "{79076f10-fc9f-43d0-ad05-c03abdb7619b}\u0000",
-                "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
+                "id": "{77ca031a-13a4-42a2-85ae-ed3f6e4a1179}\u0000",
+                "owner": "{6b1b8e9d-2abb-43f9-b194-2dbd152b8f60}\u0000",
                 "Position": {
-                    "x": 0.0,
+                    "x": -5.740073204040527,
                     "y": 1.1524142026901245,
-                    "z": 0.0
+                    "z": -2.1458053588867188
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -33,24 +33,24 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{60d52f02-6524-4499-b50e-1eaa15f2a451}\u0000",
-                "{f739f587-ddeb-44b7-b5de-18b65e1ec0f4}\u0000",
-                "{b0a37001-3bbd-4e6a-95e6-389917b06919}\u0000",
-                "{5218ca14-0545-4a16-9d40-924ee4bba9a3}\u0000"
+                "{099a47dc-94ba-4d3f-96aa-a286d3ccf104}\u0000",
+                "{ee21c8c5-ca46-4bb9-856a-57287d8afced}\u0000",
+                "{54247e48-cab3-4c9d-8a1a-258737e7aa6f}\u0000",
+                "{181bec94-3ba9-4342-b160-fd4ba781391d}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{60d52f02-6524-4499-b50e-1eaa15f2a451}\u0000",
-            "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
+            "id": "{099a47dc-94ba-4d3f-96aa-a286d3ccf104}\u0000",
+            "owner": "{6b1b8e9d-2abb-43f9-b194-2dbd152b8f60}\u0000",
             "Material": "res/materials/SampleScene/drogikamien.mat",
             "Model": "res/models/Modele_Mati/Kosztownosci/kamienDiament.fbx",
             "CastShadow": true
         },
         {
             "type": "BoxCollider",
-            "id": "{f739f587-ddeb-44b7-b5de-18b65e1ec0f4}\u0000",
-            "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
+            "id": "{ee21c8c5-ca46-4bb9-856a-57287d8afced}\u0000",
+            "owner": "{6b1b8e9d-2abb-43f9-b194-2dbd152b8f60}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
@@ -63,10 +63,10 @@
         },
         {
             "type": "Rigidbody",
-            "id": "{b0a37001-3bbd-4e6a-95e6-389917b06919}\u0000",
-            "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
+            "id": "{54247e48-cab3-4c9d-8a1a-258737e7aa6f}\u0000",
+            "owner": "{6b1b8e9d-2abb-43f9-b194-2dbd152b8f60}\u0000",
+            "mass": 0.10000000149011612,
+            "inverseMass": 10.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
@@ -75,9 +75,9 @@
         },
         {
             "type": "Thrash",
-            "id": "{5218ca14-0545-4a16-9d40-924ee4bba9a3}\u0000",
-            "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
-            "size": 1
+            "id": "{181bec94-3ba9-4342-b160-fd4ba781391d}\u0000",
+            "owner": "{6b1b8e9d-2abb-43f9-b194-2dbd152b8f60}\u0000",
+            "size": 3
         }
     ]
 }

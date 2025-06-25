@@ -2,16 +2,16 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
-            "name": "New Entity",
+            "id": "{65a5f12f-0eda-43e0-af20-518a8a1c68d7}\u0000",
+            "name": "Miesko",
             "transform": {
                 "type": "Transform",
-                "id": "{32d3fe9b-21e1-4a01-92ed-1df0d76ec010}\u0000",
-                "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+                "id": "{68a1b9af-69b8-447f-add9-9b5b7a5f290a}\u0000",
+                "owner": "{65a5f12f-0eda-43e0-af20-518a8a1c68d7}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": 1.7242627143859863,
-                    "z": 0.0
+                    "x": -35.3560905456543,
+                    "y": 5.569246292114258,
+                    "z": -11.016345977783203
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -33,39 +33,51 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{ca69cff5-2835-4420-8bf8-49c88ae84d48}\u0000",
-                "{84d60689-e5ca-47e3-844a-61b4e3f1000c}\u0000",
-                "{236e74ee-58d1-4b0b-81db-d99225ecd516}\u0000"
+                "{90e3cdb5-f743-415b-b789-249d11ec08b8}\u0000",
+                "{5e813156-bba9-4bf4-9eaa-b10e954dba09}\u0000",
+                "{0ca108e6-28a0-4aad-806a-6474fc53eede}\u0000",
+                "{c3d78171-e40b-4959-b0b1-6b3acbebf149}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{ca69cff5-2835-4420-8bf8-49c88ae84d48}\u0000",
-            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
-            "Material": "res/materials/SampleScene/UV8.mat",
+            "id": "{90e3cdb5-f743-415b-b789-249d11ec08b8}\u0000",
+            "owner": "{65a5f12f-0eda-43e0-af20-518a8a1c68d7}\u0000",
+            "Material": "res/materials/SampleScene/UV11.mat",
             "Model": "res/models/Modele_Mati/Smieci/Miesko.fbx",
             "CastShadow": true
         },
         {
-            "type": "SphereCollider",
-            "id": "{84d60689-e5ca-47e3-844a-61b4e3f1000c}\u0000",
-            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+            "type": "BoxCollider",
+            "id": "{5e813156-bba9-4bf4-9eaa-b10e954dba09}\u0000",
+            "owner": "{65a5f12f-0eda-43e0-af20-518a8a1c68d7}\u0000",
             "isTrigger": false,
             "isStatic": false,
-            "colliderType": 1,
-            "radius": 0.8999999761581421
+            "skipCollisionSibling": false,
+            "collisionLayer": 2,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.600000023841858,
+            "_height": 1.399999976158142,
+            "_depth": 2.0
         },
         {
             "type": "Rigidbody",
-            "id": "{236e74ee-58d1-4b0b-81db-d99225ecd516}\u0000",
-            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
-            "mass": 0.30000001192092896,
-            "inverseMass": 3.3333332538604736,
+            "id": "{0ca108e6-28a0-4aad-806a-6474fc53eede}\u0000",
+            "owner": "{65a5f12f-0eda-43e0-af20-518a8a1c68d7}\u0000",
+            "mass": 0.5,
+            "inverseMass": 2.0,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
-            "friction": 0.2750000059604645,
+            "friction": 0.20000000298023224,
             "frictionEnabled": true,
-            "restitution": 0.6869999766349792
+            "restitution": 0.39899998903274536
+        },
+        {
+            "type": "Thrash",
+            "id": "{c3d78171-e40b-4959-b0b1-6b3acbebf149}\u0000",
+            "owner": "{65a5f12f-0eda-43e0-af20-518a8a1c68d7}\u0000",
+            "size": 5
         }
     ]
 }

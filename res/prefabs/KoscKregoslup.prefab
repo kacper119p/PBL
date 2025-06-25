@@ -2,20 +2,20 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
-            "name": "New Entity",
+            "id": "{7bf9ed33-fdb5-43a7-a9ae-d3053ad4bef9}\u0000",
+            "name": "KoscKregoslup",
             "transform": {
                 "type": "Transform",
-                "id": "{32d3fe9b-21e1-4a01-92ed-1df0d76ec010}\u0000",
-                "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+                "id": "{3de0f9be-ebe1-434d-9aeb-50230cf48b72}\u0000",
+                "owner": "{7bf9ed33-fdb5-43a7-a9ae-d3053ad4bef9}\u0000",
                 "Position": {
-                    "x": 0.0,
+                    "x": -41.734039306640625,
                     "y": 1.7242627143859863,
-                    "z": 0.0
+                    "z": 2.9157848358154297
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": 24.63095474243164,
                     "z": 0.0
                 },
                 "Scale": {
@@ -25,35 +25,36 @@
                 },
                 "Rotation": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": 0.21329431235790253,
                     "z": 0.0,
-                    "w": 1.0
+                    "w": 0.9769880175590515
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{ca69cff5-2835-4420-8bf8-49c88ae84d48}\u0000",
-                "{21bc8168-af97-4386-8e81-94b48af165f9}\u0000",
-                "{b94dd8d2-2bef-4d17-abc5-a55f70805f1e}\u0000"
+                "{c654bb9a-59ce-4853-947b-abe0b9472d9f}\u0000",
+                "{a8e091ad-fead-499b-a5e0-07f787b52735}\u0000",
+                "{c2c2bf51-fe25-47d7-821c-ebfec60e7a97}\u0000",
+                "{46c1d542-c2e6-4bb7-8977-ea7ac657421b}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{ca69cff5-2835-4420-8bf8-49c88ae84d48}\u0000",
-            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+            "id": "{c654bb9a-59ce-4853-947b-abe0b9472d9f}\u0000",
+            "owner": "{7bf9ed33-fdb5-43a7-a9ae-d3053ad4bef9}\u0000",
             "Material": "res/materials/SampleScene/UV8.mat",
             "Model": "res/models/Modele_Mati/Smieci/KoscKregoslup.fbx",
             "CastShadow": true
         },
         {
             "type": "BoxCollider",
-            "id": "{21bc8168-af97-4386-8e81-94b48af165f9}\u0000",
-            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+            "id": "{a8e091ad-fead-499b-a5e0-07f787b52735}\u0000",
+            "owner": "{7bf9ed33-fdb5-43a7-a9ae-d3053ad4bef9}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
+            "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
             "_width": 1.600000023841858,
@@ -62,8 +63,8 @@
         },
         {
             "type": "Rigidbody",
-            "id": "{b94dd8d2-2bef-4d17-abc5-a55f70805f1e}\u0000",
-            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+            "id": "{c2c2bf51-fe25-47d7-821c-ebfec60e7a97}\u0000",
+            "owner": "{7bf9ed33-fdb5-43a7-a9ae-d3053ad4bef9}\u0000",
             "mass": 0.5,
             "inverseMass": 2.0,
             "linearDamping": 0.0,
@@ -71,6 +72,12 @@
             "friction": 0.20000000298023224,
             "frictionEnabled": true,
             "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Thrash",
+            "id": "{46c1d542-c2e6-4bb7-8977-ea7ac657421b}\u0000",
+            "owner": "{7bf9ed33-fdb5-43a7-a9ae-d3053ad4bef9}\u0000",
+            "size": 5
         }
     ]
 }

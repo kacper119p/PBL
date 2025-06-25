@@ -1,0 +1,63 @@
+{
+    "Prefab": [
+        {
+            "type": "Entity",
+            "id": "{53ad5c9c-6b1a-4301-8c7c-54246ad0c100}\u0000",
+            "name": "Kolumna",
+            "transform": {
+                "type": "Transform",
+                "id": "{bbfffd54-1bf2-407d-97f4-92806b33440f}\u0000",
+                "owner": "{53ad5c9c-6b1a-4301-8c7c-54246ad0c100}\u0000",
+                "Position": {
+                    "x": -13.542642593383789,
+                    "y": 6.699916362762451,
+                    "z": -11.088909149169922
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{22654e59-2e33-4b1e-a720-8a23f2af5b47}\u0000",
+                "{e83389a1-04ac-4d78-a1da-7d443be9ef38}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{22654e59-2e33-4b1e-a720-8a23f2af5b47}\u0000",
+            "owner": "{53ad5c9c-6b1a-4301-8c7c-54246ad0c100}\u0000",
+            "Material": "res/materials/SampleScene/Pilar.mat",
+            "Model": "./res/Models/Modele_Mati/Otoczenie/Pilar.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{e83389a1-04ac-4d78-a1da-7d443be9ef38}\u0000",
+            "owner": "{53ad5c9c-6b1a-4301-8c7c-54246ad0c100}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 3.700000047683716,
+            "_height": 12.600000381469727,
+            "_depth": 2.9000000953674316
+        }
+    ]
+}

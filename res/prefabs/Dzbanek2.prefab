@@ -2,16 +2,16 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
-            "name": "New Entity",
+            "id": "{57a8debc-bf19-4eba-9ef4-adf7342b3f33}\u0000",
+            "name": "Dzbanek2",
             "transform": {
                 "type": "Transform",
-                "id": "{3deab416-9c15-44bc-a6e3-2fc0fe356d35}\u0000",
-                "owner": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
+                "id": "{23f80f00-5802-4f6a-811f-079a0385139d}\u0000",
+                "owner": "{57a8debc-bf19-4eba-9ef4-adf7342b3f33}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": 1.3093535900115967,
-                    "z": 0.0
+                    "x": -1.868983268737793,
+                    "y": 2.6290969848632813,
+                    "z": -35.67487335205078
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -19,9 +19,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
+                    "x": 2.0,
+                    "y": 2.0,
+                    "z": 2.0
                 },
                 "Rotation": {
                     "x": 0.0,
@@ -33,40 +33,50 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{507ef287-3f3b-4b13-b7a9-719aed7bd1bb}\u0000",
-                "{6ff575c0-5071-4dee-b991-519a341f794e}\u0000",
-                "{0b149841-fc39-4235-a2e2-65c2bc1f9ef2}\u0000"
+                "{95f9b5d4-488b-4ddf-a041-82126097fca7}\u0000",
+                "{63bd5ca2-4b7b-46c6-a899-d92121f3b309}\u0000",
+                "{01d4127b-c0d2-4e6c-b441-c22c9da45679}\u0000",
+                "{78e6cad0-2d7d-407d-ad7b-ace5c8769c83}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{507ef287-3f3b-4b13-b7a9-719aed7bd1bb}\u0000",
-            "owner": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
+            "id": "{95f9b5d4-488b-4ddf-a041-82126097fca7}\u0000",
+            "owner": "{57a8debc-bf19-4eba-9ef4-adf7342b3f33}\u0000",
             "Material": "res/materials/SampleScene/UV6.mat",
             "Model": "res/models/Modele_Mati/Naczynia/Dzbanek2.fbx",
             "CastShadow": true
         },
         {
-            "type": "CapsuleCollider",
-            "id": "{6ff575c0-5071-4dee-b991-519a341f794e}\u0000",
-            "owner": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
+            "type": "BoxCollider",
+            "id": "{63bd5ca2-4b7b-46c6-a899-d92121f3b309}\u0000",
+            "owner": "{57a8debc-bf19-4eba-9ef4-adf7342b3f33}\u0000",
             "isTrigger": false,
             "isStatic": false,
-            "colliderType": 2,
-            "Radius": 0.6000000238418579,
-            "Height": 1.0
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 2.0,
+            "_height": 4.0,
+            "_depth": 2.0
         },
         {
             "type": "Rigidbody",
-            "id": "{0b149841-fc39-4235-a2e2-65c2bc1f9ef2}\u0000",
-            "owner": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
-            "mass": 0.5,
-            "inverseMass": 2.0,
+            "id": "{01d4127b-c0d2-4e6c-b441-c22c9da45679}\u0000",
+            "owner": "{57a8debc-bf19-4eba-9ef4-adf7342b3f33}\u0000",
+            "mass": 0.30000001192092896,
+            "inverseMass": 3.3333332538604736,
             "linearDamping": 0.0,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
             "frictionEnabled": true,
             "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Furniture",
+            "id": "{78e6cad0-2d7d-407d-ad7b-ace5c8769c83}\u0000",
+            "owner": "{57a8debc-bf19-4eba-9ef4-adf7342b3f33}\u0000"
         }
     ]
 }

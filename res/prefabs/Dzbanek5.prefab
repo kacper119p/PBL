@@ -2,16 +2,16 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
-            "name": "New Entity",
+            "id": "{d96a64d7-4322-44a9-b347-6f99ad88d081}\u0000",
+            "name": "Dzbanek5",
             "transform": {
                 "type": "Transform",
-                "id": "{3deab416-9c15-44bc-a6e3-2fc0fe356d35}\u0000",
-                "owner": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
+                "id": "{f52eeda6-2fa8-4f72-a8c4-2526889f8732}\u0000",
+                "owner": "{d96a64d7-4322-44a9-b347-6f99ad88d081}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": 1.7242627143859863,
-                    "z": 0.0
+                    "x": 4.8802409172058105,
+                    "y": 2.1635255813598633,
+                    "z": 14.737100601196289
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -19,9 +19,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 1.0,
-                    "y": 0.8999999761581421,
-                    "z": 1.0
+                    "x": 2.0,
+                    "y": 2.0,
+                    "z": 2.0
                 },
                 "Rotation": {
                     "x": 0.0,
@@ -33,33 +33,38 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{507ef287-3f3b-4b13-b7a9-719aed7bd1bb}\u0000",
-                "{6ff575c0-5071-4dee-b991-519a341f794e}\u0000",
-                "{0b149841-fc39-4235-a2e2-65c2bc1f9ef2}\u0000"
+                "{ed38b67b-981b-4bda-8f14-462a8524514a}\u0000",
+                "{9caf41ba-867e-4bd4-9360-f7fd05bfbaf4}\u0000",
+                "{0fd519aa-fa8d-4377-8470-564edb7a456f}\u0000",
+                "{e80d774f-cd0a-4875-a633-f2863a008eb3}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{507ef287-3f3b-4b13-b7a9-719aed7bd1bb}\u0000",
-            "owner": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
+            "id": "{ed38b67b-981b-4bda-8f14-462a8524514a}\u0000",
+            "owner": "{d96a64d7-4322-44a9-b347-6f99ad88d081}\u0000",
             "Material": "res/materials/SampleScene/UV6.mat",
             "Model": "res/models/Modele_Mati/Naczynia/Dzbanek5.fbx",
             "CastShadow": true
         },
         {
-            "type": "CapsuleCollider",
-            "id": "{6ff575c0-5071-4dee-b991-519a341f794e}\u0000",
-            "owner": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
+            "type": "BoxCollider",
+            "id": "{9caf41ba-867e-4bd4-9360-f7fd05bfbaf4}\u0000",
+            "owner": "{d96a64d7-4322-44a9-b347-6f99ad88d081}\u0000",
             "isTrigger": false,
             "isStatic": false,
-            "colliderType": 2,
-            "Radius": 0.8999999761581421,
-            "Height": 0.30000001192092896
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 3.0,
+            "_height": 3.700000047683716,
+            "_depth": 3.0
         },
         {
             "type": "Rigidbody",
-            "id": "{0b149841-fc39-4235-a2e2-65c2bc1f9ef2}\u0000",
-            "owner": "{d0dffbab-2a2b-4592-a2b3-89ced62b3473}\u0000",
+            "id": "{0fd519aa-fa8d-4377-8470-564edb7a456f}\u0000",
+            "owner": "{d96a64d7-4322-44a9-b347-6f99ad88d081}\u0000",
             "mass": 0.5,
             "inverseMass": 2.0,
             "linearDamping": 0.0,
@@ -67,6 +72,11 @@
             "friction": 0.20000000298023224,
             "frictionEnabled": true,
             "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Furniture",
+            "id": "{e80d774f-cd0a-4875-a633-f2863a008eb3}\u0000",
+            "owner": "{d96a64d7-4322-44a9-b347-6f99ad88d081}\u0000"
         }
     ]
 }

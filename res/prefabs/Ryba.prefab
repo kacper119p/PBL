@@ -2,12 +2,12 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
-            "name": "New Entity",
+            "id": "{8a3a0def-a444-414a-9261-c836aa677e5c}\u0000",
+            "name": "Ryba",
             "transform": {
                 "type": "Transform",
-                "id": "{32d3fe9b-21e1-4a01-92ed-1df0d76ec010}\u0000",
-                "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+                "id": "{a1a62b9e-6c42-4e7d-8ac8-80b38e1c5305}\u0000",
+                "owner": "{8a3a0def-a444-414a-9261-c836aa677e5c}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 1.7242627143859863,
@@ -33,27 +33,28 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{ca69cff5-2835-4420-8bf8-49c88ae84d48}\u0000",
-                "{21bc8168-af97-4386-8e81-94b48af165f9}\u0000",
-                "{b94dd8d2-2bef-4d17-abc5-a55f70805f1e}\u0000"
+                "{d177907c-69de-40f5-9f04-ec7352d2c150}\u0000",
+                "{65aa6401-ce2e-4900-8fea-a8f5a11af062}\u0000",
+                "{9921a251-22f1-44f7-8176-526bc74308c2}\u0000",
+                "{d2f54a92-9784-44f4-8172-990fd276b4cd}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{ca69cff5-2835-4420-8bf8-49c88ae84d48}\u0000",
-            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
-            "Material": "res/materials/SampleScene/UV8.mat",
+            "id": "{d177907c-69de-40f5-9f04-ec7352d2c150}\u0000",
+            "owner": "{8a3a0def-a444-414a-9261-c836aa677e5c}\u0000",
+            "Material": "res/materials/SampleScene/UV11.mat",
             "Model": "res/models/Modele_Mati/Smieci/Ryba.fbx",
             "CastShadow": true
         },
         {
             "type": "BoxCollider",
-            "id": "{21bc8168-af97-4386-8e81-94b48af165f9}\u0000",
-            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+            "id": "{65aa6401-ce2e-4900-8fea-a8f5a11af062}\u0000",
+            "owner": "{8a3a0def-a444-414a-9261-c836aa677e5c}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
+            "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
             "_width": 1.2000000476837158,
@@ -62,8 +63,8 @@
         },
         {
             "type": "Rigidbody",
-            "id": "{b94dd8d2-2bef-4d17-abc5-a55f70805f1e}\u0000",
-            "owner": "{4293a5f1-28cb-4ee1-a228-abba166ab902}\u0000",
+            "id": "{9921a251-22f1-44f7-8176-526bc74308c2}\u0000",
+            "owner": "{8a3a0def-a444-414a-9261-c836aa677e5c}\u0000",
             "mass": 0.10000000149011612,
             "inverseMass": 10.0,
             "linearDamping": 0.0,
@@ -71,6 +72,12 @@
             "friction": 0.2619999945163727,
             "frictionEnabled": true,
             "restitution": 0.8240000009536743
+        },
+        {
+            "type": "Thrash",
+            "id": "{d2f54a92-9784-44f4-8172-990fd276b4cd}\u0000",
+            "owner": "{8a3a0def-a444-414a-9261-c836aa677e5c}\u0000",
+            "size": 1
         }
     ]
 }

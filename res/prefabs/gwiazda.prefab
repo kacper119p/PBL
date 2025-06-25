@@ -2,16 +2,16 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
-            "name": "swieczka1",
+            "id": "{20e0ca94-f5e2-4cab-98fe-fe05bc0c90cd}\u0000",
+            "name": "gwiazda",
             "transform": {
                 "type": "Transform",
-                "id": "{79076f10-fc9f-43d0-ad05-c03abdb7619b}\u0000",
-                "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
+                "id": "{db59a659-0680-4116-a1a1-9d6a698eb6a6}\u0000",
+                "owner": "{20e0ca94-f5e2-4cab-98fe-fe05bc0c90cd}\u0000",
                 "Position": {
-                    "x": 0.0,
+                    "x": -12.345320701599121,
                     "y": 1.1524142026901245,
-                    "z": 0.0
+                    "z": 8.736461639404297
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -33,29 +33,29 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{60d52f02-6524-4499-b50e-1eaa15f2a451}\u0000",
-                "{f739f587-ddeb-44b7-b5de-18b65e1ec0f4}\u0000",
-                "{b0a37001-3bbd-4e6a-95e6-389917b06919}\u0000",
-                "{5218ca14-0545-4a16-9d40-924ee4bba9a3}\u0000"
+                "{3d74f81c-717f-4a4c-b234-1784c933765c}\u0000",
+                "{9274bde6-3e7c-4fe6-8e29-b7038d03f9c7}\u0000",
+                "{05b049b9-0a70-480f-979a-9e7d27b76c7e}\u0000",
+                "{fe0ae3b7-98c1-46ba-83a3-7b5dddf7ad6f}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{60d52f02-6524-4499-b50e-1eaa15f2a451}\u0000",
-            "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
+            "id": "{3d74f81c-717f-4a4c-b234-1784c933765c}\u0000",
+            "owner": "{20e0ca94-f5e2-4cab-98fe-fe05bc0c90cd}\u0000",
             "Material": "res/materials/SampleScene/drogikamien.mat",
             "Model": "res/models/Modele_Mati/Kosztownosci/kamienGwiazda.fbx",
             "CastShadow": true
         },
         {
             "type": "BoxCollider",
-            "id": "{f739f587-ddeb-44b7-b5de-18b65e1ec0f4}\u0000",
-            "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
+            "id": "{9274bde6-3e7c-4fe6-8e29-b7038d03f9c7}\u0000",
+            "owner": "{20e0ca94-f5e2-4cab-98fe-fe05bc0c90cd}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 4294967295,
-            "collisionMask": 4294967291,
+            "collisionMask": 4294967295,
             "colliderType": 0,
             "_width": 1.7999999523162842,
             "_height": 0.5,
@@ -63,8 +63,8 @@
         },
         {
             "type": "Rigidbody",
-            "id": "{b0a37001-3bbd-4e6a-95e6-389917b06919}\u0000",
-            "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
+            "id": "{05b049b9-0a70-480f-979a-9e7d27b76c7e}\u0000",
+            "owner": "{20e0ca94-f5e2-4cab-98fe-fe05bc0c90cd}\u0000",
             "mass": 1.0,
             "inverseMass": 1.0,
             "linearDamping": 0.0,
@@ -75,9 +75,9 @@
         },
         {
             "type": "Thrash",
-            "id": "{5218ca14-0545-4a16-9d40-924ee4bba9a3}\u0000",
-            "owner": "{14f3ddd0-768d-4050-8bb9-1870d2887812}\u0000",
-            "size": 1
+            "id": "{fe0ae3b7-98c1-46ba-83a3-7b5dddf7ad6f}\u0000",
+            "owner": "{20e0ca94-f5e2-4cab-98fe-fe05bc0c90cd}\u0000",
+            "size": 3
         }
     ]
 }

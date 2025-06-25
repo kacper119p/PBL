@@ -2,16 +2,16 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{e4aa0b0a-7b99-43f6-bc25-d78e87fc44a9}\u0000",
-            "name": "New Entity",
+            "id": "{d1a6a681-34eb-487b-8395-9fadbe9507ef}\u0000",
+            "name": "krzeslo",
             "transform": {
                 "type": "Transform",
-                "id": "{b53f668e-d5e5-4371-9610-fc2bcf3c125b}\u0000",
-                "owner": "{e4aa0b0a-7b99-43f6-bc25-d78e87fc44a9}\u0000",
+                "id": "{5358e69e-b7d3-489d-a2cb-ccc2d59912ee}\u0000",
+                "owner": "{d1a6a681-34eb-487b-8395-9fadbe9507ef}\u0000",
                 "Position": {
-                    "x": 0.0,
+                    "x": 23.02235984802246,
                     "y": 3.2826361656188965,
-                    "z": -3.8658242225646973
+                    "z": -13.189482688903809
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -33,23 +33,24 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{7335fd5d-2fbe-4a93-a76c-06a756496a26}\u0000",
-                "{517637f9-ef78-437e-80c4-281941574b6b}\u0000",
-                "{aa204c9a-840f-4dca-831e-85f14f4c7fa8}\u0000"
+                "{e5031d59-231e-46eb-b6ad-ef7199640471}\u0000",
+                "{3278cc4f-1d5a-4e2e-a8e3-aa57851d63df}\u0000",
+                "{a73816d0-ceb3-46e7-b754-f07d6401f6c7}\u0000",
+                "{fbbcb0a7-7269-418a-8558-f2f7e708c425}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{7335fd5d-2fbe-4a93-a76c-06a756496a26}\u0000",
-            "owner": "{e4aa0b0a-7b99-43f6-bc25-d78e87fc44a9}\u0000",
+            "id": "{e5031d59-231e-46eb-b6ad-ef7199640471}\u0000",
+            "owner": "{d1a6a681-34eb-487b-8395-9fadbe9507ef}\u0000",
             "Material": "res/materials/SampleScene/UV4.mat",
             "Model": "res/models/Modele_Mati/Meble/Krzeslo.fbx",
             "CastShadow": true
         },
         {
             "type": "BoxCollider",
-            "id": "{517637f9-ef78-437e-80c4-281941574b6b}\u0000",
-            "owner": "{e4aa0b0a-7b99-43f6-bc25-d78e87fc44a9}\u0000",
+            "id": "{3278cc4f-1d5a-4e2e-a8e3-aa57851d63df}\u0000",
+            "owner": "{d1a6a681-34eb-487b-8395-9fadbe9507ef}\u0000",
             "isTrigger": false,
             "isStatic": false,
             "skipCollisionSibling": false,
@@ -62,8 +63,8 @@
         },
         {
             "type": "Rigidbody",
-            "id": "{aa204c9a-840f-4dca-831e-85f14f4c7fa8}\u0000",
-            "owner": "{e4aa0b0a-7b99-43f6-bc25-d78e87fc44a9}\u0000",
+            "id": "{a73816d0-ceb3-46e7-b754-f07d6401f6c7}\u0000",
+            "owner": "{d1a6a681-34eb-487b-8395-9fadbe9507ef}\u0000",
             "mass": 1.0,
             "inverseMass": 1.0,
             "linearDamping": 0.20200000703334808,
@@ -71,6 +72,11 @@
             "friction": 0.20000000298023224,
             "frictionEnabled": true,
             "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Furniture",
+            "id": "{fbbcb0a7-7269-418a-8558-f2f7e708c425}\u0000",
+            "owner": "{d1a6a681-34eb-487b-8395-9fadbe9507ef}\u0000"
         }
     ]
 }

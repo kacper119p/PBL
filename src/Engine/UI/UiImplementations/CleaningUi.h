@@ -12,8 +12,34 @@ namespace Engine::Ui
     {
     private:
         Image* TaskListBackground;
+
         Text* TrashText;
         Text* FloorText;
+        Text* WeaponText;
+        Text* BooksText;
+        Text* CoinsText;
+        Text* DontFurniture;
+        Text* DontWeapons;
+        Text* DontBooks;
+        Text* DontCoins;
+        Text* AdditionalTasks;
+
+        Text* TrashProgressText;
+        Text* FloorProgressText;
+        Text* WeaponProgressText;
+        Text* BooksProgressText;
+        Text* CoinsProgressText;
+
+        Text* DontFurnitureFailed;
+        Text* DontWeaponsFailed;
+        Text* DontBooksFailed;
+        Text* DontCoinsFailed;
+
+        glm::vec4 PositiveColor = glm::vec4(0.0, 0.15, 0.0, 1);
+        glm::vec4 FailedColor = glm::vec4(0.8, 0.05, 0.0,1);
+        glm::vec4 HeaderColor = glm::vec4(0.1, 0.0, 0.0, 1);
+
+        float TaskListFontSize = 25.0f;
 
         float ReferenceBloodFill = 0.0f;
         int32_t ReferenceTrashCount = 0;
