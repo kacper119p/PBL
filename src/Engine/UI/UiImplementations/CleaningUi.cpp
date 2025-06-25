@@ -144,6 +144,122 @@ namespace Engine::Ui
             SummaryBackground->SetMaterial(imageMaterial);
             SummaryBackground->SetTexture(
                     TextureManager::GetTexture("./res/textures/CleaningUi/SummaryBackgroud.dds"));
+
+            TaskListFontSize = 35.0f;
+
+            TrashText = AddElement<Text>(SummaryBackground);
+            TrashText->GetRect().SetPositionPixels(glm::vec3(-650, 350, 0));
+            TrashText->GetRect().SetSizePixels(glm::vec2(700, TaskListFontSize));
+            TrashText->SetFont("EagleLakeRegular");
+            TrashText->SetText("Dispose of the trash");
+
+            FloorText = AddElement<Text>(SummaryBackground);
+            FloorText->GetRect().SetPositionPixels(glm::vec3(-650, 310, 0));
+            FloorText->GetRect().SetSizePixels(glm::vec2(700, TaskListFontSize));
+            FloorText->SetFont("EagleLakeRegular");
+            FloorText->SetText("Mop the floor");
+
+            TrashProgressText = AddElement<Text>(SummaryBackground);
+            TrashProgressText->GetRect().SetPositionPixels(glm::vec3(-260, 350, 0));
+            TrashProgressText->GetRect().SetSizePixels(glm::vec2(700, TaskListFontSize));
+            TrashProgressText->SetFont("EagleLakeRegular");
+            TrashProgressText->SetText("(xx/xx)");
+
+            FloorProgressText = AddElement<Text>(SummaryBackground);
+            FloorProgressText->GetRect().SetPositionPixels(glm::vec3(-260, 310, 0));
+            FloorProgressText->GetRect().SetSizePixels(glm::vec2(700, TaskListFontSize));
+            FloorProgressText->SetFont("EagleLakeRegular");
+            FloorProgressText->SetText("(xx%)");
+
+            WeaponText = AddElement<Text>(SummaryBackground);
+            WeaponText->GetRect().SetPositionPixels(glm::vec3(-650, 265, 0));
+            WeaponText->GetRect().SetSizePixels(glm::vec2(550, TaskListFontSize));
+            WeaponText->SetFont("EagleLakeRegular");
+            WeaponText->SetText("Put the weapons on the rack");
+
+            WeaponProgressText = AddElement<Text>(SummaryBackground);
+            WeaponProgressText->GetRect().SetPositionPixels(glm::vec3(-260, 265, 0));
+            WeaponProgressText->GetRect().SetSizePixels(glm::vec2(700, TaskListFontSize));
+            WeaponProgressText->SetFont("EagleLakeRegular");
+            WeaponProgressText->SetText("(xx/xx)");
+
+            BooksText = AddElement<Text>(SummaryBackground);
+            BooksText->GetRect().SetPositionPixels(glm::vec3(-650, 160, 0));
+            BooksText->GetRect().SetSizePixels(glm::vec2(550, TaskListFontSize));
+            BooksText->SetFont("EagleLakeRegular");
+            BooksText->SetText("Place the books back on the shelf");
+
+            BooksProgressText = AddElement<Text>(SummaryBackground);
+            BooksProgressText->GetRect().SetPositionPixels(glm::vec3(-260, 160, 0));
+            BooksProgressText->GetRect().SetSizePixels(glm::vec2(700, TaskListFontSize));
+            BooksProgressText->SetFont("EagleLakeRegular");
+            BooksProgressText->SetText("(xx/xx)");
+
+            CoinsText = AddElement<Text>(SummaryBackground);
+            CoinsText->GetRect().SetPositionPixels(glm::vec3(-650, 55, 0));
+            CoinsText->GetRect().SetSizePixels(glm::vec2(550, TaskListFontSize));
+            CoinsText->SetFont("EagleLakeRegular");
+            CoinsText->SetText("Put the coins in the chest");
+
+            CoinsProgressText = AddElement<Text>(SummaryBackground);
+            CoinsProgressText->GetRect().SetPositionPixels(glm::vec3(-260, 55, 0));
+            CoinsProgressText->GetRect().SetSizePixels(glm::vec2(700, TaskListFontSize));
+            CoinsProgressText->SetFont("EagleLakeRegular");
+            CoinsProgressText->SetText("(xx/xx)");
+
+
+            DontFurniture = AddElement<Text>(SummaryBackground);
+            DontFurniture->GetRect().SetPositionPixels(glm::vec3(-650, -90, 0));
+            DontFurniture->GetRect().SetSizePixels(glm::vec2(1000, TaskListFontSize));
+            DontFurniture->SetFont("EagleLakeRegular");
+            DontFurniture->SetText("Do not dispose of the furniture");
+
+            DontBooks = AddElement<Text>(SummaryBackground);
+            DontBooks->GetRect().SetPositionPixels(glm::vec3(-650, -140, 0));
+            DontBooks->GetRect().SetSizePixels(glm::vec2(1000, TaskListFontSize));
+            DontBooks->SetFont("EagleLakeRegular");
+            DontBooks->SetText("Do not dispose of the books");
+
+            DontCoins = AddElement<Text>(SummaryBackground);
+            DontCoins->GetRect().SetPositionPixels(glm::vec3(-650, -190, 0));
+            DontCoins->GetRect().SetSizePixels(glm::vec2(1000, TaskListFontSize));
+            DontCoins->SetFont("EagleLakeRegular");
+            DontCoins->SetText("Do not throw out any coins");
+
+            DontWeapons = AddElement<Text>(SummaryBackground);
+            DontWeapons->GetRect().SetPositionPixels(glm::vec3(-650, -240, 0));
+            DontWeapons->GetRect().SetSizePixels(glm::vec2(1000, TaskListFontSize));
+            DontWeapons->SetFont("EagleLakeRegular");
+            DontWeapons->SetText("Do not throw out any weapons");
+
+            Frame = AddElement<Image>(SummaryBackground);
+            Frame->GetRect().SetPositionPixels(glm::vec3(-380, 0, 0));
+            Frame->GetRect().SetSizePixels(glm::vec2(665, 760));
+            Materials::UiMaterial* frameMaterial = new Materials::BasicImageMaterial();
+            Frame->SetMaterial(frameMaterial);
+            Frame->SetTexture(TextureManager::GetTexture("./res/textures/CleaningUi/Frame.dds"));
+
+            TimerText = AddElement<Text>(SummaryBackground);
+            TimerText->GetRect().SetPositionPixels(glm::vec3(20, 420, 0));
+            TimerText->GetRect().SetSizePixels(glm::vec2(800, 70));
+            TimerText->SetFont("EagleLakeRegular");
+            TimerText->SetText(std::format("Completed in: {:.02f}", ThrashManager::GetInstance()->GetLevelEndTime() - ThrashManager::GetInstance()->GetLevelStartTime()));
+
+            switch (ThrashManager::GetInstance()->GetPlayerGrade())
+            {
+                case (6):
+                {
+                    Grade = AddElement<Image>(SummaryBackground);
+                    Grade->GetRect().SetPositionPixels(glm::vec3(300, -100, 0));
+                    Grade->GetRect().SetSizePixels(glm::vec2(0, 0));
+                    Materials::UiMaterial* gradeSMaterial = new Materials::BasicImageMaterial();
+                    Grade->SetMaterial(gradeSMaterial);
+                    Grade->SetTexture(TextureManager::GetTexture("./res/textures/CleaningUi/GradeS.dds"));
+
+                }
+                break;
+            }
+
         }
     }
 
@@ -213,24 +329,122 @@ namespace Engine::Ui
                                                        trashManager->GetBookCount()));
                 CoinsProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetCleanedUpCoinCount(),
                                                        trashManager->GetCoinCount()));
+
+                if (trashManager->IsBookTaskFailed())
+                {
+                    DontBooks->SetColor(FailedColor);
+                }
+                else
+                {
+                    DontBooks->SetColor(PositiveColor);
+                }
+                if (trashManager->IsFurnitureTaskFailed())
+                {
+                    DontFurniture->SetColor(FailedColor);
+                }
+                else
+                {
+                    DontFurniture->SetColor(PositiveColor);
+                }
+                if (trashManager->IsCoinTaskFailed())
+                {
+                    DontCoins->SetColor(FailedColor);
+                }
+                else
+                {
+                    DontCoins->SetColor(PositiveColor);
+                }
+                if (trashManager->IsWeaponTaskFailed())
+                {
+                    DontWeapons->SetColor(FailedColor);
+                }
+                else
+                {
+                    DontWeapons->SetColor(PositiveColor);
+                }
             }
         }
         else
         {
         if (!SummaryAppeared)
             {
-                SummaryAnimationTime += DeltaTime / 1.0f;
-                float t = std::min(SummaryAnimationTime, 1.0f);
-                float eased = Math::EaseOutBack(t);
-                glm::vec3 startPos = glm::vec3(1920, 0, 0);
-                glm::vec3 endPos = glm::vec3(0, 0, 0);
-                SummaryBackground->GetRect().SetPositionPixels(startPos + eased * (endPos - startPos));
+            ThrashManager* trashManager = ThrashManager::GetInstance();
+                if (const BloodManager* bloodManager = BloodManager::GetCurrent())
+                    SummaryAnimationTime += DeltaTime / 2.0f;
+                    float t = std::min(SummaryAnimationTime, 2.0f);
+                    float eased = Math::EaseInOutExpo(t);
+                    glm::vec3 startPos = glm::vec3(0, 0, 0);
+                    glm::vec3 endPos = glm::vec3(-1920, 0, 0);
+                    SummaryBackground->GetRect().SetPositionPixels(startPos + (1 - eased) * (endPos - startPos));
+
+                    if (t >= 1.0f)
+                    {
+                        SummaryAppeared = true;
+                    }
+                    TrashProgressText->SetText(std::format("({:02}/{:02})", ReferenceTrashCount, ReferenceTrashCount));
+                    WeaponProgressText->SetText(std::format("({:02}/{:02})",trashManager->GetWeaponCount(),trashManager->GetWeaponCount()));
+                    BooksProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetBookCount(),trashManager->GetBookCount()));
+                    CoinsProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetCoinCount(), trashManager->GetCoinCount()));
+                    FloorProgressText->SetText("(100.00)%");
+
+                    if (trashManager->IsBookTaskFailed())
+                    {
+                        DontBooks->SetColor(FailedColor);
+                    }
+                    else
+                    {
+                        DontBooks->SetColor(PositiveColor);
+                    }
+                    if (trashManager->IsFurnitureTaskFailed())
+                    {
+                        DontFurniture->SetColor(FailedColor);
+                    }
+                    else
+                    {
+                        DontFurniture->SetColor(PositiveColor);
+                    }
+                    if (trashManager->IsCoinTaskFailed())
+                    {
+                        DontCoins->SetColor(FailedColor);
+                    }
+                    else
+                    {
+                        DontCoins->SetColor(PositiveColor);
+                    }
+                    if (trashManager->IsWeaponTaskFailed())
+                    {
+                        DontWeapons->SetColor(FailedColor);
+                    }
+                    else
+                    {
+                        DontWeapons->SetColor(PositiveColor);
+                    }
+                
+            }
+            if (SummaryAppeared && Grade && !GradeAnimationStarted && !GradeAnimationFinished)
+            {
+                GradeAnimationStarted = true;
+                GradeAnimationTime = 0.0f;
+                Grade->GetRect().SetSizePixels(glm::vec2(10000, 10000));
+            }
+
+            if (GradeAnimationStarted && !GradeAnimationFinished)
+            {
+                GradeAnimationTime += DeltaTime;
+                float animDuration = 1.0f;
+                float t = std::min(GradeAnimationTime / animDuration, 1.0f);
+                float eased = Math::EaseOutBounce(t);
+                float currentSize = 800.0f - 288.0f * eased;
+                Grade->GetRect().SetSizePixels(glm::vec2(currentSize, currentSize));
 
                 if (t >= 1.0f)
                 {
-                    SummaryAppeared = true;
+                    GradeAnimationStarted = false;
+                    GradeAnimationFinished = true;
                 }
             }
+
+
         }
     }
 }

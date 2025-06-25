@@ -31,6 +31,8 @@ namespace Engine
 
         float LevelStartTime = 0.0f;
         float LevelEndTime = 0.0f;
+
+        int PlayerGrade = 6;
         
     public:
         ThrashManager() = default;
@@ -80,6 +82,24 @@ namespace Engine
         float GetLevelStartTime() const { return LevelStartTime; }
         void SetLevelEndTime(float time) { LevelEndTime = time; }
         float GetLevelEndTime() const { return LevelEndTime; }
+        void SetPlayerGrade(int grade) { PlayerGrade = grade; }
+        int GetPlayerGrade() const { return PlayerGrade; }
+
+        void SetFurnitureTaskFailed(bool failed) { FurnitureTaskFailed = failed; }
+        bool IsFurnitureTaskFailed() const { return FurnitureTaskFailed; }
+        void SetWeaponTaskFailed(bool failed) { WeaponTaskFailed = failed; }
+        bool IsWeaponTaskFailed() const { return WeaponTaskFailed; }
+        void SetBookTaskFailed(bool failed) { BookTaskFailed = failed; }
+        bool IsBookTaskFailed() const { return BookTaskFailed; }
+        void SetCoinTaskFailed(bool failed) { CoinTaskFailed = failed; }
+        bool IsCoinTaskFailed() const { return CoinTaskFailed; }
+        void ResetTasks()
+        {
+            FurnitureTaskFailed = false;
+            WeaponTaskFailed = false;
+            BookTaskFailed = false;
+            CoinTaskFailed = false;
+        }
 
         int VacuumCount;
         int VacuumVolume;

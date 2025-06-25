@@ -23,6 +23,7 @@ namespace Engine
         static constexpr float MaxLifetime = 64.0f / 24.0f;
         static constexpr int32_t MaxParticleCount = 64;
         static constexpr float SpawnRate = MaxParticleCount / MaxLifetime;
+        static const Models::AABBox3 Bounds;
 
         float Timer = 0.0f;
 
@@ -37,6 +38,8 @@ namespace Engine
         int32_t ViewMatrixLocation;
         int32_t ProjectionMatrixLocation;
         int32_t ObjectToWorldMatrixLocation;
+
+        bool Culled = false;
 
     public:
         FireParticleEmitter();
