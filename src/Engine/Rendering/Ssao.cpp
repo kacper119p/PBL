@@ -9,7 +9,8 @@
 
 namespace Engine
 {
-    Ssao::Ssao()
+    Ssao::Ssao(const glm::uvec2 Resolution):
+        Resolution(Resolution)
     {
         LoadShader();
         GenerateBuffers();
@@ -89,6 +90,7 @@ namespace Engine
         BlurShader = Shaders::ShaderManager::GetShader(
                 Shaders::ShaderSourceFiles("./res/shaders/SSAO/SSAO.vert", nullptr, "./res/shaders/SSAO/Blur.frag"));
         BlurHorizontalBoolLocation = BlurShader.GetUniformLocation("Horizontal");
+        ScreenSizeLocation = Shader.GetUniformLocation("ScreenSize");
     }
 
     void Ssao::GenerateBuffers()
@@ -98,7 +100,8 @@ namespace Engine
 
         glGenTextures(1, &ColorTexture);
         glBindTexture(GL_TEXTURE_2D, ColorTexture);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, Resolution.x, Resolution.y, 0, GL_RED, GL_FLOAT, nullptr);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, static_cast<GLsizei>(Resolution.x), static_cast<GLsizei>(Resolution.y),
+                     0, GL_RED, GL_FLOAT, nullptr);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -110,7 +113,8 @@ namespace Engine
 
         glGenTextures(1, &SecondaryColorTexture);
         glBindTexture(GL_TEXTURE_2D, SecondaryColorTexture);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, Resolution.x, Resolution.y, 0, GL_RED, GL_FLOAT, nullptr);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, static_cast<GLsizei>(Resolution.x), static_cast<GLsizei>(Resolution.y),
+                     0, GL_RED, GL_FLOAT, nullptr);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);

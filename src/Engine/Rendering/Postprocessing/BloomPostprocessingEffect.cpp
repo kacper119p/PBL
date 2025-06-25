@@ -6,7 +6,8 @@
 
 namespace Engine
 {
-    BloomPostprocessingEffect::BloomPostprocessingEffect() :
+    BloomPostprocessingEffect::BloomPostprocessingEffect(const glm::uvec2 Resolution) :
+        Resolution(Resolution),
         PrefilterShader(Shaders::ShaderManager::GetShader(
                 Shaders::ShaderSourceFiles("./res/shaders/Bloom/Bloom.vert", nullptr,
                                            "./res/shaders/Bloom/BloomFilter.frag"))),
@@ -22,15 +23,12 @@ namespace Engine
     {
         glGenFramebuffers(1, &FrameBuffer);
 
-        glm::vec2 mipSize(1920.0f, 1080.0f);
-        glm::ivec2 mipIntSize(1920, 1080);
+        glm::vec2 mipSize(Resolution);
 
         for (BloomMip& mip : BloomMips)
         {
             mipSize *= 0.5f;
-            mipIntSize /= 2;
             mip.Size = mipSize;
-            mip.IntSize = mipIntSize;
 
             glGenTextures(1, &mip.Texture);
             glBindTexture(GL_TEXTURE_2D, mip.Texture);
@@ -44,7 +42,8 @@ namespace Engine
 
         glGenTextures(1, &PrefilteredColor);
         glBindTexture(GL_TEXTURE_2D, PrefilteredColor);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_R11F_G11F_B10F, static_cast<int>(1920), static_cast<int>(1080),
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_R11F_G11F_B10F,
+                     static_cast<int>(Resolution.x), static_cast<int>(Resolution.y),
                      0, GL_RGB, GL_FLOAT, nullptr);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -115,7 +114,7 @@ namespace Engine
         glBindTexture(GL_TEXTURE_2D, BloomMips[0].Texture);
 
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-        glViewport(0, 0, 1920, 1080);
+        glViewport(0, 0, Resolution.x, Resolution.y);
 
         Rendering::ScreenQuad::Draw();
     }

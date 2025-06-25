@@ -14,16 +14,16 @@ namespace Engine
         struct BloomMip
         {
             glm::vec2 Size;
-            glm::ivec2 IntSize;
             unsigned int Texture;
         };
 
     private:
         static constexpr size_t MipCount = 5;
 
-        uint32_t FrameBuffer;
-        uint32_t PrefilteredColor;
-        BloomMip BloomMips[MipCount];
+        glm::uvec2 Resolution;
+        uint32_t FrameBuffer = 0;
+        uint32_t PrefilteredColor = 0;
+        BloomMip BloomMips[MipCount]{};
 
         Shaders::Shader PrefilterShader;
         Shaders::Shader DownSampleShader;
@@ -31,7 +31,7 @@ namespace Engine
         Shaders::Shader OutputShader;
 
     public:
-        BloomPostprocessingEffect();
+        explicit BloomPostprocessingEffect(glm::uvec2 Resolution);
 
     public:
         virtual ~BloomPostprocessingEffect();
