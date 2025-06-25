@@ -23,8 +23,6 @@ namespace Scene
         Engine::SceneManager::LoadScene("./res/scenes/Gameplay.lvl", Scene);
         // TODO: remove when no longer needed
 
-
-        // BOX BOX SCENARIO /////////////////////////////////////////////////////////////////////////////////////////////////////////
 #if !EDITOR
 
 #endif

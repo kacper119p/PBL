@@ -17,7 +17,7 @@ namespace Engine
     { 
         if (collider)
         {
-            collider->OnCollisionRemoveListener(ThrowOut);
+            //collider->OnCollisionRemoveListener(ThrowOut);
             ThrashManager::GetInstance()->RemoveFurniture(this);
         }
     }
@@ -27,7 +27,7 @@ namespace Engine
         if (collider->GetOwner()->GetName() == "ThrashCan")
         {
             GetOwner()->GetScene()->DeleteEntity(GetOwner());
-                ThrashManager::GetInstance()->RemoveFurniture(this);
+            collider->OnCollisionRemoveListener(ThrowOut);
         }
     }
     #if EDITOR

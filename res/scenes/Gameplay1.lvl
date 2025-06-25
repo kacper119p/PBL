@@ -2234,7 +2234,7 @@
             "type": "SkyboxRenderer",
             "id": "{e9ef049c-1945-43b0-a6ef-3801c78b3ebb}\u0000",
             "owner": "{167ab58a-5df8-4368-b13c-ed6d4075fc40}\u0000",
-            "Material": "C:\\Users\\matik\\Desktop\\Studia\\ztgk2025\\PBL\\cmake-build-release-visual-studio-editor\\src\\res\\materials\\SampleScene\\Skybox.mat"
+            "Material": "./res\\materials\\SampleScene\\Skybox.mat"
         },
         {
             "type": "Entity",
