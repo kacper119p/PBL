@@ -1,0 +1,19 @@
+{
+    "type": "AnimatedPbrMaterial",
+    "BaseMap": "./res/textures/Slime/BaseMap.dds",
+    "RoughnessMetallicMap": "./res/textures/Slime/RMAOMap.dds",
+    "NormalMap": "./res/textures/Slime/NormalMap.dds",
+    "EmissiveMap": "",
+    "Roughness": 0.008999999612569809,
+    "Metallic": 0.013000000268220901,
+    "BaseColor": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
+    },
+    "EmissiveColor": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    }
+}

@@ -31,6 +31,8 @@ namespace Engine::Ui
     public:
         Text();
 
+        ~Text();
+
     public:
         [[nodiscard]] const std::string& GetText() const
         {
