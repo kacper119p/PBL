@@ -39,14 +39,13 @@
 #include <iostream>
 
 #include "Math/Math.h"
+#include "Rendering/Postprocessing/TransitionTint.h"
 
 namespace SceneBuilding = Scene;
 
 namespace Engine
 {
-    Engine::Engine()
-    {
-    }
+    Engine::Engine() = default;
 
     Engine::~Engine()
     {
@@ -119,22 +118,28 @@ namespace Engine
             Entity::DestroyQueued();
             RigidbodyUpdateManager::GetInstance()->Update(deltaTime);
             CollisionUpdateManager::GetInstance()->Update(deltaTime);
-            SceneManager::UpdateScene(CurrentScene);
-            if (!BackgroundAudioPlayer->IsPlaying())
-                BackgroundAudioPlayer->PlayLooping("music", 0.02f);
-#endif
-            int displayW, displayH;
-            glfwMakeContextCurrent(Window);
-            glfwGetFramebufferSize(Window, &displayW, &displayH);
 
             const CameraRenderData renderData(Camera->GetPosition(), Camera->GetTransform(),
                                               Camera->GetProjectionMatrix());
 
-            RenderingManager::GetInstance()->RenderAll(renderData, WindowWidth, WindowHeight, deltaTime);
+            SceneManager::UpdateScene(CurrentScene, renderData, Window);
+            if (!BackgroundAudioPlayer->IsPlaying())
+                BackgroundAudioPlayer->PlayLooping("music", 0.02f);
+#else
+            const CameraRenderData renderData(Camera->GetPosition(), Camera->GetTransform(),
+                                              Camera->GetProjectionMatrix());
+#endif
+            glfwMakeContextCurrent(Window);
+
+            RenderingManager::GetInstance()->RenderAll(renderData, deltaTime);
             AudioListener->UpdateListener();
 
 
 #if EDITOR
+            int displayW, displayH;
+            glfwMakeContextCurrent(Window);
+            glfwGetFramebufferSize(Window, &displayW, &displayH);
+
             glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, EditorFramebuffer);
             glBlitFramebuffer(0, 0, displayW, displayH, 0, 0, displayW, displayH, GL_COLOR_BUFFER_BIT, GL_NEAREST);
@@ -253,6 +258,7 @@ namespace Engine
         RigidbodyUpdateManager::Initialize();
         CollisionUpdateManager::Initialize();
         PrimitiveMeshes::Initialize();
+        TransitionTint::Initialize();
 #if EDITOR
         //for editor game screen
         InitEditorFramebuffer();
