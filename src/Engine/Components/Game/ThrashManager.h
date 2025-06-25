@@ -27,7 +27,7 @@ namespace Engine
         bool CoinTaskFailed = false;
 
         int currentLevel = 0;
-        bool isCurrentLevelCompleted = true;
+        bool isCurrentLevelCompleted = false;
 
         float LevelStartTime = 0.0f;
         float LevelEndTime = 0.0f;
