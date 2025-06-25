@@ -26,6 +26,7 @@ namespace Engine
         static constexpr float MaxLifetime = 1.25;
         static constexpr int32_t MaxParticleCount = 192;
         static constexpr float SpawnRate = MaxParticleCount / MaxLifetime;
+        static const Models::AABBox3 Bounds;
 
         float Timer = 0.0f;
 
@@ -40,6 +41,8 @@ namespace Engine
         int32_t ViewMatrixLocation;
         int32_t ProjectionMatrixLocation;
         int32_t ObjectToWorldMatrixLocation;
+
+        bool Culled = false;
 
     public:
         EmbersParticleEmitter();

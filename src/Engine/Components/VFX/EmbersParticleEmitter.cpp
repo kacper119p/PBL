@@ -11,6 +11,9 @@
 #include "Serialization/SerializationUtility.h"
 #include "Shaders/ShaderManager.h"
 
+const Models::AABBox3 Engine::EmbersParticleEmitter::Bounds
+        = Models::AABBox3(glm::vec3(-10.0, -2.0, -10.0), glm::vec3(10.0));
+
 Engine::EmbersParticleEmitter::EmbersParticleEmitter() :
     ParticleEmitter(Materials::MaterialManager::GetMaterial("res/materials/VFX/Embers.mat"),
                     Shaders::ShaderManager::GetComputeShader("res/shaders/VFX/Fire/Embers/EmbersSpawn.comp"),
@@ -33,6 +36,10 @@ Engine::EmbersParticleEmitter::~EmbersParticleEmitter()
 
 void Engine::EmbersParticleEmitter::Render(const Engine::CameraRenderData& RenderData)
 {
+    if (Culled)
+    {
+        return;
+    }
     Shaders::Shader::SetUniform(ViewMatrixLocation, RenderData.ViewMatrix);
     Shaders::Shader::SetUniform(ProjectionMatrixLocation, RenderData.ProjectionMatrix);
     Shaders::Shader::SetUniform(ObjectToWorldMatrixLocation, GetOwner()->GetTransform()->GetLocalToWorldMatrix());
@@ -69,6 +76,15 @@ void Engine::EmbersParticleEmitter::Start()
 
 void Engine::EmbersParticleEmitter::DispatchSpawnShaders(const float DeltaTime)
 {
+    const auto& frustum = RenderingManager::GetInstance()->GetFrustum();
+    const glm::mat4 objectToWorldMatrix = GetOwner()->GetTransform()->GetLocalToWorldMatrix();
+    Culled = !frustum.IsBoxVisible(Bounds, objectToWorldMatrix);
+
+    if (Culled)
+    {
+        return;
+    }
+
     Timer += DeltaTime;
 
     const int particlesToSpawn = std::min(static_cast<int>(Timer * SpawnRate), MaxParticleCount);
@@ -95,6 +111,10 @@ void Engine::EmbersParticleEmitter::DispatchSpawnShaders(const float DeltaTime)
 
 void Engine::EmbersParticleEmitter::DispatchUpdateShaders(const float DeltaTime)
 {
+    if (Culled)
+    {
+        return;
+    }
     UpdateShader.Use();
     Shaders::ComputeShader::SetUniform(DeltaTimeProperty, DeltaTime);
     glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ParticlesBuffer);
