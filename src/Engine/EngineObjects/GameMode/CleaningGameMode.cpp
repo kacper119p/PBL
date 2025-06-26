@@ -121,12 +121,12 @@ namespace Engine
             if (cleanedPercent >= 99.0f && ThrashManager::GetInstance()->GetThrashCount() == 0)
             {
                 return true;
-                ThrashManager::GetInstance()->SetIsCurrentLevelCompleted(true);
+                //ThrashManager::GetInstance()->SetIsCurrentLevelCompleted(true);
             }
             else
             {
                 return false;
-                ThrashManager::GetInstance()->SetIsCurrentLevelCompleted(false);
+                //ThrashManager::GetInstance()->SetIsCurrentLevelCompleted(false);
             }
         }
     }

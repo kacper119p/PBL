@@ -56,6 +56,19 @@ namespace Engine
             {
                 std::cout << "Thrash: Removing ThrowOut listener from collider." << std::endl;
                 this->collider->OnTriggerRemoveListener(ThrowOut);
+                if (size == ThrashSize::Coin)
+                {
+                    ThrashManager::GetInstance()->SetCoinTaskFailed(true);
+                }
+                else if (size == ThrashSize::Book)
+                {
+                    ThrashManager::GetInstance()->SetBookTaskFailed(true);
+                }
+                else if (size == ThrashSize::Arrow || size == ThrashSize::Bow || size == ThrashSize::Shield ||
+                         size == ThrashSize::Sword)
+                {
+                    ThrashManager::GetInstance()->SetWeaponTaskFailed(true);
+                }
             }
             GetOwner()->Destroy();
         }

@@ -4,7 +4,7 @@
         "min": {
             "x": -57.79945755004883,
             "y": -40.868064880371094,
-            "z": -130.20138549804688
+            "z": -139.31997680664063
         },
         "max": {
             "x": 46.48554992675781,
@@ -106,7 +106,6 @@
                 "{35fc0f56-1ce1-4057-a2fa-b251170cbe7e}\u0000",
                 "{a2daae99-b2b2-4801-861f-cdd8a9f6774a}\u0000",
                 "{029b7df4-5012-42dd-b395-c00ccab1448e}\u0000",
-                "{e27c6500-2768-4ee0-a83c-dda32d7e59d9}\u0000",
                 "{8f706393-c947-4b37-92eb-0f90b2cfe341}\u0000",
                 "{a3b2556f-764b-4f25-9ad0-7e1bd1ba3a5e}\u0000",
                 "{8f6ff007-883e-4f1c-90c3-1363123b2e8d}\u0000",
@@ -121,7 +120,15 @@
                 "{a1ea9047-a93d-4010-9f14-a777f10c65bf}\u0000",
                 "{cd02eafc-3ad6-4458-a417-7ed50c9eedd4}\u0000",
                 "{b40bb1c2-0010-48a4-b2e8-69c79faa942a}\u0000",
-                "{9239163f-b4ed-4652-b0ee-cda82a7a207f}\u0000"
+                "{9239163f-b4ed-4652-b0ee-cda82a7a207f}\u0000",
+                "{b946fbc3-c91d-46b9-b870-0e150f71736a}\u0000",
+                "{c723fbd6-78a5-4693-8429-5c167905e882}\u0000",
+                "{fb2d8431-b088-4288-95e3-24a785088d7d}\u0000",
+                "{609b3dec-68a8-4cf2-8dad-7bff464b7bc1}\u0000",
+                "{cf1d4f1f-4b5c-4daa-a6df-35e8af057219}\u0000",
+                "{2e50ecb5-4d89-48ab-a11c-903b6e9cdc43}\u0000",
+                "{7a630d8e-3c06-439b-811f-5ff513ff3464}\u0000",
+                "{48e1c5c3-1d8c-4013-96a6-3eb4dbbb6353}\u0000"
             ],
             "Parent": null
         },
@@ -525,8 +532,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{c822ea45-4801-4ad7-bba8-dc01a74153f7}\u0000",
-                "{eecaf9a2-793f-4640-a794-c848d2ce245b}\u0000"
+                "{c822ea45-4801-4ad7-bba8-dc01a74153f7}\u0000"
             ]
         },
         {
@@ -536,20 +542,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaNiska.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{eecaf9a2-793f-4640-a794-c848d2ce245b}\u0000",
-            "owner": "{1517781b-ead5-436a-89d5-05b583fa334e}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 3.799999952316284,
-            "_depth": 27.0
         },
         {
             "type": "Entity",
@@ -584,8 +576,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{a3445d5d-314e-45d1-b7be-b9f79a62ab62}\u0000",
-                "{6c774403-5d15-4d50-8246-9a11e92e87ee}\u0000"
+                "{a3445d5d-314e-45d1-b7be-b9f79a62ab62}\u0000"
             ]
         },
         {
@@ -595,20 +586,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaNiska.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{6c774403-5d15-4d50-8246-9a11e92e87ee}\u0000",
-            "owner": "{942f085b-dd0b-4d18-ac0d-ed93e843c1ba}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 3.799999952316284,
-            "_depth": 27.0
         },
         {
             "type": "Entity",
@@ -643,8 +620,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{5204dd9a-92e6-417f-b800-33ef03d72d80}\u0000",
-                "{cae6e29e-9e05-4b0a-84d3-1d838afd4362}\u0000"
+                "{5204dd9a-92e6-417f-b800-33ef03d72d80}\u0000"
             ]
         },
         {
@@ -654,20 +630,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaNiska.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{cae6e29e-9e05-4b0a-84d3-1d838afd4362}\u0000",
-            "owner": "{f3cf2f74-d7e1-44e3-bcfe-c43c48ada11c}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 3.799999952316284,
-            "_depth": 27.0
         },
         {
             "type": "Entity",
@@ -752,8 +714,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{5888ebb9-17bc-4c34-a0a1-5001790ac774}\u0000",
-                "{507298fc-753d-4670-8e03-fd4054fc278e}\u0000"
+                "{5888ebb9-17bc-4c34-a0a1-5001790ac774}\u0000"
             ]
         },
         {
@@ -763,20 +724,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaNiska.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{507298fc-753d-4670-8e03-fd4054fc278e}\u0000",
-            "owner": "{2ccf9c46-8999-431c-81a9-4aea815f43ef}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 3.799999952316284,
-            "_depth": 27.0
         },
         {
             "type": "Entity",
@@ -811,8 +758,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{8719a449-edd9-4d05-bcde-bedade0c7294}\u0000",
-                "{51f6d140-4838-47e4-9693-a58eb9327dfb}\u0000"
+                "{8719a449-edd9-4d05-bcde-bedade0c7294}\u0000"
             ]
         },
         {
@@ -822,20 +768,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaNiska.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{51f6d140-4838-47e4-9693-a58eb9327dfb}\u0000",
-            "owner": "{628e61f7-bcef-43a5-85ba-55d0f58b781c}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 3.799999952316284,
-            "_depth": 27.0
         },
         {
             "type": "Entity",
@@ -870,8 +802,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{0f797569-e029-44e4-8e6b-cb8fc4a15b62}\u0000",
-                "{1c00bcf3-bebb-4722-a2cf-3cfe03e328d9}\u0000"
+                "{0f797569-e029-44e4-8e6b-cb8fc4a15b62}\u0000"
             ]
         },
         {
@@ -881,20 +812,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{1c00bcf3-bebb-4722-a2cf-3cfe03e328d9}\u0000",
-            "owner": "{6f8bb1f1-0e35-4f24-a3c0-1ef4eff84aeb}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 19.100000381469727,
-            "_depth": 26.100000381469727
         },
         {
             "type": "Entity",
@@ -929,8 +846,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{ca22e33a-03e4-4f9b-af4e-4a3951e3c1f2}\u0000",
-                "{0d54b6d1-2119-41c6-8534-3e527ad699d5}\u0000"
+                "{ca22e33a-03e4-4f9b-af4e-4a3951e3c1f2}\u0000"
             ]
         },
         {
@@ -940,20 +856,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{0d54b6d1-2119-41c6-8534-3e527ad699d5}\u0000",
-            "owner": "{f4bb07e6-fd4e-450a-b184-41a35bc73045}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 19.100000381469727,
-            "_depth": 26.100000381469727
         },
         {
             "type": "Entity",
@@ -988,8 +890,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{d24452b3-8a98-4bb4-9950-0f8ddc781d5a}\u0000",
-                "{2d980944-a20f-4381-9c4e-ca4377a9f760}\u0000"
+                "{d24452b3-8a98-4bb4-9950-0f8ddc781d5a}\u0000"
             ]
         },
         {
@@ -999,20 +900,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{2d980944-a20f-4381-9c4e-ca4377a9f760}\u0000",
-            "owner": "{c6f52858-1836-4cbd-aa43-a7bdf5f309c2}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 19.100000381469727,
-            "_depth": 26.100000381469727
         },
         {
             "type": "Entity",
@@ -1047,8 +934,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{6f987296-9549-432a-8db6-3defad94bd3d}\u0000",
-                "{e98826f7-5365-4615-bee4-486f219e6d35}\u0000"
+                "{6f987296-9549-432a-8db6-3defad94bd3d}\u0000"
             ]
         },
         {
@@ -1060,20 +946,6 @@
             "CastShadow": true
         },
         {
-            "type": "BoxCollider",
-            "id": "{e98826f7-5365-4615-bee4-486f219e6d35}\u0000",
-            "owner": "{af23c2d9-f953-4275-b6b8-d0bea00884b1}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 19.100000381469727,
-            "_depth": 26.100000381469727
-        },
-        {
             "type": "Entity",
             "id": "{1a7bbf51-6fdf-4349-95f2-a3483a76660f}\u0000",
             "name": "scianaWysoka",
@@ -1083,7 +955,7 @@
                 "owner": "{1a7bbf51-6fdf-4349-95f2-a3483a76660f}\u0000",
                 "Position": {
                     "x": 31.91748809814453,
-                    "y": 0.00006127357482910156,
+                    "y": 0.00006103515625,
                     "z": -128.1715545654297
                 },
                 "EulerAngles": {
@@ -1106,8 +978,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{97fb5328-a9a9-4d4e-b0a0-b44e1d8c86a3}\u0000",
-                "{0f48ea6b-4d01-4c3a-bd23-41ae48a08807}\u0000"
+                "{97fb5328-a9a9-4d4e-b0a0-b44e1d8c86a3}\u0000"
             ]
         },
         {
@@ -1117,20 +988,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{0f48ea6b-4d01-4c3a-bd23-41ae48a08807}\u0000",
-            "owner": "{1a7bbf51-6fdf-4349-95f2-a3483a76660f}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 19.100000381469727,
-            "_depth": 26.100000381469727
         },
         {
             "type": "Entity",
@@ -3509,8 +3366,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{3846b9c7-0fc9-41fa-8f33-3cb1738cdd04}\u0000",
-                "{c1d8272a-8792-4697-ad70-938b78c4852c}\u0000"
+                "{3846b9c7-0fc9-41fa-8f33-3cb1738cdd04}\u0000"
             ]
         },
         {
@@ -3520,20 +3376,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{c1d8272a-8792-4697-ad70-938b78c4852c}\u0000",
-            "owner": "{f96b37db-2da9-4e9f-82ac-699b9895afb7}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 19.100000381469727,
-            "_depth": 26.100000381469727
         },
         {
             "type": "Entity",
@@ -3568,8 +3410,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{430416ad-f371-48c4-8d35-8435444e1502}\u0000",
-                "{b00cd3cf-37f6-4b22-b54d-062cc1da6536}\u0000"
+                "{430416ad-f371-48c4-8d35-8435444e1502}\u0000"
             ]
         },
         {
@@ -3579,20 +3420,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{b00cd3cf-37f6-4b22-b54d-062cc1da6536}\u0000",
-            "owner": "{b77f2919-4d10-4470-bbe5-62957c7023ec}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 19.100000381469727,
-            "_depth": 26.100000381469727
         },
         {
             "type": "Entity",
@@ -3722,8 +3549,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{2896e8c5-2901-486d-adbf-f19ce8e67ac3}\u0000",
-                "{b4fea0f4-2f8c-474c-bd7c-c498ce53b2d0}\u0000"
+                "{2896e8c5-2901-486d-adbf-f19ce8e67ac3}\u0000"
             ]
         },
         {
@@ -3733,20 +3559,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{b4fea0f4-2f8c-474c-bd7c-c498ce53b2d0}\u0000",
-            "owner": "{f4885b15-9c02-473f-a04e-5cea8f789696}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 19.100000381469727,
-            "_depth": 26.100000381469727
         },
         {
             "type": "Entity",
@@ -3781,8 +3593,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{14e20fbb-f9a3-43d4-a810-e91c5a2bef37}\u0000",
-                "{bb395ebb-3272-4248-a19c-0e232e83da70}\u0000"
+                "{14e20fbb-f9a3-43d4-a810-e91c5a2bef37}\u0000"
             ]
         },
         {
@@ -3792,20 +3603,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{bb395ebb-3272-4248-a19c-0e232e83da70}\u0000",
-            "owner": "{5e4fef64-3809-4e31-87c6-15c3fe8e19e8}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 19.100000381469727,
-            "_depth": 26.100000381469727
         },
         {
             "type": "Entity",
@@ -3840,8 +3637,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{326c7965-9f4b-4257-ad9f-d24f81b09fe7}\u0000",
-                "{77284d1a-45f2-42d7-be06-fa61ee8c14a2}\u0000"
+                "{326c7965-9f4b-4257-ad9f-d24f81b09fe7}\u0000"
             ]
         },
         {
@@ -3851,20 +3647,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{77284d1a-45f2-42d7-be06-fa61ee8c14a2}\u0000",
-            "owner": "{31e04219-10bb-4d2d-b5ce-3cfd3b995cf5}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 19.100000381469727,
-            "_depth": 26.100000381469727
         },
         {
             "type": "Entity",
@@ -3899,8 +3681,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{a3419fe6-92ca-48b6-af32-3d1518e27c1c}\u0000",
-                "{86847b1d-c525-4801-b3d3-9b90f069afc7}\u0000"
+                "{a3419fe6-92ca-48b6-af32-3d1518e27c1c}\u0000"
             ]
         },
         {
@@ -3910,20 +3691,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{86847b1d-c525-4801-b3d3-9b90f069afc7}\u0000",
-            "owner": "{d744fb83-075b-46ba-b8df-0bf5acb9871d}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 19.100000381469727,
-            "_depth": 26.100000381469727
         },
         {
             "type": "Entity",
@@ -3958,8 +3725,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{edb41a2c-854f-44b5-a988-496b272a5959}\u0000",
-                "{977adcfb-eaf0-4d84-bedc-0ebcce06f4a4}\u0000"
+                "{edb41a2c-854f-44b5-a988-496b272a5959}\u0000"
             ]
         },
         {
@@ -3971,20 +3737,6 @@
             "CastShadow": true
         },
         {
-            "type": "BoxCollider",
-            "id": "{977adcfb-eaf0-4d84-bedc-0ebcce06f4a4}\u0000",
-            "owner": "{4acd9a66-5495-4afc-8961-513dcc6b4f24}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 19.100000381469727,
-            "_depth": 26.100000381469727
-        },
-        {
             "type": "Entity",
             "id": "{ef092bf4-23d6-44e3-be4d-f66b6a5799b2}\u0000",
             "name": "scianaWysoka",
@@ -3994,7 +3746,7 @@
                 "owner": "{ef092bf4-23d6-44e3-be4d-f66b6a5799b2}\u0000",
                 "Position": {
                     "x": -56.22343063354492,
-                    "y": 0.000005139416316524148,
+                    "y": 0.000005245208740234375,
                     "z": -90.17044830322266
                 },
                 "EulerAngles": {
@@ -4017,8 +3769,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{1a7f1b25-1d9b-4690-9e38-f91f2e1143fd}\u0000",
-                "{7cd89fbd-0562-4737-bc46-2863a9b7d8df}\u0000"
+                "{1a7f1b25-1d9b-4690-9e38-f91f2e1143fd}\u0000"
             ]
         },
         {
@@ -4028,20 +3779,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{7cd89fbd-0562-4737-bc46-2863a9b7d8df}\u0000",
-            "owner": "{ef092bf4-23d6-44e3-be4d-f66b6a5799b2}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 19.100000381469727,
-            "_depth": 26.100000381469727
         },
         {
             "type": "Entity",
@@ -4076,8 +3813,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{833011db-62c3-4cdf-90da-e44829a85345}\u0000",
-                "{7649dd10-9edb-48f3-8c09-f8662838823f}\u0000"
+                "{833011db-62c3-4cdf-90da-e44829a85345}\u0000"
             ]
         },
         {
@@ -4087,20 +3823,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{7649dd10-9edb-48f3-8c09-f8662838823f}\u0000",
-            "owner": "{f23ab6d1-b961-415c-bd9e-b8dfc0e9f6b6}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 19.100000381469727,
-            "_depth": 26.100000381469727
         },
         {
             "type": "Entity",
@@ -4135,8 +3857,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{9ea6a06c-fec8-4227-9858-a007ae69f070}\u0000",
-                "{b053e4b1-361b-4efc-99e4-ee20b928e014}\u0000"
+                "{9ea6a06c-fec8-4227-9858-a007ae69f070}\u0000"
             ]
         },
         {
@@ -4146,20 +3867,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{b053e4b1-361b-4efc-99e4-ee20b928e014}\u0000",
-            "owner": "{6606b9cf-ef4a-459c-a16f-52fd29c04e11}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 19.100000381469727,
-            "_depth": 26.100000381469727
         },
         {
             "type": "Entity",
@@ -4194,8 +3901,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{e791920e-ec0a-49f1-95f5-98049783d1b9}\u0000",
-                "{73e9c661-fcfb-4cf9-947d-76c6cfef0c38}\u0000"
+                "{e791920e-ec0a-49f1-95f5-98049783d1b9}\u0000"
             ]
         },
         {
@@ -4205,20 +3911,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaNiska.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{73e9c661-fcfb-4cf9-947d-76c6cfef0c38}\u0000",
-            "owner": "{d115a3db-ffdd-46df-90a1-8f4c3c93f81c}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 3.799999952316284,
-            "_depth": 27.0
         },
         {
             "type": "Entity",
@@ -4253,8 +3945,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{64c72d3e-5ffb-41e0-8d03-1e21fe914114}\u0000",
-                "{a5637ebf-f39b-45d3-9dd3-8f1b0aa3b4d1}\u0000"
+                "{64c72d3e-5ffb-41e0-8d03-1e21fe914114}\u0000"
             ]
         },
         {
@@ -4264,20 +3955,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaNiska.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{a5637ebf-f39b-45d3-9dd3-8f1b0aa3b4d1}\u0000",
-            "owner": "{ab12d049-0aad-48c4-b9b7-0bdba29fb32d}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 3.799999952316284,
-            "_depth": 27.0
         },
         {
             "type": "Entity",
@@ -4312,8 +3989,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{da144dd1-dd10-4963-9628-087461acf113}\u0000",
-                "{c9ced663-46c5-4202-a4db-6df271359ae8}\u0000"
+                "{da144dd1-dd10-4963-9628-087461acf113}\u0000"
             ]
         },
         {
@@ -4323,20 +3999,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaNiska.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{c9ced663-46c5-4202-a4db-6df271359ae8}\u0000",
-            "owner": "{7e458776-dc38-4c32-9736-eebb2f85a13a}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 3.799999952316284,
-            "_depth": 27.0
         },
         {
             "type": "Entity",
@@ -4371,8 +4033,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{960a7632-157f-4633-8df2-27fcce922870}\u0000",
-                "{56970a90-ce66-4f75-ada7-796b9d15d95c}\u0000"
+                "{960a7632-157f-4633-8df2-27fcce922870}\u0000"
             ]
         },
         {
@@ -4382,20 +4043,6 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaNiska.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{56970a90-ce66-4f75-ada7-796b9d15d95c}\u0000",
-            "owner": "{123a1711-38ee-4566-84cc-bd25a27d34ee}\u0000",
-            "isTrigger": false,
-            "isStatic": true,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.600000023841858,
-            "_height": 3.799999952316284,
-            "_depth": 27.0
         },
         {
             "type": "Entity",
@@ -5905,11 +5552,11 @@
                 "owner": "{53ad5c9c-6b1a-4301-8c7c-54246ad0c100}\u0000",
                 "Position": {
                     "x": -16.40280532836914,
-                    "y": 6.699916362762451,
+                    "y": 0.0,
                     "z": 5.384754657745361
                 },
                 "EulerAngles": {
-                    "x": 0.0,
+                    "x": 90.0,
                     "y": 0.0,
                     "z": 0.0
                 },
@@ -5919,17 +5566,16 @@
                     "z": 1.0
                 },
                 "Rotation": {
-                    "x": 0.0,
+                    "x": 0.7071067690849304,
                     "y": 0.0,
                     "z": 0.0,
-                    "w": 0.0
+                    "w": 0.7071067690849304
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{22654e59-2e33-4b1e-a720-8a23f2af5b47}\u0000",
-                "{e83389a1-04ac-4d78-a1da-7d443be9ef38}\u0000"
+                "{22654e59-2e33-4b1e-a720-8a23f2af5b47}\u0000"
             ]
         },
         {
@@ -5941,20 +5587,6 @@
             "CastShadow": true
         },
         {
-            "type": "BoxCollider",
-            "id": "{e83389a1-04ac-4d78-a1da-7d443be9ef38}\u0000",
-            "owner": "{53ad5c9c-6b1a-4301-8c7c-54246ad0c100}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 3.700000047683716,
-            "_height": 12.600000381469727,
-            "_depth": 2.9000000953674316
-        },
-        {
             "type": "Entity",
             "id": "{b78d6157-cd28-4e1e-ab08-23b89906e1e5}\u0000",
             "name": "Kolumna",
@@ -5964,11 +5596,11 @@
                 "owner": "{b78d6157-cd28-4e1e-ab08-23b89906e1e5}\u0000",
                 "Position": {
                     "x": 5.015432357788086,
-                    "y": 6.699916362762451,
+                    "y": 0.0,
                     "z": 5.384754657745361
                 },
                 "EulerAngles": {
-                    "x": 0.0,
+                    "x": 90.0,
                     "y": 0.0,
                     "z": 0.0
                 },
@@ -5978,17 +5610,16 @@
                     "z": 1.0
                 },
                 "Rotation": {
-                    "x": 0.0,
+                    "x": 0.7071067690849304,
                     "y": 0.0,
                     "z": 0.0,
-                    "w": 0.0
+                    "w": 0.7071067690849304
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{c0bb7623-d76e-4b00-8aad-1e1125e93246}\u0000",
-                "{6d5deac4-d152-4b41-a5c4-ac22428681d0}\u0000"
+                "{c0bb7623-d76e-4b00-8aad-1e1125e93246}\u0000"
             ]
         },
         {
@@ -5998,20 +5629,6 @@
             "Material": "res/materials/SampleScene/Pilar.mat",
             "Model": "./res/Models/Modele_Mati/Otoczenie/Pilar.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{6d5deac4-d152-4b41-a5c4-ac22428681d0}\u0000",
-            "owner": "{b78d6157-cd28-4e1e-ab08-23b89906e1e5}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 3.700000047683716,
-            "_height": 12.600000381469727,
-            "_depth": 2.9000000953674316
         },
         {
             "type": "Entity",
@@ -6258,13 +5875,13 @@
                 "id": "{63242b28-edc6-483a-bf0a-147f6ff0bfbc}\u0000",
                 "owner": "{23cbdddc-454f-462e-bc20-2f675d084e32}\u0000",
                 "Position": {
-                    "x": -5.903009414672852,
+                    "x": 18.15739631652832,
                     "y": 1.4752318859100342,
-                    "z": -79.31586456298828
+                    "z": -74.31442260742188
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": 36.96668243408203,
                     "z": 0.0
                 },
                 "Scale": {
@@ -6274,9 +5891,9 @@
                 },
                 "Rotation": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": 0.3170289099216461,
                     "z": 0.0,
-                    "w": 1.0
+                    "w": 0.9484158754348755
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
@@ -6538,83 +6155,6 @@
             "id": "{79ed7f3c-f25f-4335-a233-691997fffa61}\u0000",
             "owner": "{77561c28-a897-473c-af63-d5812f50b0f8}\u0000",
             "size": 5
-        },
-        {
-            "type": "Entity",
-            "id": "{0ae3e669-479a-45fa-8eeb-6f1dd28cdbea}\u0000",
-            "name": "New Entity",
-            "transform": {
-                "type": "Transform",
-                "id": "{e27c6500-2768-4ee0-a83c-dda32d7e59d9}\u0000",
-                "owner": "{0ae3e669-479a-45fa-8eeb-6f1dd28cdbea}\u0000",
-                "Position": {
-                    "x": -7.186715602874756,
-                    "y": 2.498645305633545,
-                    "z": -79.62191009521484
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 1.0,
-                    "y": 0.8999999761581421,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 0.0
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{3524518c-1acf-4c99-9ed6-bec6c4f6f63a}\u0000",
-                "{0bc31259-7a35-4564-baff-8315d266308d}\u0000",
-                "{cd1af90b-88de-4d4a-8d67-ffecf0510655}\u0000",
-                "{b4216bc1-c8d3-436f-8bb0-0ecb2cb3dad8}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{3524518c-1acf-4c99-9ed6-bec6c4f6f63a}\u0000",
-            "owner": "{0ae3e669-479a-45fa-8eeb-6f1dd28cdbea}\u0000",
-            "Material": "res/materials/SampleScene/UV8.mat",
-            "Model": "res/models/Modele_Mati/Smieci/Czaszka.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "SphereCollider",
-            "id": "{0bc31259-7a35-4564-baff-8315d266308d}\u0000",
-            "owner": "{0ae3e669-479a-45fa-8eeb-6f1dd28cdbea}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 1,
-            "radius": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{cd1af90b-88de-4d4a-8d67-ffecf0510655}\u0000",
-            "owner": "{0ae3e669-479a-45fa-8eeb-6f1dd28cdbea}\u0000",
-            "mass": 0.30000001192092896,
-            "inverseMass": 3.3333332538604736,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{b4216bc1-c8d3-436f-8bb0-0ecb2cb3dad8}\u0000",
-            "owner": "{0ae3e669-479a-45fa-8eeb-6f1dd28cdbea}\u0000",
-            "size": 20
         },
         {
             "type": "Entity",
@@ -7720,6 +7260,406 @@
             "_width": 3.700000047683716,
             "_height": 12.600000381469727,
             "_depth": 2.9000000953674316
+        },
+        {
+            "type": "Entity",
+            "id": "{5f7ed144-a6ff-45a6-92ba-35ec3f2fa45a}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{b946fbc3-c91d-46b9-b870-0e150f71736a}\u0000",
+                "owner": "{5f7ed144-a6ff-45a6-92ba-35ec3f2fa45a}\u0000",
+                "Position": {
+                    "x": -4.373965263366699,
+                    "y": 0.0,
+                    "z": 22.466415405273438
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{ca6419f8-cede-4ce2-9cd1-1cee6ec5c08a}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{ca6419f8-cede-4ce2-9cd1-1cee6ec5c08a}\u0000",
+            "owner": "{5f7ed144-a6ff-45a6-92ba-35ec3f2fa45a}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 56.29999923706055,
+            "_height": 25.399999618530273,
+            "_depth": 1.0
+        },
+        {
+            "type": "Entity",
+            "id": "{7f6bb9c8-e95a-4619-965a-d1414cbc860c}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{c723fbd6-78a5-4693-8429-5c167905e882}\u0000",
+                "owner": "{7f6bb9c8-e95a-4619-965a-d1414cbc860c}\u0000",
+                "Position": {
+                    "x": -30.369571685791016,
+                    "y": 0.0,
+                    "z": -16.397111892700195
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{92666104-4681-4b2a-87e7-abb2d215df10}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{92666104-4681-4b2a-87e7-abb2d215df10}\u0000",
+            "owner": "{7f6bb9c8-e95a-4619-965a-d1414cbc860c}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 1.600000023841858,
+            "_height": 19.899999618530273,
+            "_depth": 73.5
+        },
+        {
+            "type": "Entity",
+            "id": "{7edb928f-3db7-49bb-b132-6686adf23bae}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{fb2d8431-b088-4288-95e3-24a785088d7d}\u0000",
+                "owner": "{7edb928f-3db7-49bb-b132-6686adf23bae}\u0000",
+                "Position": {
+                    "x": 19.501834869384766,
+                    "y": 0.0,
+                    "z": -16.397111892700195
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{ef1f0311-cebf-492b-81ca-2e8eee152e73}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{ef1f0311-cebf-492b-81ca-2e8eee152e73}\u0000",
+            "owner": "{7edb928f-3db7-49bb-b132-6686adf23bae}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 1.600000023841858,
+            "_height": 19.899999618530273,
+            "_depth": 73.5
+        },
+        {
+            "type": "Entity",
+            "id": "{d7e89fc6-1c4e-43f4-ab0d-dae372f150c3}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{609b3dec-68a8-4cf2-8dad-7bff464b7bc1}\u0000",
+                "owner": "{d7e89fc6-1c4e-43f4-ab0d-dae372f150c3}\u0000",
+                "Position": {
+                    "x": 45.46023941040039,
+                    "y": 0.0,
+                    "z": -77.81401062011719
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{17624b33-3bd4-4b9a-9d5e-099ec32a1dde}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{17624b33-3bd4-4b9a-9d5e-099ec32a1dde}\u0000",
+            "owner": "{d7e89fc6-1c4e-43f4-ab0d-dae372f150c3}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 1.600000023841858,
+            "_height": 19.899999618530273,
+            "_depth": 50.099998474121094
+        },
+        {
+            "type": "Entity",
+            "id": "{5cb661e6-5242-4e4c-bb96-925f6ddfd3d4}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{cf1d4f1f-4b5c-4daa-a6df-35e8af057219}\u0000",
+                "owner": "{5cb661e6-5242-4e4c-bb96-925f6ddfd3d4}\u0000",
+                "Position": {
+                    "x": -56.19932174682617,
+                    "y": 0.0,
+                    "z": -77.81401062011719
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{888c6664-18ec-4bf3-8781-9c176dc1cf8d}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{888c6664-18ec-4bf3-8781-9c176dc1cf8d}\u0000",
+            "owner": "{5cb661e6-5242-4e4c-bb96-925f6ddfd3d4}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 1.600000023841858,
+            "_height": 19.899999618530273,
+            "_depth": 50.099998474121094
+        },
+        {
+            "type": "Entity",
+            "id": "{7aa844fb-0287-4171-8b40-f8c27beac2a4}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{2e50ecb5-4d89-48ab-a11c-903b6e9cdc43}\u0000",
+                "owner": "{7aa844fb-0287-4171-8b40-f8c27beac2a4}\u0000",
+                "Position": {
+                    "x": -5.211609840393066,
+                    "y": 0.0,
+                    "z": -117.2408676147461
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{3da9944b-ac18-441c-9b64-7aa3423a1191}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{3da9944b-ac18-441c-9b64-7aa3423a1191}\u0000",
+            "owner": "{7aa844fb-0287-4171-8b40-f8c27beac2a4}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 101.4000015258789,
+            "_height": 20.600000381469727,
+            "_depth": 28.0
+        },
+        {
+            "type": "Entity",
+            "id": "{7600800d-a2f7-4b7b-b572-5d7506fbec9b}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{7a630d8e-3c06-439b-811f-5ff513ff3464}\u0000",
+                "owner": "{7600800d-a2f7-4b7b-b572-5d7506fbec9b}\u0000",
+                "Position": {
+                    "x": -43.252418518066406,
+                    "y": 0.0,
+                    "z": -52.30392837524414
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{467c2961-cd06-47ab-bb35-08e828f2d6a3}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{467c2961-cd06-47ab-bb35-08e828f2d6a3}\u0000",
+            "owner": "{7600800d-a2f7-4b7b-b572-5d7506fbec9b}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 27.0,
+            "_height": 22.299999237060547,
+            "_depth": 1.0
+        },
+        {
+            "type": "Entity",
+            "id": "{3d2bbe2b-1dd0-4d10-8593-7810f7900173}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{48e1c5c3-1d8c-4013-96a6-3eb4dbbb6353}\u0000",
+                "owner": "{3d2bbe2b-1dd0-4d10-8593-7810f7900173}\u0000",
+                "Position": {
+                    "x": 32.56856155395508,
+                    "y": 0.0,
+                    "z": -52.708343505859375
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{fe006f5f-2b9e-4955-a2b0-8c0b1f22987d}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{fe006f5f-2b9e-4955-a2b0-8c0b1f22987d}\u0000",
+            "owner": "{3d2bbe2b-1dd0-4d10-8593-7810f7900173}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 27.0,
+            "_height": 22.299999237060547,
+            "_depth": 1.0
         }
     ]
 }

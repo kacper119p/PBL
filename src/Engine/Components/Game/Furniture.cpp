@@ -28,6 +28,7 @@ namespace Engine
         {
             GetOwner()->GetScene()->DeleteEntity(GetOwner());
             collider->OnCollisionRemoveListener(ThrowOut);
+            ThrashManager::GetInstance()->SetFurnitureTaskFailed(true);
         }
     }
     #if EDITOR
