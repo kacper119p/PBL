@@ -10,7 +10,7 @@
 namespace Engine
 {
     glm::mat4 LightManager::DirectionalLightProjectionMatrix
-            = glm::ortho(-60.0f, 60.0f, -60.0f, 60.0f,
+            = glm::ortho(-150.0f, 150.0f, -150.0f, 150.0f,
                          0.1f, 300.0f);
 
     LightManager* LightManager::Instance = nullptr;
@@ -292,6 +292,11 @@ namespace Engine
             AddLightScreenPosition(RenderData, PointLights[i]);
         }
 
+        for (uint32_t i = 2, skipped = 0; i < FakeLights.size(); ++i)
+        {
+            AddLightScreenPosition(RenderData, FakeLights[i]);
+        }
+
         //Avoids conversion (required to upload correct data)
         LightsScreenPositionBuffer[0].x = *reinterpret_cast<float*>(&ScreenLightsCount);
 
@@ -337,6 +342,15 @@ namespace Engine
         {
             return;
         }
+        LightsScreenPositionBuffer.push_back(lightPosition);
+        ScreenLightsCount++;
+    }
+
+    void LightManager::AddLightScreenPosition(const CameraRenderData& RenderData, const FakeLight* Light)
+    {
+        const glm::vec4 ndc = RenderData.ProjectionMatrix * RenderData.ViewMatrix * glm::vec4(
+                                      Light->GetOwner()->GetTransform()->GetPositionWorldSpace(), 1.0f);
+        const glm::vec2 lightPosition = static_cast<glm::vec2>(ndc) / ndc.w * 0.5f + 0.5f;
         LightsScreenPositionBuffer.push_back(lightPosition);
         ScreenLightsCount++;
     }

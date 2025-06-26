@@ -9,9 +9,11 @@ namespace Engine::Ui
     {
         DialogueWidget = AddElement<class DialogueWidget>(nullptr);
         DialogueWidget->PushLine(
-                "Lorem ipsum dolor sit amet, consectetur\nadipiscing elit, sed do eiusmod tempor.");
+                "Lorem ipsum dolor sit amet, consectetur\nadipiscing elit, sed do eiusmod tempor.",
+                DialogueWidget::Speaker::Player);
         DialogueWidget->PushLine(
-                "Ut enim ad minim veniam, quis nostrud\nexercitation ullamco laboris nisi ut.");
+                "Ut enim ad minim veniam, quis nostrud\nexercitation ullamco laboris nisi ut.",
+                DialogueWidget::Speaker::Boss);
     }
 
     void DialogueTestUi::Update(const float DeltaTime)

@@ -30,6 +30,7 @@ namespace Engine::Ui
 
     void CleaningUi::Update(float DeltaTime)
     {
+        DialogueWidget->Update(DeltaTime);
         if (ThrashManager::GetInstance()->IsCurrentLevelCompleted())
         {
             if (!PicturesLoaded)
@@ -245,7 +246,7 @@ namespace Engine::Ui
                     {
                         DontWeapons->SetColor(PositiveColor);
                     }
-                
+
             }
             if (SummaryAppeared && Grade && !GradeAnimationStarted && !GradeAnimationFinished)
             {
@@ -273,7 +274,7 @@ namespace Engine::Ui
 
         }
     }
-    void CleaningUi::SetupDuringLevel() 
+    void CleaningUi::SetupDuringLevel()
     {
         TaskListBackground = AddElement<Image>(nullptr);
         TaskListBackground->GetRect().SetPositionPixels(glm::vec3(1280, 0, 0));
@@ -389,8 +390,11 @@ namespace Engine::Ui
         AudioManager::GetInstance().ConfigureSoundAttenuation(TaskSound, 1.0f, 100.0f, 0.0f);
         AudioManager::GetInstance().SetVolume(ListSound, 0.5f);
         AudioManager::GetInstance().SetVolume(TaskSound, 0.5f);
+
+        DialogueWidget = AddElement<class DialogueWidget>(nullptr);
+        DialogueStart();
     }
-    void CleaningUi::SetupAfterLevel() 
+    void CleaningUi::SetupAfterLevel()
     {
         SummaryBackground = AddElement<Image>(nullptr);
         SummaryBackground->GetRect().SetPositionPixels(glm::vec3(1920, 0, 0));
@@ -500,7 +504,93 @@ namespace Engine::Ui
         TimerText->SetText(
                 std::format("Completed in: {:.02f}", ThrashManager::GetInstance()->GetLevelEndTime() -
                                                              ThrashManager::GetInstance()->GetLevelStartTime()));
+            TimerText = AddElement<Text>(SummaryBackground);
+            TimerText->GetRect().SetPositionPixels(glm::vec3(20, 420, 0));
+            TimerText->GetRect().SetSizePixels(glm::vec2(800, 70));
+            TimerText->SetFont("EagleLakeRegular");
+            TimerText->SetText(std::format("Completed in: {:.02f}",
+                                           ThrashManager::GetInstance()->GetLevelEndTime() -
+                                           ThrashManager::GetInstance()->GetLevelStartTime()));
 
-        
+            switch (ThrashManager::GetInstance()->GetPlayerGrade())
+            {
+                case (6):
+                {
+                    Grade = AddElement<Image>(SummaryBackground);
+                    Grade->GetRect().SetPositionPixels(glm::vec3(300, -100, 0));
+                    Grade->GetRect().SetSizePixels(glm::vec2(0, 0));
+                    Materials::UiMaterial* gradeSMaterial = new Materials::BasicImageMaterial();
+                    Grade->SetMaterial(gradeSMaterial);
+                    Grade->SetTexture(TextureManager::GetTexture("./res/textures/CleaningUi/GradeS.dds"));
+
+                }
+                break;
+            }
+
+        }
+    }
+
+
+    void Engine::Ui::CleaningUi::DialogueStart()
+    {
+        switch (ThrashManager::GetInstance()->GetCurrentLevel())
+        {
+            case 1:
+            {
+                DialogueWidget->Show();
+                DialogueWidget->PushLine("What now?", DialogueWidget::Speaker::Player);
+                DialogueWidget->PushLine(
+                        "Finally, you're here, Gryzia. Come closer, we need to clean up the mess left by the hero.",
+                        DialogueWidget::Speaker::Boss);
+                DialogueWidget->PushLine("Start by washing away the blood he left behind.",
+                                         DialogueWidget::Speaker::Boss);
+                DialogueWidget->PushLine("Don't screw this up...", DialogueWidget::Speaker::Boss);
+                break;
+            }
+            case 2:
+            {
+                printf("level 2");
+                DialogueWidget->Show();
+                DialogueWidget->PushLine("What a mess!", DialogueWidget::Speaker::Player);
+                DialogueWidget->PushLine(
+                        "And there’s some slime crawling around too—better catch it with the vacuum and toss it into the pit before it causes more trouble...",
+                        DialogueWidget::Speaker::Player);
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+    }
+
+    void Engine::Ui::CleaningUi::DialogueUpdate(float DeltaTime)
+    {
+        switch (ThrashManager::GetInstance()->GetCurrentLevel())
+        {
+            case 1:
+            {
+                DialogueWidget->PopLine();
+                if (DialogueWidget->IsAnimationFinished())
+                {
+                    DialogueWidget->Hide();
+                }
+                break;
+            }
+            case 2:
+            {
+                DialogueWidget->PopLine();
+                if (DialogueWidget->IsAnimationFinished())
+                {
+                    DialogueWidget->Hide();
+                }
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+        DialogueWidget->Update(DeltaTime);
     }
 }
