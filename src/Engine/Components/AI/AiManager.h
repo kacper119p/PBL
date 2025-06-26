@@ -86,11 +86,14 @@ namespace Engine
         float TrashRange = 3.0f;
         Entity* TargetTrash = nullptr;
         int CurrentTrashValue = 0;
-        int MaxTrashCapacity = 10;
+        int MaxTrashCapacity = 0;
         std::string SelectedPlayerName = "";
         std::shared_ptr<ma_sound> WalkingSound = AudioManager::GetInstance().CreateSoundInstance("glut");
-        bool Enabled = true;
-        int Size = 5;
+        glm::vec3 LastPosition;
+        float TimeWithoutMovement = 0.0f;
+        float MovementCheckInterval = 2.0f;
+        Entity* Hole = nullptr;
+        bool IsFalling = false;
 
     };
 }
