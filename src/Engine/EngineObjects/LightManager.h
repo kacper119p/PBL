@@ -8,6 +8,7 @@
 #include "Engine/Components/Lights/PointLight.h"
 #include "Camera.h"
 #include "CameraRenderData.h"
+#include "Engine/Components/Lights/FakeLight.h"
 #include "Engine/Components/Lights/SpotLight.h"
 #include "Engine/Textures/Texture.h"
 
@@ -85,6 +86,8 @@ namespace Engine
 
         glm::uvec2 Resolution;
 
+        std::vector<FakeLight*> FakeLights;
+
         static LightManager* Instance;
 
         static constexpr uint32_t DirectionalShadowWidth = 4096;
@@ -129,6 +132,20 @@ namespace Engine
                 DirectionalLight = nullptr;
             }
         }
+
+        void RegisterLight(FakeLight* NewLight)
+        {
+            if (std::ranges::find(FakeLights, NewLight) == FakeLights.end())
+            {
+                FakeLights.push_back(NewLight);
+            }
+        }
+
+        void UnregisterLight(FakeLight* LightToUnregister)
+        {
+            std::erase(FakeLights, LightToUnregister);
+        }
+
 
         void ClearAllLights();
 
@@ -196,6 +213,8 @@ namespace Engine
         void AddLightScreenPosition(const CameraRenderData& RenderData, const class PointLight* Light);
 
         void AddLightScreenPosition(const CameraRenderData& RenderData, const class SpotLight* Light);
+
+        void AddLightScreenPosition(const CameraRenderData& RenderData, const class FakeLight* Light);
 
         static bool IsPointLightVisible(const PointLight* Light);
 

@@ -134,6 +134,9 @@ namespace Engine::Ui
             AudioManager::GetInstance().ConfigureSoundAttenuation(TaskSound, 1.0f, 100.0f, 0.0f);
             AudioManager::GetInstance().SetVolume(ListSound, 0.5f);
             AudioManager::GetInstance().SetVolume(TaskSound, 0.5f);
+
+            DialogueWidget = AddElement<class DialogueWidget>(nullptr);
+            DialogueStart();
         }
         else
         {
@@ -467,8 +470,70 @@ namespace Engine::Ui
                     GradeAnimationFinished = true;
                 }
             }
-
-
         }
+        DialogueUpdate(DeltaTime);
+    }
+
+    void CleaningUi::DialogueStart()
+    {
+        switch (ThrashManager::GetInstance()->GetCurrentLevel())
+        {
+            case 1:
+            {
+                DialogueWidget->Show();
+                DialogueWidget->PushLine("What now?", DialogueWidget::Speaker::Player);
+                DialogueWidget->PushLine(
+                        "Finally, you're here, Gryzia. Come closer, we need to clean up the mess left by the hero.",
+                        DialogueWidget::Speaker::Boss);
+                DialogueWidget->PushLine("Start by washing away the blood he left behind.",
+                                         DialogueWidget::Speaker::Boss);
+                DialogueWidget->PushLine("Don't screw this up...", DialogueWidget::Speaker::Boss);
+                break;
+            }
+            case 2:
+            {
+                printf("level 2");
+                DialogueWidget->Show();
+                DialogueWidget->PushLine("What a mess!", DialogueWidget::Speaker::Player);
+                DialogueWidget->PushLine(
+                        "And there’s some slime crawling around too—better catch it with the vacuum and toss it into the pit before it causes more trouble...",
+                        DialogueWidget::Speaker::Player);
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+    }
+
+    void CleaningUi::DialogueUpdate(float DeltaTime)
+    {
+        switch (ThrashManager::GetInstance()->GetCurrentLevel())
+        {
+            case 1:
+            {
+                DialogueWidget->PopLine();
+                if (DialogueWidget->IsAnimationFinished())
+                {
+                    DialogueWidget->Hide();
+                }
+                break;
+            }
+            case 2:
+            {
+                DialogueWidget->PopLine();
+                if (DialogueWidget->IsAnimationFinished())
+                {
+                    DialogueWidget->Hide();
+                }
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+        DialogueWidget->Update(DeltaTime);
     }
 }
