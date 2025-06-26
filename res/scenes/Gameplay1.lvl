@@ -218,7 +218,19 @@
                 "{74d5da33-4610-49c5-9322-aef63c2c1525}\u0000",
                 "{360f1a00-75b1-4e7c-a1b0-d5387f42a614}\u0000",
                 "{9fa2f0eb-1244-429d-9da3-bc9840754a99}\u0000",
-                "{21cee5f7-578f-40e0-9360-d7922dfab7a3}\u0000"
+                "{21cee5f7-578f-40e0-9360-d7922dfab7a3}\u0000",
+                "{fee4263b-9545-42c6-a795-cbef2d7917a2}\u0000",
+                "{09b33ebf-0bf9-4107-8b12-49f5b781fd7f}\u0000",
+                "{5af88eac-f1ac-4ec9-b545-9b1a63c3f1f0}\u0000",
+                "{ea4914ab-79ad-4e5b-a602-99d2ba13a1f7}\u0000",
+                "{71a92c02-04fd-45cb-96c6-11e1bd4e9e04}\u0000",
+                "{9e569cdb-9ceb-443f-82ed-9d0de775d8fa}\u0000",
+                "{a28da572-39c2-429e-9914-a27134238e01}\u0000",
+                "{fcea804a-eab9-40c8-a257-c54e474ac306}\u0000",
+                "{fe3d692a-5556-4864-bb6d-b4213bb7d230}\u0000",
+                "{3d3ada0a-7129-4ddc-868f-b023e3085ea7}\u0000",
+                "{a69b9b42-7e81-437a-8e20-89a791111459}\u0000",
+                "{a9ccf08a-781c-44d6-9570-d98f0823ac9d}\u0000"
             ],
             "Parent": null
         },
@@ -2306,7 +2318,7 @@
                 "owner": "{fedcfb4e-9567-4308-8680-b09fdf463b39}\u0000",
                 "Position": {
                     "x": -18.32451820373535,
-                    "y": 0.9497056007385254,
+                    "y": 1.0,
                     "z": -65.81327819824219
                 },
                 "EulerAngles": {
@@ -4338,13 +4350,13 @@
                 "id": "{35fc0f56-1ce1-4057-a2fa-b251170cbe7e}\u0000",
                 "owner": "{2846475c-4a5f-44e1-aee3-076a323d90fe}\u0000",
                 "Position": {
-                    "x": -4.588115692138672,
+                    "x": -3.2262375354766846,
                     "y": 1.7907521724700928,
-                    "z": -81.84551239013672
+                    "z": -79.80499267578125
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": 111.25514221191406,
                     "z": 0.0
                 },
                 "Scale": {
@@ -4354,9 +4366,9 @@
                 },
                 "Rotation": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": 0.8253852725028992,
                     "z": 0.0,
-                    "w": 0.0
+                    "w": 0.564569890499115
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
@@ -4550,7 +4562,7 @@
                 "owner": "{6e2fb9a7-f4a0-4531-9977-37e42a68ad44}\u0000",
                 "Position": {
                     "x": 19.732303619384766,
-                    "y": 0.0,
+                    "y": 5.960464477539063e-8,
                     "z": -52.78199005126953
                 },
                 "EulerAngles": {
@@ -11902,9 +11914,88 @@
                 "id": "{21cee5f7-578f-40e0-9360-d7922dfab7a3}\u0000",
                 "owner": "{c74b28ad-f6c9-413c-ae8c-f15542747f18}\u0000",
                 "Position": {
-                    "x": -2.47059965133667,
-                    "y": 3.8590593338012695,
-                    "z": -71.99781036376953
+                    "x": -3.801326274871826,
+                    "y": 2.116764783859253,
+                    "z": -72.67050170898438
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": -95.12244415283203
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": -0.7379988431930542,
+                    "w": 0.6748020052909851
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{14153dcf-7335-4442-bcca-1319b556536a}\u0000",
+                "{b00e1d7f-40db-4e18-a5b6-081ccbd13383}\u0000",
+                "{3b4926fc-f7b1-4688-b9dc-58d86e672247}\u0000",
+                "{7a2cf0a5-73eb-4dd8-bc7e-1a2ff9001f83}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{14153dcf-7335-4442-bcca-1319b556536a}\u0000",
+            "owner": "{c74b28ad-f6c9-413c-ae8c-f15542747f18}\u0000",
+            "Material": "res/materials/SampleScene/Sword.mat",
+            "Model": "res/models/Modele_Mati/Smieci/But.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{b00e1d7f-40db-4e18-a5b6-081ccbd13383}\u0000",
+            "owner": "{c74b28ad-f6c9-413c-ae8c-f15542747f18}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 1.7999999523162842,
+            "_height": 1.600000023841858,
+            "_depth": 2.799999952316284
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{3b4926fc-f7b1-4688-b9dc-58d86e672247}\u0000",
+            "owner": "{c74b28ad-f6c9-413c-ae8c-f15542747f18}\u0000",
+            "mass": 1.0,
+            "inverseMass": 1.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Thrash",
+            "id": "{7a2cf0a5-73eb-4dd8-bc7e-1a2ff9001f83}\u0000",
+            "owner": "{c74b28ad-f6c9-413c-ae8c-f15542747f18}\u0000",
+            "size": 5
+        },
+        {
+            "type": "Entity",
+            "id": "{bf6cc749-433f-4099-94c8-3ef23cb31933}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{fee4263b-9545-42c6-a795-cbef2d7917a2}\u0000",
+                "owner": "{bf6cc749-433f-4099-94c8-3ef23cb31933}\u0000",
+                "Position": {
+                    "x": -20.715499877929688,
+                    "y": 3.448179244995117,
+                    "z": -38.45957565307617
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -11926,16 +12017,775 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{14153dcf-7335-4442-bcca-1319b556536a}\u0000"
+                "{1e2bba3b-1734-436f-8548-7674180e791e}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{1e2bba3b-1734-436f-8548-7674180e791e}\u0000",
+            "owner": "{bf6cc749-433f-4099-94c8-3ef23cb31933}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 15.0,
+            "_height": 5.0,
+            "_depth": 15.0
+        },
+        {
+            "type": "Entity",
+            "id": "{13104e9a-3d6f-41b1-93e8-e7b1698528e8}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{09b33ebf-0bf9-4107-8b12-49f5b781fd7f}\u0000",
+                "owner": "{13104e9a-3d6f-41b1-93e8-e7b1698528e8}\u0000",
+                "Position": {
+                    "x": -19.347728729248047,
+                    "y": 2.5943446159362793,
+                    "z": 18.162166595458984
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{ffe26c93-0c86-4404-bde6-5f5acabe0b01}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{ffe26c93-0c86-4404-bde6-5f5acabe0b01}\u0000",
+            "owner": "{13104e9a-3d6f-41b1-93e8-e7b1698528e8}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 11.800000190734863,
+            "_height": 10.100000381469727,
+            "_depth": 26.799999237060547
+        },
+        {
+            "type": "Entity",
+            "id": "{b96ae152-e9ca-4b8a-b93b-5de14f467293}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{5af88eac-f1ac-4ec9-b545-9b1a63c3f1f0}\u0000",
+                "owner": "{b96ae152-e9ca-4b8a-b93b-5de14f467293}\u0000",
+                "Position": {
+                    "x": 13.432058334350586,
+                    "y": 3.448179244995117,
+                    "z": -32.89192581176758
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{06b7603c-ce97-40d9-937e-bdd9a3886d77}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{06b7603c-ce97-40d9-937e-bdd9a3886d77}\u0000",
+            "owner": "{b96ae152-e9ca-4b8a-b93b-5de14f467293}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 19.100000381469727,
+            "_height": 6.900000095367432,
+            "_depth": 22.899999618530273
+        },
+        {
+            "type": "Entity",
+            "id": "{d26a18ad-17be-47bd-884c-0b0933e631f7}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{ea4914ab-79ad-4e5b-a602-99d2ba13a1f7}\u0000",
+                "owner": "{d26a18ad-17be-47bd-884c-0b0933e631f7}\u0000",
+                "Position": {
+                    "x": 13.219732284545898,
+                    "y": 3.448179244995117,
+                    "z": 10.041769981384277
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{363c6ae7-1fa0-4530-9798-908dfbfd98cf}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{363c6ae7-1fa0-4530-9798-908dfbfd98cf}\u0000",
+            "owner": "{d26a18ad-17be-47bd-884c-0b0933e631f7}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 19.100000381469727,
+            "_height": 6.900000095367432,
+            "_depth": 22.899999618530273
+        },
+        {
+            "type": "Entity",
+            "id": "{25401848-d7a7-4a15-90a6-747011064e0e}\u0000",
+            "name": "New Entity",
+            "transform": {
+                "type": "Transform",
+                "id": "{71a92c02-04fd-45cb-96c6-11e1bd4e9e04}\u0000",
+                "owner": "{25401848-d7a7-4a15-90a6-747011064e0e}\u0000",
+                "Position": {
+                    "x": -34.43735122680664,
+                    "y": 3.796008586883545,
+                    "z": -12.08692741394043
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{1a5bff9e-41f2-48de-9659-1d2750416a14}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{1a5bff9e-41f2-48de-9659-1d2750416a14}\u0000",
+            "owner": "{25401848-d7a7-4a15-90a6-747011064e0e}\u0000",
+            "isTrigger": false,
+            "isStatic": true,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967295,
+            "colliderType": 0,
+            "_width": 19.600000381469727,
+            "_height": 6.900000095367432,
+            "_depth": 40.70000076293945
+        },
+        {
+            "type": "Entity",
+            "id": "{f79227d3-c127-4205-aff5-170e99cf54ad}\u0000",
+            "name": "KamienPrzeszkoda1",
+            "transform": {
+                "type": "Transform",
+                "id": "{9e569cdb-9ceb-443f-82ed-9d0de775d8fa}\u0000",
+                "owner": "{f79227d3-c127-4205-aff5-170e99cf54ad}\u0000",
+                "Position": {
+                    "x": -12.099281311035156,
+                    "y": 1.9288444519042969,
+                    "z": -78.0569839477539
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 64.04052734375,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.5302191972732544,
+                    "z": 0.0,
+                    "w": 0.8478606343269348
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{a83ec713-0ba3-4f7e-9c03-c8fecd6cdc1d}\u0000",
+                "{b0167697-e0b0-4892-8771-f9fdfc37ed3a}\u0000",
+                "{4a15022b-884a-4668-9006-be29cc59b484}\u0000",
+                "{d24f8020-f732-49d8-9fc7-1d7503b66312}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{14153dcf-7335-4442-bcca-1319b556536a}\u0000",
-            "owner": "{c74b28ad-f6c9-413c-ae8c-f15542747f18}\u0000",
-            "Material": "res/materials/SampleScene/UV12.mat",
-            "Model": "res/models/Modele_Mati/Smieci/But.fbx",
+            "id": "{a83ec713-0ba3-4f7e-9c03-c8fecd6cdc1d}\u0000",
+            "owner": "{f79227d3-c127-4205-aff5-170e99cf54ad}\u0000",
+            "Material": "res/materials/SampleScene/UV14.mat",
+            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{b0167697-e0b0-4892-8771-f9fdfc37ed3a}\u0000",
+            "owner": "{f79227d3-c127-4205-aff5-170e99cf54ad}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 2,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 3.200000047683716,
+            "_height": 1.2699999809265137,
+            "_depth": 1.899999976158142
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{4a15022b-884a-4668-9006-be29cc59b484}\u0000",
+            "owner": "{f79227d3-c127-4205-aff5-170e99cf54ad}\u0000",
+            "mass": 0.5,
+            "inverseMass": 2.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.3799999952316284,
+            "frictionEnabled": true,
+            "restitution": 0.0560000017285347
+        },
+        {
+            "type": "Thrash",
+            "id": "{d24f8020-f732-49d8-9fc7-1d7503b66312}\u0000",
+            "owner": "{f79227d3-c127-4205-aff5-170e99cf54ad}\u0000",
+            "size": 5
+        },
+        {
+            "type": "Entity",
+            "id": "{4972ef2e-1328-4fa3-8014-ef65317882a5}\u0000",
+            "name": "KoscDluga",
+            "transform": {
+                "type": "Transform",
+                "id": "{a28da572-39c2-429e-9914-a27134238e01}\u0000",
+                "owner": "{4972ef2e-1328-4fa3-8014-ef65317882a5}\u0000",
+                "Position": {
+                    "x": -0.26928412914276123,
+                    "y": 1.7242627143859863,
+                    "z": -74.56352996826172
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 27.971126556396484,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 2.0,
+                    "y": 2.0,
+                    "z": 2.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.241677388548851,
+                    "z": 0.0,
+                    "w": 0.9703566431999207
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{a50e6996-cbdc-481f-a318-439041b11c66}\u0000",
+                "{c7068c6b-6a20-4ccc-b599-07a769a0fc21}\u0000",
+                "{b31d3c80-363c-4ff0-8cc5-21109faec9c6}\u0000",
+                "{0afb5af2-554d-4f92-8cfa-74ae1a747f39}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{a50e6996-cbdc-481f-a318-439041b11c66}\u0000",
+            "owner": "{4972ef2e-1328-4fa3-8014-ef65317882a5}\u0000",
+            "Material": "res/materials/SampleScene/UV8.mat",
+            "Model": "res/models/Modele_Mati/Smieci/KoscDluga.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{c7068c6b-6a20-4ccc-b599-07a769a0fc21}\u0000",
+            "owner": "{4972ef2e-1328-4fa3-8014-ef65317882a5}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 2,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 5.400000095367432,
+            "_height": 1.0,
+            "_depth": 1.0
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{b31d3c80-363c-4ff0-8cc5-21109faec9c6}\u0000",
+            "owner": "{4972ef2e-1328-4fa3-8014-ef65317882a5}\u0000",
+            "mass": 0.5,
+            "inverseMass": 2.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Thrash",
+            "id": "{0afb5af2-554d-4f92-8cfa-74ae1a747f39}\u0000",
+            "owner": "{4972ef2e-1328-4fa3-8014-ef65317882a5}\u0000",
+            "size": 20
+        },
+        {
+            "type": "Entity",
+            "id": "{78efed45-d602-45bb-98f3-45c0aa8921a6}\u0000",
+            "name": "KoscDluga",
+            "transform": {
+                "type": "Transform",
+                "id": "{fcea804a-eab9-40c8-a257-c54e474ac306}\u0000",
+                "owner": "{78efed45-d602-45bb-98f3-45c0aa8921a6}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 1.7242627143859863,
+                    "z": -79.02034759521484
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -129.19879150390625,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 2.0,
+                    "y": 2.0,
+                    "z": 2.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.9033308029174805,
+                    "z": 0.0,
+                    "w": 0.4289446473121643
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{c11d00ee-8dde-46d3-9122-bbbfa45eaa7b}\u0000",
+                "{e81cdc8c-03bc-432b-8b35-26afcc57ce6b}\u0000",
+                "{b53357cc-38e7-49c3-9878-94fe7d392be1}\u0000",
+                "{250f97b5-d12a-4bc1-97ca-dd3bc7222a5f}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{c11d00ee-8dde-46d3-9122-bbbfa45eaa7b}\u0000",
+            "owner": "{78efed45-d602-45bb-98f3-45c0aa8921a6}\u0000",
+            "Material": "res/materials/SampleScene/UV8.mat",
+            "Model": "res/models/Modele_Mati/Smieci/KoscDluga.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{e81cdc8c-03bc-432b-8b35-26afcc57ce6b}\u0000",
+            "owner": "{78efed45-d602-45bb-98f3-45c0aa8921a6}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 2,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 5.400000095367432,
+            "_height": 1.0,
+            "_depth": 1.0
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{b53357cc-38e7-49c3-9878-94fe7d392be1}\u0000",
+            "owner": "{78efed45-d602-45bb-98f3-45c0aa8921a6}\u0000",
+            "mass": 0.5,
+            "inverseMass": 2.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Thrash",
+            "id": "{250f97b5-d12a-4bc1-97ca-dd3bc7222a5f}\u0000",
+            "owner": "{78efed45-d602-45bb-98f3-45c0aa8921a6}\u0000",
+            "size": 20
+        },
+        {
+            "type": "Entity",
+            "id": "{9d1cca81-d000-4044-b963-f021b0e760c7}\u0000",
+            "name": "KamienPrzeszkoda1",
+            "transform": {
+                "type": "Transform",
+                "id": "{fe3d692a-5556-4864-bb6d-b4213bb7d230}\u0000",
+                "owner": "{9d1cca81-d000-4044-b963-f021b0e760c7}\u0000",
+                "Position": {
+                    "x": -12.099281311035156,
+                    "y": 1.9288444519042969,
+                    "z": -73.62879943847656
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -25.032737731933594,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.21671852469444275,
+                    "z": 0.0,
+                    "w": 0.9762341380119324
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{6ab75635-56b9-4047-9982-0c92c846e93c}\u0000",
+                "{69c907b7-2582-4fcb-85f6-38bf1a4e7822}\u0000",
+                "{4da16dcb-aec2-4455-8325-046dc4503746}\u0000",
+                "{7cc04b08-4684-4911-b6c6-3ba66672145f}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{6ab75635-56b9-4047-9982-0c92c846e93c}\u0000",
+            "owner": "{9d1cca81-d000-4044-b963-f021b0e760c7}\u0000",
+            "Material": "res/materials/SampleScene/UV14.mat",
+            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{69c907b7-2582-4fcb-85f6-38bf1a4e7822}\u0000",
+            "owner": "{9d1cca81-d000-4044-b963-f021b0e760c7}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 2,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 3.200000047683716,
+            "_height": 1.2699999809265137,
+            "_depth": 1.899999976158142
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{4da16dcb-aec2-4455-8325-046dc4503746}\u0000",
+            "owner": "{9d1cca81-d000-4044-b963-f021b0e760c7}\u0000",
+            "mass": 0.5,
+            "inverseMass": 2.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.3799999952316284,
+            "frictionEnabled": true,
+            "restitution": 0.0560000017285347
+        },
+        {
+            "type": "Thrash",
+            "id": "{7cc04b08-4684-4911-b6c6-3ba66672145f}\u0000",
+            "owner": "{9d1cca81-d000-4044-b963-f021b0e760c7}\u0000",
+            "size": 5
+        },
+        {
+            "type": "Entity",
+            "id": "{4bbd18cc-75ce-488c-9cb3-5fa69eb66b91}\u0000",
+            "name": "KamienPrzeszkoda1",
+            "transform": {
+                "type": "Transform",
+                "id": "{3d3ada0a-7129-4ddc-868f-b023e3085ea7}\u0000",
+                "owner": "{4bbd18cc-75ce-488c-9cb3-5fa69eb66b91}\u0000",
+                "Position": {
+                    "x": -9.23038387298584,
+                    "y": 1.9288444519042969,
+                    "z": -75.4616470336914
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": -25.032737731933594,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.21671852469444275,
+                    "z": 0.0,
+                    "w": 0.9762341380119324
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{0cc9b046-08a0-41c1-9c4a-659f1392a6a6}\u0000",
+                "{89846778-8e19-4458-9861-ee7d8b708c54}\u0000",
+                "{861d318b-5250-49e5-9c75-67cedf6e9fa5}\u0000",
+                "{3afea048-5046-48a0-98f1-ddfbbdaf8b33}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{0cc9b046-08a0-41c1-9c4a-659f1392a6a6}\u0000",
+            "owner": "{4bbd18cc-75ce-488c-9cb3-5fa69eb66b91}\u0000",
+            "Material": "res/materials/SampleScene/UV14.mat",
+            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{89846778-8e19-4458-9861-ee7d8b708c54}\u0000",
+            "owner": "{4bbd18cc-75ce-488c-9cb3-5fa69eb66b91}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 2,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 3.200000047683716,
+            "_height": 1.2699999809265137,
+            "_depth": 1.899999976158142
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{861d318b-5250-49e5-9c75-67cedf6e9fa5}\u0000",
+            "owner": "{4bbd18cc-75ce-488c-9cb3-5fa69eb66b91}\u0000",
+            "mass": 0.5,
+            "inverseMass": 2.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.3799999952316284,
+            "frictionEnabled": true,
+            "restitution": 0.0560000017285347
+        },
+        {
+            "type": "Thrash",
+            "id": "{3afea048-5046-48a0-98f1-ddfbbdaf8b33}\u0000",
+            "owner": "{4bbd18cc-75ce-488c-9cb3-5fa69eb66b91}\u0000",
+            "size": 5
+        },
+        {
+            "type": "Entity",
+            "id": "{49fb85af-f3a7-4d42-8f0d-86daf2c6f607}\u0000",
+            "name": "KamienPrzeszkoda1",
+            "transform": {
+                "type": "Transform",
+                "id": "{a69b9b42-7e81-437a-8e20-89a791111459}\u0000",
+                "owner": "{49fb85af-f3a7-4d42-8f0d-86daf2c6f607}\u0000",
+                "Position": {
+                    "x": -15.62009334564209,
+                    "y": 1.9288444519042969,
+                    "z": -75.4616470336914
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 53.220733642578125,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.44792085886001587,
+                    "z": 0.0,
+                    "w": 0.8940731883049011
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{352d76fd-9253-4bf9-886d-f395b49700ae}\u0000",
+                "{ef51c5ea-cd2b-406b-a901-d83206757cf7}\u0000",
+                "{391756df-c478-4563-869d-45491c19323c}\u0000",
+                "{e10c0a26-cd14-4535-9782-86d7a31a19d0}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{352d76fd-9253-4bf9-886d-f395b49700ae}\u0000",
+            "owner": "{49fb85af-f3a7-4d42-8f0d-86daf2c6f607}\u0000",
+            "Material": "res/materials/SampleScene/UV14.mat",
+            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{ef51c5ea-cd2b-406b-a901-d83206757cf7}\u0000",
+            "owner": "{49fb85af-f3a7-4d42-8f0d-86daf2c6f607}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 2,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 3.200000047683716,
+            "_height": 1.2699999809265137,
+            "_depth": 1.899999976158142
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{391756df-c478-4563-869d-45491c19323c}\u0000",
+            "owner": "{49fb85af-f3a7-4d42-8f0d-86daf2c6f607}\u0000",
+            "mass": 0.5,
+            "inverseMass": 2.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.3799999952316284,
+            "frictionEnabled": true,
+            "restitution": 0.0560000017285347
+        },
+        {
+            "type": "Thrash",
+            "id": "{e10c0a26-cd14-4535-9782-86d7a31a19d0}\u0000",
+            "owner": "{49fb85af-f3a7-4d42-8f0d-86daf2c6f607}\u0000",
+            "size": 5
+        },
+        {
+            "type": "Entity",
+            "id": "{0ef88c47-46c8-4dcd-96ea-d774ceae76ce}\u0000",
+            "name": "KamienPrzeszkoda1",
+            "transform": {
+                "type": "Transform",
+                "id": "{a9ccf08a-781c-44d6-9570-d98f0823ac9d}\u0000",
+                "owner": "{0ef88c47-46c8-4dcd-96ea-d774ceae76ce}\u0000",
+                "Position": {
+                    "x": -15.046792984008789,
+                    "y": 1.9288444519042969,
+                    "z": -71.49046325683594
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 53.220733642578125,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.44792085886001587,
+                    "z": 0.0,
+                    "w": 0.8940731883049011
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{eb62b016-29db-471b-94a0-4ba3f85acb95}\u0000",
+                "{b4063c7c-05f3-4c41-b24a-467e0efb343b}\u0000",
+                "{11259539-c848-4ff0-b718-b39fadafef88}\u0000",
+                "{eb57940c-1182-449b-83fe-97399b79295b}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{eb62b016-29db-471b-94a0-4ba3f85acb95}\u0000",
+            "owner": "{0ef88c47-46c8-4dcd-96ea-d774ceae76ce}\u0000",
+            "Material": "res/materials/SampleScene/UV14.mat",
+            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{b4063c7c-05f3-4c41-b24a-467e0efb343b}\u0000",
+            "owner": "{0ef88c47-46c8-4dcd-96ea-d774ceae76ce}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 2,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 3.200000047683716,
+            "_height": 1.2699999809265137,
+            "_depth": 1.899999976158142
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{11259539-c848-4ff0-b718-b39fadafef88}\u0000",
+            "owner": "{0ef88c47-46c8-4dcd-96ea-d774ceae76ce}\u0000",
+            "mass": 0.5,
+            "inverseMass": 2.0,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.3799999952316284,
+            "frictionEnabled": true,
+            "restitution": 0.0560000017285347
+        },
+        {
+            "type": "Thrash",
+            "id": "{eb57940c-1182-449b-83fe-97399b79295b}\u0000",
+            "owner": "{0ef88c47-46c8-4dcd-96ea-d774ceae76ce}\u0000",
+            "size": 5
         }
     ]
 }
