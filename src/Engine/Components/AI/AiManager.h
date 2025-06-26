@@ -94,6 +94,8 @@ namespace Engine
         float MovementCheckInterval = 2.0f;
         Entity* Hole = nullptr;
         bool IsFalling = false;
+        bool Enabled = true;
+        int Size = 5;
 
     };
 }
