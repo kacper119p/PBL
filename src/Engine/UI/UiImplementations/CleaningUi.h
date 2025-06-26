@@ -56,7 +56,7 @@ namespace Engine::Ui
 
         bool HideKeyPressedLastFrame = false;
         bool Hidden = true;
-        float HiddenTime = 0.0f;
+        float HiddenTime = 1.0f;
 
         std::shared_ptr<ma_sound> ListSound = AudioManager::GetInstance().CreateSoundInstance("lista");
         std::shared_ptr<ma_sound> TaskSound = AudioManager::GetInstance().CreateSoundInstance("task");
