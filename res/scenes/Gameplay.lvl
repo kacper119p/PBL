@@ -828,7 +828,8 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{b8e19c20-a746-46fb-8c17-c73ed8786e9d}\u0000"
+                "{b8e19c20-a746-46fb-8c17-c73ed8786e9d}\u0000",
+                "{84972dda-2b66-4b34-ac54-d313c3e7a767}\u0000"
             ]
         },
         {
@@ -838,6 +839,14 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "NavArea",
+            "id": "{84972dda-2b66-4b34-ac54-d313c3e7a767}\u0000",
+            "owner": "{be81cfb8-729f-4180-a609-30276e54f17b}\u0000",
+            "IsWalkable": false,
+            "spacing": 1.0,
+            "padding": 1.0
         },
         {
             "type": "Entity",
@@ -916,7 +925,8 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{8edbc583-4a25-4c43-89d3-41852c2fae4f}\u0000"
+                "{8edbc583-4a25-4c43-89d3-41852c2fae4f}\u0000",
+                "{68f06017-69c5-42c3-b453-538e50b9dfa5}\u0000"
             ]
         },
         {
@@ -926,6 +936,14 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "NavArea",
+            "id": "{68f06017-69c5-42c3-b453-538e50b9dfa5}\u0000",
+            "owner": "{01af3588-25c8-46e5-b5c9-789bf89f9b80}\u0000",
+            "IsWalkable": false,
+            "spacing": 1.0,
+            "padding": 1.0
         },
         {
             "type": "Entity",
@@ -4007,7 +4025,8 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{b563d255-ec93-42cb-b670-6f7b81be34f5}\u0000"
+                "{b563d255-ec93-42cb-b670-6f7b81be34f5}\u0000",
+                "{b9ac420c-4479-409c-bfa3-bd6c50d9eb45}\u0000"
             ]
         },
         {
@@ -4017,6 +4036,14 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "NavArea",
+            "id": "{b9ac420c-4479-409c-bfa3-bd6c50d9eb45}\u0000",
+            "owner": "{de3651dc-e9e3-4481-b237-1362cb9e12cd}\u0000",
+            "IsWalkable": false,
+            "spacing": 1.0,
+            "padding": 1.0
         },
         {
             "type": "Entity",
@@ -4104,7 +4131,8 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{96138b7a-02a0-48cd-b4db-5cb39bc3d5fd}\u0000"
+                "{96138b7a-02a0-48cd-b4db-5cb39bc3d5fd}\u0000",
+                "{2ef4443e-6f02-4ebf-ae12-c5b6ba67c133}\u0000"
             ]
         },
         {
@@ -4114,6 +4142,14 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "NavArea",
+            "id": "{2ef4443e-6f02-4ebf-ae12-c5b6ba67c133}\u0000",
+            "owner": "{a3642b53-4839-4e05-8fbe-4c1dbc3bcf9e}\u0000",
+            "IsWalkable": false,
+            "spacing": 1.0,
+            "padding": 1.0
         },
         {
             "type": "Entity",
@@ -4236,7 +4272,8 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{12e268e7-6f17-47b1-a036-ebcd51b550c3}\u0000"
+                "{12e268e7-6f17-47b1-a036-ebcd51b550c3}\u0000",
+                "{4342038e-feaa-4c35-87ce-0146fb6019ea}\u0000"
             ]
         },
         {
@@ -4246,6 +4283,14 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "NavArea",
+            "id": "{4342038e-feaa-4c35-87ce-0146fb6019ea}\u0000",
+            "owner": "{3868f600-3656-44f2-b1a3-5dab0ef0f016}\u0000",
+            "IsWalkable": false,
+            "spacing": 1.0,
+            "padding": 1.0
         },
         {
             "type": "Entity",
@@ -4280,7 +4325,8 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{bdc0d623-d0a1-4b06-9d39-23a6bb418cee}\u0000"
+                "{bdc0d623-d0a1-4b06-9d39-23a6bb418cee}\u0000",
+                "{d1787aae-e127-4367-ba34-265511d2c136}\u0000"
             ]
         },
         {
@@ -4290,6 +4336,14 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "NavArea",
+            "id": "{d1787aae-e127-4367-ba34-265511d2c136}\u0000",
+            "owner": "{a84bd790-c6c6-448e-a0f6-4eaaa3ed1576}\u0000",
+            "IsWalkable": false,
+            "spacing": 1.0,
+            "padding": 1.0
         },
         {
             "type": "Entity",
@@ -5673,7 +5727,8 @@
                 "Parent": "{2a53c72d-ca73-43c1-9223-d0b3436dcd4e}\u0000"
             },
             "components": [
-                "{8c1c304c-cca9-43af-9fd2-12935a43601b}\u0000"
+                "{8c1c304c-cca9-43af-9fd2-12935a43601b}\u0000",
+                "{20d95102-9527-4b4b-a7e6-f7905b324ada}\u0000"
             ]
         },
         {
@@ -5683,6 +5738,17 @@
             "Material": "res/materials/SampleScene/Deska.mat",
             "Model": "res/models/Modele_Mati/Meble/zestawdesek.fbx",
             "CastShadow": false
+        },
+        {
+            "type": "AudioSource",
+            "id": "{20d95102-9527-4b4b-a7e6-f7905b324ada}\u0000",
+            "owner": "{af4ee570-a98e-4eaa-a162-57076cbe51b7}\u0000",
+            "SelectedSoundId": "ogien",
+            "SoundVolume": 1.0,
+            "Looping": true,
+            "MinDist": 22.86199951171875,
+            "MaxDist": 234.70899963378906,
+            "RollOff": 1.0
         },
         {
             "type": "Entity",
@@ -7251,9 +7317,9 @@
                 "id": "{773fbeb4-2501-4f81-8470-86b0427eb4e0}\u0000",
                 "owner": "{53681ba1-cb08-4ae7-ba30-dc363285c70b}\u0000",
                 "Position": {
-                    "x": -9.5367431640625e-7,
+                    "x": 0.0000019073486328125,
                     "y": 0.0,
-                    "z": -0.000064849853515625
+                    "z": -0.00006103515625
                 },
                 "EulerAngles": {
                     "x": -90.0,
@@ -7275,7 +7341,8 @@
                 "Parent": "{6f7165a1-21eb-4b67-a62b-f914e3c0386e}\u0000"
             },
             "components": [
-                "{28a8af7c-442e-4677-b987-44e656395744}\u0000"
+                "{28a8af7c-442e-4677-b987-44e656395744}\u0000",
+                "{0dd28f66-4312-49c5-a210-ceb564cd0c50}\u0000"
             ]
         },
         {
@@ -7285,6 +7352,17 @@
             "Material": "res/materials/SampleScene/Deska.mat",
             "Model": "res/models/Modele_Mati/Meble/zestawdesek.fbx",
             "CastShadow": false
+        },
+        {
+            "type": "AudioSource",
+            "id": "{0dd28f66-4312-49c5-a210-ceb564cd0c50}\u0000",
+            "owner": "{53681ba1-cb08-4ae7-ba30-dc363285c70b}\u0000",
+            "SelectedSoundId": "ogien",
+            "SoundVolume": 1.0,
+            "Looping": true,
+            "MinDist": 32.029998779296875,
+            "MaxDist": 259.9750061035156,
+            "RollOff": 1.0
         },
         {
             "type": "Entity",
@@ -8834,7 +8912,8 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{d34ee364-9f41-41e5-91a7-e969f30fa309}\u0000"
+                "{d34ee364-9f41-41e5-91a7-e969f30fa309}\u0000",
+                "{241bb2b9-c392-4c32-989e-fc292abf9c11}\u0000"
             ]
         },
         {
@@ -8844,6 +8923,14 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "NavArea",
+            "id": "{241bb2b9-c392-4c32-989e-fc292abf9c11}\u0000",
+            "owner": "{6f0995a8-3ad2-4675-a62c-2ee6c153f574}\u0000",
+            "IsWalkable": false,
+            "spacing": 1.0,
+            "padding": 1.0
         },
         {
             "type": "Entity",
@@ -9627,9 +9714,9 @@
                 "id": "{8362167e-a522-435e-a094-2aa0fe7cd0a5}\u0000",
                 "owner": "{dc736103-a240-4edc-bc78-15ef0835e011}\u0000",
                 "Position": {
-                    "x": 0.00011348724365234375,
+                    "x": 0.00011444091796875,
                     "y": 0.0,
-                    "z": -0.0002651214599609375
+                    "z": -0.0002689361572265625
                 },
                 "EulerAngles": {
                     "x": -90.0,
@@ -9651,7 +9738,8 @@
                 "Parent": "{b38fadf0-549e-4651-a568-caf0e78283cd}\u0000"
             },
             "components": [
-                "{2f63cc18-883d-45bf-aee4-f879fc7ee1a9}\u0000"
+                "{2f63cc18-883d-45bf-aee4-f879fc7ee1a9}\u0000",
+                "{5cd55547-50f9-418a-b1b6-8fd7b244f9bc}\u0000"
             ]
         },
         {
@@ -9661,6 +9749,17 @@
             "Material": "res/materials/SampleScene/Deska.mat",
             "Model": "res/models/Modele_Mati/Meble/zestawdesek.fbx",
             "CastShadow": false
+        },
+        {
+            "type": "AudioSource",
+            "id": "{5cd55547-50f9-418a-b1b6-8fd7b244f9bc}\u0000",
+            "owner": "{dc736103-a240-4edc-bc78-15ef0835e011}\u0000",
+            "SelectedSoundId": "ogien",
+            "SoundVolume": 1.0,
+            "Looping": true,
+            "MinDist": 29.816999435424805,
+            "MaxDist": 236.28799438476563,
+            "RollOff": 1.0
         },
         {
             "type": "Entity",
