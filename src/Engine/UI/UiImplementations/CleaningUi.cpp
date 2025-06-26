@@ -558,7 +558,7 @@ void Engine::Ui::CleaningUi::DialogueStart()
             DialogueWidget->Show();
             DialogueWidget->PushLine("What a mess!", DialogueWidget::Speaker::Player);
             DialogueWidget->PushLine(
-                    "And there’s some slime crawling around too—better catch it with the vacuum and toss it into the pit before it causes more trouble...",
+                    "And there is some slime crawling around too, better catch it with the vacuum and toss it into the pit before it causes more trouble...",
                     DialogueWidget::Speaker::Player);
             break;
         }
