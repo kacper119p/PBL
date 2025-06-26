@@ -11354,7 +11354,7 @@
             "type": "ModelRenderer",
             "id": "{808295df-582c-4a84-93f5-c9311c573efc}\u0000",
             "owner": "{b23f1733-d85a-4549-8911-5ddbd4ed65f4}\u0000",
-            "Material": "",
+            "Material": "res/materials/SampleScene/Pilar.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/Lancuch.fbx",
             "CastShadow": true
         }
