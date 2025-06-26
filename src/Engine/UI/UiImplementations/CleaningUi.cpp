@@ -243,7 +243,9 @@ namespace Engine::Ui
             TimerText->GetRect().SetPositionPixels(glm::vec3(20, 420, 0));
             TimerText->GetRect().SetSizePixels(glm::vec2(800, 70));
             TimerText->SetFont("EagleLakeRegular");
-            TimerText->SetText(std::format("Completed in: {:.02f}", ThrashManager::GetInstance()->GetLevelEndTime() - ThrashManager::GetInstance()->GetLevelStartTime()));
+            TimerText->SetText(std::format("Completed in: {:.02f}",
+                                           ThrashManager::GetInstance()->GetLevelEndTime() -
+                                           ThrashManager::GetInstance()->GetLevelStartTime()));
 
             switch (ThrashManager::GetInstance()->GetPlayerGrade())
             {
@@ -323,6 +325,24 @@ namespace Engine::Ui
                     TrashTaskCompleted = true;
                 }
 
+                if (trashManager->GetCleanedUpWeaponCount() >= trashManager->GetWeaponCount() && !WeaponTaskCompleted)
+                {
+                    AudioManager::GetInstance().PlayAudio(TaskSound);
+                    WeaponTaskCompleted = true;
+                }
+
+                if (trashManager->GetCleanedUpBookCount() >= trashManager->GetBookCount() && !BooksTaskCompleted)
+                {
+                    AudioManager::GetInstance().PlayAudio(TaskSound);
+                    BooksTaskCompleted = true;
+                }
+
+                if (trashManager->GetCleanedUpCoinCount() >= trashManager->GetCoinCount() && !CoinsTaskCompleted)
+                {
+                    AudioManager::GetInstance().PlayAudio(TaskSound);
+                    CoinsTaskCompleted = true;
+                }
+
                 WeaponProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetCleanedUpWeaponCount(),
                                                         trashManager->GetWeaponCount()));
                 BooksProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetCleanedUpBookCount(),
@@ -366,60 +386,63 @@ namespace Engine::Ui
         }
         else
         {
-        if (!SummaryAppeared)
+            if (!SummaryAppeared)
             {
-            ThrashManager* trashManager = ThrashManager::GetInstance();
+                ThrashManager* trashManager = ThrashManager::GetInstance();
                 if (const BloodManager* bloodManager = BloodManager::GetCurrent())
                     SummaryAnimationTime += DeltaTime / 2.0f;
-                    float t = std::min(SummaryAnimationTime, 2.0f);
-                    float eased = Math::EaseInOutExpo(t);
-                    glm::vec3 startPos = glm::vec3(0, 0, 0);
-                    glm::vec3 endPos = glm::vec3(-1920, 0, 0);
-                    SummaryBackground->GetRect().SetPositionPixels(startPos + (1 - eased) * (endPos - startPos));
+                float t = std::min(SummaryAnimationTime, 2.0f);
+                float eased = Math::EaseInOutExpo(t);
+                glm::vec3 startPos = glm::vec3(0, 0, 0);
+                glm::vec3 endPos = glm::vec3(-1920, 0, 0);
+                SummaryBackground->GetRect().SetPositionPixels(startPos + (1 - eased) * (endPos - startPos));
 
-                    if (t >= 1.0f)
-                    {
-                        SummaryAppeared = true;
-                    }
-                    TrashProgressText->SetText(std::format("({:02}/{:02})", ReferenceTrashCount, ReferenceTrashCount));
-                    WeaponProgressText->SetText(std::format("({:02}/{:02})",trashManager->GetWeaponCount(),trashManager->GetWeaponCount()));
-                    BooksProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetBookCount(),trashManager->GetBookCount()));
-                    CoinsProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetCoinCount(), trashManager->GetCoinCount()));
-                    FloorProgressText->SetText("(100.00)%");
+                if (t >= 1.0f)
+                {
+                    SummaryAppeared = true;
+                }
+                TrashProgressText->SetText(std::format("({:02}/{:02})", ReferenceTrashCount, ReferenceTrashCount));
+                WeaponProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetWeaponCount(),
+                                                        trashManager->GetWeaponCount()));
+                BooksProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetBookCount(),
+                                                       trashManager->GetBookCount()));
+                CoinsProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetCoinCount(),
+                                                       trashManager->GetCoinCount()));
+                FloorProgressText->SetText("(100.00)%");
 
-                    if (trashManager->IsBookTaskFailed())
-                    {
-                        DontBooks->SetColor(FailedColor);
-                    }
-                    else
-                    {
-                        DontBooks->SetColor(PositiveColor);
-                    }
-                    if (trashManager->IsFurnitureTaskFailed())
-                    {
-                        DontFurniture->SetColor(FailedColor);
-                    }
-                    else
-                    {
-                        DontFurniture->SetColor(PositiveColor);
-                    }
-                    if (trashManager->IsCoinTaskFailed())
-                    {
-                        DontCoins->SetColor(FailedColor);
-                    }
-                    else
-                    {
-                        DontCoins->SetColor(PositiveColor);
-                    }
-                    if (trashManager->IsWeaponTaskFailed())
-                    {
-                        DontWeapons->SetColor(FailedColor);
-                    }
-                    else
-                    {
-                        DontWeapons->SetColor(PositiveColor);
-                    }
-                
+                if (trashManager->IsBookTaskFailed())
+                {
+                    DontBooks->SetColor(FailedColor);
+                }
+                else
+                {
+                    DontBooks->SetColor(PositiveColor);
+                }
+                if (trashManager->IsFurnitureTaskFailed())
+                {
+                    DontFurniture->SetColor(FailedColor);
+                }
+                else
+                {
+                    DontFurniture->SetColor(PositiveColor);
+                }
+                if (trashManager->IsCoinTaskFailed())
+                {
+                    DontCoins->SetColor(FailedColor);
+                }
+                else
+                {
+                    DontCoins->SetColor(PositiveColor);
+                }
+                if (trashManager->IsWeaponTaskFailed())
+                {
+                    DontWeapons->SetColor(FailedColor);
+                }
+                else
+                {
+                    DontWeapons->SetColor(PositiveColor);
+                }
+
             }
             if (SummaryAppeared && Grade && !GradeAnimationStarted && !GradeAnimationFinished)
             {
@@ -430,6 +453,7 @@ namespace Engine::Ui
 
             if (GradeAnimationStarted && !GradeAnimationFinished)
             {
+                AudioManager::GetInstance().PlayAudio(LevelEnd);
                 GradeAnimationTime += DeltaTime;
                 float animDuration = 1.0f;
                 float t = std::min(GradeAnimationTime / animDuration, 1.0f);

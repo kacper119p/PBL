@@ -43,7 +43,7 @@ namespace Engine::Ui
         bool ShowSummary = false;
 
         glm::vec4 PositiveColor = glm::vec4(0.0, 0.15, 0.0, 1);
-        glm::vec4 FailedColor = glm::vec4(0.8, 0.05, 0.0,1);
+        glm::vec4 FailedColor = glm::vec4(0.8, 0.05, 0.0, 1);
         glm::vec4 HeaderColor = glm::vec4(0.1, 0.0, 0.0, 1);
 
         float TaskListFontSize = 25.0f;
@@ -57,8 +57,12 @@ namespace Engine::Ui
 
         std::shared_ptr<ma_sound> ListSound = AudioManager::GetInstance().CreateSoundInstance("lista");
         std::shared_ptr<ma_sound> TaskSound = AudioManager::GetInstance().CreateSoundInstance("task");
+        std::shared_ptr<ma_sound> LevelEnd = AudioManager::GetInstance().CreateSoundInstance("win1");
         bool TrashTaskCompleted = false;
         bool FloorTaskCompleted = false;
+        bool WeaponTaskCompleted = false;
+        bool BooksTaskCompleted = false;
+        bool CoinsTaskCompleted = false;
 
         float SummaryAnimationTime = 0.0f;
         bool SummaryAppeared = false;
