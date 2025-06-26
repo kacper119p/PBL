@@ -574,8 +574,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{0668c1cd-bc99-4dde-a5e5-5b153658f268}\u0000",
-                "{6a090aa5-2b29-4834-b238-38ec96d63d75}\u0000"
+                "{0668c1cd-bc99-4dde-a5e5-5b153658f268}\u0000"
             ]
         },
         {
@@ -585,14 +584,6 @@
             "Material": "res/materials/SampleScene/podloga.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/Podloga.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "NavArea",
-            "id": "{6a090aa5-2b29-4834-b238-38ec96d63d75}\u0000",
-            "owner": "{6a3862e4-3084-4cd8-9ef3-bea2bd0afa39}\u0000",
-            "IsWalkable": true,
-            "spacing": 10.0,
-            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -627,8 +618,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{e8166666-ae0a-4334-83f2-b278582549c6}\u0000",
-                "{7f096581-5274-4dbf-9324-6af7799697be}\u0000"
+                "{e8166666-ae0a-4334-83f2-b278582549c6}\u0000"
             ]
         },
         {
@@ -638,14 +628,6 @@
             "Material": "res/materials/SampleScene/podloga.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/Podloga.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "NavArea",
-            "id": "{7f096581-5274-4dbf-9324-6af7799697be}\u0000",
-            "owner": "{d43ad049-dea9-455a-9588-4344e8077cf3}\u0000",
-            "IsWalkable": true,
-            "spacing": 10.0,
-            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -680,8 +662,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{87096b19-d8db-4d3d-83a4-b9f772379828}\u0000",
-                "{520bcf58-99cb-4e3d-ad82-bd0a6945b416}\u0000"
+                "{87096b19-d8db-4d3d-83a4-b9f772379828}\u0000"
             ]
         },
         {
@@ -691,14 +672,6 @@
             "Material": "res/materials/SampleScene/podloga.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/Podloga.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "NavArea",
-            "id": "{520bcf58-99cb-4e3d-ad82-bd0a6945b416}\u0000",
-            "owner": "{5388e3e2-7c69-4ab8-97b8-4306c965c697}\u0000",
-            "IsWalkable": true,
-            "spacing": 10.0,
-            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -4053,8 +4026,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{f15883b6-d3ce-46e7-ae6e-6b4fea0921fb}\u0000",
-                "{8511c3b8-8268-41eb-abc3-5c5c592cecf4}\u0000"
+                "{f15883b6-d3ce-46e7-ae6e-6b4fea0921fb}\u0000"
             ]
         },
         {
@@ -4064,14 +4036,6 @@
             "Material": "res/materials/SampleScene/podloga.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/Podloga.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "NavArea",
-            "id": "{8511c3b8-8268-41eb-abc3-5c5c592cecf4}\u0000",
-            "owner": "{2e966063-7a8e-4b58-b0ca-1807d1fa93be}\u0000",
-            "IsWalkable": true,
-            "spacing": 10.0,
-            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -4766,8 +4730,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{fe80184f-5b12-4727-bed0-964fd3a2506f}\u0000",
-                "{c691e9cc-0885-48de-bb17-a4a79a3278af}\u0000"
+                "{fe80184f-5b12-4727-bed0-964fd3a2506f}\u0000"
             ]
         },
         {
@@ -4777,14 +4740,6 @@
             "Material": "res/materials/SampleScene/podloga.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/Podloga.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "NavArea",
-            "id": "{c691e9cc-0885-48de-bb17-a4a79a3278af}\u0000",
-            "owner": "{a9937c59-354b-4935-9b9a-c5317c594527}\u0000",
-            "IsWalkable": true,
-            "spacing": 10.0,
-            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -5083,8 +5038,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{22630f23-e6c6-43b5-ae84-dacd7f12d0bc}\u0000",
-                "{e9512627-f917-476e-8744-f4b20ba81968}\u0000"
+                "{22630f23-e6c6-43b5-ae84-dacd7f12d0bc}\u0000"
             ]
         },
         {
@@ -5094,14 +5048,6 @@
             "Material": "res/materials/SampleScene/podloga.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/Podloga.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "NavArea",
-            "id": "{e9512627-f917-476e-8744-f4b20ba81968}\u0000",
-            "owner": "{86a97e66-7b94-4a95-833f-1c5466b8b8cb}\u0000",
-            "IsWalkable": true,
-            "spacing": 10.0,
-            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -7769,8 +7715,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{41df072c-fb0a-4fba-b318-b03e1ce73e34}\u0000",
-                "{604edb5f-ddef-4edc-8086-4c112abb1410}\u0000"
+                "{41df072c-fb0a-4fba-b318-b03e1ce73e34}\u0000"
             ]
         },
         {
@@ -7780,14 +7725,6 @@
             "Material": "res/materials/SampleScene/podloga.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/Podloga.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "NavArea",
-            "id": "{604edb5f-ddef-4edc-8086-4c112abb1410}\u0000",
-            "owner": "{6ce40b65-31b1-4266-8d4b-13adfcde4639}\u0000",
-            "IsWalkable": true,
-            "spacing": 10.0,
-            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -7822,8 +7759,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{252cd68d-c647-4a3f-9d3b-598e7fbe8889}\u0000",
-                "{ac35df47-b926-4ea8-a5da-7a28034bfb1a}\u0000"
+                "{252cd68d-c647-4a3f-9d3b-598e7fbe8889}\u0000"
             ]
         },
         {
@@ -7833,14 +7769,6 @@
             "Material": "res/materials/SampleScene/podloga.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/Podloga.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "NavArea",
-            "id": "{ac35df47-b926-4ea8-a5da-7a28034bfb1a}\u0000",
-            "owner": "{be6c4e7a-fac4-465b-b86a-89a879538ca4}\u0000",
-            "IsWalkable": true,
-            "spacing": 10.0,
-            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -7875,8 +7803,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{21818192-eed9-4354-a51e-952a18075e0f}\u0000",
-                "{4f9ce6e5-96eb-4139-bf71-f935d06d090d}\u0000"
+                "{21818192-eed9-4354-a51e-952a18075e0f}\u0000"
             ]
         },
         {
@@ -7886,14 +7813,6 @@
             "Material": "res/materials/SampleScene/podloga.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/Podloga.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "NavArea",
-            "id": "{4f9ce6e5-96eb-4139-bf71-f935d06d090d}\u0000",
-            "owner": "{c327d9ff-0f5a-4c33-aec5-cd72c84dc7a3}\u0000",
-            "IsWalkable": true,
-            "spacing": 10.0,
-            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -7928,8 +7847,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{169c92ba-b6a2-4679-af38-226e0ee43ccf}\u0000",
-                "{442c4c73-cb3b-4db0-a3cf-06aa31a3ef8b}\u0000"
+                "{169c92ba-b6a2-4679-af38-226e0ee43ccf}\u0000"
             ]
         },
         {
@@ -7939,14 +7857,6 @@
             "Material": "res/materials/SampleScene/podloga.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/Podloga.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "NavArea",
-            "id": "{442c4c73-cb3b-4db0-a3cf-06aa31a3ef8b}\u0000",
-            "owner": "{ca59cfca-f5f3-4ecf-858a-02fdc14a03bc}\u0000",
-            "IsWalkable": true,
-            "spacing": 10.0,
-            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -7981,8 +7891,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{ed834439-c752-4e70-8ad9-c68eb4060434}\u0000",
-                "{23d5e9f9-0c77-4c93-8f06-adfd3535548f}\u0000"
+                "{ed834439-c752-4e70-8ad9-c68eb4060434}\u0000"
             ]
         },
         {
@@ -7992,14 +7901,6 @@
             "Material": "res/materials/SampleScene/podloga.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/Podloga.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "NavArea",
-            "id": "{23d5e9f9-0c77-4c93-8f06-adfd3535548f}\u0000",
-            "owner": "{e7b2e28d-8fa5-49c0-91e8-47193b891c52}\u0000",
-            "IsWalkable": true,
-            "spacing": 10.0,
-            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -8087,8 +7988,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{3bd0d76a-b477-4ba1-8c34-ab34005e9aef}\u0000",
-                "{db3c9a4e-4222-4870-81da-bd0ee0f7174f}\u0000"
+                "{3bd0d76a-b477-4ba1-8c34-ab34005e9aef}\u0000"
             ]
         },
         {
@@ -8098,14 +7998,6 @@
             "Material": "res/materials/SampleScene/podloga.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/Podloga.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "NavArea",
-            "id": "{db3c9a4e-4222-4870-81da-bd0ee0f7174f}\u0000",
-            "owner": "{62a61ead-e112-4068-846a-f978e136967c}\u0000",
-            "IsWalkable": true,
-            "spacing": 10.0,
-            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -8140,8 +8032,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{100a313b-b811-496a-abbf-bd883016c7bf}\u0000",
-                "{0e27d5b1-8a0d-4b0b-bb83-ece2a1510898}\u0000"
+                "{100a313b-b811-496a-abbf-bd883016c7bf}\u0000"
             ]
         },
         {
@@ -8151,14 +8042,6 @@
             "Material": "res/materials/SampleScene/podloga.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/Podloga.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "NavArea",
-            "id": "{0e27d5b1-8a0d-4b0b-bb83-ece2a1510898}\u0000",
-            "owner": "{9a15d23b-42e9-4592-a2ef-ecfcbccb9c7c}\u0000",
-            "IsWalkable": true,
-            "spacing": 10.0,
-            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -30635,9 +30518,9 @@
                 "id": "{be306113-75c5-4d27-87d6-b43306fcb6ee}\u0000",
                 "owner": "{999262c8-7df9-4e75-bf98-97869699f1bb}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": 0.176594078540802,
-                    "z": -6.623942852020264
+                    "x": -28.110902786254883,
+                    "y": 0.17658990621566772,
+                    "z": 10.383639335632324
                 },
                 "EulerAngles": {
                     "x": 180.0,
@@ -30702,8 +30585,8 @@
                 "owner": "{55597b53-9928-4b43-bcd5-898f1c50eb3c}\u0000",
                 "Position": {
                     "x": 0.0,
-                    "y": -0.000003337860107421875,
-                    "z": 5.360271870813449e-7
+                    "y": -0.000003248453140258789,
+                    "z": 4.845566081712605e-7
                 },
                 "EulerAngles": {
                     "x": 0.0,

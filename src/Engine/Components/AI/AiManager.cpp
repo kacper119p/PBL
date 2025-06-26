@@ -149,7 +149,7 @@ namespace Engine
         if (IsFalling)
         {
             glm::vec3 pos = GetOwner()->GetTransform()->GetPosition();
-            pos.y -= DeltaTime * 2.0f;
+            pos.y -= DeltaTime * 5.0f;
             GetOwner()->GetTransform()->SetPosition(pos);
 
             if (pos.y <= -10.0f)
