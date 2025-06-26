@@ -563,7 +563,7 @@ void Engine::Ui::CleaningUi::DialogueStart()
             DialogueWidget->PushLine(
                     "Finally, you're here, Gryzia. Come closer, we need to clean up the mess left by the hero.",
                     DialogueWidget::Speaker::Boss);
-            DialogueWidget->PushLine("Start by washing away the blood he left behind.",
+            DialogueWidget->PushLine("Start by throwing away the mess he made to that pit.",
                                      DialogueWidget::Speaker::Boss);
             DialogueWidget->PushLine("Don't screw this up...", DialogueWidget::Speaker::Boss);
             break;
@@ -574,7 +574,7 @@ void Engine::Ui::CleaningUi::DialogueStart()
             DialogueWidget->Show();
             DialogueWidget->PushLine("What a mess!", DialogueWidget::Speaker::Player);
             DialogueWidget->PushLine(
-                    "And there’s some slime crawling around too—better catch it with the vacuum and toss it into the pit before it causes more trouble...",
+                    "There is a lot of blood around here. I better mop it up!",
                     DialogueWidget::Speaker::Player);
             break;
         }
