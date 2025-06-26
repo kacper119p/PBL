@@ -34,14 +34,14 @@ namespace Engine::Ui
         BossImage->GetRect().SetSizePixels(glm::vec2(300, 300));
         BossImage->GetRect().SetPositionPixels(ShownPositionImage + glm::vec3(750, 150, 0));
 
-        Image->GetRect().SetPositionPixels(glm::vec3(HiddenPositionImage));
+        Image->GetRect().SetPositionPixels(glm::vec3(ShownPositionImage) + glm::vec3(0, 1000, 0));
         Image->GetRect().SetSizePixels(glm::vec2(1470, 144 + 50));
 
         Text = new class Text();
         Text->SetFont("EagleLakeRegular");
         Text->GetRect().SetParent(&GetRect());
 
-        Text->GetRect().SetPositionPixels(glm::vec3(HiddenPositionText));
+        Text->GetRect().SetPositionPixels(glm::vec3(ShownPositionImage) + glm::vec3(0, 1000, 0));
         Text->GetRect().SetSizePixels(glm::vec2(1200 * 2, 52));
     }
 
@@ -56,10 +56,6 @@ namespace Engine::Ui
 
     void DialogueWidget::Update(const float DeltaTime)
     {
-        if (FinishedAnimation)
-        {
-            return;
-        }
         Timer += DeltaTime;
 
         switch (CurrentAnimation)
@@ -68,7 +64,6 @@ namespace Engine::Ui
             {
                 if (!FinishedAnimation)
                 {
-
                     const int32_t characterCount = static_cast<int32_t>(Timer / TimePerCharacter);
                     const std::string str = CurrentText.substr(0, characterCount);
                     if (Text->GetText() != str)
