@@ -237,7 +237,6 @@
                 "{98ed312d-50c2-426e-a218-86c080250fe6}\u0000",
                 "{ea901ee8-e9a4-4b86-bb2f-597f8110edc6}\u0000",
                 "{36e0509d-de94-4c06-a2c5-ce931cdb7eaa}\u0000",
-                "{691ae308-1356-4835-a405-c0c59ed08bde}\u0000",
                 "{0b90e353-0d3e-452b-b8d3-52998d9b304e}\u0000",
                 "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000",
                 "{f0831910-4f9d-475c-9c08-5d3d3421c4d1}\u0000",
@@ -326,7 +325,8 @@
                 "{6d837eac-cb6c-4076-bf9d-741784e95a6f}\u0000",
                 "{ba715b75-3a05-41ed-8b20-78542851443c}\u0000",
                 "{db1b06cf-a9c6-4045-a6e7-d5db2d83ed00}\u0000",
-                "{d0a77aeb-a4fc-492e-b1f9-5959094b075b}\u0000"
+                "{d0a77aeb-a4fc-492e-b1f9-5959094b075b}\u0000",
+                "{d8fb5096-b753-4006-9014-5d39faf9bce1}\u0000"
             ],
             "Parent": null
         },
@@ -11483,9 +11483,9 @@
                 "id": "{10fe23ac-5e80-45db-9b0b-802f1b190bc5}\u0000",
                 "owner": "{f766ada9-e70a-4363-a326-2ca49b5462d2}\u0000",
                 "Position": {
-                    "x": -4.820365905761719,
+                    "x": -3.89471435546875,
                     "y": 0.0,
-                    "z": 4.701147079467773
+                    "z": 3.854490280151367
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -11533,9 +11533,9 @@
                 "id": "{e0a49acc-3d11-4ef4-9b52-c73c5d780ca7}\u0000",
                 "owner": "{aad44def-2c3c-4d2f-9554-4ccf7b4d633d}\u0000",
                 "Position": {
-                    "x": 4.507011413574219,
+                    "x": 4.189624786376953,
                     "y": 0.0,
-                    "z": -5.12468147277832
+                    "z": -4.518688201904297
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -11585,7 +11585,7 @@
                 "Position": {
                     "x": -4.483917236328125,
                     "y": 0.0,
-                    "z": -5.607637405395508
+                    "z": -4.583671569824219
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -11633,9 +11633,9 @@
                 "id": "{ce56a9f2-b909-4bcb-9224-b1989b0e783b}\u0000",
                 "owner": "{b4a824d3-a4ae-42cc-a4bc-fa2345595e37}\u0000",
                 "Position": {
-                    "x": 4.581672668457031,
+                    "x": 4.284526824951172,
                     "y": 0.0,
-                    "z": 4.582233428955078
+                    "z": 3.721254348754883
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -11683,7 +11683,7 @@
                 "id": "{b6dcfe81-4443-4fb2-a411-51f5edb0cc42}\u0000",
                 "owner": "{bcd367d5-0cfe-44a7-9c09-91e4fd1f082c}\u0000",
                 "Position": {
-                    "x": 8.509159088134766,
+                    "x": 8.135894775390625,
                     "y": 0.0,
                     "z": -0.4482250213623047
                 },
@@ -11720,9 +11720,9 @@
             "collisionLayer": 4294967295,
             "collisionMask": 4294967295,
             "colliderType": 0,
-            "_width": 12.5,
+            "_width": 12.399999618530273,
             "_height": 1.0,
-            "_depth": 7.599999904632568
+            "_depth": 8.199999809265137
         },
         {
             "type": "Entity",
@@ -11733,7 +11733,7 @@
                 "id": "{97730b84-c6f3-4d4c-b84c-21d22d119603}\u0000",
                 "owner": "{18ffd63d-a29d-44cc-9b04-348e75d3ba29}\u0000",
                 "Position": {
-                    "x": -8.586906433105469,
+                    "x": -8.256591796875,
                     "y": 0.0,
                     "z": -0.4482250213623047
                 },
@@ -11772,7 +11772,7 @@
             "colliderType": 0,
             "_width": 11.5,
             "_height": 1.0,
-            "_depth": 7.599999904632568
+            "_depth": 8.199999809265137
         },
         {
             "type": "Entity",
@@ -11820,7 +11820,7 @@
             "collisionLayer": 4294967295,
             "collisionMask": 4294967295,
             "colliderType": 0,
-            "_width": 7.0,
+            "_width": 9.0,
             "_height": 1.0,
             "_depth": 25.0
         },
@@ -11870,7 +11870,7 @@
             "collisionLayer": 4294967295,
             "collisionMask": 4294967295,
             "colliderType": 0,
-            "_width": 5.0,
+            "_width": 7.0,
             "_height": 1.0,
             "_depth": 25.0
         },
@@ -17479,85 +17479,6 @@
             "type": "Thrash",
             "id": "{bb0e9f21-21e1-48f3-b043-3371bbf93445}\u0000",
             "owner": "{001148bb-9807-47f7-ae2c-73c3d5cd231d}\u0000",
-            "size": 4
-        },
-        {
-            "type": "Entity",
-            "id": "{2b0351d6-9a61-4f4c-9c0d-2d8fdbf471a5}\u0000",
-            "name": "SmallBook",
-            "transform": {
-                "type": "Transform",
-                "id": "{691ae308-1356-4835-a405-c0c59ed08bde}\u0000",
-                "owner": "{2b0351d6-9a61-4f4c-9c0d-2d8fdbf471a5}\u0000",
-                "Position": {
-                    "x": 3.3525595664978027,
-                    "y": 0.7047799825668335,
-                    "z": 19.473318099975586
-                },
-                "EulerAngles": {
-                    "x": 90.0,
-                    "y": -28.816999435424805,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 1.5,
-                    "y": 1.5,
-                    "z": 1.5
-                },
-                "Rotation": {
-                    "x": 0.6848656535148621,
-                    "y": -0.17595189809799194,
-                    "z": 0.17595189809799194,
-                    "w": 0.6848656535148621
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{9d52e8c4-4fd4-4c14-8dea-116e843a2d05}\u0000",
-                "{2ad9479d-f264-4a1e-8f8c-5efba3a24724}\u0000",
-                "{2364f61b-93d1-4f56-8665-8e1b506dac51}\u0000",
-                "{df823dbf-9ae5-4d62-90f1-229824f37385}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{9d52e8c4-4fd4-4c14-8dea-116e843a2d05}\u0000",
-            "owner": "{2b0351d6-9a61-4f4c-9c0d-2d8fdbf471a5}\u0000",
-            "Material": "res/materials/SampleScene/UV8.mat",
-            "Model": "res/models/Modele_Mati/Meble/Ksiazka.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{2ad9479d-f264-4a1e-8f8c-5efba3a24724}\u0000",
-            "owner": "{2b0351d6-9a61-4f4c-9c0d-2d8fdbf471a5}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 16,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 1.5,
-            "_height": 2.4000000953674316,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{2364f61b-93d1-4f56-8665-8e1b506dac51}\u0000",
-            "owner": "{2b0351d6-9a61-4f4c-9c0d-2d8fdbf471a5}\u0000",
-            "mass": 0.30000001192092896,
-            "inverseMass": 3.3333332538604736,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.10100000351667404,
-            "frictionEnabled": true,
-            "restitution": 0.6869999766349792
-        },
-        {
-            "type": "Thrash",
-            "id": "{df823dbf-9ae5-4d62-90f1-229824f37385}\u0000",
-            "owner": "{2b0351d6-9a61-4f4c-9c0d-2d8fdbf471a5}\u0000",
             "size": 4
         },
         {
@@ -24863,7 +24784,7 @@
             "components": [
                 "{3206f196-d4df-4991-90a1-d42c132fd50d}\u0000",
                 "{7082a7f1-e4c1-47b4-b628-f1bc42e3fcf9}\u0000",
-                "{4812d156-51d2-4737-9f70-ac8aa576ba15}\u0000"
+                "{367912dc-fa07-4404-b5f4-1291776ba325}\u0000"
             ]
         },
         {
@@ -24890,7 +24811,7 @@
         },
         {
             "type": "Swapper",
-            "id": "{4812d156-51d2-4737-9f70-ac8aa576ba15}\u0000",
+            "id": "{367912dc-fa07-4404-b5f4-1291776ba325}\u0000",
             "owner": "{b3861999-c867-4767-acf8-b4bf8eb77a4d}\u0000"
         },
         {
@@ -26536,6 +26457,50 @@
             "id": "{a61d9a2a-4fea-4e74-8f63-6931c9d01c38}\u0000",
             "owner": "{487d01f2-0c16-4d51-a6c4-0469e0d7627d}\u0000",
             "size": 20
+        },
+        {
+            "type": "Entity",
+            "id": "{a1f5c44c-18ce-4791-856b-00de8ceb2376}\u0000",
+            "name": "Kamien",
+            "transform": {
+                "type": "Transform",
+                "id": "{d8fb5096-b753-4006-9014-5d39faf9bce1}\u0000",
+                "owner": "{a1f5c44c-18ce-4791-856b-00de8ceb2376}\u0000",
+                "Position": {
+                    "x": -62.019691467285156,
+                    "y": -4.209691047668457,
+                    "z": 50.08732223510742
+                },
+                "EulerAngles": {
+                    "x": 64.0860366821289,
+                    "y": 16.823909759521484,
+                    "z": -6.534558296203613
+                },
+                "Scale": {
+                    "x": 12.0,
+                    "y": 12.0,
+                    "z": 12.0
+                },
+                "Rotation": {
+                    "x": 0.5310623049736023,
+                    "y": 0.09388755261898041,
+                    "z": -0.12527967989444733,
+                    "w": 0.8327442407608032
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{8e312bc5-c2bc-4aad-acac-64ae7e762df9}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{8e312bc5-c2bc-4aad-acac-64ae7e762df9}\u0000",
+            "owner": "{a1f5c44c-18ce-4791-856b-00de8ceb2376}\u0000",
+            "Material": "res/materials/SampleScene/UV15.mat",
+            "Model": "res/models/Modele_Mati/Kamienie/KamienTeren5.fbx",
+            "CastShadow": true
         }
     ]
 }

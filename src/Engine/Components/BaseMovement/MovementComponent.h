@@ -15,7 +15,7 @@ namespace Engine
     class MovementComponent : public Component, public IUpdateable
     {
     private:
-        float Speed = 500.0f;
+        float Speed = 700.0f;
         float RotationSpeed = 40.0f;
         float BothRotationSpeed = RotationSpeed * 4.0f;
         float CurrentVelocity = 0.0f;
