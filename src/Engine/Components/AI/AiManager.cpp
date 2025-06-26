@@ -41,6 +41,11 @@ namespace Engine
             {
                 TrashEntities.emplace_back(transform->GetOwner());
             }
+
+            if (transform->GetOwner()->GetName() == "dziura")
+            {
+                Hole = transform->GetOwner();
+            }
         }
 
         SlimeAnimationManager::GetInstance()->SetSlimeIdleModel(
@@ -132,18 +137,49 @@ namespace Engine
 
     void AiManager::Update(const float DeltaTime)
     {
-        if (!Enabled)
+        if (!Player || !NavMesh::Get().GetGraph() || !Hole)
             return;
 
-        AStarComponent->SetGraph(NavMesh::Get().GetGraph());
+        if (!IsFalling && glm::distance(GetOwner()->GetTransform()->GetPosition(), Hole->GetTransform()->GetPosition())
+            < 6.0f)
+        {
+            IsFalling = true;
+        }
 
-        if (!Player || !NavMesh::Get().GetGraph())
+        if (IsFalling)
+        {
+            glm::vec3 pos = GetOwner()->GetTransform()->GetPosition();
+            pos.y -= DeltaTime * 2.0f;
+            GetOwner()->GetTransform()->SetPosition(pos);
+
+            if (pos.y <= -10.0f)
+            {
+                GetOwner()->Destroy();
+            }
+
             return;
+        }
 
         if (RootBehavior)
             RootBehavior->Tick(DeltaTime);
 
         AStarComponent->SetObjectPosition(GetOwner()->GetTransform()->GetPosition());
+
+        glm::vec3 currentPosition = GetOwner()->GetTransform()->GetPosition();
+        if (glm::distance(currentPosition, LastPosition) < 0.01f)
+        {
+            TimeWithoutMovement += DeltaTime;
+            if (TimeWithoutMovement >= MovementCheckInterval)
+            {
+                AStarComponent->ClearPath(GetOwner());
+                TimeWithoutMovement = 0.0f;
+            }
+        }
+        else
+        {
+            TimeWithoutMovement = 0.0f;
+            LastPosition = currentPosition;
+        }
 
         if (NavMesh::Get().IsOnNavMesh(GetOwner()->GetTransform()->GetPosition(), NavMesh::Get().GetSpacing()))
             AStarComponent->UpdateMovement(DeltaTime, GetOwner());

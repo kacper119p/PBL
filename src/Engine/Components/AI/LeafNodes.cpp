@@ -319,7 +319,7 @@ namespace Engine
             glm::vec3 toCandidate = glm::normalize(node->GetPosition() - currentPos);
             toCandidate.y = 0.0f;
 
-            float dot = glm::dot(-forward, toCandidate);
+            float dot = glm::dot(forward, toCandidate);
 
             if (ShouldTurnAround)
             {
