@@ -459,23 +459,26 @@ namespace Engine::Ui
     {
         switch (ThrashManager::GetInstance()->GetCurrentLevel())
         {
-            case 0:
+            case 1:
             {
                 DialogueWidget->Show();
-                DialogueWidget->PushLine("What now?");
+                DialogueWidget->PushLine("What now?", DialogueWidget::Speaker::Player);
                 DialogueWidget->PushLine(
-                        "Finally, you're here, Gryzia. Come closer, we need to clean up the mess left by the hero.");
-                DialogueWidget->PushLine("Start by washing away the blood he left behind.");
-                DialogueWidget->PushLine("Don't screw this up...");
+                        "Finally, you're here, Gryzia. Come closer, we need to clean up the mess left by the hero.",
+                        DialogueWidget::Speaker::Boss);
+                DialogueWidget->PushLine("Start by washing away the blood he left behind.",
+                                         DialogueWidget::Speaker::Boss);
+                DialogueWidget->PushLine("Don't screw this up...", DialogueWidget::Speaker::Boss);
                 break;
             }
             case 2:
             {
                 printf("level 2");
                 DialogueWidget->Show();
-                DialogueWidget->PushLine("What a mess!");
+                DialogueWidget->PushLine("What a mess!", DialogueWidget::Speaker::Player);
                 DialogueWidget->PushLine(
-                        "And there’s some slime crawling around too—better catch it with the vacuum and toss it into the pit before it causes more trouble...");
+                        "And there’s some slime crawling around too—better catch it with the vacuum and toss it into the pit before it causes more trouble...",
+                        DialogueWidget::Speaker::Player);
                 break;
             }
             default:
@@ -489,7 +492,7 @@ namespace Engine::Ui
     {
         switch (ThrashManager::GetInstance()->GetCurrentLevel())
         {
-            case 0:
+            case 1:
             {
                 DialogueWidget->PopLine();
                 if (DialogueWidget->IsAnimationFinished())

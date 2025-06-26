@@ -9,6 +9,14 @@ namespace Engine::Ui
 {
     class DialogueWidget final : public UiElement
     {
+    public:
+        enum class Speaker: uint8_t
+        {
+            Player,
+            Boss,
+            None
+        };
+
     private:
         enum class AnimationType : uint8_t
         {
@@ -29,9 +37,12 @@ namespace Engine::Ui
         static constexpr float WaitTimeTime = 0.75f;
 
         std::queue<std::string> Lines;
+        std::queue<Speaker> Speakers;
         std::string CurrentText;
 
         Image* Image = nullptr;
+        class Image* BossImage = nullptr;
+        class Image* PlayerImage = nullptr;
         Text* Text = nullptr;
 
         float Timer = 0.0f;
@@ -39,15 +50,19 @@ namespace Engine::Ui
         bool Hidden = true;
         AnimationType CurrentAnimation = AnimationType::Enter;
 
+        bool ShowPlayer = false;
+        bool ShowBoss = false;
+
     public:
         DialogueWidget();
 
     public:
         ~DialogueWidget() override;
 
-        void PushLine(const std::string& Line)
+        void PushLine(const std::string& Line, const Speaker Speaker)
         {
             Lines.push(Line);
+            Speakers.push(Speaker);
         }
 
         void PopLine()
@@ -69,6 +84,8 @@ namespace Engine::Ui
             {
                 CurrentText = std::move(Lines.front());
                 Lines.pop();
+                SetSpeaker(Speakers.front());
+                Speakers.pop();
             }
             Text->SetText(std::string());
         }
@@ -118,5 +135,25 @@ namespace Engine::Ui
         void Update(float DeltaTime);
 
         void Render() override;
+
+    private:
+        void SetSpeaker(const Speaker Speaker)
+        {
+            switch (Speaker)
+            {
+                case Speaker::Player:
+                    ShowBoss = false;
+                    ShowPlayer = true;
+                    break;
+                case Speaker::Boss:
+                    ShowBoss = true;
+                    ShowPlayer = false;
+                    break;
+                case Speaker::None:
+                    ShowBoss = false;
+                    ShowPlayer = false;
+                    break;
+            }
+        }
     };
 }

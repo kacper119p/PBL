@@ -16,6 +16,24 @@ namespace Engine::Ui
         Image->SetTexture(TextureManager::GetTexture("res/textures/UI/Tekst.dds"));
         Image->SetMaterial(imageMaterial);
 
+        PlayerImage = new class Image();
+        PlayerImage->GetRect().SetParent(&GetRect());
+        PlayerImage->SetTexture(TextureManager::GetTexture("res/textures/UI/Gryzia.dds"));
+        PlayerImage->SetMaterial(imageMaterial);
+
+        BossImage = new class Image();
+        BossImage->GetRect().SetParent(&GetRect());
+        BossImage->SetTexture(TextureManager::GetTexture("res/textures/UI/Szrajber.dds"));
+        BossImage->SetMaterial(imageMaterial);
+
+        PlayerImage->GetRect().SetPositionPixels(glm::vec3(HiddenPositionImage));
+        PlayerImage->GetRect().SetSizePixels(glm::vec2(300, 300));
+        PlayerImage->GetRect().SetPositionPixels(ShownPositionImage + glm::vec3(-750, 150, 0));
+
+        BossImage->GetRect().SetPositionPixels(glm::vec3(HiddenPositionImage));
+        BossImage->GetRect().SetSizePixels(glm::vec2(300, 300));
+        BossImage->GetRect().SetPositionPixels(ShownPositionImage + glm::vec3(750, 150, 0));
+
         Image->GetRect().SetPositionPixels(glm::vec3(HiddenPositionImage));
         Image->GetRect().SetSizePixels(glm::vec2(1470, 144 + 50));
 
@@ -31,11 +49,17 @@ namespace Engine::Ui
     {
         delete Image->GetMaterial();
         delete Image;
+        delete PlayerImage;
+        delete BossImage;
         delete Text;
     }
 
     void DialogueWidget::Update(const float DeltaTime)
     {
+        if (FinishedAnimation)
+        {
+            return;
+        }
         Timer += DeltaTime;
 
         switch (CurrentAnimation)
@@ -63,6 +87,7 @@ namespace Engine::Ui
             {
                 if (Timer >= WaitTimeTime)
                 {
+                    SetSpeaker(Speaker::None);
                     FinishedAnimation = true;
                 }
                 break;
@@ -99,5 +124,13 @@ namespace Engine::Ui
     {
         Image->Render();
         Text->Render();
+        if (ShowPlayer)
+        {
+            PlayerImage->Render();
+        }
+        if (ShowBoss)
+        {
+            BossImage->Render();
+        }
     }
 }
