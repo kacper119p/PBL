@@ -76,7 +76,6 @@ namespace Engine
             
                 switch (ThrashManager::GetInstance()->GetCurrentLevel())
                 {
-                    
                     case 1:
                     {
                         ThrashManager::GetInstance()->SetLevelEndTime(glfwGetTime());
@@ -100,7 +99,7 @@ namespace Engine
                         {
                             SceneManager::ChangeScene("./res/scenes/Gameplay1.lvl");
                             ThrashManager::GetInstance()->SetCurrentLevel(
-                                    ThrashManager::GetInstance()->GetCurrentLevel() + 1);
+                            ThrashManager::GetInstance()->GetCurrentLevel() + 1);
                         }
                         break;
                         case 1:
@@ -139,15 +138,15 @@ namespace Engine
         }
         else
         {
-            if (cleanedPercent >= 99.0f && ThrashManager::GetInstance()->GetThrashCount() == 0)
+            if (ThrashManager::GetInstance()->GetThrashCount() == 0)
             {
                 return true;
-                //ThrashManager::GetInstance()->SetIsCurrentLevelCompleted(true);
+                ThrashManager::GetInstance()->SetIsCurrentLevelCompleted(true);
             }
             else
             {
                 return false;
-                //ThrashManager::GetInstance()->SetIsCurrentLevelCompleted(false);
+                ThrashManager::GetInstance()->SetIsCurrentLevelCompleted(false);
             }
         }
     }
