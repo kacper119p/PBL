@@ -134,6 +134,9 @@ namespace Engine::Ui
             AudioManager::GetInstance().ConfigureSoundAttenuation(TaskSound, 1.0f, 100.0f, 0.0f);
             AudioManager::GetInstance().SetVolume(ListSound, 0.5f);
             AudioManager::GetInstance().SetVolume(TaskSound, 0.5f);
+
+            DialogueWidget = AddElement<class DialogueWidget>(nullptr);
+            DialogueStart();
         }
         else
         {
@@ -243,7 +246,9 @@ namespace Engine::Ui
             TimerText->GetRect().SetPositionPixels(glm::vec3(20, 420, 0));
             TimerText->GetRect().SetSizePixels(glm::vec2(800, 70));
             TimerText->SetFont("EagleLakeRegular");
-            TimerText->SetText(std::format("Completed in: {:.02f}", ThrashManager::GetInstance()->GetLevelEndTime() - ThrashManager::GetInstance()->GetLevelStartTime()));
+            TimerText->SetText(std::format("Completed in: {:.02f}",
+                                           ThrashManager::GetInstance()->GetLevelEndTime() -
+                                           ThrashManager::GetInstance()->GetLevelStartTime()));
 
             switch (ThrashManager::GetInstance()->GetPlayerGrade())
             {
@@ -366,60 +371,63 @@ namespace Engine::Ui
         }
         else
         {
-        if (!SummaryAppeared)
+            if (!SummaryAppeared)
             {
-            ThrashManager* trashManager = ThrashManager::GetInstance();
+                ThrashManager* trashManager = ThrashManager::GetInstance();
                 if (const BloodManager* bloodManager = BloodManager::GetCurrent())
                     SummaryAnimationTime += DeltaTime / 2.0f;
-                    float t = std::min(SummaryAnimationTime, 2.0f);
-                    float eased = Math::EaseInOutExpo(t);
-                    glm::vec3 startPos = glm::vec3(0, 0, 0);
-                    glm::vec3 endPos = glm::vec3(-1920, 0, 0);
-                    SummaryBackground->GetRect().SetPositionPixels(startPos + (1 - eased) * (endPos - startPos));
+                float t = std::min(SummaryAnimationTime, 2.0f);
+                float eased = Math::EaseInOutExpo(t);
+                glm::vec3 startPos = glm::vec3(0, 0, 0);
+                glm::vec3 endPos = glm::vec3(-1920, 0, 0);
+                SummaryBackground->GetRect().SetPositionPixels(startPos + (1 - eased) * (endPos - startPos));
 
-                    if (t >= 1.0f)
-                    {
-                        SummaryAppeared = true;
-                    }
-                    TrashProgressText->SetText(std::format("({:02}/{:02})", ReferenceTrashCount, ReferenceTrashCount));
-                    WeaponProgressText->SetText(std::format("({:02}/{:02})",trashManager->GetWeaponCount(),trashManager->GetWeaponCount()));
-                    BooksProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetBookCount(),trashManager->GetBookCount()));
-                    CoinsProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetCoinCount(), trashManager->GetCoinCount()));
-                    FloorProgressText->SetText("(100.00)%");
+                if (t >= 1.0f)
+                {
+                    SummaryAppeared = true;
+                }
+                TrashProgressText->SetText(std::format("({:02}/{:02})", ReferenceTrashCount, ReferenceTrashCount));
+                WeaponProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetWeaponCount(),
+                                                        trashManager->GetWeaponCount()));
+                BooksProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetBookCount(),
+                                                       trashManager->GetBookCount()));
+                CoinsProgressText->SetText(std::format("({:02}/{:02})", trashManager->GetCoinCount(),
+                                                       trashManager->GetCoinCount()));
+                FloorProgressText->SetText("(100.00)%");
 
-                    if (trashManager->IsBookTaskFailed())
-                    {
-                        DontBooks->SetColor(FailedColor);
-                    }
-                    else
-                    {
-                        DontBooks->SetColor(PositiveColor);
-                    }
-                    if (trashManager->IsFurnitureTaskFailed())
-                    {
-                        DontFurniture->SetColor(FailedColor);
-                    }
-                    else
-                    {
-                        DontFurniture->SetColor(PositiveColor);
-                    }
-                    if (trashManager->IsCoinTaskFailed())
-                    {
-                        DontCoins->SetColor(FailedColor);
-                    }
-                    else
-                    {
-                        DontCoins->SetColor(PositiveColor);
-                    }
-                    if (trashManager->IsWeaponTaskFailed())
-                    {
-                        DontWeapons->SetColor(FailedColor);
-                    }
-                    else
-                    {
-                        DontWeapons->SetColor(PositiveColor);
-                    }
-                
+                if (trashManager->IsBookTaskFailed())
+                {
+                    DontBooks->SetColor(FailedColor);
+                }
+                else
+                {
+                    DontBooks->SetColor(PositiveColor);
+                }
+                if (trashManager->IsFurnitureTaskFailed())
+                {
+                    DontFurniture->SetColor(FailedColor);
+                }
+                else
+                {
+                    DontFurniture->SetColor(PositiveColor);
+                }
+                if (trashManager->IsCoinTaskFailed())
+                {
+                    DontCoins->SetColor(FailedColor);
+                }
+                else
+                {
+                    DontCoins->SetColor(PositiveColor);
+                }
+                if (trashManager->IsWeaponTaskFailed())
+                {
+                    DontWeapons->SetColor(FailedColor);
+                }
+                else
+                {
+                    DontWeapons->SetColor(PositiveColor);
+                }
+
             }
             if (SummaryAppeared && Grade && !GradeAnimationStarted && !GradeAnimationFinished)
             {
@@ -443,8 +451,67 @@ namespace Engine::Ui
                     GradeAnimationFinished = true;
                 }
             }
-
-
         }
+        DialogueUpdate(DeltaTime);
+    }
+
+    void CleaningUi::DialogueStart()
+    {
+        switch (ThrashManager::GetInstance()->GetCurrentLevel())
+        {
+            case 0:
+            {
+                DialogueWidget->Show();
+                DialogueWidget->PushLine("What now?");
+                DialogueWidget->PushLine(
+                        "Finally, you're here, Gryzia. Come closer, we need to clean up the mess left by the hero.");
+                DialogueWidget->PushLine("Start by washing away the blood he left behind.");
+                DialogueWidget->PushLine("Don't screw this up...");
+                break;
+            }
+            case 2:
+            {
+                printf("level 2");
+                DialogueWidget->Show();
+                DialogueWidget->PushLine("What a mess!");
+                DialogueWidget->PushLine(
+                        "And there’s some slime crawling around too—better catch it with the vacuum and toss it into the pit before it causes more trouble...");
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+    }
+
+    void CleaningUi::DialogueUpdate(float DeltaTime)
+    {
+        switch (ThrashManager::GetInstance()->GetCurrentLevel())
+        {
+            case 0:
+            {
+                DialogueWidget->PopLine();
+                if (DialogueWidget->IsAnimationFinished())
+                {
+                    DialogueWidget->Hide();
+                }
+                break;
+            }
+            case 2:
+            {
+                DialogueWidget->PopLine();
+                if (DialogueWidget->IsAnimationFinished())
+                {
+                    DialogueWidget->Hide();
+                }
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+        DialogueWidget->Update(DeltaTime);
     }
 }

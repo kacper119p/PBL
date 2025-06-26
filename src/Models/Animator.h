@@ -22,6 +22,7 @@ namespace Models
         float m_EndTime = 0.0f;
 
         float m_AnimationSpeed = 1.0f;
+
     public:
         Animator() = default;
 
@@ -34,56 +35,57 @@ namespace Models
         void PlayAnimation(Animation* pAnimation);
 
         void CalculateBoneTransform(const AssimpNodeData* node, glm::mat4 parentTransform);
-      
+
         void PlayOnceFromTo(float startTime, float endTime);
 
         std::vector<glm::mat4> GetFinalBoneMatrices() const
         {
-          return m_FinalBoneMatrices;
+            return m_FinalBoneMatrices;
         }
-      
+
         void PauseAnimation()
         {
-          m_IsPaused = true;
+            m_IsPaused = true;
         }
-      
+
         void ResumeAnimation()
         {
-          m_IsPaused = false;
+            m_IsPaused = false;
         }
-      
+
         void SetPlayBackward(bool playBackward)
         {
-          m_IsPlayingBackward = playBackward;
+            m_IsPlayingBackward = playBackward;
         }
-      
+
         bool IsPaused() const
         {
-          return m_IsPaused;
+            return m_IsPaused;
         }
-      
+
         bool IsPlayingBackward() const
         {
-          return m_IsPlayingBackward;
+            return m_IsPlayingBackward;
         }
-      
+
         bool IsAnimationFinished() const
         {
             if (m_CurrentAnimation)
             {
                 return m_CurrentTime >= m_CurrentAnimation->GetDuration() - 0.5f;
             }
+            return true;
         }
-      
+
         void SetAnimationSpeed(float speed)
         {
-          m_AnimationSpeed = speed;
+            m_AnimationSpeed = speed;
         }
-      
+
         float GetAnimationSpeed() const
         {
-          return m_AnimationSpeed;
+            return m_AnimationSpeed;
         }
-      
-	};
+
+    };
 }

@@ -13,7 +13,7 @@ namespace Engine::Ui
 
         Image = new class Image();
         Image->GetRect().SetParent(&GetRect());
-        Image->SetTexture(TextureManager::GetTexture("res/textures/Default.dds"));
+        Image->SetTexture(TextureManager::GetTexture("res/textures/UI/Tekst.dds"));
         Image->SetMaterial(imageMaterial);
 
         Image->GetRect().SetPositionPixels(glm::vec3(HiddenPositionImage));
@@ -23,8 +23,8 @@ namespace Engine::Ui
         Text->SetFont("EagleLakeRegular");
         Text->GetRect().SetParent(&GetRect());
 
-        Text->GetRect().SetPositionPixels(glm::vec3(HiddenPositionImage));
-        Text->GetRect().SetSizePixels(glm::vec2(1400 * 2, 70));
+        Text->GetRect().SetPositionPixels(glm::vec3(HiddenPositionText));
+        Text->GetRect().SetSizePixels(glm::vec2(1200 * 2, 52));
     }
 
     DialogueWidget::~DialogueWidget()
@@ -52,9 +52,18 @@ namespace Engine::Ui
                         Text->SetText(str);
                         if (characterCount >= CurrentText.length())
                         {
-                            FinishedAnimation = true;
+                            Timer = 0.0;
+                            CurrentAnimation = AnimationType::TextWait;
                         }
                     }
+                }
+                break;
+            }
+            case AnimationType::TextWait:
+            {
+                if (Timer >= WaitTimeTime)
+                {
+                    FinishedAnimation = true;
                 }
                 break;
             }

@@ -14,17 +14,19 @@ namespace Engine::Ui
         {
             Enter,
             Exit,
-            TextEnter
+            TextEnter,
+            TextWait
         };
 
         static constexpr glm::vec3 ShownPositionImage = glm::vec3(0, -468 + 25, 0.5);
-        static constexpr glm::vec3 ShownPositionText = glm::vec3(-700, -308, 0.5);
+        static constexpr glm::vec3 ShownPositionText = glm::vec3(-600, -328, 0.5);
 
         static constexpr glm::vec3 HiddenPositionImage = ShownPositionImage + glm::vec3(0, 300, 0);
         static constexpr glm::vec3 HiddenPositionText = ShownPositionText + glm::vec3(0, 300, 0);
         static constexpr float TransitionTime = 1.25f;
 
         static constexpr float TimePerCharacter = 0.025f;
+        static constexpr float WaitTimeTime = 0.75f;
 
         std::queue<std::string> Lines;
         std::string CurrentText;
