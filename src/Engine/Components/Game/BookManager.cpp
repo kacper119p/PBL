@@ -94,15 +94,16 @@ namespace Engine
             it->book->GetTransform()->SetPosition(pos);
             it->book->GetTransform()->SetRotation(glm::eulerAngles(rot));
 
-            if (t >= 1.5f)
+            if (t >= 1.0f)
             {
-                it = activeBookMoves.erase(it);
+                
                 if (itemType == ItemType::Book)
                     ThrashManager::GetInstance()->AddCleanedUpBook(it->book);
                 else if (itemType == ItemType::Coin)
                     ThrashManager::GetInstance()->AddCleanedUpCoin(it->book);
                 else if (itemType == ItemType::Weapon)
                     ThrashManager::GetInstance()->AddCleanedUpWeapon(it->book);
+                it = activeBookMoves.erase(it);
             }
             else
                 ++it;
@@ -195,7 +196,7 @@ namespace Engine
                 item->RemoveComponent<Rigidbody>();
             }
             end = this->GetOwner()->GetTransform()->GetPosition() +
-                          glm::vec3(RandomRange(-1.5f, 1.5f), RandomRange(0.0f, 0.5f), RandomRange(-1.5f, 1.5f));
+                          glm::vec3(RandomRange(-.7f, .7f), RandomRange(0.0f, 0.5f), RandomRange(-.7f, .7f));
             
         }
         else if (itemType == ItemType::Weapon)
