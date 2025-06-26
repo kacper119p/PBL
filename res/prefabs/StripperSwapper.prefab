@@ -2,16 +2,16 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{816f17ce-ebd3-4fe0-8e9a-b540c9e012fd}\u0000",
+            "id": "{9f0722ce-454f-43af-8f95-bfafed1c2ea5}\u0000",
             "name": "StripperSwapper",
             "transform": {
                 "type": "Transform",
-                "id": "{c4376985-a2e2-4310-81ce-1af3a5a28ab3}\u0000",
-                "owner": "{816f17ce-ebd3-4fe0-8e9a-b540c9e012fd}\u0000",
+                "id": "{b6b81454-b947-447c-b67e-6e59f26e2867}\u0000",
+                "owner": "{9f0722ce-454f-43af-8f95-bfafed1c2ea5}\u0000",
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
-                    "z": 0.800000011920929
+                    "z": 0.0
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -33,15 +33,15 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{d65145d3-907d-463e-b9c1-e44b824ebd99}\u0000"
+                "{e40d3912-56d6-41ff-a026-b91417bb4d84}\u0000"
             ]
         },
         {
             "type": "OutlinedModelRenderer",
-            "id": "{d65145d3-907d-463e-b9c1-e44b824ebd99}\u0000",
-            "owner": "{816f17ce-ebd3-4fe0-8e9a-b540c9e012fd}\u0000",
+            "id": "{e40d3912-56d6-41ff-a026-b91417bb4d84}\u0000",
+            "owner": "{9f0722ce-454f-43af-8f95-bfafed1c2ea5}\u0000",
             "Material": "./res/materials/SampleScene/Tools.mat",
-            "Model": "./res/Models/Granny/spychacz.fbx",
+            "Model": "./res/models/Swapper/Spychacz_stojak.fbx",
             "CastShadow": true,
             "Color": {
                 "x": 10.0,
@@ -49,7 +49,7 @@
                 "z": 8.823529243469238
             },
             "OutlineSize": 0.009999999776482582,
-            "Active": true
+            "Active": false
         }
     ]
 }

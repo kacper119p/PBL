@@ -13,7 +13,7 @@ in vec2 TexCoords;
 out float FragColor;
 
 const float RADIUS = 1.5;
-const float BIAS = 0.015;
+const float BIAS = 0.005;
 
 vec3 GetViewPosition(vec2 uv, float viewZ) {
     float x = uv.x * 2.0 - 1.0;

@@ -18,8 +18,8 @@ namespace Engine
         int volume = 0;
         int maxVolume = 20;
 
-        int size = 2*3;
-        float centerSize = 1.5f*3;
+        int size = 2 * 3;
+        float centerSize = 1.5f * 3;
         std::vector<Engine::Entity*> items;
         Engine::SphereCollider* collider;
 
@@ -32,11 +32,28 @@ namespace Engine
         bool isShootingKeyPressed = false;
         float shootKeyHoldStartTime = 0.0f;
         float lastShootTime = 0.0f;
-        const float shootCooldown = 0.3f; // 300 ms
+        const float shootCooldown = .3f; // 300 ms
         float lastSuckToggleTime = 0.0f;
 
         std::shared_ptr<ma_sound> blowingSound;
         std::shared_ptr<ma_sound> suckingSound;
+
+        struct GravityDisableTask
+        {
+            Engine::Entity* entity;
+            float disableTime;
+        };
+
+        struct PendingSlimeIntake
+        {
+            Engine::Entity* entity;
+            int totalSize;
+            int currentAbsorbed;
+            float nextAbsorbTime;
+        };
+
+        std::vector<PendingSlimeIntake> activeSlimeAbsorptions;
+        std::vector<GravityDisableTask> pendingGravityDisables;
 
     public:
         Vacuum() = default;

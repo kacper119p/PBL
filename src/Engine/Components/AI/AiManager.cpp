@@ -53,6 +53,13 @@ namespace Engine
         SlimeAnimationManager::GetInstance()->SetSlimeWalkModel(
                 GetOwner()->GetTransform()->GetChildren().at(1)->GetOwner()->GetComponent<AnimatedModelRenderer>());
         AudioManager::GetInstance().SetVolume(WalkingSound, 3.0f);
+
+        if (GetOwner()->GetComponent<Rigidbody>())
+        {
+            GetOwner()->GetComponent<Rigidbody>()->hasGravity = false;
+            GetOwner()->GetComponent<Rigidbody>()->constraints.freezeRotationX = true;
+            GetOwner()->GetComponent<Rigidbody>()->constraints.freezeRotationZ = true;
+        }
     }
 
     void AiManager::InitPlayer()

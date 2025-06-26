@@ -2,46 +2,46 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{3eeb715e-99a4-48cb-979c-4916e753c3f2}\u0000",
+            "id": "{db82c462-77fa-4cf7-aed2-6197d3641eb4}\u0000",
             "name": "VacuumSwapper",
             "transform": {
                 "type": "Transform",
-                "id": "{3f065eed-d317-4c33-8b82-e41e4ca46c90}\u0000",
-                "owner": "{3eeb715e-99a4-48cb-979c-4916e753c3f2}\u0000",
+                "id": "{514ce8c5-29ea-4c2a-ac2b-1a09963ff92d}\u0000",
+                "owner": "{db82c462-77fa-4cf7-aed2-6197d3641eb4}\u0000",
                 "Position": {
-                    "x": 1.5,
+                    "x": 0.0,
                     "y": 0.0,
                     "z": 0.0
                 },
                 "EulerAngles": {
-                    "x": -179.99989318847656,
-                    "y": 89.99994659423828,
-                    "z": -179.99989318847656
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
                 },
                 "Scale": {
                     "x": 1.0,
-                    "y": 0.9999999403953552,
+                    "y": 1.0,
                     "z": 1.0
                 },
                 "Rotation": {
-                    "x": -5.684341886080801e-13,
-                    "y": 0.7071071267127991,
-                    "z": -5.684341886080801e-13,
-                    "w": 0.7071064710617065
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
                 },
                 "Children": [],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{d6b354dc-b8d5-47f4-9e85-bd23756f79d2}\u0000"
+                "{b7f47854-069d-4cea-a6a7-0ca6e83afd6a}\u0000"
             ]
         },
         {
             "type": "OutlinedModelRenderer",
-            "id": "{d6b354dc-b8d5-47f4-9e85-bd23756f79d2}\u0000",
-            "owner": "{3eeb715e-99a4-48cb-979c-4916e753c3f2}\u0000",
+            "id": "{b7f47854-069d-4cea-a6a7-0ca6e83afd6a}\u0000",
+            "owner": "{db82c462-77fa-4cf7-aed2-6197d3641eb4}\u0000",
             "Material": "./res/materials/SampleScene/Tools.mat",
-            "Model": "./res/Models/Granny/Odkurzacz.fbx",
+            "Model": "./res/models/Swapper/Odkurzacz_stojak.fbx",
             "CastShadow": true,
             "Color": {
                 "x": 10.0,
@@ -49,7 +49,7 @@
                 "z": 8.823529243469238
             },
             "OutlineSize": 0.009999999776482582,
-            "Active": true
+            "Active": false
         }
     ]
 }

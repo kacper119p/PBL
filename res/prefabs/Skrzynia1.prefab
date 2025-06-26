@@ -9,9 +9,9 @@
                 "id": "{48035bd6-66f8-4684-92bd-588f386240e1}\u0000",
                 "owner": "{23bc77d3-828e-425b-abf6-67bb20715870}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": 2.3012843132019043,
-                    "z": -3.8658242225646973
+                    "x": -25.56316375732422,
+                    "y": 1.6077446937561035,
+                    "z": -4.369035720825195
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -35,7 +35,8 @@
             "components": [
                 "{79a146c7-cadd-458d-aa1c-97e2e295eb25}\u0000",
                 "{962b70e1-386f-4fc1-bf55-add210db8e08}\u0000",
-                "{d79f2196-096d-4d2a-a7c1-54dda6883c89}\u0000"
+                "{d79f2196-096d-4d2a-a7c1-54dda6883c89}\u0000",
+                "{4c5abae2-24ed-4c6e-af6d-d6e1f99f6d23}\u0000"
             ]
         },
         {
@@ -51,7 +52,7 @@
             "id": "{962b70e1-386f-4fc1-bf55-add210db8e08}\u0000",
             "owner": "{23bc77d3-828e-425b-abf6-67bb20715870}\u0000",
             "isTrigger": false,
-            "isStatic": true,
+            "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 4294967295,
             "collisionMask": 4294967291,
@@ -64,13 +65,18 @@
             "type": "Rigidbody",
             "id": "{d79f2196-096d-4d2a-a7c1-54dda6883c89}\u0000",
             "owner": "{23bc77d3-828e-425b-abf6-67bb20715870}\u0000",
-            "mass": 3.0,
-            "inverseMass": 0.3333333432674408,
+            "mass": 1.0,
+            "inverseMass": 1.0,
             "linearDamping": 0.20200000703334808,
             "angularDamping": 0.0,
             "friction": 0.20000000298023224,
             "frictionEnabled": true,
             "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Furniture",
+            "id": "{4c5abae2-24ed-4c6e-af6d-d6e1f99f6d23}\u0000",
+            "owner": "{23bc77d3-828e-425b-abf6-67bb20715870}\u0000"
         }
     ]
 }

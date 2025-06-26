@@ -1,6 +1,7 @@
 #include "StartGameButton.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "Engine/EngineObjects/Scene/SceneManager.h"
+#include "Engine/Components/Game/ThrashManager.h"
 namespace Engine
 {
        
@@ -8,6 +9,7 @@ namespace Engine
     { 
         //TODO: ustawic tu 1 lvl jak juz bedzie
         SceneManager::ChangeScene("./res/scenes/Gameplay.lvl");
+        ThrashManager::GetInstance()->SetCurrentLevel(1);
     }
     void StartGameButton::Start() 
     {

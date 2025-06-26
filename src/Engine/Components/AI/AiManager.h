@@ -44,6 +44,15 @@ namespace Engine
         void SetIsChasingPlayer(bool Value) { IsChasing = Value; }
         void SetRestFinished(bool Value) { RestFinished = Value; }
 
+        void SetEnabled(bool Value) { Enabled = Value; }
+        [[nodiscard]] bool IsEnabled() const { return Enabled; }
+        [[nodiscard]] int GetSize() { return Size; }
+
+        void SetSize(int Value)
+        {
+            Size = std::max(0, Value);
+        }
+
         void RecalculateCurrentTrash();
 
     private:

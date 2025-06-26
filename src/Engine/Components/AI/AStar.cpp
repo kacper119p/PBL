@@ -30,8 +30,8 @@ namespace Engine
         std::unordered_map<int, NodeRecord> allNodes;
         std::unordered_map<int, bool> closedList;
 
-        const Node* goalNode = NavGraph->GetNode(GoalId);
-        const Node* startNode = NavGraph->GetNode(StartId);
+        const Node* goalNode = NavMesh::Get().GetGraph()->GetNode(GoalId);
+        const Node* startNode = NavMesh::Get().GetGraph()->GetNode(StartId);
         if (!goalNode || !startNode)
         {
             Path.clear();
