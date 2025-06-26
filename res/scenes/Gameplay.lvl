@@ -29192,15 +29192,15 @@
         {
             "type": "Entity",
             "id": "{e50eae4c-55e8-46db-a91c-97f292ea2c6c}\u0000",
-            "name": "VacuumCollider",
+            "name": "BroomCollider",
             "transform": {
                 "type": "Transform",
                 "id": "{061a1a68-0e95-44b9-8e45-7071e12aed0d}\u0000",
                 "owner": "{e50eae4c-55e8-46db-a91c-97f292ea2c6c}\u0000",
                 "Position": {
-                    "x": 3.97526216506958,
+                    "x": 3.975151538848877,
                     "y": 2.384185791015625e-7,
-                    "z": 3.3697128295898438
+                    "z": 3.3696889877319336
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -29242,7 +29242,7 @@
         {
             "type": "Entity",
             "id": "{da5c0c33-efaa-4c55-8a73-8728257d1223}\u0000",
-            "name": "BroomCollider",
+            "name": "VacuumCollider",
             "transform": {
                 "type": "Transform",
                 "id": "{fe8ed71c-f907-4db6-b7ff-62309aea3666}\u0000",
