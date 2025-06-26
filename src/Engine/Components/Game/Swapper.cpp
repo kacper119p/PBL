@@ -6,6 +6,7 @@
 #include "Engine/Components/Renderers/OutlinedModelRenderer.h"
 #include "Engine/EngineObjects/Player/DefaultPlayer.h"
 #include "Engine/Components/Colliders/SphereCollider.h"
+#include "Engine/Components/Game/ThrashManager.h"
 #include "Engine/Components/Renderers/OutlinedModelRenderer.h"
 
 namespace Engine
@@ -42,8 +43,10 @@ namespace Engine
     {
         auto defaultPlayer = static_cast<Engine::DefaultPlayer*>(player);
         Tool currentPlayerTool = defaultPlayer->GetCurrentTool();
+        int currentLevel = ThrashManager::GetInstance()->GetCurrentLevel();
         switch (currentPlayerTool)
         {
+            
             case Tool::Stripper:
                 if (!hasBroom)
                 {
@@ -52,7 +55,7 @@ namespace Engine
                     this->GetOwner()->GetTransform()->AddChild(broom->GetTransform());
                     hasBroom = true;
                 }
-                if (!hasVacuum)
+                if (!hasVacuum&&currentLevel==2)
                 {
                     vacuum = Engine::PrefabLoader::LoadPrefab(VacuumPath, this->GetOwner()->GetScene(),
                                                                               this->GetOwner()->GetTransform());
@@ -82,7 +85,7 @@ namespace Engine
                     this->GetOwner()->GetTransform()->AddChild(broom->GetTransform());
                     hasBroom = true;
                 }
-                if (vacuum)
+                if (vacuum&&currentLevel==2)
                 {
                     this->GetOwner()->GetTransform()->RemoveChild(vacuum->GetTransform());
                     vacuum->Destroy();
@@ -91,7 +94,7 @@ namespace Engine
                 hasVacuum = false;
                 break;
             case Tool::Broom:
-                if (!hasVacuum)
+                if (!hasVacuum&&currentLevel==2)
                 {
                     vacuum = Engine::PrefabLoader::LoadPrefab(VacuumPath, this->GetOwner()->GetScene(),
                                                                               this->GetOwner()->GetTransform());
@@ -148,11 +151,14 @@ namespace Engine
 
     void Swapper::SwapPlayerToolVacuum(Collider* collider) 
     {
-        auto defaultPlayer = static_cast<Engine::DefaultPlayer*>(player);
-        if (defaultPlayer->GetCurrentTool() != Tool::Vacuum && defaultPlayer->GetCanSwap())
-            defaultPlayer->SetTool(Tool::Vacuum);
-        if (vacuum != nullptr)
-        vacuum->GetComponent<OutlinedModelRenderer>()->Activate();
+        if (ThrashManager::GetInstance()->GetCurrentLevel()==2)
+        {
+            auto defaultPlayer = static_cast<Engine::DefaultPlayer*>(player);
+            if (defaultPlayer->GetCurrentTool() != Tool::Vacuum && defaultPlayer->GetCanSwap())
+                defaultPlayer->SetTool(Tool::Vacuum);
+            if (vacuum != nullptr)
+                vacuum->GetComponent<OutlinedModelRenderer>()->Activate();
+        }
     }
 
     rapidjson::Value Swapper::Serialize(rapidjson::Document::AllocatorType& Allocator) const

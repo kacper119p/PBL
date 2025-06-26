@@ -36,6 +36,13 @@ namespace Engine
             shieldPlacementPoint = children[3];
         }
         GetUnoccupiedPlace();
+
+        AudioManager::GetInstance().ConfigureSoundAttenuation(CoinSound, 1.0f, 100.0f, 0.0f);
+        AudioManager::GetInstance().ConfigureSoundAttenuation(BookSound, 1.0f, 100.0f, 0.0f);
+        AudioManager::GetInstance().ConfigureSoundAttenuation(WeaponSound, 1.0f, 100.0f, 0.0f);
+        AudioManager::GetInstance().SetVolume(CoinSound, 0.5f);
+        AudioManager::GetInstance().SetVolume(BookSound, 0.5f);
+        AudioManager::GetInstance().SetVolume(WeaponSound, 0.5f);
     }
 
     rapidjson::Value BookManager::Serialize(rapidjson::Document::AllocatorType& Allocator) const
@@ -96,13 +103,24 @@ namespace Engine
 
             if (t >= 1.0f)
             {
-                
                 if (itemType == ItemType::Book)
+                {
                     ThrashManager::GetInstance()->AddCleanedUpBook(it->book);
+                    AudioManager::GetInstance().StopSound(BookSound);
+                    AudioManager::GetInstance().PlayAudio(BookSound);
+                }
                 else if (itemType == ItemType::Coin)
+                {
                     ThrashManager::GetInstance()->AddCleanedUpCoin(it->book);
+                    AudioManager::GetInstance().StopSound(CoinSound);
+                    AudioManager::GetInstance().PlayAudio(CoinSound);
+                }
                 else if (itemType == ItemType::Weapon)
+                {
                     ThrashManager::GetInstance()->AddCleanedUpWeapon(it->book);
+                    AudioManager::GetInstance().StopSound(WeaponSound);
+                    AudioManager::GetInstance().PlayAudio(WeaponSound);
+                }
                 it = activeBookMoves.erase(it);
             }
             else
@@ -196,7 +214,7 @@ namespace Engine
                 item->RemoveComponent<Rigidbody>();
             }
             end = this->GetOwner()->GetTransform()->GetPosition() +
-                          glm::vec3(RandomRange(-.7f, .7f), RandomRange(0.0f, 0.5f), RandomRange(-.7f, .7f));
+                          glm::vec3(RandomRange(-1.5f, 1.5f), RandomRange(0.0f, 0.5f), RandomRange(-1.5f, 1.5f));
             
         }
         else if (itemType == ItemType::Weapon)

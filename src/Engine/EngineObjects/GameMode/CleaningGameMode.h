@@ -12,12 +12,6 @@ namespace Engine
         int ThrashCount = 0;
         float BloodFill = 0.0f;
         float cleanedPercent = 0.0f;
-
-        std::string MainMenuPath = "./res/prefabs/MainMenu.prefab";
-        //std::string Level1Path = "./res/prefabs/Level1.prefab";
-        //std::string Level2Path = "./res/prefabs/Level2.prefab";
-        //std::string Level3Path = "./res/prefabs/Level3.prefab";
-
     public:
         CleaningGameMode();
 

@@ -7,9 +7,10 @@ namespace Engine
        
     void StartGameButton::OnStartGame(Collider* collider) 
     { 
-        //TODO: ustawic tu 1 lvl jak juz bedzie
-        SceneManager::ChangeScene("./res/scenes/Gameplay.lvl");
+        SceneManager::ChangeScene("./res/scenes/Gameplay1.lvl");
         ThrashManager::GetInstance()->SetCurrentLevel(1);
+        ThrashManager::GetInstance()->SetIsCurrentLevelCompleted(false);
+        ThrashManager::GetInstance()->ResetTasks();
     }
     void StartGameButton::Start() 
     {

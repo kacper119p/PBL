@@ -41,7 +41,7 @@ namespace Engine
             // rb settings
             //rb->constraints.freezePositionY = true;
             rb->friction = 0.3f;
-            rb->angularDamping = 0.07f;
+            rb->angularDamping = 0.1f;
             rb->linearDamping = 0.03f;
             rb->restitution = 0.2f;
             rb->SetMass(5.0f);

@@ -101,6 +101,14 @@ namespace Engine
             CoinTaskFailed = false;
         }
 
+        bool cleanedBooks() 
+        { 
+            return CleanedUpBooks.size() == Books.size();
+        }
+        bool cleanedCoins() { return CleanedUpCoins.size() == Coins.size(); }
+        bool cleanedWeapons() { return CleanedUpWeapons.size() == Weapons.size(); }
+
+
         int VacuumCount;
         int VacuumVolume;
     };

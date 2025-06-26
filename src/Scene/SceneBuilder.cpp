@@ -20,11 +20,9 @@ namespace Scene
     {
         ZoneScoped;
         Scene = new class Engine::Scene();
-        Engine::SceneManager::LoadScene("./res/scenes/Gameplay.lvl", Scene);
+        Engine::SceneManager::LoadScene("./res/scenes/Gameplay1.lvl", Scene);
         // TODO: remove when no longer needed
 
-
-        // BOX BOX SCENARIO /////////////////////////////////////////////////////////////////////////////////////////////////////////
 #if !EDITOR
 
 #endif

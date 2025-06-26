@@ -76,8 +76,9 @@ namespace Engine
             if (playerAnimationManager->isVacuumActive)
             {
                 playerAnimationManager->SetVacuumInactive();
-                AudioManager::GetInstance().StopSound(suckingSound);
+                
             }
+            AudioManager::GetInstance().StopSound(suckingSound);
         }
 
         float currentTime = static_cast<float>(glfwGetTime());

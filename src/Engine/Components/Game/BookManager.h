@@ -6,6 +6,7 @@
 #include "Engine/Components/Colliders/Collider.h"
 #include "Engine/Components/Colliders/SphereCollider.h"
 #include "Engine/Components/Game/ThrashManager.h"
+#include "Audio/AudioManager.h"
 #include "Engine/EngineObjects/Entity.h"
 #include "Events/TAction.h"
 #include "Serialization/SerializationUtility.h"
@@ -56,6 +57,10 @@ namespace Engine
         bool returnIfCantHoldMoreWeapon = false;
         ItemType itemType = ItemType::Book;
         Events::TAction<Collider*> BookCollision = Events::TAction<Collider*>(this, &BookManager::PutItem);
+
+        std::shared_ptr<ma_sound> CoinSound = AudioManager::GetInstance().CreateSoundInstance("coin");
+        std::shared_ptr<ma_sound> BookSound = AudioManager::GetInstance().CreateSoundInstance("book");
+        std::shared_ptr<ma_sound> WeaponSound = AudioManager::GetInstance().CreateSoundInstance("weapon");
 
     public:
         BookManager() = default;

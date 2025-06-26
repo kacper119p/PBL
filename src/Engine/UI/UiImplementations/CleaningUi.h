@@ -74,6 +74,8 @@ namespace Engine::Ui
         bool GradeAnimationFinished = false;
         float GradeAnimationTime = 0.0f;
 
+        bool PicturesLoaded = false;
+
     public:
         CleaningUi();
 
@@ -82,6 +84,8 @@ namespace Engine::Ui
 
     public:
         void Update(float DeltaTime) override;
+        void SetupDuringLevel();
+        void SetupAfterLevel();
 
     private:
         void DialogueStart();
