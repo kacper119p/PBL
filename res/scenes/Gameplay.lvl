@@ -324,7 +324,9 @@
                 "{90d6d73c-3045-458a-b11d-3bdacff80366}\u0000",
                 "{a530f64d-54f5-42fa-ae83-c1cdcb13c7d4}\u0000",
                 "{6d837eac-cb6c-4076-bf9d-741784e95a6f}\u0000",
-                "{ba715b75-3a05-41ed-8b20-78542851443c}\u0000"
+                "{ba715b75-3a05-41ed-8b20-78542851443c}\u0000",
+                "{db1b06cf-a9c6-4045-a6e7-d5db2d83ed00}\u0000",
+                "{d0a77aeb-a4fc-492e-b1f9-5959094b075b}\u0000"
             ],
             "Parent": null
         },
@@ -1664,17 +1666,8 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{e2652bfa-136b-4887-bdd9-8c3cae81fdac}\u0000",
                 "{3773453b-232f-4329-baa7-d2c5c9f647da}\u0000"
             ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{e2652bfa-136b-4887-bdd9-8c3cae81fdac}\u0000",
-            "owner": "{a2e540a9-dab2-47b8-9727-bdbb9296652e}\u0000",
-            "Material": "res/materials/SampleScene/Default.mat",
-            "Model": "./res/Models/Box.fbx",
-            "CastShadow": false
         },
         {
             "type": "BoxCollider",
@@ -1686,9 +1679,9 @@
             "collisionLayer": 4294967295,
             "collisionMask": 4294967295,
             "colliderType": 0,
-            "_width": 60.0,
+            "_width": 210.8000030517578,
             "_height": 5.0,
-            "_depth": 60.0
+            "_depth": 214.10000610351563
         },
         {
             "type": "Entity",
@@ -26385,6 +26378,164 @@
             "Material": "res/materials/SampleScene/CandleFlame.mat",
             "Model": "res/models/VFX/Candle/CandleFlame.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{3d7d8811-be73-4f29-b64e-581201df5d6d}\u0000",
+            "name": "KoscDluga",
+            "transform": {
+                "type": "Transform",
+                "id": "{db1b06cf-a9c6-4045-a6e7-d5db2d83ed00}\u0000",
+                "owner": "{3d7d8811-be73-4f29-b64e-581201df5d6d}\u0000",
+                "Position": {
+                    "x": -34.82997131347656,
+                    "y": 1.906494379043579,
+                    "z": 14.53795337677002
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 26.62727928161621,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 2.0,
+                    "y": 2.0,
+                    "z": 2.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.23028139770030975,
+                    "z": 0.0,
+                    "w": 0.973124086856842
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{9b0e9b74-65b1-4379-96cc-2c29dd44a6a6}\u0000",
+                "{9a702ff8-16c8-4612-b188-2697737e6474}\u0000",
+                "{bbb37291-5ce3-46e5-a704-e46ab7f8ad7b}\u0000",
+                "{f646d2b2-02ef-4c74-a581-61a4cdf2273d}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{9b0e9b74-65b1-4379-96cc-2c29dd44a6a6}\u0000",
+            "owner": "{3d7d8811-be73-4f29-b64e-581201df5d6d}\u0000",
+            "Material": "res/materials/SampleScene/UV8.mat",
+            "Model": "res/models/Modele_Mati/Smieci/KoscDluga.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{9a702ff8-16c8-4612-b188-2697737e6474}\u0000",
+            "owner": "{3d7d8811-be73-4f29-b64e-581201df5d6d}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 5.400000095367432,
+            "_height": 1.0,
+            "_depth": 1.0
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{bbb37291-5ce3-46e5-a704-e46ab7f8ad7b}\u0000",
+            "owner": "{3d7d8811-be73-4f29-b64e-581201df5d6d}\u0000",
+            "mass": 0.4000000059604645,
+            "inverseMass": 2.5,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Thrash",
+            "id": "{f646d2b2-02ef-4c74-a581-61a4cdf2273d}\u0000",
+            "owner": "{3d7d8811-be73-4f29-b64e-581201df5d6d}\u0000",
+            "size": 20
+        },
+        {
+            "type": "Entity",
+            "id": "{487d01f2-0c16-4d51-a6c4-0469e0d7627d}\u0000",
+            "name": "KoscDluga",
+            "transform": {
+                "type": "Transform",
+                "id": "{d0a77aeb-a4fc-492e-b1f9-5959094b075b}\u0000",
+                "owner": "{487d01f2-0c16-4d51-a6c4-0469e0d7627d}\u0000",
+                "Position": {
+                    "x": -34.40715789794922,
+                    "y": 1.7242627143859863,
+                    "z": 19.11282730102539
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 2.0,
+                    "y": 2.0,
+                    "z": 2.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{3a8a7199-9c5c-4727-810c-08c3950e48f5}\u0000",
+                "{3f0e1848-96b5-4b10-804a-27f2048a4174}\u0000",
+                "{3c771714-4dcf-4c73-95a9-f5783752648c}\u0000",
+                "{a61d9a2a-4fea-4e74-8f63-6931c9d01c38}\u0000"
+            ]
+        },
+        {
+            "type": "ModelRenderer",
+            "id": "{3a8a7199-9c5c-4727-810c-08c3950e48f5}\u0000",
+            "owner": "{487d01f2-0c16-4d51-a6c4-0469e0d7627d}\u0000",
+            "Material": "res/materials/SampleScene/UV8.mat",
+            "Model": "res/models/Modele_Mati/Smieci/KoscDluga.fbx",
+            "CastShadow": true
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{3f0e1848-96b5-4b10-804a-27f2048a4174}\u0000",
+            "owner": "{487d01f2-0c16-4d51-a6c4-0469e0d7627d}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967291,
+            "colliderType": 0,
+            "_width": 5.400000095367432,
+            "_height": 1.0,
+            "_depth": 1.0
+        },
+        {
+            "type": "Rigidbody",
+            "id": "{3c771714-4dcf-4c73-95a9-f5783752648c}\u0000",
+            "owner": "{487d01f2-0c16-4d51-a6c4-0469e0d7627d}\u0000",
+            "mass": 0.4000000059604645,
+            "inverseMass": 2.5,
+            "linearDamping": 0.0,
+            "angularDamping": 0.0,
+            "friction": 0.20000000298023224,
+            "frictionEnabled": true,
+            "restitution": 0.10000000149011612
+        },
+        {
+            "type": "Thrash",
+            "id": "{a61d9a2a-4fea-4e74-8f63-6931c9d01c38}\u0000",
+            "owner": "{487d01f2-0c16-4d51-a6c4-0469e0d7627d}\u0000",
+            "size": 20
         }
     ]
 }

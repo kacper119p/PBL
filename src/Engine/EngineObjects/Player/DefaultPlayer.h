@@ -40,7 +40,7 @@ namespace Engine
 
         bool canSwap = false;
 
-        Tool currentTool = Tool::Vacuum;
+        Tool currentTool = Tool::Broom;
 
         std::shared_ptr<ma_sound> toolChangeSound;
         bool isFirstUpdate = true;

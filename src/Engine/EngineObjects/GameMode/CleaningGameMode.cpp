@@ -73,18 +73,12 @@ namespace Engine
 
         if (isLevelFinished())
         {
-            if (InputManager::GetInstance().IsKeyPressed(GLFW_KEY_E)||InputManager::GetInstance().IsGamepadButtonPressed(GLFW_GAMEPAD_BUTTON_A))
-            {
+            
                 switch (ThrashManager::GetInstance()->GetCurrentLevel())
                 {
-                    case 0:
-                    {
-                        SceneManager::ChangeScene("./res/scenes/Gameplay1.lvl");
-                    }
-                    break;
+                    
                     case 1:
                     {
-                        SceneManager::ChangeScene("./res/scenes/Gameplay.lvl");
                         ThrashManager::GetInstance()->SetLevelEndTime(glfwGetTime());
                         ThrashManager::GetInstance()->SetIsCurrentLevelCompleted(true);
                     }
@@ -96,8 +90,35 @@ namespace Engine
                     }
                     break;
                 }
-                ThrashManager::GetInstance()->SetCurrentLevel(ThrashManager::GetInstance()->GetCurrentLevel() + 1);
-            }
+
+                if (InputManager::GetInstance().IsKeyPressed(GLFW_KEY_E) ||
+                    InputManager::GetInstance().IsGamepadButtonPressed(GLFW_GAMEPAD_BUTTON_A))
+                {
+                    switch (ThrashManager::GetInstance()->GetCurrentLevel())
+                    {
+                        case 0:
+                        {
+                            SceneManager::ChangeScene("./res/scenes/Gameplay1.lvl");
+                            ThrashManager::GetInstance()->SetCurrentLevel(
+                                    ThrashManager::GetInstance()->GetCurrentLevel() + 1);
+                        }
+                        break;
+                        case 1:
+                        {
+                            SceneManager::ChangeScene("./res/scenes/Gameplay.lvl");
+                            ThrashManager::GetInstance()->SetCurrentLevel(ThrashManager::GetInstance()->GetCurrentLevel() + 1);
+                        }
+                        break;
+                        case 2:
+                        {
+                            SceneManager::ChangeScene("./res/scenes/MainMenu.lvl");
+                            ThrashManager::GetInstance()->SetCurrentLevel(0);
+                        }
+                        break;
+                    }
+
+                }
+            
         }
     }
     bool CleaningGameMode::isLevelFinished()
