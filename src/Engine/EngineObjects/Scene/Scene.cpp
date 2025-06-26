@@ -138,16 +138,6 @@ namespace Engine
         Player->Scene = this;
         GameMode->Scene = this;
 
-        const auto uiIterator = Value.FindMember("UI");
-        if (uiIterator != Value.MemberEnd())
-        {
-            Ui = Ui::UiSerializationFactory::CreateObject(uiIterator->value.GetString());
-        }
-        else
-        {
-            Ui = new Ui::EmptyUi();
-        }
-
         Root->DeserializeValuePass(Value["Root"], referenceTable);
 
         const rapidjson::Value& serializedObjects = Value["Objects"];
@@ -173,6 +163,16 @@ namespace Engine
 
         GameMode->Start();
         Player->Start();
+
+        const auto uiIterator = Value.FindMember("UI");
+        if (uiIterator != Value.MemberEnd())
+        {
+            Ui = Ui::UiSerializationFactory::CreateObject(uiIterator->value.GetString());
+        }
+        else
+        {
+            Ui = new Ui::EmptyUi();
+        }
 
         for (const DeserializationPair pair : objects)
         {
