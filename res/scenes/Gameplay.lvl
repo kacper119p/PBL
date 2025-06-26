@@ -328,7 +328,8 @@
                 "{90d6d73c-3045-458a-b11d-3bdacff80366}\u0000",
                 "{a530f64d-54f5-42fa-ae83-c1cdcb13c7d4}\u0000",
                 "{6d837eac-cb6c-4076-bf9d-741784e95a6f}\u0000",
-                "{ba715b75-3a05-41ed-8b20-78542851443c}\u0000"
+                "{ba715b75-3a05-41ed-8b20-78542851443c}\u0000",
+                "{be306113-75c5-4d27-87d6-b43306fcb6ee}\u0000"
             ],
             "Parent": null
         },
@@ -431,8 +432,8 @@
             "id": "{812d7cba-50b4-4e12-b5bb-5ee5955ca6d3}\u0000",
             "owner": "{25219bdf-7f29-4637-a99b-13186cb0320d}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -484,8 +485,8 @@
             "id": "{1669b7c3-ac58-4440-b9a1-db6ab2da5ea7}\u0000",
             "owner": "{b0cd0adb-689b-4c19-baea-084f8064a071}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -537,8 +538,8 @@
             "id": "{ab9ea1f9-091a-4ca7-8607-236889ea435d}\u0000",
             "owner": "{1c2512c7-11ea-4df8-b5df-037f659a8e47}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -590,8 +591,8 @@
             "id": "{6a090aa5-2b29-4834-b238-38ec96d63d75}\u0000",
             "owner": "{6a3862e4-3084-4cd8-9ef3-bea2bd0afa39}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -643,8 +644,8 @@
             "id": "{7f096581-5274-4dbf-9324-6af7799697be}\u0000",
             "owner": "{d43ad049-dea9-455a-9588-4344e8077cf3}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -696,8 +697,8 @@
             "id": "{520bcf58-99cb-4e3d-ad82-bd0a6945b416}\u0000",
             "owner": "{5388e3e2-7c69-4ab8-97b8-4306c965c697}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -749,8 +750,8 @@
             "id": "{38af635d-692d-4241-ac5e-93d7f28f4d6c}\u0000",
             "owner": "{31f73b08-254d-4d5d-9d76-656375738f88}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -4069,8 +4070,8 @@
             "id": "{8511c3b8-8268-41eb-abc3-5c5c592cecf4}\u0000",
             "owner": "{2e966063-7a8e-4b58-b0ca-1807d1fa93be}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -4782,8 +4783,8 @@
             "id": "{c691e9cc-0885-48de-bb17-a4a79a3278af}\u0000",
             "owner": "{a9937c59-354b-4935-9b9a-c5317c594527}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -5099,8 +5100,8 @@
             "id": "{e9512627-f917-476e-8744-f4b20ba81968}\u0000",
             "owner": "{86a97e66-7b94-4a95-833f-1c5466b8b8cb}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -7785,8 +7786,8 @@
             "id": "{604edb5f-ddef-4edc-8086-4c112abb1410}\u0000",
             "owner": "{6ce40b65-31b1-4266-8d4b-13adfcde4639}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -7838,8 +7839,8 @@
             "id": "{ac35df47-b926-4ea8-a5da-7a28034bfb1a}\u0000",
             "owner": "{be6c4e7a-fac4-465b-b86a-89a879538ca4}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -7891,8 +7892,8 @@
             "id": "{4f9ce6e5-96eb-4139-bf71-f935d06d090d}\u0000",
             "owner": "{c327d9ff-0f5a-4c33-aec5-cd72c84dc7a3}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -7944,8 +7945,8 @@
             "id": "{442c4c73-cb3b-4db0-a3cf-06aa31a3ef8b}\u0000",
             "owner": "{ca59cfca-f5f3-4ecf-858a-02fdc14a03bc}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -7997,8 +7998,8 @@
             "id": "{23d5e9f9-0c77-4c93-8f06-adfd3535548f}\u0000",
             "owner": "{e7b2e28d-8fa5-49c0-91e8-47193b891c52}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -8050,8 +8051,8 @@
             "id": "{f3029350-09f3-4f07-94c4-e0073ff0a6d0}\u0000",
             "owner": "{aa18ff8c-b4c6-463e-aad5-b2890394b203}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -8103,8 +8104,8 @@
             "id": "{db3c9a4e-4222-4870-81da-bd0ee0f7174f}\u0000",
             "owner": "{62a61ead-e112-4068-846a-f978e136967c}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -8156,8 +8157,8 @@
             "id": "{0e27d5b1-8a0d-4b0b-bb83-ece2a1510898}\u0000",
             "owner": "{9a15d23b-42e9-4592-a2ef-ecfcbccb9c7c}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -8209,8 +8210,8 @@
             "id": "{1058cfff-0ced-4ee2-8470-0708c941b941}\u0000",
             "owner": "{2b1ecff8-ac1c-4c11-a1ae-4af4b640a88c}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -8262,8 +8263,8 @@
             "id": "{db5e28f1-a6a3-4d3f-ba8a-8e16aa4f4783}\u0000",
             "owner": "{39dabe54-2844-44aa-9ad6-720b3df48353}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -8315,8 +8316,8 @@
             "id": "{dac54fbe-2487-43e8-8bb3-ccb551419eb6}\u0000",
             "owner": "{df155d72-2c13-46c2-983d-b68862de86bd}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -9028,8 +9029,8 @@
             "id": "{6292f822-185a-4efb-9b7b-64ee64dd7735}\u0000",
             "owner": "{b0e577fa-b865-494e-a818-cfbbc8484597}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -9081,8 +9082,8 @@
             "id": "{a2b16f94-fc53-4616-93fb-2cccc25c3773}\u0000",
             "owner": "{506e7bdb-bb8f-498d-bd20-652881d54035}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -9134,8 +9135,8 @@
             "id": "{efd6da9f-64fe-4c62-bde0-3ca9766fc0f6}\u0000",
             "owner": "{fef6b771-4c3f-4362-b613-23047bacc9c2}\u0000",
             "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 1.0
+            "spacing": 5.0,
+            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -30624,6 +30625,160 @@
             "Material": "res/materials/SampleScene/CandleFlame.mat",
             "Model": "res/models/VFX/Candle/CandleFlame.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "Entity",
+            "id": "{999262c8-7df9-4e75-bf98-97869699f1bb}\u0000",
+            "name": "Slime",
+            "transform": {
+                "type": "Transform",
+                "id": "{be306113-75c5-4d27-87d6-b43306fcb6ee}\u0000",
+                "owner": "{999262c8-7df9-4e75-bf98-97869699f1bb}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": 0.176594078540802,
+                    "z": -6.623942852020264
+                },
+                "EulerAngles": {
+                    "x": 180.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 2.0,
+                    "y": 2.0,
+                    "z": 2.0
+                },
+                "Rotation": {
+                    "x": 1.0,
+                    "y": 0.0,
+                    "z": -0.0,
+                    "w": -4.371138828673793e-8
+                },
+                "Children": [
+                    "{970acc3e-f1bc-48f8-a594-2f68db99008a}\u0000",
+                    "{0567a46d-7d7b-42b6-a956-8ff9119bb53c}\u0000"
+                ],
+                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
+            },
+            "components": [
+                "{4b4f3fa0-386f-4bb8-9759-551d61ca4cb6}\u0000",
+                "{5675a3a1-1008-4a04-8d05-f34f03f6c70a}\u0000"
+            ]
+        },
+        {
+            "type": "AiManager",
+            "id": "{4b4f3fa0-386f-4bb8-9759-551d61ca4cb6}\u0000",
+            "owner": "{999262c8-7df9-4e75-bf98-97869699f1bb}\u0000",
+            "ChaseCooldown": 5.0,
+            "RestCooldown": 3.0,
+            "PlayerRange": 20.0,
+            "FastMovementSpeed": 8.0,
+            "SlowMovementSpeed": 3.0,
+            "TrashRange": 10.0,
+            "MaxTrashCapacity": 10
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{5675a3a1-1008-4a04-8d05-f34f03f6c70a}\u0000",
+            "owner": "{999262c8-7df9-4e75-bf98-97869699f1bb}\u0000",
+            "isTrigger": false,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967293,
+            "colliderType": 0,
+            "_width": 1.2000000476837158,
+            "_height": 2.299999952316284,
+            "_depth": 0.5
+        },
+        {
+            "type": "Entity",
+            "id": "{55597b53-9928-4b43-bcd5-898f1c50eb3c}\u0000",
+            "name": "Idle",
+            "transform": {
+                "type": "Transform",
+                "id": "{970acc3e-f1bc-48f8-a594-2f68db99008a}\u0000",
+                "owner": "{55597b53-9928-4b43-bcd5-898f1c50eb3c}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": -0.000003337860107421875,
+                    "z": 5.360271870813449e-7
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{be306113-75c5-4d27-87d6-b43306fcb6ee}\u0000"
+            },
+            "components": [
+                "{b994c221-52cf-4f36-ab30-8e42fb2c4c29}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{b994c221-52cf-4f36-ab30-8e42fb2c4c29}\u0000",
+            "owner": "{55597b53-9928-4b43-bcd5-898f1c50eb3c}\u0000",
+            "Material": "res/materials/SampleScene/Slime.mat",
+            "Model": "./res/Models/Slime/SlimeIdle.fbx",
+            "Animation": "./res/Models/Slime/SlimeIdle.fbx"
+        },
+        {
+            "type": "Entity",
+            "id": "{0dd7e23b-bbca-4514-8316-e8852f71bc97}\u0000",
+            "name": "Walk",
+            "transform": {
+                "type": "Transform",
+                "id": "{0567a46d-7d7b-42b6-a956-8ff9119bb53c}\u0000",
+                "owner": "{0dd7e23b-bbca-4514-8316-e8852f71bc97}\u0000",
+                "Position": {
+                    "x": 0.0,
+                    "y": -0.000005245208740234375,
+                    "z": 5.360273576116015e-7
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                },
+                "Children": [],
+                "Parent": "{be306113-75c5-4d27-87d6-b43306fcb6ee}\u0000"
+            },
+            "components": [
+                "{5b31230a-3f7e-406d-bd1e-a429f682a6e7}\u0000"
+            ]
+        },
+        {
+            "type": "AnimatedModelRenderer",
+            "id": "{5b31230a-3f7e-406d-bd1e-a429f682a6e7}\u0000",
+            "owner": "{0dd7e23b-bbca-4514-8316-e8852f71bc97}\u0000",
+            "Material": "res/materials/SampleScene/Slime.mat",
+            "Model": "./res/Models/Slime/SlimeWalk.fbx",
+            "Animation": "./res/Models/Slime/SlimeWalk.fbx"
         }
     ]
 }

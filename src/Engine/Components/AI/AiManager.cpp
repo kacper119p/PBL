@@ -42,7 +42,7 @@ namespace Engine
                 TrashEntities.emplace_back(transform->GetOwner());
             }
 
-            if (transform->GetOwner()->GetName() == "dziura")
+            if (transform->GetOwner()->GetName() == "STUDNIA")
             {
                 Hole = transform->GetOwner();
             }
