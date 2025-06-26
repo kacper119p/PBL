@@ -91,8 +91,6 @@
                 "{2096d1f2-27c3-4dff-b569-584f4acc54b4}\u0000",
                 "{916eb7bb-99a2-4a62-8696-3697cf470ee0}\u0000",
                 "{f67cedb1-8ed5-4340-8541-e74cfdb855d6}\u0000",
-                "{63242b28-edc6-483a-bf0a-147f6ff0bfbc}\u0000",
-                "{35fc0f56-1ce1-4057-a2fa-b251170cbe7e}\u0000",
                 "{a1ea9047-a93d-4010-9f14-a777f10c65bf}\u0000",
                 "{cd02eafc-3ad6-4458-a417-7ed50c9eedd4}\u0000",
                 "{b40bb1c2-0010-48a4-b2e8-69c79faa942a}\u0000",
@@ -232,7 +230,6 @@
                 "{9a3002fd-6215-4d83-89ce-db2999611beb}\u0000",
                 "{184082fb-e05c-4648-b846-f3ac17b39661}\u0000",
                 "{f3c2ed23-2aed-471d-a359-eb51e20d51c8}\u0000",
-                "{dfbe4c9a-10df-423c-8a91-a73700b7b506}\u0000",
                 "{a349d291-3bf9-49f8-871d-affd49c9f81f}\u0000",
                 "{be153532-11f1-451f-9ae1-c27683b314f4}\u0000",
                 "{4189dabf-6f0f-4ad7-8350-6db44708f04d}\u0000",
@@ -2206,8 +2203,7 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{c8684e71-ab34-4771-8f75-0dae458df052}\u0000",
-                "{4f74727e-0766-4cfc-a7da-82a45fe1dea7}\u0000"
+                "{c8684e71-ab34-4771-8f75-0dae458df052}\u0000"
             ]
         },
         {
@@ -2217,14 +2213,6 @@
             "Material": "res/materials/SampleScene/podloga.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/Podloga.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "NavArea",
-            "id": "{4f74727e-0766-4cfc-a7da-82a45fe1dea7}\u0000",
-            "owner": "{501cd21a-8653-4ddd-be78-6b6450c8df96}\u0000",
-            "IsWalkable": true,
-            "spacing": 1.0,
-            "padding": 0.0
         },
         {
             "type": "Entity",
@@ -4079,132 +4067,6 @@
             "Material": "res/materials/SampleScene/Pilar.mat",
             "Model": "./res/Models/Modele_Mati/Otoczenie/Pilar.fbx",
             "CastShadow": true
-        },
-        {
-            "type": "Entity",
-            "id": "{23cbdddc-454f-462e-bc20-2f675d084e32}\u0000",
-            "name": "Krew",
-            "transform": {
-                "type": "Transform",
-                "id": "{63242b28-edc6-483a-bf0a-147f6ff0bfbc}\u0000",
-                "owner": "{23cbdddc-454f-462e-bc20-2f675d084e32}\u0000",
-                "Position": {
-                    "x": 11.869179725646973,
-                    "y": 1.4752318859100342,
-                    "z": -68.72554779052734
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 36.96668243408203,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 15.0,
-                    "y": 15.0,
-                    "z": 15.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.3170289099216461,
-                    "z": 0.0,
-                    "w": 0.9484158754348755
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{bcd31d67-1f45-4afa-9bbf-88811fb4bacc}\u0000"
-            ]
-        },
-        {
-            "type": "BloodStain",
-            "id": "{bcd31d67-1f45-4afa-9bbf-88811fb4bacc}\u0000",
-            "owner": "{23cbdddc-454f-462e-bc20-2f675d084e32}\u0000",
-            "Texture": "res/textures/BloodSplatter/BloodTest.dds",
-            "Color": {
-                "x": 0.24019604921340942,
-                "y": 0.0,
-                "z": 0.0
-            }
-        },
-        {
-            "type": "Entity",
-            "id": "{2846475c-4a5f-44e1-aee3-076a323d90fe}\u0000",
-            "name": "Miecz",
-            "transform": {
-                "type": "Transform",
-                "id": "{35fc0f56-1ce1-4057-a2fa-b251170cbe7e}\u0000",
-                "owner": "{2846475c-4a5f-44e1-aee3-076a323d90fe}\u0000",
-                "Position": {
-                    "x": -3.2262375354766846,
-                    "y": 1.7907521724700928,
-                    "z": -79.80499267578125
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 111.25514221191406,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.8253852725028992,
-                    "z": 0.0,
-                    "w": 0.564569890499115
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{86ab4880-dfbf-46d3-a439-76e1ea69fdd3}\u0000",
-                "{76cf0df9-c9a4-4762-ad32-a213b2628e59}\u0000",
-                "{3f6853da-c7e5-43c4-8da4-1b480fa2655f}\u0000",
-                "{7f026abd-8776-49ca-b78f-54c8a986f9ba}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{86ab4880-dfbf-46d3-a439-76e1ea69fdd3}\u0000",
-            "owner": "{2846475c-4a5f-44e1-aee3-076a323d90fe}\u0000",
-            "Material": "res/materials/SampleScene/UV5.mat",
-            "Model": "./res/Models/Modele_Mati/Bron/MieczCaly.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{76cf0df9-c9a4-4762-ad32-a213b2628e59}\u0000",
-            "owner": "{2846475c-4a5f-44e1-aee3-076a323d90fe}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967295,
-            "colliderType": 0,
-            "_width": 4.5,
-            "_height": 0.4000000059604645,
-            "_depth": 1.5
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{3f6853da-c7e5-43c4-8da4-1b480fa2655f}\u0000",
-            "owner": "{2846475c-4a5f-44e1-aee3-076a323d90fe}\u0000",
-            "mass": 1.0,
-            "inverseMass": 1.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{7f026abd-8776-49ca-b78f-54c8a986f9ba}\u0000",
-            "owner": "{2846475c-4a5f-44e1-aee3-076a323d90fe}\u0000",
-            "size": 10
         },
         {
             "type": "Entity",
@@ -13422,53 +13284,6 @@
         },
         {
             "type": "Entity",
-            "id": "{73523329-c239-4b8a-9a8b-b74f9075d9dc}\u0000",
-            "name": "Krew",
-            "transform": {
-                "type": "Transform",
-                "id": "{dfbe4c9a-10df-423c-8a91-a73700b7b506}\u0000",
-                "owner": "{73523329-c239-4b8a-9a8b-b74f9075d9dc}\u0000",
-                "Position": {
-                    "x": -34.324951171875,
-                    "y": 1.4752318859100342,
-                    "z": -80.93588256835938
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -26.81303596496582,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 20.0,
-                    "y": 15.0,
-                    "z": 15.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": -0.23185856640338898,
-                    "z": 0.0,
-                    "w": 0.9727495312690735
-                },
-                "Children": [],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": [
-                "{08013bab-e3b5-4b4e-ac2e-cadd7eb4eeed}\u0000"
-            ]
-        },
-        {
-            "type": "BloodSource",
-            "id": "{08013bab-e3b5-4b4e-ac2e-cadd7eb4eeed}\u0000",
-            "owner": "{73523329-c239-4b8a-9a8b-b74f9075d9dc}\u0000",
-            "Texture": "res/textures/BloodSplatter\\BloodTest.dds",
-            "Color": {
-                "x": 0.19117647409439087,
-                "y": 0.0,
-                "z": 0.0
-            }
-        },
-        {
-            "type": "Entity",
             "id": "{1318f9d0-ea67-4954-94cb-d311fef507d3}\u0000",
             "name": "Podloga collider",
             "transform": {
@@ -13626,7 +13441,7 @@
                 "id": "{d22278a1-d71c-4f3e-81d9-6e42edc76f90}\u0000",
                 "owner": "{ca2a408f-99a7-46c6-a407-a99ce42a4a95}\u0000",
                 "Position": {
-                    "x": -45.63463592529297,
+                    "x": -10.115784645080566,
                     "y": -36.69673156738281,
                     "z": -65.58533477783203
                 },
@@ -13663,9 +13478,9 @@
             "collisionLayer": 4294967295,
             "collisionMask": 4294967295,
             "colliderType": 0,
-            "_width": 50.0,
+            "_width": 130.1999969482422,
             "_height": 1.0,
-            "_depth": 50.0
+            "_depth": 50.099998474121094
         }
     ]
 }
