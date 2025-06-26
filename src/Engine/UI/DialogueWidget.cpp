@@ -122,6 +122,10 @@ namespace Engine::Ui
 
     void DialogueWidget::Render()
     {
+        if (!Active)
+        {
+            return;
+        }
         Image->Render();
         Text->Render();
         if (ShowPlayer)

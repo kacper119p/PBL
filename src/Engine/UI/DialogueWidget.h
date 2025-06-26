@@ -48,10 +48,11 @@ namespace Engine::Ui
         float Timer = 0.0f;
         bool FinishedAnimation = true;
         bool Hidden = true;
-        AnimationType CurrentAnimation = AnimationType::Enter;
+        AnimationType CurrentAnimation = AnimationType::Exit;
 
         bool ShowPlayer = false;
         bool ShowBoss = false;
+        bool Active = false;
 
     public:
         DialogueWidget();
@@ -102,6 +103,7 @@ namespace Engine::Ui
 
         void Show()
         {
+            Active = true;
             if (!Hidden)
             {
                 return;
