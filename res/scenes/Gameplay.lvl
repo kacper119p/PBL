@@ -243,7 +243,6 @@
                 "{36e0509d-de94-4c06-a2c5-ce931cdb7eaa}\u0000",
                 "{691ae308-1356-4835-a405-c0c59ed08bde}\u0000",
                 "{0b90e353-0d3e-452b-b8d3-52998d9b304e}\u0000",
-                "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000",
                 "{f0831910-4f9d-475c-9c08-5d3d3421c4d1}\u0000",
                 "{e7b17619-a8d2-4a47-b5b6-6441e02edd78}\u0000",
                 "{bc285aa5-1a2f-441e-9990-0030f52abce8}\u0000",
@@ -549,7 +548,7 @@
                 "id": "{d9709540-5917-4a47-8438-713e13e9c5ea}\u0000",
                 "owner": "{6a3862e4-3084-4cd8-9ef3-bea2bd0afa39}\u0000",
                 "Position": {
-                    "x": 25.9892520904541,
+                    "x": 25.63997459411621,
                     "y": -0.0010000000474974513,
                     "z": -0.11907958984375
                 },
@@ -829,7 +828,8 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{b8e19c20-a746-46fb-8c17-c73ed8786e9d}\u0000"
+                "{b8e19c20-a746-46fb-8c17-c73ed8786e9d}\u0000",
+                "{84972dda-2b66-4b34-ac54-d313c3e7a767}\u0000"
             ]
         },
         {
@@ -839,6 +839,14 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "NavArea",
+            "id": "{84972dda-2b66-4b34-ac54-d313c3e7a767}\u0000",
+            "owner": "{be81cfb8-729f-4180-a609-30276e54f17b}\u0000",
+            "IsWalkable": false,
+            "spacing": 1.0,
+            "padding": 1.0
         },
         {
             "type": "Entity",
@@ -917,7 +925,8 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{8edbc583-4a25-4c43-89d3-41852c2fae4f}\u0000"
+                "{8edbc583-4a25-4c43-89d3-41852c2fae4f}\u0000",
+                "{68f06017-69c5-42c3-b453-538e50b9dfa5}\u0000"
             ]
         },
         {
@@ -927,6 +936,14 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "NavArea",
+            "id": "{68f06017-69c5-42c3-b453-538e50b9dfa5}\u0000",
+            "owner": "{01af3588-25c8-46e5-b5c9-789bf89f9b80}\u0000",
+            "IsWalkable": false,
+            "spacing": 1.0,
+            "padding": 1.0
         },
         {
             "type": "Entity",
@@ -1836,9 +1853,9 @@
                 "id": "{8fa9f89a-ab42-46a5-afad-df4aaa0eacef}\u0000",
                 "owner": "{38d8e09a-c089-4c88-8115-99577179e7b2}\u0000",
                 "Position": {
-                    "x": -0.967041015625,
+                    "x": -0.966796875,
                     "y": 458.3816223144531,
-                    "z": 252.2293701171875
+                    "z": 252.229248046875
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -1870,9 +1887,9 @@
                 "id": "{f9fc13a8-459d-4982-9c0e-82dc21fe217a}\u0000",
                 "owner": "{104d1106-0de5-4683-9d96-360349fe773d}\u0000",
                 "Position": {
-                    "x": 31.391845703125,
+                    "x": 31.39111328125,
                     "y": 410.8468322753906,
-                    "z": 132.767578125
+                    "z": 132.76806640625
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -1904,9 +1921,9 @@
                 "id": "{f23b1abf-4c3a-4dde-a6e0-10bf123afff6}\u0000",
                 "owner": "{53d0b32c-3292-4211-b6d1-b6169e693262}\u0000",
                 "Position": {
-                    "x": -3.618408203125,
-                    "y": 99.06086730957031,
-                    "z": 274.40234375
+                    "x": -3.61767578125,
+                    "y": 99.06088256835938,
+                    "z": 274.403564453125
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -1940,7 +1957,7 @@
                 "Position": {
                     "x": 54.6083984375,
                     "y": 388.5063781738281,
-                    "z": -467.0882568359375
+                    "z": -467.088134765625
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -1974,7 +1991,7 @@
                 "Position": {
                     "x": 0.0,
                     "y": 0.0,
-                    "z": 0.0008544921875
+                    "z": 0.0009765625
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -2112,7 +2129,7 @@
                 "Position": {
                     "x": 25.399658203125,
                     "y": 410.8468322753906,
-                    "z": -135.9281005859375
+                    "z": -135.927734375
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -2154,9 +2171,9 @@
                 "id": "{24ed60f1-c1c7-4fca-bb49-c06b3c50b86b}\u0000",
                 "owner": "{4531f778-3b86-4076-a2b2-82cfe58027b4}\u0000",
                 "Position": {
-                    "x": -3.618408203125,
-                    "y": 99.06086730957031,
-                    "z": 41.2928466796875
+                    "x": -3.61767578125,
+                    "y": 99.06088256835938,
+                    "z": 41.294189453125
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -2198,9 +2215,9 @@
                 "id": "{e85d9eac-7e7b-4fb0-bf13-c4e704f86f8e}\u0000",
                 "owner": "{26daec2e-4a53-4919-865a-d51d0536cdb8}\u0000",
                 "Position": {
-                    "x": -3.618408203125,
-                    "y": 99.06086730957031,
-                    "z": -219.39306640625
+                    "x": -3.61865234375,
+                    "y": 99.06088256835938,
+                    "z": -219.39208984375
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -2244,7 +2261,7 @@
                 "Position": {
                     "x": 43.193359375,
                     "y": 388.5063781738281,
-                    "z": 483.9849853515625
+                    "z": 483.98583984375
                 },
                 "EulerAngles": {
                     "x": 27.498584747314453,
@@ -2418,9 +2435,9 @@
                 "id": "{a4970a72-cccf-4c9b-bedf-67b82e7e29f8}\u0000",
                 "owner": "{7b54432f-1e5c-47e1-a07d-294a45d26ad1}\u0000",
                 "Position": {
-                    "x": -0.97216796875,
-                    "y": 458.3816223144531,
-                    "z": 5.65283203125
+                    "x": -1.1301777362823486,
+                    "y": 458.381591796875,
+                    "z": 5.6524658203125
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -2452,8 +2469,8 @@
                 "id": "{97ad6fa3-bc42-465d-8a20-b82ab898306a}\u0000",
                 "owner": "{db97d7d8-7296-480d-a4e2-9f4bef259918}\u0000",
                 "Position": {
-                    "x": 31.391845703125,
-                    "y": 410.8468322753906,
+                    "x": 31.29559898376465,
+                    "y": 410.8468017578125,
                     "z": 132.767578125
                 },
                 "EulerAngles": {
@@ -2486,9 +2503,9 @@
                 "id": "{1692fd95-5d06-4dff-ba83-6887b54b62d1}\u0000",
                 "owner": "{5ab444af-5561-4626-92b7-c9eff54d538b}\u0000",
                 "Position": {
-                    "x": -3.62109375,
+                    "x": -3.7162201404571533,
                     "y": 99.06086730957031,
-                    "z": -235.994384765625
+                    "z": -235.9945068359375
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -2520,9 +2537,9 @@
                 "id": "{0dba8648-0352-4e9f-ae32-c6f51951d018}\u0000",
                 "owner": "{3ab452ee-c3ba-4395-9a6d-3f85e448f298}\u0000",
                 "Position": {
-                    "x": 54.6083984375,
-                    "y": 388.5063781738281,
-                    "z": -467.0882568359375
+                    "x": 54.57597351074219,
+                    "y": 388.50634765625,
+                    "z": -467.087890625
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -2554,9 +2571,9 @@
                 "id": "{05b11e94-4585-44e4-9043-d7d00bd4215b}\u0000",
                 "owner": "{0823d8da-329e-4640-9091-ac200d85de23}\u0000",
                 "Position": {
-                    "x": 0.0,
+                    "x": -0.2184915542602539,
                     "y": 0.0,
-                    "z": 0.0008544921875
+                    "z": 0.0003662109375
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -2604,9 +2621,9 @@
                 "id": "{49eb1b75-fb7d-48c5-b445-02d4880c59d4}\u0000",
                 "owner": "{b6a27306-0fe6-4439-bb7d-fcf4daa89a10}\u0000",
                 "Position": {
-                    "x": -0.97216796875,
-                    "y": 458.3816223144531,
-                    "z": 252.345703125
+                    "x": -1.180410385131836,
+                    "y": 458.3814697265625,
+                    "z": 252.345458984375
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -2648,9 +2665,9 @@
                 "id": "{ff462a09-bcd0-4e63-82c2-3221edf5f850}\u0000",
                 "owner": "{7580efb9-7596-403b-957c-68bb91b8c89d}\u0000",
                 "Position": {
-                    "x": 4.13037109375,
-                    "y": 458.3816223144531,
-                    "z": -250.195068359375
+                    "x": 3.771134614944458,
+                    "y": 458.3814697265625,
+                    "z": -250.1956787109375
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -2692,9 +2709,9 @@
                 "id": "{f8574068-a5cc-4552-8f8e-6c84ce71d4ae}\u0000",
                 "owner": "{fc0aac89-621d-4c42-ba1a-1aaaa47d49c3}\u0000",
                 "Position": {
-                    "x": 25.399658203125,
-                    "y": 410.8468322753906,
-                    "z": -135.9281005859375
+                    "x": 24.661470413208008,
+                    "y": 410.8468017578125,
+                    "z": -135.92919921875
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -2736,9 +2753,9 @@
                 "id": "{c407e299-6151-456a-846d-7f74445a2487}\u0000",
                 "owner": "{47cfba8c-0845-4376-b78e-1d2bb20f84a1}\u0000",
                 "Position": {
-                    "x": -3.62109375,
+                    "x": -3.8160324096679688,
                     "y": 99.06086730957031,
-                    "z": 41.292724609375
+                    "z": 41.29248046875
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -2780,9 +2797,9 @@
                 "id": "{c6897fef-eee6-4f05-bd24-ecb53267ccd0}\u0000",
                 "owner": "{6e2f8c86-605d-4b12-9252-1f209c76a7f0}\u0000",
                 "Position": {
-                    "x": -3.62109375,
+                    "x": -3.670337200164795,
                     "y": 99.06086730957031,
-                    "z": 243.29052734375
+                    "z": 243.290771484375
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -2824,9 +2841,9 @@
                 "id": "{5839fc5b-13de-45d9-9b43-d536ade5cad3}\u0000",
                 "owner": "{cc109fb6-e12c-4f8d-9d25-375523e41a1a}\u0000",
                 "Position": {
-                    "x": 43.193359375,
-                    "y": 388.5063781738281,
-                    "z": 483.9849853515625
+                    "x": 42.09708786010742,
+                    "y": 388.5062255859375,
+                    "z": 483.9832763671875
                 },
                 "EulerAngles": {
                     "x": 27.498584747314453,
@@ -4008,7 +4025,8 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{b563d255-ec93-42cb-b670-6f7b81be34f5}\u0000"
+                "{b563d255-ec93-42cb-b670-6f7b81be34f5}\u0000",
+                "{b9ac420c-4479-409c-bfa3-bd6c50d9eb45}\u0000"
             ]
         },
         {
@@ -4018,6 +4036,14 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "NavArea",
+            "id": "{b9ac420c-4479-409c-bfa3-bd6c50d9eb45}\u0000",
+            "owner": "{de3651dc-e9e3-4481-b237-1362cb9e12cd}\u0000",
+            "IsWalkable": false,
+            "spacing": 1.0,
+            "padding": 1.0
         },
         {
             "type": "Entity",
@@ -4105,7 +4131,8 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{96138b7a-02a0-48cd-b4db-5cb39bc3d5fd}\u0000"
+                "{96138b7a-02a0-48cd-b4db-5cb39bc3d5fd}\u0000",
+                "{2ef4443e-6f02-4ebf-ae12-c5b6ba67c133}\u0000"
             ]
         },
         {
@@ -4115,6 +4142,14 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "NavArea",
+            "id": "{2ef4443e-6f02-4ebf-ae12-c5b6ba67c133}\u0000",
+            "owner": "{a3642b53-4839-4e05-8fbe-4c1dbc3bcf9e}\u0000",
+            "IsWalkable": false,
+            "spacing": 1.0,
+            "padding": 1.0
         },
         {
             "type": "Entity",
@@ -4237,7 +4272,8 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{12e268e7-6f17-47b1-a036-ebcd51b550c3}\u0000"
+                "{12e268e7-6f17-47b1-a036-ebcd51b550c3}\u0000",
+                "{4342038e-feaa-4c35-87ce-0146fb6019ea}\u0000"
             ]
         },
         {
@@ -4247,6 +4283,14 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "NavArea",
+            "id": "{4342038e-feaa-4c35-87ce-0146fb6019ea}\u0000",
+            "owner": "{3868f600-3656-44f2-b1a3-5dab0ef0f016}\u0000",
+            "IsWalkable": false,
+            "spacing": 1.0,
+            "padding": 1.0
         },
         {
             "type": "Entity",
@@ -4281,7 +4325,8 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{bdc0d623-d0a1-4b06-9d39-23a6bb418cee}\u0000"
+                "{bdc0d623-d0a1-4b06-9d39-23a6bb418cee}\u0000",
+                "{d1787aae-e127-4367-ba34-265511d2c136}\u0000"
             ]
         },
         {
@@ -4291,6 +4336,14 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "NavArea",
+            "id": "{d1787aae-e127-4367-ba34-265511d2c136}\u0000",
+            "owner": "{a84bd790-c6c6-448e-a0f6-4eaaa3ed1576}\u0000",
+            "IsWalkable": false,
+            "spacing": 1.0,
+            "padding": 1.0
         },
         {
             "type": "Entity",
@@ -5674,7 +5727,8 @@
                 "Parent": "{2a53c72d-ca73-43c1-9223-d0b3436dcd4e}\u0000"
             },
             "components": [
-                "{8c1c304c-cca9-43af-9fd2-12935a43601b}\u0000"
+                "{8c1c304c-cca9-43af-9fd2-12935a43601b}\u0000",
+                "{20d95102-9527-4b4b-a7e6-f7905b324ada}\u0000"
             ]
         },
         {
@@ -5684,6 +5738,17 @@
             "Material": "res/materials/SampleScene/Deska.mat",
             "Model": "res/models/Modele_Mati/Meble/zestawdesek.fbx",
             "CastShadow": false
+        },
+        {
+            "type": "AudioSource",
+            "id": "{20d95102-9527-4b4b-a7e6-f7905b324ada}\u0000",
+            "owner": "{af4ee570-a98e-4eaa-a162-57076cbe51b7}\u0000",
+            "SelectedSoundId": "ogien",
+            "SoundVolume": 1.0,
+            "Looping": true,
+            "MinDist": 22.86199951171875,
+            "MaxDist": 234.70899963378906,
+            "RollOff": 1.0
         },
         {
             "type": "Entity",
@@ -7252,9 +7317,9 @@
                 "id": "{773fbeb4-2501-4f81-8470-86b0427eb4e0}\u0000",
                 "owner": "{53681ba1-cb08-4ae7-ba30-dc363285c70b}\u0000",
                 "Position": {
-                    "x": -9.5367431640625e-7,
+                    "x": 0.0000019073486328125,
                     "y": 0.0,
-                    "z": -0.000064849853515625
+                    "z": -0.00006103515625
                 },
                 "EulerAngles": {
                     "x": -90.0,
@@ -7276,7 +7341,8 @@
                 "Parent": "{6f7165a1-21eb-4b67-a62b-f914e3c0386e}\u0000"
             },
             "components": [
-                "{28a8af7c-442e-4677-b987-44e656395744}\u0000"
+                "{28a8af7c-442e-4677-b987-44e656395744}\u0000",
+                "{0dd28f66-4312-49c5-a210-ceb564cd0c50}\u0000"
             ]
         },
         {
@@ -7286,6 +7352,17 @@
             "Material": "res/materials/SampleScene/Deska.mat",
             "Model": "res/models/Modele_Mati/Meble/zestawdesek.fbx",
             "CastShadow": false
+        },
+        {
+            "type": "AudioSource",
+            "id": "{0dd28f66-4312-49c5-a210-ceb564cd0c50}\u0000",
+            "owner": "{53681ba1-cb08-4ae7-ba30-dc363285c70b}\u0000",
+            "SelectedSoundId": "ogien",
+            "SoundVolume": 1.0,
+            "Looping": true,
+            "MinDist": 32.029998779296875,
+            "MaxDist": 259.9750061035156,
+            "RollOff": 1.0
         },
         {
             "type": "Entity",
@@ -8835,7 +8912,8 @@
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{d34ee364-9f41-41e5-91a7-e969f30fa309}\u0000"
+                "{d34ee364-9f41-41e5-91a7-e969f30fa309}\u0000",
+                "{241bb2b9-c392-4c32-989e-fc292abf9c11}\u0000"
             ]
         },
         {
@@ -8845,6 +8923,14 @@
             "Material": "res/materials/SampleScene/sciana.mat",
             "Model": "res/models/Modele_Mati/Otoczenie/ScianaWysoka.fbx",
             "CastShadow": true
+        },
+        {
+            "type": "NavArea",
+            "id": "{241bb2b9-c392-4c32-989e-fc292abf9c11}\u0000",
+            "owner": "{6f0995a8-3ad2-4675-a62c-2ee6c153f574}\u0000",
+            "IsWalkable": false,
+            "spacing": 1.0,
+            "padding": 1.0
         },
         {
             "type": "Entity",
@@ -9628,9 +9714,9 @@
                 "id": "{8362167e-a522-435e-a094-2aa0fe7cd0a5}\u0000",
                 "owner": "{dc736103-a240-4edc-bc78-15ef0835e011}\u0000",
                 "Position": {
-                    "x": 0.00011348724365234375,
+                    "x": 0.00011444091796875,
                     "y": 0.0,
-                    "z": -0.0002651214599609375
+                    "z": -0.0002689361572265625
                 },
                 "EulerAngles": {
                     "x": -90.0,
@@ -9652,7 +9738,8 @@
                 "Parent": "{b38fadf0-549e-4651-a568-caf0e78283cd}\u0000"
             },
             "components": [
-                "{2f63cc18-883d-45bf-aee4-f879fc7ee1a9}\u0000"
+                "{2f63cc18-883d-45bf-aee4-f879fc7ee1a9}\u0000",
+                "{5cd55547-50f9-418a-b1b6-8fd7b244f9bc}\u0000"
             ]
         },
         {
@@ -9662,6 +9749,17 @@
             "Material": "res/materials/SampleScene/Deska.mat",
             "Model": "res/models/Modele_Mati/Meble/zestawdesek.fbx",
             "CastShadow": false
+        },
+        {
+            "type": "AudioSource",
+            "id": "{5cd55547-50f9-418a-b1b6-8fd7b244f9bc}\u0000",
+            "owner": "{dc736103-a240-4edc-bc78-15ef0835e011}\u0000",
+            "SelectedSoundId": "ogien",
+            "SoundVolume": 1.0,
+            "Looping": true,
+            "MinDist": 29.816999435424805,
+            "MaxDist": 236.28799438476563,
+            "RollOff": 1.0
         },
         {
             "type": "Entity",
@@ -13457,9 +13555,9 @@
                 "id": "{325aed29-4d38-4952-ad09-ccf0241c8bba}\u0000",
                 "owner": "{5bcb30dd-fcf8-4146-8dfc-cb4a295f453f}\u0000",
                 "Position": {
-                    "x": -0.967041015625,
+                    "x": -0.96728515625,
                     "y": 458.3816223144531,
-                    "z": 252.2293701171875
+                    "z": 252.229248046875
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -13493,7 +13591,7 @@
                 "Position": {
                     "x": 31.391845703125,
                     "y": 410.8468322753906,
-                    "z": 132.767578125
+                    "z": 132.767822265625
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -13525,9 +13623,9 @@
                 "id": "{0b78e101-7857-4242-8383-ee8d9e446324}\u0000",
                 "owner": "{d538451c-cc6e-4eed-856f-5ec1bff19593}\u0000",
                 "Position": {
-                    "x": -3.618408203125,
-                    "y": 99.06086730957031,
-                    "z": 274.40234375
+                    "x": -3.6187744140625,
+                    "y": 99.06088256835938,
+                    "z": 274.402099609375
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -13559,9 +13657,9 @@
                 "id": "{b954211e-65d2-4425-812c-178afa799ef9}\u0000",
                 "owner": "{b7cfd99b-fe6d-4671-a050-b9dd90717d10}\u0000",
                 "Position": {
-                    "x": 54.6083984375,
+                    "x": 54.614990234375,
                     "y": 388.5063781738281,
-                    "z": -467.0882568359375
+                    "z": -467.099853515625
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -13593,9 +13691,9 @@
                 "id": "{60d8d8e2-2e11-4068-ade9-a475d48f1099}\u0000",
                 "owner": "{cbf2145b-3a55-4dcd-be24-f49ff61331ca}\u0000",
                 "Position": {
-                    "x": 0.0,
+                    "x": -0.0001220703125,
                     "y": 0.0,
-                    "z": 0.0008544921875
+                    "z": 0.000732421875
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -13643,9 +13741,9 @@
                 "id": "{8c277874-e648-4e76-825d-d168e2d980b3}\u0000",
                 "owner": "{e77462b7-b801-4529-829a-2b612a29c456}\u0000",
                 "Position": {
-                    "x": -0.967041015625,
+                    "x": -0.966796875,
                     "y": 458.3816223144531,
-                    "z": 6.1722412109375
+                    "z": 6.17236328125
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -13689,7 +13787,7 @@
                 "Position": {
                     "x": 4.1318359375,
                     "y": 458.3816223144531,
-                    "z": -250.193603515625
+                    "z": -250.19384765625
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -13731,9 +13829,9 @@
                 "id": "{ea281267-2a89-4f1a-bc72-5813ec355410}\u0000",
                 "owner": "{ec3b8c1c-1ad3-4108-916a-4275a316b5a5}\u0000",
                 "Position": {
-                    "x": 25.399658203125,
+                    "x": 25.3995361328125,
                     "y": 410.8468322753906,
-                    "z": -135.9281005859375
+                    "z": -135.92822265625
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -13775,9 +13873,9 @@
                 "id": "{a4acac99-e1b8-4ccd-b7bd-9fe8778784b4}\u0000",
                 "owner": "{778e5376-5a03-45d5-a2e2-53669d1dbce0}\u0000",
                 "Position": {
-                    "x": -3.618408203125,
-                    "y": 99.06086730957031,
-                    "z": 41.2928466796875
+                    "x": -3.6181640625,
+                    "y": 99.06088256835938,
+                    "z": 41.2919921875
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -13819,9 +13917,9 @@
                 "id": "{f51edc5e-3390-42a0-be42-8f3c9fdff57d}\u0000",
                 "owner": "{5979c390-f0ab-42b7-a51d-aa784c93aa65}\u0000",
                 "Position": {
-                    "x": -3.618408203125,
-                    "y": 99.06086730957031,
-                    "z": -219.39306640625
+                    "x": -3.61865234375,
+                    "y": 99.06088256835938,
+                    "z": -219.393310546875
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -13863,9 +13961,9 @@
                 "id": "{8412410f-dd1f-488a-a38f-88766e72352b}\u0000",
                 "owner": "{f04a321c-3200-4bc7-9555-6ad9bf4e5149}\u0000",
                 "Position": {
-                    "x": 43.193359375,
+                    "x": 43.1932373046875,
                     "y": 388.5063781738281,
-                    "z": 483.9849853515625
+                    "z": 483.985107421875
                 },
                 "EulerAngles": {
                     "x": 27.498584747314453,
@@ -14332,7 +14430,7 @@
             "type": "ModelRenderer",
             "id": "{411841be-da4f-47ba-a4da-453ccd09a6aa}\u0000",
             "owner": "{8b994880-14f1-4a1f-856b-a9fc0902af57}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
             "CastShadow": true
         },
@@ -14346,9 +14444,9 @@
             "collisionLayer": 4294967295,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 3.200000047683716,
-            "_height": 1.2699999809265137,
-            "_depth": 1.899999976158142
+            "_width": 4.099999904632568,
+            "_height": 2.6700000762939453,
+            "_depth": 2.700000047683716
         },
         {
             "type": "Rigidbody",
@@ -14366,7 +14464,7 @@
             "type": "Thrash",
             "id": "{a418d6d3-6a5c-40e7-8765-579e9a348d40}\u0000",
             "owner": "{8b994880-14f1-4a1f-856b-a9fc0902af57}\u0000",
-            "size": 5
+            "size": 20
         },
         {
             "type": "Entity",
@@ -14411,7 +14509,7 @@
             "type": "ModelRenderer",
             "id": "{d6028a34-117f-481c-990a-c40dc825b4a7}\u0000",
             "owner": "{87d474f7-b692-4555-8bfc-380f22b83d8e}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda2.fbx",
             "CastShadow": true
         },
@@ -14490,7 +14588,7 @@
             "type": "ModelRenderer",
             "id": "{35c6a7ef-2261-4da1-84fe-d743045bdef0}\u0000",
             "owner": "{93c02852-d321-4d6b-bb38-73548658eb4c}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda3.fbx",
             "CastShadow": true
         },
@@ -14569,7 +14667,7 @@
             "type": "ModelRenderer",
             "id": "{0f280c52-caa3-48f1-b61d-4cde99c0eb09}\u0000",
             "owner": "{620f3bca-b1f5-45eb-b0c8-7f3515a39c44}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda4.fbx",
             "CastShadow": true
         },
@@ -14726,7 +14824,7 @@
             "type": "ModelRenderer",
             "id": "{4672d5e3-984c-458f-bac0-06edfea4cdf1}\u0000",
             "owner": "{4a79c8b9-3400-408b-afc9-633da78e0053}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda5.fbx",
             "CastShadow": true
         },
@@ -14740,9 +14838,9 @@
             "collisionLayer": 4294967295,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 2.0999999046325684,
-            "_depth": 1.0
+            "_width": 2.5,
+            "_height": 3.700000047683716,
+            "_depth": 1.7000000476837158
         },
         {
             "type": "Rigidbody",
@@ -14760,7 +14858,7 @@
             "type": "Thrash",
             "id": "{e65208b2-70f1-4106-9e11-d09352d8005c}\u0000",
             "owner": "{4a79c8b9-3400-408b-afc9-633da78e0053}\u0000",
-            "size": 5
+            "size": 20
         },
         {
             "type": "Entity",
@@ -14805,7 +14903,7 @@
             "type": "ModelRenderer",
             "id": "{1b580bbf-4dec-4fca-a5cc-dcda0f0ded9f}\u0000",
             "owner": "{a11f601c-65e7-4ce2-8f50-3b5eb4968fae}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda6.fbx",
             "CastShadow": true
         },
@@ -17884,7 +17982,7 @@
             "type": "Thrash",
             "id": "{df823dbf-9ae5-4d62-90f1-229824f37385}\u0000",
             "owner": "{2b0351d6-9a61-4f4c-9c0d-2d8fdbf471a5}\u0000",
-            "size": 4
+            "size": 2
         },
         {
             "type": "Entity",
@@ -17994,7 +18092,7 @@
             "type": "ModelRenderer",
             "id": "{55c16770-69eb-4d69-b1d8-b28089f1f08c}\u0000",
             "owner": "{0de28f1c-4404-4fd1-97ca-0ed86bf88942}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda6.fbx",
             "CastShadow": true
         },
@@ -18008,9 +18106,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.0,
-            "_depth": 1.0
+            "_width": 0.5,
+            "_height": 0.5,
+            "_depth": 0.5
         },
         {
             "type": "Rigidbody",
@@ -18073,7 +18171,7 @@
             "type": "ModelRenderer",
             "id": "{5ed7be3f-ad7f-4894-83f4-f3b02759eab2}\u0000",
             "owner": "{d8424362-f20e-4281-bb37-2221e7fa6b7d}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda4.fbx",
             "CastShadow": true
         },
@@ -18087,9 +18185,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 1.0,
-            "_depth": 1.7000000476837158
+            "_width": 0.800000011920929,
+            "_height": 0.6000000238418579,
+            "_depth": 1.2999999523162842
         },
         {
             "type": "Rigidbody",
@@ -18107,7 +18205,7 @@
             "type": "Thrash",
             "id": "{672c4508-2e6f-46a4-bd0f-91b3863743f7}\u0000",
             "owner": "{d8424362-f20e-4281-bb37-2221e7fa6b7d}\u0000",
-            "size": 5
+            "size": 1
         },
         {
             "type": "Entity",
@@ -18152,7 +18250,7 @@
             "type": "ModelRenderer",
             "id": "{2dcd95ff-f51a-4962-9cfa-59bb4608d8da}\u0000",
             "owner": "{a9b6b111-c4de-428e-b069-b1754bbb5864}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda6.fbx",
             "CastShadow": true
         },
@@ -18166,9 +18264,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.0,
-            "_depth": 1.0
+            "_width": 0.6000000238418579,
+            "_height": 0.5,
+            "_depth": 0.6000000238418579
         },
         {
             "type": "Rigidbody",
@@ -18197,9 +18295,9 @@
                 "id": "{f0c5d2c6-2606-4b07-97af-7be42ab8a658}\u0000",
                 "owner": "{47d7546a-a168-4651-9ef8-370527ac819a}\u0000",
                 "Position": {
-                    "x": 12.70319938659668,
-                    "y": 0.47399675846099854,
-                    "z": 6.585813522338867
+                    "x": -17.19188117980957,
+                    "y": 0.47399646043777466,
+                    "z": 24.00376319885254
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -18207,9 +18305,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 0.5302490592002869,
-                    "y": 0.5302490592002869,
-                    "z": 0.5302490592002869
+                    "x": 0.4000000059604645,
+                    "y": 0.4000000059604645,
+                    "z": 0.4000000059604645
                 },
                 "Rotation": {
                     "x": -0.0,
@@ -18231,7 +18329,7 @@
             "type": "ModelRenderer",
             "id": "{02847d20-89bb-4769-a60d-1ee4199646e3}\u0000",
             "owner": "{47d7546a-a168-4651-9ef8-370527ac819a}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
             "CastShadow": true
         },
@@ -18245,9 +18343,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 3.200000047683716,
-            "_height": 1.2699999809265137,
-            "_depth": 1.899999976158142
+            "_width": 1.2000000476837158,
+            "_height": 0.7699999809265137,
+            "_depth": 0.8999999761581421
         },
         {
             "type": "Rigidbody",
@@ -18265,7 +18363,7 @@
             "type": "Thrash",
             "id": "{56ef6cdb-8695-4a70-a008-422840d37c83}\u0000",
             "owner": "{47d7546a-a168-4651-9ef8-370527ac819a}\u0000",
-            "size": 5
+            "size": 1
         },
         {
             "type": "Entity",
@@ -18276,9 +18374,9 @@
                 "id": "{d17c83ee-9f79-4376-ad5a-296a9e4f0fd6}\u0000",
                 "owner": "{03e1ac9b-1ba6-473c-af32-ccb14f7dc2aa}\u0000",
                 "Position": {
-                    "x": -4.958113670349121,
+                    "x": -14.264266967773438,
                     "y": 0.3763608932495117,
-                    "z": -7.237007141113281
+                    "z": 36.75148391723633
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -18310,7 +18408,7 @@
             "type": "ModelRenderer",
             "id": "{f32f8d9c-27fc-4a54-b102-ace129cb8760}\u0000",
             "owner": "{03e1ac9b-1ba6-473c-af32-ccb14f7dc2aa}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda2.fbx",
             "CastShadow": true
         },
@@ -18324,9 +18422,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.2999999523162842,
-            "_depth": 1.0
+            "_width": 0.699999988079071,
+            "_height": 0.8999999761581421,
+            "_depth": 0.6000000238418579
         },
         {
             "type": "Rigidbody",
@@ -18355,9 +18453,9 @@
                 "id": "{9f4c5b63-e4d2-4afc-ac87-fa69b61117c7}\u0000",
                 "owner": "{d137ca56-455b-4f73-aca4-bb2c1a87d60f}\u0000",
                 "Position": {
-                    "x": 14.767387390136719,
-                    "y": 0.677287220954895,
-                    "z": 6.110483169555664
+                    "x": -21.726116180419922,
+                    "y": 0.6772869229316711,
+                    "z": 32.477439880371094
                 },
                 "EulerAngles": {
                     "x": 180.0,
@@ -18389,7 +18487,7 @@
             "type": "ModelRenderer",
             "id": "{2c99ec90-4912-4fbc-95fd-d1669064c6cb}\u0000",
             "owner": "{d137ca56-455b-4f73-aca4-bb2c1a87d60f}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda2.fbx",
             "CastShadow": true
         },
@@ -18435,7 +18533,7 @@
                 "owner": "{a83bb49b-5cfc-40ce-8e5d-c76e2869151a}\u0000",
                 "Position": {
                     "x": -11.596147537231445,
-                    "y": 0.8219603300094604,
+                    "y": 1.5250056982040405,
                     "z": 39.61077117919922
                 },
                 "EulerAngles": {
@@ -18444,9 +18542,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 0.762689471244812,
-                    "y": 0.762689471244812,
-                    "z": 0.762689471244812
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
                 },
                 "Rotation": {
                     "x": -0.0,
@@ -18468,7 +18566,7 @@
             "type": "ModelRenderer",
             "id": "{8a8b75c4-a247-45b1-aab0-bc5ebe12954b}\u0000",
             "owner": "{a83bb49b-5cfc-40ce-8e5d-c76e2869151a}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
             "CastShadow": true
         },
@@ -18482,9 +18580,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 3.200000047683716,
-            "_height": 1.2699999809265137,
-            "_depth": 1.899999976158142
+            "_width": 0.8999999761581421,
+            "_height": 1.2000000476837158,
+            "_depth": 1.0
         },
         {
             "type": "Rigidbody",
@@ -18502,7 +18600,7 @@
             "type": "Thrash",
             "id": "{2efb799b-693c-4780-bd35-38c097f2ff45}\u0000",
             "owner": "{a83bb49b-5cfc-40ce-8e5d-c76e2869151a}\u0000",
-            "size": 5
+            "size": 1
         },
         {
             "type": "Entity",
@@ -18547,7 +18645,7 @@
             "type": "ModelRenderer",
             "id": "{bad04ecc-61f2-4925-96c6-e059d93f8f7b}\u0000",
             "owner": "{b42cc345-559c-48ab-ae34-a45f92e09f12}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda2.fbx",
             "CastShadow": true
         },
@@ -18626,7 +18724,7 @@
             "type": "ModelRenderer",
             "id": "{1d957e59-3b61-48b7-bdfc-434c74cab733}\u0000",
             "owner": "{27c1bde9-c5db-4673-9093-064f61baa9f1}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
             "CastShadow": true
         },
@@ -18640,9 +18738,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 3.200000047683716,
+            "_width": 0.800000011920929,
             "_height": 1.2699999809265137,
-            "_depth": 1.899999976158142
+            "_depth": 1.0
         },
         {
             "type": "Rigidbody",
@@ -18660,7 +18758,7 @@
             "type": "Thrash",
             "id": "{3ebd9407-244d-4a08-90ae-d0608a5c430e}\u0000",
             "owner": "{27c1bde9-c5db-4673-9093-064f61baa9f1}\u0000",
-            "size": 5
+            "size": 1
         },
         {
             "type": "Entity",
@@ -18705,7 +18803,7 @@
             "type": "ModelRenderer",
             "id": "{ef879739-401c-48ec-965a-b233d5330ef0}\u0000",
             "owner": "{c58c4aaf-fcd6-4ffc-9d7d-b7f6cf0b7bc4}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda6.fbx",
             "CastShadow": true
         },
@@ -18719,9 +18817,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.0,
-            "_depth": 1.0
+            "_width": 0.6000000238418579,
+            "_height": 0.4000000059604645,
+            "_depth": 0.4000000059604645
         },
         {
             "type": "Rigidbody",
@@ -18760,9 +18858,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 0.6736582517623901,
-                    "y": 0.6736582517623901,
-                    "z": 0.6736582517623901
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
                 },
                 "Rotation": {
                     "x": -0.0,
@@ -18784,7 +18882,7 @@
             "type": "ModelRenderer",
             "id": "{feaac822-5297-469c-bf9b-c8478737908b}\u0000",
             "owner": "{b1958f1d-d132-4efb-9d85-83d85684cc4d}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda5.fbx",
             "CastShadow": true
         },
@@ -18798,9 +18896,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 2.0999999046325684,
-            "_depth": 1.0
+            "_width": 0.699999988079071,
+            "_height": 1.2999999523162842,
+            "_depth": 0.6000000238418579
         },
         {
             "type": "Rigidbody",
@@ -18818,7 +18916,7 @@
             "type": "Thrash",
             "id": "{31a9d079-4a0c-454d-a18c-255d1a21e79b}\u0000",
             "owner": "{b1958f1d-d132-4efb-9d85-83d85684cc4d}\u0000",
-            "size": 5
+            "size": 1
         },
         {
             "type": "Entity",
@@ -18863,7 +18961,7 @@
             "type": "ModelRenderer",
             "id": "{c61c68c1-d4d7-45c0-9a57-f7a311f63b79}\u0000",
             "owner": "{55c37a8f-af1a-45b1-94c9-671eb26836d2}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda5.fbx",
             "CastShadow": true
         },
@@ -18877,9 +18975,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 2.0999999046325684,
-            "_depth": 1.0
+            "_width": 0.4000000059604645,
+            "_height": 1.100000023841858,
+            "_depth": 0.4000000059604645
         },
         {
             "type": "Rigidbody",
@@ -18897,7 +18995,7 @@
             "type": "Thrash",
             "id": "{62551ce3-1cce-42b1-a7db-8578fd839511}\u0000",
             "owner": "{55c37a8f-af1a-45b1-94c9-671eb26836d2}\u0000",
-            "size": 5
+            "size": 1
         },
         {
             "type": "Entity",
@@ -18908,9 +19006,9 @@
                 "id": "{b04292dd-cc2c-41c6-bd75-ec9b8a267c27}\u0000",
                 "owner": "{1d3b42d9-eea9-4a13-871b-1c169ee0eef3}\u0000",
                 "Position": {
-                    "x": 4.442018508911133,
-                    "y": 0.667917013168335,
-                    "z": 3.6873931884765625
+                    "x": -18.969125747680664,
+                    "y": 0.6679167151451111,
+                    "z": 28.36750030517578
                 },
                 "EulerAngles": {
                     "x": 180.0,
@@ -18918,9 +19016,9 @@
                     "z": 180.0
                 },
                 "Scale": {
-                    "x": 0.6109626293182373,
-                    "y": 0.6109626293182373,
-                    "z": 0.6109626293182373
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
                 },
                 "Rotation": {
                     "x": -0.0,
@@ -18942,7 +19040,7 @@
             "type": "ModelRenderer",
             "id": "{bf88f29f-1d5a-457c-8073-985d191b628a}\u0000",
             "owner": "{1d3b42d9-eea9-4a13-871b-1c169ee0eef3}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
             "CastShadow": true
         },
@@ -18956,9 +19054,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 3.200000047683716,
-            "_height": 1.2699999809265137,
-            "_depth": 1.899999976158142
+            "_width": 3.9000000953674316,
+            "_height": 2.1700000762939453,
+            "_depth": 2.9000000953674316
         },
         {
             "type": "Rigidbody",
@@ -18976,7 +19074,7 @@
             "type": "Thrash",
             "id": "{efcd7bee-5bff-4127-a06d-39c93b4bcc2d}\u0000",
             "owner": "{1d3b42d9-eea9-4a13-871b-1c169ee0eef3}\u0000",
-            "size": 5
+            "size": 20
         },
         {
             "type": "Entity",
@@ -18987,9 +19085,9 @@
                 "id": "{8af6cd5f-3a85-4d25-a17e-5ada24d3e86e}\u0000",
                 "owner": "{bd9a9049-84e1-45d0-8396-40f51bf5f1d0}\u0000",
                 "Position": {
-                    "x": 9.517303466796875,
-                    "y": 0.23325946927070618,
-                    "z": 14.629859924316406
+                    "x": -21.306610107421875,
+                    "y": 0.9069106578826904,
+                    "z": 18.1489200592041
                 },
                 "EulerAngles": {
                     "x": 180.0,
@@ -19021,7 +19119,7 @@
             "type": "ModelRenderer",
             "id": "{2a04d591-be06-4d99-b32e-743ad7d9748c}\u0000",
             "owner": "{bd9a9049-84e1-45d0-8396-40f51bf5f1d0}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda4.fbx",
             "CastShadow": true
         },
@@ -19035,9 +19133,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 1.0,
-            "_depth": 1.7000000476837158
+            "_width": 0.5,
+            "_height": 0.6000000238418579,
+            "_depth": 0.800000011920929
         },
         {
             "type": "Rigidbody",
@@ -19055,7 +19153,7 @@
             "type": "Thrash",
             "id": "{0547f692-8fb8-4cbd-9575-e5f501bd0e1c}\u0000",
             "owner": "{bd9a9049-84e1-45d0-8396-40f51bf5f1d0}\u0000",
-            "size": 5
+            "size": 1
         },
         {
             "type": "Entity",
@@ -19066,9 +19164,9 @@
                 "id": "{64c44faa-65dd-4626-8d2a-78a5bd2a8cc2}\u0000",
                 "owner": "{c69f5094-60b2-483e-bb48-755d0fb53227}\u0000",
                 "Position": {
-                    "x": 16.763347625732422,
-                    "y": 0.25407111644744873,
-                    "z": 5.448390960693359
+                    "x": -18.07868766784668,
+                    "y": 0.7972424030303955,
+                    "z": 16.36158561706543
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -19100,7 +19198,7 @@
             "type": "ModelRenderer",
             "id": "{5ebf13eb-9fe4-4dd9-9868-8878ed30b18c}\u0000",
             "owner": "{c69f5094-60b2-483e-bb48-755d0fb53227}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda3.fbx",
             "CastShadow": true
         },
@@ -19114,9 +19212,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.0,
-            "_height": 1.0,
-            "_depth": 1.0
+            "_width": 0.5,
+            "_height": 0.6000000238418579,
+            "_depth": 0.699999988079071
         },
         {
             "type": "Rigidbody",
@@ -19179,7 +19277,7 @@
             "type": "ModelRenderer",
             "id": "{6bb524b7-bed5-4e61-bb05-5883a8d19829}\u0000",
             "owner": "{0261a866-cb45-4111-ae7c-04450287d46b}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda5.fbx",
             "CastShadow": true
         },
@@ -19193,9 +19291,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 2.0999999046325684,
-            "_depth": 1.0
+            "_width": 0.8999999761581421,
+            "_height": 1.7999999523162842,
+            "_depth": 0.800000011920929
         },
         {
             "type": "Rigidbody",
@@ -19213,7 +19311,7 @@
             "type": "Thrash",
             "id": "{96171114-6cc1-4467-9ef2-633126073ab7}\u0000",
             "owner": "{0261a866-cb45-4111-ae7c-04450287d46b}\u0000",
-            "size": 5
+            "size": 1
         },
         {
             "type": "Entity",
@@ -19224,9 +19322,9 @@
                 "id": "{cba44e42-7fdf-49cc-b4ed-fb6cf5b8477f}\u0000",
                 "owner": "{eb9bcf94-8c5e-46f3-9353-35278af6ef2a}\u0000",
                 "Position": {
-                    "x": -2.322551727294922,
-                    "y": 0.5073880553245544,
-                    "z": -2.3134517669677734
+                    "x": -24.099424362182617,
+                    "y": 1.1200129985809326,
+                    "z": 22.366657257080078
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -19234,9 +19332,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 0.5286645293235779,
-                    "y": 0.5286645293235779,
-                    "z": 0.5286645293235779
+                    "x": 0.800000011920929,
+                    "y": 0.800000011920929,
+                    "z": 0.800000011920929
                 },
                 "Rotation": {
                     "x": 0.0,
@@ -19258,7 +19356,7 @@
             "type": "ModelRenderer",
             "id": "{29789654-4bcd-4bad-b230-616808265408}\u0000",
             "owner": "{eb9bcf94-8c5e-46f3-9353-35278af6ef2a}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
             "CastShadow": true
         },
@@ -19272,9 +19370,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 3.200000047683716,
-            "_height": 1.2699999809265137,
-            "_depth": 1.899999976158142
+            "_width": 3.5,
+            "_height": 1.9700000286102295,
+            "_depth": 2.5
         },
         {
             "type": "Rigidbody",
@@ -19292,7 +19390,7 @@
             "type": "Thrash",
             "id": "{ef425842-7ed6-4e84-bda7-a2212d64d2ef}\u0000",
             "owner": "{eb9bcf94-8c5e-46f3-9353-35278af6ef2a}\u0000",
-            "size": 5
+            "size": 20
         },
         {
             "type": "Entity",
@@ -19337,7 +19435,7 @@
             "type": "ModelRenderer",
             "id": "{d4889391-f6a8-48fa-881e-d44a034f865d}\u0000",
             "owner": "{2a23e915-3974-4485-8db2-ce54b6e2061c}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda5.fbx",
             "CastShadow": true
         },
@@ -19351,9 +19449,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 2.0999999046325684,
-            "_depth": 1.0
+            "_width": 0.699999988079071,
+            "_height": 1.2999999523162842,
+            "_depth": 0.699999988079071
         },
         {
             "type": "Rigidbody",
@@ -19371,7 +19469,7 @@
             "type": "Thrash",
             "id": "{56ac2f5f-bc48-4bb3-9ae4-14d320ecd616}\u0000",
             "owner": "{2a23e915-3974-4485-8db2-ce54b6e2061c}\u0000",
-            "size": 5
+            "size": 1
         },
         {
             "type": "Entity",
@@ -19382,9 +19480,9 @@
                 "id": "{36eb03a7-4212-4cbc-a1f9-9469cb576bbb}\u0000",
                 "owner": "{1e208984-d244-4342-969d-3bb2ef0dd3e2}\u0000",
                 "Position": {
-                    "x": 8.655046463012695,
+                    "x": -20.170732498168945,
                     "y": 0.29929792881011963,
-                    "z": -0.6489028930664063
+                    "z": 22.980234146118164
                 },
                 "EulerAngles": {
                     "x": 180.0,
@@ -19416,7 +19514,7 @@
             "type": "ModelRenderer",
             "id": "{29dc831f-2f7f-4669-85ce-b29261dd8f8a}\u0000",
             "owner": "{1e208984-d244-4342-969d-3bb2ef0dd3e2}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda4.fbx",
             "CastShadow": true
         },
@@ -19430,9 +19528,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 1.0,
-            "_depth": 1.7000000476837158
+            "_width": 0.699999988079071,
+            "_height": 0.699999988079071,
+            "_depth": 0.8999999761581421
         },
         {
             "type": "Rigidbody",
@@ -19450,7 +19548,7 @@
             "type": "Thrash",
             "id": "{f6fe6125-69ff-4b2c-9418-62b3b5bf0054}\u0000",
             "owner": "{1e208984-d244-4342-969d-3bb2ef0dd3e2}\u0000",
-            "size": 5
+            "size": 1
         },
         {
             "type": "Entity",
@@ -19461,9 +19559,9 @@
                 "id": "{0769456d-99db-4ce2-b077-0ae0d3dec72a}\u0000",
                 "owner": "{67d8e9cc-1287-4025-8f28-9dce25b8b471}\u0000",
                 "Position": {
-                    "x": 8.79104232788086,
+                    "x": -16.578250885009766,
                     "y": 0.8532408475875854,
-                    "z": -1.4213638305664063
+                    "z": 33.83131790161133
                 },
                 "EulerAngles": {
                     "x": 180.0,
@@ -19495,7 +19593,7 @@
             "type": "ModelRenderer",
             "id": "{7458d30e-c685-4324-9103-b1ecde50a94c}\u0000",
             "owner": "{67d8e9cc-1287-4025-8f28-9dce25b8b471}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda3.fbx",
             "CastShadow": true
         },
@@ -19509,9 +19607,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.0,
-            "_height": 1.0,
-            "_depth": 1.0
+            "_width": 0.6000000238418579,
+            "_height": 0.800000011920929,
+            "_depth": 0.4000000059604645
         },
         {
             "type": "Rigidbody",
@@ -19574,7 +19672,7 @@
             "type": "ModelRenderer",
             "id": "{3e005c4b-5fd1-46af-9be9-e2bc7309e682}\u0000",
             "owner": "{a18e22f5-1d2c-4d9f-b02d-aa920f050b50}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda3.fbx",
             "CastShadow": true
         },
@@ -19588,9 +19686,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.0,
-            "_height": 1.0,
-            "_depth": 1.0
+            "_width": 0.5,
+            "_height": 0.5,
+            "_depth": 0.699999988079071
         },
         {
             "type": "Rigidbody",
@@ -19653,7 +19751,7 @@
             "type": "ModelRenderer",
             "id": "{c7b29a28-2209-459c-aecf-22ee2f165268}\u0000",
             "owner": "{0a66135d-9aff-4621-afe8-d9658809e9ee}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda2.fbx",
             "CastShadow": true
         },
@@ -19667,9 +19765,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.2999999523162842,
-            "_depth": 1.0
+            "_width": 1.0,
+            "_height": 1.0,
+            "_depth": 0.800000011920929
         },
         {
             "type": "Rigidbody",
@@ -19698,9 +19796,9 @@
                 "id": "{91b2a8c8-d4d4-4c23-8cc5-1c4c10e936f7}\u0000",
                 "owner": "{a49ffc42-98de-4752-800a-488bf2d314d7}\u0000",
                 "Position": {
-                    "x": -4.958113670349121,
-                    "y": 1.2577561140060425,
-                    "z": -7.237007141113281
+                    "x": -24.30446434020996,
+                    "y": 1.2577557563781738,
+                    "z": 34.72328567504883
                 },
                 "EulerAngles": {
                     "x": 180.0,
@@ -19732,7 +19830,7 @@
             "type": "ModelRenderer",
             "id": "{48847b48-8e6f-485b-bee5-602fd81cbbba}\u0000",
             "owner": "{a49ffc42-98de-4752-800a-488bf2d314d7}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda6.fbx",
             "CastShadow": true
         },
@@ -19746,9 +19844,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.0,
-            "_depth": 1.0
+            "_width": 0.699999988079071,
+            "_height": 0.699999988079071,
+            "_depth": 0.699999988079071
         },
         {
             "type": "Rigidbody",
@@ -19811,7 +19909,7 @@
             "type": "ModelRenderer",
             "id": "{f396ceca-8408-43fc-b351-c11a026f8726}\u0000",
             "owner": "{80aa124e-3e26-432b-8b30-7daeb7b93fba}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda3.fbx",
             "CastShadow": true
         },
@@ -19825,8 +19923,8 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.0,
-            "_height": 1.0,
+            "_width": 0.800000011920929,
+            "_height": 0.699999988079071,
             "_depth": 1.0
         },
         {
@@ -19856,9 +19954,9 @@
                 "id": "{cb43e0ce-5489-47c5-a223-785be116fa97}\u0000",
                 "owner": "{08fd2258-520d-4b15-84e6-984f9a2977a1}\u0000",
                 "Position": {
-                    "x": 7.667137145996094,
-                    "y": 0.30570462346076965,
-                    "z": 11.247467041015625
+                    "x": -23.052345275878906,
+                    "y": 1.0517524480819702,
+                    "z": 25.267288208007813
                 },
                 "EulerAngles": {
                     "x": 180.0,
@@ -19890,7 +19988,7 @@
             "type": "ModelRenderer",
             "id": "{8010f162-a5dd-4309-985d-0694d4ec60b9}\u0000",
             "owner": "{08fd2258-520d-4b15-84e6-984f9a2977a1}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda4.fbx",
             "CastShadow": true
         },
@@ -19904,9 +20002,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 1.0,
-            "_depth": 1.7000000476837158
+            "_width": 0.699999988079071,
+            "_height": 0.699999988079071,
+            "_depth": 0.8999999761581421
         },
         {
             "type": "Rigidbody",
@@ -19924,7 +20022,7 @@
             "type": "Thrash",
             "id": "{49095f4d-fe31-4526-a00d-217536586731}\u0000",
             "owner": "{08fd2258-520d-4b15-84e6-984f9a2977a1}\u0000",
-            "size": 5
+            "size": 1
         },
         {
             "type": "Entity",
@@ -19969,7 +20067,7 @@
             "type": "ModelRenderer",
             "id": "{e43ff34b-852c-4a40-8879-d7bad7bbe330}\u0000",
             "owner": "{748d0fcc-159d-4fdf-b8b1-d7807027c4ce}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda5.fbx",
             "CastShadow": true
         },
@@ -19983,9 +20081,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 2.0999999046325684,
-            "_depth": 1.0
+            "_width": 0.5,
+            "_height": 1.0,
+            "_depth": 0.5
         },
         {
             "type": "Rigidbody",
@@ -20003,7 +20101,7 @@
             "type": "Thrash",
             "id": "{9476e94b-648e-4ff6-ab3f-495a025f7996}\u0000",
             "owner": "{748d0fcc-159d-4fdf-b8b1-d7807027c4ce}\u0000",
-            "size": 5
+            "size": 1
         },
         {
             "type": "Entity",
@@ -20014,7 +20112,7 @@
                 "id": "{6424cf2a-ded7-4446-8120-9a897b0bb5fe}\u0000",
                 "owner": "{1a6c0d59-6caf-4e17-a53b-2bf5c35a8f44}\u0000",
                 "Position": {
-                    "x": -17.113693237304688,
+                    "x": -14.627548217773438,
                     "y": 0.5038151144981384,
                     "z": 38.43172836303711
                 },
@@ -20048,7 +20146,7 @@
             "type": "ModelRenderer",
             "id": "{34aab5f5-0ce7-42ee-a4fa-aded35df754c}\u0000",
             "owner": "{1a6c0d59-6caf-4e17-a53b-2bf5c35a8f44}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda6.fbx",
             "CastShadow": true
         },
@@ -20062,9 +20160,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.0,
-            "_depth": 1.0
+            "_width": 0.8999999761581421,
+            "_height": 0.6000000238418579,
+            "_depth": 0.699999988079071
         },
         {
             "type": "Rigidbody",
@@ -20103,9 +20201,9 @@
                     "z": 0.0
                 },
                 "Scale": {
-                    "x": 0.6888464689254761,
-                    "y": 0.6888464689254761,
-                    "z": 0.6888464689254761
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 0.5
                 },
                 "Rotation": {
                     "x": 0.0,
@@ -20127,7 +20225,7 @@
             "type": "ModelRenderer",
             "id": "{c23fcb2c-c45d-496c-ba83-d7bf3cc820f5}\u0000",
             "owner": "{6b101b6d-9fa2-41c4-9676-78d31fc67307}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireStone.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda4.fbx",
             "CastShadow": true
         },
@@ -20141,9 +20239,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 1.0,
-            "_depth": 1.7000000476837158
+            "_width": 0.699999988079071,
+            "_height": 0.5,
+            "_depth": 1.0
         },
         {
             "type": "Rigidbody",
@@ -20161,7 +20259,7 @@
             "type": "Thrash",
             "id": "{69c2e80b-c579-4e13-9e0c-786507f9198f}\u0000",
             "owner": "{6b101b6d-9fa2-41c4-9676-78d31fc67307}\u0000",
-            "size": 5
+            "size": 1
         },
         {
             "type": "Entity",
@@ -20172,9 +20270,9 @@
                 "id": "{6c7e64e3-d878-4017-95e0-14ac18958d72}\u0000",
                 "owner": "{954f59d2-321c-4d8c-b3e2-1e7d55a540f9}\u0000",
                 "Position": {
-                    "x": 1.4967975616455078,
-                    "y": 0.0862131416797638,
-                    "z": 11.508068084716797
+                    "x": -23.43302345275879,
+                    "y": 0.5137332677841187,
+                    "z": 19.082399368286133
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -20206,7 +20304,7 @@
             "type": "ModelRenderer",
             "id": "{3e280617-e7de-4e62-8f9f-b53f6da6cb5d}\u0000",
             "owner": "{954f59d2-321c-4d8c-b3e2-1e7d55a540f9}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda3.fbx",
             "CastShadow": true
         },
@@ -20220,9 +20318,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.0,
-            "_height": 1.0,
-            "_depth": 1.0
+            "_width": 0.699999988079071,
+            "_height": 0.4000000059604645,
+            "_depth": 0.5
         },
         {
             "type": "Rigidbody",
@@ -20285,7 +20383,7 @@
             "type": "ModelRenderer",
             "id": "{0d9d395a-06bf-4383-a328-baab2564d390}\u0000",
             "owner": "{d50c8d77-dfaa-4df4-a07a-b9a153cc834a}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
+            "Material": "res/materials/SampleScene/FireSphere.mat",
             "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda2.fbx",
             "CastShadow": true
         },
@@ -20299,9 +20397,9 @@
             "collisionLayer": 2,
             "collisionMask": 4294967291,
             "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.2999999523162842,
-            "_depth": 1.0
+            "_width": 0.699999988079071,
+            "_height": 0.800000011920929,
+            "_depth": 0.699999988079071
         },
         {
             "type": "Rigidbody",
@@ -20320,2441 +20418,6 @@
             "id": "{2ad2c022-1d69-4529-b716-eaed266d42e5}\u0000",
             "owner": "{d50c8d77-dfaa-4df4-a07a-b9a153cc834a}\u0000",
             "size": 1
-        },
-        {
-            "type": "Entity",
-            "id": "{69cc4e52-5dc3-4ca8-9b28-0ccad61760a3}\u0000",
-            "name": "Generated Items",
-            "transform": {
-                "type": "Transform",
-                "id": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000",
-                "owner": "{69cc4e52-5dc3-4ca8-9b28-0ccad61760a3}\u0000",
-                "Position": {
-                    "x": 9.978113174438477,
-                    "y": 0.0972900390625,
-                    "z": 14.732429504394531
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 0.0
-                },
-                "Children": [
-                    "{23f4fbf2-50de-466c-b15b-3b0c52de69ed}\u0000",
-                    "{ee655279-43d4-4575-a0ba-fd84738f59e9}\u0000",
-                    "{dbe3cd27-7308-4cf6-90da-26f3d430fc4a}\u0000",
-                    "{f9bcaa5b-6699-42b0-95ce-c68d8fe207ca}\u0000",
-                    "{51ce34eb-1db9-4a03-8718-31dfc03b3ae6}\u0000",
-                    "{43cd9e56-0bf4-4547-944e-bbfa5b803b94}\u0000",
-                    "{4bd40554-7f7e-4592-b251-66ec5e0fd8cb}\u0000",
-                    "{7d61aa4a-7d6f-4d0a-9888-bdd8f4d94156}\u0000",
-                    "{afca2a61-20fd-4ec1-94c5-fbc7b3e1df10}\u0000",
-                    "{cf12996a-5fb0-4d62-9bcc-c4868ef54f13}\u0000",
-                    "{5908e741-f204-4b13-a4cb-427660a9ae48}\u0000",
-                    "{7468d94c-8993-4d68-99f4-304cb4e2bd26}\u0000",
-                    "{78309e6e-42e3-47a0-aea2-6b4420cba674}\u0000",
-                    "{18e0e685-69d2-4bd2-abcd-9f912f50ebb0}\u0000",
-                    "{d63f8655-df42-42f9-8c4d-dbc8869757ea}\u0000",
-                    "{06b45e2d-d1af-4a7c-ad56-e9410331bc95}\u0000",
-                    "{a06f1a32-a204-4874-8b6e-fff978c1b010}\u0000",
-                    "{70be1d98-c659-4ee6-9dc2-fc159c910e34}\u0000",
-                    "{0d56dce6-c9d8-47e2-ab2b-76654535617c}\u0000",
-                    "{21215013-31f4-4398-ba56-c44059c97519}\u0000",
-                    "{a333e5e1-71d6-4adf-82b4-42269975ce2c}\u0000",
-                    "{063dce91-5704-4b1f-bd53-96272872106e}\u0000",
-                    "{2844e70e-0162-4b6d-a254-543172a1bcfa}\u0000",
-                    "{ca43a960-d5bd-4f80-a7ee-e4a159d4028e}\u0000",
-                    "{a1fc5b3a-735b-4718-a74d-45bb5bc8a726}\u0000",
-                    "{296c78a2-bbe4-4c6b-965d-53e06ce4cfcc}\u0000",
-                    "{cc68714e-21cd-408b-bd35-0689574fdd54}\u0000",
-                    "{e97a17ba-6549-458d-afc8-ced297a61e5b}\u0000",
-                    "{3a532f03-2854-411d-8967-2f553f4f40a1}\u0000",
-                    "{6c621541-be02-41fa-ab07-5117aae1b2c4}\u0000"
-                ],
-                "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
-            },
-            "components": []
-        },
-        {
-            "type": "Entity",
-            "id": "{73f6bf20-b886-44b0-aa50-ea0934ccb2f9}\u0000",
-            "name": "KamienPrzeszkoda5 1",
-            "transform": {
-                "type": "Transform",
-                "id": "{23f4fbf2-50de-466c-b15b-3b0c52de69ed}\u0000",
-                "owner": "{73f6bf20-b886-44b0-aa50-ea0934ccb2f9}\u0000",
-                "Position": {
-                    "x": -0.3996305465698242,
-                    "y": 1.1138938665390015,
-                    "z": 5.721912384033203
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 40.15471267700195,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.6914242506027222,
-                    "y": 0.6914242506027222,
-                    "z": 0.6914242506027222
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.34328851103782654,
-                    "z": 0.0,
-                    "w": 0.9392300248146057
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{0aa806d6-3c13-41ea-9051-3455982b1fde}\u0000",
-                "{4de9b91c-1d81-4923-878a-c988b2d1268e}\u0000",
-                "{69b0fe3f-97fc-4513-a7d9-5db4626242a2}\u0000",
-                "{62b90bc4-8328-4d53-99d6-88d55da2a630}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{0aa806d6-3c13-41ea-9051-3455982b1fde}\u0000",
-            "owner": "{73f6bf20-b886-44b0-aa50-ea0934ccb2f9}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda5.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{4de9b91c-1d81-4923-878a-c988b2d1268e}\u0000",
-            "owner": "{73f6bf20-b886-44b0-aa50-ea0934ccb2f9}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 2.0999999046325684,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{69b0fe3f-97fc-4513-a7d9-5db4626242a2}\u0000",
-            "owner": "{73f6bf20-b886-44b0-aa50-ea0934ccb2f9}\u0000",
-            "mass": 0.5,
-            "inverseMass": 2.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{62b90bc4-8328-4d53-99d6-88d55da2a630}\u0000",
-            "owner": "{73f6bf20-b886-44b0-aa50-ea0934ccb2f9}\u0000",
-            "size": 5
-        },
-        {
-            "type": "Entity",
-            "id": "{b4c98e13-8ce1-4601-93cb-1721c04c8eec}\u0000",
-            "name": "KamienPrzeszkoda3 1",
-            "transform": {
-                "type": "Transform",
-                "id": "{ee655279-43d4-4575-a0ba-fd84738f59e9}\u0000",
-                "owner": "{b4c98e13-8ce1-4601-93cb-1721c04c8eec}\u0000",
-                "Position": {
-                    "x": -11.332195281982422,
-                    "y": 0.17849132418632507,
-                    "z": 8.772586822509766
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 27.263795852661133,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.4310283064842224,
-                    "y": 0.4310283064842224,
-                    "z": 0.4310283064842224
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.23568318784236908,
-                    "z": 0.0,
-                    "w": 0.9718299508094788
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{cf9f2406-4974-447b-bf9f-7233fa6e60be}\u0000",
-                "{61e4b826-17f2-456e-81d2-9274166ab023}\u0000",
-                "{779344e4-42a7-4e43-a8a7-655abf647a70}\u0000",
-                "{d5be2a3b-792e-4f37-b529-a6ebb99298fb}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{cf9f2406-4974-447b-bf9f-7233fa6e60be}\u0000",
-            "owner": "{b4c98e13-8ce1-4601-93cb-1721c04c8eec}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda3.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{61e4b826-17f2-456e-81d2-9274166ab023}\u0000",
-            "owner": "{b4c98e13-8ce1-4601-93cb-1721c04c8eec}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.0,
-            "_height": 1.0,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{779344e4-42a7-4e43-a8a7-655abf647a70}\u0000",
-            "owner": "{b4c98e13-8ce1-4601-93cb-1721c04c8eec}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{d5be2a3b-792e-4f37-b529-a6ebb99298fb}\u0000",
-            "owner": "{b4c98e13-8ce1-4601-93cb-1721c04c8eec}\u0000",
-            "size": 1
-        },
-        {
-            "type": "Entity",
-            "id": "{abe9e3e9-7b21-47bc-82a2-08e498d4489a}\u0000",
-            "name": "KamienPrzeszkoda2 1",
-            "transform": {
-                "type": "Transform",
-                "id": "{dbe3cd27-7308-4cf6-90da-26f3d430fc4a}\u0000",
-                "owner": "{abe9e3e9-7b21-47bc-82a2-08e498d4489a}\u0000",
-                "Position": {
-                    "x": -19.025691986083984,
-                    "y": 0.5127718448638916,
-                    "z": -4.488478660583496
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 30.128114700317383,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.3566098213195801,
-                    "y": 0.3566098213195801,
-                    "z": 0.3566098213195801
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.2598988115787506,
-                    "z": 0.0,
-                    "w": 0.9656358361244202
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{fe504830-7a3c-4b48-899e-c01b699429d5}\u0000",
-                "{51c4dab9-de70-408b-a854-114d4a1e267c}\u0000",
-                "{b9a3e960-ce2f-4164-913a-106a97f2439e}\u0000",
-                "{62c187b6-b4e7-4c17-afd8-d140a8b965fa}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{fe504830-7a3c-4b48-899e-c01b699429d5}\u0000",
-            "owner": "{abe9e3e9-7b21-47bc-82a2-08e498d4489a}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda2.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{51c4dab9-de70-408b-a854-114d4a1e267c}\u0000",
-            "owner": "{abe9e3e9-7b21-47bc-82a2-08e498d4489a}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.2999999523162842,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{b9a3e960-ce2f-4164-913a-106a97f2439e}\u0000",
-            "owner": "{abe9e3e9-7b21-47bc-82a2-08e498d4489a}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{62c187b6-b4e7-4c17-afd8-d140a8b965fa}\u0000",
-            "owner": "{abe9e3e9-7b21-47bc-82a2-08e498d4489a}\u0000",
-            "size": 1
-        },
-        {
-            "type": "Entity",
-            "id": "{3f87472c-de97-4e44-b37a-9c67630912a6}\u0000",
-            "name": "KamienPrzeszkoda1 1",
-            "transform": {
-                "type": "Transform",
-                "id": "{f9bcaa5b-6699-42b0-95ce-c68d8fe207ca}\u0000",
-                "owner": "{3f87472c-de97-4e44-b37a-9c67630912a6}\u0000",
-                "Position": {
-                    "x": -13.356473922729492,
-                    "y": 0.45562005043029785,
-                    "z": -10.66492748260498
-                },
-                "EulerAngles": {
-                    "x": 180.0,
-                    "y": -38.670921325683594,
-                    "z": 180.0
-                },
-                "Scale": {
-                    "x": 0.39828500151634216,
-                    "y": 0.39828500151634216,
-                    "z": 0.39828500151634216
-                },
-                "Rotation": {
-                    "x": -0.0,
-                    "y": 0.9435961842536926,
-                    "z": -0.0,
-                    "w": -0.3310984671115875
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{317375d4-d006-4288-9a6b-3d9097d9aa61}\u0000",
-                "{58ea2a89-844b-4b6a-80ab-27fb520f1d76}\u0000",
-                "{58902897-e314-417a-874f-bb7e37b693a2}\u0000",
-                "{c0724935-13e1-4a92-a678-12c80d69b1ba}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{317375d4-d006-4288-9a6b-3d9097d9aa61}\u0000",
-            "owner": "{3f87472c-de97-4e44-b37a-9c67630912a6}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{58ea2a89-844b-4b6a-80ab-27fb520f1d76}\u0000",
-            "owner": "{3f87472c-de97-4e44-b37a-9c67630912a6}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 3.200000047683716,
-            "_height": 1.2699999809265137,
-            "_depth": 1.899999976158142
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{58902897-e314-417a-874f-bb7e37b693a2}\u0000",
-            "owner": "{3f87472c-de97-4e44-b37a-9c67630912a6}\u0000",
-            "mass": 0.5,
-            "inverseMass": 2.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.3799999952316284,
-            "frictionEnabled": true,
-            "restitution": 0.0560000017285347
-        },
-        {
-            "type": "Thrash",
-            "id": "{c0724935-13e1-4a92-a678-12c80d69b1ba}\u0000",
-            "owner": "{3f87472c-de97-4e44-b37a-9c67630912a6}\u0000",
-            "size": 5
-        },
-        {
-            "type": "Entity",
-            "id": "{74061fb5-9c1f-481b-94ee-f5bb65fb7338}\u0000",
-            "name": "KamienPrzeszkoda3 2",
-            "transform": {
-                "type": "Transform",
-                "id": "{51ce34eb-1db9-4a03-8718-31dfc03b3ae6}\u0000",
-                "owner": "{74061fb5-9c1f-481b-94ee-f5bb65fb7338}\u0000",
-                "Position": {
-                    "x": 2.0240097045898438,
-                    "y": 0.5047186613082886,
-                    "z": -9.154340744018555
-                },
-                "EulerAngles": {
-                    "x": 180.0,
-                    "y": 24.2630558013916,
-                    "z": 180.0
-                },
-                "Scale": {
-                    "x": 0.6824383735656738,
-                    "y": 0.6824383735656738,
-                    "z": 0.6824383735656738
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.9776677489280701,
-                    "z": 0.0,
-                    "w": 0.21015655994415283
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{c256373a-86bc-4db9-a5c5-8f44b87a975d}\u0000",
-                "{910c2ce1-0d6f-419a-8c98-7da368e29e5a}\u0000",
-                "{6db0f416-8ae4-4cc4-bee3-8a0cbe845959}\u0000",
-                "{d99eb835-c6e2-4d91-add4-a9d7fd66c447}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{c256373a-86bc-4db9-a5c5-8f44b87a975d}\u0000",
-            "owner": "{74061fb5-9c1f-481b-94ee-f5bb65fb7338}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda3.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{910c2ce1-0d6f-419a-8c98-7da368e29e5a}\u0000",
-            "owner": "{74061fb5-9c1f-481b-94ee-f5bb65fb7338}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.0,
-            "_height": 1.0,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{6db0f416-8ae4-4cc4-bee3-8a0cbe845959}\u0000",
-            "owner": "{74061fb5-9c1f-481b-94ee-f5bb65fb7338}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{d99eb835-c6e2-4d91-add4-a9d7fd66c447}\u0000",
-            "owner": "{74061fb5-9c1f-481b-94ee-f5bb65fb7338}\u0000",
-            "size": 1
-        },
-        {
-            "type": "Entity",
-            "id": "{03946b38-7356-48be-bd80-f5a3e2770101}\u0000",
-            "name": "KamienPrzeszkoda5 2",
-            "transform": {
-                "type": "Transform",
-                "id": "{43cd9e56-0bf4-4547-944e-bbfa5b803b94}\u0000",
-                "owner": "{03946b38-7356-48be-bd80-f5a3e2770101}\u0000",
-                "Position": {
-                    "x": -1.2820701599121094,
-                    "y": 0.8134914636611938,
-                    "z": -11.262808799743652
-                },
-                "EulerAngles": {
-                    "x": 180.0,
-                    "y": -56.46628952026367,
-                    "z": 180.0
-                },
-                "Scale": {
-                    "x": 0.4075797200202942,
-                    "y": 0.4075797200202942,
-                    "z": 0.4075797200202942
-                },
-                "Rotation": {
-                    "x": -0.0,
-                    "y": 0.8810299634933472,
-                    "z": -0.0,
-                    "w": -0.4730604887008667
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{717cb695-1ff1-4903-b9c3-a53414713d6f}\u0000",
-                "{b19cc024-564d-4829-97b5-dc3aea09fd84}\u0000",
-                "{6181086e-eaf5-4edb-96dc-56625da2b67c}\u0000",
-                "{06c14959-ab1a-4e69-b7ec-ab4041580104}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{717cb695-1ff1-4903-b9c3-a53414713d6f}\u0000",
-            "owner": "{03946b38-7356-48be-bd80-f5a3e2770101}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda5.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{b19cc024-564d-4829-97b5-dc3aea09fd84}\u0000",
-            "owner": "{03946b38-7356-48be-bd80-f5a3e2770101}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 2.0999999046325684,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{6181086e-eaf5-4edb-96dc-56625da2b67c}\u0000",
-            "owner": "{03946b38-7356-48be-bd80-f5a3e2770101}\u0000",
-            "mass": 0.5,
-            "inverseMass": 2.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{06c14959-ab1a-4e69-b7ec-ab4041580104}\u0000",
-            "owner": "{03946b38-7356-48be-bd80-f5a3e2770101}\u0000",
-            "size": 5
-        },
-        {
-            "type": "Entity",
-            "id": "{ab4387b7-9f8f-4903-9eae-2b8a8d6c393b}\u0000",
-            "name": "KamienPrzeszkoda6 1",
-            "transform": {
-                "type": "Transform",
-                "id": "{4bd40554-7f7e-4592-b251-66ec5e0fd8cb}\u0000",
-                "owner": "{ab4387b7-9f8f-4903-9eae-2b8a8d6c393b}\u0000",
-                "Position": {
-                    "x": -9.333982467651367,
-                    "y": 0.3976692855358124,
-                    "z": -6.945516109466553
-                },
-                "EulerAngles": {
-                    "x": 180.0,
-                    "y": 6.245683193206787,
-                    "z": 180.0
-                },
-                "Scale": {
-                    "x": 0.35038045048713684,
-                    "y": 0.35038045048713684,
-                    "z": 0.35038045048713684
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.9985150098800659,
-                    "z": 0.0,
-                    "w": 0.054476890712976456
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{949b3a36-48fe-4396-b558-50bc3ae68ca8}\u0000",
-                "{d4f2fbf2-28cf-4fbc-90b7-c97eba79e26a}\u0000",
-                "{d065561b-61cc-4952-958f-af47de1f513e}\u0000",
-                "{2208c001-7bf4-42e5-8dc6-e3847310fb59}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{949b3a36-48fe-4396-b558-50bc3ae68ca8}\u0000",
-            "owner": "{ab4387b7-9f8f-4903-9eae-2b8a8d6c393b}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda6.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{d4f2fbf2-28cf-4fbc-90b7-c97eba79e26a}\u0000",
-            "owner": "{ab4387b7-9f8f-4903-9eae-2b8a8d6c393b}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.0,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{d065561b-61cc-4952-958f-af47de1f513e}\u0000",
-            "owner": "{ab4387b7-9f8f-4903-9eae-2b8a8d6c393b}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{2208c001-7bf4-42e5-8dc6-e3847310fb59}\u0000",
-            "owner": "{ab4387b7-9f8f-4903-9eae-2b8a8d6c393b}\u0000",
-            "size": 1
-        },
-        {
-            "type": "Entity",
-            "id": "{b63a7a87-54a4-4b23-bf54-08cb827966b8}\u0000",
-            "name": "KamienPrzeszkoda4 1",
-            "transform": {
-                "type": "Transform",
-                "id": "{7d61aa4a-7d6f-4d0a-9888-bdd8f4d94156}\u0000",
-                "owner": "{b63a7a87-54a4-4b23-bf54-08cb827966b8}\u0000",
-                "Position": {
-                    "x": -0.7450428009033203,
-                    "y": 0.3549615740776062,
-                    "z": -6.245791435241699
-                },
-                "EulerAngles": {
-                    "x": 180.0,
-                    "y": -29.40443229675293,
-                    "z": 180.0
-                },
-                "Scale": {
-                    "x": 0.5453843474388123,
-                    "y": 0.5453843474388123,
-                    "z": 0.5453843474388123
-                },
-                "Rotation": {
-                    "x": -0.0,
-                    "y": 0.9672579169273376,
-                    "z": -0.0,
-                    "w": -0.2537953555583954
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{837117f8-330a-4ff4-865b-491854a8d821}\u0000",
-                "{6dde4188-91c0-4d22-9e92-b792d41274cd}\u0000",
-                "{a832bf11-b90b-4992-a4bd-8b880704a437}\u0000",
-                "{ee1d4790-29cd-4ca5-be99-4b14dafa1a11}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{837117f8-330a-4ff4-865b-491854a8d821}\u0000",
-            "owner": "{b63a7a87-54a4-4b23-bf54-08cb827966b8}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda4.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{6dde4188-91c0-4d22-9e92-b792d41274cd}\u0000",
-            "owner": "{b63a7a87-54a4-4b23-bf54-08cb827966b8}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 1.0,
-            "_depth": 1.7000000476837158
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{a832bf11-b90b-4992-a4bd-8b880704a437}\u0000",
-            "owner": "{b63a7a87-54a4-4b23-bf54-08cb827966b8}\u0000",
-            "mass": 0.4000000059604645,
-            "inverseMass": 2.5,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.44200000166893005,
-            "frictionEnabled": true,
-            "restitution": 0.0560000017285347
-        },
-        {
-            "type": "Thrash",
-            "id": "{ee1d4790-29cd-4ca5-be99-4b14dafa1a11}\u0000",
-            "owner": "{b63a7a87-54a4-4b23-bf54-08cb827966b8}\u0000",
-            "size": 5
-        },
-        {
-            "type": "Entity",
-            "id": "{6593668c-963a-4388-9a19-011d03b48cd5}\u0000",
-            "name": "KamienPrzeszkoda6 2",
-            "transform": {
-                "type": "Transform",
-                "id": "{afca2a61-20fd-4ec1-94c5-fbc7b3e1df10}\u0000",
-                "owner": "{6593668c-963a-4388-9a19-011d03b48cd5}\u0000",
-                "Position": {
-                    "x": -15.602347373962402,
-                    "y": 0.24697965383529663,
-                    "z": 9.740499496459961
-                },
-                "EulerAngles": {
-                    "x": 180.0,
-                    "y": -37.48468780517578,
-                    "z": 180.0
-                },
-                "Scale": {
-                    "x": 0.5501943826675415,
-                    "y": 0.5501943826675415,
-                    "z": 0.5501943826675415
-                },
-                "Rotation": {
-                    "x": -0.0,
-                    "y": 0.9469730854034424,
-                    "z": -0.0,
-                    "w": -0.32131290435791016
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{2705ae2c-2bdf-4bb9-b9a4-715de00fb420}\u0000",
-                "{25ccb747-1e92-49b8-a304-314d33946363}\u0000",
-                "{a658db2f-4cce-46d6-8a6f-9b76ac468861}\u0000",
-                "{2bb801ee-fa1a-4aea-adaa-dc57df203fbf}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{2705ae2c-2bdf-4bb9-b9a4-715de00fb420}\u0000",
-            "owner": "{6593668c-963a-4388-9a19-011d03b48cd5}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda6.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{25ccb747-1e92-49b8-a304-314d33946363}\u0000",
-            "owner": "{6593668c-963a-4388-9a19-011d03b48cd5}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.0,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{a658db2f-4cce-46d6-8a6f-9b76ac468861}\u0000",
-            "owner": "{6593668c-963a-4388-9a19-011d03b48cd5}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{2bb801ee-fa1a-4aea-adaa-dc57df203fbf}\u0000",
-            "owner": "{6593668c-963a-4388-9a19-011d03b48cd5}\u0000",
-            "size": 1
-        },
-        {
-            "type": "Entity",
-            "id": "{d4ad2cad-a362-40b9-b9a8-8d39804e302c}\u0000",
-            "name": "KamienPrzeszkoda1 2",
-            "transform": {
-                "type": "Transform",
-                "id": "{cf12996a-5fb0-4d62-9bcc-c4868ef54f13}\u0000",
-                "owner": "{d4ad2cad-a362-40b9-b9a8-8d39804e302c}\u0000",
-                "Position": {
-                    "x": -11.327899932861328,
-                    "y": 0.8452037572860718,
-                    "z": 14.667816162109375
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -85.86421203613281,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.7637591361999512,
-                    "y": 0.7637591361999512,
-                    "z": 0.7637591361999512
-                },
-                "Rotation": {
-                    "x": -0.0,
-                    "y": 0.6811312437057495,
-                    "z": -0.0,
-                    "w": -0.7321613430976868
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{e7f23307-0ce8-4d28-b013-a88bb4582f6e}\u0000",
-                "{8d3b14c7-16b2-478a-85d6-dcb8777d8a35}\u0000",
-                "{aeb9d366-20bf-463e-9f1a-2aff1c2bf871}\u0000",
-                "{8207e31d-883e-4a02-abe4-2d25025e6b25}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{e7f23307-0ce8-4d28-b013-a88bb4582f6e}\u0000",
-            "owner": "{d4ad2cad-a362-40b9-b9a8-8d39804e302c}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{8d3b14c7-16b2-478a-85d6-dcb8777d8a35}\u0000",
-            "owner": "{d4ad2cad-a362-40b9-b9a8-8d39804e302c}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 3.200000047683716,
-            "_height": 1.2699999809265137,
-            "_depth": 1.899999976158142
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{aeb9d366-20bf-463e-9f1a-2aff1c2bf871}\u0000",
-            "owner": "{d4ad2cad-a362-40b9-b9a8-8d39804e302c}\u0000",
-            "mass": 0.5,
-            "inverseMass": 2.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.3799999952316284,
-            "frictionEnabled": true,
-            "restitution": 0.0560000017285347
-        },
-        {
-            "type": "Thrash",
-            "id": "{8207e31d-883e-4a02-abe4-2d25025e6b25}\u0000",
-            "owner": "{d4ad2cad-a362-40b9-b9a8-8d39804e302c}\u0000",
-            "size": 5
-        },
-        {
-            "type": "Entity",
-            "id": "{6eec834a-6e7d-40e5-927a-219b22439ad9}\u0000",
-            "name": "KamienPrzeszkoda6 3",
-            "transform": {
-                "type": "Transform",
-                "id": "{5908e741-f204-4b13-a4cb-427660a9ae48}\u0000",
-                "owner": "{6eec834a-6e7d-40e5-927a-219b22439ad9}\u0000",
-                "Position": {
-                    "x": 1.9956588745117188,
-                    "y": 0.6012641191482544,
-                    "z": -6.177567481994629
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 34.44801712036133,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.7086910605430603,
-                    "y": 0.7086910605430603,
-                    "z": 0.7086910605430603
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.29610833525657654,
-                    "z": 0.0,
-                    "w": 0.9551543593406677
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{f0ad4ad3-cca5-4bfd-90e8-4b06da95d4ba}\u0000",
-                "{729f51f8-72a9-49e1-b956-0c502a0bf34d}\u0000",
-                "{12389e47-52d5-47ac-8f3f-4a49181adda6}\u0000",
-                "{42f3788b-1613-4f1c-9555-102e0628048e}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{f0ad4ad3-cca5-4bfd-90e8-4b06da95d4ba}\u0000",
-            "owner": "{6eec834a-6e7d-40e5-927a-219b22439ad9}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda6.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{729f51f8-72a9-49e1-b956-0c502a0bf34d}\u0000",
-            "owner": "{6eec834a-6e7d-40e5-927a-219b22439ad9}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.0,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{12389e47-52d5-47ac-8f3f-4a49181adda6}\u0000",
-            "owner": "{6eec834a-6e7d-40e5-927a-219b22439ad9}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{42f3788b-1613-4f1c-9555-102e0628048e}\u0000",
-            "owner": "{6eec834a-6e7d-40e5-927a-219b22439ad9}\u0000",
-            "size": 1
-        },
-        {
-            "type": "Entity",
-            "id": "{d9960532-f426-4c64-ada3-c22f7aca1296}\u0000",
-            "name": "KamienPrzeszkoda6 4",
-            "transform": {
-                "type": "Transform",
-                "id": "{7468d94c-8993-4d68-99f4-304cb4e2bd26}\u0000",
-                "owner": "{d9960532-f426-4c64-ada3-c22f7aca1296}\u0000",
-                "Position": {
-                    "x": 4.957807540893555,
-                    "y": 0.43226468563079834,
-                    "z": 5.044916152954102
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 74.11039733886719,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.7087996602058411,
-                    "y": 0.7087996602058411,
-                    "z": 0.7087996602058411
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.6025841236114502,
-                    "z": 0.0,
-                    "w": 0.7980553507804871
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{8ee73f23-0eb2-41f1-94c4-a1a711603368}\u0000",
-                "{fe96164e-e539-4485-8f2d-18eb27bfe4c2}\u0000",
-                "{170755a6-b098-403d-8a5b-36f36bb637f8}\u0000",
-                "{d07193be-fef9-4549-8e27-6a97bffbda7f}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{8ee73f23-0eb2-41f1-94c4-a1a711603368}\u0000",
-            "owner": "{d9960532-f426-4c64-ada3-c22f7aca1296}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda6.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{fe96164e-e539-4485-8f2d-18eb27bfe4c2}\u0000",
-            "owner": "{d9960532-f426-4c64-ada3-c22f7aca1296}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.0,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{170755a6-b098-403d-8a5b-36f36bb637f8}\u0000",
-            "owner": "{d9960532-f426-4c64-ada3-c22f7aca1296}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{d07193be-fef9-4549-8e27-6a97bffbda7f}\u0000",
-            "owner": "{d9960532-f426-4c64-ada3-c22f7aca1296}\u0000",
-            "size": 1
-        },
-        {
-            "type": "Entity",
-            "id": "{570706a8-b36c-42bf-8941-923d30c43747}\u0000",
-            "name": "KamienPrzeszkoda2 2",
-            "transform": {
-                "type": "Transform",
-                "id": "{78309e6e-42e3-47a0-aea2-6b4420cba674}\u0000",
-                "owner": "{570706a8-b36c-42bf-8941-923d30c43747}\u0000",
-                "Position": {
-                    "x": -12.241939544677734,
-                    "y": 0.6395847201347351,
-                    "z": 6.85107421875
-                },
-                "EulerAngles": {
-                    "x": 180.0,
-                    "y": 9.792723655700684,
-                    "z": 180.0
-                },
-                "Scale": {
-                    "x": 0.5736782550811768,
-                    "y": 0.5736782550811768,
-                    "z": 0.5736782550811768
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.9963507056236267,
-                    "z": 0.0,
-                    "w": 0.08535365760326385
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{fb245be8-261b-408a-a4ac-5e4d8386028d}\u0000",
-                "{daa8c7f1-6f36-422c-a9c0-14ad2e5938d5}\u0000",
-                "{b5921eae-f9f3-42e2-8633-c2c16496cecc}\u0000",
-                "{51828ad8-63d4-4dd4-990b-db2684e145b5}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{fb245be8-261b-408a-a4ac-5e4d8386028d}\u0000",
-            "owner": "{570706a8-b36c-42bf-8941-923d30c43747}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda2.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{daa8c7f1-6f36-422c-a9c0-14ad2e5938d5}\u0000",
-            "owner": "{570706a8-b36c-42bf-8941-923d30c43747}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.2999999523162842,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{b5921eae-f9f3-42e2-8633-c2c16496cecc}\u0000",
-            "owner": "{570706a8-b36c-42bf-8941-923d30c43747}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{51828ad8-63d4-4dd4-990b-db2684e145b5}\u0000",
-            "owner": "{570706a8-b36c-42bf-8941-923d30c43747}\u0000",
-            "size": 1
-        },
-        {
-            "type": "Entity",
-            "id": "{5538909b-2f65-4a7c-bd85-d611822484db}\u0000",
-            "name": "KamienPrzeszkoda3 3",
-            "transform": {
-                "type": "Transform",
-                "id": "{18e0e685-69d2-4bd2-abcd-9f912f50ebb0}\u0000",
-                "owner": "{5538909b-2f65-4a7c-bd85-d611822484db}\u0000",
-                "Position": {
-                    "x": 4.810888290405273,
-                    "y": 0.4390289783477783,
-                    "z": -8.37688159942627
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -37.944427490234375,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.5732587575912476,
-                    "y": 0.5732587575912476,
-                    "z": 0.5732587575912476
-                },
-                "Rotation": {
-                    "x": -0.0,
-                    "y": 0.3251095414161682,
-                    "z": -0.0,
-                    "w": -0.9456763863563538
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{f93ae017-001c-4d15-99f9-4d741ed787b6}\u0000",
-                "{774a24f3-0954-46db-b98e-5fba011a1227}\u0000",
-                "{74462220-49b2-40cc-aedf-616d8f9f45b1}\u0000",
-                "{286f006d-0dd2-42b1-9824-5881e04f97d4}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{f93ae017-001c-4d15-99f9-4d741ed787b6}\u0000",
-            "owner": "{5538909b-2f65-4a7c-bd85-d611822484db}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda3.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{774a24f3-0954-46db-b98e-5fba011a1227}\u0000",
-            "owner": "{5538909b-2f65-4a7c-bd85-d611822484db}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.0,
-            "_height": 1.0,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{74462220-49b2-40cc-aedf-616d8f9f45b1}\u0000",
-            "owner": "{5538909b-2f65-4a7c-bd85-d611822484db}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{286f006d-0dd2-42b1-9824-5881e04f97d4}\u0000",
-            "owner": "{5538909b-2f65-4a7c-bd85-d611822484db}\u0000",
-            "size": 1
-        },
-        {
-            "type": "Entity",
-            "id": "{c3353ebc-f6b6-459b-aa62-48ba82b26657}\u0000",
-            "name": "KamienPrzeszkoda5 3",
-            "transform": {
-                "type": "Transform",
-                "id": "{d63f8655-df42-42f9-8c4d-dbc8869757ea}\u0000",
-                "owner": "{c3353ebc-f6b6-459b-aa62-48ba82b26657}\u0000",
-                "Position": {
-                    "x": -1.1850929260253906,
-                    "y": 0.6446121335029602,
-                    "z": -4.940169334411621
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 72.53584289550781,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.4110530614852905,
-                    "y": 0.4110530614852905,
-                    "z": 0.4110530614852905
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.5915618538856506,
-                    "z": 0.0,
-                    "w": 0.8062596321105957
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{d7cfb63e-1646-457a-b92e-80dafc19ebcf}\u0000",
-                "{7729f2ec-cec8-46c1-b818-0512e1274d5b}\u0000",
-                "{940890cf-1f97-418f-ad1d-e236d0b9448f}\u0000",
-                "{61b4e94b-2627-417a-8c04-f1371482dba3}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{d7cfb63e-1646-457a-b92e-80dafc19ebcf}\u0000",
-            "owner": "{c3353ebc-f6b6-459b-aa62-48ba82b26657}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda5.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{7729f2ec-cec8-46c1-b818-0512e1274d5b}\u0000",
-            "owner": "{c3353ebc-f6b6-459b-aa62-48ba82b26657}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 2.0999999046325684,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{940890cf-1f97-418f-ad1d-e236d0b9448f}\u0000",
-            "owner": "{c3353ebc-f6b6-459b-aa62-48ba82b26657}\u0000",
-            "mass": 0.5,
-            "inverseMass": 2.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{61b4e94b-2627-417a-8c04-f1371482dba3}\u0000",
-            "owner": "{c3353ebc-f6b6-459b-aa62-48ba82b26657}\u0000",
-            "size": 5
-        },
-        {
-            "type": "Entity",
-            "id": "{0ce2f902-09a5-4cdb-a12b-04fecf167a0a}\u0000",
-            "name": "KamienPrzeszkoda4 2",
-            "transform": {
-                "type": "Transform",
-                "id": "{06b45e2d-d1af-4a7c-ad56-e9410331bc95}\u0000",
-                "owner": "{0ce2f902-09a5-4cdb-a12b-04fecf167a0a}\u0000",
-                "Position": {
-                    "x": 0.813201904296875,
-                    "y": 0.4346764087677002,
-                    "z": 1.0950050354003906
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 59.806339263916016,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.6700521111488342,
-                    "y": 0.6700521111488342,
-                    "z": 0.6700521111488342
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.4985356330871582,
-                    "z": 0.0,
-                    "w": 0.8668692111968994
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{57c2af46-9e21-42e3-9ba1-22b17666ee7c}\u0000",
-                "{3c2357f6-ca90-4284-af39-13e081159b75}\u0000",
-                "{804a3cb6-1a6b-4480-a038-6a9d8aab27fa}\u0000",
-                "{1aa83f19-26a6-499c-b5ad-1d067cdb1ec9}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{57c2af46-9e21-42e3-9ba1-22b17666ee7c}\u0000",
-            "owner": "{0ce2f902-09a5-4cdb-a12b-04fecf167a0a}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda4.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{3c2357f6-ca90-4284-af39-13e081159b75}\u0000",
-            "owner": "{0ce2f902-09a5-4cdb-a12b-04fecf167a0a}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 1.0,
-            "_depth": 1.7000000476837158
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{804a3cb6-1a6b-4480-a038-6a9d8aab27fa}\u0000",
-            "owner": "{0ce2f902-09a5-4cdb-a12b-04fecf167a0a}\u0000",
-            "mass": 0.4000000059604645,
-            "inverseMass": 2.5,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.44200000166893005,
-            "frictionEnabled": true,
-            "restitution": 0.0560000017285347
-        },
-        {
-            "type": "Thrash",
-            "id": "{1aa83f19-26a6-499c-b5ad-1d067cdb1ec9}\u0000",
-            "owner": "{0ce2f902-09a5-4cdb-a12b-04fecf167a0a}\u0000",
-            "size": 5
-        },
-        {
-            "type": "Entity",
-            "id": "{257c913d-665c-4581-960a-80f481e258b3}\u0000",
-            "name": "KamienPrzeszkoda4 3",
-            "transform": {
-                "type": "Transform",
-                "id": "{a06f1a32-a204-4874-8b6e-fff978c1b010}\u0000",
-                "owner": "{257c913d-665c-4581-960a-80f481e258b3}\u0000",
-                "Position": {
-                    "x": 1.1013469696044922,
-                    "y": 1.54654860496521,
-                    "z": 20.026622772216797
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -26.49618148803711,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.7348793745040894,
-                    "y": 0.7348793745040894,
-                    "z": 0.7348793745040894
-                },
-                "Rotation": {
-                    "x": -0.0,
-                    "y": 0.22916793823242188,
-                    "z": -0.0,
-                    "w": -0.9733868837356567
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{f261ca6f-c341-4675-a6b1-06b1968a4a2f}\u0000",
-                "{78c4a9e2-ce69-4c0d-93cd-2bd364637d15}\u0000",
-                "{313a6c2e-85c1-4d48-af5e-463b173a33e5}\u0000",
-                "{dec85f80-85f5-4820-9c8e-dbb6685d57cf}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{f261ca6f-c341-4675-a6b1-06b1968a4a2f}\u0000",
-            "owner": "{257c913d-665c-4581-960a-80f481e258b3}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda4.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{78c4a9e2-ce69-4c0d-93cd-2bd364637d15}\u0000",
-            "owner": "{257c913d-665c-4581-960a-80f481e258b3}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 1.0,
-            "_depth": 1.7000000476837158
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{313a6c2e-85c1-4d48-af5e-463b173a33e5}\u0000",
-            "owner": "{257c913d-665c-4581-960a-80f481e258b3}\u0000",
-            "mass": 0.4000000059604645,
-            "inverseMass": 2.5,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.44200000166893005,
-            "frictionEnabled": true,
-            "restitution": 0.0560000017285347
-        },
-        {
-            "type": "Thrash",
-            "id": "{dec85f80-85f5-4820-9c8e-dbb6685d57cf}\u0000",
-            "owner": "{257c913d-665c-4581-960a-80f481e258b3}\u0000",
-            "size": 5
-        },
-        {
-            "type": "Entity",
-            "id": "{1c334a4c-6444-4cac-95ee-03cae37641b2}\u0000",
-            "name": "KamienPrzeszkoda2 3",
-            "transform": {
-                "type": "Transform",
-                "id": "{70be1d98-c659-4ee6-9dc2-fc159c910e34}\u0000",
-                "owner": "{1c334a4c-6444-4cac-95ee-03cae37641b2}\u0000",
-                "Position": {
-                    "x": -5.591443061828613,
-                    "y": 5.725038528442383,
-                    "z": 3.5284271240234375
-                },
-                "EulerAngles": {
-                    "x": 180.0,
-                    "y": 25.37584114074707,
-                    "z": 180.0
-                },
-                "Scale": {
-                    "x": 0.5586246252059937,
-                    "y": 0.5586246252059937,
-                    "z": 0.5586246252059937
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.9755808711051941,
-                    "z": 0.0,
-                    "w": 0.21964053809642792
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{1ec4a575-8a60-4108-ba34-dd26bde015d2}\u0000",
-                "{28f5c965-e860-4921-b057-cffe769a200c}\u0000",
-                "{1f754f04-bf0e-4d67-be47-607bad3f7ead}\u0000",
-                "{095e4711-cfa5-459c-9c38-46e2e16570c0}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{1ec4a575-8a60-4108-ba34-dd26bde015d2}\u0000",
-            "owner": "{1c334a4c-6444-4cac-95ee-03cae37641b2}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda2.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{28f5c965-e860-4921-b057-cffe769a200c}\u0000",
-            "owner": "{1c334a4c-6444-4cac-95ee-03cae37641b2}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.2999999523162842,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{1f754f04-bf0e-4d67-be47-607bad3f7ead}\u0000",
-            "owner": "{1c334a4c-6444-4cac-95ee-03cae37641b2}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{095e4711-cfa5-459c-9c38-46e2e16570c0}\u0000",
-            "owner": "{1c334a4c-6444-4cac-95ee-03cae37641b2}\u0000",
-            "size": 1
-        },
-        {
-            "type": "Entity",
-            "id": "{c21f36a7-739b-4cfb-bff7-0c07c39de987}\u0000",
-            "name": "KamienPrzeszkoda2 4",
-            "transform": {
-                "type": "Transform",
-                "id": "{0d56dce6-c9d8-47e2-ab2b-76654535617c}\u0000",
-                "owner": "{c21f36a7-739b-4cfb-bff7-0c07c39de987}\u0000",
-                "Position": {
-                    "x": 4.491933822631836,
-                    "y": 0.7589864730834961,
-                    "z": -4.660469055175781
-                },
-                "EulerAngles": {
-                    "x": 180.0,
-                    "y": 8.666999816894531,
-                    "z": 180.0
-                },
-                "Scale": {
-                    "x": 0.5824373960494995,
-                    "y": 0.5824373960494995,
-                    "z": 0.5824373960494995
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.9971411228179932,
-                    "z": 0.0,
-                    "w": 0.07556174695491791
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{aebb3885-2502-45b7-af21-e82ca5b29808}\u0000",
-                "{9dce847f-59dd-4a21-b448-14c4ad87910e}\u0000",
-                "{b8c71603-b0f2-4433-8513-7e38b0246e6d}\u0000",
-                "{8f4cbbfd-a1b5-40f2-978d-652004d5d110}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{aebb3885-2502-45b7-af21-e82ca5b29808}\u0000",
-            "owner": "{c21f36a7-739b-4cfb-bff7-0c07c39de987}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda2.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{9dce847f-59dd-4a21-b448-14c4ad87910e}\u0000",
-            "owner": "{c21f36a7-739b-4cfb-bff7-0c07c39de987}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.2999999523162842,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{b8c71603-b0f2-4433-8513-7e38b0246e6d}\u0000",
-            "owner": "{c21f36a7-739b-4cfb-bff7-0c07c39de987}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{8f4cbbfd-a1b5-40f2-978d-652004d5d110}\u0000",
-            "owner": "{c21f36a7-739b-4cfb-bff7-0c07c39de987}\u0000",
-            "size": 1
-        },
-        {
-            "type": "Entity",
-            "id": "{73ebd8db-94af-4879-9de3-feb0d767213a}\u0000",
-            "name": "KamienPrzeszkoda1 3",
-            "transform": {
-                "type": "Transform",
-                "id": "{21215013-31f4-4398-ba56-c44059c97519}\u0000",
-                "owner": "{73ebd8db-94af-4879-9de3-feb0d767213a}\u0000",
-                "Position": {
-                    "x": -5.5511674880981445,
-                    "y": 0.5227896571159363,
-                    "z": 9.253499984741211
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -85.8267822265625,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.5447119474411011,
-                    "y": 0.5447119474411011,
-                    "z": 0.5447119474411011
-                },
-                "Rotation": {
-                    "x": -0.0,
-                    "y": 0.6808922290802002,
-                    "z": -0.0,
-                    "w": -0.7323836088180542
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{2d327ee5-6796-4810-b3b4-303193ea2f22}\u0000",
-                "{84e71355-6c89-404b-b8e2-fb7332e2206c}\u0000",
-                "{83f372ae-8b97-413a-a5a6-1a9c1ed5d74f}\u0000",
-                "{64fde2a7-7300-4ca1-9811-a68b4c599c4b}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{2d327ee5-6796-4810-b3b4-303193ea2f22}\u0000",
-            "owner": "{73ebd8db-94af-4879-9de3-feb0d767213a}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{84e71355-6c89-404b-b8e2-fb7332e2206c}\u0000",
-            "owner": "{73ebd8db-94af-4879-9de3-feb0d767213a}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 3.200000047683716,
-            "_height": 1.2699999809265137,
-            "_depth": 1.899999976158142
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{83f372ae-8b97-413a-a5a6-1a9c1ed5d74f}\u0000",
-            "owner": "{73ebd8db-94af-4879-9de3-feb0d767213a}\u0000",
-            "mass": 0.5,
-            "inverseMass": 2.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.3799999952316284,
-            "frictionEnabled": true,
-            "restitution": 0.0560000017285347
-        },
-        {
-            "type": "Thrash",
-            "id": "{64fde2a7-7300-4ca1-9811-a68b4c599c4b}\u0000",
-            "owner": "{73ebd8db-94af-4879-9de3-feb0d767213a}\u0000",
-            "size": 5
-        },
-        {
-            "type": "Entity",
-            "id": "{58965179-9f33-4d50-bebe-5f5e13f9b0e7}\u0000",
-            "name": "KamienPrzeszkoda5 4",
-            "transform": {
-                "type": "Transform",
-                "id": "{a333e5e1-71d6-4adf-82b4-42269975ce2c}\u0000",
-                "owner": "{58965179-9f33-4d50-bebe-5f5e13f9b0e7}\u0000",
-                "Position": {
-                    "x": -0.539118766784668,
-                    "y": 0.6682711839675903,
-                    "z": 9.32159423828125
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 64.77889251708984,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.3147314786911011,
-                    "y": 0.3147314786911011,
-                    "z": 0.3147314786911011
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.5356712341308594,
-                    "z": 0.0,
-                    "w": 0.8444266319274902
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{5a1f5a7a-0c51-4706-8e01-996f0222fea6}\u0000",
-                "{5f288d54-9e7f-4fe2-978d-c1edbe9e733c}\u0000",
-                "{135502a9-6215-4258-acb7-cf56244834cd}\u0000",
-                "{7ad00a43-c53f-4e33-b614-a425b770b7f1}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{5a1f5a7a-0c51-4706-8e01-996f0222fea6}\u0000",
-            "owner": "{58965179-9f33-4d50-bebe-5f5e13f9b0e7}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda5.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{5f288d54-9e7f-4fe2-978d-c1edbe9e733c}\u0000",
-            "owner": "{58965179-9f33-4d50-bebe-5f5e13f9b0e7}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 2.0999999046325684,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{135502a9-6215-4258-acb7-cf56244834cd}\u0000",
-            "owner": "{58965179-9f33-4d50-bebe-5f5e13f9b0e7}\u0000",
-            "mass": 0.5,
-            "inverseMass": 2.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{7ad00a43-c53f-4e33-b614-a425b770b7f1}\u0000",
-            "owner": "{58965179-9f33-4d50-bebe-5f5e13f9b0e7}\u0000",
-            "size": 5
-        },
-        {
-            "type": "Entity",
-            "id": "{087dca72-5ccf-4f22-ba0b-bf39830cc25b}\u0000",
-            "name": "KamienPrzeszkoda3 4",
-            "transform": {
-                "type": "Transform",
-                "id": "{063dce91-5704-4b1f-bd53-96272872106e}\u0000",
-                "owner": "{087dca72-5ccf-4f22-ba0b-bf39830cc25b}\u0000",
-                "Position": {
-                    "x": -7.725968360900879,
-                    "y": 0.43092960119247437,
-                    "z": -10.538296699523926
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -76.744140625,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.5862637758255005,
-                    "y": 0.5862637758255005,
-                    "z": 0.5862637758255005
-                },
-                "Rotation": {
-                    "x": -0.0,
-                    "y": 0.6207656264305115,
-                    "z": -0.0,
-                    "w": -0.7839962244033813
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{0c8cef2d-9919-41ae-bbcc-880c39be204e}\u0000",
-                "{e2954510-0eb3-4946-b9f3-11e04b0883ad}\u0000",
-                "{a7e77fdd-d32d-45ab-aa11-c973f785710a}\u0000",
-                "{d43cfad5-bc7b-4317-b1f3-97610b1000cd}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{0c8cef2d-9919-41ae-bbcc-880c39be204e}\u0000",
-            "owner": "{087dca72-5ccf-4f22-ba0b-bf39830cc25b}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda3.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{e2954510-0eb3-4946-b9f3-11e04b0883ad}\u0000",
-            "owner": "{087dca72-5ccf-4f22-ba0b-bf39830cc25b}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.0,
-            "_height": 1.0,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{a7e77fdd-d32d-45ab-aa11-c973f785710a}\u0000",
-            "owner": "{087dca72-5ccf-4f22-ba0b-bf39830cc25b}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{d43cfad5-bc7b-4317-b1f3-97610b1000cd}\u0000",
-            "owner": "{087dca72-5ccf-4f22-ba0b-bf39830cc25b}\u0000",
-            "size": 1
-        },
-        {
-            "type": "Entity",
-            "id": "{fe21e22a-52e4-46fa-8de2-3b4f1d7ac262}\u0000",
-            "name": "KamienPrzeszkoda1 4",
-            "transform": {
-                "type": "Transform",
-                "id": "{2844e70e-0162-4b6d-a254-543172a1bcfa}\u0000",
-                "owner": "{fe21e22a-52e4-46fa-8de2-3b4f1d7ac262}\u0000",
-                "Position": {
-                    "x": -4.125657081604004,
-                    "y": 0.5577630996704102,
-                    "z": 1.9274654388427734
-                },
-                "EulerAngles": {
-                    "x": 180.0,
-                    "y": 34.78237533569336,
-                    "z": 180.0
-                },
-                "Scale": {
-                    "x": 0.4729140102863312,
-                    "y": 0.4729140102863312,
-                    "z": 0.4729140102863312
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.9542862772941589,
-                    "z": 0.0,
-                    "w": 0.2988940477371216
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{be17d2fa-fecf-42c3-a053-a8f1ffd8a45c}\u0000",
-                "{4aea438a-cfb0-42a0-b792-807f0ffc60e1}\u0000",
-                "{01b85e19-0e61-4e6b-93af-69e139d4c7a0}\u0000",
-                "{9fbe3bea-62b3-4284-a45e-fdbc298335e5}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{be17d2fa-fecf-42c3-a053-a8f1ffd8a45c}\u0000",
-            "owner": "{fe21e22a-52e4-46fa-8de2-3b4f1d7ac262}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{4aea438a-cfb0-42a0-b792-807f0ffc60e1}\u0000",
-            "owner": "{fe21e22a-52e4-46fa-8de2-3b4f1d7ac262}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 3.200000047683716,
-            "_height": 1.2699999809265137,
-            "_depth": 1.899999976158142
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{01b85e19-0e61-4e6b-93af-69e139d4c7a0}\u0000",
-            "owner": "{fe21e22a-52e4-46fa-8de2-3b4f1d7ac262}\u0000",
-            "mass": 0.5,
-            "inverseMass": 2.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.3799999952316284,
-            "frictionEnabled": true,
-            "restitution": 0.0560000017285347
-        },
-        {
-            "type": "Thrash",
-            "id": "{9fbe3bea-62b3-4284-a45e-fdbc298335e5}\u0000",
-            "owner": "{fe21e22a-52e4-46fa-8de2-3b4f1d7ac262}\u0000",
-            "size": 5
-        },
-        {
-            "type": "Entity",
-            "id": "{8f1c93c1-e994-471a-8336-22ee4a82d5b2}\u0000",
-            "name": "KamienPrzeszkoda3 5",
-            "transform": {
-                "type": "Transform",
-                "id": "{ca43a960-d5bd-4f80-a7ee-e4a159d4028e}\u0000",
-                "owner": "{8f1c93c1-e994-471a-8336-22ee4a82d5b2}\u0000",
-                "Position": {
-                    "x": 4.708134651184082,
-                    "y": 0.349467396736145,
-                    "z": 21.164615631103516
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 60.80538558959961,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.7001248002052307,
-                    "y": 0.7001248002052307,
-                    "z": 0.7001248002052307
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.5060742497444153,
-                    "z": 0.0,
-                    "w": 0.8624899387359619
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{9ad25d7e-ecfc-4551-b937-74c990975279}\u0000",
-                "{9f77c4fc-b73e-437c-ba79-e8ea02a8af0f}\u0000",
-                "{ec770ac0-f42a-4542-b8b5-c2d508d3bdc1}\u0000",
-                "{a0c4eb2f-1ead-4b58-a508-86b58db7ac76}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{9ad25d7e-ecfc-4551-b937-74c990975279}\u0000",
-            "owner": "{8f1c93c1-e994-471a-8336-22ee4a82d5b2}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda3.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{9f77c4fc-b73e-437c-ba79-e8ea02a8af0f}\u0000",
-            "owner": "{8f1c93c1-e994-471a-8336-22ee4a82d5b2}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.0,
-            "_height": 1.0,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{ec770ac0-f42a-4542-b8b5-c2d508d3bdc1}\u0000",
-            "owner": "{8f1c93c1-e994-471a-8336-22ee4a82d5b2}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{a0c4eb2f-1ead-4b58-a508-86b58db7ac76}\u0000",
-            "owner": "{8f1c93c1-e994-471a-8336-22ee4a82d5b2}\u0000",
-            "size": 1
-        },
-        {
-            "type": "Entity",
-            "id": "{8540a36e-2db6-4953-bfd2-7fb81f717d23}\u0000",
-            "name": "KamienPrzeszkoda2 5",
-            "transform": {
-                "type": "Transform",
-                "id": "{a1fc5b3a-735b-4718-a74d-45bb5bc8a726}\u0000",
-                "owner": "{8540a36e-2db6-4953-bfd2-7fb81f717d23}\u0000",
-                "Position": {
-                    "x": -6.063465595245361,
-                    "y": 0.44894611835479736,
-                    "z": -10.752476692199707
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 84.71379852294922,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.3936740756034851,
-                    "y": 0.3936740756034851,
-                    "z": 0.3936740756034851
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.6737467050552368,
-                    "z": 0.0,
-                    "w": 0.7389623522758484
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{9d969627-8648-45ee-867a-4ebe149c4405}\u0000",
-                "{d578e5c6-fafa-48ad-bc03-6cd9ad7a7fc0}\u0000",
-                "{c3d2c9fd-44c0-4e43-8483-69fd2ac7e009}\u0000",
-                "{4213f3a6-edd1-4999-9861-7d8ea5acb255}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{9d969627-8648-45ee-867a-4ebe149c4405}\u0000",
-            "owner": "{8540a36e-2db6-4953-bfd2-7fb81f717d23}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda2.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{d578e5c6-fafa-48ad-bc03-6cd9ad7a7fc0}\u0000",
-            "owner": "{8540a36e-2db6-4953-bfd2-7fb81f717d23}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.2999999523162842,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{c3d2c9fd-44c0-4e43-8483-69fd2ac7e009}\u0000",
-            "owner": "{8540a36e-2db6-4953-bfd2-7fb81f717d23}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{4213f3a6-edd1-4999-9861-7d8ea5acb255}\u0000",
-            "owner": "{8540a36e-2db6-4953-bfd2-7fb81f717d23}\u0000",
-            "size": 1
-        },
-        {
-            "type": "Entity",
-            "id": "{b85f5c97-d947-462c-8152-5cf87b771b1a}\u0000",
-            "name": "KamienPrzeszkoda4 4",
-            "transform": {
-                "type": "Transform",
-                "id": "{296c78a2-bbe4-4c6b-965d-53e06ce4cfcc}\u0000",
-                "owner": "{b85f5c97-d947-462c-8152-5cf87b771b1a}\u0000",
-                "Position": {
-                    "x": -13.805322647094727,
-                    "y": 0.5076865553855896,
-                    "z": 0.6939401626586914
-                },
-                "EulerAngles": {
-                    "x": 180.0,
-                    "y": -70.03192138671875,
-                    "z": 180.0
-                },
-                "Scale": {
-                    "x": 0.687194287776947,
-                    "y": 0.687194287776947,
-                    "z": 0.687194287776947
-                },
-                "Rotation": {
-                    "x": -0.0,
-                    "y": 0.8189922571182251,
-                    "z": -0.0,
-                    "w": -0.5738045573234558
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{0ab9bc19-92ca-44ff-ab3d-43885d916a65}\u0000",
-                "{8ee03e4e-24d3-4585-a083-2b582eb8da31}\u0000",
-                "{159b79ab-8a31-43ee-9477-8caf787ed4c8}\u0000",
-                "{b470f090-3dcb-4dfc-b00d-b0d9cc627aaa}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{0ab9bc19-92ca-44ff-ab3d-43885d916a65}\u0000",
-            "owner": "{b85f5c97-d947-462c-8152-5cf87b771b1a}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda4.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{8ee03e4e-24d3-4585-a083-2b582eb8da31}\u0000",
-            "owner": "{b85f5c97-d947-462c-8152-5cf87b771b1a}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 1.0,
-            "_depth": 1.7000000476837158
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{159b79ab-8a31-43ee-9477-8caf787ed4c8}\u0000",
-            "owner": "{b85f5c97-d947-462c-8152-5cf87b771b1a}\u0000",
-            "mass": 0.4000000059604645,
-            "inverseMass": 2.5,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.44200000166893005,
-            "frictionEnabled": true,
-            "restitution": 0.0560000017285347
-        },
-        {
-            "type": "Thrash",
-            "id": "{b470f090-3dcb-4dfc-b00d-b0d9cc627aaa}\u0000",
-            "owner": "{b85f5c97-d947-462c-8152-5cf87b771b1a}\u0000",
-            "size": 5
-        },
-        {
-            "type": "Entity",
-            "id": "{7c79e9be-3e74-4550-9bef-dde2a1f909bd}\u0000",
-            "name": "KamienPrzeszkoda5 5",
-            "transform": {
-                "type": "Transform",
-                "id": "{cc68714e-21cd-408b-bd35-0689574fdd54}\u0000",
-                "owner": "{7c79e9be-3e74-4550-9bef-dde2a1f909bd}\u0000",
-                "Position": {
-                    "x": -8.202583312988281,
-                    "y": 0.8594763875007629,
-                    "z": -7.05487585067749
-                },
-                "EulerAngles": {
-                    "x": 180.0,
-                    "y": -68.08946228027344,
-                    "z": 180.0
-                },
-                "Scale": {
-                    "x": 0.5042540431022644,
-                    "y": 0.5042540431022644,
-                    "z": 0.5042540431022644
-                },
-                "Rotation": {
-                    "x": -0.0,
-                    "y": 0.8286007642745972,
-                    "z": -0.0,
-                    "w": -0.5598399639129639
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{0a2b105b-0e89-4156-a32d-7ab73d5c307a}\u0000",
-                "{65f74a64-5274-4d0a-a3f7-5d951c68e124}\u0000",
-                "{73113475-049b-474f-8566-f986aea902e2}\u0000",
-                "{831dba3f-e43e-4e5f-b9e2-a52520b38882}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{0a2b105b-0e89-4156-a32d-7ab73d5c307a}\u0000",
-            "owner": "{7c79e9be-3e74-4550-9bef-dde2a1f909bd}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda5.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{65f74a64-5274-4d0a-a3f7-5d951c68e124}\u0000",
-            "owner": "{7c79e9be-3e74-4550-9bef-dde2a1f909bd}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 2.0999999046325684,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{73113475-049b-474f-8566-f986aea902e2}\u0000",
-            "owner": "{7c79e9be-3e74-4550-9bef-dde2a1f909bd}\u0000",
-            "mass": 0.5,
-            "inverseMass": 2.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{831dba3f-e43e-4e5f-b9e2-a52520b38882}\u0000",
-            "owner": "{7c79e9be-3e74-4550-9bef-dde2a1f909bd}\u0000",
-            "size": 5
-        },
-        {
-            "type": "Entity",
-            "id": "{055de471-ac73-4575-bfec-ba2820658644}\u0000",
-            "name": "KamienPrzeszkoda4 5",
-            "transform": {
-                "type": "Transform",
-                "id": "{e97a17ba-6549-458d-afc8-ced297a61e5b}\u0000",
-                "owner": "{055de471-ac73-4575-bfec-ba2820658644}\u0000",
-                "Position": {
-                    "x": 1.4965038299560547,
-                    "y": 2.1120810508728027,
-                    "z": -4.693836212158203
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 29.6845703125,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.5433529615402222,
-                    "y": 0.5433529615402222,
-                    "z": 0.5433529615402222
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.2561591863632202,
-                    "z": 0.0,
-                    "w": 0.9666346311569214
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{106ae901-9e74-49fe-a489-3e7c70abe289}\u0000",
-                "{21919c8a-b1bd-45db-8850-498974cfc995}\u0000",
-                "{3485f151-e491-4e05-ba5f-72ed5be3df6a}\u0000",
-                "{2de5453a-c974-416d-839e-3dff79f2de19}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{106ae901-9e74-49fe-a489-3e7c70abe289}\u0000",
-            "owner": "{055de471-ac73-4575-bfec-ba2820658644}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda4.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{21919c8a-b1bd-45db-8850-498974cfc995}\u0000",
-            "owner": "{055de471-ac73-4575-bfec-ba2820658644}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2999999523162842,
-            "_height": 1.0,
-            "_depth": 1.7000000476837158
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{3485f151-e491-4e05-ba5f-72ed5be3df6a}\u0000",
-            "owner": "{055de471-ac73-4575-bfec-ba2820658644}\u0000",
-            "mass": 0.4000000059604645,
-            "inverseMass": 2.5,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.44200000166893005,
-            "frictionEnabled": true,
-            "restitution": 0.0560000017285347
-        },
-        {
-            "type": "Thrash",
-            "id": "{2de5453a-c974-416d-839e-3dff79f2de19}\u0000",
-            "owner": "{055de471-ac73-4575-bfec-ba2820658644}\u0000",
-            "size": 5
-        },
-        {
-            "type": "Entity",
-            "id": "{371c982b-7e4a-41ae-9d37-11cb26e1fea1}\u0000",
-            "name": "KamienPrzeszkoda6 5",
-            "transform": {
-                "type": "Transform",
-                "id": "{3a532f03-2854-411d-8967-2f553f4f40a1}\u0000",
-                "owner": "{371c982b-7e4a-41ae-9d37-11cb26e1fea1}\u0000",
-                "Position": {
-                    "x": 0.773590087890625,
-                    "y": 3.6398186683654785,
-                    "z": 19.59442138671875
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": -76.47249603271484,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 0.5817857980728149,
-                    "y": 0.5817857980728149,
-                    "z": 0.5817857980728149
-                },
-                "Rotation": {
-                    "x": -0.0,
-                    "y": 0.6189053654670715,
-                    "z": -0.0,
-                    "w": -0.7854655981063843
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{cfc58ab8-40ec-463d-b174-f2d088184d95}\u0000",
-                "{7a685be4-caa0-46a2-8a20-e718d3064f00}\u0000",
-                "{a911a80f-b5a6-4349-87c8-c8bcbe413eec}\u0000",
-                "{8d2b49d7-97b4-4196-bb12-a05bf75f78f9}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{cfc58ab8-40ec-463d-b174-f2d088184d95}\u0000",
-            "owner": "{371c982b-7e4a-41ae-9d37-11cb26e1fea1}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda6.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{7a685be4-caa0-46a2-8a20-e718d3064f00}\u0000",
-            "owner": "{371c982b-7e4a-41ae-9d37-11cb26e1fea1}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 1.2000000476837158,
-            "_height": 1.0,
-            "_depth": 1.0
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{a911a80f-b5a6-4349-87c8-c8bcbe413eec}\u0000",
-            "owner": "{371c982b-7e4a-41ae-9d37-11cb26e1fea1}\u0000",
-            "mass": 0.20000000298023224,
-            "inverseMass": 5.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.20000000298023224,
-            "frictionEnabled": true,
-            "restitution": 0.10000000149011612
-        },
-        {
-            "type": "Thrash",
-            "id": "{8d2b49d7-97b4-4196-bb12-a05bf75f78f9}\u0000",
-            "owner": "{371c982b-7e4a-41ae-9d37-11cb26e1fea1}\u0000",
-            "size": 1
-        },
-        {
-            "type": "Entity",
-            "id": "{24550ca3-d3ab-4f0e-bfbb-f5dfbbfc9bc6}\u0000",
-            "name": "KamienPrzeszkoda1 5",
-            "transform": {
-                "type": "Transform",
-                "id": "{6c621541-be02-41fa-ab07-5117aae1b2c4}\u0000",
-                "owner": "{24550ca3-d3ab-4f0e-bfbb-f5dfbbfc9bc6}\u0000",
-                "Position": {
-                    "x": -9.160492897033691,
-                    "y": 0.65911865234375,
-                    "z": -1.906972885131836
-                },
-                "EulerAngles": {
-                    "x": 180.0,
-                    "y": -74.88023376464844,
-                    "z": 180.0
-                },
-                "Scale": {
-                    "x": 0.6172487735748291,
-                    "y": 0.6172487735748291,
-                    "z": 0.6172487735748291
-                },
-                "Rotation": {
-                    "x": -0.0,
-                    "y": 0.7939891815185547,
-                    "z": -0.0,
-                    "w": -0.607931911945343
-                },
-                "Children": [],
-                "Parent": "{7efd3770-1156-43bf-86fc-8fa504b144e5}\u0000"
-            },
-            "components": [
-                "{7c076b25-4bac-44a8-9733-8a4e2def64af}\u0000",
-                "{1d05b6fb-a394-4860-bdc2-c1e1b9b1518c}\u0000",
-                "{3e52d202-c16d-484b-a8d8-8d7cfad4fd2c}\u0000",
-                "{1f93e83b-04ea-494f-a1fa-a55e98af310b}\u0000"
-            ]
-        },
-        {
-            "type": "ModelRenderer",
-            "id": "{7c076b25-4bac-44a8-9733-8a4e2def64af}\u0000",
-            "owner": "{24550ca3-d3ab-4f0e-bfbb-f5dfbbfc9bc6}\u0000",
-            "Material": "res/materials/SampleScene/UV14.mat",
-            "Model": "res/models/Modele_Mati/Smieci/KamienPrzeszkoda1.fbx",
-            "CastShadow": true
-        },
-        {
-            "type": "BoxCollider",
-            "id": "{1d05b6fb-a394-4860-bdc2-c1e1b9b1518c}\u0000",
-            "owner": "{24550ca3-d3ab-4f0e-bfbb-f5dfbbfc9bc6}\u0000",
-            "isTrigger": false,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 2,
-            "collisionMask": 4294967291,
-            "colliderType": 0,
-            "_width": 3.200000047683716,
-            "_height": 1.2699999809265137,
-            "_depth": 1.899999976158142
-        },
-        {
-            "type": "Rigidbody",
-            "id": "{3e52d202-c16d-484b-a8d8-8d7cfad4fd2c}\u0000",
-            "owner": "{24550ca3-d3ab-4f0e-bfbb-f5dfbbfc9bc6}\u0000",
-            "mass": 0.5,
-            "inverseMass": 2.0,
-            "linearDamping": 0.0,
-            "angularDamping": 0.0,
-            "friction": 0.3799999952316284,
-            "frictionEnabled": true,
-            "restitution": 0.0560000017285347
-        },
-        {
-            "type": "Thrash",
-            "id": "{1f93e83b-04ea-494f-a1fa-a55e98af310b}\u0000",
-            "owner": "{24550ca3-d3ab-4f0e-bfbb-f5dfbbfc9bc6}\u0000",
-            "size": 5
         },
         {
             "type": "Entity",
