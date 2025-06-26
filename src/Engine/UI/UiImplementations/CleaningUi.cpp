@@ -278,6 +278,7 @@ namespace Engine::Ui
 
 
         }
+        DialogueUpdate(DeltaTime);
     }
 
     void CleaningUi::SetupDuringLevel()
