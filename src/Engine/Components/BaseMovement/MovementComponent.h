@@ -32,6 +32,7 @@ namespace Engine
         {
             UpdateManager::GetInstance()->RegisterComponent(this);
         }
+
         ~MovementComponent() override
         {
             UpdateManager::GetInstance()->UnregisterComponent(this);
@@ -45,7 +46,7 @@ namespace Engine
             AudioManager::GetInstance().SetLooping(DrivingSound, true);
             AudioManager::GetInstance().SetVolume(DrivingSound, 6.5f);
             BloodCleaningSound = AudioManager::GetInstance().CreateSoundInstance("mop");
-            AudioManager::GetInstance().SetVolume(BloodCleaningSound, 20.0f);
+            AudioManager::GetInstance().SetVolume(BloodCleaningSound, 30.0f);
         }
 
         void Update(float deltaTime) override;
