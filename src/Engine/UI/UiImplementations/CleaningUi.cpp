@@ -20,6 +20,8 @@ namespace Engine::Ui
         if (!ThrashManager::GetInstance()->IsCurrentLevelCompleted())
         {
             SetupDuringLevel();
+            DialogueWidget = AddElement<class DialogueWidget>(nullptr);
+            DialogueStart();
         }
         else
         {
@@ -394,9 +396,6 @@ namespace Engine::Ui
         AudioManager::GetInstance().ConfigureSoundAttenuation(TaskSound, 1.0f, 100.0f, 0.0f);
         AudioManager::GetInstance().SetVolume(ListSound, 0.5f);
         AudioManager::GetInstance().SetVolume(TaskSound, 0.5f);
-
-        DialogueWidget = AddElement<class DialogueWidget>(nullptr);
-        DialogueStart();
     }
 
     void CleaningUi::SetupAfterLevel()
