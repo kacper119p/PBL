@@ -114,16 +114,6 @@ namespace Engine
 
         Serialization::Deserialize(Value, "Bounds", Bounds);
 
-        const auto uiIterator = Value.FindMember("UI");
-        if (uiIterator != Value.MemberEnd())
-        {
-            Ui = Ui::UiSerializationFactory::CreateObject(uiIterator->value.GetString());
-        }
-        else
-        {
-            Ui = new Ui::EmptyUi();
-        }
-
         const auto gameModeIterator = Value.FindMember("GameMode");
         if (gameModeIterator != Value.MemberEnd())
         {
@@ -147,6 +137,16 @@ namespace Engine
         Root->Scene = this;
         Player->Scene = this;
         GameMode->Scene = this;
+
+        const auto uiIterator = Value.FindMember("UI");
+        if (uiIterator != Value.MemberEnd())
+        {
+            Ui = Ui::UiSerializationFactory::CreateObject(uiIterator->value.GetString());
+        }
+        else
+        {
+            Ui = new Ui::EmptyUi();
+        }
 
         Root->DeserializeValuePass(Value["Root"], referenceTable);
 
