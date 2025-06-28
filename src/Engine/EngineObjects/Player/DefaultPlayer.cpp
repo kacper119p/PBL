@@ -97,6 +97,10 @@ namespace Engine
 
     void DefaultPlayer::Update(const float DeltaTime)
     {
+        if (GetTransform()->GetPosition().y <= -10.0f)
+        {
+            GetTransform()->SetPosition(glm::vec3(0.0f, 7.0f, 0.0f));
+        }
 #if !EDITOR
         AudioManager::GetInstance().SetSoundPosition(toolChangeSound, GetTransform()->GetPosition());
         InputManager& input = InputManager::GetInstance();

@@ -124,7 +124,7 @@ namespace Engine
 
             SceneManager::UpdateScene(CurrentScene, renderData, Window);
             if (!BackgroundAudioPlayer->IsPlaying())
-                BackgroundAudioPlayer->PlayLooping("music", 0.02f);
+                BackgroundAudioPlayer->PlayLooping("music", 0.2f);
 #else
             const CameraRenderData renderData(Camera->GetPosition(), Camera->GetTransform(),
                                               Camera->GetProjectionMatrix());
