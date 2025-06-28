@@ -18,10 +18,10 @@ void main()
     vec3 cameraUp = vec3(0.0, 1.0, 0.0);
 
     vec3 offset = (inputTexCoord.x - 0.5) * cameraRight + (inputTexCoord.y - 0.5) * cameraUp;
+    vec3 basePosition = vec3(ObjectToWorldMatrix[3]);
+    vec3 worldPosition = basePosition + offset;
 
-    vec4 worldPosition = ObjectToWorldMatrix * vec4(offset, 1.0);
-
-    gl_Position = ProjectionMatrix * ViewMatrix * worldPosition;
+    gl_Position = ProjectionMatrix * ViewMatrix * vec4(worldPosition, 1.0);
 
     UV = inputTexCoord;
 }
