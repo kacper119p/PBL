@@ -2,20 +2,20 @@
     "Prefab": [
         {
             "type": "Entity",
-            "id": "{98e093fb-9767-4f91-9d1b-c75a30ec7a36}\u0000",
+            "id": "{b3861999-c867-4767-acf8-b4bf8eb77a4d}\u0000",
             "name": "Swapper",
             "transform": {
                 "type": "Transform",
-                "id": "{6e61070b-57d5-463d-b4c6-0c77a2aef202}\u0000",
-                "owner": "{98e093fb-9767-4f91-9d1b-c75a30ec7a36}\u0000",
+                "id": "{86936768-86d9-42f0-a231-8a0cbd589c30}\u0000",
+                "owner": "{b3861999-c867-4767-acf8-b4bf8eb77a4d}\u0000",
                 "Position": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
+                    "x": -45.31134033203125,
+                    "y": 4.428833961486816,
+                    "z": 63.4711799621582
                 },
                 "EulerAngles": {
                     "x": 0.0,
-                    "y": -0.0,
+                    "y": 102.35147857666016,
                     "z": 0.0
                 },
                 "Scale": {
@@ -25,35 +25,35 @@
                 },
                 "Rotation": {
                     "x": 0.0,
-                    "y": 0.0,
+                    "y": 0.7790725827217102,
                     "z": 0.0,
-                    "w": 1.0
+                    "w": 0.626933753490448
                 },
                 "Children": [
-                    "{4a162ac6-1d51-416e-bcf0-efc07d739e5b}\u0000",
-                    "{5d96e724-2346-42a7-831f-deea0ce2e66a}\u0000",
-                    "{7898f176-c297-477b-aebf-06d5a2de9cef}\u0000"
+                    "{747530c2-59f4-4f78-a32b-413f0d98f70f}\u0000",
+                    "{061a1a68-0e95-44b9-8e45-7071e12aed0d}\u0000",
+                    "{fe8ed71c-f907-4db6-b7ff-62309aea3666}\u0000"
                 ],
                 "Parent": "{a6043b9e-3277-480d-b56b-4df06552b465}\u0000"
             },
             "components": [
-                "{ae126d1b-1e11-416f-be79-f9c9110e5b26}\u0000",
-                "{0840f065-8aa3-41b0-84f5-d08e9777c9f4}\u0000",
-                "{91e4d22c-0f89-4b71-b8cf-a3516e86e5e9}\u0000"
+                "{3206f196-d4df-4991-90a1-d42c132fd50d}\u0000",
+                "{7082a7f1-e4c1-47b4-b628-f1bc42e3fcf9}\u0000",
+                "{367912dc-fa07-4404-b5f4-1291776ba325}\u0000"
             ]
         },
         {
             "type": "ModelRenderer",
-            "id": "{ae126d1b-1e11-416f-be79-f9c9110e5b26}\u0000",
-            "owner": "{98e093fb-9767-4f91-9d1b-c75a30ec7a36}\u0000",
+            "id": "{3206f196-d4df-4991-90a1-d42c132fd50d}\u0000",
+            "owner": "{b3861999-c867-4767-acf8-b4bf8eb77a4d}\u0000",
             "Material": "res/materials/SampleScene/Swapper.mat",
             "Model": "res/models/Swapper/Stojak_tools.fbx",
             "CastShadow": true
         },
         {
             "type": "BoxCollider",
-            "id": "{0840f065-8aa3-41b0-84f5-d08e9777c9f4}\u0000",
-            "owner": "{98e093fb-9767-4f91-9d1b-c75a30ec7a36}\u0000",
+            "id": "{7082a7f1-e4c1-47b4-b628-f1bc42e3fcf9}\u0000",
+            "owner": "{b3861999-c867-4767-acf8-b4bf8eb77a4d}\u0000",
             "isTrigger": false,
             "isStatic": true,
             "skipCollisionSibling": false,
@@ -66,21 +66,21 @@
         },
         {
             "type": "Swapper",
-            "id": "{91e4d22c-0f89-4b71-b8cf-a3516e86e5e9}\u0000",
-            "owner": "{98e093fb-9767-4f91-9d1b-c75a30ec7a36}\u0000"
+            "id": "{367912dc-fa07-4404-b5f4-1291776ba325}\u0000",
+            "owner": "{b3861999-c867-4767-acf8-b4bf8eb77a4d}\u0000"
         },
         {
             "type": "Entity",
-            "id": "{8d64dc66-b81a-4a76-afbf-69428a6b999c}\u0000",
+            "id": "{827146a2-19b5-4304-b143-8156827d5dff}\u0000",
             "name": "StripperCollider",
             "transform": {
                 "type": "Transform",
-                "id": "{4a162ac6-1d51-416e-bcf0-efc07d739e5b}\u0000",
-                "owner": "{8d64dc66-b81a-4a76-afbf-69428a6b999c}\u0000",
+                "id": "{747530c2-59f4-4f78-a32b-413f0d98f70f}\u0000",
+                "owner": "{827146a2-19b5-4304-b143-8156827d5dff}\u0000",
                 "Position": {
-                    "x": -5.0,
+                    "x": -3.2880077362060547,
                     "y": 2.384185791015625e-7,
-                    "z": 3.1039295196533203
+                    "z": 3.6989994049072266
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -99,84 +99,38 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{6e61070b-57d5-463d-b4c6-0c77a2aef202}\u0000"
+                "Parent": "{86936768-86d9-42f0-a231-8a0cbd589c30}\u0000"
             },
             "components": [
-                "{e811a886-4225-4d42-858f-c2f5db5c9eef}\u0000"
+                "{04976a8c-5d63-404d-87bf-ee92ab45a57e}\u0000"
             ]
         },
         {
-            "type": "SphereCollider",
-            "id": "{e811a886-4225-4d42-858f-c2f5db5c9eef}\u0000",
-            "owner": "{8d64dc66-b81a-4a76-afbf-69428a6b999c}\u0000",
+            "type": "BoxCollider",
+            "id": "{04976a8c-5d63-404d-87bf-ee92ab45a57e}\u0000",
+            "owner": "{827146a2-19b5-4304-b143-8156827d5dff}\u0000",
             "isTrigger": true,
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 4294967295,
             "collisionMask": 4294967072,
-            "colliderType": 1,
-            "radius": 6.0
+            "colliderType": 0,
+            "_width": 3.0,
+            "_height": 3.0,
+            "_depth": 3.0
         },
         {
             "type": "Entity",
-            "id": "{da19f2c4-39fc-4e9e-9dd7-8b80e9b4421d}\u0000",
-            "name": "VacuumCollider",
-            "transform": {
-                "type": "Transform",
-                "id": "{5d96e724-2346-42a7-831f-deea0ce2e66a}\u0000",
-                "owner": "{da19f2c4-39fc-4e9e-9dd7-8b80e9b4421d}\u0000",
-                "Position": {
-                    "x": 5.0,
-                    "y": 2.384185791015625e-7,
-                    "z": 3.1040000915527344
-                },
-                "EulerAngles": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0
-                },
-                "Scale": {
-                    "x": 1.0,
-                    "y": 1.0,
-                    "z": 1.0
-                },
-                "Rotation": {
-                    "x": 0.0,
-                    "y": 0.0,
-                    "z": 0.0,
-                    "w": 0.0
-                },
-                "Children": [],
-                "Parent": "{6e61070b-57d5-463d-b4c6-0c77a2aef202}\u0000"
-            },
-            "components": [
-                "{5fba8a8f-9591-4e49-9d83-b1ca5b9a204d}\u0000"
-            ]
-        },
-        {
-            "type": "SphereCollider",
-            "id": "{5fba8a8f-9591-4e49-9d83-b1ca5b9a204d}\u0000",
-            "owner": "{da19f2c4-39fc-4e9e-9dd7-8b80e9b4421d}\u0000",
-            "isTrigger": true,
-            "isStatic": false,
-            "skipCollisionSibling": false,
-            "collisionLayer": 4294967295,
-            "collisionMask": 4294967072,
-            "colliderType": 1,
-            "radius": 6.0
-        },
-        {
-            "type": "Entity",
-            "id": "{b23e9de0-faa0-4bd3-89fb-7138df4845d1}\u0000",
+            "id": "{e50eae4c-55e8-46db-a91c-97f292ea2c6c}\u0000",
             "name": "BroomCollider",
             "transform": {
                 "type": "Transform",
-                "id": "{7898f176-c297-477b-aebf-06d5a2de9cef}\u0000",
-                "owner": "{b23e9de0-faa0-4bd3-89fb-7138df4845d1}\u0000",
+                "id": "{061a1a68-0e95-44b9-8e45-7071e12aed0d}\u0000",
+                "owner": "{e50eae4c-55e8-46db-a91c-97f292ea2c6c}\u0000",
                 "Position": {
-                    "x": 0.0,
+                    "x": 3.288372278213501,
                     "y": 2.384185791015625e-7,
-                    "z": 3.801187038421631
+                    "z": 3.699212074279785
                 },
                 "EulerAngles": {
                     "x": 0.0,
@@ -195,23 +149,75 @@
                     "w": 1.0
                 },
                 "Children": [],
-                "Parent": "{6e61070b-57d5-463d-b4c6-0c77a2aef202}\u0000"
+                "Parent": "{86936768-86d9-42f0-a231-8a0cbd589c30}\u0000"
             },
             "components": [
-                "{ee40cf1d-c673-4832-b35b-8985345d1fa6}\u0000"
+                "{072f09dc-faaf-4d2a-a851-2a5c4dd6291c}\u0000"
             ]
         },
         {
-            "type": "SphereCollider",
-            "id": "{ee40cf1d-c673-4832-b35b-8985345d1fa6}\u0000",
-            "owner": "{b23e9de0-faa0-4bd3-89fb-7138df4845d1}\u0000",
+            "type": "BoxCollider",
+            "id": "{072f09dc-faaf-4d2a-a851-2a5c4dd6291c}\u0000",
+            "owner": "{e50eae4c-55e8-46db-a91c-97f292ea2c6c}\u0000",
             "isTrigger": true,
             "isStatic": false,
             "skipCollisionSibling": false,
             "collisionLayer": 4294967295,
             "collisionMask": 4294967072,
-            "colliderType": 1,
-            "radius": 6.0
+            "colliderType": 0,
+            "_width": 3.0,
+            "_height": 3.0,
+            "_depth": 3.0
+        },
+        {
+            "type": "Entity",
+            "id": "{da5c0c33-efaa-4c55-8a73-8728257d1223}\u0000",
+            "name": "VacuumCollider",
+            "transform": {
+                "type": "Transform",
+                "id": "{fe8ed71c-f907-4db6-b7ff-62309aea3666}\u0000",
+                "owner": "{da5c0c33-efaa-4c55-8a73-8728257d1223}\u0000",
+                "Position": {
+                    "x": -0.0006203651428222656,
+                    "y": 2.384185791015625e-7,
+                    "z": 3.8014678955078125
+                },
+                "EulerAngles": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                },
+                "Scale": {
+                    "x": 1.0,
+                    "y": 1.0,
+                    "z": 1.0
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                },
+                "Children": [],
+                "Parent": "{86936768-86d9-42f0-a231-8a0cbd589c30}\u0000"
+            },
+            "components": [
+                "{f67c212c-b9cb-4749-942b-d49351079f43}\u0000"
+            ]
+        },
+        {
+            "type": "BoxCollider",
+            "id": "{f67c212c-b9cb-4749-942b-d49351079f43}\u0000",
+            "owner": "{da5c0c33-efaa-4c55-8a73-8728257d1223}\u0000",
+            "isTrigger": true,
+            "isStatic": false,
+            "skipCollisionSibling": false,
+            "collisionLayer": 4294967295,
+            "collisionMask": 4294967072,
+            "colliderType": 0,
+            "_width": 3.0,
+            "_height": 3.0,
+            "_depth": 3.0
         }
     ]
 }

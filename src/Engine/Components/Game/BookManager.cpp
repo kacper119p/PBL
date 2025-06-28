@@ -182,12 +182,12 @@ namespace Engine
         if (itemCollider->collisionMask == 0)
             return;
 
-        currentBooksBeingPut.push_back(item);
         std::string name = item->GetName();
         glm::vec3 start = item->GetTransform()->GetPosition();
         glm::quat startRot = item->GetTransform()->GetRotation();
         glm::vec3 end = glm::vec3(0.0f);
         glm::quat endRot = glm::quat(glm::vec3(0.0f));
+
 
         if (itemType == ItemType::Book && name.find("SmallBook") != std::string::npos)
         {
@@ -268,6 +268,8 @@ namespace Engine
             else
                 return; // Unrecognized
         }
+
+        currentBooksBeingPut.push_back(item);
 
         BookLerpData lerp;
         lerp.book = item;
